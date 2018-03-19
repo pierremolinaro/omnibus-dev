@@ -68,7 +68,7 @@ sync rdvs = $rendezVous ()
 
 //-----------------------------------------------------------------------------*
 
-task T0 @priority 0 @stacksize 512 @activate {
+task T0 @stacksize 512 @activate {
   var top $uint32 = 0
 
   on @setup first {
@@ -94,7 +94,7 @@ task T0 @priority 0 @stacksize 512 @activate {
 
 //-----------------------------------------------------------------------------*
 
-task T1 @priority 1 @stacksize 512 @activate {
+task T1 @stacksize 512 @activate {
  
   on rdvs.input () {
     digital.write (!yes !toPort:LED_L1)

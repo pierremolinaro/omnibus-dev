@@ -1429,6 +1429,10 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_117 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_118 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_119 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -15185,7 +15189,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mTaskName,
-                                                  const class GALGAS_lbigint & in_mPriority,
+                                                  const class GALGAS_lstringlist & in_mLowerPriorityTaskList,
                                                   const class GALGAS_lbigint & in_mStackSize,
                                                   const class GALGAS_structurePropertyListAST & in_mVarList,
                                                   const class GALGAS_functionDeclarationListAST & in_mTaskFunctionList,
@@ -15211,7 +15215,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
   public : static class GALGAS_taskListAST constructor_emptyList (LOCATION_ARGS) ;
 
   public : static class GALGAS_taskListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
-                                                                      const class GALGAS_lbigint & inOperand1,
+                                                                      const class GALGAS_lstringlist & inOperand1,
                                                                       const class GALGAS_lbigint & inOperand2,
                                                                       const class GALGAS_structurePropertyListAST & inOperand3,
                                                                       const class GALGAS_functionDeclarationListAST & inOperand4,
@@ -15230,7 +15234,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_lbigint & inOperand1,
+                                                      const class GALGAS_lstringlist & inOperand1,
                                                       const class GALGAS_lbigint & inOperand2,
                                                       const class GALGAS_structurePropertyListAST & inOperand3,
                                                       const class GALGAS_functionDeclarationListAST & inOperand4,
@@ -15249,7 +15253,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
-                                                       class GALGAS_lbigint constinArgument1,
+                                                       class GALGAS_lstringlist constinArgument1,
                                                        class GALGAS_lbigint constinArgument2,
                                                        class GALGAS_structurePropertyListAST constinArgument3,
                                                        class GALGAS_functionDeclarationListAST constinArgument4,
@@ -15264,7 +15268,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
-                                                  class GALGAS_lbigint & outArgument1,
+                                                  class GALGAS_lstringlist & outArgument1,
                                                   class GALGAS_lbigint & outArgument2,
                                                   class GALGAS_structurePropertyListAST & outArgument3,
                                                   class GALGAS_functionDeclarationListAST & outArgument4,
@@ -15278,7 +15282,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
-                                                 class GALGAS_lbigint & outArgument1,
+                                                 class GALGAS_lstringlist & outArgument1,
                                                  class GALGAS_lbigint & outArgument2,
                                                  class GALGAS_structurePropertyListAST & outArgument3,
                                                  class GALGAS_functionDeclarationListAST & outArgument4,
@@ -15292,7 +15296,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
-                                                       class GALGAS_lbigint & outArgument1,
+                                                       class GALGAS_lstringlist & outArgument1,
                                                        class GALGAS_lbigint & outArgument2,
                                                        class GALGAS_structurePropertyListAST & outArgument3,
                                                        class GALGAS_functionDeclarationListAST & outArgument4,
@@ -15309,7 +15313,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
-                                               class GALGAS_lbigint & outArgument1,
+                                               class GALGAS_lstringlist & outArgument1,
                                                class GALGAS_lbigint & outArgument2,
                                                class GALGAS_structurePropertyListAST & outArgument3,
                                                class GALGAS_functionDeclarationListAST & outArgument4,
@@ -15323,7 +15327,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
-                                              class GALGAS_lbigint & outArgument1,
+                                              class GALGAS_lstringlist & outArgument1,
                                               class GALGAS_lbigint & outArgument2,
                                               class GALGAS_structurePropertyListAST & outArgument3,
                                               class GALGAS_functionDeclarationListAST & outArgument4,
@@ -15351,9 +15355,9 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                                                                          C_Compiler * inCompiler
                                                                                                          COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriorityAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mLowerPriorityTaskListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mStackSizeAtIndex (const class GALGAS_uint & constinOperand0,
                                                                            C_Compiler * inCompiler
@@ -15414,7 +15418,7 @@ class cEnumerator_taskListAST : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_mTaskName (LOCATION_ARGS) const ;
-  public : class GALGAS_lbigint current_mPriority (LOCATION_ARGS) const ;
+  public : class GALGAS_lstringlist current_mLowerPriorityTaskList (LOCATION_ARGS) const ;
   public : class GALGAS_lbigint current_mStackSize (LOCATION_ARGS) const ;
   public : class GALGAS_structurePropertyListAST current_mVarList (LOCATION_ARGS) const ;
   public : class GALGAS_functionDeclarationListAST current_mTaskFunctionList (LOCATION_ARGS) const ;

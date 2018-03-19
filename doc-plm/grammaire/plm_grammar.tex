@@ -214,17 +214,17 @@
   \draw[->] (p0-11) -- (p0-12) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{declaration-control-register}{74}
+\ruleSubsection{plm\_syntax}{declaration-control-register}{81}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p6-44) [point] {}; & \\
-    & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p5-41) [point] {}; & \\
-    & & & & & & & & & & & & & & & & & & & \node (p4-19) [point] {}; & & & & & & & & & & & & & & & & \node (p4-35) [terminal] {:}; & \node (p4-36) [terminal] {integer}; & \\
-    & & & & & & & & & & & & & & \node (p3-14) [point] {}; & & & & & & & & & & & & & & & & & & & \node (p3-33) [terminal] {identifier}; & \node (p3-34) [point] {}; & \node (p3-35) [point] {}; & & \node (p3-37) [point] {}; & & & \node (p3-40) [terminal] {,}; & \\
-    & & & & & & & & & & & & & \node (p2-13) [terminal] {,}; & & & & & & & & & & & & & & \node (p2-27) [point] {}; & & & \node (p2-30) [terminal] {\{}; & \node (p2-31) [point] {}; & \node (p2-32) [point] {}; & \node (p2-33) [terminal] {integer}; & & & & & \node (p2-38) [point] {}; & \node (p2-39) [point] {}; & & & \node (p2-42) [terminal] {\}}; & \\
-    & & & & & & \node (p1-6) [terminal] {[}; & \node (p1-7) [terminal] {integer}; & \node (p1-8) [terminal] {]}; & \node (p1-9) [terminal] {\{}; & \node (p1-10) [point] {}; & \node (p1-11) [terminal] {integer}; & \node (p1-12) [point] {}; & & & \node (p1-15) [terminal] {\}}; & & & \node (p1-18) [terminal] {,}; & & & & & & \node (p1-24) [point] {}; & \node (p1-25) [nonterminal] {\nonTerminalSymbol{registerDeclaration}{9}}; & \node (p1-26) [point] {}; & & \node (p1-28) [terminal] {\$type}; & \node (p1-29) [point] {}; & \node (p1-30) [point] {}; & & & & & & & & & & & & & \node (p1-43) [point] {}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {registers}; & \node (p0-3) [point] {}; & \node (p0-4) [terminal] {\#groupName}; & \node (p0-5) [point] {}; & \node (p0-6) [terminal] {integer}; & & & & & & & & & & \node (p0-16) [point] {}; & \node (p0-17) [point] {}; & & & \node (p0-20) [terminal] {\{}; & \node (p0-21) [point] {}; & \node (p0-22) [point] {}; & \node (p0-23) [point] {}; & & & & & & & & & & & & & & & & & & & & & & \node (p0-45) [terminal] {\}}; & \node (p0-46) [lastPoint] {}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p6-45) [point] {}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p5-42) [point] {}; & \\
+    & & & & & & & & & & & & & & & & & & & \node (p4-19) [point] {}; & & & & & & & & & & & & & & & & & \node (p4-36) [terminal] {:}; & \node (p4-37) [terminal] {integer}; & \\
+    & & & & & & & & & & & & & & \node (p3-14) [point] {}; & & & & & & & & & & & & & & \node (p3-28) [point] {}; & & & & & & \node (p3-34) [terminal] {identifier}; & \node (p3-35) [point] {}; & \node (p3-36) [point] {}; & & \node (p3-38) [point] {}; & & & \node (p3-41) [terminal] {,}; & \\
+    & & & & & & & & & & & & & \node (p2-13) [terminal] {,}; & & & & & & & & & & & & & & \node (p2-27) [terminal] {,}; & & & & \node (p2-31) [terminal] {\{}; & \node (p2-32) [point] {}; & \node (p2-33) [point] {}; & \node (p2-34) [terminal] {integer}; & & & & & \node (p2-39) [point] {}; & \node (p2-40) [point] {}; & & & \node (p2-43) [terminal] {\}}; & \\
+    & & & & & & \node (p1-6) [terminal] {[}; & \node (p1-7) [terminal] {integer}; & \node (p1-8) [terminal] {]}; & \node (p1-9) [terminal] {\{}; & \node (p1-10) [point] {}; & \node (p1-11) [terminal] {integer}; & \node (p1-12) [point] {}; & & & \node (p1-15) [terminal] {\}}; & & & \node (p1-18) [terminal] {,}; & & & & & & \node (p1-24) [point] {}; & \node (p1-25) [nonterminal] {\nonTerminalSymbol{registerDeclaration}{9}}; & \node (p1-26) [point] {}; & & & \node (p1-29) [terminal] {\$type}; & \node (p1-30) [point] {}; & \node (p1-31) [point] {}; & & & & & & & & & & & & & \node (p1-44) [point] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {registers}; & \node (p0-3) [point] {}; & \node (p0-4) [terminal] {\#groupName}; & \node (p0-5) [point] {}; & \node (p0-6) [terminal] {integer}; & & & & & & & & & & \node (p0-16) [point] {}; & \node (p0-17) [point] {}; & & & \node (p0-20) [terminal] {\{}; & \node (p0-21) [point] {}; & \node (p0-22) [point] {}; & \node (p0-23) [point] {}; & & & & & & & & & & & & & & & & & & & & & & & \node (p0-46) [terminal] {\}}; & \node (p0-47) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-4) ;
@@ -246,30 +246,50 @@
   \draw[->] (p0-16) -- (p0-20) ;
   \draw (p0-20) -- (p0-22) ;
   \draw[->] (p0-23) |- (p1-25) ;
-  \draw[->] (p2-27) -| (p1-24) ;
-  \draw[->] (p1-26) -| (p2-27) ;
-  \draw[->] (p1-25) -- (p1-28) ;
-  \draw (p1-28) -- (p1-30) ;
-  \draw[->] (p1-29) |- (p2-30) ;
-  \draw[->] (p2-30) -- (p2-33) ;
-  \draw[->] (p2-32) |- (p3-33) ;
-  \draw (p3-33) -- (p3-35) ;
-  \draw[->] (p3-34) |- (p4-35) ;
-  \draw[->] (p4-35) -- (p4-36) ;
-  \draw (p3-35) -- (p3-37) ;
-  \draw[->] (p4-36) -| (p3-37) ;
-  \draw (p2-33) -- (p2-38) ;
-  \draw[->] (p3-37) -| (p2-38) ;
-  \draw[->] (p2-39) |- (p3-40) ;
-  \draw[->] (p5-41) -| (p2-31) ;
-  \draw[->] (p3-40) -| (p5-41) ;
-  \draw[->] (p2-38) -- (p2-42) ;
-  \draw (p1-30) -- (p1-43) ;
-  \draw[->] (p2-42) -| (p1-43) ;
-  \draw[->] (p6-44) -| (p0-21) ;
-  \draw[->] (p1-43) -| (p6-44) ;
-  \draw[->] (p0-22) -- (p0-45) ;
-  \draw[->] (p0-45) -- (p0-46) ;
+  \draw[->] (p1-26) |- (p2-27) ;
+  \draw[->] (p3-28) -| (p1-24) ;
+  \draw[->] (p2-27) -| (p3-28) ;
+  \draw[->] (p1-25) -- (p1-29) ;
+  \draw (p1-29) -- (p1-31) ;
+  \draw[->] (p1-30) |- (p2-31) ;
+  \draw[->] (p2-31) -- (p2-34) ;
+  \draw[->] (p2-33) |- (p3-34) ;
+  \draw (p3-34) -- (p3-36) ;
+  \draw[->] (p3-35) |- (p4-36) ;
+  \draw[->] (p4-36) -- (p4-37) ;
+  \draw (p3-36) -- (p3-38) ;
+  \draw[->] (p4-37) -| (p3-38) ;
+  \draw (p2-34) -- (p2-39) ;
+  \draw[->] (p3-38) -| (p2-39) ;
+  \draw[->] (p2-40) |- (p3-41) ;
+  \draw[->] (p5-42) -| (p2-32) ;
+  \draw[->] (p3-41) -| (p5-42) ;
+  \draw[->] (p2-39) -- (p2-43) ;
+  \draw (p1-31) -- (p1-44) ;
+  \draw[->] (p2-43) -| (p1-44) ;
+  \draw[->] (p6-45) -| (p0-21) ;
+  \draw[->] (p1-44) -| (p6-45) ;
+  \draw[->] (p0-22) -- (p0-46) ;
+  \draw[->] (p0-46) -- (p0-47) ;
+\end{tikzpicture}
+
+\ruleSubsection{plm\_syntax}{declaration-control-register}{202}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    & & & & & & & & & & \node (p2-10) [point] {}; & \\
+    & & & & & & & & & \node (p1-9) [terminal] {,}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {registers}; & \node (p0-3) [terminal] {@attribute}; & \node (p0-4) [point] {}; & \node (p0-5) [terminal] {\#groupName}; & \node (p0-6) [terminal] {:}; & \node (p0-7) [terminal] {identifier}; & \node (p0-8) [point] {}; & & & \node (p0-11) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw[->] (p0-2) -- (p0-3) ;
+  \draw[->] (p0-3) -- (p0-5) ;
+  \draw[->] (p0-5) -- (p0-6) ;
+  \draw[->] (p0-6) -- (p0-7) ;
+  \draw[->] (p0-8) |- (p1-9) ;
+  \draw[->] (p2-10) -| (p0-4) ;
+  \draw[->] (p1-9) -| (p2-10) ;
+  \draw[->] (p0-7) -- (p0-11) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{declaration-global-constant}{26}
@@ -422,17 +442,20 @@
   \draw[->] (p0-15) -- (p0-16) ;
 \end{tikzpicture}
 
-\ruleSubsection{plm\_syntax}{task-declaration}{43}
+\ruleSubsection{plm\_syntax}{task-declaration}{44}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & & & & & & & & & & & & & \node (p6-22) [point] {}; & \\
-    & & & & & & & & & & & & \node (p5-12) [nonterminal] {\nonTerminalSymbol{guarded\_command}{42}}; & \node (p5-13) [terminal] {\{}; & \node (p5-14) [nonterminal] {\nonTerminalSymbol{instructionList}{38}}; & \node (p5-15) [terminal] {\}}; & \\
-    & & & & & & & & & & & & \node (p4-12) [terminal] {setup}; & \node (p4-13) [terminal] {integer}; & \node (p4-14) [terminal] {\{}; & \node (p4-15) [nonterminal] {\nonTerminalSymbol{instructionList}{38}}; & \node (p4-16) [terminal] {\}}; & \\
-    & & & & & & & & & & & & & & & & \node (p3-16) [terminal] {->}; & \node (p3-17) [nonterminal] {\nonTerminalSymbol{type\_definition}{3}}; & \\
-    & & & & & & & & & & & & \node (p2-12) [terminal] {func}; & \node (p2-13) [terminal] {identifier}; & \node (p2-14) [nonterminal] {\nonTerminalSymbol{procedure\_formal\_arguments}{21}}; & \node (p2-15) [point] {}; & \node (p2-16) [point] {}; & & \node (p2-18) [point] {}; & \node (p2-19) [terminal] {\{}; & \node (p2-20) [nonterminal] {\nonTerminalSymbol{instructionList}{38}}; & \node (p2-21) [terminal] {\}}; & \\
-    & & & & & & & & & & & & \node (p1-12) [nonterminal] {\nonTerminalSymbol{private\_struct\_property\_declaration}{5}}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {task}; & \node (p0-3) [terminal] {identifier}; & \node (p0-4) [terminal] {@attribute}; & \node (p0-5) [terminal] {integer}; & \node (p0-6) [terminal] {@attribute}; & \node (p0-7) [terminal] {integer}; & \node (p0-8) [terminal] {\{}; & \node (p0-9) [point] {}; & \node (p0-10) [point] {}; & \node (p0-11) [point] {}; & & & & & & & & & & & & \node (p0-23) [terminal] {\}}; & \node (p0-24) [lastPoint] {}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p9-29) [point] {}; & \\
+    & & & & & & & & & & & & & & & \node (p8-15) [nonterminal] {\nonTerminalSymbol{guarded\_command}{42}}; & \node (p8-16) [terminal] {\{}; & \node (p8-17) [nonterminal] {\nonTerminalSymbol{instructionList}{38}}; & \node (p8-18) [terminal] {\}}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & & \node (p7-24) [point] {}; & \\
+    & & & & & & & & & & & & & & & & & & & & & & & \node (p6-23) [terminal] {,}; & \\
+    & & & & & & & & & & & & & & & & & & & \node (p5-19) [terminal] {>}; & \node (p5-20) [point] {}; & \node (p5-21) [terminal] {identifier}; & \node (p5-22) [point] {}; & \\
+    & & & & & & & & & & & & & & & \node (p4-15) [terminal] {on}; & \node (p4-16) [terminal] {@attribute}; & \node (p4-17) [terminal] {identifier}; & \node (p4-18) [point] {}; & \node (p4-19) [point] {}; & & & & & & \node (p4-25) [point] {}; & \node (p4-26) [terminal] {\{}; & \node (p4-27) [nonterminal] {\nonTerminalSymbol{instructionList}{38}}; & \node (p4-28) [terminal] {\}}; & \\
+    & & & & & & & & & & & & & & & & & & & \node (p3-19) [terminal] {->}; & \node (p3-20) [nonterminal] {\nonTerminalSymbol{type\_definition}{3}}; & \\
+    & & & & & & & & & & & & & & & \node (p2-15) [terminal] {func}; & \node (p2-16) [terminal] {identifier}; & \node (p2-17) [nonterminal] {\nonTerminalSymbol{procedure\_formal\_arguments}{21}}; & \node (p2-18) [point] {}; & \node (p2-19) [point] {}; & & \node (p2-21) [point] {}; & \node (p2-22) [terminal] {\{}; & \node (p2-23) [nonterminal] {\nonTerminalSymbol{instructionList}{38}}; & \node (p2-24) [terminal] {\}}; & \\
+    & & & & & & & & & \node (p1-9) [terminal] {@attribute}; & & & & & & \node (p1-15) [nonterminal] {\nonTerminalSymbol{private\_struct\_property\_declaration}{5}}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {task}; & \node (p0-3) [terminal] {identifier}; & \node (p0-4) [terminal] {@attribute}; & \node (p0-5) [terminal] {integer}; & \node (p0-6) [terminal] {@attribute}; & \node (p0-7) [terminal] {integer}; & \node (p0-8) [point] {}; & \node (p0-9) [point] {}; & \node (p0-10) [point] {}; & \node (p0-11) [terminal] {\{}; & \node (p0-12) [point] {}; & \node (p0-13) [point] {}; & \node (p0-14) [point] {}; & & & & & & & & & & & & & & & & \node (p0-30) [terminal] {\}}; & \node (p0-31) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
@@ -440,36 +463,49 @@
   \draw[->] (p0-4) -- (p0-5) ;
   \draw[->] (p0-5) -- (p0-6) ;
   \draw[->] (p0-6) -- (p0-7) ;
-  \draw[->] (p0-7) -- (p0-8) ;
-  \draw (p0-8) -- (p0-10) ;
-  \draw[->] (p0-11) |- (p1-12) ;
-  \draw[->] (p0-11) |- (p2-12) ;
-  \draw[->] (p2-12) -- (p2-13) ;
-  \draw[->] (p2-13) -- (p2-14) ;
-  \draw (p2-14) -- (p2-16) ;
-  \draw[->] (p2-15) |- (p3-16) ;
-  \draw[->] (p3-16) -- (p3-17) ;
-  \draw (p2-16) -- (p2-18) ;
-  \draw[->] (p3-17) -| (p2-18) ;
-  \draw[->] (p2-18) -- (p2-19) ;
-  \draw[->] (p2-19) -- (p2-20) ;
-  \draw[->] (p2-20) -- (p2-21) ;
-  \draw[->] (p0-11) |- (p4-12) ;
-  \draw[->] (p4-12) -- (p4-13) ;
-  \draw[->] (p4-13) -- (p4-14) ;
-  \draw[->] (p4-14) -- (p4-15) ;
+  \draw (p0-7) -- (p0-9) ;
+  \draw[->] (p0-8) |- (p1-9) ;
+  \draw (p0-9) -- (p0-10) ;
+  \draw[->] (p1-9) -| (p0-10) ;
+  \draw[->] (p0-10) -- (p0-11) ;
+  \draw (p0-11) -- (p0-13) ;
+  \draw[->] (p0-14) |- (p1-15) ;
+  \draw[->] (p0-14) |- (p2-15) ;
+  \draw[->] (p2-15) -- (p2-16) ;
+  \draw[->] (p2-16) -- (p2-17) ;
+  \draw (p2-17) -- (p2-19) ;
+  \draw[->] (p2-18) |- (p3-19) ;
+  \draw[->] (p3-19) -- (p3-20) ;
+  \draw (p2-19) -- (p2-21) ;
+  \draw[->] (p3-20) -| (p2-21) ;
+  \draw[->] (p2-21) -- (p2-22) ;
+  \draw[->] (p2-22) -- (p2-23) ;
+  \draw[->] (p2-23) -- (p2-24) ;
+  \draw[->] (p0-14) |- (p4-15) ;
   \draw[->] (p4-15) -- (p4-16) ;
-  \draw[->] (p0-11) |- (p5-12) ;
-  \draw[->] (p5-12) -- (p5-13) ;
-  \draw[->] (p5-13) -- (p5-14) ;
-  \draw[->] (p5-14) -- (p5-15) ;
-  \draw[->] (p6-22) -| (p0-9) ;
-  \draw[->] (p1-12) -| (p6-22) ;
-  \draw[->] (p2-21) -| (p6-22) ;
-  \draw[->] (p4-16) -| (p6-22) ;
-  \draw[->] (p5-15) -| (p6-22) ;
-  \draw[->] (p0-10) -- (p0-23) ;
-  \draw[->] (p0-23) -- (p0-24) ;
+  \draw[->] (p4-16) -- (p4-17) ;
+  \draw (p4-17) -- (p4-19) ;
+  \draw[->] (p4-18) |- (p5-19) ;
+  \draw[->] (p5-19) -- (p5-21) ;
+  \draw[->] (p5-22) |- (p6-23) ;
+  \draw[->] (p7-24) -| (p5-20) ;
+  \draw[->] (p6-23) -| (p7-24) ;
+  \draw (p4-19) -- (p4-25) ;
+  \draw[->] (p5-21) -| (p4-25) ;
+  \draw[->] (p4-25) -- (p4-26) ;
+  \draw[->] (p4-26) -- (p4-27) ;
+  \draw[->] (p4-27) -- (p4-28) ;
+  \draw[->] (p0-14) |- (p8-15) ;
+  \draw[->] (p8-15) -- (p8-16) ;
+  \draw[->] (p8-16) -- (p8-17) ;
+  \draw[->] (p8-17) -- (p8-18) ;
+  \draw[->] (p9-29) -| (p0-12) ;
+  \draw[->] (p1-15) -| (p9-29) ;
+  \draw[->] (p2-24) -| (p9-29) ;
+  \draw[->] (p4-28) -| (p9-29) ;
+  \draw[->] (p8-18) -| (p9-29) ;
+  \draw[->] (p0-13) -- (p0-30) ;
+  \draw[->] (p0-30) -- (p0-31) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{panic}{20}
@@ -2046,7 +2082,7 @@
 
 \nonTerminalSection{registerDeclaration}{9}
 
-\ruleSubsection{plm\_syntax}{declaration-control-register}{149}
+\ruleSubsection{plm\_syntax}{declaration-control-register}{157}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {

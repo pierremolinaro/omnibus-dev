@@ -186,7 +186,7 @@ system section initializeDMA (?!pattern $patternArray) {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @priority 1 @stacksize 512 @activate {
+task Tâche @stacksize 512 @activate {
   var compteur $uint32 = 0
   var pattern = $patternArray (!repeated:0)
  

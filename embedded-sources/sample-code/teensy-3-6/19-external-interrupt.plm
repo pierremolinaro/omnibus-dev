@@ -93,7 +93,7 @@ driver myDriver ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T1 @priority 10 @stacksize 512 @activate {
+task T1 @stacksize 512 @activate {
   var échéance $uint32 = 0
 
   on time.wait (!untilDeadline:self.échéance) {

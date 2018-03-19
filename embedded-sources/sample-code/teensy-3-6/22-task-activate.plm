@@ -21,7 +21,7 @@ let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche0 @priority 0 @stacksize 512 @activate {
+task Tâche0 @stacksize 512 @activate {
   var tick = $uint32 ()
   
   on time.wait (!untilDeadline: self.tick) {
@@ -32,7 +32,7 @@ task Tâche0 @priority 0 @stacksize 512 @activate {
   
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @priority 1 @stacksize 512 { // Do not activate
+task Tâche1 @stacksize 512 { // Do not activate
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
