@@ -491,7 +491,7 @@ let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T @priority 0 @stacksize 512 @activate {
+task T @stacksize 512 @activate {
   var tick $uint32 = 0
   var état $uint32 = 0
   

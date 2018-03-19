@@ -8067,7 +8067,6 @@ GALGAS_decoratedStaticList GALGAS_decoratedStaticList::extractObject (const GALG
 
 GALGAS_decoratedTaskList_2D_element::GALGAS_decoratedTaskList_2D_element (void) :
 mProperty_mTaskName (),
-mProperty_mPriority (),
 mProperty_mStackSize (),
 mProperty_mVarList (),
 mProperty_mTaskProcList (),
@@ -8088,33 +8087,30 @@ GALGAS_decoratedTaskList_2D_element::~ GALGAS_decoratedTaskList_2D_element (void
 
 GALGAS_decoratedTaskList_2D_element::GALGAS_decoratedTaskList_2D_element (const GALGAS_lstring & inOperand0,
                                                                           const GALGAS_lbigint & inOperand1,
-                                                                          const GALGAS_lbigint & inOperand2,
-                                                                          const GALGAS_structurePropertyListAST & inOperand3,
-                                                                          const GALGAS_functionDeclarationListAST & inOperand4,
+                                                                          const GALGAS_structurePropertyListAST & inOperand2,
+                                                                          const GALGAS_functionDeclarationListAST & inOperand3,
+                                                                          const GALGAS_taskSetupListAST & inOperand4,
                                                                           const GALGAS_taskSetupListAST & inOperand5,
                                                                           const GALGAS_taskSetupListAST & inOperand6,
-                                                                          const GALGAS_taskSetupListAST & inOperand7,
-                                                                          const GALGAS_syncInstructionBranchListAST & inOperand8,
-                                                                          const GALGAS_location & inOperand9,
-                                                                          const GALGAS_bool & inOperand10) :
+                                                                          const GALGAS_syncInstructionBranchListAST & inOperand7,
+                                                                          const GALGAS_location & inOperand8,
+                                                                          const GALGAS_bool & inOperand9) :
 mProperty_mTaskName (inOperand0),
-mProperty_mPriority (inOperand1),
-mProperty_mStackSize (inOperand2),
-mProperty_mVarList (inOperand3),
-mProperty_mTaskProcList (inOperand4),
-mProperty_mTaskSetupListAST (inOperand5),
-mProperty_mTaskActivateListAST (inOperand6),
-mProperty_mTaskDeactivateListAST (inOperand7),
-mProperty_mGuardedCommandList (inOperand8),
-mProperty_mEndOfTaskDeclaration (inOperand9),
-mProperty_mActivate (inOperand10) {
+mProperty_mStackSize (inOperand1),
+mProperty_mVarList (inOperand2),
+mProperty_mTaskProcList (inOperand3),
+mProperty_mTaskSetupListAST (inOperand4),
+mProperty_mTaskActivateListAST (inOperand5),
+mProperty_mTaskDeactivateListAST (inOperand6),
+mProperty_mGuardedCommandList (inOperand7),
+mProperty_mEndOfTaskDeclaration (inOperand8),
+mProperty_mActivate (inOperand9) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_decoratedTaskList_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                              GALGAS_lbigint::constructor_default (HERE),
                                               GALGAS_lbigint::constructor_default (HERE),
                                               GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
                                               GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
@@ -8130,19 +8126,18 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
 
 GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                           const GALGAS_lbigint & inOperand1,
-                                                                                          const GALGAS_lbigint & inOperand2,
-                                                                                          const GALGAS_structurePropertyListAST & inOperand3,
-                                                                                          const GALGAS_functionDeclarationListAST & inOperand4,
+                                                                                          const GALGAS_structurePropertyListAST & inOperand2,
+                                                                                          const GALGAS_functionDeclarationListAST & inOperand3,
+                                                                                          const GALGAS_taskSetupListAST & inOperand4,
                                                                                           const GALGAS_taskSetupListAST & inOperand5,
                                                                                           const GALGAS_taskSetupListAST & inOperand6,
-                                                                                          const GALGAS_taskSetupListAST & inOperand7,
-                                                                                          const GALGAS_syncInstructionBranchListAST & inOperand8,
-                                                                                          const GALGAS_location & inOperand9,
-                                                                                          const GALGAS_bool & inOperand10 
+                                                                                          const GALGAS_syncInstructionBranchListAST & inOperand7,
+                                                                                          const GALGAS_location & inOperand8,
+                                                                                          const GALGAS_bool & inOperand9 
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedTaskList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
-    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
+    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
   }
   return result ;
 }
@@ -8153,9 +8148,6 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mProperty_mTaskName.objectCompare (inOperand.mProperty_mTaskName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mStackSize.objectCompare (inOperand.mProperty_mStackSize) ;
@@ -8190,14 +8182,13 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_decoratedTaskList_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_decoratedTaskList_2D_element::drop (void) {
   mProperty_mTaskName.drop () ;
-  mProperty_mPriority.drop () ;
   mProperty_mStackSize.drop () ;
   mProperty_mVarList.drop () ;
   mProperty_mTaskProcList.drop () ;
@@ -8218,8 +8209,6 @@ void GALGAS_decoratedTaskList_2D_element::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mProperty_mTaskName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mPriority.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mStackSize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -8246,12 +8235,6 @@ void GALGAS_decoratedTaskList_2D_element::description (C_String & ioString,
 
 GALGAS_lstring GALGAS_decoratedTaskList_2D_element::getter_mTaskName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTaskName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint GALGAS_decoratedTaskList_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

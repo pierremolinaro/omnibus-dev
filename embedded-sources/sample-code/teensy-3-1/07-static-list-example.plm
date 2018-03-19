@@ -55,7 +55,7 @@ extend staticArray maListeStatique (
 
 //-----------------------------------------------------------------------------*
 
-task T @priority 12 @stacksize 512 @activate {
+task T @stacksize 512 @activate {
   var deadline $uint32 = 0
 
   on @setup first {

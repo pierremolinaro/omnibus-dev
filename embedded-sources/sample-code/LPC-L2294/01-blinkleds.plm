@@ -14,7 +14,7 @@ system section ledOff () {
 
 //------------------------------------------------*
 
-task T1 @priority 1 @stacksize 512 @activate {
+task T1 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {

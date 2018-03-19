@@ -38,7 +38,7 @@ driver RegisterRead ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @priority 1 @stacksize 512 @activate {
+task Tâche @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on @setup first {

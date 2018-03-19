@@ -32,7 +32,7 @@ let PUSH_P4 = $digitalPort.D12
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T @priority 0 @stacksize 512 @activate {
+task T @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on @setup first {
