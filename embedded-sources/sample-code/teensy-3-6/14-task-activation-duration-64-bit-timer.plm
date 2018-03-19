@@ -65,7 +65,7 @@ sync s = $semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche0 @priority 0 @stacksize 512 {
+task Tâche0 @priority 0 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on @setup first {
@@ -78,7 +78,7 @@ task Tâche0 @priority 0 @stacksize 512 {
   
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @priority 1 @stacksize 512 {
+task Tâche1 @priority 1 @stacksize 512 @activate {
 
   on @setup first {
     timer.setTick ()

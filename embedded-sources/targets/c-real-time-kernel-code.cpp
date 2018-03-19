@@ -59,13 +59,12 @@ void kernel_create_task (const unsigned inTaskIndex,
 //  taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0
 //  taskControlBlockPtr->mUserResult = false ; // statically initialized to 0
 //  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to GUARD_EVALUATING_OR_OUTSIDE
+//  taskControlBlockPtr->mActivationCount = 0 ;  // statically initialized to 0
 //--- Store stack parameters
   taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
   taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
 //--- Initial free stack size
   taskControlBlockPtr->mStackFreeSize = inStackBufferSize ;
-//--- Task auto start ?
-  taskControlBlockPtr->mActivationCount = 1 ;
 //--- Initialize Context
   const bool hasFloatingPointContext = false ;
   kernel_set_task_context (taskControlBlockPtr->mTaskContext,

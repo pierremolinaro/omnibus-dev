@@ -25,7 +25,7 @@ sync sémaphore = $semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T1 @priority 1 @stacksize 512 {
+task T1 @priority 1 @stacksize 512 @activate {
   var top $uint32 = 0
 
   on @setup first {
@@ -48,7 +48,7 @@ task T1 @priority 1 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T2 @priority 2 @stacksize 512 {
+task T2 @priority 2 @stacksize 512 @activate {
 
   on sémaphore.wait () {
     digital.write (!yes !toPort:LED_L2)

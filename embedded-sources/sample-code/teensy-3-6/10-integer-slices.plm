@@ -21,7 +21,7 @@ let LED_L3 = $digitalPort.D6
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @priority 1 @stacksize 512 {
+task Tâche1 @priority 1 @stacksize 512 @activate {
   var compteur $uint32 = 0
   var test = yes
 

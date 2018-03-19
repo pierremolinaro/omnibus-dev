@@ -8075,7 +8075,8 @@ mProperty_mTaskSetupListAST (),
 mProperty_mTaskActivateListAST (),
 mProperty_mTaskDeactivateListAST (),
 mProperty_mGuardedCommandList (),
-mProperty_mEndOfTaskDeclaration () {
+mProperty_mEndOfTaskDeclaration (),
+mProperty_mActivate () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8094,7 +8095,8 @@ GALGAS_decoratedTaskList_2D_element::GALGAS_decoratedTaskList_2D_element (const 
                                                                           const GALGAS_taskSetupListAST & inOperand6,
                                                                           const GALGAS_taskSetupListAST & inOperand7,
                                                                           const GALGAS_syncInstructionBranchListAST & inOperand8,
-                                                                          const GALGAS_location & inOperand9) :
+                                                                          const GALGAS_location & inOperand9,
+                                                                          const GALGAS_bool & inOperand10) :
 mProperty_mTaskName (inOperand0),
 mProperty_mPriority (inOperand1),
 mProperty_mStackSize (inOperand2),
@@ -8104,7 +8106,8 @@ mProperty_mTaskSetupListAST (inOperand5),
 mProperty_mTaskActivateListAST (inOperand6),
 mProperty_mTaskDeactivateListAST (inOperand7),
 mProperty_mGuardedCommandList (inOperand8),
-mProperty_mEndOfTaskDeclaration (inOperand9) {
+mProperty_mEndOfTaskDeclaration (inOperand9),
+mProperty_mActivate (inOperand10) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8119,7 +8122,8 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
                                               GALGAS_taskSetupListAST::constructor_emptyList (HERE),
                                               GALGAS_taskSetupListAST::constructor_emptyList (HERE),
                                               GALGAS_syncInstructionBranchListAST::constructor_emptyList (HERE),
-                                              GALGAS_location::constructor_nowhere (HERE)) ;
+                                              GALGAS_location::constructor_nowhere (HERE),
+                                              GALGAS_bool::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8133,11 +8137,12 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
                                                                                           const GALGAS_taskSetupListAST & inOperand6,
                                                                                           const GALGAS_taskSetupListAST & inOperand7,
                                                                                           const GALGAS_syncInstructionBranchListAST & inOperand8,
-                                                                                          const GALGAS_location & inOperand9 
+                                                                                          const GALGAS_location & inOperand9,
+                                                                                          const GALGAS_bool & inOperand10 
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedTaskList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
-    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
   }
   return result ;
 }
@@ -8176,13 +8181,16 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
   if (result == kOperandEqual) {
     result = mProperty_mEndOfTaskDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskDeclaration) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mActivate.objectCompare (inOperand.mProperty_mActivate) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_decoratedTaskList_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8198,6 +8206,7 @@ void GALGAS_decoratedTaskList_2D_element::drop (void) {
   mProperty_mTaskDeactivateListAST.drop () ;
   mProperty_mGuardedCommandList.drop () ;
   mProperty_mEndOfTaskDeclaration.drop () ;
+  mProperty_mActivate.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8227,6 +8236,8 @@ void GALGAS_decoratedTaskList_2D_element::description (C_String & ioString,
     mProperty_mGuardedCommandList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mEndOfTaskDeclaration.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mActivate.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -8289,6 +8300,12 @@ GALGAS_syncInstructionBranchListAST GALGAS_decoratedTaskList_2D_element::getter_
 
 GALGAS_location GALGAS_decoratedTaskList_2D_element::getter_mEndOfTaskDeclaration (UNUSED_LOCATION_ARGS) const {
   return mProperty_mEndOfTaskDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_decoratedTaskList_2D_element::getter_mActivate (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mActivate ;
 }
 
 

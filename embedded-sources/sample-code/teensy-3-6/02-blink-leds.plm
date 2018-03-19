@@ -25,7 +25,7 @@ let LED_L4 = $digitalPort.D7
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T1 @priority 1 @stacksize 512 {
+task T1 @priority 1 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on @setup first {
@@ -53,7 +53,7 @@ task T1 @priority 1 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T2 @priority 2 @stacksize 512 {
+task T2 @priority 2 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
@@ -67,7 +67,7 @@ task T2 @priority 2 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T3 @priority 3 @stacksize 512 {
+task T3 @priority 3 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
@@ -81,7 +81,7 @@ task T3 @priority 3 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T4 @priority 4 @stacksize 512 {
+task T4 @priority 4 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {
@@ -95,7 +95,7 @@ task T4 @priority 4 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T5 @priority 5 @stacksize 512 {
+task T5 @priority 5 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on time.wait (!untilDeadline:self.compteur) {

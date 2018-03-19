@@ -40,7 +40,7 @@ sync s = $semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche0 @priority 0 @stacksize 512 {
+task Tâche0 @priority 0 @stacksize 512 @activate {
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
@@ -54,7 +54,7 @@ task Tâche0 @priority 0 @stacksize 512 {
   
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @priority 1 @stacksize 512 {
+task Tâche1 @priority 1 @stacksize 512 @activate {
 
   on @setup first {
     myDriver.noteTick ()
