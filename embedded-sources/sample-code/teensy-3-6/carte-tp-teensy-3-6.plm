@@ -44,7 +44,7 @@ let BUTTON_P4 = $digitalPort.D12
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-panic setup 0 {
+panic @setup 0 {
   digital.set (!mode:.OUTPUT !toPort:LED_L0)
   digital.set (!mode:.OUTPUT !toPort:LED_L1)
   digital.set (!mode:.OUTPUT !toPort:LED_L2)
@@ -67,7 +67,7 @@ panic setup 0 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-panic loop 0 {
+panic @loop 0 {
   time.panicBusyWaitingDuringMS (!50)
   digital.toggle (!port:LED_L0)
   digital.toggle (!port:LED_L1)

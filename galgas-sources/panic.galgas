@@ -19,14 +19,23 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $panic$
-    $setup$
+    $@attribute$ ?let attribute
+    @bool isSetup
+    if attribute.string == "setup" then
+      isSetup = true
+    elsif attribute.string == "loop" then
+      isSetup = false
+    else
+      error attribute : "attribute should be @setup or @loop" : isSetup
+    end
+#    $setup$
     $integer$ ?let priority
     ${$
     <instructionList> !?ioAST ?let instructionList
     let endOfInstructionList = @location.here
     $}$
     ioAST.mDeclarationListAST += !@panicAST.new {
-      !true
+      !isSetup
       !instructionList
       !endOfInstructionList
       !priority
@@ -35,21 +44,21 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    $panic$
-    $loop$
-    $integer$ ?let priority
-    ${$
-    <instructionList> !?ioAST ?let instructionList
-    let endOfInstructionList = @location.here
-    $}$
-    ioAST.mDeclarationListAST += !@panicAST.new {
-      !false
-      !instructionList
-      !endOfInstructionList
-      !priority
-    }
-  }
+#  rule <declaration> ?!@ast ioAST {
+#    $panic$
+#    $loop$
+#    $integer$ ?let priority
+#    ${$
+#    <instructionList> !?ioAST ?let instructionList
+#    let endOfInstructionList = @location.here
+#    $}$
+#    ioAST.mDeclarationListAST += !@panicAST.new {
+#      !false
+#      !instructionList
+#      !endOfInstructionList
+#      !priority
+#    }
+#  }
 
   #·····················································································································
 
