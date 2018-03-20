@@ -1,34 +1,6 @@
 target "teensy-3-1/unprivileged"
 
-driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
-
-//——————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                               
-//——————————————————————————————————————————————————————————————————————————————
-
-func section activityLedOn @safe @exported () {
-  digital.write (!yes !toPort:.D13)
-}
-
-func section activityLedOff @safe @exported () {
-  digital.write (!no !toPort:.D13)
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-let LED_L0 = $digitalPort.D3
-let LED_L1 = $digitalPort.D4
-let LED_L2 = $digitalPort.D5
-let LED_L3 = $digitalPort.D6
-let LED_L4 = $digitalPort.D7
-
-//——————————————————————————————————————————————————————————————————————————————
-
-let PUSH_P0 = $digitalPort.D8
-let PUSH_P1 = $digitalPort.D9
-let PUSH_P2 = $digitalPort.D10
-let PUSH_P3 = $digitalPort.D11
-let PUSH_P4 = $digitalPort.D12
+import "carte-tp-teensy-3-1.plm"
 
 //——————————————————————————————————————————————————————————————————————————————
 
@@ -42,22 +14,22 @@ task T @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
     digital.set (!mode:.OUTPUT !toPort:.D13)
-    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P0)
-    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P1)
-    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P2)
-    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P3)
-    digital.set (!mode:.INPUT_PULLUP !toPort:PUSH_P4)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P0)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P1)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P2)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P3)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P4)
   }
 
   //············································································
   
   on time.wait (!untilDeadline:self.compteur) {
     self.compteur +%= 50
-    digital.write (!not digital.read (!port:PUSH_P0) !toPort:LED_L0)
-    digital.write (!not digital.read (!port:PUSH_P1) !toPort:LED_L1)
-    digital.write (!not digital.read (!port:PUSH_P2) !toPort:LED_L2)
-    digital.write (!not digital.read (!port:PUSH_P3) !toPort:LED_L3)
-    digital.write (!not digital.read (!port:PUSH_P4) !toPort:LED_L4)
+    digital.write (!not digital.read (!port:BUTTON_P0) !toPort:LED_L0)
+    digital.write (!not digital.read (!port:BUTTON_P1) !toPort:LED_L1)
+    digital.write (!not digital.read (!port:BUTTON_P2) !toPort:LED_L2)
+    digital.write (!not digital.read (!port:BUTTON_P3) !toPort:LED_L3)
+    digital.write (!not digital.read (!port:BUTTON_P4) !toPort:LED_L4)
   }
   
 
