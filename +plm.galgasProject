@@ -39,6 +39,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-global-sync-instance.galgas"
   "galgas-sources/declaration-driver.galgas"
   "galgas-sources/declaration-static-array.galgas"
+  "galgas-sources/declaration-option.galgas"
 
 #--- Tasks
   "galgas-sources/task-declaration.galgas"

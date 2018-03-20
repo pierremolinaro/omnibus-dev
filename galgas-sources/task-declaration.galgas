@@ -229,7 +229,7 @@ method @taskListAST enterInContext
     end
     if [option plm_options.taskStrictPriorityOrder value] && ([candidateTaskList length] > 1) then
       for task in candidateTaskList do
-        warning task.mTaskName : "this task does not respect a strict priority order"
+        error task.mTaskName : "this task does not respect a strict priority order"
       end
     end
     if [candidateTaskList length] > 0 then
