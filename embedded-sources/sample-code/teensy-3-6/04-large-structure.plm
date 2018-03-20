@@ -1,23 +1,9 @@
 target "teensy-3-6/xtr32"
 let F_CPU_MHZ = 180
 
-driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+import "carte-tp.plm"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                                                                       
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func section activityLedOn @safe @exported () {
-  digital.write (!yes !toPort:.D13)
-}
-
-func section activityLedOff @safe @exported () {
-  digital.write (!no !toPort:.D13)
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-let LED_L0 = $digitalPort.D3
 
 let PATTERN_LENGTH = 1000
 
@@ -25,13 +11,12 @@ typealias $patternArray : $uint32 [PATTERN_LENGTH]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @stacksize 5512 @activate {
+task Tâcheq @stacksize 5512 @activate {
   var compteur $uint32 = 0
   var x = $patternArray (!repeated:0)
   var y = $patternArray (!repeated:0)
 
   on @setup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
    

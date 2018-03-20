@@ -1,21 +1,7 @@
 target "teensy-3-6/xtr64"
 let F_CPU_MHZ = 240
 
-driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                                                                       
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func section activityLedOn @safe @exported () {
-  digital.write (!yes !toPort:.D13)
-}
-
-func section activityLedOff @safe @exported () {
-  digital.write (!no !toPort:.D13)
-}
-
-let LED_L0 = $digitalPort.D3
+import "carte-tp.plm"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -42,7 +28,6 @@ task Tâche @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on @setup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!string:"OUTDIV: ")

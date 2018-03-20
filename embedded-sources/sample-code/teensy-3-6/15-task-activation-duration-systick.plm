@@ -1,24 +1,9 @@
 target "teensy-3-6/xtr32"
 let F_CPU_MHZ = 240
 
-driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+import "carte-tp.plm"
+
 driver myDriver ()
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                                                                       
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func section activityLedOn @safe @exported () {
-  digital.write (!yes !toPort:.D13)
-}
-
-func section activityLedOff @safe @exported () {
-  digital.write (!no !toPort:.D13)
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //
@@ -43,7 +28,6 @@ sync s = $semaphore (!value:0)
 task TâcheA @stacksize 512 @activate {
 
   on @setup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     s.wait ()
     let duration = myDriver.getDuration ()
     lcd.print (!u32:duration)
