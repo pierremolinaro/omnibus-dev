@@ -1,22 +1,8 @@
 target "teensy-3-1/unprivileged"
 
-driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+import "carte-tp-teensy-3-1.plm"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                                                                       
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func section activityLedOn @safe @exported () {
-  digital.write (!yes !toPort:.D13)
-}
-
-func section activityLedOff @safe @exported () {
-  digital.write (!no !toPort:.D13)
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-let LED_L3 = $digitalPort.D6
 
 let N = 12
 let slice = N [1 ... 3]

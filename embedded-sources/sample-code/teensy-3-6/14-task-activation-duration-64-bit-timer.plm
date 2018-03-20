@@ -2,7 +2,7 @@ target "teensy-3-6/xtr32"
 let F_CPU_MHZ = 240
 let BUS_MHZ2 @display = BUS_MHZ
 
-import "carte-tp.plm"
+import "carte-tp-teensy-3-6.plm"
 driver timer ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
