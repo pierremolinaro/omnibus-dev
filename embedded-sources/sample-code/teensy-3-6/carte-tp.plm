@@ -1,0 +1,79 @@
+check target "teensy-3-6/xtr32", "teensy-3-6/xtr64"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                                                                       
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver ActivityLed > digital {
+  init {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+  }
+}
+
+driver ActivityLed ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func section activityLedOn @safe @exported () {
+  digital.write (!yes !toPort:.D13)
+}
+
+func section activityLedOff @safe @exported () {
+  digital.write (!no !toPort:.D13)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
+let LED_L4 = $digitalPort.D7
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let BUTTON_P0 = $digitalPort.D8
+let BUTTON_P1 = $digitalPort.D9
+let BUTTON_P2 = $digitalPort.D10
+let BUTTON_P3 = $digitalPort.D11
+let BUTTON_P4 = $digitalPort.D12
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+panic setup 0 {
+  digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  digital.set (!mode:.OUTPUT !toPort:LED_L1)
+  digital.set (!mode:.OUTPUT !toPort:LED_L2)
+  digital.set (!mode:.OUTPUT !toPort:LED_L3)
+  digital.set (!mode:.OUTPUT !toPort:LED_L4)
+  lcd.clearScreenInPanicMode ()
+  lcd.gotoInPanicMode (!line:0 !column:0)
+  if LINE == 0 { // ISR Panic
+    lcd.printStringInPanicMode (!"ISR PANIC")  
+  }else{
+    lcd.printStringInPanicMode (!FILE)
+    lcd.gotoInPanicMode (!line:2 !column:0)
+    lcd.printStringInPanicMode (!"Line:")
+    lcd.printUnsignedInPanicMode (!LINE)
+  }
+  lcd.gotoInPanicMode (!line:3 !column:0)
+  lcd.printStringInPanicMode (!"Code:")
+  lcd.printUnsignedInPanicMode (!CODE)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+panic loop 0 {
+  time.panicBusyWaitingDuringMS (!50)
+  digital.toggle (!port:LED_L0)
+  digital.toggle (!port:LED_L1)
+  digital.toggle (!port:LED_L2)
+  digital.toggle (!port:LED_L3)
+  digital.toggle (!port:LED_L4)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
