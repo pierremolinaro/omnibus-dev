@@ -79,7 +79,6 @@ PLM_FILES:
   "../plm-teensy-3-6-xtr32.plm"
   "../driver-digital-teensy-3-6.plm"
   "../plm-teensy-3-6-lcd.plm"
-  "../plm-teensy-3-6-panic.plm"
   "../../plm-semaphore.plm"
   "../../heap.plm"
 

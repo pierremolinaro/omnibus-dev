@@ -194,13 +194,14 @@ method @taskListAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
 {
-#--- Sort task following their relative priority
+#------------- Sort tasks following their relative priority
   @taskListAST taskList = self
   @taskListAST sortedTaskList = {}
   @stringset handledTaskSet = {}
   var continue = true
   loop ([taskList length]) while continue && ([taskList length] > 0) do
     continue = false
+    @taskListAST candidateTaskList = {}
     var idx = 0
     for task in taskList do
       var allPrecedenceDefined = true
@@ -208,7 +209,7 @@ method @taskListAST enterInContext
         allPrecedenceDefined = [handledTaskSet hasKey !precedenceName.string]
       end
       if allPrecedenceDefined then
-        sortedTaskList +=
+        candidateTaskList +=
           !task.mTaskName
           !task.mLowerPriorityTaskList
           !task.mStackSize
@@ -220,12 +221,23 @@ method @taskListAST enterInContext
           !task.mGuardedCommandList
           !task.mEndOfTaskDeclaration
           !task.mActivate
-        handledTaskSet += !task.mTaskName.string
         continue = true
         [!?taskList removeAtIndex ?11* !idx]
       else
         idx = idx + 1
       end
+    end
+    if [option plm_options.taskStrictPriorityOrder value] && ([candidateTaskList length] > 1) then
+      for task in candidateTaskList do
+        warning task.mTaskName : "this task does not respect a strict priority order"
+      end
+    end
+    if [candidateTaskList length] > 0 then
+      continue = true
+      for task in candidateTaskList do
+        handledTaskSet += !task.mTaskName.string
+      end
+      sortedTaskList += candidateTaskList
     end
   end
 #--- Signal unsorted entries as error
@@ -639,7 +651,6 @@ method @taskMapIR generateCode
 #---------- Build ordered task list
   @taskSortedListIR orderedTaskList = {}
   for task in self do
-#    message "T " + task.lkey + " " + task.mPriority + "\n"
     orderedTaskList +=
       !task.lkey.string
       !task.mPriority

@@ -124,6 +124,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"taskStrictPriorityOrder"
+    commandChar:0
+    commandString:@"task-strict-priority-order"
+    comment:@"Ensure task stricyt priority order"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"writeControlRegisterHTMLDumpFile"
     commandChar:0
     commandString:@"emit-control-register-map"

@@ -1,7 +1,7 @@
 target "teensy-3-6/xtr32"
 let F_CPU_MHZ = 180
 
-driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
+import "carte-tp.plm"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   Display clock settings                                                               
@@ -10,18 +10,6 @@ driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 //let myBUS_MHZ @display = BUS_MHZ
 //let myFLEXBUS_MHZ @display = FLEXBUS_MHZ
 //let myFLASH_KHZ @display = FLASH_KHZ
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                               
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func section activityLedOn @safe @exported () {
-  digital.write (!yes !toPort:.D13)
-}
-
-func section activityLedOff @safe @exported () {
-  digital.write (!no !toPort:.D13)
-}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // USB DEVICE DRIVER
@@ -98,10 +86,6 @@ let CONFIG_DESCRIPTOR = $uint8 [32] (
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 let NUM_ENDPOINTS = 4
-let LED_L1 = $digitalPort.D4
-let LED_L2 = $digitalPort.D5
-let LED_L3 = $digitalPort.D6
-let LED_L4 = $digitalPort.D7
 
 //······················································································································
 
@@ -487,10 +471,6 @@ driver usb_device ()
 // TASK
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let LED_L0 = $digitalPort.D3
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 task T @stacksize 512 @activate {
   var tick $uint32 = 0
   var état $uint32 = 0
@@ -498,7 +478,6 @@ task T @stacksize 512 @activate {
   //····················································································································
 
   on @setup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
   
