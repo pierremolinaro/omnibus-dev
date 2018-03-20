@@ -8629,7 +8629,7 @@ static void extensionMethod_panicAST_noteTypesInPrecedenceGraph (const cPtr_pani
                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_panicAST * object = inObject ;
   macroValidSharedObject (object, cPtr_panicAST) ;
-  extensionMethod_noteInstructionListTypesInPrecedenceGraph (object->mProperty_mPanicInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 63)) ;
+  extensionMethod_noteInstructionListTypesInPrecedenceGraph (object->mProperty_mPanicInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 72)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
