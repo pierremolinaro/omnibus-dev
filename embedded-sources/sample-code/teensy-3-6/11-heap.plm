@@ -3,6 +3,8 @@ let F_CPU_MHZ = 240
 
 import "carte-tp-teensy-3-6.plm"
 
+option "task-strict-priority-order"
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver project > digital {

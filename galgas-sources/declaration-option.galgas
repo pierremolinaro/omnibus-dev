@@ -1,0 +1,30 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast unused ioAST {
+    $option$
+    $"string"$ ?let constantName
+    @stringlist suggestionList = {}
+    var found = false
+    for (domain identifier) in @application.boolOptionNameList while not found do       let invocationString = @application.boolOptionInvocationString {!domain !identifier}
+      suggestionList += !"\"" + invocationString + "\""
+      found = invocationString == constantName.string
+      if found then
+        [@application setBoolOptionValue !domain !identifier !true]
+      end
+    end 
+    if not found then
+      error constantName : "unknown command line option" fixit { replace suggestionList } 
+    end
+   }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

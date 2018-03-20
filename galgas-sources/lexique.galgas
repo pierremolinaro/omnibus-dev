@@ -38,6 +38,7 @@ lexique plm_lexique {
     "not",
     "on",
     "opaque",
+    "option",
     "or",
     "panic",
     "primitive",
