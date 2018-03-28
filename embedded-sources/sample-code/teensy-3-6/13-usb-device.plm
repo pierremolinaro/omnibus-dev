@@ -73,7 +73,7 @@ let CONFIG_DESCRIPTOR = $uint8 [32] (
   !1  // ENDPOINT number and direction (bit 7=0 --> OUT)
   !0x02 // Transfer type (0x02 --> BULK)
   !64 !0 // Maximum packet size (0 à 1024); here: 64
-  !0  // Maximulm latency / polling interval / NAK rate [ignored for bulk and control transfers]
+  !0  // Maximum latency / polling interval / NAK rate [ignored for bulk and control transfers]
 //--- Subordinate descriptor: ENDPOINT association
   !7  // Endpoint descriptor size in bytes
   !5  // ENDPOINT constant

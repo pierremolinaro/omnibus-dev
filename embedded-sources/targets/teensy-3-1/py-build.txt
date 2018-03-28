@@ -103,6 +103,8 @@ def linker ():
   result.append ("--cref")
   result.append ("-static")
   result.append ("--gc-sections")
+  result.append ("--sort-common=descending")
+  result.append ("--sort-section=alignment")
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*
