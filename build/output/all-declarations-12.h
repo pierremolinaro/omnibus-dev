@@ -1,18 +1,18 @@
 #pragma once
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 #include "all-predefined-types.h"
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 #include "all-declarations-11.h"
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                            Routine 'copyExecutableFile'                                             *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_copyExecutableFile (const class GALGAS_string constinArgument0,
                                  const class GALGAS_string constinArgument1,
@@ -20,11 +20,11 @@ void routine_copyExecutableFile (const class GALGAS_string constinArgument0,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                    Routine 'copyExecutableFileWithSubstitutions'                                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_copyExecutableFileWithSubstitutions (const class GALGAS_string constinArgument0,
                                                   const class GALGAS_string constinArgument1,
@@ -33,11 +33,11 @@ void routine_copyExecutableFileWithSubstitutions (const class GALGAS_string cons
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                         Routine 'copyFileWithSubstitutions'                                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_copyFileWithSubstitutions (const class GALGAS_string constinArgument0,
                                         const class GALGAS_string constinArgument1,
@@ -46,21 +46,21 @@ void routine_copyFileWithSubstitutions (const class GALGAS_string constinArgumen
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                           Routine 'importFilesAndCompile'                                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_importFilesAndCompile (const class GALGAS_lstring constinArgument0,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                              Routine 'compileProject'                                               *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_compileProject (const class GALGAS_lstring constinArgument0,
                              const class GALGAS_ast constinArgument1,
@@ -71,11 +71,11 @@ void routine_compileProject (const class GALGAS_lstring constinArgument0,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                           Routine 'recursiveImportFiles'                                            *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
                                    class GALGAS_string inArgument1,
@@ -84,11 +84,11 @@ void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                          Routine 'addTargetSpecificFiles'                                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
                                      class GALGAS_ast & ioArgument1,
@@ -97,11 +97,11 @@ void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_recursiveImportEmbeddedTargetFiles (class GALGAS_ast & ioArgument0,
                                                  const class GALGAS_string constinArgument1,
@@ -110,11 +110,11 @@ void routine_recursiveImportEmbeddedTargetFiles (class GALGAS_ast & ioArgument0,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                   Routine 'recursiveImportFileSystemTargetFiles'                                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_recursiveImportFileSystemTargetFiles (class GALGAS_ast & ioArgument0,
                                                    const class GALGAS_string constinArgument1,
@@ -123,11 +123,11 @@ void routine_recursiveImportFileSystemTargetFiles (class GALGAS_ast & ioArgument
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                          Filewrapper 'embeddedSampleCode'                                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const char * gWrapperFileContent_0_embeddedSampleCode ;
 extern const char * gWrapperFileContent_1_embeddedSampleCode ;
@@ -169,10 +169,10 @@ extern const char * gWrapperFileContent_36_embeddedSampleCode ;
 extern const char * gWrapperFileContent_37_embeddedSampleCode ;
 extern const char * gWrapperFileContent_38_embeddedSampleCode ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode ;
@@ -214,7 +214,7 @@ extern const cRegularFileWrapper gWrapperFile_36_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_37_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_38_embeddedSampleCode ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;

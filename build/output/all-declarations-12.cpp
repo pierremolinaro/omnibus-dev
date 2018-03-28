@@ -3,16 +3,15 @@
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "utilities/C_PrologueEpilogue.h"
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 #include "all-declarations-12.h"
 
-
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                              Routine 'generateTarget'                                               *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirectory,
                              const GALGAS_string constinArgument_inProductDirectory,
@@ -79,11 +78,11 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                            Routine 'copyExecutableFile'                                             *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDirectory,
                                  const GALGAS_string constinArgument_inSourceFileNamePath,
@@ -105,11 +104,11 @@ void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDi
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                    Routine 'copyExecutableFileWithSubstitutions'                                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_copyExecutableFileWithSubstitutions (const GALGAS_string constinArgument_inCurrentDirectory,
                                                   const GALGAS_string constinArgument_inSourceFileNamePath,
@@ -136,11 +135,11 @@ void routine_copyExecutableFileWithSubstitutions (const GALGAS_string constinArg
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                         Routine 'copyFileWithSubstitutions'                                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_copyFileWithSubstitutions (const GALGAS_string constinArgument_inCurrentDirectory,
                                         const GALGAS_string constinArgument_inSourceFileNamePath,
@@ -167,11 +166,11 @@ void routine_copyFileWithSubstitutions (const GALGAS_string constinArgument_inCu
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                            Function 'getTargetTextFile'                                             *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_inCurrentDirectory,
                                           const GALGAS_string & constinArgument_inTargetFile,
@@ -191,9 +190,9 @@ GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 static const C_galgas_type_descriptor * functionArgs_getTargetTextFile [3] = {
   & kTypeDescriptor_GALGAS_string,
@@ -201,7 +200,7 @@ static const C_galgas_type_descriptor * functionArgs_getTargetTextFile [3] = {
   NULL
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 static GALGAS_object functionWithGenericHeader_getTargetTextFile (C_Compiler * inCompiler,
                                                                   const cObjectArray & inEffectiveParameterArray,
@@ -219,7 +218,7 @@ static GALGAS_object functionWithGenericHeader_getTargetTextFile (C_Compiler * i
                                      COMMA_THERE).getter_object (THERE) ;
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_galgas_function_descriptor functionDescriptor_getTargetTextFile ("getTargetTextFile",
                                                                    functionWithGenericHeader_getTargetTextFile,
@@ -227,11 +226,11 @@ C_galgas_function_descriptor functionDescriptor_getTargetTextFile ("getTargetTex
                                                                    2,
                                                                    functionArgs_getTargetTextFile) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                           Routine 'importFilesAndCompile'                                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourceFile,
                                     C_Compiler * inCompiler
@@ -286,11 +285,11 @@ void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourc
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                              Routine 'compileProject'                                               *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
                              const GALGAS_ast constinArgument_inAST,
@@ -415,11 +414,11 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                          Routine 'addTargetSpecificFiles'                                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTargetName,
                                      GALGAS_ast & ioArgument_ioAST,
@@ -470,11 +469,11 @@ void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTarg
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                   Routine 'recursiveImportFileSystemTargetFiles'                                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_recursiveImportFileSystemTargetFiles (GALGAS_ast & ioArgument_ioAST,
                                                    const GALGAS_string constinArgument_inTargetDirectory,
@@ -524,11 +523,11 @@ void routine_recursiveImportFileSystemTargetFiles (GALGAS_ast & ioArgument_ioAST
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_recursiveImportEmbeddedTargetFiles (GALGAS_ast & ioArgument_ioAST,
                                                  const GALGAS_string constinArgument_inCurrentDirectory,
@@ -563,11 +562,11 @@ void routine_recursiveImportEmbeddedTargetFiles (GALGAS_ast & ioArgument_ioAST,
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                           Routine 'recursiveImportFiles'                                            *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
                                    GALGAS_string inArgument_inCurrentDirectory,
@@ -651,11 +650,11 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                          Filewrapper 'embeddedSampleCode'                                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 //--- File 'LPC-L2294/01-blinkleds.plm'
 
@@ -3470,7 +3469,7 @@ const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/xt
   "  !1  // ENDPOINT number and direction (bit 7=0 --> OUT)\n"
   "  !0x02 // Transfer type (0x02 --> BULK)\n"
   "  !64 !0 // Maximum packet size (0 \xC3""\xA0"" 1024); here: 64\n"
-  "  !0  // Maximulm latency / polling interval / NAK rate [ignored for bulk and control transfers]\n"
+  "  !0  // Maximum latency / polling interval / NAK rate [ignored for bulk and control transfers]\n"
   "//--- Subordinate descriptor: ENDPOINT association\n"
   "  !7  // Endpoint descriptor size in bytes\n"
   "  !5  // ENDPOINT constant\n"
@@ -3904,7 +3903,7 @@ const cRegularFileWrapper gWrapperFile_28_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20560, // Text length
+  20559, // Text length
   gWrapperFileContent_28_embeddedSampleCode
 ) ;
 

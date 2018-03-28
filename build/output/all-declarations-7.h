@@ -1,18 +1,18 @@
 #pragma once
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 #include "all-predefined-types.h"
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 #include "all-declarations-6.h"
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                           @forInstructionOnArrayIR class                                            *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
@@ -80,15 +80,15 @@ class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
 } ; // End of GALGAS_forInstructionOnArrayIR class
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnArrayIR ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                  Pointer class for @forInstructionOnArrayIR class                                   *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 //--- Attributes
@@ -137,11 +137,11 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                       @forLowerUpperBoundInstructionIR class                                        *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
@@ -203,15 +203,15 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
 } ; // End of GALGAS_forLowerUpperBoundInstructionIR class
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionIR ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                              Pointer class for @forLowerUpperBoundInstructionIR class                               *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
@@ -254,33 +254,33 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
 
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //           Extension getter '@effectiveArgumentPassingModeAST passingModeForActualSelector' (as function)            *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_effectiveArgumentPassingModeAST & inObject,
                                                                   const class GALGAS_lstring & constinArgument0,
                                                                   class C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                         Extension method '@LValueAST noteInstructionTypesInPrecedenceGraph'                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_LValueAST inObject,
                                                             class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                     Extension method '@LValueAST analyzeLValue'                                     *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     const class GALGAS_PLMType constin_inSelfType,
@@ -298,11 +298,11 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                        Routine 'analyzeSelfAssignmentTarget'                                        *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgument0,
                                           const class GALGAS_routineAttributes constinArgument1,
@@ -320,11 +320,11 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                          Routine 'analyzeVariableInLValue'                                          *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument0,
                                       const class GALGAS_bool constinArgument1,
@@ -345,22 +345,22 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                  Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_controlRegisterLValueAST inObject,
                                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                  Extension method '@controlRegisterLValueAST addDependenceEdgeForStaticExpression'                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_controlRegisterLValueAST inObject,
                                                            const class GALGAS_lstring constin_inConstantName,
@@ -368,11 +368,11 @@ void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_co
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                 Extension method '@controlRegisterLValueAST controlRegisterLValueSemanticAnalysis'                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_controlRegisterLValueAST inObject,
                                                             const class GALGAS_bool constin_inWriteAccess,
@@ -393,11 +393,11 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_c
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                          Routine 'handleArraySubscriptNew'                                          *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
                                       const class GALGAS_routineAttributes constinArgument1,
@@ -417,11 +417,11 @@ void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                 Extension method '@routineMapForContext searchKey'                                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_searchKey (const class GALGAS_routineMapForContext inObject,
                                 const class GALGAS_string constin_inReceiverTypeName,
@@ -433,11 +433,11 @@ void extensionMethod_searchKey (const class GALGAS_routineMapForContext inObject
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                            Extension getter '@routineMapForContext hasKey' (as function)                            *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContext & inObject,
                                           const class GALGAS_string & constinArgument0,
@@ -446,11 +446,11 @@ class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContex
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                              Extension setter '@universalValuedObjectMap insertDriver'                              *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObject,
                                    const class GALGAS_lstring constin_inDriverName,
@@ -459,11 +459,11 @@ void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObj
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                          Extension setter '@universalValuedObjectMap insertRegisterGroup'                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertRegisterGroup (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inRegisterGroupName,
@@ -472,11 +472,11 @@ void extensionSetter_insertRegisterGroup (class GALGAS_universalValuedObjectMap 
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                          Extension setter '@universalValuedObjectMap insertGlobalConstant'                          *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                            const class GALGAS_lstring constin_inConstantName,
@@ -484,11 +484,11 @@ void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                        Extension setter '@universalValuedObjectMap insertGlobalSyncInstance'                        *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjectMap & ioObject,
                                                const class GALGAS_lstring constin_inSyncInstanceName,
@@ -496,11 +496,11 @@ void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjec
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                          Extension setter '@universalValuedObjectMap insertLocalConstant'                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalConstantName,
@@ -510,11 +510,11 @@ void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap 
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                        Extension setter '@universalValuedObjectMap insertUsedLocalConstant'                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                               const class GALGAS_lstring constin_inLocalConstantName,
@@ -523,11 +523,11 @@ void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObject
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                          Extension setter '@universalValuedObjectMap insertLocalVariable'                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalVariableName,
@@ -538,11 +538,11 @@ void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap 
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                           Extension method '@universalValuedObjectMap searchValuedObject'                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjectMap inObject,
                                          const class GALGAS_lstring constin_inValuedObjectName,
@@ -552,11 +552,11 @@ void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjec
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                    Extension setter '@universalValuedObjectMap searchValuedObjectForReadAccess'                     *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                                       const class GALGAS_lstring constin_inValuedObjectName,
@@ -564,11 +564,11 @@ void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalValu
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                    Extension setter '@universalValuedObjectMap searchValuedObjectForWriteAccess'                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                                        const class GALGAS_lstring constin_inValuedObjectName,
@@ -576,11 +576,11 @@ void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalVal
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                  Extension setter '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                                            const class GALGAS_lstring constin_inValuedObjectName,
@@ -588,11 +588,11 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universa
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                         Extension method '@universalValuedObjectMap searchValuedObjectType'                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
                                              const class GALGAS_PLMType constin_inSelfType,
@@ -601,53 +601,53 @@ void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedO
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                      Extension method '@universalValuedObjectMap checkLocalVariableFinalState'                      *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalValuedObjectMap inObject,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                       Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'                       *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_openOverrideForSelectBlock (class GALGAS_universalValuedObjectMap & ioObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                       Extension setter '@universalValuedObjectMap openOverrideForRepeatBlock'                       *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_openOverrideForRepeatBlock (class GALGAS_universalValuedObjectMap & ioObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                             Extension setter '@universalValuedObjectMap closeOverride'                              *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_closeOverride (class GALGAS_universalValuedObjectMap & ioObject,
                                     const class GALGAS_location constin_inErrorLocation,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                              Extension setter '@staticEntityMap findOrAddStaticString'                              *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObject,
                                             class GALGAS_string in_inString,
@@ -655,61 +655,61 @@ void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObj
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                 Extension getter '@PLMType equatable' (as function)                                 *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_equatable (const class GALGAS_PLMType & inObject,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                         Extension getter '@unifiedTypeMap-proxy instanciable' (as function)                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_instanciable (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                               Extension getter '@PLMType instanciable' (as function)                                *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_instanciable (const class GALGAS_PLMType & inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                           Extension getter '@unifiedTypeMap-proxy copyable' (as function)                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                 Extension getter '@PLMType copyable' (as function)                                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_copyable (const class GALGAS_PLMType & inObject,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                     Extension method '@PLMType generateRetain'                                      *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_generateRetain (const class GALGAS_PLMType inObject,
                                      const class GALGAS_string constin_inPLMName,
@@ -718,22 +718,22 @@ void extensionMethod_generateRetain (const class GALGAS_PLMType inObject,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                  Extension getter '@PLMType arcList' (as function)                                  *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_arcAssignmentList extensionGetter_arcList (const class GALGAS_PLMType & inObject,
                                                         const class GALGAS_uintlist & constinArgument0,
                                                         class C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                    Extension method '@PLMType generateInsulate'                                     *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_generateInsulate (const class GALGAS_PLMType inObject,
                                        const class GALGAS_string constin_inPLMName,
@@ -742,11 +742,11 @@ void extensionMethod_generateInsulate (const class GALGAS_PLMType inObject,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                     Extension method '@PLMType generateRelease'                                     *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_generateRelease (const class GALGAS_PLMType inObject,
                                       const class GALGAS_string constin_inPLMName,
@@ -755,41 +755,41 @@ void extensionMethod_generateRelease (const class GALGAS_PLMType inObject,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                          Extension getter '@PLMType descriptionForHTMLFile' (as function)                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_string extensionGetter_descriptionForHTMLFile (const class GALGAS_PLMType & inObject,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                             Extension getter '@PLMType defaultAlignment' (as function)                              *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_uint extensionGetter_defaultAlignment (const class GALGAS_PLMType & inObject,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                               Extension getter '@PLMType deinitNeeded' (as function)                                *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_bool extensionGetter_deinitNeeded (const class GALGAS_PLMType & inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                         Extension method '@binaryOperationIR enterCodeForOverflowOperation'                         *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_binaryOperationIR_enterCodeForOverflowOperation) (const class cPtr_binaryOperationIR * inObject,
                                                                                           const class GALGAS_string constinArgument0,
@@ -800,12 +800,12 @@ typedef void (*extensionMethodSignature_binaryOperationIR_enterCodeForOverflowOp
                                                                                           class C_Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionMethod_enterCodeForOverflowOperation (const int32_t inClassIndex,
                                                          extensionMethodSignature_binaryOperationIR_enterCodeForOverflowOperation inMethod) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_enterCodeForOverflowOperation (const class cPtr_binaryOperationIR * inObject,
                                                         const GALGAS_string constin_inOperation,
@@ -816,11 +816,11 @@ void callExtensionMethod_enterCodeForOverflowOperation (const class cPtr_binaryO
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                   Extension method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic) (const class cPtr_binaryOperationIR * inObject,
                                                                                                      const class GALGAS_string constinArgument0,
@@ -831,12 +831,12 @@ typedef void (*extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWi
                                                                                                      class C_Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const int32_t inClassIndex,
                                                                     extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic inMethod) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class cPtr_binaryOperationIR * inObject,
                                                                    const GALGAS_string constin_inOperation,
@@ -847,11 +847,11 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class c
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                           @standaloneRoutineCallIR class                                            *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_standaloneRoutineCallIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
@@ -910,15 +910,15 @@ class GALGAS_standaloneRoutineCallIR : public GALGAS_abstractInstructionIR {
 } ; // End of GALGAS_standaloneRoutineCallIR class
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneRoutineCallIR ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                  Pointer class for @standaloneRoutineCallIR class                                   *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
@@ -958,11 +958,11 @@ class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
 
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                            @indirectRoutineCallIR class                                             *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_indirectRoutineCallIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
@@ -1015,15 +1015,15 @@ class GALGAS_indirectRoutineCallIR : public GALGAS_abstractInstructionIR {
 } ; // End of GALGAS_indirectRoutineCallIR class
 
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_indirectRoutineCallIR ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                   Pointer class for @indirectRoutineCallIR class                                    *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
@@ -1057,11 +1057,11 @@ class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
 
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                   Extension method '@PLMType generateCopyRoutine'                                   *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_generateCopyRoutine (const class GALGAS_PLMType inObject,
                                           class GALGAS_string & io_ioLLVMCode,
@@ -1069,11 +1069,11 @@ void extensionMethod_generateCopyRoutine (const class GALGAS_PLMType inObject,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                          Extension method '@routineMapIR-element enterAccessibleEntities'                           *
 //                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_element inObject,
                                               class GALGAS_accessibleEntities & io_ioAccessibleEntities,
