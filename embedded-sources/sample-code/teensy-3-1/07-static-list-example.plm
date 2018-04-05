@@ -46,7 +46,7 @@ task T @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
   }
 
-  on time.wait (!untilDeadline:self.deadline) {
+  on time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.toggle (!port:LED_L1)
     var total $uint32 = 0

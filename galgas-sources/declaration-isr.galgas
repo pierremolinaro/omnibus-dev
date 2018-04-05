@@ -69,6 +69,15 @@ class @decoratedISRDeclarations : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
+override method @decoratedISRDeclarations routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#·······················································································································
+
 override method @decoratedISRDeclarations semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

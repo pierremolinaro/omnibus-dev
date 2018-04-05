@@ -61,11 +61,11 @@ task T0 @stacksize 512 @activate {
   }
 
 
-  on time.wait (!untilDeadline:self.top) {
+  on time.wait (!until:self.top) {
     rdvs.output ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
-    time.wait (!untilDeadline:self.top)
+    time.wait (!until:self.top)
     rdvs.output ()
     self.top += 250
     digital.write (!no !toPort:LED_L0)

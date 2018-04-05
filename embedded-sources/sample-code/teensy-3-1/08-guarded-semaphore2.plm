@@ -21,11 +21,11 @@ task T0 @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
 
-  on time.wait (!untilDeadline:self.top) {
+  on time.wait (!until:self.top) {
     s0.signal ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
-    time.wait (!untilDeadline:self.top)
+    time.wait (!until:self.top)
     s0.signal ()
     self.top += 250
     digital.write (!no !toPort:LED_L0)
@@ -37,11 +37,11 @@ task T0 @stacksize 512 @activate {
 task T1 @stacksize 512 @activate {
   var top $uint32 = 0
 
-  on time.wait (!untilDeadline:self.top) {
+  on time.wait (!until:self.top) {
     s1.signal ()
     self.top += 249
     digital.write (!yes !toPort:LED_L4)
-    time.wait (!untilDeadline:self.top)
+    time.wait (!until:self.top)
     s1.signal ()
     self.top += 249
     digital.write (!no !toPort:LED_L4)
@@ -67,7 +67,7 @@ task T2 @stacksize 512 @activate {
     digital.toggle (!port:LED_L3)
   }
   
-  on time.wait (!untilDeadline:self.deadline) {
+  on time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L2)
   }

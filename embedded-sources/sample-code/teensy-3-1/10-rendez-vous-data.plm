@@ -52,7 +52,7 @@ task T0 @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
 
-  on time.wait (!untilDeadline:self.top) {
+  on time.wait (!until:self.top) {
     rdvs2.input (?data:let n)
     rdvs.output (!data:n)
     digital.toggle (!port:LED_L0)
@@ -87,7 +87,7 @@ task T2 @stacksize 1024 @activate {
     self.n += 1
   }
   
-  on time.wait (!untilDeadline:self.deadline) {
+  on time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L4)
   }

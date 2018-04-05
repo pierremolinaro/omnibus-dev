@@ -208,6 +208,33 @@ void callExtensionMethod_semanticAnalysis (const class cPtr_abstractDecoratedDec
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                  Abstract extension method '@abstractDecoratedDeclaration routineSemanticAnalysis'                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_abstractDecoratedDeclaration_routineSemanticAnalysis) (const class cPtr_abstractDecoratedDeclaration * inObject,
+                                                                                               const class GALGAS_semanticContext constinArgument0,
+                                                                                               class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                                                                               class GALGAS_intermediateCodeStruct & ioArgument2,
+                                                                                               class C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_routineSemanticAnalysis (const int32_t inClassIndex,
+                                                   extensionMethodSignature_abstractDecoratedDeclaration_routineSemanticAnalysis inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_routineSemanticAnalysis (const class cPtr_abstractDecoratedDeclaration * inObject,
+                                                  const GALGAS_semanticContext constin_inContext,
+                                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                  GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                 Extension method '@routineMapIR llvmCodeGeneration'                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -8,7 +8,7 @@ import "carte-tp-teensy-3-6.plm"
 task Tâche0 @stacksize 512 @activate {
   var tick = $uint32 ()
   
-  on time.wait (!untilDeadline: self.tick) {
+  on time.wait (!until: self.tick) {
     self.tick += 500
     Tâche1.activate ()
   }

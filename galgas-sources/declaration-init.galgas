@@ -120,6 +120,15 @@ class @decoratedInitRoutine : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
+override method @decoratedInitRoutine routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#·······················································································································
+
 override method @decoratedInitRoutine semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

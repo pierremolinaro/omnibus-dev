@@ -68,7 +68,7 @@ task Tâche @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
   
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     let tick = timer.now ()
     digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)

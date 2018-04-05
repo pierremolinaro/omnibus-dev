@@ -189,26 +189,26 @@ driver lcd > digital {
   //············································································
 
   func user write8bitCommand_inUserMode @noUnusedWarning (?inCommand $uint8) {
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4) ;
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.driveLowE () ;
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.writeSecondNibble (!inCommand) ;
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.driveLowE () ;
   }
 
   //············································································
 
   func user writeData_inUserMode @noUnusedWarning (?inData $uint8) {
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.writeFirstNibbleOf8bitData (!inData >> 4) ;
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.driveLowE () ;
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.writeSecondNibble (!inData) ;
-    time.wait (!duringDelay:1) ;
+    time.wait (!during:1) ;
     self.driveLowE () ;
   }
 

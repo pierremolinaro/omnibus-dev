@@ -180,10 +180,10 @@ task Tâche @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
   }
   
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
-    time.wait (!untilDeadline: self.compteur)
+    time.wait (!until: self.compteur)
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)

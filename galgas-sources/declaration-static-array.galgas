@@ -502,6 +502,15 @@ class @decoratedStaticList : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
+override method @decoratedStaticList routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#·······················································································································
+
 override method @decoratedStaticList semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

@@ -225,6 +225,15 @@ override method @decoratedTypeDynamicArrayDeclaration semanticAnalysis
   }
 }
 
+#·······················································································································
+
+override method @decoratedTypeDynamicArrayDeclaration routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -942,6 +942,68 @@ void callExtensionMethod_semanticAnalysis (const cPtr_abstractDecoratedDeclarati
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                  Abstract extension method '@abstractDecoratedDeclaration routineSemanticAnalysis'                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static TC_UniqueArray <extensionMethodSignature_abstractDecoratedDeclaration_routineSemanticAnalysis> gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_routineSemanticAnalysis (const int32_t inClassIndex,
+                                                   extensionMethodSignature_abstractDecoratedDeclaration_routineSemanticAnalysis inMethod) {
+  gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void freeExtensionMethod_abstractDecoratedDeclaration_routineSemanticAnalysis (void) {
+  gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis.free () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_abstractDecoratedDeclaration_routineSemanticAnalysis (NULL,
+                                                                                 freeExtensionMethod_abstractDecoratedDeclaration_routineSemanticAnalysis) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_routineSemanticAnalysis (const cPtr_abstractDecoratedDeclaration * inObject,
+                                                  const GALGAS_semanticContext constin_inContext,
+                                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                  GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDecoratedDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_abstractDecoratedDeclaration_routineSemanticAnalysis f = NULL ;
+    if (classIndex < gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis.count ()) {
+      f = gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+      while ((NULL == f) && (NULL != p)) {
+        if (p->mSlotID < gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis.count ()) {
+          f = gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis (p->mSlotID COMMA_HERE) ;
+        }
+        p = p->mSuperclassDescriptor ;
+      }
+      gExtensionMethodTable_abstractDecoratedDeclaration_routineSemanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                         '@subprogramInvocationGraph' graph                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

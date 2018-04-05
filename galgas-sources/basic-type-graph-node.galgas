@@ -2,21 +2,26 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literalStringDeclarationAST : @abstractDeclarationAST {
-  @lstring mLiteralStringTypeName
+class @basicTypeGraphNodeDeclarationAST : @abstractDeclarationAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclarationAST location -> @location outLocation {
-  outLocation = mLiteralStringTypeName.location
+override getter @basicTypeGraphNodeDeclarationAST location -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @basicTypeGraphNodeDeclarationAST typeName -> @string outName {
+  outName = "BASIC TYPE"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclarationAST addExtension
+override method @basicTypeGraphNodeDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -28,28 +33,31 @@ override method @literalStringDeclarationAST addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclarationAST enterInPrecedenceGraph
+func basicTypeNodeName -> @lstring {
+  result = ["BASIC TYPE" nowhere]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @basicTypeGraphNodeDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let literalStringTypeName = llvmTypeNameFromPLMname (!mLiteralStringTypeName)
-  [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !literalStringTypeName !llvmTypeNameFromPLMname (!["uint8" nowhere])]
-  [!?ioGraph addEdge !basicTypeNodeName () !literalStringTypeName]
+  [!?ioGraph addNode !basicTypeNodeName () !self]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "literal string " + mLiteralStringTypeName 
+override getter @basicTypeGraphNodeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "BASIC TYPE"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclarationAST enterInContext
+override method @basicTypeGraphNodeDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
+  ?!context:@semanticContext unused ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
@@ -57,12 +65,6 @@ override method @literalStringDeclarationAST enterInContext
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-#--- Enter in type map
-  [!?ioContext.mTypeMap insertType
-    !lkey:mLiteralStringTypeName
-    !type:literalStringType ()
-    !index:[ioContext.mTypeMap count]
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -237,6 +237,7 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
   let structureTypeName = llvmTypeNameFromPLMname (!mStructureName)
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
+  [!?ioGraph addEdge !structureTypeName !basicTypeNodeName ()]
 #--- Add property types
   for (4* fieldTypeName initExpression *) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
@@ -589,10 +590,10 @@ class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
-override method @decoratedStructureDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+override method @decoratedStructureDeclaration routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
   let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName} type]
 #----------- Analyze functions
@@ -616,9 +617,43 @@ override method @decoratedStructureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
+}
+
+#·······················································································································
+
+override method @decoratedStructureDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName} type]
+##----------- Analyze functions
+#  [self functionSemanticAnalysis
+#    !structureType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##----------- Analyze system routines
+#  [mSystemRoutineListAST systemRoutineSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##----------- Analyze guards
+#  [mGuardListAST guardSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
 #----------- Generate enumeration specific code
   if mMayImplementDeinit && [structureType deinitNeeded]  then
-    ioIntermediateCodeStruct.mGenerationListIR += !@structureIR.new {!structureType !inContext.mTargetParameters.mPointerSize}
+    ioIntermediateCodeStruct.mGenerationListIR += !@structureIR.new {
+      !structureType
+      !inContext.mTargetParameters.mPointerSize
+    }
   end
 }
 

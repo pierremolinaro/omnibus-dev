@@ -109,7 +109,7 @@ sync sémaphore62 = $semaphore (!value:0)
 task T0 @stacksize 512 @activate {
   var échéance $uint32 = 0
 
-  on time.wait (!untilDeadline:self.échéance) {
+  on time.wait (!until:self.échéance) {
     self.échéance +%= 500
     myDriver.noteTick ()
     sémaphore0.signal () ;
