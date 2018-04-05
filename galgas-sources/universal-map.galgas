@@ -476,7 +476,7 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
         [mInternalPropertyAndRoutineMap searchKey !lkey ?let currentObjectState ?2*]
         if referenceState == currentObjectState then # Ok
         elsif (currentObjectState == .hasUnreadValue) & (referenceState == .hasReadValue) then # Ok
-        elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then # Ok, modify refence state
+        elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then # Ok, modify reference state
           [!?referenceStateMap setMStateForKey !.hasReadValue !lkey]
         else
           error inErrorLocation

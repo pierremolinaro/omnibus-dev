@@ -159,11 +159,9 @@ override method @syncInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @syncInstructionBranchListIR onInstructionBranchListIR = {}
+#-------------------- Guards
+  @guardedCommandIRList guardedCommandIRList = {}
   for (guardedCommand instructionList endOfBranch) in mBranchList do
-    [!?ioUniversalMap openOverrideForSelectBlock]
-  #--- Guard
-    @guardedCommandIR guardedCommandIR
     switch guardedCommand
     case boolean (isContinue expression endOfExpression) :
       @instructionListIR guardInstructionGenerationList = {}
@@ -190,7 +188,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?ioTemporaries
         !?sourceOperand
       ]
-      guardedCommandIR = .booleanGuard {
+      guardedCommandIRList += !.booleanGuard {
         !isExitCommand:isContinue
         !instructionGenerationList:guardInstructionGenerationList
         !result:sourceOperand
@@ -314,17 +312,17 @@ override method @syncInstructionAST instructionSemanticAnalysis
       if [boolExpressionResult isLiteralInteger] then
         [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
         if value == 1G then
-          guardedCommandIR = .sync {
+          guardedCommandIRList += !.sync {
             !isExitCommand:isContinue
             !guardMangledName:guardMangledName.string
             !guardInstructionGenerationList:guardInstructionGenerationList
             !effectiveParameterListIR:guardEffectiveParameterListIR
           }
         else
-          error guardMangledName : "false guard not handled yet" : guardedCommandIR
+          error guardMangledName : "false guard not handled yet"
         end
       else
-        guardedCommandIR = .boolAndSync {
+        guardedCommandIRList += !.boolAndSync {
           !isExitCommand:isContinue
           !boolExpInstructionGenerationList:boolExpInstructionGenerationList
           !boolExpResult:boolExpressionResult
@@ -334,7 +332,11 @@ override method @syncInstructionAST instructionSemanticAnalysis
         }
       end
     end
-  #--- Instruction list
+  end
+#-------------------- Instruction lists
+  [!?ioUniversalMap openOverrideForSelectBlock]
+  @syncInstructionBranchListIR syncInstructionBranchListIR = {}
+  for (* instructionList endOfBranch) in mBranchList, (guardedCommandIR) in guardedCommandIRList do
     @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
@@ -349,14 +351,11 @@ override method @syncInstructionAST instructionSemanticAnalysis
       !?alloca:ioAllocaList
       !?instructionListIR:branchInstructionGenerationList
     ]
-    [!?ioUniversalMap closeOverride !endOfBranch]
-  #---
-    onInstructionBranchListIR +=
-      !guardedCommandIR
-      !branchInstructionGenerationList
+    syncInstructionBranchListIR += !guardedCommandIR !branchInstructionGenerationList
   end
-#--- Code generation
-  ioInstructionGenerationList += !@syncInstructionIR.new {!mInstructionLocation !onInstructionBranchListIR}
+  [!?ioUniversalMap closeOverride !mEndOf_on_instruction]
+#-------------------- Code generation
+  ioInstructionGenerationList += !@syncInstructionIR.new {!mInstructionLocation !syncInstructionBranchListIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -498,6 +497,12 @@ enum @guardedCommandIR {
 list @syncInstructionBranchListIR {
   @guardedCommandIR mGuardedCommand
   @instructionListIR mInstructionGenerationList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @guardedCommandIRList {
+  @guardedCommandIR mGuardedCommand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
