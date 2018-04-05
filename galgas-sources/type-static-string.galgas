@@ -34,7 +34,6 @@ override method @literalStringDeclarationAST enterInPrecedenceGraph
   let literalStringTypeName = llvmTypeNameFromPLMname (!mLiteralStringTypeName)
   [!?ioGraph addNode !literalStringTypeName !self]
   [!?ioGraph addEdge !literalStringTypeName !llvmTypeNameFromPLMname (!["uint8" nowhere])]
-  [!?ioGraph addEdge !basicTypeNodeName () !literalStringTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

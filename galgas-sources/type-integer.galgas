@@ -40,7 +40,6 @@ override method @integerDeclarationAST enterInPrecedenceGraph
 {
   let integerTypeName = llvmTypeNameFromPLMname (![[self typeName] nowhere])
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !basicTypeNodeName () !integerTypeName]
   [!?ioGraph addEdge !integerTypeName !llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])]
 }
 

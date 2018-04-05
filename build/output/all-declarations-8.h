@@ -103,6 +103,29 @@ class cPtr_decoratedTypeDynamicArrayDeclaration : public cPtr_abstractDecoratedD
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                   Extension method '@functionDeclarationListAST-element functionSemanticAnalysis'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_functionSemanticAnalysis (const class GALGAS_functionDeclarationListAST_2D_element inObject,
+                                               const class GALGAS_PLMType constin_inStructureType,
+                                               const class GALGAS_semanticContext constin_inContext,
+                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           Function 'userAccessAttribute'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                     @infixObjectObjectOperatorDescription class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -496,15 +519,6 @@ class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            Function 'basicTypeNodeName'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_basicTypeNodeName (class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            Function 'staticIntegerType'                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -531,4 +545,25 @@ void routine_enterBooleanOperators (class GALGAS_lstring inArgument0,
                                     class GALGAS_semanticContext & ioArgument1,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         Function 'integerEnumAccessorName'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_integerEnumAccessorName (const class GALGAS_uint & constinArgument0,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Routine 'enterEnumerationComparisonOperators'                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
+                                                  class GALGAS_semanticContext & ioArgument1,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
