@@ -35,7 +35,6 @@ override method @booleanDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addNode !boolTypeName !self]
   let uint1TypeName = llvmTypeNameFromPLMname (!.new{!"uint1" !mBooleanTypeName.location})
   [!?ioGraph noteNode !uint1TypeName]
-  [!?ioGraph addEdge !basicTypeNodeName () !boolTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -743,44 +743,6 @@ class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclarat
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                     Extension method '@decoratedStructureDeclaration functionSemanticAnalysis'                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef void (*extensionMethodSignature_decoratedStructureDeclaration_functionSemanticAnalysis) (const class cPtr_decoratedStructureDeclaration * inObject,
-                                                                                                 const class GALGAS_PLMType constinArgument0,
-                                                                                                 const class GALGAS_semanticContext constinArgument1,
-                                                                                                 class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                                                                                 class GALGAS_intermediateCodeStruct & ioArgument3,
-                                                                                                 class C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_functionSemanticAnalysis (const int32_t inClassIndex,
-                                                    extensionMethodSignature_decoratedStructureDeclaration_functionSemanticAnalysis inMethod) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_functionSemanticAnalysis (const class cPtr_decoratedStructureDeclaration * inObject,
-                                                   const GALGAS_PLMType constin_inStructureType,
-                                                   const GALGAS_semanticContext constin_inContext,
-                                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                   GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Function 'userAccessAttribute'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                                 @structureIR class                                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

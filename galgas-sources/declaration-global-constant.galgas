@@ -77,7 +77,6 @@ abstract method @expressionAST addDependenceEdgeForStaticExpression
 override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add 'constant name' node
   [!?ioGraph addNode !mConstantName !self]
-  [!?ioGraph addEdge !mConstantName !basicTypeNodeName ()]
 #--- Add dependency from constant type name
   if mConstantTypeName.string != "" then
     let typeName = llvmTypeNameFromPLMname (!mConstantTypeName)
