@@ -89,6 +89,8 @@ private proc compileProject
   )
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
+  #--- Add basic type node for precedence graph
+    ast.mDeclarationListAST += !@basicTypeGraphNodeDeclarationAST.new
   #--- Add boolean type
     ast.mDeclarationListAST += !@booleanDeclarationAST.new {![boolTypeName () nowhere]}
   #--- Literal integer type

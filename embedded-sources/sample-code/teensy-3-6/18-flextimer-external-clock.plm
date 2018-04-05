@@ -118,7 +118,7 @@ task T1 @stacksize 512 @activate {
     lcd.print (!string:"FTM1:")
   }
 
-  on time.wait (!untilDeadline:self.échéance) {
+  on time.wait (!until:self.échéance) {
     self.échéance +%= 1_000
     digital.toggle (!port:LED_L3)
     let counter0 = myDriver.readCounter0 ()

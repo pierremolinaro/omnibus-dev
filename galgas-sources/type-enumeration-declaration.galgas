@@ -235,6 +235,15 @@ override method @enumerationDecoratedDeclaration semanticAnalysis
   ioIntermediateCodeStruct.mGenerationListIR += !@enumerationIR.new {!mEnumerationName !mRepresentationBitCount}
 }
 
+#·······················································································································
+
+override method @enumerationDecoratedDeclaration routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

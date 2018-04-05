@@ -45,10 +45,10 @@ task T @stacksize 512 @activate {
     setupPIT ()
   }
   
-  on time.wait (!untilDeadline:self.deadline) {
+  on time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.write (!yes !toPort:LED_L1) // Allumer la led
-    time.wait (!untilDeadline:self.deadline)
+    time.wait (!until:self.deadline)
     self.deadline +%= 250
     digital.write (!no !toPort:LED_L1)  // Éteindre la led
     lcd.goto (!line:1 !column:0)

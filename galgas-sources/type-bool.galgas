@@ -35,6 +35,7 @@ override method @booleanDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addNode !boolTypeName !self]
   let uint1TypeName = llvmTypeNameFromPLMname (!.new{!"uint1" !mBooleanTypeName.location})
   [!?ioGraph noteNode !uint1TypeName]
+  [!?ioGraph addEdge !basicTypeNodeName () !boolTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -162,6 +163,15 @@ override method @boolDecoratedDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   ioIntermediateCodeStruct.mGenerationListIR += !@boolIR.new
+}
+
+#·······················································································································
+
+override method @boolDecoratedDeclaration routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

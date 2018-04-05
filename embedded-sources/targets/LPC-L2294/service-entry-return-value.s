@@ -4,7 +4,7 @@
 
 	.section	".text.!ENTRY!","ax",%progbits
 	.globl	!ENTRY!
-	.align	1
+	.align	2
 	.type	!ENTRY!,%function
 	.code	32
 

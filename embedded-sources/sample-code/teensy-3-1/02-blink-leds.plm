@@ -16,10 +16,10 @@ task T1 @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:.D13)
   }
   
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
-    time.wait (!untilDeadline:self.compteur)
+    time.wait (!until:self.compteur)
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
@@ -32,10 +32,10 @@ task T1 @stacksize 512 @activate {
 task T2 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L1)
     self.compteur +%= 499
-    time.wait (!untilDeadline:self.compteur)
+    time.wait (!until:self.compteur)
     digital.write (!no !toPort:LED_L1)
     self.compteur +%= 499
   }
@@ -46,10 +46,10 @@ task T2 @stacksize 512 @activate {
 task T3 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L2)
     self.compteur +%= 498
-    time.wait (!untilDeadline:self.compteur)
+    time.wait (!until:self.compteur)
     digital.write (!no !toPort:LED_L2)
     self.compteur +%= 498
   }
@@ -60,10 +60,10 @@ task T3 @stacksize 512 @activate {
 task T4 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L3)
     self.compteur +%= 497
-    time.wait (!untilDeadline:self.compteur)
+    time.wait (!until:self.compteur)
     digital.write (!no !toPort:LED_L3)
     self.compteur +%= 497
   }
@@ -74,10 +74,10 @@ task T4 @stacksize 512 @activate {
 task T5 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L4)
     self.compteur +%= 496
-    time.wait (!untilDeadline:self.compteur)
+    time.wait (!until:self.compteur)
     digital.write (!no !toPort:LED_L4)
     self.compteur +%= 496
   }

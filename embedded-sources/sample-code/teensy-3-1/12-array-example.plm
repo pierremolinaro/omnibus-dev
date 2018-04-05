@@ -32,7 +32,7 @@ task T @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   }
 
-  on time.wait (!untilDeadline:self.deadline) {
+  on time.wait (!until:self.deadline) {
     self.deadline +%= 1000
 //    digital.toggle (!port:LED_L1)
     self.array [self.index] = 0

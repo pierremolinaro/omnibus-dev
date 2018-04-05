@@ -46,6 +46,13 @@ abstract method @abstractDecoratedDeclaration semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+abstract method @abstractDecoratedDeclaration routineSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 struct @semanticTemporariesStruct {
   @uint mTemporaryIndex
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
@@ -117,6 +124,13 @@ proc semanticAnalysis
   temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph
   for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
+      !context:inSemanticContext
+      !?temporary:temporaries
+      !?intermediateCode:outIntermediateCodeStruct
+     ]
+  end
+  for (declaration) in inDecoratedDeclarationList do
+    [declaration routineSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct

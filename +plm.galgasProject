@@ -20,6 +20,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/configuration.galgas"
 
 #--- Type declarations
+  "galgas-sources/basic-type-graph-node.galgas"
   "galgas-sources/declaration-type.galgas"
   "galgas-sources/type-array.galgas"
   "galgas-sources/type-dynamic-array.galgas"

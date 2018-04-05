@@ -211,6 +211,15 @@ override method @decoratedTypeArrayDeclaration semanticAnalysis
   ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mOriginalArrayTypeName !mArraySize}
 }
 
+#·······················································································································
+
+override method @decoratedTypeArrayDeclaration routineSemanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

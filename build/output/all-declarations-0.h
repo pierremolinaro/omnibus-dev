@@ -16712,6 +16712,105 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                       @basicTypeGraphNodeDeclarationAST class                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_basicTypeGraphNodeDeclarationAST : public GALGAS_abstractDeclarationAST {
+//--- Constructor
+  public : GALGAS_basicTypeGraphNodeDeclarationAST (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_basicTypeGraphNodeDeclarationAST constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_basicTypeGraphNodeDeclarationAST * ptr (void) const { return (const cPtr_basicTypeGraphNodeDeclarationAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_basicTypeGraphNodeDeclarationAST (const cPtr_basicTypeGraphNodeDeclarationAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_basicTypeGraphNodeDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_basicTypeGraphNodeDeclarationAST constructor_new (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_basicTypeGraphNodeDeclarationAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_basicTypeGraphNodeDeclarationAST class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_basicTypeGraphNodeDeclarationAST ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              Pointer class for @basicTypeGraphNodeDeclarationAST class                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_basicTypeGraphNodeDeclarationAST : public cPtr_abstractDeclarationAST {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_basicTypeGraphNodeDeclarationAST (LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                            Extension getter '@basicTypeGraphNodeDeclarationAST typeName'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef class GALGAS_string (*enterExtensionGetter_basicTypeGraphNodeDeclarationAST_typeName) (const class cPtr_basicTypeGraphNodeDeclarationAST * inObject,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionGetter_typeName (const int32_t inClassIndex,
+                                    enterExtensionGetter_basicTypeGraphNodeDeclarationAST_typeName inGetter) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string callExtensionGetter_typeName (const cPtr_basicTypeGraphNodeDeclarationAST * inObject,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                         @abstractDecoratedDeclaration class                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

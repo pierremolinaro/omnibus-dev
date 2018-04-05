@@ -370,7 +370,7 @@ task T @stacksize 512 @activate {
   
   //····················································································································
 
-  on time.wait (!untilDeadline:self.tick) {
+  on time.wait (!until:self.tick) {
     digital.toggle (!port:LED_L0)
     self.tick +%= 500
     lcd.goto (!line:0 !column:0)

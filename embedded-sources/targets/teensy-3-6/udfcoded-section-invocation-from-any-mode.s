@@ -7,8 +7,7 @@
   .global !USER_ROUTINE!
   .type  !USER_ROUTINE!,%function
 
-  .align  1
-  .code  16
+  .align  2
   .thumb_func
 
 !USER_ROUTINE!:

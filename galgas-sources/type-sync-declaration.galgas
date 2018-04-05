@@ -107,7 +107,7 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 #·······················································································································
 
 override getter @syncDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "sync $" + mSyncToolName 
+  outRepresentation = "synctype." + mSyncToolName 
 }
 
 #·······················································································································

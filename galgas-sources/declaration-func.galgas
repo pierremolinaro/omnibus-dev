@@ -362,6 +362,15 @@ class @decoratedFunction : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
+override method @decoratedFunction routineSemanticAnalysis
+  ?context:let @semanticContext unused inSemanticContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#·······················································································································
+
 override method @decoratedFunction semanticAnalysis
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

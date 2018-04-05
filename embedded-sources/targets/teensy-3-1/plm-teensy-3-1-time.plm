@@ -64,7 +64,7 @@ driver time > root {
 
   //············································································
 
-  public system primitive wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
+  public system primitive wait @noUnusedWarning (?until: inDate $uint32) {
     if inDate > self.mUptime {
       block (!onDeadline:inDate)
     }
@@ -72,7 +72,7 @@ driver time > root {
 
   //············································································
 
-  public system primitive wait @noUnusedWarning (?duringDelay: inDelay $uint32) {
+  public system primitive wait @noUnusedWarning (?during: inDelay $uint32) {
     if inDelay > 0 {
       block (!onDeadline:self.mUptime +% inDelay)
     }
@@ -80,7 +80,7 @@ driver time > root {
 
   //············································································
 
-  public guard wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) {
+  public guard wait @noUnusedWarning (?until:inDeadline $uint32) {
     accept = (inDeadline) ≤ self.mUptime
     if not accept {
       handle (!guardedDeadline:inDeadline)

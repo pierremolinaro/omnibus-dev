@@ -19,7 +19,7 @@ task Tâche1 @stacksize 512 @activate {
     lcd.print (!hex2:extend (bb))
   }
 
-  on time.wait (!untilDeadline:self.compteur) {
+  on time.wait (!until:self.compteur) {
     self.compteur +%= 500
     digital.toggle (!port:LED_L3)
   }
