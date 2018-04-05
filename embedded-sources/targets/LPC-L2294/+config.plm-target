@@ -69,9 +69,9 @@ LL_FILES:
    "ll-install-interrupts.ll"
 
 PLM_FILES:
-  "plm-registers-lpc2294.plm"
-  "plm-lpc2294-xtr.plm"
-  "../plm-semaphore.plm"
+  "plm-registers-lpc2294.plm-import"
+  "plm-lpc2294-xtr.plm-import"
+  "../plm-semaphore.plm-import"
 
 INTERRUPTS:
   WDT

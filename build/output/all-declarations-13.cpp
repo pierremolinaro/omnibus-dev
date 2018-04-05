@@ -30,6 +30,7 @@ static void print_tool_help_message (void) {
 
 static const char * kSourceFileExtensions [] = {
   "plm-target",
+  "plm-import",
   "plm",
   NULL
 } ;    
@@ -38,6 +39,7 @@ static const char * kSourceFileExtensions [] = {
 
 static const char * kSourceFileHelpMessages [] = {
   "a target definition text file with the .plm-target extension",
+  "an imported text file with the .plm-import extension",
   "a source text file with the .plm extension",
   NULL
 } ;    
@@ -108,29 +110,29 @@ static void routine_before (C_Compiler * inCompiler
     }
   }
   {
-    GALGAS_filewrapper var_fw_602 = GALGAS_filewrapper (gWrapperDirectory_0_embeddedSampleCode) ;
+    GALGAS_filewrapper var_fw_616 = GALGAS_filewrapper (gWrapperDirectory_0_embeddedSampleCode) ;
     const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedSampleFiles.getter_value ()).boolEnum () ;
     if (kBoolTrue == test_6) {
-      GALGAS_stringlist var_files_712 = var_fw_602.getter_allTextFilePathes (SOURCE_FILE ("embedded-sample-code.galgas", 16)) ;
+      GALGAS_stringlist var_files_726 = var_fw_616.getter_allTextFilePathes (SOURCE_FILE ("embedded-sample-code.galgas", 16)) ;
       inCompiler->printMessage (GALGAS_string ("Embedded sample code:\n")  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 17)) ;
-      cEnumerator_stringlist enumerator_796 (var_files_712, kENUMERATION_UP) ;
-      while (enumerator_796.hasCurrentObject ()) {
-        inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_796.current_mValue (HERE).getter_subStringFromIndex (GALGAS_uint ((uint32_t) 1U) COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
-        enumerator_796.gotoNextObject () ;
+      cEnumerator_stringlist enumerator_810 (var_files_726, kENUMERATION_UP) ;
+      while (enumerator_810.hasCurrentObject ()) {
+        inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_810.current_mValue (HERE).getter_subStringFromIndex (GALGAS_uint ((uint32_t) 1U) COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
+        enumerator_810.gotoNextObject () ;
       }
     }
-    GALGAS_string var_path_878 = GALGAS_string (gOption_plm_5F_options_extractEmbeddedSampleFile.getter_value ()) ;
-    const enumGalgasBool test_7 = GALGAS_bool (kIsNotEqual, var_path_878.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    GALGAS_string var_path_892 = GALGAS_string (gOption_plm_5F_options_extractEmbeddedSampleFile.getter_value ()) ;
+    const enumGalgasBool test_7 = GALGAS_bool (kIsNotEqual, var_path_892.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_7) {
-      const enumGalgasBool test_8 = var_fw_602.getter_fileExistsAtPath (var_path_878, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 24)).boolEnum () ;
+      const enumGalgasBool test_8 = var_fw_616.getter_fileExistsAtPath (var_path_892, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 24)).boolEnum () ;
       if (kBoolTrue == test_8) {
-        GALGAS_string var_text_1009 = var_fw_602.getter_textFileContentsAtPath (var_path_878, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 25)) ;
-        GALGAS_string var_sourceName_1066 = var_path_878.getter_lastPathComponent (SOURCE_FILE ("embedded-sample-code.galgas", 26)) ;
-        GALGAS_bool joker_1152 ; // Joker input parameter
-        var_text_1009.method_writeToFileWhenDifferentContents (var_sourceName_1066, joker_1152, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 27)) ;
+        GALGAS_string var_text_1023 = var_fw_616.getter_textFileContentsAtPath (var_path_892, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 25)) ;
+        GALGAS_string var_sourceName_1080 = var_path_892.getter_lastPathComponent (SOURCE_FILE ("embedded-sample-code.galgas", 26)) ;
+        GALGAS_bool joker_1166 ; // Joker input parameter
+        var_text_1023.method_writeToFileWhenDifferentContents (var_sourceName_1080, joker_1166, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 27)) ;
       }else if (kBoolFalse == test_8) {
         TC_Array <C_FixItDescription> fixItArray9 ;
-        inCompiler->emitSemanticError (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("embedded-sample-code.galgas", 29)).getter_location (SOURCE_FILE ("embedded-sample-code.galgas", 29)), GALGAS_string ("there is no '").add_operation (var_path_878, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)).add_operation (GALGAS_string ("' embedded file"), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)), fixItArray9  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)) ;
+        inCompiler->emitSemanticError (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("embedded-sample-code.galgas", 29)).getter_location (SOURCE_FILE ("embedded-sample-code.galgas", 29)), GALGAS_string ("there is no '").add_operation (var_path_892, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)).add_operation (GALGAS_string ("' embedded file"), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)), fixItArray9  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)) ;
       }
     }
   }
@@ -166,13 +168,25 @@ static void routine_programRule_5F__30_ (const GALGAS_lstring /* constinArgument
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static void routine_programRule_5F__31_ (const GALGAS_lstring constinArgument_inSourceFile,
+static void routine_programRule_5F__31_ (const GALGAS_lstring /* constinArgument_inSourceFile */,
+                                         C_Compiler * /* inCompiler */
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                               Routine 'programRule_2'                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void routine_programRule_5F__32_ (const GALGAS_lstring constinArgument_inSourceFile,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_galgas_5F_builtin_5F_options_mode.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).operator_and (GALGAS_bool (gOption_galgas_5F_builtin_5F_options_outputConcreteSyntaxTree.getter_value ()).operator_not (SOURCE_FILE ("program.galgas", 16)) COMMA_SOURCE_FILE ("program.galgas", 16)).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_galgas_5F_builtin_5F_options_mode.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).operator_and (GALGAS_bool (gOption_galgas_5F_builtin_5F_options_outputConcreteSyntaxTree.getter_value ()).operator_not (SOURCE_FILE ("program.galgas", 24)) COMMA_SOURCE_FILE ("program.galgas", 24)).boolEnum () ;
   if (kBoolTrue == test_0) {
     {
-    routine_importFilesAndCompile (constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 17)) ;
+    routine_importFilesAndCompile (constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 25)) ;
     }
   }
 }
@@ -232,10 +246,28 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
             cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           }
-        }else if (fileExtension == "plm") {
+        }else if (fileExtension == "plm-import") {
           switch (executionMode ()) {
           case kExecutionModeNormal :
             routine_programRule_5F__31_ (sourceFilePath, commonCompiler COMMA_HERE) ;
+            break ;
+          case kExecutionModeLexicalAnalysisOnly :
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeSyntaxAnalysisOnly :
+            cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeIndexing :
+            cGrammar_plm_5F_target_5F_grammar::performIndexing (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeLatex :
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          }
+        }else if (fileExtension == "plm") {
+          switch (executionMode ()) {
+          case kExecutionModeNormal :
+            routine_programRule_5F__32_ (sourceFilePath, commonCompiler COMMA_HERE) ;
             break ;
           case kExecutionModeLexicalAnalysisOnly :
             cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;

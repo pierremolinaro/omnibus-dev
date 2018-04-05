@@ -1,7 +1,7 @@
 target "teensy-3-6/xtr64"
 let F_CPU_MHZ = 240
 
-import "carte-tp-teensy-3-6.plm"
+import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

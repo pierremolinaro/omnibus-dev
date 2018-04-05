@@ -19,60 +19,60 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
                              const GALGAS_targetParameters constinArgument_inTargetParameters,
                              C_Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator__32_lstringlist enumerator_3608 (constinArgument_inTargetParameters.getter_mPython_5F_utilityToolList (HERE), kENUMERATION_UP) ;
-  while (enumerator_3608.hasCurrentObject ()) {
+  cEnumerator__32_lstringlist enumerator_3622 (constinArgument_inTargetParameters.getter_mPython_5F_utilityToolList (HERE), kENUMERATION_UP) ;
+  while (enumerator_3622.hasCurrentObject ()) {
     {
-    routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 85)).add_operation (enumerator_3608.current_mValue_30_ (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 85)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 86)).add_operation (enumerator_3608.current_mValue_31_ (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 86)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 83)) ;
+    routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 85)).add_operation (enumerator_3622.current_mValue_30_ (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 85)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 86)).add_operation (enumerator_3622.current_mValue_31_ (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 86)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 83)) ;
     }
-    enumerator_3608.gotoNextObject () ;
+    enumerator_3622.gotoNextObject () ;
   }
   {
   GALGAS__32_stringlist temp_0 = GALGAS__32_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 94)) ;
   temp_0.addAssign_operation (GALGAS_string ("!SYSTEMSTACKSIZE!"), constinArgument_inTargetParameters.getter_mSystemStackSize (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 94))  COMMA_SOURCE_FILE ("target-generation.galgas", 94)) ;
   routine_copyFileWithSubstitutions (constinArgument_inCurrentDirectory, constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 92)).add_operation (constinArgument_inTargetParameters.getter_mLinkerScript (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 92)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 92)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/linker.ld"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 93)), temp_0, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 90)) ;
   }
-  GALGAS_string var_opt_5F_optimizationOption_4130 = GALGAS_string ("disable-opt") ;
-  GALGAS_string var_llc_5F_optimizationOption_4175 = GALGAS_string ("O0") ;
-  GALGAS_uint var_optimizationOptionCount_4212 = GALGAS_uint ((uint32_t) 0U) ;
+  GALGAS_string var_opt_5F_optimizationOption_4144 = GALGAS_string ("disable-opt") ;
+  GALGAS_string var_llc_5F_optimizationOption_4189 = GALGAS_string ("O0") ;
+  GALGAS_uint var_optimizationOptionCount_4226 = GALGAS_uint ((uint32_t) 0U) ;
   const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_optimization_31_.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_1) {
-    var_opt_5F_optimizationOption_4130 = GALGAS_string ("O1") ;
-    var_llc_5F_optimizationOption_4175 = GALGAS_string ("O1") ;
-    var_optimizationOptionCount_4212.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 103)) ;
+    var_opt_5F_optimizationOption_4144 = GALGAS_string ("O1") ;
+    var_llc_5F_optimizationOption_4189 = GALGAS_string ("O1") ;
+    var_optimizationOptionCount_4226.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 103)) ;
   }
   const enumGalgasBool test_2 = GALGAS_bool (gOption_plm_5F_options_optimization_32_.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_2) {
-    var_opt_5F_optimizationOption_4130 = GALGAS_string ("O2") ;
-    var_llc_5F_optimizationOption_4175 = GALGAS_string ("O2") ;
-    var_optimizationOptionCount_4212.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
+    var_opt_5F_optimizationOption_4144 = GALGAS_string ("O2") ;
+    var_llc_5F_optimizationOption_4189 = GALGAS_string ("O2") ;
+    var_optimizationOptionCount_4226.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
   }
   const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_optimizationS.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_3) {
-    var_opt_5F_optimizationOption_4130 = GALGAS_string ("Os") ;
-    var_llc_5F_optimizationOption_4175 = GALGAS_string ("O2") ;
-    var_optimizationOptionCount_4212.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 113)) ;
+    var_opt_5F_optimizationOption_4144 = GALGAS_string ("Os") ;
+    var_llc_5F_optimizationOption_4189 = GALGAS_string ("O2") ;
+    var_optimizationOptionCount_4226.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 113)) ;
   }
   const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_optimizationZ.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_4) {
-    var_opt_5F_optimizationOption_4130 = GALGAS_string ("Oz") ;
-    var_llc_5F_optimizationOption_4175 = GALGAS_string ("O2") ;
-    var_optimizationOptionCount_4212.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 118)) ;
+    var_opt_5F_optimizationOption_4144 = GALGAS_string ("Oz") ;
+    var_llc_5F_optimizationOption_4189 = GALGAS_string ("O2") ;
+    var_optimizationOptionCount_4226.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 118)) ;
   }
   const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_optimizationZ_33_.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_5) {
-    var_opt_5F_optimizationOption_4130 = GALGAS_string ("O3") ;
-    var_llc_5F_optimizationOption_4175 = GALGAS_string ("O3") ;
-    var_optimizationOptionCount_4212.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
+    var_opt_5F_optimizationOption_4144 = GALGAS_string ("O3") ;
+    var_llc_5F_optimizationOption_4189 = GALGAS_string ("O3") ;
+    var_optimizationOptionCount_4226.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
   }
-  const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_optimizationOptionCount_4212.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+  const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_optimizationOptionCount_4226.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
   if (kBoolTrue == test_6) {
     TC_Array <C_FixItDescription> fixItArray7 ;
-    inCompiler->emitSemanticWarning (GALGAS_location::constructor_nowhere (SOURCE_FILE ("target-generation.galgas", 126)), GALGAS_string ("several optimization options: --").add_operation (var_opt_5F_optimizationOption_4130, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)).add_operation (GALGAS_string (" is used"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)), fixItArray7  COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
+    inCompiler->emitSemanticWarning (GALGAS_location::constructor_nowhere (SOURCE_FILE ("target-generation.galgas", 126)), GALGAS_string ("several optimization options: --").add_operation (var_opt_5F_optimizationOption_4144, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)).add_operation (GALGAS_string (" is used"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)), fixItArray7  COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
   }
   {
   GALGAS__32_stringlist temp_8 = GALGAS__32_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 132)) ;
-  temp_8.addAssign_operation (GALGAS_string ("<<OPT_OPTIMIZATION_OPTION>>"), var_opt_5F_optimizationOption_4130  COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
-  temp_8.addAssign_operation (GALGAS_string ("<<LLC_OPTIMIZATION_OPTION>>"), var_llc_5F_optimizationOption_4175  COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
+  temp_8.addAssign_operation (GALGAS_string ("<<OPT_OPTIMIZATION_OPTION>>"), var_opt_5F_optimizationOption_4144  COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
+  temp_8.addAssign_operation (GALGAS_string ("<<LLC_OPTIMIZATION_OPTION>>"), var_llc_5F_optimizationOption_4189  COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
   routine_copyExecutableFileWithSubstitutions (constinArgument_inCurrentDirectory, constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 130)).add_operation (constinArgument_inTargetParameters.getter_mPython_5F_build (HERE).getter_string (SOURCE_FILE ("target-generation.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 130)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 131)), temp_8, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
   }
 }
@@ -91,15 +91,15 @@ void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDi
                                  COMMA_UNUSED_LOCATION_ARGS) {
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_filewrapper var_fw_5833 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    GALGAS_string var_s_5875 = var_fw_5833.getter_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 145)) ;
-    GALGAS_bool joker_6010 ; // Joker input parameter
-    var_s_5875.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_6010, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 146)) ;
+    GALGAS_filewrapper var_fw_5847 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    GALGAS_string var_s_5889 = var_fw_5847.getter_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 145)) ;
+    GALGAS_bool joker_6024 ; // Joker input parameter
+    var_s_5889.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_6024, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 146)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir_6047 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 148)) ;
-    GALGAS_string var_s_6147 = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_6047.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 149)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 149)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 149)) ;
-    GALGAS_bool joker_6317 ; // Joker input parameter
-    var_s_6147.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_6317, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 150)) ;
+    GALGAS_string var_targetDefinitionDir_6061 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 148)) ;
+    GALGAS_string var_s_6161 = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_6061.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 149)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 149)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 149)) ;
+    GALGAS_bool joker_6331 ; // Joker input parameter
+    var_s_6161.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_6331, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 150)) ;
   }
 }
 
@@ -116,22 +116,22 @@ void routine_copyExecutableFileWithSubstitutions (const GALGAS_string constinArg
                                                   const GALGAS__32_stringlist constinArgument_inSubstitutions,
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_s_6683 ;
+  GALGAS_string var_s_6697 ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_filewrapper var_fw_6776 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    var_s_6683 = var_fw_6776.getter_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 165)) ;
+    GALGAS_filewrapper var_fw_6790 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    var_s_6697 = var_fw_6790.getter_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 165)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir_6901 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 167)) ;
-    var_s_6683 = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_6901.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 168)) ;
+    GALGAS_string var_targetDefinitionDir_6915 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 167)) ;
+    var_s_6697 = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_6915.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 168)) ;
   }
-  cEnumerator__32_stringlist enumerator_7150 (constinArgument_inSubstitutions, kENUMERATION_UP) ;
-  while (enumerator_7150.hasCurrentObject ()) {
-    var_s_6683 = var_s_6683.getter_stringByReplacingStringByString (enumerator_7150.current_mValue_30_ (HERE), enumerator_7150.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 171)) ;
-    enumerator_7150.gotoNextObject () ;
+  cEnumerator__32_stringlist enumerator_7164 (constinArgument_inSubstitutions, kENUMERATION_UP) ;
+  while (enumerator_7164.hasCurrentObject ()) {
+    var_s_6697 = var_s_6697.getter_stringByReplacingStringByString (enumerator_7164.current_mValue_30_ (HERE), enumerator_7164.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 171)) ;
+    enumerator_7164.gotoNextObject () ;
   }
-  GALGAS_bool joker_7319 ; // Joker input parameter
-  var_s_6683.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_7319, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 173)) ;
+  GALGAS_bool joker_7333 ; // Joker input parameter
+  var_s_6697.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_7333, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 173)) ;
 }
 
 
@@ -147,22 +147,22 @@ void routine_copyFileWithSubstitutions (const GALGAS_string constinArgument_inCu
                                         const GALGAS__32_stringlist constinArgument_inSubstitutions,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_s_7669 ;
+  GALGAS_string var_s_7683 ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_filewrapper var_fw_7762 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    var_s_7669 = var_fw_7762.getter_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 187)) ;
+    GALGAS_filewrapper var_fw_7776 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    var_s_7683 = var_fw_7776.getter_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 187)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir_7887 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 189)) ;
-    var_s_7669 = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_7887.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 190)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 190)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 190)) ;
+    GALGAS_string var_targetDefinitionDir_7901 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 189)) ;
+    var_s_7683 = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_7901.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 190)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 190)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 190)) ;
   }
-  cEnumerator__32_stringlist enumerator_8136 (constinArgument_inSubstitutions, kENUMERATION_UP) ;
-  while (enumerator_8136.hasCurrentObject ()) {
-    var_s_7669 = var_s_7669.getter_stringByReplacingStringByString (enumerator_8136.current_mValue_30_ (HERE), enumerator_8136.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 193)) ;
-    enumerator_8136.gotoNextObject () ;
+  cEnumerator__32_stringlist enumerator_8150 (constinArgument_inSubstitutions, kENUMERATION_UP) ;
+  while (enumerator_8150.hasCurrentObject ()) {
+    var_s_7683 = var_s_7683.getter_stringByReplacingStringByString (enumerator_8150.current_mValue_30_ (HERE), enumerator_8150.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 193)) ;
+    enumerator_8150.gotoNextObject () ;
   }
-  GALGAS_bool joker_8295 ; // Joker input parameter
-  var_s_7669.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_8295, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 195)) ;
+  GALGAS_bool joker_8309 ; // Joker input parameter
+  var_s_7683.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_8309, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 195)) ;
 }
 
 
@@ -179,11 +179,11 @@ GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_
   GALGAS_string result_outContents ; // Returned variable
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_filewrapper var_fw_8643 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    result_outContents = var_fw_8643.getter_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 207)) ;
+    GALGAS_filewrapper var_fw_8657 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    result_outContents = var_fw_8657.getter_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 207)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir_8770 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 209)) ;
-    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_8770.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 210)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 210)) ;
+    GALGAS_string var_targetDefinitionDir_8784 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 209)) ;
+    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir_8784.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 210)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 210)) ;
   }
 //---
   return result_outContents ;
@@ -235,49 +235,49 @@ C_galgas_function_descriptor functionDescriptor_getTargetTextFile ("getTargetTex
 void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourceFile,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_ast var_ast_905 = GALGAS_ast::constructor_default (SOURCE_FILE ("program.galgas", 26)) ;
-  GALGAS_lstringlist var_importedFileList_1007 ;
-  GALGAS_location var_endOfSourceFile_1048 ;
-  var_importedFileList_1007.drop () ;
-  var_endOfSourceFile_1048.drop () ;
-  cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile, var_ast_905, var_importedFileList_1007, var_endOfSourceFile_1048  COMMA_SOURCE_FILE ("program.galgas", 27)) ;
-  GALGAS_stringset var_importedFileAbsolutePathSet_1119 = GALGAS_stringset::constructor_setWithString (constinArgument_inSourceFile.getter_string (HERE)  COMMA_SOURCE_FILE ("program.galgas", 32)) ;
-  GALGAS_string var_currentDirectory_1182 = constinArgument_inSourceFile.getter_string (HERE).getter_stringByDeletingLastPathComponent (SOURCE_FILE ("program.galgas", 33)) ;
+  GALGAS_ast var_ast_1187 = GALGAS_ast::constructor_default (SOURCE_FILE ("program.galgas", 34)) ;
+  GALGAS_lstringlist var_importedFileList_1289 ;
+  GALGAS_location var_endOfSourceFile_1330 ;
+  var_importedFileList_1289.drop () ;
+  var_endOfSourceFile_1330.drop () ;
+  cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile, var_ast_1187, var_importedFileList_1289, var_endOfSourceFile_1330  COMMA_SOURCE_FILE ("program.galgas", 35)) ;
+  GALGAS_stringset var_importedFileAbsolutePathSet_1401 = GALGAS_stringset::constructor_setWithString (constinArgument_inSourceFile.getter_string (HERE)  COMMA_SOURCE_FILE ("program.galgas", 40)) ;
+  GALGAS_string var_currentDirectory_1464 = constinArgument_inSourceFile.getter_string (HERE).getter_stringByDeletingLastPathComponent (SOURCE_FILE ("program.galgas", 41)) ;
   {
-  routine_recursiveImportFiles (var_ast_905, var_currentDirectory_1182, var_importedFileList_1007, var_importedFileAbsolutePathSet_1119, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 34)) ;
+  routine_recursiveImportFiles (var_ast_1187, var_currentDirectory_1464, var_importedFileList_1289, var_importedFileAbsolutePathSet_1401, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 42)) ;
   }
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 41)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 49)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_stringset var_targetNameSet_1512 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("program.galgas", 42)) ;
-    cEnumerator_lstringlist enumerator_1560 (var_ast_905.getter_mTargetListAST (HERE), kENUMERATION_UP) ;
-    while (enumerator_1560.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = var_targetNameSet_1512.getter_hasKey (enumerator_1560.current_mValue (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("program.galgas", 44)).boolEnum () ;
+    GALGAS_stringset var_targetNameSet_1794 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("program.galgas", 50)) ;
+    cEnumerator_lstringlist enumerator_1842 (var_ast_1187.getter_mTargetListAST (HERE), kENUMERATION_UP) ;
+    while (enumerator_1842.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = var_targetNameSet_1794.getter_hasKey (enumerator_1842.current_mValue (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("program.galgas", 52)).boolEnum () ;
       if (kBoolTrue == test_1) {
         TC_Array <C_FixItDescription> fixItArray2 ;
-        inCompiler->emitSemanticError (enumerator_1560.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 45)), GALGAS_string ("Duplicated target"), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 45)) ;
+        inCompiler->emitSemanticError (enumerator_1842.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 53)), GALGAS_string ("Duplicated target"), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 53)) ;
       }
-      var_targetNameSet_1512.addAssign_operation (enumerator_1560.current_mValue (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("program.galgas", 47)) ;
-      enumerator_1560.gotoNextObject () ;
+      var_targetNameSet_1794.addAssign_operation (enumerator_1842.current_mValue (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("program.galgas", 55)) ;
+      enumerator_1842.gotoNextObject () ;
     }
   }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 51)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 59)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_ast_905.getter_mTargetListAST (HERE).getter_length (SOURCE_FILE ("program.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_ast_1187.getter_mTargetListAST (HERE).getter_length (SOURCE_FILE ("program.galgas", 60)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_4) {
       TC_Array <C_FixItDescription> fixItArray5 ;
-      inCompiler->emitSemanticWarning (var_endOfSourceFile_1048, GALGAS_string ("no target: only syntax analysis is performed"), fixItArray5  COMMA_SOURCE_FILE ("program.galgas", 53)) ;
+      inCompiler->emitSemanticWarning (var_endOfSourceFile_1330, GALGAS_string ("no target: only syntax analysis is performed"), fixItArray5  COMMA_SOURCE_FILE ("program.galgas", 61)) ;
     }else if (kBoolFalse == test_4) {
-      const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_ast_905.getter_mTargetListAST (HERE).getter_length (SOURCE_FILE ("program.galgas", 54)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+      const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_ast_1187.getter_mTargetListAST (HERE).getter_length (SOURCE_FILE ("program.galgas", 62)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
       if (kBoolTrue == test_6) {
         TC_Array <C_FixItDescription> fixItArray7 ;
-        inCompiler->emitSemanticWarning (var_endOfSourceFile_1048, var_ast_905.getter_mTargetListAST (HERE).getter_length (SOURCE_FILE ("program.galgas", 55)).getter_string (SOURCE_FILE ("program.galgas", 55)).add_operation (GALGAS_string (" targets: only syntax analysis is performed"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 55)), fixItArray7  COMMA_SOURCE_FILE ("program.galgas", 55)) ;
+        inCompiler->emitSemanticWarning (var_endOfSourceFile_1330, var_ast_1187.getter_mTargetListAST (HERE).getter_length (SOURCE_FILE ("program.galgas", 63)).getter_string (SOURCE_FILE ("program.galgas", 63)).add_operation (GALGAS_string (" targets: only syntax analysis is performed"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 63)), fixItArray7  COMMA_SOURCE_FILE ("program.galgas", 63)) ;
       }else if (kBoolFalse == test_6) {
-        cEnumerator_lstringlist enumerator_2144 (var_ast_905.getter_mTargetListAST (HERE), kENUMERATION_UP) ;
-        while (enumerator_2144.hasCurrentObject ()) {
+        cEnumerator_lstringlist enumerator_2426 (var_ast_1187.getter_mTargetListAST (HERE), kENUMERATION_UP) ;
+        while (enumerator_2426.hasCurrentObject ()) {
           {
-          routine_compileProject (constinArgument_inSourceFile, var_ast_905, enumerator_2144.current_mValue (HERE), var_endOfSourceFile_1048, var_currentDirectory_1182, var_importedFileAbsolutePathSet_1119, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 58)) ;
+          routine_compileProject (constinArgument_inSourceFile, var_ast_1187, enumerator_2426.current_mValue (HERE), var_endOfSourceFile_1330, var_currentDirectory_1464, var_importedFileAbsolutePathSet_1401, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 66)) ;
           }
-          enumerator_2144.gotoNextObject () ;
+          enumerator_2426.gotoNextObject () ;
         }
       }
     }
@@ -299,117 +299,117 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
                              const GALGAS_stringset constinArgument_inImportedFileAbsolutePathSet,
                              C_Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_ast var_ast_2876 = constinArgument_inAST ;
-  GALGAS_stringset var_sourceFileAbsolutePathSet_2923 = constinArgument_inImportedFileAbsolutePathSet ;
+  GALGAS_ast var_ast_3158 = constinArgument_inAST ;
+  GALGAS_stringset var_sourceFileAbsolutePathSet_3205 = constinArgument_inImportedFileAbsolutePathSet ;
   {
-  routine_addTargetSpecificFiles (constinArgument_inTargetName, var_ast_2876, constinArgument_inCurrentDirectory, var_sourceFileAbsolutePathSet_2923, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 84)) ;
+  routine_addTargetSpecificFiles (constinArgument_inTargetName, var_ast_3158, constinArgument_inCurrentDirectory, var_sourceFileAbsolutePathSet_3205, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 92)) ;
   }
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 90)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 98)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_ast_2876.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_booleanDeclarationAST::constructor_new (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("program.galgas", 93)).getter_nowhere (SOURCE_FILE ("program.galgas", 93))  COMMA_SOURCE_FILE ("program.galgas", 93))  COMMA_SOURCE_FILE ("program.galgas", 93)) ;
-    var_ast_2876.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_literalIntegerDeclarationAST::constructor_new (SOURCE_FILE ("program.galgas", 95))  COMMA_SOURCE_FILE ("program.galgas", 95)) ;
-    var_ast_2876.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_literalStringDeclarationAST::constructor_new (function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("program.galgas", 97)).getter_nowhere (SOURCE_FILE ("program.galgas", 97))  COMMA_SOURCE_FILE ("program.galgas", 97))  COMMA_SOURCE_FILE ("program.galgas", 97)) ;
-    GALGAS_declarationListAST var_declarationList_3768 = var_ast_2876.getter_mDeclarationListAST (HERE) ;
-    GALGAS_declarationListAST var_newDeclarationList_3841 = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 100)) ;
-    GALGAS_extensionDeclarationListAST var_extensionDeclarationListAST_3882 = var_ast_2876.getter_mExtensionDeclarationListAST (HERE) ;
-    GALGAS_extendStaticArrayDeclarationAST var_extendStaticArrayDeclarationAST_3957 = var_ast_2876.getter_mExtendStaticArrayDeclarationAST (HERE) ;
-    cEnumerator_declarationListAST enumerator_4037 (var_declarationList_3768, kENUMERATION_UP) ;
-    while (enumerator_4037.hasCurrentObject ()) {
-      GALGAS_abstractDeclarationAST var_newDeclaration_4156 ;
-      callExtensionMethod_addExtension ((const cPtr_abstractDeclarationAST *) enumerator_4037.current_mDeclaration (HERE).ptr (), var_extensionDeclarationListAST_3882, var_extendStaticArrayDeclarationAST_3957, var_newDeclaration_4156, inCompiler COMMA_SOURCE_FILE ("program.galgas", 104)) ;
-      var_newDeclarationList_3841.addAssign_operation (var_newDeclaration_4156  COMMA_SOURCE_FILE ("program.galgas", 105)) ;
-      enumerator_4037.gotoNextObject () ;
+    var_ast_3158.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_booleanDeclarationAST::constructor_new (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("program.galgas", 101)).getter_nowhere (SOURCE_FILE ("program.galgas", 101))  COMMA_SOURCE_FILE ("program.galgas", 101))  COMMA_SOURCE_FILE ("program.galgas", 101)) ;
+    var_ast_3158.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_literalIntegerDeclarationAST::constructor_new (SOURCE_FILE ("program.galgas", 103))  COMMA_SOURCE_FILE ("program.galgas", 103)) ;
+    var_ast_3158.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_literalStringDeclarationAST::constructor_new (function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("program.galgas", 105)).getter_nowhere (SOURCE_FILE ("program.galgas", 105))  COMMA_SOURCE_FILE ("program.galgas", 105))  COMMA_SOURCE_FILE ("program.galgas", 105)) ;
+    GALGAS_declarationListAST var_declarationList_4050 = var_ast_3158.getter_mDeclarationListAST (HERE) ;
+    GALGAS_declarationListAST var_newDeclarationList_4123 = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 108)) ;
+    GALGAS_extensionDeclarationListAST var_extensionDeclarationListAST_4164 = var_ast_3158.getter_mExtensionDeclarationListAST (HERE) ;
+    GALGAS_extendStaticArrayDeclarationAST var_extendStaticArrayDeclarationAST_4239 = var_ast_3158.getter_mExtendStaticArrayDeclarationAST (HERE) ;
+    cEnumerator_declarationListAST enumerator_4319 (var_declarationList_4050, kENUMERATION_UP) ;
+    while (enumerator_4319.hasCurrentObject ()) {
+      GALGAS_abstractDeclarationAST var_newDeclaration_4438 ;
+      callExtensionMethod_addExtension ((const cPtr_abstractDeclarationAST *) enumerator_4319.current_mDeclaration (HERE).ptr (), var_extensionDeclarationListAST_4164, var_extendStaticArrayDeclarationAST_4239, var_newDeclaration_4438, inCompiler COMMA_SOURCE_FILE ("program.galgas", 112)) ;
+      var_newDeclarationList_4123.addAssign_operation (var_newDeclaration_4438  COMMA_SOURCE_FILE ("program.galgas", 113)) ;
+      enumerator_4319.gotoNextObject () ;
     }
-    var_ast_2876.mProperty_mDeclarationListAST = var_newDeclarationList_3841 ;
-    cEnumerator_extensionDeclarationListAST enumerator_4368 (var_extensionDeclarationListAST_3882, kENUMERATION_UP) ;
-    while (enumerator_4368.hasCurrentObject ()) {
+    var_ast_3158.mProperty_mDeclarationListAST = var_newDeclarationList_4123 ;
+    cEnumerator_extensionDeclarationListAST enumerator_4650 (var_extensionDeclarationListAST_4164, kENUMERATION_UP) ;
+    while (enumerator_4650.hasCurrentObject ()) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (enumerator_4368.current_mTypeName (HERE).getter_location (SOURCE_FILE ("program.galgas", 110)), GALGAS_string ("this type is not defined or does not support extension"), fixItArray1  COMMA_SOURCE_FILE ("program.galgas", 110)) ;
-      enumerator_4368.gotoNextObject () ;
+      inCompiler->emitSemanticError (enumerator_4650.current_mTypeName (HERE).getter_location (SOURCE_FILE ("program.galgas", 118)), GALGAS_string ("this type is not defined or does not support extension"), fixItArray1  COMMA_SOURCE_FILE ("program.galgas", 118)) ;
+      enumerator_4650.gotoNextObject () ;
     }
-    cEnumerator_extendStaticArrayDeclarationAST enumerator_4581 (var_extendStaticArrayDeclarationAST_3957, kENUMERATION_UP) ;
-    while (enumerator_4581.hasCurrentObject ()) {
+    cEnumerator_extendStaticArrayDeclarationAST enumerator_4863 (var_extendStaticArrayDeclarationAST_4239, kENUMERATION_UP) ;
+    while (enumerator_4863.hasCurrentObject ()) {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (enumerator_4581.current_mStaticListName (HERE).getter_location (SOURCE_FILE ("program.galgas", 114)), GALGAS_string ("this static list is not defined"), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 114)) ;
-      enumerator_4581.gotoNextObject () ;
+      inCompiler->emitSemanticError (enumerator_4863.current_mStaticListName (HERE).getter_location (SOURCE_FILE ("program.galgas", 122)), GALGAS_string ("this static list is not defined"), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 122)) ;
+      enumerator_4863.gotoNextObject () ;
     }
   }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 118)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 126)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
     {
-    routine_retainRequiredDrivers (var_ast_2876, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 119)) ;
+    routine_retainRequiredDrivers (var_ast_3158, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 127)) ;
     }
   }
-  GALGAS_declarationListAST var_orderedDeclarationListAST_4954 = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 122)) ;
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 123)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  GALGAS_declarationListAST var_orderedDeclarationListAST_5236 = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 130)) ;
+  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 131)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
     {
-    routine_buildOrderedDeclarationList (var_ast_2876, constinArgument_inSourceFile.getter_string (HERE), constinArgument_inEndOfSourceFile, var_orderedDeclarationListAST_4954, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 124)) ;
+    routine_buildOrderedDeclarationList (var_ast_3158, constinArgument_inSourceFile.getter_string (HERE), constinArgument_inEndOfSourceFile, var_orderedDeclarationListAST_5236, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 132)) ;
     }
   }
-  const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 132)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 140)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_5) {
-    cEnumerator_checkTargetListAST enumerator_5392 (var_ast_2876.getter_mCheckTargetListAST (HERE), kENUMERATION_UP) ;
-    while (enumerator_5392.hasCurrentObject ()) {
-      GALGAS_bool var_accepted_5414 = GALGAS_bool (false) ;
-      cEnumerator_lstringlist enumerator_5471 (enumerator_5392.current_mAcceptedTargetList (HERE), kENUMERATION_UP) ;
-      bool bool_6 = var_accepted_5414.operator_not (SOURCE_FILE ("program.galgas", 135)).isValidAndTrue () ;
-      if (enumerator_5471.hasCurrentObject () && bool_6) {
-        while (enumerator_5471.hasCurrentObject () && bool_6) {
-          var_accepted_5414 = GALGAS_bool (kIsEqual, enumerator_5471.current_mValue (HERE).getter_string (HERE).objectCompare (constinArgument_inTargetName.getter_string (SOURCE_FILE ("program.galgas", 136)))) ;
-          enumerator_5471.gotoNextObject () ;
-          if (enumerator_5471.hasCurrentObject ()) {
-            bool_6 = var_accepted_5414.operator_not (SOURCE_FILE ("program.galgas", 135)).isValidAndTrue () ;
+    cEnumerator_checkTargetListAST enumerator_5674 (var_ast_3158.getter_mCheckTargetListAST (HERE), kENUMERATION_UP) ;
+    while (enumerator_5674.hasCurrentObject ()) {
+      GALGAS_bool var_accepted_5696 = GALGAS_bool (false) ;
+      cEnumerator_lstringlist enumerator_5753 (enumerator_5674.current_mAcceptedTargetList (HERE), kENUMERATION_UP) ;
+      bool bool_6 = var_accepted_5696.operator_not (SOURCE_FILE ("program.galgas", 143)).isValidAndTrue () ;
+      if (enumerator_5753.hasCurrentObject () && bool_6) {
+        while (enumerator_5753.hasCurrentObject () && bool_6) {
+          var_accepted_5696 = GALGAS_bool (kIsEqual, enumerator_5753.current_mValue (HERE).getter_string (HERE).objectCompare (constinArgument_inTargetName.getter_string (SOURCE_FILE ("program.galgas", 144)))) ;
+          enumerator_5753.gotoNextObject () ;
+          if (enumerator_5753.hasCurrentObject ()) {
+            bool_6 = var_accepted_5696.operator_not (SOURCE_FILE ("program.galgas", 143)).isValidAndTrue () ;
           }
         }
       }
-      const enumGalgasBool test_7 = var_accepted_5414.operator_not (SOURCE_FILE ("program.galgas", 138)).boolEnum () ;
+      const enumGalgasBool test_7 = var_accepted_5696.operator_not (SOURCE_FILE ("program.galgas", 146)).boolEnum () ;
       if (kBoolTrue == test_7) {
         TC_Array <C_FixItDescription> fixItArray8 ;
-        inCompiler->emitSemanticError (enumerator_5392.current_mTargetConstructLocation (HERE), GALGAS_string ("invalid target"), fixItArray8  COMMA_SOURCE_FILE ("program.galgas", 139)) ;
+        inCompiler->emitSemanticError (enumerator_5674.current_mTargetConstructLocation (HERE), GALGAS_string ("invalid target"), fixItArray8  COMMA_SOURCE_FILE ("program.galgas", 147)) ;
       }
-      enumerator_5392.gotoNextObject () ;
+      enumerator_5674.gotoNextObject () ;
     }
   }
-  GALGAS_semanticContext var_semanticContext_5773 = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("program.galgas", 144)) ;
-  GALGAS_staticEntityMap var_globalLiteralStringMap_5826 = GALGAS_staticEntityMap::constructor_default (SOURCE_FILE ("program.galgas", 145)) ;
-  GALGAS_staticListInitializationMap var_staticListValueMap_5887 = GALGAS_staticListInitializationMap::constructor_emptyMap (SOURCE_FILE ("program.galgas", 146)) ;
-  var_ast_2876.mProperty_mDeclarationListAST = var_orderedDeclarationListAST_4954 ;
-  GALGAS_subprogramInvocationGraph var_subprogramInvocationGraph_6001 = GALGAS_subprogramInvocationGraph::constructor_emptyGraph (SOURCE_FILE ("program.galgas", 148)) ;
-  GALGAS_declarationDecorationList var_decoratedDeclarationList_6069 = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("program.galgas", 149)) ;
-  GALGAS_globalVariableIRList var_globalVariableIRList_6119 = GALGAS_globalVariableIRList::constructor_emptySortedList (SOURCE_FILE ("program.galgas", 150)) ;
-  const enumGalgasBool test_9 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 151)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  GALGAS_semanticContext var_semanticContext_6055 = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("program.galgas", 152)) ;
+  GALGAS_staticEntityMap var_globalLiteralStringMap_6108 = GALGAS_staticEntityMap::constructor_default (SOURCE_FILE ("program.galgas", 153)) ;
+  GALGAS_staticListInitializationMap var_staticListValueMap_6169 = GALGAS_staticListInitializationMap::constructor_emptyMap (SOURCE_FILE ("program.galgas", 154)) ;
+  var_ast_3158.mProperty_mDeclarationListAST = var_orderedDeclarationListAST_5236 ;
+  GALGAS_subprogramInvocationGraph var_subprogramInvocationGraph_6283 = GALGAS_subprogramInvocationGraph::constructor_emptyGraph (SOURCE_FILE ("program.galgas", 156)) ;
+  GALGAS_declarationDecorationList var_decoratedDeclarationList_6351 = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("program.galgas", 157)) ;
+  GALGAS_globalVariableIRList var_globalVariableIRList_6401 = GALGAS_globalVariableIRList::constructor_emptySortedList (SOURCE_FILE ("program.galgas", 158)) ;
+  const enumGalgasBool test_9 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 159)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_9) {
-    GALGAS_timer var_t_6173 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 152)) ;
+    GALGAS_timer var_t_6455 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 160)) ;
     {
-    routine_buildSemanticContext (constinArgument_inSourceFile, var_ast_2876, var_globalLiteralStringMap_5826, var_staticListValueMap_5887, var_semanticContext_5773, var_subprogramInvocationGraph_6001, var_decoratedDeclarationList_6069, var_globalVariableIRList_6119, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 153)) ;
+    routine_buildSemanticContext (constinArgument_inSourceFile, var_ast_3158, var_globalLiteralStringMap_6108, var_staticListValueMap_6169, var_semanticContext_6055, var_subprogramInvocationGraph_6283, var_decoratedDeclarationList_6351, var_globalVariableIRList_6401, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 161)) ;
     }
-    inCompiler->printMessage (GALGAS_string ("Context: ").add_operation (var_t_6173.getter_string (SOURCE_FILE ("program.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 163)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 163))  COMMA_SOURCE_FILE ("program.galgas", 163)) ;
+    inCompiler->printMessage (GALGAS_string ("Context: ").add_operation (var_t_6455.getter_string (SOURCE_FILE ("program.galgas", 171)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 171)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 171))  COMMA_SOURCE_FILE ("program.galgas", 171)) ;
   }
-  GALGAS_intermediateCodeStruct var_intermediateCodeStruct_6657 = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("program.galgas", 166)) ;
-  const enumGalgasBool test_10 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 167)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  GALGAS_intermediateCodeStruct var_intermediateCodeStruct_6939 = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("program.galgas", 174)) ;
+  const enumGalgasBool test_10 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 175)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_10) {
-    GALGAS_timer var_t_6717 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 168)) ;
+    GALGAS_timer var_t_6999 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 176)) ;
     {
-    routine_semanticAnalysis (constinArgument_inSourceFile.getter_string (HERE), var_ast_2876, var_decoratedDeclarationList_6069, var_semanticContext_5773, var_subprogramInvocationGraph_6001, constinArgument_inEndOfSourceFile, var_globalLiteralStringMap_5826, var_intermediateCodeStruct_6657, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 169)) ;
+    routine_semanticAnalysis (constinArgument_inSourceFile.getter_string (HERE), var_ast_3158, var_decoratedDeclarationList_6351, var_semanticContext_6055, var_subprogramInvocationGraph_6283, constinArgument_inEndOfSourceFile, var_globalLiteralStringMap_6108, var_intermediateCodeStruct_6939, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 177)) ;
     }
-    inCompiler->printMessage (GALGAS_string ("Semantic: ").add_operation (var_t_6717.getter_string (SOURCE_FILE ("program.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 179)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 179))  COMMA_SOURCE_FILE ("program.galgas", 179)) ;
+    inCompiler->printMessage (GALGAS_string ("Semantic: ").add_operation (var_t_6999.getter_string (SOURCE_FILE ("program.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 187)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 187))  COMMA_SOURCE_FILE ("program.galgas", 187)) ;
   }
-  const enumGalgasBool test_11 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 182)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_11 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 190)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_11) {
-    GALGAS_timer var_tOpt_7248 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 183)) ;
+    GALGAS_timer var_tOpt_7530 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 191)) ;
     {
-    routine_codeOptimisation (var_intermediateCodeStruct_6657, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 184)) ;
+    routine_codeOptimisation (var_intermediateCodeStruct_6939, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 192)) ;
     }
-    inCompiler->printMessage (GALGAS_string ("Optimization: ").add_operation (var_tOpt_7248.getter_string (SOURCE_FILE ("program.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 185)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 185))  COMMA_SOURCE_FILE ("program.galgas", 185)) ;
+    inCompiler->printMessage (GALGAS_string ("Optimization: ").add_operation (var_tOpt_7530.getter_string (SOURCE_FILE ("program.galgas", 193)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 193)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 193))  COMMA_SOURCE_FILE ("program.galgas", 193)) ;
   }
-  const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 188)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 196)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_12) {
-    GALGAS_timer var_tGen_7512 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 189)) ;
+    GALGAS_timer var_tGen_7794 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 197)) ;
     {
-    routine_codeGeneration (constinArgument_inCurrentDirectory, constinArgument_inSourceFile.getter_string (HERE), constinArgument_inEndOfSourceFile, var_intermediateCodeStruct_6657, var_semanticContext_5773.getter_mTypeMap (HERE), constinArgument_inTargetName, var_semanticContext_5773.getter_mPanicCodeType (HERE), var_semanticContext_5773.getter_mPanicLineType (HERE), var_semanticContext_5773.getter_mAvailableInterruptMap (HERE), var_staticListValueMap_5887, var_sourceFileAbsolutePathSet_2923, var_semanticContext_5773.getter_mTargetParameters (HERE), var_globalVariableIRList_6119, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 190)) ;
+    routine_codeGeneration (constinArgument_inCurrentDirectory, constinArgument_inSourceFile.getter_string (HERE), constinArgument_inEndOfSourceFile, var_intermediateCodeStruct_6939, var_semanticContext_6055.getter_mTypeMap (HERE), constinArgument_inTargetName, var_semanticContext_6055.getter_mPanicCodeType (HERE), var_semanticContext_6055.getter_mPanicLineType (HERE), var_semanticContext_6055.getter_mAvailableInterruptMap (HERE), var_staticListValueMap_6169, var_sourceFileAbsolutePathSet_3205, var_semanticContext_6055.getter_mTargetParameters (HERE), var_globalVariableIRList_6401, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 198)) ;
     }
-    inCompiler->printMessage (GALGAS_string ("Code generation: ").add_operation (var_tGen_7512.getter_string (SOURCE_FILE ("program.galgas", 205)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 205)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 205))  COMMA_SOURCE_FILE ("program.galgas", 205)) ;
+    inCompiler->printMessage (GALGAS_string ("Code generation: ").add_operation (var_tGen_7794.getter_string (SOURCE_FILE ("program.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 213)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 213))  COMMA_SOURCE_FILE ("program.galgas", 213)) ;
   }
 }
 
@@ -428,42 +428,42 @@ void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTarg
                                      COMMA_UNUSED_LOCATION_ARGS) {
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_string var_targetDirectory_8635 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 218)) ;
-    const enumGalgasBool test_1 = var_targetDirectory_8635.getter_directoryExists (SOURCE_FILE ("program.galgas", 219)).boolEnum () ;
+    GALGAS_string var_targetDirectory_8917 = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 226)) ;
+    const enumGalgasBool test_1 = var_targetDirectory_8917.getter_directoryExists (SOURCE_FILE ("program.galgas", 227)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_string var_targetDefinitionFullPath_8806 = var_targetDirectory_8635.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 220)).add_operation (constinArgument_inTargetName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 220)).add_operation (GALGAS_string ("/+config.plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 220)) ;
-      const enumGalgasBool test_2 = var_targetDefinitionFullPath_8806.getter_fileExists (SOURCE_FILE ("program.galgas", 221)).boolEnum () ;
+      GALGAS_string var_targetDefinitionFullPath_9088 = var_targetDirectory_8917.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 228)).add_operation (constinArgument_inTargetName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 228)).add_operation (GALGAS_string ("/+config.plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 228)) ;
+      const enumGalgasBool test_2 = var_targetDefinitionFullPath_9088.getter_fileExists (SOURCE_FILE ("program.galgas", 229)).boolEnum () ;
       if (kBoolTrue == test_2) {
-        GALGAS_lstringlist var_importedFileList_9068 ;
-        var_importedFileList_9068.drop () ;
-        GALGAS_location joker_9096 ; // Joker input parameter
-        cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, var_targetDefinitionFullPath_8806.getter_nowhere (SOURCE_FILE ("program.galgas", 222)), ioArgument_ioAST, var_importedFileList_9068, joker_9096  COMMA_SOURCE_FILE ("program.galgas", 222)) ;
+        GALGAS_lstringlist var_importedFileList_9350 ;
+        var_importedFileList_9350.drop () ;
+        GALGAS_location joker_9378 ; // Joker input parameter
+        cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, var_targetDefinitionFullPath_9088.getter_nowhere (SOURCE_FILE ("program.galgas", 230)), ioArgument_ioAST, var_importedFileList_9350, joker_9378  COMMA_SOURCE_FILE ("program.galgas", 230)) ;
         {
-        routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, var_targetDirectory_8635.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 228)).add_operation (constinArgument_inTargetName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 228)), var_importedFileList_9068, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 226)) ;
+        routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, var_targetDirectory_8917.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 236)).add_operation (constinArgument_inTargetName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 236)), var_importedFileList_9350, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 234)) ;
         }
       }else if (kBoolFalse == test_2) {
         TC_Array <C_FixItDescription> fixItArray3 ;
-        inCompiler->emitSemanticError (constinArgument_inTargetName.getter_location (SOURCE_FILE ("program.galgas", 233)), GALGAS_string ("This target is not defined in '").add_operation (GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()), inCompiler COMMA_SOURCE_FILE ("program.galgas", 234)).add_operation (GALGAS_string ("' directory"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 234)), fixItArray3  COMMA_SOURCE_FILE ("program.galgas", 233)) ;
+        inCompiler->emitSemanticError (constinArgument_inTargetName.getter_location (SOURCE_FILE ("program.galgas", 241)), GALGAS_string ("This target is not defined in '").add_operation (GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()), inCompiler COMMA_SOURCE_FILE ("program.galgas", 242)).add_operation (GALGAS_string ("' directory"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 242)), fixItArray3  COMMA_SOURCE_FILE ("program.galgas", 241)) ;
       }
     }else if (kBoolFalse == test_1) {
       TC_Array <C_FixItDescription> fixItArray4 ;
-      inCompiler->emitSemanticError (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("program.galgas", 237)).getter_location (SOURCE_FILE ("program.galgas", 237)), GALGAS_string ("the '").add_operation (GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()), inCompiler COMMA_SOURCE_FILE ("program.galgas", 237)).add_operation (GALGAS_string ("' directory does not exist"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 237)), fixItArray4  COMMA_SOURCE_FILE ("program.galgas", 237)) ;
+      inCompiler->emitSemanticError (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("program.galgas", 245)).getter_location (SOURCE_FILE ("program.galgas", 245)), GALGAS_string ("the '").add_operation (GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.getter_value ()), inCompiler COMMA_SOURCE_FILE ("program.galgas", 245)).add_operation (GALGAS_string ("' directory does not exist"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 245)), fixItArray4  COMMA_SOURCE_FILE ("program.galgas", 245)) ;
     }
   }else if (kBoolFalse == test_0) {
-    GALGAS_filewrapper var_fw_9745 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    const enumGalgasBool test_5 = var_fw_9745.getter_fileExistsAtPath (constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/+config.plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 242)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 242)).boolEnum () ;
+    GALGAS_filewrapper var_fw_10027 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    const enumGalgasBool test_5 = var_fw_10027.getter_fileExistsAtPath (constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/+config.plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 250)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 250)).boolEnum () ;
     if (kBoolTrue == test_5) {
-      GALGAS_string var_source_9873 = var_fw_9745.getter_textFileContentsAtPath (constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/+config.plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 243)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 243)) ;
-      GALGAS_lstringlist var_importedFileList_10077 ;
-      var_importedFileList_10077.drop () ;
-      GALGAS_location joker_10103 ; // Joker input parameter
-      cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_source_9873, constinArgument_inTargetName.getter_string (HERE), ioArgument_ioAST, var_importedFileList_10077, joker_10103  COMMA_SOURCE_FILE ("program.galgas", 244)) ;
+      GALGAS_string var_source_10155 = var_fw_10027.getter_textFileContentsAtPath (constinArgument_inTargetName.getter_string (HERE).add_operation (GALGAS_string ("/+config.plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 251)) ;
+      GALGAS_lstringlist var_importedFileList_10359 ;
+      var_importedFileList_10359.drop () ;
+      GALGAS_location joker_10385 ; // Joker input parameter
+      cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_source_10155, constinArgument_inTargetName.getter_string (HERE), ioArgument_ioAST, var_importedFileList_10359, joker_10385  COMMA_SOURCE_FILE ("program.galgas", 252)) ;
       {
-      routine_recursiveImportEmbeddedTargetFiles (ioArgument_ioAST, constinArgument_inTargetName.getter_string (HERE), var_importedFileList_10077, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 248)) ;
+      routine_recursiveImportEmbeddedTargetFiles (ioArgument_ioAST, constinArgument_inTargetName.getter_string (HERE), var_importedFileList_10359, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 256)) ;
       }
     }else if (kBoolFalse == test_5) {
       TC_Array <C_FixItDescription> fixItArray6 ;
-      inCompiler->emitSemanticError (constinArgument_inTargetName.getter_location (SOURCE_FILE ("program.galgas", 255)), GALGAS_string ("This target is not defined in embedded targets"), fixItArray6  COMMA_SOURCE_FILE ("program.galgas", 255)) ;
+      inCompiler->emitSemanticError (constinArgument_inTargetName.getter_location (SOURCE_FILE ("program.galgas", 263)), GALGAS_string ("This target is not defined in embedded targets"), fixItArray6  COMMA_SOURCE_FILE ("program.galgas", 263)) ;
     }
   }
 }
@@ -481,44 +481,44 @@ void routine_recursiveImportFileSystemTargetFiles (GALGAS_ast & ioArgument_ioAST
                                                    GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                    C_Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_12220 (inArgument_inImportedClauseList, kENUMERATION_UP) ;
-  while (enumerator_12220.hasCurrentObject ()) {
-    GALGAS_string var_absolutePath_12244 = constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 285)).add_operation (enumerator_12220.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 285)) ;
-    const enumGalgasBool test_0 = var_absolutePath_12244.getter_fileExists (SOURCE_FILE ("program.galgas", 286)).boolEnum () ;
+  cEnumerator_lstringlist enumerator_12502 (inArgument_inImportedClauseList, kENUMERATION_UP) ;
+  while (enumerator_12502.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath_12526 = constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 293)).add_operation (enumerator_12502.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 293)) ;
+    const enumGalgasBool test_0 = var_absolutePath_12526.getter_fileExists (SOURCE_FILE ("program.galgas", 294)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_absolutePath_12244 COMMA_SOURCE_FILE ("program.galgas", 287)).operator_not (SOURCE_FILE ("program.galgas", 287)).boolEnum () ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_absolutePath_12526 COMMA_SOURCE_FILE ("program.galgas", 295)).operator_not (SOURCE_FILE ("program.galgas", 295)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath_12244  COMMA_SOURCE_FILE ("program.galgas", 288)) ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath_12244.getter_pathExtension (SOURCE_FILE ("program.galgas", 289)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath_12526  COMMA_SOURCE_FILE ("program.galgas", 296)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath_12526.getter_pathExtension (SOURCE_FILE ("program.galgas", 297)).objectCompare (GALGAS_string ("plm-import"))).boolEnum () ;
         if (kBoolTrue == test_2) {
-          GALGAS_lstringlist var_importedFileList_12650 ;
-          var_importedFileList_12650.drop () ;
-          GALGAS_location joker_12680 ; // Joker input parameter
-          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_12244, enumerator_12220.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 290)), ioArgument_ioAST, var_importedFileList_12650, joker_12680  COMMA_SOURCE_FILE ("program.galgas", 290)) ;
+          GALGAS_lstringlist var_importedFileList_12939 ;
+          var_importedFileList_12939.drop () ;
+          GALGAS_location joker_12969 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_12526, enumerator_12502.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 298)), ioArgument_ioAST, var_importedFileList_12939, joker_12969  COMMA_SOURCE_FILE ("program.galgas", 298)) ;
           {
-          routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList_12650, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 294)) ;
+          routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList_12939, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 302)) ;
           }
         }else if (kBoolFalse == test_2) {
-          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath_12244.getter_pathExtension (SOURCE_FILE ("program.galgas", 300)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath_12526.getter_pathExtension (SOURCE_FILE ("program.galgas", 308)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
           if (kBoolTrue == test_3) {
-            GALGAS_lstringlist var_importedFileList_13143 ;
-            var_importedFileList_13143.drop () ;
-            GALGAS_location joker_13173 ; // Joker input parameter
-            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_12244, enumerator_12220.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 301)), ioArgument_ioAST, var_importedFileList_13143, joker_13173  COMMA_SOURCE_FILE ("program.galgas", 301)) ;
+            GALGAS_lstringlist var_importedFileList_13432 ;
+            var_importedFileList_13432.drop () ;
+            GALGAS_location joker_13462 ; // Joker input parameter
+            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_12526, enumerator_12502.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 309)), ioArgument_ioAST, var_importedFileList_13432, joker_13462  COMMA_SOURCE_FILE ("program.galgas", 309)) ;
             {
-            routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList_13143, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 305)) ;
+            routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList_13432, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 313)) ;
             }
           }else if (kBoolFalse == test_3) {
             TC_Array <C_FixItDescription> fixItArray4 ;
-            inCompiler->emitSemanticError (enumerator_12220.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 312)), GALGAS_string ("invalid extension (should be .plm or .plm-target)"), fixItArray4  COMMA_SOURCE_FILE ("program.galgas", 312)) ;
+            inCompiler->emitSemanticError (enumerator_12502.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 320)), GALGAS_string ("invalid extension (should be .plm-import or .plm-target)"), fixItArray4  COMMA_SOURCE_FILE ("program.galgas", 320)) ;
           }
         }
       }
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray5 ;
-      inCompiler->emitSemanticError (enumerator_12220.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 316)), GALGAS_string ("file does not exist in file system target definition"), fixItArray5  COMMA_SOURCE_FILE ("program.galgas", 316)) ;
+      inCompiler->emitSemanticError (enumerator_12502.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 324)), GALGAS_string ("file does not exist in file system target definition"), fixItArray5  COMMA_SOURCE_FILE ("program.galgas", 324)) ;
     }
-    enumerator_12220.gotoNextObject () ;
+    enumerator_12502.gotoNextObject () ;
   }
 }
 
@@ -535,29 +535,29 @@ void routine_recursiveImportEmbeddedTargetFiles (GALGAS_ast & ioArgument_ioAST,
                                                  GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_14025 (inArgument_inImportedClauseList, kENUMERATION_UP) ;
-  while (enumerator_14025.hasCurrentObject ()) {
-    GALGAS_string var_fullPath_14045 = constinArgument_inCurrentDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 330)).add_operation (enumerator_14025.current_mValue (HERE).getter_string (SOURCE_FILE ("program.galgas", 330)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 330)) ;
-    GALGAS_filewrapper var_fw_14103 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    const enumGalgasBool test_0 = var_fw_14103.getter_fileExistsAtPath (var_fullPath_14045, inCompiler COMMA_SOURCE_FILE ("program.galgas", 332)).boolEnum () ;
+  cEnumerator_lstringlist enumerator_14321 (inArgument_inImportedClauseList, kENUMERATION_UP) ;
+  while (enumerator_14321.hasCurrentObject ()) {
+    GALGAS_string var_fullPath_14341 = constinArgument_inCurrentDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 338)).add_operation (enumerator_14321.current_mValue (HERE).getter_string (SOURCE_FILE ("program.galgas", 338)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 338)) ;
+    GALGAS_filewrapper var_fw_14399 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    const enumGalgasBool test_0 = var_fw_14399.getter_fileExistsAtPath (var_fullPath_14341, inCompiler COMMA_SOURCE_FILE ("program.galgas", 340)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_string var_embeddedPath_14202 = GALGAS_string (":").add_operation (var_fullPath_14045, inCompiler COMMA_SOURCE_FILE ("program.galgas", 333)) ;
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_embeddedPath_14202 COMMA_SOURCE_FILE ("program.galgas", 334)).operator_not (SOURCE_FILE ("program.galgas", 334)).boolEnum () ;
+      GALGAS_string var_embeddedPath_14498 = GALGAS_string (":").add_operation (var_fullPath_14341, inCompiler COMMA_SOURCE_FILE ("program.galgas", 341)) ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_embeddedPath_14498 COMMA_SOURCE_FILE ("program.galgas", 342)).operator_not (SOURCE_FILE ("program.galgas", 342)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath_14202  COMMA_SOURCE_FILE ("program.galgas", 335)) ;
-        GALGAS_lstringlist var_importedFileList_14496 ;
-        var_importedFileList_14496.drop () ;
-        GALGAS_location joker_14524 ; // Joker input parameter
-        cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_14103.getter_textFileContentsAtPath (var_fullPath_14045, inCompiler COMMA_SOURCE_FILE ("program.galgas", 336)), enumerator_14025.current_mValue (HERE).getter_string (HERE), ioArgument_ioAST, var_importedFileList_14496, joker_14524  COMMA_SOURCE_FILE ("program.galgas", 336)) ;
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath_14498  COMMA_SOURCE_FILE ("program.galgas", 343)) ;
+        GALGAS_lstringlist var_importedFileList_14792 ;
+        var_importedFileList_14792.drop () ;
+        GALGAS_location joker_14820 ; // Joker input parameter
+        cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_14399.getter_textFileContentsAtPath (var_fullPath_14341, inCompiler COMMA_SOURCE_FILE ("program.galgas", 344)), enumerator_14321.current_mValue (HERE).getter_string (HERE), ioArgument_ioAST, var_importedFileList_14792, joker_14820  COMMA_SOURCE_FILE ("program.galgas", 344)) ;
         {
-        routine_recursiveImportEmbeddedTargetFiles (ioArgument_ioAST, var_fullPath_14045.getter_stringByDeletingLastPathComponent (SOURCE_FILE ("program.galgas", 342)), var_importedFileList_14496, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 340)) ;
+        routine_recursiveImportEmbeddedTargetFiles (ioArgument_ioAST, var_fullPath_14341.getter_stringByDeletingLastPathComponent (SOURCE_FILE ("program.galgas", 350)), var_importedFileList_14792, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 348)) ;
         }
       }
     }else if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (enumerator_14025.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 348)), GALGAS_string ("cannot find this file in embedded files"), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 348)) ;
+      inCompiler->emitSemanticError (enumerator_14321.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 356)), GALGAS_string ("cannot find this file in embedded files"), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 356)) ;
     }
-    enumerator_14025.gotoNextObject () ;
+    enumerator_14321.gotoNextObject () ;
   }
 }
 
@@ -574,78 +574,78 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
                                    GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_15259 (inArgument_inImportedClauseList, kENUMERATION_UP) ;
-  while (enumerator_15259.hasCurrentObject ()) {
-    GALGAS_string var_absolutePath_15283 = enumerator_15259.current_mValue (HERE).getter_string (HERE).getter_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 362)) ;
-    const enumGalgasBool test_0 = var_absolutePath_15283.getter_fileExists (SOURCE_FILE ("program.galgas", 363)).boolEnum () ;
+  cEnumerator_lstringlist enumerator_15555 (inArgument_inImportedClauseList, kENUMERATION_UP) ;
+  while (enumerator_15555.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath_15579 = enumerator_15555.current_mValue (HERE).getter_string (HERE).getter_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 370)) ;
+    const enumGalgasBool test_0 = var_absolutePath_15579.getter_fileExists (SOURCE_FILE ("program.galgas", 371)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_absolutePath_15283 COMMA_SOURCE_FILE ("program.galgas", 364)).operator_not (SOURCE_FILE ("program.galgas", 364)).boolEnum () ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_absolutePath_15579 COMMA_SOURCE_FILE ("program.galgas", 372)).operator_not (SOURCE_FILE ("program.galgas", 372)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath_15283  COMMA_SOURCE_FILE ("program.galgas", 365)) ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath_15283.getter_pathExtension (SOURCE_FILE ("program.galgas", 366)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath_15579  COMMA_SOURCE_FILE ("program.galgas", 373)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath_15579.getter_pathExtension (SOURCE_FILE ("program.galgas", 374)).objectCompare (GALGAS_string ("plm-import"))).boolEnum () ;
         if (kBoolTrue == test_2) {
-          GALGAS_lstringlist var_importedFileList_15732 ;
-          var_importedFileList_15732.drop () ;
-          GALGAS_location joker_15762 ; // Joker input parameter
-          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_15283, enumerator_15259.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 367)), ioArgument_ioAST, var_importedFileList_15732, joker_15762  COMMA_SOURCE_FILE ("program.galgas", 367)) ;
+          GALGAS_lstringlist var_importedFileList_16035 ;
+          var_importedFileList_16035.drop () ;
+          GALGAS_location joker_16065 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_15579, enumerator_15555.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 375)), ioArgument_ioAST, var_importedFileList_16035, joker_16065  COMMA_SOURCE_FILE ("program.galgas", 375)) ;
           {
-          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_15732, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 371)) ;
+          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_16035, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 379)) ;
           }
         }else if (kBoolFalse == test_2) {
-          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath_15283.getter_pathExtension (SOURCE_FILE ("program.galgas", 377)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath_15579.getter_pathExtension (SOURCE_FILE ("program.galgas", 385)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
           if (kBoolTrue == test_3) {
-            GALGAS_lstringlist var_importedFileList_16211 ;
-            var_importedFileList_16211.drop () ;
-            GALGAS_location joker_16241 ; // Joker input parameter
-            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_15283, enumerator_15259.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 378)), ioArgument_ioAST, var_importedFileList_16211, joker_16241  COMMA_SOURCE_FILE ("program.galgas", 378)) ;
+            GALGAS_lstringlist var_importedFileList_16514 ;
+            var_importedFileList_16514.drop () ;
+            GALGAS_location joker_16544 ; // Joker input parameter
+            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath_15579, enumerator_15555.current_mValue (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("program.galgas", 386)), ioArgument_ioAST, var_importedFileList_16514, joker_16544  COMMA_SOURCE_FILE ("program.galgas", 386)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_16211, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 382)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_16514, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 390)) ;
             }
           }else if (kBoolFalse == test_3) {
             TC_Array <C_FixItDescription> fixItArray4 ;
-            inCompiler->emitSemanticError (enumerator_15259.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 389)), GALGAS_string ("invalid extension (should be .plm or .plm-target)"), fixItArray4  COMMA_SOURCE_FILE ("program.galgas", 389)) ;
+            inCompiler->emitSemanticError (enumerator_15555.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 397)), GALGAS_string ("invalid extension (should be .plm-import or .plm-target)"), fixItArray4  COMMA_SOURCE_FILE ("program.galgas", 397)) ;
           }
         }
       }
     }else if (kBoolFalse == test_0) {
-      GALGAS_filewrapper var_fw_16616 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-      const enumGalgasBool test_5 = var_fw_16616.getter_fileExistsAtPath (enumerator_15259.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 394)).boolEnum () ;
+      GALGAS_filewrapper var_fw_16926 = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+      const enumGalgasBool test_5 = var_fw_16926.getter_fileExistsAtPath (enumerator_15555.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 402)).boolEnum () ;
       if (kBoolTrue == test_5) {
-        GALGAS_string var_embeddedPath_16722 = GALGAS_string (":").add_operation (enumerator_15259.current_mValue (HERE).getter_string (SOURCE_FILE ("program.galgas", 395)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 395)) ;
-        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_embeddedPath_16722 COMMA_SOURCE_FILE ("program.galgas", 396)).operator_not (SOURCE_FILE ("program.galgas", 396)).boolEnum () ;
+        GALGAS_string var_embeddedPath_17032 = GALGAS_string (":").add_operation (enumerator_15555.current_mValue (HERE).getter_string (SOURCE_FILE ("program.galgas", 403)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 403)) ;
+        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_embeddedPath_17032 COMMA_SOURCE_FILE ("program.galgas", 404)).operator_not (SOURCE_FILE ("program.galgas", 404)).boolEnum () ;
         if (kBoolTrue == test_6) {
-          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath_16722  COMMA_SOURCE_FILE ("program.galgas", 397)) ;
-          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, enumerator_15259.current_mValue (HERE).getter_string (HERE).getter_pathExtension (SOURCE_FILE ("program.galgas", 398)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath_17032  COMMA_SOURCE_FILE ("program.galgas", 405)) ;
+          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, enumerator_15555.current_mValue (HERE).getter_string (HERE).getter_pathExtension (SOURCE_FILE ("program.galgas", 406)).objectCompare (GALGAS_string ("plm-import"))).boolEnum () ;
           if (kBoolTrue == test_7) {
-            GALGAS_lstringlist var_importedFileList_17079 ;
-            var_importedFileList_17079.drop () ;
-            GALGAS_location joker_17111 ; // Joker input parameter
-            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_16616.getter_textFileContentsAtPath (enumerator_15259.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 399)), enumerator_15259.current_mValue (HERE).getter_string (HERE), ioArgument_ioAST, var_importedFileList_17079, joker_17111  COMMA_SOURCE_FILE ("program.galgas", 399)) ;
+            GALGAS_lstringlist var_importedFileList_17396 ;
+            var_importedFileList_17396.drop () ;
+            GALGAS_location joker_17428 ; // Joker input parameter
+            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_16926.getter_textFileContentsAtPath (enumerator_15555.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 407)), enumerator_15555.current_mValue (HERE).getter_string (HERE), ioArgument_ioAST, var_importedFileList_17396, joker_17428  COMMA_SOURCE_FILE ("program.galgas", 407)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_17079, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 403)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_17396, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 411)) ;
             }
           }else if (kBoolFalse == test_7) {
-            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_15259.current_mValue (HERE).getter_string (HERE).getter_pathExtension (SOURCE_FILE ("program.galgas", 409)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_15555.current_mValue (HERE).getter_string (HERE).getter_pathExtension (SOURCE_FILE ("program.galgas", 417)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
             if (kBoolTrue == test_8) {
-              GALGAS_lstringlist var_importedFileList_17584 ;
-              var_importedFileList_17584.drop () ;
-              GALGAS_location joker_17616 ; // Joker input parameter
-              cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_16616.getter_textFileContentsAtPath (enumerator_15259.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 410)), enumerator_15259.current_mValue (HERE).getter_string (HERE), ioArgument_ioAST, var_importedFileList_17584, joker_17616  COMMA_SOURCE_FILE ("program.galgas", 410)) ;
+              GALGAS_lstringlist var_importedFileList_17901 ;
+              var_importedFileList_17901.drop () ;
+              GALGAS_location joker_17933 ; // Joker input parameter
+              cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_16926.getter_textFileContentsAtPath (enumerator_15555.current_mValue (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 418)), enumerator_15555.current_mValue (HERE).getter_string (HERE), ioArgument_ioAST, var_importedFileList_17901, joker_17933  COMMA_SOURCE_FILE ("program.galgas", 418)) ;
               {
-              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_17584, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 414)) ;
+              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_17901, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 422)) ;
               }
             }else if (kBoolFalse == test_8) {
               TC_Array <C_FixItDescription> fixItArray9 ;
-              inCompiler->emitSemanticError (enumerator_15259.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 421)), GALGAS_string ("invalid extension (should be .plm or .plm-target)"), fixItArray9  COMMA_SOURCE_FILE ("program.galgas", 421)) ;
+              inCompiler->emitSemanticError (enumerator_15555.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 429)), GALGAS_string ("invalid extension (should be .plm-import or .plm-target)"), fixItArray9  COMMA_SOURCE_FILE ("program.galgas", 429)) ;
             }
           }
         }
       }else if (kBoolFalse == test_5) {
         TC_Array <C_FixItDescription> fixItArray10 ;
-        inCompiler->emitSemanticError (enumerator_15259.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 425)), GALGAS_string ("cannot find this file in file system and in embedded files"), fixItArray10  COMMA_SOURCE_FILE ("program.galgas", 425)) ;
+        inCompiler->emitSemanticError (enumerator_15555.current_mValue (HERE).getter_location (SOURCE_FILE ("program.galgas", 433)), GALGAS_string ("cannot find this file in file system and in embedded files"), fixItArray10  COMMA_SOURCE_FILE ("program.galgas", 433)) ;
       }
     }
-    enumerator_15259.gotoNextObject () ;
+    enumerator_15555.gotoNextObject () ;
   }
 }
 
@@ -723,7 +723,7 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
 
 const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -773,7 +773,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1016, // Text length
+  1023, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -781,7 +781,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
 
 const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -812,7 +812,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  790, // Text length
+  797, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -820,7 +820,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
 
 const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -909,7 +909,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2322, // Text length
+  2329, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -917,7 +917,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
 
 const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -960,7 +960,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "03-push-buttons.plm",
   "plm",
   true, // Text file
-  1475, // Text length
+  1482, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -968,7 +968,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
 
 const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -1042,7 +1042,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  1908, // Text length
+  1915, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1050,7 +1050,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
 
 const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -1096,7 +1096,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "05-semaphore.plm",
   "plm",
   true, // Text file
-  1115, // Text length
+  1122, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1104,7 +1104,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
 
 const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -1139,7 +1139,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-integer-slices.plm",
   "plm",
   true, // Text file
-  972, // Text length
+  979, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1147,7 +1147,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
 
 const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1215,7 +1215,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-static-list-example.plm",
   "plm",
   true, // Text file
-  1568, // Text length
+  1575, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1223,7 +1223,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
 
 const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1302,7 +1302,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "08-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1837, // Text length
+  1844, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1310,7 +1310,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
 
 const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1399,7 +1399,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  2269, // Text length
+  2276, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1407,7 +1407,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
 
 const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1506,7 +1506,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2472, // Text length
+  2479, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -1514,7 +1514,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
 
 const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1580,7 +1580,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1474, // Text length
+  1481, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -1588,7 +1588,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
 
 const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1670,7 +1670,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1659, // Text length
+  1666, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
@@ -1678,7 +1678,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
 
 const char * gWrapperFileContent_14_embeddedSampleCode = "target \"teensy-3-1/unprivileged\"\n"
   "\n"
-  "import \"carte-tp-teensy-3-1.plm\"\n"
+  "import \"carte-tp-teensy-3-1.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "// USB DEVICE DRIVER\n"
@@ -2071,11 +2071,11 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  15327, // Text length
+  15334, // Text length
   gWrapperFileContent_14_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1/carte-tp-teensy-3-1.plm'
+//--- File 'teensy-3-1/carte-tp-teensy-3-1.plm-import'
 
 const char * gWrapperFileContent_15_embeddedSampleCode = "check target \"teensy-3-1/unprivileged\"\n"
   "\n"
@@ -2158,8 +2158,8 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "check target \"teensy-
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
 const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
-  "carte-tp-teensy-3-1.plm",
-  "plm",
+  "carte-tp-teensy-3-1.plm-import",
+  "plm-import",
   true, // Text file
   2860, // Text length
   gWrapperFileContent_15_embeddedSampleCode
@@ -2207,7 +2207,7 @@ const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
 const char * gWrapperFileContent_16_embeddedSampleCode = "target \"teensy-3-6/xtr64\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2261,7 +2261,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1461, // Text length
+  1468, // Text length
   gWrapperFileContent_16_embeddedSampleCode
 ) ;
 
@@ -2270,7 +2270,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
 const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2361,7 +2361,7 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2394, // Text length
+  2401, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 
@@ -2387,7 +2387,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2569,7 +2569,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7511, // Text length
+  7518, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
@@ -2578,7 +2578,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
 const char * gWrapperFileContent_19_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2618,7 +2618,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
   "04-large-structure.plm",
   "plm",
   true, // Text file
-  1136, // Text length
+  1143, // Text length
   gWrapperFileContent_19_embeddedSampleCode
 ) ;
 
@@ -2627,7 +2627,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedSampleCode (
 const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2688,7 +2688,7 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "05-periodic-timer.plm",
   "plm",
   true, // Text file
-  1604, // Text length
+  1611, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
@@ -2697,7 +2697,7 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
 const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 192\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "driver timer ()\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -2787,7 +2787,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "06-chained-pit-0-1.plm",
   "plm",
   true, // Text file
-  2440, // Text length
+  2447, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 
@@ -2796,7 +2796,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
 const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2900,7 +2900,7 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
   "07-synchronization-gate.plm",
   "plm",
   true, // Text file
-  2789, // Text length
+  2796, // Text length
   gWrapperFileContent_22_embeddedSampleCode
 ) ;
 
@@ -2909,7 +2909,7 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
 const char * gWrapperFileContent_23_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -2999,7 +2999,7 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
   "08-synchronization-buffer.plm",
   "plm",
   true, // Text file
-  2542, // Text length
+  2549, // Text length
   gWrapperFileContent_23_embeddedSampleCode
 ) ;
 
@@ -3008,7 +3008,7 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
 const char * gWrapperFileContent_24_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -3081,7 +3081,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
   "09-PWM-with-PTM-module.plm",
   "plm",
   true, // Text file
-  2727, // Text length
+  2734, // Text length
   gWrapperFileContent_24_embeddedSampleCode
 ) ;
 
@@ -3090,7 +3090,7 @@ const cRegularFileWrapper gWrapperFile_24_embeddedSampleCode (
 const char * gWrapperFileContent_25_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -3120,7 +3120,7 @@ const cRegularFileWrapper gWrapperFile_25_embeddedSampleCode (
   "10-integer-slices.plm",
   "plm",
   true, // Text file
-  781, // Text length
+  788, // Text length
   gWrapperFileContent_25_embeddedSampleCode
 ) ;
 
@@ -3129,7 +3129,7 @@ const cRegularFileWrapper gWrapperFile_25_embeddedSampleCode (
 const char * gWrapperFileContent_26_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "option \"task-strict-priority-order\"\n"
   "\n"
@@ -3306,7 +3306,7 @@ const cRegularFileWrapper gWrapperFile_26_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5006, // Text length
+  5013, // Text length
   gWrapperFileContent_26_embeddedSampleCode
 ) ;
 
@@ -3315,7 +3315,7 @@ const cRegularFileWrapper gWrapperFile_26_embeddedSampleCode (
 const char * gWrapperFileContent_27_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -3388,7 +3388,7 @@ const cRegularFileWrapper gWrapperFile_27_embeddedSampleCode (
   "12-section-service-duration.plm",
   "plm",
   true, // Text file
-  1876, // Text length
+  1883, // Text length
   gWrapperFileContent_27_embeddedSampleCode
 ) ;
 
@@ -3397,7 +3397,7 @@ const cRegularFileWrapper gWrapperFile_27_embeddedSampleCode (
 const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 180\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//   Display clock settings                                                               \n"
@@ -3903,7 +3903,7 @@ const cRegularFileWrapper gWrapperFile_28_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20551, // Text length
+  20558, // Text length
   gWrapperFileContent_28_embeddedSampleCode
 ) ;
 
@@ -3913,7 +3913,7 @@ const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xt
   "let F_CPU_MHZ = 240\n"
   "let BUS_MHZ2 @display = BUS_MHZ\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "driver timer ()\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -3986,7 +3986,7 @@ const cRegularFileWrapper gWrapperFile_29_embeddedSampleCode (
   "14-task-activation-duration-64-bit-timer.plm",
   "plm",
   true, // Text file
-  1920, // Text length
+  1927, // Text length
   gWrapperFileContent_29_embeddedSampleCode
 ) ;
 
@@ -3995,7 +3995,7 @@ const cRegularFileWrapper gWrapperFile_29_embeddedSampleCode (
 const char * gWrapperFileContent_30_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "driver myDriver ()\n"
   "\n"
@@ -4046,7 +4046,7 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
   "15-task-activation-duration-systick.plm",
   "plm",
   true, // Text file
-  1300, // Text length
+  1307, // Text length
   gWrapperFileContent_30_embeddedSampleCode
 ) ;
 
@@ -4055,7 +4055,7 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
 const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "// Le champ CLKOUTSEL de SIM_SOPT2 permet de s\xC3""\xA9""lectionner le signal qui sera sorti :\n"
@@ -4089,7 +4089,7 @@ const cRegularFileWrapper gWrapperFile_31_embeddedSampleCode (
   "16-clock-out-pin.plm",
   "plm",
   true, // Text file
-  1210, // Text length
+  1217, // Text length
   gWrapperFileContent_31_embeddedSampleCode
 ) ;
 
@@ -4101,7 +4101,7 @@ const char * gWrapperFileContent_32_embeddedSampleCode = "target \"teensy-3-6/xt
   "//let myFLEXBUS_MHZ @display = FLEXBUS_MHZ\n"
   "//let myFLASH_KHZ @display = FLASH_KHZ\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -4168,7 +4168,7 @@ const cRegularFileWrapper gWrapperFile_32_embeddedSampleCode (
   "17-flextimer-as-pwm.plm",
   "plm",
   true, // Text file
-  2721, // Text length
+  2728, // Text length
   gWrapperFileContent_32_embeddedSampleCode
 ) ;
 
@@ -4177,7 +4177,7 @@ const cRegularFileWrapper gWrapperFile_32_embeddedSampleCode (
 const char * gWrapperFileContent_33_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -4319,7 +4319,7 @@ const cRegularFileWrapper gWrapperFile_33_embeddedSampleCode (
   "18-flextimer-external-clock.plm",
   "plm",
   true, // Text file
-  5191, // Text length
+  5198, // Text length
   gWrapperFileContent_33_embeddedSampleCode
 ) ;
 
@@ -4328,7 +4328,7 @@ const cRegularFileWrapper gWrapperFile_33_embeddedSampleCode (
 const char * gWrapperFileContent_34_embeddedSampleCode = "target \"teensy-3-6/xtr64\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -4416,7 +4416,7 @@ const cRegularFileWrapper gWrapperFile_34_embeddedSampleCode (
   "19-external-interrupt.plm",
   "plm",
   true, // Text file
-  3328, // Text length
+  3335, // Text length
   gWrapperFileContent_34_embeddedSampleCode
 ) ;
 
@@ -4425,7 +4425,7 @@ const cRegularFileWrapper gWrapperFile_34_embeddedSampleCode (
 const char * gWrapperFileContent_35_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -4766,7 +4766,7 @@ const cRegularFileWrapper gWrapperFile_35_embeddedSampleCode (
   "20-round-robin-32-tasks.plm",
   "plm",
   true, // Text file
-  10029, // Text length
+  10036, // Text length
   gWrapperFileContent_35_embeddedSampleCode
 ) ;
 
@@ -4775,7 +4775,7 @@ const cRegularFileWrapper gWrapperFile_35_embeddedSampleCode (
 const char * gWrapperFileContent_36_embeddedSampleCode = "target \"teensy-3-6/xtr64\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -5404,7 +5404,7 @@ const cRegularFileWrapper gWrapperFile_36_embeddedSampleCode (
   "21-round-robin-64-tasks.plm",
   "plm",
   true, // Text file
-  18361, // Text length
+  18368, // Text length
   gWrapperFileContent_36_embeddedSampleCode
 ) ;
 
@@ -5413,7 +5413,7 @@ const cRegularFileWrapper gWrapperFile_36_embeddedSampleCode (
 const char * gWrapperFileContent_37_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
   "\n"
-  "import \"carte-tp-teensy-3-6.plm\"\n"
+  "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -5445,11 +5445,11 @@ const cRegularFileWrapper gWrapperFile_37_embeddedSampleCode (
   "22-task-activate.plm",
   "plm",
   true, // Text file
-  789, // Text length
+  796, // Text length
   gWrapperFileContent_37_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-6/carte-tp-teensy-3-6.plm'
+//--- File 'teensy-3-6/carte-tp-teensy-3-6.plm-import'
 
 const char * gWrapperFileContent_38_embeddedSampleCode = "check target \"teensy-3-6/xtr32\", \"teensy-3-6/xtr64\"\n"
   "\n"
@@ -5532,8 +5532,8 @@ const char * gWrapperFileContent_38_embeddedSampleCode = "check target \"teensy-
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
 const cRegularFileWrapper gWrapperFile_38_embeddedSampleCode (
-  "carte-tp-teensy-3-6.plm",
-  "plm",
+  "carte-tp-teensy-3-6.plm-import",
+  "plm-import",
   true, // Text file
   2873, // Text length
   gWrapperFileContent_38_embeddedSampleCode

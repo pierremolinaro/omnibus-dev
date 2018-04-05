@@ -67,14 +67,14 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const UInt16 gPopUpData_plm_5F_lexique_200 [4] = {
+static const UInt16 gPopUpData_plm_5F_lexique_232 [4] = {
   1, // Leading character count to strip
   plm_lexique_1_commentMark, 48,
   0
 } ;
 
 static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
-  gPopUpData_plm_5F_lexique_200,
+  gPopUpData_plm_5F_lexique_232,
   NULL
 } ;
 
@@ -159,6 +159,8 @@ static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
 OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
   OC_Lexique * result = nil ;
   if ([inExtension isEqualToString:@"plm"]) {
+    result = [OC_Tokenizer_plm_lexique new] ;
+  }else if ([inExtension isEqualToString:@"plm-import"]) {
     result = [OC_Tokenizer_plm_lexique new] ;
   }else if ([inExtension isEqualToString:@"plm-target"]) {
     result = [OC_Tokenizer_plm_lexique new] ;
