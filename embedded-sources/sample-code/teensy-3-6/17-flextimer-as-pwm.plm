@@ -4,7 +4,7 @@ let F_CPU_MHZ = 24
 //let myFLEXBUS_MHZ @display = FLEXBUS_MHZ
 //let myFLASH_KHZ @display = FLASH_KHZ
 
-import "carte-tp-teensy-3-6.plm"
+import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

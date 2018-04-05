@@ -1609,39 +1609,45 @@
     settings = {ATTRIBUTES = (); };
   };
 
-  08FC6938F52CB96F7E087941 /* plm-target_icns.icns */ = {
+  08FC6938F52CB96F7E087941 /* plm-import_icns.icns */ = {
     isa = PBXBuildFile;
     fileRef = 75A764C8E3A691FA2B3A321D ;
     settings = {ATTRIBUTES = (); };
   };
 
-  66AEEC73C49038385428EC4C /* plm_icns.icns */ = {
+  66AEEC73C49038385428EC4C /* plm-target_icns.icns */ = {
     isa = PBXBuildFile;
     fileRef = 0D927DCD0980F86024E5208B ;
     settings = {ATTRIBUTES = (); };
   };
 
-  05533ABA051261497ECFFCBB /* AppKit.framework */ = {
+  0B77BCB3B283AF5BE021448F /* plm_icns.icns */ = {
     isa = PBXBuildFile;
-    fileRef = 0B77BCB3B283AF5BE021448F ;
+    fileRef = 48FAC1B4A0F97AA554886EC8 ;
     settings = {ATTRIBUTES = (); };
   };
 
-  E1BF64D32A5527244D104CEA /* Cocoa.framework */ = {
+  E1BF64D32A5527244D104CEA /* AppKit.framework */ = {
     isa = PBXBuildFile;
     fileRef = 4917B24303EE6A220679DAB3 ;
     settings = {ATTRIBUTES = (); };
   };
 
-  FDAF6C699B223C61B1B5AB89 /* plm */ = {
+  5D186D28E06FF97135CADE7F /* Cocoa.framework */ = {
     isa = PBXBuildFile;
     fileRef = 4A5380AF7CA75622A6426917 ;
     settings = {ATTRIBUTES = (); };
   };
 
-  3CD70FE748E6982B3439AD3B /* plm-debug */ = {
+  050594C7BC3C36E7E8AB9550 /* plm */ = {
     isa = PBXBuildFile;
-    fileRef = 72E08B4C5312DCDAFDF6EF36 ;
+    fileRef = 4F678F3B13B9D5EE16489088 ;
+    settings = {ATTRIBUTES = (); };
+  };
+
+  A68C18DA59A35C2BFE1CA554 /* plm-debug */ = {
+    isa = PBXBuildFile;
+    fileRef = 297FE25A71D030B67EB83BFC ;
     settings = {ATTRIBUTES = (); };
   };
 
@@ -5390,7 +5396,7 @@
     sourceTree = "<group>";
   };
 
-  0B77BCB3B283AF5BE021448F /* AppKit.framework */ = {
+  4917B24303EE6A220679DAB3 /* AppKit.framework */ = {
     isa = PBXFileReference;
     lastKnownFileType = wrapper.framework;
     name = "AppKit.framework";
@@ -5398,7 +5404,7 @@
     sourceTree = "<group>";
   };
 
-  4917B24303EE6A220679DAB3 /* Cocoa.framework */ = {
+  4A5380AF7CA75622A6426917 /* Cocoa.framework */ = {
     isa = PBXFileReference;
     lastKnownFileType = wrapper.framework;
     name = "Cocoa.framework";
@@ -5406,7 +5412,7 @@
     sourceTree = "<group>";
   };
 
-  4A5380AF7CA75622A6426917 = {
+  4F678F3B13B9D5EE16489088 = {
     isa = PBXFileReference;
     explicitFileType = "compiled.mach-o.executable";
     includeInIndex = 0;
@@ -5414,7 +5420,7 @@
     sourceTree = BUILT_PRODUCTS_DIR;
   };
 
-  72E08B4C5312DCDAFDF6EF36 = {
+  297FE25A71D030B67EB83BFC = {
     isa = PBXFileReference;
     explicitFileType = "compiled.mach-o.executable";
     includeInIndex = 0;
@@ -5422,7 +5428,7 @@
     sourceTree = BUILT_PRODUCTS_DIR;
   };
 
-  0C3540F67C1E9575E213BE0A = {
+  56967D946471AF29D7BF99F1 = {
     isa = PBXFileReference;
     explicitFileType = "compiled.mach-o.executable";
     includeInIndex = 0;
@@ -5493,12 +5499,20 @@
   75A764C8E3A691FA2B3A321D = {
     isa = PBXFileReference;
     lastKnownFileType = image.icns;
+    name = "plm-import_icns.icns";
+    path = "plm-import_icns.icns";
+    sourceTree = "<group>";
+  };
+
+  0D927DCD0980F86024E5208B = {
+    isa = PBXFileReference;
+    lastKnownFileType = image.icns;
     name = "plm-target_icns.icns";
     path = "plm-target_icns.icns";
     sourceTree = "<group>";
   };
 
-  0D927DCD0980F86024E5208B = {
+  48FAC1B4A0F97AA554886EC8 = {
     isa = PBXFileReference;
     lastKnownFileType = image.icns;
     name = "plm_icns.icns";
@@ -5508,12 +5522,12 @@
 
   /*------------------------------------------------------------------ PBXFrameworksBuildPhase */
 
-  0048B187F7182F1B9CE7A6A7 = {
+  6281D984952C07998DC54358 = {
     isa = PBXFrameworksBuildPhase;
     buildActionMask = 2147483647;
     files = (
-      05533ABA051261497ECFFCBB,
       E1BF64D32A5527244D104CEA,
+      5D186D28E06FF97135CADE7F,
     );
     runOnlyForDeploymentPostprocessing = 0;
   };
@@ -6088,16 +6102,17 @@
       472EC9115B10C292EF8BC986, 
       75A764C8E3A691FA2B3A321D, 
       0D927DCD0980F86024E5208B, 
+      48FAC1B4A0F97AA554886EC8, 
     );
     name = "User Resources";
     path = "userResources";
     sourceTree = "<group>";
   };
-  48FAC1B4A0F97AA554886EC8 /* Frameworks for App */ = {
+  05533ABA051261497ECFFCBB /* Frameworks for App */ = {
     isa = PBXGroup;
     children = (
-      0B77BCB3B283AF5BE021448F, 
       4917B24303EE6A220679DAB3, 
+      4A5380AF7CA75622A6426917, 
     );
     name = "Frameworks for App";
     path = "/System/Library/Frameworks";
@@ -6111,17 +6126,17 @@
       3C8BD392B120B627E0E1CAB4,
       3C102B71C593D98D96093FDE,
       D39D2BCEF4622B2499A05FE6,
-      48FAC1B4A0F97AA554886EC8,
+      05533ABA051261497ECFFCBB,
     );
     sourceTree = "<group>";
   };
 
   /*------------------------------------------------------------------ PBXNativeTarget */
-  4F678F3B13B9D5EE16489088 /* plm tool */ = {
+  8CE0780A2142A6EB7BC4F3C8 /* plm tool */ = {
     isa = PBXNativeTarget;
-    buildConfigurationList = 97405321542838D77F855226 ;
+    buildConfigurationList = C3B01637C607CE05F52A2FED ;
     buildPhases = (
-      5D186D28E06FF97135CADE7F ,
+      97405321542838D77F855226 ,
     );
     buildRules = (
     );
@@ -6130,15 +6145,15 @@
     name = "plm tool";
     productInstallPath = "$(HOME)/bin";
     productName = "plm tool";
-    productReference = 4A5380AF7CA75622A6426917 ;
+    productReference = 4F678F3B13B9D5EE16489088 ;
     productType = "com.apple.product-type.tool";
   };
  
-  297FE25A71D030B67EB83BFC /* plm tool debug */ = {
+  4F5350C12C322B5B664544C1 /* plm tool debug */ = {
     isa = PBXNativeTarget;
-    buildConfigurationList = 9A4FEAB575962E78E006250D ;
+    buildConfigurationList = 884A62116BE975A9BB8257E3 ;
     buildPhases = (
-      E6D743BF1E848C206E16A1D7 ,
+      9A4FEAB575962E78E006250D ,
     );
     buildRules = (
     );
@@ -6147,28 +6162,28 @@
     name = "plm tool debug";
     productInstallPath = "$(HOME)/bin";
     productName = "plm tool debug";
-    productReference = 72E08B4C5312DCDAFDF6EF36 ;
+    productReference = 297FE25A71D030B67EB83BFC ;
     productType = "com.apple.product-type.tool";
   };
  
-  56967D946471AF29D7BF99F1 /* Cocoa plm */ = {
+  AB650B25B4114E93A98F1EBA /* Cocoa plm */ = {
     isa = PBXNativeTarget;
-    buildConfigurationList = 6F0150C77BDA2EDA01AE484C ;
+    buildConfigurationList = 0048B187F7182F1B9CE7A6A7 ;
     buildPhases = (
-      BA8C592DB97D0DBE54C7ADFC , /* Resources */
-      0048B187F7182F1B9CE7A6A7 , /* Frameworks */
-      140A811D0C45CE03C1C93A28 , /* Sources */
+      CF9246BB0D40EB4D8027D90F , /* Resources */
+      6281D984952C07998DC54358 , /* Frameworks */
+      6F0150C77BDA2EDA01AE484C , /* Sources */
     );
     buildRules = (
     );
     dependencies = (
-      6281D984952C07998DC54358 ,
-      CF9246BB0D40EB4D8027D90F ,
+      FDAF6C699B223C61B1B5AB89 ,
+      3CD70FE748E6982B3439AD3B ,
     );
     name = "Cocoa plm";
     productInstallPath = "$(HOME)/bin";
     productName = "Cocoa plm";
-    productReference = 0C3540F67C1E9575E213BE0A ;
+    productReference = 56967D946471AF29D7BF99F1 ;
     productType = "com.apple.product-type.application";
   };
 
@@ -6182,15 +6197,15 @@
    projectDirPath = "";
    projectRoot = "";
    targets = (
-    4F678F3B13B9D5EE16489088, 
-    297FE25A71D030B67EB83BFC, 
-    56967D946471AF29D7BF99F1, 
+    8CE0780A2142A6EB7BC4F3C8, 
+    4F5350C12C322B5B664544C1, 
+    AB650B25B4114E93A98F1EBA, 
    );
   };
 
   /*------------------------------------------------------------------ PBXResourcesBuildPhase */
 
-  BA8C592DB97D0DBE54C7ADFC /* Resources */ = {
+  CF9246BB0D40EB4D8027D90F /* Resources */ = {
     isa = PBXResourcesBuildPhase;
     buildActionMask = 2147483647;
     files = (
@@ -6202,14 +6217,15 @@
       3D2760C8BBAFB4ACB29E3446,
       08FC6938F52CB96F7E087941,
       66AEEC73C49038385428EC4C,
-      FDAF6C699B223C61B1B5AB89,
-      3CD70FE748E6982B3439AD3B,
+      0B77BCB3B283AF5BE021448F,
+      050594C7BC3C36E7E8AB9550,
+      A68C18DA59A35C2BFE1CA554,
     );
     runOnlyForDeploymentPostprocessing = 0;
   };
 
   /*------------------------------------------------------------------ PBXSourcesBuildPhase */
-    5D186D28E06FF97135CADE7F /* Sources */ = {
+    97405321542838D77F855226 /* Sources */ = {
       isa = PBXSourcesBuildPhase;
       buildActionMask = 2147483647;
       files = (
@@ -6444,7 +6460,7 @@
       );
       runOnlyForDeploymentPostprocessing = 0;
     };
-    E6D743BF1E848C206E16A1D7 /* Sources */ = {
+    9A4FEAB575962E78E006250D /* Sources */ = {
       isa = PBXSourcesBuildPhase;
       buildActionMask = 2147483647;
       files = (
@@ -6679,7 +6695,7 @@
       );
       runOnlyForDeploymentPostprocessing = 0;
     };
-    140A811D0C45CE03C1C93A28 /* Sources */ = {
+    6F0150C77BDA2EDA01AE484C /* Sources */ = {
       isa = PBXSourcesBuildPhase;
       buildActionMask = 2147483647;
       files = (
@@ -6723,14 +6739,14 @@
 
   /*------------------------------------------------------------------ PBXTargetDependency */
  
-  6281D984952C07998DC54358 = {
+  FDAF6C699B223C61B1B5AB89 = {
     isa = PBXTargetDependency;
-    target = 4F678F3B13B9D5EE16489088;
+    target = 8CE0780A2142A6EB7BC4F3C8;
   };
 
-  CF9246BB0D40EB4D8027D90F = {
+  3CD70FE748E6982B3439AD3B = {
     isa = PBXTargetDependency;
-    target = 297FE25A71D030B67EB83BFC;
+    target = 4F5350C12C322B5B664544C1;
   };
 
   /*------------------------------------------------------------------ PBXVariantGroup */
@@ -6779,7 +6795,7 @@
     name = Default;
   };
 
-    8CE0780A2142A6EB7BC4F3C8 /* Default */ = {
+    72E08B4C5312DCDAFDF6EF36 /* Default */ = {
       isa = XCBuildConfiguration;
       buildSettings = {
       GCC_OPTIMIZATION_LEVEL = 2 ;
@@ -6790,7 +6806,7 @@
     name = Default;
   };
 
-    4F5350C12C322B5B664544C1 /* Default */ = {
+    0C3540F67C1E9575E213BE0A /* Default */ = {
       isa = XCBuildConfiguration;
       buildSettings = {
       GCC_OPTIMIZATION_LEVEL = 0 ;
@@ -6802,7 +6818,7 @@
     name = Default;
   };
 
-    AB650B25B4114E93A98F1EBA /* Default */ = {
+    BA8C592DB97D0DBE54C7ADFC /* Default */ = {
       isa = XCBuildConfiguration;
       buildSettings = {
       GCC_OPTIMIZATION_LEVEL = 0 ;
@@ -6824,28 +6840,28 @@
       defaultConfigurationName = Default;
     };
 
-    97405321542838D77F855226 /* Default */ = {
+    C3B01637C607CE05F52A2FED /* Default */ = {
       isa = XCConfigurationList;
       buildConfigurations = (
-        8CE0780A2142A6EB7BC4F3C8 /* Default */,
+        72E08B4C5312DCDAFDF6EF36 /* Default */,
       );
       defaultConfigurationIsVisible = 0;
       defaultConfigurationName = Default;
     };
 
-    9A4FEAB575962E78E006250D /* Default */ = {
+    884A62116BE975A9BB8257E3 /* Default */ = {
       isa = XCConfigurationList;
       buildConfigurations = (
-        4F5350C12C322B5B664544C1 /* Default */,
+        0C3540F67C1E9575E213BE0A /* Default */,
       );
       defaultConfigurationIsVisible = 0;
       defaultConfigurationName = Default;
     };
 
-    6F0150C77BDA2EDA01AE484C /* Default */ = {
+    0048B187F7182F1B9CE7A6A7 /* Default */ = {
       isa = XCConfigurationList;
       buildConfigurations = (
-        AB650B25B4114E93A98F1EBA /* Default */,
+        BA8C592DB97D0DBE54C7ADFC /* Default */,
       );
       defaultConfigurationIsVisible = 0;
       defaultConfigurationName = Default;

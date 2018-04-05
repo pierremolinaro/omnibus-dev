@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 filewrapper embeddedSampleCode in "../embedded-sources/sample-code" {
-  "plm"
+  "plm", "plm-import"
 }{
 }{
 }

@@ -3169,10 +3169,10 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_import_5F_file_i0_ (GALGAS_lstrin
   GALGAS_lstring var_importedFile_622 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("syntax-grammar.galgas", 11)) ;
   ioArgument_ioImportedFileList.addAssign_operation (var_importedFile_622  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 12)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_622.getter_string (HERE).getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 13)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_622.getter_string (HERE).getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 13)).objectCompare (GALGAS_string ("plm-import"))).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (var_importedFile_622.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 14)), GALGAS_string ("the pah extension should be .plm"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 14)) ;
+    inCompiler->emitSemanticError (var_importedFile_622.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 14)), GALGAS_string ("the pah extension should be .plm-import"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 14)) ;
   }
 }
 
@@ -3200,14 +3200,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_ (GALGAS_ast &
       nt_declaration_ (ioArgument_ioAST, inCompiler) ;
     } break ;
     case 3: {
-      GALGAS_functionDeclarationListAST var_standAloneFunctionDeclarationListAST_1223 = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 31)) ;
-      nt_function_ (ioArgument_ioAST, var_standAloneFunctionDeclarationListAST_1223, inCompiler) ;
-      ioArgument_ioAST.mProperty_mStandAloneFunctionDeclarationListAST.plusAssign_operation(var_standAloneFunctionDeclarationListAST_1223, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 33)) ;
+      GALGAS_functionDeclarationListAST var_standAloneFunctionDeclarationListAST_1237 = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 31)) ;
+      nt_function_ (ioArgument_ioAST, var_standAloneFunctionDeclarationListAST_1237, inCompiler) ;
+      ioArgument_ioAST.mProperty_mStandAloneFunctionDeclarationListAST.plusAssign_operation(var_standAloneFunctionDeclarationListAST_1237, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 33)) ;
     } break ;
     case 4: {
-      GALGAS_systemRoutineDeclarationListAST var_standAloneSystemRoutineListAST_1462 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 35)) ;
-      nt_system_5F_routine_ (ioArgument_ioAST, var_standAloneSystemRoutineListAST_1462, inCompiler) ;
-      ioArgument_ioAST.mProperty_mStandAloneSystemRoutineListAST.plusAssign_operation(var_standAloneSystemRoutineListAST_1462, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 37)) ;
+      GALGAS_systemRoutineDeclarationListAST var_standAloneSystemRoutineListAST_1476 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 35)) ;
+      nt_system_5F_routine_ (ioArgument_ioAST, var_standAloneSystemRoutineListAST_1476, inCompiler) ;
+      ioArgument_ioAST.mProperty_mStandAloneSystemRoutineListAST.plusAssign_operation(var_standAloneSystemRoutineListAST_1476, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 37)) ;
     } break ;
     case 5: {
       nt_import_5F_file_ (outArgument_outImportedFileList, inCompiler) ;

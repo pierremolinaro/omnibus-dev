@@ -1,6 +1,6 @@
 target "teensy-3-1/unprivileged"
 
-import "carte-tp-teensy-3-1.plm"
+import "carte-tp-teensy-3-1.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // USB DEVICE DRIVER

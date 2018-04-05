@@ -8,6 +8,14 @@ grammar plm_target_grammar
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+case . "plm-import"
+message "an imported text file with the .plm-import extension"
+grammar plm_target_grammar
+?sourceFilePath:@lstring unused inSourceFile {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 case . "plm"
 message "a source text file with the .plm extension"
 grammar plm_grammar
@@ -286,7 +294,7 @@ private proc recursiveImportFileSystemTargetFiles
     if [absolutePath fileExists] then
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
-        if [absolutePath pathExtension] == "plm" then
+        if [absolutePath pathExtension] == "plm-import" then
           grammar plm_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
@@ -309,7 +317,7 @@ private proc recursiveImportFileSystemTargetFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .plm or .plm-target)"
+          error path : "invalid extension (should be .plm-import or .plm-target)"
         end
       end
     else
@@ -363,7 +371,7 @@ private proc recursiveImportFiles
     if [absolutePath fileExists] then # Exists in file system ?
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
-        if [absolutePath pathExtension] == "plm" then
+        if [absolutePath pathExtension] == "plm-import" then
           grammar plm_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
@@ -386,7 +394,7 @@ private proc recursiveImportFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .plm or .plm-target)"
+          error path : "invalid extension (should be .plm-import or .plm-target)"
         end
       end
     else
@@ -395,7 +403,7 @@ private proc recursiveImportFiles
         let embeddedPath = ":" + path
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
           ioImportedFileAbsolutePathSet += !embeddedPath
-          if [path pathExtension] == "plm" then
+          if [path pathExtension] == "plm-import" then
             grammar plm_grammar on ([fw textFileContentsAtPath !path.string], path.string)
               !?ioAST
               ?importClauseList:let importedFileList
@@ -418,7 +426,7 @@ private proc recursiveImportFiles
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
           else
-            error path : "invalid extension (should be .plm or .plm-target)"
+            error path : "invalid extension (should be .plm-import or .plm-target)"
           end
         end
       else

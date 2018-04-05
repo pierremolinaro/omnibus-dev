@@ -72,15 +72,15 @@ LL_FILES:
   "../../ll-configuration-on-boot.ll"
 
 PLM_FILES:
-  "../plm-registers-mk66fx1m0.plm"
-  "../plm-teensy-3-6-nvic-interrupts.plm"
-  "../driver-root-teensy-3-6.plm"
-  "../plm-teensy-3-6-time.plm"
-  "../plm-teensy-3-6-xtr32.plm"
-  "../driver-digital-teensy-3-6.plm"
-  "../plm-teensy-3-6-lcd.plm"
-  "../../plm-semaphore.plm"
-  "../../heap.plm"
+  "../plm-registers-mk66fx1m0.plm-import"
+  "../plm-teensy-3-6-nvic-interrupts.plm-import"
+  "../driver-root-teensy-3-6.plm-import"
+  "../plm-teensy-3-6-time.plm-import"
+  "../plm-teensy-3-6-xtr32.plm-import"
+  "../driver-digital-teensy-3-6.plm-import"
+  "../plm-teensy-3-6-lcd.plm-import"
+  "../../plm-semaphore.plm-import"
+  "../../heap.plm-import"
 
 INTERRUPTS:
   NMI -> 2

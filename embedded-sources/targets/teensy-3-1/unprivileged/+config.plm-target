@@ -72,15 +72,15 @@ LL_FILES:
   "../../ll-configuration-on-boot.ll"
 
 PLM_FILES:
-  "../plm-registers-mk20dx256.plm"
-  "../driver-root-teensy-3-1.plm"
-  "../plm-teensy-3-1-nvic-interrupts.plm"
-  "../plm-teensy-3-1-xtr.plm"
-  "../plm-teensy-3-1-time.plm"
-  "../driver-digital-teensy-3-1.plm"
-  "../plm-teensy-3-1-lcd.plm"
-  "../../plm-semaphore.plm"
-  "../../heap.plm"
+  "../plm-registers-mk20dx256.plm-import"
+  "../driver-root-teensy-3-1.plm-import"
+  "../plm-teensy-3-1-nvic-interrupts.plm-import"
+  "../plm-teensy-3-1-xtr.plm-import"
+  "../plm-teensy-3-1-time.plm-import"
+  "../driver-digital-teensy-3-1.plm-import"
+  "../plm-teensy-3-1-lcd.plm-import"
+  "../../plm-semaphore.plm-import"
+  "../../heap.plm-import"
 
 INTERRUPTS:
   NMI -> 2
