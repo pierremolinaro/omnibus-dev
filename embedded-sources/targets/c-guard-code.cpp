@@ -44,12 +44,11 @@ void kernel_waitForGuardChange (void) {
   if (gRunningTaskControlBlockPtr->mUserResult) { // GUARD_DID_CHANGE
     gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }else{ // GUARD_EVALUATING_OR_OUTSIDE
-    gRunningTaskControlBlockPtr->mUserResult =
-      deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)
-    ||
-     (gRunningTaskControlBlockPtr->mGuardDescriptor.mCount > 0)
-    ;
-    if (gRunningTaskControlBlockPtr->mUserResult) {
+    bool hasGuards = deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;
+    if (! hasGuards) {
+      hasGuards = gRunningTaskControlBlockPtr->mGuardDescriptor.mCount > 0 ;
+    }
+    if (hasGuards) {
       gRunningTaskControlBlockPtr->mGuardState = GUARD_WAITING_FOR_CHANGE ;
       kernel_makeNoTaskRunning () ;
     }

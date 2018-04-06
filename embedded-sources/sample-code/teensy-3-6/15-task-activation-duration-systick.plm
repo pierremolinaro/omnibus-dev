@@ -25,7 +25,7 @@ sync s = $semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task TâcheA @stacksize 512 @activate {
+task TâcheA > TâcheB @stacksize 512 @activate {
 
   on @setup first {
     s.wait ()
