@@ -8533,12 +8533,11 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "  if (gRunningTaskControlBlockPtr->mUserResult) { // GUARD_DID_CHANGE\n"
   "    gRunningTaskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "  }else{ // GUARD_EVALUATING_OR_OUTSIDE\n"
-  "    gRunningTaskControlBlockPtr->mUserResult =\n"
-  "      deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr)\n"
-  "    ||\n"
-  "     (gRunningTaskControlBlockPtr->mGuardDescriptor.mCount > 0)\n"
-  "    ;\n"
-  "    if (gRunningTaskControlBlockPtr->mUserResult) {\n"
+  "    bool hasGuards = deadlinelist_containsTask (gDeadlineWaitingInGuardTaskList, gRunningTaskControlBlockPtr) ;\n"
+  "    if (! hasGuards) {\n"
+  "      hasGuards = gRunningTaskControlBlockPtr->mGuardDescriptor.mCount > 0 ;\n"
+  "    }\n"
+  "    if (hasGuards) {\n"
   "      gRunningTaskControlBlockPtr->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
   "      kernel_makeNoTaskRunning () ;\n"
   "    }\n"
@@ -8608,7 +8607,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "c-guard-code.cpp",
   "cpp",
   true, // Text file
-  5279, // Text length
+  5247, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
