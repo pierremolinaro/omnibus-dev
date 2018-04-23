@@ -442,6 +442,17 @@
   \draw[->] (p0-15) -- (p0-16) ;
 \end{tikzpicture}
 
+\ruleSubsection{plm\_syntax}{declaration-option}{9}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {option}; & \node (p0-3) [terminal] {"string"}; & \node (p0-4) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw[->] (p0-2) -- (p0-3) ;
+  \draw[->] (p0-3) -- (p0-4) ;
+\end{tikzpicture}
+
 \ruleSubsection{plm\_syntax}{task-declaration}{44}
 
 \begin{tikzpicture}

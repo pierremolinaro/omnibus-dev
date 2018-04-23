@@ -2433,7 +2433,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    digital.toggle (!port:LED_L3)\n"
   "  }\n"
   "  \n"
-  "  interrupt section DMAChannel_0_16_TransferComplete {\n"
+  "  interrupt section DMAChannel0TransferComplete {\n"
   "  //--- Acquitter l'interruption\n"
   "    #DMA:CINT = 0\n"
   "  //--- Toggle LED_L2\n"
@@ -2466,8 +2466,8 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "//--- Unmask PIT0 interrupt\n"
   "  enable (!interrupt:.PITChannel3)\n"
   "\n"
-  "//--- Unmask DMAChannel_0_16_TransferComplete interrupt\n"
-  "  enable (!interrupt:.DMAChannel_0_16_TransferComplete)\n"
+  "//--- Unmask DMAChannel0TransferComplete interrupt\n"
+  "  enable (!interrupt:.DMAChannel0TransferComplete)\n"
   "\n"
   "//--- Enable PIT module\n"
   "  #PIT:MCR = 0\n"
@@ -2569,7 +2569,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7518, // Text length
+  7503, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
@@ -4019,7 +4019,7 @@ const char * gWrapperFileContent_30_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "task T\xC3""\xA2""cheA @stacksize 512 @activate {\n"
+  "task T\xC3""\xA2""cheA > T\xC3""\xA2""cheB @stacksize 512 @activate {\n"
   "\n"
   "  on @setup first {\n"
   "    s.wait ()\n"
@@ -4046,7 +4046,7 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
   "15-task-activation-duration-systick.plm",
   "plm",
   true, // Text file
-  1307, // Text length
+  1316, // Text length
   gWrapperFileContent_30_embeddedSampleCode
 ) ;
 
