@@ -64,7 +64,7 @@ driver pit > root {
     digital.toggle (!port:LED_L3)
   }
   
-  interrupt section DMAChannel_0_16_TransferComplete {
+  interrupt section DMAChannel0TransferComplete {
   //--- Acquitter l'interruption
     #DMA:CINT = 0
   //--- Toggle LED_L2
@@ -97,8 +97,8 @@ system section initializeDMA (?!pattern $patternArray) {
 //--- Unmask PIT0 interrupt
   enable (!interrupt:.PITChannel3)
 
-//--- Unmask DMAChannel_0_16_TransferComplete interrupt
-  enable (!interrupt:.DMAChannel_0_16_TransferComplete)
+//--- Unmask DMAChannel0TransferComplete interrupt
+  enable (!interrupt:.DMAChannel0TransferComplete)
 
 //--- Enable PIT module
   #PIT:MCR = 0

@@ -23184,22 +23184,22 @@ const char * gWrapperFileContent_99_targetTemplates = "@------------------------
   "  .word !ISR!PendSV @ 14\n"
   "  .word !ISR!systick @ 15\n"
   "@--- Non-Core Vectors\n"
-  "  .word !ISR!DMAChannel_0_16_TransferComplete @ 16\n"
-  "  .word !ISR!DMAChannel_1_17_TransferComplete @ 17\n"
-  "  .word !ISR!DMAChannel_2_18_TransferComplete @ 18\n"
-  "  .word !ISR!DMAChannel_3_19_TransferComplete @ 19\n"
-  "  .word !ISR!DMAChannel_4_20_TransferComplete @ 20\n"
-  "  .word !ISR!DMAChannel_5_21_TransferComplete @ 21\n"
-  "  .word !ISR!DMAChannel_6_22_TransferComplete @ 22\n"
-  "  .word !ISR!DMAChannel_7_23_TransferComplete @ 23\n"
-  "  .word !ISR!DMAChannel_8_24_TransferComplete @ 24\n"
-  "  .word !ISR!DMAChannel_9_25_TransferComplete @ 25\n"
-  "  .word !ISR!DMAChannel_10_26_TransferComplete @ 26\n"
-  "  .word !ISR!DMAChannel_11_27_TransferComplete @ 27\n"
-  "  .word !ISR!DMAChannel_12_28_TransferComplete @ 28\n"
-  "  .word !ISR!DMAChannel_13_29_TransferComplete @ 29\n"
-  "  .word !ISR!DMAChannel_14_30_TransferComplete @ 30\n"
-  "  .word !ISR!DMAChannel_15_31_TransferComplete @ 31\n"
+  "  .word !ISR!DMAChannel0TransferComplete @ 16\n"
+  "  .word !ISR!DMAChannel1TransferComplete @ 17\n"
+  "  .word !ISR!DMAChannel2TransferComplete @ 18\n"
+  "  .word !ISR!DMAChannel3TransferComplete @ 19\n"
+  "  .word !ISR!DMAChannel4TransferComplete @ 20\n"
+  "  .word !ISR!DMAChannel5TransferComplete @ 21\n"
+  "  .word !ISR!DMAChannel6TransferComplete @ 22\n"
+  "  .word !ISR!DMAChannel7TransferComplete @ 23\n"
+  "  .word !ISR!DMAChannel8TransferComplete @ 24\n"
+  "  .word !ISR!DMAChannel9TransferComplete @ 25\n"
+  "  .word !ISR!DMAChannel10TransferComplete @ 26\n"
+  "  .word !ISR!DMAChannel11TransferComplete @ 27\n"
+  "  .word !ISR!DMAChannel12TransferComplete @ 28\n"
+  "  .word !ISR!DMAChannel13TransferComplete @ 29\n"
+  "  .word !ISR!DMAChannel14TransferComplete @ 30\n"
+  "  .word !ISR!DMAChannel15TransferComplete @ 31\n"
   "  .word !ISR!DMAError @ 32\n"
   "  .word !ISR!MCM @ 33\n"
   "  .word !ISR!FlashMemoryCommandComplete @ 34\n"
@@ -23314,7 +23314,7 @@ const cRegularFileWrapper gWrapperFile_99_targetTemplates (
   "s-interrupt-vectors.s",
   "s",
   true, // Text file
-  5107, // Text length
+  5027, // Text length
   gWrapperFileContent_99_targetTemplates
 ) ;
 
@@ -23900,22 +23900,22 @@ const char * gWrapperFileContent_112_targetTemplates = "PYTHON_UTILITIES:\n"
   "  DebugMonitor -> 12\n"
   "  PendSV -> 14\n"
   "  systick -> 15\n"
-  "  DMAChannel_0_16_TransferComplete -> 16\n"
-  "  DMAChannel_1_17_TransferComplete -> 17\n"
-  "  DMAChannel_2_18_TransferComplete -> 18\n"
-  "  DMAChannel_3_19_TransferComplete -> 19\n"
-  "  DMAChannel_4_20_TransferComplete -> 20\n"
-  "  DMAChannel_5_21_TransferComplete -> 21\n"
-  "  DMAChannel_6_22_TransferComplete -> 22\n"
-  "  DMAChannel_7_23_TransferComplete -> 23\n"
-  "  DMAChannel_8_24_TransferComplete -> 24\n"
-  "  DMAChannel_9_25_TransferComplete -> 25\n"
-  "  DMAChannel_10_26_TransferComplete -> 26\n"
-  "  DMAChannel_11_27_TransferComplete -> 27\n"
-  "  DMAChannel_12_28_TransferComplete -> 28\n"
-  "  DMAChannel_13_29_TransferComplete -> 29\n"
-  "  DMAChannel_14_30_TransferComplete -> 30\n"
-  "  DMAChannel_15_31_TransferComplete -> 31\n"
+  "  DMAChannel0TransferComplete -> 16\n"
+  "  DMAChannel1TransferComplete -> 17\n"
+  "  DMAChannel2TransferComplete -> 18\n"
+  "  DMAChannel3TransferComplete -> 19\n"
+  "  DMAChannel4TransferComplete -> 20\n"
+  "  DMAChannel5TransferComplete -> 21\n"
+  "  DMAChannel6TransferComplete -> 22\n"
+  "  DMAChannel7TransferComplete -> 23\n"
+  "  DMAChannel8TransferComplete -> 24\n"
+  "  DMAChannel9TransferComplete -> 25\n"
+  "  DMAChannel10TransferComplete -> 26\n"
+  "  DMAChannel11TransferComplete -> 27\n"
+  "  DMAChannel12TransferComplete -> 28\n"
+  "  DMAChannel13TransferComplete -> 29\n"
+  "  DMAChannel14TransferComplete -> 30\n"
+  "  DMAChannel15TransferComplete -> 31\n"
   "  DMAError -> 32\n"
   "  MCM -> 33\n"
   "  FlashMemoryCommandComplete -> 34\n"
@@ -24001,7 +24001,7 @@ const cRegularFileWrapper gWrapperFile_112_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  5090, // Text length
+  5010, // Text length
   gWrapperFileContent_112_targetTemplates
 ) ;
 
@@ -24122,22 +24122,22 @@ const char * gWrapperFileContent_113_targetTemplates = "PYTHON_UTILITIES:\n"
   "  DebugMonitor -> 12\n"
   "  PendSV -> 14\n"
   "  systick -> 15\n"
-  "  DMAChannel_0_16_TransferComplete -> 16\n"
-  "  DMAChannel_1_17_TransferComplete -> 17\n"
-  "  DMAChannel_2_18_TransferComplete -> 18\n"
-  "  DMAChannel_3_19_TransferComplete -> 19\n"
-  "  DMAChannel_4_20_TransferComplete -> 20\n"
-  "  DMAChannel_5_21_TransferComplete -> 21\n"
-  "  DMAChannel_6_22_TransferComplete -> 22\n"
-  "  DMAChannel_7_23_TransferComplete -> 23\n"
-  "  DMAChannel_8_24_TransferComplete -> 24\n"
-  "  DMAChannel_9_25_TransferComplete -> 25\n"
-  "  DMAChannel_10_26_TransferComplete -> 26\n"
-  "  DMAChannel_11_27_TransferComplete -> 27\n"
-  "  DMAChannel_12_28_TransferComplete -> 28\n"
-  "  DMAChannel_13_29_TransferComplete -> 29\n"
-  "  DMAChannel_14_30_TransferComplete -> 30\n"
-  "  DMAChannel_15_31_TransferComplete -> 31\n"
+  "  DMAChannel0TransferComplete -> 16\n"
+  "  DMAChannel1TransferComplete -> 17\n"
+  "  DMAChannel2TransferComplete -> 18\n"
+  "  DMAChannel3TransferComplete -> 19\n"
+  "  DMAChannel4TransferComplete -> 20\n"
+  "  DMAChannel5TransferComplete -> 21\n"
+  "  DMAChannel6TransferComplete -> 22\n"
+  "  DMAChannel7TransferComplete -> 23\n"
+  "  DMAChannel8TransferComplete -> 24\n"
+  "  DMAChannel9TransferComplete -> 25\n"
+  "  DMAChannel10TransferComplete -> 26\n"
+  "  DMAChannel11TransferComplete -> 27\n"
+  "  DMAChannel12TransferComplete -> 28\n"
+  "  DMAChannel13TransferComplete -> 29\n"
+  "  DMAChannel14TransferComplete -> 30\n"
+  "  DMAChannel15TransferComplete -> 31\n"
   "  DMAError -> 32\n"
   "  MCM -> 33\n"
   "  FlashMemoryCommandComplete -> 34\n"
@@ -24223,7 +24223,7 @@ const cRegularFileWrapper gWrapperFile_113_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  5090, // Text length
+  5010, // Text length
   gWrapperFileContent_113_targetTemplates
 ) ;
 
