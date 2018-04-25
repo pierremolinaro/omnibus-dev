@@ -13,6 +13,50 @@ def cppComment () :
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+def writeBitbanding (stringArray) :
+  stringArray[0] += cppComment ()
+  stringArray[0] += "// BITBAND\n"
+  stringArray[0] += cppComment () + "\n"
+  stringArray[0] += "inline void bitband32 (const volatile uint32_t & inRegister, const uint8_t inBit, const bool inValue) {\n"
+  stringArray[0] += "  const uint32_t address = ((uint32_t) &inRegister - 0x40000000) * 32 + ((uint32_t) inBit) * 4 + 0x42000000 ;\n"
+  stringArray[0] += "  volatile uint32_t * ptr = (volatile uint32_t *) address ;\n"
+  stringArray[0] += "  *ptr = (uint32_t) inValue ;\n"
+  stringArray[0] += "}\n\n"
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+def writeInterruptionNumbers (root, stringArray) :
+  stringArray[0] += cppComment ()
+  stringArray[0] += "// INTERRUPTS\n"
+  stringArray[0] += cppComment () + "\n"
+  stringArray[0] += "enum class ISRSlot : uint8_t {\n"
+  interruptDictionary = {}
+  for interrupt in root.iter ('interrupt') :
+    interruptName = interrupt.find ('name').text
+    interruptValue = int (interrupt.find ('value').text)
+    if interruptName in interruptDictionary :
+      if interruptValue != interruptDictionary [interruptName] :
+        print ("Inconsistent interrupt number for " + interruptName)
+    else :
+      interruptDictionary [interruptName] = interruptValue
+  for interruptName in sorted (interruptDictionary.keys ()) :
+    stringArray[0] += "  " + interruptName + " = " + str (interruptDictionary [interruptName]) + ",\n"
+  stringArray[0] += "} ;\n\n"
+  stringArray[0] += cppComment () + "\n"
+  stringArray[0] += "inline void NVIC_ENABLE_IRQ (const ISRSlot inInterrupt) {\n"
+  stringArray[0] += "  const uint32_t it = static_cast <uint32_t> (inInterrupt) ;\n"
+  stringArray[0] += "  *((volatile uint32_t *) (0xE000E100 + 4 * (it >> 5))) = 1U << (it & 31) ;\n"
+  stringArray[0] += "}\n\n"
+  stringArray[0] += cppComment () + "\n"
+  stringArray[0] += "inline void NVIC_DISABLE_IRQ (const ISRSlot inInterrupt) {\n"
+  stringArray[0] += "  const uint32_t it = static_cast <uint32_t> (inInterrupt) ;\n"
+  stringArray[0] += "  *((volatile uint32_t *) (0xE000E180 + 4 * (it >> 5))) = 1U << (it & 31) ;\n"
+  stringArray[0] += "}\n\n"
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 def writeSinglePeripheral (peripheral, stringArray) :
   peripheralName = peripheral.find('name').text
   baseAddress = peripheral.find ('baseAddress').text
@@ -171,6 +215,8 @@ def analyzeSVDfile (svdFile, stringArray) :
         peripheralGroupBaseAddressDictionary [groupName].append (peripheralBaseAddress)
         # print ("  Ok with group named '" + groupName + "', peripheral '" + peripheralName + "'")
   writePeripheralGroups (peripheralGroupDictionary, peripheralGroupNameDictionary, peripheralGroupBaseAddressDictionary, stringArray)
+  writeInterruptionNumbers (root, stringArray)
+  writeBitbanding (stringArray)
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -185,6 +231,7 @@ for root, dirs, files in os.walk (scriptDir) :
       stringArray [0] += cppComment () + "\n"
       stringArray [0] += "#include <stdint.h>\n\n"
       analyzeSVDfile (baseName, stringArray)
+      stringArray[0] += cppComment ()
       f = open (baseName + ".h", "wt")
       f.write (stringArray [0])
       f.close()

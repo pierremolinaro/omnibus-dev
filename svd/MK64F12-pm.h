@@ -1211,8 +1211,14 @@
 //-------------------- Flash Option Register
 #define FTFE_FOPT (* ((const volatile uint8_t *) (0x40020000 + 0x3)))
 
-//-------------------- Flash Common Command Object Registers (idx = 0 ... 11)
-#define FTFE_FCCOB(idx) (* ((volatile uint8_t *) (0x40020000 + 0x4 + 0x1 * (idx))))
+//-------------------- Flash Common Command Object Registers (0 ... 3)
+#define FTFE_FCCOB_0_3 (* ((volatile uint32_t *) (0x40020000 + 0x4)))
+
+//-------------------- Flash Common Command Object Registers (4 ... 7)
+#define FTFE_FCCOB_4_7 (* ((volatile uint32_t *) (0x40020000 + 0x8)))
+
+//-------------------- Flash Common Command Object Registers (8 ... 11)
+#define FTFE_FCCOB_8_11 (* ((volatile uint32_t *) (0x40020000 + 0xC)))
 
 //-------------------- Program Flash Protection Registers (idx = 0 ... 3)
 #define FTFE_FPROT(idx) (* ((volatile uint8_t *) (0x40020000 + 0x10 + 0x1 * (idx))))
@@ -6898,6 +6904,34 @@
 #define CAU_CAU_AESIC_CA8 (* ((volatile uint32_t *) (0xE0081000 + 0xB68)))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral SYST
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- SysTick Control and Status
+#define SYST_CSR (* ((volatile uint32_t *) (0xE000E000 + 0x10)))
+
+  // Boolean field: Enable the Counter
+    static const uint32_t SYST_CSR_ENABLE = 1U << 0 ;
+
+  // Boolean field: Enables SysTick exception request
+    static const uint32_t SYST_CSR_TICKINT = 1U << 1 ;
+
+  // Boolean field: Clock Source Selection
+    static const uint32_t SYST_CSR_CLKSOURCE = 1U << 2 ;
+
+  // Boolean field: Returns 1 if timer counted to 0 since last time this was read
+    static const uint32_t SYST_CSR_COUNTFLAG = 1U << 16 ;
+
+//-------------------- SysTick Reload Value Register
+#define SYST_RVR (* ((volatile uint32_t *) (0xE000E000 + 0x14)))
+
+//-------------------- SysTick Current Value Register
+#define SYST_CVR (* ((volatile uint32_t *) (0xE000E000 + 0x18)))
+
+//-------------------- SysTick Calibration Value Register
+#define SYST_CALIB (* ((const volatile uint32_t *) (0xE000E000 + 0x1C)))
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral group ADC
 //                ADC0 at 0x4003B000
 //                ADC1 at 0x400BB000
@@ -10642,3 +10676,118 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
 #define UART4_TWFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x13)))
 #define UART5_TWFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x13)))
 
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// INTERRUPTS
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum class ISRSlot : uint8_t {
+  ADC0 = 39,
+  ADC1 = 73,
+  CAN0_Bus_Off = 76,
+  CAN0_Error = 77,
+  CAN0_ORed_Message_buffer = 75,
+  CAN0_Rx_Warning = 79,
+  CAN0_Tx_Warning = 78,
+  CAN0_Wake_Up = 80,
+  CMP0 = 40,
+  CMP1 = 41,
+  CMP2 = 70,
+  CMT = 45,
+  DAC0 = 56,
+  DAC1 = 72,
+  DMA0 = 0,
+  DMA1 = 1,
+  DMA10 = 10,
+  DMA11 = 11,
+  DMA12 = 12,
+  DMA13 = 13,
+  DMA14 = 14,
+  DMA15 = 15,
+  DMA2 = 2,
+  DMA3 = 3,
+  DMA4 = 4,
+  DMA5 = 5,
+  DMA6 = 6,
+  DMA7 = 7,
+  DMA8 = 8,
+  DMA9 = 9,
+  DMA_Error = 16,
+  ENET_1588_Timer = 82,
+  ENET_Error = 85,
+  ENET_Receive = 84,
+  ENET_Transmit = 83,
+  FTFE = 18,
+  FTM0 = 42,
+  FTM1 = 43,
+  FTM2 = 44,
+  FTM3 = 71,
+  I2C0 = 24,
+  I2C1 = 25,
+  I2C2 = 74,
+  I2S0_Rx = 29,
+  I2S0_Tx = 28,
+  LLWU = 21,
+  LPTMR0 = 58,
+  LVD_LVW = 20,
+  MCM = 17,
+  PDB0 = 52,
+  PIT0 = 48,
+  PIT1 = 49,
+  PIT2 = 50,
+  PIT3 = 51,
+  PORTA = 59,
+  PORTB = 60,
+  PORTC = 61,
+  PORTD = 62,
+  PORTE = 63,
+  RNG = 23,
+  RTC = 46,
+  RTC_Seconds = 47,
+  Read_Collision = 19,
+  SDHC = 81,
+  SPI0 = 26,
+  SPI1 = 27,
+  SPI2 = 65,
+  UART0_ERR = 32,
+  UART0_LON = 30,
+  UART0_RX_TX = 31,
+  UART1_ERR = 34,
+  UART1_RX_TX = 33,
+  UART2_ERR = 36,
+  UART2_RX_TX = 35,
+  UART3_ERR = 38,
+  UART3_RX_TX = 37,
+  UART4_ERR = 67,
+  UART4_RX_TX = 66,
+  UART5_ERR = 69,
+  UART5_RX_TX = 68,
+  USB0 = 53,
+  USBDCD = 54,
+  WDOG_EWM = 22,
+} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+inline void NVIC_ENABLE_IRQ (const ISRSlot inInterrupt) {
+  const uint32_t it = static_cast <uint32_t> (inInterrupt) ;
+  *((volatile uint32_t *) (0xE000E100 + 4 * (it >> 5))) = 1U << (it & 31) ;
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+inline void NVIC_DISABLE_IRQ (const ISRSlot inInterrupt) {
+  const uint32_t it = static_cast <uint32_t> (inInterrupt) ;
+  *((volatile uint32_t *) (0xE000E180 + 4 * (it >> 5))) = 1U << (it & 31) ;
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// BITBAND
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+inline void bitband32 (const volatile uint32_t & inRegister, const uint8_t inBit, const bool inValue) {
+  const uint32_t address = ((uint32_t) &inRegister - 0x40000000) * 32 + ((uint32_t) inBit) * 4 + 0x42000000 ;
+  volatile uint32_t * ptr = (volatile uint32_t *) address ;
+  *ptr = (uint32_t) inValue ;
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
