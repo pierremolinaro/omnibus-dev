@@ -38838,9 +38838,9 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>8</dim>
           <dimIncrement>0x8</dimIncrement>
-          <dimIndex>0,1</dimIndex>
+          <dimIndex>0,1,2,3,4,5,6,7</dimIndex>
           <name>C%sSC</name>
           <description>Channel (n) Status And Control</description>
           <addressOffset>0xC</addressOffset>
@@ -38937,9 +38937,9 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>8</dim>
           <dimIncrement>0x8</dimIncrement>
-          <dimIndex>0,1</dimIndex>
+          <dimIndex>0,1,2,3,4,5,6,7</dimIndex>
           <name>C%sV</name>
           <description>Channel (n) Value</description>
           <addressOffset>0x10</addressOffset>
@@ -42427,9 +42427,9 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>8</dim>
           <dimIncrement>0x8</dimIncrement>
-          <dimIndex>0,1</dimIndex>
+          <dimIndex>0,1,2,3,4,5,6,7</dimIndex>
           <name>C%sSC</name>
           <description>Channel (n) Status And Control</description>
           <addressOffset>0xC</addressOffset>
@@ -42526,9 +42526,9 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>8</dim>
           <dimIncrement>0x8</dimIncrement>
-          <dimIndex>0,1</dimIndex>
+          <dimIndex>0,1,2,3,4,5,6,7</dimIndex>
           <name>C%sV</name>
           <description>Channel (n) Value</description>
           <addressOffset>0x10</addressOffset>

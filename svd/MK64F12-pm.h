@@ -75,2570 +75,6 @@
 #define FTFE_FlashConfig_FDPROT (* ((const volatile uint8_t *) (0x400 + 0xF)))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral AIPS0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Master Privilege Register A
-#define AIPS0_MPRA (* ((volatile uint32_t *) (0x40000000 + 0)))
-
-  // Boolean field: Master 5 Privilege Level
-    static const uint32_t AIPS0_MPRA_MPL5 = 1U << 8 ;
-
-  // Boolean field: Master 5 Trusted For Writes
-    static const uint32_t AIPS0_MPRA_MTW5 = 1U << 9 ;
-
-  // Boolean field: Master 5 Trusted For Read
-    static const uint32_t AIPS0_MPRA_MTR5 = 1U << 10 ;
-
-  // Boolean field: Master 4 Privilege Level
-    static const uint32_t AIPS0_MPRA_MPL4 = 1U << 12 ;
-
-  // Boolean field: Master 4 Trusted For Writes
-    static const uint32_t AIPS0_MPRA_MTW4 = 1U << 13 ;
-
-  // Boolean field: Master 4 Trusted For Read
-    static const uint32_t AIPS0_MPRA_MTR4 = 1U << 14 ;
-
-  // Boolean field: Master 3 Privilege Level
-    static const uint32_t AIPS0_MPRA_MPL3 = 1U << 16 ;
-
-  // Boolean field: Master 3 Trusted For Writes
-    static const uint32_t AIPS0_MPRA_MTW3 = 1U << 17 ;
-
-  // Boolean field: Master 3 Trusted For Read
-    static const uint32_t AIPS0_MPRA_MTR3 = 1U << 18 ;
-
-  // Boolean field: Master 2 Privilege Level
-    static const uint32_t AIPS0_MPRA_MPL2 = 1U << 20 ;
-
-  // Boolean field: Master 2 Trusted For Writes
-    static const uint32_t AIPS0_MPRA_MTW2 = 1U << 21 ;
-
-  // Boolean field: Master 2 Trusted For Read
-    static const uint32_t AIPS0_MPRA_MTR2 = 1U << 22 ;
-
-  // Boolean field: Master 1 Privilege Level
-    static const uint32_t AIPS0_MPRA_MPL1 = 1U << 24 ;
-
-  // Boolean field: Master 1 Trusted for Writes
-    static const uint32_t AIPS0_MPRA_MTW1 = 1U << 25 ;
-
-  // Boolean field: Master 1 Trusted for Read
-    static const uint32_t AIPS0_MPRA_MTR1 = 1U << 26 ;
-
-  // Boolean field: Master 0 Privilege Level
-    static const uint32_t AIPS0_MPRA_MPL0 = 1U << 28 ;
-
-  // Boolean field: Master 0 Trusted For Writes
-    static const uint32_t AIPS0_MPRA_MTW0 = 1U << 29 ;
-
-  // Boolean field: Master 0 Trusted For Read
-    static const uint32_t AIPS0_MPRA_MTR0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRA (* ((volatile uint32_t *) (0x40000000 + 0x20)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRA_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRA_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRA_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRB (* ((volatile uint32_t *) (0x40000000 + 0x24)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRB_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRB_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRB_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRC (* ((volatile uint32_t *) (0x40000000 + 0x28)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRC_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRC_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRC_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRD (* ((volatile uint32_t *) (0x40000000 + 0x2C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRD_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRD_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRD_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRE (* ((volatile uint32_t *) (0x40000000 + 0x40)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRE_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRE_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRE_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRF (* ((volatile uint32_t *) (0x40000000 + 0x44)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRF_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRF_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRF_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRG (* ((volatile uint32_t *) (0x40000000 + 0x48)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRG_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRG_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRG_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRH (* ((volatile uint32_t *) (0x40000000 + 0x4C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRH_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRH_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRH_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRI (* ((volatile uint32_t *) (0x40000000 + 0x50)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRI_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRI_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRI_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRJ (* ((volatile uint32_t *) (0x40000000 + 0x54)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRJ_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRJ_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRJ_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRK (* ((volatile uint32_t *) (0x40000000 + 0x58)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRK_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRK_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRK_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRL (* ((volatile uint32_t *) (0x40000000 + 0x5C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRL_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRL_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRL_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRM (* ((volatile uint32_t *) (0x40000000 + 0x60)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRM_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRM_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRM_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRN (* ((volatile uint32_t *) (0x40000000 + 0x64)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRN_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRN_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRN_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRO (* ((volatile uint32_t *) (0x40000000 + 0x68)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRO_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRO_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRO_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRP (* ((volatile uint32_t *) (0x40000000 + 0x6C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRP_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRP_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRP_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS0_PACRU (* ((volatile uint32_t *) (0x40000000 + 0x80)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRU_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRU_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRU_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS0_PACRU_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS0_PACRU_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS0_PACRU_SP0 = 1U << 30 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral AIPS1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Master Privilege Register A
-#define AIPS1_MPRA (* ((volatile uint32_t *) (0x40080000 + 0)))
-
-  // Boolean field: Master 5 Privilege Level
-    static const uint32_t AIPS1_MPRA_MPL5 = 1U << 8 ;
-
-  // Boolean field: Master 5 Trusted For Writes
-    static const uint32_t AIPS1_MPRA_MTW5 = 1U << 9 ;
-
-  // Boolean field: Master 5 Trusted For Read
-    static const uint32_t AIPS1_MPRA_MTR5 = 1U << 10 ;
-
-  // Boolean field: Master 4 Privilege Level
-    static const uint32_t AIPS1_MPRA_MPL4 = 1U << 12 ;
-
-  // Boolean field: Master 4 Trusted For Writes
-    static const uint32_t AIPS1_MPRA_MTW4 = 1U << 13 ;
-
-  // Boolean field: Master 4 Trusted For Read
-    static const uint32_t AIPS1_MPRA_MTR4 = 1U << 14 ;
-
-  // Boolean field: Master 3 Privilege Level
-    static const uint32_t AIPS1_MPRA_MPL3 = 1U << 16 ;
-
-  // Boolean field: Master 3 Trusted For Writes
-    static const uint32_t AIPS1_MPRA_MTW3 = 1U << 17 ;
-
-  // Boolean field: Master 3 Trusted For Read
-    static const uint32_t AIPS1_MPRA_MTR3 = 1U << 18 ;
-
-  // Boolean field: Master 2 Privilege Level
-    static const uint32_t AIPS1_MPRA_MPL2 = 1U << 20 ;
-
-  // Boolean field: Master 2 Trusted For Writes
-    static const uint32_t AIPS1_MPRA_MTW2 = 1U << 21 ;
-
-  // Boolean field: Master 2 Trusted For Read
-    static const uint32_t AIPS1_MPRA_MTR2 = 1U << 22 ;
-
-  // Boolean field: Master 1 Privilege Level
-    static const uint32_t AIPS1_MPRA_MPL1 = 1U << 24 ;
-
-  // Boolean field: Master 1 Trusted for Writes
-    static const uint32_t AIPS1_MPRA_MTW1 = 1U << 25 ;
-
-  // Boolean field: Master 1 Trusted for Read
-    static const uint32_t AIPS1_MPRA_MTR1 = 1U << 26 ;
-
-  // Boolean field: Master 0 Privilege Level
-    static const uint32_t AIPS1_MPRA_MPL0 = 1U << 28 ;
-
-  // Boolean field: Master 0 Trusted For Writes
-    static const uint32_t AIPS1_MPRA_MTW0 = 1U << 29 ;
-
-  // Boolean field: Master 0 Trusted For Read
-    static const uint32_t AIPS1_MPRA_MTR0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRA (* ((volatile uint32_t *) (0x40080000 + 0x20)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRA_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRA_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRA_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRB (* ((volatile uint32_t *) (0x40080000 + 0x24)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRB_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRB_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRB_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRC (* ((volatile uint32_t *) (0x40080000 + 0x28)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRC_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRC_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRC_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRD (* ((volatile uint32_t *) (0x40080000 + 0x2C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRD_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRD_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRD_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRE (* ((volatile uint32_t *) (0x40080000 + 0x40)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRE_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRE_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRE_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRF (* ((volatile uint32_t *) (0x40080000 + 0x44)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRF_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRF_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRF_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRG (* ((volatile uint32_t *) (0x40080000 + 0x48)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRG_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRG_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRG_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRH (* ((volatile uint32_t *) (0x40080000 + 0x4C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRH_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRH_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRH_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRI (* ((volatile uint32_t *) (0x40080000 + 0x50)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRI_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRI_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRI_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRJ (* ((volatile uint32_t *) (0x40080000 + 0x54)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRJ_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRJ_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRJ_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRK (* ((volatile uint32_t *) (0x40080000 + 0x58)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRK_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRK_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRK_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRL (* ((volatile uint32_t *) (0x40080000 + 0x5C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRL_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRL_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRL_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRM (* ((volatile uint32_t *) (0x40080000 + 0x60)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRM_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRM_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRM_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRN (* ((volatile uint32_t *) (0x40080000 + 0x64)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRN_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRN_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRN_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRO (* ((volatile uint32_t *) (0x40080000 + 0x68)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRO_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRO_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRO_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRP (* ((volatile uint32_t *) (0x40080000 + 0x6C)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP7 = 1U << 0 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP7 = 1U << 1 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP7 = 1U << 2 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP6 = 1U << 4 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP6 = 1U << 5 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP6 = 1U << 6 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP5 = 1U << 8 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP5 = 1U << 9 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP5 = 1U << 10 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP4 = 1U << 12 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP4 = 1U << 13 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP4 = 1U << 14 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP3 = 1U << 16 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP3 = 1U << 17 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP3 = 1U << 18 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP2 = 1U << 20 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP2 = 1U << 21 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP2 = 1U << 22 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRP_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRP_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRP_SP0 = 1U << 30 ;
-
-//-------------------- Peripheral Access Control Register
-#define AIPS1_PACRU (* ((volatile uint32_t *) (0x40080000 + 0x80)))
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRU_TP1 = 1U << 24 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRU_WP1 = 1U << 25 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRU_SP1 = 1U << 26 ;
-
-  // Boolean field: Trusted Protect
-    static const uint32_t AIPS1_PACRU_TP0 = 1U << 28 ;
-
-  // Boolean field: Write Protect
-    static const uint32_t AIPS1_PACRU_WP0 = 1U << 29 ;
-
-  // Boolean field: Supervisor Protect
-    static const uint32_t AIPS1_PACRU_SP0 = 1U << 30 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral AXBS
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -5138,657 +2574,6 @@
 #define RNG_OR (* ((const volatile uint32_t *) (0x40029000 + 0xC)))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral SPI0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Module Configuration Register
-#define SPI0_MCR (* ((volatile uint32_t *) (0x4002C000 + 0)))
-
-  // Boolean field: Halt
-    static const uint32_t SPI0_MCR_HALT = 1U << 0 ;
-
-  // Field (width: 2 bits): Sample Point
-    inline uint32_t SPI0_MCR_SMPL_PT (const uint32_t inValue) { return (inValue & 3) << 8 ; }
-
-  // Boolean field: Flushes the RX FIFO
-    static const uint32_t SPI0_MCR_CLR_RXF = 1U << 10 ;
-
-  // Boolean field: Clear TX FIFO
-    static const uint32_t SPI0_MCR_CLR_TXF = 1U << 11 ;
-
-  // Boolean field: Disable Receive FIFO
-    static const uint32_t SPI0_MCR_DIS_RXF = 1U << 12 ;
-
-  // Boolean field: Disable Transmit FIFO
-    static const uint32_t SPI0_MCR_DIS_TXF = 1U << 13 ;
-
-  // Boolean field: Module Disable
-    static const uint32_t SPI0_MCR_MDIS = 1U << 14 ;
-
-  // Boolean field: Doze Enable
-    static const uint32_t SPI0_MCR_DOZE = 1U << 15 ;
-
-  // Field (width: 6 bits): Peripheral Chip Select x Inactive State
-    inline uint32_t SPI0_MCR_PCSIS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
-
-  // Boolean field: Receive FIFO Overflow Overwrite Enable
-    static const uint32_t SPI0_MCR_ROOE = 1U << 24 ;
-
-  // Boolean field: Peripheral Chip Select Strobe Enable
-    static const uint32_t SPI0_MCR_PCSSE = 1U << 25 ;
-
-  // Boolean field: Modified Timing Format Enable
-    static const uint32_t SPI0_MCR_MTFE = 1U << 26 ;
-
-  // Boolean field: Freeze
-    static const uint32_t SPI0_MCR_FRZ = 1U << 27 ;
-
-  // Field (width: 2 bits): SPI Configuration.
-    inline uint32_t SPI0_MCR_DCONF (const uint32_t inValue) { return (inValue & 3) << 28 ; }
-
-  // Boolean field: Continuous SCK Enable
-    static const uint32_t SPI0_MCR_CONT_SCKE = 1U << 30 ;
-
-  // Boolean field: Master/Slave Mode Select
-    static const uint32_t SPI0_MCR_MSTR = 1U << 31 ;
-
-//-------------------- Transfer Count Register
-#define SPI0_TCR (* ((volatile uint32_t *) (0x4002C000 + 0x8)))
-
-  // Field (width: 16 bits): SPI Transfer Counter
-    inline uint32_t SPI0_TCR_SPI_TCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Clock and Transfer Attributes Register (In Master Mode) (idx = 0 ... 1)
-#define SPI0_CTAR(idx) (* ((volatile uint32_t *) (0x4002C000 + 0xC + 0x4 * (idx))))
-
-  // Field (width: 4 bits): Baud Rate Scaler
-    inline uint32_t SPI0_CTAR_BR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Delay After Transfer Scaler
-    inline uint32_t SPI0_CTAR_DT (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): After SCK Delay Scaler
-    inline uint32_t SPI0_CTAR_ASC (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): PCS to SCK Delay Scaler
-    inline uint32_t SPI0_CTAR_CSSCK (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-  // Field (width: 2 bits): Baud Rate Prescaler
-    inline uint32_t SPI0_CTAR_PBR (const uint32_t inValue) { return (inValue & 3) << 16 ; }
-
-  // Field (width: 2 bits): Delay after Transfer Prescaler
-    inline uint32_t SPI0_CTAR_PDT (const uint32_t inValue) { return (inValue & 3) << 18 ; }
-
-  // Field (width: 2 bits): After SCK Delay Prescaler
-    inline uint32_t SPI0_CTAR_PASC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
-
-  // Field (width: 2 bits): PCS to SCK Delay Prescaler
-    inline uint32_t SPI0_CTAR_PCSSCK (const uint32_t inValue) { return (inValue & 3) << 22 ; }
-
-  // Boolean field: LSB First
-    static const uint32_t SPI0_CTAR_LSBFE = 1U << 24 ;
-
-  // Boolean field: Clock Phase
-    static const uint32_t SPI0_CTAR_CPHA = 1U << 25 ;
-
-  // Boolean field: Clock Polarity
-    static const uint32_t SPI0_CTAR_CPOL = 1U << 26 ;
-
-  // Field (width: 4 bits): Frame Size
-    inline uint32_t SPI0_CTAR_FMSZ (const uint32_t inValue) { return (inValue & 15) << 27 ; }
-
-  // Boolean field: Double Baud Rate
-    static const uint32_t SPI0_CTAR_DBR = 1U << 31 ;
-
-//-------------------- Clock and Transfer Attributes Register (In Slave Mode)
-#define SPI0_CTAR_SLAVE (* ((volatile uint32_t *) (0x4002C000 + 0xC)))
-
-  // Boolean field: Clock Phase
-    static const uint32_t SPI0_CTAR_SLAVE_CPHA = 1U << 25 ;
-
-  // Boolean field: Clock Polarity
-    static const uint32_t SPI0_CTAR_SLAVE_CPOL = 1U << 26 ;
-
-  // Field (width: 5 bits): Frame Size
-    inline uint32_t SPI0_CTAR_SLAVE_FMSZ (const uint32_t inValue) { return (inValue & 31) << 27 ; }
-
-//-------------------- Status Register
-#define SPI0_SR (* ((volatile uint32_t *) (0x4002C000 + 0x2C)))
-
-  // Field (width: 4 bits): Pop Next Pointer
-    inline uint32_t SPI0_SR_POPNXTPTR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): RX FIFO Counter
-    inline uint32_t SPI0_SR_RXCTR (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Transmit Next Pointer
-    inline uint32_t SPI0_SR_TXNXTPTR (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): TX FIFO Counter
-    inline uint32_t SPI0_SR_TXCTR (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-  // Boolean field: Receive FIFO Drain Flag
-    static const uint32_t SPI0_SR_RFDF = 1U << 17 ;
-
-  // Boolean field: Receive FIFO Overflow Flag
-    static const uint32_t SPI0_SR_RFOF = 1U << 19 ;
-
-  // Boolean field: Transmit FIFO Fill Flag
-    static const uint32_t SPI0_SR_TFFF = 1U << 25 ;
-
-  // Boolean field: Transmit FIFO Underflow Flag
-    static const uint32_t SPI0_SR_TFUF = 1U << 27 ;
-
-  // Boolean field: End of Queue Flag
-    static const uint32_t SPI0_SR_EOQF = 1U << 28 ;
-
-  // Boolean field: TX and RX Status
-    static const uint32_t SPI0_SR_TXRXS = 1U << 30 ;
-
-  // Boolean field: Transfer Complete Flag
-    static const uint32_t SPI0_SR_TCF = 1U << 31 ;
-
-//-------------------- DMA/Interrupt Request Select and Enable Register
-#define SPI0_RSER (* ((volatile uint32_t *) (0x4002C000 + 0x30)))
-
-  // Boolean field: Receive FIFO Drain DMA or Interrupt Request Select
-    static const uint32_t SPI0_RSER_RFDF_DIRS = 1U << 16 ;
-
-  // Boolean field: Receive FIFO Drain Request Enable
-    static const uint32_t SPI0_RSER_RFDF_RE = 1U << 17 ;
-
-  // Boolean field: Receive FIFO Overflow Request Enable
-    static const uint32_t SPI0_RSER_RFOF_RE = 1U << 19 ;
-
-  // Boolean field: Transmit FIFO Fill DMA or Interrupt Request Select
-    static const uint32_t SPI0_RSER_TFFF_DIRS = 1U << 24 ;
-
-  // Boolean field: Transmit FIFO Fill Request Enable
-    static const uint32_t SPI0_RSER_TFFF_RE = 1U << 25 ;
-
-  // Boolean field: Transmit FIFO Underflow Request Enable
-    static const uint32_t SPI0_RSER_TFUF_RE = 1U << 27 ;
-
-  // Boolean field: Finished Request Enable
-    static const uint32_t SPI0_RSER_EOQF_RE = 1U << 28 ;
-
-  // Boolean field: Transmission Complete Request Enable
-    static const uint32_t SPI0_RSER_TCF_RE = 1U << 31 ;
-
-//-------------------- PUSH TX FIFO Register In Master Mode
-#define SPI0_PUSHR (* ((volatile uint32_t *) (0x4002C000 + 0x34)))
-
-  // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI0_PUSHR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 6 bits): Select which PCS signals are to be asserted for the transfer
-    inline uint32_t SPI0_PUSHR_PCS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
-
-  // Boolean field: Clear Transfer Counter
-    static const uint32_t SPI0_PUSHR_CTCNT = 1U << 26 ;
-
-  // Boolean field: End Of Queue
-    static const uint32_t SPI0_PUSHR_EOQ = 1U << 27 ;
-
-  // Field (width: 3 bits): Clock and Transfer Attributes Select
-    inline uint32_t SPI0_PUSHR_CTAS (const uint32_t inValue) { return (inValue & 7) << 28 ; }
-
-  // Boolean field: Continuous Peripheral Chip Select Enable
-    static const uint32_t SPI0_PUSHR_CONT = 1U << 31 ;
-
-//-------------------- PUSH TX FIFO Register In Slave Mode
-#define SPI0_PUSHR_SLAVE (* ((volatile uint32_t *) (0x4002C000 + 0x34)))
-
-//-------------------- POP RX FIFO Register
-#define SPI0_POPR (* ((const volatile uint32_t *) (0x4002C000 + 0x38)))
-
-//-------------------- Transmit FIFO Registers (idx = 0 ... 3)
-#define SPI0_TXFR(idx) (* ((const volatile uint32_t *) (0x4002C000 + 0x3C + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI0_TXFR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Transmit Command or Transmit Data
-    inline uint32_t SPI0_TXFR_TXCMD_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Receive FIFO Registers (idx = 0 ... 3)
-#define SPI0_RXFR(idx) (* ((const volatile uint32_t *) (0x4002C000 + 0x7C + 0x4 * (idx))))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral SPI1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Module Configuration Register
-#define SPI1_MCR (* ((volatile uint32_t *) (0x4002D000 + 0)))
-
-  // Boolean field: Halt
-    static const uint32_t SPI1_MCR_HALT = 1U << 0 ;
-
-  // Field (width: 2 bits): Sample Point
-    inline uint32_t SPI1_MCR_SMPL_PT (const uint32_t inValue) { return (inValue & 3) << 8 ; }
-
-  // Boolean field: Flushes the RX FIFO
-    static const uint32_t SPI1_MCR_CLR_RXF = 1U << 10 ;
-
-  // Boolean field: Clear TX FIFO
-    static const uint32_t SPI1_MCR_CLR_TXF = 1U << 11 ;
-
-  // Boolean field: Disable Receive FIFO
-    static const uint32_t SPI1_MCR_DIS_RXF = 1U << 12 ;
-
-  // Boolean field: Disable Transmit FIFO
-    static const uint32_t SPI1_MCR_DIS_TXF = 1U << 13 ;
-
-  // Boolean field: Module Disable
-    static const uint32_t SPI1_MCR_MDIS = 1U << 14 ;
-
-  // Boolean field: Doze Enable
-    static const uint32_t SPI1_MCR_DOZE = 1U << 15 ;
-
-  // Field (width: 6 bits): Peripheral Chip Select x Inactive State
-    inline uint32_t SPI1_MCR_PCSIS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
-
-  // Boolean field: Receive FIFO Overflow Overwrite Enable
-    static const uint32_t SPI1_MCR_ROOE = 1U << 24 ;
-
-  // Boolean field: Peripheral Chip Select Strobe Enable
-    static const uint32_t SPI1_MCR_PCSSE = 1U << 25 ;
-
-  // Boolean field: Modified Timing Format Enable
-    static const uint32_t SPI1_MCR_MTFE = 1U << 26 ;
-
-  // Boolean field: Freeze
-    static const uint32_t SPI1_MCR_FRZ = 1U << 27 ;
-
-  // Field (width: 2 bits): SPI Configuration.
-    inline uint32_t SPI1_MCR_DCONF (const uint32_t inValue) { return (inValue & 3) << 28 ; }
-
-  // Boolean field: Continuous SCK Enable
-    static const uint32_t SPI1_MCR_CONT_SCKE = 1U << 30 ;
-
-  // Boolean field: Master/Slave Mode Select
-    static const uint32_t SPI1_MCR_MSTR = 1U << 31 ;
-
-//-------------------- Transfer Count Register
-#define SPI1_TCR (* ((volatile uint32_t *) (0x4002D000 + 0x8)))
-
-  // Field (width: 16 bits): SPI Transfer Counter
-    inline uint32_t SPI1_TCR_SPI_TCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Clock and Transfer Attributes Register (In Master Mode) (idx = 0 ... 1)
-#define SPI1_CTAR(idx) (* ((volatile uint32_t *) (0x4002D000 + 0xC + 0x4 * (idx))))
-
-  // Field (width: 4 bits): Baud Rate Scaler
-    inline uint32_t SPI1_CTAR_BR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Delay After Transfer Scaler
-    inline uint32_t SPI1_CTAR_DT (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): After SCK Delay Scaler
-    inline uint32_t SPI1_CTAR_ASC (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): PCS to SCK Delay Scaler
-    inline uint32_t SPI1_CTAR_CSSCK (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-  // Field (width: 2 bits): Baud Rate Prescaler
-    inline uint32_t SPI1_CTAR_PBR (const uint32_t inValue) { return (inValue & 3) << 16 ; }
-
-  // Field (width: 2 bits): Delay after Transfer Prescaler
-    inline uint32_t SPI1_CTAR_PDT (const uint32_t inValue) { return (inValue & 3) << 18 ; }
-
-  // Field (width: 2 bits): After SCK Delay Prescaler
-    inline uint32_t SPI1_CTAR_PASC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
-
-  // Field (width: 2 bits): PCS to SCK Delay Prescaler
-    inline uint32_t SPI1_CTAR_PCSSCK (const uint32_t inValue) { return (inValue & 3) << 22 ; }
-
-  // Boolean field: LSB First
-    static const uint32_t SPI1_CTAR_LSBFE = 1U << 24 ;
-
-  // Boolean field: Clock Phase
-    static const uint32_t SPI1_CTAR_CPHA = 1U << 25 ;
-
-  // Boolean field: Clock Polarity
-    static const uint32_t SPI1_CTAR_CPOL = 1U << 26 ;
-
-  // Field (width: 4 bits): Frame Size
-    inline uint32_t SPI1_CTAR_FMSZ (const uint32_t inValue) { return (inValue & 15) << 27 ; }
-
-  // Boolean field: Double Baud Rate
-    static const uint32_t SPI1_CTAR_DBR = 1U << 31 ;
-
-//-------------------- Clock and Transfer Attributes Register (In Slave Mode)
-#define SPI1_CTAR_SLAVE (* ((volatile uint32_t *) (0x4002D000 + 0xC)))
-
-  // Boolean field: Clock Phase
-    static const uint32_t SPI1_CTAR_SLAVE_CPHA = 1U << 25 ;
-
-  // Boolean field: Clock Polarity
-    static const uint32_t SPI1_CTAR_SLAVE_CPOL = 1U << 26 ;
-
-  // Field (width: 5 bits): Frame Size
-    inline uint32_t SPI1_CTAR_SLAVE_FMSZ (const uint32_t inValue) { return (inValue & 31) << 27 ; }
-
-//-------------------- Status Register
-#define SPI1_SR (* ((volatile uint32_t *) (0x4002D000 + 0x2C)))
-
-  // Field (width: 4 bits): Pop Next Pointer
-    inline uint32_t SPI1_SR_POPNXTPTR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): RX FIFO Counter
-    inline uint32_t SPI1_SR_RXCTR (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Transmit Next Pointer
-    inline uint32_t SPI1_SR_TXNXTPTR (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): TX FIFO Counter
-    inline uint32_t SPI1_SR_TXCTR (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-  // Boolean field: Receive FIFO Drain Flag
-    static const uint32_t SPI1_SR_RFDF = 1U << 17 ;
-
-  // Boolean field: Receive FIFO Overflow Flag
-    static const uint32_t SPI1_SR_RFOF = 1U << 19 ;
-
-  // Boolean field: Transmit FIFO Fill Flag
-    static const uint32_t SPI1_SR_TFFF = 1U << 25 ;
-
-  // Boolean field: Transmit FIFO Underflow Flag
-    static const uint32_t SPI1_SR_TFUF = 1U << 27 ;
-
-  // Boolean field: End of Queue Flag
-    static const uint32_t SPI1_SR_EOQF = 1U << 28 ;
-
-  // Boolean field: TX and RX Status
-    static const uint32_t SPI1_SR_TXRXS = 1U << 30 ;
-
-  // Boolean field: Transfer Complete Flag
-    static const uint32_t SPI1_SR_TCF = 1U << 31 ;
-
-//-------------------- DMA/Interrupt Request Select and Enable Register
-#define SPI1_RSER (* ((volatile uint32_t *) (0x4002D000 + 0x30)))
-
-  // Boolean field: Receive FIFO Drain DMA or Interrupt Request Select
-    static const uint32_t SPI1_RSER_RFDF_DIRS = 1U << 16 ;
-
-  // Boolean field: Receive FIFO Drain Request Enable
-    static const uint32_t SPI1_RSER_RFDF_RE = 1U << 17 ;
-
-  // Boolean field: Receive FIFO Overflow Request Enable
-    static const uint32_t SPI1_RSER_RFOF_RE = 1U << 19 ;
-
-  // Boolean field: Transmit FIFO Fill DMA or Interrupt Request Select
-    static const uint32_t SPI1_RSER_TFFF_DIRS = 1U << 24 ;
-
-  // Boolean field: Transmit FIFO Fill Request Enable
-    static const uint32_t SPI1_RSER_TFFF_RE = 1U << 25 ;
-
-  // Boolean field: Transmit FIFO Underflow Request Enable
-    static const uint32_t SPI1_RSER_TFUF_RE = 1U << 27 ;
-
-  // Boolean field: Finished Request Enable
-    static const uint32_t SPI1_RSER_EOQF_RE = 1U << 28 ;
-
-  // Boolean field: Transmission Complete Request Enable
-    static const uint32_t SPI1_RSER_TCF_RE = 1U << 31 ;
-
-//-------------------- PUSH TX FIFO Register In Master Mode
-#define SPI1_PUSHR (* ((volatile uint32_t *) (0x4002D000 + 0x34)))
-
-  // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI1_PUSHR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 6 bits): Select which PCS signals are to be asserted for the transfer
-    inline uint32_t SPI1_PUSHR_PCS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
-
-  // Boolean field: Clear Transfer Counter
-    static const uint32_t SPI1_PUSHR_CTCNT = 1U << 26 ;
-
-  // Boolean field: End Of Queue
-    static const uint32_t SPI1_PUSHR_EOQ = 1U << 27 ;
-
-  // Field (width: 3 bits): Clock and Transfer Attributes Select
-    inline uint32_t SPI1_PUSHR_CTAS (const uint32_t inValue) { return (inValue & 7) << 28 ; }
-
-  // Boolean field: Continuous Peripheral Chip Select Enable
-    static const uint32_t SPI1_PUSHR_CONT = 1U << 31 ;
-
-//-------------------- PUSH TX FIFO Register In Slave Mode
-#define SPI1_PUSHR_SLAVE (* ((volatile uint32_t *) (0x4002D000 + 0x34)))
-
-//-------------------- POP RX FIFO Register
-#define SPI1_POPR (* ((const volatile uint32_t *) (0x4002D000 + 0x38)))
-
-//-------------------- Transmit FIFO Registers (idx = 0 ... 3)
-#define SPI1_TXFR(idx) (* ((const volatile uint32_t *) (0x4002D000 + 0x3C + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI1_TXFR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Transmit Command or Transmit Data
-    inline uint32_t SPI1_TXFR_TXCMD_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Receive FIFO Registers (idx = 0 ... 3)
-#define SPI1_RXFR(idx) (* ((const volatile uint32_t *) (0x4002D000 + 0x7C + 0x4 * (idx))))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral SPI2
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Module Configuration Register
-#define SPI2_MCR (* ((volatile uint32_t *) (0x400AC000 + 0)))
-
-  // Boolean field: Halt
-    static const uint32_t SPI2_MCR_HALT = 1U << 0 ;
-
-  // Field (width: 2 bits): Sample Point
-    inline uint32_t SPI2_MCR_SMPL_PT (const uint32_t inValue) { return (inValue & 3) << 8 ; }
-
-  // Boolean field: Flushes the RX FIFO
-    static const uint32_t SPI2_MCR_CLR_RXF = 1U << 10 ;
-
-  // Boolean field: Clear TX FIFO
-    static const uint32_t SPI2_MCR_CLR_TXF = 1U << 11 ;
-
-  // Boolean field: Disable Receive FIFO
-    static const uint32_t SPI2_MCR_DIS_RXF = 1U << 12 ;
-
-  // Boolean field: Disable Transmit FIFO
-    static const uint32_t SPI2_MCR_DIS_TXF = 1U << 13 ;
-
-  // Boolean field: Module Disable
-    static const uint32_t SPI2_MCR_MDIS = 1U << 14 ;
-
-  // Boolean field: Doze Enable
-    static const uint32_t SPI2_MCR_DOZE = 1U << 15 ;
-
-  // Field (width: 6 bits): Peripheral Chip Select x Inactive State
-    inline uint32_t SPI2_MCR_PCSIS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
-
-  // Boolean field: Receive FIFO Overflow Overwrite Enable
-    static const uint32_t SPI2_MCR_ROOE = 1U << 24 ;
-
-  // Boolean field: Peripheral Chip Select Strobe Enable
-    static const uint32_t SPI2_MCR_PCSSE = 1U << 25 ;
-
-  // Boolean field: Modified Timing Format Enable
-    static const uint32_t SPI2_MCR_MTFE = 1U << 26 ;
-
-  // Boolean field: Freeze
-    static const uint32_t SPI2_MCR_FRZ = 1U << 27 ;
-
-  // Field (width: 2 bits): SPI Configuration.
-    inline uint32_t SPI2_MCR_DCONF (const uint32_t inValue) { return (inValue & 3) << 28 ; }
-
-  // Boolean field: Continuous SCK Enable
-    static const uint32_t SPI2_MCR_CONT_SCKE = 1U << 30 ;
-
-  // Boolean field: Master/Slave Mode Select
-    static const uint32_t SPI2_MCR_MSTR = 1U << 31 ;
-
-//-------------------- Transfer Count Register
-#define SPI2_TCR (* ((volatile uint32_t *) (0x400AC000 + 0x8)))
-
-  // Field (width: 16 bits): SPI Transfer Counter
-    inline uint32_t SPI2_TCR_SPI_TCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Clock and Transfer Attributes Register (In Master Mode) (idx = 0 ... 1)
-#define SPI2_CTAR(idx) (* ((volatile uint32_t *) (0x400AC000 + 0xC + 0x4 * (idx))))
-
-  // Field (width: 4 bits): Baud Rate Scaler
-    inline uint32_t SPI2_CTAR_BR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Delay After Transfer Scaler
-    inline uint32_t SPI2_CTAR_DT (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): After SCK Delay Scaler
-    inline uint32_t SPI2_CTAR_ASC (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): PCS to SCK Delay Scaler
-    inline uint32_t SPI2_CTAR_CSSCK (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-  // Field (width: 2 bits): Baud Rate Prescaler
-    inline uint32_t SPI2_CTAR_PBR (const uint32_t inValue) { return (inValue & 3) << 16 ; }
-
-  // Field (width: 2 bits): Delay after Transfer Prescaler
-    inline uint32_t SPI2_CTAR_PDT (const uint32_t inValue) { return (inValue & 3) << 18 ; }
-
-  // Field (width: 2 bits): After SCK Delay Prescaler
-    inline uint32_t SPI2_CTAR_PASC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
-
-  // Field (width: 2 bits): PCS to SCK Delay Prescaler
-    inline uint32_t SPI2_CTAR_PCSSCK (const uint32_t inValue) { return (inValue & 3) << 22 ; }
-
-  // Boolean field: LSB First
-    static const uint32_t SPI2_CTAR_LSBFE = 1U << 24 ;
-
-  // Boolean field: Clock Phase
-    static const uint32_t SPI2_CTAR_CPHA = 1U << 25 ;
-
-  // Boolean field: Clock Polarity
-    static const uint32_t SPI2_CTAR_CPOL = 1U << 26 ;
-
-  // Field (width: 4 bits): Frame Size
-    inline uint32_t SPI2_CTAR_FMSZ (const uint32_t inValue) { return (inValue & 15) << 27 ; }
-
-  // Boolean field: Double Baud Rate
-    static const uint32_t SPI2_CTAR_DBR = 1U << 31 ;
-
-//-------------------- Clock and Transfer Attributes Register (In Slave Mode)
-#define SPI2_CTAR_SLAVE (* ((volatile uint32_t *) (0x400AC000 + 0xC)))
-
-  // Boolean field: Clock Phase
-    static const uint32_t SPI2_CTAR_SLAVE_CPHA = 1U << 25 ;
-
-  // Boolean field: Clock Polarity
-    static const uint32_t SPI2_CTAR_SLAVE_CPOL = 1U << 26 ;
-
-  // Field (width: 5 bits): Frame Size
-    inline uint32_t SPI2_CTAR_SLAVE_FMSZ (const uint32_t inValue) { return (inValue & 31) << 27 ; }
-
-//-------------------- Status Register
-#define SPI2_SR (* ((volatile uint32_t *) (0x400AC000 + 0x2C)))
-
-  // Field (width: 4 bits): Pop Next Pointer
-    inline uint32_t SPI2_SR_POPNXTPTR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): RX FIFO Counter
-    inline uint32_t SPI2_SR_RXCTR (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Transmit Next Pointer
-    inline uint32_t SPI2_SR_TXNXTPTR (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): TX FIFO Counter
-    inline uint32_t SPI2_SR_TXCTR (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-  // Boolean field: Receive FIFO Drain Flag
-    static const uint32_t SPI2_SR_RFDF = 1U << 17 ;
-
-  // Boolean field: Receive FIFO Overflow Flag
-    static const uint32_t SPI2_SR_RFOF = 1U << 19 ;
-
-  // Boolean field: Transmit FIFO Fill Flag
-    static const uint32_t SPI2_SR_TFFF = 1U << 25 ;
-
-  // Boolean field: Transmit FIFO Underflow Flag
-    static const uint32_t SPI2_SR_TFUF = 1U << 27 ;
-
-  // Boolean field: End of Queue Flag
-    static const uint32_t SPI2_SR_EOQF = 1U << 28 ;
-
-  // Boolean field: TX and RX Status
-    static const uint32_t SPI2_SR_TXRXS = 1U << 30 ;
-
-  // Boolean field: Transfer Complete Flag
-    static const uint32_t SPI2_SR_TCF = 1U << 31 ;
-
-//-------------------- DMA/Interrupt Request Select and Enable Register
-#define SPI2_RSER (* ((volatile uint32_t *) (0x400AC000 + 0x30)))
-
-  // Boolean field: Receive FIFO Drain DMA or Interrupt Request Select
-    static const uint32_t SPI2_RSER_RFDF_DIRS = 1U << 16 ;
-
-  // Boolean field: Receive FIFO Drain Request Enable
-    static const uint32_t SPI2_RSER_RFDF_RE = 1U << 17 ;
-
-  // Boolean field: Receive FIFO Overflow Request Enable
-    static const uint32_t SPI2_RSER_RFOF_RE = 1U << 19 ;
-
-  // Boolean field: Transmit FIFO Fill DMA or Interrupt Request Select
-    static const uint32_t SPI2_RSER_TFFF_DIRS = 1U << 24 ;
-
-  // Boolean field: Transmit FIFO Fill Request Enable
-    static const uint32_t SPI2_RSER_TFFF_RE = 1U << 25 ;
-
-  // Boolean field: Transmit FIFO Underflow Request Enable
-    static const uint32_t SPI2_RSER_TFUF_RE = 1U << 27 ;
-
-  // Boolean field: Finished Request Enable
-    static const uint32_t SPI2_RSER_EOQF_RE = 1U << 28 ;
-
-  // Boolean field: Transmission Complete Request Enable
-    static const uint32_t SPI2_RSER_TCF_RE = 1U << 31 ;
-
-//-------------------- PUSH TX FIFO Register In Master Mode
-#define SPI2_PUSHR (* ((volatile uint32_t *) (0x400AC000 + 0x34)))
-
-  // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI2_PUSHR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 6 bits): Select which PCS signals are to be asserted for the transfer
-    inline uint32_t SPI2_PUSHR_PCS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
-
-  // Boolean field: Clear Transfer Counter
-    static const uint32_t SPI2_PUSHR_CTCNT = 1U << 26 ;
-
-  // Boolean field: End Of Queue
-    static const uint32_t SPI2_PUSHR_EOQ = 1U << 27 ;
-
-  // Field (width: 3 bits): Clock and Transfer Attributes Select
-    inline uint32_t SPI2_PUSHR_CTAS (const uint32_t inValue) { return (inValue & 7) << 28 ; }
-
-  // Boolean field: Continuous Peripheral Chip Select Enable
-    static const uint32_t SPI2_PUSHR_CONT = 1U << 31 ;
-
-//-------------------- PUSH TX FIFO Register In Slave Mode
-#define SPI2_PUSHR_SLAVE (* ((volatile uint32_t *) (0x400AC000 + 0x34)))
-
-//-------------------- POP RX FIFO Register
-#define SPI2_POPR (* ((const volatile uint32_t *) (0x400AC000 + 0x38)))
-
-//-------------------- Transmit FIFO Registers (idx = 0 ... 3)
-#define SPI2_TXFR(idx) (* ((const volatile uint32_t *) (0x400AC000 + 0x3C + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI2_TXFR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Transmit Command or Transmit Data
-    inline uint32_t SPI2_TXFR_TXCMD_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Receive FIFO Registers (idx = 0 ... 3)
-#define SPI2_RXFR(idx) (* ((const volatile uint32_t *) (0x400AC000 + 0x7C + 0x4 * (idx))))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral I2S0
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -6449,2910 +3234,6 @@
 
   // Boolean field: Timer Interrupt Flag
     static const uint32_t PIT_TFLG_TIF = 1U << 0 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral FTM0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Status And Control
-#define FTM0_SC (* ((volatile uint32_t *) (0x40038000 + 0)))
-
-  // Field (width: 3 bits): Prescale Factor Selection
-    inline uint32_t FTM0_SC_PS (const uint32_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 2 bits): Clock Source Selection
-    inline uint32_t FTM0_SC_CLKS (const uint32_t inValue) { return (inValue & 3) << 3 ; }
-
-  // Boolean field: Center-Aligned PWM Select
-    static const uint32_t FTM0_SC_CPWMS = 1U << 5 ;
-
-  // Boolean field: Timer Overflow Interrupt Enable
-    static const uint32_t FTM0_SC_TOIE = 1U << 6 ;
-
-  // Boolean field: Timer Overflow Flag
-    static const uint32_t FTM0_SC_TOF = 1U << 7 ;
-
-//-------------------- Counter
-#define FTM0_CNT (* ((volatile uint32_t *) (0x40038000 + 0x4)))
-
-  // Field (width: 16 bits): Counter Value
-    inline uint32_t FTM0_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Modulo
-#define FTM0_MOD (* ((volatile uint32_t *) (0x40038000 + 0x8)))
-
-  // Field (width: 16 bits): Modulo Value
-    inline uint32_t FTM0_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Channel (n) Status And Control (idx = 0 ... 7)
-#define FTM0_CSC(idx) (* ((volatile uint32_t *) (0x40038000 + 0xC + 0x8 * (idx))))
-
-  // Boolean field: DMA Enable
-    static const uint32_t FTM0_CSC_DMA = 1U << 0 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM0_CSC_ELSA = 1U << 2 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM0_CSC_ELSB = 1U << 3 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM0_CSC_MSA = 1U << 4 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM0_CSC_MSB = 1U << 5 ;
-
-  // Boolean field: Channel Interrupt Enable
-    static const uint32_t FTM0_CSC_CHIE = 1U << 6 ;
-
-  // Boolean field: Channel Flag
-    static const uint32_t FTM0_CSC_CHF = 1U << 7 ;
-
-//-------------------- Channel (n) Value (idx = 0 ... 7)
-#define FTM0_CV(idx) (* ((volatile uint32_t *) (0x40038000 + 0x10 + 0x8 * (idx))))
-
-  // Field (width: 16 bits): Channel Value
-    inline uint32_t FTM0_CV_VAL (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Counter Initial Value
-#define FTM0_CNTIN (* ((volatile uint32_t *) (0x40038000 + 0x4C)))
-
-  // Field (width: 16 bits): Initial Value Of The FTM Counter
-    inline uint32_t FTM0_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Capture And Compare Status
-#define FTM0_STATUS (* ((volatile uint32_t *) (0x40038000 + 0x50)))
-
-  // Boolean field: Channel 0 Flag
-    static const uint32_t FTM0_STATUS_CH0F = 1U << 0 ;
-
-  // Boolean field: Channel 1 Flag
-    static const uint32_t FTM0_STATUS_CH1F = 1U << 1 ;
-
-  // Boolean field: Channel 2 Flag
-    static const uint32_t FTM0_STATUS_CH2F = 1U << 2 ;
-
-  // Boolean field: Channel 3 Flag
-    static const uint32_t FTM0_STATUS_CH3F = 1U << 3 ;
-
-  // Boolean field: Channel 4 Flag
-    static const uint32_t FTM0_STATUS_CH4F = 1U << 4 ;
-
-  // Boolean field: Channel 5 Flag
-    static const uint32_t FTM0_STATUS_CH5F = 1U << 5 ;
-
-  // Boolean field: Channel 6 Flag
-    static const uint32_t FTM0_STATUS_CH6F = 1U << 6 ;
-
-  // Boolean field: Channel 7 Flag
-    static const uint32_t FTM0_STATUS_CH7F = 1U << 7 ;
-
-//-------------------- Features Mode Selection
-#define FTM0_MODE (* ((volatile uint32_t *) (0x40038000 + 0x54)))
-
-  // Boolean field: FTM Enable
-    static const uint32_t FTM0_MODE_FTMEN = 1U << 0 ;
-
-  // Boolean field: Initialize The Channels Output
-    static const uint32_t FTM0_MODE_INIT = 1U << 1 ;
-
-  // Boolean field: Write Protection Disable
-    static const uint32_t FTM0_MODE_WPDIS = 1U << 2 ;
-
-  // Boolean field: PWM Synchronization Mode
-    static const uint32_t FTM0_MODE_PWMSYNC = 1U << 3 ;
-
-  // Boolean field: Capture Test Mode Enable
-    static const uint32_t FTM0_MODE_CAPTEST = 1U << 4 ;
-
-  // Field (width: 2 bits): Fault Control Mode
-    inline uint32_t FTM0_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3) << 5 ; }
-
-  // Boolean field: Fault Interrupt Enable
-    static const uint32_t FTM0_MODE_FAULTIE = 1U << 7 ;
-
-//-------------------- Synchronization
-#define FTM0_SYNC (* ((volatile uint32_t *) (0x40038000 + 0x58)))
-
-  // Boolean field: Minimum Loading Point Enable
-    static const uint32_t FTM0_SYNC_CNTMIN = 1U << 0 ;
-
-  // Boolean field: Maximum Loading Point Enable
-    static const uint32_t FTM0_SYNC_CNTMAX = 1U << 1 ;
-
-  // Boolean field: FTM Counter Reinitialization By Synchronization (FTM counter synchronization)
-    static const uint32_t FTM0_SYNC_REINIT = 1U << 2 ;
-
-  // Boolean field: Output Mask Synchronization
-    static const uint32_t FTM0_SYNC_SYNCHOM = 1U << 3 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 0
-    static const uint32_t FTM0_SYNC_TRIG0 = 1U << 4 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 1
-    static const uint32_t FTM0_SYNC_TRIG1 = 1U << 5 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 2
-    static const uint32_t FTM0_SYNC_TRIG2 = 1U << 6 ;
-
-  // Boolean field: PWM Synchronization Software Trigger
-    static const uint32_t FTM0_SYNC_SWSYNC = 1U << 7 ;
-
-//-------------------- Initial State For Channels Output
-#define FTM0_OUTINIT (* ((volatile uint32_t *) (0x40038000 + 0x5C)))
-
-  // Boolean field: Channel 0 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH0OI = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH1OI = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH2OI = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH3OI = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH4OI = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH5OI = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH6OI = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Initialization Value
-    static const uint32_t FTM0_OUTINIT_CH7OI = 1U << 7 ;
-
-//-------------------- Output Mask
-#define FTM0_OUTMASK (* ((volatile uint32_t *) (0x40038000 + 0x60)))
-
-  // Boolean field: Channel 0 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH0OM = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH1OM = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH2OM = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH3OM = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH4OM = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH5OM = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH6OM = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Mask
-    static const uint32_t FTM0_OUTMASK_CH7OM = 1U << 7 ;
-
-//-------------------- Function For Linked Channels
-#define FTM0_COMBINE (* ((volatile uint32_t *) (0x40038000 + 0x64)))
-
-  // Boolean field: Combine Channels For n = 0
-    static const uint32_t FTM0_COMBINE_COMBINE0 = 1U << 0 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 0
-    static const uint32_t FTM0_COMBINE_COMP0 = 1U << 1 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 0
-    static const uint32_t FTM0_COMBINE_DECAPEN0 = 1U << 2 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 0
-    static const uint32_t FTM0_COMBINE_DECAP0 = 1U << 3 ;
-
-  // Boolean field: Deadtime Enable For n = 0
-    static const uint32_t FTM0_COMBINE_DTEN0 = 1U << 4 ;
-
-  // Boolean field: Synchronization Enable For n = 0
-    static const uint32_t FTM0_COMBINE_SYNCEN0 = 1U << 5 ;
-
-  // Boolean field: Fault Control Enable For n = 0
-    static const uint32_t FTM0_COMBINE_FAULTEN0 = 1U << 6 ;
-
-  // Boolean field: Combine Channels For n = 2
-    static const uint32_t FTM0_COMBINE_COMBINE1 = 1U << 8 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 2
-    static const uint32_t FTM0_COMBINE_COMP1 = 1U << 9 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 2
-    static const uint32_t FTM0_COMBINE_DECAPEN1 = 1U << 10 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 2
-    static const uint32_t FTM0_COMBINE_DECAP1 = 1U << 11 ;
-
-  // Boolean field: Deadtime Enable For n = 2
-    static const uint32_t FTM0_COMBINE_DTEN1 = 1U << 12 ;
-
-  // Boolean field: Synchronization Enable For n = 2
-    static const uint32_t FTM0_COMBINE_SYNCEN1 = 1U << 13 ;
-
-  // Boolean field: Fault Control Enable For n = 2
-    static const uint32_t FTM0_COMBINE_FAULTEN1 = 1U << 14 ;
-
-  // Boolean field: Combine Channels For n = 4
-    static const uint32_t FTM0_COMBINE_COMBINE2 = 1U << 16 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 4
-    static const uint32_t FTM0_COMBINE_COMP2 = 1U << 17 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 4
-    static const uint32_t FTM0_COMBINE_DECAPEN2 = 1U << 18 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 4
-    static const uint32_t FTM0_COMBINE_DECAP2 = 1U << 19 ;
-
-  // Boolean field: Deadtime Enable For n = 4
-    static const uint32_t FTM0_COMBINE_DTEN2 = 1U << 20 ;
-
-  // Boolean field: Synchronization Enable For n = 4
-    static const uint32_t FTM0_COMBINE_SYNCEN2 = 1U << 21 ;
-
-  // Boolean field: Fault Control Enable For n = 4
-    static const uint32_t FTM0_COMBINE_FAULTEN2 = 1U << 22 ;
-
-  // Boolean field: Combine Channels For n = 6
-    static const uint32_t FTM0_COMBINE_COMBINE3 = 1U << 24 ;
-
-  // Boolean field: Complement Of Channel (n) for n = 6
-    static const uint32_t FTM0_COMBINE_COMP3 = 1U << 25 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 6
-    static const uint32_t FTM0_COMBINE_DECAPEN3 = 1U << 26 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 6
-    static const uint32_t FTM0_COMBINE_DECAP3 = 1U << 27 ;
-
-  // Boolean field: Deadtime Enable For n = 6
-    static const uint32_t FTM0_COMBINE_DTEN3 = 1U << 28 ;
-
-  // Boolean field: Synchronization Enable For n = 6
-    static const uint32_t FTM0_COMBINE_SYNCEN3 = 1U << 29 ;
-
-  // Boolean field: Fault Control Enable For n = 6
-    static const uint32_t FTM0_COMBINE_FAULTEN3 = 1U << 30 ;
-
-//-------------------- Deadtime Insertion Control
-#define FTM0_DEADTIME (* ((volatile uint32_t *) (0x40038000 + 0x68)))
-
-  // Field (width: 6 bits): Deadtime Value
-    inline uint32_t FTM0_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Deadtime Prescaler Value
-    inline uint32_t FTM0_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- FTM External Trigger
-#define FTM0_EXTTRIG (* ((volatile uint32_t *) (0x40038000 + 0x6C)))
-
-  // Boolean field: Channel 2 Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_CH2TRIG = 1U << 0 ;
-
-  // Boolean field: Channel 3 Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_CH3TRIG = 1U << 1 ;
-
-  // Boolean field: Channel 4 Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_CH4TRIG = 1U << 2 ;
-
-  // Boolean field: Channel 5 Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_CH5TRIG = 1U << 3 ;
-
-  // Boolean field: Channel 0 Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_CH0TRIG = 1U << 4 ;
-
-  // Boolean field: Channel 1 Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_CH1TRIG = 1U << 5 ;
-
-  // Boolean field: Initialization Trigger Enable
-    static const uint32_t FTM0_EXTTRIG_INITTRIGEN = 1U << 6 ;
-
-  // Boolean field: Channel Trigger Flag
-    static const uint32_t FTM0_EXTTRIG_TRIGF = 1U << 7 ;
-
-//-------------------- Channels Polarity
-#define FTM0_POL (* ((volatile uint32_t *) (0x40038000 + 0x70)))
-
-  // Boolean field: Channel 0 Polarity
-    static const uint32_t FTM0_POL_POL0 = 1U << 0 ;
-
-  // Boolean field: Channel 1 Polarity
-    static const uint32_t FTM0_POL_POL1 = 1U << 1 ;
-
-  // Boolean field: Channel 2 Polarity
-    static const uint32_t FTM0_POL_POL2 = 1U << 2 ;
-
-  // Boolean field: Channel 3 Polarity
-    static const uint32_t FTM0_POL_POL3 = 1U << 3 ;
-
-  // Boolean field: Channel 4 Polarity
-    static const uint32_t FTM0_POL_POL4 = 1U << 4 ;
-
-  // Boolean field: Channel 5 Polarity
-    static const uint32_t FTM0_POL_POL5 = 1U << 5 ;
-
-  // Boolean field: Channel 6 Polarity
-    static const uint32_t FTM0_POL_POL6 = 1U << 6 ;
-
-  // Boolean field: Channel 7 Polarity
-    static const uint32_t FTM0_POL_POL7 = 1U << 7 ;
-
-//-------------------- Fault Mode Status
-#define FTM0_FMS (* ((volatile uint32_t *) (0x40038000 + 0x74)))
-
-  // Boolean field: Fault Detection Flag 0
-    static const uint32_t FTM0_FMS_FAULTF0 = 1U << 0 ;
-
-  // Boolean field: Fault Detection Flag 1
-    static const uint32_t FTM0_FMS_FAULTF1 = 1U << 1 ;
-
-  // Boolean field: Fault Detection Flag 2
-    static const uint32_t FTM0_FMS_FAULTF2 = 1U << 2 ;
-
-  // Boolean field: Fault Detection Flag 3
-    static const uint32_t FTM0_FMS_FAULTF3 = 1U << 3 ;
-
-  // Boolean field: Fault Inputs
-    static const uint32_t FTM0_FMS_FAULTIN = 1U << 5 ;
-
-  // Boolean field: Write Protection Enable
-    static const uint32_t FTM0_FMS_WPEN = 1U << 6 ;
-
-  // Boolean field: Fault Detection Flag
-    static const uint32_t FTM0_FMS_FAULTF = 1U << 7 ;
-
-//-------------------- Input Capture Filter Control
-#define FTM0_FILTER (* ((volatile uint32_t *) (0x40038000 + 0x78)))
-
-  // Field (width: 4 bits): Channel 0 Input Filter
-    inline uint32_t FTM0_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Channel 1 Input Filter
-    inline uint32_t FTM0_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Channel 2 Input Filter
-    inline uint32_t FTM0_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): Channel 3 Input Filter
-    inline uint32_t FTM0_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-//-------------------- Fault Control
-#define FTM0_FLTCTRL (* ((volatile uint32_t *) (0x40038000 + 0x7C)))
-
-  // Boolean field: Fault Input 0 Enable
-    static const uint32_t FTM0_FLTCTRL_FAULT0EN = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Enable
-    static const uint32_t FTM0_FLTCTRL_FAULT1EN = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Enable
-    static const uint32_t FTM0_FLTCTRL_FAULT2EN = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Enable
-    static const uint32_t FTM0_FLTCTRL_FAULT3EN = 1U << 3 ;
-
-  // Boolean field: Fault Input 0 Filter Enable
-    static const uint32_t FTM0_FLTCTRL_FFLTR0EN = 1U << 4 ;
-
-  // Boolean field: Fault Input 1 Filter Enable
-    static const uint32_t FTM0_FLTCTRL_FFLTR1EN = 1U << 5 ;
-
-  // Boolean field: Fault Input 2 Filter Enable
-    static const uint32_t FTM0_FLTCTRL_FFLTR2EN = 1U << 6 ;
-
-  // Boolean field: Fault Input 3 Filter Enable
-    static const uint32_t FTM0_FLTCTRL_FFLTR3EN = 1U << 7 ;
-
-  // Field (width: 4 bits): Fault Input Filter
-    inline uint32_t FTM0_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-//-------------------- Quadrature Decoder Control And Status
-#define FTM0_QDCTRL (* ((volatile uint32_t *) (0x40038000 + 0x80)))
-
-  // Boolean field: Quadrature Decoder Mode Enable
-    static const uint32_t FTM0_QDCTRL_QUADEN = 1U << 0 ;
-
-  // Boolean field: Timer Overflow Direction In Quadrature Decoder Mode
-    static const uint32_t FTM0_QDCTRL_TOFDIR = 1U << 1 ;
-
-  // Boolean field: FTM Counter Direction In Quadrature Decoder Mode
-    static const uint32_t FTM0_QDCTRL_QUADIR = 1U << 2 ;
-
-  // Boolean field: Quadrature Decoder Mode
-    static const uint32_t FTM0_QDCTRL_QUADMODE = 1U << 3 ;
-
-  // Boolean field: Phase B Input Polarity
-    static const uint32_t FTM0_QDCTRL_PHBPOL = 1U << 4 ;
-
-  // Boolean field: Phase A Input Polarity
-    static const uint32_t FTM0_QDCTRL_PHAPOL = 1U << 5 ;
-
-  // Boolean field: Phase B Input Filter Enable
-    static const uint32_t FTM0_QDCTRL_PHBFLTREN = 1U << 6 ;
-
-  // Boolean field: Phase A Input Filter Enable
-    static const uint32_t FTM0_QDCTRL_PHAFLTREN = 1U << 7 ;
-
-//-------------------- Configuration
-#define FTM0_CONF (* ((volatile uint32_t *) (0x40038000 + 0x84)))
-
-  // Field (width: 5 bits): TOF Frequency
-    inline uint32_t FTM0_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Field (width: 2 bits): BDM Mode
-    inline uint32_t FTM0_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-  // Boolean field: Global Time Base Enable
-    static const uint32_t FTM0_CONF_GTBEEN = 1U << 9 ;
-
-  // Boolean field: Global Time Base Output
-    static const uint32_t FTM0_CONF_GTBEOUT = 1U << 10 ;
-
-//-------------------- FTM Fault Input Polarity
-#define FTM0_FLTPOL (* ((volatile uint32_t *) (0x40038000 + 0x88)))
-
-  // Boolean field: Fault Input 0 Polarity
-    static const uint32_t FTM0_FLTPOL_FLT0POL = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Polarity
-    static const uint32_t FTM0_FLTPOL_FLT1POL = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Polarity
-    static const uint32_t FTM0_FLTPOL_FLT2POL = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Polarity
-    static const uint32_t FTM0_FLTPOL_FLT3POL = 1U << 3 ;
-
-//-------------------- Synchronization Configuration
-#define FTM0_SYNCONF (* ((volatile uint32_t *) (0x40038000 + 0x8C)))
-
-  // Boolean field: Hardware Trigger Mode
-    static const uint32_t FTM0_SYNCONF_HWTRIGMODE = 1U << 0 ;
-
-  // Boolean field: CNTIN Register Synchronization
-    static const uint32_t FTM0_SYNCONF_CNTINC = 1U << 2 ;
-
-  // Boolean field: INVCTRL Register Synchronization
-    static const uint32_t FTM0_SYNCONF_INVC = 1U << 4 ;
-
-  // Boolean field: SWOCTRL Register Synchronization
-    static const uint32_t FTM0_SYNCONF_SWOC = 1U << 5 ;
-
-  // Boolean field: Synchronization Mode
-    static const uint32_t FTM0_SYNCONF_SYNCMODE = 1U << 7 ;
-
-  // Boolean field: FTM counter synchronization is activated by the software trigger.
-    static const uint32_t FTM0_SYNCONF_SWRSTCNT = 1U << 8 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by the software trigger.
-    static const uint32_t FTM0_SYNCONF_SWWRBUF = 1U << 9 ;
-
-  // Boolean field: Output mask synchronization is activated by the software trigger.
-    static const uint32_t FTM0_SYNCONF_SWOM = 1U << 10 ;
-
-  // Boolean field: Inverting control synchronization is activated by the software trigger.
-    static const uint32_t FTM0_SYNCONF_SWINVC = 1U << 11 ;
-
-  // Boolean field: Software output control synchronization is activated by the software trigger.
-    static const uint32_t FTM0_SYNCONF_SWSOC = 1U << 12 ;
-
-  // Boolean field: FTM counter synchronization is activated by a hardware trigger.
-    static const uint32_t FTM0_SYNCONF_HWRSTCNT = 1U << 16 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by a hardware trigger.
-    static const uint32_t FTM0_SYNCONF_HWWRBUF = 1U << 17 ;
-
-  // Boolean field: Output mask synchronization is activated by a hardware trigger.
-    static const uint32_t FTM0_SYNCONF_HWOM = 1U << 18 ;
-
-  // Boolean field: Inverting control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM0_SYNCONF_HWINVC = 1U << 19 ;
-
-  // Boolean field: Software output control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM0_SYNCONF_HWSOC = 1U << 20 ;
-
-//-------------------- FTM Inverting Control
-#define FTM0_INVCTRL (* ((volatile uint32_t *) (0x40038000 + 0x90)))
-
-  // Boolean field: Pair Channels 0 Inverting Enable
-    static const uint32_t FTM0_INVCTRL_INV0EN = 1U << 0 ;
-
-  // Boolean field: Pair Channels 1 Inverting Enable
-    static const uint32_t FTM0_INVCTRL_INV1EN = 1U << 1 ;
-
-  // Boolean field: Pair Channels 2 Inverting Enable
-    static const uint32_t FTM0_INVCTRL_INV2EN = 1U << 2 ;
-
-  // Boolean field: Pair Channels 3 Inverting Enable
-    static const uint32_t FTM0_INVCTRL_INV3EN = 1U << 3 ;
-
-//-------------------- FTM Software Output Control
-#define FTM0_SWOCTRL (* ((volatile uint32_t *) (0x40038000 + 0x94)))
-
-  // Boolean field: Channel 0 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH0OC = 1U << 0 ;
-
-  // Boolean field: Channel 1 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH1OC = 1U << 1 ;
-
-  // Boolean field: Channel 2 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH2OC = 1U << 2 ;
-
-  // Boolean field: Channel 3 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH3OC = 1U << 3 ;
-
-  // Boolean field: Channel 4 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH4OC = 1U << 4 ;
-
-  // Boolean field: Channel 5 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH5OC = 1U << 5 ;
-
-  // Boolean field: Channel 6 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH6OC = 1U << 6 ;
-
-  // Boolean field: Channel 7 Software Output Control Enable
-    static const uint32_t FTM0_SWOCTRL_CH7OC = 1U << 7 ;
-
-  // Boolean field: Channel 0 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH0OCV = 1U << 8 ;
-
-  // Boolean field: Channel 1 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH1OCV = 1U << 9 ;
-
-  // Boolean field: Channel 2 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH2OCV = 1U << 10 ;
-
-  // Boolean field: Channel 3 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH3OCV = 1U << 11 ;
-
-  // Boolean field: Channel 4 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH4OCV = 1U << 12 ;
-
-  // Boolean field: Channel 5 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH5OCV = 1U << 13 ;
-
-  // Boolean field: Channel 6 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH6OCV = 1U << 14 ;
-
-  // Boolean field: Channel 7 Software Output Control Value
-    static const uint32_t FTM0_SWOCTRL_CH7OCV = 1U << 15 ;
-
-//-------------------- FTM PWM Load
-#define FTM0_PWMLOAD (* ((volatile uint32_t *) (0x40038000 + 0x98)))
-
-  // Boolean field: Channel 0 Select
-    static const uint32_t FTM0_PWMLOAD_CH0SEL = 1U << 0 ;
-
-  // Boolean field: Channel 1 Select
-    static const uint32_t FTM0_PWMLOAD_CH1SEL = 1U << 1 ;
-
-  // Boolean field: Channel 2 Select
-    static const uint32_t FTM0_PWMLOAD_CH2SEL = 1U << 2 ;
-
-  // Boolean field: Channel 3 Select
-    static const uint32_t FTM0_PWMLOAD_CH3SEL = 1U << 3 ;
-
-  // Boolean field: Channel 4 Select
-    static const uint32_t FTM0_PWMLOAD_CH4SEL = 1U << 4 ;
-
-  // Boolean field: Channel 5 Select
-    static const uint32_t FTM0_PWMLOAD_CH5SEL = 1U << 5 ;
-
-  // Boolean field: Channel 6 Select
-    static const uint32_t FTM0_PWMLOAD_CH6SEL = 1U << 6 ;
-
-  // Boolean field: Channel 7 Select
-    static const uint32_t FTM0_PWMLOAD_CH7SEL = 1U << 7 ;
-
-  // Boolean field: Load Enable
-    static const uint32_t FTM0_PWMLOAD_LDOK = 1U << 9 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral FTM1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Status And Control
-#define FTM1_SC (* ((volatile uint32_t *) (0x40039000 + 0)))
-
-  // Field (width: 3 bits): Prescale Factor Selection
-    inline uint32_t FTM1_SC_PS (const uint32_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 2 bits): Clock Source Selection
-    inline uint32_t FTM1_SC_CLKS (const uint32_t inValue) { return (inValue & 3) << 3 ; }
-
-  // Boolean field: Center-Aligned PWM Select
-    static const uint32_t FTM1_SC_CPWMS = 1U << 5 ;
-
-  // Boolean field: Timer Overflow Interrupt Enable
-    static const uint32_t FTM1_SC_TOIE = 1U << 6 ;
-
-  // Boolean field: Timer Overflow Flag
-    static const uint32_t FTM1_SC_TOF = 1U << 7 ;
-
-//-------------------- Counter
-#define FTM1_CNT (* ((volatile uint32_t *) (0x40039000 + 0x4)))
-
-  // Field (width: 16 bits): Counter Value
-    inline uint32_t FTM1_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Modulo
-#define FTM1_MOD (* ((volatile uint32_t *) (0x40039000 + 0x8)))
-
-  // Field (width: 16 bits): Modulo Value
-    inline uint32_t FTM1_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Channel (n) Status And Control (idx = 0 ... 1)
-#define FTM1_CSC(idx) (* ((volatile uint32_t *) (0x40039000 + 0xC + 0x8 * (idx))))
-
-  // Boolean field: DMA Enable
-    static const uint32_t FTM1_CSC_DMA = 1U << 0 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM1_CSC_ELSA = 1U << 2 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM1_CSC_ELSB = 1U << 3 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM1_CSC_MSA = 1U << 4 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM1_CSC_MSB = 1U << 5 ;
-
-  // Boolean field: Channel Interrupt Enable
-    static const uint32_t FTM1_CSC_CHIE = 1U << 6 ;
-
-  // Boolean field: Channel Flag
-    static const uint32_t FTM1_CSC_CHF = 1U << 7 ;
-
-//-------------------- Channel (n) Value (idx = 0 ... 1)
-#define FTM1_CV(idx) (* ((volatile uint32_t *) (0x40039000 + 0x10 + 0x8 * (idx))))
-
-  // Field (width: 16 bits): Channel Value
-    inline uint32_t FTM1_CV_VAL (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Counter Initial Value
-#define FTM1_CNTIN (* ((volatile uint32_t *) (0x40039000 + 0x4C)))
-
-  // Field (width: 16 bits): Initial Value Of The FTM Counter
-    inline uint32_t FTM1_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Capture And Compare Status
-#define FTM1_STATUS (* ((volatile uint32_t *) (0x40039000 + 0x50)))
-
-  // Boolean field: Channel 0 Flag
-    static const uint32_t FTM1_STATUS_CH0F = 1U << 0 ;
-
-  // Boolean field: Channel 1 Flag
-    static const uint32_t FTM1_STATUS_CH1F = 1U << 1 ;
-
-  // Boolean field: Channel 2 Flag
-    static const uint32_t FTM1_STATUS_CH2F = 1U << 2 ;
-
-  // Boolean field: Channel 3 Flag
-    static const uint32_t FTM1_STATUS_CH3F = 1U << 3 ;
-
-  // Boolean field: Channel 4 Flag
-    static const uint32_t FTM1_STATUS_CH4F = 1U << 4 ;
-
-  // Boolean field: Channel 5 Flag
-    static const uint32_t FTM1_STATUS_CH5F = 1U << 5 ;
-
-  // Boolean field: Channel 6 Flag
-    static const uint32_t FTM1_STATUS_CH6F = 1U << 6 ;
-
-  // Boolean field: Channel 7 Flag
-    static const uint32_t FTM1_STATUS_CH7F = 1U << 7 ;
-
-//-------------------- Features Mode Selection
-#define FTM1_MODE (* ((volatile uint32_t *) (0x40039000 + 0x54)))
-
-  // Boolean field: FTM Enable
-    static const uint32_t FTM1_MODE_FTMEN = 1U << 0 ;
-
-  // Boolean field: Initialize The Channels Output
-    static const uint32_t FTM1_MODE_INIT = 1U << 1 ;
-
-  // Boolean field: Write Protection Disable
-    static const uint32_t FTM1_MODE_WPDIS = 1U << 2 ;
-
-  // Boolean field: PWM Synchronization Mode
-    static const uint32_t FTM1_MODE_PWMSYNC = 1U << 3 ;
-
-  // Boolean field: Capture Test Mode Enable
-    static const uint32_t FTM1_MODE_CAPTEST = 1U << 4 ;
-
-  // Field (width: 2 bits): Fault Control Mode
-    inline uint32_t FTM1_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3) << 5 ; }
-
-  // Boolean field: Fault Interrupt Enable
-    static const uint32_t FTM1_MODE_FAULTIE = 1U << 7 ;
-
-//-------------------- Synchronization
-#define FTM1_SYNC (* ((volatile uint32_t *) (0x40039000 + 0x58)))
-
-  // Boolean field: Minimum Loading Point Enable
-    static const uint32_t FTM1_SYNC_CNTMIN = 1U << 0 ;
-
-  // Boolean field: Maximum Loading Point Enable
-    static const uint32_t FTM1_SYNC_CNTMAX = 1U << 1 ;
-
-  // Boolean field: FTM Counter Reinitialization By Synchronization (FTM counter synchronization)
-    static const uint32_t FTM1_SYNC_REINIT = 1U << 2 ;
-
-  // Boolean field: Output Mask Synchronization
-    static const uint32_t FTM1_SYNC_SYNCHOM = 1U << 3 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 0
-    static const uint32_t FTM1_SYNC_TRIG0 = 1U << 4 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 1
-    static const uint32_t FTM1_SYNC_TRIG1 = 1U << 5 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 2
-    static const uint32_t FTM1_SYNC_TRIG2 = 1U << 6 ;
-
-  // Boolean field: PWM Synchronization Software Trigger
-    static const uint32_t FTM1_SYNC_SWSYNC = 1U << 7 ;
-
-//-------------------- Initial State For Channels Output
-#define FTM1_OUTINIT (* ((volatile uint32_t *) (0x40039000 + 0x5C)))
-
-  // Boolean field: Channel 0 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH0OI = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH1OI = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH2OI = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH3OI = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH4OI = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH5OI = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH6OI = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Initialization Value
-    static const uint32_t FTM1_OUTINIT_CH7OI = 1U << 7 ;
-
-//-------------------- Output Mask
-#define FTM1_OUTMASK (* ((volatile uint32_t *) (0x40039000 + 0x60)))
-
-  // Boolean field: Channel 0 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH0OM = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH1OM = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH2OM = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH3OM = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH4OM = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH5OM = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH6OM = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Mask
-    static const uint32_t FTM1_OUTMASK_CH7OM = 1U << 7 ;
-
-//-------------------- Function For Linked Channels
-#define FTM1_COMBINE (* ((volatile uint32_t *) (0x40039000 + 0x64)))
-
-  // Boolean field: Combine Channels For n = 0
-    static const uint32_t FTM1_COMBINE_COMBINE0 = 1U << 0 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 0
-    static const uint32_t FTM1_COMBINE_COMP0 = 1U << 1 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 0
-    static const uint32_t FTM1_COMBINE_DECAPEN0 = 1U << 2 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 0
-    static const uint32_t FTM1_COMBINE_DECAP0 = 1U << 3 ;
-
-  // Boolean field: Deadtime Enable For n = 0
-    static const uint32_t FTM1_COMBINE_DTEN0 = 1U << 4 ;
-
-  // Boolean field: Synchronization Enable For n = 0
-    static const uint32_t FTM1_COMBINE_SYNCEN0 = 1U << 5 ;
-
-  // Boolean field: Fault Control Enable For n = 0
-    static const uint32_t FTM1_COMBINE_FAULTEN0 = 1U << 6 ;
-
-  // Boolean field: Combine Channels For n = 2
-    static const uint32_t FTM1_COMBINE_COMBINE1 = 1U << 8 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 2
-    static const uint32_t FTM1_COMBINE_COMP1 = 1U << 9 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 2
-    static const uint32_t FTM1_COMBINE_DECAPEN1 = 1U << 10 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 2
-    static const uint32_t FTM1_COMBINE_DECAP1 = 1U << 11 ;
-
-  // Boolean field: Deadtime Enable For n = 2
-    static const uint32_t FTM1_COMBINE_DTEN1 = 1U << 12 ;
-
-  // Boolean field: Synchronization Enable For n = 2
-    static const uint32_t FTM1_COMBINE_SYNCEN1 = 1U << 13 ;
-
-  // Boolean field: Fault Control Enable For n = 2
-    static const uint32_t FTM1_COMBINE_FAULTEN1 = 1U << 14 ;
-
-  // Boolean field: Combine Channels For n = 4
-    static const uint32_t FTM1_COMBINE_COMBINE2 = 1U << 16 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 4
-    static const uint32_t FTM1_COMBINE_COMP2 = 1U << 17 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 4
-    static const uint32_t FTM1_COMBINE_DECAPEN2 = 1U << 18 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 4
-    static const uint32_t FTM1_COMBINE_DECAP2 = 1U << 19 ;
-
-  // Boolean field: Deadtime Enable For n = 4
-    static const uint32_t FTM1_COMBINE_DTEN2 = 1U << 20 ;
-
-  // Boolean field: Synchronization Enable For n = 4
-    static const uint32_t FTM1_COMBINE_SYNCEN2 = 1U << 21 ;
-
-  // Boolean field: Fault Control Enable For n = 4
-    static const uint32_t FTM1_COMBINE_FAULTEN2 = 1U << 22 ;
-
-  // Boolean field: Combine Channels For n = 6
-    static const uint32_t FTM1_COMBINE_COMBINE3 = 1U << 24 ;
-
-  // Boolean field: Complement Of Channel (n) for n = 6
-    static const uint32_t FTM1_COMBINE_COMP3 = 1U << 25 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 6
-    static const uint32_t FTM1_COMBINE_DECAPEN3 = 1U << 26 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 6
-    static const uint32_t FTM1_COMBINE_DECAP3 = 1U << 27 ;
-
-  // Boolean field: Deadtime Enable For n = 6
-    static const uint32_t FTM1_COMBINE_DTEN3 = 1U << 28 ;
-
-  // Boolean field: Synchronization Enable For n = 6
-    static const uint32_t FTM1_COMBINE_SYNCEN3 = 1U << 29 ;
-
-  // Boolean field: Fault Control Enable For n = 6
-    static const uint32_t FTM1_COMBINE_FAULTEN3 = 1U << 30 ;
-
-//-------------------- Deadtime Insertion Control
-#define FTM1_DEADTIME (* ((volatile uint32_t *) (0x40039000 + 0x68)))
-
-  // Field (width: 6 bits): Deadtime Value
-    inline uint32_t FTM1_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Deadtime Prescaler Value
-    inline uint32_t FTM1_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- FTM External Trigger
-#define FTM1_EXTTRIG (* ((volatile uint32_t *) (0x40039000 + 0x6C)))
-
-  // Boolean field: Channel 2 Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_CH2TRIG = 1U << 0 ;
-
-  // Boolean field: Channel 3 Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_CH3TRIG = 1U << 1 ;
-
-  // Boolean field: Channel 4 Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_CH4TRIG = 1U << 2 ;
-
-  // Boolean field: Channel 5 Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_CH5TRIG = 1U << 3 ;
-
-  // Boolean field: Channel 0 Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_CH0TRIG = 1U << 4 ;
-
-  // Boolean field: Channel 1 Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_CH1TRIG = 1U << 5 ;
-
-  // Boolean field: Initialization Trigger Enable
-    static const uint32_t FTM1_EXTTRIG_INITTRIGEN = 1U << 6 ;
-
-  // Boolean field: Channel Trigger Flag
-    static const uint32_t FTM1_EXTTRIG_TRIGF = 1U << 7 ;
-
-//-------------------- Channels Polarity
-#define FTM1_POL (* ((volatile uint32_t *) (0x40039000 + 0x70)))
-
-  // Boolean field: Channel 0 Polarity
-    static const uint32_t FTM1_POL_POL0 = 1U << 0 ;
-
-  // Boolean field: Channel 1 Polarity
-    static const uint32_t FTM1_POL_POL1 = 1U << 1 ;
-
-  // Boolean field: Channel 2 Polarity
-    static const uint32_t FTM1_POL_POL2 = 1U << 2 ;
-
-  // Boolean field: Channel 3 Polarity
-    static const uint32_t FTM1_POL_POL3 = 1U << 3 ;
-
-  // Boolean field: Channel 4 Polarity
-    static const uint32_t FTM1_POL_POL4 = 1U << 4 ;
-
-  // Boolean field: Channel 5 Polarity
-    static const uint32_t FTM1_POL_POL5 = 1U << 5 ;
-
-  // Boolean field: Channel 6 Polarity
-    static const uint32_t FTM1_POL_POL6 = 1U << 6 ;
-
-  // Boolean field: Channel 7 Polarity
-    static const uint32_t FTM1_POL_POL7 = 1U << 7 ;
-
-//-------------------- Fault Mode Status
-#define FTM1_FMS (* ((volatile uint32_t *) (0x40039000 + 0x74)))
-
-  // Boolean field: Fault Detection Flag 0
-    static const uint32_t FTM1_FMS_FAULTF0 = 1U << 0 ;
-
-  // Boolean field: Fault Detection Flag 1
-    static const uint32_t FTM1_FMS_FAULTF1 = 1U << 1 ;
-
-  // Boolean field: Fault Detection Flag 2
-    static const uint32_t FTM1_FMS_FAULTF2 = 1U << 2 ;
-
-  // Boolean field: Fault Detection Flag 3
-    static const uint32_t FTM1_FMS_FAULTF3 = 1U << 3 ;
-
-  // Boolean field: Fault Inputs
-    static const uint32_t FTM1_FMS_FAULTIN = 1U << 5 ;
-
-  // Boolean field: Write Protection Enable
-    static const uint32_t FTM1_FMS_WPEN = 1U << 6 ;
-
-  // Boolean field: Fault Detection Flag
-    static const uint32_t FTM1_FMS_FAULTF = 1U << 7 ;
-
-//-------------------- Input Capture Filter Control
-#define FTM1_FILTER (* ((volatile uint32_t *) (0x40039000 + 0x78)))
-
-  // Field (width: 4 bits): Channel 0 Input Filter
-    inline uint32_t FTM1_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Channel 1 Input Filter
-    inline uint32_t FTM1_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Channel 2 Input Filter
-    inline uint32_t FTM1_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): Channel 3 Input Filter
-    inline uint32_t FTM1_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-//-------------------- Fault Control
-#define FTM1_FLTCTRL (* ((volatile uint32_t *) (0x40039000 + 0x7C)))
-
-  // Boolean field: Fault Input 0 Enable
-    static const uint32_t FTM1_FLTCTRL_FAULT0EN = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Enable
-    static const uint32_t FTM1_FLTCTRL_FAULT1EN = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Enable
-    static const uint32_t FTM1_FLTCTRL_FAULT2EN = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Enable
-    static const uint32_t FTM1_FLTCTRL_FAULT3EN = 1U << 3 ;
-
-  // Boolean field: Fault Input 0 Filter Enable
-    static const uint32_t FTM1_FLTCTRL_FFLTR0EN = 1U << 4 ;
-
-  // Boolean field: Fault Input 1 Filter Enable
-    static const uint32_t FTM1_FLTCTRL_FFLTR1EN = 1U << 5 ;
-
-  // Boolean field: Fault Input 2 Filter Enable
-    static const uint32_t FTM1_FLTCTRL_FFLTR2EN = 1U << 6 ;
-
-  // Boolean field: Fault Input 3 Filter Enable
-    static const uint32_t FTM1_FLTCTRL_FFLTR3EN = 1U << 7 ;
-
-  // Field (width: 4 bits): Fault Input Filter
-    inline uint32_t FTM1_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-//-------------------- Quadrature Decoder Control And Status
-#define FTM1_QDCTRL (* ((volatile uint32_t *) (0x40039000 + 0x80)))
-
-  // Boolean field: Quadrature Decoder Mode Enable
-    static const uint32_t FTM1_QDCTRL_QUADEN = 1U << 0 ;
-
-  // Boolean field: Timer Overflow Direction In Quadrature Decoder Mode
-    static const uint32_t FTM1_QDCTRL_TOFDIR = 1U << 1 ;
-
-  // Boolean field: FTM Counter Direction In Quadrature Decoder Mode
-    static const uint32_t FTM1_QDCTRL_QUADIR = 1U << 2 ;
-
-  // Boolean field: Quadrature Decoder Mode
-    static const uint32_t FTM1_QDCTRL_QUADMODE = 1U << 3 ;
-
-  // Boolean field: Phase B Input Polarity
-    static const uint32_t FTM1_QDCTRL_PHBPOL = 1U << 4 ;
-
-  // Boolean field: Phase A Input Polarity
-    static const uint32_t FTM1_QDCTRL_PHAPOL = 1U << 5 ;
-
-  // Boolean field: Phase B Input Filter Enable
-    static const uint32_t FTM1_QDCTRL_PHBFLTREN = 1U << 6 ;
-
-  // Boolean field: Phase A Input Filter Enable
-    static const uint32_t FTM1_QDCTRL_PHAFLTREN = 1U << 7 ;
-
-//-------------------- Configuration
-#define FTM1_CONF (* ((volatile uint32_t *) (0x40039000 + 0x84)))
-
-  // Field (width: 5 bits): TOF Frequency
-    inline uint32_t FTM1_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Field (width: 2 bits): BDM Mode
-    inline uint32_t FTM1_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-  // Boolean field: Global Time Base Enable
-    static const uint32_t FTM1_CONF_GTBEEN = 1U << 9 ;
-
-  // Boolean field: Global Time Base Output
-    static const uint32_t FTM1_CONF_GTBEOUT = 1U << 10 ;
-
-//-------------------- FTM Fault Input Polarity
-#define FTM1_FLTPOL (* ((volatile uint32_t *) (0x40039000 + 0x88)))
-
-  // Boolean field: Fault Input 0 Polarity
-    static const uint32_t FTM1_FLTPOL_FLT0POL = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Polarity
-    static const uint32_t FTM1_FLTPOL_FLT1POL = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Polarity
-    static const uint32_t FTM1_FLTPOL_FLT2POL = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Polarity
-    static const uint32_t FTM1_FLTPOL_FLT3POL = 1U << 3 ;
-
-//-------------------- Synchronization Configuration
-#define FTM1_SYNCONF (* ((volatile uint32_t *) (0x40039000 + 0x8C)))
-
-  // Boolean field: Hardware Trigger Mode
-    static const uint32_t FTM1_SYNCONF_HWTRIGMODE = 1U << 0 ;
-
-  // Boolean field: CNTIN Register Synchronization
-    static const uint32_t FTM1_SYNCONF_CNTINC = 1U << 2 ;
-
-  // Boolean field: INVCTRL Register Synchronization
-    static const uint32_t FTM1_SYNCONF_INVC = 1U << 4 ;
-
-  // Boolean field: SWOCTRL Register Synchronization
-    static const uint32_t FTM1_SYNCONF_SWOC = 1U << 5 ;
-
-  // Boolean field: Synchronization Mode
-    static const uint32_t FTM1_SYNCONF_SYNCMODE = 1U << 7 ;
-
-  // Boolean field: FTM counter synchronization is activated by the software trigger.
-    static const uint32_t FTM1_SYNCONF_SWRSTCNT = 1U << 8 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by the software trigger.
-    static const uint32_t FTM1_SYNCONF_SWWRBUF = 1U << 9 ;
-
-  // Boolean field: Output mask synchronization is activated by the software trigger.
-    static const uint32_t FTM1_SYNCONF_SWOM = 1U << 10 ;
-
-  // Boolean field: Inverting control synchronization is activated by the software trigger.
-    static const uint32_t FTM1_SYNCONF_SWINVC = 1U << 11 ;
-
-  // Boolean field: Software output control synchronization is activated by the software trigger.
-    static const uint32_t FTM1_SYNCONF_SWSOC = 1U << 12 ;
-
-  // Boolean field: FTM counter synchronization is activated by a hardware trigger.
-    static const uint32_t FTM1_SYNCONF_HWRSTCNT = 1U << 16 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by a hardware trigger.
-    static const uint32_t FTM1_SYNCONF_HWWRBUF = 1U << 17 ;
-
-  // Boolean field: Output mask synchronization is activated by a hardware trigger.
-    static const uint32_t FTM1_SYNCONF_HWOM = 1U << 18 ;
-
-  // Boolean field: Inverting control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM1_SYNCONF_HWINVC = 1U << 19 ;
-
-  // Boolean field: Software output control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM1_SYNCONF_HWSOC = 1U << 20 ;
-
-//-------------------- FTM Inverting Control
-#define FTM1_INVCTRL (* ((volatile uint32_t *) (0x40039000 + 0x90)))
-
-  // Boolean field: Pair Channels 0 Inverting Enable
-    static const uint32_t FTM1_INVCTRL_INV0EN = 1U << 0 ;
-
-  // Boolean field: Pair Channels 1 Inverting Enable
-    static const uint32_t FTM1_INVCTRL_INV1EN = 1U << 1 ;
-
-  // Boolean field: Pair Channels 2 Inverting Enable
-    static const uint32_t FTM1_INVCTRL_INV2EN = 1U << 2 ;
-
-  // Boolean field: Pair Channels 3 Inverting Enable
-    static const uint32_t FTM1_INVCTRL_INV3EN = 1U << 3 ;
-
-//-------------------- FTM Software Output Control
-#define FTM1_SWOCTRL (* ((volatile uint32_t *) (0x40039000 + 0x94)))
-
-  // Boolean field: Channel 0 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH0OC = 1U << 0 ;
-
-  // Boolean field: Channel 1 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH1OC = 1U << 1 ;
-
-  // Boolean field: Channel 2 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH2OC = 1U << 2 ;
-
-  // Boolean field: Channel 3 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH3OC = 1U << 3 ;
-
-  // Boolean field: Channel 4 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH4OC = 1U << 4 ;
-
-  // Boolean field: Channel 5 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH5OC = 1U << 5 ;
-
-  // Boolean field: Channel 6 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH6OC = 1U << 6 ;
-
-  // Boolean field: Channel 7 Software Output Control Enable
-    static const uint32_t FTM1_SWOCTRL_CH7OC = 1U << 7 ;
-
-  // Boolean field: Channel 0 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH0OCV = 1U << 8 ;
-
-  // Boolean field: Channel 1 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH1OCV = 1U << 9 ;
-
-  // Boolean field: Channel 2 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH2OCV = 1U << 10 ;
-
-  // Boolean field: Channel 3 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH3OCV = 1U << 11 ;
-
-  // Boolean field: Channel 4 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH4OCV = 1U << 12 ;
-
-  // Boolean field: Channel 5 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH5OCV = 1U << 13 ;
-
-  // Boolean field: Channel 6 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH6OCV = 1U << 14 ;
-
-  // Boolean field: Channel 7 Software Output Control Value
-    static const uint32_t FTM1_SWOCTRL_CH7OCV = 1U << 15 ;
-
-//-------------------- FTM PWM Load
-#define FTM1_PWMLOAD (* ((volatile uint32_t *) (0x40039000 + 0x98)))
-
-  // Boolean field: Channel 0 Select
-    static const uint32_t FTM1_PWMLOAD_CH0SEL = 1U << 0 ;
-
-  // Boolean field: Channel 1 Select
-    static const uint32_t FTM1_PWMLOAD_CH1SEL = 1U << 1 ;
-
-  // Boolean field: Channel 2 Select
-    static const uint32_t FTM1_PWMLOAD_CH2SEL = 1U << 2 ;
-
-  // Boolean field: Channel 3 Select
-    static const uint32_t FTM1_PWMLOAD_CH3SEL = 1U << 3 ;
-
-  // Boolean field: Channel 4 Select
-    static const uint32_t FTM1_PWMLOAD_CH4SEL = 1U << 4 ;
-
-  // Boolean field: Channel 5 Select
-    static const uint32_t FTM1_PWMLOAD_CH5SEL = 1U << 5 ;
-
-  // Boolean field: Channel 6 Select
-    static const uint32_t FTM1_PWMLOAD_CH6SEL = 1U << 6 ;
-
-  // Boolean field: Channel 7 Select
-    static const uint32_t FTM1_PWMLOAD_CH7SEL = 1U << 7 ;
-
-  // Boolean field: Load Enable
-    static const uint32_t FTM1_PWMLOAD_LDOK = 1U << 9 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral FTM2
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Status And Control
-#define FTM2_SC (* ((volatile uint32_t *) (0x4003A000 + 0)))
-
-  // Field (width: 3 bits): Prescale Factor Selection
-    inline uint32_t FTM2_SC_PS (const uint32_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 2 bits): Clock Source Selection
-    inline uint32_t FTM2_SC_CLKS (const uint32_t inValue) { return (inValue & 3) << 3 ; }
-
-  // Boolean field: Center-Aligned PWM Select
-    static const uint32_t FTM2_SC_CPWMS = 1U << 5 ;
-
-  // Boolean field: Timer Overflow Interrupt Enable
-    static const uint32_t FTM2_SC_TOIE = 1U << 6 ;
-
-  // Boolean field: Timer Overflow Flag
-    static const uint32_t FTM2_SC_TOF = 1U << 7 ;
-
-//-------------------- Counter
-#define FTM2_CNT (* ((volatile uint32_t *) (0x4003A000 + 0x4)))
-
-  // Field (width: 16 bits): Counter Value
-    inline uint32_t FTM2_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Modulo
-#define FTM2_MOD (* ((volatile uint32_t *) (0x4003A000 + 0x8)))
-
-  // Field (width: 16 bits): Modulo Value
-    inline uint32_t FTM2_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Channel (n) Status And Control (idx = 0 ... 1)
-#define FTM2_CSC(idx) (* ((volatile uint32_t *) (0x4003A000 + 0xC + 0x8 * (idx))))
-
-  // Boolean field: DMA Enable
-    static const uint32_t FTM2_CSC_DMA = 1U << 0 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM2_CSC_ELSA = 1U << 2 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM2_CSC_ELSB = 1U << 3 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM2_CSC_MSA = 1U << 4 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM2_CSC_MSB = 1U << 5 ;
-
-  // Boolean field: Channel Interrupt Enable
-    static const uint32_t FTM2_CSC_CHIE = 1U << 6 ;
-
-  // Boolean field: Channel Flag
-    static const uint32_t FTM2_CSC_CHF = 1U << 7 ;
-
-//-------------------- Channel (n) Value (idx = 0 ... 1)
-#define FTM2_CV(idx) (* ((volatile uint32_t *) (0x4003A000 + 0x10 + 0x8 * (idx))))
-
-  // Field (width: 16 bits): Channel Value
-    inline uint32_t FTM2_CV_VAL (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Counter Initial Value
-#define FTM2_CNTIN (* ((volatile uint32_t *) (0x4003A000 + 0x4C)))
-
-  // Field (width: 16 bits): Initial Value Of The FTM Counter
-    inline uint32_t FTM2_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Capture And Compare Status
-#define FTM2_STATUS (* ((volatile uint32_t *) (0x4003A000 + 0x50)))
-
-  // Boolean field: Channel 0 Flag
-    static const uint32_t FTM2_STATUS_CH0F = 1U << 0 ;
-
-  // Boolean field: Channel 1 Flag
-    static const uint32_t FTM2_STATUS_CH1F = 1U << 1 ;
-
-  // Boolean field: Channel 2 Flag
-    static const uint32_t FTM2_STATUS_CH2F = 1U << 2 ;
-
-  // Boolean field: Channel 3 Flag
-    static const uint32_t FTM2_STATUS_CH3F = 1U << 3 ;
-
-  // Boolean field: Channel 4 Flag
-    static const uint32_t FTM2_STATUS_CH4F = 1U << 4 ;
-
-  // Boolean field: Channel 5 Flag
-    static const uint32_t FTM2_STATUS_CH5F = 1U << 5 ;
-
-  // Boolean field: Channel 6 Flag
-    static const uint32_t FTM2_STATUS_CH6F = 1U << 6 ;
-
-  // Boolean field: Channel 7 Flag
-    static const uint32_t FTM2_STATUS_CH7F = 1U << 7 ;
-
-//-------------------- Features Mode Selection
-#define FTM2_MODE (* ((volatile uint32_t *) (0x4003A000 + 0x54)))
-
-  // Boolean field: FTM Enable
-    static const uint32_t FTM2_MODE_FTMEN = 1U << 0 ;
-
-  // Boolean field: Initialize The Channels Output
-    static const uint32_t FTM2_MODE_INIT = 1U << 1 ;
-
-  // Boolean field: Write Protection Disable
-    static const uint32_t FTM2_MODE_WPDIS = 1U << 2 ;
-
-  // Boolean field: PWM Synchronization Mode
-    static const uint32_t FTM2_MODE_PWMSYNC = 1U << 3 ;
-
-  // Boolean field: Capture Test Mode Enable
-    static const uint32_t FTM2_MODE_CAPTEST = 1U << 4 ;
-
-  // Field (width: 2 bits): Fault Control Mode
-    inline uint32_t FTM2_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3) << 5 ; }
-
-  // Boolean field: Fault Interrupt Enable
-    static const uint32_t FTM2_MODE_FAULTIE = 1U << 7 ;
-
-//-------------------- Synchronization
-#define FTM2_SYNC (* ((volatile uint32_t *) (0x4003A000 + 0x58)))
-
-  // Boolean field: Minimum Loading Point Enable
-    static const uint32_t FTM2_SYNC_CNTMIN = 1U << 0 ;
-
-  // Boolean field: Maximum Loading Point Enable
-    static const uint32_t FTM2_SYNC_CNTMAX = 1U << 1 ;
-
-  // Boolean field: FTM Counter Reinitialization By Synchronization (FTM counter synchronization)
-    static const uint32_t FTM2_SYNC_REINIT = 1U << 2 ;
-
-  // Boolean field: Output Mask Synchronization
-    static const uint32_t FTM2_SYNC_SYNCHOM = 1U << 3 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 0
-    static const uint32_t FTM2_SYNC_TRIG0 = 1U << 4 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 1
-    static const uint32_t FTM2_SYNC_TRIG1 = 1U << 5 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 2
-    static const uint32_t FTM2_SYNC_TRIG2 = 1U << 6 ;
-
-  // Boolean field: PWM Synchronization Software Trigger
-    static const uint32_t FTM2_SYNC_SWSYNC = 1U << 7 ;
-
-//-------------------- Initial State For Channels Output
-#define FTM2_OUTINIT (* ((volatile uint32_t *) (0x4003A000 + 0x5C)))
-
-  // Boolean field: Channel 0 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH0OI = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH1OI = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH2OI = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH3OI = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH4OI = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH5OI = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH6OI = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Initialization Value
-    static const uint32_t FTM2_OUTINIT_CH7OI = 1U << 7 ;
-
-//-------------------- Output Mask
-#define FTM2_OUTMASK (* ((volatile uint32_t *) (0x4003A000 + 0x60)))
-
-  // Boolean field: Channel 0 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH0OM = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH1OM = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH2OM = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH3OM = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH4OM = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH5OM = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH6OM = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Mask
-    static const uint32_t FTM2_OUTMASK_CH7OM = 1U << 7 ;
-
-//-------------------- Function For Linked Channels
-#define FTM2_COMBINE (* ((volatile uint32_t *) (0x4003A000 + 0x64)))
-
-  // Boolean field: Combine Channels For n = 0
-    static const uint32_t FTM2_COMBINE_COMBINE0 = 1U << 0 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 0
-    static const uint32_t FTM2_COMBINE_COMP0 = 1U << 1 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 0
-    static const uint32_t FTM2_COMBINE_DECAPEN0 = 1U << 2 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 0
-    static const uint32_t FTM2_COMBINE_DECAP0 = 1U << 3 ;
-
-  // Boolean field: Deadtime Enable For n = 0
-    static const uint32_t FTM2_COMBINE_DTEN0 = 1U << 4 ;
-
-  // Boolean field: Synchronization Enable For n = 0
-    static const uint32_t FTM2_COMBINE_SYNCEN0 = 1U << 5 ;
-
-  // Boolean field: Fault Control Enable For n = 0
-    static const uint32_t FTM2_COMBINE_FAULTEN0 = 1U << 6 ;
-
-  // Boolean field: Combine Channels For n = 2
-    static const uint32_t FTM2_COMBINE_COMBINE1 = 1U << 8 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 2
-    static const uint32_t FTM2_COMBINE_COMP1 = 1U << 9 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 2
-    static const uint32_t FTM2_COMBINE_DECAPEN1 = 1U << 10 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 2
-    static const uint32_t FTM2_COMBINE_DECAP1 = 1U << 11 ;
-
-  // Boolean field: Deadtime Enable For n = 2
-    static const uint32_t FTM2_COMBINE_DTEN1 = 1U << 12 ;
-
-  // Boolean field: Synchronization Enable For n = 2
-    static const uint32_t FTM2_COMBINE_SYNCEN1 = 1U << 13 ;
-
-  // Boolean field: Fault Control Enable For n = 2
-    static const uint32_t FTM2_COMBINE_FAULTEN1 = 1U << 14 ;
-
-  // Boolean field: Combine Channels For n = 4
-    static const uint32_t FTM2_COMBINE_COMBINE2 = 1U << 16 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 4
-    static const uint32_t FTM2_COMBINE_COMP2 = 1U << 17 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 4
-    static const uint32_t FTM2_COMBINE_DECAPEN2 = 1U << 18 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 4
-    static const uint32_t FTM2_COMBINE_DECAP2 = 1U << 19 ;
-
-  // Boolean field: Deadtime Enable For n = 4
-    static const uint32_t FTM2_COMBINE_DTEN2 = 1U << 20 ;
-
-  // Boolean field: Synchronization Enable For n = 4
-    static const uint32_t FTM2_COMBINE_SYNCEN2 = 1U << 21 ;
-
-  // Boolean field: Fault Control Enable For n = 4
-    static const uint32_t FTM2_COMBINE_FAULTEN2 = 1U << 22 ;
-
-  // Boolean field: Combine Channels For n = 6
-    static const uint32_t FTM2_COMBINE_COMBINE3 = 1U << 24 ;
-
-  // Boolean field: Complement Of Channel (n) for n = 6
-    static const uint32_t FTM2_COMBINE_COMP3 = 1U << 25 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 6
-    static const uint32_t FTM2_COMBINE_DECAPEN3 = 1U << 26 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 6
-    static const uint32_t FTM2_COMBINE_DECAP3 = 1U << 27 ;
-
-  // Boolean field: Deadtime Enable For n = 6
-    static const uint32_t FTM2_COMBINE_DTEN3 = 1U << 28 ;
-
-  // Boolean field: Synchronization Enable For n = 6
-    static const uint32_t FTM2_COMBINE_SYNCEN3 = 1U << 29 ;
-
-  // Boolean field: Fault Control Enable For n = 6
-    static const uint32_t FTM2_COMBINE_FAULTEN3 = 1U << 30 ;
-
-//-------------------- Deadtime Insertion Control
-#define FTM2_DEADTIME (* ((volatile uint32_t *) (0x4003A000 + 0x68)))
-
-  // Field (width: 6 bits): Deadtime Value
-    inline uint32_t FTM2_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Deadtime Prescaler Value
-    inline uint32_t FTM2_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- FTM External Trigger
-#define FTM2_EXTTRIG (* ((volatile uint32_t *) (0x4003A000 + 0x6C)))
-
-  // Boolean field: Channel 2 Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_CH2TRIG = 1U << 0 ;
-
-  // Boolean field: Channel 3 Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_CH3TRIG = 1U << 1 ;
-
-  // Boolean field: Channel 4 Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_CH4TRIG = 1U << 2 ;
-
-  // Boolean field: Channel 5 Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_CH5TRIG = 1U << 3 ;
-
-  // Boolean field: Channel 0 Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_CH0TRIG = 1U << 4 ;
-
-  // Boolean field: Channel 1 Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_CH1TRIG = 1U << 5 ;
-
-  // Boolean field: Initialization Trigger Enable
-    static const uint32_t FTM2_EXTTRIG_INITTRIGEN = 1U << 6 ;
-
-  // Boolean field: Channel Trigger Flag
-    static const uint32_t FTM2_EXTTRIG_TRIGF = 1U << 7 ;
-
-//-------------------- Channels Polarity
-#define FTM2_POL (* ((volatile uint32_t *) (0x4003A000 + 0x70)))
-
-  // Boolean field: Channel 0 Polarity
-    static const uint32_t FTM2_POL_POL0 = 1U << 0 ;
-
-  // Boolean field: Channel 1 Polarity
-    static const uint32_t FTM2_POL_POL1 = 1U << 1 ;
-
-  // Boolean field: Channel 2 Polarity
-    static const uint32_t FTM2_POL_POL2 = 1U << 2 ;
-
-  // Boolean field: Channel 3 Polarity
-    static const uint32_t FTM2_POL_POL3 = 1U << 3 ;
-
-  // Boolean field: Channel 4 Polarity
-    static const uint32_t FTM2_POL_POL4 = 1U << 4 ;
-
-  // Boolean field: Channel 5 Polarity
-    static const uint32_t FTM2_POL_POL5 = 1U << 5 ;
-
-  // Boolean field: Channel 6 Polarity
-    static const uint32_t FTM2_POL_POL6 = 1U << 6 ;
-
-  // Boolean field: Channel 7 Polarity
-    static const uint32_t FTM2_POL_POL7 = 1U << 7 ;
-
-//-------------------- Fault Mode Status
-#define FTM2_FMS (* ((volatile uint32_t *) (0x4003A000 + 0x74)))
-
-  // Boolean field: Fault Detection Flag 0
-    static const uint32_t FTM2_FMS_FAULTF0 = 1U << 0 ;
-
-  // Boolean field: Fault Detection Flag 1
-    static const uint32_t FTM2_FMS_FAULTF1 = 1U << 1 ;
-
-  // Boolean field: Fault Detection Flag 2
-    static const uint32_t FTM2_FMS_FAULTF2 = 1U << 2 ;
-
-  // Boolean field: Fault Detection Flag 3
-    static const uint32_t FTM2_FMS_FAULTF3 = 1U << 3 ;
-
-  // Boolean field: Fault Inputs
-    static const uint32_t FTM2_FMS_FAULTIN = 1U << 5 ;
-
-  // Boolean field: Write Protection Enable
-    static const uint32_t FTM2_FMS_WPEN = 1U << 6 ;
-
-  // Boolean field: Fault Detection Flag
-    static const uint32_t FTM2_FMS_FAULTF = 1U << 7 ;
-
-//-------------------- Input Capture Filter Control
-#define FTM2_FILTER (* ((volatile uint32_t *) (0x4003A000 + 0x78)))
-
-  // Field (width: 4 bits): Channel 0 Input Filter
-    inline uint32_t FTM2_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Channel 1 Input Filter
-    inline uint32_t FTM2_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Channel 2 Input Filter
-    inline uint32_t FTM2_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): Channel 3 Input Filter
-    inline uint32_t FTM2_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-//-------------------- Fault Control
-#define FTM2_FLTCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x7C)))
-
-  // Boolean field: Fault Input 0 Enable
-    static const uint32_t FTM2_FLTCTRL_FAULT0EN = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Enable
-    static const uint32_t FTM2_FLTCTRL_FAULT1EN = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Enable
-    static const uint32_t FTM2_FLTCTRL_FAULT2EN = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Enable
-    static const uint32_t FTM2_FLTCTRL_FAULT3EN = 1U << 3 ;
-
-  // Boolean field: Fault Input 0 Filter Enable
-    static const uint32_t FTM2_FLTCTRL_FFLTR0EN = 1U << 4 ;
-
-  // Boolean field: Fault Input 1 Filter Enable
-    static const uint32_t FTM2_FLTCTRL_FFLTR1EN = 1U << 5 ;
-
-  // Boolean field: Fault Input 2 Filter Enable
-    static const uint32_t FTM2_FLTCTRL_FFLTR2EN = 1U << 6 ;
-
-  // Boolean field: Fault Input 3 Filter Enable
-    static const uint32_t FTM2_FLTCTRL_FFLTR3EN = 1U << 7 ;
-
-  // Field (width: 4 bits): Fault Input Filter
-    inline uint32_t FTM2_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-//-------------------- Quadrature Decoder Control And Status
-#define FTM2_QDCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x80)))
-
-  // Boolean field: Quadrature Decoder Mode Enable
-    static const uint32_t FTM2_QDCTRL_QUADEN = 1U << 0 ;
-
-  // Boolean field: Timer Overflow Direction In Quadrature Decoder Mode
-    static const uint32_t FTM2_QDCTRL_TOFDIR = 1U << 1 ;
-
-  // Boolean field: FTM Counter Direction In Quadrature Decoder Mode
-    static const uint32_t FTM2_QDCTRL_QUADIR = 1U << 2 ;
-
-  // Boolean field: Quadrature Decoder Mode
-    static const uint32_t FTM2_QDCTRL_QUADMODE = 1U << 3 ;
-
-  // Boolean field: Phase B Input Polarity
-    static const uint32_t FTM2_QDCTRL_PHBPOL = 1U << 4 ;
-
-  // Boolean field: Phase A Input Polarity
-    static const uint32_t FTM2_QDCTRL_PHAPOL = 1U << 5 ;
-
-  // Boolean field: Phase B Input Filter Enable
-    static const uint32_t FTM2_QDCTRL_PHBFLTREN = 1U << 6 ;
-
-  // Boolean field: Phase A Input Filter Enable
-    static const uint32_t FTM2_QDCTRL_PHAFLTREN = 1U << 7 ;
-
-//-------------------- Configuration
-#define FTM2_CONF (* ((volatile uint32_t *) (0x4003A000 + 0x84)))
-
-  // Field (width: 5 bits): TOF Frequency
-    inline uint32_t FTM2_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Field (width: 2 bits): BDM Mode
-    inline uint32_t FTM2_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-  // Boolean field: Global Time Base Enable
-    static const uint32_t FTM2_CONF_GTBEEN = 1U << 9 ;
-
-  // Boolean field: Global Time Base Output
-    static const uint32_t FTM2_CONF_GTBEOUT = 1U << 10 ;
-
-//-------------------- FTM Fault Input Polarity
-#define FTM2_FLTPOL (* ((volatile uint32_t *) (0x4003A000 + 0x88)))
-
-  // Boolean field: Fault Input 0 Polarity
-    static const uint32_t FTM2_FLTPOL_FLT0POL = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Polarity
-    static const uint32_t FTM2_FLTPOL_FLT1POL = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Polarity
-    static const uint32_t FTM2_FLTPOL_FLT2POL = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Polarity
-    static const uint32_t FTM2_FLTPOL_FLT3POL = 1U << 3 ;
-
-//-------------------- Synchronization Configuration
-#define FTM2_SYNCONF (* ((volatile uint32_t *) (0x4003A000 + 0x8C)))
-
-  // Boolean field: Hardware Trigger Mode
-    static const uint32_t FTM2_SYNCONF_HWTRIGMODE = 1U << 0 ;
-
-  // Boolean field: CNTIN Register Synchronization
-    static const uint32_t FTM2_SYNCONF_CNTINC = 1U << 2 ;
-
-  // Boolean field: INVCTRL Register Synchronization
-    static const uint32_t FTM2_SYNCONF_INVC = 1U << 4 ;
-
-  // Boolean field: SWOCTRL Register Synchronization
-    static const uint32_t FTM2_SYNCONF_SWOC = 1U << 5 ;
-
-  // Boolean field: Synchronization Mode
-    static const uint32_t FTM2_SYNCONF_SYNCMODE = 1U << 7 ;
-
-  // Boolean field: FTM counter synchronization is activated by the software trigger.
-    static const uint32_t FTM2_SYNCONF_SWRSTCNT = 1U << 8 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by the software trigger.
-    static const uint32_t FTM2_SYNCONF_SWWRBUF = 1U << 9 ;
-
-  // Boolean field: Output mask synchronization is activated by the software trigger.
-    static const uint32_t FTM2_SYNCONF_SWOM = 1U << 10 ;
-
-  // Boolean field: Inverting control synchronization is activated by the software trigger.
-    static const uint32_t FTM2_SYNCONF_SWINVC = 1U << 11 ;
-
-  // Boolean field: Software output control synchronization is activated by the software trigger.
-    static const uint32_t FTM2_SYNCONF_SWSOC = 1U << 12 ;
-
-  // Boolean field: FTM counter synchronization is activated by a hardware trigger.
-    static const uint32_t FTM2_SYNCONF_HWRSTCNT = 1U << 16 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by a hardware trigger.
-    static const uint32_t FTM2_SYNCONF_HWWRBUF = 1U << 17 ;
-
-  // Boolean field: Output mask synchronization is activated by a hardware trigger.
-    static const uint32_t FTM2_SYNCONF_HWOM = 1U << 18 ;
-
-  // Boolean field: Inverting control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM2_SYNCONF_HWINVC = 1U << 19 ;
-
-  // Boolean field: Software output control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM2_SYNCONF_HWSOC = 1U << 20 ;
-
-//-------------------- FTM Inverting Control
-#define FTM2_INVCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x90)))
-
-  // Boolean field: Pair Channels 0 Inverting Enable
-    static const uint32_t FTM2_INVCTRL_INV0EN = 1U << 0 ;
-
-  // Boolean field: Pair Channels 1 Inverting Enable
-    static const uint32_t FTM2_INVCTRL_INV1EN = 1U << 1 ;
-
-  // Boolean field: Pair Channels 2 Inverting Enable
-    static const uint32_t FTM2_INVCTRL_INV2EN = 1U << 2 ;
-
-  // Boolean field: Pair Channels 3 Inverting Enable
-    static const uint32_t FTM2_INVCTRL_INV3EN = 1U << 3 ;
-
-//-------------------- FTM Software Output Control
-#define FTM2_SWOCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x94)))
-
-  // Boolean field: Channel 0 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH0OC = 1U << 0 ;
-
-  // Boolean field: Channel 1 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH1OC = 1U << 1 ;
-
-  // Boolean field: Channel 2 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH2OC = 1U << 2 ;
-
-  // Boolean field: Channel 3 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH3OC = 1U << 3 ;
-
-  // Boolean field: Channel 4 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH4OC = 1U << 4 ;
-
-  // Boolean field: Channel 5 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH5OC = 1U << 5 ;
-
-  // Boolean field: Channel 6 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH6OC = 1U << 6 ;
-
-  // Boolean field: Channel 7 Software Output Control Enable
-    static const uint32_t FTM2_SWOCTRL_CH7OC = 1U << 7 ;
-
-  // Boolean field: Channel 0 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH0OCV = 1U << 8 ;
-
-  // Boolean field: Channel 1 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH1OCV = 1U << 9 ;
-
-  // Boolean field: Channel 2 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH2OCV = 1U << 10 ;
-
-  // Boolean field: Channel 3 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH3OCV = 1U << 11 ;
-
-  // Boolean field: Channel 4 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH4OCV = 1U << 12 ;
-
-  // Boolean field: Channel 5 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH5OCV = 1U << 13 ;
-
-  // Boolean field: Channel 6 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH6OCV = 1U << 14 ;
-
-  // Boolean field: Channel 7 Software Output Control Value
-    static const uint32_t FTM2_SWOCTRL_CH7OCV = 1U << 15 ;
-
-//-------------------- FTM PWM Load
-#define FTM2_PWMLOAD (* ((volatile uint32_t *) (0x4003A000 + 0x98)))
-
-  // Boolean field: Channel 0 Select
-    static const uint32_t FTM2_PWMLOAD_CH0SEL = 1U << 0 ;
-
-  // Boolean field: Channel 1 Select
-    static const uint32_t FTM2_PWMLOAD_CH1SEL = 1U << 1 ;
-
-  // Boolean field: Channel 2 Select
-    static const uint32_t FTM2_PWMLOAD_CH2SEL = 1U << 2 ;
-
-  // Boolean field: Channel 3 Select
-    static const uint32_t FTM2_PWMLOAD_CH3SEL = 1U << 3 ;
-
-  // Boolean field: Channel 4 Select
-    static const uint32_t FTM2_PWMLOAD_CH4SEL = 1U << 4 ;
-
-  // Boolean field: Channel 5 Select
-    static const uint32_t FTM2_PWMLOAD_CH5SEL = 1U << 5 ;
-
-  // Boolean field: Channel 6 Select
-    static const uint32_t FTM2_PWMLOAD_CH6SEL = 1U << 6 ;
-
-  // Boolean field: Channel 7 Select
-    static const uint32_t FTM2_PWMLOAD_CH7SEL = 1U << 7 ;
-
-  // Boolean field: Load Enable
-    static const uint32_t FTM2_PWMLOAD_LDOK = 1U << 9 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral FTM3
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Status And Control
-#define FTM3_SC (* ((volatile uint32_t *) (0x400B9000 + 0)))
-
-  // Field (width: 3 bits): Prescale Factor Selection
-    inline uint32_t FTM3_SC_PS (const uint32_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 2 bits): Clock Source Selection
-    inline uint32_t FTM3_SC_CLKS (const uint32_t inValue) { return (inValue & 3) << 3 ; }
-
-  // Boolean field: Center-Aligned PWM Select
-    static const uint32_t FTM3_SC_CPWMS = 1U << 5 ;
-
-  // Boolean field: Timer Overflow Interrupt Enable
-    static const uint32_t FTM3_SC_TOIE = 1U << 6 ;
-
-  // Boolean field: Timer Overflow Flag
-    static const uint32_t FTM3_SC_TOF = 1U << 7 ;
-
-//-------------------- Counter
-#define FTM3_CNT (* ((volatile uint32_t *) (0x400B9000 + 0x4)))
-
-  // Field (width: 16 bits): Counter Value
-    inline uint32_t FTM3_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Modulo
-#define FTM3_MOD (* ((volatile uint32_t *) (0x400B9000 + 0x8)))
-
-  // Field (width: 16 bits): Modulo Value
-    inline uint32_t FTM3_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Channel (n) Status And Control (idx = 0 ... 7)
-#define FTM3_CSC(idx) (* ((volatile uint32_t *) (0x400B9000 + 0xC + 0x8 * (idx))))
-
-  // Boolean field: DMA Enable
-    static const uint32_t FTM3_CSC_DMA = 1U << 0 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM3_CSC_ELSA = 1U << 2 ;
-
-  // Boolean field: Edge or Level Select
-    static const uint32_t FTM3_CSC_ELSB = 1U << 3 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM3_CSC_MSA = 1U << 4 ;
-
-  // Boolean field: Channel Mode Select
-    static const uint32_t FTM3_CSC_MSB = 1U << 5 ;
-
-  // Boolean field: Channel Interrupt Enable
-    static const uint32_t FTM3_CSC_CHIE = 1U << 6 ;
-
-  // Boolean field: Channel Flag
-    static const uint32_t FTM3_CSC_CHF = 1U << 7 ;
-
-//-------------------- Channel (n) Value (idx = 0 ... 7)
-#define FTM3_CV(idx) (* ((volatile uint32_t *) (0x400B9000 + 0x10 + 0x8 * (idx))))
-
-  // Field (width: 16 bits): Channel Value
-    inline uint32_t FTM3_CV_VAL (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Counter Initial Value
-#define FTM3_CNTIN (* ((volatile uint32_t *) (0x400B9000 + 0x4C)))
-
-  // Field (width: 16 bits): Initial Value Of The FTM Counter
-    inline uint32_t FTM3_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Capture And Compare Status
-#define FTM3_STATUS (* ((volatile uint32_t *) (0x400B9000 + 0x50)))
-
-  // Boolean field: Channel 0 Flag
-    static const uint32_t FTM3_STATUS_CH0F = 1U << 0 ;
-
-  // Boolean field: Channel 1 Flag
-    static const uint32_t FTM3_STATUS_CH1F = 1U << 1 ;
-
-  // Boolean field: Channel 2 Flag
-    static const uint32_t FTM3_STATUS_CH2F = 1U << 2 ;
-
-  // Boolean field: Channel 3 Flag
-    static const uint32_t FTM3_STATUS_CH3F = 1U << 3 ;
-
-  // Boolean field: Channel 4 Flag
-    static const uint32_t FTM3_STATUS_CH4F = 1U << 4 ;
-
-  // Boolean field: Channel 5 Flag
-    static const uint32_t FTM3_STATUS_CH5F = 1U << 5 ;
-
-  // Boolean field: Channel 6 Flag
-    static const uint32_t FTM3_STATUS_CH6F = 1U << 6 ;
-
-  // Boolean field: Channel 7 Flag
-    static const uint32_t FTM3_STATUS_CH7F = 1U << 7 ;
-
-//-------------------- Features Mode Selection
-#define FTM3_MODE (* ((volatile uint32_t *) (0x400B9000 + 0x54)))
-
-  // Boolean field: FTM Enable
-    static const uint32_t FTM3_MODE_FTMEN = 1U << 0 ;
-
-  // Boolean field: Initialize The Channels Output
-    static const uint32_t FTM3_MODE_INIT = 1U << 1 ;
-
-  // Boolean field: Write Protection Disable
-    static const uint32_t FTM3_MODE_WPDIS = 1U << 2 ;
-
-  // Boolean field: PWM Synchronization Mode
-    static const uint32_t FTM3_MODE_PWMSYNC = 1U << 3 ;
-
-  // Boolean field: Capture Test Mode Enable
-    static const uint32_t FTM3_MODE_CAPTEST = 1U << 4 ;
-
-  // Field (width: 2 bits): Fault Control Mode
-    inline uint32_t FTM3_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3) << 5 ; }
-
-  // Boolean field: Fault Interrupt Enable
-    static const uint32_t FTM3_MODE_FAULTIE = 1U << 7 ;
-
-//-------------------- Synchronization
-#define FTM3_SYNC (* ((volatile uint32_t *) (0x400B9000 + 0x58)))
-
-  // Boolean field: Minimum Loading Point Enable
-    static const uint32_t FTM3_SYNC_CNTMIN = 1U << 0 ;
-
-  // Boolean field: Maximum Loading Point Enable
-    static const uint32_t FTM3_SYNC_CNTMAX = 1U << 1 ;
-
-  // Boolean field: FTM Counter Reinitialization By Synchronization (FTM counter synchronization)
-    static const uint32_t FTM3_SYNC_REINIT = 1U << 2 ;
-
-  // Boolean field: Output Mask Synchronization
-    static const uint32_t FTM3_SYNC_SYNCHOM = 1U << 3 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 0
-    static const uint32_t FTM3_SYNC_TRIG0 = 1U << 4 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 1
-    static const uint32_t FTM3_SYNC_TRIG1 = 1U << 5 ;
-
-  // Boolean field: PWM Synchronization Hardware Trigger 2
-    static const uint32_t FTM3_SYNC_TRIG2 = 1U << 6 ;
-
-  // Boolean field: PWM Synchronization Software Trigger
-    static const uint32_t FTM3_SYNC_SWSYNC = 1U << 7 ;
-
-//-------------------- Initial State For Channels Output
-#define FTM3_OUTINIT (* ((volatile uint32_t *) (0x400B9000 + 0x5C)))
-
-  // Boolean field: Channel 0 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH0OI = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH1OI = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH2OI = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH3OI = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH4OI = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH5OI = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH6OI = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Initialization Value
-    static const uint32_t FTM3_OUTINIT_CH7OI = 1U << 7 ;
-
-//-------------------- Output Mask
-#define FTM3_OUTMASK (* ((volatile uint32_t *) (0x400B9000 + 0x60)))
-
-  // Boolean field: Channel 0 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH0OM = 1U << 0 ;
-
-  // Boolean field: Channel 1 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH1OM = 1U << 1 ;
-
-  // Boolean field: Channel 2 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH2OM = 1U << 2 ;
-
-  // Boolean field: Channel 3 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH3OM = 1U << 3 ;
-
-  // Boolean field: Channel 4 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH4OM = 1U << 4 ;
-
-  // Boolean field: Channel 5 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH5OM = 1U << 5 ;
-
-  // Boolean field: Channel 6 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH6OM = 1U << 6 ;
-
-  // Boolean field: Channel 7 Output Mask
-    static const uint32_t FTM3_OUTMASK_CH7OM = 1U << 7 ;
-
-//-------------------- Function For Linked Channels
-#define FTM3_COMBINE (* ((volatile uint32_t *) (0x400B9000 + 0x64)))
-
-  // Boolean field: Combine Channels For n = 0
-    static const uint32_t FTM3_COMBINE_COMBINE0 = 1U << 0 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 0
-    static const uint32_t FTM3_COMBINE_COMP0 = 1U << 1 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 0
-    static const uint32_t FTM3_COMBINE_DECAPEN0 = 1U << 2 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 0
-    static const uint32_t FTM3_COMBINE_DECAP0 = 1U << 3 ;
-
-  // Boolean field: Deadtime Enable For n = 0
-    static const uint32_t FTM3_COMBINE_DTEN0 = 1U << 4 ;
-
-  // Boolean field: Synchronization Enable For n = 0
-    static const uint32_t FTM3_COMBINE_SYNCEN0 = 1U << 5 ;
-
-  // Boolean field: Fault Control Enable For n = 0
-    static const uint32_t FTM3_COMBINE_FAULTEN0 = 1U << 6 ;
-
-  // Boolean field: Combine Channels For n = 2
-    static const uint32_t FTM3_COMBINE_COMBINE1 = 1U << 8 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 2
-    static const uint32_t FTM3_COMBINE_COMP1 = 1U << 9 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 2
-    static const uint32_t FTM3_COMBINE_DECAPEN1 = 1U << 10 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 2
-    static const uint32_t FTM3_COMBINE_DECAP1 = 1U << 11 ;
-
-  // Boolean field: Deadtime Enable For n = 2
-    static const uint32_t FTM3_COMBINE_DTEN1 = 1U << 12 ;
-
-  // Boolean field: Synchronization Enable For n = 2
-    static const uint32_t FTM3_COMBINE_SYNCEN1 = 1U << 13 ;
-
-  // Boolean field: Fault Control Enable For n = 2
-    static const uint32_t FTM3_COMBINE_FAULTEN1 = 1U << 14 ;
-
-  // Boolean field: Combine Channels For n = 4
-    static const uint32_t FTM3_COMBINE_COMBINE2 = 1U << 16 ;
-
-  // Boolean field: Complement Of Channel (n) For n = 4
-    static const uint32_t FTM3_COMBINE_COMP2 = 1U << 17 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 4
-    static const uint32_t FTM3_COMBINE_DECAPEN2 = 1U << 18 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 4
-    static const uint32_t FTM3_COMBINE_DECAP2 = 1U << 19 ;
-
-  // Boolean field: Deadtime Enable For n = 4
-    static const uint32_t FTM3_COMBINE_DTEN2 = 1U << 20 ;
-
-  // Boolean field: Synchronization Enable For n = 4
-    static const uint32_t FTM3_COMBINE_SYNCEN2 = 1U << 21 ;
-
-  // Boolean field: Fault Control Enable For n = 4
-    static const uint32_t FTM3_COMBINE_FAULTEN2 = 1U << 22 ;
-
-  // Boolean field: Combine Channels For n = 6
-    static const uint32_t FTM3_COMBINE_COMBINE3 = 1U << 24 ;
-
-  // Boolean field: Complement Of Channel (n) for n = 6
-    static const uint32_t FTM3_COMBINE_COMP3 = 1U << 25 ;
-
-  // Boolean field: Dual Edge Capture Mode Enable For n = 6
-    static const uint32_t FTM3_COMBINE_DECAPEN3 = 1U << 26 ;
-
-  // Boolean field: Dual Edge Capture Mode Captures For n = 6
-    static const uint32_t FTM3_COMBINE_DECAP3 = 1U << 27 ;
-
-  // Boolean field: Deadtime Enable For n = 6
-    static const uint32_t FTM3_COMBINE_DTEN3 = 1U << 28 ;
-
-  // Boolean field: Synchronization Enable For n = 6
-    static const uint32_t FTM3_COMBINE_SYNCEN3 = 1U << 29 ;
-
-  // Boolean field: Fault Control Enable For n = 6
-    static const uint32_t FTM3_COMBINE_FAULTEN3 = 1U << 30 ;
-
-//-------------------- Deadtime Insertion Control
-#define FTM3_DEADTIME (* ((volatile uint32_t *) (0x400B9000 + 0x68)))
-
-  // Field (width: 6 bits): Deadtime Value
-    inline uint32_t FTM3_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Deadtime Prescaler Value
-    inline uint32_t FTM3_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- FTM External Trigger
-#define FTM3_EXTTRIG (* ((volatile uint32_t *) (0x400B9000 + 0x6C)))
-
-  // Boolean field: Channel 2 Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_CH2TRIG = 1U << 0 ;
-
-  // Boolean field: Channel 3 Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_CH3TRIG = 1U << 1 ;
-
-  // Boolean field: Channel 4 Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_CH4TRIG = 1U << 2 ;
-
-  // Boolean field: Channel 5 Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_CH5TRIG = 1U << 3 ;
-
-  // Boolean field: Channel 0 Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_CH0TRIG = 1U << 4 ;
-
-  // Boolean field: Channel 1 Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_CH1TRIG = 1U << 5 ;
-
-  // Boolean field: Initialization Trigger Enable
-    static const uint32_t FTM3_EXTTRIG_INITTRIGEN = 1U << 6 ;
-
-  // Boolean field: Channel Trigger Flag
-    static const uint32_t FTM3_EXTTRIG_TRIGF = 1U << 7 ;
-
-//-------------------- Channels Polarity
-#define FTM3_POL (* ((volatile uint32_t *) (0x400B9000 + 0x70)))
-
-  // Boolean field: Channel 0 Polarity
-    static const uint32_t FTM3_POL_POL0 = 1U << 0 ;
-
-  // Boolean field: Channel 1 Polarity
-    static const uint32_t FTM3_POL_POL1 = 1U << 1 ;
-
-  // Boolean field: Channel 2 Polarity
-    static const uint32_t FTM3_POL_POL2 = 1U << 2 ;
-
-  // Boolean field: Channel 3 Polarity
-    static const uint32_t FTM3_POL_POL3 = 1U << 3 ;
-
-  // Boolean field: Channel 4 Polarity
-    static const uint32_t FTM3_POL_POL4 = 1U << 4 ;
-
-  // Boolean field: Channel 5 Polarity
-    static const uint32_t FTM3_POL_POL5 = 1U << 5 ;
-
-  // Boolean field: Channel 6 Polarity
-    static const uint32_t FTM3_POL_POL6 = 1U << 6 ;
-
-  // Boolean field: Channel 7 Polarity
-    static const uint32_t FTM3_POL_POL7 = 1U << 7 ;
-
-//-------------------- Fault Mode Status
-#define FTM3_FMS (* ((volatile uint32_t *) (0x400B9000 + 0x74)))
-
-  // Boolean field: Fault Detection Flag 0
-    static const uint32_t FTM3_FMS_FAULTF0 = 1U << 0 ;
-
-  // Boolean field: Fault Detection Flag 1
-    static const uint32_t FTM3_FMS_FAULTF1 = 1U << 1 ;
-
-  // Boolean field: Fault Detection Flag 2
-    static const uint32_t FTM3_FMS_FAULTF2 = 1U << 2 ;
-
-  // Boolean field: Fault Detection Flag 3
-    static const uint32_t FTM3_FMS_FAULTF3 = 1U << 3 ;
-
-  // Boolean field: Fault Inputs
-    static const uint32_t FTM3_FMS_FAULTIN = 1U << 5 ;
-
-  // Boolean field: Write Protection Enable
-    static const uint32_t FTM3_FMS_WPEN = 1U << 6 ;
-
-  // Boolean field: Fault Detection Flag
-    static const uint32_t FTM3_FMS_FAULTF = 1U << 7 ;
-
-//-------------------- Input Capture Filter Control
-#define FTM3_FILTER (* ((volatile uint32_t *) (0x400B9000 + 0x78)))
-
-  // Field (width: 4 bits): Channel 0 Input Filter
-    inline uint32_t FTM3_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Channel 1 Input Filter
-    inline uint32_t FTM3_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15) << 4 ; }
-
-  // Field (width: 4 bits): Channel 2 Input Filter
-    inline uint32_t FTM3_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-  // Field (width: 4 bits): Channel 3 Input Filter
-    inline uint32_t FTM3_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15) << 12 ; }
-
-//-------------------- Fault Control
-#define FTM3_FLTCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x7C)))
-
-  // Boolean field: Fault Input 0 Enable
-    static const uint32_t FTM3_FLTCTRL_FAULT0EN = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Enable
-    static const uint32_t FTM3_FLTCTRL_FAULT1EN = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Enable
-    static const uint32_t FTM3_FLTCTRL_FAULT2EN = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Enable
-    static const uint32_t FTM3_FLTCTRL_FAULT3EN = 1U << 3 ;
-
-  // Boolean field: Fault Input 0 Filter Enable
-    static const uint32_t FTM3_FLTCTRL_FFLTR0EN = 1U << 4 ;
-
-  // Boolean field: Fault Input 1 Filter Enable
-    static const uint32_t FTM3_FLTCTRL_FFLTR1EN = 1U << 5 ;
-
-  // Boolean field: Fault Input 2 Filter Enable
-    static const uint32_t FTM3_FLTCTRL_FFLTR2EN = 1U << 6 ;
-
-  // Boolean field: Fault Input 3 Filter Enable
-    static const uint32_t FTM3_FLTCTRL_FFLTR3EN = 1U << 7 ;
-
-  // Field (width: 4 bits): Fault Input Filter
-    inline uint32_t FTM3_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
-
-//-------------------- Quadrature Decoder Control And Status
-#define FTM3_QDCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x80)))
-
-  // Boolean field: Quadrature Decoder Mode Enable
-    static const uint32_t FTM3_QDCTRL_QUADEN = 1U << 0 ;
-
-  // Boolean field: Timer Overflow Direction In Quadrature Decoder Mode
-    static const uint32_t FTM3_QDCTRL_TOFDIR = 1U << 1 ;
-
-  // Boolean field: FTM Counter Direction In Quadrature Decoder Mode
-    static const uint32_t FTM3_QDCTRL_QUADIR = 1U << 2 ;
-
-  // Boolean field: Quadrature Decoder Mode
-    static const uint32_t FTM3_QDCTRL_QUADMODE = 1U << 3 ;
-
-  // Boolean field: Phase B Input Polarity
-    static const uint32_t FTM3_QDCTRL_PHBPOL = 1U << 4 ;
-
-  // Boolean field: Phase A Input Polarity
-    static const uint32_t FTM3_QDCTRL_PHAPOL = 1U << 5 ;
-
-  // Boolean field: Phase B Input Filter Enable
-    static const uint32_t FTM3_QDCTRL_PHBFLTREN = 1U << 6 ;
-
-  // Boolean field: Phase A Input Filter Enable
-    static const uint32_t FTM3_QDCTRL_PHAFLTREN = 1U << 7 ;
-
-//-------------------- Configuration
-#define FTM3_CONF (* ((volatile uint32_t *) (0x400B9000 + 0x84)))
-
-  // Field (width: 5 bits): TOF Frequency
-    inline uint32_t FTM3_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Field (width: 2 bits): BDM Mode
-    inline uint32_t FTM3_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3) << 6 ; }
-
-  // Boolean field: Global Time Base Enable
-    static const uint32_t FTM3_CONF_GTBEEN = 1U << 9 ;
-
-  // Boolean field: Global Time Base Output
-    static const uint32_t FTM3_CONF_GTBEOUT = 1U << 10 ;
-
-//-------------------- FTM Fault Input Polarity
-#define FTM3_FLTPOL (* ((volatile uint32_t *) (0x400B9000 + 0x88)))
-
-  // Boolean field: Fault Input 0 Polarity
-    static const uint32_t FTM3_FLTPOL_FLT0POL = 1U << 0 ;
-
-  // Boolean field: Fault Input 1 Polarity
-    static const uint32_t FTM3_FLTPOL_FLT1POL = 1U << 1 ;
-
-  // Boolean field: Fault Input 2 Polarity
-    static const uint32_t FTM3_FLTPOL_FLT2POL = 1U << 2 ;
-
-  // Boolean field: Fault Input 3 Polarity
-    static const uint32_t FTM3_FLTPOL_FLT3POL = 1U << 3 ;
-
-//-------------------- Synchronization Configuration
-#define FTM3_SYNCONF (* ((volatile uint32_t *) (0x400B9000 + 0x8C)))
-
-  // Boolean field: Hardware Trigger Mode
-    static const uint32_t FTM3_SYNCONF_HWTRIGMODE = 1U << 0 ;
-
-  // Boolean field: CNTIN Register Synchronization
-    static const uint32_t FTM3_SYNCONF_CNTINC = 1U << 2 ;
-
-  // Boolean field: INVCTRL Register Synchronization
-    static const uint32_t FTM3_SYNCONF_INVC = 1U << 4 ;
-
-  // Boolean field: SWOCTRL Register Synchronization
-    static const uint32_t FTM3_SYNCONF_SWOC = 1U << 5 ;
-
-  // Boolean field: Synchronization Mode
-    static const uint32_t FTM3_SYNCONF_SYNCMODE = 1U << 7 ;
-
-  // Boolean field: FTM counter synchronization is activated by the software trigger.
-    static const uint32_t FTM3_SYNCONF_SWRSTCNT = 1U << 8 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by the software trigger.
-    static const uint32_t FTM3_SYNCONF_SWWRBUF = 1U << 9 ;
-
-  // Boolean field: Output mask synchronization is activated by the software trigger.
-    static const uint32_t FTM3_SYNCONF_SWOM = 1U << 10 ;
-
-  // Boolean field: Inverting control synchronization is activated by the software trigger.
-    static const uint32_t FTM3_SYNCONF_SWINVC = 1U << 11 ;
-
-  // Boolean field: Software output control synchronization is activated by the software trigger.
-    static const uint32_t FTM3_SYNCONF_SWSOC = 1U << 12 ;
-
-  // Boolean field: FTM counter synchronization is activated by a hardware trigger.
-    static const uint32_t FTM3_SYNCONF_HWRSTCNT = 1U << 16 ;
-
-  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by a hardware trigger.
-    static const uint32_t FTM3_SYNCONF_HWWRBUF = 1U << 17 ;
-
-  // Boolean field: Output mask synchronization is activated by a hardware trigger.
-    static const uint32_t FTM3_SYNCONF_HWOM = 1U << 18 ;
-
-  // Boolean field: Inverting control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM3_SYNCONF_HWINVC = 1U << 19 ;
-
-  // Boolean field: Software output control synchronization is activated by a hardware trigger.
-    static const uint32_t FTM3_SYNCONF_HWSOC = 1U << 20 ;
-
-//-------------------- FTM Inverting Control
-#define FTM3_INVCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x90)))
-
-  // Boolean field: Pair Channels 0 Inverting Enable
-    static const uint32_t FTM3_INVCTRL_INV0EN = 1U << 0 ;
-
-  // Boolean field: Pair Channels 1 Inverting Enable
-    static const uint32_t FTM3_INVCTRL_INV1EN = 1U << 1 ;
-
-  // Boolean field: Pair Channels 2 Inverting Enable
-    static const uint32_t FTM3_INVCTRL_INV2EN = 1U << 2 ;
-
-  // Boolean field: Pair Channels 3 Inverting Enable
-    static const uint32_t FTM3_INVCTRL_INV3EN = 1U << 3 ;
-
-//-------------------- FTM Software Output Control
-#define FTM3_SWOCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x94)))
-
-  // Boolean field: Channel 0 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH0OC = 1U << 0 ;
-
-  // Boolean field: Channel 1 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH1OC = 1U << 1 ;
-
-  // Boolean field: Channel 2 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH2OC = 1U << 2 ;
-
-  // Boolean field: Channel 3 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH3OC = 1U << 3 ;
-
-  // Boolean field: Channel 4 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH4OC = 1U << 4 ;
-
-  // Boolean field: Channel 5 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH5OC = 1U << 5 ;
-
-  // Boolean field: Channel 6 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH6OC = 1U << 6 ;
-
-  // Boolean field: Channel 7 Software Output Control Enable
-    static const uint32_t FTM3_SWOCTRL_CH7OC = 1U << 7 ;
-
-  // Boolean field: Channel 0 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH0OCV = 1U << 8 ;
-
-  // Boolean field: Channel 1 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH1OCV = 1U << 9 ;
-
-  // Boolean field: Channel 2 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH2OCV = 1U << 10 ;
-
-  // Boolean field: Channel 3 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH3OCV = 1U << 11 ;
-
-  // Boolean field: Channel 4 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH4OCV = 1U << 12 ;
-
-  // Boolean field: Channel 5 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH5OCV = 1U << 13 ;
-
-  // Boolean field: Channel 6 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH6OCV = 1U << 14 ;
-
-  // Boolean field: Channel 7 Software Output Control Value
-    static const uint32_t FTM3_SWOCTRL_CH7OCV = 1U << 15 ;
-
-//-------------------- FTM PWM Load
-#define FTM3_PWMLOAD (* ((volatile uint32_t *) (0x400B9000 + 0x98)))
-
-  // Boolean field: Channel 0 Select
-    static const uint32_t FTM3_PWMLOAD_CH0SEL = 1U << 0 ;
-
-  // Boolean field: Channel 1 Select
-    static const uint32_t FTM3_PWMLOAD_CH1SEL = 1U << 1 ;
-
-  // Boolean field: Channel 2 Select
-    static const uint32_t FTM3_PWMLOAD_CH2SEL = 1U << 2 ;
-
-  // Boolean field: Channel 3 Select
-    static const uint32_t FTM3_PWMLOAD_CH3SEL = 1U << 3 ;
-
-  // Boolean field: Channel 4 Select
-    static const uint32_t FTM3_PWMLOAD_CH4SEL = 1U << 4 ;
-
-  // Boolean field: Channel 5 Select
-    static const uint32_t FTM3_PWMLOAD_CH5SEL = 1U << 5 ;
-
-  // Boolean field: Channel 6 Select
-    static const uint32_t FTM3_PWMLOAD_CH6SEL = 1U << 6 ;
-
-  // Boolean field: Channel 7 Select
-    static const uint32_t FTM3_PWMLOAD_CH7SEL = 1U << 7 ;
-
-  // Boolean field: Load Enable
-    static const uint32_t FTM3_PWMLOAD_LDOK = 1U << 9 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral ADC0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- ADC Status and Control Registers 1 (idx = 0 ... 1)
-#define ADC0_SC1(idx) (* ((volatile uint32_t *) (0x4003B000 + 0 + 0x4 * (idx))))
-
-  // Field (width: 5 bits): Input channel select
-    inline uint32_t ADC0_SC1_ADCH (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Differential Mode Enable
-    static const uint32_t ADC0_SC1_DIFF = 1U << 5 ;
-
-  // Boolean field: Interrupt Enable
-    static const uint32_t ADC0_SC1_AIEN = 1U << 6 ;
-
-  // Boolean field: Conversion Complete Flag
-    static const uint32_t ADC0_SC1_COCO = 1U << 7 ;
-
-//-------------------- ADC Configuration Register 1
-#define ADC0_CFG1 (* ((volatile uint32_t *) (0x4003B000 + 0x8)))
-
-  // Field (width: 2 bits): Input Clock Select
-    inline uint32_t ADC0_CFG1_ADICLK (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Field (width: 2 bits): Conversion mode selection
-    inline uint32_t ADC0_CFG1_MODE (const uint32_t inValue) { return (inValue & 3) << 2 ; }
-
-  // Boolean field: Sample Time Configuration
-    static const uint32_t ADC0_CFG1_ADLSMP = 1U << 4 ;
-
-  // Field (width: 2 bits): Clock Divide Select
-    inline uint32_t ADC0_CFG1_ADIV (const uint32_t inValue) { return (inValue & 3) << 5 ; }
-
-  // Boolean field: Low-Power Configuration
-    static const uint32_t ADC0_CFG1_ADLPC = 1U << 7 ;
-
-//-------------------- ADC Configuration Register 2
-#define ADC0_CFG2 (* ((volatile uint32_t *) (0x4003B000 + 0xC)))
-
-  // Field (width: 2 bits): Long Sample Time Select
-    inline uint32_t ADC0_CFG2_ADLSTS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: High-Speed Configuration
-    static const uint32_t ADC0_CFG2_ADHSC = 1U << 2 ;
-
-  // Boolean field: Asynchronous Clock Output Enable
-    static const uint32_t ADC0_CFG2_ADACKEN = 1U << 3 ;
-
-  // Boolean field: ADC Mux Select
-    static const uint32_t ADC0_CFG2_MUXSEL = 1U << 4 ;
-
-//-------------------- ADC Data Result Register (idx = 0 ... 1)
-#define ADC0_R(idx) (* ((const volatile uint32_t *) (0x4003B000 + 0x10 + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Data result
-    inline uint32_t ADC0_R_D (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Compare Value Registers (idx = 0 ... 1)
-#define ADC0_CV(idx) (* ((volatile uint32_t *) (0x4003B000 + 0x18 + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Compare Value.
-    inline uint32_t ADC0_CV_CV (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Status and Control Register 2
-#define ADC0_SC2 (* ((volatile uint32_t *) (0x4003B000 + 0x20)))
-
-  // Field (width: 2 bits): Voltage Reference Selection
-    inline uint32_t ADC0_SC2_REFSEL (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: DMA Enable
-    static const uint32_t ADC0_SC2_DMAEN = 1U << 2 ;
-
-  // Boolean field: Compare Function Range Enable
-    static const uint32_t ADC0_SC2_ACREN = 1U << 3 ;
-
-  // Boolean field: Compare Function Greater Than Enable
-    static const uint32_t ADC0_SC2_ACFGT = 1U << 4 ;
-
-  // Boolean field: Compare Function Enable
-    static const uint32_t ADC0_SC2_ACFE = 1U << 5 ;
-
-  // Boolean field: Conversion Trigger Select
-    static const uint32_t ADC0_SC2_ADTRG = 1U << 6 ;
-
-  // Boolean field: Conversion Active
-    static const uint32_t ADC0_SC2_ADACT = 1U << 7 ;
-
-//-------------------- Status and Control Register 3
-#define ADC0_SC3 (* ((volatile uint32_t *) (0x4003B000 + 0x24)))
-
-  // Field (width: 2 bits): Hardware Average Select
-    inline uint32_t ADC0_SC3_AVGS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Hardware Average Enable
-    static const uint32_t ADC0_SC3_AVGE = 1U << 2 ;
-
-  // Boolean field: Continuous Conversion Enable
-    static const uint32_t ADC0_SC3_ADCO = 1U << 3 ;
-
-  // Boolean field: Calibration Failed Flag
-    static const uint32_t ADC0_SC3_CALF = 1U << 6 ;
-
-  // Boolean field: Calibration
-    static const uint32_t ADC0_SC3_CAL = 1U << 7 ;
-
-//-------------------- ADC Offset Correction Register
-#define ADC0_OFS (* ((volatile uint32_t *) (0x4003B000 + 0x28)))
-
-  // Field (width: 16 bits): Offset Error Correction Value
-    inline uint32_t ADC0_OFS_OFS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- ADC Plus-Side Gain Register
-#define ADC0_PG (* ((volatile uint32_t *) (0x4003B000 + 0x2C)))
-
-  // Field (width: 16 bits): Plus-Side Gain
-    inline uint32_t ADC0_PG_PG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- ADC Minus-Side Gain Register
-#define ADC0_MG (* ((volatile uint32_t *) (0x4003B000 + 0x30)))
-
-  // Field (width: 16 bits): Minus-Side Gain
-    inline uint32_t ADC0_MG_MG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLPD (* ((volatile uint32_t *) (0x4003B000 + 0x34)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC0_CLPD_CLPD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLPS (* ((volatile uint32_t *) (0x4003B000 + 0x38)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC0_CLPS_CLPS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLP4 (* ((volatile uint32_t *) (0x4003B000 + 0x3C)))
-
-  // Field (width: 10 bits): Calibration Value
-    inline uint32_t ADC0_CLP4_CLP4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLP3 (* ((volatile uint32_t *) (0x4003B000 + 0x40)))
-
-  // Field (width: 9 bits): Calibration Value
-    inline uint32_t ADC0_CLP3_CLP3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLP2 (* ((volatile uint32_t *) (0x4003B000 + 0x44)))
-
-  // Field (width: 8 bits): Calibration Value
-    inline uint32_t ADC0_CLP2_CLP2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLP1 (* ((volatile uint32_t *) (0x4003B000 + 0x48)))
-
-  // Field (width: 7 bits): Calibration Value
-    inline uint32_t ADC0_CLP1_CLP1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC0_CLP0 (* ((volatile uint32_t *) (0x4003B000 + 0x4C)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC0_CLP0_CLP0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLMD (* ((volatile uint32_t *) (0x4003B000 + 0x54)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC0_CLMD_CLMD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLMS (* ((volatile uint32_t *) (0x4003B000 + 0x58)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC0_CLMS_CLMS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLM4 (* ((volatile uint32_t *) (0x4003B000 + 0x5C)))
-
-  // Field (width: 10 bits): Calibration Value
-    inline uint32_t ADC0_CLM4_CLM4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLM3 (* ((volatile uint32_t *) (0x4003B000 + 0x60)))
-
-  // Field (width: 9 bits): Calibration Value
-    inline uint32_t ADC0_CLM3_CLM3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLM2 (* ((volatile uint32_t *) (0x4003B000 + 0x64)))
-
-  // Field (width: 8 bits): Calibration Value
-    inline uint32_t ADC0_CLM2_CLM2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLM1 (* ((volatile uint32_t *) (0x4003B000 + 0x68)))
-
-  // Field (width: 7 bits): Calibration Value
-    inline uint32_t ADC0_CLM1_CLM1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC0_CLM0 (* ((volatile uint32_t *) (0x4003B000 + 0x6C)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC0_CLM0_CLM0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral ADC1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- ADC Status and Control Registers 1 (idx = 0 ... 1)
-#define ADC1_SC1(idx) (* ((volatile uint32_t *) (0x400BB000 + 0 + 0x4 * (idx))))
-
-  // Field (width: 5 bits): Input channel select
-    inline uint32_t ADC1_SC1_ADCH (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Differential Mode Enable
-    static const uint32_t ADC1_SC1_DIFF = 1U << 5 ;
-
-  // Boolean field: Interrupt Enable
-    static const uint32_t ADC1_SC1_AIEN = 1U << 6 ;
-
-  // Boolean field: Conversion Complete Flag
-    static const uint32_t ADC1_SC1_COCO = 1U << 7 ;
-
-//-------------------- ADC Configuration Register 1
-#define ADC1_CFG1 (* ((volatile uint32_t *) (0x400BB000 + 0x8)))
-
-  // Field (width: 2 bits): Input Clock Select
-    inline uint32_t ADC1_CFG1_ADICLK (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Field (width: 2 bits): Conversion mode selection
-    inline uint32_t ADC1_CFG1_MODE (const uint32_t inValue) { return (inValue & 3) << 2 ; }
-
-  // Boolean field: Sample Time Configuration
-    static const uint32_t ADC1_CFG1_ADLSMP = 1U << 4 ;
-
-  // Field (width: 2 bits): Clock Divide Select
-    inline uint32_t ADC1_CFG1_ADIV (const uint32_t inValue) { return (inValue & 3) << 5 ; }
-
-  // Boolean field: Low-Power Configuration
-    static const uint32_t ADC1_CFG1_ADLPC = 1U << 7 ;
-
-//-------------------- ADC Configuration Register 2
-#define ADC1_CFG2 (* ((volatile uint32_t *) (0x400BB000 + 0xC)))
-
-  // Field (width: 2 bits): Long Sample Time Select
-    inline uint32_t ADC1_CFG2_ADLSTS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: High-Speed Configuration
-    static const uint32_t ADC1_CFG2_ADHSC = 1U << 2 ;
-
-  // Boolean field: Asynchronous Clock Output Enable
-    static const uint32_t ADC1_CFG2_ADACKEN = 1U << 3 ;
-
-  // Boolean field: ADC Mux Select
-    static const uint32_t ADC1_CFG2_MUXSEL = 1U << 4 ;
-
-//-------------------- ADC Data Result Register (idx = 0 ... 1)
-#define ADC1_R(idx) (* ((const volatile uint32_t *) (0x400BB000 + 0x10 + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Data result
-    inline uint32_t ADC1_R_D (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Compare Value Registers (idx = 0 ... 1)
-#define ADC1_CV(idx) (* ((volatile uint32_t *) (0x400BB000 + 0x18 + 0x4 * (idx))))
-
-  // Field (width: 16 bits): Compare Value.
-    inline uint32_t ADC1_CV_CV (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- Status and Control Register 2
-#define ADC1_SC2 (* ((volatile uint32_t *) (0x400BB000 + 0x20)))
-
-  // Field (width: 2 bits): Voltage Reference Selection
-    inline uint32_t ADC1_SC2_REFSEL (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: DMA Enable
-    static const uint32_t ADC1_SC2_DMAEN = 1U << 2 ;
-
-  // Boolean field: Compare Function Range Enable
-    static const uint32_t ADC1_SC2_ACREN = 1U << 3 ;
-
-  // Boolean field: Compare Function Greater Than Enable
-    static const uint32_t ADC1_SC2_ACFGT = 1U << 4 ;
-
-  // Boolean field: Compare Function Enable
-    static const uint32_t ADC1_SC2_ACFE = 1U << 5 ;
-
-  // Boolean field: Conversion Trigger Select
-    static const uint32_t ADC1_SC2_ADTRG = 1U << 6 ;
-
-  // Boolean field: Conversion Active
-    static const uint32_t ADC1_SC2_ADACT = 1U << 7 ;
-
-//-------------------- Status and Control Register 3
-#define ADC1_SC3 (* ((volatile uint32_t *) (0x400BB000 + 0x24)))
-
-  // Field (width: 2 bits): Hardware Average Select
-    inline uint32_t ADC1_SC3_AVGS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Hardware Average Enable
-    static const uint32_t ADC1_SC3_AVGE = 1U << 2 ;
-
-  // Boolean field: Continuous Conversion Enable
-    static const uint32_t ADC1_SC3_ADCO = 1U << 3 ;
-
-  // Boolean field: Calibration Failed Flag
-    static const uint32_t ADC1_SC3_CALF = 1U << 6 ;
-
-  // Boolean field: Calibration
-    static const uint32_t ADC1_SC3_CAL = 1U << 7 ;
-
-//-------------------- ADC Offset Correction Register
-#define ADC1_OFS (* ((volatile uint32_t *) (0x400BB000 + 0x28)))
-
-  // Field (width: 16 bits): Offset Error Correction Value
-    inline uint32_t ADC1_OFS_OFS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- ADC Plus-Side Gain Register
-#define ADC1_PG (* ((volatile uint32_t *) (0x400BB000 + 0x2C)))
-
-  // Field (width: 16 bits): Plus-Side Gain
-    inline uint32_t ADC1_PG_PG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- ADC Minus-Side Gain Register
-#define ADC1_MG (* ((volatile uint32_t *) (0x400BB000 + 0x30)))
-
-  // Field (width: 16 bits): Minus-Side Gain
-    inline uint32_t ADC1_MG_MG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLPD (* ((volatile uint32_t *) (0x400BB000 + 0x34)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC1_CLPD_CLPD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLPS (* ((volatile uint32_t *) (0x400BB000 + 0x38)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC1_CLPS_CLPS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLP4 (* ((volatile uint32_t *) (0x400BB000 + 0x3C)))
-
-  // Field (width: 10 bits): Calibration Value
-    inline uint32_t ADC1_CLP4_CLP4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLP3 (* ((volatile uint32_t *) (0x400BB000 + 0x40)))
-
-  // Field (width: 9 bits): Calibration Value
-    inline uint32_t ADC1_CLP3_CLP3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLP2 (* ((volatile uint32_t *) (0x400BB000 + 0x44)))
-
-  // Field (width: 8 bits): Calibration Value
-    inline uint32_t ADC1_CLP2_CLP2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLP1 (* ((volatile uint32_t *) (0x400BB000 + 0x48)))
-
-  // Field (width: 7 bits): Calibration Value
-    inline uint32_t ADC1_CLP1_CLP1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
-
-//-------------------- ADC Plus-Side General Calibration Value Register
-#define ADC1_CLP0 (* ((volatile uint32_t *) (0x400BB000 + 0x4C)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC1_CLP0_CLP0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLMD (* ((volatile uint32_t *) (0x400BB000 + 0x54)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC1_CLMD_CLMD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLMS (* ((volatile uint32_t *) (0x400BB000 + 0x58)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC1_CLMS_CLMS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLM4 (* ((volatile uint32_t *) (0x400BB000 + 0x5C)))
-
-  // Field (width: 10 bits): Calibration Value
-    inline uint32_t ADC1_CLM4_CLM4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLM3 (* ((volatile uint32_t *) (0x400BB000 + 0x60)))
-
-  // Field (width: 9 bits): Calibration Value
-    inline uint32_t ADC1_CLM3_CLM3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLM2 (* ((volatile uint32_t *) (0x400BB000 + 0x64)))
-
-  // Field (width: 8 bits): Calibration Value
-    inline uint32_t ADC1_CLM2_CLM2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLM1 (* ((volatile uint32_t *) (0x400BB000 + 0x68)))
-
-  // Field (width: 7 bits): Calibration Value
-    inline uint32_t ADC1_CLM1_CLM1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
-
-//-------------------- ADC Minus-Side General Calibration Value Register
-#define ADC1_CLM0 (* ((volatile uint32_t *) (0x400BB000 + 0x6C)))
-
-  // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC1_CLM0_CLM0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral RTC
@@ -10029,371 +3910,6 @@
 #define SIM_UIDL (* ((const volatile uint32_t *) (0x40047000 + 0x1060)))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral PORTA
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Pin Control Register n (idx = 0 ... 31)
-#define PORTA_PCR(idx) (* ((volatile uint32_t *) (0x40049000 + 0 + 0x4 * (idx))))
-
-  // Boolean field: Pull Select
-    static const uint32_t PORTA_PCR_PS = 1U << 0 ;
-
-  // Boolean field: Pull Enable
-    static const uint32_t PORTA_PCR_PE = 1U << 1 ;
-
-  // Boolean field: Slew Rate Enable
-    static const uint32_t PORTA_PCR_SRE = 1U << 2 ;
-
-  // Boolean field: Passive Filter Enable
-    static const uint32_t PORTA_PCR_PFE = 1U << 4 ;
-
-  // Boolean field: Open Drain Enable
-    static const uint32_t PORTA_PCR_ODE = 1U << 5 ;
-
-  // Boolean field: Drive Strength Enable
-    static const uint32_t PORTA_PCR_DSE = 1U << 6 ;
-
-  // Field (width: 3 bits): Pin Mux Control
-    inline uint32_t PORTA_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
-
-  // Boolean field: Lock Register
-    static const uint32_t PORTA_PCR_LK = 1U << 15 ;
-
-  // Field (width: 4 bits): Interrupt Configuration
-    inline uint32_t PORTA_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
-
-  // Boolean field: Interrupt Status Flag
-    static const uint32_t PORTA_PCR_ISF = 1U << 24 ;
-
-//-------------------- Global Pin Control Low Register
-#define PORTA_GPCLR (* ((volatile uint32_t *) (0x40049000 + 0x80)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTA_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTA_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Global Pin Control High Register
-#define PORTA_GPCHR (* ((volatile uint32_t *) (0x40049000 + 0x84)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTA_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTA_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Interrupt Status Flag Register
-#define PORTA_ISFR (* ((volatile uint32_t *) (0x40049000 + 0xA0)))
-
-//-------------------- Digital Filter Enable Register
-#define PORTA_DFER (* ((volatile uint32_t *) (0x40049000 + 0xC0)))
-
-//-------------------- Digital Filter Clock Register
-#define PORTA_DFCR (* ((volatile uint32_t *) (0x40049000 + 0xC4)))
-
-  // Boolean field: Clock Source
-    static const uint32_t PORTA_DFCR_CS = 1U << 0 ;
-
-//-------------------- Digital Filter Width Register
-#define PORTA_DFWR (* ((volatile uint32_t *) (0x40049000 + 0xC8)))
-
-  // Field (width: 5 bits): Filter Length
-    inline uint32_t PORTA_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral PORTB
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Pin Control Register n (idx = 0 ... 31)
-#define PORTB_PCR(idx) (* ((volatile uint32_t *) (0x4004A000 + 0 + 0x4 * (idx))))
-
-  // Boolean field: Pull Select
-    static const uint32_t PORTB_PCR_PS = 1U << 0 ;
-
-  // Boolean field: Pull Enable
-    static const uint32_t PORTB_PCR_PE = 1U << 1 ;
-
-  // Boolean field: Slew Rate Enable
-    static const uint32_t PORTB_PCR_SRE = 1U << 2 ;
-
-  // Boolean field: Passive Filter Enable
-    static const uint32_t PORTB_PCR_PFE = 1U << 4 ;
-
-  // Boolean field: Open Drain Enable
-    static const uint32_t PORTB_PCR_ODE = 1U << 5 ;
-
-  // Boolean field: Drive Strength Enable
-    static const uint32_t PORTB_PCR_DSE = 1U << 6 ;
-
-  // Field (width: 3 bits): Pin Mux Control
-    inline uint32_t PORTB_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
-
-  // Boolean field: Lock Register
-    static const uint32_t PORTB_PCR_LK = 1U << 15 ;
-
-  // Field (width: 4 bits): Interrupt Configuration
-    inline uint32_t PORTB_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
-
-  // Boolean field: Interrupt Status Flag
-    static const uint32_t PORTB_PCR_ISF = 1U << 24 ;
-
-//-------------------- Global Pin Control Low Register
-#define PORTB_GPCLR (* ((volatile uint32_t *) (0x4004A000 + 0x80)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTB_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTB_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Global Pin Control High Register
-#define PORTB_GPCHR (* ((volatile uint32_t *) (0x4004A000 + 0x84)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTB_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTB_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Interrupt Status Flag Register
-#define PORTB_ISFR (* ((volatile uint32_t *) (0x4004A000 + 0xA0)))
-
-//-------------------- Digital Filter Enable Register
-#define PORTB_DFER (* ((volatile uint32_t *) (0x4004A000 + 0xC0)))
-
-//-------------------- Digital Filter Clock Register
-#define PORTB_DFCR (* ((volatile uint32_t *) (0x4004A000 + 0xC4)))
-
-  // Boolean field: Clock Source
-    static const uint32_t PORTB_DFCR_CS = 1U << 0 ;
-
-//-------------------- Digital Filter Width Register
-#define PORTB_DFWR (* ((volatile uint32_t *) (0x4004A000 + 0xC8)))
-
-  // Field (width: 5 bits): Filter Length
-    inline uint32_t PORTB_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral PORTC
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Pin Control Register n (idx = 0 ... 31)
-#define PORTC_PCR(idx) (* ((volatile uint32_t *) (0x4004B000 + 0 + 0x4 * (idx))))
-
-  // Boolean field: Pull Select
-    static const uint32_t PORTC_PCR_PS = 1U << 0 ;
-
-  // Boolean field: Pull Enable
-    static const uint32_t PORTC_PCR_PE = 1U << 1 ;
-
-  // Boolean field: Slew Rate Enable
-    static const uint32_t PORTC_PCR_SRE = 1U << 2 ;
-
-  // Boolean field: Passive Filter Enable
-    static const uint32_t PORTC_PCR_PFE = 1U << 4 ;
-
-  // Boolean field: Open Drain Enable
-    static const uint32_t PORTC_PCR_ODE = 1U << 5 ;
-
-  // Boolean field: Drive Strength Enable
-    static const uint32_t PORTC_PCR_DSE = 1U << 6 ;
-
-  // Field (width: 3 bits): Pin Mux Control
-    inline uint32_t PORTC_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
-
-  // Boolean field: Lock Register
-    static const uint32_t PORTC_PCR_LK = 1U << 15 ;
-
-  // Field (width: 4 bits): Interrupt Configuration
-    inline uint32_t PORTC_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
-
-  // Boolean field: Interrupt Status Flag
-    static const uint32_t PORTC_PCR_ISF = 1U << 24 ;
-
-//-------------------- Global Pin Control Low Register
-#define PORTC_GPCLR (* ((volatile uint32_t *) (0x4004B000 + 0x80)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTC_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTC_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Global Pin Control High Register
-#define PORTC_GPCHR (* ((volatile uint32_t *) (0x4004B000 + 0x84)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTC_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTC_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Interrupt Status Flag Register
-#define PORTC_ISFR (* ((volatile uint32_t *) (0x4004B000 + 0xA0)))
-
-//-------------------- Digital Filter Enable Register
-#define PORTC_DFER (* ((volatile uint32_t *) (0x4004B000 + 0xC0)))
-
-//-------------------- Digital Filter Clock Register
-#define PORTC_DFCR (* ((volatile uint32_t *) (0x4004B000 + 0xC4)))
-
-  // Boolean field: Clock Source
-    static const uint32_t PORTC_DFCR_CS = 1U << 0 ;
-
-//-------------------- Digital Filter Width Register
-#define PORTC_DFWR (* ((volatile uint32_t *) (0x4004B000 + 0xC8)))
-
-  // Field (width: 5 bits): Filter Length
-    inline uint32_t PORTC_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral PORTD
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Pin Control Register n (idx = 0 ... 31)
-#define PORTD_PCR(idx) (* ((volatile uint32_t *) (0x4004C000 + 0 + 0x4 * (idx))))
-
-  // Boolean field: Pull Select
-    static const uint32_t PORTD_PCR_PS = 1U << 0 ;
-
-  // Boolean field: Pull Enable
-    static const uint32_t PORTD_PCR_PE = 1U << 1 ;
-
-  // Boolean field: Slew Rate Enable
-    static const uint32_t PORTD_PCR_SRE = 1U << 2 ;
-
-  // Boolean field: Passive Filter Enable
-    static const uint32_t PORTD_PCR_PFE = 1U << 4 ;
-
-  // Boolean field: Open Drain Enable
-    static const uint32_t PORTD_PCR_ODE = 1U << 5 ;
-
-  // Boolean field: Drive Strength Enable
-    static const uint32_t PORTD_PCR_DSE = 1U << 6 ;
-
-  // Field (width: 3 bits): Pin Mux Control
-    inline uint32_t PORTD_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
-
-  // Boolean field: Lock Register
-    static const uint32_t PORTD_PCR_LK = 1U << 15 ;
-
-  // Field (width: 4 bits): Interrupt Configuration
-    inline uint32_t PORTD_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
-
-  // Boolean field: Interrupt Status Flag
-    static const uint32_t PORTD_PCR_ISF = 1U << 24 ;
-
-//-------------------- Global Pin Control Low Register
-#define PORTD_GPCLR (* ((volatile uint32_t *) (0x4004C000 + 0x80)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTD_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTD_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Global Pin Control High Register
-#define PORTD_GPCHR (* ((volatile uint32_t *) (0x4004C000 + 0x84)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTD_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTD_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Interrupt Status Flag Register
-#define PORTD_ISFR (* ((volatile uint32_t *) (0x4004C000 + 0xA0)))
-
-//-------------------- Digital Filter Enable Register
-#define PORTD_DFER (* ((volatile uint32_t *) (0x4004C000 + 0xC0)))
-
-//-------------------- Digital Filter Clock Register
-#define PORTD_DFCR (* ((volatile uint32_t *) (0x4004C000 + 0xC4)))
-
-  // Boolean field: Clock Source
-    static const uint32_t PORTD_DFCR_CS = 1U << 0 ;
-
-//-------------------- Digital Filter Width Register
-#define PORTD_DFWR (* ((volatile uint32_t *) (0x4004C000 + 0xC8)))
-
-  // Field (width: 5 bits): Filter Length
-    inline uint32_t PORTD_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral PORTE
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Pin Control Register n (idx = 0 ... 31)
-#define PORTE_PCR(idx) (* ((volatile uint32_t *) (0x4004D000 + 0 + 0x4 * (idx))))
-
-  // Boolean field: Pull Select
-    static const uint32_t PORTE_PCR_PS = 1U << 0 ;
-
-  // Boolean field: Pull Enable
-    static const uint32_t PORTE_PCR_PE = 1U << 1 ;
-
-  // Boolean field: Slew Rate Enable
-    static const uint32_t PORTE_PCR_SRE = 1U << 2 ;
-
-  // Boolean field: Passive Filter Enable
-    static const uint32_t PORTE_PCR_PFE = 1U << 4 ;
-
-  // Boolean field: Open Drain Enable
-    static const uint32_t PORTE_PCR_ODE = 1U << 5 ;
-
-  // Boolean field: Drive Strength Enable
-    static const uint32_t PORTE_PCR_DSE = 1U << 6 ;
-
-  // Field (width: 3 bits): Pin Mux Control
-    inline uint32_t PORTE_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
-
-  // Boolean field: Lock Register
-    static const uint32_t PORTE_PCR_LK = 1U << 15 ;
-
-  // Field (width: 4 bits): Interrupt Configuration
-    inline uint32_t PORTE_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
-
-  // Boolean field: Interrupt Status Flag
-    static const uint32_t PORTE_PCR_ISF = 1U << 24 ;
-
-//-------------------- Global Pin Control Low Register
-#define PORTE_GPCLR (* ((volatile uint32_t *) (0x4004D000 + 0x80)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTE_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTE_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Global Pin Control High Register
-#define PORTE_GPCHR (* ((volatile uint32_t *) (0x4004D000 + 0x84)))
-
-  // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORTE_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
-
-  // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORTE_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
-
-//-------------------- Interrupt Status Flag Register
-#define PORTE_ISFR (* ((volatile uint32_t *) (0x4004D000 + 0xA0)))
-
-//-------------------- Digital Filter Enable Register
-#define PORTE_DFER (* ((volatile uint32_t *) (0x4004D000 + 0xC0)))
-
-//-------------------- Digital Filter Clock Register
-#define PORTE_DFCR (* ((volatile uint32_t *) (0x4004D000 + 0xC4)))
-
-  // Boolean field: Clock Source
-    static const uint32_t PORTE_DFCR_CS = 1U << 0 ;
-
-//-------------------- Digital Filter Width Register
-#define PORTE_DFWR (* ((volatile uint32_t *) (0x4004D000 + 0xC8)))
-
-  // Field (width: 5 bits): Filter Length
-    inline uint32_t PORTE_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral WDOG
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -10766,2832 +4282,6 @@
 
   // Boolean field: External Reference Enable
     static const uint8_t OSC_CR_ERCLKEN = 1U << 7 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral I2C0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- I2C Address Register 1
-#define I2C0_A1 (* ((volatile uint8_t *) (0x40066000 + 0)))
-
-  // Field (width: 7 bits): Address
-    inline uint8_t I2C0_A1_AD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C Frequency Divider register
-#define I2C0_F (* ((volatile uint8_t *) (0x40066000 + 0x1)))
-
-  // Field (width: 6 bits): ClockRate
-    inline uint8_t I2C0_F_ICR (const uint8_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Multiplier Factor
-    inline uint8_t I2C0_F_MULT (const uint8_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- I2C Control Register 1
-#define I2C0_C1 (* ((volatile uint8_t *) (0x40066000 + 0x2)))
-
-  // Boolean field: DMA Enable
-    static const uint8_t I2C0_C1_DMAEN = 1U << 0 ;
-
-  // Boolean field: Wakeup Enable
-    static const uint8_t I2C0_C1_WUEN = 1U << 1 ;
-
-  // Boolean field: Repeat START
-    static const uint8_t I2C0_C1_RSTA = 1U << 2 ;
-
-  // Boolean field: Transmit Acknowledge Enable
-    static const uint8_t I2C0_C1_TXAK = 1U << 3 ;
-
-  // Boolean field: Transmit Mode Select
-    static const uint8_t I2C0_C1_TX = 1U << 4 ;
-
-  // Boolean field: Master Mode Select
-    static const uint8_t I2C0_C1_MST = 1U << 5 ;
-
-  // Boolean field: I2C Interrupt Enable
-    static const uint8_t I2C0_C1_IICIE = 1U << 6 ;
-
-  // Boolean field: I2C Enable
-    static const uint8_t I2C0_C1_IICEN = 1U << 7 ;
-
-//-------------------- I2C Status register
-#define I2C0_S (* ((volatile uint8_t *) (0x40066000 + 0x3)))
-
-  // Boolean field: Receive Acknowledge
-    static const uint8_t I2C0_S_RXAK = 1U << 0 ;
-
-  // Boolean field: Interrupt Flag
-    static const uint8_t I2C0_S_IICIF = 1U << 1 ;
-
-  // Boolean field: Slave Read/Write
-    static const uint8_t I2C0_S_SRW = 1U << 2 ;
-
-  // Boolean field: Range Address Match
-    static const uint8_t I2C0_S_RAM = 1U << 3 ;
-
-  // Boolean field: Arbitration Lost
-    static const uint8_t I2C0_S_ARBL = 1U << 4 ;
-
-  // Boolean field: Bus Busy
-    static const uint8_t I2C0_S_BUSY = 1U << 5 ;
-
-  // Boolean field: Addressed As A Slave
-    static const uint8_t I2C0_S_IAAS = 1U << 6 ;
-
-  // Boolean field: Transfer Complete Flag
-    static const uint8_t I2C0_S_TCF = 1U << 7 ;
-
-//-------------------- I2C Data I/O register
-#define I2C0_D (* ((volatile uint8_t *) (0x40066000 + 0x4)))
-
-//-------------------- I2C Control Register 2
-#define I2C0_C2 (* ((volatile uint8_t *) (0x40066000 + 0x5)))
-
-  // Field (width: 3 bits): Slave Address
-    inline uint8_t I2C0_C2_AD (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Range Address Matching Enable
-    static const uint8_t I2C0_C2_RMEN = 1U << 3 ;
-
-  // Boolean field: Slave Baud Rate Control
-    static const uint8_t I2C0_C2_SBRC = 1U << 4 ;
-
-  // Boolean field: High Drive Select
-    static const uint8_t I2C0_C2_HDRS = 1U << 5 ;
-
-  // Boolean field: Address Extension
-    static const uint8_t I2C0_C2_ADEXT = 1U << 6 ;
-
-  // Boolean field: General Call Address Enable
-    static const uint8_t I2C0_C2_GCAEN = 1U << 7 ;
-
-//-------------------- I2C Programmable Input Glitch Filter register
-#define I2C0_FLT (* ((volatile uint8_t *) (0x40066000 + 0x6)))
-
-  // Field (width: 4 bits): I2C Programmable Filter Factor
-    inline uint8_t I2C0_FLT_FLT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Boolean field: I2C Bus Start Detect Flag
-    static const uint8_t I2C0_FLT_STARTF = 1U << 4 ;
-
-  // Boolean field: I2C Bus Stop or Start Interrupt Enable
-    static const uint8_t I2C0_FLT_SSIE = 1U << 5 ;
-
-  // Boolean field: I2C Bus Stop Detect Flag
-    static const uint8_t I2C0_FLT_STOPF = 1U << 6 ;
-
-  // Boolean field: Stop Hold Enable
-    static const uint8_t I2C0_FLT_SHEN = 1U << 7 ;
-
-//-------------------- I2C Range Address register
-#define I2C0_RA (* ((volatile uint8_t *) (0x40066000 + 0x7)))
-
-  // Field (width: 7 bits): Range Slave Address
-    inline uint8_t I2C0_RA_RAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C SMBus Control and Status register
-#define I2C0_SMB (* ((volatile uint8_t *) (0x40066000 + 0x8)))
-
-  // Boolean field: SHTF2 Interrupt Enable
-    static const uint8_t I2C0_SMB_SHTF2IE = 1U << 0 ;
-
-  // Boolean field: SCL High Timeout Flag 2
-    static const uint8_t I2C0_SMB_SHTF2 = 1U << 1 ;
-
-  // Boolean field: SCL High Timeout Flag 1
-    static const uint8_t I2C0_SMB_SHTF1 = 1U << 2 ;
-
-  // Boolean field: SCL Low Timeout Flag
-    static const uint8_t I2C0_SMB_SLTF = 1U << 3 ;
-
-  // Boolean field: Timeout Counter Clock Select
-    static const uint8_t I2C0_SMB_TCKSEL = 1U << 4 ;
-
-  // Boolean field: Second I2C Address Enable
-    static const uint8_t I2C0_SMB_SIICAEN = 1U << 5 ;
-
-  // Boolean field: SMBus Alert Response Address Enable
-    static const uint8_t I2C0_SMB_ALERTEN = 1U << 6 ;
-
-  // Boolean field: Fast NACK/ACK Enable
-    static const uint8_t I2C0_SMB_FACK = 1U << 7 ;
-
-//-------------------- I2C Address Register 2
-#define I2C0_A2 (* ((volatile uint8_t *) (0x40066000 + 0x9)))
-
-  // Field (width: 7 bits): SMBus Address
-    inline uint8_t I2C0_A2_SAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C SCL Low Timeout Register High
-#define I2C0_SLTH (* ((volatile uint8_t *) (0x40066000 + 0xA)))
-
-//-------------------- I2C SCL Low Timeout Register Low
-#define I2C0_SLTL (* ((volatile uint8_t *) (0x40066000 + 0xB)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral I2C1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- I2C Address Register 1
-#define I2C1_A1 (* ((volatile uint8_t *) (0x40067000 + 0)))
-
-  // Field (width: 7 bits): Address
-    inline uint8_t I2C1_A1_AD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C Frequency Divider register
-#define I2C1_F (* ((volatile uint8_t *) (0x40067000 + 0x1)))
-
-  // Field (width: 6 bits): ClockRate
-    inline uint8_t I2C1_F_ICR (const uint8_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Multiplier Factor
-    inline uint8_t I2C1_F_MULT (const uint8_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- I2C Control Register 1
-#define I2C1_C1 (* ((volatile uint8_t *) (0x40067000 + 0x2)))
-
-  // Boolean field: DMA Enable
-    static const uint8_t I2C1_C1_DMAEN = 1U << 0 ;
-
-  // Boolean field: Wakeup Enable
-    static const uint8_t I2C1_C1_WUEN = 1U << 1 ;
-
-  // Boolean field: Repeat START
-    static const uint8_t I2C1_C1_RSTA = 1U << 2 ;
-
-  // Boolean field: Transmit Acknowledge Enable
-    static const uint8_t I2C1_C1_TXAK = 1U << 3 ;
-
-  // Boolean field: Transmit Mode Select
-    static const uint8_t I2C1_C1_TX = 1U << 4 ;
-
-  // Boolean field: Master Mode Select
-    static const uint8_t I2C1_C1_MST = 1U << 5 ;
-
-  // Boolean field: I2C Interrupt Enable
-    static const uint8_t I2C1_C1_IICIE = 1U << 6 ;
-
-  // Boolean field: I2C Enable
-    static const uint8_t I2C1_C1_IICEN = 1U << 7 ;
-
-//-------------------- I2C Status register
-#define I2C1_S (* ((volatile uint8_t *) (0x40067000 + 0x3)))
-
-  // Boolean field: Receive Acknowledge
-    static const uint8_t I2C1_S_RXAK = 1U << 0 ;
-
-  // Boolean field: Interrupt Flag
-    static const uint8_t I2C1_S_IICIF = 1U << 1 ;
-
-  // Boolean field: Slave Read/Write
-    static const uint8_t I2C1_S_SRW = 1U << 2 ;
-
-  // Boolean field: Range Address Match
-    static const uint8_t I2C1_S_RAM = 1U << 3 ;
-
-  // Boolean field: Arbitration Lost
-    static const uint8_t I2C1_S_ARBL = 1U << 4 ;
-
-  // Boolean field: Bus Busy
-    static const uint8_t I2C1_S_BUSY = 1U << 5 ;
-
-  // Boolean field: Addressed As A Slave
-    static const uint8_t I2C1_S_IAAS = 1U << 6 ;
-
-  // Boolean field: Transfer Complete Flag
-    static const uint8_t I2C1_S_TCF = 1U << 7 ;
-
-//-------------------- I2C Data I/O register
-#define I2C1_D (* ((volatile uint8_t *) (0x40067000 + 0x4)))
-
-//-------------------- I2C Control Register 2
-#define I2C1_C2 (* ((volatile uint8_t *) (0x40067000 + 0x5)))
-
-  // Field (width: 3 bits): Slave Address
-    inline uint8_t I2C1_C2_AD (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Range Address Matching Enable
-    static const uint8_t I2C1_C2_RMEN = 1U << 3 ;
-
-  // Boolean field: Slave Baud Rate Control
-    static const uint8_t I2C1_C2_SBRC = 1U << 4 ;
-
-  // Boolean field: High Drive Select
-    static const uint8_t I2C1_C2_HDRS = 1U << 5 ;
-
-  // Boolean field: Address Extension
-    static const uint8_t I2C1_C2_ADEXT = 1U << 6 ;
-
-  // Boolean field: General Call Address Enable
-    static const uint8_t I2C1_C2_GCAEN = 1U << 7 ;
-
-//-------------------- I2C Programmable Input Glitch Filter register
-#define I2C1_FLT (* ((volatile uint8_t *) (0x40067000 + 0x6)))
-
-  // Field (width: 4 bits): I2C Programmable Filter Factor
-    inline uint8_t I2C1_FLT_FLT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Boolean field: I2C Bus Start Detect Flag
-    static const uint8_t I2C1_FLT_STARTF = 1U << 4 ;
-
-  // Boolean field: I2C Bus Stop or Start Interrupt Enable
-    static const uint8_t I2C1_FLT_SSIE = 1U << 5 ;
-
-  // Boolean field: I2C Bus Stop Detect Flag
-    static const uint8_t I2C1_FLT_STOPF = 1U << 6 ;
-
-  // Boolean field: Stop Hold Enable
-    static const uint8_t I2C1_FLT_SHEN = 1U << 7 ;
-
-//-------------------- I2C Range Address register
-#define I2C1_RA (* ((volatile uint8_t *) (0x40067000 + 0x7)))
-
-  // Field (width: 7 bits): Range Slave Address
-    inline uint8_t I2C1_RA_RAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C SMBus Control and Status register
-#define I2C1_SMB (* ((volatile uint8_t *) (0x40067000 + 0x8)))
-
-  // Boolean field: SHTF2 Interrupt Enable
-    static const uint8_t I2C1_SMB_SHTF2IE = 1U << 0 ;
-
-  // Boolean field: SCL High Timeout Flag 2
-    static const uint8_t I2C1_SMB_SHTF2 = 1U << 1 ;
-
-  // Boolean field: SCL High Timeout Flag 1
-    static const uint8_t I2C1_SMB_SHTF1 = 1U << 2 ;
-
-  // Boolean field: SCL Low Timeout Flag
-    static const uint8_t I2C1_SMB_SLTF = 1U << 3 ;
-
-  // Boolean field: Timeout Counter Clock Select
-    static const uint8_t I2C1_SMB_TCKSEL = 1U << 4 ;
-
-  // Boolean field: Second I2C Address Enable
-    static const uint8_t I2C1_SMB_SIICAEN = 1U << 5 ;
-
-  // Boolean field: SMBus Alert Response Address Enable
-    static const uint8_t I2C1_SMB_ALERTEN = 1U << 6 ;
-
-  // Boolean field: Fast NACK/ACK Enable
-    static const uint8_t I2C1_SMB_FACK = 1U << 7 ;
-
-//-------------------- I2C Address Register 2
-#define I2C1_A2 (* ((volatile uint8_t *) (0x40067000 + 0x9)))
-
-  // Field (width: 7 bits): SMBus Address
-    inline uint8_t I2C1_A2_SAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C SCL Low Timeout Register High
-#define I2C1_SLTH (* ((volatile uint8_t *) (0x40067000 + 0xA)))
-
-//-------------------- I2C SCL Low Timeout Register Low
-#define I2C1_SLTL (* ((volatile uint8_t *) (0x40067000 + 0xB)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral I2C2
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- I2C Address Register 1
-#define I2C2_A1 (* ((volatile uint8_t *) (0x400E6000 + 0)))
-
-  // Field (width: 7 bits): Address
-    inline uint8_t I2C2_A1_AD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C Frequency Divider register
-#define I2C2_F (* ((volatile uint8_t *) (0x400E6000 + 0x1)))
-
-  // Field (width: 6 bits): ClockRate
-    inline uint8_t I2C2_F_ICR (const uint8_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Field (width: 2 bits): Multiplier Factor
-    inline uint8_t I2C2_F_MULT (const uint8_t inValue) { return (inValue & 3) << 6 ; }
-
-//-------------------- I2C Control Register 1
-#define I2C2_C1 (* ((volatile uint8_t *) (0x400E6000 + 0x2)))
-
-  // Boolean field: DMA Enable
-    static const uint8_t I2C2_C1_DMAEN = 1U << 0 ;
-
-  // Boolean field: Wakeup Enable
-    static const uint8_t I2C2_C1_WUEN = 1U << 1 ;
-
-  // Boolean field: Repeat START
-    static const uint8_t I2C2_C1_RSTA = 1U << 2 ;
-
-  // Boolean field: Transmit Acknowledge Enable
-    static const uint8_t I2C2_C1_TXAK = 1U << 3 ;
-
-  // Boolean field: Transmit Mode Select
-    static const uint8_t I2C2_C1_TX = 1U << 4 ;
-
-  // Boolean field: Master Mode Select
-    static const uint8_t I2C2_C1_MST = 1U << 5 ;
-
-  // Boolean field: I2C Interrupt Enable
-    static const uint8_t I2C2_C1_IICIE = 1U << 6 ;
-
-  // Boolean field: I2C Enable
-    static const uint8_t I2C2_C1_IICEN = 1U << 7 ;
-
-//-------------------- I2C Status register
-#define I2C2_S (* ((volatile uint8_t *) (0x400E6000 + 0x3)))
-
-  // Boolean field: Receive Acknowledge
-    static const uint8_t I2C2_S_RXAK = 1U << 0 ;
-
-  // Boolean field: Interrupt Flag
-    static const uint8_t I2C2_S_IICIF = 1U << 1 ;
-
-  // Boolean field: Slave Read/Write
-    static const uint8_t I2C2_S_SRW = 1U << 2 ;
-
-  // Boolean field: Range Address Match
-    static const uint8_t I2C2_S_RAM = 1U << 3 ;
-
-  // Boolean field: Arbitration Lost
-    static const uint8_t I2C2_S_ARBL = 1U << 4 ;
-
-  // Boolean field: Bus Busy
-    static const uint8_t I2C2_S_BUSY = 1U << 5 ;
-
-  // Boolean field: Addressed As A Slave
-    static const uint8_t I2C2_S_IAAS = 1U << 6 ;
-
-  // Boolean field: Transfer Complete Flag
-    static const uint8_t I2C2_S_TCF = 1U << 7 ;
-
-//-------------------- I2C Data I/O register
-#define I2C2_D (* ((volatile uint8_t *) (0x400E6000 + 0x4)))
-
-//-------------------- I2C Control Register 2
-#define I2C2_C2 (* ((volatile uint8_t *) (0x400E6000 + 0x5)))
-
-  // Field (width: 3 bits): Slave Address
-    inline uint8_t I2C2_C2_AD (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Range Address Matching Enable
-    static const uint8_t I2C2_C2_RMEN = 1U << 3 ;
-
-  // Boolean field: Slave Baud Rate Control
-    static const uint8_t I2C2_C2_SBRC = 1U << 4 ;
-
-  // Boolean field: High Drive Select
-    static const uint8_t I2C2_C2_HDRS = 1U << 5 ;
-
-  // Boolean field: Address Extension
-    static const uint8_t I2C2_C2_ADEXT = 1U << 6 ;
-
-  // Boolean field: General Call Address Enable
-    static const uint8_t I2C2_C2_GCAEN = 1U << 7 ;
-
-//-------------------- I2C Programmable Input Glitch Filter register
-#define I2C2_FLT (* ((volatile uint8_t *) (0x400E6000 + 0x6)))
-
-  // Field (width: 4 bits): I2C Programmable Filter Factor
-    inline uint8_t I2C2_FLT_FLT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Boolean field: I2C Bus Start Detect Flag
-    static const uint8_t I2C2_FLT_STARTF = 1U << 4 ;
-
-  // Boolean field: I2C Bus Stop or Start Interrupt Enable
-    static const uint8_t I2C2_FLT_SSIE = 1U << 5 ;
-
-  // Boolean field: I2C Bus Stop Detect Flag
-    static const uint8_t I2C2_FLT_STOPF = 1U << 6 ;
-
-  // Boolean field: Stop Hold Enable
-    static const uint8_t I2C2_FLT_SHEN = 1U << 7 ;
-
-//-------------------- I2C Range Address register
-#define I2C2_RA (* ((volatile uint8_t *) (0x400E6000 + 0x7)))
-
-  // Field (width: 7 bits): Range Slave Address
-    inline uint8_t I2C2_RA_RAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C SMBus Control and Status register
-#define I2C2_SMB (* ((volatile uint8_t *) (0x400E6000 + 0x8)))
-
-  // Boolean field: SHTF2 Interrupt Enable
-    static const uint8_t I2C2_SMB_SHTF2IE = 1U << 0 ;
-
-  // Boolean field: SCL High Timeout Flag 2
-    static const uint8_t I2C2_SMB_SHTF2 = 1U << 1 ;
-
-  // Boolean field: SCL High Timeout Flag 1
-    static const uint8_t I2C2_SMB_SHTF1 = 1U << 2 ;
-
-  // Boolean field: SCL Low Timeout Flag
-    static const uint8_t I2C2_SMB_SLTF = 1U << 3 ;
-
-  // Boolean field: Timeout Counter Clock Select
-    static const uint8_t I2C2_SMB_TCKSEL = 1U << 4 ;
-
-  // Boolean field: Second I2C Address Enable
-    static const uint8_t I2C2_SMB_SIICAEN = 1U << 5 ;
-
-  // Boolean field: SMBus Alert Response Address Enable
-    static const uint8_t I2C2_SMB_ALERTEN = 1U << 6 ;
-
-  // Boolean field: Fast NACK/ACK Enable
-    static const uint8_t I2C2_SMB_FACK = 1U << 7 ;
-
-//-------------------- I2C Address Register 2
-#define I2C2_A2 (* ((volatile uint8_t *) (0x400E6000 + 0x9)))
-
-  // Field (width: 7 bits): SMBus Address
-    inline uint8_t I2C2_A2_SAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
-
-//-------------------- I2C SCL Low Timeout Register High
-#define I2C2_SLTH (* ((volatile uint8_t *) (0x400E6000 + 0xA)))
-
-//-------------------- I2C SCL Low Timeout Register Low
-#define I2C2_SLTL (* ((volatile uint8_t *) (0x400E6000 + 0xB)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral UART0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- UART Baud Rate Registers: High
-#define UART0_BDH (* ((volatile uint8_t *) (0x4006A000 + 0)))
-
-  // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART0_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Stop Bit Number Select
-    static const uint8_t UART0_BDH_SBNS = 1U << 5 ;
-
-  // Boolean field: RxD Input Active Edge Interrupt Enable
-    static const uint8_t UART0_BDH_RXEDGIE = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
-    static const uint8_t UART0_BDH_LBKDIE = 1U << 7 ;
-
-//-------------------- UART Baud Rate Registers: Low
-#define UART0_BDL (* ((volatile uint8_t *) (0x4006A000 + 0x1)))
-
-//-------------------- UART Control Register 1
-#define UART0_C1 (* ((volatile uint8_t *) (0x4006A000 + 0x2)))
-
-  // Boolean field: Parity Type
-    static const uint8_t UART0_C1_PT = 1U << 0 ;
-
-  // Boolean field: Parity Enable
-    static const uint8_t UART0_C1_PE = 1U << 1 ;
-
-  // Boolean field: Idle Line Type Select
-    static const uint8_t UART0_C1_ILT = 1U << 2 ;
-
-  // Boolean field: Receiver Wakeup Method Select
-    static const uint8_t UART0_C1_WAKE = 1U << 3 ;
-
-  // Boolean field: 9-bit or 8-bit Mode Select
-    static const uint8_t UART0_C1_M = 1U << 4 ;
-
-  // Boolean field: Receiver Source Select
-    static const uint8_t UART0_C1_RSRC = 1U << 5 ;
-
-  // Boolean field: UART Stops in Wait Mode
-    static const uint8_t UART0_C1_UARTSWAI = 1U << 6 ;
-
-  // Boolean field: Loop Mode Select
-    static const uint8_t UART0_C1_LOOPS = 1U << 7 ;
-
-//-------------------- UART Control Register 2
-#define UART0_C2 (* ((volatile uint8_t *) (0x4006A000 + 0x3)))
-
-  // Boolean field: Send Break
-    static const uint8_t UART0_C2_SBK = 1U << 0 ;
-
-  // Boolean field: Receiver Wakeup Control
-    static const uint8_t UART0_C2_RWU = 1U << 1 ;
-
-  // Boolean field: Receiver Enable
-    static const uint8_t UART0_C2_RE = 1U << 2 ;
-
-  // Boolean field: Transmitter Enable
-    static const uint8_t UART0_C2_TE = 1U << 3 ;
-
-  // Boolean field: Idle Line Interrupt DMA Transfer Enable
-    static const uint8_t UART0_C2_ILIE = 1U << 4 ;
-
-  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
-    static const uint8_t UART0_C2_RIE = 1U << 5 ;
-
-  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
-    static const uint8_t UART0_C2_TCIE = 1U << 6 ;
-
-  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
-    static const uint8_t UART0_C2_TIE = 1U << 7 ;
-
-//-------------------- UART Status Register 1
-#define UART0_S1 (* ((const volatile uint8_t *) (0x4006A000 + 0x4)))
-
-  // Boolean field: Parity Error Flag
-    static const uint8_t UART0_S1_PF = 1U << 0 ;
-
-  // Boolean field: Framing Error Flag
-    static const uint8_t UART0_S1_FE = 1U << 1 ;
-
-  // Boolean field: Noise Flag
-    static const uint8_t UART0_S1_NF = 1U << 2 ;
-
-  // Boolean field: Receiver Overrun Flag
-    static const uint8_t UART0_S1_OR = 1U << 3 ;
-
-  // Boolean field: Idle Line Flag
-    static const uint8_t UART0_S1_IDLE = 1U << 4 ;
-
-  // Boolean field: Receive Data Register Full Flag
-    static const uint8_t UART0_S1_RDRF = 1U << 5 ;
-
-  // Boolean field: Transmit Complete Flag
-    static const uint8_t UART0_S1_TC = 1U << 6 ;
-
-  // Boolean field: Transmit Data Register Empty Flag
-    static const uint8_t UART0_S1_TDRE = 1U << 7 ;
-
-//-------------------- UART Status Register 2
-#define UART0_S2 (* ((volatile uint8_t *) (0x4006A000 + 0x5)))
-
-  // Boolean field: Receiver Active Flag
-    static const uint8_t UART0_S2_RAF = 1U << 0 ;
-
-  // Boolean field: LIN Break Detection Enable
-    static const uint8_t UART0_S2_LBKDE = 1U << 1 ;
-
-  // Boolean field: Break Transmit Character Length
-    static const uint8_t UART0_S2_BRK13 = 1U << 2 ;
-
-  // Boolean field: Receive Wakeup Idle Detect
-    static const uint8_t UART0_S2_RWUID = 1U << 3 ;
-
-  // Boolean field: Receive Data Inversion
-    static const uint8_t UART0_S2_RXINV = 1U << 4 ;
-
-  // Boolean field: Most Significant Bit First
-    static const uint8_t UART0_S2_MSBF = 1U << 5 ;
-
-  // Boolean field: RxD Pin Active Edge Interrupt Flag
-    static const uint8_t UART0_S2_RXEDGIF = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt Flag
-    static const uint8_t UART0_S2_LBKDIF = 1U << 7 ;
-
-//-------------------- UART Control Register 3
-#define UART0_C3 (* ((volatile uint8_t *) (0x4006A000 + 0x6)))
-
-  // Boolean field: Parity Error Interrupt Enable
-    static const uint8_t UART0_C3_PEIE = 1U << 0 ;
-
-  // Boolean field: Framing Error Interrupt Enable
-    static const uint8_t UART0_C3_FEIE = 1U << 1 ;
-
-  // Boolean field: Noise Error Interrupt Enable
-    static const uint8_t UART0_C3_NEIE = 1U << 2 ;
-
-  // Boolean field: Overrun Error Interrupt Enable
-    static const uint8_t UART0_C3_ORIE = 1U << 3 ;
-
-  // Boolean field: Transmit Data Inversion.
-    static const uint8_t UART0_C3_TXINV = 1U << 4 ;
-
-  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
-    static const uint8_t UART0_C3_TXDIR = 1U << 5 ;
-
-  // Boolean field: Transmit Bit 8
-    static const uint8_t UART0_C3_T8 = 1U << 6 ;
-
-  // Boolean field: Received Bit 8
-    static const uint8_t UART0_C3_R8 = 1U << 7 ;
-
-//-------------------- UART Data Register
-#define UART0_D (* ((volatile uint8_t *) (0x4006A000 + 0x7)))
-
-//-------------------- UART Match Address Registers 1
-#define UART0_MA1 (* ((volatile uint8_t *) (0x4006A000 + 0x8)))
-
-//-------------------- UART Match Address Registers 2
-#define UART0_MA2 (* ((volatile uint8_t *) (0x4006A000 + 0x9)))
-
-//-------------------- UART Control Register 4
-#define UART0_C4 (* ((volatile uint8_t *) (0x4006A000 + 0xA)))
-
-  // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART0_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: 10-bit Mode select
-    static const uint8_t UART0_C4_M10 = 1U << 5 ;
-
-  // Boolean field: Match Address Mode Enable 2
-    static const uint8_t UART0_C4_MAEN2 = 1U << 6 ;
-
-  // Boolean field: Match Address Mode Enable 1
-    static const uint8_t UART0_C4_MAEN1 = 1U << 7 ;
-
-//-------------------- UART Control Register 5
-#define UART0_C5 (* ((volatile uint8_t *) (0x4006A000 + 0xB)))
-
-  // Boolean field: LIN Break Detect DMA Select Bit
-    static const uint8_t UART0_C5_LBKDDMAS = 1U << 3 ;
-
-  // Boolean field: Idle Line DMA Select
-    static const uint8_t UART0_C5_ILDMAS = 1U << 4 ;
-
-  // Boolean field: Receiver Full DMA Select
-    static const uint8_t UART0_C5_RDMAS = 1U << 5 ;
-
-  // Boolean field: Transmission Complete DMA Select
-    static const uint8_t UART0_C5_TCDMAS = 1U << 6 ;
-
-  // Boolean field: Transmitter DMA Select
-    static const uint8_t UART0_C5_TDMAS = 1U << 7 ;
-
-//-------------------- UART Extended Data Register
-#define UART0_ED (* ((const volatile uint8_t *) (0x4006A000 + 0xC)))
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
-    static const uint8_t UART0_ED_PARITYE = 1U << 6 ;
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
-    static const uint8_t UART0_ED_NOISY = 1U << 7 ;
-
-//-------------------- UART Modem Register
-#define UART0_MODEM (* ((volatile uint8_t *) (0x4006A000 + 0xD)))
-
-  // Boolean field: Transmitter clear-to-send enable
-    static const uint8_t UART0_MODEM_TXCTSE = 1U << 0 ;
-
-  // Boolean field: Transmitter request-to-send enable
-    static const uint8_t UART0_MODEM_TXRTSE = 1U << 1 ;
-
-  // Boolean field: Transmitter request-to-send polarity
-    static const uint8_t UART0_MODEM_TXRTSPOL = 1U << 2 ;
-
-  // Boolean field: Receiver request-to-send enable
-    static const uint8_t UART0_MODEM_RXRTSE = 1U << 3 ;
-
-//-------------------- UART Infrared Register
-#define UART0_IR (* ((volatile uint8_t *) (0x4006A000 + 0xE)))
-
-  // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART0_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Infrared enable
-    static const uint8_t UART0_IR_IREN = 1U << 2 ;
-
-//-------------------- UART FIFO Parameters
-#define UART0_PFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x10)))
-
-  // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART0_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Receive FIFO Enable
-    static const uint8_t UART0_PFIFO_RXFE = 1U << 3 ;
-
-  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART0_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-  // Boolean field: Transmit FIFO Enable
-    static const uint8_t UART0_PFIFO_TXFE = 1U << 7 ;
-
-//-------------------- UART FIFO Control Register
-#define UART0_CFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x11)))
-
-  // Boolean field: Receive FIFO Underflow Interrupt Enable
-    static const uint8_t UART0_CFIFO_RXUFE = 1U << 0 ;
-
-  // Boolean field: Transmit FIFO Overflow Interrupt Enable
-    static const uint8_t UART0_CFIFO_TXOFE = 1U << 1 ;
-
-  // Boolean field: Receive FIFO Overflow Interrupt Enable
-    static const uint8_t UART0_CFIFO_RXOFE = 1U << 2 ;
-
-  // Boolean field: Receive FIFO/Buffer Flush
-    static const uint8_t UART0_CFIFO_RXFLUSH = 1U << 6 ;
-
-  // Boolean field: Transmit FIFO/Buffer Flush
-    static const uint8_t UART0_CFIFO_TXFLUSH = 1U << 7 ;
-
-//-------------------- UART FIFO Status Register
-#define UART0_SFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x12)))
-
-  // Boolean field: Receiver Buffer Underflow Flag
-    static const uint8_t UART0_SFIFO_RXUF = 1U << 0 ;
-
-  // Boolean field: Transmitter Buffer Overflow Flag
-    static const uint8_t UART0_SFIFO_TXOF = 1U << 1 ;
-
-  // Boolean field: Receiver Buffer Overflow Flag
-    static const uint8_t UART0_SFIFO_RXOF = 1U << 2 ;
-
-  // Boolean field: Receive Buffer/FIFO Empty
-    static const uint8_t UART0_SFIFO_RXEMPT = 1U << 6 ;
-
-  // Boolean field: Transmit Buffer/FIFO Empty
-    static const uint8_t UART0_SFIFO_TXEMPT = 1U << 7 ;
-
-//-------------------- UART FIFO Transmit Watermark
-#define UART0_TWFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x13)))
-
-//-------------------- UART FIFO Transmit Count
-#define UART0_TCFIFO (* ((const volatile uint8_t *) (0x4006A000 + 0x14)))
-
-//-------------------- UART FIFO Receive Watermark
-#define UART0_RWFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x15)))
-
-//-------------------- UART FIFO Receive Count
-#define UART0_RCFIFO (* ((const volatile uint8_t *) (0x4006A000 + 0x16)))
-
-//-------------------- UART 7816 Control Register
-#define UART0_C7816 (* ((volatile uint8_t *) (0x4006A000 + 0x18)))
-
-  // Boolean field: ISO-7816 Functionality Enabled
-    static const uint8_t UART0_C7816_ISO_7816E = 1U << 0 ;
-
-  // Boolean field: Transfer Type
-    static const uint8_t UART0_C7816_TTYPE = 1U << 1 ;
-
-  // Boolean field: Detect Initial Character
-    static const uint8_t UART0_C7816_INIT = 1U << 2 ;
-
-  // Boolean field: Generate NACK on Error
-    static const uint8_t UART0_C7816_ANACK = 1U << 3 ;
-
-  // Boolean field: Generate NACK on Overflow
-    static const uint8_t UART0_C7816_ONACK = 1U << 4 ;
-
-//-------------------- UART 7816 Interrupt Enable Register
-#define UART0_IE7816 (* ((volatile uint8_t *) (0x4006A000 + 0x19)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt Enable
-    static const uint8_t UART0_IE7816_RXTE = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
-    static const uint8_t UART0_IE7816_TXTE = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt Enable
-    static const uint8_t UART0_IE7816_GTVE = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt Enable
-    static const uint8_t UART0_IE7816_INITDE = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt Enable
-    static const uint8_t UART0_IE7816_BWTE = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt Enable
-    static const uint8_t UART0_IE7816_CWTE = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt Enable
-    static const uint8_t UART0_IE7816_WTE = 1U << 7 ;
-
-//-------------------- UART 7816 Interrupt Status Register
-#define UART0_IS7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1A)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt
-    static const uint8_t UART0_IS7816_RXT = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt
-    static const uint8_t UART0_IS7816_TXT = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt
-    static const uint8_t UART0_IS7816_GTV = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt
-    static const uint8_t UART0_IS7816_INITD = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt
-    static const uint8_t UART0_IS7816_BWT = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt
-    static const uint8_t UART0_IS7816_CWT = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt
-    static const uint8_t UART0_IS7816_WT = 1U << 7 ;
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART0_WP7816T0 (* ((volatile uint8_t *) (0x4006A000 + 0x1B)))
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART0_WP7816T1 (* ((volatile uint8_t *) (0x4006A000 + 0x1B)))
-
-  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART0_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART0_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Wait N Register
-#define UART0_WN7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1C)))
-
-//-------------------- UART 7816 Wait FD Register
-#define UART0_WF7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1D)))
-
-//-------------------- UART 7816 Error Threshold Register
-#define UART0_ET7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1E)))
-
-  // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART0_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART0_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Transmit Length Register
-#define UART0_TL7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1F)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral UART1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- UART Baud Rate Registers: High
-#define UART1_BDH (* ((volatile uint8_t *) (0x4006B000 + 0)))
-
-  // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART1_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Stop Bit Number Select
-    static const uint8_t UART1_BDH_SBNS = 1U << 5 ;
-
-  // Boolean field: RxD Input Active Edge Interrupt Enable
-    static const uint8_t UART1_BDH_RXEDGIE = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
-    static const uint8_t UART1_BDH_LBKDIE = 1U << 7 ;
-
-//-------------------- UART Baud Rate Registers: Low
-#define UART1_BDL (* ((volatile uint8_t *) (0x4006B000 + 0x1)))
-
-//-------------------- UART Control Register 1
-#define UART1_C1 (* ((volatile uint8_t *) (0x4006B000 + 0x2)))
-
-  // Boolean field: Parity Type
-    static const uint8_t UART1_C1_PT = 1U << 0 ;
-
-  // Boolean field: Parity Enable
-    static const uint8_t UART1_C1_PE = 1U << 1 ;
-
-  // Boolean field: Idle Line Type Select
-    static const uint8_t UART1_C1_ILT = 1U << 2 ;
-
-  // Boolean field: Receiver Wakeup Method Select
-    static const uint8_t UART1_C1_WAKE = 1U << 3 ;
-
-  // Boolean field: 9-bit or 8-bit Mode Select
-    static const uint8_t UART1_C1_M = 1U << 4 ;
-
-  // Boolean field: Receiver Source Select
-    static const uint8_t UART1_C1_RSRC = 1U << 5 ;
-
-  // Boolean field: UART Stops in Wait Mode
-    static const uint8_t UART1_C1_UARTSWAI = 1U << 6 ;
-
-  // Boolean field: Loop Mode Select
-    static const uint8_t UART1_C1_LOOPS = 1U << 7 ;
-
-//-------------------- UART Control Register 2
-#define UART1_C2 (* ((volatile uint8_t *) (0x4006B000 + 0x3)))
-
-  // Boolean field: Send Break
-    static const uint8_t UART1_C2_SBK = 1U << 0 ;
-
-  // Boolean field: Receiver Wakeup Control
-    static const uint8_t UART1_C2_RWU = 1U << 1 ;
-
-  // Boolean field: Receiver Enable
-    static const uint8_t UART1_C2_RE = 1U << 2 ;
-
-  // Boolean field: Transmitter Enable
-    static const uint8_t UART1_C2_TE = 1U << 3 ;
-
-  // Boolean field: Idle Line Interrupt DMA Transfer Enable
-    static const uint8_t UART1_C2_ILIE = 1U << 4 ;
-
-  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
-    static const uint8_t UART1_C2_RIE = 1U << 5 ;
-
-  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
-    static const uint8_t UART1_C2_TCIE = 1U << 6 ;
-
-  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
-    static const uint8_t UART1_C2_TIE = 1U << 7 ;
-
-//-------------------- UART Status Register 1
-#define UART1_S1 (* ((const volatile uint8_t *) (0x4006B000 + 0x4)))
-
-  // Boolean field: Parity Error Flag
-    static const uint8_t UART1_S1_PF = 1U << 0 ;
-
-  // Boolean field: Framing Error Flag
-    static const uint8_t UART1_S1_FE = 1U << 1 ;
-
-  // Boolean field: Noise Flag
-    static const uint8_t UART1_S1_NF = 1U << 2 ;
-
-  // Boolean field: Receiver Overrun Flag
-    static const uint8_t UART1_S1_OR = 1U << 3 ;
-
-  // Boolean field: Idle Line Flag
-    static const uint8_t UART1_S1_IDLE = 1U << 4 ;
-
-  // Boolean field: Receive Data Register Full Flag
-    static const uint8_t UART1_S1_RDRF = 1U << 5 ;
-
-  // Boolean field: Transmit Complete Flag
-    static const uint8_t UART1_S1_TC = 1U << 6 ;
-
-  // Boolean field: Transmit Data Register Empty Flag
-    static const uint8_t UART1_S1_TDRE = 1U << 7 ;
-
-//-------------------- UART Status Register 2
-#define UART1_S2 (* ((volatile uint8_t *) (0x4006B000 + 0x5)))
-
-  // Boolean field: Receiver Active Flag
-    static const uint8_t UART1_S2_RAF = 1U << 0 ;
-
-  // Boolean field: LIN Break Detection Enable
-    static const uint8_t UART1_S2_LBKDE = 1U << 1 ;
-
-  // Boolean field: Break Transmit Character Length
-    static const uint8_t UART1_S2_BRK13 = 1U << 2 ;
-
-  // Boolean field: Receive Wakeup Idle Detect
-    static const uint8_t UART1_S2_RWUID = 1U << 3 ;
-
-  // Boolean field: Receive Data Inversion
-    static const uint8_t UART1_S2_RXINV = 1U << 4 ;
-
-  // Boolean field: Most Significant Bit First
-    static const uint8_t UART1_S2_MSBF = 1U << 5 ;
-
-  // Boolean field: RxD Pin Active Edge Interrupt Flag
-    static const uint8_t UART1_S2_RXEDGIF = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt Flag
-    static const uint8_t UART1_S2_LBKDIF = 1U << 7 ;
-
-//-------------------- UART Control Register 3
-#define UART1_C3 (* ((volatile uint8_t *) (0x4006B000 + 0x6)))
-
-  // Boolean field: Parity Error Interrupt Enable
-    static const uint8_t UART1_C3_PEIE = 1U << 0 ;
-
-  // Boolean field: Framing Error Interrupt Enable
-    static const uint8_t UART1_C3_FEIE = 1U << 1 ;
-
-  // Boolean field: Noise Error Interrupt Enable
-    static const uint8_t UART1_C3_NEIE = 1U << 2 ;
-
-  // Boolean field: Overrun Error Interrupt Enable
-    static const uint8_t UART1_C3_ORIE = 1U << 3 ;
-
-  // Boolean field: Transmit Data Inversion.
-    static const uint8_t UART1_C3_TXINV = 1U << 4 ;
-
-  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
-    static const uint8_t UART1_C3_TXDIR = 1U << 5 ;
-
-  // Boolean field: Transmit Bit 8
-    static const uint8_t UART1_C3_T8 = 1U << 6 ;
-
-  // Boolean field: Received Bit 8
-    static const uint8_t UART1_C3_R8 = 1U << 7 ;
-
-//-------------------- UART Data Register
-#define UART1_D (* ((volatile uint8_t *) (0x4006B000 + 0x7)))
-
-//-------------------- UART Match Address Registers 1
-#define UART1_MA1 (* ((volatile uint8_t *) (0x4006B000 + 0x8)))
-
-//-------------------- UART Match Address Registers 2
-#define UART1_MA2 (* ((volatile uint8_t *) (0x4006B000 + 0x9)))
-
-//-------------------- UART Control Register 4
-#define UART1_C4 (* ((volatile uint8_t *) (0x4006B000 + 0xA)))
-
-  // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART1_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: 10-bit Mode select
-    static const uint8_t UART1_C4_M10 = 1U << 5 ;
-
-  // Boolean field: Match Address Mode Enable 2
-    static const uint8_t UART1_C4_MAEN2 = 1U << 6 ;
-
-  // Boolean field: Match Address Mode Enable 1
-    static const uint8_t UART1_C4_MAEN1 = 1U << 7 ;
-
-//-------------------- UART Control Register 5
-#define UART1_C5 (* ((volatile uint8_t *) (0x4006B000 + 0xB)))
-
-  // Boolean field: LIN Break Detect DMA Select Bit
-    static const uint8_t UART1_C5_LBKDDMAS = 1U << 3 ;
-
-  // Boolean field: Idle Line DMA Select
-    static const uint8_t UART1_C5_ILDMAS = 1U << 4 ;
-
-  // Boolean field: Receiver Full DMA Select
-    static const uint8_t UART1_C5_RDMAS = 1U << 5 ;
-
-  // Boolean field: Transmission Complete DMA Select
-    static const uint8_t UART1_C5_TCDMAS = 1U << 6 ;
-
-  // Boolean field: Transmitter DMA Select
-    static const uint8_t UART1_C5_TDMAS = 1U << 7 ;
-
-//-------------------- UART Extended Data Register
-#define UART1_ED (* ((const volatile uint8_t *) (0x4006B000 + 0xC)))
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
-    static const uint8_t UART1_ED_PARITYE = 1U << 6 ;
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
-    static const uint8_t UART1_ED_NOISY = 1U << 7 ;
-
-//-------------------- UART Modem Register
-#define UART1_MODEM (* ((volatile uint8_t *) (0x4006B000 + 0xD)))
-
-  // Boolean field: Transmitter clear-to-send enable
-    static const uint8_t UART1_MODEM_TXCTSE = 1U << 0 ;
-
-  // Boolean field: Transmitter request-to-send enable
-    static const uint8_t UART1_MODEM_TXRTSE = 1U << 1 ;
-
-  // Boolean field: Transmitter request-to-send polarity
-    static const uint8_t UART1_MODEM_TXRTSPOL = 1U << 2 ;
-
-  // Boolean field: Receiver request-to-send enable
-    static const uint8_t UART1_MODEM_RXRTSE = 1U << 3 ;
-
-//-------------------- UART Infrared Register
-#define UART1_IR (* ((volatile uint8_t *) (0x4006B000 + 0xE)))
-
-  // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART1_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Infrared enable
-    static const uint8_t UART1_IR_IREN = 1U << 2 ;
-
-//-------------------- UART FIFO Parameters
-#define UART1_PFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x10)))
-
-  // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART1_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Receive FIFO Enable
-    static const uint8_t UART1_PFIFO_RXFE = 1U << 3 ;
-
-  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART1_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-  // Boolean field: Transmit FIFO Enable
-    static const uint8_t UART1_PFIFO_TXFE = 1U << 7 ;
-
-//-------------------- UART FIFO Control Register
-#define UART1_CFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x11)))
-
-  // Boolean field: Receive FIFO Underflow Interrupt Enable
-    static const uint8_t UART1_CFIFO_RXUFE = 1U << 0 ;
-
-  // Boolean field: Transmit FIFO Overflow Interrupt Enable
-    static const uint8_t UART1_CFIFO_TXOFE = 1U << 1 ;
-
-  // Boolean field: Receive FIFO Overflow Interrupt Enable
-    static const uint8_t UART1_CFIFO_RXOFE = 1U << 2 ;
-
-  // Boolean field: Receive FIFO/Buffer Flush
-    static const uint8_t UART1_CFIFO_RXFLUSH = 1U << 6 ;
-
-  // Boolean field: Transmit FIFO/Buffer Flush
-    static const uint8_t UART1_CFIFO_TXFLUSH = 1U << 7 ;
-
-//-------------------- UART FIFO Status Register
-#define UART1_SFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x12)))
-
-  // Boolean field: Receiver Buffer Underflow Flag
-    static const uint8_t UART1_SFIFO_RXUF = 1U << 0 ;
-
-  // Boolean field: Transmitter Buffer Overflow Flag
-    static const uint8_t UART1_SFIFO_TXOF = 1U << 1 ;
-
-  // Boolean field: Receiver Buffer Overflow Flag
-    static const uint8_t UART1_SFIFO_RXOF = 1U << 2 ;
-
-  // Boolean field: Receive Buffer/FIFO Empty
-    static const uint8_t UART1_SFIFO_RXEMPT = 1U << 6 ;
-
-  // Boolean field: Transmit Buffer/FIFO Empty
-    static const uint8_t UART1_SFIFO_TXEMPT = 1U << 7 ;
-
-//-------------------- UART FIFO Transmit Watermark
-#define UART1_TWFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x13)))
-
-//-------------------- UART FIFO Transmit Count
-#define UART1_TCFIFO (* ((const volatile uint8_t *) (0x4006B000 + 0x14)))
-
-//-------------------- UART FIFO Receive Watermark
-#define UART1_RWFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x15)))
-
-//-------------------- UART FIFO Receive Count
-#define UART1_RCFIFO (* ((const volatile uint8_t *) (0x4006B000 + 0x16)))
-
-//-------------------- UART 7816 Control Register
-#define UART1_C7816 (* ((volatile uint8_t *) (0x4006B000 + 0x18)))
-
-  // Boolean field: ISO-7816 Functionality Enabled
-    static const uint8_t UART1_C7816_ISO_7816E = 1U << 0 ;
-
-  // Boolean field: Transfer Type
-    static const uint8_t UART1_C7816_TTYPE = 1U << 1 ;
-
-  // Boolean field: Detect Initial Character
-    static const uint8_t UART1_C7816_INIT = 1U << 2 ;
-
-  // Boolean field: Generate NACK on Error
-    static const uint8_t UART1_C7816_ANACK = 1U << 3 ;
-
-  // Boolean field: Generate NACK on Overflow
-    static const uint8_t UART1_C7816_ONACK = 1U << 4 ;
-
-//-------------------- UART 7816 Interrupt Enable Register
-#define UART1_IE7816 (* ((volatile uint8_t *) (0x4006B000 + 0x19)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt Enable
-    static const uint8_t UART1_IE7816_RXTE = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
-    static const uint8_t UART1_IE7816_TXTE = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt Enable
-    static const uint8_t UART1_IE7816_GTVE = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt Enable
-    static const uint8_t UART1_IE7816_INITDE = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt Enable
-    static const uint8_t UART1_IE7816_BWTE = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt Enable
-    static const uint8_t UART1_IE7816_CWTE = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt Enable
-    static const uint8_t UART1_IE7816_WTE = 1U << 7 ;
-
-//-------------------- UART 7816 Interrupt Status Register
-#define UART1_IS7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1A)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt
-    static const uint8_t UART1_IS7816_RXT = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt
-    static const uint8_t UART1_IS7816_TXT = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt
-    static const uint8_t UART1_IS7816_GTV = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt
-    static const uint8_t UART1_IS7816_INITD = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt
-    static const uint8_t UART1_IS7816_BWT = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt
-    static const uint8_t UART1_IS7816_CWT = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt
-    static const uint8_t UART1_IS7816_WT = 1U << 7 ;
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART1_WP7816T0 (* ((volatile uint8_t *) (0x4006B000 + 0x1B)))
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART1_WP7816T1 (* ((volatile uint8_t *) (0x4006B000 + 0x1B)))
-
-  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART1_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART1_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Wait N Register
-#define UART1_WN7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1C)))
-
-//-------------------- UART 7816 Wait FD Register
-#define UART1_WF7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1D)))
-
-//-------------------- UART 7816 Error Threshold Register
-#define UART1_ET7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1E)))
-
-  // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART1_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART1_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Transmit Length Register
-#define UART1_TL7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1F)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral UART2
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- UART Baud Rate Registers: High
-#define UART2_BDH (* ((volatile uint8_t *) (0x4006C000 + 0)))
-
-  // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART2_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Stop Bit Number Select
-    static const uint8_t UART2_BDH_SBNS = 1U << 5 ;
-
-  // Boolean field: RxD Input Active Edge Interrupt Enable
-    static const uint8_t UART2_BDH_RXEDGIE = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
-    static const uint8_t UART2_BDH_LBKDIE = 1U << 7 ;
-
-//-------------------- UART Baud Rate Registers: Low
-#define UART2_BDL (* ((volatile uint8_t *) (0x4006C000 + 0x1)))
-
-//-------------------- UART Control Register 1
-#define UART2_C1 (* ((volatile uint8_t *) (0x4006C000 + 0x2)))
-
-  // Boolean field: Parity Type
-    static const uint8_t UART2_C1_PT = 1U << 0 ;
-
-  // Boolean field: Parity Enable
-    static const uint8_t UART2_C1_PE = 1U << 1 ;
-
-  // Boolean field: Idle Line Type Select
-    static const uint8_t UART2_C1_ILT = 1U << 2 ;
-
-  // Boolean field: Receiver Wakeup Method Select
-    static const uint8_t UART2_C1_WAKE = 1U << 3 ;
-
-  // Boolean field: 9-bit or 8-bit Mode Select
-    static const uint8_t UART2_C1_M = 1U << 4 ;
-
-  // Boolean field: Receiver Source Select
-    static const uint8_t UART2_C1_RSRC = 1U << 5 ;
-
-  // Boolean field: UART Stops in Wait Mode
-    static const uint8_t UART2_C1_UARTSWAI = 1U << 6 ;
-
-  // Boolean field: Loop Mode Select
-    static const uint8_t UART2_C1_LOOPS = 1U << 7 ;
-
-//-------------------- UART Control Register 2
-#define UART2_C2 (* ((volatile uint8_t *) (0x4006C000 + 0x3)))
-
-  // Boolean field: Send Break
-    static const uint8_t UART2_C2_SBK = 1U << 0 ;
-
-  // Boolean field: Receiver Wakeup Control
-    static const uint8_t UART2_C2_RWU = 1U << 1 ;
-
-  // Boolean field: Receiver Enable
-    static const uint8_t UART2_C2_RE = 1U << 2 ;
-
-  // Boolean field: Transmitter Enable
-    static const uint8_t UART2_C2_TE = 1U << 3 ;
-
-  // Boolean field: Idle Line Interrupt DMA Transfer Enable
-    static const uint8_t UART2_C2_ILIE = 1U << 4 ;
-
-  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
-    static const uint8_t UART2_C2_RIE = 1U << 5 ;
-
-  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
-    static const uint8_t UART2_C2_TCIE = 1U << 6 ;
-
-  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
-    static const uint8_t UART2_C2_TIE = 1U << 7 ;
-
-//-------------------- UART Status Register 1
-#define UART2_S1 (* ((const volatile uint8_t *) (0x4006C000 + 0x4)))
-
-  // Boolean field: Parity Error Flag
-    static const uint8_t UART2_S1_PF = 1U << 0 ;
-
-  // Boolean field: Framing Error Flag
-    static const uint8_t UART2_S1_FE = 1U << 1 ;
-
-  // Boolean field: Noise Flag
-    static const uint8_t UART2_S1_NF = 1U << 2 ;
-
-  // Boolean field: Receiver Overrun Flag
-    static const uint8_t UART2_S1_OR = 1U << 3 ;
-
-  // Boolean field: Idle Line Flag
-    static const uint8_t UART2_S1_IDLE = 1U << 4 ;
-
-  // Boolean field: Receive Data Register Full Flag
-    static const uint8_t UART2_S1_RDRF = 1U << 5 ;
-
-  // Boolean field: Transmit Complete Flag
-    static const uint8_t UART2_S1_TC = 1U << 6 ;
-
-  // Boolean field: Transmit Data Register Empty Flag
-    static const uint8_t UART2_S1_TDRE = 1U << 7 ;
-
-//-------------------- UART Status Register 2
-#define UART2_S2 (* ((volatile uint8_t *) (0x4006C000 + 0x5)))
-
-  // Boolean field: Receiver Active Flag
-    static const uint8_t UART2_S2_RAF = 1U << 0 ;
-
-  // Boolean field: LIN Break Detection Enable
-    static const uint8_t UART2_S2_LBKDE = 1U << 1 ;
-
-  // Boolean field: Break Transmit Character Length
-    static const uint8_t UART2_S2_BRK13 = 1U << 2 ;
-
-  // Boolean field: Receive Wakeup Idle Detect
-    static const uint8_t UART2_S2_RWUID = 1U << 3 ;
-
-  // Boolean field: Receive Data Inversion
-    static const uint8_t UART2_S2_RXINV = 1U << 4 ;
-
-  // Boolean field: Most Significant Bit First
-    static const uint8_t UART2_S2_MSBF = 1U << 5 ;
-
-  // Boolean field: RxD Pin Active Edge Interrupt Flag
-    static const uint8_t UART2_S2_RXEDGIF = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt Flag
-    static const uint8_t UART2_S2_LBKDIF = 1U << 7 ;
-
-//-------------------- UART Control Register 3
-#define UART2_C3 (* ((volatile uint8_t *) (0x4006C000 + 0x6)))
-
-  // Boolean field: Parity Error Interrupt Enable
-    static const uint8_t UART2_C3_PEIE = 1U << 0 ;
-
-  // Boolean field: Framing Error Interrupt Enable
-    static const uint8_t UART2_C3_FEIE = 1U << 1 ;
-
-  // Boolean field: Noise Error Interrupt Enable
-    static const uint8_t UART2_C3_NEIE = 1U << 2 ;
-
-  // Boolean field: Overrun Error Interrupt Enable
-    static const uint8_t UART2_C3_ORIE = 1U << 3 ;
-
-  // Boolean field: Transmit Data Inversion.
-    static const uint8_t UART2_C3_TXINV = 1U << 4 ;
-
-  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
-    static const uint8_t UART2_C3_TXDIR = 1U << 5 ;
-
-  // Boolean field: Transmit Bit 8
-    static const uint8_t UART2_C3_T8 = 1U << 6 ;
-
-  // Boolean field: Received Bit 8
-    static const uint8_t UART2_C3_R8 = 1U << 7 ;
-
-//-------------------- UART Data Register
-#define UART2_D (* ((volatile uint8_t *) (0x4006C000 + 0x7)))
-
-//-------------------- UART Match Address Registers 1
-#define UART2_MA1 (* ((volatile uint8_t *) (0x4006C000 + 0x8)))
-
-//-------------------- UART Match Address Registers 2
-#define UART2_MA2 (* ((volatile uint8_t *) (0x4006C000 + 0x9)))
-
-//-------------------- UART Control Register 4
-#define UART2_C4 (* ((volatile uint8_t *) (0x4006C000 + 0xA)))
-
-  // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART2_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: 10-bit Mode select
-    static const uint8_t UART2_C4_M10 = 1U << 5 ;
-
-  // Boolean field: Match Address Mode Enable 2
-    static const uint8_t UART2_C4_MAEN2 = 1U << 6 ;
-
-  // Boolean field: Match Address Mode Enable 1
-    static const uint8_t UART2_C4_MAEN1 = 1U << 7 ;
-
-//-------------------- UART Control Register 5
-#define UART2_C5 (* ((volatile uint8_t *) (0x4006C000 + 0xB)))
-
-  // Boolean field: LIN Break Detect DMA Select Bit
-    static const uint8_t UART2_C5_LBKDDMAS = 1U << 3 ;
-
-  // Boolean field: Idle Line DMA Select
-    static const uint8_t UART2_C5_ILDMAS = 1U << 4 ;
-
-  // Boolean field: Receiver Full DMA Select
-    static const uint8_t UART2_C5_RDMAS = 1U << 5 ;
-
-  // Boolean field: Transmission Complete DMA Select
-    static const uint8_t UART2_C5_TCDMAS = 1U << 6 ;
-
-  // Boolean field: Transmitter DMA Select
-    static const uint8_t UART2_C5_TDMAS = 1U << 7 ;
-
-//-------------------- UART Extended Data Register
-#define UART2_ED (* ((const volatile uint8_t *) (0x4006C000 + 0xC)))
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
-    static const uint8_t UART2_ED_PARITYE = 1U << 6 ;
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
-    static const uint8_t UART2_ED_NOISY = 1U << 7 ;
-
-//-------------------- UART Modem Register
-#define UART2_MODEM (* ((volatile uint8_t *) (0x4006C000 + 0xD)))
-
-  // Boolean field: Transmitter clear-to-send enable
-    static const uint8_t UART2_MODEM_TXCTSE = 1U << 0 ;
-
-  // Boolean field: Transmitter request-to-send enable
-    static const uint8_t UART2_MODEM_TXRTSE = 1U << 1 ;
-
-  // Boolean field: Transmitter request-to-send polarity
-    static const uint8_t UART2_MODEM_TXRTSPOL = 1U << 2 ;
-
-  // Boolean field: Receiver request-to-send enable
-    static const uint8_t UART2_MODEM_RXRTSE = 1U << 3 ;
-
-//-------------------- UART Infrared Register
-#define UART2_IR (* ((volatile uint8_t *) (0x4006C000 + 0xE)))
-
-  // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART2_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Infrared enable
-    static const uint8_t UART2_IR_IREN = 1U << 2 ;
-
-//-------------------- UART FIFO Parameters
-#define UART2_PFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x10)))
-
-  // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART2_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Receive FIFO Enable
-    static const uint8_t UART2_PFIFO_RXFE = 1U << 3 ;
-
-  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART2_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-  // Boolean field: Transmit FIFO Enable
-    static const uint8_t UART2_PFIFO_TXFE = 1U << 7 ;
-
-//-------------------- UART FIFO Control Register
-#define UART2_CFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x11)))
-
-  // Boolean field: Receive FIFO Underflow Interrupt Enable
-    static const uint8_t UART2_CFIFO_RXUFE = 1U << 0 ;
-
-  // Boolean field: Transmit FIFO Overflow Interrupt Enable
-    static const uint8_t UART2_CFIFO_TXOFE = 1U << 1 ;
-
-  // Boolean field: Receive FIFO Overflow Interrupt Enable
-    static const uint8_t UART2_CFIFO_RXOFE = 1U << 2 ;
-
-  // Boolean field: Receive FIFO/Buffer Flush
-    static const uint8_t UART2_CFIFO_RXFLUSH = 1U << 6 ;
-
-  // Boolean field: Transmit FIFO/Buffer Flush
-    static const uint8_t UART2_CFIFO_TXFLUSH = 1U << 7 ;
-
-//-------------------- UART FIFO Status Register
-#define UART2_SFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x12)))
-
-  // Boolean field: Receiver Buffer Underflow Flag
-    static const uint8_t UART2_SFIFO_RXUF = 1U << 0 ;
-
-  // Boolean field: Transmitter Buffer Overflow Flag
-    static const uint8_t UART2_SFIFO_TXOF = 1U << 1 ;
-
-  // Boolean field: Receiver Buffer Overflow Flag
-    static const uint8_t UART2_SFIFO_RXOF = 1U << 2 ;
-
-  // Boolean field: Receive Buffer/FIFO Empty
-    static const uint8_t UART2_SFIFO_RXEMPT = 1U << 6 ;
-
-  // Boolean field: Transmit Buffer/FIFO Empty
-    static const uint8_t UART2_SFIFO_TXEMPT = 1U << 7 ;
-
-//-------------------- UART FIFO Transmit Watermark
-#define UART2_TWFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x13)))
-
-//-------------------- UART FIFO Transmit Count
-#define UART2_TCFIFO (* ((const volatile uint8_t *) (0x4006C000 + 0x14)))
-
-//-------------------- UART FIFO Receive Watermark
-#define UART2_RWFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x15)))
-
-//-------------------- UART FIFO Receive Count
-#define UART2_RCFIFO (* ((const volatile uint8_t *) (0x4006C000 + 0x16)))
-
-//-------------------- UART 7816 Control Register
-#define UART2_C7816 (* ((volatile uint8_t *) (0x4006C000 + 0x18)))
-
-  // Boolean field: ISO-7816 Functionality Enabled
-    static const uint8_t UART2_C7816_ISO_7816E = 1U << 0 ;
-
-  // Boolean field: Transfer Type
-    static const uint8_t UART2_C7816_TTYPE = 1U << 1 ;
-
-  // Boolean field: Detect Initial Character
-    static const uint8_t UART2_C7816_INIT = 1U << 2 ;
-
-  // Boolean field: Generate NACK on Error
-    static const uint8_t UART2_C7816_ANACK = 1U << 3 ;
-
-  // Boolean field: Generate NACK on Overflow
-    static const uint8_t UART2_C7816_ONACK = 1U << 4 ;
-
-//-------------------- UART 7816 Interrupt Enable Register
-#define UART2_IE7816 (* ((volatile uint8_t *) (0x4006C000 + 0x19)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt Enable
-    static const uint8_t UART2_IE7816_RXTE = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
-    static const uint8_t UART2_IE7816_TXTE = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt Enable
-    static const uint8_t UART2_IE7816_GTVE = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt Enable
-    static const uint8_t UART2_IE7816_INITDE = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt Enable
-    static const uint8_t UART2_IE7816_BWTE = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt Enable
-    static const uint8_t UART2_IE7816_CWTE = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt Enable
-    static const uint8_t UART2_IE7816_WTE = 1U << 7 ;
-
-//-------------------- UART 7816 Interrupt Status Register
-#define UART2_IS7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1A)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt
-    static const uint8_t UART2_IS7816_RXT = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt
-    static const uint8_t UART2_IS7816_TXT = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt
-    static const uint8_t UART2_IS7816_GTV = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt
-    static const uint8_t UART2_IS7816_INITD = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt
-    static const uint8_t UART2_IS7816_BWT = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt
-    static const uint8_t UART2_IS7816_CWT = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt
-    static const uint8_t UART2_IS7816_WT = 1U << 7 ;
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART2_WP7816T0 (* ((volatile uint8_t *) (0x4006C000 + 0x1B)))
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART2_WP7816T1 (* ((volatile uint8_t *) (0x4006C000 + 0x1B)))
-
-  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART2_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART2_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Wait N Register
-#define UART2_WN7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1C)))
-
-//-------------------- UART 7816 Wait FD Register
-#define UART2_WF7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1D)))
-
-//-------------------- UART 7816 Error Threshold Register
-#define UART2_ET7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1E)))
-
-  // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART2_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART2_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Transmit Length Register
-#define UART2_TL7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1F)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral UART3
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- UART Baud Rate Registers: High
-#define UART3_BDH (* ((volatile uint8_t *) (0x4006D000 + 0)))
-
-  // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART3_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Stop Bit Number Select
-    static const uint8_t UART3_BDH_SBNS = 1U << 5 ;
-
-  // Boolean field: RxD Input Active Edge Interrupt Enable
-    static const uint8_t UART3_BDH_RXEDGIE = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
-    static const uint8_t UART3_BDH_LBKDIE = 1U << 7 ;
-
-//-------------------- UART Baud Rate Registers: Low
-#define UART3_BDL (* ((volatile uint8_t *) (0x4006D000 + 0x1)))
-
-//-------------------- UART Control Register 1
-#define UART3_C1 (* ((volatile uint8_t *) (0x4006D000 + 0x2)))
-
-  // Boolean field: Parity Type
-    static const uint8_t UART3_C1_PT = 1U << 0 ;
-
-  // Boolean field: Parity Enable
-    static const uint8_t UART3_C1_PE = 1U << 1 ;
-
-  // Boolean field: Idle Line Type Select
-    static const uint8_t UART3_C1_ILT = 1U << 2 ;
-
-  // Boolean field: Receiver Wakeup Method Select
-    static const uint8_t UART3_C1_WAKE = 1U << 3 ;
-
-  // Boolean field: 9-bit or 8-bit Mode Select
-    static const uint8_t UART3_C1_M = 1U << 4 ;
-
-  // Boolean field: Receiver Source Select
-    static const uint8_t UART3_C1_RSRC = 1U << 5 ;
-
-  // Boolean field: UART Stops in Wait Mode
-    static const uint8_t UART3_C1_UARTSWAI = 1U << 6 ;
-
-  // Boolean field: Loop Mode Select
-    static const uint8_t UART3_C1_LOOPS = 1U << 7 ;
-
-//-------------------- UART Control Register 2
-#define UART3_C2 (* ((volatile uint8_t *) (0x4006D000 + 0x3)))
-
-  // Boolean field: Send Break
-    static const uint8_t UART3_C2_SBK = 1U << 0 ;
-
-  // Boolean field: Receiver Wakeup Control
-    static const uint8_t UART3_C2_RWU = 1U << 1 ;
-
-  // Boolean field: Receiver Enable
-    static const uint8_t UART3_C2_RE = 1U << 2 ;
-
-  // Boolean field: Transmitter Enable
-    static const uint8_t UART3_C2_TE = 1U << 3 ;
-
-  // Boolean field: Idle Line Interrupt DMA Transfer Enable
-    static const uint8_t UART3_C2_ILIE = 1U << 4 ;
-
-  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
-    static const uint8_t UART3_C2_RIE = 1U << 5 ;
-
-  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
-    static const uint8_t UART3_C2_TCIE = 1U << 6 ;
-
-  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
-    static const uint8_t UART3_C2_TIE = 1U << 7 ;
-
-//-------------------- UART Status Register 1
-#define UART3_S1 (* ((const volatile uint8_t *) (0x4006D000 + 0x4)))
-
-  // Boolean field: Parity Error Flag
-    static const uint8_t UART3_S1_PF = 1U << 0 ;
-
-  // Boolean field: Framing Error Flag
-    static const uint8_t UART3_S1_FE = 1U << 1 ;
-
-  // Boolean field: Noise Flag
-    static const uint8_t UART3_S1_NF = 1U << 2 ;
-
-  // Boolean field: Receiver Overrun Flag
-    static const uint8_t UART3_S1_OR = 1U << 3 ;
-
-  // Boolean field: Idle Line Flag
-    static const uint8_t UART3_S1_IDLE = 1U << 4 ;
-
-  // Boolean field: Receive Data Register Full Flag
-    static const uint8_t UART3_S1_RDRF = 1U << 5 ;
-
-  // Boolean field: Transmit Complete Flag
-    static const uint8_t UART3_S1_TC = 1U << 6 ;
-
-  // Boolean field: Transmit Data Register Empty Flag
-    static const uint8_t UART3_S1_TDRE = 1U << 7 ;
-
-//-------------------- UART Status Register 2
-#define UART3_S2 (* ((volatile uint8_t *) (0x4006D000 + 0x5)))
-
-  // Boolean field: Receiver Active Flag
-    static const uint8_t UART3_S2_RAF = 1U << 0 ;
-
-  // Boolean field: LIN Break Detection Enable
-    static const uint8_t UART3_S2_LBKDE = 1U << 1 ;
-
-  // Boolean field: Break Transmit Character Length
-    static const uint8_t UART3_S2_BRK13 = 1U << 2 ;
-
-  // Boolean field: Receive Wakeup Idle Detect
-    static const uint8_t UART3_S2_RWUID = 1U << 3 ;
-
-  // Boolean field: Receive Data Inversion
-    static const uint8_t UART3_S2_RXINV = 1U << 4 ;
-
-  // Boolean field: Most Significant Bit First
-    static const uint8_t UART3_S2_MSBF = 1U << 5 ;
-
-  // Boolean field: RxD Pin Active Edge Interrupt Flag
-    static const uint8_t UART3_S2_RXEDGIF = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt Flag
-    static const uint8_t UART3_S2_LBKDIF = 1U << 7 ;
-
-//-------------------- UART Control Register 3
-#define UART3_C3 (* ((volatile uint8_t *) (0x4006D000 + 0x6)))
-
-  // Boolean field: Parity Error Interrupt Enable
-    static const uint8_t UART3_C3_PEIE = 1U << 0 ;
-
-  // Boolean field: Framing Error Interrupt Enable
-    static const uint8_t UART3_C3_FEIE = 1U << 1 ;
-
-  // Boolean field: Noise Error Interrupt Enable
-    static const uint8_t UART3_C3_NEIE = 1U << 2 ;
-
-  // Boolean field: Overrun Error Interrupt Enable
-    static const uint8_t UART3_C3_ORIE = 1U << 3 ;
-
-  // Boolean field: Transmit Data Inversion.
-    static const uint8_t UART3_C3_TXINV = 1U << 4 ;
-
-  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
-    static const uint8_t UART3_C3_TXDIR = 1U << 5 ;
-
-  // Boolean field: Transmit Bit 8
-    static const uint8_t UART3_C3_T8 = 1U << 6 ;
-
-  // Boolean field: Received Bit 8
-    static const uint8_t UART3_C3_R8 = 1U << 7 ;
-
-//-------------------- UART Data Register
-#define UART3_D (* ((volatile uint8_t *) (0x4006D000 + 0x7)))
-
-//-------------------- UART Match Address Registers 1
-#define UART3_MA1 (* ((volatile uint8_t *) (0x4006D000 + 0x8)))
-
-//-------------------- UART Match Address Registers 2
-#define UART3_MA2 (* ((volatile uint8_t *) (0x4006D000 + 0x9)))
-
-//-------------------- UART Control Register 4
-#define UART3_C4 (* ((volatile uint8_t *) (0x4006D000 + 0xA)))
-
-  // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART3_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: 10-bit Mode select
-    static const uint8_t UART3_C4_M10 = 1U << 5 ;
-
-  // Boolean field: Match Address Mode Enable 2
-    static const uint8_t UART3_C4_MAEN2 = 1U << 6 ;
-
-  // Boolean field: Match Address Mode Enable 1
-    static const uint8_t UART3_C4_MAEN1 = 1U << 7 ;
-
-//-------------------- UART Control Register 5
-#define UART3_C5 (* ((volatile uint8_t *) (0x4006D000 + 0xB)))
-
-  // Boolean field: LIN Break Detect DMA Select Bit
-    static const uint8_t UART3_C5_LBKDDMAS = 1U << 3 ;
-
-  // Boolean field: Idle Line DMA Select
-    static const uint8_t UART3_C5_ILDMAS = 1U << 4 ;
-
-  // Boolean field: Receiver Full DMA Select
-    static const uint8_t UART3_C5_RDMAS = 1U << 5 ;
-
-  // Boolean field: Transmission Complete DMA Select
-    static const uint8_t UART3_C5_TCDMAS = 1U << 6 ;
-
-  // Boolean field: Transmitter DMA Select
-    static const uint8_t UART3_C5_TDMAS = 1U << 7 ;
-
-//-------------------- UART Extended Data Register
-#define UART3_ED (* ((const volatile uint8_t *) (0x4006D000 + 0xC)))
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
-    static const uint8_t UART3_ED_PARITYE = 1U << 6 ;
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
-    static const uint8_t UART3_ED_NOISY = 1U << 7 ;
-
-//-------------------- UART Modem Register
-#define UART3_MODEM (* ((volatile uint8_t *) (0x4006D000 + 0xD)))
-
-  // Boolean field: Transmitter clear-to-send enable
-    static const uint8_t UART3_MODEM_TXCTSE = 1U << 0 ;
-
-  // Boolean field: Transmitter request-to-send enable
-    static const uint8_t UART3_MODEM_TXRTSE = 1U << 1 ;
-
-  // Boolean field: Transmitter request-to-send polarity
-    static const uint8_t UART3_MODEM_TXRTSPOL = 1U << 2 ;
-
-  // Boolean field: Receiver request-to-send enable
-    static const uint8_t UART3_MODEM_RXRTSE = 1U << 3 ;
-
-//-------------------- UART Infrared Register
-#define UART3_IR (* ((volatile uint8_t *) (0x4006D000 + 0xE)))
-
-  // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART3_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Infrared enable
-    static const uint8_t UART3_IR_IREN = 1U << 2 ;
-
-//-------------------- UART FIFO Parameters
-#define UART3_PFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x10)))
-
-  // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART3_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Receive FIFO Enable
-    static const uint8_t UART3_PFIFO_RXFE = 1U << 3 ;
-
-  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART3_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-  // Boolean field: Transmit FIFO Enable
-    static const uint8_t UART3_PFIFO_TXFE = 1U << 7 ;
-
-//-------------------- UART FIFO Control Register
-#define UART3_CFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x11)))
-
-  // Boolean field: Receive FIFO Underflow Interrupt Enable
-    static const uint8_t UART3_CFIFO_RXUFE = 1U << 0 ;
-
-  // Boolean field: Transmit FIFO Overflow Interrupt Enable
-    static const uint8_t UART3_CFIFO_TXOFE = 1U << 1 ;
-
-  // Boolean field: Receive FIFO Overflow Interrupt Enable
-    static const uint8_t UART3_CFIFO_RXOFE = 1U << 2 ;
-
-  // Boolean field: Receive FIFO/Buffer Flush
-    static const uint8_t UART3_CFIFO_RXFLUSH = 1U << 6 ;
-
-  // Boolean field: Transmit FIFO/Buffer Flush
-    static const uint8_t UART3_CFIFO_TXFLUSH = 1U << 7 ;
-
-//-------------------- UART FIFO Status Register
-#define UART3_SFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x12)))
-
-  // Boolean field: Receiver Buffer Underflow Flag
-    static const uint8_t UART3_SFIFO_RXUF = 1U << 0 ;
-
-  // Boolean field: Transmitter Buffer Overflow Flag
-    static const uint8_t UART3_SFIFO_TXOF = 1U << 1 ;
-
-  // Boolean field: Receiver Buffer Overflow Flag
-    static const uint8_t UART3_SFIFO_RXOF = 1U << 2 ;
-
-  // Boolean field: Receive Buffer/FIFO Empty
-    static const uint8_t UART3_SFIFO_RXEMPT = 1U << 6 ;
-
-  // Boolean field: Transmit Buffer/FIFO Empty
-    static const uint8_t UART3_SFIFO_TXEMPT = 1U << 7 ;
-
-//-------------------- UART FIFO Transmit Watermark
-#define UART3_TWFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x13)))
-
-//-------------------- UART FIFO Transmit Count
-#define UART3_TCFIFO (* ((const volatile uint8_t *) (0x4006D000 + 0x14)))
-
-//-------------------- UART FIFO Receive Watermark
-#define UART3_RWFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x15)))
-
-//-------------------- UART FIFO Receive Count
-#define UART3_RCFIFO (* ((const volatile uint8_t *) (0x4006D000 + 0x16)))
-
-//-------------------- UART 7816 Control Register
-#define UART3_C7816 (* ((volatile uint8_t *) (0x4006D000 + 0x18)))
-
-  // Boolean field: ISO-7816 Functionality Enabled
-    static const uint8_t UART3_C7816_ISO_7816E = 1U << 0 ;
-
-  // Boolean field: Transfer Type
-    static const uint8_t UART3_C7816_TTYPE = 1U << 1 ;
-
-  // Boolean field: Detect Initial Character
-    static const uint8_t UART3_C7816_INIT = 1U << 2 ;
-
-  // Boolean field: Generate NACK on Error
-    static const uint8_t UART3_C7816_ANACK = 1U << 3 ;
-
-  // Boolean field: Generate NACK on Overflow
-    static const uint8_t UART3_C7816_ONACK = 1U << 4 ;
-
-//-------------------- UART 7816 Interrupt Enable Register
-#define UART3_IE7816 (* ((volatile uint8_t *) (0x4006D000 + 0x19)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt Enable
-    static const uint8_t UART3_IE7816_RXTE = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
-    static const uint8_t UART3_IE7816_TXTE = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt Enable
-    static const uint8_t UART3_IE7816_GTVE = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt Enable
-    static const uint8_t UART3_IE7816_INITDE = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt Enable
-    static const uint8_t UART3_IE7816_BWTE = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt Enable
-    static const uint8_t UART3_IE7816_CWTE = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt Enable
-    static const uint8_t UART3_IE7816_WTE = 1U << 7 ;
-
-//-------------------- UART 7816 Interrupt Status Register
-#define UART3_IS7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1A)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt
-    static const uint8_t UART3_IS7816_RXT = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt
-    static const uint8_t UART3_IS7816_TXT = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt
-    static const uint8_t UART3_IS7816_GTV = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt
-    static const uint8_t UART3_IS7816_INITD = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt
-    static const uint8_t UART3_IS7816_BWT = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt
-    static const uint8_t UART3_IS7816_CWT = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt
-    static const uint8_t UART3_IS7816_WT = 1U << 7 ;
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART3_WP7816T0 (* ((volatile uint8_t *) (0x4006D000 + 0x1B)))
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART3_WP7816T1 (* ((volatile uint8_t *) (0x4006D000 + 0x1B)))
-
-  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART3_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART3_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Wait N Register
-#define UART3_WN7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1C)))
-
-//-------------------- UART 7816 Wait FD Register
-#define UART3_WF7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1D)))
-
-//-------------------- UART 7816 Error Threshold Register
-#define UART3_ET7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1E)))
-
-  // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART3_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART3_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Transmit Length Register
-#define UART3_TL7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1F)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral UART4
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- UART Baud Rate Registers: High
-#define UART4_BDH (* ((volatile uint8_t *) (0x400EA000 + 0)))
-
-  // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART4_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Stop Bit Number Select
-    static const uint8_t UART4_BDH_SBNS = 1U << 5 ;
-
-  // Boolean field: RxD Input Active Edge Interrupt Enable
-    static const uint8_t UART4_BDH_RXEDGIE = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
-    static const uint8_t UART4_BDH_LBKDIE = 1U << 7 ;
-
-//-------------------- UART Baud Rate Registers: Low
-#define UART4_BDL (* ((volatile uint8_t *) (0x400EA000 + 0x1)))
-
-//-------------------- UART Control Register 1
-#define UART4_C1 (* ((volatile uint8_t *) (0x400EA000 + 0x2)))
-
-  // Boolean field: Parity Type
-    static const uint8_t UART4_C1_PT = 1U << 0 ;
-
-  // Boolean field: Parity Enable
-    static const uint8_t UART4_C1_PE = 1U << 1 ;
-
-  // Boolean field: Idle Line Type Select
-    static const uint8_t UART4_C1_ILT = 1U << 2 ;
-
-  // Boolean field: Receiver Wakeup Method Select
-    static const uint8_t UART4_C1_WAKE = 1U << 3 ;
-
-  // Boolean field: 9-bit or 8-bit Mode Select
-    static const uint8_t UART4_C1_M = 1U << 4 ;
-
-  // Boolean field: Receiver Source Select
-    static const uint8_t UART4_C1_RSRC = 1U << 5 ;
-
-  // Boolean field: UART Stops in Wait Mode
-    static const uint8_t UART4_C1_UARTSWAI = 1U << 6 ;
-
-  // Boolean field: Loop Mode Select
-    static const uint8_t UART4_C1_LOOPS = 1U << 7 ;
-
-//-------------------- UART Control Register 2
-#define UART4_C2 (* ((volatile uint8_t *) (0x400EA000 + 0x3)))
-
-  // Boolean field: Send Break
-    static const uint8_t UART4_C2_SBK = 1U << 0 ;
-
-  // Boolean field: Receiver Wakeup Control
-    static const uint8_t UART4_C2_RWU = 1U << 1 ;
-
-  // Boolean field: Receiver Enable
-    static const uint8_t UART4_C2_RE = 1U << 2 ;
-
-  // Boolean field: Transmitter Enable
-    static const uint8_t UART4_C2_TE = 1U << 3 ;
-
-  // Boolean field: Idle Line Interrupt DMA Transfer Enable
-    static const uint8_t UART4_C2_ILIE = 1U << 4 ;
-
-  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
-    static const uint8_t UART4_C2_RIE = 1U << 5 ;
-
-  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
-    static const uint8_t UART4_C2_TCIE = 1U << 6 ;
-
-  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
-    static const uint8_t UART4_C2_TIE = 1U << 7 ;
-
-//-------------------- UART Status Register 1
-#define UART4_S1 (* ((const volatile uint8_t *) (0x400EA000 + 0x4)))
-
-  // Boolean field: Parity Error Flag
-    static const uint8_t UART4_S1_PF = 1U << 0 ;
-
-  // Boolean field: Framing Error Flag
-    static const uint8_t UART4_S1_FE = 1U << 1 ;
-
-  // Boolean field: Noise Flag
-    static const uint8_t UART4_S1_NF = 1U << 2 ;
-
-  // Boolean field: Receiver Overrun Flag
-    static const uint8_t UART4_S1_OR = 1U << 3 ;
-
-  // Boolean field: Idle Line Flag
-    static const uint8_t UART4_S1_IDLE = 1U << 4 ;
-
-  // Boolean field: Receive Data Register Full Flag
-    static const uint8_t UART4_S1_RDRF = 1U << 5 ;
-
-  // Boolean field: Transmit Complete Flag
-    static const uint8_t UART4_S1_TC = 1U << 6 ;
-
-  // Boolean field: Transmit Data Register Empty Flag
-    static const uint8_t UART4_S1_TDRE = 1U << 7 ;
-
-//-------------------- UART Status Register 2
-#define UART4_S2 (* ((volatile uint8_t *) (0x400EA000 + 0x5)))
-
-  // Boolean field: Receiver Active Flag
-    static const uint8_t UART4_S2_RAF = 1U << 0 ;
-
-  // Boolean field: LIN Break Detection Enable
-    static const uint8_t UART4_S2_LBKDE = 1U << 1 ;
-
-  // Boolean field: Break Transmit Character Length
-    static const uint8_t UART4_S2_BRK13 = 1U << 2 ;
-
-  // Boolean field: Receive Wakeup Idle Detect
-    static const uint8_t UART4_S2_RWUID = 1U << 3 ;
-
-  // Boolean field: Receive Data Inversion
-    static const uint8_t UART4_S2_RXINV = 1U << 4 ;
-
-  // Boolean field: Most Significant Bit First
-    static const uint8_t UART4_S2_MSBF = 1U << 5 ;
-
-  // Boolean field: RxD Pin Active Edge Interrupt Flag
-    static const uint8_t UART4_S2_RXEDGIF = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt Flag
-    static const uint8_t UART4_S2_LBKDIF = 1U << 7 ;
-
-//-------------------- UART Control Register 3
-#define UART4_C3 (* ((volatile uint8_t *) (0x400EA000 + 0x6)))
-
-  // Boolean field: Parity Error Interrupt Enable
-    static const uint8_t UART4_C3_PEIE = 1U << 0 ;
-
-  // Boolean field: Framing Error Interrupt Enable
-    static const uint8_t UART4_C3_FEIE = 1U << 1 ;
-
-  // Boolean field: Noise Error Interrupt Enable
-    static const uint8_t UART4_C3_NEIE = 1U << 2 ;
-
-  // Boolean field: Overrun Error Interrupt Enable
-    static const uint8_t UART4_C3_ORIE = 1U << 3 ;
-
-  // Boolean field: Transmit Data Inversion.
-    static const uint8_t UART4_C3_TXINV = 1U << 4 ;
-
-  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
-    static const uint8_t UART4_C3_TXDIR = 1U << 5 ;
-
-  // Boolean field: Transmit Bit 8
-    static const uint8_t UART4_C3_T8 = 1U << 6 ;
-
-  // Boolean field: Received Bit 8
-    static const uint8_t UART4_C3_R8 = 1U << 7 ;
-
-//-------------------- UART Data Register
-#define UART4_D (* ((volatile uint8_t *) (0x400EA000 + 0x7)))
-
-//-------------------- UART Match Address Registers 1
-#define UART4_MA1 (* ((volatile uint8_t *) (0x400EA000 + 0x8)))
-
-//-------------------- UART Match Address Registers 2
-#define UART4_MA2 (* ((volatile uint8_t *) (0x400EA000 + 0x9)))
-
-//-------------------- UART Control Register 4
-#define UART4_C4 (* ((volatile uint8_t *) (0x400EA000 + 0xA)))
-
-  // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART4_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: 10-bit Mode select
-    static const uint8_t UART4_C4_M10 = 1U << 5 ;
-
-  // Boolean field: Match Address Mode Enable 2
-    static const uint8_t UART4_C4_MAEN2 = 1U << 6 ;
-
-  // Boolean field: Match Address Mode Enable 1
-    static const uint8_t UART4_C4_MAEN1 = 1U << 7 ;
-
-//-------------------- UART Control Register 5
-#define UART4_C5 (* ((volatile uint8_t *) (0x400EA000 + 0xB)))
-
-  // Boolean field: LIN Break Detect DMA Select Bit
-    static const uint8_t UART4_C5_LBKDDMAS = 1U << 3 ;
-
-  // Boolean field: Idle Line DMA Select
-    static const uint8_t UART4_C5_ILDMAS = 1U << 4 ;
-
-  // Boolean field: Receiver Full DMA Select
-    static const uint8_t UART4_C5_RDMAS = 1U << 5 ;
-
-  // Boolean field: Transmission Complete DMA Select
-    static const uint8_t UART4_C5_TCDMAS = 1U << 6 ;
-
-  // Boolean field: Transmitter DMA Select
-    static const uint8_t UART4_C5_TDMAS = 1U << 7 ;
-
-//-------------------- UART Extended Data Register
-#define UART4_ED (* ((const volatile uint8_t *) (0x400EA000 + 0xC)))
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
-    static const uint8_t UART4_ED_PARITYE = 1U << 6 ;
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
-    static const uint8_t UART4_ED_NOISY = 1U << 7 ;
-
-//-------------------- UART Modem Register
-#define UART4_MODEM (* ((volatile uint8_t *) (0x400EA000 + 0xD)))
-
-  // Boolean field: Transmitter clear-to-send enable
-    static const uint8_t UART4_MODEM_TXCTSE = 1U << 0 ;
-
-  // Boolean field: Transmitter request-to-send enable
-    static const uint8_t UART4_MODEM_TXRTSE = 1U << 1 ;
-
-  // Boolean field: Transmitter request-to-send polarity
-    static const uint8_t UART4_MODEM_TXRTSPOL = 1U << 2 ;
-
-  // Boolean field: Receiver request-to-send enable
-    static const uint8_t UART4_MODEM_RXRTSE = 1U << 3 ;
-
-//-------------------- UART Infrared Register
-#define UART4_IR (* ((volatile uint8_t *) (0x400EA000 + 0xE)))
-
-  // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART4_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Infrared enable
-    static const uint8_t UART4_IR_IREN = 1U << 2 ;
-
-//-------------------- UART FIFO Parameters
-#define UART4_PFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x10)))
-
-  // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART4_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Receive FIFO Enable
-    static const uint8_t UART4_PFIFO_RXFE = 1U << 3 ;
-
-  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART4_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-  // Boolean field: Transmit FIFO Enable
-    static const uint8_t UART4_PFIFO_TXFE = 1U << 7 ;
-
-//-------------------- UART FIFO Control Register
-#define UART4_CFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x11)))
-
-  // Boolean field: Receive FIFO Underflow Interrupt Enable
-    static const uint8_t UART4_CFIFO_RXUFE = 1U << 0 ;
-
-  // Boolean field: Transmit FIFO Overflow Interrupt Enable
-    static const uint8_t UART4_CFIFO_TXOFE = 1U << 1 ;
-
-  // Boolean field: Receive FIFO Overflow Interrupt Enable
-    static const uint8_t UART4_CFIFO_RXOFE = 1U << 2 ;
-
-  // Boolean field: Receive FIFO/Buffer Flush
-    static const uint8_t UART4_CFIFO_RXFLUSH = 1U << 6 ;
-
-  // Boolean field: Transmit FIFO/Buffer Flush
-    static const uint8_t UART4_CFIFO_TXFLUSH = 1U << 7 ;
-
-//-------------------- UART FIFO Status Register
-#define UART4_SFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x12)))
-
-  // Boolean field: Receiver Buffer Underflow Flag
-    static const uint8_t UART4_SFIFO_RXUF = 1U << 0 ;
-
-  // Boolean field: Transmitter Buffer Overflow Flag
-    static const uint8_t UART4_SFIFO_TXOF = 1U << 1 ;
-
-  // Boolean field: Receiver Buffer Overflow Flag
-    static const uint8_t UART4_SFIFO_RXOF = 1U << 2 ;
-
-  // Boolean field: Receive Buffer/FIFO Empty
-    static const uint8_t UART4_SFIFO_RXEMPT = 1U << 6 ;
-
-  // Boolean field: Transmit Buffer/FIFO Empty
-    static const uint8_t UART4_SFIFO_TXEMPT = 1U << 7 ;
-
-//-------------------- UART FIFO Transmit Watermark
-#define UART4_TWFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x13)))
-
-//-------------------- UART FIFO Transmit Count
-#define UART4_TCFIFO (* ((const volatile uint8_t *) (0x400EA000 + 0x14)))
-
-//-------------------- UART FIFO Receive Watermark
-#define UART4_RWFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x15)))
-
-//-------------------- UART FIFO Receive Count
-#define UART4_RCFIFO (* ((const volatile uint8_t *) (0x400EA000 + 0x16)))
-
-//-------------------- UART 7816 Control Register
-#define UART4_C7816 (* ((volatile uint8_t *) (0x400EA000 + 0x18)))
-
-  // Boolean field: ISO-7816 Functionality Enabled
-    static const uint8_t UART4_C7816_ISO_7816E = 1U << 0 ;
-
-  // Boolean field: Transfer Type
-    static const uint8_t UART4_C7816_TTYPE = 1U << 1 ;
-
-  // Boolean field: Detect Initial Character
-    static const uint8_t UART4_C7816_INIT = 1U << 2 ;
-
-  // Boolean field: Generate NACK on Error
-    static const uint8_t UART4_C7816_ANACK = 1U << 3 ;
-
-  // Boolean field: Generate NACK on Overflow
-    static const uint8_t UART4_C7816_ONACK = 1U << 4 ;
-
-//-------------------- UART 7816 Interrupt Enable Register
-#define UART4_IE7816 (* ((volatile uint8_t *) (0x400EA000 + 0x19)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt Enable
-    static const uint8_t UART4_IE7816_RXTE = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
-    static const uint8_t UART4_IE7816_TXTE = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt Enable
-    static const uint8_t UART4_IE7816_GTVE = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt Enable
-    static const uint8_t UART4_IE7816_INITDE = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt Enable
-    static const uint8_t UART4_IE7816_BWTE = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt Enable
-    static const uint8_t UART4_IE7816_CWTE = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt Enable
-    static const uint8_t UART4_IE7816_WTE = 1U << 7 ;
-
-//-------------------- UART 7816 Interrupt Status Register
-#define UART4_IS7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1A)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt
-    static const uint8_t UART4_IS7816_RXT = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt
-    static const uint8_t UART4_IS7816_TXT = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt
-    static const uint8_t UART4_IS7816_GTV = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt
-    static const uint8_t UART4_IS7816_INITD = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt
-    static const uint8_t UART4_IS7816_BWT = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt
-    static const uint8_t UART4_IS7816_CWT = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt
-    static const uint8_t UART4_IS7816_WT = 1U << 7 ;
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART4_WP7816T0 (* ((volatile uint8_t *) (0x400EA000 + 0x1B)))
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART4_WP7816T1 (* ((volatile uint8_t *) (0x400EA000 + 0x1B)))
-
-  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART4_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART4_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Wait N Register
-#define UART4_WN7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1C)))
-
-//-------------------- UART 7816 Wait FD Register
-#define UART4_WF7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1D)))
-
-//-------------------- UART 7816 Error Threshold Register
-#define UART4_ET7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1E)))
-
-  // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART4_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART4_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Transmit Length Register
-#define UART4_TL7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1F)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral UART5
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- UART Baud Rate Registers: High
-#define UART5_BDH (* ((volatile uint8_t *) (0x400EB000 + 0)))
-
-  // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART5_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: Stop Bit Number Select
-    static const uint8_t UART5_BDH_SBNS = 1U << 5 ;
-
-  // Boolean field: RxD Input Active Edge Interrupt Enable
-    static const uint8_t UART5_BDH_RXEDGIE = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
-    static const uint8_t UART5_BDH_LBKDIE = 1U << 7 ;
-
-//-------------------- UART Baud Rate Registers: Low
-#define UART5_BDL (* ((volatile uint8_t *) (0x400EB000 + 0x1)))
-
-//-------------------- UART Control Register 1
-#define UART5_C1 (* ((volatile uint8_t *) (0x400EB000 + 0x2)))
-
-  // Boolean field: Parity Type
-    static const uint8_t UART5_C1_PT = 1U << 0 ;
-
-  // Boolean field: Parity Enable
-    static const uint8_t UART5_C1_PE = 1U << 1 ;
-
-  // Boolean field: Idle Line Type Select
-    static const uint8_t UART5_C1_ILT = 1U << 2 ;
-
-  // Boolean field: Receiver Wakeup Method Select
-    static const uint8_t UART5_C1_WAKE = 1U << 3 ;
-
-  // Boolean field: 9-bit or 8-bit Mode Select
-    static const uint8_t UART5_C1_M = 1U << 4 ;
-
-  // Boolean field: Receiver Source Select
-    static const uint8_t UART5_C1_RSRC = 1U << 5 ;
-
-  // Boolean field: UART Stops in Wait Mode
-    static const uint8_t UART5_C1_UARTSWAI = 1U << 6 ;
-
-  // Boolean field: Loop Mode Select
-    static const uint8_t UART5_C1_LOOPS = 1U << 7 ;
-
-//-------------------- UART Control Register 2
-#define UART5_C2 (* ((volatile uint8_t *) (0x400EB000 + 0x3)))
-
-  // Boolean field: Send Break
-    static const uint8_t UART5_C2_SBK = 1U << 0 ;
-
-  // Boolean field: Receiver Wakeup Control
-    static const uint8_t UART5_C2_RWU = 1U << 1 ;
-
-  // Boolean field: Receiver Enable
-    static const uint8_t UART5_C2_RE = 1U << 2 ;
-
-  // Boolean field: Transmitter Enable
-    static const uint8_t UART5_C2_TE = 1U << 3 ;
-
-  // Boolean field: Idle Line Interrupt DMA Transfer Enable
-    static const uint8_t UART5_C2_ILIE = 1U << 4 ;
-
-  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
-    static const uint8_t UART5_C2_RIE = 1U << 5 ;
-
-  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
-    static const uint8_t UART5_C2_TCIE = 1U << 6 ;
-
-  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
-    static const uint8_t UART5_C2_TIE = 1U << 7 ;
-
-//-------------------- UART Status Register 1
-#define UART5_S1 (* ((const volatile uint8_t *) (0x400EB000 + 0x4)))
-
-  // Boolean field: Parity Error Flag
-    static const uint8_t UART5_S1_PF = 1U << 0 ;
-
-  // Boolean field: Framing Error Flag
-    static const uint8_t UART5_S1_FE = 1U << 1 ;
-
-  // Boolean field: Noise Flag
-    static const uint8_t UART5_S1_NF = 1U << 2 ;
-
-  // Boolean field: Receiver Overrun Flag
-    static const uint8_t UART5_S1_OR = 1U << 3 ;
-
-  // Boolean field: Idle Line Flag
-    static const uint8_t UART5_S1_IDLE = 1U << 4 ;
-
-  // Boolean field: Receive Data Register Full Flag
-    static const uint8_t UART5_S1_RDRF = 1U << 5 ;
-
-  // Boolean field: Transmit Complete Flag
-    static const uint8_t UART5_S1_TC = 1U << 6 ;
-
-  // Boolean field: Transmit Data Register Empty Flag
-    static const uint8_t UART5_S1_TDRE = 1U << 7 ;
-
-//-------------------- UART Status Register 2
-#define UART5_S2 (* ((volatile uint8_t *) (0x400EB000 + 0x5)))
-
-  // Boolean field: Receiver Active Flag
-    static const uint8_t UART5_S2_RAF = 1U << 0 ;
-
-  // Boolean field: LIN Break Detection Enable
-    static const uint8_t UART5_S2_LBKDE = 1U << 1 ;
-
-  // Boolean field: Break Transmit Character Length
-    static const uint8_t UART5_S2_BRK13 = 1U << 2 ;
-
-  // Boolean field: Receive Wakeup Idle Detect
-    static const uint8_t UART5_S2_RWUID = 1U << 3 ;
-
-  // Boolean field: Receive Data Inversion
-    static const uint8_t UART5_S2_RXINV = 1U << 4 ;
-
-  // Boolean field: Most Significant Bit First
-    static const uint8_t UART5_S2_MSBF = 1U << 5 ;
-
-  // Boolean field: RxD Pin Active Edge Interrupt Flag
-    static const uint8_t UART5_S2_RXEDGIF = 1U << 6 ;
-
-  // Boolean field: LIN Break Detect Interrupt Flag
-    static const uint8_t UART5_S2_LBKDIF = 1U << 7 ;
-
-//-------------------- UART Control Register 3
-#define UART5_C3 (* ((volatile uint8_t *) (0x400EB000 + 0x6)))
-
-  // Boolean field: Parity Error Interrupt Enable
-    static const uint8_t UART5_C3_PEIE = 1U << 0 ;
-
-  // Boolean field: Framing Error Interrupt Enable
-    static const uint8_t UART5_C3_FEIE = 1U << 1 ;
-
-  // Boolean field: Noise Error Interrupt Enable
-    static const uint8_t UART5_C3_NEIE = 1U << 2 ;
-
-  // Boolean field: Overrun Error Interrupt Enable
-    static const uint8_t UART5_C3_ORIE = 1U << 3 ;
-
-  // Boolean field: Transmit Data Inversion.
-    static const uint8_t UART5_C3_TXINV = 1U << 4 ;
-
-  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
-    static const uint8_t UART5_C3_TXDIR = 1U << 5 ;
-
-  // Boolean field: Transmit Bit 8
-    static const uint8_t UART5_C3_T8 = 1U << 6 ;
-
-  // Boolean field: Received Bit 8
-    static const uint8_t UART5_C3_R8 = 1U << 7 ;
-
-//-------------------- UART Data Register
-#define UART5_D (* ((volatile uint8_t *) (0x400EB000 + 0x7)))
-
-//-------------------- UART Match Address Registers 1
-#define UART5_MA1 (* ((volatile uint8_t *) (0x400EB000 + 0x8)))
-
-//-------------------- UART Match Address Registers 2
-#define UART5_MA2 (* ((volatile uint8_t *) (0x400EB000 + 0x9)))
-
-//-------------------- UART Control Register 4
-#define UART5_C4 (* ((volatile uint8_t *) (0x400EB000 + 0xA)))
-
-  // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART5_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
-
-  // Boolean field: 10-bit Mode select
-    static const uint8_t UART5_C4_M10 = 1U << 5 ;
-
-  // Boolean field: Match Address Mode Enable 2
-    static const uint8_t UART5_C4_MAEN2 = 1U << 6 ;
-
-  // Boolean field: Match Address Mode Enable 1
-    static const uint8_t UART5_C4_MAEN1 = 1U << 7 ;
-
-//-------------------- UART Control Register 5
-#define UART5_C5 (* ((volatile uint8_t *) (0x400EB000 + 0xB)))
-
-  // Boolean field: LIN Break Detect DMA Select Bit
-    static const uint8_t UART5_C5_LBKDDMAS = 1U << 3 ;
-
-  // Boolean field: Idle Line DMA Select
-    static const uint8_t UART5_C5_ILDMAS = 1U << 4 ;
-
-  // Boolean field: Receiver Full DMA Select
-    static const uint8_t UART5_C5_RDMAS = 1U << 5 ;
-
-  // Boolean field: Transmission Complete DMA Select
-    static const uint8_t UART5_C5_TCDMAS = 1U << 6 ;
-
-  // Boolean field: Transmitter DMA Select
-    static const uint8_t UART5_C5_TDMAS = 1U << 7 ;
-
-//-------------------- UART Extended Data Register
-#define UART5_ED (* ((const volatile uint8_t *) (0x400EB000 + 0xC)))
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
-    static const uint8_t UART5_ED_PARITYE = 1U << 6 ;
-
-  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
-    static const uint8_t UART5_ED_NOISY = 1U << 7 ;
-
-//-------------------- UART Modem Register
-#define UART5_MODEM (* ((volatile uint8_t *) (0x400EB000 + 0xD)))
-
-  // Boolean field: Transmitter clear-to-send enable
-    static const uint8_t UART5_MODEM_TXCTSE = 1U << 0 ;
-
-  // Boolean field: Transmitter request-to-send enable
-    static const uint8_t UART5_MODEM_TXRTSE = 1U << 1 ;
-
-  // Boolean field: Transmitter request-to-send polarity
-    static const uint8_t UART5_MODEM_TXRTSPOL = 1U << 2 ;
-
-  // Boolean field: Receiver request-to-send enable
-    static const uint8_t UART5_MODEM_RXRTSE = 1U << 3 ;
-
-//-------------------- UART Infrared Register
-#define UART5_IR (* ((volatile uint8_t *) (0x400EB000 + 0xE)))
-
-  // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART5_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Boolean field: Infrared enable
-    static const uint8_t UART5_IR_IREN = 1U << 2 ;
-
-//-------------------- UART FIFO Parameters
-#define UART5_PFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x10)))
-
-  // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART5_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Boolean field: Receive FIFO Enable
-    static const uint8_t UART5_PFIFO_RXFE = 1U << 3 ;
-
-  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART5_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-  // Boolean field: Transmit FIFO Enable
-    static const uint8_t UART5_PFIFO_TXFE = 1U << 7 ;
-
-//-------------------- UART FIFO Control Register
-#define UART5_CFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x11)))
-
-  // Boolean field: Receive FIFO Underflow Interrupt Enable
-    static const uint8_t UART5_CFIFO_RXUFE = 1U << 0 ;
-
-  // Boolean field: Transmit FIFO Overflow Interrupt Enable
-    static const uint8_t UART5_CFIFO_TXOFE = 1U << 1 ;
-
-  // Boolean field: Receive FIFO Overflow Interrupt Enable
-    static const uint8_t UART5_CFIFO_RXOFE = 1U << 2 ;
-
-  // Boolean field: Receive FIFO/Buffer Flush
-    static const uint8_t UART5_CFIFO_RXFLUSH = 1U << 6 ;
-
-  // Boolean field: Transmit FIFO/Buffer Flush
-    static const uint8_t UART5_CFIFO_TXFLUSH = 1U << 7 ;
-
-//-------------------- UART FIFO Status Register
-#define UART5_SFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x12)))
-
-  // Boolean field: Receiver Buffer Underflow Flag
-    static const uint8_t UART5_SFIFO_RXUF = 1U << 0 ;
-
-  // Boolean field: Transmitter Buffer Overflow Flag
-    static const uint8_t UART5_SFIFO_TXOF = 1U << 1 ;
-
-  // Boolean field: Receiver Buffer Overflow Flag
-    static const uint8_t UART5_SFIFO_RXOF = 1U << 2 ;
-
-  // Boolean field: Receive Buffer/FIFO Empty
-    static const uint8_t UART5_SFIFO_RXEMPT = 1U << 6 ;
-
-  // Boolean field: Transmit Buffer/FIFO Empty
-    static const uint8_t UART5_SFIFO_TXEMPT = 1U << 7 ;
-
-//-------------------- UART FIFO Transmit Watermark
-#define UART5_TWFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x13)))
-
-//-------------------- UART FIFO Transmit Count
-#define UART5_TCFIFO (* ((const volatile uint8_t *) (0x400EB000 + 0x14)))
-
-//-------------------- UART FIFO Receive Watermark
-#define UART5_RWFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x15)))
-
-//-------------------- UART FIFO Receive Count
-#define UART5_RCFIFO (* ((const volatile uint8_t *) (0x400EB000 + 0x16)))
-
-//-------------------- UART 7816 Control Register
-#define UART5_C7816 (* ((volatile uint8_t *) (0x400EB000 + 0x18)))
-
-  // Boolean field: ISO-7816 Functionality Enabled
-    static const uint8_t UART5_C7816_ISO_7816E = 1U << 0 ;
-
-  // Boolean field: Transfer Type
-    static const uint8_t UART5_C7816_TTYPE = 1U << 1 ;
-
-  // Boolean field: Detect Initial Character
-    static const uint8_t UART5_C7816_INIT = 1U << 2 ;
-
-  // Boolean field: Generate NACK on Error
-    static const uint8_t UART5_C7816_ANACK = 1U << 3 ;
-
-  // Boolean field: Generate NACK on Overflow
-    static const uint8_t UART5_C7816_ONACK = 1U << 4 ;
-
-//-------------------- UART 7816 Interrupt Enable Register
-#define UART5_IE7816 (* ((volatile uint8_t *) (0x400EB000 + 0x19)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt Enable
-    static const uint8_t UART5_IE7816_RXTE = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
-    static const uint8_t UART5_IE7816_TXTE = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt Enable
-    static const uint8_t UART5_IE7816_GTVE = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt Enable
-    static const uint8_t UART5_IE7816_INITDE = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt Enable
-    static const uint8_t UART5_IE7816_BWTE = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt Enable
-    static const uint8_t UART5_IE7816_CWTE = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt Enable
-    static const uint8_t UART5_IE7816_WTE = 1U << 7 ;
-
-//-------------------- UART 7816 Interrupt Status Register
-#define UART5_IS7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1A)))
-
-  // Boolean field: Receive Threshold Exceeded Interrupt
-    static const uint8_t UART5_IS7816_RXT = 1U << 0 ;
-
-  // Boolean field: Transmit Threshold Exceeded Interrupt
-    static const uint8_t UART5_IS7816_TXT = 1U << 1 ;
-
-  // Boolean field: Guard Timer Violated Interrupt
-    static const uint8_t UART5_IS7816_GTV = 1U << 2 ;
-
-  // Boolean field: Initial Character Detected Interrupt
-    static const uint8_t UART5_IS7816_INITD = 1U << 4 ;
-
-  // Boolean field: Block Wait Timer Interrupt
-    static const uint8_t UART5_IS7816_BWT = 1U << 5 ;
-
-  // Boolean field: Character Wait Timer Interrupt
-    static const uint8_t UART5_IS7816_CWT = 1U << 6 ;
-
-  // Boolean field: Wait Timer Interrupt
-    static const uint8_t UART5_IS7816_WT = 1U << 7 ;
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART5_WP7816T0 (* ((volatile uint8_t *) (0x400EB000 + 0x1B)))
-
-//-------------------- UART 7816 Wait Parameter Register
-#define UART5_WP7816T1 (* ((volatile uint8_t *) (0x400EB000 + 0x1B)))
-
-  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART5_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART5_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Wait N Register
-#define UART5_WN7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1C)))
-
-//-------------------- UART 7816 Wait FD Register
-#define UART5_WF7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1D)))
-
-//-------------------- UART 7816 Error Threshold Register
-#define UART5_ET7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1E)))
-
-  // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART5_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART5_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//-------------------- UART 7816 Transmit Length Register
-#define UART5_TL7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1F)))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral USB0
@@ -13980,261 +4670,6 @@
 
   // Boolean field: Indicates that the USB clock recovery algorithm has detected that the frequency trim adjustment needed for the IRC48M output clock is outside the available TRIM_FINE adjustment range for the IRC48M module
     static const uint8_t USB0_CLK_RECOVER_INT_STATUS_OVF_ERROR = 1U << 4 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral CMP0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- CMP Control Register 0
-#define CMP0_CR0 (* ((volatile uint8_t *) (0x40073000 + 0)))
-
-  // Field (width: 2 bits): Comparator hard block hysteresis control
-    inline uint8_t CMP0_CR0_HYSTCTR (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Field (width: 3 bits): Filter Sample Count
-    inline uint8_t CMP0_CR0_FILTER_CNT (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-//-------------------- CMP Control Register 1
-#define CMP0_CR1 (* ((volatile uint8_t *) (0x40073000 + 0x1)))
-
-  // Boolean field: Comparator Module Enable
-    static const uint8_t CMP0_CR1_EN = 1U << 0 ;
-
-  // Boolean field: Comparator Output Pin Enable
-    static const uint8_t CMP0_CR1_OPE = 1U << 1 ;
-
-  // Boolean field: Comparator Output Select
-    static const uint8_t CMP0_CR1_COS = 1U << 2 ;
-
-  // Boolean field: Comparator INVERT
-    static const uint8_t CMP0_CR1_INV = 1U << 3 ;
-
-  // Boolean field: Power Mode Select
-    static const uint8_t CMP0_CR1_PMODE = 1U << 4 ;
-
-  // Boolean field: Windowing Enable
-    static const uint8_t CMP0_CR1_WE = 1U << 6 ;
-
-  // Boolean field: Sample Enable
-    static const uint8_t CMP0_CR1_SE = 1U << 7 ;
-
-//-------------------- CMP Filter Period Register
-#define CMP0_FPR (* ((volatile uint8_t *) (0x40073000 + 0x2)))
-
-//-------------------- CMP Status and Control Register
-#define CMP0_SCR (* ((volatile uint8_t *) (0x40073000 + 0x3)))
-
-  // Boolean field: Analog Comparator Output
-    static const uint8_t CMP0_SCR_COUT = 1U << 0 ;
-
-  // Boolean field: Analog Comparator Flag Falling
-    static const uint8_t CMP0_SCR_CFF = 1U << 1 ;
-
-  // Boolean field: Analog Comparator Flag Rising
-    static const uint8_t CMP0_SCR_CFR = 1U << 2 ;
-
-  // Boolean field: Comparator Interrupt Enable Falling
-    static const uint8_t CMP0_SCR_IEF = 1U << 3 ;
-
-  // Boolean field: Comparator Interrupt Enable Rising
-    static const uint8_t CMP0_SCR_IER = 1U << 4 ;
-
-  // Boolean field: DMA Enable Control
-    static const uint8_t CMP0_SCR_DMAEN = 1U << 6 ;
-
-//-------------------- DAC Control Register
-#define CMP0_DACCR (* ((volatile uint8_t *) (0x40073000 + 0x4)))
-
-  // Field (width: 6 bits): DAC Output Voltage Select
-    inline uint8_t CMP0_DACCR_VOSEL (const uint8_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Boolean field: Supply Voltage Reference Source Select
-    static const uint8_t CMP0_DACCR_VRSEL = 1U << 6 ;
-
-  // Boolean field: DAC Enable
-    static const uint8_t CMP0_DACCR_DACEN = 1U << 7 ;
-
-//-------------------- MUX Control Register
-#define CMP0_MUXCR (* ((volatile uint8_t *) (0x40073000 + 0x5)))
-
-  // Field (width: 3 bits): Minus Input Mux Control
-    inline uint8_t CMP0_MUXCR_MSEL (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 3 bits): Plus Input Mux Control
-    inline uint8_t CMP0_MUXCR_PSEL (const uint8_t inValue) { return (inValue & 7) << 3 ; }
-
-  // Boolean field: Pass Through Mode Enable
-    static const uint8_t CMP0_MUXCR_PSTM = 1U << 7 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral CMP1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- CMP Control Register 0
-#define CMP1_CR0 (* ((volatile uint8_t *) (0x40073008 + 0)))
-
-  // Field (width: 2 bits): Comparator hard block hysteresis control
-    inline uint8_t CMP1_CR0_HYSTCTR (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Field (width: 3 bits): Filter Sample Count
-    inline uint8_t CMP1_CR0_FILTER_CNT (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-//-------------------- CMP Control Register 1
-#define CMP1_CR1 (* ((volatile uint8_t *) (0x40073008 + 0x1)))
-
-  // Boolean field: Comparator Module Enable
-    static const uint8_t CMP1_CR1_EN = 1U << 0 ;
-
-  // Boolean field: Comparator Output Pin Enable
-    static const uint8_t CMP1_CR1_OPE = 1U << 1 ;
-
-  // Boolean field: Comparator Output Select
-    static const uint8_t CMP1_CR1_COS = 1U << 2 ;
-
-  // Boolean field: Comparator INVERT
-    static const uint8_t CMP1_CR1_INV = 1U << 3 ;
-
-  // Boolean field: Power Mode Select
-    static const uint8_t CMP1_CR1_PMODE = 1U << 4 ;
-
-  // Boolean field: Windowing Enable
-    static const uint8_t CMP1_CR1_WE = 1U << 6 ;
-
-  // Boolean field: Sample Enable
-    static const uint8_t CMP1_CR1_SE = 1U << 7 ;
-
-//-------------------- CMP Filter Period Register
-#define CMP1_FPR (* ((volatile uint8_t *) (0x40073008 + 0x2)))
-
-//-------------------- CMP Status and Control Register
-#define CMP1_SCR (* ((volatile uint8_t *) (0x40073008 + 0x3)))
-
-  // Boolean field: Analog Comparator Output
-    static const uint8_t CMP1_SCR_COUT = 1U << 0 ;
-
-  // Boolean field: Analog Comparator Flag Falling
-    static const uint8_t CMP1_SCR_CFF = 1U << 1 ;
-
-  // Boolean field: Analog Comparator Flag Rising
-    static const uint8_t CMP1_SCR_CFR = 1U << 2 ;
-
-  // Boolean field: Comparator Interrupt Enable Falling
-    static const uint8_t CMP1_SCR_IEF = 1U << 3 ;
-
-  // Boolean field: Comparator Interrupt Enable Rising
-    static const uint8_t CMP1_SCR_IER = 1U << 4 ;
-
-  // Boolean field: DMA Enable Control
-    static const uint8_t CMP1_SCR_DMAEN = 1U << 6 ;
-
-//-------------------- DAC Control Register
-#define CMP1_DACCR (* ((volatile uint8_t *) (0x40073008 + 0x4)))
-
-  // Field (width: 6 bits): DAC Output Voltage Select
-    inline uint8_t CMP1_DACCR_VOSEL (const uint8_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Boolean field: Supply Voltage Reference Source Select
-    static const uint8_t CMP1_DACCR_VRSEL = 1U << 6 ;
-
-  // Boolean field: DAC Enable
-    static const uint8_t CMP1_DACCR_DACEN = 1U << 7 ;
-
-//-------------------- MUX Control Register
-#define CMP1_MUXCR (* ((volatile uint8_t *) (0x40073008 + 0x5)))
-
-  // Field (width: 3 bits): Minus Input Mux Control
-    inline uint8_t CMP1_MUXCR_MSEL (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 3 bits): Plus Input Mux Control
-    inline uint8_t CMP1_MUXCR_PSEL (const uint8_t inValue) { return (inValue & 7) << 3 ; }
-
-  // Boolean field: Pass Through Mode Enable
-    static const uint8_t CMP1_MUXCR_PSTM = 1U << 7 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral CMP2
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- CMP Control Register 0
-#define CMP2_CR0 (* ((volatile uint8_t *) (0x40073010 + 0)))
-
-  // Field (width: 2 bits): Comparator hard block hysteresis control
-    inline uint8_t CMP2_CR0_HYSTCTR (const uint8_t inValue) { return (inValue & 3) << 0 ; }
-
-  // Field (width: 3 bits): Filter Sample Count
-    inline uint8_t CMP2_CR0_FILTER_CNT (const uint8_t inValue) { return (inValue & 7) << 4 ; }
-
-//-------------------- CMP Control Register 1
-#define CMP2_CR1 (* ((volatile uint8_t *) (0x40073010 + 0x1)))
-
-  // Boolean field: Comparator Module Enable
-    static const uint8_t CMP2_CR1_EN = 1U << 0 ;
-
-  // Boolean field: Comparator Output Pin Enable
-    static const uint8_t CMP2_CR1_OPE = 1U << 1 ;
-
-  // Boolean field: Comparator Output Select
-    static const uint8_t CMP2_CR1_COS = 1U << 2 ;
-
-  // Boolean field: Comparator INVERT
-    static const uint8_t CMP2_CR1_INV = 1U << 3 ;
-
-  // Boolean field: Power Mode Select
-    static const uint8_t CMP2_CR1_PMODE = 1U << 4 ;
-
-  // Boolean field: Windowing Enable
-    static const uint8_t CMP2_CR1_WE = 1U << 6 ;
-
-  // Boolean field: Sample Enable
-    static const uint8_t CMP2_CR1_SE = 1U << 7 ;
-
-//-------------------- CMP Filter Period Register
-#define CMP2_FPR (* ((volatile uint8_t *) (0x40073010 + 0x2)))
-
-//-------------------- CMP Status and Control Register
-#define CMP2_SCR (* ((volatile uint8_t *) (0x40073010 + 0x3)))
-
-  // Boolean field: Analog Comparator Output
-    static const uint8_t CMP2_SCR_COUT = 1U << 0 ;
-
-  // Boolean field: Analog Comparator Flag Falling
-    static const uint8_t CMP2_SCR_CFF = 1U << 1 ;
-
-  // Boolean field: Analog Comparator Flag Rising
-    static const uint8_t CMP2_SCR_CFR = 1U << 2 ;
-
-  // Boolean field: Comparator Interrupt Enable Falling
-    static const uint8_t CMP2_SCR_IEF = 1U << 3 ;
-
-  // Boolean field: Comparator Interrupt Enable Rising
-    static const uint8_t CMP2_SCR_IER = 1U << 4 ;
-
-  // Boolean field: DMA Enable Control
-    static const uint8_t CMP2_SCR_DMAEN = 1U << 6 ;
-
-//-------------------- DAC Control Register
-#define CMP2_DACCR (* ((volatile uint8_t *) (0x40073010 + 0x4)))
-
-  // Field (width: 6 bits): DAC Output Voltage Select
-    inline uint8_t CMP2_DACCR_VOSEL (const uint8_t inValue) { return (inValue & 63) << 0 ; }
-
-  // Boolean field: Supply Voltage Reference Source Select
-    static const uint8_t CMP2_DACCR_VRSEL = 1U << 6 ;
-
-  // Boolean field: DAC Enable
-    static const uint8_t CMP2_DACCR_DACEN = 1U << 7 ;
-
-//-------------------- MUX Control Register
-#define CMP2_MUXCR (* ((volatile uint8_t *) (0x40073010 + 0x5)))
-
-  // Field (width: 3 bits): Minus Input Mux Control
-    inline uint8_t CMP2_MUXCR_MSEL (const uint8_t inValue) { return (inValue & 7) << 0 ; }
-
-  // Field (width: 3 bits): Plus Input Mux Control
-    inline uint8_t CMP2_MUXCR_PSEL (const uint8_t inValue) { return (inValue & 7) << 3 ; }
-
-  // Boolean field: Pass Through Mode Enable
-    static const uint8_t CMP2_MUXCR_PSTM = 1U << 7 ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral VREF
@@ -15960,268 +6395,6 @@
 #define ENET_TCCR(idx) (* ((volatile uint32_t *) (0x400C0000 + 0x60C + 0x8 * (idx))))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral DAC0
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- DAC Data Low Register (idx = 0 ... 15)
-#define DAC0_DATL(idx) (* ((volatile uint8_t *) (0x400CC000 + 0 + 0x2 * (idx))))
-
-//-------------------- DAC Data High Register (idx = 0 ... 15)
-#define DAC0_DATH(idx) (* ((volatile uint8_t *) (0x400CC000 + 0x1 + 0x2 * (idx))))
-
-  // Field (width: 4 bits): When the DAC Buffer is not enabled, DATA[11:0] controls the output voltage based on the following formula
-    inline uint8_t DAC0_DATH_DATA1 (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-//-------------------- DAC Status Register
-#define DAC0_SR (* ((volatile uint8_t *) (0x400CC000 + 0x20)))
-
-  // Boolean field: DAC Buffer Read Pointer Bottom Position Flag
-    static const uint8_t DAC0_SR_DACBFRPBF = 1U << 0 ;
-
-  // Boolean field: DAC Buffer Read Pointer Top Position Flag
-    static const uint8_t DAC0_SR_DACBFRPTF = 1U << 1 ;
-
-  // Boolean field: DAC Buffer Watermark Flag
-    static const uint8_t DAC0_SR_DACBFWMF = 1U << 2 ;
-
-//-------------------- DAC Control Register
-#define DAC0_C0 (* ((volatile uint8_t *) (0x400CC000 + 0x21)))
-
-  // Boolean field: DAC Buffer Read Pointer Bottom Flag Interrupt Enable
-    static const uint8_t DAC0_C0_DACBBIEN = 1U << 0 ;
-
-  // Boolean field: DAC Buffer Read Pointer Top Flag Interrupt Enable
-    static const uint8_t DAC0_C0_DACBTIEN = 1U << 1 ;
-
-  // Boolean field: DAC Buffer Watermark Interrupt Enable
-    static const uint8_t DAC0_C0_DACBWIEN = 1U << 2 ;
-
-  // Boolean field: DAC Low Power Control
-    static const uint8_t DAC0_C0_LPEN = 1U << 3 ;
-
-  // Boolean field: DAC Software Trigger
-    static const uint8_t DAC0_C0_DACSWTRG = 1U << 4 ;
-
-  // Boolean field: DAC Trigger Select
-    static const uint8_t DAC0_C0_DACTRGSEL = 1U << 5 ;
-
-  // Boolean field: DAC Reference Select
-    static const uint8_t DAC0_C0_DACRFS = 1U << 6 ;
-
-  // Boolean field: DAC Enable
-    static const uint8_t DAC0_C0_DACEN = 1U << 7 ;
-
-//-------------------- DAC Control Register 1
-#define DAC0_C1 (* ((volatile uint8_t *) (0x400CC000 + 0x22)))
-
-  // Boolean field: DAC Buffer Enable
-    static const uint8_t DAC0_C1_DACBFEN = 1U << 0 ;
-
-  // Field (width: 2 bits): DAC Buffer Work Mode Select
-    inline uint8_t DAC0_C1_DACBFMD (const uint8_t inValue) { return (inValue & 3) << 1 ; }
-
-  // Field (width: 2 bits): DAC Buffer Watermark Select
-    inline uint8_t DAC0_C1_DACBFWM (const uint8_t inValue) { return (inValue & 3) << 3 ; }
-
-  // Boolean field: DMA Enable Select
-    static const uint8_t DAC0_C1_DMAEN = 1U << 7 ;
-
-//-------------------- DAC Control Register 2
-#define DAC0_C2 (* ((volatile uint8_t *) (0x400CC000 + 0x23)))
-
-  // Field (width: 4 bits): DAC Buffer Upper Limit
-    inline uint8_t DAC0_C2_DACBFUP (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): DAC Buffer Read Pointer
-    inline uint8_t DAC0_C2_DACBFRP (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral DAC1
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- DAC Data Low Register (idx = 0 ... 15)
-#define DAC1_DATL(idx) (* ((volatile uint8_t *) (0x400CD000 + 0 + 0x2 * (idx))))
-
-//-------------------- DAC Data High Register (idx = 0 ... 15)
-#define DAC1_DATH(idx) (* ((volatile uint8_t *) (0x400CD000 + 0x1 + 0x2 * (idx))))
-
-  // Field (width: 4 bits): When the DAC Buffer is not enabled, DATA[11:0] controls the output voltage based on the following formula
-    inline uint8_t DAC1_DATH_DATA1 (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-//-------------------- DAC Status Register
-#define DAC1_SR (* ((volatile uint8_t *) (0x400CD000 + 0x20)))
-
-  // Boolean field: DAC Buffer Read Pointer Bottom Position Flag
-    static const uint8_t DAC1_SR_DACBFRPBF = 1U << 0 ;
-
-  // Boolean field: DAC Buffer Read Pointer Top Position Flag
-    static const uint8_t DAC1_SR_DACBFRPTF = 1U << 1 ;
-
-  // Boolean field: DAC Buffer Watermark Flag
-    static const uint8_t DAC1_SR_DACBFWMF = 1U << 2 ;
-
-//-------------------- DAC Control Register
-#define DAC1_C0 (* ((volatile uint8_t *) (0x400CD000 + 0x21)))
-
-  // Boolean field: DAC Buffer Read Pointer Bottom Flag Interrupt Enable
-    static const uint8_t DAC1_C0_DACBBIEN = 1U << 0 ;
-
-  // Boolean field: DAC Buffer Read Pointer Top Flag Interrupt Enable
-    static const uint8_t DAC1_C0_DACBTIEN = 1U << 1 ;
-
-  // Boolean field: DAC Buffer Watermark Interrupt Enable
-    static const uint8_t DAC1_C0_DACBWIEN = 1U << 2 ;
-
-  // Boolean field: DAC Low Power Control
-    static const uint8_t DAC1_C0_LPEN = 1U << 3 ;
-
-  // Boolean field: DAC Software Trigger
-    static const uint8_t DAC1_C0_DACSWTRG = 1U << 4 ;
-
-  // Boolean field: DAC Trigger Select
-    static const uint8_t DAC1_C0_DACTRGSEL = 1U << 5 ;
-
-  // Boolean field: DAC Reference Select
-    static const uint8_t DAC1_C0_DACRFS = 1U << 6 ;
-
-  // Boolean field: DAC Enable
-    static const uint8_t DAC1_C0_DACEN = 1U << 7 ;
-
-//-------------------- DAC Control Register 1
-#define DAC1_C1 (* ((volatile uint8_t *) (0x400CD000 + 0x22)))
-
-  // Boolean field: DAC Buffer Enable
-    static const uint8_t DAC1_C1_DACBFEN = 1U << 0 ;
-
-  // Field (width: 2 bits): DAC Buffer Work Mode Select
-    inline uint8_t DAC1_C1_DACBFMD (const uint8_t inValue) { return (inValue & 3) << 1 ; }
-
-  // Field (width: 2 bits): DAC Buffer Watermark Select
-    inline uint8_t DAC1_C1_DACBFWM (const uint8_t inValue) { return (inValue & 3) << 3 ; }
-
-  // Boolean field: DMA Enable Select
-    static const uint8_t DAC1_C1_DMAEN = 1U << 7 ;
-
-//-------------------- DAC Control Register 2
-#define DAC1_C2 (* ((volatile uint8_t *) (0x400CD000 + 0x23)))
-
-  // Field (width: 4 bits): DAC Buffer Upper Limit
-    inline uint8_t DAC1_C2_DACBFUP (const uint8_t inValue) { return (inValue & 15) << 0 ; }
-
-  // Field (width: 4 bits): DAC Buffer Read Pointer
-    inline uint8_t DAC1_C2_DACBFRP (const uint8_t inValue) { return (inValue & 15) << 4 ; }
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral GPIOA
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Port Data Output Register
-#define GPIOA_PDOR (* ((volatile uint32_t *) (0x400FF000 + 0)))
-
-//-------------------- Port Set Output Register
-#define GPIOA_PSOR (* ((volatile uint32_t *) (0x400FF000 + 0x4)))
-
-//-------------------- Port Clear Output Register
-#define GPIOA_PCOR (* ((volatile uint32_t *) (0x400FF000 + 0x8)))
-
-//-------------------- Port Toggle Output Register
-#define GPIOA_PTOR (* ((volatile uint32_t *) (0x400FF000 + 0xC)))
-
-//-------------------- Port Data Input Register
-#define GPIOA_PDIR (* ((const volatile uint32_t *) (0x400FF000 + 0x10)))
-
-//-------------------- Port Data Direction Register
-#define GPIOA_PDDR (* ((volatile uint32_t *) (0x400FF000 + 0x14)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral GPIOB
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Port Data Output Register
-#define GPIOB_PDOR (* ((volatile uint32_t *) (0x400FF040 + 0)))
-
-//-------------------- Port Set Output Register
-#define GPIOB_PSOR (* ((volatile uint32_t *) (0x400FF040 + 0x4)))
-
-//-------------------- Port Clear Output Register
-#define GPIOB_PCOR (* ((volatile uint32_t *) (0x400FF040 + 0x8)))
-
-//-------------------- Port Toggle Output Register
-#define GPIOB_PTOR (* ((volatile uint32_t *) (0x400FF040 + 0xC)))
-
-//-------------------- Port Data Input Register
-#define GPIOB_PDIR (* ((const volatile uint32_t *) (0x400FF040 + 0x10)))
-
-//-------------------- Port Data Direction Register
-#define GPIOB_PDDR (* ((volatile uint32_t *) (0x400FF040 + 0x14)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral GPIOC
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Port Data Output Register
-#define GPIOC_PDOR (* ((volatile uint32_t *) (0x400FF080 + 0)))
-
-//-------------------- Port Set Output Register
-#define GPIOC_PSOR (* ((volatile uint32_t *) (0x400FF080 + 0x4)))
-
-//-------------------- Port Clear Output Register
-#define GPIOC_PCOR (* ((volatile uint32_t *) (0x400FF080 + 0x8)))
-
-//-------------------- Port Toggle Output Register
-#define GPIOC_PTOR (* ((volatile uint32_t *) (0x400FF080 + 0xC)))
-
-//-------------------- Port Data Input Register
-#define GPIOC_PDIR (* ((const volatile uint32_t *) (0x400FF080 + 0x10)))
-
-//-------------------- Port Data Direction Register
-#define GPIOC_PDDR (* ((volatile uint32_t *) (0x400FF080 + 0x14)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral GPIOD
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Port Data Output Register
-#define GPIOD_PDOR (* ((volatile uint32_t *) (0x400FF0C0 + 0)))
-
-//-------------------- Port Set Output Register
-#define GPIOD_PSOR (* ((volatile uint32_t *) (0x400FF0C0 + 0x4)))
-
-//-------------------- Port Clear Output Register
-#define GPIOD_PCOR (* ((volatile uint32_t *) (0x400FF0C0 + 0x8)))
-
-//-------------------- Port Toggle Output Register
-#define GPIOD_PTOR (* ((volatile uint32_t *) (0x400FF0C0 + 0xC)))
-
-//-------------------- Port Data Input Register
-#define GPIOD_PDIR (* ((const volatile uint32_t *) (0x400FF0C0 + 0x10)))
-
-//-------------------- Port Data Direction Register
-#define GPIOD_PDDR (* ((volatile uint32_t *) (0x400FF0C0 + 0x14)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Peripheral GPIOE
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-//-------------------- Port Data Output Register
-#define GPIOE_PDOR (* ((volatile uint32_t *) (0x400FF100 + 0)))
-
-//-------------------- Port Set Output Register
-#define GPIOE_PSOR (* ((volatile uint32_t *) (0x400FF100 + 0x4)))
-
-//-------------------- Port Clear Output Register
-#define GPIOE_PCOR (* ((volatile uint32_t *) (0x400FF100 + 0x8)))
-
-//-------------------- Port Toggle Output Register
-#define GPIOE_PTOR (* ((volatile uint32_t *) (0x400FF100 + 0xC)))
-
-//-------------------- Port Data Input Register
-#define GPIOE_PDIR (* ((const volatile uint32_t *) (0x400FF100 + 0x10)))
-
-//-------------------- Port Data Direction Register
-#define GPIOE_PDDR (* ((volatile uint32_t *) (0x400FF100 + 0x14)))
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral MCM
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -16725,3 +6898,3747 @@
 #define CAU_CAU_AESIC_CA8 (* ((volatile uint32_t *) (0xE0081000 + 0xB68)))
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group ADC
+//                ADC0 at 0x4003B000
+//                ADC1 at 0x400BB000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLMD(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x54)))
+#define ADC0_CLMD (* ((volatile uint32_t *) (0x4003B000 + 0x54)))
+#define ADC1_CLMD (* ((volatile uint32_t *) (0x400BB000 + 0x54)))
+
+  // Field (width: 6 bits): Calibration Value
+    inline uint32_t ADC_CLMD_CLMD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+//-------------------- ADC Configuration Register 2
+#define ADC_CFG2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0xC)))
+#define ADC0_CFG2 (* ((volatile uint32_t *) (0x4003B000 + 0xC)))
+#define ADC1_CFG2 (* ((volatile uint32_t *) (0x400BB000 + 0xC)))
+
+  // Boolean field: ADC Mux Select
+    static const uint32_t ADC_CFG2_MUXSEL = 1U << 4 ;
+
+  // Field (width: 2 bits): Long Sample Time Select
+    inline uint32_t ADC_CFG2_ADLSTS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+
+  // Boolean field: High-Speed Configuration
+    static const uint32_t ADC_CFG2_ADHSC = 1U << 2 ;
+
+  // Boolean field: Asynchronous Clock Output Enable
+    static const uint32_t ADC_CFG2_ADACKEN = 1U << 3 ;
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLPS(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x38)))
+#define ADC0_CLPS (* ((volatile uint32_t *) (0x4003B000 + 0x38)))
+#define ADC1_CLPS (* ((volatile uint32_t *) (0x400BB000 + 0x38)))
+
+  // Field (width: 6 bits): Calibration Value
+    inline uint32_t ADC_CLPS_CLPS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+//-------------------- ADC Configuration Register 1
+#define ADC_CFG1(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x8)))
+#define ADC0_CFG1 (* ((volatile uint32_t *) (0x4003B000 + 0x8)))
+#define ADC1_CFG1 (* ((volatile uint32_t *) (0x400BB000 + 0x8)))
+
+  // Boolean field: Sample Time Configuration
+    static const uint32_t ADC_CFG1_ADLSMP = 1U << 4 ;
+
+  // Field (width: 2 bits): Clock Divide Select
+    inline uint32_t ADC_CFG1_ADIV (const uint32_t inValue) { return (inValue & 3) << 5 ; }
+
+  // Field (width: 2 bits): Conversion mode selection
+    inline uint32_t ADC_CFG1_MODE (const uint32_t inValue) { return (inValue & 3) << 2 ; }
+
+  // Field (width: 2 bits): Input Clock Select
+    inline uint32_t ADC_CFG1_ADICLK (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+
+  // Boolean field: Low-Power Configuration
+    static const uint32_t ADC_CFG1_ADLPC = 1U << 7 ;
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLMS(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x58)))
+#define ADC0_CLMS (* ((volatile uint32_t *) (0x4003B000 + 0x58)))
+#define ADC1_CLMS (* ((volatile uint32_t *) (0x400BB000 + 0x58)))
+
+  // Field (width: 6 bits): Calibration Value
+    inline uint32_t ADC_CLMS_CLMS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLPD(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x34)))
+#define ADC0_CLPD (* ((volatile uint32_t *) (0x4003B000 + 0x34)))
+#define ADC1_CLPD (* ((volatile uint32_t *) (0x400BB000 + 0x34)))
+
+  // Field (width: 6 bits): Calibration Value
+    inline uint32_t ADC_CLPD_CLPD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+//-------------------- ADC Status and Control Registers 1 (idx = 0 ... 1)
+#define ADC_SC1(group,idx) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0 + 0x4 * (idx))))
+#define ADC0_SC1(idx) (* ((volatile uint32_t *) (0x4003B000 + 0 + 0x4 * (idx))))
+#define ADC1_SC1(idx) (* ((volatile uint32_t *) (0x400BB000 + 0 + 0x4 * (idx))))
+
+  // Boolean field: Conversion Complete Flag
+    static const uint32_t ADC_SC1_COCO = 1U << 7 ;
+
+  // Boolean field: Differential Mode Enable
+    static const uint32_t ADC_SC1_DIFF = 1U << 5 ;
+
+  // Boolean field: Interrupt Enable
+    static const uint32_t ADC_SC1_AIEN = 1U << 6 ;
+
+  // Field (width: 5 bits): Input channel select
+    inline uint32_t ADC_SC1_ADCH (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+
+//-------------------- Compare Value Registers (idx = 0 ... 1)
+#define ADC_CV(group,idx) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x18 + 0x4 * (idx))))
+#define ADC0_CV(idx) (* ((volatile uint32_t *) (0x4003B000 + 0x18 + 0x4 * (idx))))
+#define ADC1_CV(idx) (* ((volatile uint32_t *) (0x400BB000 + 0x18 + 0x4 * (idx))))
+
+  // Field (width: 16 bits): Compare Value.
+    inline uint32_t ADC_CV_CV (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- ADC Plus-Side Gain Register
+#define ADC_PG(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x2C)))
+#define ADC0_PG (* ((volatile uint32_t *) (0x4003B000 + 0x2C)))
+#define ADC1_PG (* ((volatile uint32_t *) (0x400BB000 + 0x2C)))
+
+  // Field (width: 16 bits): Plus-Side Gain
+    inline uint32_t ADC_PG_PG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- ADC Data Result Register (idx = 0 ... 1)
+#define ADC_R(group,idx) (* ((const volatile uint32_t *) (kBaseAddress_ADC [group] + 0x10 + 0x4 * (idx))))
+#define ADC0_R(idx) (* ((const volatile uint32_t *) (0x4003B000 + 0x10 + 0x4 * (idx))))
+#define ADC1_R(idx) (* ((const volatile uint32_t *) (0x400BB000 + 0x10 + 0x4 * (idx))))
+
+  // Field (width: 16 bits): Data result
+    inline uint32_t ADC_R_D (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- ADC Offset Correction Register
+#define ADC_OFS(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x28)))
+#define ADC0_OFS (* ((volatile uint32_t *) (0x4003B000 + 0x28)))
+#define ADC1_OFS (* ((volatile uint32_t *) (0x400BB000 + 0x28)))
+
+  // Field (width: 16 bits): Offset Error Correction Value
+    inline uint32_t ADC_OFS_OFS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- Status and Control Register 3
+#define ADC_SC3(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x24)))
+#define ADC0_SC3 (* ((volatile uint32_t *) (0x4003B000 + 0x24)))
+#define ADC1_SC3 (* ((volatile uint32_t *) (0x400BB000 + 0x24)))
+
+  // Boolean field: Hardware Average Enable
+    static const uint32_t ADC_SC3_AVGE = 1U << 2 ;
+
+  // Boolean field: Continuous Conversion Enable
+    static const uint32_t ADC_SC3_ADCO = 1U << 3 ;
+
+  // Boolean field: Calibration
+    static const uint32_t ADC_SC3_CAL = 1U << 7 ;
+
+  // Boolean field: Calibration Failed Flag
+    static const uint32_t ADC_SC3_CALF = 1U << 6 ;
+
+  // Field (width: 2 bits): Hardware Average Select
+    inline uint32_t ADC_SC3_AVGS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+
+//-------------------- Status and Control Register 2
+#define ADC_SC2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x20)))
+#define ADC0_SC2 (* ((volatile uint32_t *) (0x4003B000 + 0x20)))
+#define ADC1_SC2 (* ((volatile uint32_t *) (0x400BB000 + 0x20)))
+
+  // Boolean field: DMA Enable
+    static const uint32_t ADC_SC2_DMAEN = 1U << 2 ;
+
+  // Field (width: 2 bits): Voltage Reference Selection
+    inline uint32_t ADC_SC2_REFSEL (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+
+  // Boolean field: Conversion Active
+    static const uint32_t ADC_SC2_ADACT = 1U << 7 ;
+
+  // Boolean field: Compare Function Greater Than Enable
+    static const uint32_t ADC_SC2_ACFGT = 1U << 4 ;
+
+  // Boolean field: Conversion Trigger Select
+    static const uint32_t ADC_SC2_ADTRG = 1U << 6 ;
+
+  // Boolean field: Compare Function Range Enable
+    static const uint32_t ADC_SC2_ACREN = 1U << 3 ;
+
+  // Boolean field: Compare Function Enable
+    static const uint32_t ADC_SC2_ACFE = 1U << 5 ;
+
+//-------------------- ADC Minus-Side Gain Register
+#define ADC_MG(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x30)))
+#define ADC0_MG (* ((volatile uint32_t *) (0x4003B000 + 0x30)))
+#define ADC1_MG (* ((volatile uint32_t *) (0x400BB000 + 0x30)))
+
+  // Field (width: 16 bits): Minus-Side Gain
+    inline uint32_t ADC_MG_MG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLP1(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x48)))
+#define ADC0_CLP1 (* ((volatile uint32_t *) (0x4003B000 + 0x48)))
+#define ADC1_CLP1 (* ((volatile uint32_t *) (0x400BB000 + 0x48)))
+
+  // Field (width: 7 bits): Calibration Value
+    inline uint32_t ADC_CLP1_CLP1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLP0(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x4C)))
+#define ADC0_CLP0 (* ((volatile uint32_t *) (0x4003B000 + 0x4C)))
+#define ADC1_CLP0 (* ((volatile uint32_t *) (0x400BB000 + 0x4C)))
+
+  // Field (width: 6 bits): Calibration Value
+    inline uint32_t ADC_CLP0_CLP0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLP3(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x40)))
+#define ADC0_CLP3 (* ((volatile uint32_t *) (0x4003B000 + 0x40)))
+#define ADC1_CLP3 (* ((volatile uint32_t *) (0x400BB000 + 0x40)))
+
+  // Field (width: 9 bits): Calibration Value
+    inline uint32_t ADC_CLP3_CLP3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLP2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x44)))
+#define ADC0_CLP2 (* ((volatile uint32_t *) (0x4003B000 + 0x44)))
+#define ADC1_CLP2 (* ((volatile uint32_t *) (0x400BB000 + 0x44)))
+
+  // Field (width: 8 bits): Calibration Value
+    inline uint32_t ADC_CLP2_CLP2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+
+//-------------------- ADC Plus-Side General Calibration Value Register
+#define ADC_CLP4(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x3C)))
+#define ADC0_CLP4 (* ((volatile uint32_t *) (0x4003B000 + 0x3C)))
+#define ADC1_CLP4 (* ((volatile uint32_t *) (0x400BB000 + 0x3C)))
+
+  // Field (width: 10 bits): Calibration Value
+    inline uint32_t ADC_CLP4_CLP4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLM2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x64)))
+#define ADC0_CLM2 (* ((volatile uint32_t *) (0x4003B000 + 0x64)))
+#define ADC1_CLM2 (* ((volatile uint32_t *) (0x400BB000 + 0x64)))
+
+  // Field (width: 8 bits): Calibration Value
+    inline uint32_t ADC_CLM2_CLM2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLM3(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x60)))
+#define ADC0_CLM3 (* ((volatile uint32_t *) (0x4003B000 + 0x60)))
+#define ADC1_CLM3 (* ((volatile uint32_t *) (0x400BB000 + 0x60)))
+
+  // Field (width: 9 bits): Calibration Value
+    inline uint32_t ADC_CLM3_CLM3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLM0(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x6C)))
+#define ADC0_CLM0 (* ((volatile uint32_t *) (0x4003B000 + 0x6C)))
+#define ADC1_CLM0 (* ((volatile uint32_t *) (0x400BB000 + 0x6C)))
+
+  // Field (width: 6 bits): Calibration Value
+    inline uint32_t ADC_CLM0_CLM0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLM1(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x68)))
+#define ADC0_CLM1 (* ((volatile uint32_t *) (0x4003B000 + 0x68)))
+#define ADC1_CLM1 (* ((volatile uint32_t *) (0x400BB000 + 0x68)))
+
+  // Field (width: 7 bits): Calibration Value
+    inline uint32_t ADC_CLM1_CLM1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
+
+//-------------------- ADC Minus-Side General Calibration Value Register
+#define ADC_CLM4(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x5C)))
+#define ADC0_CLM4 (* ((volatile uint32_t *) (0x4003B000 + 0x5C)))
+#define ADC1_CLM4 (* ((volatile uint32_t *) (0x400BB000 + 0x5C)))
+
+  // Field (width: 10 bits): Calibration Value
+    inline uint32_t ADC_CLM4_CLM4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group AIPS
+//                AIPS0 at 0x40000000
+//                AIPS1 at 0x40080000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- Master Privilege Register A
+#define AIPS_MPRA(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0)))
+#define AIPS0_MPRA (* ((volatile uint32_t *) (0x40000000 + 0)))
+#define AIPS1_MPRA (* ((volatile uint32_t *) (0x40080000 + 0)))
+
+  // Boolean field: Master 5 Privilege Level
+    static const uint32_t AIPS_MPRA_MPL5 = 1U << 8 ;
+
+  // Boolean field: Master 4 Privilege Level
+    static const uint32_t AIPS_MPRA_MPL4 = 1U << 12 ;
+
+  // Boolean field: Master 3 Privilege Level
+    static const uint32_t AIPS_MPRA_MPL3 = 1U << 16 ;
+
+  // Boolean field: Master 2 Privilege Level
+    static const uint32_t AIPS_MPRA_MPL2 = 1U << 20 ;
+
+  // Boolean field: Master 1 Privilege Level
+    static const uint32_t AIPS_MPRA_MPL1 = 1U << 24 ;
+
+  // Boolean field: Master 0 Privilege Level
+    static const uint32_t AIPS_MPRA_MPL0 = 1U << 28 ;
+
+  // Boolean field: Master 5 Trusted For Read
+    static const uint32_t AIPS_MPRA_MTR5 = 1U << 10 ;
+
+  // Boolean field: Master 4 Trusted For Read
+    static const uint32_t AIPS_MPRA_MTR4 = 1U << 14 ;
+
+  // Boolean field: Master 1 Trusted for Read
+    static const uint32_t AIPS_MPRA_MTR1 = 1U << 26 ;
+
+  // Boolean field: Master 0 Trusted For Read
+    static const uint32_t AIPS_MPRA_MTR0 = 1U << 30 ;
+
+  // Boolean field: Master 3 Trusted For Read
+    static const uint32_t AIPS_MPRA_MTR3 = 1U << 18 ;
+
+  // Boolean field: Master 2 Trusted For Read
+    static const uint32_t AIPS_MPRA_MTR2 = 1U << 22 ;
+
+  // Boolean field: Master 4 Trusted For Writes
+    static const uint32_t AIPS_MPRA_MTW4 = 1U << 13 ;
+
+  // Boolean field: Master 5 Trusted For Writes
+    static const uint32_t AIPS_MPRA_MTW5 = 1U << 9 ;
+
+  // Boolean field: Master 2 Trusted For Writes
+    static const uint32_t AIPS_MPRA_MTW2 = 1U << 21 ;
+
+  // Boolean field: Master 3 Trusted For Writes
+    static const uint32_t AIPS_MPRA_MTW3 = 1U << 17 ;
+
+  // Boolean field: Master 0 Trusted For Writes
+    static const uint32_t AIPS_MPRA_MTW0 = 1U << 29 ;
+
+  // Boolean field: Master 1 Trusted for Writes
+    static const uint32_t AIPS_MPRA_MTW1 = 1U << 25 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRB(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x24)))
+#define AIPS0_PACRB (* ((volatile uint32_t *) (0x40000000 + 0x24)))
+#define AIPS1_PACRB (* ((volatile uint32_t *) (0x40080000 + 0x24)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRB_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRB_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRB_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRA(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x20)))
+#define AIPS0_PACRA (* ((volatile uint32_t *) (0x40000000 + 0x20)))
+#define AIPS1_PACRA (* ((volatile uint32_t *) (0x40080000 + 0x20)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRA_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRA_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRA_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRG(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x48)))
+#define AIPS0_PACRG (* ((volatile uint32_t *) (0x40000000 + 0x48)))
+#define AIPS1_PACRG (* ((volatile uint32_t *) (0x40080000 + 0x48)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRG_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRG_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRG_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRF(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x44)))
+#define AIPS0_PACRF (* ((volatile uint32_t *) (0x40000000 + 0x44)))
+#define AIPS1_PACRF (* ((volatile uint32_t *) (0x40080000 + 0x44)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRF_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRF_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRF_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRE(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x40)))
+#define AIPS0_PACRE (* ((volatile uint32_t *) (0x40000000 + 0x40)))
+#define AIPS1_PACRE (* ((volatile uint32_t *) (0x40080000 + 0x40)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRE_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRE_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRE_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRD(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x2C)))
+#define AIPS0_PACRD (* ((volatile uint32_t *) (0x40000000 + 0x2C)))
+#define AIPS1_PACRD (* ((volatile uint32_t *) (0x40080000 + 0x2C)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRD_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRD_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRD_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRK(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x58)))
+#define AIPS0_PACRK (* ((volatile uint32_t *) (0x40000000 + 0x58)))
+#define AIPS1_PACRK (* ((volatile uint32_t *) (0x40080000 + 0x58)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRK_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRK_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRK_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRJ(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x54)))
+#define AIPS0_PACRJ (* ((volatile uint32_t *) (0x40000000 + 0x54)))
+#define AIPS1_PACRJ (* ((volatile uint32_t *) (0x40080000 + 0x54)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRJ_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRJ_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRJ_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRI(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x50)))
+#define AIPS0_PACRI (* ((volatile uint32_t *) (0x40000000 + 0x50)))
+#define AIPS1_PACRI (* ((volatile uint32_t *) (0x40080000 + 0x50)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRI_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRI_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRI_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRH(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x4C)))
+#define AIPS0_PACRH (* ((volatile uint32_t *) (0x40000000 + 0x4C)))
+#define AIPS1_PACRH (* ((volatile uint32_t *) (0x40080000 + 0x4C)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRH_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRH_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRH_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRO(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x68)))
+#define AIPS0_PACRO (* ((volatile uint32_t *) (0x40000000 + 0x68)))
+#define AIPS1_PACRO (* ((volatile uint32_t *) (0x40080000 + 0x68)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRO_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRO_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRO_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRN(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x64)))
+#define AIPS0_PACRN (* ((volatile uint32_t *) (0x40000000 + 0x64)))
+#define AIPS1_PACRN (* ((volatile uint32_t *) (0x40080000 + 0x64)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRN_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRN_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRN_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRM(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x60)))
+#define AIPS0_PACRM (* ((volatile uint32_t *) (0x40000000 + 0x60)))
+#define AIPS1_PACRM (* ((volatile uint32_t *) (0x40080000 + 0x60)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRM_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRM_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRM_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRL(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x5C)))
+#define AIPS0_PACRL (* ((volatile uint32_t *) (0x40000000 + 0x5C)))
+#define AIPS1_PACRL (* ((volatile uint32_t *) (0x40080000 + 0x5C)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRL_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRL_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRL_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRP(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x6C)))
+#define AIPS0_PACRP (* ((volatile uint32_t *) (0x40000000 + 0x6C)))
+#define AIPS1_PACRP (* ((volatile uint32_t *) (0x40080000 + 0x6C)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRP_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRP_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRP_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRC(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x28)))
+#define AIPS0_PACRC (* ((volatile uint32_t *) (0x40000000 + 0x28)))
+#define AIPS1_PACRC (* ((volatile uint32_t *) (0x40080000 + 0x28)))
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP0 = 1U << 29 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP0 = 1U << 28 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP7 = 1U << 0 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP6 = 1U << 4 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP5 = 1U << 8 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP4 = 1U << 12 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP3 = 1U << 16 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP2 = 1U << 20 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRC_TP1 = 1U << 24 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP1 = 1U << 26 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP2 = 1U << 22 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP7 = 1U << 1 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP4 = 1U << 13 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP5 = 1U << 9 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP6 = 1U << 5 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP3 = 1U << 18 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP4 = 1U << 14 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP1 = 1U << 25 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP2 = 1U << 21 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP5 = 1U << 10 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP6 = 1U << 6 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP7 = 1U << 2 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRC_WP3 = 1U << 17 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRC_SP0 = 1U << 30 ;
+
+//-------------------- Peripheral Access Control Register
+#define AIPS_PACRU(group) (* ((volatile uint32_t *) (kBaseAddress_AIPS [group] + 0x80)))
+#define AIPS0_PACRU (* ((volatile uint32_t *) (0x40000000 + 0x80)))
+#define AIPS1_PACRU (* ((volatile uint32_t *) (0x40080000 + 0x80)))
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRU_SP0 = 1U << 30 ;
+
+  // Boolean field: Supervisor Protect
+    static const uint32_t AIPS_PACRU_SP1 = 1U << 26 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRU_WP0 = 1U << 29 ;
+
+  // Boolean field: Write Protect
+    static const uint32_t AIPS_PACRU_WP1 = 1U << 25 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRU_TP1 = 1U << 24 ;
+
+  // Boolean field: Trusted Protect
+    static const uint32_t AIPS_PACRU_TP0 = 1U << 28 ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group CMP
+//                CMP0 at 0x40073000
+//                CMP1 at 0x40073008
+//                CMP2 at 0x40073010
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- CMP Control Register 0
+#define CMP_CR0(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0)))
+#define CMP0_CR0 (* ((volatile uint8_t *) (0x40073000 + 0)))
+#define CMP1_CR0 (* ((volatile uint8_t *) (0x40073008 + 0)))
+#define CMP2_CR0 (* ((volatile uint8_t *) (0x40073010 + 0)))
+
+  // Field (width: 3 bits): Filter Sample Count
+    inline uint8_t CMP_CR0_FILTER_CNT (const uint8_t inValue) { return (inValue & 7) << 4 ; }
+
+  // Field (width: 2 bits): Comparator hard block hysteresis control
+    inline uint8_t CMP_CR0_HYSTCTR (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+
+//-------------------- CMP Control Register 1
+#define CMP_CR1(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0x1)))
+#define CMP0_CR1 (* ((volatile uint8_t *) (0x40073000 + 0x1)))
+#define CMP1_CR1 (* ((volatile uint8_t *) (0x40073008 + 0x1)))
+#define CMP2_CR1 (* ((volatile uint8_t *) (0x40073010 + 0x1)))
+
+  // Boolean field: Comparator Output Select
+    static const uint8_t CMP_CR1_COS = 1U << 2 ;
+
+  // Boolean field: Comparator Module Enable
+    static const uint8_t CMP_CR1_EN = 1U << 0 ;
+
+  // Boolean field: Power Mode Select
+    static const uint8_t CMP_CR1_PMODE = 1U << 4 ;
+
+  // Boolean field: Comparator INVERT
+    static const uint8_t CMP_CR1_INV = 1U << 3 ;
+
+  // Boolean field: Windowing Enable
+    static const uint8_t CMP_CR1_WE = 1U << 6 ;
+
+  // Boolean field: Comparator Output Pin Enable
+    static const uint8_t CMP_CR1_OPE = 1U << 1 ;
+
+  // Boolean field: Sample Enable
+    static const uint8_t CMP_CR1_SE = 1U << 7 ;
+
+//-------------------- MUX Control Register
+#define CMP_MUXCR(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0x5)))
+#define CMP0_MUXCR (* ((volatile uint8_t *) (0x40073000 + 0x5)))
+#define CMP1_MUXCR (* ((volatile uint8_t *) (0x40073008 + 0x5)))
+#define CMP2_MUXCR (* ((volatile uint8_t *) (0x40073010 + 0x5)))
+
+  // Field (width: 3 bits): Minus Input Mux Control
+    inline uint8_t CMP_MUXCR_MSEL (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+
+  // Field (width: 3 bits): Plus Input Mux Control
+    inline uint8_t CMP_MUXCR_PSEL (const uint8_t inValue) { return (inValue & 7) << 3 ; }
+
+  // Boolean field: Pass Through Mode Enable
+    static const uint8_t CMP_MUXCR_PSTM = 1U << 7 ;
+
+//-------------------- CMP Filter Period Register
+#define CMP_FPR(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0x2)))
+#define CMP0_FPR (* ((volatile uint8_t *) (0x40073000 + 0x2)))
+#define CMP1_FPR (* ((volatile uint8_t *) (0x40073008 + 0x2)))
+#define CMP2_FPR (* ((volatile uint8_t *) (0x40073010 + 0x2)))
+
+//-------------------- DAC Control Register
+#define CMP_DACCR(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0x4)))
+#define CMP0_DACCR (* ((volatile uint8_t *) (0x40073000 + 0x4)))
+#define CMP1_DACCR (* ((volatile uint8_t *) (0x40073008 + 0x4)))
+#define CMP2_DACCR (* ((volatile uint8_t *) (0x40073010 + 0x4)))
+
+  // Boolean field: DAC Enable
+    static const uint8_t CMP_DACCR_DACEN = 1U << 7 ;
+
+  // Field (width: 6 bits): DAC Output Voltage Select
+    inline uint8_t CMP_DACCR_VOSEL (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+
+  // Boolean field: Supply Voltage Reference Source Select
+    static const uint8_t CMP_DACCR_VRSEL = 1U << 6 ;
+
+//-------------------- CMP Status and Control Register
+#define CMP_SCR(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0x3)))
+#define CMP0_SCR (* ((volatile uint8_t *) (0x40073000 + 0x3)))
+#define CMP1_SCR (* ((volatile uint8_t *) (0x40073008 + 0x3)))
+#define CMP2_SCR (* ((volatile uint8_t *) (0x40073010 + 0x3)))
+
+  // Boolean field: DMA Enable Control
+    static const uint8_t CMP_SCR_DMAEN = 1U << 6 ;
+
+  // Boolean field: Analog Comparator Output
+    static const uint8_t CMP_SCR_COUT = 1U << 0 ;
+
+  // Boolean field: Analog Comparator Flag Falling
+    static const uint8_t CMP_SCR_CFF = 1U << 1 ;
+
+  // Boolean field: Comparator Interrupt Enable Rising
+    static const uint8_t CMP_SCR_IER = 1U << 4 ;
+
+  // Boolean field: Analog Comparator Flag Rising
+    static const uint8_t CMP_SCR_CFR = 1U << 2 ;
+
+  // Boolean field: Comparator Interrupt Enable Falling
+    static const uint8_t CMP_SCR_IEF = 1U << 3 ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group DAC
+//                DAC0 at 0x400CC000
+//                DAC1 at 0x400CD000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_DAC [2] = {0x400CC000, 0x400CD000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- DAC Data High Register (idx = 0 ... 15)
+#define DAC_DATH(group,idx) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x1 + 0x2 * (idx))))
+#define DAC0_DATH(idx) (* ((volatile uint8_t *) (0x400CC000 + 0x1 + 0x2 * (idx))))
+#define DAC1_DATH(idx) (* ((volatile uint8_t *) (0x400CD000 + 0x1 + 0x2 * (idx))))
+
+  // Field (width: 4 bits): When the DAC Buffer is not enabled, DATA[11:0] controls the output voltage based on the following formula
+    inline uint8_t DAC_DATH_DATA1 (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+
+//-------------------- DAC Status Register
+#define DAC_SR(group) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x20)))
+#define DAC0_SR (* ((volatile uint8_t *) (0x400CC000 + 0x20)))
+#define DAC1_SR (* ((volatile uint8_t *) (0x400CD000 + 0x20)))
+
+  // Boolean field: DAC Buffer Read Pointer Top Position Flag
+    static const uint8_t DAC_SR_DACBFRPTF = 1U << 1 ;
+
+  // Boolean field: DAC Buffer Watermark Flag
+    static const uint8_t DAC_SR_DACBFWMF = 1U << 2 ;
+
+  // Boolean field: DAC Buffer Read Pointer Bottom Position Flag
+    static const uint8_t DAC_SR_DACBFRPBF = 1U << 0 ;
+
+//-------------------- DAC Control Register 2
+#define DAC_C2(group) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x23)))
+#define DAC0_C2 (* ((volatile uint8_t *) (0x400CC000 + 0x23)))
+#define DAC1_C2 (* ((volatile uint8_t *) (0x400CD000 + 0x23)))
+
+  // Field (width: 4 bits): DAC Buffer Upper Limit
+    inline uint8_t DAC_C2_DACBFUP (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+
+  // Field (width: 4 bits): DAC Buffer Read Pointer
+    inline uint8_t DAC_C2_DACBFRP (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+
+//-------------------- DAC Control Register 1
+#define DAC_C1(group) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x22)))
+#define DAC0_C1 (* ((volatile uint8_t *) (0x400CC000 + 0x22)))
+#define DAC1_C1 (* ((volatile uint8_t *) (0x400CD000 + 0x22)))
+
+  // Field (width: 2 bits): DAC Buffer Work Mode Select
+    inline uint8_t DAC_C1_DACBFMD (const uint8_t inValue) { return (inValue & 3) << 1 ; }
+
+  // Boolean field: DAC Buffer Enable
+    static const uint8_t DAC_C1_DACBFEN = 1U << 0 ;
+
+  // Field (width: 2 bits): DAC Buffer Watermark Select
+    inline uint8_t DAC_C1_DACBFWM (const uint8_t inValue) { return (inValue & 3) << 3 ; }
+
+  // Boolean field: DMA Enable Select
+    static const uint8_t DAC_C1_DMAEN = 1U << 7 ;
+
+//-------------------- DAC Control Register
+#define DAC_C0(group) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x21)))
+#define DAC0_C0 (* ((volatile uint8_t *) (0x400CC000 + 0x21)))
+#define DAC1_C0 (* ((volatile uint8_t *) (0x400CD000 + 0x21)))
+
+  // Boolean field: DAC Low Power Control
+    static const uint8_t DAC_C0_LPEN = 1U << 3 ;
+
+  // Boolean field: DAC Buffer Read Pointer Bottom Flag Interrupt Enable
+    static const uint8_t DAC_C0_DACBBIEN = 1U << 0 ;
+
+  // Boolean field: DAC Reference Select
+    static const uint8_t DAC_C0_DACRFS = 1U << 6 ;
+
+  // Boolean field: DAC Software Trigger
+    static const uint8_t DAC_C0_DACSWTRG = 1U << 4 ;
+
+  // Boolean field: DAC Trigger Select
+    static const uint8_t DAC_C0_DACTRGSEL = 1U << 5 ;
+
+  // Boolean field: DAC Enable
+    static const uint8_t DAC_C0_DACEN = 1U << 7 ;
+
+  // Boolean field: DAC Buffer Read Pointer Top Flag Interrupt Enable
+    static const uint8_t DAC_C0_DACBTIEN = 1U << 1 ;
+
+  // Boolean field: DAC Buffer Watermark Interrupt Enable
+    static const uint8_t DAC_C0_DACBWIEN = 1U << 2 ;
+
+//-------------------- DAC Data Low Register (idx = 0 ... 15)
+#define DAC_DATL(group,idx) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0 + 0x2 * (idx))))
+#define DAC0_DATL(idx) (* ((volatile uint8_t *) (0x400CC000 + 0 + 0x2 * (idx))))
+#define DAC1_DATL(idx) (* ((volatile uint8_t *) (0x400CD000 + 0 + 0x2 * (idx))))
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group FTM
+//                FTM0 at 0x40038000
+//                FTM1 at 0x40039000
+//                FTM2 at 0x4003A000
+//                FTM3 at 0x400B9000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000, 0x400B9000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- Synchronization
+#define FTM_SYNC(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x58)))
+#define FTM0_SYNC (* ((volatile uint32_t *) (0x40038000 + 0x58)))
+#define FTM1_SYNC (* ((volatile uint32_t *) (0x40039000 + 0x58)))
+#define FTM2_SYNC (* ((volatile uint32_t *) (0x4003A000 + 0x58)))
+#define FTM3_SYNC (* ((volatile uint32_t *) (0x400B9000 + 0x58)))
+
+  // Boolean field: Minimum Loading Point Enable
+    static const uint32_t FTM_SYNC_CNTMIN = 1U << 0 ;
+
+  // Boolean field: Output Mask Synchronization
+    static const uint32_t FTM_SYNC_SYNCHOM = 1U << 3 ;
+
+  // Boolean field: FTM Counter Reinitialization By Synchronization (FTM counter synchronization)
+    static const uint32_t FTM_SYNC_REINIT = 1U << 2 ;
+
+  // Boolean field: PWM Synchronization Software Trigger
+    static const uint32_t FTM_SYNC_SWSYNC = 1U << 7 ;
+
+  // Boolean field: Maximum Loading Point Enable
+    static const uint32_t FTM_SYNC_CNTMAX = 1U << 1 ;
+
+  // Boolean field: PWM Synchronization Hardware Trigger 2
+    static const uint32_t FTM_SYNC_TRIG2 = 1U << 6 ;
+
+  // Boolean field: PWM Synchronization Hardware Trigger 1
+    static const uint32_t FTM_SYNC_TRIG1 = 1U << 5 ;
+
+  // Boolean field: PWM Synchronization Hardware Trigger 0
+    static const uint32_t FTM_SYNC_TRIG0 = 1U << 4 ;
+
+//-------------------- Function For Linked Channels
+#define FTM_COMBINE(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x64)))
+#define FTM0_COMBINE (* ((volatile uint32_t *) (0x40038000 + 0x64)))
+#define FTM1_COMBINE (* ((volatile uint32_t *) (0x40039000 + 0x64)))
+#define FTM2_COMBINE (* ((volatile uint32_t *) (0x4003A000 + 0x64)))
+#define FTM3_COMBINE (* ((volatile uint32_t *) (0x400B9000 + 0x64)))
+
+  // Boolean field: Synchronization Enable For n = 6
+    static const uint32_t FTM_COMBINE_SYNCEN3 = 1U << 29 ;
+
+  // Boolean field: Synchronization Enable For n = 4
+    static const uint32_t FTM_COMBINE_SYNCEN2 = 1U << 21 ;
+
+  // Boolean field: Synchronization Enable For n = 2
+    static const uint32_t FTM_COMBINE_SYNCEN1 = 1U << 13 ;
+
+  // Boolean field: Synchronization Enable For n = 0
+    static const uint32_t FTM_COMBINE_SYNCEN0 = 1U << 5 ;
+
+  // Boolean field: Deadtime Enable For n = 4
+    static const uint32_t FTM_COMBINE_DTEN2 = 1U << 20 ;
+
+  // Boolean field: Deadtime Enable For n = 6
+    static const uint32_t FTM_COMBINE_DTEN3 = 1U << 28 ;
+
+  // Boolean field: Deadtime Enable For n = 0
+    static const uint32_t FTM_COMBINE_DTEN0 = 1U << 4 ;
+
+  // Boolean field: Deadtime Enable For n = 2
+    static const uint32_t FTM_COMBINE_DTEN1 = 1U << 12 ;
+
+  // Boolean field: Complement Of Channel (n) For n = 4
+    static const uint32_t FTM_COMBINE_COMP2 = 1U << 17 ;
+
+  // Boolean field: Complement Of Channel (n) for n = 6
+    static const uint32_t FTM_COMBINE_COMP3 = 1U << 25 ;
+
+  // Boolean field: Complement Of Channel (n) For n = 0
+    static const uint32_t FTM_COMBINE_COMP0 = 1U << 1 ;
+
+  // Boolean field: Complement Of Channel (n) For n = 2
+    static const uint32_t FTM_COMBINE_COMP1 = 1U << 9 ;
+
+  // Boolean field: Combine Channels For n = 2
+    static const uint32_t FTM_COMBINE_COMBINE1 = 1U << 8 ;
+
+  // Boolean field: Combine Channels For n = 0
+    static const uint32_t FTM_COMBINE_COMBINE0 = 1U << 0 ;
+
+  // Boolean field: Combine Channels For n = 6
+    static const uint32_t FTM_COMBINE_COMBINE3 = 1U << 24 ;
+
+  // Boolean field: Combine Channels For n = 4
+    static const uint32_t FTM_COMBINE_COMBINE2 = 1U << 16 ;
+
+  // Boolean field: Dual Edge Capture Mode Captures For n = 6
+    static const uint32_t FTM_COMBINE_DECAP3 = 1U << 27 ;
+
+  // Boolean field: Dual Edge Capture Mode Captures For n = 4
+    static const uint32_t FTM_COMBINE_DECAP2 = 1U << 19 ;
+
+  // Boolean field: Dual Edge Capture Mode Captures For n = 2
+    static const uint32_t FTM_COMBINE_DECAP1 = 1U << 11 ;
+
+  // Boolean field: Dual Edge Capture Mode Captures For n = 0
+    static const uint32_t FTM_COMBINE_DECAP0 = 1U << 3 ;
+
+  // Boolean field: Dual Edge Capture Mode Enable For n = 4
+    static const uint32_t FTM_COMBINE_DECAPEN2 = 1U << 18 ;
+
+  // Boolean field: Dual Edge Capture Mode Enable For n = 6
+    static const uint32_t FTM_COMBINE_DECAPEN3 = 1U << 26 ;
+
+  // Boolean field: Dual Edge Capture Mode Enable For n = 0
+    static const uint32_t FTM_COMBINE_DECAPEN0 = 1U << 2 ;
+
+  // Boolean field: Dual Edge Capture Mode Enable For n = 2
+    static const uint32_t FTM_COMBINE_DECAPEN1 = 1U << 10 ;
+
+  // Boolean field: Fault Control Enable For n = 6
+    static const uint32_t FTM_COMBINE_FAULTEN3 = 1U << 30 ;
+
+  // Boolean field: Fault Control Enable For n = 4
+    static const uint32_t FTM_COMBINE_FAULTEN2 = 1U << 22 ;
+
+  // Boolean field: Fault Control Enable For n = 2
+    static const uint32_t FTM_COMBINE_FAULTEN1 = 1U << 14 ;
+
+  // Boolean field: Fault Control Enable For n = 0
+    static const uint32_t FTM_COMBINE_FAULTEN0 = 1U << 6 ;
+
+//-------------------- Counter Initial Value
+#define FTM_CNTIN(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x4C)))
+#define FTM0_CNTIN (* ((volatile uint32_t *) (0x40038000 + 0x4C)))
+#define FTM1_CNTIN (* ((volatile uint32_t *) (0x40039000 + 0x4C)))
+#define FTM2_CNTIN (* ((volatile uint32_t *) (0x4003A000 + 0x4C)))
+#define FTM3_CNTIN (* ((volatile uint32_t *) (0x400B9000 + 0x4C)))
+
+  // Field (width: 16 bits): Initial Value Of The FTM Counter
+    inline uint32_t FTM_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- Configuration
+#define FTM_CONF(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x84)))
+#define FTM0_CONF (* ((volatile uint32_t *) (0x40038000 + 0x84)))
+#define FTM1_CONF (* ((volatile uint32_t *) (0x40039000 + 0x84)))
+#define FTM2_CONF (* ((volatile uint32_t *) (0x4003A000 + 0x84)))
+#define FTM3_CONF (* ((volatile uint32_t *) (0x400B9000 + 0x84)))
+
+  // Boolean field: Global Time Base Output
+    static const uint32_t FTM_CONF_GTBEOUT = 1U << 10 ;
+
+  // Field (width: 5 bits): TOF Frequency
+    inline uint32_t FTM_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+
+  // Field (width: 2 bits): BDM Mode
+    inline uint32_t FTM_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+
+  // Boolean field: Global Time Base Enable
+    static const uint32_t FTM_CONF_GTBEEN = 1U << 9 ;
+
+//-------------------- Synchronization Configuration
+#define FTM_SYNCONF(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x8C)))
+#define FTM0_SYNCONF (* ((volatile uint32_t *) (0x40038000 + 0x8C)))
+#define FTM1_SYNCONF (* ((volatile uint32_t *) (0x40039000 + 0x8C)))
+#define FTM2_SYNCONF (* ((volatile uint32_t *) (0x4003A000 + 0x8C)))
+#define FTM3_SYNCONF (* ((volatile uint32_t *) (0x400B9000 + 0x8C)))
+
+  // Boolean field: FTM counter synchronization is activated by the software trigger.
+    static const uint32_t FTM_SYNCONF_SWRSTCNT = 1U << 8 ;
+
+  // Boolean field: Synchronization Mode
+    static const uint32_t FTM_SYNCONF_SYNCMODE = 1U << 7 ;
+
+  // Boolean field: Output mask synchronization is activated by the software trigger.
+    static const uint32_t FTM_SYNCONF_SWOM = 1U << 10 ;
+
+  // Boolean field: SWOCTRL Register Synchronization
+    static const uint32_t FTM_SYNCONF_SWOC = 1U << 5 ;
+
+  // Boolean field: Software output control synchronization is activated by the software trigger.
+    static const uint32_t FTM_SYNCONF_SWSOC = 1U << 12 ;
+
+  // Boolean field: Inverting control synchronization is activated by the software trigger.
+    static const uint32_t FTM_SYNCONF_SWINVC = 1U << 11 ;
+
+  // Boolean field: Hardware Trigger Mode
+    static const uint32_t FTM_SYNCONF_HWTRIGMODE = 1U << 0 ;
+
+  // Boolean field: Output mask synchronization is activated by a hardware trigger.
+    static const uint32_t FTM_SYNCONF_HWOM = 1U << 18 ;
+
+  // Boolean field: FTM counter synchronization is activated by a hardware trigger.
+    static const uint32_t FTM_SYNCONF_HWRSTCNT = 1U << 16 ;
+
+  // Boolean field: CNTIN Register Synchronization
+    static const uint32_t FTM_SYNCONF_CNTINC = 1U << 2 ;
+
+  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by the software trigger.
+    static const uint32_t FTM_SYNCONF_SWWRBUF = 1U << 9 ;
+
+  // Boolean field: MOD, CNTIN, and CV registers synchronization is activated by a hardware trigger.
+    static const uint32_t FTM_SYNCONF_HWWRBUF = 1U << 17 ;
+
+  // Boolean field: INVCTRL Register Synchronization
+    static const uint32_t FTM_SYNCONF_INVC = 1U << 4 ;
+
+  // Boolean field: Software output control synchronization is activated by a hardware trigger.
+    static const uint32_t FTM_SYNCONF_HWSOC = 1U << 20 ;
+
+  // Boolean field: Inverting control synchronization is activated by a hardware trigger.
+    static const uint32_t FTM_SYNCONF_HWINVC = 1U << 19 ;
+
+//-------------------- Channel (n) Status And Control (idx = 0 ... 7)
+#define FTM_CSC(group,idx) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0xC + 0x8 * (idx))))
+#define FTM0_CSC(idx) (* ((volatile uint32_t *) (0x40038000 + 0xC + 0x8 * (idx))))
+#define FTM1_CSC(idx) (* ((volatile uint32_t *) (0x40039000 + 0xC + 0x8 * (idx))))
+#define FTM2_CSC(idx) (* ((volatile uint32_t *) (0x4003A000 + 0xC + 0x8 * (idx))))
+#define FTM3_CSC(idx) (* ((volatile uint32_t *) (0x400B9000 + 0xC + 0x8 * (idx))))
+
+  // Boolean field: DMA Enable
+    static const uint32_t FTM_CSC_DMA = 1U << 0 ;
+
+  // Boolean field: Channel Flag
+    static const uint32_t FTM_CSC_CHF = 1U << 7 ;
+
+  // Boolean field: Edge or Level Select
+    static const uint32_t FTM_CSC_ELSB = 1U << 3 ;
+
+  // Boolean field: Edge or Level Select
+    static const uint32_t FTM_CSC_ELSA = 1U << 2 ;
+
+  // Boolean field: Channel Mode Select
+    static const uint32_t FTM_CSC_MSB = 1U << 5 ;
+
+  // Boolean field: Channel Mode Select
+    static const uint32_t FTM_CSC_MSA = 1U << 4 ;
+
+  // Boolean field: Channel Interrupt Enable
+    static const uint32_t FTM_CSC_CHIE = 1U << 6 ;
+
+//-------------------- Channels Polarity
+#define FTM_POL(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x70)))
+#define FTM0_POL (* ((volatile uint32_t *) (0x40038000 + 0x70)))
+#define FTM1_POL (* ((volatile uint32_t *) (0x40039000 + 0x70)))
+#define FTM2_POL (* ((volatile uint32_t *) (0x4003A000 + 0x70)))
+#define FTM3_POL (* ((volatile uint32_t *) (0x400B9000 + 0x70)))
+
+  // Boolean field: Channel 7 Polarity
+    static const uint32_t FTM_POL_POL7 = 1U << 7 ;
+
+  // Boolean field: Channel 6 Polarity
+    static const uint32_t FTM_POL_POL6 = 1U << 6 ;
+
+  // Boolean field: Channel 5 Polarity
+    static const uint32_t FTM_POL_POL5 = 1U << 5 ;
+
+  // Boolean field: Channel 4 Polarity
+    static const uint32_t FTM_POL_POL4 = 1U << 4 ;
+
+  // Boolean field: Channel 3 Polarity
+    static const uint32_t FTM_POL_POL3 = 1U << 3 ;
+
+  // Boolean field: Channel 2 Polarity
+    static const uint32_t FTM_POL_POL2 = 1U << 2 ;
+
+  // Boolean field: Channel 1 Polarity
+    static const uint32_t FTM_POL_POL1 = 1U << 1 ;
+
+  // Boolean field: Channel 0 Polarity
+    static const uint32_t FTM_POL_POL0 = 1U << 0 ;
+
+//-------------------- Features Mode Selection
+#define FTM_MODE(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x54)))
+#define FTM0_MODE (* ((volatile uint32_t *) (0x40038000 + 0x54)))
+#define FTM1_MODE (* ((volatile uint32_t *) (0x40039000 + 0x54)))
+#define FTM2_MODE (* ((volatile uint32_t *) (0x4003A000 + 0x54)))
+#define FTM3_MODE (* ((volatile uint32_t *) (0x400B9000 + 0x54)))
+
+  // Boolean field: FTM Enable
+    static const uint32_t FTM_MODE_FTMEN = 1U << 0 ;
+
+  // Boolean field: Fault Interrupt Enable
+    static const uint32_t FTM_MODE_FAULTIE = 1U << 7 ;
+
+  // Boolean field: PWM Synchronization Mode
+    static const uint32_t FTM_MODE_PWMSYNC = 1U << 3 ;
+
+  // Field (width: 2 bits): Fault Control Mode
+    inline uint32_t FTM_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3) << 5 ; }
+
+  // Boolean field: Initialize The Channels Output
+    static const uint32_t FTM_MODE_INIT = 1U << 1 ;
+
+  // Boolean field: Capture Test Mode Enable
+    static const uint32_t FTM_MODE_CAPTEST = 1U << 4 ;
+
+  // Boolean field: Write Protection Disable
+    static const uint32_t FTM_MODE_WPDIS = 1U << 2 ;
+
+//-------------------- FTM Inverting Control
+#define FTM_INVCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x90)))
+#define FTM0_INVCTRL (* ((volatile uint32_t *) (0x40038000 + 0x90)))
+#define FTM1_INVCTRL (* ((volatile uint32_t *) (0x40039000 + 0x90)))
+#define FTM2_INVCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x90)))
+#define FTM3_INVCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x90)))
+
+  // Boolean field: Pair Channels 1 Inverting Enable
+    static const uint32_t FTM_INVCTRL_INV1EN = 1U << 1 ;
+
+  // Boolean field: Pair Channels 2 Inverting Enable
+    static const uint32_t FTM_INVCTRL_INV2EN = 1U << 2 ;
+
+  // Boolean field: Pair Channels 0 Inverting Enable
+    static const uint32_t FTM_INVCTRL_INV0EN = 1U << 0 ;
+
+  // Boolean field: Pair Channels 3 Inverting Enable
+    static const uint32_t FTM_INVCTRL_INV3EN = 1U << 3 ;
+
+//-------------------- Capture And Compare Status
+#define FTM_STATUS(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x50)))
+#define FTM0_STATUS (* ((volatile uint32_t *) (0x40038000 + 0x50)))
+#define FTM1_STATUS (* ((volatile uint32_t *) (0x40039000 + 0x50)))
+#define FTM2_STATUS (* ((volatile uint32_t *) (0x4003A000 + 0x50)))
+#define FTM3_STATUS (* ((volatile uint32_t *) (0x400B9000 + 0x50)))
+
+  // Boolean field: Channel 5 Flag
+    static const uint32_t FTM_STATUS_CH5F = 1U << 5 ;
+
+  // Boolean field: Channel 4 Flag
+    static const uint32_t FTM_STATUS_CH4F = 1U << 4 ;
+
+  // Boolean field: Channel 2 Flag
+    static const uint32_t FTM_STATUS_CH2F = 1U << 2 ;
+
+  // Boolean field: Channel 3 Flag
+    static const uint32_t FTM_STATUS_CH3F = 1U << 3 ;
+
+  // Boolean field: Channel 1 Flag
+    static const uint32_t FTM_STATUS_CH1F = 1U << 1 ;
+
+  // Boolean field: Channel 0 Flag
+    static const uint32_t FTM_STATUS_CH0F = 1U << 0 ;
+
+  // Boolean field: Channel 6 Flag
+    static const uint32_t FTM_STATUS_CH6F = 1U << 6 ;
+
+  // Boolean field: Channel 7 Flag
+    static const uint32_t FTM_STATUS_CH7F = 1U << 7 ;
+
+//-------------------- Counter
+#define FTM_CNT(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x4)))
+#define FTM0_CNT (* ((volatile uint32_t *) (0x40038000 + 0x4)))
+#define FTM1_CNT (* ((volatile uint32_t *) (0x40039000 + 0x4)))
+#define FTM2_CNT (* ((volatile uint32_t *) (0x4003A000 + 0x4)))
+#define FTM3_CNT (* ((volatile uint32_t *) (0x400B9000 + 0x4)))
+
+  // Field (width: 16 bits): Counter Value
+    inline uint32_t FTM_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- Output Mask
+#define FTM_OUTMASK(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x60)))
+#define FTM0_OUTMASK (* ((volatile uint32_t *) (0x40038000 + 0x60)))
+#define FTM1_OUTMASK (* ((volatile uint32_t *) (0x40039000 + 0x60)))
+#define FTM2_OUTMASK (* ((volatile uint32_t *) (0x4003A000 + 0x60)))
+#define FTM3_OUTMASK (* ((volatile uint32_t *) (0x400B9000 + 0x60)))
+
+  // Boolean field: Channel 1 Output Mask
+    static const uint32_t FTM_OUTMASK_CH1OM = 1U << 1 ;
+
+  // Boolean field: Channel 0 Output Mask
+    static const uint32_t FTM_OUTMASK_CH0OM = 1U << 0 ;
+
+  // Boolean field: Channel 5 Output Mask
+    static const uint32_t FTM_OUTMASK_CH5OM = 1U << 5 ;
+
+  // Boolean field: Channel 7 Output Mask
+    static const uint32_t FTM_OUTMASK_CH7OM = 1U << 7 ;
+
+  // Boolean field: Channel 3 Output Mask
+    static const uint32_t FTM_OUTMASK_CH3OM = 1U << 3 ;
+
+  // Boolean field: Channel 4 Output Mask
+    static const uint32_t FTM_OUTMASK_CH4OM = 1U << 4 ;
+
+  // Boolean field: Channel 6 Output Mask
+    static const uint32_t FTM_OUTMASK_CH6OM = 1U << 6 ;
+
+  // Boolean field: Channel 2 Output Mask
+    static const uint32_t FTM_OUTMASK_CH2OM = 1U << 2 ;
+
+//-------------------- Fault Mode Status
+#define FTM_FMS(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x74)))
+#define FTM0_FMS (* ((volatile uint32_t *) (0x40038000 + 0x74)))
+#define FTM1_FMS (* ((volatile uint32_t *) (0x40039000 + 0x74)))
+#define FTM2_FMS (* ((volatile uint32_t *) (0x4003A000 + 0x74)))
+#define FTM3_FMS (* ((volatile uint32_t *) (0x400B9000 + 0x74)))
+
+  // Boolean field: Write Protection Enable
+    static const uint32_t FTM_FMS_WPEN = 1U << 6 ;
+
+  // Boolean field: Fault Inputs
+    static const uint32_t FTM_FMS_FAULTIN = 1U << 5 ;
+
+  // Boolean field: Fault Detection Flag 1
+    static const uint32_t FTM_FMS_FAULTF1 = 1U << 1 ;
+
+  // Boolean field: Fault Detection Flag 0
+    static const uint32_t FTM_FMS_FAULTF0 = 1U << 0 ;
+
+  // Boolean field: Fault Detection Flag 3
+    static const uint32_t FTM_FMS_FAULTF3 = 1U << 3 ;
+
+  // Boolean field: Fault Detection Flag 2
+    static const uint32_t FTM_FMS_FAULTF2 = 1U << 2 ;
+
+  // Boolean field: Fault Detection Flag
+    static const uint32_t FTM_FMS_FAULTF = 1U << 7 ;
+
+//-------------------- FTM Software Output Control
+#define FTM_SWOCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x94)))
+#define FTM0_SWOCTRL (* ((volatile uint32_t *) (0x40038000 + 0x94)))
+#define FTM1_SWOCTRL (* ((volatile uint32_t *) (0x40039000 + 0x94)))
+#define FTM2_SWOCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x94)))
+#define FTM3_SWOCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x94)))
+
+  // Boolean field: Channel 5 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH5OC = 1U << 5 ;
+
+  // Boolean field: Channel 0 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH0OC = 1U << 0 ;
+
+  // Boolean field: Channel 4 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH4OCV = 1U << 12 ;
+
+  // Boolean field: Channel 1 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH1OCV = 1U << 9 ;
+
+  // Boolean field: Channel 6 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH6OCV = 1U << 14 ;
+
+  // Boolean field: Channel 3 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH3OCV = 1U << 11 ;
+
+  // Boolean field: Channel 1 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH1OC = 1U << 1 ;
+
+  // Boolean field: Channel 2 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH2OC = 1U << 2 ;
+
+  // Boolean field: Channel 0 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH0OCV = 1U << 8 ;
+
+  // Boolean field: Channel 2 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH2OCV = 1U << 10 ;
+
+  // Boolean field: Channel 6 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH6OC = 1U << 6 ;
+
+  // Boolean field: Channel 4 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH4OC = 1U << 4 ;
+
+  // Boolean field: Channel 3 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH3OC = 1U << 3 ;
+
+  // Boolean field: Channel 5 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH5OCV = 1U << 13 ;
+
+  // Boolean field: Channel 7 Software Output Control Value
+    static const uint32_t FTM_SWOCTRL_CH7OCV = 1U << 15 ;
+
+  // Boolean field: Channel 7 Software Output Control Enable
+    static const uint32_t FTM_SWOCTRL_CH7OC = 1U << 7 ;
+
+//-------------------- Fault Control
+#define FTM_FLTCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x7C)))
+#define FTM0_FLTCTRL (* ((volatile uint32_t *) (0x40038000 + 0x7C)))
+#define FTM1_FLTCTRL (* ((volatile uint32_t *) (0x40039000 + 0x7C)))
+#define FTM2_FLTCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x7C)))
+#define FTM3_FLTCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x7C)))
+
+  // Boolean field: Fault Input 3 Enable
+    static const uint32_t FTM_FLTCTRL_FAULT3EN = 1U << 3 ;
+
+  // Boolean field: Fault Input 1 Enable
+    static const uint32_t FTM_FLTCTRL_FAULT1EN = 1U << 1 ;
+
+  // Boolean field: Fault Input 1 Filter Enable
+    static const uint32_t FTM_FLTCTRL_FFLTR1EN = 1U << 5 ;
+
+  // Boolean field: Fault Input 0 Enable
+    static const uint32_t FTM_FLTCTRL_FAULT0EN = 1U << 0 ;
+
+  // Boolean field: Fault Input 2 Filter Enable
+    static const uint32_t FTM_FLTCTRL_FFLTR2EN = 1U << 6 ;
+
+  // Boolean field: Fault Input 2 Enable
+    static const uint32_t FTM_FLTCTRL_FAULT2EN = 1U << 2 ;
+
+  // Field (width: 4 bits): Fault Input Filter
+    inline uint32_t FTM_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+
+  // Boolean field: Fault Input 0 Filter Enable
+    static const uint32_t FTM_FLTCTRL_FFLTR0EN = 1U << 4 ;
+
+  // Boolean field: Fault Input 3 Filter Enable
+    static const uint32_t FTM_FLTCTRL_FFLTR3EN = 1U << 7 ;
+
+//-------------------- FTM PWM Load
+#define FTM_PWMLOAD(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x98)))
+#define FTM0_PWMLOAD (* ((volatile uint32_t *) (0x40038000 + 0x98)))
+#define FTM1_PWMLOAD (* ((volatile uint32_t *) (0x40039000 + 0x98)))
+#define FTM2_PWMLOAD (* ((volatile uint32_t *) (0x4003A000 + 0x98)))
+#define FTM3_PWMLOAD (* ((volatile uint32_t *) (0x400B9000 + 0x98)))
+
+  // Boolean field: Load Enable
+    static const uint32_t FTM_PWMLOAD_LDOK = 1U << 9 ;
+
+  // Boolean field: Channel 2 Select
+    static const uint32_t FTM_PWMLOAD_CH2SEL = 1U << 2 ;
+
+  // Boolean field: Channel 5 Select
+    static const uint32_t FTM_PWMLOAD_CH5SEL = 1U << 5 ;
+
+  // Boolean field: Channel 6 Select
+    static const uint32_t FTM_PWMLOAD_CH6SEL = 1U << 6 ;
+
+  // Boolean field: Channel 3 Select
+    static const uint32_t FTM_PWMLOAD_CH3SEL = 1U << 3 ;
+
+  // Boolean field: Channel 7 Select
+    static const uint32_t FTM_PWMLOAD_CH7SEL = 1U << 7 ;
+
+  // Boolean field: Channel 1 Select
+    static const uint32_t FTM_PWMLOAD_CH1SEL = 1U << 1 ;
+
+  // Boolean field: Channel 0 Select
+    static const uint32_t FTM_PWMLOAD_CH0SEL = 1U << 0 ;
+
+  // Boolean field: Channel 4 Select
+    static const uint32_t FTM_PWMLOAD_CH4SEL = 1U << 4 ;
+
+//-------------------- FTM Fault Input Polarity
+#define FTM_FLTPOL(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x88)))
+#define FTM0_FLTPOL (* ((volatile uint32_t *) (0x40038000 + 0x88)))
+#define FTM1_FLTPOL (* ((volatile uint32_t *) (0x40039000 + 0x88)))
+#define FTM2_FLTPOL (* ((volatile uint32_t *) (0x4003A000 + 0x88)))
+#define FTM3_FLTPOL (* ((volatile uint32_t *) (0x400B9000 + 0x88)))
+
+  // Boolean field: Fault Input 3 Polarity
+    static const uint32_t FTM_FLTPOL_FLT3POL = 1U << 3 ;
+
+  // Boolean field: Fault Input 0 Polarity
+    static const uint32_t FTM_FLTPOL_FLT0POL = 1U << 0 ;
+
+  // Boolean field: Fault Input 2 Polarity
+    static const uint32_t FTM_FLTPOL_FLT2POL = 1U << 2 ;
+
+  // Boolean field: Fault Input 1 Polarity
+    static const uint32_t FTM_FLTPOL_FLT1POL = 1U << 1 ;
+
+//-------------------- Quadrature Decoder Control And Status
+#define FTM_QDCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x80)))
+#define FTM0_QDCTRL (* ((volatile uint32_t *) (0x40038000 + 0x80)))
+#define FTM1_QDCTRL (* ((volatile uint32_t *) (0x40039000 + 0x80)))
+#define FTM2_QDCTRL (* ((volatile uint32_t *) (0x4003A000 + 0x80)))
+#define FTM3_QDCTRL (* ((volatile uint32_t *) (0x400B9000 + 0x80)))
+
+  // Boolean field: Phase A Input Polarity
+    static const uint32_t FTM_QDCTRL_PHAPOL = 1U << 5 ;
+
+  // Boolean field: Phase B Input Polarity
+    static const uint32_t FTM_QDCTRL_PHBPOL = 1U << 4 ;
+
+  // Boolean field: Phase B Input Filter Enable
+    static const uint32_t FTM_QDCTRL_PHBFLTREN = 1U << 6 ;
+
+  // Boolean field: FTM Counter Direction In Quadrature Decoder Mode
+    static const uint32_t FTM_QDCTRL_QUADIR = 1U << 2 ;
+
+  // Boolean field: Phase A Input Filter Enable
+    static const uint32_t FTM_QDCTRL_PHAFLTREN = 1U << 7 ;
+
+  // Boolean field: Timer Overflow Direction In Quadrature Decoder Mode
+    static const uint32_t FTM_QDCTRL_TOFDIR = 1U << 1 ;
+
+  // Boolean field: Quadrature Decoder Mode
+    static const uint32_t FTM_QDCTRL_QUADMODE = 1U << 3 ;
+
+  // Boolean field: Quadrature Decoder Mode Enable
+    static const uint32_t FTM_QDCTRL_QUADEN = 1U << 0 ;
+
+//-------------------- Input Capture Filter Control
+#define FTM_FILTER(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x78)))
+#define FTM0_FILTER (* ((volatile uint32_t *) (0x40038000 + 0x78)))
+#define FTM1_FILTER (* ((volatile uint32_t *) (0x40039000 + 0x78)))
+#define FTM2_FILTER (* ((volatile uint32_t *) (0x4003A000 + 0x78)))
+#define FTM3_FILTER (* ((volatile uint32_t *) (0x400B9000 + 0x78)))
+
+  // Field (width: 4 bits): Channel 1 Input Filter
+    inline uint32_t FTM_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+
+  // Field (width: 4 bits): Channel 0 Input Filter
+    inline uint32_t FTM_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+
+  // Field (width: 4 bits): Channel 3 Input Filter
+    inline uint32_t FTM_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+
+  // Field (width: 4 bits): Channel 2 Input Filter
+    inline uint32_t FTM_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+
+//-------------------- FTM External Trigger
+#define FTM_EXTTRIG(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x6C)))
+#define FTM0_EXTTRIG (* ((volatile uint32_t *) (0x40038000 + 0x6C)))
+#define FTM1_EXTTRIG (* ((volatile uint32_t *) (0x40039000 + 0x6C)))
+#define FTM2_EXTTRIG (* ((volatile uint32_t *) (0x4003A000 + 0x6C)))
+#define FTM3_EXTTRIG (* ((volatile uint32_t *) (0x400B9000 + 0x6C)))
+
+  // Boolean field: Channel 0 Trigger Enable
+    static const uint32_t FTM_EXTTRIG_CH0TRIG = 1U << 4 ;
+
+  // Boolean field: Initialization Trigger Enable
+    static const uint32_t FTM_EXTTRIG_INITTRIGEN = 1U << 6 ;
+
+  // Boolean field: Channel Trigger Flag
+    static const uint32_t FTM_EXTTRIG_TRIGF = 1U << 7 ;
+
+  // Boolean field: Channel 5 Trigger Enable
+    static const uint32_t FTM_EXTTRIG_CH5TRIG = 1U << 3 ;
+
+  // Boolean field: Channel 2 Trigger Enable
+    static const uint32_t FTM_EXTTRIG_CH2TRIG = 1U << 0 ;
+
+  // Boolean field: Channel 3 Trigger Enable
+    static const uint32_t FTM_EXTTRIG_CH3TRIG = 1U << 1 ;
+
+  // Boolean field: Channel 4 Trigger Enable
+    static const uint32_t FTM_EXTTRIG_CH4TRIG = 1U << 2 ;
+
+  // Boolean field: Channel 1 Trigger Enable
+    static const uint32_t FTM_EXTTRIG_CH1TRIG = 1U << 5 ;
+
+//-------------------- Initial State For Channels Output
+#define FTM_OUTINIT(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x5C)))
+#define FTM0_OUTINIT (* ((volatile uint32_t *) (0x40038000 + 0x5C)))
+#define FTM1_OUTINIT (* ((volatile uint32_t *) (0x40039000 + 0x5C)))
+#define FTM2_OUTINIT (* ((volatile uint32_t *) (0x4003A000 + 0x5C)))
+#define FTM3_OUTINIT (* ((volatile uint32_t *) (0x400B9000 + 0x5C)))
+
+  // Boolean field: Channel 1 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH1OI = 1U << 1 ;
+
+  // Boolean field: Channel 5 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH5OI = 1U << 5 ;
+
+  // Boolean field: Channel 0 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH0OI = 1U << 0 ;
+
+  // Boolean field: Channel 3 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH3OI = 1U << 3 ;
+
+  // Boolean field: Channel 4 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH4OI = 1U << 4 ;
+
+  // Boolean field: Channel 7 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH7OI = 1U << 7 ;
+
+  // Boolean field: Channel 2 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH2OI = 1U << 2 ;
+
+  // Boolean field: Channel 6 Output Initialization Value
+    static const uint32_t FTM_OUTINIT_CH6OI = 1U << 6 ;
+
+//-------------------- Channel (n) Value (idx = 0 ... 7)
+#define FTM_CV(group,idx) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x10 + 0x8 * (idx))))
+#define FTM0_CV(idx) (* ((volatile uint32_t *) (0x40038000 + 0x10 + 0x8 * (idx))))
+#define FTM1_CV(idx) (* ((volatile uint32_t *) (0x40039000 + 0x10 + 0x8 * (idx))))
+#define FTM2_CV(idx) (* ((volatile uint32_t *) (0x4003A000 + 0x10 + 0x8 * (idx))))
+#define FTM3_CV(idx) (* ((volatile uint32_t *) (0x400B9000 + 0x10 + 0x8 * (idx))))
+
+  // Field (width: 16 bits): Channel Value
+    inline uint32_t FTM_CV_VAL (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- Status And Control
+#define FTM_SC(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0)))
+#define FTM0_SC (* ((volatile uint32_t *) (0x40038000 + 0)))
+#define FTM1_SC (* ((volatile uint32_t *) (0x40039000 + 0)))
+#define FTM2_SC (* ((volatile uint32_t *) (0x4003A000 + 0)))
+#define FTM3_SC (* ((volatile uint32_t *) (0x400B9000 + 0)))
+
+  // Field (width: 3 bits): Prescale Factor Selection
+    inline uint32_t FTM_SC_PS (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+
+  // Field (width: 2 bits): Clock Source Selection
+    inline uint32_t FTM_SC_CLKS (const uint32_t inValue) { return (inValue & 3) << 3 ; }
+
+  // Boolean field: Timer Overflow Flag
+    static const uint32_t FTM_SC_TOF = 1U << 7 ;
+
+  // Boolean field: Center-Aligned PWM Select
+    static const uint32_t FTM_SC_CPWMS = 1U << 5 ;
+
+  // Boolean field: Timer Overflow Interrupt Enable
+    static const uint32_t FTM_SC_TOIE = 1U << 6 ;
+
+//-------------------- Modulo
+#define FTM_MOD(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x8)))
+#define FTM0_MOD (* ((volatile uint32_t *) (0x40038000 + 0x8)))
+#define FTM1_MOD (* ((volatile uint32_t *) (0x40039000 + 0x8)))
+#define FTM2_MOD (* ((volatile uint32_t *) (0x4003A000 + 0x8)))
+#define FTM3_MOD (* ((volatile uint32_t *) (0x400B9000 + 0x8)))
+
+  // Field (width: 16 bits): Modulo Value
+    inline uint32_t FTM_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- Deadtime Insertion Control
+#define FTM_DEADTIME(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x68)))
+#define FTM0_DEADTIME (* ((volatile uint32_t *) (0x40038000 + 0x68)))
+#define FTM1_DEADTIME (* ((volatile uint32_t *) (0x40039000 + 0x68)))
+#define FTM2_DEADTIME (* ((volatile uint32_t *) (0x4003A000 + 0x68)))
+#define FTM3_DEADTIME (* ((volatile uint32_t *) (0x400B9000 + 0x68)))
+
+  // Field (width: 6 bits): Deadtime Value
+    inline uint32_t FTM_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+
+  // Field (width: 2 bits): Deadtime Prescaler Value
+    inline uint32_t FTM_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group GPIO
+//                GPIOA at 0x400FF000
+//                GPIOB at 0x400FF040
+//                GPIOC at 0x400FF080
+//                GPIOD at 0x400FF0C0
+//                GPIOE at 0x400FF100
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_GPIO [5] = {0x400FF000, 0x400FF040, 0x400FF080, 0x400FF0C0, 0x400FF100} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- Port Set Output Register
+#define GPIO_PSOR(group) (* ((volatile uint32_t *) (kBaseAddress_GPIO [group] + 0x4)))
+#define GPIOA_PSOR (* ((volatile uint32_t *) (0x400FF000 + 0x4)))
+#define GPIOB_PSOR (* ((volatile uint32_t *) (0x400FF040 + 0x4)))
+#define GPIOC_PSOR (* ((volatile uint32_t *) (0x400FF080 + 0x4)))
+#define GPIOD_PSOR (* ((volatile uint32_t *) (0x400FF0C0 + 0x4)))
+#define GPIOE_PSOR (* ((volatile uint32_t *) (0x400FF100 + 0x4)))
+
+//-------------------- Port Data Input Register
+#define GPIO_PDIR(group) (* ((const volatile uint32_t *) (kBaseAddress_GPIO [group] + 0x10)))
+#define GPIOA_PDIR (* ((const volatile uint32_t *) (0x400FF000 + 0x10)))
+#define GPIOB_PDIR (* ((const volatile uint32_t *) (0x400FF040 + 0x10)))
+#define GPIOC_PDIR (* ((const volatile uint32_t *) (0x400FF080 + 0x10)))
+#define GPIOD_PDIR (* ((const volatile uint32_t *) (0x400FF0C0 + 0x10)))
+#define GPIOE_PDIR (* ((const volatile uint32_t *) (0x400FF100 + 0x10)))
+
+//-------------------- Port Data Output Register
+#define GPIO_PDOR(group) (* ((volatile uint32_t *) (kBaseAddress_GPIO [group] + 0)))
+#define GPIOA_PDOR (* ((volatile uint32_t *) (0x400FF000 + 0)))
+#define GPIOB_PDOR (* ((volatile uint32_t *) (0x400FF040 + 0)))
+#define GPIOC_PDOR (* ((volatile uint32_t *) (0x400FF080 + 0)))
+#define GPIOD_PDOR (* ((volatile uint32_t *) (0x400FF0C0 + 0)))
+#define GPIOE_PDOR (* ((volatile uint32_t *) (0x400FF100 + 0)))
+
+//-------------------- Port Clear Output Register
+#define GPIO_PCOR(group) (* ((volatile uint32_t *) (kBaseAddress_GPIO [group] + 0x8)))
+#define GPIOA_PCOR (* ((volatile uint32_t *) (0x400FF000 + 0x8)))
+#define GPIOB_PCOR (* ((volatile uint32_t *) (0x400FF040 + 0x8)))
+#define GPIOC_PCOR (* ((volatile uint32_t *) (0x400FF080 + 0x8)))
+#define GPIOD_PCOR (* ((volatile uint32_t *) (0x400FF0C0 + 0x8)))
+#define GPIOE_PCOR (* ((volatile uint32_t *) (0x400FF100 + 0x8)))
+
+//-------------------- Port Data Direction Register
+#define GPIO_PDDR(group) (* ((volatile uint32_t *) (kBaseAddress_GPIO [group] + 0x14)))
+#define GPIOA_PDDR (* ((volatile uint32_t *) (0x400FF000 + 0x14)))
+#define GPIOB_PDDR (* ((volatile uint32_t *) (0x400FF040 + 0x14)))
+#define GPIOC_PDDR (* ((volatile uint32_t *) (0x400FF080 + 0x14)))
+#define GPIOD_PDDR (* ((volatile uint32_t *) (0x400FF0C0 + 0x14)))
+#define GPIOE_PDDR (* ((volatile uint32_t *) (0x400FF100 + 0x14)))
+
+//-------------------- Port Toggle Output Register
+#define GPIO_PTOR(group) (* ((volatile uint32_t *) (kBaseAddress_GPIO [group] + 0xC)))
+#define GPIOA_PTOR (* ((volatile uint32_t *) (0x400FF000 + 0xC)))
+#define GPIOB_PTOR (* ((volatile uint32_t *) (0x400FF040 + 0xC)))
+#define GPIOC_PTOR (* ((volatile uint32_t *) (0x400FF080 + 0xC)))
+#define GPIOD_PTOR (* ((volatile uint32_t *) (0x400FF0C0 + 0xC)))
+#define GPIOE_PTOR (* ((volatile uint32_t *) (0x400FF100 + 0xC)))
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group I2C
+//                I2C0 at 0x40066000
+//                I2C1 at 0x40067000
+//                I2C2 at 0x400E6000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- I2C Data I/O register
+#define I2C_D(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x4)))
+#define I2C0_D (* ((volatile uint8_t *) (0x40066000 + 0x4)))
+#define I2C1_D (* ((volatile uint8_t *) (0x40067000 + 0x4)))
+#define I2C2_D (* ((volatile uint8_t *) (0x400E6000 + 0x4)))
+
+//-------------------- I2C Frequency Divider register
+#define I2C_F(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x1)))
+#define I2C0_F (* ((volatile uint8_t *) (0x40066000 + 0x1)))
+#define I2C1_F (* ((volatile uint8_t *) (0x40067000 + 0x1)))
+#define I2C2_F (* ((volatile uint8_t *) (0x400E6000 + 0x1)))
+
+  // Field (width: 6 bits): ClockRate
+    inline uint8_t I2C_F_ICR (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+
+  // Field (width: 2 bits): Multiplier Factor
+    inline uint8_t I2C_F_MULT (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+
+//-------------------- I2C SCL Low Timeout Register Low
+#define I2C_SLTL(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0xB)))
+#define I2C0_SLTL (* ((volatile uint8_t *) (0x40066000 + 0xB)))
+#define I2C1_SLTL (* ((volatile uint8_t *) (0x40067000 + 0xB)))
+#define I2C2_SLTL (* ((volatile uint8_t *) (0x400E6000 + 0xB)))
+
+//-------------------- I2C Programmable Input Glitch Filter register
+#define I2C_FLT(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x6)))
+#define I2C0_FLT (* ((volatile uint8_t *) (0x40066000 + 0x6)))
+#define I2C1_FLT (* ((volatile uint8_t *) (0x40067000 + 0x6)))
+#define I2C2_FLT (* ((volatile uint8_t *) (0x400E6000 + 0x6)))
+
+  // Boolean field: Stop Hold Enable
+    static const uint8_t I2C_FLT_SHEN = 1U << 7 ;
+
+  // Boolean field: I2C Bus Stop or Start Interrupt Enable
+    static const uint8_t I2C_FLT_SSIE = 1U << 5 ;
+
+  // Boolean field: I2C Bus Stop Detect Flag
+    static const uint8_t I2C_FLT_STOPF = 1U << 6 ;
+
+  // Boolean field: I2C Bus Start Detect Flag
+    static const uint8_t I2C_FLT_STARTF = 1U << 4 ;
+
+  // Field (width: 4 bits): I2C Programmable Filter Factor
+    inline uint8_t I2C_FLT_FLT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+
+//-------------------- I2C SCL Low Timeout Register High
+#define I2C_SLTH(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0xA)))
+#define I2C0_SLTH (* ((volatile uint8_t *) (0x40066000 + 0xA)))
+#define I2C1_SLTH (* ((volatile uint8_t *) (0x40067000 + 0xA)))
+#define I2C2_SLTH (* ((volatile uint8_t *) (0x400E6000 + 0xA)))
+
+//-------------------- I2C Address Register 1
+#define I2C_A1(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0)))
+#define I2C0_A1 (* ((volatile uint8_t *) (0x40066000 + 0)))
+#define I2C1_A1 (* ((volatile uint8_t *) (0x40067000 + 0)))
+#define I2C2_A1 (* ((volatile uint8_t *) (0x400E6000 + 0)))
+
+  // Field (width: 7 bits): Address
+    inline uint8_t I2C_A1_AD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+
+//-------------------- I2C Status register
+#define I2C_S(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x3)))
+#define I2C0_S (* ((volatile uint8_t *) (0x40066000 + 0x3)))
+#define I2C1_S (* ((volatile uint8_t *) (0x40067000 + 0x3)))
+#define I2C2_S (* ((volatile uint8_t *) (0x400E6000 + 0x3)))
+
+  // Boolean field: Interrupt Flag
+    static const uint8_t I2C_S_IICIF = 1U << 1 ;
+
+  // Boolean field: Bus Busy
+    static const uint8_t I2C_S_BUSY = 1U << 5 ;
+
+  // Boolean field: Range Address Match
+    static const uint8_t I2C_S_RAM = 1U << 3 ;
+
+  // Boolean field: Receive Acknowledge
+    static const uint8_t I2C_S_RXAK = 1U << 0 ;
+
+  // Boolean field: Slave Read/Write
+    static const uint8_t I2C_S_SRW = 1U << 2 ;
+
+  // Boolean field: Transfer Complete Flag
+    static const uint8_t I2C_S_TCF = 1U << 7 ;
+
+  // Boolean field: Addressed As A Slave
+    static const uint8_t I2C_S_IAAS = 1U << 6 ;
+
+  // Boolean field: Arbitration Lost
+    static const uint8_t I2C_S_ARBL = 1U << 4 ;
+
+//-------------------- I2C Address Register 2
+#define I2C_A2(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x9)))
+#define I2C0_A2 (* ((volatile uint8_t *) (0x40066000 + 0x9)))
+#define I2C1_A2 (* ((volatile uint8_t *) (0x40067000 + 0x9)))
+#define I2C2_A2 (* ((volatile uint8_t *) (0x400E6000 + 0x9)))
+
+  // Field (width: 7 bits): SMBus Address
+    inline uint8_t I2C_A2_SAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+
+//-------------------- I2C Range Address register
+#define I2C_RA(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x7)))
+#define I2C0_RA (* ((volatile uint8_t *) (0x40066000 + 0x7)))
+#define I2C1_RA (* ((volatile uint8_t *) (0x40067000 + 0x7)))
+#define I2C2_RA (* ((volatile uint8_t *) (0x400E6000 + 0x7)))
+
+  // Field (width: 7 bits): Range Slave Address
+    inline uint8_t I2C_RA_RAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+
+//-------------------- I2C Control Register 2
+#define I2C_C2(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x5)))
+#define I2C0_C2 (* ((volatile uint8_t *) (0x40066000 + 0x5)))
+#define I2C1_C2 (* ((volatile uint8_t *) (0x40067000 + 0x5)))
+#define I2C2_C2 (* ((volatile uint8_t *) (0x400E6000 + 0x5)))
+
+  // Boolean field: High Drive Select
+    static const uint8_t I2C_C2_HDRS = 1U << 5 ;
+
+  // Boolean field: Address Extension
+    static const uint8_t I2C_C2_ADEXT = 1U << 6 ;
+
+  // Boolean field: Slave Baud Rate Control
+    static const uint8_t I2C_C2_SBRC = 1U << 4 ;
+
+  // Boolean field: General Call Address Enable
+    static const uint8_t I2C_C2_GCAEN = 1U << 7 ;
+
+  // Boolean field: Range Address Matching Enable
+    static const uint8_t I2C_C2_RMEN = 1U << 3 ;
+
+  // Field (width: 3 bits): Slave Address
+    inline uint8_t I2C_C2_AD (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+
+//-------------------- I2C Control Register 1
+#define I2C_C1(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x2)))
+#define I2C0_C1 (* ((volatile uint8_t *) (0x40066000 + 0x2)))
+#define I2C1_C1 (* ((volatile uint8_t *) (0x40067000 + 0x2)))
+#define I2C2_C1 (* ((volatile uint8_t *) (0x400E6000 + 0x2)))
+
+  // Boolean field: DMA Enable
+    static const uint8_t I2C_C1_DMAEN = 1U << 0 ;
+
+  // Boolean field: I2C Enable
+    static const uint8_t I2C_C1_IICEN = 1U << 7 ;
+
+  // Boolean field: Transmit Mode Select
+    static const uint8_t I2C_C1_TX = 1U << 4 ;
+
+  // Boolean field: Transmit Acknowledge Enable
+    static const uint8_t I2C_C1_TXAK = 1U << 3 ;
+
+  // Boolean field: Master Mode Select
+    static const uint8_t I2C_C1_MST = 1U << 5 ;
+
+  // Boolean field: I2C Interrupt Enable
+    static const uint8_t I2C_C1_IICIE = 1U << 6 ;
+
+  // Boolean field: Repeat START
+    static const uint8_t I2C_C1_RSTA = 1U << 2 ;
+
+  // Boolean field: Wakeup Enable
+    static const uint8_t I2C_C1_WUEN = 1U << 1 ;
+
+//-------------------- I2C SMBus Control and Status register
+#define I2C_SMB(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x8)))
+#define I2C0_SMB (* ((volatile uint8_t *) (0x40066000 + 0x8)))
+#define I2C1_SMB (* ((volatile uint8_t *) (0x40067000 + 0x8)))
+#define I2C2_SMB (* ((volatile uint8_t *) (0x400E6000 + 0x8)))
+
+  // Boolean field: Fast NACK/ACK Enable
+    static const uint8_t I2C_SMB_FACK = 1U << 7 ;
+
+  // Boolean field: SCL Low Timeout Flag
+    static const uint8_t I2C_SMB_SLTF = 1U << 3 ;
+
+  // Boolean field: Timeout Counter Clock Select
+    static const uint8_t I2C_SMB_TCKSEL = 1U << 4 ;
+
+  // Boolean field: SCL High Timeout Flag 1
+    static const uint8_t I2C_SMB_SHTF1 = 1U << 2 ;
+
+  // Boolean field: SCL High Timeout Flag 2
+    static const uint8_t I2C_SMB_SHTF2 = 1U << 1 ;
+
+  // Boolean field: Second I2C Address Enable
+    static const uint8_t I2C_SMB_SIICAEN = 1U << 5 ;
+
+  // Boolean field: SMBus Alert Response Address Enable
+    static const uint8_t I2C_SMB_ALERTEN = 1U << 6 ;
+
+  // Boolean field: SHTF2 Interrupt Enable
+    static const uint8_t I2C_SMB_SHTF2IE = 1U << 0 ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group PORT
+//                PORTA at 0x40049000
+//                PORTB at 0x4004A000
+//                PORTC at 0x4004B000
+//                PORTD at 0x4004C000
+//                PORTE at 0x4004D000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004A000, 0x4004B000, 0x4004C000, 0x4004D000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- Digital Filter Clock Register
+#define PORT_DFCR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0xC4)))
+#define PORTA_DFCR (* ((volatile uint32_t *) (0x40049000 + 0xC4)))
+#define PORTB_DFCR (* ((volatile uint32_t *) (0x4004A000 + 0xC4)))
+#define PORTC_DFCR (* ((volatile uint32_t *) (0x4004B000 + 0xC4)))
+#define PORTD_DFCR (* ((volatile uint32_t *) (0x4004C000 + 0xC4)))
+#define PORTE_DFCR (* ((volatile uint32_t *) (0x4004D000 + 0xC4)))
+
+  // Boolean field: Clock Source
+    static const uint32_t PORT_DFCR_CS = 1U << 0 ;
+
+//-------------------- Digital Filter Enable Register
+#define PORT_DFER(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0xC0)))
+#define PORTA_DFER (* ((volatile uint32_t *) (0x40049000 + 0xC0)))
+#define PORTB_DFER (* ((volatile uint32_t *) (0x4004A000 + 0xC0)))
+#define PORTC_DFER (* ((volatile uint32_t *) (0x4004B000 + 0xC0)))
+#define PORTD_DFER (* ((volatile uint32_t *) (0x4004C000 + 0xC0)))
+#define PORTE_DFER (* ((volatile uint32_t *) (0x4004D000 + 0xC0)))
+
+//-------------------- Interrupt Status Flag Register
+#define PORT_ISFR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0xA0)))
+#define PORTA_ISFR (* ((volatile uint32_t *) (0x40049000 + 0xA0)))
+#define PORTB_ISFR (* ((volatile uint32_t *) (0x4004A000 + 0xA0)))
+#define PORTC_ISFR (* ((volatile uint32_t *) (0x4004B000 + 0xA0)))
+#define PORTD_ISFR (* ((volatile uint32_t *) (0x4004C000 + 0xA0)))
+#define PORTE_ISFR (* ((volatile uint32_t *) (0x4004D000 + 0xA0)))
+
+//-------------------- Digital Filter Width Register
+#define PORT_DFWR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0xC8)))
+#define PORTA_DFWR (* ((volatile uint32_t *) (0x40049000 + 0xC8)))
+#define PORTB_DFWR (* ((volatile uint32_t *) (0x4004A000 + 0xC8)))
+#define PORTC_DFWR (* ((volatile uint32_t *) (0x4004B000 + 0xC8)))
+#define PORTD_DFWR (* ((volatile uint32_t *) (0x4004C000 + 0xC8)))
+#define PORTE_DFWR (* ((volatile uint32_t *) (0x4004D000 + 0xC8)))
+
+  // Field (width: 5 bits): Filter Length
+    inline uint32_t PORT_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+
+//-------------------- Global Pin Control Low Register
+#define PORT_GPCLR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0x80)))
+#define PORTA_GPCLR (* ((volatile uint32_t *) (0x40049000 + 0x80)))
+#define PORTB_GPCLR (* ((volatile uint32_t *) (0x4004A000 + 0x80)))
+#define PORTC_GPCLR (* ((volatile uint32_t *) (0x4004B000 + 0x80)))
+#define PORTD_GPCLR (* ((volatile uint32_t *) (0x4004C000 + 0x80)))
+#define PORTE_GPCLR (* ((volatile uint32_t *) (0x4004D000 + 0x80)))
+
+  // Field (width: 16 bits): Global Pin Write Data
+    inline uint32_t PORT_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+  // Field (width: 16 bits): Global Pin Write Enable
+    inline uint32_t PORT_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+
+//-------------------- Global Pin Control High Register
+#define PORT_GPCHR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0x84)))
+#define PORTA_GPCHR (* ((volatile uint32_t *) (0x40049000 + 0x84)))
+#define PORTB_GPCHR (* ((volatile uint32_t *) (0x4004A000 + 0x84)))
+#define PORTC_GPCHR (* ((volatile uint32_t *) (0x4004B000 + 0x84)))
+#define PORTD_GPCHR (* ((volatile uint32_t *) (0x4004C000 + 0x84)))
+#define PORTE_GPCHR (* ((volatile uint32_t *) (0x4004D000 + 0x84)))
+
+  // Field (width: 16 bits): Global Pin Write Data
+    inline uint32_t PORT_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+  // Field (width: 16 bits): Global Pin Write Enable
+    inline uint32_t PORT_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+
+//-------------------- Pin Control Register n (idx = 0 ... 31)
+#define PORT_PCR(group,idx) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0 + 0x4 * (idx))))
+#define PORTA_PCR(idx) (* ((volatile uint32_t *) (0x40049000 + 0 + 0x4 * (idx))))
+#define PORTB_PCR(idx) (* ((volatile uint32_t *) (0x4004A000 + 0 + 0x4 * (idx))))
+#define PORTC_PCR(idx) (* ((volatile uint32_t *) (0x4004B000 + 0 + 0x4 * (idx))))
+#define PORTD_PCR(idx) (* ((volatile uint32_t *) (0x4004C000 + 0 + 0x4 * (idx))))
+#define PORTE_PCR(idx) (* ((volatile uint32_t *) (0x4004D000 + 0 + 0x4 * (idx))))
+
+  // Boolean field: Pull Select
+    static const uint32_t PORT_PCR_PS = 1U << 0 ;
+
+  // Boolean field: Passive Filter Enable
+    static const uint32_t PORT_PCR_PFE = 1U << 4 ;
+
+  // Boolean field: Interrupt Status Flag
+    static const uint32_t PORT_PCR_ISF = 1U << 24 ;
+
+  // Boolean field: Slew Rate Enable
+    static const uint32_t PORT_PCR_SRE = 1U << 2 ;
+
+  // Field (width: 3 bits): Pin Mux Control
+    inline uint32_t PORT_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
+
+  // Boolean field: Lock Register
+    static const uint32_t PORT_PCR_LK = 1U << 15 ;
+
+  // Boolean field: Pull Enable
+    static const uint32_t PORT_PCR_PE = 1U << 1 ;
+
+  // Field (width: 4 bits): Interrupt Configuration
+    inline uint32_t PORT_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+
+  // Boolean field: Drive Strength Enable
+    static const uint32_t PORT_PCR_DSE = 1U << 6 ;
+
+  // Boolean field: Open Drain Enable
+    static const uint32_t PORT_PCR_ODE = 1U << 5 ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group SPI
+//                SPI0 at 0x4002C000
+//                SPI1 at 0x4002D000
+//                SPI2 at 0x400AC000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- Receive FIFO Registers (idx = 0 ... 3)
+#define SPI_RXFR(group,idx) (* ((const volatile uint32_t *) (kBaseAddress_SPI [group] + 0x7C + 0x4 * (idx))))
+#define SPI0_RXFR(idx) (* ((const volatile uint32_t *) (0x4002C000 + 0x7C + 0x4 * (idx))))
+#define SPI1_RXFR(idx) (* ((const volatile uint32_t *) (0x4002D000 + 0x7C + 0x4 * (idx))))
+#define SPI2_RXFR(idx) (* ((const volatile uint32_t *) (0x400AC000 + 0x7C + 0x4 * (idx))))
+
+//-------------------- PUSH TX FIFO Register In Slave Mode
+#define SPI_PUSHR_SLAVE(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x34)))
+#define SPI0_PUSHR_SLAVE (* ((volatile uint32_t *) (0x4002C000 + 0x34)))
+#define SPI1_PUSHR_SLAVE (* ((volatile uint32_t *) (0x4002D000 + 0x34)))
+#define SPI2_PUSHR_SLAVE (* ((volatile uint32_t *) (0x400AC000 + 0x34)))
+
+//-------------------- PUSH TX FIFO Register In Master Mode
+#define SPI_PUSHR(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x34)))
+#define SPI0_PUSHR (* ((volatile uint32_t *) (0x4002C000 + 0x34)))
+#define SPI1_PUSHR (* ((volatile uint32_t *) (0x4002D000 + 0x34)))
+#define SPI2_PUSHR (* ((volatile uint32_t *) (0x400AC000 + 0x34)))
+
+  // Boolean field: Continuous Peripheral Chip Select Enable
+    static const uint32_t SPI_PUSHR_CONT = 1U << 31 ;
+
+  // Boolean field: Clear Transfer Counter
+    static const uint32_t SPI_PUSHR_CTCNT = 1U << 26 ;
+
+  // Field (width: 6 bits): Select which PCS signals are to be asserted for the transfer
+    inline uint32_t SPI_PUSHR_PCS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
+
+  // Boolean field: End Of Queue
+    static const uint32_t SPI_PUSHR_EOQ = 1U << 27 ;
+
+  // Field (width: 3 bits): Clock and Transfer Attributes Select
+    inline uint32_t SPI_PUSHR_CTAS (const uint32_t inValue) { return (inValue & 7) << 28 ; }
+
+  // Field (width: 16 bits): Transmit Data
+    inline uint32_t SPI_PUSHR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+//-------------------- DMA/Interrupt Request Select and Enable Register
+#define SPI_RSER(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x30)))
+#define SPI0_RSER (* ((volatile uint32_t *) (0x4002C000 + 0x30)))
+#define SPI1_RSER (* ((volatile uint32_t *) (0x4002D000 + 0x30)))
+#define SPI2_RSER (* ((volatile uint32_t *) (0x400AC000 + 0x30)))
+
+  // Boolean field: Receive FIFO Drain Request Enable
+    static const uint32_t SPI_RSER_RFDF_RE = 1U << 17 ;
+
+  // Boolean field: Transmit FIFO Fill DMA or Interrupt Request Select
+    static const uint32_t SPI_RSER_TFFF_DIRS = 1U << 24 ;
+
+  // Boolean field: Receive FIFO Overflow Request Enable
+    static const uint32_t SPI_RSER_RFOF_RE = 1U << 19 ;
+
+  // Boolean field: Transmission Complete Request Enable
+    static const uint32_t SPI_RSER_TCF_RE = 1U << 31 ;
+
+  // Boolean field: Finished Request Enable
+    static const uint32_t SPI_RSER_EOQF_RE = 1U << 28 ;
+
+  // Boolean field: Transmit FIFO Fill Request Enable
+    static const uint32_t SPI_RSER_TFFF_RE = 1U << 25 ;
+
+  // Boolean field: Transmit FIFO Underflow Request Enable
+    static const uint32_t SPI_RSER_TFUF_RE = 1U << 27 ;
+
+  // Boolean field: Receive FIFO Drain DMA or Interrupt Request Select
+    static const uint32_t SPI_RSER_RFDF_DIRS = 1U << 16 ;
+
+//-------------------- Status Register
+#define SPI_SR(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x2C)))
+#define SPI0_SR (* ((volatile uint32_t *) (0x4002C000 + 0x2C)))
+#define SPI1_SR (* ((volatile uint32_t *) (0x4002D000 + 0x2C)))
+#define SPI2_SR (* ((volatile uint32_t *) (0x400AC000 + 0x2C)))
+
+  // Boolean field: TX and RX Status
+    static const uint32_t SPI_SR_TXRXS = 1U << 30 ;
+
+  // Boolean field: End of Queue Flag
+    static const uint32_t SPI_SR_EOQF = 1U << 28 ;
+
+  // Boolean field: Transmit FIFO Underflow Flag
+    static const uint32_t SPI_SR_TFUF = 1U << 27 ;
+
+  // Field (width: 4 bits): Transmit Next Pointer
+    inline uint32_t SPI_SR_TXNXTPTR (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+
+  // Field (width: 4 bits): Pop Next Pointer
+    inline uint32_t SPI_SR_POPNXTPTR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+
+  // Field (width: 4 bits): RX FIFO Counter
+    inline uint32_t SPI_SR_RXCTR (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+
+  // Boolean field: Transfer Complete Flag
+    static const uint32_t SPI_SR_TCF = 1U << 31 ;
+
+  // Field (width: 4 bits): TX FIFO Counter
+    inline uint32_t SPI_SR_TXCTR (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+
+  // Boolean field: Transmit FIFO Fill Flag
+    static const uint32_t SPI_SR_TFFF = 1U << 25 ;
+
+  // Boolean field: Receive FIFO Drain Flag
+    static const uint32_t SPI_SR_RFDF = 1U << 17 ;
+
+  // Boolean field: Receive FIFO Overflow Flag
+    static const uint32_t SPI_SR_RFOF = 1U << 19 ;
+
+//-------------------- Clock and Transfer Attributes Register (In Master Mode) (idx = 0 ... 1)
+#define SPI_CTAR(group,idx) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0xC + 0x4 * (idx))))
+#define SPI0_CTAR(idx) (* ((volatile uint32_t *) (0x4002C000 + 0xC + 0x4 * (idx))))
+#define SPI1_CTAR(idx) (* ((volatile uint32_t *) (0x4002D000 + 0xC + 0x4 * (idx))))
+#define SPI2_CTAR(idx) (* ((volatile uint32_t *) (0x400AC000 + 0xC + 0x4 * (idx))))
+
+  // Field (width: 2 bits): PCS to SCK Delay Prescaler
+    inline uint32_t SPI_CTAR_PCSSCK (const uint32_t inValue) { return (inValue & 3) << 22 ; }
+
+  // Boolean field: Clock Polarity
+    static const uint32_t SPI_CTAR_CPOL = 1U << 26 ;
+
+  // Field (width: 2 bits): Baud Rate Prescaler
+    inline uint32_t SPI_CTAR_PBR (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+
+  // Field (width: 2 bits): Delay after Transfer Prescaler
+    inline uint32_t SPI_CTAR_PDT (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+
+  // Boolean field: Clock Phase
+    static const uint32_t SPI_CTAR_CPHA = 1U << 25 ;
+
+  // Field (width: 4 bits): After SCK Delay Scaler
+    inline uint32_t SPI_CTAR_ASC (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+
+  // Field (width: 4 bits): PCS to SCK Delay Scaler
+    inline uint32_t SPI_CTAR_CSSCK (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+
+  // Field (width: 4 bits): Frame Size
+    inline uint32_t SPI_CTAR_FMSZ (const uint32_t inValue) { return (inValue & 15) << 27 ; }
+
+  // Field (width: 4 bits): Baud Rate Scaler
+    inline uint32_t SPI_CTAR_BR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+
+  // Boolean field: LSB First
+    static const uint32_t SPI_CTAR_LSBFE = 1U << 24 ;
+
+  // Field (width: 4 bits): Delay After Transfer Scaler
+    inline uint32_t SPI_CTAR_DT (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+
+  // Boolean field: Double Baud Rate
+    static const uint32_t SPI_CTAR_DBR = 1U << 31 ;
+
+  // Field (width: 2 bits): After SCK Delay Prescaler
+    inline uint32_t SPI_CTAR_PASC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
+
+//-------------------- Transfer Count Register
+#define SPI_TCR(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x8)))
+#define SPI0_TCR (* ((volatile uint32_t *) (0x4002C000 + 0x8)))
+#define SPI1_TCR (* ((volatile uint32_t *) (0x4002D000 + 0x8)))
+#define SPI2_TCR (* ((volatile uint32_t *) (0x400AC000 + 0x8)))
+
+  // Field (width: 16 bits): SPI Transfer Counter
+    inline uint32_t SPI_TCR_SPI_TCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+
+//-------------------- POP RX FIFO Register
+#define SPI_POPR(group) (* ((const volatile uint32_t *) (kBaseAddress_SPI [group] + 0x38)))
+#define SPI0_POPR (* ((const volatile uint32_t *) (0x4002C000 + 0x38)))
+#define SPI1_POPR (* ((const volatile uint32_t *) (0x4002D000 + 0x38)))
+#define SPI2_POPR (* ((const volatile uint32_t *) (0x400AC000 + 0x38)))
+
+//-------------------- Clock and Transfer Attributes Register (In Slave Mode)
+#define SPI_CTAR_SLAVE(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0xC)))
+#define SPI0_CTAR_SLAVE (* ((volatile uint32_t *) (0x4002C000 + 0xC)))
+#define SPI1_CTAR_SLAVE (* ((volatile uint32_t *) (0x4002D000 + 0xC)))
+#define SPI2_CTAR_SLAVE (* ((volatile uint32_t *) (0x400AC000 + 0xC)))
+
+  // Boolean field: Clock Polarity
+    static const uint32_t SPI_CTAR_SLAVE_CPOL = 1U << 26 ;
+
+  // Boolean field: Clock Phase
+    static const uint32_t SPI_CTAR_SLAVE_CPHA = 1U << 25 ;
+
+  // Field (width: 5 bits): Frame Size
+    inline uint32_t SPI_CTAR_SLAVE_FMSZ (const uint32_t inValue) { return (inValue & 31) << 27 ; }
+
+//-------------------- Transmit FIFO Registers (idx = 0 ... 3)
+#define SPI_TXFR(group,idx) (* ((const volatile uint32_t *) (kBaseAddress_SPI [group] + 0x3C + 0x4 * (idx))))
+#define SPI0_TXFR(idx) (* ((const volatile uint32_t *) (0x4002C000 + 0x3C + 0x4 * (idx))))
+#define SPI1_TXFR(idx) (* ((const volatile uint32_t *) (0x4002D000 + 0x3C + 0x4 * (idx))))
+#define SPI2_TXFR(idx) (* ((const volatile uint32_t *) (0x400AC000 + 0x3C + 0x4 * (idx))))
+
+  // Field (width: 16 bits): Transmit Data
+    inline uint32_t SPI_TXFR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+
+  // Field (width: 16 bits): Transmit Command or Transmit Data
+    inline uint32_t SPI_TXFR_TXCMD_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+
+//-------------------- Module Configuration Register
+#define SPI_MCR(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0)))
+#define SPI0_MCR (* ((volatile uint32_t *) (0x4002C000 + 0)))
+#define SPI1_MCR (* ((volatile uint32_t *) (0x4002D000 + 0)))
+#define SPI2_MCR (* ((volatile uint32_t *) (0x400AC000 + 0)))
+
+  // Boolean field: Disable Receive FIFO
+    static const uint32_t SPI_MCR_DIS_RXF = 1U << 12 ;
+
+  // Field (width: 6 bits): Peripheral Chip Select x Inactive State
+    inline uint32_t SPI_MCR_PCSIS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
+
+  // Boolean field: Halt
+    static const uint32_t SPI_MCR_HALT = 1U << 0 ;
+
+  // Boolean field: Peripheral Chip Select Strobe Enable
+    static const uint32_t SPI_MCR_PCSSE = 1U << 25 ;
+
+  // Boolean field: Modified Timing Format Enable
+    static const uint32_t SPI_MCR_MTFE = 1U << 26 ;
+
+  // Boolean field: Continuous SCK Enable
+    static const uint32_t SPI_MCR_CONT_SCKE = 1U << 30 ;
+
+  // Boolean field: Receive FIFO Overflow Overwrite Enable
+    static const uint32_t SPI_MCR_ROOE = 1U << 24 ;
+
+  // Boolean field: Master/Slave Mode Select
+    static const uint32_t SPI_MCR_MSTR = 1U << 31 ;
+
+  // Boolean field: Flushes the RX FIFO
+    static const uint32_t SPI_MCR_CLR_RXF = 1U << 10 ;
+
+  // Boolean field: Disable Transmit FIFO
+    static const uint32_t SPI_MCR_DIS_TXF = 1U << 13 ;
+
+  // Boolean field: Clear TX FIFO
+    static const uint32_t SPI_MCR_CLR_TXF = 1U << 11 ;
+
+  // Boolean field: Module Disable
+    static const uint32_t SPI_MCR_MDIS = 1U << 14 ;
+
+  // Boolean field: Doze Enable
+    static const uint32_t SPI_MCR_DOZE = 1U << 15 ;
+
+  // Boolean field: Freeze
+    static const uint32_t SPI_MCR_FRZ = 1U << 27 ;
+
+  // Field (width: 2 bits): SPI Configuration.
+    inline uint32_t SPI_MCR_DCONF (const uint32_t inValue) { return (inValue & 3) << 28 ; }
+
+  // Field (width: 2 bits): Sample Point
+    inline uint32_t SPI_MCR_SMPL_PT (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Peripheral group UART
+//                UART0 at 0x4006A000
+//                UART1 at 0x4006B000
+//                UART2 at 0x4006C000
+//                UART3 at 0x4006D000
+//                UART4 at 0x400EA000
+//                UART5 at 0x400EB000
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C000, 0x4006D000, 0x400EA000, 0x400EB000} ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//-------------------- UART Match Address Registers 1
+#define UART_MA1(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x8)))
+#define UART0_MA1 (* ((volatile uint8_t *) (0x4006A000 + 0x8)))
+#define UART1_MA1 (* ((volatile uint8_t *) (0x4006B000 + 0x8)))
+#define UART2_MA1 (* ((volatile uint8_t *) (0x4006C000 + 0x8)))
+#define UART3_MA1 (* ((volatile uint8_t *) (0x4006D000 + 0x8)))
+#define UART4_MA1 (* ((volatile uint8_t *) (0x400EA000 + 0x8)))
+#define UART5_MA1 (* ((volatile uint8_t *) (0x400EB000 + 0x8)))
+
+//-------------------- UART Match Address Registers 2
+#define UART_MA2(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x9)))
+#define UART0_MA2 (* ((volatile uint8_t *) (0x4006A000 + 0x9)))
+#define UART1_MA2 (* ((volatile uint8_t *) (0x4006B000 + 0x9)))
+#define UART2_MA2 (* ((volatile uint8_t *) (0x4006C000 + 0x9)))
+#define UART3_MA2 (* ((volatile uint8_t *) (0x4006D000 + 0x9)))
+#define UART4_MA2 (* ((volatile uint8_t *) (0x400EA000 + 0x9)))
+#define UART5_MA2 (* ((volatile uint8_t *) (0x400EB000 + 0x9)))
+
+//-------------------- UART FIFO Status Register
+#define UART_SFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x12)))
+#define UART0_SFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x12)))
+#define UART1_SFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x12)))
+#define UART2_SFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x12)))
+#define UART3_SFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x12)))
+#define UART4_SFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x12)))
+#define UART5_SFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x12)))
+
+  // Boolean field: Receive Buffer/FIFO Empty
+    static const uint8_t UART_SFIFO_RXEMPT = 1U << 6 ;
+
+  // Boolean field: Transmitter Buffer Overflow Flag
+    static const uint8_t UART_SFIFO_TXOF = 1U << 1 ;
+
+  // Boolean field: Transmit Buffer/FIFO Empty
+    static const uint8_t UART_SFIFO_TXEMPT = 1U << 7 ;
+
+  // Boolean field: Receiver Buffer Overflow Flag
+    static const uint8_t UART_SFIFO_RXOF = 1U << 2 ;
+
+  // Boolean field: Receiver Buffer Underflow Flag
+    static const uint8_t UART_SFIFO_RXUF = 1U << 0 ;
+
+//-------------------- UART Status Register 2
+#define UART_S2(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x5)))
+#define UART0_S2 (* ((volatile uint8_t *) (0x4006A000 + 0x5)))
+#define UART1_S2 (* ((volatile uint8_t *) (0x4006B000 + 0x5)))
+#define UART2_S2 (* ((volatile uint8_t *) (0x4006C000 + 0x5)))
+#define UART3_S2 (* ((volatile uint8_t *) (0x4006D000 + 0x5)))
+#define UART4_S2 (* ((volatile uint8_t *) (0x400EA000 + 0x5)))
+#define UART5_S2 (* ((volatile uint8_t *) (0x400EB000 + 0x5)))
+
+  // Boolean field: Receiver Active Flag
+    static const uint8_t UART_S2_RAF = 1U << 0 ;
+
+  // Boolean field: Receive Wakeup Idle Detect
+    static const uint8_t UART_S2_RWUID = 1U << 3 ;
+
+  // Boolean field: Receive Data Inversion
+    static const uint8_t UART_S2_RXINV = 1U << 4 ;
+
+  // Boolean field: Break Transmit Character Length
+    static const uint8_t UART_S2_BRK13 = 1U << 2 ;
+
+  // Boolean field: LIN Break Detect Interrupt Flag
+    static const uint8_t UART_S2_LBKDIF = 1U << 7 ;
+
+  // Boolean field: LIN Break Detection Enable
+    static const uint8_t UART_S2_LBKDE = 1U << 1 ;
+
+  // Boolean field: RxD Pin Active Edge Interrupt Flag
+    static const uint8_t UART_S2_RXEDGIF = 1U << 6 ;
+
+  // Boolean field: Most Significant Bit First
+    static const uint8_t UART_S2_MSBF = 1U << 5 ;
+
+//-------------------- UART Status Register 1
+#define UART_S1(group) (* ((const volatile uint8_t *) (kBaseAddress_UART [group] + 0x4)))
+#define UART0_S1 (* ((const volatile uint8_t *) (0x4006A000 + 0x4)))
+#define UART1_S1 (* ((const volatile uint8_t *) (0x4006B000 + 0x4)))
+#define UART2_S1 (* ((const volatile uint8_t *) (0x4006C000 + 0x4)))
+#define UART3_S1 (* ((const volatile uint8_t *) (0x4006D000 + 0x4)))
+#define UART4_S1 (* ((const volatile uint8_t *) (0x400EA000 + 0x4)))
+#define UART5_S1 (* ((const volatile uint8_t *) (0x400EB000 + 0x4)))
+
+  // Boolean field: Noise Flag
+    static const uint8_t UART_S1_NF = 1U << 2 ;
+
+  // Boolean field: Receive Data Register Full Flag
+    static const uint8_t UART_S1_RDRF = 1U << 5 ;
+
+  // Boolean field: Transmit Complete Flag
+    static const uint8_t UART_S1_TC = 1U << 6 ;
+
+  // Boolean field: Idle Line Flag
+    static const uint8_t UART_S1_IDLE = 1U << 4 ;
+
+  // Boolean field: Parity Error Flag
+    static const uint8_t UART_S1_PF = 1U << 0 ;
+
+  // Boolean field: Framing Error Flag
+    static const uint8_t UART_S1_FE = 1U << 1 ;
+
+  // Boolean field: Transmit Data Register Empty Flag
+    static const uint8_t UART_S1_TDRE = 1U << 7 ;
+
+  // Boolean field: Receiver Overrun Flag
+    static const uint8_t UART_S1_OR = 1U << 3 ;
+
+//-------------------- UART FIFO Transmit Count
+#define UART_TCFIFO(group) (* ((const volatile uint8_t *) (kBaseAddress_UART [group] + 0x14)))
+#define UART0_TCFIFO (* ((const volatile uint8_t *) (0x4006A000 + 0x14)))
+#define UART1_TCFIFO (* ((const volatile uint8_t *) (0x4006B000 + 0x14)))
+#define UART2_TCFIFO (* ((const volatile uint8_t *) (0x4006C000 + 0x14)))
+#define UART3_TCFIFO (* ((const volatile uint8_t *) (0x4006D000 + 0x14)))
+#define UART4_TCFIFO (* ((const volatile uint8_t *) (0x400EA000 + 0x14)))
+#define UART5_TCFIFO (* ((const volatile uint8_t *) (0x400EB000 + 0x14)))
+
+//-------------------- UART 7816 Interrupt Enable Register
+#define UART_IE7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x19)))
+#define UART0_IE7816 (* ((volatile uint8_t *) (0x4006A000 + 0x19)))
+#define UART1_IE7816 (* ((volatile uint8_t *) (0x4006B000 + 0x19)))
+#define UART2_IE7816 (* ((volatile uint8_t *) (0x4006C000 + 0x19)))
+#define UART3_IE7816 (* ((volatile uint8_t *) (0x4006D000 + 0x19)))
+#define UART4_IE7816 (* ((volatile uint8_t *) (0x400EA000 + 0x19)))
+#define UART5_IE7816 (* ((volatile uint8_t *) (0x400EB000 + 0x19)))
+
+  // Boolean field: Transmit Threshold Exceeded Interrupt Enable
+    static const uint8_t UART_IE7816_TXTE = 1U << 1 ;
+
+  // Boolean field: Character Wait Timer Interrupt Enable
+    static const uint8_t UART_IE7816_CWTE = 1U << 6 ;
+
+  // Boolean field: Initial Character Detected Interrupt Enable
+    static const uint8_t UART_IE7816_INITDE = 1U << 4 ;
+
+  // Boolean field: Block Wait Timer Interrupt Enable
+    static const uint8_t UART_IE7816_BWTE = 1U << 5 ;
+
+  // Boolean field: Wait Timer Interrupt Enable
+    static const uint8_t UART_IE7816_WTE = 1U << 7 ;
+
+  // Boolean field: Receive Threshold Exceeded Interrupt Enable
+    static const uint8_t UART_IE7816_RXTE = 1U << 0 ;
+
+  // Boolean field: Guard Timer Violated Interrupt Enable
+    static const uint8_t UART_IE7816_GTVE = 1U << 2 ;
+
+//-------------------- UART 7816 Wait FD Register
+#define UART_WF7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1D)))
+#define UART0_WF7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1D)))
+#define UART1_WF7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1D)))
+#define UART2_WF7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1D)))
+#define UART3_WF7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1D)))
+#define UART4_WF7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1D)))
+#define UART5_WF7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1D)))
+
+//-------------------- UART FIFO Receive Count
+#define UART_RCFIFO(group) (* ((const volatile uint8_t *) (kBaseAddress_UART [group] + 0x16)))
+#define UART0_RCFIFO (* ((const volatile uint8_t *) (0x4006A000 + 0x16)))
+#define UART1_RCFIFO (* ((const volatile uint8_t *) (0x4006B000 + 0x16)))
+#define UART2_RCFIFO (* ((const volatile uint8_t *) (0x4006C000 + 0x16)))
+#define UART3_RCFIFO (* ((const volatile uint8_t *) (0x4006D000 + 0x16)))
+#define UART4_RCFIFO (* ((const volatile uint8_t *) (0x400EA000 + 0x16)))
+#define UART5_RCFIFO (* ((const volatile uint8_t *) (0x400EB000 + 0x16)))
+
+//-------------------- UART Modem Register
+#define UART_MODEM(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0xD)))
+#define UART0_MODEM (* ((volatile uint8_t *) (0x4006A000 + 0xD)))
+#define UART1_MODEM (* ((volatile uint8_t *) (0x4006B000 + 0xD)))
+#define UART2_MODEM (* ((volatile uint8_t *) (0x4006C000 + 0xD)))
+#define UART3_MODEM (* ((volatile uint8_t *) (0x4006D000 + 0xD)))
+#define UART4_MODEM (* ((volatile uint8_t *) (0x400EA000 + 0xD)))
+#define UART5_MODEM (* ((volatile uint8_t *) (0x400EB000 + 0xD)))
+
+  // Boolean field: Transmitter request-to-send enable
+    static const uint8_t UART_MODEM_TXRTSE = 1U << 1 ;
+
+  // Boolean field: Transmitter clear-to-send enable
+    static const uint8_t UART_MODEM_TXCTSE = 1U << 0 ;
+
+  // Boolean field: Receiver request-to-send enable
+    static const uint8_t UART_MODEM_RXRTSE = 1U << 3 ;
+
+  // Boolean field: Transmitter request-to-send polarity
+    static const uint8_t UART_MODEM_TXRTSPOL = 1U << 2 ;
+
+//-------------------- UART 7816 Wait N Register
+#define UART_WN7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1C)))
+#define UART0_WN7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1C)))
+#define UART1_WN7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1C)))
+#define UART2_WN7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1C)))
+#define UART3_WN7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1C)))
+#define UART4_WN7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1C)))
+#define UART5_WN7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1C)))
+
+//-------------------- UART 7816 Transmit Length Register
+#define UART_TL7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1F)))
+#define UART0_TL7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1F)))
+#define UART1_TL7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1F)))
+#define UART2_TL7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1F)))
+#define UART3_TL7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1F)))
+#define UART4_TL7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1F)))
+#define UART5_TL7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1F)))
+
+//-------------------- UART Baud Rate Registers: Low
+#define UART_BDL(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1)))
+#define UART0_BDL (* ((volatile uint8_t *) (0x4006A000 + 0x1)))
+#define UART1_BDL (* ((volatile uint8_t *) (0x4006B000 + 0x1)))
+#define UART2_BDL (* ((volatile uint8_t *) (0x4006C000 + 0x1)))
+#define UART3_BDL (* ((volatile uint8_t *) (0x4006D000 + 0x1)))
+#define UART4_BDL (* ((volatile uint8_t *) (0x400EA000 + 0x1)))
+#define UART5_BDL (* ((volatile uint8_t *) (0x400EB000 + 0x1)))
+
+//-------------------- UART Control Register 3
+#define UART_C3(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x6)))
+#define UART0_C3 (* ((volatile uint8_t *) (0x4006A000 + 0x6)))
+#define UART1_C3 (* ((volatile uint8_t *) (0x4006B000 + 0x6)))
+#define UART2_C3 (* ((volatile uint8_t *) (0x4006C000 + 0x6)))
+#define UART3_C3 (* ((volatile uint8_t *) (0x4006D000 + 0x6)))
+#define UART4_C3 (* ((volatile uint8_t *) (0x400EA000 + 0x6)))
+#define UART5_C3 (* ((volatile uint8_t *) (0x400EB000 + 0x6)))
+
+  // Boolean field: Parity Error Interrupt Enable
+    static const uint8_t UART_C3_PEIE = 1U << 0 ;
+
+  // Boolean field: Transmitter Pin Data Direction in Single-Wire mode
+    static const uint8_t UART_C3_TXDIR = 1U << 5 ;
+
+  // Boolean field: Framing Error Interrupt Enable
+    static const uint8_t UART_C3_FEIE = 1U << 1 ;
+
+  // Boolean field: Transmit Bit 8
+    static const uint8_t UART_C3_T8 = 1U << 6 ;
+
+  // Boolean field: Received Bit 8
+    static const uint8_t UART_C3_R8 = 1U << 7 ;
+
+  // Boolean field: Noise Error Interrupt Enable
+    static const uint8_t UART_C3_NEIE = 1U << 2 ;
+
+  // Boolean field: Transmit Data Inversion.
+    static const uint8_t UART_C3_TXINV = 1U << 4 ;
+
+  // Boolean field: Overrun Error Interrupt Enable
+    static const uint8_t UART_C3_ORIE = 1U << 3 ;
+
+//-------------------- UART Control Register 2
+#define UART_C2(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x3)))
+#define UART0_C2 (* ((volatile uint8_t *) (0x4006A000 + 0x3)))
+#define UART1_C2 (* ((volatile uint8_t *) (0x4006B000 + 0x3)))
+#define UART2_C2 (* ((volatile uint8_t *) (0x4006C000 + 0x3)))
+#define UART3_C2 (* ((volatile uint8_t *) (0x4006D000 + 0x3)))
+#define UART4_C2 (* ((volatile uint8_t *) (0x400EA000 + 0x3)))
+#define UART5_C2 (* ((volatile uint8_t *) (0x400EB000 + 0x3)))
+
+  // Boolean field: Transmitter Enable
+    static const uint8_t UART_C2_TE = 1U << 3 ;
+
+  // Boolean field: Idle Line Interrupt DMA Transfer Enable
+    static const uint8_t UART_C2_ILIE = 1U << 4 ;
+
+  // Boolean field: Receiver Enable
+    static const uint8_t UART_C2_RE = 1U << 2 ;
+
+  // Boolean field: Receiver Wakeup Control
+    static const uint8_t UART_C2_RWU = 1U << 1 ;
+
+  // Boolean field: Transmitter Interrupt or DMA Transfer Enable.
+    static const uint8_t UART_C2_TIE = 1U << 7 ;
+
+  // Boolean field: Send Break
+    static const uint8_t UART_C2_SBK = 1U << 0 ;
+
+  // Boolean field: Receiver Full Interrupt or DMA Transfer Enable
+    static const uint8_t UART_C2_RIE = 1U << 5 ;
+
+  // Boolean field: Transmission Complete Interrupt or DMA Transfer Enable
+    static const uint8_t UART_C2_TCIE = 1U << 6 ;
+
+//-------------------- UART Control Register 1
+#define UART_C1(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x2)))
+#define UART0_C1 (* ((volatile uint8_t *) (0x4006A000 + 0x2)))
+#define UART1_C1 (* ((volatile uint8_t *) (0x4006B000 + 0x2)))
+#define UART2_C1 (* ((volatile uint8_t *) (0x4006C000 + 0x2)))
+#define UART3_C1 (* ((volatile uint8_t *) (0x4006D000 + 0x2)))
+#define UART4_C1 (* ((volatile uint8_t *) (0x400EA000 + 0x2)))
+#define UART5_C1 (* ((volatile uint8_t *) (0x400EB000 + 0x2)))
+
+  // Boolean field: UART Stops in Wait Mode
+    static const uint8_t UART_C1_UARTSWAI = 1U << 6 ;
+
+  // Boolean field: Parity Type
+    static const uint8_t UART_C1_PT = 1U << 0 ;
+
+  // Boolean field: 9-bit or 8-bit Mode Select
+    static const uint8_t UART_C1_M = 1U << 4 ;
+
+  // Boolean field: Receiver Source Select
+    static const uint8_t UART_C1_RSRC = 1U << 5 ;
+
+  // Boolean field: Idle Line Type Select
+    static const uint8_t UART_C1_ILT = 1U << 2 ;
+
+  // Boolean field: Receiver Wakeup Method Select
+    static const uint8_t UART_C1_WAKE = 1U << 3 ;
+
+  // Boolean field: Parity Enable
+    static const uint8_t UART_C1_PE = 1U << 1 ;
+
+  // Boolean field: Loop Mode Select
+    static const uint8_t UART_C1_LOOPS = 1U << 7 ;
+
+//-------------------- UART Control Register 5
+#define UART_C5(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0xB)))
+#define UART0_C5 (* ((volatile uint8_t *) (0x4006A000 + 0xB)))
+#define UART1_C5 (* ((volatile uint8_t *) (0x4006B000 + 0xB)))
+#define UART2_C5 (* ((volatile uint8_t *) (0x4006C000 + 0xB)))
+#define UART3_C5 (* ((volatile uint8_t *) (0x4006D000 + 0xB)))
+#define UART4_C5 (* ((volatile uint8_t *) (0x400EA000 + 0xB)))
+#define UART5_C5 (* ((volatile uint8_t *) (0x400EB000 + 0xB)))
+
+  // Boolean field: Transmitter DMA Select
+    static const uint8_t UART_C5_TDMAS = 1U << 7 ;
+
+  // Boolean field: Transmission Complete DMA Select
+    static const uint8_t UART_C5_TCDMAS = 1U << 6 ;
+
+  // Boolean field: LIN Break Detect DMA Select Bit
+    static const uint8_t UART_C5_LBKDDMAS = 1U << 3 ;
+
+  // Boolean field: Idle Line DMA Select
+    static const uint8_t UART_C5_ILDMAS = 1U << 4 ;
+
+  // Boolean field: Receiver Full DMA Select
+    static const uint8_t UART_C5_RDMAS = 1U << 5 ;
+
+//-------------------- UART Control Register 4
+#define UART_C4(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0xA)))
+#define UART0_C4 (* ((volatile uint8_t *) (0x4006A000 + 0xA)))
+#define UART1_C4 (* ((volatile uint8_t *) (0x4006B000 + 0xA)))
+#define UART2_C4 (* ((volatile uint8_t *) (0x4006C000 + 0xA)))
+#define UART3_C4 (* ((volatile uint8_t *) (0x4006D000 + 0xA)))
+#define UART4_C4 (* ((volatile uint8_t *) (0x400EA000 + 0xA)))
+#define UART5_C4 (* ((volatile uint8_t *) (0x400EB000 + 0xA)))
+
+  // Boolean field: 10-bit Mode select
+    static const uint8_t UART_C4_M10 = 1U << 5 ;
+
+  // Field (width: 5 bits): Baud Rate Fine Adjust
+    inline uint8_t UART_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+
+  // Boolean field: Match Address Mode Enable 1
+    static const uint8_t UART_C4_MAEN1 = 1U << 7 ;
+
+  // Boolean field: Match Address Mode Enable 2
+    static const uint8_t UART_C4_MAEN2 = 1U << 6 ;
+
+//-------------------- UART Data Register
+#define UART_D(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x7)))
+#define UART0_D (* ((volatile uint8_t *) (0x4006A000 + 0x7)))
+#define UART1_D (* ((volatile uint8_t *) (0x4006B000 + 0x7)))
+#define UART2_D (* ((volatile uint8_t *) (0x4006C000 + 0x7)))
+#define UART3_D (* ((volatile uint8_t *) (0x4006D000 + 0x7)))
+#define UART4_D (* ((volatile uint8_t *) (0x400EA000 + 0x7)))
+#define UART5_D (* ((volatile uint8_t *) (0x400EB000 + 0x7)))
+
+//-------------------- UART Extended Data Register
+#define UART_ED(group) (* ((const volatile uint8_t *) (kBaseAddress_UART [group] + 0xC)))
+#define UART0_ED (* ((const volatile uint8_t *) (0x4006A000 + 0xC)))
+#define UART1_ED (* ((const volatile uint8_t *) (0x4006B000 + 0xC)))
+#define UART2_ED (* ((const volatile uint8_t *) (0x4006C000 + 0xC)))
+#define UART3_ED (* ((const volatile uint8_t *) (0x4006D000 + 0xC)))
+#define UART4_ED (* ((const volatile uint8_t *) (0x400EA000 + 0xC)))
+#define UART5_ED (* ((const volatile uint8_t *) (0x400EB000 + 0xC)))
+
+  // Boolean field: The current received dataword contained in D and C3[R8] was received with noise.
+    static const uint8_t UART_ED_NOISY = 1U << 7 ;
+
+  // Boolean field: The current received dataword contained in D and C3[R8] was received with a parity error.
+    static const uint8_t UART_ED_PARITYE = 1U << 6 ;
+
+//-------------------- UART Infrared Register
+#define UART_IR(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0xE)))
+#define UART0_IR (* ((volatile uint8_t *) (0x4006A000 + 0xE)))
+#define UART1_IR (* ((volatile uint8_t *) (0x4006B000 + 0xE)))
+#define UART2_IR (* ((volatile uint8_t *) (0x4006C000 + 0xE)))
+#define UART3_IR (* ((volatile uint8_t *) (0x4006D000 + 0xE)))
+#define UART4_IR (* ((volatile uint8_t *) (0x400EA000 + 0xE)))
+#define UART5_IR (* ((volatile uint8_t *) (0x400EB000 + 0xE)))
+
+  // Boolean field: Infrared enable
+    static const uint8_t UART_IR_IREN = 1U << 2 ;
+
+  // Field (width: 2 bits): Transmitter narrow pulse
+    inline uint8_t UART_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+
+//-------------------- UART Baud Rate Registers: High
+#define UART_BDH(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0)))
+#define UART0_BDH (* ((volatile uint8_t *) (0x4006A000 + 0)))
+#define UART1_BDH (* ((volatile uint8_t *) (0x4006B000 + 0)))
+#define UART2_BDH (* ((volatile uint8_t *) (0x4006C000 + 0)))
+#define UART3_BDH (* ((volatile uint8_t *) (0x4006D000 + 0)))
+#define UART4_BDH (* ((volatile uint8_t *) (0x400EA000 + 0)))
+#define UART5_BDH (* ((volatile uint8_t *) (0x400EB000 + 0)))
+
+  // Field (width: 5 bits): UART Baud Rate Bits
+    inline uint8_t UART_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+
+  // Boolean field: Stop Bit Number Select
+    static const uint8_t UART_BDH_SBNS = 1U << 5 ;
+
+  // Boolean field: RxD Input Active Edge Interrupt Enable
+    static const uint8_t UART_BDH_RXEDGIE = 1U << 6 ;
+
+  // Boolean field: LIN Break Detect Interrupt or DMA Request Enable
+    static const uint8_t UART_BDH_LBKDIE = 1U << 7 ;
+
+//-------------------- UART FIFO Receive Watermark
+#define UART_RWFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x15)))
+#define UART0_RWFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x15)))
+#define UART1_RWFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x15)))
+#define UART2_RWFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x15)))
+#define UART3_RWFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x15)))
+#define UART4_RWFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x15)))
+#define UART5_RWFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x15)))
+
+//-------------------- UART 7816 Control Register
+#define UART_C7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x18)))
+#define UART0_C7816 (* ((volatile uint8_t *) (0x4006A000 + 0x18)))
+#define UART1_C7816 (* ((volatile uint8_t *) (0x4006B000 + 0x18)))
+#define UART2_C7816 (* ((volatile uint8_t *) (0x4006C000 + 0x18)))
+#define UART3_C7816 (* ((volatile uint8_t *) (0x4006D000 + 0x18)))
+#define UART4_C7816 (* ((volatile uint8_t *) (0x400EA000 + 0x18)))
+#define UART5_C7816 (* ((volatile uint8_t *) (0x400EB000 + 0x18)))
+
+  // Boolean field: Transfer Type
+    static const uint8_t UART_C7816_TTYPE = 1U << 1 ;
+
+  // Boolean field: Detect Initial Character
+    static const uint8_t UART_C7816_INIT = 1U << 2 ;
+
+  // Boolean field: Generate NACK on Error
+    static const uint8_t UART_C7816_ANACK = 1U << 3 ;
+
+  // Boolean field: ISO-7816 Functionality Enabled
+    static const uint8_t UART_C7816_ISO_7816E = 1U << 0 ;
+
+  // Boolean field: Generate NACK on Overflow
+    static const uint8_t UART_C7816_ONACK = 1U << 4 ;
+
+//-------------------- UART FIFO Parameters
+#define UART_PFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x10)))
+#define UART0_PFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x10)))
+#define UART1_PFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x10)))
+#define UART2_PFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x10)))
+#define UART3_PFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x10)))
+#define UART4_PFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x10)))
+#define UART5_PFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x10)))
+
+  // Boolean field: Transmit FIFO Enable
+    static const uint8_t UART_PFIFO_TXFE = 1U << 7 ;
+
+  // Field (width: 3 bits): Transmit FIFO. Buffer Depth
+    inline uint8_t UART_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
+
+  // Field (width: 3 bits): Receive FIFO. Buffer Depth
+    inline uint8_t UART_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+
+  // Boolean field: Receive FIFO Enable
+    static const uint8_t UART_PFIFO_RXFE = 1U << 3 ;
+
+//-------------------- UART 7816 Wait Parameter Register
+#define UART_WP7816T1(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1B)))
+#define UART0_WP7816T1 (* ((volatile uint8_t *) (0x4006A000 + 0x1B)))
+#define UART1_WP7816T1 (* ((volatile uint8_t *) (0x4006B000 + 0x1B)))
+#define UART2_WP7816T1 (* ((volatile uint8_t *) (0x4006C000 + 0x1B)))
+#define UART3_WP7816T1 (* ((volatile uint8_t *) (0x4006D000 + 0x1B)))
+#define UART4_WP7816T1 (* ((volatile uint8_t *) (0x400EA000 + 0x1B)))
+#define UART5_WP7816T1 (* ((volatile uint8_t *) (0x400EB000 + 0x1B)))
+
+  // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
+    inline uint8_t UART_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+
+  // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
+    inline uint8_t UART_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+
+//-------------------- UART 7816 Wait Parameter Register
+#define UART_WP7816T0(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1B)))
+#define UART0_WP7816T0 (* ((volatile uint8_t *) (0x4006A000 + 0x1B)))
+#define UART1_WP7816T0 (* ((volatile uint8_t *) (0x4006B000 + 0x1B)))
+#define UART2_WP7816T0 (* ((volatile uint8_t *) (0x4006C000 + 0x1B)))
+#define UART3_WP7816T0 (* ((volatile uint8_t *) (0x4006D000 + 0x1B)))
+#define UART4_WP7816T0 (* ((volatile uint8_t *) (0x400EA000 + 0x1B)))
+#define UART5_WP7816T0 (* ((volatile uint8_t *) (0x400EB000 + 0x1B)))
+
+//-------------------- UART FIFO Control Register
+#define UART_CFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x11)))
+#define UART0_CFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x11)))
+#define UART1_CFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x11)))
+#define UART2_CFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x11)))
+#define UART3_CFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x11)))
+#define UART4_CFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x11)))
+#define UART5_CFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x11)))
+
+  // Boolean field: Receive FIFO Underflow Interrupt Enable
+    static const uint8_t UART_CFIFO_RXUFE = 1U << 0 ;
+
+  // Boolean field: Receive FIFO Overflow Interrupt Enable
+    static const uint8_t UART_CFIFO_RXOFE = 1U << 2 ;
+
+  // Boolean field: Transmit FIFO Overflow Interrupt Enable
+    static const uint8_t UART_CFIFO_TXOFE = 1U << 1 ;
+
+  // Boolean field: Receive FIFO/Buffer Flush
+    static const uint8_t UART_CFIFO_RXFLUSH = 1U << 6 ;
+
+  // Boolean field: Transmit FIFO/Buffer Flush
+    static const uint8_t UART_CFIFO_TXFLUSH = 1U << 7 ;
+
+//-------------------- UART 7816 Interrupt Status Register
+#define UART_IS7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1A)))
+#define UART0_IS7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1A)))
+#define UART1_IS7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1A)))
+#define UART2_IS7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1A)))
+#define UART3_IS7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1A)))
+#define UART4_IS7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1A)))
+#define UART5_IS7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1A)))
+
+  // Boolean field: Initial Character Detected Interrupt
+    static const uint8_t UART_IS7816_INITD = 1U << 4 ;
+
+  // Boolean field: Block Wait Timer Interrupt
+    static const uint8_t UART_IS7816_BWT = 1U << 5 ;
+
+  // Boolean field: Character Wait Timer Interrupt
+    static const uint8_t UART_IS7816_CWT = 1U << 6 ;
+
+  // Boolean field: Wait Timer Interrupt
+    static const uint8_t UART_IS7816_WT = 1U << 7 ;
+
+  // Boolean field: Guard Timer Violated Interrupt
+    static const uint8_t UART_IS7816_GTV = 1U << 2 ;
+
+  // Boolean field: Transmit Threshold Exceeded Interrupt
+    static const uint8_t UART_IS7816_TXT = 1U << 1 ;
+
+  // Boolean field: Receive Threshold Exceeded Interrupt
+    static const uint8_t UART_IS7816_RXT = 1U << 0 ;
+
+//-------------------- UART 7816 Error Threshold Register
+#define UART_ET7816(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1E)))
+#define UART0_ET7816 (* ((volatile uint8_t *) (0x4006A000 + 0x1E)))
+#define UART1_ET7816 (* ((volatile uint8_t *) (0x4006B000 + 0x1E)))
+#define UART2_ET7816 (* ((volatile uint8_t *) (0x4006C000 + 0x1E)))
+#define UART3_ET7816 (* ((volatile uint8_t *) (0x4006D000 + 0x1E)))
+#define UART4_ET7816 (* ((volatile uint8_t *) (0x400EA000 + 0x1E)))
+#define UART5_ET7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1E)))
+
+  // Field (width: 4 bits): Receive NACK Threshold
+    inline uint8_t UART_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+
+  // Field (width: 4 bits): Transmit NACK Threshold
+    inline uint8_t UART_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+
+//-------------------- UART FIFO Transmit Watermark
+#define UART_TWFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x13)))
+#define UART0_TWFIFO (* ((volatile uint8_t *) (0x4006A000 + 0x13)))
+#define UART1_TWFIFO (* ((volatile uint8_t *) (0x4006B000 + 0x13)))
+#define UART2_TWFIFO (* ((volatile uint8_t *) (0x4006C000 + 0x13)))
+#define UART3_TWFIFO (* ((volatile uint8_t *) (0x4006D000 + 0x13)))
+#define UART4_TWFIFO (* ((volatile uint8_t *) (0x400EA000 + 0x13)))
+#define UART5_TWFIFO (* ((volatile uint8_t *) (0x400EB000 + 0x13)))
+
