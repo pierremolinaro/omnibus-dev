@@ -22975,25 +22975,31 @@
           </fields>
         </register>
         <register>
-          <dim>12</dim>
-          <dimIncrement>0x1</dimIncrement>
-          <dimIndex>3,2,1,0,7,6,5,4,B,A,9,8</dimIndex>
-          <name>FCCOB%s</name>
-          <description>Flash Common Command Object Registers</description>
+          <name>FCCOB_0_3</name>
+          <description>Flash Common Command Object Registers (0 ... 3)</description>
           <addressOffset>0x4</addressOffset>
-          <size>8</size>
+          <size>32</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
-          <resetMask>0xFF</resetMask>
-          <fields>
-            <field>
-              <name>CCOBn</name>
-              <description>The FCCOB register provides a command code and relevant parameters to the memory controller</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
+          <resetMask>0xFFFFFFFF</resetMask>
+        </register>
+        <register>
+          <name>FCCOB_4_7</name>
+          <description>Flash Common Command Object Registers (4 ... 7)</description>
+          <addressOffset>0x8</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
+        </register>
+        <register>
+          <name>FCCOB_8_11</name>
+          <description>Flash Common Command Object Registers (8 ... 11)</description>
+          <addressOffset>0xC</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
         </register>
         <register>
           <dim>4</dim>
@@ -94105,6 +94111,79 @@
               <access>write-only</access>
             </field>
           </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>SYST</name>
+      <description>System Timer</description>
+      <prependToName>SYST_</prependToName>
+      <baseAddress>0xE000E000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x24</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>CSR</name>
+          <description>SysTick Control and Status</description>
+          <addressOffset>0x10</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0xFFFFFFFF</resetMask>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable the Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>TICKINT</name>
+              <description>Enables SysTick exception request</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>CLKSOURCE</name>
+              <description>Clock Source Selection</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>COUNTFLAG</name>
+              <description>Returns 1 if timer counted to 0 since last time this was read</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RVR</name>
+          <description>SysTick Reload Value Register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+        </register>
+        <register>
+          <name>CVR</name>
+          <description>SysTick Current Value Register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+        </register>
+        <register>
+          <name>CALIB</name>
+          <description>SysTick Calibration Value Register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
         </register>
       </registers>
     </peripheral>
