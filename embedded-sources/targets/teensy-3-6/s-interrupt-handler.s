@@ -18,8 +18,8 @@
 !ISR!:
 	.fnstart
 @----------------------------------------- Save preserved registers
-	.save	{r4, r5, lr}
-  push  {r4, r5, lr}
+	.save	{r4, lr}
+  push  {r4, lr}
 @----------------------------------------- Activity led On
   bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)
 @----------------------------------------- R4 <- running task context
