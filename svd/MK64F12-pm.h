@@ -48,16 +48,16 @@
 #define FTFE_FlashConfig_FSEC (* ((const volatile uint8_t *) (0x400 + 0xC)))
 
   // Field (width: 2 bits): Flash Security
-    inline uint8_t FTFE_FlashConfig_FSEC_SEC (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t FTFE_FlashConfig_FSEC_SEC (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Freescale Failure Analysis Access Code
-    inline uint8_t FTFE_FlashConfig_FSEC_FSLACC (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t FTFE_FlashConfig_FSEC_FSLACC (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): no description available
-    inline uint8_t FTFE_FlashConfig_FSEC_MEEN (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t FTFE_FlashConfig_FSEC_MEEN (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Backdoor Key Security Enable
-    inline uint8_t FTFE_FlashConfig_FSEC_KEYEN (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t FTFE_FlashConfig_FSEC_KEYEN (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- Non-volatile Flash Option Register
 #define FTFE_FlashConfig_FOPT (* ((const volatile uint8_t *) (0x400 + 0xD)))
@@ -82,34 +82,34 @@
 #define AXBS_PRS(idx) (* ((volatile uint32_t *) (0x40004000 + 0 + 0x100 * (idx))))
 
   // Field (width: 3 bits): Master 0 Priority. Sets the arbitration priority for this port on the associated slave port.
-    inline uint32_t AXBS_PRS_M0 (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t AXBS_PRS_M0 (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 3 bits): Master 1 Priority. Sets the arbitration priority for this port on the associated slave port.
-    inline uint32_t AXBS_PRS_M1 (const uint32_t inValue) { return (inValue & 7) << 4 ; }
+    inline uint32_t AXBS_PRS_M1 (const uint32_t inValue) { return (inValue & 7U) << 4 ; }
 
   // Field (width: 3 bits): Master 2 Priority. Sets the arbitration priority for this port on the associated slave port.
-    inline uint32_t AXBS_PRS_M2 (const uint32_t inValue) { return (inValue & 7) << 8 ; }
+    inline uint32_t AXBS_PRS_M2 (const uint32_t inValue) { return (inValue & 7U) << 8 ; }
 
   // Field (width: 3 bits): Master 3 Priority. Sets the arbitration priority for this port on the associated slave port.
-    inline uint32_t AXBS_PRS_M3 (const uint32_t inValue) { return (inValue & 7) << 12 ; }
+    inline uint32_t AXBS_PRS_M3 (const uint32_t inValue) { return (inValue & 7U) << 12 ; }
 
   // Field (width: 3 bits): Master 4 Priority. Sets the arbitration priority for this port on the associated slave port.
-    inline uint32_t AXBS_PRS_M4 (const uint32_t inValue) { return (inValue & 7) << 16 ; }
+    inline uint32_t AXBS_PRS_M4 (const uint32_t inValue) { return (inValue & 7U) << 16 ; }
 
   // Field (width: 3 bits): Master 5 Priority. Sets the arbitration priority for this port on the associated slave port.
-    inline uint32_t AXBS_PRS_M5 (const uint32_t inValue) { return (inValue & 7) << 20 ; }
+    inline uint32_t AXBS_PRS_M5 (const uint32_t inValue) { return (inValue & 7U) << 20 ; }
 
 //-------------------- Control Register (idx = 0 ... 4)
 #define AXBS_CRS(idx) (* ((volatile uint32_t *) (0x40004000 + 0x10 + 0x100 * (idx))))
 
   // Field (width: 3 bits): Park
-    inline uint32_t AXBS_CRS_PARK (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t AXBS_CRS_PARK (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 2 bits): Parking Control
-    inline uint32_t AXBS_CRS_PCTL (const uint32_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint32_t AXBS_CRS_PCTL (const uint32_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Arbitration Mode
-    inline uint32_t AXBS_CRS_ARB (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+    inline uint32_t AXBS_CRS_ARB (const uint32_t inValue) { return (inValue & 3U) << 8 ; }
 
   // Boolean field: Halt Low Priority
     static const uint32_t AXBS_CRS_HLP = 1U << 30 ;
@@ -121,7 +121,7 @@
 #define AXBS_MGPCR(idx) (* ((volatile uint32_t *) (0x40004000 + 0x800 + 0x100 * (idx))))
 
   // Field (width: 3 bits): Arbitrates On Undefined Length Bursts
-    inline uint32_t AXBS_MGPCR_AULB (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t AXBS_MGPCR_AULB (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral DMA
@@ -182,7 +182,7 @@
     static const uint32_t DMA_ES_SAE = 1U << 7 ;
 
   // Field (width: 4 bits): Error Channel Number or Canceled Channel Number
-    inline uint32_t DMA_ES_ERRCHN (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t DMA_ES_ERRCHN (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Boolean field: Channel Priority Error
     static const uint32_t DMA_ES_CPE = 1U << 14 ;
@@ -299,7 +299,7 @@
 #define DMA_CEEI (* ((volatile uint8_t *) (0x40008000 + 0x18)))
 
   // Field (width: 4 bits): Clear Enable Error Interrupt
-    inline uint8_t DMA_CEEI_CEEI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_CEEI_CEEI (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Clear All Enable Error Interrupts
     static const uint8_t DMA_CEEI_CAEE = 1U << 6 ;
@@ -311,7 +311,7 @@
 #define DMA_SEEI (* ((volatile uint8_t *) (0x40008000 + 0x19)))
 
   // Field (width: 4 bits): Set Enable Error Interrupt
-    inline uint8_t DMA_SEEI_SEEI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_SEEI_SEEI (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Sets All Enable Error Interrupts
     static const uint8_t DMA_SEEI_SAEE = 1U << 6 ;
@@ -323,7 +323,7 @@
 #define DMA_CERQ (* ((volatile uint8_t *) (0x40008000 + 0x1A)))
 
   // Field (width: 4 bits): Clear Enable Request
-    inline uint8_t DMA_CERQ_CERQ (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_CERQ_CERQ (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Clear All Enable Requests
     static const uint8_t DMA_CERQ_CAER = 1U << 6 ;
@@ -335,7 +335,7 @@
 #define DMA_SERQ (* ((volatile uint8_t *) (0x40008000 + 0x1B)))
 
   // Field (width: 4 bits): Set enable request
-    inline uint8_t DMA_SERQ_SERQ (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_SERQ_SERQ (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Set All Enable Requests
     static const uint8_t DMA_SERQ_SAER = 1U << 6 ;
@@ -347,7 +347,7 @@
 #define DMA_CDNE (* ((volatile uint8_t *) (0x40008000 + 0x1C)))
 
   // Field (width: 4 bits): Clear DONE Bit
-    inline uint8_t DMA_CDNE_CDNE (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_CDNE_CDNE (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Clears All DONE Bits
     static const uint8_t DMA_CDNE_CADN = 1U << 6 ;
@@ -359,7 +359,7 @@
 #define DMA_SSRT (* ((volatile uint8_t *) (0x40008000 + 0x1D)))
 
   // Field (width: 4 bits): Set START Bit
-    inline uint8_t DMA_SSRT_SSRT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_SSRT_SSRT (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Set All START Bits (activates all channels)
     static const uint8_t DMA_SSRT_SAST = 1U << 6 ;
@@ -371,7 +371,7 @@
 #define DMA_CERR (* ((volatile uint8_t *) (0x40008000 + 0x1E)))
 
   // Field (width: 4 bits): Clear Error Indicator
-    inline uint8_t DMA_CERR_CERR (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_CERR_CERR (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Clear All Error Indicators
     static const uint8_t DMA_CERR_CAEI = 1U << 6 ;
@@ -383,7 +383,7 @@
 #define DMA_CINT (* ((volatile uint8_t *) (0x40008000 + 0x1F)))
 
   // Field (width: 4 bits): Clear Interrupt Request
-    inline uint8_t DMA_CINT_CINT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_CINT_CINT (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Clear All Interrupt Requests
     static const uint8_t DMA_CINT_CAIR = 1U << 6 ;
@@ -548,7 +548,7 @@
 #define DMA_DCHPRI(idx) (* ((volatile uint8_t *) (0x40008000 + 0x100 + 0x1 * (idx))))
 
   // Field (width: 4 bits): Channel n Arbitration Priority
-    inline uint8_t DMA_DCHPRI_CHPRI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DMA_DCHPRI_CHPRI (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Disable Preempt Ability
     static const uint8_t DMA_DCHPRI_DPA = 1U << 6 ;
@@ -566,16 +566,16 @@
 #define DMA_TCD_ATTR(idx) (* ((volatile uint16_t *) (0x40008000 + 0x1006 + 0x20 * (idx))))
 
   // Field (width: 3 bits): Destination Data Transfer Size
-    inline uint16_t DMA_TCD_ATTR_DSIZE (const uint16_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint16_t DMA_TCD_ATTR_DSIZE (const uint16_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 5 bits): Destination Address Modulo
-    inline uint16_t DMA_TCD_ATTR_DMOD (const uint16_t inValue) { return (inValue & 31) << 3 ; }
+    inline uint16_t DMA_TCD_ATTR_DMOD (const uint16_t inValue) { return (inValue & 31U) << 3 ; }
 
   // Field (width: 3 bits): Source data transfer size
-    inline uint16_t DMA_TCD_ATTR_SSIZE (const uint16_t inValue) { return (inValue & 7) << 8 ; }
+    inline uint16_t DMA_TCD_ATTR_SSIZE (const uint16_t inValue) { return (inValue & 7U) << 8 ; }
 
   // Field (width: 5 bits): Source Address Modulo.
-    inline uint16_t DMA_TCD_ATTR_SMOD (const uint16_t inValue) { return (inValue & 31) << 11 ; }
+    inline uint16_t DMA_TCD_ATTR_SMOD (const uint16_t inValue) { return (inValue & 31U) << 11 ; }
 
 //-------------------- TCD Minor Byte Count (Minor Loop Disabled) (idx = 0 ... 15)
 #define DMA_TCD_NBYTES_MLNO(idx) (* ((volatile uint32_t *) (0x40008000 + 0x1008 + 0x20 * (idx))))
@@ -584,7 +584,7 @@
 #define DMA_TCD_NBYTES_MLOFFNO(idx) (* ((volatile uint32_t *) (0x40008000 + 0x1008 + 0x20 * (idx))))
 
   // Field (width: 30 bits): Minor Byte Transfer Count
-    inline uint32_t DMA_TCD_NBYTES_MLOFFNO_NBYTES (const uint32_t inValue) { return (inValue & 1073741823) << 0 ; }
+    inline uint32_t DMA_TCD_NBYTES_MLOFFNO_NBYTES (const uint32_t inValue) { return (inValue & 1073741823U) << 0 ; }
 
   // Boolean field: Destination Minor Loop Offset enable
     static const uint32_t DMA_TCD_NBYTES_MLOFFNO_DMLOE = 1U << 30 ;
@@ -596,10 +596,10 @@
 #define DMA_TCD_NBYTES_MLOFFYES(idx) (* ((volatile uint32_t *) (0x40008000 + 0x1008 + 0x20 * (idx))))
 
   // Field (width: 10 bits): Minor Byte Transfer Count
-    inline uint32_t DMA_TCD_NBYTES_MLOFFYES_NBYTES (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+    inline uint32_t DMA_TCD_NBYTES_MLOFFYES_NBYTES (const uint32_t inValue) { return (inValue & 1023U) << 0 ; }
 
   // Field (width: 20 bits): If SMLOE or DMLOE is set, this field represents a sign-extended offset applied to the source or destination address to form the next-state value after the minor loop completes.
-    inline uint32_t DMA_TCD_NBYTES_MLOFFYES_MLOFF (const uint32_t inValue) { return (inValue & 1048575) << 10 ; }
+    inline uint32_t DMA_TCD_NBYTES_MLOFFYES_MLOFF (const uint32_t inValue) { return (inValue & 1048575U) << 10 ; }
 
   // Boolean field: Destination Minor Loop Offset enable
     static const uint32_t DMA_TCD_NBYTES_MLOFFYES_DMLOE = 1U << 30 ;
@@ -620,7 +620,7 @@
 #define DMA_TCD_CITER_ELINKNO(idx) (* ((volatile uint16_t *) (0x40008000 + 0x1016 + 0x20 * (idx))))
 
   // Field (width: 15 bits): Current Major Iteration Count
-    inline uint16_t DMA_TCD_CITER_ELINKNO_CITER (const uint16_t inValue) { return (inValue & 32767) << 0 ; }
+    inline uint16_t DMA_TCD_CITER_ELINKNO_CITER (const uint16_t inValue) { return (inValue & 32767U) << 0 ; }
 
   // Boolean field: Enable channel-to-channel linking on minor-loop complete
     static const uint16_t DMA_TCD_CITER_ELINKNO_ELINK = 1U << 15 ;
@@ -629,10 +629,10 @@
 #define DMA_TCD_CITER_ELINKYES(idx) (* ((volatile uint16_t *) (0x40008000 + 0x1016 + 0x20 * (idx))))
 
   // Field (width: 9 bits): Current Major Iteration Count
-    inline uint16_t DMA_TCD_CITER_ELINKYES_CITER (const uint16_t inValue) { return (inValue & 511) << 0 ; }
+    inline uint16_t DMA_TCD_CITER_ELINKYES_CITER (const uint16_t inValue) { return (inValue & 511U) << 0 ; }
 
   // Field (width: 4 bits): Link Channel Number
-    inline uint16_t DMA_TCD_CITER_ELINKYES_LINKCH (const uint16_t inValue) { return (inValue & 15) << 9 ; }
+    inline uint16_t DMA_TCD_CITER_ELINKYES_LINKCH (const uint16_t inValue) { return (inValue & 15U) << 9 ; }
 
   // Boolean field: Enable channel-to-channel linking on minor-loop complete
     static const uint16_t DMA_TCD_CITER_ELINKYES_ELINK = 1U << 15 ;
@@ -668,16 +668,16 @@
     static const uint16_t DMA_TCD_CSR_DONE = 1U << 7 ;
 
   // Field (width: 4 bits): Link Channel Number
-    inline uint16_t DMA_TCD_CSR_MAJORLINKCH (const uint16_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint16_t DMA_TCD_CSR_MAJORLINKCH (const uint16_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Field (width: 2 bits): Bandwidth Control
-    inline uint16_t DMA_TCD_CSR_BWC (const uint16_t inValue) { return (inValue & 3) << 14 ; }
+    inline uint16_t DMA_TCD_CSR_BWC (const uint16_t inValue) { return (inValue & 3U) << 14 ; }
 
 //-------------------- TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled) (idx = 0 ... 15)
 #define DMA_TCD_BITER_ELINKNO(idx) (* ((volatile uint16_t *) (0x40008000 + 0x101E + 0x20 * (idx))))
 
   // Field (width: 15 bits): Starting Major Iteration Count
-    inline uint16_t DMA_TCD_BITER_ELINKNO_BITER (const uint16_t inValue) { return (inValue & 32767) << 0 ; }
+    inline uint16_t DMA_TCD_BITER_ELINKNO_BITER (const uint16_t inValue) { return (inValue & 32767U) << 0 ; }
 
   // Boolean field: Enables channel-to-channel linking on minor loop complete
     static const uint16_t DMA_TCD_BITER_ELINKNO_ELINK = 1U << 15 ;
@@ -686,10 +686,10 @@
 #define DMA_TCD_BITER_ELINKYES(idx) (* ((volatile uint16_t *) (0x40008000 + 0x101E + 0x20 * (idx))))
 
   // Field (width: 9 bits): Starting Major Iteration Count
-    inline uint16_t DMA_TCD_BITER_ELINKYES_BITER (const uint16_t inValue) { return (inValue & 511) << 0 ; }
+    inline uint16_t DMA_TCD_BITER_ELINKYES_BITER (const uint16_t inValue) { return (inValue & 511U) << 0 ; }
 
   // Field (width: 4 bits): Link Channel Number
-    inline uint16_t DMA_TCD_BITER_ELINKYES_LINKCH (const uint16_t inValue) { return (inValue & 15) << 9 ; }
+    inline uint16_t DMA_TCD_BITER_ELINKYES_LINKCH (const uint16_t inValue) { return (inValue & 15U) << 9 ; }
 
   // Boolean field: Enables channel-to-channel linking on minor loop complete
     static const uint16_t DMA_TCD_BITER_ELINKYES_ELINK = 1U << 15 ;
@@ -702,7 +702,7 @@
 #define FB_CSAR(idx) (* ((volatile uint32_t *) (0x4000C000 + 0 + 0xC * (idx))))
 
   // Field (width: 16 bits): Base Address
-    inline uint32_t FB_CSAR_BA (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t FB_CSAR_BA (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Chip Select Mask Register (idx = 0 ... 5)
 #define FB_CSMR(idx) (* ((volatile uint32_t *) (0x4000C000 + 0x4 + 0xC * (idx))))
@@ -714,7 +714,7 @@
     static const uint32_t FB_CSMR_WP = 1U << 8 ;
 
   // Field (width: 16 bits): Base Address Mask
-    inline uint32_t FB_CSMR_BAM (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t FB_CSMR_BAM (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Chip Select Control Register (idx = 0 ... 5)
 #define FB_CSCR(idx) (* ((volatile uint32_t *) (0x4000C000 + 0x8 + 0xC * (idx))))
@@ -729,7 +729,7 @@
     static const uint32_t FB_CSCR_BEM = 1U << 5 ;
 
   // Field (width: 2 bits): Port Size
-    inline uint32_t FB_CSCR_PS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint32_t FB_CSCR_PS (const uint32_t inValue) { return (inValue & 3U) << 6 ; }
 
   // Boolean field: Auto-Acknowledge Enable
     static const uint32_t FB_CSCR_AA = 1U << 8 ;
@@ -738,16 +738,16 @@
     static const uint32_t FB_CSCR_BLS = 1U << 9 ;
 
   // Field (width: 6 bits): Wait States
-    inline uint32_t FB_CSCR_WS (const uint32_t inValue) { return (inValue & 63) << 10 ; }
+    inline uint32_t FB_CSCR_WS (const uint32_t inValue) { return (inValue & 63U) << 10 ; }
 
   // Field (width: 2 bits): Write Address Hold or Deselect
-    inline uint32_t FB_CSCR_WRAH (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t FB_CSCR_WRAH (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
   // Field (width: 2 bits): Read Address Hold or Deselect
-    inline uint32_t FB_CSCR_RDAH (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+    inline uint32_t FB_CSCR_RDAH (const uint32_t inValue) { return (inValue & 3U) << 18 ; }
 
   // Field (width: 2 bits): Address Setup
-    inline uint32_t FB_CSCR_ASET (const uint32_t inValue) { return (inValue & 3) << 20 ; }
+    inline uint32_t FB_CSCR_ASET (const uint32_t inValue) { return (inValue & 3U) << 20 ; }
 
   // Boolean field: Extended Transfer Start/Extended Address Latch Enable Controls how long FB_TS /FB_ALE is asserted.
     static const uint32_t FB_CSCR_EXTS = 1U << 22 ;
@@ -756,25 +756,25 @@
     static const uint32_t FB_CSCR_SWSEN = 1U << 23 ;
 
   // Field (width: 6 bits): Secondary Wait States
-    inline uint32_t FB_CSCR_SWS (const uint32_t inValue) { return (inValue & 63) << 26 ; }
+    inline uint32_t FB_CSCR_SWS (const uint32_t inValue) { return (inValue & 63U) << 26 ; }
 
 //-------------------- Chip Select port Multiplexing Control Register
 #define FB_CSPMCR (* ((volatile uint32_t *) (0x4000C000 + 0x60)))
 
   // Field (width: 4 bits): FlexBus Signal Group 5 Multiplex control
-    inline uint32_t FB_CSPMCR_GROUP5 (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t FB_CSPMCR_GROUP5 (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Field (width: 4 bits): FlexBus Signal Group 4 Multiplex control
-    inline uint32_t FB_CSPMCR_GROUP4 (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t FB_CSPMCR_GROUP4 (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Field (width: 4 bits): FlexBus Signal Group 3 Multiplex control
-    inline uint32_t FB_CSPMCR_GROUP3 (const uint32_t inValue) { return (inValue & 15) << 20 ; }
+    inline uint32_t FB_CSPMCR_GROUP3 (const uint32_t inValue) { return (inValue & 15U) << 20 ; }
 
   // Field (width: 4 bits): FlexBus Signal Group 2 Multiplex control
-    inline uint32_t FB_CSPMCR_GROUP2 (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t FB_CSPMCR_GROUP2 (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
   // Field (width: 4 bits): FlexBus Signal Group 1 Multiplex control
-    inline uint32_t FB_CSPMCR_GROUP1 (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t FB_CSPMCR_GROUP1 (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral MPU
@@ -787,16 +787,16 @@
     static const uint32_t MPU_CESR_VLD = 1U << 0 ;
 
   // Field (width: 4 bits): Number Of Region Descriptors
-    inline uint32_t MPU_CESR_NRGD (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t MPU_CESR_NRGD (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Field (width: 4 bits): Number Of Slave Ports
-    inline uint32_t MPU_CESR_NSP (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t MPU_CESR_NSP (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Field (width: 4 bits): Hardware Revision Level
-    inline uint32_t MPU_CESR_HRL (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t MPU_CESR_HRL (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Field (width: 5 bits): Slave Port n Error
-    inline uint32_t MPU_CESR_SPERR (const uint32_t inValue) { return (inValue & 31) << 27 ; }
+    inline uint32_t MPU_CESR_SPERR (const uint32_t inValue) { return (inValue & 31U) << 27 ; }
 
 //-------------------- Error Address Register, slave port n (idx = 0 ... 4)
 #define MPU_EAR(idx) (* ((const volatile uint32_t *) (0x4000D000 + 0x10 + 0x8 * (idx))))
@@ -808,64 +808,64 @@
     static const uint32_t MPU_EDR_ERW = 1U << 0 ;
 
   // Field (width: 3 bits): Error Attributes
-    inline uint32_t MPU_EDR_EATTR (const uint32_t inValue) { return (inValue & 7) << 1 ; }
+    inline uint32_t MPU_EDR_EATTR (const uint32_t inValue) { return (inValue & 7U) << 1 ; }
 
   // Field (width: 4 bits): Error Master Number
-    inline uint32_t MPU_EDR_EMN (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint32_t MPU_EDR_EMN (const uint32_t inValue) { return (inValue & 15U) << 4 ; }
 
   // Field (width: 8 bits): Error Process Identification
-    inline uint32_t MPU_EDR_EPID (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t MPU_EDR_EPID (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 16 bits): Error Access Control Detail
-    inline uint32_t MPU_EDR_EACD (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t MPU_EDR_EACD (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Region Descriptor n, Word 0 (idx = 0 ... 11)
 #define MPU_RGD_WORD0(idx) (* ((volatile uint32_t *) (0x4000D000 + 0x400 + 0x10 * (idx))))
 
   // Field (width: 27 bits): Start Address
-    inline uint32_t MPU_RGD_WORD0_SRTADDR (const uint32_t inValue) { return (inValue & 134217727) << 5 ; }
+    inline uint32_t MPU_RGD_WORD0_SRTADDR (const uint32_t inValue) { return (inValue & 134217727U) << 5 ; }
 
 //-------------------- Region Descriptor n, Word 1 (idx = 0 ... 11)
 #define MPU_RGD_WORD1(idx) (* ((volatile uint32_t *) (0x4000D000 + 0x404 + 0x10 * (idx))))
 
   // Field (width: 27 bits): End Address
-    inline uint32_t MPU_RGD_WORD1_ENDADDR (const uint32_t inValue) { return (inValue & 134217727) << 5 ; }
+    inline uint32_t MPU_RGD_WORD1_ENDADDR (const uint32_t inValue) { return (inValue & 134217727U) << 5 ; }
 
 //-------------------- Region Descriptor n, Word 2 (idx = 0 ... 11)
 #define MPU_RGD_WORD2(idx) (* ((volatile uint32_t *) (0x4000D000 + 0x408 + 0x10 * (idx))))
 
   // Field (width: 3 bits): Bus Master 0 User Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M0UM (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t MPU_RGD_WORD2_M0UM (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 2 bits): Bus Master 0 Supervisor Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M0SM (const uint32_t inValue) { return (inValue & 3) << 3 ; }
+    inline uint32_t MPU_RGD_WORD2_M0SM (const uint32_t inValue) { return (inValue & 3U) << 3 ; }
 
   // Boolean field: Bus Master 0 Process Identifier enable
     static const uint32_t MPU_RGD_WORD2_M0PE = 1U << 5 ;
 
   // Field (width: 3 bits): Bus Master 1 User Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M1UM (const uint32_t inValue) { return (inValue & 7) << 6 ; }
+    inline uint32_t MPU_RGD_WORD2_M1UM (const uint32_t inValue) { return (inValue & 7U) << 6 ; }
 
   // Field (width: 2 bits): Bus Master 1 Supervisor Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M1SM (const uint32_t inValue) { return (inValue & 3) << 9 ; }
+    inline uint32_t MPU_RGD_WORD2_M1SM (const uint32_t inValue) { return (inValue & 3U) << 9 ; }
 
   // Boolean field: Bus Master 1 Process Identifier enable
     static const uint32_t MPU_RGD_WORD2_M1PE = 1U << 11 ;
 
   // Field (width: 3 bits): Bus Master 2 User Mode Access control
-    inline uint32_t MPU_RGD_WORD2_M2UM (const uint32_t inValue) { return (inValue & 7) << 12 ; }
+    inline uint32_t MPU_RGD_WORD2_M2UM (const uint32_t inValue) { return (inValue & 7U) << 12 ; }
 
   // Field (width: 2 bits): Bus Master 2 Supervisor Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M2SM (const uint32_t inValue) { return (inValue & 3) << 15 ; }
+    inline uint32_t MPU_RGD_WORD2_M2SM (const uint32_t inValue) { return (inValue & 3U) << 15 ; }
 
   // Boolean field: Bus Master 2 Process Identifier Enable
     static const uint32_t MPU_RGD_WORD2_M2PE = 1U << 17 ;
 
   // Field (width: 3 bits): Bus Master 3 User Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M3UM (const uint32_t inValue) { return (inValue & 7) << 18 ; }
+    inline uint32_t MPU_RGD_WORD2_M3UM (const uint32_t inValue) { return (inValue & 7U) << 18 ; }
 
   // Field (width: 2 bits): Bus Master 3 Supervisor Mode Access Control
-    inline uint32_t MPU_RGD_WORD2_M3SM (const uint32_t inValue) { return (inValue & 3) << 21 ; }
+    inline uint32_t MPU_RGD_WORD2_M3SM (const uint32_t inValue) { return (inValue & 3U) << 21 ; }
 
   // Boolean field: Bus Master 3 Process Identifier Enable
     static const uint32_t MPU_RGD_WORD2_M3PE = 1U << 23 ;
@@ -901,46 +901,46 @@
     static const uint32_t MPU_RGD_WORD3_VLD = 1U << 0 ;
 
   // Field (width: 8 bits): Process Identifier Mask
-    inline uint32_t MPU_RGD_WORD3_PIDMASK (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t MPU_RGD_WORD3_PIDMASK (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Process Identifier
-    inline uint32_t MPU_RGD_WORD3_PID (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t MPU_RGD_WORD3_PID (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Region Descriptor Alternate Access Control n (idx = 0 ... 11)
 #define MPU_RGDAAC(idx) (* ((volatile uint32_t *) (0x4000D000 + 0x800 + 0x4 * (idx))))
 
   // Field (width: 3 bits): Bus Master 0 User Mode Access Control
-    inline uint32_t MPU_RGDAAC_M0UM (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t MPU_RGDAAC_M0UM (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 2 bits): Bus Master 0 Supervisor Mode Access Control
-    inline uint32_t MPU_RGDAAC_M0SM (const uint32_t inValue) { return (inValue & 3) << 3 ; }
+    inline uint32_t MPU_RGDAAC_M0SM (const uint32_t inValue) { return (inValue & 3U) << 3 ; }
 
   // Boolean field: Bus Master 0 Process Identifier Enable
     static const uint32_t MPU_RGDAAC_M0PE = 1U << 5 ;
 
   // Field (width: 3 bits): Bus Master 1 User Mode Access Control
-    inline uint32_t MPU_RGDAAC_M1UM (const uint32_t inValue) { return (inValue & 7) << 6 ; }
+    inline uint32_t MPU_RGDAAC_M1UM (const uint32_t inValue) { return (inValue & 7U) << 6 ; }
 
   // Field (width: 2 bits): Bus Master 1 Supervisor Mode Access Control
-    inline uint32_t MPU_RGDAAC_M1SM (const uint32_t inValue) { return (inValue & 3) << 9 ; }
+    inline uint32_t MPU_RGDAAC_M1SM (const uint32_t inValue) { return (inValue & 3U) << 9 ; }
 
   // Boolean field: Bus Master 1 Process Identifier Enable
     static const uint32_t MPU_RGDAAC_M1PE = 1U << 11 ;
 
   // Field (width: 3 bits): Bus Master 2 User Mode Access Control
-    inline uint32_t MPU_RGDAAC_M2UM (const uint32_t inValue) { return (inValue & 7) << 12 ; }
+    inline uint32_t MPU_RGDAAC_M2UM (const uint32_t inValue) { return (inValue & 7U) << 12 ; }
 
   // Field (width: 2 bits): Bus Master 2 Supervisor Mode Access Control
-    inline uint32_t MPU_RGDAAC_M2SM (const uint32_t inValue) { return (inValue & 3) << 15 ; }
+    inline uint32_t MPU_RGDAAC_M2SM (const uint32_t inValue) { return (inValue & 3U) << 15 ; }
 
   // Boolean field: Bus Master 2 Process Identifier Enable
     static const uint32_t MPU_RGDAAC_M2PE = 1U << 17 ;
 
   // Field (width: 3 bits): Bus Master 3 User Mode Access Control
-    inline uint32_t MPU_RGDAAC_M3UM (const uint32_t inValue) { return (inValue & 7) << 18 ; }
+    inline uint32_t MPU_RGDAAC_M3UM (const uint32_t inValue) { return (inValue & 7U) << 18 ; }
 
   // Field (width: 2 bits): Bus Master 3 Supervisor Mode Access Control
-    inline uint32_t MPU_RGDAAC_M3SM (const uint32_t inValue) { return (inValue & 3) << 21 ; }
+    inline uint32_t MPU_RGDAAC_M3SM (const uint32_t inValue) { return (inValue & 3U) << 21 ; }
 
   // Boolean field: Bus Master 3 Process Identifier Enable
     static const uint32_t MPU_RGDAAC_M3PE = 1U << 23 ;
@@ -977,28 +977,28 @@
 #define FMC_PFAPR (* ((volatile uint32_t *) (0x4001F000 + 0)))
 
   // Field (width: 2 bits): Master 0 Access Protection
-    inline uint32_t FMC_PFAPR_M0AP (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t FMC_PFAPR_M0AP (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Master 1 Access Protection
-    inline uint32_t FMC_PFAPR_M1AP (const uint32_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint32_t FMC_PFAPR_M1AP (const uint32_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Master 2 Access Protection
-    inline uint32_t FMC_PFAPR_M2AP (const uint32_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint32_t FMC_PFAPR_M2AP (const uint32_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Master 3 Access Protection
-    inline uint32_t FMC_PFAPR_M3AP (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint32_t FMC_PFAPR_M3AP (const uint32_t inValue) { return (inValue & 3U) << 6 ; }
 
   // Field (width: 2 bits): Master 4 Access Protection
-    inline uint32_t FMC_PFAPR_M4AP (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+    inline uint32_t FMC_PFAPR_M4AP (const uint32_t inValue) { return (inValue & 3U) << 8 ; }
 
   // Field (width: 2 bits): Master 5 Access Protection
-    inline uint32_t FMC_PFAPR_M5AP (const uint32_t inValue) { return (inValue & 3) << 10 ; }
+    inline uint32_t FMC_PFAPR_M5AP (const uint32_t inValue) { return (inValue & 3U) << 10 ; }
 
   // Field (width: 2 bits): Master 6 Access Protection
-    inline uint32_t FMC_PFAPR_M6AP (const uint32_t inValue) { return (inValue & 3) << 12 ; }
+    inline uint32_t FMC_PFAPR_M6AP (const uint32_t inValue) { return (inValue & 3U) << 12 ; }
 
   // Field (width: 2 bits): Master 7 Access Protection
-    inline uint32_t FMC_PFAPR_M7AP (const uint32_t inValue) { return (inValue & 3) << 14 ; }
+    inline uint32_t FMC_PFAPR_M7AP (const uint32_t inValue) { return (inValue & 3U) << 14 ; }
 
   // Boolean field: Master 0 Prefetch Disable
     static const uint32_t FMC_PFAPR_M0PFD = 1U << 16 ;
@@ -1043,22 +1043,22 @@
     static const uint32_t FMC_PFB0CR_B0DCE = 1U << 4 ;
 
   // Field (width: 3 bits): Cache Replacement Control
-    inline uint32_t FMC_PFB0CR_CRC (const uint32_t inValue) { return (inValue & 7) << 5 ; }
+    inline uint32_t FMC_PFB0CR_CRC (const uint32_t inValue) { return (inValue & 7U) << 5 ; }
 
   // Field (width: 2 bits): Bank 0 Memory Width
-    inline uint32_t FMC_PFB0CR_B0MW (const uint32_t inValue) { return (inValue & 3) << 17 ; }
+    inline uint32_t FMC_PFB0CR_B0MW (const uint32_t inValue) { return (inValue & 3U) << 17 ; }
 
   // Boolean field: Invalidate Prefetch Speculation Buffer
     static const uint32_t FMC_PFB0CR_S_B_INV = 1U << 19 ;
 
   // Field (width: 4 bits): Cache Invalidate Way x
-    inline uint32_t FMC_PFB0CR_CINV_WAY (const uint32_t inValue) { return (inValue & 15) << 20 ; }
+    inline uint32_t FMC_PFB0CR_CINV_WAY (const uint32_t inValue) { return (inValue & 15U) << 20 ; }
 
   // Field (width: 4 bits): Cache Lock Way x
-    inline uint32_t FMC_PFB0CR_CLCK_WAY (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t FMC_PFB0CR_CLCK_WAY (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
   // Field (width: 4 bits): Bank 0 Read Wait State Control
-    inline uint32_t FMC_PFB0CR_B0RWSC (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t FMC_PFB0CR_B0RWSC (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Flash Bank 1 Control Register
 #define FMC_PFB1CR (* ((volatile uint32_t *) (0x4001F000 + 0x8)))
@@ -1079,10 +1079,10 @@
     static const uint32_t FMC_PFB1CR_B1DCE = 1U << 4 ;
 
   // Field (width: 2 bits): Bank 1 Memory Width
-    inline uint32_t FMC_PFB1CR_B1MW (const uint32_t inValue) { return (inValue & 3) << 17 ; }
+    inline uint32_t FMC_PFB1CR_B1MW (const uint32_t inValue) { return (inValue & 3U) << 17 ; }
 
   // Field (width: 4 bits): Bank 1 Read Wait State Control
-    inline uint32_t FMC_PFB1CR_B1RWSC (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t FMC_PFB1CR_B1RWSC (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Cache Tag Storage (idx = 0 ... 3)
 #define FMC_TAGVDW0S(idx) (* ((volatile uint32_t *) (0x4001F000 + 0x100 + 0x4 * (idx))))
@@ -1091,7 +1091,7 @@
     static const uint32_t FMC_TAGVDW0S_valid = 1U << 0 ;
 
   // Field (width: 14 bits): 14-bit tag for cache entry
-    inline uint32_t FMC_TAGVDW0S_tag (const uint32_t inValue) { return (inValue & 16383) << 5 ; }
+    inline uint32_t FMC_TAGVDW0S_tag (const uint32_t inValue) { return (inValue & 16383U) << 5 ; }
 
 //-------------------- Cache Tag Storage (idx = 0 ... 3)
 #define FMC_TAGVDW1S(idx) (* ((volatile uint32_t *) (0x4001F000 + 0x110 + 0x4 * (idx))))
@@ -1100,7 +1100,7 @@
     static const uint32_t FMC_TAGVDW1S_valid = 1U << 0 ;
 
   // Field (width: 14 bits): 14-bit tag for cache entry
-    inline uint32_t FMC_TAGVDW1S_tag (const uint32_t inValue) { return (inValue & 16383) << 5 ; }
+    inline uint32_t FMC_TAGVDW1S_tag (const uint32_t inValue) { return (inValue & 16383U) << 5 ; }
 
 //-------------------- Cache Tag Storage (idx = 0 ... 3)
 #define FMC_TAGVDW2S(idx) (* ((volatile uint32_t *) (0x4001F000 + 0x120 + 0x4 * (idx))))
@@ -1109,7 +1109,7 @@
     static const uint32_t FMC_TAGVDW2S_valid = 1U << 0 ;
 
   // Field (width: 14 bits): 14-bit tag for cache entry
-    inline uint32_t FMC_TAGVDW2S_tag (const uint32_t inValue) { return (inValue & 16383) << 5 ; }
+    inline uint32_t FMC_TAGVDW2S_tag (const uint32_t inValue) { return (inValue & 16383U) << 5 ; }
 
 //-------------------- Cache Tag Storage (idx = 0 ... 3)
 #define FMC_TAGVDW3S(idx) (* ((volatile uint32_t *) (0x4001F000 + 0x130 + 0x4 * (idx))))
@@ -1118,7 +1118,7 @@
     static const uint32_t FMC_TAGVDW3S_valid = 1U << 0 ;
 
   // Field (width: 14 bits): 14-bit tag for cache entry
-    inline uint32_t FMC_TAGVDW3S_tag (const uint32_t inValue) { return (inValue & 16383) << 5 ; }
+    inline uint32_t FMC_TAGVDW3S_tag (const uint32_t inValue) { return (inValue & 16383U) << 5 ; }
 
 //-------------------- Cache Data Storage (upper word) (idx = 0 ... 3)
 #define FMC_DATAW0SU(idx) (* ((volatile uint32_t *) (0x4001F000 + 0x200 + 0x8 * (idx))))
@@ -1197,16 +1197,16 @@
 #define FTFE_FSEC (* ((const volatile uint8_t *) (0x40020000 + 0x2)))
 
   // Field (width: 2 bits): Flash Security
-    inline uint8_t FTFE_FSEC_SEC (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t FTFE_FSEC_SEC (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Freescale Failure Analysis Access Code
-    inline uint8_t FTFE_FSEC_FSLACC (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t FTFE_FSEC_FSLACC (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Mass Erase Enable Bits
-    inline uint8_t FTFE_FSEC_MEEN (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t FTFE_FSEC_MEEN (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Backdoor Key Security Enable
-    inline uint8_t FTFE_FSEC_KEYEN (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t FTFE_FSEC_KEYEN (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- Flash Option Register
 #define FTFE_FOPT (* ((const volatile uint8_t *) (0x40020000 + 0x3)))
@@ -1237,7 +1237,7 @@
 #define DMAMUX_CHCFG(idx) (* ((volatile uint8_t *) (0x40021000 + 0 + 0x1 * (idx))))
 
   // Field (width: 6 bits): DMA Channel Source (Slot)
-    inline uint8_t DMAMUX_CHCFG_SOURCE (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint8_t DMAMUX_CHCFG_SOURCE (const uint8_t inValue) { return (inValue & 63U) << 0 ; }
 
   // Boolean field: DMA Channel Trigger Enable
     static const uint8_t DMAMUX_CHCFG_TRIG = 1U << 6 ;
@@ -1253,10 +1253,10 @@
 #define CAN0_MCR (* ((volatile uint32_t *) (0x40024000 + 0)))
 
   // Field (width: 7 bits): Number Of The Last Message Buffer
-    inline uint32_t CAN0_MCR_MAXMB (const uint32_t inValue) { return (inValue & 127) << 0 ; }
+    inline uint32_t CAN0_MCR_MAXMB (const uint32_t inValue) { return (inValue & 127U) << 0 ; }
 
   // Field (width: 2 bits): ID Acceptance Mode
-    inline uint32_t CAN0_MCR_IDAM (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+    inline uint32_t CAN0_MCR_IDAM (const uint32_t inValue) { return (inValue & 3U) << 8 ; }
 
   // Boolean field: Abort Enable
     static const uint32_t CAN0_MCR_AEN = 1U << 12 ;
@@ -1313,7 +1313,7 @@
 #define CAN0_CTRL1 (* ((volatile uint32_t *) (0x40024000 + 0x4)))
 
   // Field (width: 3 bits): Propagation Segment
-    inline uint32_t CAN0_CTRL1_PROPSEG (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t CAN0_CTRL1_PROPSEG (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Boolean field: Listen-Only Mode
     static const uint32_t CAN0_CTRL1_LOM = 1U << 3 ;
@@ -1349,22 +1349,22 @@
     static const uint32_t CAN0_CTRL1_BOFFMSK = 1U << 15 ;
 
   // Field (width: 3 bits): Phase Segment 2
-    inline uint32_t CAN0_CTRL1_PSEG2 (const uint32_t inValue) { return (inValue & 7) << 16 ; }
+    inline uint32_t CAN0_CTRL1_PSEG2 (const uint32_t inValue) { return (inValue & 7U) << 16 ; }
 
   // Field (width: 3 bits): Phase Segment 1
-    inline uint32_t CAN0_CTRL1_PSEG1 (const uint32_t inValue) { return (inValue & 7) << 19 ; }
+    inline uint32_t CAN0_CTRL1_PSEG1 (const uint32_t inValue) { return (inValue & 7U) << 19 ; }
 
   // Field (width: 2 bits): Resync Jump Width
-    inline uint32_t CAN0_CTRL1_RJW (const uint32_t inValue) { return (inValue & 3) << 22 ; }
+    inline uint32_t CAN0_CTRL1_RJW (const uint32_t inValue) { return (inValue & 3U) << 22 ; }
 
   // Field (width: 8 bits): Prescaler Division Factor
-    inline uint32_t CAN0_CTRL1_PRESDIV (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_CTRL1_PRESDIV (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Free Running Timer
 #define CAN0_TIMER (* ((volatile uint32_t *) (0x40024000 + 0x8)))
 
   // Field (width: 16 bits): Timer Value
-    inline uint32_t CAN0_TIMER_TIMER (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_TIMER_TIMER (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Mailboxes Global Mask Register
 #define CAN0_RXMGMASK (* ((volatile uint32_t *) (0x40024000 + 0x10)))
@@ -1379,10 +1379,10 @@
 #define CAN0_ECR (* ((volatile uint32_t *) (0x40024000 + 0x1C)))
 
   // Field (width: 8 bits): Transmit Error Counter
-    inline uint32_t CAN0_ECR_TXERRCNT (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_ECR_TXERRCNT (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Receive Error Counter
-    inline uint32_t CAN0_ECR_RXERRCNT (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_ECR_RXERRCNT (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
 //-------------------- Error and Status 1 register
 #define CAN0_ESR1 (* ((volatile uint32_t *) (0x40024000 + 0x20)))
@@ -1400,7 +1400,7 @@
     static const uint32_t CAN0_ESR1_RX = 1U << 3 ;
 
   // Field (width: 2 bits): Fault Confinement State
-    inline uint32_t CAN0_ESR1_FLTCONF (const uint32_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint32_t CAN0_ESR1_FLTCONF (const uint32_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Boolean field: FlexCAN In Transmission
     static const uint32_t CAN0_ESR1_TX = 1U << 6 ;
@@ -1451,7 +1451,7 @@
     static const uint32_t CAN0_IFLAG1_BUF0I = 1U << 0 ;
 
   // Field (width: 4 bits): Buffer MB i Interrupt Or "reserved"
-    inline uint32_t CAN0_IFLAG1_BUF4TO1I (const uint32_t inValue) { return (inValue & 15) << 1 ; }
+    inline uint32_t CAN0_IFLAG1_BUF4TO1I (const uint32_t inValue) { return (inValue & 15U) << 1 ; }
 
   // Boolean field: Buffer MB5 Interrupt Or "Frames available in Rx FIFO"
     static const uint32_t CAN0_IFLAG1_BUF5I = 1U << 5 ;
@@ -1463,7 +1463,7 @@
     static const uint32_t CAN0_IFLAG1_BUF7I = 1U << 7 ;
 
   // Field (width: 24 bits): Buffer MBi Interrupt
-    inline uint32_t CAN0_IFLAG1_BUF31TO8I (const uint32_t inValue) { return (inValue & 16777215) << 8 ; }
+    inline uint32_t CAN0_IFLAG1_BUF31TO8I (const uint32_t inValue) { return (inValue & 16777215U) << 8 ; }
 
 //-------------------- Control 2 register
 #define CAN0_CTRL2 (* ((volatile uint32_t *) (0x40024000 + 0x34)))
@@ -1478,10 +1478,10 @@
     static const uint32_t CAN0_CTRL2_MRP = 1U << 18 ;
 
   // Field (width: 5 bits): Tx Arbitration Start Delay
-    inline uint32_t CAN0_CTRL2_TASD (const uint32_t inValue) { return (inValue & 31) << 19 ; }
+    inline uint32_t CAN0_CTRL2_TASD (const uint32_t inValue) { return (inValue & 31U) << 19 ; }
 
   // Field (width: 4 bits): Number Of Rx FIFO Filters
-    inline uint32_t CAN0_CTRL2_RFFN (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CTRL2_RFFN (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
   // Boolean field: Write-Access To Memory In Freeze Mode
     static const uint32_t CAN0_CTRL2_WRMFRZ = 1U << 28 ;
@@ -1496,16 +1496,16 @@
     static const uint32_t CAN0_ESR2_VPS = 1U << 14 ;
 
   // Field (width: 7 bits): Lowest Priority Tx Mailbox
-    inline uint32_t CAN0_ESR2_LPTM (const uint32_t inValue) { return (inValue & 127) << 16 ; }
+    inline uint32_t CAN0_ESR2_LPTM (const uint32_t inValue) { return (inValue & 127U) << 16 ; }
 
 //-------------------- CRC Register
 #define CAN0_CRCR (* ((const volatile uint32_t *) (0x40024000 + 0x44)))
 
   // Field (width: 15 bits): CRC Transmitted
-    inline uint32_t CAN0_CRCR_TXCRC (const uint32_t inValue) { return (inValue & 32767) << 0 ; }
+    inline uint32_t CAN0_CRCR_TXCRC (const uint32_t inValue) { return (inValue & 32767U) << 0 ; }
 
   // Field (width: 7 bits): CRC Mailbox
-    inline uint32_t CAN0_CRCR_MBCRC (const uint32_t inValue) { return (inValue & 127) << 16 ; }
+    inline uint32_t CAN0_CRCR_MBCRC (const uint32_t inValue) { return (inValue & 127U) << 16 ; }
 
 //-------------------- Rx FIFO Global Mask register
 #define CAN0_RXFGMASK (* ((volatile uint32_t *) (0x40024000 + 0x48)))
@@ -1514,16 +1514,16 @@
 #define CAN0_RXFIR (* ((const volatile uint32_t *) (0x40024000 + 0x4C)))
 
   // Field (width: 9 bits): Identifier Acceptance Filter Hit Indicator
-    inline uint32_t CAN0_RXFIR_IDHIT (const uint32_t inValue) { return (inValue & 511) << 0 ; }
+    inline uint32_t CAN0_RXFIR_IDHIT (const uint32_t inValue) { return (inValue & 511U) << 0 ; }
 
 //-------------------- Message Buffer 0 CS Register
 #define CAN0_CS0 (* ((volatile uint32_t *) (0x40024000 + 0x80)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS0_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS0_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS0_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS0_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS0_RTR = 1U << 20 ;
@@ -1535,58 +1535,58 @@
     static const uint32_t CAN0_CS0_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS0_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS0_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 0 ID Register
 #define CAN0_ID0 (* ((volatile uint32_t *) (0x40024000 + 0x84)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID0_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID0_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID0_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID0_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID0_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID0_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 0 WORD0 Register
 #define CAN0_WORD00 (* ((volatile uint32_t *) (0x40024000 + 0x88)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD00_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD00_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD00_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD00_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD00_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD00_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD00_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD00_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 0 WORD1 Register
 #define CAN0_WORD10 (* ((volatile uint32_t *) (0x40024000 + 0x8C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD10_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD10_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD10_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD10_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD10_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD10_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD10_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD10_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 1 CS Register
 #define CAN0_CS1 (* ((volatile uint32_t *) (0x40024000 + 0x90)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS1_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS1_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS1_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS1_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS1_RTR = 1U << 20 ;
@@ -1598,58 +1598,58 @@
     static const uint32_t CAN0_CS1_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS1_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS1_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 1 ID Register
 #define CAN0_ID1 (* ((volatile uint32_t *) (0x40024000 + 0x94)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID1_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID1_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID1_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID1_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID1_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID1_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 1 WORD0 Register
 #define CAN0_WORD01 (* ((volatile uint32_t *) (0x40024000 + 0x98)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD01_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD01_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD01_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD01_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD01_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD01_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD01_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD01_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 1 WORD1 Register
 #define CAN0_WORD11 (* ((volatile uint32_t *) (0x40024000 + 0x9C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD11_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD11_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD11_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD11_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD11_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD11_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD11_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD11_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 2 CS Register
 #define CAN0_CS2 (* ((volatile uint32_t *) (0x40024000 + 0xA0)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS2_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS2_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS2_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS2_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS2_RTR = 1U << 20 ;
@@ -1661,58 +1661,58 @@
     static const uint32_t CAN0_CS2_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS2_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS2_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 2 ID Register
 #define CAN0_ID2 (* ((volatile uint32_t *) (0x40024000 + 0xA4)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID2_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID2_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID2_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID2_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID2_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID2_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 2 WORD0 Register
 #define CAN0_WORD02 (* ((volatile uint32_t *) (0x40024000 + 0xA8)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD02_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD02_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD02_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD02_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD02_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD02_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD02_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD02_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 2 WORD1 Register
 #define CAN0_WORD12 (* ((volatile uint32_t *) (0x40024000 + 0xAC)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD12_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD12_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD12_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD12_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD12_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD12_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD12_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD12_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 3 CS Register
 #define CAN0_CS3 (* ((volatile uint32_t *) (0x40024000 + 0xB0)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS3_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS3_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS3_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS3_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS3_RTR = 1U << 20 ;
@@ -1724,58 +1724,58 @@
     static const uint32_t CAN0_CS3_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS3_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS3_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 3 ID Register
 #define CAN0_ID3 (* ((volatile uint32_t *) (0x40024000 + 0xB4)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID3_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID3_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID3_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID3_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID3_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID3_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 3 WORD0 Register
 #define CAN0_WORD03 (* ((volatile uint32_t *) (0x40024000 + 0xB8)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD03_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD03_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD03_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD03_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD03_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD03_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD03_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD03_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 3 WORD1 Register
 #define CAN0_WORD13 (* ((volatile uint32_t *) (0x40024000 + 0xBC)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD13_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD13_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD13_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD13_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD13_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD13_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD13_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD13_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 4 CS Register
 #define CAN0_CS4 (* ((volatile uint32_t *) (0x40024000 + 0xC0)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS4_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS4_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS4_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS4_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS4_RTR = 1U << 20 ;
@@ -1787,58 +1787,58 @@
     static const uint32_t CAN0_CS4_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS4_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS4_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 4 ID Register
 #define CAN0_ID4 (* ((volatile uint32_t *) (0x40024000 + 0xC4)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID4_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID4_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID4_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID4_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID4_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID4_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 4 WORD0 Register
 #define CAN0_WORD04 (* ((volatile uint32_t *) (0x40024000 + 0xC8)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD04_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD04_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD04_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD04_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD04_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD04_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD04_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD04_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 4 WORD1 Register
 #define CAN0_WORD14 (* ((volatile uint32_t *) (0x40024000 + 0xCC)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD14_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD14_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD14_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD14_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD14_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD14_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD14_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD14_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 5 CS Register
 #define CAN0_CS5 (* ((volatile uint32_t *) (0x40024000 + 0xD0)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS5_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS5_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS5_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS5_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS5_RTR = 1U << 20 ;
@@ -1850,58 +1850,58 @@
     static const uint32_t CAN0_CS5_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS5_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS5_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 5 ID Register
 #define CAN0_ID5 (* ((volatile uint32_t *) (0x40024000 + 0xD4)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID5_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID5_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID5_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID5_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID5_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID5_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 5 WORD0 Register
 #define CAN0_WORD05 (* ((volatile uint32_t *) (0x40024000 + 0xD8)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD05_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD05_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD05_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD05_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD05_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD05_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD05_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD05_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 5 WORD1 Register
 #define CAN0_WORD15 (* ((volatile uint32_t *) (0x40024000 + 0xDC)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD15_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD15_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD15_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD15_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD15_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD15_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD15_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD15_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 6 CS Register
 #define CAN0_CS6 (* ((volatile uint32_t *) (0x40024000 + 0xE0)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS6_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS6_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS6_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS6_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS6_RTR = 1U << 20 ;
@@ -1913,58 +1913,58 @@
     static const uint32_t CAN0_CS6_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS6_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS6_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 6 ID Register
 #define CAN0_ID6 (* ((volatile uint32_t *) (0x40024000 + 0xE4)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID6_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID6_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID6_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID6_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID6_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID6_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 6 WORD0 Register
 #define CAN0_WORD06 (* ((volatile uint32_t *) (0x40024000 + 0xE8)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD06_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD06_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD06_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD06_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD06_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD06_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD06_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD06_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 6 WORD1 Register
 #define CAN0_WORD16 (* ((volatile uint32_t *) (0x40024000 + 0xEC)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD16_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD16_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD16_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD16_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD16_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD16_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD16_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD16_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 7 CS Register
 #define CAN0_CS7 (* ((volatile uint32_t *) (0x40024000 + 0xF0)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS7_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS7_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS7_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS7_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS7_RTR = 1U << 20 ;
@@ -1976,58 +1976,58 @@
     static const uint32_t CAN0_CS7_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS7_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS7_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 7 ID Register
 #define CAN0_ID7 (* ((volatile uint32_t *) (0x40024000 + 0xF4)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID7_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID7_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID7_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID7_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID7_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID7_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 7 WORD0 Register
 #define CAN0_WORD07 (* ((volatile uint32_t *) (0x40024000 + 0xF8)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD07_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD07_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD07_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD07_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD07_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD07_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD07_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD07_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 7 WORD1 Register
 #define CAN0_WORD17 (* ((volatile uint32_t *) (0x40024000 + 0xFC)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD17_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD17_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD17_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD17_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD17_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD17_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD17_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD17_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 8 CS Register
 #define CAN0_CS8 (* ((volatile uint32_t *) (0x40024000 + 0x100)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS8_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS8_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS8_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS8_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS8_RTR = 1U << 20 ;
@@ -2039,58 +2039,58 @@
     static const uint32_t CAN0_CS8_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS8_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS8_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 8 ID Register
 #define CAN0_ID8 (* ((volatile uint32_t *) (0x40024000 + 0x104)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID8_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID8_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID8_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID8_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID8_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID8_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 8 WORD0 Register
 #define CAN0_WORD08 (* ((volatile uint32_t *) (0x40024000 + 0x108)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD08_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD08_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD08_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD08_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD08_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD08_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD08_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD08_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 8 WORD1 Register
 #define CAN0_WORD18 (* ((volatile uint32_t *) (0x40024000 + 0x10C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD18_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD18_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD18_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD18_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD18_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD18_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD18_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD18_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 9 CS Register
 #define CAN0_CS9 (* ((volatile uint32_t *) (0x40024000 + 0x110)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS9_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS9_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS9_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS9_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS9_RTR = 1U << 20 ;
@@ -2102,58 +2102,58 @@
     static const uint32_t CAN0_CS9_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS9_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS9_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 9 ID Register
 #define CAN0_ID9 (* ((volatile uint32_t *) (0x40024000 + 0x114)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID9_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID9_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID9_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID9_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID9_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID9_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 9 WORD0 Register
 #define CAN0_WORD09 (* ((volatile uint32_t *) (0x40024000 + 0x118)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD09_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD09_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD09_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD09_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD09_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD09_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD09_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD09_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 9 WORD1 Register
 #define CAN0_WORD19 (* ((volatile uint32_t *) (0x40024000 + 0x11C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD19_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD19_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD19_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD19_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD19_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD19_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD19_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD19_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 10 CS Register
 #define CAN0_CS10 (* ((volatile uint32_t *) (0x40024000 + 0x120)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS10_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS10_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS10_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS10_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS10_RTR = 1U << 20 ;
@@ -2165,58 +2165,58 @@
     static const uint32_t CAN0_CS10_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS10_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS10_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 10 ID Register
 #define CAN0_ID10 (* ((volatile uint32_t *) (0x40024000 + 0x124)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID10_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID10_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID10_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID10_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID10_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID10_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 10 WORD0 Register
 #define CAN0_WORD010 (* ((volatile uint32_t *) (0x40024000 + 0x128)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD010_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD010_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD010_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD010_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD010_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD010_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD010_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD010_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 10 WORD1 Register
 #define CAN0_WORD110 (* ((volatile uint32_t *) (0x40024000 + 0x12C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD110_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD110_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD110_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD110_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD110_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD110_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD110_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD110_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 11 CS Register
 #define CAN0_CS11 (* ((volatile uint32_t *) (0x40024000 + 0x130)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS11_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS11_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS11_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS11_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS11_RTR = 1U << 20 ;
@@ -2228,58 +2228,58 @@
     static const uint32_t CAN0_CS11_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS11_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS11_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 11 ID Register
 #define CAN0_ID11 (* ((volatile uint32_t *) (0x40024000 + 0x134)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID11_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID11_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID11_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID11_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID11_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID11_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 11 WORD0 Register
 #define CAN0_WORD011 (* ((volatile uint32_t *) (0x40024000 + 0x138)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD011_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD011_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD011_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD011_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD011_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD011_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD011_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD011_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 11 WORD1 Register
 #define CAN0_WORD111 (* ((volatile uint32_t *) (0x40024000 + 0x13C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD111_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD111_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD111_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD111_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD111_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD111_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD111_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD111_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 12 CS Register
 #define CAN0_CS12 (* ((volatile uint32_t *) (0x40024000 + 0x140)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS12_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS12_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS12_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS12_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS12_RTR = 1U << 20 ;
@@ -2291,58 +2291,58 @@
     static const uint32_t CAN0_CS12_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS12_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS12_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 12 ID Register
 #define CAN0_ID12 (* ((volatile uint32_t *) (0x40024000 + 0x144)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID12_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID12_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID12_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID12_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID12_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID12_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 12 WORD0 Register
 #define CAN0_WORD012 (* ((volatile uint32_t *) (0x40024000 + 0x148)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD012_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD012_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD012_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD012_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD012_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD012_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD012_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD012_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 12 WORD1 Register
 #define CAN0_WORD112 (* ((volatile uint32_t *) (0x40024000 + 0x14C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD112_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD112_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD112_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD112_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD112_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD112_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD112_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD112_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 13 CS Register
 #define CAN0_CS13 (* ((volatile uint32_t *) (0x40024000 + 0x150)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS13_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS13_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS13_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS13_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS13_RTR = 1U << 20 ;
@@ -2354,58 +2354,58 @@
     static const uint32_t CAN0_CS13_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS13_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS13_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 13 ID Register
 #define CAN0_ID13 (* ((volatile uint32_t *) (0x40024000 + 0x154)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID13_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID13_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID13_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID13_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID13_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID13_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 13 WORD0 Register
 #define CAN0_WORD013 (* ((volatile uint32_t *) (0x40024000 + 0x158)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD013_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD013_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD013_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD013_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD013_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD013_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD013_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD013_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 13 WORD1 Register
 #define CAN0_WORD113 (* ((volatile uint32_t *) (0x40024000 + 0x15C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD113_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD113_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD113_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD113_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD113_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD113_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD113_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD113_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 14 CS Register
 #define CAN0_CS14 (* ((volatile uint32_t *) (0x40024000 + 0x160)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS14_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS14_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS14_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS14_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS14_RTR = 1U << 20 ;
@@ -2417,58 +2417,58 @@
     static const uint32_t CAN0_CS14_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS14_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS14_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 14 ID Register
 #define CAN0_ID14 (* ((volatile uint32_t *) (0x40024000 + 0x164)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID14_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID14_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID14_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID14_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID14_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID14_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 14 WORD0 Register
 #define CAN0_WORD014 (* ((volatile uint32_t *) (0x40024000 + 0x168)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD014_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD014_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD014_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD014_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD014_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD014_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD014_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD014_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 14 WORD1 Register
 #define CAN0_WORD114 (* ((volatile uint32_t *) (0x40024000 + 0x16C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD114_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD114_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD114_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD114_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD114_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD114_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD114_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD114_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 15 CS Register
 #define CAN0_CS15 (* ((volatile uint32_t *) (0x40024000 + 0x170)))
 
   // Field (width: 16 bits): Free-Running Counter Time stamp. This 16-bit field is a copy of the Free-Running Timer, captured for Tx and Rx frames at the time when the beginning of the Identifier field appears on the CAN bus.
-    inline uint32_t CAN0_CS15_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CAN0_CS15_TIME_STAMP (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 4 bits): Length of the data to be stored/transmitted.
-    inline uint32_t CAN0_CS15_DLC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t CAN0_CS15_DLC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Remote Transmission Request. One/zero for remote/data frame.
     static const uint32_t CAN0_CS15_RTR = 1U << 20 ;
@@ -2480,49 +2480,49 @@
     static const uint32_t CAN0_CS15_SRR = 1U << 22 ;
 
   // Field (width: 4 bits): Reserved
-    inline uint32_t CAN0_CS15_CODE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t CAN0_CS15_CODE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
 //-------------------- Message Buffer 15 ID Register
 #define CAN0_ID15 (* ((volatile uint32_t *) (0x40024000 + 0x174)))
 
   // Field (width: 18 bits): Contains extended (LOW word) identifier of message buffer.
-    inline uint32_t CAN0_ID15_EXT (const uint32_t inValue) { return (inValue & 262143) << 0 ; }
+    inline uint32_t CAN0_ID15_EXT (const uint32_t inValue) { return (inValue & 262143U) << 0 ; }
 
   // Field (width: 11 bits): Contains standard/extended (HIGH word) identifier of message buffer.
-    inline uint32_t CAN0_ID15_STD (const uint32_t inValue) { return (inValue & 2047) << 18 ; }
+    inline uint32_t CAN0_ID15_STD (const uint32_t inValue) { return (inValue & 2047U) << 18 ; }
 
   // Field (width: 3 bits): Local priority. This 3-bit fieldis only used when LPRIO_EN bit is set in MCR and it only makes sense for Tx buffers. These bits are not transmitted. They are appended to the regular ID to define the transmission priority.
-    inline uint32_t CAN0_ID15_PRIO (const uint32_t inValue) { return (inValue & 7) << 29 ; }
+    inline uint32_t CAN0_ID15_PRIO (const uint32_t inValue) { return (inValue & 7U) << 29 ; }
 
 //-------------------- Message Buffer 15 WORD0 Register
 #define CAN0_WORD015 (* ((volatile uint32_t *) (0x40024000 + 0x178)))
 
   // Field (width: 8 bits): Data byte 3 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD015_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD015_DATA_BYTE_3 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 2 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD015_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD015_DATA_BYTE_2 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 1 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD015_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD015_DATA_BYTE_1 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 0 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD015_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD015_DATA_BYTE_0 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Message Buffer 15 WORD1 Register
 #define CAN0_WORD115 (* ((volatile uint32_t *) (0x40024000 + 0x17C)))
 
   // Field (width: 8 bits): Data byte 7 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD115_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CAN0_WORD115_DATA_BYTE_7 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Data byte 6 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD115_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CAN0_WORD115_DATA_BYTE_6 (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Data byte 5 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD115_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CAN0_WORD115_DATA_BYTE_5 (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Data byte 4 of Rx/Tx frame.
-    inline uint32_t CAN0_WORD115_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CAN0_WORD115_DATA_BYTE_4 (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Rx Individual Mask Registers (idx = 0 ... 15)
 #define CAN0_RXIMR(idx) (* ((volatile uint32_t *) (0x40024000 + 0x880 + 0x4 * (idx))))
@@ -2568,10 +2568,10 @@
     static const uint32_t RNG_SR_SLP = 1U << 4 ;
 
   // Field (width: 8 bits): Output Register Level
-    inline uint32_t RNG_SR_OREG_LVL (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t RNG_SR_OREG_LVL (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Output Register Size
-    inline uint32_t RNG_SR_OREG_SIZE (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t RNG_SR_OREG_SIZE (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
 //-------------------- RNGA Entropy Register
 #define RNG_ER (* ((volatile uint32_t *) (0x40029000 + 0x8)))
@@ -2644,13 +2644,13 @@
 #define I2S0_TCR1 (* ((volatile uint32_t *) (0x4002F000 + 0x4)))
 
   // Field (width: 3 bits): Transmit FIFO Watermark
-    inline uint32_t I2S0_TCR1_TFW (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t I2S0_TCR1_TFW (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
 //-------------------- SAI Transmit Configuration 2 Register
 #define I2S0_TCR2 (* ((volatile uint32_t *) (0x4002F000 + 0x8)))
 
   // Field (width: 8 bits): Bit Clock Divide
-    inline uint32_t I2S0_TCR2_DIV (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t I2S0_TCR2_DIV (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Boolean field: Bit Clock Direction
     static const uint32_t I2S0_TCR2_BCD = 1U << 24 ;
@@ -2659,7 +2659,7 @@
     static const uint32_t I2S0_TCR2_BCP = 1U << 25 ;
 
   // Field (width: 2 bits): MCLK Select
-    inline uint32_t I2S0_TCR2_MSEL (const uint32_t inValue) { return (inValue & 3) << 26 ; }
+    inline uint32_t I2S0_TCR2_MSEL (const uint32_t inValue) { return (inValue & 3U) << 26 ; }
 
   // Boolean field: Bit Clock Input
     static const uint32_t I2S0_TCR2_BCI = 1U << 28 ;
@@ -2668,16 +2668,16 @@
     static const uint32_t I2S0_TCR2_BCS = 1U << 29 ;
 
   // Field (width: 2 bits): Synchronous Mode
-    inline uint32_t I2S0_TCR2_SYNC (const uint32_t inValue) { return (inValue & 3) << 30 ; }
+    inline uint32_t I2S0_TCR2_SYNC (const uint32_t inValue) { return (inValue & 3U) << 30 ; }
 
 //-------------------- SAI Transmit Configuration 3 Register
 #define I2S0_TCR3 (* ((volatile uint32_t *) (0x4002F000 + 0xC)))
 
   // Field (width: 5 bits): Word Flag Configuration
-    inline uint32_t I2S0_TCR3_WDFL (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint32_t I2S0_TCR3_WDFL (const uint32_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Field (width: 2 bits): Transmit Channel Enable
-    inline uint32_t I2S0_TCR3_TCE (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t I2S0_TCR3_TCE (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
 //-------------------- SAI Transmit Configuration 4 Register
 #define I2S0_TCR4 (* ((volatile uint32_t *) (0x4002F000 + 0x10)))
@@ -2695,22 +2695,22 @@
     static const uint32_t I2S0_TCR4_MF = 1U << 4 ;
 
   // Field (width: 5 bits): Sync Width
-    inline uint32_t I2S0_TCR4_SYWD (const uint32_t inValue) { return (inValue & 31) << 8 ; }
+    inline uint32_t I2S0_TCR4_SYWD (const uint32_t inValue) { return (inValue & 31U) << 8 ; }
 
   // Field (width: 5 bits): Frame size
-    inline uint32_t I2S0_TCR4_FRSZ (const uint32_t inValue) { return (inValue & 31) << 16 ; }
+    inline uint32_t I2S0_TCR4_FRSZ (const uint32_t inValue) { return (inValue & 31U) << 16 ; }
 
 //-------------------- SAI Transmit Configuration 5 Register
 #define I2S0_TCR5 (* ((volatile uint32_t *) (0x4002F000 + 0x14)))
 
   // Field (width: 5 bits): First Bit Shifted
-    inline uint32_t I2S0_TCR5_FBT (const uint32_t inValue) { return (inValue & 31) << 8 ; }
+    inline uint32_t I2S0_TCR5_FBT (const uint32_t inValue) { return (inValue & 31U) << 8 ; }
 
   // Field (width: 5 bits): Word 0 Width
-    inline uint32_t I2S0_TCR5_W0W (const uint32_t inValue) { return (inValue & 31) << 16 ; }
+    inline uint32_t I2S0_TCR5_W0W (const uint32_t inValue) { return (inValue & 31U) << 16 ; }
 
   // Field (width: 5 bits): Word N Width
-    inline uint32_t I2S0_TCR5_WNW (const uint32_t inValue) { return (inValue & 31) << 24 ; }
+    inline uint32_t I2S0_TCR5_WNW (const uint32_t inValue) { return (inValue & 31U) << 24 ; }
 
 //-------------------- SAI Transmit Data Register (idx = 0 ... 1)
 #define I2S0_TDR(idx) (* ((volatile uint32_t *) (0x4002F000 + 0x20 + 0x4 * (idx))))
@@ -2719,10 +2719,10 @@
 #define I2S0_TFR(idx) (* ((const volatile uint32_t *) (0x4002F000 + 0x40 + 0x4 * (idx))))
 
   // Field (width: 4 bits): Read FIFO Pointer
-    inline uint32_t I2S0_TFR_RFP (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t I2S0_TFR_RFP (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): Write FIFO Pointer
-    inline uint32_t I2S0_TFR_WFP (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t I2S0_TFR_WFP (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
 //-------------------- SAI Transmit Mask Register
 #define I2S0_TMR (* ((volatile uint32_t *) (0x4002F000 + 0x60)))
@@ -2788,13 +2788,13 @@
 #define I2S0_RCR1 (* ((volatile uint32_t *) (0x4002F000 + 0x84)))
 
   // Field (width: 3 bits): Receive FIFO Watermark
-    inline uint32_t I2S0_RCR1_RFW (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t I2S0_RCR1_RFW (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
 //-------------------- SAI Receive Configuration 2 Register
 #define I2S0_RCR2 (* ((volatile uint32_t *) (0x4002F000 + 0x88)))
 
   // Field (width: 8 bits): Bit Clock Divide
-    inline uint32_t I2S0_RCR2_DIV (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t I2S0_RCR2_DIV (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Boolean field: Bit Clock Direction
     static const uint32_t I2S0_RCR2_BCD = 1U << 24 ;
@@ -2803,7 +2803,7 @@
     static const uint32_t I2S0_RCR2_BCP = 1U << 25 ;
 
   // Field (width: 2 bits): MCLK Select
-    inline uint32_t I2S0_RCR2_MSEL (const uint32_t inValue) { return (inValue & 3) << 26 ; }
+    inline uint32_t I2S0_RCR2_MSEL (const uint32_t inValue) { return (inValue & 3U) << 26 ; }
 
   // Boolean field: Bit Clock Input
     static const uint32_t I2S0_RCR2_BCI = 1U << 28 ;
@@ -2812,16 +2812,16 @@
     static const uint32_t I2S0_RCR2_BCS = 1U << 29 ;
 
   // Field (width: 2 bits): Synchronous Mode
-    inline uint32_t I2S0_RCR2_SYNC (const uint32_t inValue) { return (inValue & 3) << 30 ; }
+    inline uint32_t I2S0_RCR2_SYNC (const uint32_t inValue) { return (inValue & 3U) << 30 ; }
 
 //-------------------- SAI Receive Configuration 3 Register
 #define I2S0_RCR3 (* ((volatile uint32_t *) (0x4002F000 + 0x8C)))
 
   // Field (width: 5 bits): Word Flag Configuration
-    inline uint32_t I2S0_RCR3_WDFL (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint32_t I2S0_RCR3_WDFL (const uint32_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Field (width: 2 bits): Receive Channel Enable
-    inline uint32_t I2S0_RCR3_RCE (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t I2S0_RCR3_RCE (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
 //-------------------- SAI Receive Configuration 4 Register
 #define I2S0_RCR4 (* ((volatile uint32_t *) (0x4002F000 + 0x90)))
@@ -2839,22 +2839,22 @@
     static const uint32_t I2S0_RCR4_MF = 1U << 4 ;
 
   // Field (width: 5 bits): Sync Width
-    inline uint32_t I2S0_RCR4_SYWD (const uint32_t inValue) { return (inValue & 31) << 8 ; }
+    inline uint32_t I2S0_RCR4_SYWD (const uint32_t inValue) { return (inValue & 31U) << 8 ; }
 
   // Field (width: 5 bits): Frame Size
-    inline uint32_t I2S0_RCR4_FRSZ (const uint32_t inValue) { return (inValue & 31) << 16 ; }
+    inline uint32_t I2S0_RCR4_FRSZ (const uint32_t inValue) { return (inValue & 31U) << 16 ; }
 
 //-------------------- SAI Receive Configuration 5 Register
 #define I2S0_RCR5 (* ((volatile uint32_t *) (0x4002F000 + 0x94)))
 
   // Field (width: 5 bits): First Bit Shifted
-    inline uint32_t I2S0_RCR5_FBT (const uint32_t inValue) { return (inValue & 31) << 8 ; }
+    inline uint32_t I2S0_RCR5_FBT (const uint32_t inValue) { return (inValue & 31U) << 8 ; }
 
   // Field (width: 5 bits): Word 0 Width
-    inline uint32_t I2S0_RCR5_W0W (const uint32_t inValue) { return (inValue & 31) << 16 ; }
+    inline uint32_t I2S0_RCR5_W0W (const uint32_t inValue) { return (inValue & 31U) << 16 ; }
 
   // Field (width: 5 bits): Word N Width
-    inline uint32_t I2S0_RCR5_WNW (const uint32_t inValue) { return (inValue & 31) << 24 ; }
+    inline uint32_t I2S0_RCR5_WNW (const uint32_t inValue) { return (inValue & 31U) << 24 ; }
 
 //-------------------- SAI Receive Data Register (idx = 0 ... 1)
 #define I2S0_RDR(idx) (* ((const volatile uint32_t *) (0x4002F000 + 0xA0 + 0x4 * (idx))))
@@ -2863,10 +2863,10 @@
 #define I2S0_RFR(idx) (* ((const volatile uint32_t *) (0x4002F000 + 0xC0 + 0x4 * (idx))))
 
   // Field (width: 4 bits): Read FIFO Pointer
-    inline uint32_t I2S0_RFR_RFP (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t I2S0_RFR_RFP (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): Write FIFO Pointer
-    inline uint32_t I2S0_RFR_WFP (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t I2S0_RFR_WFP (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
 //-------------------- SAI Receive Mask Register
 #define I2S0_RMR (* ((volatile uint32_t *) (0x4002F000 + 0xE0)))
@@ -2875,7 +2875,7 @@
 #define I2S0_MCR (* ((volatile uint32_t *) (0x4002F000 + 0x100)))
 
   // Field (width: 2 bits): MCLK Input Clock Select
-    inline uint32_t I2S0_MCR_MICS (const uint32_t inValue) { return (inValue & 3) << 24 ; }
+    inline uint32_t I2S0_MCR_MICS (const uint32_t inValue) { return (inValue & 3U) << 24 ; }
 
   // Boolean field: MCLK Output Enable
     static const uint32_t I2S0_MCR_MOE = 1U << 30 ;
@@ -2887,10 +2887,10 @@
 #define I2S0_MDR (* ((volatile uint32_t *) (0x4002F000 + 0x104)))
 
   // Field (width: 12 bits): MCLK Divide
-    inline uint32_t I2S0_MDR_DIVIDE (const uint32_t inValue) { return (inValue & 4095) << 0 ; }
+    inline uint32_t I2S0_MDR_DIVIDE (const uint32_t inValue) { return (inValue & 4095U) << 0 ; }
 
   // Field (width: 8 bits): MCLK Fraction
-    inline uint32_t I2S0_MDR_FRACT (const uint32_t inValue) { return (inValue & 255) << 12 ; }
+    inline uint32_t I2S0_MDR_FRACT (const uint32_t inValue) { return (inValue & 255U) << 12 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral CRC
@@ -2900,16 +2900,16 @@
 #define CRC_DATA (* ((volatile uint32_t *) (0x40032000 + 0)))
 
   // Field (width: 8 bits): CRC Low Lower Byte
-    inline uint32_t CRC_DATA_LL (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t CRC_DATA_LL (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): CRC Low Upper Byte
-    inline uint32_t CRC_DATA_LU (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t CRC_DATA_LU (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): CRC High Lower Byte
-    inline uint32_t CRC_DATA_HL (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t CRC_DATA_HL (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): CRC High Upper Byte
-    inline uint32_t CRC_DATA_HU (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t CRC_DATA_HU (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- CRC_DATAL register.
 #define CRC_DATAL (* ((volatile uint16_t *) (0x40032000 + 0)))
@@ -2933,10 +2933,10 @@
 #define CRC_GPOLY (* ((volatile uint32_t *) (0x40032000 + 0x4)))
 
   // Field (width: 16 bits): Low Polynominal Half-word
-    inline uint32_t CRC_GPOLY_LOW (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t CRC_GPOLY_LOW (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): High Polynominal Half-word
-    inline uint32_t CRC_GPOLY_HIGH (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t CRC_GPOLY_HIGH (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- CRC_GPOLYL register.
 #define CRC_GPOLYL (* ((volatile uint16_t *) (0x40032000 + 0x4)))
@@ -2969,10 +2969,10 @@
     static const uint32_t CRC_CTRL_FXOR = 1U << 26 ;
 
   // Field (width: 2 bits): Type Of Transpose For Read
-    inline uint32_t CRC_CTRL_TOTR (const uint32_t inValue) { return (inValue & 3) << 28 ; }
+    inline uint32_t CRC_CTRL_TOTR (const uint32_t inValue) { return (inValue & 3U) << 28 ; }
 
   // Field (width: 2 bits): Type Of Transpose For Writes
-    inline uint32_t CRC_CTRL_TOT (const uint32_t inValue) { return (inValue & 3) << 30 ; }
+    inline uint32_t CRC_CTRL_TOT (const uint32_t inValue) { return (inValue & 3U) << 30 ; }
 
 //-------------------- CRC_CTRLHU register.
 #define CRC_CTRLHU (* ((volatile uint8_t *) (0x40032000 + 0xB)))
@@ -2987,10 +2987,10 @@
     static const uint8_t CRC_CTRLHU_FXOR = 1U << 2 ;
 
   // Field (width: 2 bits): no description available
-    inline uint8_t CRC_CTRLHU_TOTR (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t CRC_CTRLHU_TOTR (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): no description available
-    inline uint8_t CRC_CTRLHU_TOT (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t CRC_CTRLHU_TOT (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral USBDCD
@@ -3024,16 +3024,16 @@
     static const uint32_t USBDCD_CLOCK_CLOCK_UNIT = 1U << 0 ;
 
   // Field (width: 10 bits): Numerical Value of Clock Speed in Binary
-    inline uint32_t USBDCD_CLOCK_CLOCK_SPEED (const uint32_t inValue) { return (inValue & 1023) << 2 ; }
+    inline uint32_t USBDCD_CLOCK_CLOCK_SPEED (const uint32_t inValue) { return (inValue & 1023U) << 2 ; }
 
 //-------------------- Status register
 #define USBDCD_STATUS (* ((const volatile uint32_t *) (0x40035000 + 0x8)))
 
   // Field (width: 2 bits): Charger Detection Sequence Results
-    inline uint32_t USBDCD_STATUS_SEQ_RES (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t USBDCD_STATUS_SEQ_RES (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
   // Field (width: 2 bits): Charger Detection Sequence Status
-    inline uint32_t USBDCD_STATUS_SEQ_STAT (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+    inline uint32_t USBDCD_STATUS_SEQ_STAT (const uint32_t inValue) { return (inValue & 3U) << 18 ; }
 
   // Boolean field: Error Flag
     static const uint32_t USBDCD_STATUS_ERR = 1U << 20 ;
@@ -3048,37 +3048,37 @@
 #define USBDCD_TIMER0 (* ((volatile uint32_t *) (0x40035000 + 0x10)))
 
   // Field (width: 12 bits): Unit Connection Timer Elapse (in ms)
-    inline uint32_t USBDCD_TIMER0_TUNITCON (const uint32_t inValue) { return (inValue & 4095) << 0 ; }
+    inline uint32_t USBDCD_TIMER0_TUNITCON (const uint32_t inValue) { return (inValue & 4095U) << 0 ; }
 
   // Field (width: 10 bits): Sequence Initiation Time
-    inline uint32_t USBDCD_TIMER0_TSEQ_INIT (const uint32_t inValue) { return (inValue & 1023) << 16 ; }
+    inline uint32_t USBDCD_TIMER0_TSEQ_INIT (const uint32_t inValue) { return (inValue & 1023U) << 16 ; }
 
 //-------------------- TIMER1 register
 #define USBDCD_TIMER1 (* ((volatile uint32_t *) (0x40035000 + 0x14)))
 
   // Field (width: 10 bits): Time Period Comparator Enabled
-    inline uint32_t USBDCD_TIMER1_TVDPSRC_ON (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+    inline uint32_t USBDCD_TIMER1_TVDPSRC_ON (const uint32_t inValue) { return (inValue & 1023U) << 0 ; }
 
   // Field (width: 10 bits): Time Period to Debounce D+ Signal
-    inline uint32_t USBDCD_TIMER1_TDCD_DBNC (const uint32_t inValue) { return (inValue & 1023) << 16 ; }
+    inline uint32_t USBDCD_TIMER1_TDCD_DBNC (const uint32_t inValue) { return (inValue & 1023U) << 16 ; }
 
 //-------------------- TIMER2_BC11 register
 #define USBDCD_TIMER2_BC11 (* ((volatile uint32_t *) (0x40035000 + 0x18)))
 
   // Field (width: 4 bits): Time Before Check of D- Line
-    inline uint32_t USBDCD_TIMER2_BC11_CHECK_DM (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t USBDCD_TIMER2_BC11_CHECK_DM (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 10 bits): Time Period Before Enabling D+ Pullup
-    inline uint32_t USBDCD_TIMER2_BC11_TVDPSRC_CON (const uint32_t inValue) { return (inValue & 1023) << 16 ; }
+    inline uint32_t USBDCD_TIMER2_BC11_TVDPSRC_CON (const uint32_t inValue) { return (inValue & 1023U) << 16 ; }
 
 //-------------------- TIMER2_BC12 register
 #define USBDCD_TIMER2_BC12 (* ((volatile uint32_t *) (0x40035000 + 0x18)))
 
   // Field (width: 10 bits): Sets the amount of time (in ms) that the module enables the VDM_SRC. Valid values are 0-40ms.
-    inline uint32_t USBDCD_TIMER2_BC12_TVDMSRC_ON (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+    inline uint32_t USBDCD_TIMER2_BC12_TVDMSRC_ON (const uint32_t inValue) { return (inValue & 1023U) << 0 ; }
 
   // Field (width: 10 bits): Sets the amount of time (in ms) that the module waits after primary detection before start to secondary detection
-    inline uint32_t USBDCD_TIMER2_BC12_TWAIT_AFTER_PRD (const uint32_t inValue) { return (inValue & 1023) << 16 ; }
+    inline uint32_t USBDCD_TIMER2_BC12_TWAIT_AFTER_PRD (const uint32_t inValue) { return (inValue & 1023U) << 16 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral PDB0
@@ -3094,7 +3094,7 @@
     static const uint32_t PDB0_SC_CONT = 1U << 1 ;
 
   // Field (width: 2 bits): Multiplication Factor Select for Prescaler
-    inline uint32_t PDB0_SC_MULT (const uint32_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint32_t PDB0_SC_MULT (const uint32_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Boolean field: PDB Interrupt Enable
     static const uint32_t PDB0_SC_PDBIE = 1U << 5 ;
@@ -3106,10 +3106,10 @@
     static const uint32_t PDB0_SC_PDBEN = 1U << 7 ;
 
   // Field (width: 4 bits): Trigger Input Source Select
-    inline uint32_t PDB0_SC_TRGSEL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t PDB0_SC_TRGSEL (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Field (width: 3 bits): Prescaler Divider Select
-    inline uint32_t PDB0_SC_PRESCALER (const uint32_t inValue) { return (inValue & 7) << 12 ; }
+    inline uint32_t PDB0_SC_PRESCALER (const uint32_t inValue) { return (inValue & 7U) << 12 ; }
 
   // Boolean field: DMA Enable
     static const uint32_t PDB0_SC_DMAEN = 1U << 15 ;
@@ -3121,58 +3121,58 @@
     static const uint32_t PDB0_SC_PDBEIE = 1U << 17 ;
 
   // Field (width: 2 bits): Load Mode Select
-    inline uint32_t PDB0_SC_LDMOD (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+    inline uint32_t PDB0_SC_LDMOD (const uint32_t inValue) { return (inValue & 3U) << 18 ; }
 
 //-------------------- Modulus register
 #define PDB0_MOD (* ((volatile uint32_t *) (0x40036000 + 0x4)))
 
   // Field (width: 16 bits): PDB Modulus
-    inline uint32_t PDB0_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_MOD_MOD (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Counter register
 #define PDB0_CNT (* ((const volatile uint32_t *) (0x40036000 + 0x8)))
 
   // Field (width: 16 bits): PDB Counter
-    inline uint32_t PDB0_CNT_CNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_CNT_CNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Interrupt Delay register
 #define PDB0_IDLY (* ((volatile uint32_t *) (0x40036000 + 0xC)))
 
   // Field (width: 16 bits): PDB Interrupt Delay
-    inline uint32_t PDB0_IDLY_IDLY (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_IDLY_IDLY (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Channel n Control register 1 (idx = 0 ... 1)
 #define PDB0_CHC1(idx) (* ((volatile uint32_t *) (0x40036000 + 0x10 + 0x28 * (idx))))
 
   // Field (width: 8 bits): PDB Channel Pre-Trigger Enable
-    inline uint32_t PDB0_CHC1_EN (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t PDB0_CHC1_EN (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): PDB Channel Pre-Trigger Output Select
-    inline uint32_t PDB0_CHC1_TOS (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t PDB0_CHC1_TOS (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): PDB Channel Pre-Trigger Back-to-Back Operation Enable
-    inline uint32_t PDB0_CHC1_BB (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t PDB0_CHC1_BB (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
 //-------------------- Channel n Status register (idx = 0 ... 1)
 #define PDB0_CHS(idx) (* ((volatile uint32_t *) (0x40036000 + 0x14 + 0x28 * (idx))))
 
   // Field (width: 8 bits): PDB Channel Sequence Error Flags
-    inline uint32_t PDB0_CHS_ERR (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t PDB0_CHS_ERR (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): PDB Channel Flags
-    inline uint32_t PDB0_CHS_CF (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t PDB0_CHS_CF (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
 //-------------------- Channel n Delay 0 register (idx = 0 ... 1)
 #define PDB0_CHDLY0(idx) (* ((volatile uint32_t *) (0x40036000 + 0x18 + 0x28 * (idx))))
 
   // Field (width: 16 bits): PDB Channel Delay
-    inline uint32_t PDB0_CHDLY0_DLY (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_CHDLY0_DLY (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Channel n Delay 1 register (idx = 0 ... 1)
 #define PDB0_CHDLY1(idx) (* ((volatile uint32_t *) (0x40036000 + 0x1C + 0x28 * (idx))))
 
   // Field (width: 16 bits): PDB Channel Delay
-    inline uint32_t PDB0_CHDLY1_DLY (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_CHDLY1_DLY (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- DAC Interval Trigger n Control register (idx = 0 ... 1)
 #define PDB0_DACINTC(idx) (* ((volatile uint32_t *) (0x40036000 + 0x150 + 0x8 * (idx))))
@@ -3187,22 +3187,22 @@
 #define PDB0_DACINT(idx) (* ((volatile uint32_t *) (0x40036000 + 0x154 + 0x8 * (idx))))
 
   // Field (width: 16 bits): DAC Interval
-    inline uint32_t PDB0_DACINT_INT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_DACINT_INT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Pulse-Out n Enable register
 #define PDB0_POEN (* ((volatile uint32_t *) (0x40036000 + 0x190)))
 
   // Field (width: 8 bits): PDB Pulse-Out Enable
-    inline uint32_t PDB0_POEN_POEN (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t PDB0_POEN_POEN (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Pulse-Out n Delay register (idx = 0 ... 2)
 #define PDB0_PODLY(idx) (* ((volatile uint32_t *) (0x40036000 + 0x194 + 0x4 * (idx))))
 
   // Field (width: 16 bits): PDB Pulse-Out Delay 2
-    inline uint32_t PDB0_PODLY_DLY2 (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PDB0_PODLY_DLY2 (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): PDB Pulse-Out Delay 1
-    inline uint32_t PDB0_PODLY_DLY1 (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t PDB0_PODLY_DLY1 (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral PIT
@@ -3252,7 +3252,7 @@
 #define RTC_TPR (* ((volatile uint32_t *) (0x4003D000 + 0x4)))
 
   // Field (width: 16 bits): Time Prescaler Register
-    inline uint32_t RTC_TPR_TPR (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t RTC_TPR_TPR (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- RTC Time Alarm Register
 #define RTC_TAR (* ((volatile uint32_t *) (0x4003D000 + 0x8)))
@@ -3261,16 +3261,16 @@
 #define RTC_TCR (* ((volatile uint32_t *) (0x4003D000 + 0xC)))
 
   // Field (width: 8 bits): Time Compensation Register
-    inline uint32_t RTC_TCR_TCR (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t RTC_TCR_TCR (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Compensation Interval Register
-    inline uint32_t RTC_TCR_CIR (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t RTC_TCR_CIR (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): Time Compensation Value
-    inline uint32_t RTC_TCR_TCV (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t RTC_TCR_TCV (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): Compensation Interval Counter
-    inline uint32_t RTC_TCR_CIC (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t RTC_TCR_CIC (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- RTC Control Register
 #define RTC_CR (* ((volatile uint32_t *) (0x4003D000 + 0x10)))
@@ -3418,16 +3418,16 @@
 #define RFVBAT_REG(idx) (* ((volatile uint32_t *) (0x4003E000 + 0 + 0x4 * (idx))))
 
   // Field (width: 8 bits): Low lower byte
-    inline uint32_t RFVBAT_REG_LL (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t RFVBAT_REG_LL (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Low higher byte
-    inline uint32_t RFVBAT_REG_LH (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t RFVBAT_REG_LH (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): High lower byte
-    inline uint32_t RFVBAT_REG_HL (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t RFVBAT_REG_HL (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): High higher byte
-    inline uint32_t RFVBAT_REG_HH (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t RFVBAT_REG_HH (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral LPTMR0
@@ -3449,7 +3449,7 @@
     static const uint32_t LPTMR0_CSR_TPP = 1U << 3 ;
 
   // Field (width: 2 bits): Timer Pin Select
-    inline uint32_t LPTMR0_CSR_TPS (const uint32_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint32_t LPTMR0_CSR_TPS (const uint32_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Boolean field: Timer Interrupt Enable
     static const uint32_t LPTMR0_CSR_TIE = 1U << 6 ;
@@ -3461,25 +3461,25 @@
 #define LPTMR0_PSR (* ((volatile uint32_t *) (0x40040000 + 0x4)))
 
   // Field (width: 2 bits): Prescaler Clock Select
-    inline uint32_t LPTMR0_PSR_PCS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t LPTMR0_PSR_PCS (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Prescaler Bypass
     static const uint32_t LPTMR0_PSR_PBYP = 1U << 2 ;
 
   // Field (width: 4 bits): Prescale Value
-    inline uint32_t LPTMR0_PSR_PRESCALE (const uint32_t inValue) { return (inValue & 15) << 3 ; }
+    inline uint32_t LPTMR0_PSR_PRESCALE (const uint32_t inValue) { return (inValue & 15U) << 3 ; }
 
 //-------------------- Low Power Timer Compare Register
 #define LPTMR0_CMR (* ((volatile uint32_t *) (0x40040000 + 0x8)))
 
   // Field (width: 16 bits): Compare Value
-    inline uint32_t LPTMR0_CMR_COMPARE (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t LPTMR0_CMR_COMPARE (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Low Power Timer Counter Register
 #define LPTMR0_CNR (* ((volatile uint32_t *) (0x40040000 + 0xC)))
 
   // Field (width: 16 bits): Counter Value
-    inline uint32_t LPTMR0_CNR_COUNTER (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t LPTMR0_CNR_COUNTER (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral RFSYS
@@ -3489,16 +3489,16 @@
 #define RFSYS_REG(idx) (* ((volatile uint32_t *) (0x40041000 + 0 + 0x4 * (idx))))
 
   // Field (width: 8 bits): Low lower byte
-    inline uint32_t RFSYS_REG_LL (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t RFSYS_REG_LL (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Low higher byte
-    inline uint32_t RFSYS_REG_LH (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t RFSYS_REG_LH (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 8 bits): High lower byte
-    inline uint32_t RFSYS_REG_HL (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t RFSYS_REG_HL (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
   // Field (width: 8 bits): High higher byte
-    inline uint32_t RFSYS_REG_HH (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t RFSYS_REG_HH (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral SIM
@@ -3508,10 +3508,10 @@
 #define SIM_SOPT1 (* ((volatile uint32_t *) (0x40047000 + 0)))
 
   // Field (width: 4 bits): RAM size
-    inline uint32_t SIM_SOPT1_RAMSIZE (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t SIM_SOPT1_RAMSIZE (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Field (width: 2 bits): 32K oscillator clock select
-    inline uint32_t SIM_SOPT1_OSC32KSEL (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+    inline uint32_t SIM_SOPT1_OSC32KSEL (const uint32_t inValue) { return (inValue & 3U) << 18 ; }
 
   // Boolean field: USB voltage regulator in standby mode during VLPR and VLPW modes
     static const uint32_t SIM_SOPT1_USBVSTBY = 1U << 29 ;
@@ -3541,10 +3541,10 @@
     static const uint32_t SIM_SOPT2_RTCCLKOUTSEL = 1U << 4 ;
 
   // Field (width: 3 bits): CLKOUT select
-    inline uint32_t SIM_SOPT2_CLKOUTSEL (const uint32_t inValue) { return (inValue & 7) << 5 ; }
+    inline uint32_t SIM_SOPT2_CLKOUTSEL (const uint32_t inValue) { return (inValue & 7U) << 5 ; }
 
   // Field (width: 2 bits): FlexBus security level
-    inline uint32_t SIM_SOPT2_FBSL (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+    inline uint32_t SIM_SOPT2_FBSL (const uint32_t inValue) { return (inValue & 3U) << 8 ; }
 
   // Boolean field: PTD7 pad drive strength
     static const uint32_t SIM_SOPT2_PTD7PAD = 1U << 11 ;
@@ -3553,7 +3553,7 @@
     static const uint32_t SIM_SOPT2_TRACECLKSEL = 1U << 12 ;
 
   // Field (width: 2 bits): PLL/FLL clock select
-    inline uint32_t SIM_SOPT2_PLLFLLSEL (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t SIM_SOPT2_PLLFLLSEL (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
   // Boolean field: USB clock source select
     static const uint32_t SIM_SOPT2_USBSRC = 1U << 18 ;
@@ -3562,10 +3562,10 @@
     static const uint32_t SIM_SOPT2_RMIISRC = 1U << 19 ;
 
   // Field (width: 2 bits): IEEE 1588 timestamp clock source select
-    inline uint32_t SIM_SOPT2_TIMESRC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
+    inline uint32_t SIM_SOPT2_TIMESRC (const uint32_t inValue) { return (inValue & 3U) << 20 ; }
 
   // Field (width: 2 bits): SDHC clock source select
-    inline uint32_t SIM_SOPT2_SDHCSRC (const uint32_t inValue) { return (inValue & 3) << 28 ; }
+    inline uint32_t SIM_SOPT2_SDHCSRC (const uint32_t inValue) { return (inValue & 3U) << 28 ; }
 
 //-------------------- System Options Register 4
 #define SIM_SOPT4 (* ((volatile uint32_t *) (0x40047000 + 0x100C)))
@@ -3589,10 +3589,10 @@
     static const uint32_t SIM_SOPT4_FTM3FLT0 = 1U << 12 ;
 
   // Field (width: 2 bits): FTM1 channel 0 input capture source select
-    inline uint32_t SIM_SOPT4_FTM1CH0SRC (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+    inline uint32_t SIM_SOPT4_FTM1CH0SRC (const uint32_t inValue) { return (inValue & 3U) << 18 ; }
 
   // Field (width: 2 bits): FTM2 channel 0 input capture source select
-    inline uint32_t SIM_SOPT4_FTM2CH0SRC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
+    inline uint32_t SIM_SOPT4_FTM2CH0SRC (const uint32_t inValue) { return (inValue & 3U) << 20 ; }
 
   // Boolean field: FlexTimer 0 External Clock Pin Select
     static const uint32_t SIM_SOPT4_FTM0CLKSEL = 1U << 24 ;
@@ -3622,22 +3622,22 @@
 #define SIM_SOPT5 (* ((volatile uint32_t *) (0x40047000 + 0x1010)))
 
   // Field (width: 2 bits): UART 0 transmit data source select
-    inline uint32_t SIM_SOPT5_UART0TXSRC (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t SIM_SOPT5_UART0TXSRC (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): UART 0 receive data source select
-    inline uint32_t SIM_SOPT5_UART0RXSRC (const uint32_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint32_t SIM_SOPT5_UART0RXSRC (const uint32_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): UART 1 transmit data source select
-    inline uint32_t SIM_SOPT5_UART1TXSRC (const uint32_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint32_t SIM_SOPT5_UART1TXSRC (const uint32_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): UART 1 receive data source select
-    inline uint32_t SIM_SOPT5_UART1RXSRC (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint32_t SIM_SOPT5_UART1RXSRC (const uint32_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- System Options Register 7
 #define SIM_SOPT7 (* ((volatile uint32_t *) (0x40047000 + 0x1018)))
 
   // Field (width: 4 bits): ADC0 trigger select
-    inline uint32_t SIM_SOPT7_ADC0TRGSEL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t SIM_SOPT7_ADC0TRGSEL (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: ADC0 pretrigger select
     static const uint32_t SIM_SOPT7_ADC0PRETRGSEL = 1U << 4 ;
@@ -3646,7 +3646,7 @@
     static const uint32_t SIM_SOPT7_ADC0ALTTRGEN = 1U << 7 ;
 
   // Field (width: 4 bits): ADC1 trigger select
-    inline uint32_t SIM_SOPT7_ADC1TRGSEL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t SIM_SOPT7_ADC1TRGSEL (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Boolean field: ADC1 pre-trigger select
     static const uint32_t SIM_SOPT7_ADC1PRETRGSEL = 1U << 12 ;
@@ -3658,25 +3658,25 @@
 #define SIM_SDID (* ((const volatile uint32_t *) (0x40047000 + 0x1024)))
 
   // Field (width: 4 bits): Pincount identification
-    inline uint32_t SIM_SDID_PINID (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t SIM_SDID_PINID (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 3 bits): Kinetis family identification
-    inline uint32_t SIM_SDID_FAMID (const uint32_t inValue) { return (inValue & 7) << 4 ; }
+    inline uint32_t SIM_SDID_FAMID (const uint32_t inValue) { return (inValue & 7U) << 4 ; }
 
   // Field (width: 5 bits): Device Die ID
-    inline uint32_t SIM_SDID_DIEID (const uint32_t inValue) { return (inValue & 31) << 7 ; }
+    inline uint32_t SIM_SDID_DIEID (const uint32_t inValue) { return (inValue & 31U) << 7 ; }
 
   // Field (width: 4 bits): Device revision number
-    inline uint32_t SIM_SDID_REVID (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t SIM_SDID_REVID (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Field (width: 4 bits): Kinetis Series ID
-    inline uint32_t SIM_SDID_SERIESID (const uint32_t inValue) { return (inValue & 15) << 20 ; }
+    inline uint32_t SIM_SDID_SERIESID (const uint32_t inValue) { return (inValue & 15U) << 20 ; }
 
   // Field (width: 4 bits): Kinetis Sub-Family ID
-    inline uint32_t SIM_SDID_SUBFAMID (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t SIM_SDID_SUBFAMID (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
   // Field (width: 4 bits): Kinetis Family ID
-    inline uint32_t SIM_SDID_FAMILYID (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t SIM_SDID_FAMILYID (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- System Clock Gating Control Register 1
 #define SIM_SCGC1 (* ((volatile uint32_t *) (0x40047000 + 0x1028)))
@@ -3850,16 +3850,16 @@
 #define SIM_CLKDIV1 (* ((volatile uint32_t *) (0x40047000 + 0x1044)))
 
   // Field (width: 4 bits): Clock 4 output divider value
-    inline uint32_t SIM_CLKDIV1_OUTDIV4 (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t SIM_CLKDIV1_OUTDIV4 (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Field (width: 4 bits): Clock 3 output divider value
-    inline uint32_t SIM_CLKDIV1_OUTDIV3 (const uint32_t inValue) { return (inValue & 15) << 20 ; }
+    inline uint32_t SIM_CLKDIV1_OUTDIV3 (const uint32_t inValue) { return (inValue & 15U) << 20 ; }
 
   // Field (width: 4 bits): Clock 2 output divider value
-    inline uint32_t SIM_CLKDIV1_OUTDIV2 (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t SIM_CLKDIV1_OUTDIV2 (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
   // Field (width: 4 bits): Clock 1 output divider value
-    inline uint32_t SIM_CLKDIV1_OUTDIV1 (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t SIM_CLKDIV1_OUTDIV1 (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- System Clock Divider Register 2
 #define SIM_CLKDIV2 (* ((volatile uint32_t *) (0x40047000 + 0x1048)))
@@ -3868,7 +3868,7 @@
     static const uint32_t SIM_CLKDIV2_USBFRAC = 1U << 0 ;
 
   // Field (width: 3 bits): USB clock divider divisor
-    inline uint32_t SIM_CLKDIV2_USBDIV (const uint32_t inValue) { return (inValue & 7) << 1 ; }
+    inline uint32_t SIM_CLKDIV2_USBDIV (const uint32_t inValue) { return (inValue & 7U) << 1 ; }
 
 //-------------------- Flash Configuration Register 1
 #define SIM_FCFG1 (* ((volatile uint32_t *) (0x40047000 + 0x104C)))
@@ -3880,28 +3880,28 @@
     static const uint32_t SIM_FCFG1_FLASHDOZE = 1U << 1 ;
 
   // Field (width: 4 bits): FlexNVM partition
-    inline uint32_t SIM_FCFG1_DEPART (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t SIM_FCFG1_DEPART (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Field (width: 4 bits): EEPROM size
-    inline uint32_t SIM_FCFG1_EESIZE (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t SIM_FCFG1_EESIZE (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Field (width: 4 bits): Program flash size
-    inline uint32_t SIM_FCFG1_PFSIZE (const uint32_t inValue) { return (inValue & 15) << 24 ; }
+    inline uint32_t SIM_FCFG1_PFSIZE (const uint32_t inValue) { return (inValue & 15U) << 24 ; }
 
   // Field (width: 4 bits): FlexNVM size
-    inline uint32_t SIM_FCFG1_NVMSIZE (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t SIM_FCFG1_NVMSIZE (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Flash Configuration Register 2
 #define SIM_FCFG2 (* ((const volatile uint32_t *) (0x40047000 + 0x1050)))
 
   // Field (width: 7 bits): Max address block 1
-    inline uint32_t SIM_FCFG2_MAXADDR1 (const uint32_t inValue) { return (inValue & 127) << 16 ; }
+    inline uint32_t SIM_FCFG2_MAXADDR1 (const uint32_t inValue) { return (inValue & 127U) << 16 ; }
 
   // Boolean field: Program flash only
     static const uint32_t SIM_FCFG2_PFLSH = 1U << 23 ;
 
   // Field (width: 7 bits): Max address block 0
-    inline uint32_t SIM_FCFG2_MAXADDR0 (const uint32_t inValue) { return (inValue & 127) << 24 ; }
+    inline uint32_t SIM_FCFG2_MAXADDR0 (const uint32_t inValue) { return (inValue & 127U) << 24 ; }
 
 //-------------------- Unique Identification Register High
 #define SIM_UIDH (* ((const volatile uint32_t *) (0x40047000 + 0x1054)))
@@ -3953,7 +3953,7 @@
     static const uint16_t WDOG_STCTRLH_TESTSEL = 1U << 11 ;
 
   // Field (width: 2 bits): This 2-bit field selects the byte to be tested when the watchdog is in the byte test mode.
-    inline uint16_t WDOG_STCTRLH_BYTESEL (const uint16_t inValue) { return (inValue & 3) << 12 ; }
+    inline uint16_t WDOG_STCTRLH_BYTESEL (const uint16_t inValue) { return (inValue & 3U) << 12 ; }
 
   // Boolean field: Allows the WDOG's functional test mode to be disabled permanently
     static const uint16_t WDOG_STCTRLH_DISTESTWDOG = 1U << 14 ;
@@ -3995,7 +3995,7 @@
 #define WDOG_PRESC (* ((volatile uint16_t *) (0x40052000 + 0x16)))
 
   // Field (width: 3 bits): 3-bit prescaler for the watchdog clock source
-    inline uint16_t WDOG_PRESC_PRESCVAL (const uint16_t inValue) { return (inValue & 7) << 8 ; }
+    inline uint16_t WDOG_PRESC_PRESCVAL (const uint16_t inValue) { return (inValue & 7U) << 8 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral EWM
@@ -4072,7 +4072,7 @@
     static const uint8_t CMT_MSC_EXSPC = 1U << 4 ;
 
   // Field (width: 2 bits): CMT Clock Divide Prescaler
-    inline uint8_t CMT_MSC_CMTDIV (const uint8_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint8_t CMT_MSC_CMTDIV (const uint8_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Boolean field: End Of Cycle Status Flag
     static const uint8_t CMT_MSC_EOCF = 1U << 7 ;
@@ -4093,7 +4093,7 @@
 #define CMT_PPS (* ((volatile uint8_t *) (0x40062000 + 0xA)))
 
   // Field (width: 4 bits): Primary Prescaler Divider
-    inline uint8_t CMT_PPS_PPSDIV (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t CMT_PPS_PPSDIV (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
 //-------------------- CMT Direct Memory Access Register
 #define CMT_DMA (* ((volatile uint8_t *) (0x40062000 + 0xB)))
@@ -4118,10 +4118,10 @@
     static const uint8_t MCG_C1_IREFS = 1U << 2 ;
 
   // Field (width: 3 bits): FLL External Reference Divider
-    inline uint8_t MCG_C1_FRDIV (const uint8_t inValue) { return (inValue & 7) << 3 ; }
+    inline uint8_t MCG_C1_FRDIV (const uint8_t inValue) { return (inValue & 7U) << 3 ; }
 
   // Field (width: 2 bits): Clock Source Select
-    inline uint8_t MCG_C1_CLKS (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t MCG_C1_CLKS (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- MCG Control 2 Register
 #define MCG_C2 (* ((volatile uint8_t *) (0x40064000 + 0x1)))
@@ -4139,7 +4139,7 @@
     static const uint8_t MCG_C2_HGO = 1U << 3 ;
 
   // Field (width: 2 bits): Frequency Range Select
-    inline uint8_t MCG_C2_RANGE (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t MCG_C2_RANGE (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Boolean field: Fast Internal Reference Clock Fine Trim
     static const uint8_t MCG_C2_FCFTRIM = 1U << 6 ;
@@ -4157,10 +4157,10 @@
     static const uint8_t MCG_C4_SCFTRIM = 1U << 0 ;
 
   // Field (width: 4 bits): Fast Internal Reference Clock Trim Setting
-    inline uint8_t MCG_C4_FCTRIM (const uint8_t inValue) { return (inValue & 15) << 1 ; }
+    inline uint8_t MCG_C4_FCTRIM (const uint8_t inValue) { return (inValue & 15U) << 1 ; }
 
   // Field (width: 2 bits): DCO Range Select
-    inline uint8_t MCG_C4_DRST_DRS (const uint8_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint8_t MCG_C4_DRST_DRS (const uint8_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Boolean field: DCO Maximum Frequency with 32.768 kHz Reference
     static const uint8_t MCG_C4_DMX32 = 1U << 7 ;
@@ -4169,7 +4169,7 @@
 #define MCG_C5 (* ((volatile uint8_t *) (0x40064000 + 0x4)))
 
   // Field (width: 5 bits): PLL External Reference Divider
-    inline uint8_t MCG_C5_PRDIV0 (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint8_t MCG_C5_PRDIV0 (const uint8_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Boolean field: PLL Stop Enable
     static const uint8_t MCG_C5_PLLSTEN0 = 1U << 5 ;
@@ -4181,7 +4181,7 @@
 #define MCG_C6 (* ((volatile uint8_t *) (0x40064000 + 0x5)))
 
   // Field (width: 5 bits): VCO 0 Divider
-    inline uint8_t MCG_C6_VDIV0 (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint8_t MCG_C6_VDIV0 (const uint8_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Boolean field: Clock Monitor Enable
     static const uint8_t MCG_C6_CME0 = 1U << 5 ;
@@ -4202,7 +4202,7 @@
     static const uint8_t MCG_S_OSCINIT0 = 1U << 1 ;
 
   // Field (width: 2 bits): Clock Mode Status
-    inline uint8_t MCG_S_CLKST (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t MCG_S_CLKST (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Boolean field: Internal Reference Status
     static const uint8_t MCG_S_IREFST = 1U << 4 ;
@@ -4223,7 +4223,7 @@
     static const uint8_t MCG_SC_LOCS0 = 1U << 0 ;
 
   // Field (width: 3 bits): Fast Clock Internal Reference Divider
-    inline uint8_t MCG_SC_FCRDIV (const uint8_t inValue) { return (inValue & 7) << 1 ; }
+    inline uint8_t MCG_SC_FCRDIV (const uint8_t inValue) { return (inValue & 7U) << 1 ; }
 
   // Boolean field: FLL Filter Preserve Enable
     static const uint8_t MCG_SC_FLTPRSRV = 1U << 4 ;
@@ -4247,7 +4247,7 @@
 #define MCG_C7 (* ((volatile uint8_t *) (0x40064000 + 0xC)))
 
   // Field (width: 2 bits): MCG OSC Clock Select
-    inline uint8_t MCG_C7_OSCSEL (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t MCG_C7_OSCSEL (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
 //-------------------- MCG Control 8 Register
 #define MCG_C8 (* ((volatile uint8_t *) (0x40064000 + 0xD)))
@@ -4297,13 +4297,13 @@
 #define USB0_PERID (* ((const volatile uint8_t *) (0x40072000 + 0)))
 
   // Field (width: 6 bits): Peripheral Identification
-    inline uint8_t USB0_PERID_ID (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint8_t USB0_PERID_ID (const uint8_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- Peripheral ID Complement register
 #define USB0_IDCOMP (* ((const volatile uint8_t *) (0x40072000 + 0x4)))
 
   // Field (width: 6 bits): Ones' complement of PERID[ID]. bits.
-    inline uint8_t USB0_IDCOMP_NID (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint8_t USB0_IDCOMP_NID (const uint8_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- Peripheral Revision register
 #define USB0_REV (* ((const volatile uint8_t *) (0x40072000 + 0x8)))
@@ -4315,7 +4315,7 @@
     static const uint8_t USB0_ADDINFO_IEHOST = 1U << 0 ;
 
   // Field (width: 5 bits): Assigned Interrupt Request Number
-    inline uint8_t USB0_ADDINFO_IRQNUM (const uint8_t inValue) { return (inValue & 31) << 3 ; }
+    inline uint8_t USB0_ADDINFO_IRQNUM (const uint8_t inValue) { return (inValue & 31U) << 3 ; }
 
 //-------------------- OTG Interrupt Status register
 #define USB0_OTGISTAT (* ((volatile uint8_t *) (0x40072000 + 0x10)))
@@ -4507,7 +4507,7 @@
     static const uint8_t USB0_STAT_TX = 1U << 3 ;
 
   // Field (width: 4 bits): This four-bit field encodes the endpoint address that received or transmitted the previous token
-    inline uint8_t USB0_STAT_ENDP (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint8_t USB0_STAT_ENDP (const uint8_t inValue) { return (inValue & 15U) << 4 ; }
 
 //-------------------- Control register
 #define USB0_CTL (* ((volatile uint8_t *) (0x40072000 + 0x94)))
@@ -4540,7 +4540,7 @@
 #define USB0_ADDR (* ((volatile uint8_t *) (0x40072000 + 0x98)))
 
   // Field (width: 7 bits): USB Address
-    inline uint8_t USB0_ADDR_ADDR (const uint8_t inValue) { return (inValue & 127) << 0 ; }
+    inline uint8_t USB0_ADDR_ADDR (const uint8_t inValue) { return (inValue & 127U) << 0 ; }
 
   // Boolean field: Low Speed Enable bit
     static const uint8_t USB0_ADDR_LSEN = 1U << 7 ;
@@ -4549,7 +4549,7 @@
 #define USB0_BDTPAGE1 (* ((volatile uint8_t *) (0x40072000 + 0x9C)))
 
   // Field (width: 7 bits): Provides address bits 15 through 9 of the BDT base address.
-    inline uint8_t USB0_BDTPAGE1_BDTBA (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+    inline uint8_t USB0_BDTPAGE1_BDTBA (const uint8_t inValue) { return (inValue & 127U) << 1 ; }
 
 //-------------------- Frame Number register Low
 #define USB0_FRMNUML (* ((volatile uint8_t *) (0x40072000 + 0xA0)))
@@ -4558,16 +4558,16 @@
 #define USB0_FRMNUMH (* ((volatile uint8_t *) (0x40072000 + 0xA4)))
 
   // Field (width: 3 bits): This 3-bit field and the 8-bit field in the Frame Number Register Low are used to compute the address where the current Buffer Descriptor Table (BDT) resides in system memory
-    inline uint8_t USB0_FRMNUMH_FRM (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint8_t USB0_FRMNUMH_FRM (const uint8_t inValue) { return (inValue & 7U) << 0 ; }
 
 //-------------------- Token register
 #define USB0_TOKEN (* ((volatile uint8_t *) (0x40072000 + 0xA8)))
 
   // Field (width: 4 bits): Holds the Endpoint address for the token command
-    inline uint8_t USB0_TOKEN_TOKENENDPT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t USB0_TOKEN_TOKENENDPT (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): Contains the token type executed by the USB module.
-    inline uint8_t USB0_TOKEN_TOKENPID (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint8_t USB0_TOKEN_TOKENPID (const uint8_t inValue) { return (inValue & 15U) << 4 ; }
 
 //-------------------- SOF Threshold register
 #define USB0_SOFTHLD (* ((volatile uint8_t *) (0x40072000 + 0xAC)))
@@ -4685,7 +4685,7 @@
 #define VREF_TRM (* ((volatile uint8_t *) (0x40074000 + 0)))
 
   // Field (width: 6 bits): Trim bits
-    inline uint8_t VREF_TRM_TRIM (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint8_t VREF_TRM_TRIM (const uint8_t inValue) { return (inValue & 63U) << 0 ; }
 
   // Boolean field: Chop oscillator enable. When set, internal chopping operation is enabled and the internal analog offset will be minimized.
     static const uint8_t VREF_TRM_CHOPEN = 1U << 6 ;
@@ -4694,7 +4694,7 @@
 #define VREF_SC (* ((volatile uint8_t *) (0x40074000 + 0x1)))
 
   // Field (width: 2 bits): Buffer Mode selection
-    inline uint8_t VREF_SC_MODE_LV (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t VREF_SC_MODE_LV (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Internal Voltage Reference stable
     static const uint8_t VREF_SC_VREFST = 1U << 2 ;
@@ -4716,61 +4716,61 @@
 #define LLWU_PE1 (* ((volatile uint8_t *) (0x4007C000 + 0)))
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P0
-    inline uint8_t LLWU_PE1_WUPE0 (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t LLWU_PE1_WUPE0 (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P1
-    inline uint8_t LLWU_PE1_WUPE1 (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t LLWU_PE1_WUPE1 (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P2
-    inline uint8_t LLWU_PE1_WUPE2 (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t LLWU_PE1_WUPE2 (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P3
-    inline uint8_t LLWU_PE1_WUPE3 (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t LLWU_PE1_WUPE3 (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- LLWU Pin Enable 2 register
 #define LLWU_PE2 (* ((volatile uint8_t *) (0x4007C000 + 0x1)))
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P4
-    inline uint8_t LLWU_PE2_WUPE4 (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t LLWU_PE2_WUPE4 (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P5
-    inline uint8_t LLWU_PE2_WUPE5 (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t LLWU_PE2_WUPE5 (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P6
-    inline uint8_t LLWU_PE2_WUPE6 (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t LLWU_PE2_WUPE6 (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P7
-    inline uint8_t LLWU_PE2_WUPE7 (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t LLWU_PE2_WUPE7 (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- LLWU Pin Enable 3 register
 #define LLWU_PE3 (* ((volatile uint8_t *) (0x4007C000 + 0x2)))
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P8
-    inline uint8_t LLWU_PE3_WUPE8 (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t LLWU_PE3_WUPE8 (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P9
-    inline uint8_t LLWU_PE3_WUPE9 (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t LLWU_PE3_WUPE9 (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P10
-    inline uint8_t LLWU_PE3_WUPE10 (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t LLWU_PE3_WUPE10 (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P11
-    inline uint8_t LLWU_PE3_WUPE11 (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t LLWU_PE3_WUPE11 (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- LLWU Pin Enable 4 register
 #define LLWU_PE4 (* ((volatile uint8_t *) (0x4007C000 + 0x3)))
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P12
-    inline uint8_t LLWU_PE4_WUPE12 (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t LLWU_PE4_WUPE12 (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P13
-    inline uint8_t LLWU_PE4_WUPE13 (const uint8_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint8_t LLWU_PE4_WUPE13 (const uint8_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P14
-    inline uint8_t LLWU_PE4_WUPE14 (const uint8_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint8_t LLWU_PE4_WUPE14 (const uint8_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Field (width: 2 bits): Wakeup Pin Enable For LLWU_P15
-    inline uint8_t LLWU_PE4_WUPE15 (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t LLWU_PE4_WUPE15 (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- LLWU Module Enable register
 #define LLWU_ME (* ((volatile uint8_t *) (0x4007C000 + 0x4)))
@@ -4884,10 +4884,10 @@
 #define LLWU_FILT1 (* ((volatile uint8_t *) (0x4007C000 + 0x8)))
 
   // Field (width: 4 bits): Filter Pin Select
-    inline uint8_t LLWU_FILT1_FILTSEL (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t LLWU_FILT1_FILTSEL (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 2 bits): Digital Filter On External Pin
-    inline uint8_t LLWU_FILT1_FILTE (const uint8_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint8_t LLWU_FILT1_FILTE (const uint8_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Boolean field: Filter Detect Flag
     static const uint8_t LLWU_FILT1_FILTF = 1U << 7 ;
@@ -4896,10 +4896,10 @@
 #define LLWU_FILT2 (* ((volatile uint8_t *) (0x4007C000 + 0x9)))
 
   // Field (width: 4 bits): Filter Pin Select
-    inline uint8_t LLWU_FILT2_FILTSEL (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t LLWU_FILT2_FILTSEL (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 2 bits): Digital Filter On External Pin
-    inline uint8_t LLWU_FILT2_FILTE (const uint8_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint8_t LLWU_FILT2_FILTE (const uint8_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Boolean field: Filter Detect Flag
     static const uint8_t LLWU_FILT2_FILTF = 1U << 7 ;
@@ -4921,7 +4921,7 @@
 #define PMC_LVDSC1 (* ((volatile uint8_t *) (0x4007D000 + 0)))
 
   // Field (width: 2 bits): Low-Voltage Detect Voltage Select
-    inline uint8_t PMC_LVDSC1_LVDV (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t PMC_LVDSC1_LVDV (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Low-Voltage Detect Reset Enable
     static const uint8_t PMC_LVDSC1_LVDRE = 1U << 4 ;
@@ -4939,7 +4939,7 @@
 #define PMC_LVDSC2 (* ((volatile uint8_t *) (0x4007D000 + 0x1)))
 
   // Field (width: 2 bits): Low-Voltage Warning Voltage Select
-    inline uint8_t PMC_LVDSC2_LVWV (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t PMC_LVDSC2_LVWV (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Low-Voltage Warning Interrupt Enable
     static const uint8_t PMC_LVDSC2_LVWIE = 1U << 5 ;
@@ -4985,13 +4985,13 @@
 #define SMC_PMCTRL (* ((volatile uint8_t *) (0x4007E000 + 0x1)))
 
   // Field (width: 3 bits): Stop Mode Control
-    inline uint8_t SMC_PMCTRL_STOPM (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint8_t SMC_PMCTRL_STOPM (const uint8_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Boolean field: Stop Aborted
     static const uint8_t SMC_PMCTRL_STOPA = 1U << 3 ;
 
   // Field (width: 2 bits): Run Mode Control
-    inline uint8_t SMC_PMCTRL_RUNM (const uint8_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint8_t SMC_PMCTRL_RUNM (const uint8_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Boolean field: Low-Power Wake Up On Interrupt
     static const uint8_t SMC_PMCTRL_LPWUI = 1U << 7 ;
@@ -5000,7 +5000,7 @@
 #define SMC_VLLSCTRL (* ((volatile uint8_t *) (0x4007E000 + 0x2)))
 
   // Field (width: 3 bits): VLLS Mode Control
-    inline uint8_t SMC_VLLSCTRL_VLLSM (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint8_t SMC_VLLSCTRL_VLLSM (const uint8_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Boolean field: POR Power Option
     static const uint8_t SMC_VLLSCTRL_PORPO = 1U << 5 ;
@@ -5009,7 +5009,7 @@
 #define SMC_PMSTAT (* ((const volatile uint8_t *) (0x4007E000 + 0x3)))
 
   // Field (width: 7 bits): When debug is enabled, the PMSTAT will not update to STOP or VLPS
-    inline uint8_t SMC_PMSTAT_PMSTAT (const uint8_t inValue) { return (inValue & 127) << 0 ; }
+    inline uint8_t SMC_PMSTAT_PMSTAT (const uint8_t inValue) { return (inValue & 127U) << 0 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral RCM
@@ -5064,7 +5064,7 @@
 #define RCM_RPFC (* ((volatile uint8_t *) (0x4007F000 + 0x4)))
 
   // Field (width: 2 bits): Reset Pin Filter Select in Run and Wait Modes
-    inline uint8_t RCM_RPFC_RSTFLTSRW (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t RCM_RPFC_RSTFLTSRW (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Reset Pin Filter Select in Stop Mode
     static const uint8_t RCM_RPFC_RSTFLTSS = 1U << 2 ;
@@ -5073,7 +5073,7 @@
 #define RCM_RPFW (* ((volatile uint8_t *) (0x4007F000 + 0x5)))
 
   // Field (width: 5 bits): Reset Pin Filter Bus Clock Select
-    inline uint8_t RCM_RPFW_RSTFLTSEL (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint8_t RCM_RPFW_RSTFLTSEL (const uint8_t inValue) { return (inValue & 31U) << 0 ; }
 
 //-------------------- Mode Register
 #define RCM_MR (* ((const volatile uint8_t *) (0x4007F000 + 0x7)))
@@ -5089,16 +5089,16 @@
 #define SDHC_DSADDR (* ((volatile uint32_t *) (0x400B1000 + 0)))
 
   // Field (width: 30 bits): DMA System Address
-    inline uint32_t SDHC_DSADDR_DSADDR (const uint32_t inValue) { return (inValue & 1073741823) << 2 ; }
+    inline uint32_t SDHC_DSADDR_DSADDR (const uint32_t inValue) { return (inValue & 1073741823U) << 2 ; }
 
 //-------------------- Block Attributes register
 #define SDHC_BLKATTR (* ((volatile uint32_t *) (0x400B1000 + 0x4)))
 
   // Field (width: 13 bits): Transfer Block Size
-    inline uint32_t SDHC_BLKATTR_BLKSIZE (const uint32_t inValue) { return (inValue & 8191) << 0 ; }
+    inline uint32_t SDHC_BLKATTR_BLKSIZE (const uint32_t inValue) { return (inValue & 8191U) << 0 ; }
 
   // Field (width: 16 bits): Blocks Count For Current Transfer
-    inline uint32_t SDHC_BLKATTR_BLKCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t SDHC_BLKATTR_BLKCNT (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Command Argument register
 #define SDHC_CMDARG (* ((volatile uint32_t *) (0x400B1000 + 0x8)))
@@ -5122,7 +5122,7 @@
     static const uint32_t SDHC_XFERTYP_MSBSEL = 1U << 5 ;
 
   // Field (width: 2 bits): Response Type Select
-    inline uint32_t SDHC_XFERTYP_RSPTYP (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t SDHC_XFERTYP_RSPTYP (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
   // Boolean field: Command CRC Check Enable
     static const uint32_t SDHC_XFERTYP_CCCEN = 1U << 19 ;
@@ -5134,10 +5134,10 @@
     static const uint32_t SDHC_XFERTYP_DPSEL = 1U << 21 ;
 
   // Field (width: 2 bits): Command Type
-    inline uint32_t SDHC_XFERTYP_CMDTYP (const uint32_t inValue) { return (inValue & 3) << 22 ; }
+    inline uint32_t SDHC_XFERTYP_CMDTYP (const uint32_t inValue) { return (inValue & 3U) << 22 ; }
 
   // Field (width: 6 bits): Command Index
-    inline uint32_t SDHC_XFERTYP_CMDINX (const uint32_t inValue) { return (inValue & 63) << 24 ; }
+    inline uint32_t SDHC_XFERTYP_CMDINX (const uint32_t inValue) { return (inValue & 63U) << 24 ; }
 
 //-------------------- Command Response 0
 #define SDHC_CMDRSP0 (* ((const volatile uint32_t *) (0x400B1000 + 0x10)))
@@ -5200,7 +5200,7 @@
     static const uint32_t SDHC_PRSSTAT_CLSL = 1U << 23 ;
 
   // Field (width: 8 bits): DAT Line Signal Level
-    inline uint32_t SDHC_PRSSTAT_DLSL (const uint32_t inValue) { return (inValue & 255) << 24 ; }
+    inline uint32_t SDHC_PRSSTAT_DLSL (const uint32_t inValue) { return (inValue & 255U) << 24 ; }
 
 //-------------------- Protocol Control register
 #define SDHC_PROCTL (* ((volatile uint32_t *) (0x400B1000 + 0x28)))
@@ -5209,13 +5209,13 @@
     static const uint32_t SDHC_PROCTL_LCTL = 1U << 0 ;
 
   // Field (width: 2 bits): Data Transfer Width
-    inline uint32_t SDHC_PROCTL_DTW (const uint32_t inValue) { return (inValue & 3) << 1 ; }
+    inline uint32_t SDHC_PROCTL_DTW (const uint32_t inValue) { return (inValue & 3U) << 1 ; }
 
   // Boolean field: DAT3 As Card Detection Pin
     static const uint32_t SDHC_PROCTL_D3CD = 1U << 3 ;
 
   // Field (width: 2 bits): Endian Mode
-    inline uint32_t SDHC_PROCTL_EMODE (const uint32_t inValue) { return (inValue & 3) << 4 ; }
+    inline uint32_t SDHC_PROCTL_EMODE (const uint32_t inValue) { return (inValue & 3U) << 4 ; }
 
   // Boolean field: Card Detect Test Level
     static const uint32_t SDHC_PROCTL_CDTL = 1U << 6 ;
@@ -5224,7 +5224,7 @@
     static const uint32_t SDHC_PROCTL_CDSS = 1U << 7 ;
 
   // Field (width: 2 bits): DMA Select
-    inline uint32_t SDHC_PROCTL_DMAS (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+    inline uint32_t SDHC_PROCTL_DMAS (const uint32_t inValue) { return (inValue & 3U) << 8 ; }
 
   // Boolean field: Stop At Block Gap Request
     static const uint32_t SDHC_PROCTL_SABGREQ = 1U << 16 ;
@@ -5263,13 +5263,13 @@
     static const uint32_t SDHC_SYSCTL_SDCLKEN = 1U << 3 ;
 
   // Field (width: 4 bits): Divisor
-    inline uint32_t SDHC_SYSCTL_DVS (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint32_t SDHC_SYSCTL_DVS (const uint32_t inValue) { return (inValue & 15U) << 4 ; }
 
   // Field (width: 8 bits): SDCLK Frequency Select
-    inline uint32_t SDHC_SYSCTL_SDCLKFS (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t SDHC_SYSCTL_SDCLKFS (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
   // Field (width: 4 bits): Data Timeout Counter Value
-    inline uint32_t SDHC_SYSCTL_DTOCV (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t SDHC_SYSCTL_DTOCV (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Software Reset For ALL
     static const uint32_t SDHC_SYSCTL_RSTA = 1U << 24 ;
@@ -5479,7 +5479,7 @@
 #define SDHC_HTCAPBLT (* ((const volatile uint32_t *) (0x400B1000 + 0x40)))
 
   // Field (width: 3 bits): Max Block Length
-    inline uint32_t SDHC_HTCAPBLT_MBL (const uint32_t inValue) { return (inValue & 7) << 16 ; }
+    inline uint32_t SDHC_HTCAPBLT_MBL (const uint32_t inValue) { return (inValue & 7U) << 16 ; }
 
   // Boolean field: ADMA Support
     static const uint32_t SDHC_HTCAPBLT_ADMAS = 1U << 20 ;
@@ -5500,10 +5500,10 @@
 #define SDHC_WML (* ((volatile uint32_t *) (0x400B1000 + 0x44)))
 
   // Field (width: 8 bits): Read Watermark Level
-    inline uint32_t SDHC_WML_RDWML (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t SDHC_WML_RDWML (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Write Watermark Level
-    inline uint32_t SDHC_WML_WRWML (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t SDHC_WML_WRWML (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
 //-------------------- Force Event register
 #define SDHC_FEVT (* ((volatile uint32_t *) (0x400B1000 + 0x50)))
@@ -5560,7 +5560,7 @@
 #define SDHC_ADMAES (* ((const volatile uint32_t *) (0x400B1000 + 0x54)))
 
   // Field (width: 2 bits): ADMA Error State (When ADMA Error Is Occurred.)
-    inline uint32_t SDHC_ADMAES_ADMAES (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t SDHC_ADMAES_ADMAES (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: ADMA Length Mismatch Error
     static const uint32_t SDHC_ADMAES_ADMALME = 1U << 2 ;
@@ -5572,7 +5572,7 @@
 #define SDHC_ADSADDR (* ((volatile uint32_t *) (0x400B1000 + 0x58)))
 
   // Field (width: 30 bits): ADMA System Address
-    inline uint32_t SDHC_ADSADDR_ADSADDR (const uint32_t inValue) { return (inValue & 1073741823) << 2 ; }
+    inline uint32_t SDHC_ADSADDR_ADSADDR (const uint32_t inValue) { return (inValue & 1073741823U) << 2 ; }
 
 //-------------------- Vendor Specific register
 #define SDHC_VENDOR (* ((volatile uint32_t *) (0x400B1000 + 0xC0)))
@@ -5584,13 +5584,13 @@
     static const uint32_t SDHC_VENDOR_EXBLKNU = 1U << 1 ;
 
   // Field (width: 8 bits): Internal State Value
-    inline uint32_t SDHC_VENDOR_INTSTVAL (const uint32_t inValue) { return (inValue & 255) << 16 ; }
+    inline uint32_t SDHC_VENDOR_INTSTVAL (const uint32_t inValue) { return (inValue & 255U) << 16 ; }
 
 //-------------------- MMC Boot register
 #define SDHC_MMCBOOT (* ((volatile uint32_t *) (0x400B1000 + 0xC4)))
 
   // Field (width: 4 bits): Boot ACK Time Out Counter Value
-    inline uint32_t SDHC_MMCBOOT_DTOCVACK (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t SDHC_MMCBOOT_DTOCVACK (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: Boot Ack Mode Select
     static const uint32_t SDHC_MMCBOOT_BOOTACK = 1U << 4 ;
@@ -5605,16 +5605,16 @@
     static const uint32_t SDHC_MMCBOOT_AUTOSABGEN = 1U << 7 ;
 
   // Field (width: 16 bits): Defines the stop at block gap value of automatic mode
-    inline uint32_t SDHC_MMCBOOT_BOOTBLKCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t SDHC_MMCBOOT_BOOTBLKCNT (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Host Controller Version
 #define SDHC_HOSTVER (* ((const volatile uint32_t *) (0x400B1000 + 0xFC)))
 
   // Field (width: 8 bits): Specification Version Number
-    inline uint32_t SDHC_HOSTVER_SVN (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t SDHC_HOSTVER_SVN (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 8 bits): Vendor Version Number
-    inline uint32_t SDHC_HOSTVER_VVN (const uint32_t inValue) { return (inValue & 255) << 8 ; }
+    inline uint32_t SDHC_HOSTVER_VVN (const uint32_t inValue) { return (inValue & 255U) << 8 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral ENET
@@ -5765,34 +5765,34 @@
 #define ENET_MMFR (* ((volatile uint32_t *) (0x400C0000 + 0x40)))
 
   // Field (width: 16 bits): Management Frame Data
-    inline uint32_t ENET_MMFR_DATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_MMFR_DATA (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 2 bits): Turn Around
-    inline uint32_t ENET_MMFR_TA (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t ENET_MMFR_TA (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
   // Field (width: 5 bits): Register Address
-    inline uint32_t ENET_MMFR_RA (const uint32_t inValue) { return (inValue & 31) << 18 ; }
+    inline uint32_t ENET_MMFR_RA (const uint32_t inValue) { return (inValue & 31U) << 18 ; }
 
   // Field (width: 5 bits): PHY Address
-    inline uint32_t ENET_MMFR_PA (const uint32_t inValue) { return (inValue & 31) << 23 ; }
+    inline uint32_t ENET_MMFR_PA (const uint32_t inValue) { return (inValue & 31U) << 23 ; }
 
   // Field (width: 2 bits): Operation Code
-    inline uint32_t ENET_MMFR_OP (const uint32_t inValue) { return (inValue & 3) << 28 ; }
+    inline uint32_t ENET_MMFR_OP (const uint32_t inValue) { return (inValue & 3U) << 28 ; }
 
   // Field (width: 2 bits): Start Of Frame Delimiter
-    inline uint32_t ENET_MMFR_ST (const uint32_t inValue) { return (inValue & 3) << 30 ; }
+    inline uint32_t ENET_MMFR_ST (const uint32_t inValue) { return (inValue & 3U) << 30 ; }
 
 //-------------------- MII Speed Control Register
 #define ENET_MSCR (* ((volatile uint32_t *) (0x400C0000 + 0x44)))
 
   // Field (width: 6 bits): MII Speed
-    inline uint32_t ENET_MSCR_MII_SPEED (const uint32_t inValue) { return (inValue & 63) << 1 ; }
+    inline uint32_t ENET_MSCR_MII_SPEED (const uint32_t inValue) { return (inValue & 63U) << 1 ; }
 
   // Boolean field: Disable Preamble
     static const uint32_t ENET_MSCR_DIS_PRE = 1U << 7 ;
 
   // Field (width: 3 bits): Hold time On MDIO Output
-    inline uint32_t ENET_MSCR_HOLDTIME (const uint32_t inValue) { return (inValue & 7) << 8 ; }
+    inline uint32_t ENET_MSCR_HOLDTIME (const uint32_t inValue) { return (inValue & 7U) << 8 ; }
 
 //-------------------- MIB Control Register
 #define ENET_MIBC (* ((volatile uint32_t *) (0x400C0000 + 0x64)))
@@ -5846,7 +5846,7 @@
     static const uint32_t ENET_RCR_CFEN = 1U << 15 ;
 
   // Field (width: 14 bits): Maximum Frame Length
-    inline uint32_t ENET_RCR_MAX_FL (const uint32_t inValue) { return (inValue & 16383) << 16 ; }
+    inline uint32_t ENET_RCR_MAX_FL (const uint32_t inValue) { return (inValue & 16383U) << 16 ; }
 
   // Boolean field: Payload Length Check Disable
     static const uint32_t ENET_RCR_NLC = 1U << 30 ;
@@ -5870,7 +5870,7 @@
     static const uint32_t ENET_TCR_RFC_PAUSE = 1U << 4 ;
 
   // Field (width: 3 bits): Source MAC Address Select On Transmit
-    inline uint32_t ENET_TCR_ADDSEL (const uint32_t inValue) { return (inValue & 7) << 5 ; }
+    inline uint32_t ENET_TCR_ADDSEL (const uint32_t inValue) { return (inValue & 7U) << 5 ; }
 
   // Boolean field: Set MAC Address On Transmit
     static const uint32_t ENET_TCR_ADDINS = 1U << 8 ;
@@ -5885,19 +5885,19 @@
 #define ENET_PAUR (* ((volatile uint32_t *) (0x400C0000 + 0xE8)))
 
   // Field (width: 16 bits): Type Field In PAUSE Frames
-    inline uint32_t ENET_PAUR_TYPE (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_PAUR_TYPE (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): Bytes 4 (bits 31:24) and 5 (bits 23:16) of the 6-byte individual address used for exact match, and the source address field in PAUSE frames
-    inline uint32_t ENET_PAUR_PADDR2 (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t ENET_PAUR_PADDR2 (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Opcode/Pause Duration Register
 #define ENET_OPD (* ((volatile uint32_t *) (0x400C0000 + 0xEC)))
 
   // Field (width: 16 bits): Pause Duration
-    inline uint32_t ENET_OPD_PAUSE_DUR (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_OPD_PAUSE_DUR (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): Opcode Field In PAUSE Frames
-    inline uint32_t ENET_OPD_OPCODE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t ENET_OPD_OPCODE (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Descriptor Individual Upper Address Register
 #define ENET_IAUR (* ((volatile uint32_t *) (0x400C0000 + 0x118)))
@@ -5915,7 +5915,7 @@
 #define ENET_TFWR (* ((volatile uint32_t *) (0x400C0000 + 0x144)))
 
   // Field (width: 6 bits): Transmit FIFO Write
-    inline uint32_t ENET_TFWR_TFWR (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ENET_TFWR_TFWR (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
   // Boolean field: Store And Forward Enable
     static const uint32_t ENET_TFWR_STRFWD = 1U << 8 ;
@@ -5924,76 +5924,76 @@
 #define ENET_RDSR (* ((volatile uint32_t *) (0x400C0000 + 0x180)))
 
   // Field (width: 29 bits): Pointer to the beginning of the receive buffer descriptor queue.
-    inline uint32_t ENET_RDSR_R_DES_START (const uint32_t inValue) { return (inValue & 536870911) << 3 ; }
+    inline uint32_t ENET_RDSR_R_DES_START (const uint32_t inValue) { return (inValue & 536870911U) << 3 ; }
 
 //-------------------- Transmit Buffer Descriptor Ring Start Register
 #define ENET_TDSR (* ((volatile uint32_t *) (0x400C0000 + 0x184)))
 
   // Field (width: 29 bits): Pointer to the beginning of the transmit buffer descriptor queue.
-    inline uint32_t ENET_TDSR_X_DES_START (const uint32_t inValue) { return (inValue & 536870911) << 3 ; }
+    inline uint32_t ENET_TDSR_X_DES_START (const uint32_t inValue) { return (inValue & 536870911U) << 3 ; }
 
 //-------------------- Maximum Receive Buffer Size Register
 #define ENET_MRBR (* ((volatile uint32_t *) (0x400C0000 + 0x188)))
 
   // Field (width: 10 bits): Receive buffer size in bytes.
-    inline uint32_t ENET_MRBR_R_BUF_SIZE (const uint32_t inValue) { return (inValue & 1023) << 4 ; }
+    inline uint32_t ENET_MRBR_R_BUF_SIZE (const uint32_t inValue) { return (inValue & 1023U) << 4 ; }
 
 //-------------------- Receive FIFO Section Full Threshold
 #define ENET_RSFL (* ((volatile uint32_t *) (0x400C0000 + 0x190)))
 
   // Field (width: 8 bits): Value Of Receive FIFO Section Full Threshold
-    inline uint32_t ENET_RSFL_RX_SECTION_FULL (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_RSFL_RX_SECTION_FULL (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Receive FIFO Section Empty Threshold
 #define ENET_RSEM (* ((volatile uint32_t *) (0x400C0000 + 0x194)))
 
   // Field (width: 8 bits): Value Of The Receive FIFO Section Empty Threshold
-    inline uint32_t ENET_RSEM_RX_SECTION_EMPTY (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_RSEM_RX_SECTION_EMPTY (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
   // Field (width: 5 bits): RX Status FIFO Section Empty Threshold
-    inline uint32_t ENET_RSEM_STAT_SECTION_EMPTY (const uint32_t inValue) { return (inValue & 31) << 16 ; }
+    inline uint32_t ENET_RSEM_STAT_SECTION_EMPTY (const uint32_t inValue) { return (inValue & 31U) << 16 ; }
 
 //-------------------- Receive FIFO Almost Empty Threshold
 #define ENET_RAEM (* ((volatile uint32_t *) (0x400C0000 + 0x198)))
 
   // Field (width: 8 bits): Value Of The Receive FIFO Almost Empty Threshold
-    inline uint32_t ENET_RAEM_RX_ALMOST_EMPTY (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_RAEM_RX_ALMOST_EMPTY (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Receive FIFO Almost Full Threshold
 #define ENET_RAFL (* ((volatile uint32_t *) (0x400C0000 + 0x19C)))
 
   // Field (width: 8 bits): Value Of The Receive FIFO Almost Full Threshold
-    inline uint32_t ENET_RAFL_RX_ALMOST_FULL (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_RAFL_RX_ALMOST_FULL (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Transmit FIFO Section Empty Threshold
 #define ENET_TSEM (* ((volatile uint32_t *) (0x400C0000 + 0x1A0)))
 
   // Field (width: 8 bits): Value Of The Transmit FIFO Section Empty Threshold
-    inline uint32_t ENET_TSEM_TX_SECTION_EMPTY (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_TSEM_TX_SECTION_EMPTY (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Transmit FIFO Almost Empty Threshold
 #define ENET_TAEM (* ((volatile uint32_t *) (0x400C0000 + 0x1A4)))
 
   // Field (width: 8 bits): Value of Transmit FIFO Almost Empty Threshold
-    inline uint32_t ENET_TAEM_TX_ALMOST_EMPTY (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_TAEM_TX_ALMOST_EMPTY (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Transmit FIFO Almost Full Threshold
 #define ENET_TAFL (* ((volatile uint32_t *) (0x400C0000 + 0x1A8)))
 
   // Field (width: 8 bits): Value Of The Transmit FIFO Almost Full Threshold
-    inline uint32_t ENET_TAFL_TX_ALMOST_FULL (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ENET_TAFL_TX_ALMOST_FULL (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Transmit Inter-Packet Gap
 #define ENET_TIPG (* ((volatile uint32_t *) (0x400C0000 + 0x1AC)))
 
   // Field (width: 5 bits): Transmit Inter-Packet Gap
-    inline uint32_t ENET_TIPG_IPG (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint32_t ENET_TIPG_IPG (const uint32_t inValue) { return (inValue & 31U) << 0 ; }
 
 //-------------------- Frame Truncation Length
 #define ENET_FTRL (* ((volatile uint32_t *) (0x400C0000 + 0x1B0)))
 
   // Field (width: 14 bits): Frame Truncation Length
-    inline uint32_t ENET_FTRL_TRUNC_FL (const uint32_t inValue) { return (inValue & 16383) << 0 ; }
+    inline uint32_t ENET_FTRL_TRUNC_FL (const uint32_t inValue) { return (inValue & 16383U) << 0 ; }
 
 //-------------------- Transmit Accelerator Function Configuration
 #define ENET_TACC (* ((volatile uint32_t *) (0x400C0000 + 0x1C0)))
@@ -6029,97 +6029,97 @@
 #define ENET_RMON_T_PACKETS (* ((const volatile uint32_t *) (0x400C0000 + 0x204)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_PACKETS_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_PACKETS_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Broadcast Packets Statistic Register
 #define ENET_RMON_T_BC_PKT (* ((const volatile uint32_t *) (0x400C0000 + 0x208)))
 
   // Field (width: 16 bits): Broadcast packets
-    inline uint32_t ENET_RMON_T_BC_PKT_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_BC_PKT_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Multicast Packets Statistic Register
 #define ENET_RMON_T_MC_PKT (* ((const volatile uint32_t *) (0x400C0000 + 0x20C)))
 
   // Field (width: 16 bits): Multicast packets
-    inline uint32_t ENET_RMON_T_MC_PKT_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_MC_PKT_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Packets with CRC/Align Error Statistic Register
 #define ENET_RMON_T_CRC_ALIGN (* ((const volatile uint32_t *) (0x400C0000 + 0x210)))
 
   // Field (width: 16 bits): Packets with CRC/align error
-    inline uint32_t ENET_RMON_T_CRC_ALIGN_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_CRC_ALIGN_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Packets Less Than Bytes and Good CRC Statistic Register
 #define ENET_RMON_T_UNDERSIZE (* ((const volatile uint32_t *) (0x400C0000 + 0x214)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_UNDERSIZE_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_UNDERSIZE_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Packets GT MAX_FL bytes and Good CRC Statistic Register
 #define ENET_RMON_T_OVERSIZE (* ((const volatile uint32_t *) (0x400C0000 + 0x218)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_OVERSIZE_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_OVERSIZE_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Packets Less Than 64 Bytes and Bad CRC Statistic Register
 #define ENET_RMON_T_FRAG (* ((const volatile uint32_t *) (0x400C0000 + 0x21C)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_FRAG_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_FRAG_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Packets Greater Than MAX_FL bytes and Bad CRC Statistic Register
 #define ENET_RMON_T_JAB (* ((const volatile uint32_t *) (0x400C0000 + 0x220)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_JAB_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_JAB_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Collision Count Statistic Register
 #define ENET_RMON_T_COL (* ((const volatile uint32_t *) (0x400C0000 + 0x224)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_COL_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_COL_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx 64-Byte Packets Statistic Register
 #define ENET_RMON_T_P64 (* ((const volatile uint32_t *) (0x400C0000 + 0x228)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P64_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P64_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx 65- to 127-byte Packets Statistic Register
 #define ENET_RMON_T_P65TO127 (* ((const volatile uint32_t *) (0x400C0000 + 0x22C)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P65TO127_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P65TO127_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx 128- to 255-byte Packets Statistic Register
 #define ENET_RMON_T_P128TO255 (* ((const volatile uint32_t *) (0x400C0000 + 0x230)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P128TO255_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P128TO255_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx 256- to 511-byte Packets Statistic Register
 #define ENET_RMON_T_P256TO511 (* ((const volatile uint32_t *) (0x400C0000 + 0x234)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P256TO511_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P256TO511_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx 512- to 1023-byte Packets Statistic Register
 #define ENET_RMON_T_P512TO1023 (* ((const volatile uint32_t *) (0x400C0000 + 0x238)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P512TO1023_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P512TO1023_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx 1024- to 2047-byte Packets Statistic Register
 #define ENET_RMON_T_P1024TO2047 (* ((const volatile uint32_t *) (0x400C0000 + 0x23C)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P1024TO2047_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P1024TO2047_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Packets Greater Than 2048 Bytes Statistic Register
 #define ENET_RMON_T_P_GTE2048 (* ((const volatile uint32_t *) (0x400C0000 + 0x240)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_T_P_GTE2048_TXPKTS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_T_P_GTE2048_TXPKTS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Tx Octets Statistic Register
 #define ENET_RMON_T_OCTETS (* ((const volatile uint32_t *) (0x400C0000 + 0x244)))
@@ -6128,55 +6128,55 @@
 #define ENET_IEEE_T_FRAME_OK (* ((const volatile uint32_t *) (0x400C0000 + 0x24C)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_FRAME_OK_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_FRAME_OK_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted with Single Collision Statistic Register
 #define ENET_IEEE_T_1COL (* ((const volatile uint32_t *) (0x400C0000 + 0x250)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_1COL_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_1COL_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted with Multiple Collisions Statistic Register
 #define ENET_IEEE_T_MCOL (* ((const volatile uint32_t *) (0x400C0000 + 0x254)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_MCOL_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_MCOL_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted after Deferral Delay Statistic Register
 #define ENET_IEEE_T_DEF (* ((const volatile uint32_t *) (0x400C0000 + 0x258)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_DEF_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_DEF_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted with Late Collision Statistic Register
 #define ENET_IEEE_T_LCOL (* ((const volatile uint32_t *) (0x400C0000 + 0x25C)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_LCOL_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_LCOL_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted with Excessive Collisions Statistic Register
 #define ENET_IEEE_T_EXCOL (* ((const volatile uint32_t *) (0x400C0000 + 0x260)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_EXCOL_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_EXCOL_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted with Tx FIFO Underrun Statistic Register
 #define ENET_IEEE_T_MACERR (* ((const volatile uint32_t *) (0x400C0000 + 0x264)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_MACERR_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_MACERR_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Transmitted with Carrier Sense Error Statistic Register
 #define ENET_IEEE_T_CSERR (* ((const volatile uint32_t *) (0x400C0000 + 0x268)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_CSERR_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_CSERR_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Flow Control Pause Frames Transmitted Statistic Register
 #define ENET_IEEE_T_FDXFC (* ((const volatile uint32_t *) (0x400C0000 + 0x270)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_T_FDXFC_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_T_FDXFC_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Octet Count for Frames Transmitted w/o Error Statistic Register
 #define ENET_IEEE_T_OCTETS_OK (* ((const volatile uint32_t *) (0x400C0000 + 0x274)))
@@ -6185,91 +6185,91 @@
 #define ENET_RMON_R_PACKETS (* ((const volatile uint32_t *) (0x400C0000 + 0x284)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_PACKETS_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_PACKETS_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Broadcast Packets Statistic Register
 #define ENET_RMON_R_BC_PKT (* ((const volatile uint32_t *) (0x400C0000 + 0x288)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_BC_PKT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_BC_PKT_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Multicast Packets Statistic Register
 #define ENET_RMON_R_MC_PKT (* ((const volatile uint32_t *) (0x400C0000 + 0x28C)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_MC_PKT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_MC_PKT_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Packets with CRC/Align Error Statistic Register
 #define ENET_RMON_R_CRC_ALIGN (* ((const volatile uint32_t *) (0x400C0000 + 0x290)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_CRC_ALIGN_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_CRC_ALIGN_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Packets with Less Than 64 Bytes and Good CRC Statistic Register
 #define ENET_RMON_R_UNDERSIZE (* ((const volatile uint32_t *) (0x400C0000 + 0x294)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_UNDERSIZE_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_UNDERSIZE_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Packets Greater Than MAX_FL and Good CRC Statistic Register
 #define ENET_RMON_R_OVERSIZE (* ((const volatile uint32_t *) (0x400C0000 + 0x298)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_OVERSIZE_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_OVERSIZE_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Packets Less Than 64 Bytes and Bad CRC Statistic Register
 #define ENET_RMON_R_FRAG (* ((const volatile uint32_t *) (0x400C0000 + 0x29C)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_FRAG_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_FRAG_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Packets Greater Than MAX_FL Bytes and Bad CRC Statistic Register
 #define ENET_RMON_R_JAB (* ((const volatile uint32_t *) (0x400C0000 + 0x2A0)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_JAB_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_JAB_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx 64-Byte Packets Statistic Register
 #define ENET_RMON_R_P64 (* ((const volatile uint32_t *) (0x400C0000 + 0x2A8)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P64_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P64_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx 65- to 127-Byte Packets Statistic Register
 #define ENET_RMON_R_P65TO127 (* ((const volatile uint32_t *) (0x400C0000 + 0x2AC)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P65TO127_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P65TO127_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx 128- to 255-Byte Packets Statistic Register
 #define ENET_RMON_R_P128TO255 (* ((const volatile uint32_t *) (0x400C0000 + 0x2B0)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P128TO255_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P128TO255_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx 256- to 511-Byte Packets Statistic Register
 #define ENET_RMON_R_P256TO511 (* ((const volatile uint32_t *) (0x400C0000 + 0x2B4)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P256TO511_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P256TO511_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx 512- to 1023-Byte Packets Statistic Register
 #define ENET_RMON_R_P512TO1023 (* ((const volatile uint32_t *) (0x400C0000 + 0x2B8)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P512TO1023_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P512TO1023_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx 1024- to 2047-Byte Packets Statistic Register
 #define ENET_RMON_R_P1024TO2047 (* ((const volatile uint32_t *) (0x400C0000 + 0x2BC)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P1024TO2047_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P1024TO2047_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Packets Greater than 2048 Bytes Statistic Register
 #define ENET_RMON_R_P_GTE2048 (* ((const volatile uint32_t *) (0x400C0000 + 0x2C0)))
 
   // Field (width: 16 bits): Packet count
-    inline uint32_t ENET_RMON_R_P_GTE2048_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_RMON_R_P_GTE2048_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Rx Octets Statistic Register
 #define ENET_RMON_R_OCTETS (* ((const volatile uint32_t *) (0x400C0000 + 0x2C4)))
@@ -6278,37 +6278,37 @@
 #define ENET_IEEE_R_DROP (* ((const volatile uint32_t *) (0x400C0000 + 0x2C8)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_R_DROP_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_R_DROP_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Received OK Statistic Register
 #define ENET_IEEE_R_FRAME_OK (* ((const volatile uint32_t *) (0x400C0000 + 0x2CC)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_R_FRAME_OK_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_R_FRAME_OK_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Received with CRC Error Statistic Register
 #define ENET_IEEE_R_CRC (* ((const volatile uint32_t *) (0x400C0000 + 0x2D0)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_R_CRC_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_R_CRC_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Frames Received with Alignment Error Statistic Register
 #define ENET_IEEE_R_ALIGN (* ((const volatile uint32_t *) (0x400C0000 + 0x2D4)))
 
   // Field (width: 16 bits): Frame count
-    inline uint32_t ENET_IEEE_R_ALIGN_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_R_ALIGN_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Receive FIFO Overflow Count Statistic Register
 #define ENET_IEEE_R_MACERR (* ((const volatile uint32_t *) (0x400C0000 + 0x2D8)))
 
   // Field (width: 16 bits): Count
-    inline uint32_t ENET_IEEE_R_MACERR_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_R_MACERR_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Flow Control Pause Frames Received Statistic Register
 #define ENET_IEEE_R_FDXFC (* ((const volatile uint32_t *) (0x400C0000 + 0x2DC)))
 
   // Field (width: 16 bits): Pause frame count
-    inline uint32_t ENET_IEEE_R_FDXFC_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ENET_IEEE_R_FDXFC_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Octet Count for Frames Received without Error Statistic Register
 #define ENET_IEEE_R_OCTETS_OK (* ((const volatile uint32_t *) (0x400C0000 + 0x2E0)))
@@ -6353,16 +6353,16 @@
 #define ENET_ATCOR (* ((volatile uint32_t *) (0x400C0000 + 0x410)))
 
   // Field (width: 31 bits): Correction Counter Wrap-Around Value
-    inline uint32_t ENET_ATCOR_COR (const uint32_t inValue) { return (inValue & 2147483647) << 0 ; }
+    inline uint32_t ENET_ATCOR_COR (const uint32_t inValue) { return (inValue & 2147483647U) << 0 ; }
 
 //-------------------- Time-Stamping Clock Period Register
 #define ENET_ATINC (* ((volatile uint32_t *) (0x400C0000 + 0x414)))
 
   // Field (width: 7 bits): Clock Period Of The Timestamping Clock (ts_clk) In Nanoseconds
-    inline uint32_t ENET_ATINC_INC (const uint32_t inValue) { return (inValue & 127) << 0 ; }
+    inline uint32_t ENET_ATINC_INC (const uint32_t inValue) { return (inValue & 127U) << 0 ; }
 
   // Field (width: 7 bits): Correction Increment Value
-    inline uint32_t ENET_ATINC_INC_CORR (const uint32_t inValue) { return (inValue & 127) << 8 ; }
+    inline uint32_t ENET_ATINC_INC_CORR (const uint32_t inValue) { return (inValue & 127U) << 8 ; }
 
 //-------------------- Timestamp of Last Transmitted Frame
 #define ENET_ATSTMP (* ((const volatile uint32_t *) (0x400C0000 + 0x418)))
@@ -6389,7 +6389,7 @@
     static const uint32_t ENET_TCSR_TDRE = 1U << 0 ;
 
   // Field (width: 4 bits): Timer Mode
-    inline uint32_t ENET_TCSR_TMODE (const uint32_t inValue) { return (inValue & 15) << 2 ; }
+    inline uint32_t ENET_TCSR_TMODE (const uint32_t inValue) { return (inValue & 15U) << 2 ; }
 
   // Boolean field: Timer Interrupt Enable
     static const uint32_t ENET_TCSR_TIE = 1U << 6 ;
@@ -6408,25 +6408,25 @@
 #define MCM_PLASC (* ((const volatile uint16_t *) (0xE0080000 + 0x8)))
 
   // Field (width: 8 bits): Each bit in the ASC field indicates whether there is a corresponding connection to the crossbar switch's slave input port.
-    inline uint16_t MCM_PLASC_ASC (const uint16_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint16_t MCM_PLASC_ASC (const uint16_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Crossbar Switch (AXBS) Master Configuration
 #define MCM_PLAMC (* ((const volatile uint16_t *) (0xE0080000 + 0xA)))
 
   // Field (width: 8 bits): Each bit in the AMC field indicates whether there is a corresponding connection to the AXBS master input port.
-    inline uint16_t MCM_PLAMC_AMC (const uint16_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint16_t MCM_PLAMC_AMC (const uint16_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- Control Register
 #define MCM_CR (* ((volatile uint32_t *) (0xE0080000 + 0xC)))
 
   // Field (width: 2 bits): SRAM_U arbitration priority
-    inline uint32_t MCM_CR_SRAMUAP (const uint32_t inValue) { return (inValue & 3) << 24 ; }
+    inline uint32_t MCM_CR_SRAMUAP (const uint32_t inValue) { return (inValue & 3U) << 24 ; }
 
   // Boolean field: SRAM_U write protect
     static const uint32_t MCM_CR_SRAMUWP = 1U << 26 ;
 
   // Field (width: 2 bits): SRAM_L arbitration priority
-    inline uint32_t MCM_CR_SRAMLAP (const uint32_t inValue) { return (inValue & 3) << 28 ; }
+    inline uint32_t MCM_CR_SRAMLAP (const uint32_t inValue) { return (inValue & 3U) << 28 ; }
 
   // Boolean field: SRAM_L Write Protect
     static const uint32_t MCM_CR_SRAMLWP = 1U << 30 ;
@@ -6486,7 +6486,7 @@
     static const uint32_t MCM_ETBCC_CNTEN = 1U << 0 ;
 
   // Field (width: 2 bits): Response Type
-    inline uint32_t MCM_ETBCC_RSPT (const uint32_t inValue) { return (inValue & 3) << 1 ; }
+    inline uint32_t MCM_ETBCC_RSPT (const uint32_t inValue) { return (inValue & 3U) << 1 ; }
 
   // Boolean field: Reload Request
     static const uint32_t MCM_ETBCC_RLRQ = 1U << 3 ;
@@ -6501,19 +6501,19 @@
 #define MCM_ETBRL (* ((volatile uint32_t *) (0xE0080000 + 0x18)))
 
   // Field (width: 11 bits): Byte Count Reload Value
-    inline uint32_t MCM_ETBRL_RELOAD (const uint32_t inValue) { return (inValue & 2047) << 0 ; }
+    inline uint32_t MCM_ETBRL_RELOAD (const uint32_t inValue) { return (inValue & 2047U) << 0 ; }
 
 //-------------------- ETB Counter Value register
 #define MCM_ETBCNT (* ((const volatile uint32_t *) (0xE0080000 + 0x1C)))
 
   // Field (width: 11 bits): Byte Count Counter Value
-    inline uint32_t MCM_ETBCNT_COUNTER (const uint32_t inValue) { return (inValue & 2047) << 0 ; }
+    inline uint32_t MCM_ETBCNT_COUNTER (const uint32_t inValue) { return (inValue & 2047U) << 0 ; }
 
 //-------------------- Process ID register
 #define MCM_PID (* ((volatile uint32_t *) (0xE0080000 + 0x30)))
 
   // Field (width: 8 bits): M0_PID And M1_PID For MPU
-    inline uint32_t MCM_PID_PID (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t MCM_PID_PID (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral CAU
@@ -6577,7 +6577,7 @@
     static const uint32_t CAU_CAU_LDR_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_LDR_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_LDR_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - Load Register command
 #define CAU_CAU_LDR_CAA (* ((volatile uint32_t *) (0xE0081000 + 0x844)))
@@ -6619,7 +6619,7 @@
     static const uint32_t CAU_CAU_STR_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_STR_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_STR_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - Store Register command
 #define CAU_CAU_STR_CAA (* ((const volatile uint32_t *) (0xE0081000 + 0x884)))
@@ -6661,7 +6661,7 @@
     static const uint32_t CAU_CAU_ADR_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_ADR_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_ADR_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - Add to register command
 #define CAU_CAU_ADR_CAA (* ((volatile uint32_t *) (0xE0081000 + 0x8C4)))
@@ -6703,7 +6703,7 @@
     static const uint32_t CAU_CAU_RADR_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_RADR_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_RADR_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - Reverse and Add to Register command
 #define CAU_CAU_RADR_CAA (* ((volatile uint32_t *) (0xE0081000 + 0x904)))
@@ -6745,7 +6745,7 @@
     static const uint32_t CAU_CAU_XOR_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_XOR_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_XOR_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - Exclusive Or command
 #define CAU_CAU_XOR_CAA (* ((volatile uint32_t *) (0xE0081000 + 0x984)))
@@ -6787,7 +6787,7 @@
     static const uint32_t CAU_CAU_ROTL_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_ROTL_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_ROTL_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - Rotate Left command
 #define CAU_CAU_ROTL_CAA (* ((volatile uint32_t *) (0xE0081000 + 0x9C4)))
@@ -6829,7 +6829,7 @@
     static const uint32_t CAU_CAU_AESC_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_AESC_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_AESC_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - AES Column Operation command
 #define CAU_CAU_AESC_CAA (* ((volatile uint32_t *) (0xE0081000 + 0xB04)))
@@ -6871,7 +6871,7 @@
     static const uint32_t CAU_CAU_AESIC_CASR_DPE = 1U << 1 ;
 
   // Field (width: 4 bits): CAU version
-    inline uint32_t CAU_CAU_AESIC_CASR_VER (const uint32_t inValue) { return (inValue & 15) << 28 ; }
+    inline uint32_t CAU_CAU_AESIC_CASR_VER (const uint32_t inValue) { return (inValue & 15U) << 28 ; }
 
 //-------------------- Accumulator register - AES Inverse Column Operation command
 #define CAU_CAU_AESIC_CAA (* ((volatile uint32_t *) (0xE0081000 + 0xB44)))
@@ -6947,7 +6947,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLMD (* ((volatile uint32_t *) (0x400BB000 + 0x54)))
 
   // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC_CLMD_CLMD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ADC_CLMD_CLMD (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- ADC Configuration Register 2
 #define ADC_CFG2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0xC)))
@@ -6958,7 +6958,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
     static const uint32_t ADC_CFG2_MUXSEL = 1U << 4 ;
 
   // Field (width: 2 bits): Long Sample Time Select
-    inline uint32_t ADC_CFG2_ADLSTS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t ADC_CFG2_ADLSTS (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: High-Speed Configuration
     static const uint32_t ADC_CFG2_ADHSC = 1U << 2 ;
@@ -6972,7 +6972,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLPS (* ((volatile uint32_t *) (0x400BB000 + 0x38)))
 
   // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC_CLPS_CLPS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ADC_CLPS_CLPS (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- ADC Configuration Register 1
 #define ADC_CFG1(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x8)))
@@ -6983,13 +6983,13 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
     static const uint32_t ADC_CFG1_ADLSMP = 1U << 4 ;
 
   // Field (width: 2 bits): Clock Divide Select
-    inline uint32_t ADC_CFG1_ADIV (const uint32_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint32_t ADC_CFG1_ADIV (const uint32_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Field (width: 2 bits): Conversion mode selection
-    inline uint32_t ADC_CFG1_MODE (const uint32_t inValue) { return (inValue & 3) << 2 ; }
+    inline uint32_t ADC_CFG1_MODE (const uint32_t inValue) { return (inValue & 3U) << 2 ; }
 
   // Field (width: 2 bits): Input Clock Select
-    inline uint32_t ADC_CFG1_ADICLK (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t ADC_CFG1_ADICLK (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Low-Power Configuration
     static const uint32_t ADC_CFG1_ADLPC = 1U << 7 ;
@@ -7000,7 +7000,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLMS (* ((volatile uint32_t *) (0x400BB000 + 0x58)))
 
   // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC_CLMS_CLMS (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ADC_CLMS_CLMS (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- ADC Plus-Side General Calibration Value Register
 #define ADC_CLPD(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x34)))
@@ -7008,7 +7008,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLPD (* ((volatile uint32_t *) (0x400BB000 + 0x34)))
 
   // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC_CLPD_CLPD (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ADC_CLPD_CLPD (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- ADC Status and Control Registers 1 (idx = 0 ... 1)
 #define ADC_SC1(group,idx) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0 + 0x4 * (idx))))
@@ -7025,7 +7025,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
     static const uint32_t ADC_SC1_AIEN = 1U << 6 ;
 
   // Field (width: 5 bits): Input channel select
-    inline uint32_t ADC_SC1_ADCH (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint32_t ADC_SC1_ADCH (const uint32_t inValue) { return (inValue & 31U) << 0 ; }
 
 //-------------------- Compare Value Registers (idx = 0 ... 1)
 #define ADC_CV(group,idx) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x18 + 0x4 * (idx))))
@@ -7033,7 +7033,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CV(idx) (* ((volatile uint32_t *) (0x400BB000 + 0x18 + 0x4 * (idx))))
 
   // Field (width: 16 bits): Compare Value.
-    inline uint32_t ADC_CV_CV (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ADC_CV_CV (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- ADC Plus-Side Gain Register
 #define ADC_PG(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x2C)))
@@ -7041,7 +7041,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_PG (* ((volatile uint32_t *) (0x400BB000 + 0x2C)))
 
   // Field (width: 16 bits): Plus-Side Gain
-    inline uint32_t ADC_PG_PG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ADC_PG_PG (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- ADC Data Result Register (idx = 0 ... 1)
 #define ADC_R(group,idx) (* ((const volatile uint32_t *) (kBaseAddress_ADC [group] + 0x10 + 0x4 * (idx))))
@@ -7049,7 +7049,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_R(idx) (* ((const volatile uint32_t *) (0x400BB000 + 0x10 + 0x4 * (idx))))
 
   // Field (width: 16 bits): Data result
-    inline uint32_t ADC_R_D (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ADC_R_D (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- ADC Offset Correction Register
 #define ADC_OFS(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x28)))
@@ -7057,7 +7057,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_OFS (* ((volatile uint32_t *) (0x400BB000 + 0x28)))
 
   // Field (width: 16 bits): Offset Error Correction Value
-    inline uint32_t ADC_OFS_OFS (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ADC_OFS_OFS (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Status and Control Register 3
 #define ADC_SC3(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x24)))
@@ -7077,7 +7077,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
     static const uint32_t ADC_SC3_CALF = 1U << 6 ;
 
   // Field (width: 2 bits): Hardware Average Select
-    inline uint32_t ADC_SC3_AVGS (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t ADC_SC3_AVGS (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
 //-------------------- Status and Control Register 2
 #define ADC_SC2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x20)))
@@ -7088,7 +7088,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
     static const uint32_t ADC_SC2_DMAEN = 1U << 2 ;
 
   // Field (width: 2 bits): Voltage Reference Selection
-    inline uint32_t ADC_SC2_REFSEL (const uint32_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint32_t ADC_SC2_REFSEL (const uint32_t inValue) { return (inValue & 3U) << 0 ; }
 
   // Boolean field: Conversion Active
     static const uint32_t ADC_SC2_ADACT = 1U << 7 ;
@@ -7111,7 +7111,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_MG (* ((volatile uint32_t *) (0x400BB000 + 0x30)))
 
   // Field (width: 16 bits): Minus-Side Gain
-    inline uint32_t ADC_MG_MG (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t ADC_MG_MG (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- ADC Plus-Side General Calibration Value Register
 #define ADC_CLP1(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x48)))
@@ -7119,7 +7119,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLP1 (* ((volatile uint32_t *) (0x400BB000 + 0x48)))
 
   // Field (width: 7 bits): Calibration Value
-    inline uint32_t ADC_CLP1_CLP1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
+    inline uint32_t ADC_CLP1_CLP1 (const uint32_t inValue) { return (inValue & 127U) << 0 ; }
 
 //-------------------- ADC Plus-Side General Calibration Value Register
 #define ADC_CLP0(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x4C)))
@@ -7127,7 +7127,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLP0 (* ((volatile uint32_t *) (0x400BB000 + 0x4C)))
 
   // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC_CLP0_CLP0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ADC_CLP0_CLP0 (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- ADC Plus-Side General Calibration Value Register
 #define ADC_CLP3(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x40)))
@@ -7135,7 +7135,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLP3 (* ((volatile uint32_t *) (0x400BB000 + 0x40)))
 
   // Field (width: 9 bits): Calibration Value
-    inline uint32_t ADC_CLP3_CLP3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
+    inline uint32_t ADC_CLP3_CLP3 (const uint32_t inValue) { return (inValue & 511U) << 0 ; }
 
 //-------------------- ADC Plus-Side General Calibration Value Register
 #define ADC_CLP2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x44)))
@@ -7143,7 +7143,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLP2 (* ((volatile uint32_t *) (0x400BB000 + 0x44)))
 
   // Field (width: 8 bits): Calibration Value
-    inline uint32_t ADC_CLP2_CLP2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ADC_CLP2_CLP2 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- ADC Plus-Side General Calibration Value Register
 #define ADC_CLP4(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x3C)))
@@ -7151,7 +7151,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLP4 (* ((volatile uint32_t *) (0x400BB000 + 0x3C)))
 
   // Field (width: 10 bits): Calibration Value
-    inline uint32_t ADC_CLP4_CLP4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+    inline uint32_t ADC_CLP4_CLP4 (const uint32_t inValue) { return (inValue & 1023U) << 0 ; }
 
 //-------------------- ADC Minus-Side General Calibration Value Register
 #define ADC_CLM2(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x64)))
@@ -7159,7 +7159,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLM2 (* ((volatile uint32_t *) (0x400BB000 + 0x64)))
 
   // Field (width: 8 bits): Calibration Value
-    inline uint32_t ADC_CLM2_CLM2 (const uint32_t inValue) { return (inValue & 255) << 0 ; }
+    inline uint32_t ADC_CLM2_CLM2 (const uint32_t inValue) { return (inValue & 255U) << 0 ; }
 
 //-------------------- ADC Minus-Side General Calibration Value Register
 #define ADC_CLM3(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x60)))
@@ -7167,7 +7167,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLM3 (* ((volatile uint32_t *) (0x400BB000 + 0x60)))
 
   // Field (width: 9 bits): Calibration Value
-    inline uint32_t ADC_CLM3_CLM3 (const uint32_t inValue) { return (inValue & 511) << 0 ; }
+    inline uint32_t ADC_CLM3_CLM3 (const uint32_t inValue) { return (inValue & 511U) << 0 ; }
 
 //-------------------- ADC Minus-Side General Calibration Value Register
 #define ADC_CLM0(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x6C)))
@@ -7175,7 +7175,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLM0 (* ((volatile uint32_t *) (0x400BB000 + 0x6C)))
 
   // Field (width: 6 bits): Calibration Value
-    inline uint32_t ADC_CLM0_CLM0 (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t ADC_CLM0_CLM0 (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
 //-------------------- ADC Minus-Side General Calibration Value Register
 #define ADC_CLM1(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x68)))
@@ -7183,7 +7183,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLM1 (* ((volatile uint32_t *) (0x400BB000 + 0x68)))
 
   // Field (width: 7 bits): Calibration Value
-    inline uint32_t ADC_CLM1_CLM1 (const uint32_t inValue) { return (inValue & 127) << 0 ; }
+    inline uint32_t ADC_CLM1_CLM1 (const uint32_t inValue) { return (inValue & 127U) << 0 ; }
 
 //-------------------- ADC Minus-Side General Calibration Value Register
 #define ADC_CLM4(group) (* ((volatile uint32_t *) (kBaseAddress_ADC [group] + 0x5C)))
@@ -7191,7 +7191,7 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003B000, 0x400BB000} ;
 #define ADC1_CLM4 (* ((volatile uint32_t *) (0x400BB000 + 0x5C)))
 
   // Field (width: 10 bits): Calibration Value
-    inline uint32_t ADC_CLM4_CLM4 (const uint32_t inValue) { return (inValue & 1023) << 0 ; }
+    inline uint32_t ADC_CLM4_CLM4 (const uint32_t inValue) { return (inValue & 1023U) << 0 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral group AIPS
@@ -8535,10 +8535,10 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 #define CMP2_CR0 (* ((volatile uint8_t *) (0x40073010 + 0)))
 
   // Field (width: 3 bits): Filter Sample Count
-    inline uint8_t CMP_CR0_FILTER_CNT (const uint8_t inValue) { return (inValue & 7) << 4 ; }
+    inline uint8_t CMP_CR0_FILTER_CNT (const uint8_t inValue) { return (inValue & 7U) << 4 ; }
 
   // Field (width: 2 bits): Comparator hard block hysteresis control
-    inline uint8_t CMP_CR0_HYSTCTR (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t CMP_CR0_HYSTCTR (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
 //-------------------- CMP Control Register 1
 #define CMP_CR1(group) (* ((volatile uint8_t *) (kBaseAddress_CMP [group] + 0x1)))
@@ -8574,10 +8574,10 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 #define CMP2_MUXCR (* ((volatile uint8_t *) (0x40073010 + 0x5)))
 
   // Field (width: 3 bits): Minus Input Mux Control
-    inline uint8_t CMP_MUXCR_MSEL (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint8_t CMP_MUXCR_MSEL (const uint8_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 3 bits): Plus Input Mux Control
-    inline uint8_t CMP_MUXCR_PSEL (const uint8_t inValue) { return (inValue & 7) << 3 ; }
+    inline uint8_t CMP_MUXCR_PSEL (const uint8_t inValue) { return (inValue & 7U) << 3 ; }
 
   // Boolean field: Pass Through Mode Enable
     static const uint8_t CMP_MUXCR_PSTM = 1U << 7 ;
@@ -8598,7 +8598,7 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
     static const uint8_t CMP_DACCR_DACEN = 1U << 7 ;
 
   // Field (width: 6 bits): DAC Output Voltage Select
-    inline uint8_t CMP_DACCR_VOSEL (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint8_t CMP_DACCR_VOSEL (const uint8_t inValue) { return (inValue & 63U) << 0 ; }
 
   // Boolean field: Supply Voltage Reference Source Select
     static const uint8_t CMP_DACCR_VRSEL = 1U << 6 ;
@@ -8643,7 +8643,7 @@ static const uint32_t kBaseAddress_DAC [2] = {0x400CC000, 0x400CD000} ;
 #define DAC1_DATH(idx) (* ((volatile uint8_t *) (0x400CD000 + 0x1 + 0x2 * (idx))))
 
   // Field (width: 4 bits): When the DAC Buffer is not enabled, DATA[11:0] controls the output voltage based on the following formula
-    inline uint8_t DAC_DATH_DATA1 (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DAC_DATH_DATA1 (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
 //-------------------- DAC Status Register
 #define DAC_SR(group) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x20)))
@@ -8665,10 +8665,10 @@ static const uint32_t kBaseAddress_DAC [2] = {0x400CC000, 0x400CD000} ;
 #define DAC1_C2 (* ((volatile uint8_t *) (0x400CD000 + 0x23)))
 
   // Field (width: 4 bits): DAC Buffer Upper Limit
-    inline uint8_t DAC_C2_DACBFUP (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t DAC_C2_DACBFUP (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): DAC Buffer Read Pointer
-    inline uint8_t DAC_C2_DACBFRP (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint8_t DAC_C2_DACBFRP (const uint8_t inValue) { return (inValue & 15U) << 4 ; }
 
 //-------------------- DAC Control Register 1
 #define DAC_C1(group) (* ((volatile uint8_t *) (kBaseAddress_DAC [group] + 0x22)))
@@ -8676,13 +8676,13 @@ static const uint32_t kBaseAddress_DAC [2] = {0x400CC000, 0x400CD000} ;
 #define DAC1_C1 (* ((volatile uint8_t *) (0x400CD000 + 0x22)))
 
   // Field (width: 2 bits): DAC Buffer Work Mode Select
-    inline uint8_t DAC_C1_DACBFMD (const uint8_t inValue) { return (inValue & 3) << 1 ; }
+    inline uint8_t DAC_C1_DACBFMD (const uint8_t inValue) { return (inValue & 3U) << 1 ; }
 
   // Boolean field: DAC Buffer Enable
     static const uint8_t DAC_C1_DACBFEN = 1U << 0 ;
 
   // Field (width: 2 bits): DAC Buffer Watermark Select
-    inline uint8_t DAC_C1_DACBFWM (const uint8_t inValue) { return (inValue & 3) << 3 ; }
+    inline uint8_t DAC_C1_DACBFWM (const uint8_t inValue) { return (inValue & 3U) << 3 ; }
 
   // Boolean field: DMA Enable Select
     static const uint8_t DAC_C1_DMAEN = 1U << 7 ;
@@ -8863,7 +8863,7 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_CNTIN (* ((volatile uint32_t *) (0x400B9000 + 0x4C)))
 
   // Field (width: 16 bits): Initial Value Of The FTM Counter
-    inline uint32_t FTM_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t FTM_CNTIN_INIT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Configuration
 #define FTM_CONF(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x84)))
@@ -8876,10 +8876,10 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
     static const uint32_t FTM_CONF_GTBEOUT = 1U << 10 ;
 
   // Field (width: 5 bits): TOF Frequency
-    inline uint32_t FTM_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint32_t FTM_CONF_NUMTOF (const uint32_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Field (width: 2 bits): BDM Mode
-    inline uint32_t FTM_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint32_t FTM_CONF_BDMMODE (const uint32_t inValue) { return (inValue & 3U) << 6 ; }
 
   // Boolean field: Global Time Base Enable
     static const uint32_t FTM_CONF_GTBEEN = 1U << 9 ;
@@ -9012,7 +9012,7 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
     static const uint32_t FTM_MODE_PWMSYNC = 1U << 3 ;
 
   // Field (width: 2 bits): Fault Control Mode
-    inline uint32_t FTM_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3) << 5 ; }
+    inline uint32_t FTM_MODE_FAULTM (const uint32_t inValue) { return (inValue & 3U) << 5 ; }
 
   // Boolean field: Initialize The Channels Output
     static const uint32_t FTM_MODE_INIT = 1U << 1 ;
@@ -9081,7 +9081,7 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_CNT (* ((volatile uint32_t *) (0x400B9000 + 0x4)))
 
   // Field (width: 16 bits): Counter Value
-    inline uint32_t FTM_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t FTM_CNT_COUNT (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Output Mask
 #define FTM_OUTMASK(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x60)))
@@ -9223,7 +9223,7 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
     static const uint32_t FTM_FLTCTRL_FAULT2EN = 1U << 2 ;
 
   // Field (width: 4 bits): Fault Input Filter
-    inline uint32_t FTM_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t FTM_FLTCTRL_FFVAL (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Boolean field: Fault Input 0 Filter Enable
     static const uint32_t FTM_FLTCTRL_FFLTR0EN = 1U << 4 ;
@@ -9323,16 +9323,16 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_FILTER (* ((volatile uint32_t *) (0x400B9000 + 0x78)))
 
   // Field (width: 4 bits): Channel 1 Input Filter
-    inline uint32_t FTM_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint32_t FTM_FILTER_CH1FVAL (const uint32_t inValue) { return (inValue & 15U) << 4 ; }
 
   // Field (width: 4 bits): Channel 0 Input Filter
-    inline uint32_t FTM_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t FTM_FILTER_CH0FVAL (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): Channel 3 Input Filter
-    inline uint32_t FTM_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t FTM_FILTER_CH3FVAL (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Field (width: 4 bits): Channel 2 Input Filter
-    inline uint32_t FTM_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t FTM_FILTER_CH2FVAL (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
 //-------------------- FTM External Trigger
 #define FTM_EXTTRIG(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x6C)))
@@ -9404,7 +9404,7 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_CV(idx) (* ((volatile uint32_t *) (0x400B9000 + 0x10 + 0x8 * (idx))))
 
   // Field (width: 16 bits): Channel Value
-    inline uint32_t FTM_CV_VAL (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t FTM_CV_VAL (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Status And Control
 #define FTM_SC(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0)))
@@ -9414,10 +9414,10 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_SC (* ((volatile uint32_t *) (0x400B9000 + 0)))
 
   // Field (width: 3 bits): Prescale Factor Selection
-    inline uint32_t FTM_SC_PS (const uint32_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint32_t FTM_SC_PS (const uint32_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Field (width: 2 bits): Clock Source Selection
-    inline uint32_t FTM_SC_CLKS (const uint32_t inValue) { return (inValue & 3) << 3 ; }
+    inline uint32_t FTM_SC_CLKS (const uint32_t inValue) { return (inValue & 3U) << 3 ; }
 
   // Boolean field: Timer Overflow Flag
     static const uint32_t FTM_SC_TOF = 1U << 7 ;
@@ -9436,7 +9436,7 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_MOD (* ((volatile uint32_t *) (0x400B9000 + 0x8)))
 
   // Field (width: 16 bits): Modulo Value
-    inline uint32_t FTM_MOD_MOD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t FTM_MOD_MOD (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- Deadtime Insertion Control
 #define FTM_DEADTIME(group) (* ((volatile uint32_t *) (kBaseAddress_FTM [group] + 0x68)))
@@ -9446,10 +9446,10 @@ static const uint32_t kBaseAddress_FTM [4] = {0x40038000, 0x40039000, 0x4003A000
 #define FTM3_DEADTIME (* ((volatile uint32_t *) (0x400B9000 + 0x68)))
 
   // Field (width: 6 bits): Deadtime Value
-    inline uint32_t FTM_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint32_t FTM_DEADTIME_DTVAL (const uint32_t inValue) { return (inValue & 63U) << 0 ; }
 
   // Field (width: 2 bits): Deadtime Prescaler Value
-    inline uint32_t FTM_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint32_t FTM_DEADTIME_DTPS (const uint32_t inValue) { return (inValue & 3U) << 6 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral group GPIO
@@ -9536,10 +9536,10 @@ static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000
 #define I2C2_F (* ((volatile uint8_t *) (0x400E6000 + 0x1)))
 
   // Field (width: 6 bits): ClockRate
-    inline uint8_t I2C_F_ICR (const uint8_t inValue) { return (inValue & 63) << 0 ; }
+    inline uint8_t I2C_F_ICR (const uint8_t inValue) { return (inValue & 63U) << 0 ; }
 
   // Field (width: 2 bits): Multiplier Factor
-    inline uint8_t I2C_F_MULT (const uint8_t inValue) { return (inValue & 3) << 6 ; }
+    inline uint8_t I2C_F_MULT (const uint8_t inValue) { return (inValue & 3U) << 6 ; }
 
 //-------------------- I2C SCL Low Timeout Register Low
 #define I2C_SLTL(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0xB)))
@@ -9566,7 +9566,7 @@ static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000
     static const uint8_t I2C_FLT_STARTF = 1U << 4 ;
 
   // Field (width: 4 bits): I2C Programmable Filter Factor
-    inline uint8_t I2C_FLT_FLT (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t I2C_FLT_FLT (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
 //-------------------- I2C SCL Low Timeout Register High
 #define I2C_SLTH(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0xA)))
@@ -9581,7 +9581,7 @@ static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000
 #define I2C2_A1 (* ((volatile uint8_t *) (0x400E6000 + 0)))
 
   // Field (width: 7 bits): Address
-    inline uint8_t I2C_A1_AD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+    inline uint8_t I2C_A1_AD (const uint8_t inValue) { return (inValue & 127U) << 1 ; }
 
 //-------------------- I2C Status register
 #define I2C_S(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x3)))
@@ -9620,7 +9620,7 @@ static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000
 #define I2C2_A2 (* ((volatile uint8_t *) (0x400E6000 + 0x9)))
 
   // Field (width: 7 bits): SMBus Address
-    inline uint8_t I2C_A2_SAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+    inline uint8_t I2C_A2_SAD (const uint8_t inValue) { return (inValue & 127U) << 1 ; }
 
 //-------------------- I2C Range Address register
 #define I2C_RA(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x7)))
@@ -9629,7 +9629,7 @@ static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000
 #define I2C2_RA (* ((volatile uint8_t *) (0x400E6000 + 0x7)))
 
   // Field (width: 7 bits): Range Slave Address
-    inline uint8_t I2C_RA_RAD (const uint8_t inValue) { return (inValue & 127) << 1 ; }
+    inline uint8_t I2C_RA_RAD (const uint8_t inValue) { return (inValue & 127U) << 1 ; }
 
 //-------------------- I2C Control Register 2
 #define I2C_C2(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x5)))
@@ -9653,7 +9653,7 @@ static const uint32_t kBaseAddress_I2C [3] = {0x40066000, 0x40067000, 0x400E6000
     static const uint8_t I2C_C2_RMEN = 1U << 3 ;
 
   // Field (width: 3 bits): Slave Address
-    inline uint8_t I2C_C2_AD (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint8_t I2C_C2_AD (const uint8_t inValue) { return (inValue & 7U) << 0 ; }
 
 //-------------------- I2C Control Register 1
 #define I2C_C1(group) (* ((volatile uint8_t *) (kBaseAddress_I2C [group] + 0x2)))
@@ -9764,7 +9764,7 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004A000, 0x4004B00
 #define PORTE_DFWR (* ((volatile uint32_t *) (0x4004D000 + 0xC8)))
 
   // Field (width: 5 bits): Filter Length
-    inline uint32_t PORT_DFWR_FILT (const uint32_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint32_t PORT_DFWR_FILT (const uint32_t inValue) { return (inValue & 31U) << 0 ; }
 
 //-------------------- Global Pin Control Low Register
 #define PORT_GPCLR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0x80)))
@@ -9775,10 +9775,10 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004A000, 0x4004B00
 #define PORTE_GPCLR (* ((volatile uint32_t *) (0x4004D000 + 0x80)))
 
   // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORT_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PORT_GPCLR_GPWD (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORT_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t PORT_GPCLR_GPWE (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Global Pin Control High Register
 #define PORT_GPCHR(group) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0x84)))
@@ -9789,10 +9789,10 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004A000, 0x4004B00
 #define PORTE_GPCHR (* ((volatile uint32_t *) (0x4004D000 + 0x84)))
 
   // Field (width: 16 bits): Global Pin Write Data
-    inline uint32_t PORT_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t PORT_GPCHR_GPWD (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): Global Pin Write Enable
-    inline uint32_t PORT_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t PORT_GPCHR_GPWE (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Pin Control Register n (idx = 0 ... 31)
 #define PORT_PCR(group,idx) (* ((volatile uint32_t *) (kBaseAddress_PORT [group] + 0 + 0x4 * (idx))))
@@ -9815,7 +9815,7 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004A000, 0x4004B00
     static const uint32_t PORT_PCR_SRE = 1U << 2 ;
 
   // Field (width: 3 bits): Pin Mux Control
-    inline uint32_t PORT_PCR_MUX (const uint32_t inValue) { return (inValue & 7) << 8 ; }
+    inline uint32_t PORT_PCR_MUX (const uint32_t inValue) { return (inValue & 7U) << 8 ; }
 
   // Boolean field: Lock Register
     static const uint32_t PORT_PCR_LK = 1U << 15 ;
@@ -9824,7 +9824,7 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004A000, 0x4004B00
     static const uint32_t PORT_PCR_PE = 1U << 1 ;
 
   // Field (width: 4 bits): Interrupt Configuration
-    inline uint32_t PORT_PCR_IRQC (const uint32_t inValue) { return (inValue & 15) << 16 ; }
+    inline uint32_t PORT_PCR_IRQC (const uint32_t inValue) { return (inValue & 15U) << 16 ; }
 
   // Boolean field: Drive Strength Enable
     static const uint32_t PORT_PCR_DSE = 1U << 6 ;
@@ -9868,16 +9868,16 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
     static const uint32_t SPI_PUSHR_CTCNT = 1U << 26 ;
 
   // Field (width: 6 bits): Select which PCS signals are to be asserted for the transfer
-    inline uint32_t SPI_PUSHR_PCS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
+    inline uint32_t SPI_PUSHR_PCS (const uint32_t inValue) { return (inValue & 63U) << 16 ; }
 
   // Boolean field: End Of Queue
     static const uint32_t SPI_PUSHR_EOQ = 1U << 27 ;
 
   // Field (width: 3 bits): Clock and Transfer Attributes Select
-    inline uint32_t SPI_PUSHR_CTAS (const uint32_t inValue) { return (inValue & 7) << 28 ; }
+    inline uint32_t SPI_PUSHR_CTAS (const uint32_t inValue) { return (inValue & 7U) << 28 ; }
 
   // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI_PUSHR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t SPI_PUSHR_TXDATA (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
 //-------------------- DMA/Interrupt Request Select and Enable Register
 #define SPI_RSER(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x30)))
@@ -9925,19 +9925,19 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
     static const uint32_t SPI_SR_TFUF = 1U << 27 ;
 
   // Field (width: 4 bits): Transmit Next Pointer
-    inline uint32_t SPI_SR_TXNXTPTR (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t SPI_SR_TXNXTPTR (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Field (width: 4 bits): Pop Next Pointer
-    inline uint32_t SPI_SR_POPNXTPTR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t SPI_SR_POPNXTPTR (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): RX FIFO Counter
-    inline uint32_t SPI_SR_RXCTR (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint32_t SPI_SR_RXCTR (const uint32_t inValue) { return (inValue & 15U) << 4 ; }
 
   // Boolean field: Transfer Complete Flag
     static const uint32_t SPI_SR_TCF = 1U << 31 ;
 
   // Field (width: 4 bits): TX FIFO Counter
-    inline uint32_t SPI_SR_TXCTR (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t SPI_SR_TXCTR (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Boolean field: Transmit FIFO Fill Flag
     static const uint32_t SPI_SR_TFFF = 1U << 25 ;
@@ -9955,43 +9955,43 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
 #define SPI2_CTAR(idx) (* ((volatile uint32_t *) (0x400AC000 + 0xC + 0x4 * (idx))))
 
   // Field (width: 2 bits): PCS to SCK Delay Prescaler
-    inline uint32_t SPI_CTAR_PCSSCK (const uint32_t inValue) { return (inValue & 3) << 22 ; }
+    inline uint32_t SPI_CTAR_PCSSCK (const uint32_t inValue) { return (inValue & 3U) << 22 ; }
 
   // Boolean field: Clock Polarity
     static const uint32_t SPI_CTAR_CPOL = 1U << 26 ;
 
   // Field (width: 2 bits): Baud Rate Prescaler
-    inline uint32_t SPI_CTAR_PBR (const uint32_t inValue) { return (inValue & 3) << 16 ; }
+    inline uint32_t SPI_CTAR_PBR (const uint32_t inValue) { return (inValue & 3U) << 16 ; }
 
   // Field (width: 2 bits): Delay after Transfer Prescaler
-    inline uint32_t SPI_CTAR_PDT (const uint32_t inValue) { return (inValue & 3) << 18 ; }
+    inline uint32_t SPI_CTAR_PDT (const uint32_t inValue) { return (inValue & 3U) << 18 ; }
 
   // Boolean field: Clock Phase
     static const uint32_t SPI_CTAR_CPHA = 1U << 25 ;
 
   // Field (width: 4 bits): After SCK Delay Scaler
-    inline uint32_t SPI_CTAR_ASC (const uint32_t inValue) { return (inValue & 15) << 8 ; }
+    inline uint32_t SPI_CTAR_ASC (const uint32_t inValue) { return (inValue & 15U) << 8 ; }
 
   // Field (width: 4 bits): PCS to SCK Delay Scaler
-    inline uint32_t SPI_CTAR_CSSCK (const uint32_t inValue) { return (inValue & 15) << 12 ; }
+    inline uint32_t SPI_CTAR_CSSCK (const uint32_t inValue) { return (inValue & 15U) << 12 ; }
 
   // Field (width: 4 bits): Frame Size
-    inline uint32_t SPI_CTAR_FMSZ (const uint32_t inValue) { return (inValue & 15) << 27 ; }
+    inline uint32_t SPI_CTAR_FMSZ (const uint32_t inValue) { return (inValue & 15U) << 27 ; }
 
   // Field (width: 4 bits): Baud Rate Scaler
-    inline uint32_t SPI_CTAR_BR (const uint32_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint32_t SPI_CTAR_BR (const uint32_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Boolean field: LSB First
     static const uint32_t SPI_CTAR_LSBFE = 1U << 24 ;
 
   // Field (width: 4 bits): Delay After Transfer Scaler
-    inline uint32_t SPI_CTAR_DT (const uint32_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint32_t SPI_CTAR_DT (const uint32_t inValue) { return (inValue & 15U) << 4 ; }
 
   // Boolean field: Double Baud Rate
     static const uint32_t SPI_CTAR_DBR = 1U << 31 ;
 
   // Field (width: 2 bits): After SCK Delay Prescaler
-    inline uint32_t SPI_CTAR_PASC (const uint32_t inValue) { return (inValue & 3) << 20 ; }
+    inline uint32_t SPI_CTAR_PASC (const uint32_t inValue) { return (inValue & 3U) << 20 ; }
 
 //-------------------- Transfer Count Register
 #define SPI_TCR(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0x8)))
@@ -10000,7 +10000,7 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
 #define SPI2_TCR (* ((volatile uint32_t *) (0x400AC000 + 0x8)))
 
   // Field (width: 16 bits): SPI Transfer Counter
-    inline uint32_t SPI_TCR_SPI_TCNT (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t SPI_TCR_SPI_TCNT (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- POP RX FIFO Register
 #define SPI_POPR(group) (* ((const volatile uint32_t *) (kBaseAddress_SPI [group] + 0x38)))
@@ -10021,7 +10021,7 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
     static const uint32_t SPI_CTAR_SLAVE_CPHA = 1U << 25 ;
 
   // Field (width: 5 bits): Frame Size
-    inline uint32_t SPI_CTAR_SLAVE_FMSZ (const uint32_t inValue) { return (inValue & 31) << 27 ; }
+    inline uint32_t SPI_CTAR_SLAVE_FMSZ (const uint32_t inValue) { return (inValue & 31U) << 27 ; }
 
 //-------------------- Transmit FIFO Registers (idx = 0 ... 3)
 #define SPI_TXFR(group,idx) (* ((const volatile uint32_t *) (kBaseAddress_SPI [group] + 0x3C + 0x4 * (idx))))
@@ -10030,10 +10030,10 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
 #define SPI2_TXFR(idx) (* ((const volatile uint32_t *) (0x400AC000 + 0x3C + 0x4 * (idx))))
 
   // Field (width: 16 bits): Transmit Data
-    inline uint32_t SPI_TXFR_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 0 ; }
+    inline uint32_t SPI_TXFR_TXDATA (const uint32_t inValue) { return (inValue & 65535U) << 0 ; }
 
   // Field (width: 16 bits): Transmit Command or Transmit Data
-    inline uint32_t SPI_TXFR_TXCMD_TXDATA (const uint32_t inValue) { return (inValue & 65535) << 16 ; }
+    inline uint32_t SPI_TXFR_TXCMD_TXDATA (const uint32_t inValue) { return (inValue & 65535U) << 16 ; }
 
 //-------------------- Module Configuration Register
 #define SPI_MCR(group) (* ((volatile uint32_t *) (kBaseAddress_SPI [group] + 0)))
@@ -10045,7 +10045,7 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
     static const uint32_t SPI_MCR_DIS_RXF = 1U << 12 ;
 
   // Field (width: 6 bits): Peripheral Chip Select x Inactive State
-    inline uint32_t SPI_MCR_PCSIS (const uint32_t inValue) { return (inValue & 63) << 16 ; }
+    inline uint32_t SPI_MCR_PCSIS (const uint32_t inValue) { return (inValue & 63U) << 16 ; }
 
   // Boolean field: Halt
     static const uint32_t SPI_MCR_HALT = 1U << 0 ;
@@ -10084,10 +10084,10 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002C000, 0x4002D000, 0x400AC000
     static const uint32_t SPI_MCR_FRZ = 1U << 27 ;
 
   // Field (width: 2 bits): SPI Configuration.
-    inline uint32_t SPI_MCR_DCONF (const uint32_t inValue) { return (inValue & 3) << 28 ; }
+    inline uint32_t SPI_MCR_DCONF (const uint32_t inValue) { return (inValue & 3U) << 28 ; }
 
   // Field (width: 2 bits): Sample Point
-    inline uint32_t SPI_MCR_SMPL_PT (const uint32_t inValue) { return (inValue & 3) << 8 ; }
+    inline uint32_t SPI_MCR_SMPL_PT (const uint32_t inValue) { return (inValue & 3U) << 8 ; }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Peripheral group UART
@@ -10452,7 +10452,7 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
     static const uint8_t UART_C4_M10 = 1U << 5 ;
 
   // Field (width: 5 bits): Baud Rate Fine Adjust
-    inline uint8_t UART_C4_BRFA (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint8_t UART_C4_BRFA (const uint8_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Boolean field: Match Address Mode Enable 1
     static const uint8_t UART_C4_MAEN1 = 1U << 7 ;
@@ -10497,7 +10497,7 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
     static const uint8_t UART_IR_IREN = 1U << 2 ;
 
   // Field (width: 2 bits): Transmitter narrow pulse
-    inline uint8_t UART_IR_TNP (const uint8_t inValue) { return (inValue & 3) << 0 ; }
+    inline uint8_t UART_IR_TNP (const uint8_t inValue) { return (inValue & 3U) << 0 ; }
 
 //-------------------- UART Baud Rate Registers: High
 #define UART_BDH(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0)))
@@ -10509,7 +10509,7 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
 #define UART5_BDH (* ((volatile uint8_t *) (0x400EB000 + 0)))
 
   // Field (width: 5 bits): UART Baud Rate Bits
-    inline uint8_t UART_BDH_SBR (const uint8_t inValue) { return (inValue & 31) << 0 ; }
+    inline uint8_t UART_BDH_SBR (const uint8_t inValue) { return (inValue & 31U) << 0 ; }
 
   // Boolean field: Stop Bit Number Select
     static const uint8_t UART_BDH_SBNS = 1U << 5 ;
@@ -10566,10 +10566,10 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
     static const uint8_t UART_PFIFO_TXFE = 1U << 7 ;
 
   // Field (width: 3 bits): Transmit FIFO. Buffer Depth
-    inline uint8_t UART_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 4 ; }
+    inline uint8_t UART_PFIFO_TXFIFOSIZE (const uint8_t inValue) { return (inValue & 7U) << 4 ; }
 
   // Field (width: 3 bits): Receive FIFO. Buffer Depth
-    inline uint8_t UART_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7) << 0 ; }
+    inline uint8_t UART_PFIFO_RXFIFOSIZE (const uint8_t inValue) { return (inValue & 7U) << 0 ; }
 
   // Boolean field: Receive FIFO Enable
     static const uint8_t UART_PFIFO_RXFE = 1U << 3 ;
@@ -10584,10 +10584,10 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
 #define UART5_WP7816T1 (* ((volatile uint8_t *) (0x400EB000 + 0x1B)))
 
   // Field (width: 4 bits): Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint8_t UART_WP7816T1_CWI (const uint8_t inValue) { return (inValue & 15U) << 4 ; }
 
   // Field (width: 4 bits): Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t UART_WP7816T1_BWI (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
 //-------------------- UART 7816 Wait Parameter Register
 #define UART_WP7816T0(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x1B)))
@@ -10662,10 +10662,10 @@ static const uint32_t kBaseAddress_UART [6] = {0x4006A000, 0x4006B000, 0x4006C00
 #define UART5_ET7816 (* ((volatile uint8_t *) (0x400EB000 + 0x1E)))
 
   // Field (width: 4 bits): Receive NACK Threshold
-    inline uint8_t UART_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 0 ; }
+    inline uint8_t UART_ET7816_RXTHRESHOLD (const uint8_t inValue) { return (inValue & 15U) << 0 ; }
 
   // Field (width: 4 bits): Transmit NACK Threshold
-    inline uint8_t UART_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15) << 4 ; }
+    inline uint8_t UART_ET7816_TXTHRESHOLD (const uint8_t inValue) { return (inValue & 15U) << 4 ; }
 
 //-------------------- UART FIFO Transmit Watermark
 #define UART_TWFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_UART [group] + 0x13)))

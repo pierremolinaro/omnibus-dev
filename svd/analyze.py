@@ -13,6 +13,159 @@ def cppComment () :
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+def asComment () :
+  return "@" + "—" * 119 + "\n"
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+def pyComment () :
+  return "#" + "—" * 119 + "\n"
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#   FOR PRINTING IN COLOR                                                                                              *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+def BLACK () :
+  return '\033[90m'
+
+#······················································································································*
+
+def RED () :
+  return '\033[91m'
+
+#······················································································································*
+
+def GREEN () :
+  return '\033[92m'
+
+#······················································································································*
+
+def YELLOW () :
+  return '\033[93m'
+
+#······················································································································*
+
+def BLUE () :
+  return '\033[94m'
+
+#······················································································································*
+
+def MAGENTA () :
+  return '\033[95m'
+
+#······················································································································*
+
+def CYAN () :
+  return '\033[96m'
+
+#······················································································································*
+
+def WHITE () :
+  return '\033[97m'
+
+#······················································································································*
+
+def ENDC () :
+  return '\033[0m'
+
+#······················································································································*
+
+def BOLD () :
+  return '\033[1m'
+
+#······················································································································*
+
+def UNDERLINE () :
+  return '\033[4m'
+
+#······················································································································*
+
+def BLINK () :
+  return '\033[5m'
+
+#······················································································································*
+
+def BOLD_BLUE () :
+  return BOLD () + BLUE ()
+
+#······················································································································*
+
+def BOLD_MAGENTA () :
+  return BOLD () + MAGENTA ()
+
+#······················································································································*
+
+def BOLD_GREEN () :
+  return BOLD () + GREEN ()
+
+#······················································································································*
+
+def BOLD_RED () :
+  return BOLD () + RED ()
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+def writeInterruptVectors (root, stringArray) :
+  stringArray [2] += "#!/usr/bin/python\n"
+  stringArray [2] += "# -*- coding: utf-8 -*-\n\n"
+  stringArray [2] += pyComment () + "\n"
+  stringArray [2] += "def interruptNames () :\n"
+  stringArray [2] += "  result = {}\n"
+  stringArray [2] += "  result [\"NMI\"] = 2\n"
+  stringArray [2] += "  result [\"HardFault\"] = 3\n"
+  stringArray [2] += "  result [\"MemManage\"] = 4\n"
+  stringArray [2] += "  result [\"BusFault\"] = 5\n"
+  stringArray [2] += "  result [\"UsageFault\"] = 6\n"
+  stringArray [2] += "  result [\"SVC\"] = 11\n"
+  stringArray [2] += "  result [\"DebugMonitor\"] = 12\n"
+  stringArray [2] += "  result [\"PendSV\"] = 14\n"
+  stringArray [2] += "  result [\"SysTick\"] = 15\n"
+  stringArray [1] += asComment ()
+  stringArray [1] += "@   INTERRUPT VECTORS\n"
+  stringArray [1] += asComment () + "\n"
+  interruptNameArray = []
+  for i in range (0, 256 - 16) :
+    interruptNameArray.append ("")
+  for interrupt in root.iter ('interrupt') :
+    interruptName = interrupt.find ('name').text
+    interruptValue = int (interrupt.find ('value').text)
+    interruptNameArray [interruptValue] = interruptName
+  stringArray [1] += "	.syntax unified\n"
+  stringArray [1] += "	.cpu cortex-m4\n"
+  stringArray [1] += "	.thumb\n\n"
+  stringArray [1] += asComment () + "\n"
+  stringArray [1] += "  .section .isr_vector, \"a\", %progbits\n\n"
+  stringArray [1] += asComment () + "\n"
+  stringArray [1] += "  .word __system_stack_end\n"
+  stringArray [1] += "@--- ARM Core System Handler Vectors\n"
+  stringArray [1] += "  .word reset.handler @ 1\n"
+  stringArray [1] += "  .word interrupt.NMI @ 2\n"
+  stringArray [1] += "  .word interrupt.HardFault @ 3\n"
+  stringArray [1] += "  .word interrupt.MemManage @ 4\n"
+  stringArray [1] += "  .word interrupt.BusFault @ 5\n"
+  stringArray [1] += "  .word interrupt.UsageFault @ 6\n"
+  stringArray [1] += "  .word -1 @ 7, reserved\n"
+  stringArray [1] += "  .word -1 @ 8, reserved\n"
+  stringArray [1] += "  .word -1 @ 9, reserved\n"
+  stringArray [1] += "  .word -1 @ 10, reserved\n"
+  stringArray [1] += "  .word interrupt.SVC @ 11\n"
+  stringArray [1] += "  .word interrupt.DebugMonitor @ 12\n"
+  stringArray [1] += "  .word -1 @ 13, reserved\n"
+  stringArray [1] += "  .word interrupt.PendSV @ 14\n"
+  stringArray [1] += "  .word interrupt.SysTick @ 15\n"
+  stringArray [1] += "@--- Non-Core Vectors\n"
+  for i in range (0, 256 - 16) :
+    if interruptNameArray [i] == "" :
+       stringArray[1] += "  .word -1 @ " + str (i + 16) + " (unused)\n"
+    else:
+      stringArray[1] += "  .word interrupt." + interruptNameArray [i] + " @ " + str (i + 16) + "\n"
+      stringArray[2] += "  result [\"" + interruptNameArray [i] + "\"] = " + str (i + 16) + "\n"
+  stringArray [1] += "\n" + asComment ()
+  stringArray [2] += "  return result\n\n"
+  stringArray [2] += pyComment ()
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 def writeBitbanding (stringArray) :
   stringArray[0] += cppComment ()
   stringArray[0] += "// BITBAND\n"
@@ -66,28 +219,55 @@ def writeSinglePeripheral (peripheral, stringArray) :
   stringArray[0] += cppComment () + "\n"
   for register in peripheral.iter ('register') :
     registerName = register.find ('name').text
-    registerDescription = register.find ('description').text
+    if register.find ('description') == None :
+      print (BOLD_MAGENTA () + "*** Warning: no 'access' for " + registerName + " register" + ENDC ())
+      registerDescription = ""
+    else:
+      registerDescription = register.find ('description').text
     registerOffset = register.find ('addressOffset').text
     registerSize = int (register.find ('size').text)
-    registerAccess = register.find ('access').text
+    if register.find ('access') == None :
+      print (BOLD_MAGENTA () + "*** Warning: no 'access' for " + registerName + " register" + ENDC ())
+      registerAccess = "read-only"
+    else:
+      registerAccess = register.find ('access').text
     # print ("  Register '" + registerName + "', offset " + registerOffset + ", size " + str (registerSize) + ", access " + registerAccess)
     constAttribute = "const " if registerAccess == "read-only" else ""
-    registerType = "(" + constAttribute + "volatile uint" + str (registerSize) + "_t *)"
+    registerType = constAttribute + "volatile uint" + str (registerSize) + "_t"
     if register.find ('dim') != None :
       registerDimension = int (register.find ('dim').text)
       dimensionIncrement = register.find ('dimIncrement').text
       actualRegName = registerName.replace ("%s", "")
       stringArray[0] += "//-------------------- " + registerDescription + " (idx = 0 ... " + str (registerDimension - 1) + ")\n"
-      stringArray[0] += "#define " + peripheralName + "_" + actualRegName + "(idx) (* (" + registerType + " (" + baseAddress + " + " + registerOffset + " + " + dimensionIncrement + " * (idx))))\n"
+      stringArray[0] += "#define " + peripheralName + "_" + actualRegName + "(idx) (* ((" + registerType + " *) (" + baseAddress + " + " + registerOffset + " + " + dimensionIncrement + " * (idx))))\n"
     else:
       stringArray[0] += "//-------------------- " + registerDescription + "\n"
-      stringArray[0] += "#define " + peripheralName + "_" + registerName + " (* (" + registerType + " (" + baseAddress + " + " + registerOffset + ")))\n"
+      stringArray[0] += "#define " + peripheralName + "_" + registerName + " (* ((" + registerType + " *) (" + baseAddress + " + " + registerOffset + ")))\n"
+#       stringArray[0] += "inline " + registerType + " & " + peripheralName + "_" + registerName + " (void) {\n"
+#       stringArray[0] += "  const uint32_t address = " + baseAddress + " + " + registerOffset + " ;\n"
+#       stringArray[0] += "  return * ((" + registerType + " *) address) ;\n"
+#       stringArray[0] += "}\n\n"
     stringArray[0] += "\n"
     for field in register.iter ('field') :
       fieldName = field.find ('name').text
-      fieldDescription = field.find ('description').text
-      fieldOffset = int (field.find ('bitOffset').text)
-      fieldWidth = int (field.find ('bitWidth').text)
+      if field.find ('description') == None :
+        print (BOLD_MAGENTA () + "*** Warning: no 'description' for " + fieldName + " field of " + registerName + " register"+ ENDC ())
+        fieldDescription = ""
+      elif field.find ('description').text == None :
+        print (BOLD_MAGENTA () + "*** Warning: no text for 'description' for " + fieldName + " field of " + registerName + " register"+ ENDC ())
+        fieldDescription = ""
+      else:
+        fieldDescription = field.find ('description').text
+      if field.find ('bitOffset') == None :
+        print (BOLD_RED () + "*** Error: no 'bitOffset' for " + fieldName + " field of " + registerName + " register"+ ENDC ())
+        fieldOffset = 0
+      else:
+        fieldOffset = int (field.find ('bitOffset').text)
+      if field.find ('bitWidth') == None :
+        print (BOLD_RED () + "*** Error: no 'bitWidth' for " + fieldName + " field of " + registerName + " register"+ ENDC ())
+        fieldWidth = 1
+      else:
+        fieldWidth = int (field.find ('bitWidth').text)
       # print ("    Field '" + fieldName + "', from bit " + str (fieldOffset) + ", width " + str (fieldWidth))
       fieldType = "uint" + str (registerSize) + "_t"
       qualifiedFieldName = peripheralName + "_" + registerName.replace ("%s", "") + "_" + fieldName
@@ -96,7 +276,7 @@ def writeSinglePeripheral (peripheral, stringArray) :
         stringArray[0] += "    static const " + fieldType + " " + qualifiedFieldName + " = 1U << " + str (fieldOffset) + " ;\n\n"
       elif fieldWidth != registerSize :
         stringArray[0] += "  // Field (width: " + str (fieldWidth) + " bits): " + fieldDescription + "\n"
-        stringArray[0] += "    inline " + fieldType + " " + qualifiedFieldName + " (const " + fieldType + " inValue) { return (inValue & " + str ((1 << fieldWidth) - 1) + ") << " + str (fieldOffset) + " ; }\n\n"
+        stringArray[0] += "    inline " + fieldType + " " + qualifiedFieldName + " (const " + fieldType + " inValue) { return (inValue & " + str ((1 << fieldWidth) - 1) + "U) << " + str (fieldOffset) + " ; }\n\n"
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -125,20 +305,20 @@ def writePeripheralGroups (peripheralGroupDictionary, peripheralGroupNameDiction
       registerAccess = register ['access']
       # print ("  Register '" + registerName + "', offset " + registerOffset + ", size " + str (registerSize) + ", access " + registerAccess)
       constAttribute = "const " if registerAccess == "read-only" else ""
-      registerType = "(" + constAttribute + "volatile uint" + str (registerSize) + "_t *)"
+      registerType = constAttribute + "volatile uint" + str (registerSize) + "_t"
       if 'dim' in register :
         registerDimension = register ['dim']
         dimensionIncrement = register ['dimIncrement']
         actualRegName = registerName.replace ("%s", "")
         stringArray[0] += "//-------------------- " + registerDescription + " (idx = 0 ... " + str (registerDimension - 1) + ")\n"
-        stringArray[0] += "#define " + key + "_" + actualRegName + "(group,idx) (* (" + registerType + " (kBaseAddress_" + key + " [group] + " + registerOffset + " + " + dimensionIncrement + " * (idx))))\n"
+        stringArray[0] += "#define " + key + "_" + actualRegName + "(group,idx) (* ((" + registerType + " *) (kBaseAddress_" + key + " [group] + " + registerOffset + " + " + dimensionIncrement + " * (idx))))\n"
         for i in range (0, len (peripheralNameArray)) :
-          stringArray[0] += "#define " + peripheralNameArray [i] + "_" + actualRegName + "(idx) (* (" + registerType + " (" + peripheralBaseAddressArray [i] + " + " + registerOffset + " + " + dimensionIncrement + " * (idx))))\n"
+          stringArray[0] += "#define " + peripheralNameArray [i] + "_" + actualRegName + "(idx) (* ((" + registerType + " *) (" + peripheralBaseAddressArray [i] + " + " + registerOffset + " + " + dimensionIncrement + " * (idx))))\n"
       else:
         stringArray[0] += "//-------------------- " + registerDescription + "\n"
-        stringArray[0] += "#define " + key + "_" + registerName + "(group) (* (" + registerType + " (kBaseAddress_" + key + " [group] + " + registerOffset + ")))\n"
+        stringArray[0] += "#define " + key + "_" + registerName + "(group) (* ((" + registerType + " *) (kBaseAddress_" + key + " [group] + " + registerOffset + ")))\n"
         for i in range (0, len (peripheralNameArray)) :
-          stringArray[0] += "#define " + peripheralNameArray [i] + "_" + registerName + " (* (" + registerType + " (" + peripheralBaseAddressArray [i] + " + " + registerOffset + ")))\n"
+          stringArray[0] += "#define " + peripheralNameArray [i] + "_" + registerName + " (* ((" + registerType + " *) (" + peripheralBaseAddressArray [i] + " + " + registerOffset + ")))\n"
       stringArray[0] += "\n"
       for fieldName in register ["fields"].keys () :
        # fieldName = register ["fields"] [i] ['name']
@@ -153,12 +333,12 @@ def writePeripheralGroups (peripheralGroupDictionary, peripheralGroupNameDiction
           stringArray[0] += "    static const " + fieldType + " " + qualifiedFieldName + " = 1U << " + str (fieldOffset) + " ;\n\n"
         elif fieldWidth != registerSize :
           stringArray[0] += "  // Field (width: " + str (fieldWidth) + " bits): " + fieldDescription + "\n"
-          stringArray[0] += "    inline " + fieldType + " " + qualifiedFieldName + " (const " + fieldType + " inValue) { return (inValue & " + str ((1 << fieldWidth) - 1) + ") << " + str (fieldOffset) + " ; }\n\n"
+          stringArray[0] += "    inline " + fieldType + " " + qualifiedFieldName + " (const " + fieldType + " inValue) { return (inValue & " + str ((1 << fieldWidth) - 1) + "U) << " + str (fieldOffset) + " ; }\n\n"
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def analyzeSVDfile (svdFile, stringArray) :
-  print ("File " + svdFile + ".svd")
+  print ("File " + BOLD_BLUE () + svdFile + ".svd" + ENDC ())
   tree = ET.parse (svdFile + ".svd")
   root = tree.getroot()
   peripheralGroupDictionary = {}
@@ -178,7 +358,11 @@ def analyzeSVDfile (svdFile, stringArray) :
         registerPropertyDictionary ["description"] = register.find ('description').text
         registerPropertyDictionary ["addressOffset"] = register.find ('addressOffset').text
         registerPropertyDictionary ["size"] = int (register.find ('size').text)
-        registerPropertyDictionary ["access"] = register.find ('access').text
+        if register.find ('access') == None :
+          print (BOLD_MAGENTA () + "*** Warning: no 'access' for " + registerName + " register"+ ENDC ())
+          registerPropertyDictionary ["access"] = "read-only"
+        else:
+          registerPropertyDictionary ["access"] = register.find ('access').text
         if register.find ('dim') != None :
           registerPropertyDictionary ["dim"] = int (register.find ('dim').text)
           registerPropertyDictionary ["dimIncrement"] = register.find ('dimIncrement').text
@@ -198,7 +382,7 @@ def analyzeSVDfile (svdFile, stringArray) :
         peripheralGroupBaseAddressDictionary [groupName] = [peripheralBaseAddress]
       elif peripheralGroupDictionary [groupName] != peripheralDictionary :
         peripheralName = peripheral.find('name').text
-        print ("  Error with group named '" + groupName + "', peripheral '" + peripheralName + "'")
+        print (BOLD_RED () + "  Error with group named '" + groupName + "', peripheral '" + peripheralName + "'"+ ENDC ())
         if peripheralDictionary.keys () != peripheralGroupDictionary [groupName].keys () :
           print ("    register name error")
           print ("    Current registers: %s" % sorted (set (peripheralDictionary.keys ()) - set (peripheralGroupDictionary [groupName].keys ())))
@@ -208,7 +392,7 @@ def analyzeSVDfile (svdFile, stringArray) :
             currentReg = peripheralDictionary [key]
             otherReg = peripheralGroupDictionary [groupName] [key]
             if currentReg != otherReg :
-               print ("      Error for register '" + key + "'") ;
+               print (BOLD_RED () + "      Error for register '" + key + "'"+ ENDC ()) ;
       else:
         peripheralName = peripheral.find('name').text
         peripheralGroupNameDictionary [groupName].append (peripheralName)
@@ -217,6 +401,7 @@ def analyzeSVDfile (svdFile, stringArray) :
   writePeripheralGroups (peripheralGroupDictionary, peripheralGroupNameDictionary, peripheralGroupBaseAddressDictionary, stringArray)
   writeInterruptionNumbers (root, stringArray)
   writeBitbanding (stringArray)
+  writeInterruptVectors (root, stringArray)
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -227,13 +412,19 @@ for root, dirs, files in os.walk (scriptDir) :
   for name in files:
     (baseName, extension) = os.path.splitext (os.path.join (root, name))
     if extension == ".svd" :
-      stringArray = ["#pragma once\n\n"]
+      stringArray = ["#pragma once\n\n", "", ""] # C Header, vectors (assembly), interrupt names (python)
       stringArray [0] += cppComment () + "\n"
       stringArray [0] += "#include <stdint.h>\n\n"
       analyzeSVDfile (baseName, stringArray)
       stringArray[0] += cppComment ()
       f = open (baseName + ".h", "wt")
       f.write (stringArray [0])
+      f.close()
+      f = open (baseName + ".s", "wt")
+      f.write (stringArray [1])
+      f.close()
+      f = open (baseName + ".py", "wt")
+      f.write (stringArray [2])
       f.close()
 
 #----------------------------------------------------------------------------------------------------------------------*

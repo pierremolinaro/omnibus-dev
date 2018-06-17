@@ -191,7 +191,7 @@ static inline void kernel_set_task_context (TaskContext & ioTaskContext,
     : sizeof (ExceptionFrame_without_floatingPointStorage)
   ;
 //--- Initialize SP
-  ExceptionFrame_without_floatingPointStorage * ptr = (ExceptionFrame_without_floatingPointStorage *) initialTopOfStack ;
+  auto * ptr = (ExceptionFrame_without_floatingPointStorage *) initialTopOfStack ;
   ioTaskContext.mPSP = ptr ;
 //--- Initialize PC
   ptr->mPC = (unsigned) inTaskRoutine ;

@@ -18054,7 +18054,7 @@ const char * gWrapperFileContent_83_targetTemplates = "//-----------------------
   "    : sizeof (ExceptionFrame_without_floatingPointStorage)\n"
   "  ;\n"
   "//--- Initialize SP\n"
-  "  ExceptionFrame_without_floatingPointStorage * ptr = (ExceptionFrame_without_floatingPointStorage *) initialTopOfStack ;\n"
+  "  auto * ptr = (ExceptionFrame_without_floatingPointStorage *) initialTopOfStack ;\n"
   "  ioTaskContext.mPSP = ptr ;\n"
   "//--- Initialize PC\n"
   "  ptr->mPC = (unsigned) inTaskRoutine ;\n"
@@ -18066,7 +18066,7 @@ const cRegularFileWrapper gWrapperFile_83_targetTemplates (
   "c-cortex-m4-context.cpp",
   "cpp",
   true, // Text file
-  16348, // Text length
+  16309, // Text length
   gWrapperFileContent_83_targetTemplates
 ) ;
 
@@ -23134,8 +23134,8 @@ const char * gWrapperFileContent_98_targetTemplates = "\n"
   "!ISR!:\n"
   "\t.fnstart\n"
   "@----------------------------------------- Save preserved registers\n"
-  "\t.save\t{r4, r5, lr}\n"
-  "  push  {r4, r5, lr}\n"
+  "\t.save\t{r4, lr}\n"
+  "  push  {r4, lr}\n"
   "@----------------------------------------- Activity led On\n"
   "  bl    func.activityLedOn_28__29_   @ Defined in PLM source (can modify R0-R3 registers)\n"
   "@----------------------------------------- R4 <- running task context\n"
@@ -23154,7 +23154,7 @@ const cRegularFileWrapper gWrapperFile_98_targetTemplates (
   "s-interrupt-handler.s",
   "s",
   true, // Text file
-  1565, // Text length
+  1557, // Text length
   gWrapperFileContent_98_targetTemplates
 ) ;
 
@@ -23326,7 +23326,15 @@ const char * gWrapperFileContent_100_targetTemplates = "@-----------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  ".lcomm backgroundTaskStack, 32\n"
+  "@--- This is stack for background task\n"
+  "   BACKGROUND.STACK.SIZE = 32\n"
+  "\n"
+  "\t.section\t.bss.background.task.stack, \"aw\", %nobits\n"
+  "  .align\t  3   @ Stack should be aligned on a 8-byte boundary\n"
+  "\n"
+  "background.task.stack:\n"
+  "  .space\tBACKGROUND.STACK.SIZE\n"
+  "\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@ See https://developer.arm.com/docs/dui0553/latest/2-the-cortex-m4-processor/21-programmers-model/213-core-registers\n"
@@ -23336,7 +23344,7 @@ const char * gWrapperFileContent_100_targetTemplates = "@-----------------------
   "  .global as_reset_handler\n"
   "  .type as_reset_handler, %function\n"
   "\n"
-  "as_reset_handler: @ Cortex M4 boots with interrupts enabled, in Thread mode (as IPSR is set to 0 at boot)\n"
+  "as_reset_handler: @ Cortex M4 boots with interrupts enabled, in Thread mode (as PRIMASK is set to 0 at boot)\n"
   "@---------------------------------- Run boot, zero bss section, copy data section\n"
   "  bl  boot.routines\n"
   "@---------------------------------- Enable FPU\n"
@@ -23353,12 +23361,12 @@ const char * gWrapperFileContent_100_targetTemplates = "@-----------------------
   "@--- Reset pipeline now the FPU is enabled\n"
   "@  isb\n"
   "@---------------------------------- Set background task context\n"
-  "  ldr r0, =backgroundTaskStack\n"
+  "  ldr r0, =background.task.stack\n"
   "  ldr r1, =backgroundTaskContext\n"
   "  str r0, [r1]\n"
   "@---------------------------------- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
-  "  add r0, #32\n"
-  "  msr psp, r0\n"
+  "  ldr   r0,  =background.task.stack + BACKGROUND.STACK.SIZE\n"
+  "  msr   psp, r0\n"
   "@---------------------------------- Set CONTROL register (see \xC2""\xA7""B1.4.4)\n"
   "@ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access\n"
   "@ bit 1 : 0 -> Use SP_main as the current stack, 1 -> In Thread mode, use SP_process as the current stack\n"
@@ -23380,7 +23388,7 @@ const cRegularFileWrapper gWrapperFile_100_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
-  2723, // Text length
+  2985, // Text length
   gWrapperFileContent_100_targetTemplates
 ) ;
 
@@ -23562,11 +23570,11 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "\n"
   "as_svc_handler:\n"
   "@----------------------------------------- Save preserved registers\n"
-  "  push  {r4, r5, lr}\n"
-  "@----------------------------------------- R5 <- thread SP\n"
-  "  mrs   r5, psp\n"
+  "  push  {r4, lr}\n"
+  "@----------------------------------------- R4 <- thread SP\n"
+  "  mrs   r4, psp\n"
   "@----------------------------------------- R4 <- Address of SVC instruction\n"
-  "  ldr   r4, [r5, #24]    @ 24 : 6 stacked registers before saved PC\n"
+  "  ldr   r4, [r4, #24]    @ 24 : 6 stacked registers before saved PC\n"
   "@----------------------------------------- R12 <- bits 0-7 of SVC instruction\n"
   "  ldrb  r12, [r4, #-2]   @ R12 is service call index\n"
   "@----------------------------------------- R4 <- address of dispatcher table\n"
@@ -23586,8 +23594,7 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "@                                                                                                                      *\n"
   "@  On entry:                                                                                                           *\n"
   "@    - R4 contains the runnning task save context address,                                                             *\n"
-  "@    - R5 can be freely used,                                                                                          *\n"
-  "@    - R4, R5 and LR of running task have been pushed on handler task.                                                 *\n"
+  "@    - R4 and LR of running task have been pushed on handler task.                                                 *\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -23599,7 +23606,7 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "  mov   r0, r4\n"
   "  ldr   r1, [r1]\n"
   "@----------------------------------------- Restore preserved registers\n"
-  "  pop   {r4, r5, lr}\n"
+  "  pop   {r4, lr}\n"
   "@----------------------------------------- Task context did change \?\n"
   "  cmp   r0, r1  @ R0:old task context, R1:new task context\n"
   "  beq   __no_context_change\n"
@@ -23635,7 +23642,7 @@ const cRegularFileWrapper gWrapperFile_106_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7801, // Text length
+  7668, // Text length
   gWrapperFileContent_106_targetTemplates
 ) ;
 

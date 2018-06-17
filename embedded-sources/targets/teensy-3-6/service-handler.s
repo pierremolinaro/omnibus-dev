@@ -59,11 +59,11 @@
 
 as_svc_handler:
 @----------------------------------------- Save preserved registers
-  push  {r4, r5, lr}
-@----------------------------------------- R5 <- thread SP
-  mrs   r5, psp
+  push  {r4, lr}
+@----------------------------------------- R4 <- thread SP
+  mrs   r4, psp
 @----------------------------------------- R4 <- Address of SVC instruction
-  ldr   r4, [r5, #24]    @ 24 : 6 stacked registers before saved PC
+  ldr   r4, [r4, #24]    @ 24 : 6 stacked registers before saved PC
 @----------------------------------------- R12 <- bits 0-7 of SVC instruction
   ldrb  r12, [r4, #-2]   @ R12 is service call index
 @----------------------------------------- R4 <- address of dispatcher table
@@ -83,8 +83,7 @@ as_svc_handler:
 @                                                                                                                      *
 @  On entry:                                                                                                           *
 @    - R4 contains the runnning task save context address,                                                             *
-@    - R5 can be freely used,                                                                                          *
-@    - R4, R5 and LR of running task have been pushed on handler task.                                                 *
+@    - R4 and LR of running task have been pushed on handler task.                                                 *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
@@ -96,7 +95,7 @@ as_svc_handler:
   mov   r0, r4
   ldr   r1, [r1]
 @----------------------------------------- Restore preserved registers
-  pop   {r4, r5, lr}
+  pop   {r4, lr}
 @----------------------------------------- Task context did change ?
   cmp   r0, r1  @ R0:old task context, R1:new task context
   beq   __no_context_change
