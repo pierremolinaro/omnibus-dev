@@ -75,7 +75,7 @@ as_svc_handler:
   ldr   r4, [r4]
 @----------------------------------------- Call service routine
   blx   r12         @ R4:calling task context address, R5:thread PSP
-@--- Continues in sequence to .handle.context.switch
+@--- Continues in sequence to handle.context.switch
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
@@ -88,7 +88,7 @@ as_svc_handler:
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-.handle.context.switch:
+handle.context.switch:
 @----------------------------------------- Select task to run
   bl    kernel_selectTaskToRun
 @----------------------------------------- R0 <- calling task context, R1 <- new task context
