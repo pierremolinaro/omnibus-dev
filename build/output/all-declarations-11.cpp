@@ -16979,7 +16979,7 @@ const char * gWrapperFileContent_69_targetTemplates = "@------------------------
   "@----------------------------------------- Call Interrupt handler\n"
   "  bl    !HANDLER!\n"
   "@----------------------------------------- Perform context switch, if needed\n"
-  "  b     .handle.context.switch\n"
+  "  b     handle.context.switch\n"
   "\n"
   "\t.cantunwind\n"
   "\t.fnend\n"
@@ -16989,7 +16989,7 @@ const cRegularFileWrapper gWrapperFile_69_targetTemplates (
   "xtr-interrupt-handler.s",
   "s",
   true, // Text file
-  1560, // Text length
+  1559, // Text length
   gWrapperFileContent_69_targetTemplates
 ) ;
 
@@ -17558,7 +17558,7 @@ const char * gWrapperFileContent_77_targetTemplates = "@------------------------
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call service routine\n"
   "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
-  "@--- Continues in sequence to .handle.context.switch\n"
+  "@--- Continues in sequence to handle.context.switch\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -17571,7 +17571,7 @@ const char * gWrapperFileContent_77_targetTemplates = "@------------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  ".handle.context.switch:\n"
+  "handle.context.switch:\n"
   "@----------------------------------------- Select task to run\n"
   "  bl    kernel_selectTaskToRun\n"
   "@----------------------------------------- R0 <- calling task context, R1 <- new task context\n"
@@ -17615,7 +17615,7 @@ const cRegularFileWrapper gWrapperFile_77_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7801, // Text length
+  7799, // Text length
   gWrapperFileContent_77_targetTemplates
 ) ;
 
@@ -23144,7 +23144,7 @@ const char * gWrapperFileContent_98_targetTemplates = "\n"
   "@----------------------------------------- Call Interrupt handler\n"
   "  bl    !HANDLER!\n"
   "@----------------------------------------- Perform the context switch, if needed\n"
-  "  b     .handle.context.switch\n"
+  "  b     handle.context.switch\n"
   "\n"
   "\t.cantunwind\n"
   "\t.fnend\n"
@@ -23154,7 +23154,7 @@ const cRegularFileWrapper gWrapperFile_98_targetTemplates (
   "s-interrupt-handler.s",
   "s",
   true, // Text file
-  1557, // Text length
+  1556, // Text length
   gWrapperFileContent_98_targetTemplates
 ) ;
 
@@ -23335,7 +23335,6 @@ const char * gWrapperFileContent_100_targetTemplates = "@-----------------------
   "background.task.stack:\n"
   "  .space\tBACKGROUND.STACK.SIZE\n"
   "\n"
-  "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@ See https://developer.arm.com/docs/dui0553/latest/2-the-cortex-m4-processor/21-programmers-model/213-core-registers\n"
   "\n"
@@ -23360,10 +23359,6 @@ const char * gWrapperFileContent_100_targetTemplates = "@-----------------------
   "@  dsb\n"
   "@--- Reset pipeline now the FPU is enabled\n"
   "@  isb\n"
-  "@---------------------------------- Set background task context\n"
-  "  ldr r0, =background.task.stack\n"
-  "  ldr r1, =backgroundTaskContext\n"
-  "  str r0, [r1]\n"
   "@---------------------------------- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers\n"
   "  ldr   r0,  =background.task.stack + BACKGROUND.STACK.SIZE\n"
   "  msr   psp, r0\n"
@@ -23388,7 +23383,7 @@ const cRegularFileWrapper gWrapperFile_100_targetTemplates (
   "s-reset-handler.s",
   "s",
   true, // Text file
-  2985, // Text length
+  2839, // Text length
   gWrapperFileContent_100_targetTemplates
 ) ;
 
@@ -23558,8 +23553,11 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .global backgroundTaskContext\n"
-  "  .lcomm backgroundTaskContext, 4\n"
+  "\t.section\t.bss.background.task.context.ptr, \"aw\", %nobits\n"
+  "  .align\t  2\n"
+  "\n"
+  "background.task.context.ptr:\n"
+  "  .space\t4\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -23573,8 +23571,10 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "  push  {r4, lr}\n"
   "@----------------------------------------- R4 <- thread SP\n"
   "  mrs   r4, psp\n"
+  "@----------------------------------------- Restore R0, R1, R2 and R3 from saved stack\n"
+  "  ldmia r4!, {r0, r1, r2, r3}       @ R4 incremented by 16\n"
   "@----------------------------------------- R4 <- Address of SVC instruction\n"
-  "  ldr   r4, [r4, #24]    @ 24 : 6 stacked registers before saved PC\n"
+  "  ldr   r4, [r4, #8]    @ 16 + 8 = 24 : 6 stacked registers before saved PC\n"
   "@----------------------------------------- R12 <- bits 0-7 of SVC instruction\n"
   "  ldrb  r12, [r4, #-2]   @ R12 is service call index\n"
   "@----------------------------------------- R4 <- address of dispatcher table\n"
@@ -23586,7 +23586,7 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "  ldr   r4, [r4]\n"
   "@----------------------------------------- Call service routine\n"
   "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
-  "@--- Continues in sequence to .handle.context.switch\n"
+  "@--- Continues in sequence to handle.context.switch\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -23594,11 +23594,11 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "@                                                                                                                      *\n"
   "@  On entry:                                                                                                           *\n"
   "@    - R4 contains the runnning task save context address,                                                             *\n"
-  "@    - R4 and LR of running task have been pushed on handler task.                                                 *\n"
+  "@    - R4 and LR of running task have been pushed on handler task.                                                     *\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  ".handle.context.switch:\n"
+  "handle.context.switch:\n"
   "@----------------------------------------- Select task to run\n"
   "  bl    kernel_selectTaskToRun\n"
   "@----------------------------------------- R0 <- calling task context, R1 <- new task context\n"
@@ -23609,28 +23609,32 @@ const char * gWrapperFileContent_106_targetTemplates = "@-----------------------
   "  pop   {r4, lr}\n"
   "@----------------------------------------- Task context did change \?\n"
   "  cmp   r0, r1  @ R0:old task context, R1:new task context\n"
-  "  beq   __no_context_change\n"
+  "  beq   no.context.change\n"
   "@----------------------------------------- Save context of preempted task (if any)\n"
-  "  cbz   r0, __perform_restore_context @ if old context is NULL, no context to save\n"
+  "  mrs   r12, psp\n"
+  "  cbz   r0, store.backround.task.context @ if old context is NULL, save background task context\n"
   "@--- Save registers r4 to r11, PSP, LR\n"
-  "  mrs     r12, psp\n"
-  "  stmia   r0, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
+  "  stmia r0, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
+  "  b     perform.restore.context\n"
+  "store.backround.task.context:\n"
+  "  ldr   r0, =background.task.context.ptr\n"
+  "  str   r12, [r0]\n"
   "@----------------------------------------- Restore context of activated task (if any)\n"
-  "__perform_restore_context:\n"
-  "  cbz    r1, __no_context_to_restore\n"
-  "  ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
-  "  msr    psp, r12\n"
-  "  bx     lr\n"
+  "perform.restore.context:\n"
+  "  cbz   r1, run.background.task\n"
+  "  ldmia r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
+  "  msr   psp, r12\n"
+  "  bx    lr\n"
   "@----------------------------------------- No context change\n"
-  "__no_context_change:\n"
-  "  cbz r0, __no_context_to_restore\n"
-  "  bx  lr\n"
-  "@----------------------------------------- No context to restore\n"
-  "__no_context_to_restore:\n"
+  "no.context.change:\n"
+  "  cbz   r0, run.background.task\n"
+  "  bx    lr\n"
+  "@----------------------------------------- Run background task\n"
+  "run.background.task:\n"
   "@--- Switch off activity led\n"
-  "  bl func.activityLedOff_28__29_  @ Defined in PLM source\n"
+  "  bl   func.activityLedOff_28__29_  @ Defined in PLM source\n"
   "@--- Restore PSP of background task\n"
-  "  ldr  r0, =backgroundTaskContext\n"
+  "  ldr  r0, =background.task.context.ptr\n"
   "  ldr  r0, [r0]\n"
   "  msr  psp, r0\n"
   "@--- Return from exception (thread mode, process stack, no floating point)\n"
@@ -23642,7 +23646,7 @@ const cRegularFileWrapper gWrapperFile_106_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7668, // Text length
+  7987, // Text length
   gWrapperFileContent_106_targetTemplates
 ) ;
 
@@ -23717,13 +23721,16 @@ const char * gWrapperFileContent_109_targetTemplates = "@-----------------------
   "  push  {r5, lr}\n"
   "@--------------------- R5 <- thread SP\n"
   "  mrs   r5, psp           @ r5 <- thread SP\n"
+  "@----------------------------------------- Restore R0, R1, R2 and R3 from saved stack\n"
+  "  ldmia r5!, {r0, r1, r2, r3}       @ R5 incremented by 16\n"
   "@--------------------- LR <- Address of UDF instruction\n"
-  "  ldr   lr, [r5, #24]     @ 24 : 6 stacked registers before saved PC\n"
+  "  ldr   lr, [r5, #8]     @ 24 : 6 stacked registers before saved PC\n"
   "@--------------------- Set return address to instruction following UDF\n"
   "  adds  lr, #2\n"
-  "  str   lr, [r5, #24]\n"
+  "  str   lr, [r5, #8]\n"
   "@--------------------- R12 <- address of dispatcher\n"
   "  ldr   r12, =__section_dispatcher_table\n"
+  "  subs  r5, #16\n"
   "@--------------------- LR <- bits 0-7 of UDF instruction\n"
   "  ldrb  lr, [lr, #-2]            @ LR is service call index\n"
   "@--------------------- r12 <- address of routine to call\n"
@@ -23740,7 +23747,7 @@ const cRegularFileWrapper gWrapperFile_109_targetTemplates (
   "udfcoded-section-handler.s",
   "s",
   true, // Text file
-  3206, // Text length
+  3365, // Text length
   gWrapperFileContent_109_targetTemplates
 ) ;
 

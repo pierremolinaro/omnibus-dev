@@ -53,7 +53,7 @@ task T3 @stacksize 512 @activate {
     digital.write (!yes !toPort:LED_L2)
     self.compteur +%= 498
     time.wait (!until:self.compteur)
-    digital.write (!yes !toPort:LED_L2)
+    digital.write (!no !toPort:LED_L2)
     self.compteur +%= 498
   }
 }

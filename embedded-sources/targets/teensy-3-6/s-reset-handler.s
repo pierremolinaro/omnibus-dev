@@ -13,7 +13,6 @@
 background.task.stack:
   .space	BACKGROUND.STACK.SIZE
 
-
 @----------------------------------------------------------------------------------------------------------------------*
 @ See https://developer.arm.com/docs/dui0553/latest/2-the-cortex-m4-processor/21-programmers-model/213-core-registers
 
@@ -38,10 +37,6 @@ as_reset_handler: @ Cortex M4 boots with interrupts enabled, in Thread mode (as 
 @  dsb
 @--- Reset pipeline now the FPU is enabled
 @  isb
-@---------------------------------- Set background task context
-  ldr r0, =background.task.stack
-  ldr r1, =backgroundTaskContext
-  str r0, [r1]
 @---------------------------------- Set PSP : this is stack for background task, it needs 32 bytes for stacking 8 registers
   ldr   r0,  =background.task.stack + BACKGROUND.STACK.SIZE
   msr   psp, r0

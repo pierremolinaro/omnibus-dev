@@ -2322,7 +2322,7 @@ const char * gWrapperFileContent_17_embeddedSampleCode = "target \"teensy-3-6/xt
   "    digital.write (!yes !toPort:LED_L2)\n"
   "    self.compteur +%= 498\n"
   "    time.wait (!until:self.compteur)\n"
-  "    digital.write (!yes !toPort:LED_L2)\n"
+  "    digital.write (!no !toPort:LED_L2)\n"
   "    self.compteur +%= 498\n"
   "  }\n"
   "}\n"
@@ -2361,7 +2361,7 @@ const cRegularFileWrapper gWrapperFile_17_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2401, // Text length
+  2400, // Text length
   gWrapperFileContent_17_embeddedSampleCode
 ) ;
 

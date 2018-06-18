@@ -28,7 +28,7 @@
 @----------------------------------------- Call Interrupt handler
   bl    !HANDLER!
 @----------------------------------------- Perform the context switch, if needed
-  b     .handle.context.switch
+  b     handle.context.switch
 
 	.cantunwind
 	.fnend

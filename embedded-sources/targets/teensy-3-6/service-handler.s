@@ -47,8 +47,11 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global backgroundTaskContext
-  .lcomm backgroundTaskContext, 4
+	.section	.bss.background.task.context.ptr, "aw", %nobits
+  .align	  2
+
+background.task.context.ptr:
+  .space	4
 
 @----------------------------------------------------------------------------------------------------------------------*
 
@@ -62,8 +65,10 @@ as_svc_handler:
   push  {r4, lr}
 @----------------------------------------- R4 <- thread SP
   mrs   r4, psp
+@----------------------------------------- Restore R0, R1, R2 and R3 from saved stack
+  ldmia r4!, {r0, r1, r2, r3}       @ R4 incremented by 16
 @----------------------------------------- R4 <- Address of SVC instruction
-  ldr   r4, [r4, #24]    @ 24 : 6 stacked registers before saved PC
+  ldr   r4, [r4, #8]    @ 16 + 8 = 24 : 6 stacked registers before saved PC
 @----------------------------------------- R12 <- bits 0-7 of SVC instruction
   ldrb  r12, [r4, #-2]   @ R12 is service call index
 @----------------------------------------- R4 <- address of dispatcher table
@@ -75,7 +80,7 @@ as_svc_handler:
   ldr   r4, [r4]
 @----------------------------------------- Call service routine
   blx   r12         @ R4:calling task context address, R5:thread PSP
-@--- Continues in sequence to .handle.context.switch
+@--- Continues in sequence to handle.context.switch
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
@@ -83,11 +88,11 @@ as_svc_handler:
 @                                                                                                                      *
 @  On entry:                                                                                                           *
 @    - R4 contains the runnning task save context address,                                                             *
-@    - R4 and LR of running task have been pushed on handler task.                                                 *
+@    - R4 and LR of running task have been pushed on handler task.                                                     *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-.handle.context.switch:
+handle.context.switch:
 @----------------------------------------- Select task to run
   bl    kernel_selectTaskToRun
 @----------------------------------------- R0 <- calling task context, R1 <- new task context
@@ -98,28 +103,32 @@ as_svc_handler:
   pop   {r4, lr}
 @----------------------------------------- Task context did change ?
   cmp   r0, r1  @ R0:old task context, R1:new task context
-  beq   __no_context_change
+  beq   no.context.change
 @----------------------------------------- Save context of preempted task (if any)
-  cbz   r0, __perform_restore_context @ if old context is NULL, no context to save
+  mrs   r12, psp
+  cbz   r0, store.backround.task.context @ if old context is NULL, save background task context
 @--- Save registers r4 to r11, PSP, LR
-  mrs     r12, psp
-  stmia   r0, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
+  stmia r0, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
+  b     perform.restore.context
+store.backround.task.context:
+  ldr   r0, =background.task.context.ptr
+  str   r12, [r0]
 @----------------------------------------- Restore context of activated task (if any)
-__perform_restore_context:
-  cbz    r1, __no_context_to_restore
-  ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
-  msr    psp, r12
-  bx     lr
+perform.restore.context:
+  cbz   r1, run.background.task
+  ldmia r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}
+  msr   psp, r12
+  bx    lr
 @----------------------------------------- No context change
-__no_context_change:
-  cbz r0, __no_context_to_restore
-  bx  lr
-@----------------------------------------- No context to restore
-__no_context_to_restore:
+no.context.change:
+  cbz   r0, run.background.task
+  bx    lr
+@----------------------------------------- Run background task
+run.background.task:
 @--- Switch off activity led
-  bl func.activityLedOff_28__29_  @ Defined in PLM source
+  bl   func.activityLedOff_28__29_  @ Defined in PLM source
 @--- Restore PSP of background task
-  ldr  r0, =backgroundTaskContext
+  ldr  r0, =background.task.context.ptr
   ldr  r0, [r0]
   msr  psp, r0
 @--- Return from exception (thread mode, process stack, no floating point)
