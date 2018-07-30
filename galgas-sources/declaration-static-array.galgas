@@ -129,7 +129,7 @@ syntax extension plm_syntax {
       end
       ioAST.mExtendStaticArrayDeclarationAST += !staticListName !expressions
     while
-      $;$
+      $::$
     end
     $)$
   }

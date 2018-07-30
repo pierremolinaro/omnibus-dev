@@ -29,8 +29,8 @@ let PATTERN_FREQUENCY = 5 // In Hertz
 staticArray kPATTERN {let x $bool }
 
 extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
-  yes; no; yes; no; yes; // 3 dots : letter S
-  no; no; no; no; no; no; no // Medium gap betwween words
+  yes :: no :: yes :: no :: yes :: // 3 dots : letter S
+  no :: no :: no :: no :: no :: no :: no // Medium gap betwween words
 )
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -44,7 +44,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 
 // The output port is D7: PTD2
 // For toggling D7, without any change on other GPIOC bits: "GPIOD_PTOR = (1 << 2)"
-// "GPIOD_PTOR = 0 ;" is a nop
+// "GPIOD_PTOR = 0  ::" is a nop
 // So we need to transform the kPATTERN boolean array to the gOutputPattern uint32_t array, that will
 // contains (1 << 2) for toggling PTD2 port, and 0 for not changing it: the values
 // are not the kPATTERN values, but the toggles we need to output the given pattern.
@@ -52,7 +52,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 
 let PATTERN_LENGTH = kPATTERN.count
 
-typealias $patternArray : $uint32 [PATTERN_LENGTH]
+typealias $patternArray : [PATTERN_LENGTH $uint32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -78,7 +78,7 @@ driver pit ()
 
 system section initializeDMA (?!pattern $patternArray) {
 //--- Transform pattern for encoding level changes
-  var current = no ;
+  var current = no
   var index $uint32 = 0
   for élément in kPATTERN {
     let b = élément.x

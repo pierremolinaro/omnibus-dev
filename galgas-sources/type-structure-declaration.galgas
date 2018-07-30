@@ -178,8 +178,6 @@ syntax extension plm_syntax {
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList !singletonObject:false
     while
       <structure_function> !?ioAST !?procedureDeclarationListAST
-    while
-      $;$
     end
     $}$
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {

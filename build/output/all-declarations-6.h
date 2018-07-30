@@ -98,22 +98,22 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @decoratedTypeArrayDeclaration class                                         *
+//                                     @decoratedStaticArrayTypeDeclaration class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_decoratedTypeArrayDeclaration : public GALGAS_abstractDecoratedDeclaration {
+class GALGAS_decoratedStaticArrayTypeDeclaration : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
-  public : GALGAS_decoratedTypeArrayDeclaration (void) ;
+  public : GALGAS_decoratedStaticArrayTypeDeclaration (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_decoratedTypeArrayDeclaration constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_decoratedStaticArrayTypeDeclaration constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_decoratedTypeArrayDeclaration * ptr (void) const { return (const cPtr_decoratedTypeArrayDeclaration *) mObjectPtr ; }
+  public : inline const class cPtr_decoratedStaticArrayTypeDeclaration * ptr (void) const { return (const cPtr_decoratedStaticArrayTypeDeclaration *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_decoratedTypeArrayDeclaration (const cPtr_decoratedTypeArrayDeclaration * inSourcePtr) ;
+  public : GALGAS_decoratedStaticArrayTypeDeclaration (const cPtr_decoratedStaticArrayTypeDeclaration * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -121,17 +121,17 @@ class GALGAS_decoratedTypeArrayDeclaration : public GALGAS_abstractDecoratedDecl
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedTypeArrayDeclaration extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_decoratedStaticArrayTypeDeclaration extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedTypeArrayDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                              const class GALGAS_uint & inOperand1
-                                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_decoratedStaticArrayTypeDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                    const class GALGAS_uint & inOperand1
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedTypeArrayDeclaration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedStaticArrayTypeDeclaration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -147,28 +147,28 @@ class GALGAS_decoratedTypeArrayDeclaration : public GALGAS_abstractDecoratedDecl
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_decoratedTypeArrayDeclaration class
+} ; // End of GALGAS_decoratedStaticArrayTypeDeclaration class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTypeArrayDeclaration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStaticArrayTypeDeclaration ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @decoratedTypeArrayDeclaration class                                *
+//                            Pointer class for @decoratedStaticArrayTypeDeclaration class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_decoratedTypeArrayDeclaration : public cPtr_abstractDecoratedDeclaration {
+class cPtr_decoratedStaticArrayTypeDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
   public : GALGAS_lstring mProperty_mOriginalArrayTypeName ;
   public : GALGAS_uint mProperty_mArraySize ;
 
 //--- Constructor
-  public : cPtr_decoratedTypeArrayDeclaration (const GALGAS_lstring & in_mOriginalArrayTypeName,
-                                               const GALGAS_uint & in_mArraySize
-                                               COMMA_LOCATION_ARGS) ;
+  public : cPtr_decoratedStaticArrayTypeDeclaration (const GALGAS_lstring & in_mOriginalArrayTypeName,
+                                                     const GALGAS_uint & in_mArraySize
+                                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;

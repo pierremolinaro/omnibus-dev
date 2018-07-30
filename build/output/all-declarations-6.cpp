@@ -1109,10 +1109,10 @@ GALGAS_newTypeDeclaration GALGAS_newTypeDeclaration::extractObject (const GALGAS
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cPtr_typeArrayDeclarationAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_staticArrayTypeDeclarationAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_typeArrayDeclarationAST * p = (const cPtr_typeArrayDeclarationAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_typeArrayDeclarationAST) ;
+  const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
   if (kOperandEqual == result) {
     result = mProperty_mAnonymousArrayTypeName.objectCompare (p->mProperty_mAnonymousArrayTypeName) ;
   }
@@ -1131,7 +1131,7 @@ typeComparisonResult cPtr_typeArrayDeclarationAST::dynamicObjectCompare (const a
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 
-typeComparisonResult GALGAS_typeArrayDeclarationAST::objectCompare (const GALGAS_typeArrayDeclarationAST & inOperand) const {
+typeComparisonResult GALGAS_staticArrayTypeDeclarationAST::objectCompare (const GALGAS_staticArrayTypeDeclarationAST & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -1149,38 +1149,38 @@ typeComparisonResult GALGAS_typeArrayDeclarationAST::objectCompare (const GALGAS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_typeArrayDeclarationAST::GALGAS_typeArrayDeclarationAST (void) :
+GALGAS_staticArrayTypeDeclarationAST::GALGAS_staticArrayTypeDeclarationAST (void) :
 GALGAS_abstractDeclarationAST () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_typeArrayDeclarationAST::GALGAS_typeArrayDeclarationAST (const cPtr_typeArrayDeclarationAST * inSourcePtr) :
+GALGAS_staticArrayTypeDeclarationAST::GALGAS_staticArrayTypeDeclarationAST (const cPtr_staticArrayTypeDeclarationAST * inSourcePtr) :
 GALGAS_abstractDeclarationAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_typeArrayDeclarationAST) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_staticArrayTypeDeclarationAST) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_typeArrayDeclarationAST GALGAS_typeArrayDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mAnonymousArrayTypeName,
-                                                                                const GALGAS_lstring & inAttribute_mElementTypeName,
-                                                                                const GALGAS_expressionAST & inAttribute_mSizeExpression,
-                                                                                const GALGAS_location & inAttribute_mSizeExpressionLocation
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_typeArrayDeclarationAST result ;
+GALGAS_staticArrayTypeDeclarationAST GALGAS_staticArrayTypeDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mAnonymousArrayTypeName,
+                                                                                            const GALGAS_lstring & inAttribute_mElementTypeName,
+                                                                                            const GALGAS_expressionAST & inAttribute_mSizeExpression,
+                                                                                            const GALGAS_location & inAttribute_mSizeExpressionLocation
+                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_staticArrayTypeDeclarationAST result ;
   if (inAttribute_mAnonymousArrayTypeName.isValid () && inAttribute_mElementTypeName.isValid () && inAttribute_mSizeExpression.isValid () && inAttribute_mSizeExpressionLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_typeArrayDeclarationAST (inAttribute_mAnonymousArrayTypeName, inAttribute_mElementTypeName, inAttribute_mSizeExpression, inAttribute_mSizeExpressionLocation COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_staticArrayTypeDeclarationAST (inAttribute_mAnonymousArrayTypeName, inAttribute_mElementTypeName, inAttribute_mSizeExpression, inAttribute_mSizeExpressionLocation COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_typeArrayDeclarationAST::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_staticArrayTypeDeclarationAST::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_typeArrayDeclarationAST * p = (const cPtr_typeArrayDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_typeArrayDeclarationAST) ;
+    const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
     result = p->mProperty_mAnonymousArrayTypeName ;
   }
   return result ;
@@ -1188,17 +1188,17 @@ GALGAS_lstring GALGAS_typeArrayDeclarationAST::getter_mAnonymousArrayTypeName (U
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_typeArrayDeclarationAST::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_staticArrayTypeDeclarationAST::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mAnonymousArrayTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_typeArrayDeclarationAST::getter_mElementTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_staticArrayTypeDeclarationAST::getter_mElementTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_typeArrayDeclarationAST * p = (const cPtr_typeArrayDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_typeArrayDeclarationAST) ;
+    const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
     result = p->mProperty_mElementTypeName ;
   }
   return result ;
@@ -1206,17 +1206,17 @@ GALGAS_lstring GALGAS_typeArrayDeclarationAST::getter_mElementTypeName (UNUSED_L
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_typeArrayDeclarationAST::getter_mElementTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_staticArrayTypeDeclarationAST::getter_mElementTypeName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mElementTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_expressionAST GALGAS_typeArrayDeclarationAST::getter_mSizeExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_staticArrayTypeDeclarationAST::getter_mSizeExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
-    const cPtr_typeArrayDeclarationAST * p = (const cPtr_typeArrayDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_typeArrayDeclarationAST) ;
+    const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
     result = p->mProperty_mSizeExpression ;
   }
   return result ;
@@ -1224,17 +1224,17 @@ GALGAS_expressionAST GALGAS_typeArrayDeclarationAST::getter_mSizeExpression (UNU
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_expressionAST cPtr_typeArrayDeclarationAST::getter_mSizeExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_staticArrayTypeDeclarationAST::getter_mSizeExpression (UNUSED_LOCATION_ARGS) const {
   return mProperty_mSizeExpression ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_location GALGAS_typeArrayDeclarationAST::getter_mSizeExpressionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_staticArrayTypeDeclarationAST::getter_mSizeExpressionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
-    const cPtr_typeArrayDeclarationAST * p = (const cPtr_typeArrayDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_typeArrayDeclarationAST) ;
+    const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
     result = p->mProperty_mSizeExpressionLocation ;
   }
   return result ;
@@ -1242,19 +1242,19 @@ GALGAS_location GALGAS_typeArrayDeclarationAST::getter_mSizeExpressionLocation (
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_location cPtr_typeArrayDeclarationAST::getter_mSizeExpressionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_staticArrayTypeDeclarationAST::getter_mSizeExpressionLocation (UNUSED_LOCATION_ARGS) const {
   return mProperty_mSizeExpressionLocation ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                  Pointer class for @typeArrayDeclarationAST class                                   *
+//                               Pointer class for @staticArrayTypeDeclarationAST class                                *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_typeArrayDeclarationAST::cPtr_typeArrayDeclarationAST (const GALGAS_lstring & in_mAnonymousArrayTypeName,
-                                                            const GALGAS_lstring & in_mElementTypeName,
-                                                            const GALGAS_expressionAST & in_mSizeExpression,
-                                                            const GALGAS_location & in_mSizeExpressionLocation
-                                                            COMMA_LOCATION_ARGS) :
+cPtr_staticArrayTypeDeclarationAST::cPtr_staticArrayTypeDeclarationAST (const GALGAS_lstring & in_mAnonymousArrayTypeName,
+                                                                        const GALGAS_lstring & in_mElementTypeName,
+                                                                        const GALGAS_expressionAST & in_mSizeExpression,
+                                                                        const GALGAS_location & in_mSizeExpressionLocation
+                                                                        COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
 mProperty_mAnonymousArrayTypeName (in_mAnonymousArrayTypeName),
 mProperty_mElementTypeName (in_mElementTypeName),
@@ -1264,13 +1264,13 @@ mProperty_mSizeExpressionLocation (in_mSizeExpressionLocation) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * cPtr_typeArrayDeclarationAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_typeArrayDeclarationAST ;
+const C_galgas_type_descriptor * cPtr_staticArrayTypeDeclarationAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_staticArrayTypeDeclarationAST ;
 }
 
-void cPtr_typeArrayDeclarationAST::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "[@typeArrayDeclarationAST:" ;
+void cPtr_staticArrayTypeDeclarationAST::description (C_String & ioString,
+                                                      const int32_t inIndentation) const {
+  ioString << "[@staticArrayTypeDeclarationAST:" ;
   mProperty_mAnonymousArrayTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mElementTypeName.description (ioString, inIndentation+1) ;
@@ -1283,51 +1283,51 @@ void cPtr_typeArrayDeclarationAST::description (C_String & ioString,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-acPtr_class * cPtr_typeArrayDeclarationAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_staticArrayTypeDeclarationAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_typeArrayDeclarationAST (mProperty_mAnonymousArrayTypeName, mProperty_mElementTypeName, mProperty_mSizeExpression, mProperty_mSizeExpressionLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_staticArrayTypeDeclarationAST (mProperty_mAnonymousArrayTypeName, mProperty_mElementTypeName, mProperty_mSizeExpression, mProperty_mSizeExpressionLocation COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @typeArrayDeclarationAST type                                            *
+//                                         @staticArrayTypeDeclarationAST type                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typeArrayDeclarationAST ("typeArrayDeclarationAST",
-                                                & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
+kTypeDescriptor_GALGAS_staticArrayTypeDeclarationAST ("staticArrayTypeDeclarationAST",
+                                                      & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_typeArrayDeclarationAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_typeArrayDeclarationAST ;
+const C_galgas_type_descriptor * GALGAS_staticArrayTypeDeclarationAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_staticArrayTypeDeclarationAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_typeArrayDeclarationAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_staticArrayTypeDeclarationAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_typeArrayDeclarationAST (*this)) ;
+    macroMyNew (result, GALGAS_staticArrayTypeDeclarationAST (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_typeArrayDeclarationAST GALGAS_typeArrayDeclarationAST::extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_typeArrayDeclarationAST result ;
-  const GALGAS_typeArrayDeclarationAST * p = (const GALGAS_typeArrayDeclarationAST *) inObject.embeddedObject () ;
+GALGAS_staticArrayTypeDeclarationAST GALGAS_staticArrayTypeDeclarationAST::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_staticArrayTypeDeclarationAST result ;
+  const GALGAS_staticArrayTypeDeclarationAST * p = (const GALGAS_staticArrayTypeDeclarationAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_typeArrayDeclarationAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_staticArrayTypeDeclarationAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("typeArrayDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("staticArrayTypeDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -1337,10 +1337,10 @@ GALGAS_typeArrayDeclarationAST GALGAS_typeArrayDeclarationAST::extractObject (co
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cPtr_decoratedTypeArrayDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_decoratedStaticArrayTypeDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_decoratedTypeArrayDeclaration * p = (const cPtr_decoratedTypeArrayDeclaration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_decoratedTypeArrayDeclaration) ;
+  const cPtr_decoratedStaticArrayTypeDeclaration * p = (const cPtr_decoratedStaticArrayTypeDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_decoratedStaticArrayTypeDeclaration) ;
   if (kOperandEqual == result) {
     result = mProperty_mOriginalArrayTypeName.objectCompare (p->mProperty_mOriginalArrayTypeName) ;
   }
@@ -1353,7 +1353,7 @@ typeComparisonResult cPtr_decoratedTypeArrayDeclaration::dynamicObjectCompare (c
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 
-typeComparisonResult GALGAS_decoratedTypeArrayDeclaration::objectCompare (const GALGAS_decoratedTypeArrayDeclaration & inOperand) const {
+typeComparisonResult GALGAS_decoratedStaticArrayTypeDeclaration::objectCompare (const GALGAS_decoratedStaticArrayTypeDeclaration & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -1371,44 +1371,44 @@ typeComparisonResult GALGAS_decoratedTypeArrayDeclaration::objectCompare (const 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedTypeArrayDeclaration::GALGAS_decoratedTypeArrayDeclaration (void) :
+GALGAS_decoratedStaticArrayTypeDeclaration::GALGAS_decoratedStaticArrayTypeDeclaration (void) :
 GALGAS_abstractDecoratedDeclaration () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedTypeArrayDeclaration GALGAS_decoratedTypeArrayDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_decoratedTypeArrayDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                                GALGAS_uint::constructor_default (HERE)
-                                                                COMMA_THERE) ;
+GALGAS_decoratedStaticArrayTypeDeclaration GALGAS_decoratedStaticArrayTypeDeclaration::constructor_default (LOCATION_ARGS) {
+  return GALGAS_decoratedStaticArrayTypeDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                                      GALGAS_uint::constructor_default (HERE)
+                                                                      COMMA_THERE) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedTypeArrayDeclaration::GALGAS_decoratedTypeArrayDeclaration (const cPtr_decoratedTypeArrayDeclaration * inSourcePtr) :
+GALGAS_decoratedStaticArrayTypeDeclaration::GALGAS_decoratedStaticArrayTypeDeclaration (const cPtr_decoratedStaticArrayTypeDeclaration * inSourcePtr) :
 GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_decoratedTypeArrayDeclaration) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_decoratedStaticArrayTypeDeclaration) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedTypeArrayDeclaration GALGAS_decoratedTypeArrayDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mOriginalArrayTypeName,
-                                                                                            const GALGAS_uint & inAttribute_mArraySize
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_decoratedTypeArrayDeclaration result ;
+GALGAS_decoratedStaticArrayTypeDeclaration GALGAS_decoratedStaticArrayTypeDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mOriginalArrayTypeName,
+                                                                                                        const GALGAS_uint & inAttribute_mArraySize
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_decoratedStaticArrayTypeDeclaration result ;
   if (inAttribute_mOriginalArrayTypeName.isValid () && inAttribute_mArraySize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedTypeArrayDeclaration (inAttribute_mOriginalArrayTypeName, inAttribute_mArraySize COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_decoratedStaticArrayTypeDeclaration (inAttribute_mOriginalArrayTypeName, inAttribute_mArraySize COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_decoratedTypeArrayDeclaration::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_decoratedStaticArrayTypeDeclaration::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_decoratedTypeArrayDeclaration * p = (const cPtr_decoratedTypeArrayDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedTypeArrayDeclaration) ;
+    const cPtr_decoratedStaticArrayTypeDeclaration * p = (const cPtr_decoratedStaticArrayTypeDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedStaticArrayTypeDeclaration) ;
     result = p->mProperty_mOriginalArrayTypeName ;
   }
   return result ;
@@ -1416,17 +1416,17 @@ GALGAS_lstring GALGAS_decoratedTypeArrayDeclaration::getter_mOriginalArrayTypeNa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_decoratedTypeArrayDeclaration::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_decoratedStaticArrayTypeDeclaration::getter_mOriginalArrayTypeName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mOriginalArrayTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_uint GALGAS_decoratedTypeArrayDeclaration::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_decoratedStaticArrayTypeDeclaration::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
-    const cPtr_decoratedTypeArrayDeclaration * p = (const cPtr_decoratedTypeArrayDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedTypeArrayDeclaration) ;
+    const cPtr_decoratedStaticArrayTypeDeclaration * p = (const cPtr_decoratedStaticArrayTypeDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedStaticArrayTypeDeclaration) ;
     result = p->mProperty_mArraySize ;
   }
   return result ;
@@ -1434,17 +1434,17 @@ GALGAS_uint GALGAS_decoratedTypeArrayDeclaration::getter_mArraySize (UNUSED_LOCA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_uint cPtr_decoratedTypeArrayDeclaration::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_decoratedStaticArrayTypeDeclaration::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
   return mProperty_mArraySize ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                               Pointer class for @decoratedTypeArrayDeclaration class                                *
+//                            Pointer class for @decoratedStaticArrayTypeDeclaration class                             *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_decoratedTypeArrayDeclaration::cPtr_decoratedTypeArrayDeclaration (const GALGAS_lstring & in_mOriginalArrayTypeName,
-                                                                        const GALGAS_uint & in_mArraySize
-                                                                        COMMA_LOCATION_ARGS) :
+cPtr_decoratedStaticArrayTypeDeclaration::cPtr_decoratedStaticArrayTypeDeclaration (const GALGAS_lstring & in_mOriginalArrayTypeName,
+                                                                                    const GALGAS_uint & in_mArraySize
+                                                                                    COMMA_LOCATION_ARGS) :
 cPtr_abstractDecoratedDeclaration (THERE),
 mProperty_mOriginalArrayTypeName (in_mOriginalArrayTypeName),
 mProperty_mArraySize (in_mArraySize) {
@@ -1452,13 +1452,13 @@ mProperty_mArraySize (in_mArraySize) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * cPtr_decoratedTypeArrayDeclaration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_decoratedTypeArrayDeclaration ;
+const C_galgas_type_descriptor * cPtr_decoratedStaticArrayTypeDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_decoratedStaticArrayTypeDeclaration ;
 }
 
-void cPtr_decoratedTypeArrayDeclaration::description (C_String & ioString,
-                                                      const int32_t inIndentation) const {
-  ioString << "[@decoratedTypeArrayDeclaration:" ;
+void cPtr_decoratedStaticArrayTypeDeclaration::description (C_String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString << "[@decoratedStaticArrayTypeDeclaration:" ;
   mProperty_mOriginalArrayTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mArraySize.description (ioString, inIndentation+1) ;
@@ -1467,51 +1467,51 @@ void cPtr_decoratedTypeArrayDeclaration::description (C_String & ioString,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-acPtr_class * cPtr_decoratedTypeArrayDeclaration::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_decoratedStaticArrayTypeDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedTypeArrayDeclaration (mProperty_mOriginalArrayTypeName, mProperty_mArraySize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedStaticArrayTypeDeclaration (mProperty_mOriginalArrayTypeName, mProperty_mArraySize COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @decoratedTypeArrayDeclaration type                                         *
+//                                      @decoratedStaticArrayTypeDeclaration type                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_decoratedTypeArrayDeclaration ("decoratedTypeArrayDeclaration",
-                                                      & kTypeDescriptor_GALGAS_abstractDecoratedDeclaration) ;
+kTypeDescriptor_GALGAS_decoratedStaticArrayTypeDeclaration ("decoratedStaticArrayTypeDeclaration",
+                                                            & kTypeDescriptor_GALGAS_abstractDecoratedDeclaration) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_decoratedTypeArrayDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_decoratedTypeArrayDeclaration ;
+const C_galgas_type_descriptor * GALGAS_decoratedStaticArrayTypeDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_decoratedStaticArrayTypeDeclaration ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_decoratedTypeArrayDeclaration::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_decoratedStaticArrayTypeDeclaration::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_decoratedTypeArrayDeclaration (*this)) ;
+    macroMyNew (result, GALGAS_decoratedStaticArrayTypeDeclaration (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedTypeArrayDeclaration GALGAS_decoratedTypeArrayDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_decoratedTypeArrayDeclaration result ;
-  const GALGAS_decoratedTypeArrayDeclaration * p = (const GALGAS_decoratedTypeArrayDeclaration *) inObject.embeddedObject () ;
+GALGAS_decoratedStaticArrayTypeDeclaration GALGAS_decoratedStaticArrayTypeDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_decoratedStaticArrayTypeDeclaration result ;
+  const GALGAS_decoratedStaticArrayTypeDeclaration * p = (const GALGAS_decoratedStaticArrayTypeDeclaration *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_decoratedTypeArrayDeclaration *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_decoratedStaticArrayTypeDeclaration *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("decoratedTypeArrayDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("decoratedStaticArrayTypeDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

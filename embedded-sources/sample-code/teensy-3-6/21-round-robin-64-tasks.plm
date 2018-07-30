@@ -112,7 +112,7 @@ task T0 @stacksize 512 @activate {
   on time.wait (!until:self.échéance) {
     self.échéance +%= 500
     myDriver.noteTick ()
-    sémaphore0.signal () ;
+    sémaphore0.signal ()
   }
 
 }
@@ -121,7 +121,7 @@ task T0 @stacksize 512 @activate {
 
 task T1 @stacksize 512 @activate {
   on sémaphore0.wait () {
-    sémaphore1.signal () ;
+    sémaphore1.signal ()
   }
 }
 
@@ -129,7 +129,7 @@ task T1 @stacksize 512 @activate {
 
 task T2 @stacksize 512 @activate {
   on sémaphore1.wait () {
-    sémaphore2.signal () ;
+    sémaphore2.signal ()
   }
 }
 
@@ -137,7 +137,7 @@ task T2 @stacksize 512 @activate {
 
 task T3 @stacksize 512 @activate {
   on sémaphore2.wait () {
-    sémaphore3.signal () ;
+    sémaphore3.signal ()
   }
 }
 
@@ -145,7 +145,7 @@ task T3 @stacksize 512 @activate {
 
 task T4 @stacksize 512 @activate {
   on sémaphore3.wait () {
-    sémaphore4.signal () ;
+    sémaphore4.signal ()
   }
 }
 
@@ -153,7 +153,7 @@ task T4 @stacksize 512 @activate {
 
 task T5 @stacksize 512 @activate {
   on sémaphore4.wait () {
-    sémaphore5.signal () ;
+    sémaphore5.signal ()
   }
 }
 
@@ -161,7 +161,7 @@ task T5 @stacksize 512 @activate {
 
 task T6 @stacksize 512 @activate {
   on sémaphore5.wait () {
-    sémaphore6.signal () ;
+    sémaphore6.signal ()
   }
 }
 
@@ -169,7 +169,7 @@ task T6 @stacksize 512 @activate {
 
 task T7 @stacksize 512 @activate {
   on sémaphore6.wait () {
-    sémaphore7.signal () ;
+    sémaphore7.signal ()
   }
 }
 
@@ -177,7 +177,7 @@ task T7 @stacksize 512 @activate {
 
 task T8 @stacksize 512 @activate {
   on sémaphore7.wait () {
-    sémaphore8.signal () ;
+    sémaphore8.signal ()
   }
 }
 
@@ -185,7 +185,7 @@ task T8 @stacksize 512 @activate {
 
 task T9 @stacksize 512 @activate {
   on sémaphore8.wait () {
-    sémaphore10.signal () ;
+    sémaphore10.signal ()
   }
 }
 
@@ -193,7 +193,7 @@ task T9 @stacksize 512 @activate {
 
 task T10 @stacksize 512 @activate {
   on sémaphore9.wait () {
-    sémaphore10.signal () ;
+    sémaphore10.signal ()
   }
 }
 
@@ -201,7 +201,7 @@ task T10 @stacksize 512 @activate {
 
 task T11 @stacksize 512 @activate {
   on sémaphore10.wait () {
-    sémaphore11.signal () ;
+    sémaphore11.signal ()
   }
 }
 
@@ -209,7 +209,7 @@ task T11 @stacksize 512 @activate {
 
 task T12 @stacksize 512 @activate {
   on sémaphore11.wait () {
-    sémaphore12.signal () ;
+    sémaphore12.signal ()
   }
 }
 
@@ -217,7 +217,7 @@ task T12 @stacksize 512 @activate {
 
 task T13 @stacksize 512 @activate {
   on sémaphore12.wait () {
-    sémaphore13.signal () ;
+    sémaphore13.signal ()
   }
 }
 
@@ -225,7 +225,7 @@ task T13 @stacksize 512 @activate {
 
 task T14 @stacksize 512 @activate {
   on sémaphore13.wait () {
-    sémaphore14.signal () ;
+    sémaphore14.signal ()
   }
 }
 
@@ -233,7 +233,7 @@ task T14 @stacksize 512 @activate {
 
 task T15 @stacksize 512 @activate {
   on sémaphore14.wait () {
-    sémaphore15.signal () ;
+    sémaphore15.signal ()
   }
 }
 
@@ -241,7 +241,7 @@ task T15 @stacksize 512 @activate {
 
 task T16 @stacksize 512 @activate {
   on sémaphore15.wait () {
-    sémaphore16.signal () ;
+    sémaphore16.signal ()
   }
 }
 
@@ -249,7 +249,7 @@ task T16 @stacksize 512 @activate {
 
 task T17 @stacksize 512 @activate {
   on sémaphore16.wait () {
-    sémaphore17.signal () ;
+    sémaphore17.signal ()
   }
 }
 
@@ -257,7 +257,7 @@ task T17 @stacksize 512 @activate {
 
 task T18 @stacksize 512 @activate {
   on sémaphore17.wait () {
-    sémaphore18.signal () ;
+    sémaphore18.signal ()
   }
 }
 
@@ -265,7 +265,7 @@ task T18 @stacksize 512 @activate {
 
 task T19 @stacksize 512 @activate {
   on sémaphore18.wait () {
-    sémaphore19.signal () ;
+    sémaphore19.signal ()
   }
 }
 
@@ -273,7 +273,7 @@ task T19 @stacksize 512 @activate {
 
 task T20 @stacksize 512 {
   on sémaphore19.wait () {
-    sémaphore20.signal () ;
+    sémaphore20.signal ()
   }
 }
 
@@ -281,7 +281,7 @@ task T20 @stacksize 512 {
 
 task T21 @stacksize 512 @activate {
   on sémaphore20.wait () {
-    sémaphore21.signal () ;
+    sémaphore21.signal ()
   }
 }
 
@@ -289,7 +289,7 @@ task T21 @stacksize 512 @activate {
 
 task T22 @stacksize 512 @activate {
   on sémaphore21.wait () {
-    sémaphore22.signal () ;
+    sémaphore22.signal ()
   }
 }
 
@@ -297,7 +297,7 @@ task T22 @stacksize 512 @activate {
 
 task T23 @stacksize 512 {
   on sémaphore22.wait () {
-    sémaphore23.signal () ;
+    sémaphore23.signal ()
   }
 }
 
@@ -305,7 +305,7 @@ task T23 @stacksize 512 {
 
 task T24 @stacksize 512 @activate {
   on sémaphore23.wait () {
-    sémaphore24.signal () ;
+    sémaphore24.signal ()
   }
 }
 
@@ -313,7 +313,7 @@ task T24 @stacksize 512 @activate {
 
 task T25 @stacksize 512 @activate {
   on sémaphore24.wait () {
-    sémaphore25.signal () ;
+    sémaphore25.signal ()
   }
 }
 
@@ -321,7 +321,7 @@ task T25 @stacksize 512 @activate {
 
 task T26 @stacksize 512 @activate {
   on sémaphore25.wait () {
-    sémaphore26.signal () ;
+    sémaphore26.signal ()
   }
 }
 
@@ -329,7 +329,7 @@ task T26 @stacksize 512 @activate {
 
 task T27 @stacksize 512 @activate {
   on sémaphore26.wait () {
-    sémaphore27.signal () ;
+    sémaphore27.signal ()
   }
 }
 
@@ -337,7 +337,7 @@ task T27 @stacksize 512 @activate {
 
 task T28 @stacksize 512 @activate {
   on sémaphore27.wait () {
-    sémaphore28.signal () ;
+    sémaphore28.signal ()
   }
 }
 
@@ -345,7 +345,7 @@ task T28 @stacksize 512 @activate {
 
 task T29 @stacksize 512 @activate {
   on sémaphore28.wait () {
-    sémaphore29.signal () ;
+    sémaphore29.signal ()
   }
 }
 
@@ -353,7 +353,7 @@ task T29 @stacksize 512 @activate {
 
 task T30 @stacksize 512 @activate {
   on sémaphore29.wait () {
-    sémaphore30.signal () ;
+    sémaphore30.signal ()
   }
 }
 
@@ -361,7 +361,7 @@ task T30 @stacksize 512 @activate {
 
 task T31 @stacksize 512 @activate {
   on sémaphore30.wait () {
-    sémaphore31.signal () ;
+    sémaphore31.signal ()
   }
 }
 
@@ -369,7 +369,7 @@ task T31 @stacksize 512 @activate {
 
 task T32 @stacksize 512 @activate {
   on sémaphore31.wait () {
-    sémaphore32.signal () ;
+    sémaphore32.signal ()
   }
 }
 
@@ -377,7 +377,7 @@ task T32 @stacksize 512 @activate {
 
 task T33 @stacksize 512 @activate {
   on sémaphore32.wait () {
-    sémaphore33.signal () ;
+    sémaphore33.signal ()
   }
 }
 
@@ -385,7 +385,7 @@ task T33 @stacksize 512 @activate {
 
 task T34 @stacksize 512 @activate {
   on sémaphore33.wait () {
-    sémaphore34.signal () ;
+    sémaphore34.signal ()
   }
 }
 
@@ -393,7 +393,7 @@ task T34 @stacksize 512 @activate {
 
 task T35 @stacksize 512 @activate {
   on sémaphore34.wait () {
-    sémaphore35.signal () ;
+    sémaphore35.signal ()
   }
 }
 
@@ -401,7 +401,7 @@ task T35 @stacksize 512 @activate {
 
 task T36 @stacksize 512 @activate {
   on sémaphore35.wait () {
-    sémaphore36.signal () ;
+    sémaphore36.signal ()
   }
 }
 
@@ -409,7 +409,7 @@ task T36 @stacksize 512 @activate {
 
 task T37 @stacksize 512 @activate {
   on sémaphore36.wait () {
-    sémaphore37.signal () ;
+    sémaphore37.signal ()
   }
 }
 
@@ -417,7 +417,7 @@ task T37 @stacksize 512 @activate {
 
 task T38 @stacksize 512 @activate {
   on sémaphore37.wait () {
-    sémaphore38.signal () ;
+    sémaphore38.signal ()
   }
 }
 
@@ -425,7 +425,7 @@ task T38 @stacksize 512 @activate {
 
 task T39 @stacksize 512 @activate {
   on sémaphore38.wait () {
-    sémaphore39.signal () ;
+    sémaphore39.signal ()
   }
 }
 
@@ -433,7 +433,7 @@ task T39 @stacksize 512 @activate {
 
 task T40 @stacksize 512 @activate {
   on sémaphore39.wait () {
-    sémaphore40.signal () ;
+    sémaphore40.signal ()
   }
 }
 
@@ -441,7 +441,7 @@ task T40 @stacksize 512 @activate {
 
 task T41 @stacksize 512 @activate {
   on sémaphore40.wait () {
-    sémaphore41.signal () ;
+    sémaphore41.signal ()
   }
 }
 
@@ -449,7 +449,7 @@ task T41 @stacksize 512 @activate {
 
 task T42 @stacksize 512 @activate {
   on sémaphore41.wait () {
-    sémaphore42.signal () ;
+    sémaphore42.signal ()
   }
 }
 
@@ -457,7 +457,7 @@ task T42 @stacksize 512 @activate {
 
 task T43 @stacksize 512 @activate {
   on sémaphore42.wait () {
-    sémaphore43.signal () ;
+    sémaphore43.signal ()
   }
 }
 
@@ -465,7 +465,7 @@ task T43 @stacksize 512 @activate {
 
 task T44 @stacksize 512 @activate {
   on sémaphore43.wait () {
-    sémaphore44.signal () ;
+    sémaphore44.signal ()
   }
 }
 
@@ -473,7 +473,7 @@ task T44 @stacksize 512 @activate {
 
 task T45 @stacksize 512 @activate {
   on sémaphore44.wait () {
-    sémaphore45.signal () ;
+    sémaphore45.signal ()
   }
 }
 
@@ -481,7 +481,7 @@ task T45 @stacksize 512 @activate {
 
 task T46 @stacksize 512 @activate {
   on sémaphore45.wait () {
-    sémaphore46.signal () ;
+    sémaphore46.signal ()
   }
 }
 
@@ -489,7 +489,7 @@ task T46 @stacksize 512 @activate {
 
 task T47 @stacksize 512 @activate {
   on sémaphore46.wait () {
-    sémaphore47.signal () ;
+    sémaphore47.signal ()
   }
 }
 
@@ -497,7 +497,7 @@ task T47 @stacksize 512 @activate {
 
 task T48 @stacksize 512 @activate {
   on sémaphore47.wait () {
-    sémaphore48.signal () ;
+    sémaphore48.signal ()
   }
 }
 
@@ -505,7 +505,7 @@ task T48 @stacksize 512 @activate {
 
 task T49 @stacksize 512 @activate {
   on sémaphore48.wait () {
-    sémaphore49.signal () ;
+    sémaphore49.signal ()
   }
 }
 
@@ -513,7 +513,7 @@ task T49 @stacksize 512 @activate {
 
 task T50 @stacksize 512 @activate {
   on sémaphore49.wait () {
-    sémaphore50.signal () ;
+    sémaphore50.signal ()
   }
 }
 
@@ -521,7 +521,7 @@ task T50 @stacksize 512 @activate {
 
 task T51 @stacksize 512 @activate {
   on sémaphore50.wait () {
-    sémaphore51.signal () ;
+    sémaphore51.signal ()
   }
 }
 
@@ -529,7 +529,7 @@ task T51 @stacksize 512 @activate {
 
 task T52 @stacksize 512 @activate {
   on sémaphore51.wait () {
-    sémaphore52.signal () ;
+    sémaphore52.signal ()
   }
 }
 
@@ -537,7 +537,7 @@ task T52 @stacksize 512 @activate {
 
 task T53 @stacksize 512 @activate {
   on sémaphore52.wait () {
-    sémaphore53.signal () ;
+    sémaphore53.signal ()
   }
 }
 
@@ -545,7 +545,7 @@ task T53 @stacksize 512 @activate {
 
 task T54 @stacksize 512 @activate {
   on sémaphore53.wait () {
-    sémaphore54.signal () ;
+    sémaphore54.signal ()
   }
 }
 
@@ -553,7 +553,7 @@ task T54 @stacksize 512 @activate {
 
 task T55 @stacksize 512 @activate {
   on sémaphore54.wait () {
-    sémaphore55.signal () ;
+    sémaphore55.signal ()
   }
 }
 
@@ -561,7 +561,7 @@ task T55 @stacksize 512 @activate {
 
 task T56 @stacksize 512 @activate {
   on sémaphore55.wait () {
-    sémaphore56.signal () ;
+    sémaphore56.signal ()
   }
 }
 
@@ -569,7 +569,7 @@ task T56 @stacksize 512 @activate {
 
 task T57 @stacksize 512 @activate {
   on sémaphore56.wait () {
-    sémaphore57.signal () ;
+    sémaphore57.signal ()
   }
 }
 
@@ -577,7 +577,7 @@ task T57 @stacksize 512 @activate {
 
 task T58 @stacksize 512 @activate {
   on sémaphore57.wait () {
-    sémaphore58.signal () ;
+    sémaphore58.signal ()
   }
 }
 
@@ -585,7 +585,7 @@ task T58 @stacksize 512 @activate {
 
 task T59 @stacksize 512 @activate {
   on sémaphore58.wait () {
-    sémaphore59.signal () ;
+    sémaphore59.signal ()
   }
 }
 
@@ -593,7 +593,7 @@ task T59 @stacksize 512 @activate {
 
 task T60 @stacksize 512 @activate {
   on sémaphore59.wait () {
-    sémaphore60.signal () ;
+    sémaphore60.signal ()
   }
 }
 
@@ -601,7 +601,7 @@ task T60 @stacksize 512 @activate {
 
 task T61 @stacksize 512 @activate {
   on sémaphore60.wait () {
-    sémaphore61.signal () ;
+    sémaphore61.signal ()
   }
 }
 
@@ -609,7 +609,7 @@ task T61 @stacksize 512 @activate {
 
 task T62 @stacksize 512 @activate {
   on sémaphore61.wait () {
-    sémaphore62.signal () ;
+    sémaphore62.signal ()
   }
 }
 

@@ -327,351 +327,351 @@ driver digital > root {
     switch port {
     case D0 : // PTB16
       if value {
-        #GPIOB:PSOR = 1 << 16 ;
+        #GPIOB:PSOR = 1 << 16
       }else{
-        #GPIOB:PCOR = 1 << 16 ;
+        #GPIOB:PCOR = 1 << 16
       }
     case D1 : // PTB17
       if value {
-        #GPIOB:PSOR = 1 << 17 ;
+        #GPIOB:PSOR = 1 << 17
       }else{
-        #GPIOB:PCOR = 1 << 17 ;
+        #GPIOB:PCOR = 1 << 17
       }
     case D2 : // PTD0
       if value {
-        #GPIOD:PSOR = 1 << 0 ;
+        #GPIOD:PSOR = 1 << 0
       }else{
-        #GPIOD:PCOR = 1 << 0 ;
+        #GPIOD:PCOR = 1 << 0
       }
     case D3 : // PTA12
       if value {
-        #GPIOA:PSOR = 1 << 12 ;
+        #GPIOA:PSOR = 1 << 12
       }else{
-        #GPIOA:PCOR = 1 << 12 ;
+        #GPIOA:PCOR = 1 << 12
       }
     case D4 : // PTA13
       if value {
-        #GPIOA:PSOR = 1 << 13 ;
+        #GPIOA:PSOR = 1 << 13
       }else{
-        #GPIOA:PCOR = 1 << 13 ;
+        #GPIOA:PCOR = 1 << 13
       }
     case D5 : // PTD7
       if value {
-        #GPIOD:PSOR = 1 << 7 ;
+        #GPIOD:PSOR = 1 << 7
       }else{
-        #GPIOD:PCOR = 1 << 7 ;
+        #GPIOD:PCOR = 1 << 7
       }
     case D6 : // PTD4
       if value {
-        #GPIOD:PSOR = 1 << 4 ;
+        #GPIOD:PSOR = 1 << 4
       }else{
-        #GPIOD:PCOR = 1 << 4 ;
+        #GPIOD:PCOR = 1 << 4
       }
     case D7 : // PTD2
       if value {
-        #GPIOD:PSOR = 1 << 2 ;
+        #GPIOD:PSOR = 1 << 2
       }else{
-        #GPIOD:PCOR = 1 << 2 ;
+        #GPIOD:PCOR = 1 << 2
       }
     case D8 : // PTD3
       if value {
-        #GPIOD:PSOR = 1 << 3 ;
+        #GPIOD:PSOR = 1 << 3
       }else{
-        #GPIOD:PCOR = 1 << 3 ;
+        #GPIOD:PCOR = 1 << 3
       }
     case D9  : // PTC3
       if value {
-        #GPIOC:PSOR = 1 << 3 ;
+        #GPIOC:PSOR = 1 << 3
       }else{
-        #GPIOC:PCOR = 1 << 3 ;
+        #GPIOC:PCOR = 1 << 3
       }
     case D10 : // PTC4
       if value {
-        #GPIOC:PSOR = 1 << 4 ;
+        #GPIOC:PSOR = 1 << 4
       }else{
-        #GPIOC:PCOR = 1 << 4 ;
+        #GPIOC:PCOR = 1 << 4
       }
     case D11 : // PTC6
       if value {
-        #GPIOC:PSOR = 1 << 6 ;
+        #GPIOC:PSOR = 1 << 6
       }else{
-        #GPIOC:PCOR = 1 << 6 ;
+        #GPIOC:PCOR = 1 << 6
       }
     case D12 : // PTC7
       if value {
-        #GPIOC:PSOR = 1 << 7 ;
+        #GPIOC:PSOR = 1 << 7
       }else{
-        #GPIOC:PCOR = 1 << 7 ;
+        #GPIOC:PCOR = 1 << 7
       }
     case D13 : // PTC5
       if value {
-        #GPIOC:PSOR = 1 << 5 ;
+        #GPIOC:PSOR = 1 << 5
       }else{
-        #GPIOC:PCOR = 1 << 5 ;
+        #GPIOC:PCOR = 1 << 5
       }
     case D14 : // PTD1
       if value {
-        #GPIOD:PSOR = 1 << 1 ;
+        #GPIOD:PSOR = 1 << 1
       }else{
-        #GPIOD:PCOR = 1 << 1 ;
+        #GPIOD:PCOR = 1 << 1
       }
     case D15 : // PTC0
       if value {
-        #GPIOC:PSOR = 1 << 0 ;
+        #GPIOC:PSOR = 1 << 0
       }else{
-        #GPIOC:PCOR = 1 << 0 ;
+        #GPIOC:PCOR = 1 << 0
       }
     case D16 : // PTB0
       if value {
-        #GPIOB:PSOR = 1 << 0 ;
+        #GPIOB:PSOR = 1 << 0
       }else{
-        #GPIOB:PCOR = 1 << 0 ;
+        #GPIOB:PCOR = 1 << 0
       }
     case D17 : // PTB1
       if value {
-        #GPIOB:PSOR = 1 << 1 ;
+        #GPIOB:PSOR = 1 << 1
       }else{
-        #GPIOB:PCOR = 1 << 1 ;
+        #GPIOB:PCOR = 1 << 1
       }
     case D18 : // PTB3
       if value {
-        #GPIOB:PSOR = 1 << 3 ;
+        #GPIOB:PSOR = 1 << 3
       }else{
-        #GPIOB:PCOR = 1 << 3 ;
+        #GPIOB:PCOR = 1 << 3
       }
     case D19 : // PTB2
       if value {
-        #GPIOB:PSOR = 1 << 2 ;
+        #GPIOB:PSOR = 1 << 2
       }else{
-        #GPIOB:PCOR = 1 << 2 ;
+        #GPIOB:PCOR = 1 << 2
       }
     case D20 : // PTD5
       if value {
-        #GPIOD:PSOR = 1 << 5 ;
+        #GPIOD:PSOR = 1 << 5
       }else{
-        #GPIOD:PCOR = 1 << 5 ;
+        #GPIOD:PCOR = 1 << 5
       }
     case D21 : // PTD6
       if value {
-        #GPIOD:PSOR = 1 << 6 ;
+        #GPIOD:PSOR = 1 << 6
       }else{
-        #GPIOD:PCOR = 1 << 6 ;
+        #GPIOD:PCOR = 1 << 6
       }
     case D22 : // PTC1
       if value {
-        #GPIOC:PSOR = 1 << 1 ;
+        #GPIOC:PSOR = 1 << 1
       }else{
-        #GPIOC:PCOR = 1 << 1 ;
+        #GPIOC:PCOR = 1 << 1
       }
     case D23 : // PTC2
       if value {
-        #GPIOC:PSOR = 1 << 2 ;
+        #GPIOC:PSOR = 1 << 2
       }else{
-        #GPIOC:PCOR = 1 << 2 ;
+        #GPIOC:PCOR = 1 << 2
       }
     case D24 : // PTE26
       if value {
-        #GPIOE:PSOR = 1 << 26 ;
+        #GPIOE:PSOR = 1 << 26
       }else{
-        #GPIOE:PCOR = 1 << 26 ;
+        #GPIOE:PCOR = 1 << 26
       }
     case D25 : // PTA5
       if value {
-        #GPIOA:PSOR = 1 << 5 ;
+        #GPIOA:PSOR = 1 << 5
       }else{
-        #GPIOA:PCOR = 1 << 5 ;
+        #GPIOA:PCOR = 1 << 5
       }
     case D26 : // PTA14
       if value {
-        #GPIOA:PSOR = 1 << 14 ;
+        #GPIOA:PSOR = 1 << 14
       }else{
-        #GPIOA:PCOR = 1 << 14 ;
+        #GPIOA:PCOR = 1 << 14
       }
     case D27 : // PTA15
       if value {
-        #GPIOA:PSOR = 1 << 15 ;
+        #GPIOA:PSOR = 1 << 15
       }else{
-        #GPIOA:PCOR = 1 << 15 ;
+        #GPIOA:PCOR = 1 << 15
       }
     case D28 : // PTA16
       if value {
-        #GPIOA:PSOR = 1 << 16 ;
+        #GPIOA:PSOR = 1 << 16
       }else{
-        #GPIOA:PCOR = 1 << 16 ;
+        #GPIOA:PCOR = 1 << 16
       }
     case D29 : // PTB18
       if value {
-        #GPIOB:PSOR = 1 << 18 ;
+        #GPIOB:PSOR = 1 << 18
       }else{
-        #GPIOB:PCOR = 1 << 18 ;
+        #GPIOB:PCOR = 1 << 18
       }
     case D30 : // PTB19
       if value {
-        #GPIOB:PSOR = 1 << 19 ;
+        #GPIOB:PSOR = 1 << 19
       }else{
-        #GPIOB:PCOR = 1 << 19 ;
+        #GPIOB:PCOR = 1 << 19
       }
     case D31 : // PTB10
       if value {
-        #GPIOB:PSOR = 1 << 10 ;
+        #GPIOB:PSOR = 1 << 10
       }else{
-        #GPIOB:PCOR = 1 << 10 ;
+        #GPIOB:PCOR = 1 << 10
       }
     case D32 : // PTB11
       if value {
-        #GPIOB:PSOR = 1 << 11 ;
+        #GPIOB:PSOR = 1 << 11
       }else{
-        #GPIOB:PCOR = 1 << 11 ;
+        #GPIOB:PCOR = 1 << 11
       }
     case D33 : // PTE24
       if value {
-        #GPIOE:PSOR = 1 << 24 ;
+        #GPIOE:PSOR = 1 << 24
       }else{
-        #GPIOE:PCOR = 1 << 24 ;
+        #GPIOE:PCOR = 1 << 24
       }
     case D34 : // PTE25
       if value {
-        #GPIOE:PSOR = 1 << 25 ;
+        #GPIOE:PSOR = 1 << 25
       }else{
-        #GPIOE:PCOR = 1 << 25 ;
+        #GPIOE:PCOR = 1 << 25
       }
     case D35 : // PTC8
       if value {
-        #GPIOC:PSOR = 1 << 8 ;
+        #GPIOC:PSOR = 1 << 8
       }else{
-        #GPIOC:PCOR = 1 << 8 ;
+        #GPIOC:PCOR = 1 << 8
       }
     case D36 : // PTC9
       if value {
-        #GPIOC:PSOR = 1 << 9 ;
+        #GPIOC:PSOR = 1 << 9
       }else{
-        #GPIOC:PCOR = 1 << 9 ;
+        #GPIOC:PCOR = 1 << 9
       }
     case D37 : // PTC10
       if value {
-        #GPIOC:PSOR = 1 << 10 ;
+        #GPIOC:PSOR = 1 << 10
       }else{
-        #GPIOC:PCOR = 1 << 10 ;
+        #GPIOC:PCOR = 1 << 10
       }
     case D38 : // PTC11
       if value {
-        #GPIOC:PSOR = 1 << 11 ;
+        #GPIOC:PSOR = 1 << 11
       }else{
-        #GPIOC:PCOR = 1 << 11 ;
+        #GPIOC:PCOR = 1 << 11
       }
     case D39 : // PTA17
       if value {
-        #GPIOA:PSOR = 1 << 17 ;
+        #GPIOA:PSOR = 1 << 17
       }else{
-        #GPIOA:PCOR = 1 << 17 ;
+        #GPIOA:PCOR = 1 << 17
       }
     case D40 : // PTA28
       if value {
-        #GPIOA:PSOR = 1 << 28 ;
+        #GPIOA:PSOR = 1 << 28
       }else{
-        #GPIOA:PCOR = 1 << 28 ;
+        #GPIOA:PCOR = 1 << 28
       }
     case D41 : // PTA29
       if value {
-        #GPIOA:PSOR = 1 << 29 ;
+        #GPIOA:PSOR = 1 << 29
       }else{
-        #GPIOA:PCOR = 1 << 29 ;
+        #GPIOA:PCOR = 1 << 29
       }
     case D42 : // PTA26
       if value {
-        #GPIOA:PSOR = 1 << 26 ;
+        #GPIOA:PSOR = 1 << 26
       }else{
-        #GPIOA:PCOR = 1 << 26 ;
+        #GPIOA:PCOR = 1 << 26
       }
     case D43 : // PTB20
       if value {
-        #GPIOB:PSOR = 1 << 20 ;
+        #GPIOB:PSOR = 1 << 20
       }else{
-        #GPIOB:PCOR = 1 << 20 ;
+        #GPIOB:PCOR = 1 << 20
       }
     case D44 : // PTB22
       if value {
-        #GPIOB:PSOR = 1 << 22 ;
+        #GPIOB:PSOR = 1 << 22
       }else{
-        #GPIOB:PCOR = 1 << 22 ;
+        #GPIOB:PCOR = 1 << 22
       }
     case D45 : // PTB23
       if value {
-        #GPIOB:PSOR = 1 << 23 ;
+        #GPIOB:PSOR = 1 << 23
       }else{
-        #GPIOB:PCOR = 1 << 23 ;
+        #GPIOB:PCOR = 1 << 23
       }
     case D46 : // PTB21
       if value {
-        #GPIOB:PSOR = 1 << 21 ;
+        #GPIOB:PSOR = 1 << 21
       }else{
-        #GPIOB:PCOR = 1 << 21 ;
+        #GPIOB:PCOR = 1 << 21
       }
     case D47 : // PTD8
       if value {
-        #GPIOD:PSOR = 1 << 8 ;
+        #GPIOD:PSOR = 1 << 8
       }else{
-        #GPIOD:PCOR = 1 << 8 ;
+        #GPIOD:PCOR = 1 << 8
       }
     case D48 : // PTD9
       if value {
-        #GPIOD:PSOR = 1 << 9 ;
+        #GPIOD:PSOR = 1 << 9
       }else{
-        #GPIOD:PCOR = 1 << 9 ;
+        #GPIOD:PCOR = 1 << 9
       }
     case D49 : // PTB4
       if value {
-        #GPIOB:PSOR = 1 << 4 ;
+        #GPIOB:PSOR = 1 << 4
       }else{
-        #GPIOB:PCOR = 1 << 4 ;
+        #GPIOB:PCOR = 1 << 4
       }
     case D50 : // PTB5
       if value {
-        #GPIOB:PSOR = 1 << 5 ;
+        #GPIOB:PSOR = 1 << 5
       }else{
-        #GPIOB:PCOR = 1 << 5 ;
+        #GPIOB:PCOR = 1 << 5
       }
     case D51 : // PTD14
       if value {
-        #GPIOD:PSOR = 1 << 14 ;
+        #GPIOD:PSOR = 1 << 14
       }else{
-        #GPIOD:PCOR = 1 << 14 ;
+        #GPIOD:PCOR = 1 << 14
       }
     case D52 : // PTD13
       if value {
-        #GPIOD:PSOR = 1 << 13 ;
+        #GPIOD:PSOR = 1 << 13
       }else{
-        #GPIOD:PCOR = 1 << 13 ;
+        #GPIOD:PCOR = 1 << 13
       }
     case D53 : // PTD12
       if value {
-        #GPIOD:PSOR = 1 << 12 ;
+        #GPIOD:PSOR = 1 << 12
       }else{
-        #GPIOD:PCOR = 1 << 12 ;
+        #GPIOD:PCOR = 1 << 12
       }
     case D54 : // PTD15
       if value {
-        #GPIOD:PSOR = 1 << 15 ;
+        #GPIOD:PSOR = 1 << 15
       }else{
-        #GPIOD:PCOR = 1 << 15 ;
+        #GPIOD:PCOR = 1 << 15
       }
     case D55 : // PTD11
       if value {
-        #GPIOD:PSOR = 1 << 11 ;
+        #GPIOD:PSOR = 1 << 11
       }else{
-        #GPIOD:PCOR = 1 << 11 ;
+        #GPIOD:PCOR = 1 << 11
       }
     case D56 : // PTE10
       if value {
-        #GPIOE:PSOR = 1 << 10 ;
+        #GPIOE:PSOR = 1 << 10
       }else{
-        #GPIOE:PCOR = 1 << 10 ;
+        #GPIOE:PCOR = 1 << 10
       }
     case D57 : // PTE11
       if value {
-        #GPIOE:PSOR = 1 << 11 ;
+        #GPIOE:PSOR = 1 << 11
       }else{
-        #GPIOE:PCOR = 1 << 11 ;
+        #GPIOE:PCOR = 1 << 11
       }
     }
   }
@@ -804,121 +804,121 @@ driver digital > root {
   public func toggle @noUnusedWarning (?port:port $digitalPort) {
     switch port {
     case D0 : // PTB16
-      #GPIOB:PTOR = 1 << 16 ;
+      #GPIOB:PTOR = 1 << 16
     case D1 : // PTB17
-      #GPIOB:PTOR = 1 << 17 ;
+      #GPIOB:PTOR = 1 << 17
     case D2 : // PTD0
-      #GPIOD:PTOR = 1 << 0 ;
+      #GPIOD:PTOR = 1 << 0
     case D3 : // PTA12
-      #GPIOA:PTOR = 1 << 12 ;
+      #GPIOA:PTOR = 1 << 12
     case D4 : // PTA13
-      #GPIOA:PTOR = 1 << 13 ;
+      #GPIOA:PTOR = 1 << 13
     case D5 : // PTD7
-      #GPIOD:PTOR = 1 << 7 ;
+      #GPIOD:PTOR = 1 << 7
     case D6 : // PTD4
-      #GPIOD:PTOR = 1 << 4 ;
+      #GPIOD:PTOR = 1 << 4
     case D7 : // PTD2
-      #GPIOD:PTOR = 1 << 2 ;
+      #GPIOD:PTOR = 1 << 2
     case D8 : // PTD3
-      #GPIOD:PTOR = 1 << 3 ;
+      #GPIOD:PTOR = 1 << 3
     case D9  : // PTC3
-      #GPIOC:PTOR = 1 << 3 ;
+      #GPIOC:PTOR = 1 << 3
     case D10 : // PTC4
-      #GPIOC:PTOR = 1 << 4 ;
+      #GPIOC:PTOR = 1 << 4
     case D11 : // PTC6
-      #GPIOC:PTOR = 1 << 6 ;
+      #GPIOC:PTOR = 1 << 6
     case D12 : // PTC7
-      #GPIOC:PTOR = 1 << 7 ;
+      #GPIOC:PTOR = 1 << 7
     case D13 : // PTC5
-      #GPIOC:PTOR = 1 << 5 ;
+      #GPIOC:PTOR = 1 << 5
     case D14 : // PTD1
-      #GPIOD:PTOR = 1 << 1 ;
+      #GPIOD:PTOR = 1 << 1
     case D15 : // PTC0
-      #GPIOC:PTOR = 1 << 0 ;
+      #GPIOC:PTOR = 1 << 0
     case D16 : // PTB0
-      #GPIOB:PTOR = 1 << 0 ;
+      #GPIOB:PTOR = 1 << 0
     case D17 : // PTB1
-      #GPIOB:PTOR = 1 << 1 ;
+      #GPIOB:PTOR = 1 << 1
     case D18 : // PTB3
-      #GPIOB:PTOR = 1 << 3 ;
+      #GPIOB:PTOR = 1 << 3
     case D19 : // PTB2
-      #GPIOB:PTOR = 1 << 2 ;
+      #GPIOB:PTOR = 1 << 2
     case D20 : // PTD5
-      #GPIOD:PTOR = 1 << 5 ;
+      #GPIOD:PTOR = 1 << 5
     case D21 : // PTD6
-      #GPIOD:PTOR = 1 << 6 ;
+      #GPIOD:PTOR = 1 << 6
     case D22 : // PTC1
-      #GPIOC:PTOR = 1 << 1 ;
+      #GPIOC:PTOR = 1 << 1
     case D23 : // PTC2
-      #GPIOC:PTOR = 1 << 2 ;
+      #GPIOC:PTOR = 1 << 2
     case D24 : // PTE26
-      #GPIOE:PTOR = 1 << 26 ;
+      #GPIOE:PTOR = 1 << 26
     case D25 : // PTA5
-      #GPIOA:PTOR = 1 << 5 ;
+      #GPIOA:PTOR = 1 << 5
     case D26 : // PTA14
-      #GPIOA:PTOR = 1 << 14 ;
+      #GPIOA:PTOR = 1 << 14
     case D27 : // PTA15
-      #GPIOA:PTOR = 1 << 15 ;
+      #GPIOA:PTOR = 1 << 15
     case D28 : // PTA16
-      #GPIOA:PTOR = 1 << 16 ;
+      #GPIOA:PTOR = 1 << 16
     case D29 : // PTB18
-      #GPIOB:PTOR = 1 << 18 ;
+      #GPIOB:PTOR = 1 << 18
     case D30 : // PTB19
-      #GPIOB:PTOR = 1 << 19 ;
+      #GPIOB:PTOR = 1 << 19
     case D31 : // PTB10
-      #GPIOB:PTOR = 1 << 10 ;
+      #GPIOB:PTOR = 1 << 10
     case D32 : // PTB11
-      #GPIOB:PTOR = 1 << 11 ;
+      #GPIOB:PTOR = 1 << 11
     case D33 : // PTE24
-      #GPIOE:PTOR = 1 << 24 ;
+      #GPIOE:PTOR = 1 << 24
     case D34 : // PTE25
-      #GPIOE:PTOR = 1 << 25 ;
+      #GPIOE:PTOR = 1 << 25
     case D35 : // PTC8
-      #GPIOC:PTOR = 1 << 8 ;
+      #GPIOC:PTOR = 1 << 8
     case D36 : // PTC9
-      #GPIOC:PTOR = 1 << 9 ;
+      #GPIOC:PTOR = 1 << 9
     case D37 : // PTC10
-      #GPIOC:PTOR = 1 << 10 ;
+      #GPIOC:PTOR = 1 << 10
     case D38 : // PTC11
-      #GPIOC:PTOR = 1 << 11 ;
+      #GPIOC:PTOR = 1 << 11
     case D39 : // PTA17
-      #GPIOA:PTOR = 1 << 17 ;
+      #GPIOA:PTOR = 1 << 17
     case D40 : // PTA28
-      #GPIOA:PTOR = 1 << 28 ;
+      #GPIOA:PTOR = 1 << 28
     case D41 : // PTA29
-      #GPIOA:PTOR = 1 << 29 ;
+      #GPIOA:PTOR = 1 << 29
     case D42 : // PTA26
-      #GPIOA:PTOR = 1 << 26 ;
+      #GPIOA:PTOR = 1 << 26
     case D43 : // PTB20
-      #GPIOB:PTOR = 1 << 20 ;
+      #GPIOB:PTOR = 1 << 20
     case D44 : // PTB22
-      #GPIOB:PTOR = 1 << 22 ;
+      #GPIOB:PTOR = 1 << 22
     case D45 : // PTB23
-      #GPIOB:PTOR = 1 << 23 ;
+      #GPIOB:PTOR = 1 << 23
     case D46 : // PTB21
-      #GPIOB:PTOR = 1 << 21 ;
+      #GPIOB:PTOR = 1 << 21
     case D47 : // PTD8
-      #GPIOD:PTOR = 1 << 8 ;
+      #GPIOD:PTOR = 1 << 8
     case D48 : // PTD9
-      #GPIOD:PTOR = 1 << 9 ;
+      #GPIOD:PTOR = 1 << 9
     case D49 : // PTB4
-      #GPIOB:PTOR = 1 << 4 ;
+      #GPIOB:PTOR = 1 << 4
     case D50 : // PTB5
-      #GPIOB:PTOR = 1 << 5 ;
+      #GPIOB:PTOR = 1 << 5
     case D51 : // PTD14
-      #GPIOD:PTOR = 1 << 14 ;
+      #GPIOD:PTOR = 1 << 14
     case D52 : // PTD13
-      #GPIOD:PTOR = 1 << 13 ;
+      #GPIOD:PTOR = 1 << 13
     case D53 : // PTD12
-      #GPIOD:PTOR = 1 << 12 ;
+      #GPIOD:PTOR = 1 << 12
     case D54 : // PTD15
-      #GPIOD:PTOR = 1 << 15 ;
+      #GPIOD:PTOR = 1 << 15
     case D55 : // PTD11
-      #GPIOD:PTOR = 1 << 11 ;
+      #GPIOD:PTOR = 1 << 11
     case D56 : // PTE10
-      #GPIOE:PTOR = 1 << 10 ;
+      #GPIOE:PTOR = 1 << 10
     case D57 : // PTE11
-      #GPIOE:PTOR = 1 << 11 ;
+      #GPIOE:PTOR = 1 << 11
     }
   }
   //··············································································

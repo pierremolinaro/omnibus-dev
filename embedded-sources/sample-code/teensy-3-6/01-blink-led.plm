@@ -31,7 +31,7 @@ task Tâche @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!string:"OUTDIV: ")
-    lcd.print (!hex4: RegisterRead.SIM_CLKDIV1 ()>> 16) ;
+    lcd.print (!hex4: RegisterRead.SIM_CLKDIV1 ()>> 16)
     lcd.goto (!line:1 !column:0)
     lcd.print (!string:"PRDIV: ")
     lcd.print (!u32:extend (RegisterRead.MCG_C5 () & 7))

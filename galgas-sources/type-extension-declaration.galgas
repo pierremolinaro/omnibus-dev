@@ -35,8 +35,6 @@ syntax extension plm_syntax {
      <system_routine> !?ioAST !?svcListAST
     while
       <guard> !?ioAST !?guardListAST
-    while
-      $;$
     end
     $}$
     ioAST.mExtensionDeclarationListAST +=
