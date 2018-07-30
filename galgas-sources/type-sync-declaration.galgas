@@ -35,8 +35,6 @@ syntax extension plm_syntax {
       <system_routine> !?ioAST !?systemRoutineListAST
     while
       <guard> !?ioAST !?guardListAST
-    while
-      $;$
     end
     $}$
     ioAST.mDeclarationListAST += !@syncDeclarationAST.new {

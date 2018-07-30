@@ -6,7 +6,7 @@ import "carte-tp-teensy-3-1.plm-import"
 
 let SIZE = 3
 
-typealias $A : $uint32 [SIZE]
+typealias $A : [SIZE $uint32]
 
 struct $B {
   var a $uint32 = 0

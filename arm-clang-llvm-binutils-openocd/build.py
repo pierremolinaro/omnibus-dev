@@ -185,20 +185,25 @@ LLVM = "llvm-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
 LLVM_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LLVM + ".tar.xz"
 CLANG = "cfe-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
 CLANG_ARCHIVE_PATH = ARCHIVE_DIR + "/" + CLANG + ".tar.xz"
-LLD = "lld-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
-LLD_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LLD + ".tar.xz"
+# LLD = "lld-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
+# LLD_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LLD + ".tar.xz"
+# COMPILER_RT = "compiler-rt-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
+# COMPILER_RT_ARCHIVE_PATH = ARCHIVE_DIR + "/" + COMPILER_RT + ".tar.xz"
 if LLVM_SUFFIX == "" :
   LLVM_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + LLVM + ".tar.xz"
   CLANG_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + CLANG + ".tar.xz"
-  LLD_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + LLD + ".tar.xz"
+#   LLD_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + LLD + ".tar.xz"
+#   COMPILER_RT_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + COMPILER_RT + ".tar.xz"
 else:
   LLVM_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + LLVM + ".tar.xz"
   CLANG_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + CLANG + ".tar.xz"
-  LLD_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + LLD + ".tar.xz"
+#   LLD_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + LLD + ".tar.xz"
+#   COMPILER_RT_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + COMPILER_RT + ".tar.xz"
 print  bcolors.BOLD_GREEN + "-------------- Download archives" + bcolors.ENDC
 downloadArchive (LLVM_URL, LLVM_ARCHIVE_PATH, startTime)
 downloadArchive (CLANG_URL, CLANG_ARCHIVE_PATH, startTime)
-downloadArchive (LLD_URL, LLD_ARCHIVE_PATH, startTime)
+# downloadArchive (LLD_URL, LLD_ARCHIVE_PATH, startTime)
+# downloadArchive (COMPILER_RT_URL, COMPILER_RT_ARCHIVE_PATH, startTime)
 #--------------------------------------------------------------------------- OPENOCD archives
 OPENOCD = "openocd-" + OPENOCD_VERSION
 OPENOCD_ARCHIVE_PATH = ARCHIVE_DIR + "/" + OPENOCD + ".tar.bz2"
@@ -271,7 +276,7 @@ if not os.path.exists (UTILITY_DIR + "/bin/xz"):
   ])
   runCommand (["make", "all", "-j" + processorCount ()])
   myChDir (scriptDir)
-  runCommand (["mkdir", "-p", ARCHIVE_DIR + "/bin/"])
+  runCommand (["mkdir", "-p", UTILITY_DIR + "/bin"])
   runCommand (["cp", "build-xz/src/xz/xz", UTILITY_DIR + "/bin/"])
   myDeleteDir ("build-xz")
   myDeleteDir (XZ)
@@ -314,14 +319,22 @@ if not os.path.exists (INSTALL_DIR + "/bin/llvm-dis"):
   runCommand (["mv", CLANG, "clang"])
   runCommand (["mv", "clang", LLVM + "/tools"])
   #--- LLD
-  myDeleteDir (LLD)
-  runCommand (["cp", ARCHIVE_DIR + "/" + LLD + ".tar.xz", LLD + ".tar.xz"])
-  runCommand ([UTILITY_DIR + "/bin/xz", "--decompress", LLD + ".tar.xz"])
-  runCommand (["tar", "xf", LLD + ".tar"])
-  runCommand (["rm", "-f", LLD + ".tar"])
-  runCommand (["mv", LLD, "lld"])
-  runCommand (["mv", "lld", LLVM + "/tools"])
-  #--- Build
+#   myDeleteDir (LLD)
+#   runCommand (["cp", ARCHIVE_DIR + "/" + LLD + ".tar.xz", LLD + ".tar.xz"])
+#   runCommand ([UTILITY_DIR + "/bin/xz", "--decompress", LLD + ".tar.xz"])
+#   runCommand (["tar", "xf", LLD + ".tar"])
+#   runCommand (["rm", "-f", LLD + ".tar"])
+#   runCommand (["mv", LLD, "lld"])
+#   runCommand (["mv", "lld", LLVM + "/tools"])
+  #--- Compiler-RT
+#   myDeleteDir (COMPILER_RT)
+#   runCommand (["cp", ARCHIVE_DIR + "/" + COMPILER_RT + ".tar.xz", COMPILER_RT + ".tar.xz"])
+#   runCommand ([UTILITY_DIR + "/bin/xz", "--decompress", COMPILER_RT + ".tar.xz"])
+#   runCommand (["tar", "xf", COMPILER_RT + ".tar"])
+#   runCommand (["rm", "-f", COMPILER_RT + ".tar"])
+#   runCommand (["mv", COMPILER_RT, "compiler-rt"])
+#   runCommand (["mv", "compiler-rt", LLVM + "/tools"])
+  #--- Build (http://releases.llvm.org/6.0.0/docs/CMake.html#cross-compiling)
   runCommand (["mkdir", "build-llvm-clang"])
   myChDir (scriptDir + "/build-llvm-clang")
   LLVM_CMAKE_COMMAND = [UTILITY_DIR + "/bin/cmake",
@@ -335,7 +348,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/llvm-dis"):
     "-DLLVM_INCLUDE_EXAMPLES=Off",
     "-DLLVM_ENABLE_BACKTRACES=Off",
     "-DCMAKE_CROSSCOMPILING=True",
-#     "-DLLVM_BUILD_EXTERNAL_COMPILER_RT=On",
+    "-DLLVM_BUILD_EXTERNAL_COMPILER_RT=On",
     "../" + LLVM
   ]
   LLVM_CMAKE_ENVIRONMENT= {}
@@ -346,33 +359,6 @@ if not os.path.exists (INSTALL_DIR + "/bin/llvm-dis"):
   myDeleteDir ("build-llvm-clang")
   myDeleteDir (LLVM)
   displayDurationFromStartTime (startTime)
-#--------------------------------------------------------------------------- Compiler-rt
-# print bcolors.BOLD_GREEN + "-------------- COMPILER-RT" + bcolors.ENDC
-# myDeleteDir (COMPILER_RT)
-# myDeleteDir ("build-compiler-rt")
-# runCommand (["cp", ARCHIVE_DIR + "/" + COMPILER_RT + ".tar.xz", COMPILER_RT + ".tar.xz"])
-# runCommand ([UTILITY_DIR + "/bin/xz", "--decompress", COMPILER_RT + ".tar.xz"])
-# runCommand (["tar", "xf", COMPILER_RT + ".tar"])
-# runCommand (["rm", "-f", COMPILER_RT + ".tar"])
-# runCommand (["mkdir", "build-compiler-rt"])
-# myChDir (scriptDir + "/build-compiler-rt")
-# COMPILER_RT_CMAKE_COMMAND = [
-#   UTILITY_DIR + "/bin/cmake",
-#   "../" + COMPILER_RT,
-#   "-DCMAKE_INSTALL_PREFIX=" + INSTALL_DIR,
-#   "-DLLVM_TARGETS_TO_BUILD=" + LLVM_TARGET_TO_BUILD,
-#   "-DLLVM_DEFAULT_TARGET_TRIPLE=" + TARGET,
-#   "-DLLVM_CONFIG_PATH=" + INSTALL_DIR + "/bin/llvm-config"
-# ]
-# COMPILER_RT_CMAKE_ENVIRONMENT= {}
-# COMPILER_RT_CMAKE_ENVIRONMENT ["PATH"] = os.path.abspath (INSTALL_DIR + "/bin") + ":" + os.environ ["PATH"]
-# runCommand (COMPILER_RT_CMAKE_COMMAND, COMPILER_RT_CMAKE_ENVIRONMENT)
-# runCommand (["make", "-j" + processorCount ()])
-# runCommand (["make", "install"])
-# myChDir (scriptDir)
-# myDeleteDir (COMPILER_RT)
-# myDeleteDir ("build-compiler-rt")
-# displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- LIBUSB
 print bcolors.BOLD_GREEN + "-------------- LIBUSB" + bcolors.ENDC
 LIBUSB_INSTALL_DIR = scriptDir + "/libusb-product"
@@ -502,7 +488,7 @@ myDeleteDir (PRODUCT_NAME + "/include")
 myDeleteDir (PRODUCT_NAME + "/lib")
 myDeleteDir (PRODUCT_NAME + "/share")
 #--------------------------------------------------------------------------- LIBGCC
-print bcolors.BOLD_GREEN + "-------------- LIBGCC" + bcolors.ENDC
+print bcolors.BOLD_GREEN + "-------------- OpenOCD files" + bcolors.ENDC
 LIB_DIR = PRODUCT_NAME + "/libgcc"
 librairies = ["libgcc-armv7e-m.a", "libgcc-armv4.a"]
 runCommand (["mkdir", "-p", LIB_DIR])

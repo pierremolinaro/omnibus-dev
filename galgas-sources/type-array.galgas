@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typeArrayDeclarationAST : @abstractDeclarationAST {
+class @staticArrayTypeDeclarationAST : @abstractDeclarationAST {
   @lstring mAnonymousArrayTypeName
   @lstring mElementTypeName
   @expressionAST mSizeExpression
@@ -18,14 +18,16 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
-    $\$type$ ?let elementTypeName
     $[$
     <expression> !?ioAST ?let sizeExpression
+#    $,$
+    $\$type$ ?let elementTypeName
+#    <type_definition> !?ioAST ?let elementTypeName
     let sizeExpressionLocation = @location.here
     $]$
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++
-    ioAST.mDeclarationListAST += !@typeArrayDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@staticArrayTypeDeclarationAST.new {
       !outTypeName
       !elementTypeName
       !sizeExpression
@@ -41,7 +43,7 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclarationAST addExtension
+override method @staticArrayTypeDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -53,7 +55,7 @@ override method @typeArrayDeclarationAST addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @staticArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let newTypeName = llvmTypeNameFromPLMname (!mAnonymousArrayTypeName)
   let elementTypeName = llvmTypeNameFromPLMname (!mElementTypeName)
   [!?ioGraph addNode !newTypeName !self]
@@ -65,13 +67,13 @@ override method @typeArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 
 #·······················································································································
 
-override getter @typeArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @staticArrayTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "anonymous $" + mAnonymousArrayTypeName 
 }
 
 #·······················································································································
 
-override getter @typeArrayDeclarationAST location -> @location outLocation {
+override getter @staticArrayTypeDeclarationAST location -> @location outLocation {
   outLocation = mAnonymousArrayTypeName.location
 }
 
@@ -79,7 +81,7 @@ override getter @typeArrayDeclarationAST location -> @location outLocation {
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclarationAST enterInContext
+override method @staticArrayTypeDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
@@ -186,7 +188,7 @@ override method @typeArrayDeclarationAST enterInContext
         !index:[ioContext.mTypeMap count]
       ]
     #---------------- Add decorated declaration
-      ioDecoratedDeclarationList += !@decoratedTypeArrayDeclaration.new {!originalTypeName !arraySize}
+      ioDecoratedDeclarationList += !@decoratedStaticArrayTypeDeclaration.new {!originalTypeName !arraySize}
     end
   end
 }
@@ -195,14 +197,14 @@ override method @typeArrayDeclarationAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @decoratedTypeArrayDeclaration : @abstractDecoratedDeclaration {
+class @decoratedStaticArrayTypeDeclaration : @abstractDecoratedDeclaration {
   @lstring mOriginalArrayTypeName
   @uint mArraySize
 }
 
 #·······················································································································
 
-override method @decoratedTypeArrayDeclaration semanticAnalysis
+override method @decoratedStaticArrayTypeDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -213,7 +215,7 @@ override method @decoratedTypeArrayDeclaration semanticAnalysis
 
 #·······················································································································
 
-override method @decoratedTypeArrayDeclaration routineSemanticAnalysis
+override method @decoratedStaticArrayTypeDeclaration routineSemanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

@@ -37,6 +37,7 @@ enum {plm_lexique_1_,
   plm_lexique_1__3F__21_selector_3A_,
   plm_lexique_1__21_selector_3A_,
   plm_lexique_1__21__3F_selector_3A_,
+  plm_lexique_1_eoi,
   plm_lexique_1_addressof,
   plm_lexique_1_and,
   plm_lexique_1_assert,
@@ -92,7 +93,6 @@ enum {plm_lexique_1_,
   plm_lexique_1__3A_,
   plm_lexique_1__2E_,
   plm_lexique_1__2C_,
-  plm_lexique_1__3B_,
   plm_lexique_1__7B_,
   plm_lexique_1__7D_,
   plm_lexique_1__3D_,
@@ -140,7 +140,8 @@ enum {plm_lexique_1_,
   plm_lexique_1__25__3D_,
   plm_lexique_1__21__25__3D_,
   plm_lexique_1__3C__3C__3D_,
-  plm_lexique_1__3E__3E__3D_
+  plm_lexique_1__3E__3E__3D_,
+  plm_lexique_1__3A__3A_
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

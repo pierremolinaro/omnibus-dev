@@ -18,7 +18,7 @@ driver lcd > digital {
   let RS $digitalPort
   let ENABLE $digitalPort
 
-  var buffer = $uint8 [LCD_BUFFER_SIZE] (!repeated:0)
+  var buffer = [LCD_BUFFER_SIZE $uint8] (!repeated:0)
   var sEntree = $semaphore (!value:0)
   var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)
   
@@ -96,46 +96,46 @@ driver lcd > digital {
   //····················································································································
 
   func writeFirstNibbleOf8bitCommand @noUnusedWarning (?inValue $uint8) {
-    self.driveLowRS () ;
+    self.driveLowRS ()
     self.programLcd4BitDataBusOutput (!inValue)
-    self.driveHighE () ;
+    self.driveHighE ()
   }
 
   //····················································································································
 
   func writeFirstNibbleOf8bitData @noUnusedWarning (?inValue $uint8) {
-    self.driveHighRS () ;
+    self.driveHighRS ()
     self.programLcd4BitDataBusOutput (!inValue)
-    self.driveHighE () ;
+    self.driveHighE ()
   }
 
    //····················································································································
 
   func writeSecondNibble @noUnusedWarning (?inValue $uint8) {
     self.programLcd4BitDataBusOutput (!inValue)
-    self.driveHighE () ;
+    self.driveHighE ()
   }
 
   //····················································································································
 
   func init write4BitCommand @noUnusedWarning (?inValue $uint8) {
-    time.busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inValue)
-    time.busyWaitingDuringMS (!1) ;
-    self.driveLowE () ;
+    time.busyWaitingDuringMS (!1)
+    self.driveLowE ()
   }
 
   //····················································································································
 
   func init write8bitCommand @noUnusedWarning (?inCommand $uint8) {
-    time.busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
-    time.busyWaitingDuringMS (!1) ;
-    self.driveLowE () ;
-    time.busyWaitingDuringMS (!1) ;
-    self.writeSecondNibble (!inCommand) ;
-    time.busyWaitingDuringMS (!1) ;
-    self.driveLowE () ;
+    time.busyWaitingDuringMS (!1)
+    self.driveLowE ()
+    time.busyWaitingDuringMS (!1)
+    self.writeSecondNibble (!inCommand)
+    time.busyWaitingDuringMS (!1)
+    self.driveLowE ()
   }
 
   //····················································································································
@@ -143,45 +143,45 @@ driver lcd > digital {
   //····················································································································
 
   init {
-    self.configurePorts () ;
+    self.configurePorts ()
   //--- Étape 1 : attendre 15 ms
-    time.busyWaitingDuringMS (!15) ;
+    time.busyWaitingDuringMS (!15)
   //--- Étape 2 : écrire la commande 0x30
-    self.write4BitCommand (!0x3) ;
+    self.write4BitCommand (!0x3)
   //--- Étape 3 : attendre 4,1 ms (en fait 5 ms)
-    time.busyWaitingDuringMS (!5) ;
+    time.busyWaitingDuringMS (!5)
   //--- Étape 4 : écrire la commande 0x30 une 2e fois
-    self.write4BitCommand (!0x3) ;
+    self.write4BitCommand (!0x3)
   //--- Étape 5 : attendre 100 µs
-    time.busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1)
   //--- Étape 6 : écrire la commande 0x30 une 3e fois
-    self.write4BitCommand (!0x3) ;
+    self.write4BitCommand (!0x3)
   //--- Étape 7 : écrire la commande 0x20 pour passer en 4 bits
-    self.write4BitCommand (!0x2) ;
+    self.write4BitCommand (!0x2)
   //--- Étape 8 : écrire la commande 'Set Interface Length' : 0 0 1 DL N F * *
   //    DL : Data interface length : 0 (4 bits)
   //    N : Number of Display lines : 1 (2 lignes)
   //    F : Character Font : 0 (5x7)
-    self.write8bitCommand (!0x28) ;
+    self.write8bitCommand (!0x28)
   //--- Étape 9 : écrire la commande 'Display Off'
-    self.write8bitCommand (!0x08) ;
+    self.write8bitCommand (!0x08)
   //--- Étape 10 : écrire la commande 'Clear Display'
-    self.write8bitCommand (!0x01) ;
+    self.write8bitCommand (!0x01)
   //--- Étape 11 : écrire la commande 'Set Cursor Move Direction' : 0 0 0 0 0 1 ID S
   //    ID : Increment Cursor after Each Byte Written to Display : 1 (oui)
   //    S : Shift Display When Byte Written : 0 (non)
-    self.write8bitCommand (!0x06) ;
+    self.write8bitCommand (!0x06)
   //--- Étape 12 : écrire la commande 'Move Cursor / Shift Display' : 0 0 0 1 SC RL * *
   //    SC : Display Shift On : 1 (oui)
   //    RL : Direction of Shift : 1 (vers la droite)
-    self.write8bitCommand (!0x1C) ;
+    self.write8bitCommand (!0x1C)
   //--- Étape 13 : écrire la commande 'Return Cursor and LCD to Home Position'
-    self.write8bitCommand (!0x02) ;
+    self.write8bitCommand (!0x02)
   //--- Étape 14 : écrire la commande 'Enable Display / Cursor' : 0 0 0 0 1 D C B
   //    D : Turn Display On : 1 (oui)
   //    C : Turn Cursor On : 0 (non)
   //    B : Cursor Blink On : 0 (non)
-    self.write8bitCommand (!0x0C) ;
+    self.write8bitCommand (!0x0C)
   }
 
   //····················································································································
@@ -189,27 +189,27 @@ driver lcd > digital {
   //····················································································································
 
   func user write8bitCommand_inUserMode @noUnusedWarning (?inCommand $uint8) {
-    time.wait (!during:1) ;
-    self.writeFirstNibbleOf8bitCommand (!inCommand >> 4) ;
-    time.wait (!during:1) ;
-    self.driveLowE () ;
-    time.wait (!during:1) ;
-    self.writeSecondNibble (!inCommand) ;
-    time.wait (!during:1) ;
-    self.driveLowE () ;
+    time.wait (!during:1)
+    self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
+    time.wait (!during:1)
+    self.driveLowE ()
+    time.wait (!during:1)
+    self.writeSecondNibble (!inCommand)
+    time.wait (!during:1)
+    self.driveLowE ()
   }
 
   //····················································································································
 
   func user writeData_inUserMode @noUnusedWarning (?inData $uint8) {
-    time.wait (!during:1) ;
-    self.writeFirstNibbleOf8bitData (!inData >> 4) ;
-    time.wait (!during:1) ;
-    self.driveLowE () ;
-    time.wait (!during:1) ;
-    self.writeSecondNibble (!inData) ;
-    time.wait (!during:1) ;
-    self.driveLowE () ;
+    time.wait (!during:1)
+    self.writeFirstNibbleOf8bitData (!inData >> 4)
+    time.wait (!during:1)
+    self.driveLowE ()
+    time.wait (!during:1)
+    self.writeSecondNibble (!inData)
+    time.wait (!during:1)
+    self.driveLowE ()
   }
 
   //····················································································································
@@ -228,13 +228,13 @@ driver lcd > digital {
   public func user goto @noUnusedWarning (?line:inLine $uint2 ?column:inColumn $uint8) {
     if inColumn < 20 {
       if inLine == 0 {
-        self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
+        self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn)
       }else if inLine == 1 {
-        self.write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;
+        self.write8bitCommand_inUserMode (!0x80 + 64 + inColumn)
       }else if inLine == 2 {
-        self.write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;
+        self.write8bitCommand_inUserMode (!0x80 + 20 + inColumn)
       }else{
-        self.write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;
+        self.write8bitCommand_inUserMode (!0x80 + 84 + inColumn)
       }
     }
   }
@@ -368,23 +368,23 @@ driver lcd > digital {
   //····················································································································
 
   func panic writeDataInPanicMode @noUnusedWarning (?inData $uint8) {
-    time.panicOneMillisecondBusyWait () ;
-    self.driveHighRS () ;
-    self.programLcd4BitDataBusOutput (!inData >> 4) ;
-    self.driveHighE () ;
-    time.panicOneMillisecondBusyWait () ;
-    self.driveLowE () ;
-    time.panicOneMillisecondBusyWait () ;
-    self.programLcd4BitDataBusOutput (!inData) ;
-    self.driveHighE () ;
-    time.panicOneMillisecondBusyWait () ;
-    self.driveLowE () ;
+    time.panicOneMillisecondBusyWait ()
+    self.driveHighRS ()
+    self.programLcd4BitDataBusOutput (!inData >> 4)
+    self.driveHighE ()
+    time.panicOneMillisecondBusyWait ()
+    self.driveLowE ()
+    time.panicOneMillisecondBusyWait ()
+    self.programLcd4BitDataBusOutput (!inData)
+    self.driveHighE ()
+    time.panicOneMillisecondBusyWait ()
+    self.driveLowE ()
   }
 
   //····················································································································
 
   public func panic printUnsignedInPanicMode @noUnusedWarning (?inValue $uint32) {
-    time.panicOneMillisecondBusyWait () ;
+    time.panicOneMillisecondBusyWait ()
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
@@ -406,7 +406,7 @@ driver lcd > digital {
   //····················································································································
 
   public func panic printSignedInPanicMode @noUnusedWarning (?inValue $int32) {
-    time.panicOneMillisecondBusyWait () ;
+    time.panicOneMillisecondBusyWait ()
     if inValue ≥ 0 {
       self.printUnsignedInPanicMode (!truncate (inValue))
     }else{
@@ -418,32 +418,32 @@ driver lcd > digital {
   //····················································································································
 
   func panic write8bitCommandInPanicMode @noUnusedWarning (?inCommand $uint8) {
-    time.panicOneMillisecondBusyWait () ;
-    self.driveLowRS () ;
-    self.programLcd4BitDataBusOutput (!inCommand >> 4) ;
-    self.driveHighE () ;
-    time.panicOneMillisecondBusyWait () ;
-    self.driveLowE () ;
-    time.panicOneMillisecondBusyWait () ;
-    self.programLcd4BitDataBusOutput (!inCommand) ;
-    self.driveHighE () ;
-    time.panicOneMillisecondBusyWait () ;
-    self.driveLowE () ;
+    time.panicOneMillisecondBusyWait ()
+    self.driveLowRS ()
+    self.programLcd4BitDataBusOutput (!inCommand >> 4)
+    self.driveHighE ()
+    time.panicOneMillisecondBusyWait ()
+    self.driveLowE ()
+    time.panicOneMillisecondBusyWait ()
+    self.programLcd4BitDataBusOutput (!inCommand)
+    self.driveHighE ()
+    time.panicOneMillisecondBusyWait ()
+    self.driveLowE ()
   }
 
   //····················································································································
 
   public func panic gotoInPanicMode @noUnusedWarning (?line:inLine $uint32 ?column:inColumn $uint8) {
-   time.panicOneMillisecondBusyWait () ;
+   time.panicOneMillisecondBusyWait ()
    if inColumn < 20 {
       if inLine == 0 {
-        self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn) ;
+        self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn)
       }else if inLine == 1 {
-        self.write8bitCommandInPanicMode (!0x80 +% 64 +% inColumn) ;
+        self.write8bitCommandInPanicMode (!0x80 +% 64 +% inColumn)
       }else if inLine == 2 {
-        self.write8bitCommandInPanicMode (!0x80 +% 20 +% inColumn) ;
+        self.write8bitCommandInPanicMode (!0x80 +% 20 +% inColumn)
       }else if inLine == 3 {
-        self.write8bitCommandInPanicMode (!0x80 +% 84 +% inColumn) ;
+        self.write8bitCommandInPanicMode (!0x80 +% 84 +% inColumn)
       }
     }
   }
@@ -451,7 +451,7 @@ driver lcd > digital {
   //····················································································································
 
   public func panic clearScreenInPanicMode @noUnusedWarning () {
-    time.panicOneMillisecondBusyWait () ;
+    time.panicOneMillisecondBusyWait ()
     self.write8bitCommandInPanicMode (!0x01)
     time.panicBusyWaitingDuringMS (!4)
   }
@@ -459,7 +459,7 @@ driver lcd > digital {
   //····················································································································
 
   public func panic printStringInPanicMode @noUnusedWarning (?inString $staticString) {
-    time.panicOneMillisecondBusyWait () ;
+    time.panicOneMillisecondBusyWait ()
     for c in inString {
       self.writeDataInPanicMode (!c)
     }
