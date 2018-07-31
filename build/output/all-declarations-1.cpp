@@ -13041,16 +13041,16 @@ GALGAS_bootListAST GALGAS_bootListAST::extractObject (const GALGAS_object & inOb
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      Class for element of '@initListAST' list                                       *
+//                                     Class for element of '@startupListAST' list                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cCollectionElement_initListAST : public cCollectionElement {
-  public : GALGAS_initListAST_2D_element mObject ;
+class cCollectionElement_startupListAST : public cCollectionElement {
+  public : GALGAS_startupListAST_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_initListAST (const GALGAS_initAST & in_mInit
-                                           COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_startupListAST (const GALGAS_startupAST & in_mStartup
+                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -13067,70 +13067,70 @@ class cCollectionElement_initListAST : public cCollectionElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cCollectionElement_initListAST::cCollectionElement_initListAST (const GALGAS_initAST & in_mInit
-                                                                COMMA_LOCATION_ARGS) :
+cCollectionElement_startupListAST::cCollectionElement_startupListAST (const GALGAS_startupAST & in_mStartup
+                                                                      COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mInit) {
+mObject (in_mStartup) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-bool cCollectionElement_initListAST::isValid (void) const {
+bool cCollectionElement_startupListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cCollectionElement * cCollectionElement_initListAST::copy (void) {
+cCollectionElement * cCollectionElement_startupListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_initListAST (mObject.mProperty_mInit COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_startupListAST (mObject.mProperty_mStartup COMMA_HERE)) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void cCollectionElement_initListAST::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_startupListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInit" ":" ;
-  mObject.mProperty_mInit.description (ioString, inIndentation) ;
+  ioString << "mStartup" ":" ;
+  mObject.mProperty_mStartup.description (ioString, inIndentation) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cCollectionElement_initListAST::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_initListAST * operand = (cCollectionElement_initListAST *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_initListAST) ;
+typeComparisonResult cCollectionElement_startupListAST::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_startupListAST * operand = (cCollectionElement_startupListAST *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_startupListAST) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST::GALGAS_initListAST (void) :
+GALGAS_startupListAST::GALGAS_startupListAST (void) :
 AC_GALGAS_list () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST::GALGAS_initListAST (const capCollectionElementArray & inSharedArray) :
+GALGAS_startupListAST::GALGAS_startupListAST (const capCollectionElementArray & inSharedArray) :
 AC_GALGAS_list (inSharedArray) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_initListAST  (capCollectionElementArray ()) ;
+GALGAS_startupListAST GALGAS_startupListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+  return GALGAS_startupListAST  (capCollectionElementArray ()) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::constructor_listWithValue (const GALGAS_initAST & inOperand0
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_initListAST result ;
+GALGAS_startupListAST GALGAS_startupListAST::constructor_listWithValue (const GALGAS_startupAST & inOperand0
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_startupListAST result ;
   if (inOperand0.isValid ()) {
-    result = GALGAS_initListAST (capCollectionElementArray ()) ;
+    result = GALGAS_startupListAST (capCollectionElementArray ()) ;
     capCollectionElement attributes ;
-    GALGAS_initListAST::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    GALGAS_startupListAST::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
     result.appendObject (attributes) ;
   }
   return result ;
@@ -13138,22 +13138,22 @@ GALGAS_initListAST GALGAS_initListAST::constructor_listWithValue (const GALGAS_i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                    const GALGAS_initAST & in_mInit
-                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement_initListAST * p = NULL ;
-  macroMyNew (p, cCollectionElement_initListAST (in_mInit COMMA_THERE)) ;
+void GALGAS_startupListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                       const GALGAS_startupAST & in_mStartup
+                                                       COMMA_LOCATION_ARGS) {
+  cCollectionElement_startupListAST * p = NULL ;
+  macroMyNew (p, cCollectionElement_startupListAST (in_mStartup COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::addAssign_operation (const GALGAS_initAST & inOperand0
-                                              COMMA_LOCATION_ARGS) {
+void GALGAS_startupListAST::addAssign_operation (const GALGAS_startupAST & inOperand0
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_initListAST (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_startupListAST (inOperand0 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -13163,13 +13163,13 @@ void GALGAS_initListAST::addAssign_operation (const GALGAS_initAST & inOperand0
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::setter_insertAtIndex (const GALGAS_initAST inOperand0,
-                                               const GALGAS_uint inInsertionIndex,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GALGAS_startupListAST::setter_insertAtIndex (const GALGAS_startupAST inOperand0,
+                                                  const GALGAS_uint inInsertionIndex,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_initListAST (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_startupListAST (inOperand0 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -13179,93 +13179,93 @@ void GALGAS_initListAST::setter_insertAtIndex (const GALGAS_initAST inOperand0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::setter_removeAtIndex (GALGAS_initAST & outOperand0,
-                                               const GALGAS_uint inRemoveIndex,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GALGAS_startupListAST::setter_removeAtIndex (GALGAS_startupAST & outOperand0,
+                                                  const GALGAS_uint inRemoveIndex,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_initListAST * p = (cCollectionElement_initListAST *) attributes.ptr () ;
+    cCollectionElement_startupListAST * p = (cCollectionElement_startupListAST *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_initListAST) ;
-      outOperand0 = p->mObject.mProperty_mInit ;
+      macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+      outOperand0 = p->mObject.mProperty_mStartup ;
     }
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::setter_popFirst (GALGAS_initAST & outOperand0,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
+void GALGAS_startupListAST::setter_popFirst (GALGAS_startupAST & outOperand0,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_initListAST * p = (cCollectionElement_initListAST *) attributes.ptr () ;
+  cCollectionElement_startupListAST * p = (cCollectionElement_startupListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_initListAST) ;
-    outOperand0 = p->mObject.mProperty_mInit ;
+    macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+    outOperand0 = p->mObject.mProperty_mStartup ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::setter_popLast (GALGAS_initAST & outOperand0,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
+void GALGAS_startupListAST::setter_popLast (GALGAS_startupAST & outOperand0,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_initListAST * p = (cCollectionElement_initListAST *) attributes.ptr () ;
+  cCollectionElement_startupListAST * p = (cCollectionElement_startupListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_initListAST) ;
-    outOperand0 = p->mObject.mProperty_mInit ;
+    macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+    outOperand0 = p->mObject.mProperty_mStartup ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::method_first (GALGAS_initAST & outOperand0,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_startupListAST::method_first (GALGAS_startupAST & outOperand0,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_initListAST * p = (cCollectionElement_initListAST *) attributes.ptr () ;
+  cCollectionElement_startupListAST * p = (cCollectionElement_startupListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_initListAST) ;
-    outOperand0 = p->mObject.mProperty_mInit ;
+    macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+    outOperand0 = p->mObject.mProperty_mStartup ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::method_last (GALGAS_initAST & outOperand0,
-                                      C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const {
+void GALGAS_startupListAST::method_last (GALGAS_startupAST & outOperand0,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_initListAST * p = (cCollectionElement_initListAST *) attributes.ptr () ;
+  cCollectionElement_startupListAST * p = (cCollectionElement_startupListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_initListAST) ;
-    outOperand0 = p->mObject.mProperty_mInit ;
+    macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+    outOperand0 = p->mObject.mProperty_mStartup ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::add_operation (const GALGAS_initListAST & inOperand,
-                                                      C_Compiler * /* inCompiler */
-                                                      COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_initListAST result ;
+GALGAS_startupListAST GALGAS_startupListAST::add_operation (const GALGAS_startupListAST & inOperand,
+                                                            C_Compiler * /* inCompiler */
+                                                            COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_startupListAST result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -13275,53 +13275,53 @@ GALGAS_initListAST GALGAS_initListAST::add_operation (const GALGAS_initListAST &
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_initListAST result = GALGAS_initListAST::constructor_emptyList (THERE) ;
+GALGAS_startupListAST GALGAS_startupListAST::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  GALGAS_startupListAST result = GALGAS_startupListAST::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_initListAST result = GALGAS_initListAST::constructor_emptyList (THERE) ;
+GALGAS_startupListAST GALGAS_startupListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  GALGAS_startupListAST result = GALGAS_startupListAST::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_initListAST result = GALGAS_initListAST::constructor_emptyList (THERE) ;
+GALGAS_startupListAST GALGAS_startupListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  GALGAS_startupListAST result = GALGAS_startupListAST::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_initListAST::plusAssign_operation (const GALGAS_initListAST inOperand,
-                                               C_Compiler * /* inCompiler */
-                                               COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_startupListAST::plusAssign_operation (const GALGAS_startupListAST inOperand,
+                                                  C_Compiler * /* inCompiler */
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initAST GALGAS_initListAST::getter_mInitAtIndex (const GALGAS_uint & inIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_startupAST GALGAS_startupListAST::getter_mStartupAtIndex (const GALGAS_uint & inIndex,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_initListAST * p = (cCollectionElement_initListAST *) attributes.ptr () ;
-  GALGAS_initAST result ;
+  cCollectionElement_startupListAST * p = (cCollectionElement_startupListAST *) attributes.ptr () ;
+  GALGAS_startupAST result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_initListAST) ;
-    result = p->mObject.mProperty_mInit ;
+    macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+    result = p->mObject.mProperty_mStartup ;
   }
   return result ;
 }
@@ -13330,27 +13330,27 @@ GALGAS_initAST GALGAS_initListAST::getter_mInitAtIndex (const GALGAS_uint & inIn
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumerator_initListAST::cEnumerator_initListAST (const GALGAS_initListAST & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) :
+cEnumerator_startupListAST::cEnumerator_startupListAST (const GALGAS_startupListAST & inEnumeratedObject,
+                                                        const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST_2D_element cEnumerator_initListAST::current (LOCATION_ARGS) const {
-  const cCollectionElement_initListAST * p = (const cCollectionElement_initListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_initListAST) ;
+GALGAS_startupListAST_2D_element cEnumerator_startupListAST::current (LOCATION_ARGS) const {
+  const cCollectionElement_startupListAST * p = (const cCollectionElement_startupListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_startupListAST) ;
   return p->mObject ;
 }
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initAST cEnumerator_initListAST::current_mInit (LOCATION_ARGS) const {
-  const cCollectionElement_initListAST * p = (const cCollectionElement_initListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_initListAST) ;
-  return p->mObject.mProperty_mInit ;
+GALGAS_startupAST cEnumerator_startupListAST::current_mStartup (LOCATION_ARGS) const {
+  const cCollectionElement_startupListAST * p = (const cCollectionElement_startupListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_startupListAST) ;
+  return p->mObject.mProperty_mStartup ;
 }
 
 
@@ -13358,42 +13358,42 @@ GALGAS_initAST cEnumerator_initListAST::current_mInit (LOCATION_ARGS) const {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                  @initListAST type                                                  *
+//                                                @startupListAST type                                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_initListAST ("initListAST",
-                                    NULL) ;
+kTypeDescriptor_GALGAS_startupListAST ("startupListAST",
+                                       NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_initListAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_initListAST ;
+const C_galgas_type_descriptor * GALGAS_startupListAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_startupListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_initListAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_startupListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_initListAST (*this)) ;
+    macroMyNew (result, GALGAS_startupListAST (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_initListAST GALGAS_initListAST::extractObject (const GALGAS_object & inObject,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_initListAST result ;
-  const GALGAS_initListAST * p = (const GALGAS_initListAST *) inObject.embeddedObject () ;
+GALGAS_startupListAST GALGAS_startupListAST::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_startupListAST result ;
+  const GALGAS_startupListAST * p = (const GALGAS_startupListAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_initListAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_startupListAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("initListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("startupListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

@@ -9,7 +9,7 @@ driver PWMOutput > root {
 
   //····················································································································
 
-  init {
+  startup {
   //--- Activate #TPM1 and #TPM2 modules
     #SIM:SCGC2 |= {#SIM:SCGC2 !TPM1:1 !TPM2:1}
   //--- Use the OSCERCLK 16 MHz clock for TPM Module OSC_DIV.ERPS = 0 (--> divide by 1)
@@ -61,7 +61,7 @@ task Tâche1 @stacksize 512 @activate {
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
-   
+
   on time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L4)
     self.compteur +%= 500

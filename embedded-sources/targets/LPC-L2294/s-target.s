@@ -118,7 +118,7 @@ as_reset_handler:
 
 @---------------------------------------- Initialize system (boot, init)
    bl    boot.routines
-   bl    init.routines
+   bl    startup.routines
 
 @---------------------------------------- Call entry point
    b    __entry_point

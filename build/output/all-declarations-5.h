@@ -3681,16 +3681,16 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                  GALGAS_bootAST & outArgument3,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'declaration_init' non terminal
+//------------------------------------- 'declaration_startup' non terminal
 //--- 'parse' label
-  public : virtual void nt_declaration_5F_init_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_declaration_5F_startup_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_declaration_5F_init_ (GALGAS_ast & ioArgument0,
-                                                 const GALGAS_lstring inArgument1,
-                                                 const GALGAS_lstringlist inArgument2,
-                                                 GALGAS_initAST & outArgument3,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_declaration_5F_startup_ (GALGAS_ast & ioArgument0,
+                                                    const GALGAS_lstring inArgument1,
+                                                    const GALGAS_lstringlist inArgument2,
+                                                    GALGAS_startupAST & outArgument3,
+                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'driver_property' non terminal
 //--- 'parse' label

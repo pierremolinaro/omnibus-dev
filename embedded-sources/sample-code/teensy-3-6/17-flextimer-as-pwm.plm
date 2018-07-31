@@ -13,7 +13,7 @@ driver myDriver > digital {
   //····················································································································
   //--- Clock source is set by the CLKS field of FTM0:SC :
   //   00  No clock selected. This in effect disables the FTM counter.    //   01  System clock, frequency given by BUS_MHZ   //   10  Fixed frequency clock, is MCGFFCLK ?????   //   11  External clock    //--- Clock prescaler is set by the PS field of FTM0:SC :
-  //   000  Divide by 1    //   001  Divide by 2    //   010  Divide by 4    //   011  Divide by 8    //   100  Divide by 16    //   101  Divide by 32    //   110  Divide by 64    //   111  Divide by 128 
+  //   000  Divide by 1    //   001  Divide by 2    //   010  Divide by 4    //   011  Divide by 8    //   100  Divide by 16    //   101  Divide by 32    //   110  Divide by 64    //   111  Divide by 128
   //  The overflow frequency is : BUS_MHZ / (prescaler * (FTM0:MOD - FTM0:CNTIN + 1))
   //---- Examples for BUS_MHZ = 60 MHz (F_CPU_MHZ = 240)
   //    prescaler   FTM0:CNTIN   FTM0:MOD   Resulting frequency
@@ -21,7 +21,7 @@ driver myDriver > digital {
   //      /1                 0         14   4 MHz
   //····················································································································
 
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:.D3) // Led L0
     digital.set (!mode:.OUTPUT !toPort:.D8) // Led L0
@@ -38,7 +38,7 @@ driver myDriver > digital {
   //--- Enable FTM interrupt
     #FTM[0]:SC |= {#FTM:SC !TOIE:1}
   }
-  
+
   //····················································································································
 
   interrupt section FTM0 {

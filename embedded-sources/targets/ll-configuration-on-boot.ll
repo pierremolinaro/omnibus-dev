@@ -10,11 +10,11 @@ define void @boot.routines () nounwind minsize optsize {
 }
 
 ;----------------------------------------------------------------------------------------------------------------------*
-;   init.routines                                                                                                      *
+;   startup.routines                                                                                                   *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-define void @init.routines () nounwind minsize optsize {
-  call void @init ()
+define void @startup.routines () nounwind minsize optsize {
+  call void @startup ()
   call void @start.tasks ()
   ret  void
 }

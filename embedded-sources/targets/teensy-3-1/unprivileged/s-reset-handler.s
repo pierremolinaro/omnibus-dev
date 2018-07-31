@@ -40,7 +40,7 @@ as_reset_handler: @ Cortex M4 boots with interrupts enabled, in Thread mode (as 
 @---------- Software must use an ISB barrier instruction to ensure a write to the CONTROL register
 @ takes effect before the next instruction is executed.
   isb
-@---------- Start real-time kernel (run init.routines as service)
+@---------- Start real-time kernel (run startup.routines as service)
   svc  #0
 @---------- Background task : infinite loop
 background.task:

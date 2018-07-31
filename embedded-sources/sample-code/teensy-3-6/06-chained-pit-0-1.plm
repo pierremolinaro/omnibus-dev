@@ -7,8 +7,8 @@ driver timer ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver timer > root {
- 
-  init {
+
+  startup {
   //--- Power on DMA_MUX, #PIT, DMA
     #SIM:SCGC6 |= {#SIM:SCGC6 !PIT:1}
    //--- Enable #PIT module
@@ -23,7 +23,7 @@ driver timer > root {
     #PIT:TCTRL [1] = {#PIT:TCTRL !CHN:1 !TEN:1}
     #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}
   }
-  
+
   public system section now @noUnusedWarning () -> $uptime {
     var r $uint64 = extend (#PIT:LTMR64H)
     r <<= 32
@@ -31,14 +31,14 @@ driver timer > root {
     r = ~ r
     r +%= 1
     result = $uptime (!rawValue: r)
-  } 
+  }
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $uptime @copyable {
   let rawValue $uint64
-  
+
   public func raw @noUnusedWarning () -> $uint64 {
     result = self.rawValue
   }
@@ -67,7 +67,7 @@ task Tâche @stacksize 512 @activate {
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
-  
+
   on time.wait (!until:self.compteur) {
     let tick = timer.now ()
     digital.toggle (!port:LED_L0)

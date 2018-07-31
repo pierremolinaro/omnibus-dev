@@ -112,8 +112,8 @@ syntax extension plm_syntax {
       $boot$
       outMode = .bootMode
     or
-      $init$
-      outMode = .initMode
+      $startup$
+      outMode = .startupMode
     or
       $section$
       outMode = .sectionMode

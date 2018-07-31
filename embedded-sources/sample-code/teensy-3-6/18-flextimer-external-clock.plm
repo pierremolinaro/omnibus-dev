@@ -23,7 +23,7 @@ driver myDriver > digital {
   //    1 for FTM_CLKIN0
   //····················································································································
 
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   //--- Enable clock
@@ -52,7 +52,7 @@ driver myDriver > digital {
   //--- Set counter max value
 //    #FTM[0]:MOD = {#FTM:MOD !MOD:1}
     #FTM[1]:MOD = {#FTM:MOD !MOD:0xFFFF}
-    
+
 //    #FTM[0]:CONF = {#FTM:CONF !BDMMODE:3}
 //    #FTM[1]:CONF = {#FTM:CONF !BDMMODE:3}
 //    #FTM[0]:MODE = {#FTM:MODE !FTMEN:1}
@@ -70,7 +70,7 @@ driver myDriver > digital {
   //--- Enable FTM interrupt
     #FTM[1]:SC |= {#FTM:SC !TOIE:1}
   }
-  
+
   //····················································································································
 
    system section readCounter0 () -> $uint32 {
@@ -108,8 +108,8 @@ driver myDriver ()
 
 task T1 @stacksize 512 @activate {
   var échéance $uint32 = 0
-  var counter0 $uint32 = 0 
-  var counter1 $uint32 = 0 
+  var counter0 $uint32 = 0
+  var counter1 $uint32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L3)

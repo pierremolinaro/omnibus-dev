@@ -8822,16 +8822,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                  @initListIR list                                                   *
+//                                                 @startupListIR list                                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_initListIR : public AC_GALGAS_list {
+class GALGAS_startupListIR : public AC_GALGAS_list {
 //--------------------------------- Default constructor
-  public : GALGAS_initListIR (void) ;
+  public : GALGAS_startupListIR (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_initListIR (const capCollectionElementArray & inSharedArray) ;
+  public : GALGAS_startupListIR (const capCollectionElementArray & inSharedArray) ;
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
@@ -8847,21 +8847,21 @@ class GALGAS_initListIR : public AC_GALGAS_list {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_initListIR extractObject (const GALGAS_object & inObject,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_startupListIR extractObject (const GALGAS_object & inObject,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_initListIR constructor_emptyList (LOCATION_ARGS) ;
+  public : static class GALGAS_startupListIR constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static class GALGAS_initListIR constructor_listWithValue (const class GALGAS_PLMType & inOperand0,
-                                                                     const class GALGAS_string & inOperand1,
-                                                                     const class GALGAS_allocaList & inOperand2,
-                                                                     const class GALGAS_instructionListIR & inOperand3
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_startupListIR constructor_listWithValue (const class GALGAS_PLMType & inOperand0,
+                                                                        const class GALGAS_string & inOperand1,
+                                                                        const class GALGAS_allocaList & inOperand2,
+                                                                        const class GALGAS_instructionListIR & inOperand3
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_initListIR inOperand,
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_startupListIR inOperand,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8872,9 +8872,9 @@ class GALGAS_initListIR : public AC_GALGAS_list {
                                                       const class GALGAS_instructionListIR & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
-  public : VIRTUAL_IN_DEBUG GALGAS_initListIR add_operation (const GALGAS_initListIR & inOperand,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_startupListIR add_operation (const GALGAS_startupListIR & inOperand,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Setters
@@ -8943,34 +8943,34 @@ class GALGAS_initListIR : public AC_GALGAS_list {
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_initListIR getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_startupListIR getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_initListIR getter_subListToIndex (const class GALGAS_uint & constinOperand0,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_startupListIR getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_initListIR getter_subListWithRange (const class GALGAS_range & constinOperand0,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_startupListIR getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
 //--------------------------------- Friend
 
-  friend class cEnumerator_initListIR ;
+  friend class cEnumerator_startupListIR ;
  
-} ; // End of GALGAS_initListIR class
+} ; // End of GALGAS_startupListIR class
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Enumerator declaration                                                                                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumerator_initListIR : public cGenericAbstractEnumerator {
-  public : cEnumerator_initListIR (const GALGAS_initListIR & inEnumeratedObject,
-                                   const typeEnumerationOrder inOrder) ;
+class cEnumerator_startupListIR : public cGenericAbstractEnumerator {
+  public : cEnumerator_startupListIR (const GALGAS_startupListIR & inEnumeratedObject,
+                                      const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
   public : class GALGAS_PLMType current_mSelfType (LOCATION_ARGS) const ;
@@ -8978,12 +8978,12 @@ class cEnumerator_initListIR : public cGenericAbstractEnumerator {
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionListIR (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_initListIR_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_startupListIR_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initListIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_startupListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -9826,7 +9826,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : GALGAS_bootListIR mProperty_mBootList ;
 
-  public : GALGAS_initListIR mProperty_mInitList ;
+  public : GALGAS_startupListIR mProperty_mStartupList ;
 
   public : GALGAS_instructionListSortedListIR mProperty_mPanicSetupInstructionListIR ;
 
@@ -9872,7 +9872,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
                                           const GALGAS_bootListIR & in_mBootList,
-                                          const GALGAS_initListIR & in_mInitList,
+                                          const GALGAS_startupListIR & in_mStartupList,
                                           const GALGAS_instructionListSortedListIR & in_mPanicSetupInstructionListIR,
                                           const GALGAS_instructionListSortedListIR & in_mPanicLoopInstructionListIR,
                                           const GALGAS_taskMapIR & in_mTaskMapIR,
@@ -9904,7 +9904,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                        const class GALGAS_externProcedureMapIR & inOperand5,
                                                                        const class GALGAS_stringset & inOperand6,
                                                                        const class GALGAS_bootListIR & inOperand7,
-                                                                       const class GALGAS_initListIR & inOperand8,
+                                                                       const class GALGAS_startupListIR & inOperand8,
                                                                        const class GALGAS_instructionListSortedListIR & inOperand9,
                                                                        const class GALGAS_instructionListSortedListIR & inOperand10,
                                                                        const class GALGAS_taskMapIR & inOperand11,
@@ -9948,8 +9948,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardMapIR getter_mGuardMapIR (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_initListIR getter_mInitList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_interruptMapIR getter_mInterruptMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMaxBranchOfOnInstructions (LOCATION_ARGS) const ;
@@ -9961,6 +9959,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRequiredProcedureSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapIR getter_mRoutineMapIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_startupListIR getter_mStartupList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticListInvokedFunctionSetMap getter_mStaticArrayMapForIntermediate (LOCATION_ARGS) const ;
 

@@ -8,7 +8,7 @@ option "task-strict-priority-order"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver project > digital {
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
@@ -41,11 +41,11 @@ struct $autreStructWithARC {
 
 task T1 > T2 @stacksize 512 @activate {
   var échéance $uint32 = 0
-  var freeRam $uint32 = 0 
-  var start $uint32 = 0 
-  var maxAllocationParSeconde $uint32 = 0 
+  var freeRam $uint32 = 0
+  var start $uint32 = 0
+  var maxAllocationParSeconde $uint32 = 0
   var alloc $uint32 = 0
-  var current $uint32 = 0 
+  var current $uint32 = 0
 
   on @setup first {
     lcd.print (!string:"Free:")
@@ -128,7 +128,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
     self.structure.structure.donnée = self.data2
     self.testReleaseLocalVar (!in:self.structure.structure.donnée)
   }
-  
+
   func testReleaseLocalVar (?in: inData $dArray) {
     var d = $structWithARC ()
     d.donnée = inData
@@ -139,7 +139,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
 
 task backgroundTask @stacksize 512 @activate {
   var data = $dArray ()
- 
+
   on time.wait (!until:0) {
     digital.toggle (!port:LED_L0)
     if digital.read (!port:BUTTON_P0) {

@@ -11027,9 +11027,9 @@ GALGAS_mode GALGAS_mode::constructor_bootMode (UNUSED_LOCATION_ARGS) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_mode GALGAS_mode::constructor_initMode (UNUSED_LOCATION_ARGS) {
+GALGAS_mode GALGAS_mode::constructor_startupMode (UNUSED_LOCATION_ARGS) {
   GALGAS_mode result ;
-  result.mEnum = kEnum_initMode ;
+  result.mEnum = kEnum_startupMode ;
   return result ;
 }
 
@@ -11052,7 +11052,7 @@ static const char * gEnumNameArrayFor_mode [10] = {
   "guardMode",
   "panicMode",
   "bootMode",
-  "initMode",
+  "startupMode",
   "anyMode"
 } ;
 
@@ -11100,8 +11100,8 @@ GALGAS_bool GALGAS_mode::getter_isBootMode (UNUSED_LOCATION_ARGS) const {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_mode::getter_isInitMode (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_initMode == mEnum) ;
+GALGAS_bool GALGAS_mode::getter_isStartupMode (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_startupMode == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11226,9 +11226,9 @@ GALGAS_string extensionGetter_string (const GALGAS_mode & inObject,
       result_result = GALGAS_string ("boot") ;
     }
     break ;
-  case GALGAS_mode::kEnum_initMode:
+  case GALGAS_mode::kEnum_startupMode:
     {
-      result_result = GALGAS_string ("init") ;
+      result_result = GALGAS_string ("startup") ;
     }
     break ;
   case GALGAS_mode::kEnum_anyMode:
@@ -11270,7 +11270,7 @@ GALGAS_bool extensionGetter_controlRegisterAccess (const GALGAS_mode & inObject,
   case GALGAS_mode::kEnum_primitiveMode:
   case GALGAS_mode::kEnum_panicMode:
   case GALGAS_mode::kEnum_bootMode:
-  case GALGAS_mode::kEnum_initMode:
+  case GALGAS_mode::kEnum_startupMode:
     {
       result_result = GALGAS_bool (true) ;
     }

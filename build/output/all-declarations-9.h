@@ -10,6 +10,27 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                         Function 'integerEnumAccessorName'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_integerEnumAccessorName (const class GALGAS_uint & constinArgument0,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Routine 'enterEnumerationComparisonOperators'                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
+                                                  class GALGAS_semanticContext & ioArgument1,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                            Function 'copyableAttribute'                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -657,21 +678,21 @@ class GALGAS_lstring function_initNameForInvocationGraph (const class GALGAS_str
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           Routine 'initSemanticAnalysis'                                            *
+//                                          Routine 'startupSemanticAnalysis'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
-                                   class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                   class GALGAS_intermediateCodeStruct & ioArgument2,
-                                   const class GALGAS_PLMType constinArgument3,
-                                   const class GALGAS_location constinArgument4,
-                                   const class GALGAS_instructionListAST constinArgument5,
-                                   const class GALGAS_location constinArgument6,
-                                   class GALGAS_allocaList & outArgument7,
-                                   class GALGAS_instructionListIR & outArgument8,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
+void routine_startupSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                      class GALGAS_intermediateCodeStruct & ioArgument2,
+                                      const class GALGAS_PLMType constinArgument3,
+                                      const class GALGAS_location constinArgument4,
+                                      const class GALGAS_instructionListAST constinArgument5,
+                                      const class GALGAS_location constinArgument6,
+                                      class GALGAS_allocaList & outArgument7,
+                                      class GALGAS_instructionListIR & outArgument8,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

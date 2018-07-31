@@ -24,7 +24,7 @@ driver lcd > digital {
   
   //············································································
 
-  func init configurePorts @noUnusedWarning () {
+  func startup configurePorts @noUnusedWarning () {
     digital.set (!mode:.OUTPUT !toPort:self.DB4)
     digital.set (!mode:.OUTPUT !toPort:self.DB5)
     digital.set (!mode:.OUTPUT !toPort:self.DB6)
@@ -118,7 +118,7 @@ driver lcd > digital {
 
   //············································································
 
-  func init write4BitCommand @noUnusedWarning (?inValue $uint8) {
+  func startup write4BitCommand @noUnusedWarning (?inValue $uint8) {
     time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inValue)
     time.busyWaitingDuringMS (!1)
@@ -127,7 +127,7 @@ driver lcd > digital {
 
   //············································································
 
-  func init write8bitCommand @noUnusedWarning (?inCommand $uint8) {
+  func startup write8bitCommand @noUnusedWarning (?inCommand $uint8) {
     time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
     time.busyWaitingDuringMS (!1)
@@ -142,7 +142,7 @@ driver lcd > digital {
   //   LCD INIT
   //············································································
 
-  init {
+  startup {
     self.configurePorts ()
   //--- Étape 1 : attendre 15 ms
     time.busyWaitingDuringMS (!15)
