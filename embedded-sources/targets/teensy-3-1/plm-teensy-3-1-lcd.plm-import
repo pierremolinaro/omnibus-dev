@@ -18,7 +18,7 @@ driver lcd > digital {
   let RS $digitalPort
   let ENABLE $digitalPort
 
-  var buffer = [LCD_BUFFER_SIZE $uint8] (!repeated:0)
+  var buffer = [LCD_BUFFER_SIZE • $uint8] (!repeated:0)
   var sEntree = $semaphore (!value:0)
   var sSortie = $semaphore (!value:LCD_BUFFER_SIZE)
   

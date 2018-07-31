@@ -28,7 +28,6 @@ syntax extension plm_syntax {
     else
       error attribute : "attribute should be @setup or @loop" : isSetup
     end
-#    $setup$
     $integer$ ?let priority
     ${$
     <instructionList> !?ioAST ?let instructionList

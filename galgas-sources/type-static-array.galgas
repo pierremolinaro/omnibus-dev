@@ -20,9 +20,9 @@ syntax extension plm_syntax {
   rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
     $[$
     <expression> !?ioAST ?let sizeExpression
-#    $,$
-    $\$type$ ?let elementTypeName
-#    <type_definition> !?ioAST ?let elementTypeName
+    $•$
+#    $\$type$ ?let elementTypeName
+    <type_definition> !?ioAST ?let elementTypeName
     let sizeExpressionLocation = @location.here
     $]$
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]

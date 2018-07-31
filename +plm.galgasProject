@@ -21,7 +21,7 @@ project (1:0:0) -> "plm" {
 
 #--- Type declarations
   "galgas-sources/declaration-type.galgas"
-  "galgas-sources/type-array.galgas"
+  "galgas-sources/type-static-array.galgas"
   "galgas-sources/type-dynamic-array.galgas"
   "galgas-sources/type-bool.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"

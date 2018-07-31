@@ -75,7 +75,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3F__21_selector_3A_,
    kToken__21_selector_3A_,
    kToken__21__3F_selector_3A_,
-   kToken_eoi,
    kToken_addressof,
    kToken_and,
    kToken_assert,
@@ -179,7 +178,8 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__21__25__3D_,
    kToken__3C__3C__3D_,
    kToken__3E__3E__3D_,
-   kToken__3A__3A_} ;
+   kToken__3A__3A_,
+   kToken__2022_} ;
 
 //--- Key words table 'keyWordList'
   public : static int16_t search_into_keyWordList (const C_String & inSearchedString) ;
@@ -213,6 +213,9 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
 
 //--- Get terminal count
   public : virtual int16_t terminalVocabularyCount (void) const { return 117 ; }
+
+//--- Optional terminal
+  protected : virtual bool isTerminalOptional (const int16_t inTerminalIndex) const ;
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;

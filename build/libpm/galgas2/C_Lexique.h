@@ -101,6 +101,9 @@ class C_Lexique : public C_Compiler {
   protected : C_LocationInSource mTokenStartLocation ;
   protected : C_LocationInSource mTokenEndLocation ;
 
+//--- Optional terminal
+  protected : virtual bool isTerminalOptional (const int16_t inTerminalIndex) const = 0 ;
+
 //--- Advance
   protected : void advance (void) ; // One character
   protected : void advance (const int32_t inCount) ; // Several characters
