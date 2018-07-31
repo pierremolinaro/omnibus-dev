@@ -8,10 +8,10 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "6.0.0"
+LLVM_VERSION = "6.0.1"
 LLVM_SUFFIX = ""
 
-BINUTILS_VERSION = "2.30"
+BINUTILS_VERSION = "2.31.1"
 
 LIBUSB_VERSION   = "1.0.22"
 
