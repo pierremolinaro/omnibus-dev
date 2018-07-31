@@ -16,7 +16,7 @@ driver myDriver > digital {
   // So: when push button P4 is pressed, LED_L4 toggles
   //····················································································································
 
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
@@ -27,9 +27,9 @@ driver myDriver > digital {
     enable (!interrupt:.pinDetectPortA)
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortA)
-  //--- Digital filters are clocked by the LPO clock 
+  //--- Digital filters are clocked by the LPO clock
     #PORTC:DFCR = 1
-  //--- Setr digital filter length 
+  //--- Setr digital filter length
     #PORTC:DFWR = 31
   //--- Enable digital filter ou PTC7
     #PORTC:DFER = 1 << 7
@@ -40,7 +40,7 @@ driver myDriver > digital {
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortC)
   }
-  
+
   //····················································································································
 
   interrupt section pinDetectPortA {

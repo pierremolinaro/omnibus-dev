@@ -237,7 +237,7 @@ private proc generateCodeFiles
     [generation generateLLVMcode !?llvmCode !?generationAdds]
   end
 #----------------------------------------- Init
-  [inIntermediateCodeStruct.mInitList generateLLVMinitCode
+  [inIntermediateCodeStruct.mStartupList generateLLVMinitCode
     !?llvmCode
     !inIntermediateCodeStruct.mRoutineMapIR
     !generationContext

@@ -45,7 +45,7 @@ driver time {
 
   //············································································
 
-  init {
+  startup {
   //--- Program pin P1.23 as an output (STAT led)
     #IO1:DIR |= 1 << 23
     #IO1:CLR  = 1 << 23 // Led On

@@ -25,7 +25,7 @@ struct @driverDeclarationAST {
   @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
-  @initListAST mDriverInitListAST
+  @startupListAST mDriverInitListAST
   @bootListAST mDriverBootListAST
 }
 
@@ -119,7 +119,7 @@ syntax extension plm_syntax {
     @driverPropertyListAST driverPropertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
-    @initListAST initList = {}
+    @startupListAST startupList = {}
     @bootListAST bootListAST = {}
     repeat
     while
@@ -129,11 +129,11 @@ syntax extension plm_syntax {
       end
       bootListAST += !boot
     while
-      <declaration_init>!?ioAST !driverName !driverDependenceList ?let init
-      if [initList length] != 0 then
-        error [init mInitLocation] : "a driver supports at most one init routine" 
+      <declaration_startup>!?ioAST !driverName !driverDependenceList ?let startup
+      if [startupList length] != 0 then
+        error [startup mStartupLocation] : "a driver supports at most one startup routine" 
       end
-      initList += !init
+      startupList += !startup
     while
       <isr> !?ioAST !driverName
     while
@@ -154,7 +154,7 @@ syntax extension plm_syntax {
       !functionDeclarationListAST
       !svcListAST
       !guardListAST
-      !initList
+      !startupList
       !bootListAST
     }
   }
@@ -314,7 +314,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       ioAST.mDeclarationListAST += !init
     end
     if [declaration.mDriverInitListAST length] == 0 then
-      ioAST.mDeclarationListAST += !@initAST.new {
+      ioAST.mDeclarationListAST += !@startupAST.new {
         !declaration.mDriverName
         !declaration.mDriverDependanceList
         !declaration.mDriverName.location

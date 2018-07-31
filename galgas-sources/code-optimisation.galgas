@@ -141,7 +141,7 @@ private proc suppressInaccessibleSubprograms
       !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
     ]
   end
-  for init in ioIntermediateCodeStruct.mInitList do
+  for init in ioIntermediateCodeStruct.mStartupList do
     [init.mInstructionListIR enterAccessibleEntities
       !?outAccessibleEntities
       !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions

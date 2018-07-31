@@ -14,23 +14,23 @@ driver time > root {
 
   //····················································································································
 
-  init { // Configure Systick interrupt every ms
+  startup { // Configure Systick interrupt every ms
     #SYST:RVR = F_CPU_MHZ * 1000 - 1 // Interrupt every ms
     #SYST:CVR = 0
     #SYST:CSR = {#SYST:CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
   }
 
   //····················································································································
-  //   Functions callable in init mode
+  //   Functions callable in startup mode
   //····················································································································
 
-  public func init oneMillisecondBusyWait @noUnusedWarning () {
+  public func startup oneMillisecondBusyWait @noUnusedWarning () {
     while #SYST:CSR:COUNTFLAG == 0 {}
   }
 
   //····················································································································
 
-  public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  public func startup busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }

@@ -4,9 +4,9 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .type init.routines, %function
+  .type startup.routines, %function
 
   .align  2
 
 __svc_dispatcher_table:
-  .word  init.routines @ 0
+  .word  startup.routines @ 0

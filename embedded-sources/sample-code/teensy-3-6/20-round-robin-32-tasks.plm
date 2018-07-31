@@ -16,15 +16,15 @@ driver myDriver > digital {
   // So: when push button P4 is pressed, LED_L4 toggles
   //····················································································································
 
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
-  
+
   var tick = $uint32 ()
 
   public system section noteTick () {
     self.tick = #SYST:CVR
-  } 
+  }
 
   public system section getDuration () -> $uint32 {
     result = self.tick - #SYST:CVR

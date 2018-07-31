@@ -16,7 +16,7 @@ system section setupPIT () {
 driver pit > digital {
   var gPITValue $uint32 = 0
 
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     #SIM:SCGC6 |= SIM_SCGC6_PIT
@@ -44,7 +44,7 @@ task T @stacksize 512 @activate {
   on @setup first {
     setupPIT ()
   }
-  
+
   on time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.write (!yes !toPort:LED_L1) // Allumer la led

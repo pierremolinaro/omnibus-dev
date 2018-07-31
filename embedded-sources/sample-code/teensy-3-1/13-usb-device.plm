@@ -60,20 +60,20 @@ driver usb_device > digital {
 
   var état = [TRACE_SIZE • $uint4] (!repeated:0)
   var indexÉtat $uint32 = 0
-  
+
   public system section lireÉtat (?index $uint32) -> $uint32 {
     result = extend (self.état [index])
   }
-  
-  var trace $uint32 = 0 
-  
+
+  var trace $uint32 = 0
+
   public system section lireAddresseUSB () -> $uint32 {
     result = extend (#USB0:ADDR)
   }
-  
+
   //····················································································································
 
-  init {
+  startup {
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
@@ -112,7 +112,7 @@ driver usb_device > digital {
   }
 
   //····················································································································
-  
+
   interrupt section USBOTG {
     let status = #USB0:ISTAT
 
@@ -129,7 +129,7 @@ driver usb_device > digital {
   //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
         #USB0:ISTAT = {#USB0:ISTAT !SOFTOK:1} // Ack
       }
-  
+
     //-------------------- TOKEN COMPLETED
       if (status & {#USB0:ISTAT !TOKDNE:1}) ≠ 0 { // Page 1502
   //        digital.write (!yes !toPort:LED_L2)
@@ -138,14 +138,14 @@ driver usb_device > digital {
         self.tokenCompleted ()
         #USB0:ISTAT = {#USB0:ISTAT !TOKDNE:1} // Ack
       }
-     
+
     //-------------------- STALL
       if (status & {#USB0:ISTAT !STALL:1}) ≠ 0 {
         self.état [self.indexÉtat] = 4
         self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
         #USB0:ISTAT = {#USB0:ISTAT !STALL:1} // Ack
       }
-  
+
     //-------------------- ERROR
       if (status & {#USB0:ISTAT !ERROR:1}) ≠ 0 {
         self.état [self.indexÉtat] = 5
@@ -154,7 +154,7 @@ driver usb_device > digital {
         #USB0:ERRSTAT = err
         #USB0:ISTAT = {#USB0:ISTAT !ERROR:1} // Ack
       }
-  
+
     //-------------------- SLEEP
       if (status & {#USB0:ISTAT !SLEEP:1}) ≠ 0 {
         self.état [self.indexÉtat] = 6
@@ -163,9 +163,9 @@ driver usb_device > digital {
       }
     }
   }
-  
+
   //····················································································································
-  
+
   func section configureEndPoint0OnReset @mutating () {
 //      self.état [self.indexÉtat] = 1
 //      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
@@ -191,7 +191,7 @@ driver usb_device > digital {
     //--- is this necessary?
    //   USB0:CTL = {USB0:CTL !USBENOFEN:1} // Page 1507
   }
-  
+
   //····················································································································
   // This means a transaction has completed, we receive this interrupt
   // after data was transferred and the handshake has been completed:
@@ -212,7 +212,7 @@ driver usb_device > digital {
   // calls to the handler anymore. Something else has to prepare
   // a new TX buffer for that endpoint when data becomes available
   // again, the handler will only be called AFTER the transmission!
-  
+
   func section tokenCompleted @mutating () {
     let transactionStatus = #USB0:STAT
     let endPoint $uint4 = transactionStatus [4...7]
@@ -222,7 +222,7 @@ driver usb_device > digital {
     if endPoint == 0 {
       self.endpoint_0_handler (!transactionStatus)
     }else{
-    
+
     }
 //    let index = transactionStatus >> 2
 //    let pid = (self.descriptorTable [index].desc >> 2) & 15
@@ -238,17 +238,17 @@ driver usb_device > digital {
 //    if endPoint == 0 {
 //      self.configure
 //    }else{
-//    
+//
 //    }
   }
 
   //····················································································································
-  
+
   func section endpoint_0_handler @mutating (?transactionStatus $uint8) {
   }
 
   //····················································································································
-  
+
 //  func section usb_setup @mutating () {
 //  //---
 //    let index $uint32 = 0
@@ -263,10 +263,10 @@ driver usb_device > digital {
 //      self.usb_setup_device (!bRequest)
 //    }else if bmRequestType == 1 { // Setup interface
 //      digital.write (!yes !toPort:LED_L3)
-//    
+//
 //    }else if bmRequestType == 2 { // Setup endpoint
 //      digital.write (!yes !toPort:LED_L4)
-//    
+//
 //    }
 //////    let wValue  = {$uint16 !8:self.ep0_rx0_buf [3] !8:self.ep0_rx0_buf [2]}
 //////    let wIndex  = {$uint16 !8:self.ep0_rx0_buf [5] !8:self.ep0_rx0_buf [4]}
@@ -279,7 +279,7 @@ driver usb_device > digital {
 ////    }else if requestAndType == 0x0900 { // Set configuration
 ////        digital.write (!yes !toPort:LED_L1)
 ////
-////    
+////
 ////    }else if requestAndType == 0x0880 { // Get configuration
 ////    }else if requestAndType == 0x0080 { // Get status (device)
 ////    }else if requestAndType == 0x0082 { // Get status (endpoint)
@@ -316,35 +316,35 @@ driver usb_device > digital {
 ////                        len = p->addr[0];               // Use structure length
 ////                    else
 ////                        len = p->length;
-////                        
+////
 ////                    iprintf("sending 0x%04x %d\r\n",setup->wValue, len);
 ////                    usb_queue_tx(ep, p->addr, min(len, setup->wLength));
 ////                    return;
 ////                }
 ////                p++;
 ////            }
-////            iprintf("NOT IMPLEMENTED! 0x%04x\r\n", setup->wValue);              
+////            iprintf("NOT IMPLEMENTED! 0x%04x\r\n", setup->wValue);
 ////            break;
-////            
+////
 ////        case mSET_ADDRESS:
 ////            device_state = ADDRESS;
 ////            device_address = setup->wValue & 0x7f;
 ////            usb_tx(ep,0,0);                         // Send handshake
 ////            break;
-////            
+////
 ////        case mSET_CONFIG:
 ////            iprintf("setconfig: %d\r\n", setup->wValue);
 ////            device_state = ENUMERATED;
 ////            usb_set_config(setup->wValue);
 ////            usb_tx(ep,0,0);                         // Send handshake
 ////            break;
-////            
+////
 ////        default:
 ////            iprintf("NOT IMPLEMENTED! %d\r\n", setup->bRequest);
 ////            break;
 ////      }
 //  }
- 
+
   //····················································································································
 
 }
@@ -360,14 +360,14 @@ driver usb_device ()
 task T @stacksize 512 @activate {
   var tick $uint32 = 0
   var état $uint32 = 0
-  
+
   //····················································································································
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
-  
+
   //····················································································································
 
   on time.wait (!until:self.tick) {
@@ -380,8 +380,8 @@ task T @stacksize 512 @activate {
     }
     lcd.goto (!line:1 !column:0)
     lcd.print (!hex8:usb_device.lireAddresseUSB ())
-    
-  } 
+
+  }
 
   //····················································································································
 

@@ -2,18 +2,18 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @initAST : @abstractDeclarationAST {
+class @startupAST : @abstractDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
-  @location mInitLocation
+  @location mStartupLocation
   @instructionListAST mInstructionList
-  @location mEndOfInitLocation
+  @location mEndOfStartupLocation
 }
 
 #·······················································································································
 
-list @initListAST {
-  @initAST mInit
+list @startupListAST {
+  @startupAST mStartup
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,14 +24,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_init> ?!@ast ioAST ?let @lstring inDriverName  ?let @lstringlist inDependanceList !@initAST outInit {
-    $init$
+  rule <declaration_startup> ?!@ast ioAST ?let @lstring inDriverName  ?let @lstringlist inDependanceList !@startupAST outInit {
+    $startup$
     let initLocation = @location.here
     ${$
     <instructionList> !?ioAST ?let instructionList
-    let endOfInit = @location.here
+    let endOfStartup = @location.here
     $}$
-    outInit = .new {!inDriverName !inDependanceList !initLocation !instructionList !endOfInit}
+    outInit = .new {!inDriverName !inDependanceList !initLocation !instructionList !endOfStartup}
   }
 
   #·····················································································································
@@ -42,39 +42,39 @@ syntax extension plm_syntax {
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @initAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @startupAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 #·······················································································································
 
-override method @initAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- let nodeName = @lstring.new {!"init " + mDriverName !mInitLocation}
+override method @startupAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+ let nodeName = @lstring.new {!"startup " + mDriverName !mStartupLocation}
  [!?ioGraph addNode !nodeName !self]
  [!?ioGraph addEdge !nodeName !mDriverName]
  for (dependanceDriverName) in mDriverDependanceList do
-   let dependanceNodeName = @lstring.new {!"init " + dependanceDriverName !dependanceDriverName}
+   let dependanceNodeName = @lstring.new {!"startup " + dependanceDriverName !dependanceDriverName}
    [!?ioGraph addEdge !nodeName !dependanceNodeName]
  end
 }
 
 #·······················································································································
 
-override getter @initAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "init " + mDriverName 
+override getter @startupAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "startup " + mDriverName 
 }
 
 #·······················································································································
 
-override getter @initAST location -> @location outLocation {
-  outLocation = mInitLocation
+override getter @startupAST location -> @location outLocation {
+  outLocation = mStartupLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @initAST addExtension
+override method @startupAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
@@ -86,7 +86,7 @@ override method @initAST addExtension
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @initAST enterInContext
+override method @startupAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
@@ -96,14 +96,14 @@ override method @initAST enterInContext
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-   let routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mInitLocation)
+   let routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mStartupLocation)
   [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedInitRoutine.new {
+  ioDecoratedDeclarationList += !@decoratedStartupRoutine.new {
     !mDriverName
     !mDriverDependanceList
     !mInstructionList
-    !mEndOfInitLocation
+    !mEndOfStartupLocation
   }
 }
 
@@ -111,16 +111,16 @@ override method @initAST enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @decoratedInitRoutine : @abstractDecoratedDeclaration {
+class @decoratedStartupRoutine : @abstractDecoratedDeclaration {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
   @instructionListAST mInstructionList
-  @location mEndOfInitLocation
+  @location mEndOfStartupLocation
 }
 
 #·······················································································································
 
-override method @decoratedInitRoutine routineSemanticAnalysis
+override method @decoratedStartupRoutine routineSemanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
@@ -129,27 +129,27 @@ override method @decoratedInitRoutine routineSemanticAnalysis
 
 #·······················································································································
 
-override method @decoratedInitRoutine semanticAnalysis
+override method @decoratedStartupRoutine semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]
-  initSemanticAnalysis (
+  startupSemanticAnalysis (
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
     !selfType:selfType
     !location:mDriverName.location
     !instructionList:mInstructionList
-    !endOfDeclaration:mEndOfInitLocation
+    !endOfDeclaration:mEndOfStartupLocation
     ?let @allocaList allocaList
     ?let @instructionListIR instructionGenerationList
   )
 #--- Build initialized driver set
   ioTemporaries.mInitializedDriverSet += !mDriverName.string
 #--- Code generation
-  ioIntermediateCodeStruct.mInitList +=
+  ioIntermediateCodeStruct.mStartupList +=
     !selfType
     !mDriverName
     !allocaList
@@ -158,14 +158,14 @@ override method @decoratedInitRoutine semanticAnalysis
 
 #·······················································································································
 
-private proc initSemanticAnalysis
+private proc startupSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
   ?selfType:let @PLMType inSelfType
   ?location:let @location inLocation
   ?instructionList:let @instructionListAST inInstructionListAST
-  ?endOfDeclaration:let @location inEndOfInitDeclaration
+  ?endOfDeclaration:let @location inEndOfStartupDeclaration
   !@allocaList outAllocaList
   !@instructionListIR outInstructionGenerationList
 {
@@ -187,7 +187,7 @@ private proc initSemanticAnalysis
     !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !mode:.initMode
+    !mode:.startupMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
@@ -196,15 +196,15 @@ private proc initSemanticAnalysis
   ]
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState !?outInstructionGenerationList]
-  [!?universalMap closeBranch !inEndOfInitDeclaration]
-  [!?universalMap closeOverride !inEndOfInitDeclaration]
+  [!?universalMap closeBranch !inEndOfStartupDeclaration]
+  [!?universalMap closeOverride !inEndOfStartupDeclaration]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @initListIR {
+list @startupListIR {
   @PLMType mSelfType
   @string mDriverName
   @allocaList mAllocaList
@@ -213,30 +213,30 @@ list @initListIR {
 
 #·······················································································································
 
-method @initListIR generateLLVMinitCode
+method @startupListIR generateLLVMinitCode
   ?!@string ioLLVMcode
   ?let @routineMapIR unused inProcedureMapIR
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!"Init")
-  ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += llvmTitleComment (!"Startup")
+  ioLLVMcode += "define internal void @startup ()" + llvmAttributeFunction () + "{\n"
   for init in self do
-    ioLLVMcode += "  call void @init." + init.mDriverName + " ("
+    ioLLVMcode += "  call void @startup." + init.mDriverName + " ("
     ioLLVMcode += [init.mSelfType llvmTypeName] + "* " + llvmNameForGlobalVariable (!init.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
-  for init in self do
+  for startup in self do
     ioLLVMcode += llvmSeparatorLine () + "\n"
-    ioLLVMcode += "define internal void @init." + init.mDriverName + " ("
-    if init.mSelfType.kind != .void then
-      ioLLVMcode += [init.mSelfType llvmTypeName] + "* " + llvmNameForSelf ()
+    ioLLVMcode += "define internal void @startup." + startup.mDriverName + " ("
+    if startup.mSelfType.kind != .void then
+      ioLLVMcode += [startup.mSelfType llvmTypeName] + "* " + llvmNameForSelf ()
     end
     ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-    [init.mAllocaList generateAllocaList !?ioLLVMcode]
-    [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    [startup.mAllocaList generateAllocaList !?ioLLVMcode]
+    [startup.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
   end

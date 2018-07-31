@@ -54,7 +54,7 @@ project (1:0:0) -> "plm" {
 #--- Routines
   "galgas-sources/declaration-svc.galgas"
   "galgas-sources/declaration-boot.galgas"
-  "galgas-sources/declaration-init.galgas"
+  "galgas-sources/declaration-startup.galgas"
   "galgas-sources/declaration-func.galgas"
   "galgas-sources/declaration-required-proc.galgas"
   "galgas-sources/declaration-extern-proc.galgas"

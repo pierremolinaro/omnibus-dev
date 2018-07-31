@@ -106,11 +106,11 @@ void extensionMethod_generateCode (const class GALGAS_bootListIR inObject,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @initListIR_2D_element struct                                            *
+//                                          @startupListIR_2D_element struct                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
+class GALGAS_startupListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_PLMType mProperty_mSelfType ;
 
@@ -125,16 +125,16 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_initListIR_2D_element (void) ;
+  public : GALGAS_startupListIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_initListIR_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_startupListIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_initListIR_2D_element (const GALGAS_PLMType & in_mSelfType,
-                                         const GALGAS_string & in_mDriverName,
-                                         const GALGAS_allocaList & in_mAllocaList,
-                                         const GALGAS_instructionListIR & in_mInstructionListIR) ;
+  public : GALGAS_startupListIR_2D_element (const GALGAS_PLMType & in_mSelfType,
+                                            const GALGAS_string & in_mDriverName,
+                                            const GALGAS_allocaList & in_mAllocaList,
+                                            const GALGAS_instructionListIR & in_mInstructionListIR) ;
 
 //-- Start of generic part --*
 
@@ -142,22 +142,22 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_initListIR_2D_element extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_startupListIR_2D_element extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_initListIR_2D_element constructor_new (const class GALGAS_PLMType & inOperand0,
-                                                                      const class GALGAS_string & inOperand1,
-                                                                      const class GALGAS_allocaList & inOperand2,
-                                                                      const class GALGAS_instructionListIR & inOperand3
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_startupListIR_2D_element constructor_new (const class GALGAS_PLMType & inOperand0,
+                                                                         const class GALGAS_string & inOperand1,
+                                                                         const class GALGAS_allocaList & inOperand2,
+                                                                         const class GALGAS_instructionListIR & inOperand3
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_initListIR_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_startupListIR_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -177,20 +177,20 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_initListIR_2D_element class
+} ; // End of GALGAS_startupListIR_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initListIR_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_startupListIR_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Extension method '@initListIR generateLLVMinitCode'                                 *
+//                               Extension method '@startupListIR generateLLVMinitCode'                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_generateLLVMinitCode (const class GALGAS_initListIR inObject,
+void extensionMethod_generateLLVMinitCode (const class GALGAS_startupListIR inObject,
                                            class GALGAS_string & io_ioLLVMcode,
                                            const class GALGAS_routineMapIR constin_inProcedureMapIR,
                                            const class GALGAS_generationContext constin_inGenerationContext,
