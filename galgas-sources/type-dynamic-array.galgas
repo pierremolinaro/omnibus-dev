@@ -17,7 +17,8 @@ syntax extension plm_syntax {
 
   rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
     $[$
-    $\$type$ ?let elementTypeName
+    <type_definition> !?ioAST ?let elementTypeName
+#    $\$type$ ?let elementTypeName
     $]$
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++

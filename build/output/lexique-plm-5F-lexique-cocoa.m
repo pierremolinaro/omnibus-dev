@@ -367,6 +367,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__2264_ ;
     }else if (scanningOk && [self testForInputString:@"\xE2""\x89""\xA0""" advance:YES]) {
       mTokenCode = plm_lexique_1__2260_ ;
+    }else if (scanningOk && [self testForInputString:@"\xE2""\x80""\xA2""" advance:YES]) {
+      mTokenCode = plm_lexique_1__2022_ ;
     }else if (scanningOk && [self testForInputString:@"~" advance:YES]) {
       mTokenCode = plm_lexique_1__7E_ ;
     }else if (scanningOk && [self testForInputString:@"}" advance:YES]) {
@@ -563,7 +565,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     9 /* plm_lexique_1__3F__21_selector_3A_ */,
     9 /* plm_lexique_1__21_selector_3A_ */,
     9 /* plm_lexique_1__21__3F_selector_3A_ */,
-    9 /* plm_lexique_1_eoi */,
     1 /* plm_lexique_1_addressof */,
     1 /* plm_lexique_1_and */,
     1 /* plm_lexique_1_assert */,
@@ -667,7 +668,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     8 /* plm_lexique_1__21__25__3D_ */,
     8 /* plm_lexique_1__3C__3C__3D_ */,
     8 /* plm_lexique_1__3E__3E__3D_ */,
-    8 /* plm_lexique_1__3A__3A_ */
+    8 /* plm_lexique_1__3A__3A_ */,
+    8 /* plm_lexique_1__2022_ */
   } ;
   return kTerminalSymbolStyles [inTerminal] ;
 }
@@ -692,7 +694,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__3F__21_selector_3A_ */,
     YES /* plm_lexique_1__21_selector_3A_ */,
     YES /* plm_lexique_1__21__3F_selector_3A_ */,
-    YES /* plm_lexique_1_eoi */,
     YES /* plm_lexique_1_addressof */,
     YES /* plm_lexique_1_and */,
     YES /* plm_lexique_1_assert */,
@@ -796,7 +797,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__21__25__3D_ */,
     YES /* plm_lexique_1__3C__3C__3D_ */,
     YES /* plm_lexique_1__3E__3E__3D_ */,
-    YES /* plm_lexique_1__3A__3A_ */
+    YES /* plm_lexique_1__3A__3A_ */,
+    YES /* plm_lexique_1__2022_ */
   } ;
   return kTerminalAtomicSelection [inTokenIndex] ;
 }

@@ -272,7 +272,7 @@ lexique plm_lexique {
     "/", "!/", "/=", "!/=",
     "%", "!%",  "%=", "!%=",
     "<<=", ">>=",
-    "::"
+    "::", "•"
   }
   
   rule list delimitorsList
@@ -368,8 +368,12 @@ lexique plm_lexique {
   #! Optional token (end of instruction)
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
-  $eoi$ %optional style selectorStyle error message "the ';' or end of line instruction separator"
-
+#  $eoi$ %optional style selectorStyle error message "the ';' or end of line instruction separator"
+#
+#  rule ";" { send $eoi$ }
+#  
+#  rule "\n" { send $eoi$ }
+  
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   #! Separators
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

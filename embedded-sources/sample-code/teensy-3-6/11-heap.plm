@@ -20,7 +20,7 @@ driver project > digital {
 
 driver project ()
 
-typealias $dArray : [$uint8]
+typealias $dArray = [$uint8]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

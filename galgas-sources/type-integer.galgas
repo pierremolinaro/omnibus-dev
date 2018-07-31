@@ -515,15 +515,12 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
   ?let @PLMType inResultType
   !@objectIR outResult
 {
-#  message "INFIX OP " + "\n"
   if [inLeftOperand isLiteralInteger] && [inRightOperand isLiteralInteger] then
     [inLeftOperand  literalInteger ?1* ?value:let @bigint left]
     [inRightOperand literalInteger ?1* ?value:let @bigint right]
-#    message "INFIX OP LITERAL LITERAL " + left + " " + right + "\n"
     let resultValue = [self performStaticOperation !left !right]
     outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
-#    message "INFIX OP COMPUTE\n"
     getNewTempValue (!inResultType !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
