@@ -499,7 +499,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   ioLLVMcode += llvmTitleComment (!"User Defined Types")
   ioLLVMcode += "%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"
   for (type *) in orderedTypeList do
-    if type.plmOriginalTypeName == type.plmAliasedTypeName then
+    if type.plmTypeDescriptionName == type.llvmBaseTypeName then
       switch type.kind
       case void :
       case boolean :

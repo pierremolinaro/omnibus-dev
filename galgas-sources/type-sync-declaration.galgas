@@ -51,18 +51,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @syncDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -227,9 +215,9 @@ override method @syncDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:guardMap
     !attributes:.instanciable
-    !plmOriginalTypeName:mSyncToolName
+    !plmTypeDescriptionName:mSyncToolName
     !kind:.syncTool {!propertyList:propertyList}
-    !plmAliasedTypeName:mSyncToolName
+    !llvmBaseTypeName:mSyncToolName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mSyncToolName

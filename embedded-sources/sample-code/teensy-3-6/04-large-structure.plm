@@ -11,7 +11,7 @@ typealias $patternArray = [PATTERN_LENGTH • $uint32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâcheq @stacksize 5512 @activate {
+task Tâche @stacksize 5512 @activate {
   var compteur $uint32 = 0
   var x = $patternArray (!repeated:0)
   var y = $patternArray (!repeated:0)

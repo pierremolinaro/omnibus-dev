@@ -68,12 +68,12 @@ method @infixOperatorMap checkBinaryOperationWith
   !resultType: @PLMType outResultType
   !op:@infixOperatorDescription outOperation
 {
-  let lkey = combineTypeNamesForInfixOperator (!inLeftType.plmOriginalTypeName !inRightType.plmOriginalTypeName)
+  let lkey = combineTypeNamesForInfixOperator (!inLeftType.plmTypeDescriptionName !inRightType.plmTypeDescriptionName)
   if [self hasKey !lkey.string] then
     [self searchKey !lkey ?outResultType ?outOperation]
   else
     error inOperatorLocation
-      : "infix operation between $" + inLeftType.plmOriginalTypeName + " and $" + inRightType.plmOriginalTypeName + " is not defined"
+      : "infix operation between $" + inLeftType.plmTypeDescriptionName + " and $" + inRightType.plmTypeDescriptionName + " is not defined"
       : outResultType, outOperation
   end
 }

@@ -30,18 +30,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @typeDynamicArrayDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -92,11 +80,11 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     error mElementTypeName : "an array element should be instanciable"
   end
 #-------------------------------------------- Original type name
-  let originalTypeName = @lstring.new {!"dynarray." + elementType.plmOriginalTypeName !mAnonymousDynamicArrayTypeName}
+  let originalTypeName = @lstring.new {!"dynarray." + elementType.plmTypeDescriptionName !mAnonymousDynamicArrayTypeName}
 #-------------------------------------------- Original type name
   if [ioContext.mTypeMap hasKey !originalTypeName] then
     [ioContext.mTypeMap searchKey !lkey:originalTypeName ?type:var type ?1*]
-    type.plmAliasedTypeName = mAnonymousDynamicArrayTypeName
+    type.llvmBaseTypeName = mAnonymousDynamicArrayTypeName
     type.attributes = type.attributes - .generateAssignmentRoutine
     [!?ioContext.mTypeMap insertType
       !lkey:mAnonymousDynamicArrayTypeName
@@ -168,9 +156,9 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !attributes:typeAttributes
-      !plmOriginalTypeName:originalTypeName
+      !plmTypeDescriptionName:originalTypeName
       !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
-      !plmAliasedTypeName:originalTypeName
+      !llvmBaseTypeName:originalTypeName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:originalTypeName
@@ -183,9 +171,9 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !attributes:typeAttributes - .generateAssignmentRoutine
-      !plmOriginalTypeName:originalTypeName
+      !plmTypeDescriptionName:originalTypeName
       !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
-      !plmAliasedTypeName:mAnonymousDynamicArrayTypeName
+      !llvmBaseTypeName:mAnonymousDynamicArrayTypeName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mAnonymousDynamicArrayTypeName
@@ -284,7 +272,7 @@ override method @dynamicArrayIR generateLLVMcode
   @routineFormalArgumentListAST argumentList = {
     !.input
     !["" nowhere]
-    ![mElementType.plmOriginalTypeName nowhere]
+    ![mElementType.plmTypeDescriptionName nowhere]
     !["inValue" nowhere]
   ,
     !.input
@@ -317,7 +305,7 @@ override method @dynamicArrayIR generateLLVMcode
              + "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
-  ioLLVMcode += "  call void @plm.assign." + [mElementType.plmOriginalTypeName assemblerRepresentation]
+  ioLLVMcode += "  call void @plm.assign." + [mElementType.plmTypeDescriptionName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
   ioLLVMcode += "  store %ptrtype %new.buffer.pointer, %ptrtype* %ioArray\n"
@@ -328,7 +316,7 @@ override method @dynamicArrayIR generateLLVMcode
   argumentList = {
     !.input
     !["" nowhere]
-    ![mElementType.plmOriginalTypeName nowhere]
+    ![mElementType.plmTypeDescriptionName nowhere]
     !["inValue" nowhere]
   }
   let routineMangledName = routineMangledNameFromAST (

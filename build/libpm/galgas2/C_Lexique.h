@@ -85,7 +85,7 @@ class C_Lexique : public C_Compiler {
   }
 
 //--- Syntax directed translation : accessing current token
-  public : C_String preceedingSeparatorString (void) const ;
+  public : virtual C_String separatorString (void) const ;
   public : C_String tokenString (void) const ;
 
 //--- Current character
@@ -100,9 +100,6 @@ class C_Lexique : public C_Compiler {
 //--- Locations for current token (significant only during lexical analysis phase)
   protected : C_LocationInSource mTokenStartLocation ;
   protected : C_LocationInSource mTokenEndLocation ;
-
-//--- Optional terminal
-  protected : virtual bool isTerminalOptional (const int16_t inTerminalIndex) const = 0 ;
 
 //--- Advance
   protected : void advance (void) ; // One character

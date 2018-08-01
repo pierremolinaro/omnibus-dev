@@ -155,28 +155,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @staticListAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  var newValueList = mValueList
-  @extendStaticArrayDeclarationAST extendStaticArrayDeclarationAST = {}
-  for (staticListName constantList) in ioExtendStaticArrayDeclarationAST do
-    if mStaticListName.string == staticListName.string then
-      newValueList += !constantList
-    else
-      extendStaticArrayDeclarationAST += !staticListName !constantList
-    end
-  end
-  ioExtendStaticArrayDeclarationAST = extendStaticArrayDeclarationAST
-  outNewDeclaration = @staticListAST.new {!mStaticListName !mPropertyList !newValueList}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -328,9 +306,9 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !attributes:.none
-    !plmOriginalTypeName:llvmNameForStaticListElementType (!mStaticListName)
+    !plmTypeDescriptionName:llvmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
-    !plmAliasedTypeName:llvmNameForStaticListElementType (!mStaticListName)
+    !llvmBaseTypeName:llvmNameForStaticListElementType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
@@ -458,10 +436,9 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmOriginalTypeName:plmNameForStaticListType (!mStaticListName)
+    !plmTypeDescriptionName:plmNameForStaticListType (!mStaticListName)
     !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
-    !plmAliasedTypeName:plmNameForStaticListType (!mStaticListName)
-
+    !llvmBaseTypeName:plmNameForStaticListType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)

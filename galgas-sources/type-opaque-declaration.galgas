@@ -43,18 +43,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @typeOpaqueDefinitionDeclaration addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -152,9 +140,9 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !attributes:opaqueTypeAttributes
-      !plmOriginalTypeName:mAnonymousOpaqueTypeName
+      !plmTypeDescriptionName:mAnonymousOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
-      !plmAliasedTypeName:mAnonymousOpaqueTypeName
+      !llvmBaseTypeName:mAnonymousOpaqueTypeName
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mAnonymousOpaqueTypeName

@@ -26,7 +26,7 @@ map @infixOperatorMap {
 
 map @prefixOperatorMap {
   insert insertKey error message "** internal error **"
-  search searchKey error message "prefix operation is not defined for $%K type"
+  search searchKey error message "prefix operation is not defined for %K type"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

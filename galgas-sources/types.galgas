@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @PLMTypeAttributes {
-  instanciable, equatable, copyable, generateAssignmentRoutine
+  instanciable, equatable, copyable, comparable, generateAssignmentRoutine
 }
 
 #·······················································································································
@@ -16,9 +16,57 @@ struct @PLMType {
   @constructorMap constructorMap %selector # $type (!... !...)
   @guardMapForContext guardMap %selector
   @PLMTypeAttributes attributes %selector # as instanciable, copyable, ...
-  @string plmOriginalTypeName %selector # Without le leading '$'; empty string for void type kind, used for type display
+  @string plmTypeDescriptionName %selector # used for type checking and type display
   @typeKind kind %selector
-  @string plmAliasedTypeName %selector # Without le leading '$'; empty string for void type kind, used for type implementation
+  @string llvmBaseTypeName %selector # Without le leading '$'; empty string for void type kind, used for type implementation
+}
+
+#·······················································································································
+
+getter @PLMType llvmTypeName -> @string {
+  switch self.kind
+  case void :
+    result = "void"
+  case boolean :
+    result = "i1"
+  case literalString :
+    result = "i8*"
+  case enumeration (@uint bitCount) :
+    result = "i" + bitCount
+  case structure (*) :
+    result = "%" + [llvmTypeNameFromPLMname (![plmTypeDescriptionName nowhere]) assemblerRepresentation]
+  case syncTool (*) :
+    result = "%" + [llvmTypeNameFromPLMname (![plmTypeDescriptionName nowhere]) assemblerRepresentation]
+  case integer (* * * @uint bitCount) :
+    result = "i" + bitCount
+  case staticInteger :
+    result = "i32"
+  case opaque (@bigint bitCount) :
+    result = "i" + bitCount
+  case arrayType (* *) :
+    result = "%" + [llvmTypeNameFromPLMname (![plmTypeDescriptionName nowhere]) assemblerRepresentation]
+  case dynamicArrayType (* *) :
+    result = "%ptrtype" # "i" + ptrSize
+  case function (@routineDescriptor descriptor) :
+    if descriptor.returnTypeProxy == .null then
+      result = "void"
+    else
+      result = [[descriptor.returnTypeProxy type] llvmTypeName]
+    end
+    result += "("
+    for () in descriptor.signature 
+    do
+      result += [[mTypeProxy type] llvmTypeName]
+      switch mFormalArgumentPassingMode
+      case inputOutput, output : result += "*"
+      case input :
+      end
+    between result += ", "
+    end
+    result += ")*"
+  case pointer (pointee) :
+    result = [pointee llvmTypeName] + "*"
+  end
 }
 
 #·······················································································································
@@ -48,9 +96,9 @@ func staticIntegerType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !attributes:.equatable | .copyable
-    !plmOriginalTypeName:staticIntegerTypeName ()
+    !plmTypeDescriptionName:staticIntegerTypeName ()
     !kind:.staticInteger
-    !plmAliasedTypeName:staticIntegerTypeName ()
+    !llvmBaseTypeName:staticIntegerTypeName ()
   }
 }
 
@@ -63,9 +111,9 @@ func literalStringType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmOriginalTypeName:staticStringTypeName () 
+    !plmTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString
-    !plmAliasedTypeName:staticStringTypeName ()
+    !llvmBaseTypeName:staticStringTypeName ()
   }
 }
 
@@ -78,24 +126,41 @@ func voidType -> @PLMType {
     !constructorMap:{}
     !guardMap:{}
     !attributes:.none
-    !plmOriginalTypeName:""
+    !plmTypeDescriptionName:""
     !kind:.void
-    !plmAliasedTypeName:""
+    !llvmBaseTypeName:""
   }
 }
 
 #·······················································································································
 
 func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
+  @string llvmTypeName
+    if inDescriptor.returnTypeProxy == .null then
+      llvmTypeName = "void"
+    else
+      llvmTypeName = [[inDescriptor.returnTypeProxy type] llvmTypeName]
+    end
+    llvmTypeName += "("
+    for () in inDescriptor.signature 
+    do
+      llvmTypeName += [[mTypeProxy type] llvmTypeName]
+      switch mFormalArgumentPassingMode
+      case inputOutput, output : llvmTypeName += "*"
+      case input :
+      end
+    between llvmTypeName += ", "
+    end
+    llvmTypeName += ")*"
   result = .new{
     !propertyMap:{}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
     !attributes:.none
-    !plmOriginalTypeName:""
+    !plmTypeDescriptionName:""
     !kind:.function {!descriptor:inDescriptor}
-    !plmAliasedTypeName:""
+    !llvmBaseTypeName:""
   }
 }
 
@@ -227,54 +292,6 @@ method @PLMType generateRelease
       ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
       ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
     end
-  end
-}
-
-#·······················································································································
-
-getter @PLMType llvmTypeName -> @string {
-  switch self.kind
-  case void :
-    result = "void"
-  case boolean :
-    result = "i1"
-  case literalString :
-    result = "i8*"
-  case enumeration (@uint bitCount) :
-    result = "i" + bitCount
-  case structure (*) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
-  case syncTool (*) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
-  case integer (* * * @uint bitCount) :
-    result = "i" + bitCount
-  case staticInteger :
-    result = "i32"
-  case opaque (@bigint bitCount) :
-    result = "i" + bitCount
-  case arrayType (* *) :
-    result = "%" + [llvmTypeNameFromPLMname (![plmOriginalTypeName nowhere]) assemblerRepresentation]
-  case dynamicArrayType (* *) :
-    result = "%ptrtype" # "i" + ptrSize
-  case function (@routineDescriptor descriptor) :
-    if descriptor.returnTypeProxy == .null then
-      result = "void"
-    else
-      result = [[descriptor.returnTypeProxy type] llvmTypeName]
-    end
-    result += "("
-    for () in descriptor.signature 
-    do
-      result += [[mTypeProxy type] llvmTypeName]
-      switch mFormalArgumentPassingMode
-      case inputOutput, output : result += "*"
-      case input :
-      end
-    between result += ", "
-    end
-    result += ")*"
-  case pointer (pointee) :
-    result = [pointee llvmTypeName] + "*"
   end
 }
 

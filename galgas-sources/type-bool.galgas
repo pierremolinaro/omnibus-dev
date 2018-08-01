@@ -13,18 +13,6 @@ override getter @booleanDeclarationAST location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @booleanDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -77,14 +65,14 @@ override method @booleanDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmOriginalTypeName:boolTypeName ()
+    !plmTypeDescriptionName:boolTypeName ()
     !kind:.boolean
-    !plmAliasedTypeName:boolTypeName ()
+    !llvmBaseTypeName:boolTypeName ()
   }
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:booleanType !index:[ioContext.mTypeMap count]]
 #---------- Enter boolean operators
-  enterBooleanOperators (!boolTypeName:mBooleanTypeName!?context:ioContext)
+  enterBooleanOperators (!boolTypeName: mBooleanTypeName !?context:ioContext)
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@boolDecoratedDeclaration.new
 }
@@ -96,7 +84,7 @@ private proc enterBooleanOperators
   ?!context:@semanticContext ioContext
 {
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inBooleanTypeName} type]
-  let boolBoolOp = combineTypeNamesForInfixOperator (!inBooleanTypeName.string !inBooleanTypeName.string)
+  let boolBoolOp = combineTypeNamesForInfixOperator (!inBooleanTypeName !inBooleanTypeName)
   [!?ioContext.mEqualOperatorMap insertKey
     !boolBoolOp
     !selfType

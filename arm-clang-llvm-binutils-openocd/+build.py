@@ -458,7 +458,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/arm-stack-computations"):
     "-O2",
     "-fomit-frame-pointer",
     "-std=c++11",
-    "FILES/arm-stack-computations.cpp",
+    "+FILES/arm-stack-computations.cpp",
   ]
   if  platform.system () == "Darwin" :
     BUILD_ARM_STACK_COMPUTATIONS_COMMAND += [
@@ -495,9 +495,9 @@ runCommand (["mkdir", "-p", LIB_DIR])
 for lib in librairies:
   libpath = LIB_DIR + "/" + lib
   if not os.path.exists (libpath):
-    runCommand (["cp", "FILES/" + lib, libpath])
-runCommand (["cp", "-r", "FILES/openocd-boards", PRODUCT_NAME])
-runCommand (["cp", "-r", "FILES/openocd-interfaces", PRODUCT_NAME])
+    runCommand (["cp", "+FILES/" + lib, libpath])
+runCommand (["cp", "-r", "+FILES/openocd-boards", PRODUCT_NAME])
+runCommand (["cp", "-r", "+FILES/openocd-interfaces", PRODUCT_NAME])
 #--------------------------------------------------------------------------- PRODUCT
 print bcolors.BOLD_GREEN + "-------------- PRODUCT" + bcolors.ENDC
 if not os.path.exists (PRODUCT_DIR + "/" + PRODUCT_NAME + ".tar.bz2"):

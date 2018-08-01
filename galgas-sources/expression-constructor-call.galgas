@@ -178,7 +178,7 @@ override method @constructorCallAST analyzeExpression
     outResult = .null {!type: resultType}
   case simple (value) :
     if [mParameterList length] != 0 then
-      error mErrorLocation : "$" + resultType.plmOriginalTypeName + " constructor should have no parameter" : outResult
+      error mErrorLocation : "$" + resultType.plmTypeDescriptionName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end

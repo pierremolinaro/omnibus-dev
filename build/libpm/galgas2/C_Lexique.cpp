@@ -1188,12 +1188,12 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
     cToken * tokenPtr = mFirstToken ;
 
     int16_t currentToken = (int16_t) -1 ;
-    bool currentTokenIsOptional = false ;
+//    bool currentTokenIsOptional = false ;
     if (tokenPtr == NULL) {
       mCurrentLocation.resetLocation () ;
     }else{
       currentToken = tokenPtr->mTokenCode ;
-      currentTokenIsOptional = isTerminalOptional (tokenPtr->mTokenCode) ;
+//      currentTokenIsOptional = tokenPtr->mIsOptional ;
       mCurrentLocation = tokenPtr->mEndLocation ;
     }
     bool loop = true ;
@@ -1205,11 +1205,11 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
         }else{
           tokenPtr = tokenPtr->mNextToken ;
           currentToken = 0 ;
-          currentTokenIsOptional = false ;
+//          currentTokenIsOptional = false ;
           if (tokenPtr != NULL) {
             mCurrentLocation = tokenPtr->mEndLocation ;
             currentToken = tokenPtr->mTokenCode ;
-            currentTokenIsOptional = isTerminalOptional (tokenPtr->mTokenCode) ;
+//            currentTokenIsOptional = tokenPtr->mIsOptional ;
           }
         }
       }
@@ -1322,8 +1322,8 @@ bool C_Lexique::performBottomUpParsing (const int16_t inActionTable [],
         if (executionModeIsSyntaxAnalysisOnly ()) {
           co << "  [S" << cStringWithSigned (currentState) << ", " << getCurrentTokenString (tokenPtr) << "] : Accept\n" ;
         }
-      }else if (currentTokenIsOptional) {
-        currentToken = -1 ; //--- Token has been used
+//      }else if (currentTokenIsOptional) {
+//        currentToken = -1 ; //--- Token has been used
       }else{
       //--- Parsing error -----------------------------------
         result = false ;
@@ -1406,7 +1406,7 @@ int16_t C_Lexique::nextProductionIndex (void) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-C_String C_Lexique::preceedingSeparatorString (void) const {
+C_String C_Lexique::separatorString (void) const {
   C_String result ;
   if (mCurrentTokenPtr != NULL) {
     result = mCurrentTokenPtr->mSeparatorStringBeforeToken ;
@@ -1432,13 +1432,25 @@ C_String C_Lexique::tokenString (void) const {
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void C_Lexique::acceptTerminal (const int16_t inExpectedTerminal COMMA_LOCATION_ARGS) {
-  int16_t currentTokenCode = mCurrentTokenPtr->mTokenCode ;
-  while ((currentTokenCode != inExpectedTerminal) && (mCurrentTokenPtr != NULL) && isTerminalOptional (currentTokenCode)) {
-    mCurrentTokenPtr = mCurrentTokenPtr->mNextToken ;
-    currentTokenCode = mCurrentTokenPtr->mTokenCode ;
-  }
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  #define IN_EXPECTED_TERMINAL inExpectedTerminal
+#else
+  #define IN_EXPECTED_TERMINAL
+#endif
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void C_Lexique::acceptTerminal (const int16_t IN_EXPECTED_TERMINAL COMMA_LOCATION_ARGS) {
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    int16_t currentTokenCode = 0 ;
+  #endif
   if (mCurrentTokenPtr != NULL) {
+//    while ((mCurrentTokenPtr != NULL) && mCurrentTokenPtr->mIsOptional && (mCurrentTokenPtr->mTokenCode != inExpectedTerminal)) {
+//      mCurrentTokenPtr = mCurrentTokenPtr->mNextToken ;
+//    }
+    #ifndef DO_NOT_GENERATE_CHECKINGS
+      currentTokenCode = mCurrentTokenPtr->mTokenCode ;
+    #endif
     mStartLocationForHere = mCurrentTokenPtr->mStartLocation ;
     mEndLocationForHere = mCurrentTokenPtr->mEndLocation ;
     mCurrentTokenPtr = mCurrentTokenPtr->mNextToken ;

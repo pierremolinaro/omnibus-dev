@@ -659,7 +659,7 @@ private proc handleFunctionCallInExpression
     #--- New LLVM variable for function call result
       getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
-      let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (![ioObjectIR type].plmOriginalTypeName) !inMethodName !inArguments)
+      let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (![ioObjectIR type].plmTypeDescriptionName) !inMethodName !inArguments)
       ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
         !""
         !callReturnedResult

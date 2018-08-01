@@ -363,7 +363,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmOriginalTypeName) !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmTypeDescriptionName) !methodName !mArguments)
       #--- Code generation
         ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
           !mIdentifier

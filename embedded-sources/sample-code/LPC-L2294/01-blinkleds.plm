@@ -18,7 +18,7 @@ task T1 @stacksize 512 @activate {
   var compteur $uint32 = 0
 
   on time.wait (!until:self.compteur) {
-    ledOn ()
+    ledOn () 
     self.compteur +%= 500
     time.wait (!until:self.compteur)
     ledOff ()
