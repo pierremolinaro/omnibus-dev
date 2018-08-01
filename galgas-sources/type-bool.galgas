@@ -134,7 +134,7 @@ private proc enterBooleanOperators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc generateBoolTypeLLVMCode ?!@string ioLLVMcode {
-  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTION FOR $bool TYPE")
+  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTIONS FOR $bool TYPE")
   let routineMangledName = routineMangledNameFromAST (
     !boolTypeName ()
     !["$uint1" nowhere]

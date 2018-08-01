@@ -113,6 +113,19 @@ void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstrin
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                      Routine 'generateLLVMCodeForIntegerType'                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generateLLVMCodeForIntegerType (class GALGAS_string & ioArgument0,
+                                             class GALGAS_generationAdds & ioArgument1,
+                                             const class GALGAS_uint constinArgument2,
+                                             const class GALGAS_bool constinArgument3,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                     Routine 'generateIntegerAssignmentFunction'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

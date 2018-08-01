@@ -438,7 +438,7 @@ sortedlist @orderedTypeList {
 
 #·······················································································································
 
-proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
+proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@generationAdds ioGenerationAdds ?!@string ioLLVMcode {
 #--- Build ordered list
   @orderedTypeList orderedTypeList = {}
   for (* type index) in inTypeMap do
@@ -457,7 +457,13 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
       case boolean :
         generateBoolTypeLLVMCode (!?llvmCodeForGeneratedTypes)
       case enumeration (*) :
-      case integer (* * * *) :
+      case integer (* * unsigned size) :
+        generateLLVMCodeForIntegerType (
+          !?llvmCodeForGeneratedTypes
+          !?ioGenerationAdds
+          !size
+          !not unsigned
+        )
       case structure (propertyList) :
         ioLLVMcode += [type llvmTypeName] + " = type {"
         for () in propertyList
@@ -476,6 +482,13 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
       case staticInteger : 
       case opaque (*) :
       case arrayType (elementType arraySize) :
+        generateLLVMCodeForStaticArrayType (
+          !?llvmCodeForGeneratedTypes
+          !?ioGenerationAdds
+          !type.llvmBaseTypeName
+          !elementType
+          !arraySize
+        )
         ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
       case dynamicArrayType (2*) :
       case function (*) :
