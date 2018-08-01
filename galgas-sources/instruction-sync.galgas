@@ -179,7 +179,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?instructionListIR:guardInstructionGenerationList
         ?result:@objectIR sourceOperand
       ]
-      if [sourceOperand plmTypeDescriptionName] != boolTypeName () then
+      if [sourceOperand plmTypeDescriptionName] != boolTypeDescriptionName () then
         error endOfExpression : "guarded expression should be boolean"
       elsif [sourceOperand isStatic] then
         warning endOfExpression : "guarded expression is static"
@@ -210,7 +210,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:@objectIR boolExpressionResult
       ]
-      if [boolExpressionResult plmTypeDescriptionName] != boolTypeName () then
+      if [boolExpressionResult plmTypeDescriptionName] != boolTypeDescriptionName () then
         error endOfExp : "guarded expression should be boolean"
       elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
         warning endOfExp : "guarded expression is static"

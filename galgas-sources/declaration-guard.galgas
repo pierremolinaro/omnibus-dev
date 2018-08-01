@@ -185,7 +185,7 @@ proc guardSemanticAnalysis
   case baseGuard :
   #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariablePLMName() !inRoutineName.location}
-    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]} type]
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolBaseTypeName () nowhere]} type]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
       !resultVarName
