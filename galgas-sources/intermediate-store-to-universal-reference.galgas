@@ -59,7 +59,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  " + indexVarName + " = phi i32 [0, %" + startLabel + "], [" + nextIndexVarName + ", %" + loopLabel + "]\n"
     ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + [type llvmTypeName] + ", "
                + [type llvmTypeName] + " * " + mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
-    ioLLVMcode += "  call void @plm.assign." + [[value type].plmTypeDescriptionName assemblerRepresentation]
+    ioLLVMcode += "  call void @plm.assign." + [[value type].llvmBaseTypeName assemblerRepresentation]
                + " (" + [value llvmTypeName] + "* " + ptrVarName + ", " + [value llvmTypeName] + "* " + [value llvmName] + ")\n"
     ioLLVMcode += "  " + nextIndexVarName + " = add i32 " + indexVarName + ", 1\n"
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
@@ -107,7 +107,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       if [value isStatic] then
         ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
       else
-        ioLLVMcode += "  call void @plm.assign." + [[value type].plmTypeDescriptionName assemblerRepresentation] + " ("
+        ioLLVMcode += "  call void @plm.assign." + [[value type].llvmBaseTypeName assemblerRepresentation] + " ("
                    +  valueType + "* " + tempVar + ", " + valueType + "* " + [value llvmName] + ")\n"
       end
     end
