@@ -19,9 +19,8 @@ override getter @literalStringDeclarationAST location -> @location outLocation {
 override method @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let literalStringTypeName = llvmTypeNameFromPLMname (!mLiteralStringTypeName)
-  [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !literalStringTypeName !llvmTypeNameFromPLMname (!["uint8" nowhere])]
+  [!?ioGraph addNode !mLiteralStringTypeName !self]
+  [!?ioGraph addEdge !mLiteralStringTypeName !["$uint8" nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

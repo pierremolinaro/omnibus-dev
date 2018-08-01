@@ -443,12 +443,12 @@ class GALGAS_PLMType extensionGetter_booleanType (const class GALGAS_semanticCon
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             Function 'boolBaseTypeName'                                             *
+//                                               Function 'boolTypeName'                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_boolBaseTypeName (class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -537,15 +537,6 @@ class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         Function 'boolTypeDescriptionName'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_boolTypeDescriptionName (class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                           Routine 'enterBooleanOperators'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -574,4 +565,13 @@ void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgumen
                                                   class GALGAS_semanticContext & ioArgument1,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'copyableAttribute'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 

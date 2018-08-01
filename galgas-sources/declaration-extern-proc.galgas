@@ -51,12 +51,10 @@ syntax extension plm_syntax {
 method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
-      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !formalArgumentTypeName]
     end
     if mReturnTypeName.string != "" then
-      let typeName = llvmTypeNameFromPLMname (!mReturnTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !mReturnTypeName]
     end
   end
 }

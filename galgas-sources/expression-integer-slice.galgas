@@ -66,7 +66,7 @@ override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
 override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!mTypeName)]
+  [!?ioGraph noteNode !mTypeName]
   for (sliceWidthStr expression expressionLocation) in mSliceValues do
     [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     if [sliceWidthStr.string isDecimalUnsignedNumber] then
@@ -77,8 +77,7 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
         [!?ioGraph noteUINTType !sliceWidth !expressionLocation]
       end
     elsif sliceWidthStr.string == "b" then
-      let sliceTypeName = @lstring.new {!"bool" !expressionLocation}
-      [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+      [!?ioGraph noteNode ![boolTypeName () nowhere]]
     end
   end
 }
@@ -122,12 +121,12 @@ override method @integerSliceExpressionAST analyzeExpression
           error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
         elsif sliceWidthStr.string == "b" then
           sliceWidth = 1
-          expressionTypeName = .new {!"bool" !mTypeName.location}
+          expressionTypeName = .new {!boolTypeName () !mTypeName.location}
         elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
           error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-          expressionTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
+          expressionTypeName = .new {!"$uint" + sliceWidth !mTypeName.location}
           if sliceWidth == 0 then
             error sliceWidthStr : "the bit slice width should be > 0"
           end

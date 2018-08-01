@@ -55,14 +55,12 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let structureTypeName = llvmTypeNameFromPLMname (!mSyncToolName)
 #--- Add structure type name as node
-  [!?ioGraph addNode !structureTypeName !self]
+  [!?ioGraph addNode !mSyncToolName !self]
 #--- Add property types
   for (propertyName 2* public fieldTypeName initExpression *) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
-      [!?ioGraph addEdge !structureTypeName !typeName]
+      [!?ioGraph addEdge !mSyncToolName !fieldTypeName]
     end
     if public then
       error propertyName : "a sync tool property cannot be public (should be private)"
@@ -70,18 +68,16 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
     switch initExpression
     case noExpression :
     case expression (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
     end
   end
 #--- Add structure functions
   for () in mFunctionDeclarationListAST do
     for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !formalArgumentTypeName]
     end
     if mFunctionReturnTypeName.string != "" then
-      let typeName = llvmTypeNameFromPLMname (!mFunctionReturnTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !mFunctionReturnTypeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end

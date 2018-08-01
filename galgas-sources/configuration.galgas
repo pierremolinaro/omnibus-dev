@@ -303,7 +303,7 @@ func %once configurationNodeNameForPrecedenceGraph -> @string {
 #·······················································································································
 
 func %once isrSlotTypeName -> @string {
-  result = "isrSlot"
+  result = "$isrSlot"
 }
 
 #·······················································································································
@@ -311,10 +311,8 @@ func %once isrSlotTypeName -> @string {
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
-  let panicCodeTypeName = llvmTypeNameFromPLMname (!mPanicCodeTypeName)
-  [!?ioGraph addEdge !rootNode !panicCodeTypeName]
-  let panicLineTypeName = llvmTypeNameFromPLMname (!mPanicLineTypeName)
-  [!?ioGraph addEdge !rootNode !panicLineTypeName]
+  [!?ioGraph addEdge !rootNode !mPanicCodeTypeName]
+  [!?ioGraph addEdge !rootNode !mPanicLineTypeName]
 }
 
 #·······················································································································

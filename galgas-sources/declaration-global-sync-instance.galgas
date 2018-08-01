@@ -45,7 +45,7 @@ syntax extension plm_syntax {
 override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !mSyncInstanceName !self]
   if mSyncTypeName.string != "" then
-    [!?ioGraph addEdge !mSyncInstanceName !llvmTypeNameFromPLMname (!mSyncTypeName)]
+    [!?ioGraph addEdge !mSyncInstanceName !mSyncTypeName]
   end
   [mSourceExpression addDependenceEdgeForStaticExpression !mSyncInstanceName !?ioGraph]
 }

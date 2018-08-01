@@ -46,8 +46,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = llvmTypeNameFromPLMname (!mTypeName)
-  [!?ioGraph addEdge !inConstantName !typeName]
+  [!?ioGraph addEdge !inConstantName !mTypeName]
   
   for () in mParameterList do
     [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
@@ -59,8 +58,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let typeName = llvmTypeNameFromPLMname (!mTypeName)
-  [!?ioGraph noteNode !typeName]
+  [!?ioGraph noteNode !mTypeName]
   for () in mParameterList do
     [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
@@ -178,7 +176,7 @@ override method @constructorCallAST analyzeExpression
     outResult = .null {!type: resultType}
   case simple (value) :
     if [mParameterList length] != 0 then
-      error mErrorLocation : "$" + resultType.plmTypeDescriptionName + " constructor should have no parameter" : outResult
+      error mErrorLocation : resultType.plmTypeDescriptionName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end

@@ -186,7 +186,7 @@ syntax extension plm_syntax {
 
 override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mDriverName !self]
-  let driverTypeName = llvmTypeNameFromPLMname (!llvmDriverNameFromName (!mDriverName))
+  let driverTypeName = llvmDriverNameFromName (!mDriverName)
  [!?ioGraph addEdge !mDriverName !driverTypeName]
  for (driver) in mDriverDependanceList do
    [!?ioGraph addEdge !mDriverName !driver]

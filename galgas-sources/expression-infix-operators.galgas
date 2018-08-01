@@ -73,7 +73,7 @@ method @infixOperatorMap checkBinaryOperationWith
     [self searchKey !lkey ?outResultType ?outOperation]
   else
     error inOperatorLocation
-      : "infix operation between $" + inLeftType.plmTypeDescriptionName + " and $" + inRightType.plmTypeDescriptionName + " is not defined"
+      : "infix operation between " + inLeftType.plmTypeDescriptionName + " and " + inRightType.plmTypeDescriptionName + " is not defined"
       : outResultType, outOperation
   end
 }

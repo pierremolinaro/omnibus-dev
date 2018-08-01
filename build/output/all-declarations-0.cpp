@@ -2332,6 +2332,7 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         token.mTokenCode = kToken__40_attribute ;
         enterToken (token) ;
       }else if (testForInputUTF32Char (TO_UNICODE ('$'))) {
+        ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, TO_UNICODE ('$')) ;
         if (testForCharWithFunction (isUnicodeLetter)) {
           do {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
@@ -3826,16 +3827,16 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i12_parse (C_Lexique_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i13_ (GALGAS_ast & ioArgument_ioAST,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_opaque COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 21)) ;
-  GALGAS_lstring var_opaqueTypeName_1166 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_opaqueTypeName_1157 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 22)) ;
-  GALGAS_lstringlist var_attributeList_1197 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 23)) ;
+  GALGAS_lstringlist var_attributeList_1188 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-opaque-declaration.galgas", 23)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_12 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_1257 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_1248 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 26)) ;
-      var_attributeList_1197.addAssign_operation (var_attribute_1257  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 27)) ;
+      var_attributeList_1188.addAssign_operation (var_attribute_1248  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 27)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -3843,11 +3844,11 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i13_ (GALGAS_ast & io
     }
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 29)) ;
-  GALGAS_expressionAST var_sizeExpression_1352 ;
-  nt_expression_ (ioArgument_ioAST, var_sizeExpression_1352, inCompiler) ;
-  GALGAS_location var_sizeExpressionLocation_1383 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 31)) ;
+  GALGAS_expressionAST var_sizeExpression_1343 ;
+  nt_expression_ (ioArgument_ioAST, var_sizeExpression_1343, inCompiler) ;
+  GALGAS_location var_sizeExpressionLocation_1374 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 31)) ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 32)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeOpaqueDefinitionDeclaration::constructor_new (var_opaqueTypeName_1166, var_sizeExpression_1352, var_sizeExpressionLocation_1383, var_attributeList_1197  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 33))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 33)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeOpaqueDefinitionDeclaration::constructor_new (var_opaqueTypeName_1157, var_sizeExpression_1343, var_sizeExpressionLocation_1374, var_attributeList_1188  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 33))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 33)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

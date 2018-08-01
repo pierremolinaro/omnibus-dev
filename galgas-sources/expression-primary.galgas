@@ -102,7 +102,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
+            [!?ioGraph noteNode !typeName]
           end
         case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
         case outputInput (*) :
@@ -133,7 +133,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !llvmTypeNameFromPLMname (!typeName)]
+            [!?ioGraph noteNode !typeName]
           end
         case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
         case outputInput (*) :
@@ -509,7 +509,7 @@ proc handleSliceInExpression
   #--- Shift source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
   #--- Truncate source value
-    let resultIntegerName = @lstring.new {!"uint" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
+    let resultIntegerName = @lstring.new {!"$uint" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
     [inContext.mTypeMap searchKey !lkey:resultIntegerName ?type:let sliceType ?1*]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end
@@ -659,7 +659,7 @@ private proc handleFunctionCallInExpression
     #--- New LLVM variable for function call result
       getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
-      let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (![ioObjectIR type].plmTypeDescriptionName) !inMethodName !inArguments)
+      let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].plmTypeDescriptionName !inMethodName !inArguments)
       ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
         !""
         !callReturnedResult

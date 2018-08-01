@@ -254,8 +254,7 @@ map @sliceMap {
 
 method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for reg in mRegisters do
-    let typeName = llvmTypeNameFromPLMname (!reg.mRegisterTypeName)
-    [!?ioGraph noteNode !typeName]
+    [!?ioGraph noteNode !reg.mRegisterTypeName]
   end
 }
 
@@ -280,15 +279,14 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
 #--- Add dependence definitions
   for reg in mRegisters do
   #--- Add dependency from type name
-    let typeName = llvmTypeNameFromPLMname (!reg.mRegisterTypeName)
-    [!?ioGraph addEdge !nodeName !typeName]
+    [!?ioGraph addEdge !nodeName !reg.mRegisterTypeName]
   #--- Add dependency from the number of integer type name (i.e. $uint32 --> $uint5)
-    let split = [reg.mRegisterTypeName componentsSeparatedByString !"uint"]
+    let split = [reg.mRegisterTypeName componentsSeparatedByString !"$uint"]
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
       if n > 0 then
-        let bitSizeTypeName = @lstring.new {!"uint" + [n-1 significantBitCount] !reg.mRegisterTypeName}
-        [!?ioGraph addEdge !nodeName !llvmTypeNameFromPLMname (!bitSizeTypeName)]
+        let bitSizeTypeName = @lstring.new {!"$uint" + [n-1 significantBitCount] !reg.mRegisterTypeName}
+        [!?ioGraph addEdge !nodeName !bitSizeTypeName]
       end
     end
   #--- Add integer type corresponding to slices

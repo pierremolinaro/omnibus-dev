@@ -14,18 +14,6 @@ func %once staticAttribute -> @string {
 #!   Type
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmTypeStringFromPLMname ?let @string inName -> @string {
-  result = "type." + inName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmTypeNameFromPLMname ?let @lstring inName -> @lstring {
-  result = .new {!llvmTypeStringFromPLMname (!inName.string) !inName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func registerGroupNameFromPLMname ?let @lstring inName -> @lstring {
   result = .new {!"registers " + inName !inName.location}
 }
@@ -90,25 +78,19 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once staticStringTypeName -> @string {
-  result = "staticString"
+  result = "$staticString"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once boolBaseTypeName -> @string {
-  result = "bool"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func %once boolTypeDescriptionName -> @string {
+func %once boolTypeName -> @string {
   result = "$bool"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once staticIntegerTypeName -> @string {
-  result = "staticInt"
+  result = "$staticInt"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

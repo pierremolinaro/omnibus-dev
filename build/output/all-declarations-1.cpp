@@ -3463,9 +3463,9 @@ static GALGAS_string extensionGetter_integerDeclarationAST_typeName (const cPtr_
   GALGAS_string temp_0 ;
   const enumGalgasBool test_1 = object->mProperty_mIsSigned.boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_string ("int") ;
+    temp_0 = GALGAS_string ("$int") ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_string ("uint") ;
+    temp_0 = GALGAS_string ("$uint") ;
   }
   result_outName = temp_0.add_operation (object->mProperty_mSize.getter_string (SOURCE_FILE ("type-integer.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 19)) ;
 //---
@@ -8603,15 +8603,14 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (const cPtr_controlRegisterG
 
 static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPrecedenceGraph (const cPtr_controlRegisterGroupDeclarationAST * inObject,
                                                                                            GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                           C_Compiler * inCompiler
+                                                                                           C_Compiler * /* inCompiler */
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
   cEnumerator_controlRegisterDeclarationList enumerator_9590 (object->mProperty_mRegisters, kENUMERATION_UP) ;
   while (enumerator_9590.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_9610 = function_llvmTypeNameFromPLMname (enumerator_9590.current (HERE).getter_mRegisterTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 257)) ;
     {
-    ioArgument_ioGraph.setter_noteNode (var_typeName_9610 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 258)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_9590.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 257)) ;
     }
     enumerator_9590.gotoNextObject () ;
   }
