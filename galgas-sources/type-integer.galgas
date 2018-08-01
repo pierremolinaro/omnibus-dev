@@ -249,85 +249,6 @@ class @integerIR : @abstractGenerationIR {
 
 #·······················································································································
 
-private proc generateIntegerAssignmentFunction
-  ?!@string ioLLVMcode
-  ?PLMTypeName:let @string inPLMtypeName
-  ?LLVMTypeName:let @string inLLVMtypeName
-{
-  ioLLVMcode += "define internal void @" + inPLMtypeName + "_assignment"
-  ioLLVMcode += " (" + inLLVMtypeName + "* %outTarget, " + inLLVMtypeName + "* %inSource) {\n"
-  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inSource\n"
-  ioLLVMcode += "  store " + inLLVMtypeName + " %value, " + inLLVMtypeName + "* %outTarget\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#·······················································································································
-
-private proc generateIntegerComparisonFunction
-  ?!@string ioLLVMcode
-  ?PLMTypeName:let @string inPLMtypeName
-  ?plmOperator:let @string inPLMOperatorName
-  ?LLVMTypeName:let @string inLLVMtypeName
-  ?llvmOperator:let @string inLLVMOperator
-{
-  ioLLVMcode += "define internal void @" + inPLMtypeName + "_" + inPLMOperatorName
-  ioLLVMcode += " (i1* %outResult, " + inLLVMtypeName + "* %inLeft, " + inLLVMtypeName + "* %inRight) {\n"
-  ioLLVMcode += "  %left = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inLeft\n"
-  ioLLVMcode += "  %right = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inRight\n"
-  ioLLVMcode += "  %r = icmp " + inLLVMOperator + " " + inLLVMtypeName + " %left, %right\n"
-  ioLLVMcode += "  store i1 %r, i1* %outResult\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#·······················································································································
-
-private proc generateIntegerIntrinsicFunction
-  ?PLMTypeName:let @string inPLMtypeName
-  ?!@string ioLLVMcode
-  ?method:let @string inPLMMethodName
-  ?intrinsic:let @string inIntrinsicName
-  ?!@generationAdds ioGenerationAdds
-  ?LLVMTypeName:let @string inLLVMtypeName
-{
-  let routineMangledName = routineMangledNameFromAST (
-    !inPLMtypeName
-    ![inPLMMethodName nowhere]
-    !{}
-  )
-  let functionName = llvmNameForFunction (!routineMangledName)
-  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
-  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
-  ioLLVMcode += "  %result = call " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + " %value)\n"
-  ioLLVMcode += "  ret " + inLLVMtypeName + " %result\n"
-  ioLLVMcode += "}\n\n"
-  ioGenerationAdds.mExternFunctionDeclarationSet +=
-    !inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + ")"
-
-}
-
-#·······················································································································
-
-private proc generateUInt1ToBoolFunction
-  ?PLMTypeName:let @string inPLMtypeName
-  ?!@string ioLLVMcode
-  ?LLVMTypeName:let @string inLLVMtypeName
-{
-  let routineMangledName = routineMangledNameFromAST (
-    !inPLMtypeName
-    ![boolTypeName () nowhere]
-    !{}
-  )
-  let functionName = llvmNameForFunction (!routineMangledName)
-  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
-  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
-  ioLLVMcode += "  ret i1 %value\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#·······················································································································
-
 override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = "i" + mSize
   ioLLVMcode += llvmTitleComment (!"INTEGER TYPE $" + mTypeName)
@@ -435,6 +356,85 @@ override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAd
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if mIsSigned then "sge" else "uge" end
   )
+}
+
+#·······················································································································
+
+private proc generateIntegerAssignmentFunction
+  ?!@string ioLLVMcode
+  ?PLMTypeName:let @string inPLMtypeName
+  ?LLVMTypeName:let @string inLLVMtypeName
+{
+  ioLLVMcode += "define internal void @" + inPLMtypeName + "_assignment"
+  ioLLVMcode += " (" + inLLVMtypeName + "* %outTarget, " + inLLVMtypeName + "* %inSource) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inSource\n"
+  ioLLVMcode += "  store " + inLLVMtypeName + " %value, " + inLLVMtypeName + "* %outTarget\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
+private proc generateIntegerComparisonFunction
+  ?!@string ioLLVMcode
+  ?PLMTypeName:let @string inPLMtypeName
+  ?plmOperator:let @string inPLMOperatorName
+  ?LLVMTypeName:let @string inLLVMtypeName
+  ?llvmOperator:let @string inLLVMOperator
+{
+  ioLLVMcode += "define internal void @" + inPLMtypeName + "_" + inPLMOperatorName
+  ioLLVMcode += " (i1* %outResult, " + inLLVMtypeName + "* %inLeft, " + inLLVMtypeName + "* %inRight) {\n"
+  ioLLVMcode += "  %left = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inLeft\n"
+  ioLLVMcode += "  %right = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inRight\n"
+  ioLLVMcode += "  %r = icmp " + inLLVMOperator + " " + inLLVMtypeName + " %left, %right\n"
+  ioLLVMcode += "  store i1 %r, i1* %outResult\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
+private proc generateIntegerIntrinsicFunction
+  ?PLMTypeName:let @string inPLMtypeName
+  ?!@string ioLLVMcode
+  ?method:let @string inPLMMethodName
+  ?intrinsic:let @string inIntrinsicName
+  ?!@generationAdds ioGenerationAdds
+  ?LLVMTypeName:let @string inLLVMtypeName
+{
+  let routineMangledName = routineMangledNameFromAST (
+    !inPLMtypeName
+    ![inPLMMethodName nowhere]
+    !{}
+  )
+  let functionName = llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
+  ioLLVMcode += "  %result = call " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + " %value)\n"
+  ioLLVMcode += "  ret " + inLLVMtypeName + " %result\n"
+  ioLLVMcode += "}\n\n"
+  ioGenerationAdds.mExternFunctionDeclarationSet +=
+    !inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + ")"
+
+}
+
+#·······················································································································
+
+private proc generateUInt1ToBoolFunction
+  ?PLMTypeName:let @string inPLMtypeName
+  ?!@string ioLLVMcode
+  ?LLVMTypeName:let @string inLLVMtypeName
+{
+  let routineMangledName = routineMangledNameFromAST (
+    !inPLMtypeName
+    ![boolTypeName () nowhere]
+    !{}
+  )
+  let functionName = llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
+  ioLLVMcode += "  ret i1 %value\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

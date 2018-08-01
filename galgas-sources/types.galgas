@@ -34,9 +34,9 @@ getter @PLMType llvmTypeName -> @string {
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
   case structure (*) :
-    result = "%" + [plmTypeDescriptionName assemblerRepresentation]
+    result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case syncTool (*) :
-    result = "%" + [plmTypeDescriptionName assemblerRepresentation]
+    result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
@@ -44,7 +44,7 @@ getter @PLMType llvmTypeName -> @string {
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case arrayType (* *) :
-    result = "%" + [plmTypeDescriptionName assemblerRepresentation]
+    result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case dynamicArrayType (* *) :
     result = "%ptrtype" # "i" + ptrSize
   case function (@routineDescriptor descriptor) :
@@ -419,10 +419,72 @@ getter @PLMType deinitNeeded -> @bool {
 
 shared map @unifiedTypeMap %selectors {
   @PLMType type
-  @uint index
+  @uint index # This index allows to sort type for ensuring no forward LLVM type reference on generation
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  LLVM TYPE GENERATION                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sortedlist @orderedTypeList {
+  @PLMType mType
+  @uint mIndex
+}{
+  mIndex <
+}
+
+#·······················································································································
+
+proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
+#--- Build ordered list
+  @orderedTypeList orderedTypeList = {}
+  for (* type index) in inTypeMap do
+    orderedTypeList += !type !index
+  end
+#--- Generate LLVM type declarations (using forward type is allowed for pointers)
+  ioLLVMcode += llvmTitleComment (!"User Defined Types")
+  ioLLVMcode += "%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"
+  @stringset generatedTypeSet = {}
+  var llvmCodeForGeneratedTypes = ""
+  for (type *) in orderedTypeList do
+    if not [generatedTypeSet hasKey !type.llvmBaseTypeName] then
+      generatedTypeSet += !type.llvmBaseTypeName
+      switch type.kind
+      case void :
+      case boolean :
+        generateBoolTypeLLVMCode (!?llvmCodeForGeneratedTypes)
+      case enumeration (*) :
+      case integer (* * * *) :
+      case structure (propertyList) :
+        ioLLVMcode += [type llvmTypeName] + " = type {"
+        for () in propertyList
+          do ioLLVMcode += [mType llvmTypeName]
+          between ioLLVMcode += ", "
+        end
+        ioLLVMcode += "}\n"
+      case syncTool (propertyList) :
+        ioLLVMcode += [type llvmTypeName] + " = type {"
+        for () in propertyList
+          do ioLLVMcode += [mType llvmTypeName]
+          between ioLLVMcode += ", "
+        end
+        ioLLVMcode += "}\n"
+      case literalString : 
+      case staticInteger : 
+      case opaque (*) :
+      case arrayType (elementType arraySize) :
+        ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
+      case dynamicArrayType (2*) :
+      case function (*) :
+      case pointer (unused pointee) :
+      end
+    end
+  end
+  ioLLVMcode += "\n"
+  ioLLVMcode += llvmCodeForGeneratedTypes 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

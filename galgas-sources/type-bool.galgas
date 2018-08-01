@@ -35,7 +35,7 @@ override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @st
 override method @booleanDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
@@ -70,8 +70,6 @@ override method @booleanDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType !lkey:[boolTypeName () nowhere] !type:booleanType !index:[ioContext.mTypeMap count]]
 #---------- Enter boolean operators
   enterBooleanOperators (!?context:ioContext)
-#---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@boolDecoratedDeclaration.new
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -132,42 +130,11 @@ private proc enterBooleanOperators
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @boolDecoratedDeclaration : @abstractDecoratedDeclaration {
-}
-
-#·······················································································································
-
-override method @boolDecoratedDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  ioIntermediateCodeStruct.mGenerationListIR += !@boolIR.new
-}
-
-#·······················································································································
-
-override method @boolDecoratedDeclaration routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @boolIR : @abstractGenerationIR {
-}
-
-#·······················································································································
-
-override method @boolIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
-#---------- Generate $bool to $uint1 conversion function
+proc generateBoolTypeLLVMCode ?!@string ioLLVMcode {
+  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTION FOR $bool TYPE")
   let routineMangledName = routineMangledNameFromAST (
     !boolTypeName ()
     !["$uint1" nowhere]
