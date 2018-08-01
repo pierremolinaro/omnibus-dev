@@ -52,7 +52,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
 {
   let typeName = llvmTypeNameFromPLMname (!mEnumerationName)
   [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![boolTypeName () nowhere])]
+  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])]
 #--- Mark dependance from $uintN used for value property
   @bigint maxValue = 0G
   for (* value) in mCaseNameList do

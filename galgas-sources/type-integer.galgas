@@ -105,7 +105,7 @@ override method @integerDeclarationAST enterInContext
 {
   let integerTypeName = [[self typeName] nowhere]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolBaseTypeName () !.nowhere} ?let boolTypeProxy]
 #--------------------------------------- Get min and max
   let min = minValueForInteger (!not mIsSigned !mSize)
   let max = maxValueForInteger (!not mIsSigned !mSize)
@@ -125,7 +125,7 @@ override method @integerDeclarationAST enterInContext
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
       !receiverTypeProxy:selfTypeProxy
-      !methodName:boolTypeName ()
+      !methodName:boolBaseTypeName ()
       !safe:true
       !resultTypeProxy:boolTypeProxy
       !canMutateProperties:false
@@ -316,7 +316,7 @@ private proc generateUInt1ToBoolFunction
 {
   let routineMangledName = routineMangledNameFromAST (
     !llvmTypeStringFromPLMname (!inPLMtypeName)
-    ![boolTypeName () nowhere]
+    ![boolBaseTypeName () nowhere]
     !{}
   )
   let functionName = llvmNameForFunction (!routineMangledName)
