@@ -172,13 +172,13 @@ method @routineMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += " " + [mReturnType llvmTypeName]
   ioLLVMcode += " @" + routineName + " ("
-  let receiverTypeName = if mReceiverType.kind == .void
+  let receiverLLVMTypeName = if mReceiverType.kind == .void
     then ""
-    else mReceiverType.plmTypeDescriptionName
+    else [mReceiverType llvmTypeName]
   end
   var first = true
-  if receiverTypeName != "" then
-    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + "* " + llvmNameForSelf ()
+  if receiverLLVMTypeName != "" then
+    ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
     first = false
   end
   for () in mFormalArgumentListForGeneration do

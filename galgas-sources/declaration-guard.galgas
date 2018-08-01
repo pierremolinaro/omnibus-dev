@@ -513,14 +513,14 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "declare " + prototype + "\n\n"
   end
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = if mReceiverType.kind == .void then
+  let receiverLLVMTypeName = if mReceiverType.kind == .void then
     ""
   else
-    mReceiverType.plmTypeDescriptionName
+    [mReceiverType llvmTypeName]
   end
   var first = true
-  if receiverTypeName != "" then
-    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + "* " + llvmNameForSelf ()
+  if receiverLLVMTypeName != "" then
+    ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
     first = false
   end
   for () in mFormalArgumentListForGeneration do
