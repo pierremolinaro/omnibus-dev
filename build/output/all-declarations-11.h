@@ -10,19 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Routine 'buildOrderedDeclarationList'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument0,
-                                          const class GALGAS_string constinArgument1,
-                                          const class GALGAS_location constinArgument2,
-                                          class GALGAS_declarationListAST & outArgument3,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                           Routine 'buildSemanticContext'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -56,7 +43,8 @@ void routine_buildTypeMapHTMLFile (class GALGAS_unifiedTypeMap inArgument0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_declareLLVMTypes (const class GALGAS_unifiedTypeMap constinArgument0,
-                               class GALGAS_string & ioArgument1,
+                               class GALGAS_generationAdds & ioArgument1,
+                               class GALGAS_string & ioArgument2,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

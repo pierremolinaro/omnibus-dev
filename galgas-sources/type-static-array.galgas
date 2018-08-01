@@ -71,7 +71,7 @@ override getter @staticArrayTypeDeclarationAST location -> @location outLocation
 override method @staticArrayTypeDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
@@ -174,63 +174,31 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !type:aliasedArrayType
         !index:[ioContext.mTypeMap count]
       ]
-    #---------------- Add decorated declaration
-      ioDecoratedDeclarationList += !@decoratedStaticArrayTypeDeclaration.new {!originalTypeName !arraySize}
     end
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @decoratedStaticArrayTypeDeclaration : @abstractDecoratedDeclaration {
-  @lstring mOriginalArrayTypeName
-  @uint mArraySize
-}
-
-#·······················································································································
-
-override method @decoratedStaticArrayTypeDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#----------- Generate enumeration specific code
-  ioIntermediateCodeStruct.mGenerationListIR += !@arrayIR.new {!mOriginalArrayTypeName !mArraySize}
-}
-
-#·······················································································································
-
-override method @decoratedStaticArrayTypeDeclaration routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @arrayIR : @abstractGenerationIR {
-  @string mOriginalArrayTypeName
-  @bigint mArraySize
-}
-
-#·······················································································································
-
-override method @arrayIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
+proc generateLLVMCodeForStaticArrayType
+  ?!@string ioLLVMcode
+  ?!@generationAdds unused ioGenerationAdds
+  ?let @string inLLVMBaseTypeName
+  ?let @PLMType unused inElementType
+  ?let @bigint inSize
+{
   let routineMangledName = routineMangledNameFromAST (
-    !mOriginalArrayTypeName
+    !inLLVMBaseTypeName
     !["count" nowhere]
     !{}
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
   ioLLVMcode += llvmTitleComment (!routineMangledName)
   ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%"
-              + [mOriginalArrayTypeName assemblerRepresentation] + "* %inUnusedValue) nounwind {\n"
-  ioLLVMcode += "  ret i32 " + mArraySize + "\n"
+              + [inLLVMBaseTypeName assemblerRepresentation] + "* %inUnusedValue) nounwind {\n"
+  ioLLVMcode += "  ret i32 " + inSize + "\n"
   ioLLVMcode += "}\n\n"
 }
 

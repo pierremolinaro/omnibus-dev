@@ -537,6 +537,20 @@ class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                    Routine 'generateLLVMCodeForStaticArrayType'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generateLLVMCodeForStaticArrayType (class GALGAS_string & ioArgument0,
+                                                 class GALGAS_generationAdds & ioArgument1,
+                                                 const class GALGAS_string constinArgument2,
+                                                 const class GALGAS_PLMType constinArgument3,
+                                                 const class GALGAS_bigint constinArgument4,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                           Routine 'enterBooleanOperators'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
