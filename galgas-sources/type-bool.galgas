@@ -3,13 +3,12 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @booleanDeclarationAST : @abstractDeclarationAST {
-  @lstring mBooleanTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @booleanDeclarationAST location -> @location outLocation {
-  outLocation = mBooleanTypeName.location
+  outLocation = .nowhere
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,16 +18,16 @@ override getter @booleanDeclarationAST location -> @location outLocation {
 override method @booleanDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let boolBaseTypeName = llvmTypeNameFromPLMname (!mBooleanTypeName)
+  let boolBaseTypeName = llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])
   [!?ioGraph addNode !boolBaseTypeName !self]
-  let uint1TypeName = llvmTypeNameFromPLMname (!.new{!"uint1" !mBooleanTypeName.location})
+  let uint1TypeName = llvmTypeNameFromPLMname (!.new{!"uint1" ![boolBaseTypeName () nowhere].location})
   [!?ioGraph noteNode !uint1TypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "bool " + llvmTypeNameFromPLMname (!mBooleanTypeName)
+  outRepresentation = "bool " + llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -47,8 +46,8 @@ override method @booleanDeclarationAST enterInContext
 {
 #---------- Property map
   @propertyMap propertyMap = {}
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" !mBooleanTypeName} ?let uint1TypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap ![boolBaseTypeName () nowhere] ?let boolTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolBaseTypeName () nowhere]} ?let uint1TypeProxy]
 #--- Add uint1 accessor
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
@@ -70,7 +69,7 @@ override method @booleanDeclarationAST enterInContext
     !llvmBaseTypeName:boolBaseTypeName ()
   }
 #---------- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:booleanType !index:[ioContext.mTypeMap count]]
+  [!?ioContext.mTypeMap insertType !lkey:[boolBaseTypeName () nowhere] !type:booleanType !index:[ioContext.mTypeMap count]]
 #---------- Enter boolean operators
   enterBooleanOperators (!?context:ioContext)
 #---------------- Add decorated declaration

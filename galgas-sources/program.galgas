@@ -98,7 +98,7 @@ private proc compileProject
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
   #--- Add boolean type
-    ast.mDeclarationListAST += !@booleanDeclarationAST.new {![boolBaseTypeName () nowhere]}
+    ast.mDeclarationListAST += !@booleanDeclarationAST.new
   #--- Literal integer type
     ast.mDeclarationListAST += !@literalIntegerDeclarationAST.new
   #--- Add String type
