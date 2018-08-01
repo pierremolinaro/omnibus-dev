@@ -302,7 +302,7 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !attributes:.none
-    !plmTypeDescriptionName:llvmNameForStaticListElementType (!mStaticListName)
+    !plmTypeDescriptionName:plmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
     !llvmBaseTypeName:llvmNameForStaticListElementType (!mStaticListName)
   }
@@ -434,7 +434,7 @@ override method @staticListAST enterInContext
     !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
     !plmTypeDescriptionName:plmNameForStaticListType (!mStaticListName)
     !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
-    !llvmBaseTypeName:plmNameForStaticListType (!mStaticListName)
+    !llvmBaseTypeName:llvmNameForStaticListType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)

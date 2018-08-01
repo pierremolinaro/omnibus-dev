@@ -72,9 +72,6 @@ override method @typeAliasDeclaration enterInContext
 {
 #---------- Enter in type map
   [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
-#---------- Set alias type name
-  type.llvmBaseTypeName = mAliasTypeName.string
-  type.attributes = type.attributes - .generateAssignmentRoutine
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType !lkey:mAliasTypeName !type:type !index:[ioContext.mTypeMap count]]
 }
