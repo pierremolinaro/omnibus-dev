@@ -31,7 +31,7 @@ override method @literalStringInExpressionAST addDependenceEdgeForStaticExpressi
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !llvmTypeNameFromPLMname (!.new {!staticStringTypeName () !inConstantName.location})]
+  [!?ioGraph addEdge !inConstantName !.new {!staticStringTypeName () !inConstantName.location}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -39,7 +39,7 @@ override method @literalStringInExpressionAST addDependenceEdgeForStaticExpressi
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])]
+  [!?ioGraph noteNode ![staticIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

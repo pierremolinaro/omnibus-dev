@@ -46,10 +46,8 @@ syntax extension plm_syntax {
 override method @typeAliasDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let newTypeName = llvmTypeNameFromPLMname (!mAliasTypeName)
-  let originalTypeName = llvmTypeNameFromPLMname (!mOriginalTypeName)
-  [!?ioGraph addNode !newTypeName !self]
-  [!?ioGraph addEdge !newTypeName !originalTypeName]
+  [!?ioGraph addNode !mAliasTypeName !self]
+  [!?ioGraph addEdge !mAliasTypeName !mOriginalTypeName]
 }
 
 #·······················································································································

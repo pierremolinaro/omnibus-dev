@@ -202,6 +202,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       }
       mTokenCode = plm_lexique_1__40_attribute ;
     }else if (scanningOk && ([self testForInputChar:36])) {
+      scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, 36) ;
       if (scanningOk && ([self testForCharWithFunction:isUnicodeLetter])) {
         do {
           scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;

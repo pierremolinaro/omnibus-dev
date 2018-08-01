@@ -18,16 +18,14 @@ override getter @booleanDeclarationAST location -> @location outLocation {
 override method @booleanDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let boolBaseTypeName = llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])
-  [!?ioGraph addNode !boolBaseTypeName !self]
-  let uint1TypeName = llvmTypeNameFromPLMname (!.new{!"uint1" ![boolBaseTypeName () nowhere].location})
-  [!?ioGraph noteNode !uint1TypeName]
+  [!?ioGraph addNode ![boolTypeName () nowhere] !self]
+  [!?ioGraph noteNode !["$uint1" nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "bool " + llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])
+  outRepresentation = "$bool"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,8 +44,8 @@ override method @booleanDeclarationAST enterInContext
 {
 #---------- Property map
   @propertyMap propertyMap = {}
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap ![boolBaseTypeName () nowhere] ?let boolTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolBaseTypeName () nowhere]} ?let uint1TypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap ![boolTypeName () nowhere] ?let boolTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]
 #--- Add uint1 accessor
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
@@ -64,12 +62,12 @@ override method @booleanDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmTypeDescriptionName:boolTypeDescriptionName ()
+    !plmTypeDescriptionName:boolTypeName ()
     !kind:.boolean
-    !llvmBaseTypeName:boolBaseTypeName ()
+    !llvmBaseTypeName:boolTypeName ()
   }
 #---------- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:[boolBaseTypeName () nowhere] !type:booleanType !index:[ioContext.mTypeMap count]]
+  [!?ioContext.mTypeMap insertType !lkey:[boolTypeName () nowhere] !type:booleanType !index:[ioContext.mTypeMap count]]
 #---------- Enter boolean operators
   enterBooleanOperators (!?context:ioContext)
 #---------------- Add decorated declaration
@@ -81,8 +79,8 @@ override method @booleanDeclarationAST enterInContext
 private proc enterBooleanOperators
   ?!context:@semanticContext ioContext
 {
-  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap ![boolBaseTypeName () nowhere]} type]
-  let boolBoolOp = combineTypeNamesForInfixOperator (!boolTypeDescriptionName () !boolTypeDescriptionName ())
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap ![boolTypeName () nowhere]} type]
+  let boolBoolOp = combineTypeNamesForInfixOperator (!boolTypeName () !boolTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
     !boolBoolOp
     !selfType
@@ -129,7 +127,7 @@ private proc enterBooleanOperators
     !@infixObjectObjectOperatorDescription.new {!.and}
   ]
   [!?ioContext.mNotOperatorMap insertKey
-    ![boolTypeDescriptionName () nowhere]
+    ![boolTypeName () nowhere]
   ]
 }
 
@@ -171,8 +169,8 @@ class @boolIR : @abstractGenerationIR {
 override method @boolIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
 #---------- Generate $bool to $uint1 conversion function
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!boolBaseTypeName ())
-    !["uint1" nowhere]
+    !boolTypeName ()
+    !["$uint1" nowhere]
     !{}
   )
   let functionName = llvmNameForFunction (!routineMangledName)

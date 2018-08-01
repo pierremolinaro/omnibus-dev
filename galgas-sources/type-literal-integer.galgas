@@ -18,9 +18,9 @@ override getter @literalIntegerDeclarationAST location -> @location outLocation 
 override method @literalIntegerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let staticIntegerTypeName = llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])
+  let staticIntegerTypeName = [staticIntegerTypeName () nowhere]
   [!?ioGraph addNode !staticIntegerTypeName !self]
-  [!?ioGraph addEdge !staticIntegerTypeName !llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])]
+  [!?ioGraph addEdge !staticIntegerTypeName ![boolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

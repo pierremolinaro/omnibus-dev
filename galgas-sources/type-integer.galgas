@@ -16,7 +16,7 @@ override getter @integerDeclarationAST location -> @location outLocation {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
-  outName = if mIsSigned then "int" else "uint" end + mSize
+  outName = if mIsSigned then "$int" else "$uint" end + mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,15 +26,15 @@ getter @integerDeclarationAST typeName -> @string outName {
 override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let integerTypeName = llvmTypeNameFromPLMname (![[self typeName] nowhere])
+  let integerTypeName = [[self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName !llvmTypeNameFromPLMname (![staticIntegerTypeName () nowhere])]
+  [!?ioGraph addEdge !integerTypeName ![staticIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "integer " + llvmTypeNameFromPLMname (![[self typeName] nowhere])
+  outRepresentation = "integer " + [self typeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -105,7 +105,7 @@ override method @integerDeclarationAST enterInContext
 {
   let integerTypeName = [[self typeName] nowhere]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolBaseTypeName () !.nowhere} ?let boolTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
 #--------------------------------------- Get min and max
   let min = minValueForInteger (!not mIsSigned !mSize)
   let max = maxValueForInteger (!not mIsSigned !mSize)
@@ -125,7 +125,7 @@ override method @integerDeclarationAST enterInContext
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
       !receiverTypeProxy:selfTypeProxy
-      !methodName:boolBaseTypeName ()
+      !methodName:boolTypeName ()
       !safe:true
       !resultTypeProxy:boolTypeProxy
       !canMutateProperties:false
@@ -292,7 +292,7 @@ private proc generateIntegerIntrinsicFunction
   ?LLVMTypeName:let @string inLLVMtypeName
 {
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!inPLMtypeName)
+    !inPLMtypeName
     ![inPLMMethodName nowhere]
     !{}
   )
@@ -315,8 +315,8 @@ private proc generateUInt1ToBoolFunction
   ?LLVMTypeName:let @string inLLVMtypeName
 {
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!inPLMtypeName)
-    ![boolBaseTypeName () nowhere]
+    !inPLMtypeName
+    ![boolTypeName () nowhere]
     !{}
   )
   let functionName = llvmNameForFunction (!routineMangledName)
@@ -449,7 +449,7 @@ private proc enter_integer_integer_operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
   let booleanType = [ioContext booleanType]
 #--- Comparison infix operator
-  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
+  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName !inIntegerTypeName)
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
     !booleanType

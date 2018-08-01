@@ -76,8 +76,7 @@ syntax extension plm_syntax {
 method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mGuardFormalArgumentList do
-      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !formalArgumentTypeName]
     end
     [mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
@@ -162,7 +161,7 @@ proc guardSemanticAnalysis
 {
 #--- Guard mangled name
   let guardMangledName = routineMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else llvmTypeStringFromPLMname (!inSelfType.plmTypeDescriptionName) end
+    !if inSelfType.kind == .void then "" else inSelfType.plmTypeDescriptionName end
     !inRoutineName
     !inRoutineFormalArgumentList
   )
@@ -185,7 +184,7 @@ proc guardSemanticAnalysis
   case baseGuard :
   #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariablePLMName() !inRoutineName.location}
-    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolBaseTypeName () nowhere]} type]
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]} type]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
       !resultVarName
@@ -414,7 +413,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!llvmTypeStringFromPLMname (!currentType.plmTypeDescriptionName) !methodName !mArguments)
+        let routineMangledName = routineMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
       #--- Code generation
 #        baseGuardInstructionGenerationList += !@staticRoutineCallIR.new {
 #          !mIdentifier
@@ -517,7 +516,7 @@ method @guardMapIR-element llvmCodeGeneration
   let receiverTypeName = if mReceiverType.kind == .void then
     ""
   else
-    llvmTypeStringFromPLMname (!mReceiverType.plmTypeDescriptionName)
+    mReceiverType.plmTypeDescriptionName
   end
   var first = true
   if receiverTypeName != "" then

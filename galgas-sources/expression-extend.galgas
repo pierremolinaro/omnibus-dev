@@ -49,8 +49,7 @@ override method @extendExpressionAST addDependenceEdgeForStaticExpression
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   if mTypeName.string != "" then
-    let typeName = llvmTypeNameFromPLMname (!mTypeName)
-    [!?ioGraph noteNode !typeName]
+    [!?ioGraph noteNode !mTypeName]
   end
 }
 
@@ -61,8 +60,7 @@ override method @extendExpressionAST addDependenceEdgeForStaticExpression
 override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   if mTypeName.string != "" then
-    let typeName = llvmTypeNameFromPLMname (!mTypeName)
-    [!?ioGraph noteNode !typeName]
+    [!?ioGraph noteNode !mTypeName]
   end
 }
 

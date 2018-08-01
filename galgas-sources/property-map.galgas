@@ -46,7 +46,7 @@ setter @propertyMap addFunctionWithoutArgument
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (![inReceiverType key])
+    ![inReceiverType key]
     ![inMethodName nowhere]
     !{}
   )
@@ -100,7 +100,7 @@ setter @propertyMap addFunctionWithInputArgument
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (![inReceiverType key])
+    ![inReceiverType key]
     ![inMethodName nowhere]
     !argumentList
   )
@@ -159,7 +159,7 @@ setter @propertyMap addFunctionWithTwoInputArguments
   ]
 #--- Routine mangled name
   let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (![inReceiverType key])
+    ![inReceiverType key]
     ![inMethodName nowhere]
     !argumentList
   )

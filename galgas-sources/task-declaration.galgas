@@ -159,8 +159,7 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
   for () in self do
     for variable in mVarList do
       if variable.mPropertyTypeName.string != "" then
-        let typeName = llvmTypeNameFromPLMname (!variable.mPropertyTypeName)
-        [!?ioGraph noteNode !typeName]
+        [!?ioGraph noteNode !variable.mPropertyTypeName]
       end
     end
     for setup in mTaskSetupListAST do
@@ -653,7 +652,7 @@ method @taskMapIR generateCode
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
     ioLLVMcode += llvmNameForGlobalVariable (!taskName)
     ioLLVMcode += " = internal global %"
-    ioLLVMcode += [llvmTypeStringFromPLMname (!taskTypeName) assemblerRepresentation]
+    ioLLVMcode += [taskTypeName assemblerRepresentation]
     ioLLVMcode += " " + [initValueList llvmValue] + "\n"
   end
   ioLLVMcode += "\n"
@@ -679,7 +678,7 @@ method @taskMapIR generateCode
   ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
   for task in orderedTaskList do (taskIndex)
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
-    let assemblerTaskName = [llvmTypeStringFromPLMname (!task.mTaskName) assemblerRepresentation]
+    let assemblerTaskName = [task.mTaskName assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
@@ -687,7 +686,7 @@ method @taskMapIR generateCode
     ioLLVMcode += llvmSeparatorLine () + "\n"
   #---------- Activate method
     let activateFunctionName = routineMangledNameFromAST (
-      !llvmTypeStringFromPLMname (!task.mTaskName)
+      !task.mTaskName
       !["activate" nowhere]
       !{}
     )
@@ -731,7 +730,7 @@ method @taskMapIR generateCode
       ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
     end
     ioLLVMcode += "  call void " + activateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  call void @" + llvmNameForFunction (!llvmTypeStringFromPLMname (!task.mTaskName) + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @" + llvmNameForFunction (!task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void " + deactivateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     if task.mActivate then
       ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"

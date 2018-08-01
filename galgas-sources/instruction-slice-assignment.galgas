@@ -81,7 +81,7 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !llvmTypeNameFromPLMname (!mTypeName)]
+  [!?ioGraph noteNode !mTypeName]
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   for (sliceWidthStr sliceKind) in mSliceAssignmentList do
     if [sliceWidthStr.string isDecimalUnsignedNumber] then
@@ -90,12 +90,11 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
         error sliceWidthStr : "the bit slice width should be > 0"
       else
         [!?ioGraph noteUINTType !sliceWidth !sliceWidthStr.location]
-#        let sliceTypeName = @lstring.new {!"uint" + sliceWidth !sliceWidthStr.location}
-#        [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+#        let sliceTypeName = @lstring.new {!"$uint" + sliceWidth !sliceWidthStr.location}
+#        [!?ioGraph noteNode !sliceTypeName]
       end
     elsif sliceWidthStr.string == "b" then
-      let sliceTypeName = @lstring.new {!"bool" !sliceWidthStr.location}
-      [!?ioGraph noteNode !llvmTypeNameFromPLMname (!sliceTypeName)]
+      [!?ioGraph noteNode ![boolTypeName () nowhere]]
     end
     switch sliceKind
     case discarded :
@@ -173,12 +172,12 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
     elsif sliceWidthStr.string == "b" then
       sliceWidth = 1
-      sliceTypeName = .new {!"bool" !mTypeName.location}
+      sliceTypeName = .new {!boolTypeName () !mTypeName.location}
     elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
       error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      sliceTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
+      sliceTypeName = .new {!"$uint" + sliceWidth !mTypeName.location}
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       end

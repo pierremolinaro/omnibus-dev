@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typeOpaqueDefinitionDeclaration : @abstractDeclarationAST {
-  @lstring mAnonymousOpaqueTypeName
+  @lstring mOpaqueTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation
   @lstringlist mAttributeList
@@ -47,31 +47,29 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @typeOpaqueDefinitionDeclaration noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let typeName = llvmTypeNameFromPLMname (!mAnonymousOpaqueTypeName)
-  [!?ioGraph noteNode !typeName]
+  [!?ioGraph noteNode !mOpaqueTypeName]
   [mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #·······················································································································
 
 override method @typeOpaqueDefinitionDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let internalTypeName = llvmTypeNameFromPLMname (!mAnonymousOpaqueTypeName)
 #--- Add structure type name as node
-  [!?ioGraph addNode !internalTypeName !self]
+  [!?ioGraph addNode !mOpaqueTypeName !self]
 #--- Add size expression
-  [mSizeExpression addDependenceEdgeForStaticExpression !internalTypeName !?ioGraph]
+  [mSizeExpression addDependenceEdgeForStaticExpression !mOpaqueTypeName !?ioGraph]
 }
 
 #·······················································································································
 
 override getter @typeOpaqueDefinitionDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "anonymous $" + mAnonymousOpaqueTypeName 
+  outRepresentation = "opaque " + mOpaqueTypeName 
 }
 
 #·······················································································································
 
 override getter @typeOpaqueDefinitionDeclaration location -> @location outLocation {
-  outLocation = mAnonymousOpaqueTypeName.location
+  outLocation = mOpaqueTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -115,7 +113,7 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
   [mSizeExpression analyzeExpression
     !self:voidType ()
     !routineAttributes:.none
-    !routineNameForInvocationGraph:.new {!mAnonymousOpaqueTypeName.string + " init" !mAnonymousOpaqueTypeName.location}
+    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
@@ -140,12 +138,12 @@ override method @typeOpaqueDefinitionDeclaration enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !attributes:opaqueTypeAttributes
-      !plmTypeDescriptionName:mAnonymousOpaqueTypeName
+      !plmTypeDescriptionName:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
-      !llvmBaseTypeName:mAnonymousOpaqueTypeName
+      !llvmBaseTypeName:mOpaqueTypeName
     }
     [!?ioContext.mTypeMap insertType
-      !lkey:mAnonymousOpaqueTypeName
+      !lkey:mOpaqueTypeName
       !type:opaqueType
       !index:[ioContext.mTypeMap count]
     ]

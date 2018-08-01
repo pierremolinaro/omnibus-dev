@@ -50,9 +50,8 @@ syntax extension plm_syntax {
 override method @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = llvmTypeNameFromPLMname (!mEnumerationName)
-  [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (![boolBaseTypeName () nowhere])]
+  [!?ioGraph addNode !mEnumerationName !self]
+  [!?ioGraph addEdge !mEnumerationName ![boolTypeName () nowhere]]
 #--- Mark dependance from $uintN used for value property
   @bigint maxValue = 0G
   for (* value) in mCaseNameList do
@@ -65,7 +64,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-  [!?ioGraph addEdge !typeName !llvmTypeNameFromPLMname (!["uint" + representationBitCount nowhere])]
+  [!?ioGraph addEdge !mEnumerationName !["$uint" + representationBitCount nowhere]]
 }
 
 #·······················································································································
@@ -85,7 +84,7 @@ override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling ->
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func integerEnumAccessorName ?forBitCount:let @uint inBitCount -> @string {
-  result = "uint" + inBitCount
+  result = "uint" + inBitCount # No leading '$' !!!
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -130,7 +129,7 @@ override method @enumerationDeclarationAST enterInContext
   @propertyMap propertyMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
-    !.new {!"uint" + representationBitCount !mEnumerationName}
+    !.new {!"$uint" + representationBitCount !mEnumerationName}
   }
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let enumTypeProxy]
   [!?propertyMap addFunctionWithoutArgument
@@ -245,7 +244,7 @@ class @enumerationIR : @abstractGenerationIR {
 
 override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
   let routineMangledName = routineMangledNameFromAST (
-    !llvmTypeStringFromPLMname (!mEnumerationName)
+    !mEnumerationName
     !.new {!integerEnumAccessorName (!forBitCount:mBitCount) !mEnumerationName}
     !{}
   )

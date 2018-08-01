@@ -45,8 +45,7 @@ syntax extension plm_syntax {
 
 override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if mOptionalTypeName.string != "" then
-    let typeName = llvmTypeNameFromPLMname (!mOptionalTypeName)
-    [!?ioGraph noteNode !typeName]
+    [!?ioGraph noteNode !mOptionalTypeName]
   end
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -100,7 +99,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   drop targetType
 #---
   if not [[result type] instanciable] then
-    error mConstantName : "$" + [result plmTypeDescriptionName] + " type is not instanciable" : result
+    error mConstantName : [result plmTypeDescriptionName] + " type is not instanciable" : result
   end
 #--- Declare local constant
   let plmName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}

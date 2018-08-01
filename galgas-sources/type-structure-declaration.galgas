@@ -201,30 +201,26 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let structureTypeName = llvmTypeNameFromPLMname (!mStructureName)
 #--- Add structure type name as node
-  [!?ioGraph addNode !structureTypeName !self]
+  [!?ioGraph addNode !mStructureName !self]
 #--- Add property types
   for (4* fieldTypeName initExpression *) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      let typeName = llvmTypeNameFromPLMname (!fieldTypeName)
-      [!?ioGraph addEdge !structureTypeName !typeName]
+      [!?ioGraph addEdge !mStructureName !fieldTypeName]
     end
     switch initExpression
     case noExpression :
     case expression (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !mStructureName !?ioGraph]
     end
   end
 #--- Add structure functions
   for () in mFunctionDeclarationListAST do
     for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !formalArgumentTypeName]
     end
     if mFunctionReturnTypeName.string != "" then
-      let typeName = llvmTypeNameFromPLMname (!mFunctionReturnTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !mFunctionReturnTypeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
@@ -487,7 +483,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : "$" + actualPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : actualPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -528,7 +524,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
   case noExpression :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : "$" + optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType

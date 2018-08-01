@@ -165,16 +165,13 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
   for (* type) in mPropertyList do
     switch type
     case valueType (@lstring propertyTypeName) :
-      let typeName = llvmTypeNameFromPLMname (!propertyTypeName)
-      [!?ioGraph addEdge !mStaticListName !typeName]
+      [!?ioGraph addEdge !mStaticListName !propertyTypeName]
     case function (* * @routineFormalArgumentListAST formalArgs @lstring returnType) :
       for (* * formalArgumentTypeName *) in formalArgs do
-        let typeName = llvmTypeNameFromPLMname(!formalArgumentTypeName)
-        [!?ioGraph noteNode !typeName]
+        [!?ioGraph noteNode !formalArgumentTypeName]
       end
       if returnType.string != "" then
-        let returnTypeName = llvmTypeNameFromPLMname (!returnType)
-        [!?ioGraph addEdge !mStaticListName !returnTypeName]
+        [!?ioGraph addEdge !mStaticListName !returnType]
       end
     end
   end
@@ -186,8 +183,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
         [exp addDependenceEdgeForStaticExpression !mStaticListName !?ioGraph]
       case function (* @routineFormalArgumentListAST formalArgs) :
         for (* * formalArgumentTypeName *) in formalArgs do
-          let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
-          [!?ioGraph noteNode !typeName]
+          [!?ioGraph noteNode !formalArgumentTypeName]
         end
       end
     end
@@ -529,10 +525,10 @@ method @staticListInitializationMap generateLLVMForStaticLists
         ioLLVMcode += llvmTitleComment (!"Static Arraies")
       end
       ioLLVMcode += llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
-      ioLLVMcode += [[initList length] string] + " x %" + llvmTypeStringFromPLMname (!llvmNameForStaticListElementType (![key nowhere])) + "] [\n"
+      ioLLVMcode += [[initList length] string] + " x %" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
       for (value) in initList
       do
-        ioLLVMcode += "  %" + llvmTypeStringFromPLMname (!llvmNameForStaticListElementType (![key nowhere])) + " " + value
+        ioLLVMcode += "  %" + llvmNameForStaticListElementType (![key nowhere]) + " " + value
       between
         ioLLVMcode += ",\n"
       end

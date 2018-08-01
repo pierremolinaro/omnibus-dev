@@ -131,8 +131,7 @@ syntax extension plm_syntax {
 method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mFormalArgumentList do
-      let typeName = llvmTypeNameFromPLMname (!formalArgumentTypeName)
-      [!?ioGraph noteNode !typeName]
+      [!?ioGraph noteNode !formalArgumentTypeName]
     end
     [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end

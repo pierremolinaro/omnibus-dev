@@ -67,8 +67,7 @@ override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semantic
   [!?ioGraph addNode !mConstantName !self]
 #--- Add dependency from constant type name
   if mConstantTypeName.string != "" then
-    let typeName = llvmTypeNameFromPLMname (!mConstantTypeName)
-    [!?ioGraph addEdge !mConstantName !typeName]
+    [!?ioGraph addEdge !mConstantName !mConstantTypeName]
   end
 #--- Add dependency from source expression
   [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
