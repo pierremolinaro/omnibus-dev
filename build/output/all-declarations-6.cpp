@@ -1114,7 +1114,7 @@ typeComparisonResult cPtr_staticArrayTypeDeclarationAST::dynamicObjectCompare (c
   const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
   if (kOperandEqual == result) {
-    result = mProperty_mAnonymousArrayTypeName.objectCompare (p->mProperty_mAnonymousArrayTypeName) ;
+    result = mProperty_mArrayTypeName.objectCompare (p->mProperty_mArrayTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mElementTypeName.objectCompare (p->mProperty_mElementTypeName) ;
@@ -1162,34 +1162,34 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_staticArrayTypeDeclarationAST GALGAS_staticArrayTypeDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mAnonymousArrayTypeName,
+GALGAS_staticArrayTypeDeclarationAST GALGAS_staticArrayTypeDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mArrayTypeName,
                                                                                             const GALGAS_lstring & inAttribute_mElementTypeName,
                                                                                             const GALGAS_expressionAST & inAttribute_mSizeExpression,
                                                                                             const GALGAS_location & inAttribute_mSizeExpressionLocation
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_staticArrayTypeDeclarationAST result ;
-  if (inAttribute_mAnonymousArrayTypeName.isValid () && inAttribute_mElementTypeName.isValid () && inAttribute_mSizeExpression.isValid () && inAttribute_mSizeExpressionLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_staticArrayTypeDeclarationAST (inAttribute_mAnonymousArrayTypeName, inAttribute_mElementTypeName, inAttribute_mSizeExpression, inAttribute_mSizeExpressionLocation COMMA_THERE)) ;
+  if (inAttribute_mArrayTypeName.isValid () && inAttribute_mElementTypeName.isValid () && inAttribute_mSizeExpression.isValid () && inAttribute_mSizeExpressionLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_staticArrayTypeDeclarationAST (inAttribute_mArrayTypeName, inAttribute_mElementTypeName, inAttribute_mSizeExpression, inAttribute_mSizeExpressionLocation COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_staticArrayTypeDeclarationAST::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_staticArrayTypeDeclarationAST::getter_mArrayTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_staticArrayTypeDeclarationAST * p = (const cPtr_staticArrayTypeDeclarationAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_staticArrayTypeDeclarationAST) ;
-    result = p->mProperty_mAnonymousArrayTypeName ;
+    result = p->mProperty_mArrayTypeName ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_staticArrayTypeDeclarationAST::getter_mAnonymousArrayTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAnonymousArrayTypeName ;
+GALGAS_lstring cPtr_staticArrayTypeDeclarationAST::getter_mArrayTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mArrayTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1250,13 +1250,13 @@ GALGAS_location cPtr_staticArrayTypeDeclarationAST::getter_mSizeExpressionLocati
 //                               Pointer class for @staticArrayTypeDeclarationAST class                                *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_staticArrayTypeDeclarationAST::cPtr_staticArrayTypeDeclarationAST (const GALGAS_lstring & in_mAnonymousArrayTypeName,
+cPtr_staticArrayTypeDeclarationAST::cPtr_staticArrayTypeDeclarationAST (const GALGAS_lstring & in_mArrayTypeName,
                                                                         const GALGAS_lstring & in_mElementTypeName,
                                                                         const GALGAS_expressionAST & in_mSizeExpression,
                                                                         const GALGAS_location & in_mSizeExpressionLocation
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
-mProperty_mAnonymousArrayTypeName (in_mAnonymousArrayTypeName),
+mProperty_mArrayTypeName (in_mArrayTypeName),
 mProperty_mElementTypeName (in_mElementTypeName),
 mProperty_mSizeExpression (in_mSizeExpression),
 mProperty_mSizeExpressionLocation (in_mSizeExpressionLocation) {
@@ -1271,7 +1271,7 @@ const C_galgas_type_descriptor * cPtr_staticArrayTypeDeclarationAST::classDescri
 void cPtr_staticArrayTypeDeclarationAST::description (C_String & ioString,
                                                       const int32_t inIndentation) const {
   ioString << "[@staticArrayTypeDeclarationAST:" ;
-  mProperty_mAnonymousArrayTypeName.description (ioString, inIndentation+1) ;
+  mProperty_mArrayTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mElementTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -1285,7 +1285,7 @@ void cPtr_staticArrayTypeDeclarationAST::description (C_String & ioString,
 
 acPtr_class * cPtr_staticArrayTypeDeclarationAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_staticArrayTypeDeclarationAST (mProperty_mAnonymousArrayTypeName, mProperty_mElementTypeName, mProperty_mSizeExpression, mProperty_mSizeExpressionLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_staticArrayTypeDeclarationAST (mProperty_mArrayTypeName, mProperty_mElementTypeName, mProperty_mSizeExpression, mProperty_mSizeExpressionLocation COMMA_THERE)) ;
   return ptr ;
 }
 

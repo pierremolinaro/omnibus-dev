@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @staticArrayTypeDeclarationAST : @abstractDeclarationAST {
-  @lstring mAnonymousArrayTypeName
+  @lstring mArrayTypeName
   @lstring mElementTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation
@@ -21,7 +21,6 @@ syntax extension plm_syntax {
     $[$
     <expression> !?ioAST ?let sizeExpression
     $•$
-#    $\$type$ ?let elementTypeName
     <type_definition> !?ioAST ?let elementTypeName
     let sizeExpressionLocation = @location.here
     $]$
@@ -44,24 +43,23 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let newTypeName = mAnonymousArrayTypeName
-  [!?ioGraph addNode !newTypeName !self]
-  [!?ioGraph addEdge !newTypeName !mElementTypeName]
-  [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
-  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mAnonymousArrayTypeName.location}
-  [!?ioGraph addEdge !newTypeName !rootNode]
+  [!?ioGraph addNode !mArrayTypeName !self]
+  [!?ioGraph addEdge !mArrayTypeName !mElementTypeName]
+  [mSizeExpression addDependenceEdgeForStaticExpression !mArrayTypeName !?ioGraph]
+  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mArrayTypeName.location}
+  [!?ioGraph addEdge !mArrayTypeName !rootNode]
 }
 
 #·······················································································································
 
 override getter @staticArrayTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "anonymous $" + mAnonymousArrayTypeName 
+  outRepresentation = "anonymous $" + mArrayTypeName 
 }
 
 #·······················································································································
 
 override getter @staticArrayTypeDeclarationAST location -> @location outLocation {
-  outLocation = mAnonymousArrayTypeName.location
+  outLocation = mArrayTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -93,13 +91,13 @@ override method @staticArrayTypeDeclarationAST enterInContext
   [mSizeExpression analyzeExpression
     !self:voidType ()
     !routineAttributes:.none
-    !routineNameForInvocationGraph:.new {!mAnonymousArrayTypeName.string + " init" !mAnonymousArrayTypeName.location}
+    !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
     !?temporary:temporaries
     !?staticEntityMap:*
-    !?variableMap:ioContext.mValuedObjectMap # universalMap
+    !?variableMap:ioContext.mValuedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:let @objectIR sizeExpressionIR
@@ -109,24 +107,23 @@ override method @staticArrayTypeDeclarationAST enterInContext
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name
-    let originalTypeName = @lstring.new {!"array." + elementType.plmTypeDescriptionName + "." + arraySize !mAnonymousArrayTypeName}
-    if [ioContext.mTypeMap hasKey !originalTypeName] then
-      [ioContext.mTypeMap searchKey !lkey:originalTypeName ?type:var type ?1*]
-      type.llvmBaseTypeName = mAnonymousArrayTypeName
-      type.attributes = type.attributes - .generateAssignmentRoutine
+    let plmTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.plmTypeDescriptionName + "]" !mArrayTypeName}
+    let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "." + arraySize !mArrayTypeName}
+    if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
+      [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?1*]
       [!?ioContext.mTypeMap insertType
-        !lkey:mAnonymousArrayTypeName
+        !lkey:mArrayTypeName
         !type:type
         !index:[ioContext.mTypeMap count]
       ]
     else
     #-------------------------------------------- Class method map : add "count" constructor
       @classConstantMap classConstantMap = {}
-     [!?classConstantMap insertKey !.new {!"count" !originalTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
+     [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
     #-------------------------------------------- Property map
       @propertyMap arrayTypePropertyMap = {}
       [!?arrayTypePropertyMap insertKey # "count" property
-        !.new {!"count" !originalTypeName.location}
+        !.new {!"count" !plmTypeDescriptionName.location}
         !true # public
         !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:arraySize}}
       ]
@@ -150,28 +147,13 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !constructorMap:constructorMap
         !guardMap:{}
         !attributes:typeAttributes
-        !plmTypeDescriptionName:originalTypeName
+        !plmTypeDescriptionName:plmTypeDescriptionName
         !kind:.arrayType {!elementType:elementType !size:arraySize}
-        !llvmBaseTypeName:originalTypeName
+        !llvmBaseTypeName:llvmBaseTypeName
       }
       [!?ioContext.mTypeMap insertType
-        !lkey:originalTypeName
+        !lkey:mArrayTypeName
         !type:arrayType
-        !index:[ioContext.mTypeMap count]
-      ]
-      let aliasedArrayType = @PLMType.new {
-        !propertyMap:arrayTypePropertyMap
-        !classConstantMap:classConstantMap
-        !constructorMap:constructorMap
-        !guardMap:{}
-        !attributes:typeAttributes - .generateAssignmentRoutine
-        !plmTypeDescriptionName:originalTypeName
-        !kind:.arrayType {!elementType:elementType !size:arraySize}
-        !llvmBaseTypeName:mAnonymousArrayTypeName
-      }
-      [!?ioContext.mTypeMap insertType
-        !lkey:mAnonymousArrayTypeName
-        !type:aliasedArrayType
         !index:[ioContext.mTypeMap count]
       ]
     end

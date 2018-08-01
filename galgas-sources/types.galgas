@@ -319,7 +319,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
   case arrayType (* *) :
-    result = "Array"
+    result = "Static array"
   case dynamicArrayType (2*) :
     result = "Dynamic array"
   case function (*) :

@@ -378,13 +378,19 @@ func %once memoryFreeSectionName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist." + inStaticListName !inStaticListName}
+  result = .new {!"staticlist " + inStaticListName !inStaticListName}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
+  result = .new {!"static.list." + inStaticListName !inStaticListName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist.element." + inStaticListName !inStaticListName}
+  result = .new {!"staticlist element " + inStaticListName !inStaticListName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

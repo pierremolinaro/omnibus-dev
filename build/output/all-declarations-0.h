@@ -7627,7 +7627,7 @@ class GALGAS_staticArrayTypeDeclarationAST : public GALGAS_abstractDeclarationAS
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAnonymousArrayTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mArrayTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
 
@@ -7654,13 +7654,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayTypeDecl
 
 class cPtr_staticArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mAnonymousArrayTypeName ;
+  public : GALGAS_lstring mProperty_mArrayTypeName ;
   public : GALGAS_lstring mProperty_mElementTypeName ;
   public : GALGAS_expressionAST mProperty_mSizeExpression ;
   public : GALGAS_location mProperty_mSizeExpressionLocation ;
 
 //--- Constructor
-  public : cPtr_staticArrayTypeDeclarationAST (const GALGAS_lstring & in_mAnonymousArrayTypeName,
+  public : cPtr_staticArrayTypeDeclarationAST (const GALGAS_lstring & in_mArrayTypeName,
                                                const GALGAS_lstring & in_mElementTypeName,
                                                const GALGAS_expressionAST & in_mSizeExpression,
                                                const GALGAS_location & in_mSizeExpressionLocation
@@ -7670,7 +7670,7 @@ class cPtr_staticArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAnonymousArrayTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mArrayTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;

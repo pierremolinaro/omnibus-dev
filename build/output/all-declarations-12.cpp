@@ -2371,7 +2371,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "// So LED_L3 frequency is PATTERN_FREQUENCY / 2\n"
   "// So D4 frequency is PATTERN_FREQUENCY / 2 / PATTERN_LENGTH\n"
   "\n"
-  "staticArray kPATTERN {let x $bool }\n"
+  "staticArray kPATTERN { let x $bool }\n"
   "\n"
   "extend staticArray kPATTERN ( // Morse code example: output \"S S S ...\"\n"
   "  yes :: no :: yes :: no :: yes :: // 3 dots : letter S\n"
@@ -2545,7 +2545,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7527, // Text length
+  7528, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
