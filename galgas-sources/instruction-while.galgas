@@ -86,7 +86,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ]  
 #--- Check inferred type
   if [testValue type].kind != .boolean then
-    error mEndOf_test_expression : "test expression type is '" + [testValue plmOriginalTypeName] + "', it should be boolean"
+    error mEndOf_test_expression : "test expression type is '" + [testValue plmTypeDescriptionName] + "', it should be boolean"
   elsif [testValue isStatic] then
     error mEndOf_test_expression : "test expression type should not be static"
   end

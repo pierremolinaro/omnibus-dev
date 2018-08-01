@@ -44,18 +44,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @enumerationDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -160,9 +148,9 @@ override method @enumerationDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmOriginalTypeName:mEnumerationName
+    !plmTypeDescriptionName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
-    !plmAliasedTypeName:mEnumerationName
+    !llvmBaseTypeName:mEnumerationName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName

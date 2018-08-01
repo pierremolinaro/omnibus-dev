@@ -100,12 +100,12 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   drop targetType
 #---
   if not [[result type] instanciable] then
-    error mConstantName : "$" + [result plmOriginalTypeName] + " type is not instanciable" : result
+    error mConstantName : "$" + [result plmTypeDescriptionName] + " type is not instanciable" : result
   end
 #--- Declare local constant
   let plmName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
   ioTemporaries.mTemporaryIndex ++
-  if [result plmOriginalTypeName] != staticIntegerTypeName () then
+  if [result plmTypeDescriptionName] != staticIntegerTypeName () then
     ioAllocaList += !llvmNameForLocalVariable (!plmName) ![result type] !false
     [!?ioInstructionGenerationList appendStoreTemporaryReference
       ![result type]

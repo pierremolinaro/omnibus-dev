@@ -53,18 +53,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @globalConstantDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

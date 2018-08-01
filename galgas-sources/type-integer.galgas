@@ -20,18 +20,6 @@ getter @integerDeclarationAST typeName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @integerDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -188,10 +176,10 @@ override method @integerDeclarationAST enterInContext
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !guardMap:{}
-    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
-    !plmOriginalTypeName:integerTypeName
+    !attributes:.instanciable | .equatable | .copyable | .comparable | .generateAssignmentRoutine
+    !plmTypeDescriptionName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-    !plmAliasedTypeName:integerTypeName
+    !llvmBaseTypeName:integerTypeName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
@@ -261,6 +249,40 @@ class @integerIR : @abstractGenerationIR {
 
 #·······················································································································
 
+private proc generateIntegerAssignmentFunction
+  ?!@string ioLLVMcode
+  ?PLMTypeName:let @string inPLMtypeName
+  ?LLVMTypeName:let @string inLLVMtypeName
+{
+  ioLLVMcode += "define internal void @" + inPLMtypeName + "_assignment"
+  ioLLVMcode += " (" + inLLVMtypeName + "* %outTarget, " + inLLVMtypeName + "* %inSource) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inSource\n"
+  ioLLVMcode += "  store " + inLLVMtypeName + " %value, " + inLLVMtypeName + "* %outTarget\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
+private proc generateIntegerComparisonFunction
+  ?!@string ioLLVMcode
+  ?PLMTypeName:let @string inPLMtypeName
+  ?plmOperator:let @string inPLMOperatorName
+  ?LLVMTypeName:let @string inLLVMtypeName
+  ?llvmOperator:let @string inLLVMOperator
+{
+  ioLLVMcode += "define internal void @" + inPLMtypeName + "_" + inPLMOperatorName
+  ioLLVMcode += " (i1* %outResult, " + inLLVMtypeName + "* %inLeft, " + inLLVMtypeName + "* %inRight) {\n"
+  ioLLVMcode += "  %left = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inLeft\n"
+  ioLLVMcode += "  %right = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inRight\n"
+  ioLLVMcode += "  %r = icmp " + inLLVMOperator + " " + inLLVMtypeName + " %left, %right\n"
+  ioLLVMcode += "  store i1 %r, i1* %outResult\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
 private proc generateIntegerIntrinsicFunction
   ?PLMTypeName:let @string inPLMtypeName
   ?!@string ioLLVMcode
@@ -282,6 +304,7 @@ private proc generateIntegerIntrinsicFunction
   ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet +=
     !inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + ")"
+
 }
 
 #·······················································································································
@@ -362,6 +385,55 @@ override method @integerIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAd
     !intrinsic:"ctpop"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
+  )
+#---------------------------- Generate assignment function
+  generateIntegerAssignmentFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !LLVMTypeName:llvmTypeName
+  )
+#---------------------------- Generate comparison functions
+  generateIntegerComparisonFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !plmOperator:"eq"
+    !LLVMTypeName:llvmTypeName
+    !llvmOperator:"eq"
+  )
+  generateIntegerComparisonFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !plmOperator:"ne"
+    !LLVMTypeName:llvmTypeName
+    !llvmOperator:"ne"
+  )
+  generateIntegerComparisonFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !plmOperator:"lt"
+    !LLVMTypeName:llvmTypeName
+    !llvmOperator:if mIsSigned then "slt" else "ult" end
+  )
+  generateIntegerComparisonFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !plmOperator:"le"
+    !LLVMTypeName:llvmTypeName
+    !llvmOperator:if mIsSigned then "sle" else "ule" end
+  )
+  generateIntegerComparisonFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !plmOperator:"gt"
+    !LLVMTypeName:llvmTypeName
+    !llvmOperator:if mIsSigned then "sgt" else "ugt" end
+  )
+  generateIntegerComparisonFunction (
+    !?ioLLVMcode
+    !PLMTypeName:mTypeName
+    !plmOperator:"ge"
+    !LLVMTypeName:llvmTypeName
+    !llvmOperator:if mIsSigned then "sge" else "uge" end
   )
 }
 

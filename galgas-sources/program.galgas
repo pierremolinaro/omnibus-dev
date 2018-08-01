@@ -103,24 +103,6 @@ private proc compileProject
     ast.mDeclarationListAST += !@literalIntegerDeclarationAST.new
   #--- Add String type
     ast.mDeclarationListAST += !@literalStringDeclarationAST.new {![staticStringTypeName () nowhere]}
-  #------------------------------------------------------------  Add type extensions
-    let declarationList = ast.mDeclarationListAST
-    var @declarationListAST newDeclarationList = {}
-    var extensionDeclarationListAST = ast.mExtensionDeclarationListAST
-    var extendStaticArrayDeclarationAST = ast.mExtendStaticArrayDeclarationAST
-    for (declaration) in declarationList do
-      [declaration addExtension !?extensionDeclarationListAST !?extendStaticArrayDeclarationAST ?let newDeclaration]
-      newDeclarationList += !newDeclaration
-    end
-    ast.mDeclarationListAST = newDeclarationList
-  #--- Raise an error for every unhandled extension
-    for (typeName * * * *) in extensionDeclarationListAST do
-      error typeName : "this type is not defined or does not support extension"
-    end
-  #--- Raise an error for every static array list extension
-    for (staticListName *) in extendStaticArrayDeclarationAST do
-      error staticListName : "this static list is not defined"
-    end
   end
 #------------------------------------------------------------ Retain required drivers
   if @uint.errorCount == 0 then

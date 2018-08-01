@@ -94,18 +94,6 @@ override getter @panicAST location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @panicAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

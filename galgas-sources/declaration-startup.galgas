@@ -71,18 +71,6 @@ override getter @startupAST location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @startupAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -170,7 +158,7 @@ private proc startupSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmOriginalTypeName !inLocation)
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmTypeDescriptionName !inLocation)
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

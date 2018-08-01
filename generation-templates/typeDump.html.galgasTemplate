@@ -61,9 +61,9 @@ end
 !TABLE_OF_TYPES_STRING%
 </p>
 <table class="result">
-<tr><td class="result_title">Type Name</td><td class="result_title">Description</td><td class="result_title">LLVM Type Name</td></tr>\n%
+<tr><td class="result_title">Type Name</td><td class="result_title">Kind</td><td class="result_title">Description</td><td class="result_title">LLVM Base Name</td><td class="result_title">LLVM Type Name</td></tr>\n%
 for () in GLOBAL_TYPE_MAP do
-  %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>%![type descriptionForHTMLFile]%</td><td>%![type llvmTypeName]%</td></tr>\n%
+  %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>%![type descriptionForHTMLFile]%</td><td>%![type plmTypeDescriptionName]%</td><td>%![type llvmBaseTypeName]%</td><td>%![type llvmTypeName]%</td></tr>\n%
 end%
 </table>
 </div>

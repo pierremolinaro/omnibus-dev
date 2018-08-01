@@ -391,6 +391,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__3D_ ;
     }else if (scanningOk && [self testForInputString:@"<" advance:YES]) {
       mTokenCode = plm_lexique_1__3C_ ;
+    }else if (scanningOk && [self testForInputString:@";" advance:YES]) {
+      mTokenCode = plm_lexique_1__3B_ ;
     }else if (scanningOk && [self testForInputString:@":" advance:YES]) {
       mTokenCode = plm_lexique_1__3A_ ;
     }else if (scanningOk && [self testForInputString:@"/" advance:YES]) {
@@ -522,7 +524,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 - (NSUInteger) terminalVocabularyCount {
-  return 117 ;
+  return 118 ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -552,7 +554,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
-  static const NSUInteger kTerminalSymbolStyles [118] = {0,
+  static const NSUInteger kTerminalSymbolStyles [119] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1__23_groupName */,
     3 /* plm_lexique_1__40_attribute */,
@@ -669,7 +671,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     8 /* plm_lexique_1__3C__3C__3D_ */,
     8 /* plm_lexique_1__3E__3E__3D_ */,
     8 /* plm_lexique_1__3A__3A_ */,
-    8 /* plm_lexique_1__2022_ */
+    8 /* plm_lexique_1__2022_ */,
+    8 /* plm_lexique_1__3B_ */
   } ;
   return kTerminalSymbolStyles [inTerminal] ;
 }
@@ -681,7 +684,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
-  static const BOOL kTerminalAtomicSelection [118] = {NO,
+  static const BOOL kTerminalAtomicSelection [119] = {NO,
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1__23_groupName */,
     YES /* plm_lexique_1__40_attribute */,
@@ -798,7 +801,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__3C__3C__3D_ */,
     YES /* plm_lexique_1__3E__3E__3D_ */,
     YES /* plm_lexique_1__3A__3A_ */,
-    YES /* plm_lexique_1__2022_ */
+    YES /* plm_lexique_1__2022_ */,
+    YES /* plm_lexique_1__3B_ */
   } ;
   return kTerminalAtomicSelection [inTokenIndex] ;
 }

@@ -26,7 +26,6 @@ list @checkTargetListAST {
 
 struct @ast {
   @declarationListAST mDeclarationListAST
-  @extensionDeclarationListAST mExtensionDeclarationListAST
   @extendStaticArrayDeclarationAST mExtendStaticArrayDeclarationAST
   @functionDeclarationListAST mStandAloneFunctionDeclarationListAST
   @requiredProcedureDeclarationListAST mRequiredProcListAST

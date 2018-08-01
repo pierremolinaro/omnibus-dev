@@ -273,16 +273,6 @@ override getter @controlRegisterGroupDeclarationAST location -> @location {
 
 #·······················································································································
 
-override method @controlRegisterGroupDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#·······················································································································
-
 override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let nodeName = registerGroupNameFromPLMname (![mRegisterGroupList mRegisterGroupNameAtIndex !0])
 #--- Add node
@@ -774,7 +764,7 @@ private proc buildControlRegisterMaps
       let registerName = inGroupName + ":" + reg_lkey
       var s = "<tr class=\"result_line\"><td class=\"name\">"
         + registerName
-        + "</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+        + "</td><td class=\"type\">$" + reg_mType.plmTypeDescriptionName + "</td><td class=\"address\">"
         + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
       if [reg_mControlRegisterFieldList length] > 0 then
         s += "<table class=\"fields\">"
@@ -795,7 +785,7 @@ private proc buildControlRegisterMaps
         let registerName = inGroupName + ":" + reg_lkey + "[" + [mValue string] + "]"
         var s = "<tr class=\"result_line\"><td class=\"name\">"
           + registerName
-          +"</td><td class=\"type\">$" + reg_mType.plmOriginalTypeName + "</td><td class=\"address\">"
+          +"</td><td class=\"type\">$" + reg_mType.plmTypeDescriptionName + "</td><td class=\"address\">"
           + [address hexStringSeparatedBy !'_' !4]
           + "</td><td>"
         if [reg_mControlRegisterFieldList length] > 0 then

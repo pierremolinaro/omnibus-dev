@@ -8,580 +8,6 @@
 #include "all-declarations-4.h"
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cPtr_syncInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_syncInstructionAST * p = (const cPtr_syncInstructionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_syncInstructionAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mInstructionLocation.objectCompare (p->mProperty_mInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mBranchList.objectCompare (p->mProperty_mBranchList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mEndOf_5F_on_5F_instruction.objectCompare (p->mProperty_mEndOf_5F_on_5F_instruction) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_syncInstructionAST::objectCompare (const GALGAS_syncInstructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionAST::GALGAS_syncInstructionAST (void) :
-GALGAS_instructionAST () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionAST GALGAS_syncInstructionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_syncInstructionAST::constructor_new (GALGAS_location::constructor_nowhere (HERE),
-                                                     GALGAS_syncInstructionBranchListAST::constructor_emptyList (HERE),
-                                                     GALGAS_location::constructor_nowhere (HERE)
-                                                     COMMA_THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionAST::GALGAS_syncInstructionAST (const cPtr_syncInstructionAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_syncInstructionAST) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionAST GALGAS_syncInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                      const GALGAS_syncInstructionBranchListAST & inAttribute_mBranchList,
-                                                                      const GALGAS_location & inAttribute_mEndOf_5F_on_5F_instruction
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_syncInstructionAST result ;
-  if (inAttribute_mInstructionLocation.isValid () && inAttribute_mBranchList.isValid () && inAttribute_mEndOf_5F_on_5F_instruction.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_syncInstructionAST (inAttribute_mInstructionLocation, inAttribute_mBranchList, inAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionBranchListAST GALGAS_syncInstructionAST::getter_mBranchList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_syncInstructionBranchListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_syncInstructionAST * p = (const cPtr_syncInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_syncInstructionAST) ;
-    result = p->mProperty_mBranchList ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionBranchListAST cPtr_syncInstructionAST::getter_mBranchList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mBranchList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location GALGAS_syncInstructionAST::getter_mEndOf_5F_on_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_syncInstructionAST * p = (const cPtr_syncInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_syncInstructionAST) ;
-    result = p->mProperty_mEndOf_5F_on_5F_instruction ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location cPtr_syncInstructionAST::getter_mEndOf_5F_on_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOf_5F_on_5F_instruction ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                     Pointer class for @syncInstructionAST class                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_syncInstructionAST::cPtr_syncInstructionAST (const GALGAS_location & in_mInstructionLocation,
-                                                  const GALGAS_syncInstructionBranchListAST & in_mBranchList,
-                                                  const GALGAS_location & in_mEndOf_5F_on_5F_instruction
-                                                  COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (in_mInstructionLocation COMMA_THERE),
-mProperty_mBranchList (in_mBranchList),
-mProperty_mEndOf_5F_on_5F_instruction (in_mEndOf_5F_on_5F_instruction) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_syncInstructionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_syncInstructionAST ;
-}
-
-void cPtr_syncInstructionAST::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "[@syncInstructionAST:" ;
-  mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mBranchList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mEndOf_5F_on_5F_instruction.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_syncInstructionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_syncInstructionAST (mProperty_mInstructionLocation, mProperty_mBranchList, mProperty_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                              @syncInstructionAST type                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_syncInstructionAST ("syncInstructionAST",
-                                           & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_syncInstructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_syncInstructionAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_syncInstructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_syncInstructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionAST GALGAS_syncInstructionAST::extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_syncInstructionAST result ;
-  const GALGAS_syncInstructionAST * p = (const GALGAS_syncInstructionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_syncInstructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("syncInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumAssociatedValues_guardedCommandIR_booleanGuard::cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                          const GALGAS_objectIR & inAssociatedValue2
-                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_guardedCommandIR_booleanGuard::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_booleanGuard::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_booleanGuard *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumAssociatedValues_guardedCommandIR_sync::cEnumAssociatedValues_guardedCommandIR_sync (const GALGAS_bool & inAssociatedValue0,
-                                                                                          const GALGAS_string & inAssociatedValue1,
-                                                                                          const GALGAS_instructionListIR & inAssociatedValue2,
-                                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
-                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_guardedCommandIR_sync::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_sync::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_sync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_sync *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumAssociatedValues_guardedCommandIR_boolAndSync::cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                        const GALGAS_objectIR & inAssociatedValue2,
-                                                                                                        const GALGAS_string & inAssociatedValue3,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue4,
-                                                                                                        const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
-                                                                                                        COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3),
-mAssociatedValue4 (inAssociatedValue4),
-mAssociatedValue5 (inAssociatedValue5) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_guardedCommandIR_boolAndSync::description (C_String & ioString,
-                                                                      const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  mAssociatedValue4.description (ioString, inIndentation) ;
-  mAssociatedValue5.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_boolAndSync::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_boolAndSync *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue4.objectCompare (ptr->mAssociatedValue4) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue5.objectCompare (ptr->mAssociatedValue5) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR::GALGAS_guardedCommandIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                           const GALGAS_objectIR & inAssociatedValue2
-                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_booleanGuard ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_booleanGuard (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_sync (const GALGAS_bool & inAssociatedValue0,
-                                                                   const GALGAS_string & inAssociatedValue1,
-                                                                   const GALGAS_instructionListIR & inAssociatedValue2,
-                                                                   const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
-                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
-    result.mEnum = kEnum_sync ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_sync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                          const GALGAS_objectIR & inAssociatedValue2,
-                                                                          const GALGAS_string & inAssociatedValue3,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue4,
-                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
-    result.mEnum = kEnum_boolAndSync ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_boolAndSync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedValue0,
-                                                   GALGAS_instructionListIR & outAssociatedValue1,
-                                                   GALGAS_objectIR & outAssociatedValue2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_booleanGuard) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR booleanGuard invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = (const cEnumAssociatedValues_guardedCommandIR_booleanGuard *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::method_sync (GALGAS_bool & outAssociatedValue0,
-                                           GALGAS_string & outAssociatedValue1,
-                                           GALGAS_instructionListIR & outAssociatedValue2,
-                                           GALGAS_procCallEffectiveParameterListIR & outAssociatedValue3,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_sync) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR sync invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_sync * ptr = (const cEnumAssociatedValues_guardedCommandIR_sync *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedValue0,
-                                                  GALGAS_instructionListIR & outAssociatedValue1,
-                                                  GALGAS_objectIR & outAssociatedValue2,
-                                                  GALGAS_string & outAssociatedValue3,
-                                                  GALGAS_instructionListIR & outAssociatedValue4,
-                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue5,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_boolAndSync) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    outAssociatedValue4.drop () ;
-    outAssociatedValue5.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR boolAndSync invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = (const cEnumAssociatedValues_guardedCommandIR_boolAndSync *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-    outAssociatedValue4 = ptr->mAssociatedValue4 ;
-    outAssociatedValue5 = ptr->mAssociatedValue5 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static const char * gEnumNameArrayFor_guardedCommandIR [4] = {
-  "(not built)",
-  "booleanGuard",
-  "sync",
-  "boolAndSync"
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isBooleanGuard (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanGuard == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isSync (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sync == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolAndSync == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "<enum @guardedCommandIR: " << gEnumNameArrayFor_guardedCommandIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_guardedCommandIR::objectCompare (const GALGAS_guardedCommandIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               @guardedCommandIR type                                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardedCommandIR ("guardedCommandIR",
-                                         NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_guardedCommandIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_guardedCommandIR ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_guardedCommandIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_guardedCommandIR (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  const GALGAS_guardedCommandIR * p = (const GALGAS_guardedCommandIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_guardedCommandIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("guardedCommandIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                              Class for element of '@syncInstructionBranchListIR' list                               *
 //                                                                                                                     *
@@ -6990,7 +6416,6 @@ GALGAS_checkTargetListAST GALGAS_checkTargetListAST::extractObject (const GALGAS
 
 GALGAS_ast::GALGAS_ast (void) :
 mProperty_mDeclarationListAST (),
-mProperty_mExtensionDeclarationListAST (),
 mProperty_mExtendStaticArrayDeclarationAST (),
 mProperty_mStandAloneFunctionDeclarationListAST (),
 mProperty_mRequiredProcListAST (),
@@ -7014,42 +6439,39 @@ GALGAS_ast::~ GALGAS_ast (void) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
-                        const GALGAS_extensionDeclarationListAST & inOperand1,
-                        const GALGAS_extendStaticArrayDeclarationAST & inOperand2,
-                        const GALGAS_functionDeclarationListAST & inOperand3,
-                        const GALGAS_requiredProcedureDeclarationListAST & inOperand4,
-                        const GALGAS_externProcedureDeclarationListAST & inOperand5,
-                        const GALGAS_isrDeclarationListAST & inOperand6,
-                        const GALGAS_systemRoutineDeclarationListAST & inOperand7,
-                        const GALGAS_lstringlist & inOperand8,
-                        const GALGAS_taskListAST & inOperand9,
-                        const GALGAS_checkTargetListAST & inOperand10,
-                        const GALGAS_driverDeclarationListAST & inOperand11,
-                        const GALGAS_driverInstanciationListAST & inOperand12,
-                        const GALGAS_uint & inOperand13,
-                        const GALGAS_controlRegisterUserAccesMapAST & inOperand14) :
+                        const GALGAS_extendStaticArrayDeclarationAST & inOperand1,
+                        const GALGAS_functionDeclarationListAST & inOperand2,
+                        const GALGAS_requiredProcedureDeclarationListAST & inOperand3,
+                        const GALGAS_externProcedureDeclarationListAST & inOperand4,
+                        const GALGAS_isrDeclarationListAST & inOperand5,
+                        const GALGAS_systemRoutineDeclarationListAST & inOperand6,
+                        const GALGAS_lstringlist & inOperand7,
+                        const GALGAS_taskListAST & inOperand8,
+                        const GALGAS_checkTargetListAST & inOperand9,
+                        const GALGAS_driverDeclarationListAST & inOperand10,
+                        const GALGAS_driverInstanciationListAST & inOperand11,
+                        const GALGAS_uint & inOperand12,
+                        const GALGAS_controlRegisterUserAccesMapAST & inOperand13) :
 mProperty_mDeclarationListAST (inOperand0),
-mProperty_mExtensionDeclarationListAST (inOperand1),
-mProperty_mExtendStaticArrayDeclarationAST (inOperand2),
-mProperty_mStandAloneFunctionDeclarationListAST (inOperand3),
-mProperty_mRequiredProcListAST (inOperand4),
-mProperty_mExternProcListAST (inOperand5),
-mProperty_mISRDeclarationListAST (inOperand6),
-mProperty_mStandAloneSystemRoutineListAST (inOperand7),
-mProperty_mTargetListAST (inOperand8),
-mProperty_mTaskListAST (inOperand9),
-mProperty_mCheckTargetListAST (inOperand10),
-mProperty_mDriverDeclarationListAST (inOperand11),
-mProperty_mRequiredDriverListAST (inOperand12),
-mProperty_mTypeDeclarationIndex (inOperand13),
-mProperty_mControlRegisterUserAccesMapAST (inOperand14) {
+mProperty_mExtendStaticArrayDeclarationAST (inOperand1),
+mProperty_mStandAloneFunctionDeclarationListAST (inOperand2),
+mProperty_mRequiredProcListAST (inOperand3),
+mProperty_mExternProcListAST (inOperand4),
+mProperty_mISRDeclarationListAST (inOperand5),
+mProperty_mStandAloneSystemRoutineListAST (inOperand6),
+mProperty_mTargetListAST (inOperand7),
+mProperty_mTaskListAST (inOperand8),
+mProperty_mCheckTargetListAST (inOperand9),
+mProperty_mDriverDeclarationListAST (inOperand10),
+mProperty_mRequiredDriverListAST (inOperand11),
+mProperty_mTypeDeclarationIndex (inOperand12),
+mProperty_mControlRegisterUserAccesMapAST (inOperand13) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_ast (GALGAS_declarationListAST::constructor_emptyList (HERE),
-                     GALGAS_extensionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_extendStaticArrayDeclarationAST::constructor_emptyList (HERE),
                      GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_requiredProcedureDeclarationListAST::constructor_emptyList (HERE),
@@ -7068,24 +6490,23 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_declarationListAST & inOperand0,
-                                        const GALGAS_extensionDeclarationListAST & inOperand1,
-                                        const GALGAS_extendStaticArrayDeclarationAST & inOperand2,
-                                        const GALGAS_functionDeclarationListAST & inOperand3,
-                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand4,
-                                        const GALGAS_externProcedureDeclarationListAST & inOperand5,
-                                        const GALGAS_isrDeclarationListAST & inOperand6,
-                                        const GALGAS_systemRoutineDeclarationListAST & inOperand7,
-                                        const GALGAS_lstringlist & inOperand8,
-                                        const GALGAS_taskListAST & inOperand9,
-                                        const GALGAS_checkTargetListAST & inOperand10,
-                                        const GALGAS_driverDeclarationListAST & inOperand11,
-                                        const GALGAS_driverInstanciationListAST & inOperand12,
-                                        const GALGAS_uint & inOperand13,
-                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand14 
+                                        const GALGAS_extendStaticArrayDeclarationAST & inOperand1,
+                                        const GALGAS_functionDeclarationListAST & inOperand2,
+                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand3,
+                                        const GALGAS_externProcedureDeclarationListAST & inOperand4,
+                                        const GALGAS_isrDeclarationListAST & inOperand5,
+                                        const GALGAS_systemRoutineDeclarationListAST & inOperand6,
+                                        const GALGAS_lstringlist & inOperand7,
+                                        const GALGAS_taskListAST & inOperand8,
+                                        const GALGAS_checkTargetListAST & inOperand9,
+                                        const GALGAS_driverDeclarationListAST & inOperand10,
+                                        const GALGAS_driverInstanciationListAST & inOperand11,
+                                        const GALGAS_uint & inOperand12,
+                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand13 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13) ;
   }
   return result ;
 }
@@ -7096,9 +6517,6 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mProperty_mDeclarationListAST.objectCompare (inOperand.mProperty_mDeclarationListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mExtensionDeclarationListAST.objectCompare (inOperand.mProperty_mExtensionDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mExtendStaticArrayDeclarationAST.objectCompare (inOperand.mProperty_mExtendStaticArrayDeclarationAST) ;
@@ -7145,14 +6563,13 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtensionDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
+  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandAloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_ast::drop (void) {
   mProperty_mDeclarationListAST.drop () ;
-  mProperty_mExtensionDeclarationListAST.drop () ;
   mProperty_mExtendStaticArrayDeclarationAST.drop () ;
   mProperty_mStandAloneFunctionDeclarationListAST.drop () ;
   mProperty_mRequiredProcListAST.drop () ;
@@ -7177,8 +6594,6 @@ void GALGAS_ast::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mProperty_mDeclarationListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mExtensionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mExtendStaticArrayDeclarationAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -7213,12 +6628,6 @@ void GALGAS_ast::description (C_String & ioString,
 
 GALGAS_declarationListAST GALGAS_ast::getter_mDeclarationListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mDeclarationListAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extensionDeclarationListAST GALGAS_ast::getter_mExtensionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExtensionDeclarationListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11407,7 +10816,7 @@ void GALGAS_prefixOperatorMap::setter_insertKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const char * kSearchErrorMessage_prefixOperatorMap_searchKey = "prefix operation is not defined for $%K type" ;
+const char * kSearchErrorMessage_prefixOperatorMap_searchKey = "prefix operation is not defined for %K type" ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -13073,7 +12482,7 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_none (UNUSED_LOCA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_all (UNUSED_LOCATION_ARGS) {
-  return GALGAS_PLMTypeAttributes ((uint64_t) 0xF) ;
+  return GALGAS_PLMTypeAttributes ((uint64_t) 0x1F) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13096,8 +12505,14 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_copyable (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) {
+GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_comparable (UNUSED_LOCATION_ARGS) {
   return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 3) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) {
+  return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 4) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13177,7 +12592,7 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::substract_operation (const GA
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
   GALGAS_PLMTypeAttributes result ;
   if (mIsValid) {
-    result = GALGAS_PLMTypeAttributes (((uint64_t) 0xF) ^ mFlags) ;
+    result = GALGAS_PLMTypeAttributes (((uint64_t) 0x1F) ^ mFlags) ;
   }
   return result ;
 }
@@ -13200,6 +12615,9 @@ void GALGAS_PLMTypeAttributes::description (C_String & ioString,
       ioString << " copyable" ;
     }
     if ((mFlags & ((uint64_t) 1) << 3) != 0) {
+      ioString << " comparable" ;
+    }
+    if ((mFlags & ((uint64_t) 1) << 4) != 0) {
       ioString << " generateAssignmentRoutine" ;
     }
   }
@@ -13221,7 +12639,7 @@ GALGAS_bool GALGAS_PLMTypeAttributes::getter_none (UNUSED_LOCATION_ARGS) const {
 GALGAS_bool GALGAS_PLMTypeAttributes::getter_all (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool (mFlags == (uint64_t) 0xF) ;
+    result = GALGAS_bool (mFlags == (uint64_t) 0x1F) ;
   }
   return result ;
 }
@@ -13258,10 +12676,20 @@ GALGAS_bool GALGAS_PLMTypeAttributes::getter_copyable (UNUSED_LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_PLMTypeAttributes::getter_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_PLMTypeAttributes::getter_comparable (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
     result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 3) != 0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_PLMTypeAttributes::getter_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (mIsValid) {
+    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 4) != 0) ;
   }
   return result ;
 }
@@ -15178,4 +14606,437 @@ GALGAS_arcAssignmentList GALGAS_arcAssignmentList::extractObject (const GALGAS_o
   }
   return result ;
 }
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumAssociatedValues_propertyAccessKind_constantProperty::cEnumAssociatedValues_propertyAccessKind_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyAccessKind_constantProperty::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_constantProperty::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_constantProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_constantProperty *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumAssociatedValues_propertyAccessKind_indexed::cEnumAssociatedValues_propertyAccessKind_indexed (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                    const GALGAS_uint & inAssociatedValue1
+                                                                                                    COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyAccessKind_indexed::description (C_String & ioString,
+                                                                    const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_indexed::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_indexed * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_indexed *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumAssociatedValues_propertyAccessKind_singleton::cEnumAssociatedValues_propertyAccessKind_singleton (const GALGAS_objectIR & inAssociatedValue0,
+                                                                                                        const GALGAS_location & inAssociatedValue1
+                                                                                                        COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyAccessKind_singleton::description (C_String & ioString,
+                                                                      const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_singleton::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_singleton * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_singleton *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod::cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod (const GALGAS_routineDescriptor & inAssociatedValue0
+                                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod * ptr = dynamic_cast<const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyAccessKind::GALGAS_propertyAccessKind (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                                   COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAccessKind result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_constantProperty ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_constantProperty (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_indexed (const GALGAS_PLMType & inAssociatedValue0,
+                                                                          const GALGAS_uint & inAssociatedValue1
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAccessKind result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_indexed ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_indexed (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_singleton (const GALGAS_objectIR & inAssociatedValue0,
+                                                                            const GALGAS_location & inAssociatedValue1
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAccessKind result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_singleton ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_singleton (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::constructor_nonVirtualMethod (const GALGAS_routineDescriptor & inAssociatedValue0
+                                                                                   COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAccessKind result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_nonVirtualMethod ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyAccessKind::method_constantProperty (GALGAS_objectIR & outAssociatedValue0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_constantProperty) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @propertyAccessKind constantProperty invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyAccessKind_constantProperty * ptr = (const cEnumAssociatedValues_propertyAccessKind_constantProperty *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyAccessKind::method_indexed (GALGAS_PLMType & outAssociatedValue0,
+                                                GALGAS_uint & outAssociatedValue1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_indexed) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @propertyAccessKind indexed invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyAccessKind_indexed * ptr = (const cEnumAssociatedValues_propertyAccessKind_indexed *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyAccessKind::method_singleton (GALGAS_objectIR & outAssociatedValue0,
+                                                  GALGAS_location & outAssociatedValue1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_singleton) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @propertyAccessKind singleton invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyAccessKind_singleton * ptr = (const cEnumAssociatedValues_propertyAccessKind_singleton *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyAccessKind::method_nonVirtualMethod (GALGAS_routineDescriptor & outAssociatedValue0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_nonVirtualMethod) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @propertyAccessKind nonVirtualMethod invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod * ptr = (const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static const char * gEnumNameArrayFor_propertyAccessKind [5] = {
+  "(not built)",
+  "constantProperty",
+  "indexed",
+  "singleton",
+  "nonVirtualMethod"
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyAccessKind::getter_isConstantProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_constantProperty == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyAccessKind::getter_isIndexed (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_indexed == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyAccessKind::getter_isSingleton (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_singleton == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyAccessKind::getter_isNonVirtualMethod (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_nonVirtualMethod == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyAccessKind::description (C_String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString << "<enum @propertyAccessKind: " << gEnumNameArrayFor_propertyAccessKind [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_propertyAccessKind::objectCompare (const GALGAS_propertyAccessKind & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              @propertyAccessKind type                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_propertyAccessKind ("propertyAccessKind",
+                                           NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_propertyAccessKind::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyAccessKind ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_propertyAccessKind::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyAccessKind (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyAccessKind GALGAS_propertyAccessKind::extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_propertyAccessKind result ;
+  const GALGAS_propertyAccessKind * p = (const GALGAS_propertyAccessKind *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_propertyAccessKind *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyAccessKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                             Extension method '@propertyMap addFunctionWithoutArgument'                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_addFunctionWithoutArgument (GALGAS_propertyMap & ioObject,
+                                                 GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
+                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inReceiverType,
+                                                 const GALGAS_string constinArgument_inMethodName,
+                                                 const GALGAS_bool constinArgument_inIsSafe,
+                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
+                                                 const GALGAS_bool constinArgument_inCanMutateProperties,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineDescriptor var_descriptor_1437 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 35))  COMMA_SOURCE_FILE ("property-map.galgas", 35)), GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 36)), constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 31)) ;
+  {
+  ioObject.setter_insertKey (constinArgument_inMethodName.add_operation (GALGAS_string ("()"), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 43)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 43)), GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_1437  COMMA_SOURCE_FILE ("property-map.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 42)) ;
+  }
+  GALGAS_lstring var_routineNameForInvocationGraph_2043 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 49)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 49)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 50)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 51)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 48)) ;
+  {
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_2043, var_routineNameForInvocationGraph_2043, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 53)) ;
+  }
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                            Extension method '@propertyMap addFunctionWithInputArgument'                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_addFunctionWithInputArgument (GALGAS_propertyMap & ioObject,
+                                                   GALGAS_semanticContext & ioArgument_ioContext,
+                                                   GALGAS_subprogramInvocationGraph & ioArgument_ioSubprogramInvocationGraph,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inReceiverType,
+                                                   const GALGAS_string constinArgument_inMethodName,
+                                                   const GALGAS_bool constinArgument_inIsSafe,
+                                                   const GALGAS_string constinArgument_inInputSelector,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy,
+                                                   const GALGAS_string constinArgument_inInputArgumentName,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
+                                                   const GALGAS_bool constinArgument_inCanMutateProperties,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineFormalArgumentListAST temp_0 = GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("property-map.galgas", 77)) ;
+  temp_0.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("property-map.galgas", 74)), constinArgument_inInputSelector.getter_nowhere (SOURCE_FILE ("property-map.galgas", 75)), constinArgument_inInputArgumentTypeProxy.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 76)).getter_nowhere (SOURCE_FILE ("property-map.galgas", 76)), constinArgument_inInputArgumentName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 77))  COMMA_SOURCE_FILE ("property-map.galgas", 77)) ;
+  GALGAS_routineFormalArgumentListAST var_argumentList_3001 = temp_0 ;
+  GALGAS_routineTypedSignature var_signature_3233 ;
+  {
+  routine_routineSignature (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_3001, var_signature_3233, inCompiler  COMMA_SOURCE_FILE ("property-map.galgas", 79)) ;
+  }
+  GALGAS_routineDescriptor var_descriptor_3270 = GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), constinArgument_inMethodName, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("property-map.galgas", 84))  COMMA_SOURCE_FILE ("property-map.galgas", 84)), var_signature_3233, constinArgument_inResultType, GALGAS_bool (false), constinArgument_inCanMutateProperties, constinArgument_inIsSafe  COMMA_SOURCE_FILE ("property-map.galgas", 80)) ;
+  GALGAS_lstring var_methodMangledName_3636 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), GALGAS_lstring::constructor_new (constinArgument_inMethodName, GALGAS_location::constructor_nowhere (SOURCE_FILE ("property-map.galgas", 93))  COMMA_SOURCE_FILE ("property-map.galgas", 93)), var_argumentList_3001, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 91)) ;
+  {
+  ioObject.setter_insertKey (var_methodMangledName_3636, GALGAS_bool (true), GALGAS_propertyAccessKind::constructor_nonVirtualMethod (var_descriptor_3270  COMMA_SOURCE_FILE ("property-map.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 96)) ;
+  }
+  GALGAS_lstring var_routineNameForInvocationGraph_3899 = function_routineMangledNameFromAST (function_llvmTypeStringFromPLMname (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 103)), constinArgument_inMethodName.getter_nowhere (SOURCE_FILE ("property-map.galgas", 104)), var_argumentList_3001, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 102)) ;
+  {
+  ioArgument_ioSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_3899, var_routineNameForInvocationGraph_3899, inCompiler COMMA_SOURCE_FILE ("property-map.galgas", 107)) ;
+  }
+}
+
 

@@ -197,37 +197,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @structureDeclarationAST addExtension
-  ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  @structureDeclarationAST newDeclaration = self
-  let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
-  ioExtensionDeclarationListAST = {}
-  for (typeName functions properties svcs guards) in currentExtensionDeclarationListAST do
-    if mStructureName.string == typeName.string then
-      newDeclaration = .new {
-        !newDeclaration.mStructureName
-        !newDeclaration.mAttributeListAST
-        !newDeclaration.mGenerateAssignmentRoutine
-        !newDeclaration.mStructurePropertyListAST + properties
-        !newDeclaration.mFunctionDeclarationListAST + functions
-        !newDeclaration.mSystemRoutineListAST + svcs
-        !newDeclaration.mGuardListAST + guards
-        !newDeclaration.mMayImplementDeinit   
-      }
-    else
-      ioExtensionDeclarationListAST += !typeName !functions !properties !svcs !guards
-    end
-  end
-  outNewDeclaration = newDeclaration
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -435,9 +404,9 @@ override method @structureDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:guardMap
     !attributes:typeAttributes
-    !plmOriginalTypeName:mStructureName
+    !plmTypeDescriptionName:mStructureName
     !kind:.structure {!propertyList:propertyList}
-    !plmAliasedTypeName:mStructureName
+    !llvmBaseTypeName:mStructureName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
@@ -518,7 +487,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : "$" + actualPropertyType.plmOriginalTypeName + " type is not instanciable"
+      error mPropertyName : "$" + actualPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -559,7 +528,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
   case noExpression :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : "$" + optionalPropertyType.plmOriginalTypeName + " type is not instanciable"
+      error mPropertyName : "$" + optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
@@ -724,7 +693,7 @@ class @structureIR : @abstractGenerationIR {
 
 override method @structureIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   let llvmTypeName = [mStructureType llvmTypeName]
-  let deinitName = "@deinit." + [[mStructureType plmOriginalTypeName] assemblerRepresentation]
+  let deinitName = "@deinit." + [[mStructureType plmTypeDescriptionName] assemblerRepresentation]
   ioLLVMcode += llvmTitleComment (!deinitName)
   ioLLVMcode += "define internal void " + deinitName + " (i" + mPointerSize + " %inPointer) nounwind {\n"
   let arg = "ptr"

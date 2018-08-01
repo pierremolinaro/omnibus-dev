@@ -10,26 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Extension setter '@propertyMap addFunctionWithInputArgument'                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & ioObject,
-                                                   class GALGAS_semanticContext & io_ioContext,
-                                                   class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inReceiverType,
-                                                   const class GALGAS_string constin_inMethodName,
-                                                   const class GALGAS_bool constin_inIsSafe,
-                                                   const class GALGAS_string constin_inInputSelector,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
-                                                   const class GALGAS_string constin_inInputArgumentName,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                   const class GALGAS_bool constin_inCanMutateProperties,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                          Extension setter '@propertyMap addFunctionWithTwoInputArguments'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -312,13 +292,13 @@ class GALGAS_PLMType function_literalStringType (class C_Compiler * inCompiler
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                           Extension getter '@objectIR plmOriginalTypeName' (as function)                            *
+//                          Extension getter '@objectIR plmTypeDescriptionName' (as function)                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string extensionGetter_plmOriginalTypeName (const class GALGAS_objectIR & inObject,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
+class GALGAS_string extensionGetter_plmTypeDescriptionName (const class GALGAS_objectIR & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -3984,15 +3964,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                                        GALGAS_routineFormalArgumentListAST & outArgument1,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'property_in_extension' non terminal
-//--- 'parse' label
-  public : virtual void nt_property_5F_in_5F_extension_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_property_5F_in_5F_extension_ (GALGAS_ast & ioArgument0,
-                                                         GALGAS_structurePropertyListAST & ioArgument1,
-                                                         C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'registerDeclaration' non terminal
 //--- 'parse' label
   public : virtual void nt_registerDeclaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -4339,10 +4310,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_116 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_117 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_118 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_119 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

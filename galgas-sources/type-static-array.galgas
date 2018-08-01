@@ -40,18 +40,6 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @staticArrayTypeDeclarationAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -122,10 +110,10 @@ override method @staticArrayTypeDeclarationAST enterInContext
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name
-    let originalTypeName = @lstring.new {!"array." + elementType.plmOriginalTypeName + "." + arraySize !mAnonymousArrayTypeName}
+    let originalTypeName = @lstring.new {!"array." + elementType.plmTypeDescriptionName + "." + arraySize !mAnonymousArrayTypeName}
     if [ioContext.mTypeMap hasKey !originalTypeName] then
       [ioContext.mTypeMap searchKey !lkey:originalTypeName ?type:var type ?1*]
-      type.plmAliasedTypeName = mAnonymousArrayTypeName
+      type.llvmBaseTypeName = mAnonymousArrayTypeName
       type.attributes = type.attributes - .generateAssignmentRoutine
       [!?ioContext.mTypeMap insertType
         !lkey:mAnonymousArrayTypeName
@@ -163,9 +151,9 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !constructorMap:constructorMap
         !guardMap:{}
         !attributes:typeAttributes
-        !plmOriginalTypeName:originalTypeName
+        !plmTypeDescriptionName:originalTypeName
         !kind:.arrayType {!elementType:elementType !size:arraySize}
-        !plmAliasedTypeName:originalTypeName
+        !llvmBaseTypeName:originalTypeName
       }
       [!?ioContext.mTypeMap insertType
         !lkey:originalTypeName
@@ -178,9 +166,9 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !constructorMap:constructorMap
         !guardMap:{}
         !attributes:typeAttributes - .generateAssignmentRoutine
-        !plmOriginalTypeName:originalTypeName
+        !plmTypeDescriptionName:originalTypeName
         !kind:.arrayType {!elementType:elementType !size:arraySize}
-        !plmAliasedTypeName:mAnonymousArrayTypeName
+        !llvmBaseTypeName:mAnonymousArrayTypeName
       }
       [!?ioContext.mTypeMap insertType
         !lkey:mAnonymousArrayTypeName

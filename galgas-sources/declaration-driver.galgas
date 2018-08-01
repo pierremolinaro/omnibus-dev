@@ -206,18 +206,6 @@ override getter @implementedDriverAST location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @implementedDriverAST addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  ?!@extendStaticArrayDeclarationAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  RETAIN REQUIRED DRIVERS IN DECLARATION LIST AST                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
