@@ -283,10 +283,13 @@ override method @dynamicArrayIR generateLLVMcode
   ioLLVMcode += ";--- Get inserted element pointer\n"
   ioLLVMcode += "  %current.buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  %new.buffer.pointer = call %ptrtype @arc.insert.at.index "
-             + "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
+  ioLLVMcode += "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
-  ioLLVMcode += "  call void @plm.assign." + [mElementType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += "  call void @plm.assign."
+  ioLLVMcode += [mElementType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += "."
+  ioLLVMcode += [mElementType.llvmBaseTypeName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
   ioLLVMcode += "  store %ptrtype %new.buffer.pointer, %ptrtype* %ioArray\n"
