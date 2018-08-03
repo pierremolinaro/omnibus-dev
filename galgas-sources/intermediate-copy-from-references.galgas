@@ -47,8 +47,11 @@ override method @copyFromReferencesIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mType llvmTypeName]
-  ioLLVMcode += "  call void @plm.assign." + [mType.llvmBaseTypeName assemblerRepresentation]
-             + " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
+  ioLLVMcode += "  call void @plm.assign."
+  ioLLVMcode += [mType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += "."
+  ioLLVMcode += [mType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -66,8 +69,11 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
     let typeName = [self llvmTypeName]
     if [kind isDynamicArrayType] then
       ioLLVMCode += llvmSeparatorLine () + "\n"
-      ioLLVMCode += "define internal void @plm.assign." + [self.llvmBaseTypeName assemblerRepresentation]
-                  + " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
+      ioLLVMCode += "define internal void @plm.assign."
+      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMCode += "."
+      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMCode += " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
       ioLLVMCode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
       ioLLVMCode += "  call void @arc.retain (" + typeName + " %source)\n" 
       ioLLVMCode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n" 
@@ -79,8 +85,11 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
       let arcAssignmentList = [self arcList !{}]
   
       ioLLVMCode += llvmSeparatorLine () + "\n"
-      ioLLVMCode += "define internal void @plm.assign." + [self.llvmBaseTypeName assemblerRepresentation]
-                  + " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
+      ioLLVMCode += "define internal void @plm.assign."
+      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMCode += "."
+      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMCode += " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
       ioLLVMCode += ";--- Handle ARC properties\n"
       for (propertyName propertyType indexPath) in arcAssignmentList do
         let propertyTypeLLVMName = [propertyType llvmTypeName]
@@ -125,7 +134,7 @@ method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGen
       ioLLVMCode += "testTarget:\n"
       ioLLVMCode += "  %targetAsUnsigned = ptrtoint " + typeName + "* %inTarget to i32\n"
       ioLLVMCode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
-      ioLLVMCode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq  i32%targetAsUnsignedAnd3, 0\n"
+      ioLLVMCode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
       ioLLVMCode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
       ioLLVMCode += "testSource:\n"
       ioLLVMCode += "  %sourceAsUnsigned = ptrtoint " + typeName + "* %inSource to i32\n"

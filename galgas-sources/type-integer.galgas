@@ -176,7 +176,7 @@ override method @integerDeclarationAST enterInContext
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !guardMap:{}
-    !attributes:.instanciable | .equatable | .copyable | .comparable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable | .comparable
     !plmTypeDescriptionName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
     !llvmBaseTypeName:integerTypeName
@@ -517,7 +517,6 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   ?let @PLMType inResultType
   !@objectIR outResult
 {
-#  message "INFIX OP2 " + "\n"
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
   [[inLeftOperand type].kind integer ?min:let @bigint min ?max:let @bigint max ?2*]
@@ -711,12 +710,12 @@ proc generateLLVMCodeForIntegerType
   ?let @bool inIsSigned
 {
   let llvmTypeName = "i" + inSize
-  let plmTypeName = "$" + if inIsSigned then "int" else "uint" end  + inSize
-  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTIONS FOR " + plmTypeName + " TYPE")
+  let llvmBaseTypeName = "$" + if inIsSigned then "int" else "uint" end  + inSize
+  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTIONS FOR " + llvmBaseTypeName + " TYPE")
 #--- Add "bool" function for $uint1
   if (inSize == 1) && not inIsSigned then
     generateUInt1ToBoolFunction (
-      !PLMTypeName:plmTypeName
+      !PLMTypeName:llvmBaseTypeName
       !?ioLLVMcode
       !LLVMTypeName:llvmTypeName
     )
@@ -724,7 +723,7 @@ proc generateLLVMCodeForIntegerType
 #--- Add "byteSwapped" intrinsic function
   if (inSize mod 16) == 0 then
     generateIntegerIntrinsicFunction (
-      !PLMTypeName:plmTypeName
+      !PLMTypeName:llvmBaseTypeName
       !?ioLLVMcode
       !method:byteSwappedMethoName ()
       !intrinsic:"bswap"
@@ -734,7 +733,7 @@ proc generateLLVMCodeForIntegerType
   end
 #--- Add "bitReversed" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:bitReversedMethoName ()
     !intrinsic:"bitreverse"
@@ -743,7 +742,7 @@ proc generateLLVMCodeForIntegerType
   )
 #--- Add "count leading zeros" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:countLeadingZerosMethoName ()
     !intrinsic:"ctlz"
@@ -752,7 +751,7 @@ proc generateLLVMCodeForIntegerType
   )
 #--- Add "count training zeros" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:countTrainingZerosMethoName ()
     !intrinsic:"cttz"
@@ -761,7 +760,7 @@ proc generateLLVMCodeForIntegerType
   )
 #--- Add "count training zeros" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:setBitCountMethoName ()
     !intrinsic:"ctpop"
@@ -771,52 +770,73 @@ proc generateLLVMCodeForIntegerType
 #---------------------------- Generate assignment function
   generateIntegerAssignmentFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !LLVMTypeName:llvmTypeName
   )
 #---------------------------- Generate comparison functions
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !plmOperator:"eq"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:"eq"
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !plmOperator:"ne"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:"ne"
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !plmOperator:"lt"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "slt" else "ult" end
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !plmOperator:"le"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "sle" else "ule" end
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !plmOperator:"gt"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "sgt" else "ugt" end
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:plmTypeName
+    !PLMTypeName:llvmBaseTypeName
     !plmOperator:"ge"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "sge" else "uge" end
   )
+  ioLLVMcode += llvmSeparatorLine () + "\n"
+  ioLLVMcode += "define internal void @plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName
+  ioLLVMcode += " (" + llvmTypeName + "* %outTarget, " + llvmTypeName + "* %inSource) {\n"
+  ioLLVMcode += ";--- Compute type size\n"
+  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* null, i32 1\n"
+  ioLLVMcode += "  %byteCount = ptrtoint " + llvmTypeName + "* %sizeAsPtr to i32\n"
+  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
+  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyWords\n"
+  ioLLVMcode += ";--- Copy using load/store\n"
+  ioLLVMcode += "loadStore:\n"
+  ioLLVMcode += "  %value = load " + llvmTypeName + ", " + llvmTypeName + "* %inSource\n"
+  ioLLVMcode += "  store " + llvmTypeName + " %value, " + llvmTypeName + "* %outTarget\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += ";--- Copy using copy function\n"
+  ioLLVMcode += "copyWords:\n"
+  ioLLVMcode += "  %target32 = bitcast " + llvmTypeName + "* %outTarget to i32*\n"
+  ioLLVMcode += "  %source32 = bitcast " + llvmTypeName + "* %inSource to i32*\n"
+  ioLLVMcode += "  %wordCount = udiv i32 %byteCount, 4\n"
+  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #·······················································································································

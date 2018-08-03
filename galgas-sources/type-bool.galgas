@@ -32,6 +32,12 @@ override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @st
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once boolTypeName -> @string {
+  result = "$bool"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @booleanDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -61,7 +67,7 @@ override method @booleanDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:boolTypeName ()
     !kind:.boolean
     !llvmBaseTypeName:boolTypeName ()
@@ -144,6 +150,12 @@ proc generateBoolTypeLLVMCode ?!@string ioLLVMcode {
   ioLLVMcode += "define internal i1 @" + functionName + " (i1* %inValue) {\n"
   ioLLVMcode += "  %value = load i1, i1* %inValue\n"
   ioLLVMcode += "  ret i1 %value\n"
+  ioLLVMcode += "}\n\n"
+  ioLLVMcode += llvmSeparatorLine () + "\n"
+  ioLLVMcode += "define internal void @plm.assign." + boolTypeName () + "." + boolTypeName () + " (i1* %target, i1*%source) {\n"
+  ioLLVMcode += "  %value = load i1, i1* %source\n"
+  ioLLVMcode += "  store i1 %value, i1* %target\n"
+  ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }
 
