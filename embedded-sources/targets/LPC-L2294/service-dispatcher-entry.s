@@ -1,1 +1,1 @@
-  .word  !ENTRY! @ !IDX!
+  .word  "!ENTRY!" @ !IDX!

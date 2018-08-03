@@ -2,7 +2,7 @@
 @   INTERRUPT VECTOR                                                                                                   *
 @----------------------------------------------------------------------------------------------------------------------*
 
-	.section	.isr_vector,"a",%progbits
+	.section	.isr_vector, "a", %progbits
 
   .word __system_stack_end
 @--- ARM Core System Handler Vectors

@@ -108,7 +108,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name
     let plmTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.plmTypeDescriptionName + "]" !mArrayTypeName}
-    let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "." + arraySize !mArrayTypeName}
+    let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !mArrayTypeName}
     if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
       [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?1*]
       [!?ioContext.mTypeMap insertType

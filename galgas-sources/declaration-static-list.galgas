@@ -205,6 +205,32 @@ override getter @staticListAST keyRepresentationForErrorSignaling -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! Static list
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
+  result = .new {!"staticlist " + inStaticListName !inStaticListName}
+}
+
+#·······················································································································
+
+private func llvmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
+  result = .new {!"staticlist-" + inStaticListName !inStaticListName}
+}
+
+#·······················································································································
+
+private func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+  result = .new {!"staticlist element " + inStaticListName !inStaticListName}
+}
+
+#·······················································································································
+
+private func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+  result = .new{!"staticlist-element-type-" + [inStaticListName assemblerRepresentation] !inStaticListName.location}
+}
+
+#·······················································································································
 
 map @staticlistMap {
   @propertyList mStaticListPropertyList

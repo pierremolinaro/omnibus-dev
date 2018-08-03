@@ -366,13 +366,13 @@ void routine_retainRequiredDrivers (class GALGAS_ast & ioArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               Function 'functionType'                                               *
+//                                         Function 'plmNameForStaticListType'                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_PLMType function_functionType (const class GALGAS_routineDescriptor & constinArgument0,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_plmNameForStaticListType (const class GALGAS_lstring & constinArgument0,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -396,13 +396,13 @@ class GALGAS_lstring function_plmNameForStaticListElementType (const class GALGA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         Function 'plmNameForStaticListType'                                         *
+//                                               Function 'functionType'                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_plmNameForStaticListType (const class GALGAS_lstring & constinArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
+class GALGAS_PLMType function_functionType (const class GALGAS_routineDescriptor & constinArgument0,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

@@ -108,7 +108,7 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mName,
@@ -202,7 +202,7 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
   public : GALGAS_externProcedureDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_externProcedureDeclarationListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_externProcedureDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_externProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mExternProcedureName,
@@ -384,7 +384,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_externProcedureMapIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_externProcedureMapIR_2D_element (void) ;
+  public : virtual ~ GALGAS_externProcedureMapIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_externProcedureMapIR_2D_element (const GALGAS_lstring & in_lkey,
@@ -458,7 +458,7 @@ class GALGAS_routineFormalArgumentListIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_routineFormalArgumentListIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_routineFormalArgumentListIR_2D_element (void) ;
+  public : virtual ~ GALGAS_routineFormalArgumentListIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_routineFormalArgumentListIR_2D_element (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentKind,
@@ -558,7 +558,7 @@ class GALGAS_isrDeclarationListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_isrDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_isrDeclarationListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_isrDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_isrDeclarationListAST_2D_element (const GALGAS_lstring & in_mISRName,
@@ -778,7 +778,7 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_interruptMapIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_interruptMapIR_2D_element (void) ;
+  public : virtual ~ GALGAS_interruptMapIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_interruptMapIR_2D_element (const GALGAS_lstring & in_lkey,
@@ -1276,7 +1276,7 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_guardMapIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_guardMapIR_2D_element (void) ;
+  public : virtual ~ GALGAS_guardMapIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_guardMapIR_2D_element (const GALGAS_lstring & in_lkey,
@@ -1614,7 +1614,7 @@ class GALGAS_functionCallEffectiveParameterListAST_2D_element : public AC_GALGAS
   public : GALGAS_functionCallEffectiveParameterListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_functionCallEffectiveParameterListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_functionCallEffectiveParameterListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_functionCallEffectiveParameterListAST_2D_element (const GALGAS_lstring & in_mSelector,
@@ -1680,7 +1680,7 @@ class GALGAS_primaryInExpressionAccessListAST_2D_element : public AC_GALGAS_root
   public : GALGAS_primaryInExpressionAccessListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_primaryInExpressionAccessListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_primaryInExpressionAccessListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_primaryInExpressionAccessListAST_2D_element (const GALGAS_primaryInExpressionAccessAST & in_mAccess) ;
@@ -1824,7 +1824,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_infixOperatorMap_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_infixOperatorMap_2D_element (void) ;
+  public : virtual ~ GALGAS_infixOperatorMap_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_infixOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
@@ -1898,7 +1898,7 @@ class GALGAS_integerSliceFieldListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_integerSliceFieldListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_integerSliceFieldListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_integerSliceFieldListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_integerSliceFieldListAST_2D_element (const GALGAS_lstring & in_mSliceWidth,
@@ -1972,7 +1972,7 @@ class GALGAS_registerIntegerFieldListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_registerIntegerFieldListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_registerIntegerFieldListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_registerIntegerFieldListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_registerIntegerFieldListAST_2D_element (const GALGAS_lstring & in_mFieldName,
@@ -2044,7 +2044,7 @@ class GALGAS_effectiveArgumentListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_effectiveArgumentListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_effectiveArgumentListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_effectiveArgumentListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_effectiveArgumentListAST_2D_element (const GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterKind,
@@ -2369,7 +2369,7 @@ class GALGAS_sliceAssignmentListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_sliceAssignmentListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_sliceAssignmentListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_sliceAssignmentListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_sliceAssignmentListAST_2D_element (const GALGAS_lstring & in_mSliceWidth,
@@ -3064,7 +3064,7 @@ class GALGAS_syncInstructionBranchListIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_syncInstructionBranchListIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_syncInstructionBranchListIR_2D_element (void) ;
+  public : virtual ~ GALGAS_syncInstructionBranchListIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_syncInstructionBranchListIR_2D_element (const GALGAS_guardedCommandIR & in_mGuardedCommand,
@@ -3253,7 +3253,7 @@ class GALGAS_guardedCommandIRList_2D_element : public AC_GALGAS_root {
   public : GALGAS_guardedCommandIRList_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_guardedCommandIRList_2D_element (void) ;
+  public : virtual ~ GALGAS_guardedCommandIRList_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_guardedCommandIRList_2D_element (const GALGAS_guardedCommandIR & in_mGuardedCommand) ;

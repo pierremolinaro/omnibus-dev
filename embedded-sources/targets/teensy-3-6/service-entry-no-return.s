@@ -2,20 +2,20 @@
 @  Service !ENTRY!
 @----------------------------------------------------------------------------------------------------------------------*
 
-	.section	".text.!ENTRY!","ax",%progbits
-	.globl	!ENTRY!
+	.section	".text.!ENTRY!", "ax", %progbits
+	.globl	"!ENTRY!"
 	.align	2
-	.type	!ENTRY!,%function
+	.type	"!ENTRY!", %function
 	.code	16
 	.thumb_func
 
-!ENTRY!:
+"!ENTRY!":
 	.fnstart
   svc #!IDX! + 1
   bx  lr
 
-.Lfunc_end_!ENTRY!:
-  .size	!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!
+".Lfunc_end_!ENTRY!":
+  .size	"!ENTRY!", ".Lfunc_end_!ENTRY!" - "!ENTRY!"
   .cantunwind
 	.fnend
 
