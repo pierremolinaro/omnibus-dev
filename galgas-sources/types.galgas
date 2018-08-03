@@ -539,8 +539,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@generationAdds ioGenerat
         generateLLVMCodeForStaticArrayType (
           !?llvmCodeForGeneratedTypes
           !?ioGenerationAdds
-          !type.llvmBaseTypeName
-          !elementType
+          !type
           !arraySize
         )
         ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"

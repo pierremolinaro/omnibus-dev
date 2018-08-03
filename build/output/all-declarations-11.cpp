@@ -921,13 +921,13 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
         break ;
       case GALGAS_typeKind::kEnum_arrayType:
         {
-          const cEnumAssociatedValues_typeKind_arrayType * extractPtr_20829 = (const cEnumAssociatedValues_typeKind_arrayType *) (enumerator_19421.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_PLMType extractedValue_elementType = extractPtr_20829->mAssociatedValue0 ;
-          const GALGAS_bigint extractedValue_arraySize = extractPtr_20829->mAssociatedValue1 ;
+          const cEnumAssociatedValues_typeKind_arrayType * extractPtr_20789 = (const cEnumAssociatedValues_typeKind_arrayType *) (enumerator_19421.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_PLMType extractedValue_elementType = extractPtr_20789->mAssociatedValue0 ;
+          const GALGAS_bigint extractedValue_arraySize = extractPtr_20789->mAssociatedValue1 ;
           {
-          routine_generateLLVMCodeForStaticArrayType (var_llvmCodeForGeneratedTypes_19382, ioArgument_ioGenerationAdds, enumerator_19421.current_mType (HERE).getter_llvmBaseTypeName (HERE), extractedValue_elementType, extractedValue_arraySize, inCompiler  COMMA_SOURCE_FILE ("types.galgas", 539)) ;
+          routine_generateLLVMCodeForStaticArrayType (var_llvmCodeForGeneratedTypes_19382, ioArgument_ioGenerationAdds, enumerator_19421.current_mType (HERE), extractedValue_arraySize, inCompiler  COMMA_SOURCE_FILE ("types.galgas", 539)) ;
           }
-          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_19421.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("types.galgas", 546)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 546)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 546)) ;
+          ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_19421.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("types.galgas", 545)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 545)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 545)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_dynamicArrayType:
@@ -940,16 +940,16 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
         break ;
       case GALGAS_typeKind::kEnum_pointer:
         {
-          const cEnumAssociatedValues_typeKind_pointer * extractPtr_20928 = (const cEnumAssociatedValues_typeKind_pointer *) (enumerator_19421.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_PLMType extractedValue_pointee = extractPtr_20928->mAssociatedValue0 ;
+          const cEnumAssociatedValues_typeKind_pointer * extractPtr_20888 = (const cEnumAssociatedValues_typeKind_pointer *) (enumerator_19421.current_mType (HERE).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_PLMType extractedValue_pointee = extractPtr_20888->mAssociatedValue0 ;
         }
         break ;
       }
     }
     enumerator_19421.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 553)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(var_llvmCodeForGeneratedTypes_19382, inCompiler  COMMA_SOURCE_FILE ("types.galgas", 554)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 552)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_llvmCodeForGeneratedTypes_19382, inCompiler  COMMA_SOURCE_FILE ("types.galgas", 553)) ;
 }
 
 
