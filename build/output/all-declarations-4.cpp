@@ -11529,7 +11529,7 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_none (UNUSED_LOCA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_all (UNUSED_LOCATION_ARGS) {
-  return GALGAS_PLMTypeAttributes ((uint64_t) 0x1F) ;
+  return GALGAS_PLMTypeAttributes ((uint64_t) 0xF) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11554,12 +11554,6 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_copyable (UNUSED_
 
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_comparable (UNUSED_LOCATION_ARGS) {
   return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 3) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::constructor_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) {
-  return GALGAS_PLMTypeAttributes (((uint64_t) 1) << 4) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11639,7 +11633,7 @@ GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::substract_operation (const GA
 GALGAS_PLMTypeAttributes GALGAS_PLMTypeAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
   GALGAS_PLMTypeAttributes result ;
   if (mIsValid) {
-    result = GALGAS_PLMTypeAttributes (((uint64_t) 0x1F) ^ mFlags) ;
+    result = GALGAS_PLMTypeAttributes (((uint64_t) 0xF) ^ mFlags) ;
   }
   return result ;
 }
@@ -11664,9 +11658,6 @@ void GALGAS_PLMTypeAttributes::description (C_String & ioString,
     if ((mFlags & ((uint64_t) 1) << 3) != 0) {
       ioString << " comparable" ;
     }
-    if ((mFlags & ((uint64_t) 1) << 4) != 0) {
-      ioString << " generateAssignmentRoutine" ;
-    }
   }
   ioString << ">" ;
 }
@@ -11686,7 +11677,7 @@ GALGAS_bool GALGAS_PLMTypeAttributes::getter_none (UNUSED_LOCATION_ARGS) const {
 GALGAS_bool GALGAS_PLMTypeAttributes::getter_all (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool (mFlags == (uint64_t) 0x1F) ;
+    result = GALGAS_bool (mFlags == (uint64_t) 0xF) ;
   }
   return result ;
 }
@@ -11727,16 +11718,6 @@ GALGAS_bool GALGAS_PLMTypeAttributes::getter_comparable (UNUSED_LOCATION_ARGS) c
   GALGAS_bool result ;
   if (mIsValid) {
     result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 3) != 0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_PLMTypeAttributes::getter_generateAssignmentRoutine (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (mIsValid) {
-    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 4) != 0) ;
   }
   return result ;
 }

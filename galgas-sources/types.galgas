@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @PLMTypeAttributes {
-  instanciable, equatable, copyable, comparable, generateAssignmentRoutine
+  instanciable, equatable, copyable, comparable
 }
 
 #·······················································································································
@@ -110,7 +110,7 @@ func literalStringType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString
     !llvmBaseTypeName:staticStringTypeName ()
@@ -550,6 +550,7 @@ proc declareLLVMTypes
         end
         ioLLVMcode += "}\n"
       case literalString : 
+        generateStaticStringTypeLLVMCode (!?llvmCodeForGeneratedTypes ![type llvmTypeName])
       case staticInteger : 
       case opaque (*) :
       case arrayType (elementType arraySize) :

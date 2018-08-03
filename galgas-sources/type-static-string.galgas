@@ -52,3 +52,17 @@ override method @literalStringDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc generateStaticStringTypeLLVMCode ?!@string ioLLVMcode ?let @string inLLVMTypeName {
+  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTIONS FOR $staticString TYPE")
+  ioLLVMcode += "define internal void @plm.assign." + staticStringTypeName () + "." + staticStringTypeName ()
+  ioLLVMcode += " (" + inLLVMTypeName + "* %target, " + inLLVMTypeName + "*%source) {\n"
+  ioLLVMcode += "  %value = load " + inLLVMTypeName + ", " + inLLVMTypeName + "* %source\n"
+  ioLLVMcode += "  store " + inLLVMTypeName + " %value, " + inLLVMTypeName + "* %target\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -144,7 +144,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["()" nowhere] !{} !.null]
   #-------------------------------------------- Type attributes
-    let @PLMTypeAttributes typeAttributes = .instanciable | .copyable | .generateAssignmentRoutine
+    let @PLMTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
     let arrayType = @PLMType.new {
       !propertyMap:propertyMap
@@ -171,11 +171,10 @@ override method @typeDynamicArrayDeclarationAST enterInContext
 proc generateLLVMcodeForDynamicArray
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
-  ?let @PLMType unused inArrayType
+  ?let @PLMType inArrayType
   ?let @PLMType inElementType
   ?let @string inTemporaryTypeName
 {
-  log inTemporaryTypeName
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   let llvmArrayBaseTypeName = inTemporaryTypeName # inArrayType.llvmBaseTypeName
   let elementLLVMTypeName = [inElementType llvmTypeName]
@@ -278,6 +277,21 @@ proc generateLLVMcodeForDynamicArray
   ioLLVMcode += ";--- Return\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
+#--- Assignment
+  ioLLVMcode += llvmSeparatorLine () + "\n"
+  ioLLVMcode += "define internal void @plm.assign."
+  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += "."
+  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
+  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
+  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
+  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
+  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
+  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
