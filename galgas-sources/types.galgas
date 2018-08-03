@@ -45,7 +45,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (* *) :
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
-  case dynamicArrayType (* *) :
+  case dynamicArrayType (*) :
     result = "%ptrtype" # "i" + ptrSize
   case function (@routineDescriptor descriptor) :
     if descriptor.returnTypeProxy == .null then
@@ -82,7 +82,7 @@ enum @typeKind {
   case staticInteger
   case opaque (@bigint bitCount)
   case arrayType (@PLMType elementType @bigint size)
-  case dynamicArrayType (@PLMType elementType @bigint ptrSize)
+  case dynamicArrayType (@PLMType elementType)
   case function (@routineDescriptor descriptor)
   case pointer (@PLMType pointee)
 }
@@ -320,7 +320,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Opaque (" + bitCount + " bits)"
   case arrayType (* *) :
     result = "Static array"
-  case dynamicArrayType (2*) :
+  case dynamicArrayType (*) :
     result = "Dynamic array"
   case function (*) :
     result = "Function"
@@ -371,7 +371,7 @@ getter @PLMType defaultAlignment -> @uint{
     end
   case arrayType (elementType *) :
     result = [elementType defaultAlignment]
-  case dynamicArrayType (2*) :
+  case dynamicArrayType (*) :
     result = 4
   case function (*) :
     result = 4
@@ -560,7 +560,14 @@ proc declareLLVMTypes
           !arraySize
         )
         ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
-      case dynamicArrayType (2*) :
+      case dynamicArrayType (@PLMType elementType) :
+        generateLLVMcodeForDynamicArray (
+          !?llvmCodeForGeneratedTypes
+          !?ioGenerationAdds
+          !type
+          !elementType
+          !type.plmTypeDescriptionName # !!!! Temporary
+        )
       case function (*) :
       case pointer (unused pointee) :
       end
