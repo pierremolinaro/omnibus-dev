@@ -103,7 +103,7 @@ map @classConstantMap {
 override method @enumerationDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
@@ -146,7 +146,7 @@ override method @enumerationDeclarationAST enterInContext
     !classConstantMap:enumConstantMap
     !constructorMap:{}
     !guardMap:{}
-    !attributes:.instanciable | .equatable | .copyable | .generateAssignmentRoutine
+    !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
     !llvmBaseTypeName:mEnumerationName
@@ -158,8 +158,6 @@ override method @enumerationDeclarationAST enterInContext
   ]
 #---------------- Infix operators
   enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
-#---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@enumerationDecoratedDeclaration.new {!mEnumerationName !representationBitCount}
 }
 
 #·······················································································································
@@ -203,57 +201,35 @@ proc enterEnumerationComparisonOperators
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @enumerationDecoratedDeclaration : @abstractDecoratedDeclaration {
-  @lstring mEnumerationName
-  @uint mRepresentationBitCount
-}
-
-#·······················································································································
-
-override method @enumerationDecoratedDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#----------- Generate enumeration specific code
-  ioIntermediateCodeStruct.mGenerationListIR += !@enumerationIR.new {!mEnumerationName !mRepresentationBitCount}
-}
-
-#·······················································································································
-
-override method @enumerationDecoratedDeclaration routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @enumerationIR : @abstractGenerationIR {
-  @lstring mEnumerationName
-  @uint mBitCount
-}
-
-#·······················································································································
-
-override method @enumerationIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds unused ioGenerationAdds {
+proc generateLLVMcodeForEnumeration
+  ?!@string ioLLVMcode
+  ?!@generationAdds unused ioGenerationAdds
+  ?let @PLMType inType
+  ?let @uint inBitCount
+{
+  let llvmTypeName = [inType llvmTypeName]
+  let llvmBaseTypeName = inType.llvmBaseTypeName
+#--- Conversion to uintN
   let routineMangledName = routineMangledNameFromAST (
-    !mEnumerationName
-    !.new {!integerEnumAccessorName (!forBitCount:mBitCount) !mEnumerationName}
+    !llvmBaseTypeName
+    !.new {!integerEnumAccessorName (!forBitCount:inBitCount) !.nowhere}
     !{}
   )
   let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
-  let type = "i" + mBitCount
   ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal " + type + "  @" + routineLLVMName + " (" + type + "* %inValue) nounwind {\n"
-  ioLLVMcode += "  %r = load " + type + ", " + type + "* %inValue\n"
-  ioLLVMcode += "  ret " + type + " %r\n"
+  ioLLVMcode += "define internal " + llvmTypeName + "  @" + routineLLVMName + " (" + llvmTypeName + "* %inValue) nounwind {\n"
+  ioLLVMcode += "  %r = load " + llvmTypeName + ", " + llvmTypeName + "* %inValue\n"
+  ioLLVMcode += "  ret " + llvmTypeName + " %r\n"
+  ioLLVMcode += "}\n\n"
+#--- Assignment
+  ioLLVMcode += "define internal void @plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName
+  ioLLVMcode += " (" + llvmTypeName + "* %target, " + llvmTypeName + "*%source) {\n"
+  ioLLVMcode += "  %value = load " + llvmTypeName + ", " + llvmTypeName + "* %source\n"
+  ioLLVMcode += "  store " + llvmTypeName + " %value, " + llvmTypeName + "* %target\n"
+  ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }
 

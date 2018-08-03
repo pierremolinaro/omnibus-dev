@@ -515,7 +515,13 @@ proc declareLLVMTypes
       case void :
       case boolean :
         generateBoolTypeLLVMCode (!?llvmCodeForGeneratedTypes)
-      case enumeration (*) :
+      case enumeration (bitCount) :
+        generateLLVMcodeForEnumeration (
+          !?llvmCodeForGeneratedTypes
+          !?ioGenerationAdds
+          !type
+          !bitCount
+        )
       case integer (* * unsigned size) :
         generateLLVMCodeForIntegerType (
           !?llvmCodeForGeneratedTypes
