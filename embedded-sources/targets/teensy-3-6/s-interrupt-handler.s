@@ -5,17 +5,17 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global !ISR!
-  .type !ISR!, %function
+  .global "!ISR!"
+  .type "!ISR!", %function
 
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global !HANDLER!
-  .type !HANDLER!, %function
+  .global "!HANDLER!"
+  .type "!HANDLER!", %function
 
 @----------------------------------------------------------------------------------------------------------------------*
 
-!ISR!:
+"!ISR!":
 	.fnstart
 @----------------------------------------- Save preserved registers
 	.save	{r4, lr}
@@ -26,7 +26,7 @@
   ldr   r4, =gRunningTaskControlBlockPtr
   ldr   r4, [r4]
 @----------------------------------------- Call Interrupt handler
-  bl    !HANDLER!
+  bl    "!HANDLER!"
 @----------------------------------------- Perform the context switch, if needed
   b     handle.context.switch
 

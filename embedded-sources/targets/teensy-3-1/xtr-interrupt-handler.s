@@ -1,20 +1,20 @@
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
-@                 I N T E R R U P T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                        *
+@   I N T E R R U P T   H A N D L E R                                                                                  *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global !ISR!
-  .type !ISR!, %function
+  .global "!ISR!"
+  .type "!ISR!", %function
 
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global !HANDLER!
-  .type !HANDLER!, %function
+  .global "!HANDLER!"
+  .type "!HANDLER!", %function
 
 @----------------------------------------------------------------------------------------------------------------------*
 
-!ISR!:
+"!ISR!":
 	.fnstart
 @----------------------------------------- Save preserved registers
 	.save	{r4, r5, lr}
@@ -25,7 +25,7 @@
   ldr   r4, =gRunningTaskControlBlockPtr
   ldr   r4, [r4]
 @----------------------------------------- Call Interrupt handler
-  bl    !HANDLER!
+  bl    "!HANDLER!"
 @----------------------------------------- Perform context switch, if needed
   b     handle.context.switch
 

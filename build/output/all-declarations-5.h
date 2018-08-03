@@ -222,7 +222,7 @@ class GALGAS_globalConstantMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_globalConstantMapIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_globalConstantMapIR_2D_element (void) ;
+  public : virtual ~ GALGAS_globalConstantMapIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_globalConstantMapIR_2D_element (const GALGAS_lstring & in_lkey,
@@ -292,7 +292,7 @@ class GALGAS_generationListIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_generationListIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_generationListIR_2D_element (void) ;
+  public : virtual ~ GALGAS_generationListIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_generationListIR_2D_element (const GALGAS_abstractGenerationIR & in_mGeneration) ;
@@ -2323,7 +2323,7 @@ class GALGAS_LValueRepresentation : public AC_GALGAS_root {
   public : GALGAS_LValueRepresentation (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_LValueRepresentation (void) ;
+  public : virtual ~ GALGAS_LValueRepresentation (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_LValueRepresentation (const GALGAS_PLMType & in_type,
@@ -3187,7 +3187,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : GALGAS_accessibleEntities (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_accessibleEntities (void) ;
+  public : virtual ~ GALGAS_accessibleEntities (void) ;
 
 //--------------------------------- Native constructor
   public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mRoutineSet,

@@ -78,7 +78,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   end
 #-------------------------------------------- Original type name
   let plmTypeDescriptionName = @lstring.new {!"[" + elementType.plmTypeDescriptionName + "]" !mDynamicArrayTypeName}
-  let llvmBaseTypeName = @lstring.new {!"dyn." + elementType.llvmBaseTypeName !mDynamicArrayTypeName}
+  let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !mDynamicArrayTypeName}
 #-------------------------------------------- Original type name
   if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
     [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?1*]

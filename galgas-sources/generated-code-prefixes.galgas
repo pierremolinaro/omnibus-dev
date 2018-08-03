@@ -26,7 +26,7 @@ func llvmDriverStringFromName ?let @string inDriverName -> @string {
   result = if inDriverName == "" then
     inDriverName
   else
-    "driver." + inDriverName
+    "driver$" + inDriverName
   end
 }
 
@@ -371,32 +371,6 @@ func %once memoryAllocSectionName -> @string {
 
 func %once memoryFreeSectionName -> @string {
   result = "heap.memory.free"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! Static list
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist " + inStaticListName !inStaticListName}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"static.list." + inStaticListName !inStaticListName}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist element " + inStaticListName !inStaticListName}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new{!"static.list.element.type." + [inStaticListName assemblerRepresentation] !inStaticListName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

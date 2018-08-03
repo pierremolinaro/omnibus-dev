@@ -2,12 +2,12 @@
 @  Current Stack Pointer
 @----------------------------------------------------------------------------------------------------------------------*
 
-	.section	".text.current.stack.pointer","ax",%progbits
+	.section	".text.current.stack.pointer", "ax", %progbits
 
-  .global !FUNC!current.stack.pointer
-  .type !FUNC!current.stack.pointer, %function
+  .global "!FUNC!current.stack.pointer"
+  .type "!FUNC!current.stack.pointer", %function
 
-!FUNC!current.stack.pointer:
+"!FUNC!current.stack.pointer":
   mov r0, sp
   bx lr
 
