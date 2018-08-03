@@ -64,99 +64,99 @@ override method @copyFromReferencesIR enterAccessibleEntities
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @PLMType generateCopyRoutine ?!@string ioLLVMCode ?!@generationAdds ioGenerationAdds {
+method @PLMType generateCopyRoutine ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
   if [attributes generateAssignmentRoutine] then
     let typeName = [self llvmTypeName]
     if [kind isDynamicArrayType] then
-      ioLLVMCode += llvmSeparatorLine () + "\n"
-      ioLLVMCode += "define internal void @plm.assign."
-      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
-      ioLLVMCode += "."
-      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
-      ioLLVMCode += " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
-      ioLLVMCode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
-      ioLLVMCode += "  call void @arc.retain (" + typeName + " %source)\n" 
-      ioLLVMCode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n" 
-      ioLLVMCode += "  call void @arc.release (" + typeName + " %target)\n" 
-      ioLLVMCode += "  store " + typeName + " %source, " + typeName + "* %inTargetPtr\n" 
-      ioLLVMCode += "  ret void\n"
-      ioLLVMCode += "}\n\n"
+      ioLLVMcode += llvmSeparatorLine () + "\n"
+      ioLLVMcode += "define internal void @plm.assign."
+      ioLLVMcode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMcode += "."
+      ioLLVMcode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMcode += " (" + typeName + " * %inTargetPtr, " + typeName + "* %inSourcePtr) nounwind optsize {\n"
+      ioLLVMcode += "  %source = load " + typeName + ", " + typeName + "* %inSourcePtr\n" 
+      ioLLVMcode += "  call void @arc.retain (" + typeName + " %source)\n" 
+      ioLLVMcode += "  %target = load " + typeName + ", " + typeName + "* %inTargetPtr\n" 
+      ioLLVMcode += "  call void @arc.release (" + typeName + " %target)\n" 
+      ioLLVMcode += "  store " + typeName + " %source, " + typeName + "* %inTargetPtr\n" 
+      ioLLVMcode += "  ret void\n"
+      ioLLVMcode += "}\n\n"
     else
       let arcAssignmentList = [self arcList !{}]
   
-      ioLLVMCode += llvmSeparatorLine () + "\n"
-      ioLLVMCode += "define internal void @plm.assign."
-      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
-      ioLLVMCode += "."
-      ioLLVMCode += [self.llvmBaseTypeName assemblerRepresentation]
-      ioLLVMCode += " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
-      ioLLVMCode += ";--- Handle ARC properties\n"
+      ioLLVMcode += llvmSeparatorLine () + "\n"
+      ioLLVMcode += "define internal void @plm.assign."
+      ioLLVMcode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMcode += "."
+      ioLLVMcode += [self.llvmBaseTypeName assemblerRepresentation]
+      ioLLVMcode += " (" + typeName + " * %inTarget, " + typeName + "* %inSource) nounwind optsize {\n"
+      ioLLVMcode += ";--- Handle ARC properties\n"
       for (propertyName propertyType indexPath) in arcAssignmentList do
         let propertyTypeLLVMName = [propertyType llvmTypeName]
         let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
         ioGenerationAdds.mUniqueIndex ++
-        ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inSource, i32 0"
+        ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inSource, i32 0"
         for (idx) in indexPath do
-          ioLLVMCode += ", i32 " + idx
+          ioLLVMcode += ", i32 " + idx
         end
-        ioLLVMCode += " ; " + propertyName + "\n"
+        ioLLVMcode += " ; " + propertyName + "\n"
         let llvmLoadedVarName = llvmVarName + ".loaded"
-        ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-        ioLLVMCode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+        ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+        ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
       end
       for (propertyName propertyType indexPath) in arcAssignmentList do
         let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
         ioGenerationAdds.mUniqueIndex ++
-        ioLLVMCode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inTarget, i32 0"
+        ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + typeName + ", " + typeName + "* %inTarget, i32 0"
         for (idx) in indexPath do
-          ioLLVMCode += ", i32 " + idx
+          ioLLVMcode += ", i32 " + idx
         end
-        ioLLVMCode += " ; " + propertyName + "\n"
+        ioLLVMcode += " ; " + propertyName + "\n"
         let propertyTypeLLVMName = [propertyType llvmTypeName]
         let llvmLoadedVarName = llvmVarName + ".loaded"
-        ioLLVMCode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-        ioLLVMCode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+        ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+        ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
       end
-      ioLLVMCode += ";--- Compute type size\n"
-      ioLLVMCode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
-      ioLLVMCode += "  %byteCount = ptrtoint " + typeName + "* %sizeAsPtr to i32\n"
-      ioLLVMCode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
-      ioLLVMCode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
-      ioLLVMCode += ";--- Copy\n"
-      ioLLVMCode += "loadStore:\n"
-      ioLLVMCode += "  %v = load " + typeName + ", " + typeName + "* %inSource\n" 
-      ioLLVMCode += "  store " + typeName + " %v, " + typeName + "* %inTarget\n" 
-      ioLLVMCode += "  br label %copy.end\n"
-      ioLLVMCode += "copyBytesOrCopyWords:\n"
-      ioLLVMCode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
-      ioLLVMCode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
-      ioLLVMCode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
-      ioLLVMCode += "testTarget:\n"
-      ioLLVMCode += "  %targetAsUnsigned = ptrtoint " + typeName + "* %inTarget to i32\n"
-      ioLLVMCode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
-      ioLLVMCode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
-      ioLLVMCode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
-      ioLLVMCode += "testSource:\n"
-      ioLLVMCode += "  %sourceAsUnsigned = ptrtoint " + typeName + "* %inSource to i32\n"
-      ioLLVMCode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
-      ioLLVMCode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
-      ioLLVMCode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
-      ioLLVMCode += "copyWords:\n"
-      ioLLVMCode += "  %target32 = bitcast " + typeName + "* %inTarget to i32*\n"
-      ioLLVMCode += "  %source32 = bitcast " + typeName + "* %inSource to i32*\n"
-      ioLLVMCode += "  %wordCount = udiv i32 %byteCount, 4\n"
-      ioLLVMCode += "  br label %copyWords.loop\n"
-      ioLLVMCode += "copyWords.loop:\n"
-      ioLLVMCode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
-      ioLLVMCode += "  br label %copy.end\n"
-      ioLLVMCode += "copyBytes:\n"
-      ioLLVMCode += "  %target8 = bitcast " + typeName + "* %inTarget to i8*\n"
-      ioLLVMCode += "  %source8 = bitcast " + typeName + "* %inSource to i8*\n"
-      ioLLVMCode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
-      ioLLVMCode += "  br label %copy.end\n"
-      ioLLVMCode += "copy.end:\n"
-      ioLLVMCode += "  ret void\n"
-      ioLLVMCode += "}\n\n"
+      ioLLVMcode += ";--- Compute type size\n"
+      ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
+      ioLLVMcode += "  %byteCount = ptrtoint " + typeName + "* %sizeAsPtr to i32\n"
+      ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
+      ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
+      ioLLVMcode += ";--- Copy\n"
+      ioLLVMcode += "loadStore:\n"
+      ioLLVMcode += "  %v = load " + typeName + ", " + typeName + "* %inSource\n" 
+      ioLLVMcode += "  store " + typeName + " %v, " + typeName + "* %inTarget\n" 
+      ioLLVMcode += "  br label %copy.end\n"
+      ioLLVMcode += "copyBytesOrCopyWords:\n"
+      ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
+      ioLLVMcode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
+      ioLLVMcode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
+      ioLLVMcode += "testTarget:\n"
+      ioLLVMcode += "  %targetAsUnsigned = ptrtoint " + typeName + "* %inTarget to i32\n"
+      ioLLVMcode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
+      ioLLVMcode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
+      ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
+      ioLLVMcode += "testSource:\n"
+      ioLLVMcode += "  %sourceAsUnsigned = ptrtoint " + typeName + "* %inSource to i32\n"
+      ioLLVMcode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
+      ioLLVMcode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
+      ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
+      ioLLVMcode += "copyWords:\n"
+      ioLLVMcode += "  %target32 = bitcast " + typeName + "* %inTarget to i32*\n"
+      ioLLVMcode += "  %source32 = bitcast " + typeName + "* %inSource to i32*\n"
+      ioLLVMcode += "  %wordCount = udiv i32 %byteCount, 4\n"
+      ioLLVMcode += "  br label %copyWords.loop\n"
+      ioLLVMcode += "copyWords.loop:\n"
+      ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
+      ioLLVMcode += "  br label %copy.end\n"
+      ioLLVMcode += "copyBytes:\n"
+      ioLLVMcode += "  %target8 = bitcast " + typeName + "* %inTarget to i8*\n"
+      ioLLVMcode += "  %source8 = bitcast " + typeName + "* %inSource to i8*\n"
+      ioLLVMcode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
+      ioLLVMcode += "  br label %copy.end\n"
+      ioLLVMcode += "copy.end:\n"
+      ioLLVMcode += "  ret void\n"
+      ioLLVMcode += "}\n\n"
     end
   end
 }

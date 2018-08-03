@@ -96,8 +96,9 @@ class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & con
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_declareLLVMTypes (const class GALGAS_unifiedTypeMap constinArgument0,
-                               class GALGAS_generationAdds & ioArgument1,
-                               class GALGAS_string & ioArgument2,
+                               const class GALGAS_uint constinArgument1,
+                               class GALGAS_generationAdds & ioArgument2,
+                               class GALGAS_string & ioArgument3,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

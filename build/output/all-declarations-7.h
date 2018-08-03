@@ -1064,7 +1064,7 @@ class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_generateCopyRoutine (const class GALGAS_PLMType inObject,
-                                          class GALGAS_string & io_ioLLVMCode,
+                                          class GALGAS_string & io_ioLLVMcode,
                                           class GALGAS_generationAdds & io_ioGenerationAdds,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
