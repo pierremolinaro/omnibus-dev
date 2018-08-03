@@ -2360,11 +2360,9 @@ class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
 
 class cEnumAssociatedValues_typeKind_dynamicArrayType : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
-  public : const GALGAS_bigint mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_dynamicArrayType (const GALGAS_PLMType & inAssociatedValue0,
-                                                            const GALGAS_bigint & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKind_dynamicArrayType (const GALGAS_PLMType & inAssociatedValue0
                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

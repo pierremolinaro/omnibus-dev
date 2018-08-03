@@ -58,7 +58,7 @@ override getter @typeDynamicArrayDeclarationAST location -> @location outLocatio
 override method @typeDynamicArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
@@ -153,7 +153,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !guardMap:{}
       !attributes:typeAttributes
       !plmTypeDescriptionName:plmTypeDescriptionName
-      !kind:.dynamicArrayType {!elementType:elementType !ptrSize:ioContext.mTargetParameters.mPointerSize}
+      !kind:.dynamicArrayType {!elementType:elementType}
       !llvmBaseTypeName:llvmBaseTypeName
     }
     [!?ioContext.mTypeMap insertType
@@ -161,75 +161,32 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !type:arrayType
       !index:[ioContext.mTypeMap count]
     ]
-  #---------------- Add decorated declaration
-    ioDecoratedDeclarationList += !@decoratedTypeDynamicArrayDeclaration.new {
-      !plmTypeDescriptionName
-      !ioContext.mTargetParameters.mPointerSize
-      !elementType
-    }
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @decoratedTypeDynamicArrayDeclaration : @abstractDecoratedDeclaration {
-  @string mDynamicArrayTypeName
-  @bigint mPtrSize
-  @PLMType mElementType
-}
-
-#·······················································································································
-
-override method @decoratedTypeDynamicArrayDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#----------- Generate enumeration specific code
-  ioIntermediateCodeStruct.mGenerationListIR += !@dynamicArrayIR.new {
-    !mDynamicArrayTypeName
-    !mPtrSize
-    !mElementType
-  }
-}
-
-#·······················································································································
-
-override method @decoratedTypeDynamicArrayDeclaration routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @dynamicArrayIR : @abstractGenerationIR {
-  @string mDynamicArrayTypeName
-  @uint mPtrSize
-  @PLMType mElementType
-}
-
-#·······················································································································
-
-override method @dynamicArrayIR generateLLVMcode
+proc generateLLVMcodeForDynamicArray
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
+  ?let @PLMType unused inArrayType
+  ?let @PLMType inElementType
+  ?let @string inTemporaryTypeName
 {
+  log inTemporaryTypeName
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  let elementLLVMTypeName = [mElementType llvmTypeName]
+  let llvmArrayBaseTypeName = inTemporaryTypeName # inArrayType.llvmBaseTypeName
+  let elementLLVMTypeName = [inElementType llvmTypeName]
 #---------- Method 'removeAll()'
   let removeAllRoutineMangledName = routineMangledNameFromAST (
-    !mDynamicArrayTypeName
+    !llvmArrayBaseTypeName
     !["removeAll" nowhere]
     !{}
   )
   let removeAllRoutineLLVMName = llvmNameForFunction (!removeAllRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName)
+  ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName.string + " NEW")
   ioLLVMcode += "define internal void @" + removeAllRoutineLLVMName + " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  call void @arc.release (%ptrtype %buffer.pointer)\n"
@@ -238,7 +195,7 @@ override method @dynamicArrayIR generateLLVMcode
   ioLLVMcode += "}\n\n"
 #---------- Method 'length()'
   let lengthRoutineMangledName = routineMangledNameFromAST (
-    !mDynamicArrayTypeName
+    !llvmArrayBaseTypeName
     !["length" nowhere]
     !{}
   )
@@ -253,7 +210,7 @@ override method @dynamicArrayIR generateLLVMcode
   @routineFormalArgumentListAST argumentList = {
     !.input
     !["" nowhere]
-    ![mElementType.plmTypeDescriptionName nowhere]
+    ![inElementType.plmTypeDescriptionName nowhere]
     !["inValue" nowhere]
   ,
     !.input
@@ -262,7 +219,7 @@ override method @dynamicArrayIR generateLLVMcode
     !["inIndex" nowhere]
   }
   let insertRoutineMangledName = routineMangledNameFromAST (
-    !mDynamicArrayTypeName
+    !llvmArrayBaseTypeName
     !["insert" nowhere]
     !argumentList
   )
@@ -287,9 +244,9 @@ override method @dynamicArrayIR generateLLVMcode
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
   ioLLVMcode += "  call void @plm.assign."
-  ioLLVMcode += [mElementType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += [inElementType.llvmBaseTypeName assemblerRepresentation]
   ioLLVMcode += "."
-  ioLLVMcode += [mElementType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += [inElementType.llvmBaseTypeName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
   ioLLVMcode += "  store %ptrtype %new.buffer.pointer, %ptrtype* %ioArray\n"
@@ -300,11 +257,11 @@ override method @dynamicArrayIR generateLLVMcode
   argumentList = {
     !.input
     !["" nowhere]
-    ![mElementType.plmTypeDescriptionName nowhere]
+    ![inElementType.plmTypeDescriptionName nowhere]
     !["inValue" nowhere]
   }
   let routineMangledName = routineMangledNameFromAST (
-    !mDynamicArrayTypeName
+    !llvmArrayBaseTypeName
     !["append" nowhere]
     !argumentList
   )
