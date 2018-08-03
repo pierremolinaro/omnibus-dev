@@ -337,16 +337,6 @@ private proc generateCodeFiles
     !?asCode
     !sectionIRlist
   )
-#----------------------------------------- Copy routines
-  let keyList = [inTypeMap allKeyList]
-  @stringset generatedLLVMCopyRoutineSet = {}
-  for (key) in keyList do
-    [inTypeMap searchKey !lkey:key ?type:let type ?index:*]
-    if not [generatedLLVMCopyRoutineSet hasKey !type.llvmBaseTypeName] & [type.attributes generateAssignmentRoutine] then
-      generatedLLVMCopyRoutineSet += !type.llvmBaseTypeName
-      [type generateCopyRoutine !?llvmCode !?generationAdds]
-    end
-  end
 #----------------------------------------- Extern function declaration
   generationAdds.mExternFunctionDeclarationSet += !"void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)"
   generationAdds.mExternFunctionDeclarationSet += !"void @copy.word.array (i32* %dest, i32* %src, i32 %wordCount)"
