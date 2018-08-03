@@ -492,7 +492,12 @@ sortedlist @orderedTypeList {
 
 #·······················································································································
 
-proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@generationAdds ioGenerationAdds ?!@string ioLLVMcode {
+proc declareLLVMTypes
+  ?let @unifiedTypeMap inTypeMap
+  ?let @uint inPointerSize
+  ?!@generationAdds ioGenerationAdds
+  ?!@string ioLLVMcode
+{
 #--- Build ordered list
   @orderedTypeList orderedTypeList = {}
   for (* type index) in inTypeMap do
@@ -519,6 +524,12 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@generationAdds ioGenerat
           !not unsigned
         )
       case structure (propertyList) :
+        generateLLVMcodeForStructure (
+          !?llvmCodeForGeneratedTypes
+          !?ioGenerationAdds
+          !type
+          !inPointerSize
+        )
         ioLLVMcode += [type llvmTypeName] + " = type {"
         for () in propertyList
           do ioLLVMcode += [mType llvmTypeName]

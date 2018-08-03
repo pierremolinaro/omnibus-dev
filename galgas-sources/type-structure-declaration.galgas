@@ -312,9 +312,9 @@ override method @structureDeclarationAST enterInContext
   ]
 #---------------------------------------- Attribute "generateAssignmentRoutine"
   var typeAttributes = @PLMTypeAttributes.instanciable
-  if mGenerateAssignmentRoutine then
-    typeAttributes = typeAttributes | .generateAssignmentRoutine
-  end
+#  if mGenerateAssignmentRoutine then
+#    typeAttributes = typeAttributes | .generateAssignmentRoutine
+#  end
 #---------------------------------------- Attribute "copyable"
   for (s) in mAttributeListAST do
     if s.string == copyableAttribute () then
@@ -613,12 +613,12 @@ override method @decoratedStructureDeclaration semanticAnalysis
     !?intermediateCode:ioIntermediateCodeStruct
   ]
 #----------- Generate enumeration specific code
-  if mMayImplementDeinit && [structureType deinitNeeded]  then
-    ioIntermediateCodeStruct.mGenerationListIR += !@structureIR.new {
-      !structureType
-      !inContext.mTargetParameters.mPointerSize
-    }
-  end
+#  if mMayImplementDeinit && [structureType deinitNeeded]  then
+#    ioIntermediateCodeStruct.mGenerationListIR += !@structureIR.new {
+#      !structureType
+#      !inContext.mTargetParameters.mPointerSize
+#    }
+#  end
 }
 
 #·······················································································································
@@ -677,24 +677,101 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION: DEINIT                                                                                                   
+#!  CODE GENERATION                                                                                                   
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @structureIR : @abstractGenerationIR {
-  @PLMType mStructureType
-  @uint mPointerSize
-}
+proc generateLLVMcodeForStructure
+  ?!@string ioLLVMcode
+  ?!@generationAdds ioGenerationAdds
+  ?let @PLMType inStructureType
+  ?let @uint inPointerSize
+{
+  let llvmTypeName = [inStructureType llvmTypeName]
+  let llvmBaseTypeName = [[inStructureType llvmBaseTypeName] assemblerRepresentation]
+  if [inStructureType deinitNeeded] then
+    ioLLVMcode += llvmTitleComment (!"CODE FOR STRUCTURE TYPE " + inStructureType.plmTypeDescriptionName)
+    ioLLVMcode += "define internal void @deinit." + llvmBaseTypeName
+    ioLLVMcode += " (i" + inPointerSize + " %inPointer) nounwind {\n"
+    let arg = "ptr"
+    ioLLVMcode += "  " + llvmNameForLocalVariable (!arg) + " = inttoptr i" + inPointerSize + " %inPointer to " + llvmTypeName + "*\n"
+    [inStructureType generateRelease !arg !?ioLLVMcode !?ioGenerationAdds]
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
+  end
+#--- Assignment
+ let arcAssignmentList = [inStructureType arcList !{}]
 
-#·······················································································································
-
-override method @structureIR generateLLVMcode ?!@string ioLLVMcode ?!@generationAdds ioGenerationAdds {
-  let llvmTypeName = [mStructureType llvmTypeName]
-  let deinitName = "@deinit." + [[mStructureType plmTypeDescriptionName] assemblerRepresentation]
-  ioLLVMcode += llvmTitleComment (!deinitName)
-  ioLLVMcode += "define internal void " + deinitName + " (i" + mPointerSize + " %inPointer) nounwind {\n"
-  let arg = "ptr"
-  ioLLVMcode += "  " + llvmNameForLocalVariable (!arg) + " = inttoptr i" + mPointerSize + " %inPointer to " + llvmTypeName + "*\n"
-  [mStructureType generateRelease !arg !?ioLLVMcode !?ioGenerationAdds]
+  ioLLVMcode += llvmSeparatorLine () + "\n"
+  ioLLVMcode += "define internal void @plm.assign."
+  ioLLVMcode += llvmBaseTypeName
+  ioLLVMcode += "."
+  ioLLVMcode += llvmBaseTypeName
+  ioLLVMcode += " (" + llvmTypeName + " * %inTarget, " + llvmTypeName + "* %inSource) nounwind optsize {\n"
+  ioLLVMcode += ";--- Handle ARC properties\n"
+  for (propertyName propertyType indexPath) in arcAssignmentList do
+    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inSource, i32 0"
+    for (idx) in indexPath do
+      ioLLVMcode += ", i32 " + idx
+    end
+    ioLLVMcode += " ; " + propertyName + "\n"
+    let llvmLoadedVarName = llvmVarName + ".loaded"
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+  end
+  for (propertyName propertyType indexPath) in arcAssignmentList do
+    let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inTarget, i32 0"
+    for (idx) in indexPath do
+      ioLLVMcode += ", i32 " + idx
+    end
+    ioLLVMcode += " ; " + propertyName + "\n"
+    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let llvmLoadedVarName = llvmVarName + ".loaded"
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+  end
+  ioLLVMcode += ";--- Compute type size\n"
+  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* null, i32 1\n"
+  ioLLVMcode += "  %byteCount = ptrtoint " + llvmTypeName + "* %sizeAsPtr to i32\n"
+  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
+  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
+  ioLLVMcode += ";--- Copy\n"
+  ioLLVMcode += "loadStore:\n"
+  ioLLVMcode += "  %v = load " + llvmTypeName + ", " + llvmTypeName + "* %inSource\n" 
+  ioLLVMcode += "  store " + llvmTypeName + " %v, " + llvmTypeName + "* %inTarget\n" 
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copyBytesOrCopyWords:\n"
+  ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
+  ioLLVMcode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
+  ioLLVMcode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
+  ioLLVMcode += "testTarget:\n"
+  ioLLVMcode += "  %targetAsUnsigned = ptrtoint " + llvmTypeName + "* %inTarget to i32\n"
+  ioLLVMcode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
+  ioLLVMcode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
+  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
+  ioLLVMcode += "testSource:\n"
+  ioLLVMcode += "  %sourceAsUnsigned = ptrtoint " + llvmTypeName + "* %inSource to i32\n"
+  ioLLVMcode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
+  ioLLVMcode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
+  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
+  ioLLVMcode += "copyWords:\n"
+  ioLLVMcode += "  %target32 = bitcast " + llvmTypeName + "* %inTarget to i32*\n"
+  ioLLVMcode += "  %source32 = bitcast " + llvmTypeName + "* %inSource to i32*\n"
+  ioLLVMcode += "  %wordCount = udiv i32 %byteCount, 4\n"
+  ioLLVMcode += "  br label %copyWords.loop\n"
+  ioLLVMcode += "copyWords.loop:\n"
+  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copyBytes:\n"
+  ioLLVMcode += "  %target8 = bitcast " + llvmTypeName + "* %inTarget to i8*\n"
+  ioLLVMcode += "  %source8 = bitcast " + llvmTypeName + "* %inSource to i8*\n"
+  ioLLVMcode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copy.end:\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

@@ -205,7 +205,7 @@ private proc generateCodeFiles
   llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   llvmCode += "\n"
 #----------------------------------------- Type declarations
-  declareLLVMTypes (!inTypeMap !?generationAdds !?llvmCode)
+  declareLLVMTypes (!inTypeMap !inTargetParameters.mPointerSize !?generationAdds !?llvmCode)
 #----------------------------------------- Global Variables
   llvmCode += llvmTitleComment (!"Global variables")
   for (llvmName expression alignment) in inGlobalVariableIRList do
