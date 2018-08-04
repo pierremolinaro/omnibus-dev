@@ -32,48 +32,48 @@ class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & const
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           Function 'byteSwappedMethoName'                                           *
+//                                          Function 'byteSwappedMethodName'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_byteSwappedMethoName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_byteSwappedMethodName (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           Function 'bitReversedMethoName'                                           *
+//                                          Function 'bitReversedMethodName'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_bitReversedMethoName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_bitReversedMethodName (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Function 'countLeadingZerosMethoName'                                        *
+//                                       Function 'countLeadingZerosMethodName'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_countLeadingZerosMethoName (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'countTrainingZerosMethoName'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_countTrainingZerosMethoName (class C_Compiler * inCompiler
+class GALGAS_string function_countLeadingZerosMethodName (class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           Function 'setBitCountMethoName'                                           *
+//                                       Function 'countTrainingZerosMethodName'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_setBitCountMethoName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_countTrainingZerosMethodName (class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'setBitCountMethodName'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_setBitCountMethodName (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

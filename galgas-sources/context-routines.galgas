@@ -97,7 +97,7 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
 {
   result = if inReceiverTypeName == "" then
-    inRoutineName
+    inRoutineName # @lstring.new {!"void." + inRoutineName !inRoutineName}
   else
     @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
   end
@@ -115,7 +115,7 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
                                 ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
 {
   result = if inReceiverTypeName == "" then
-    inRoutineName
+    inRoutineName # @lstring.new {!"void." + inRoutineName !inRoutineName}
   else
     @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
   end
