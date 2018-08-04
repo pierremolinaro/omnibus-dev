@@ -364,7 +364,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   case property (@lstring methodName) :
     let currentType = [currentObject type]
     let @propertyMap propertyMap = currentType.propertyMap
-    let key = routineMangledNameFromCall (!"" !methodName !mArguments)
+    let key = routineMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
     [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     switch propertyAccess
     case singleton  (* errorLocation) :

@@ -270,17 +270,17 @@ method @taskListAST enterInContext
       ]
     end
   #---- Add activate function
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !task.mTaskName ?let taskTypeProxy]
+#    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !task.mTaskName ?let taskTypeProxy]
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:taskTypeProxy
+      !llvmBaseTypeName:task.mTaskName
       !methodName:"activate"
       !safe:true
       !resultTypeProxy:.null
       !canMutateProperties:false
     ]
   #---------------- Enter task functions in property map
-    [task.mTaskFunctionList enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
+    [task.mTaskFunctionList enterFunctionsInPropertyMap !task.mTaskName !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
       !propertyMap:propertyMap

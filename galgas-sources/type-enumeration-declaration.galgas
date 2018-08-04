@@ -131,10 +131,10 @@ override method @enumerationDeclarationAST enterInContext
     !ioContext.mTypeMap
     !.new {!"$uint" + representationBitCount !mEnumerationName}
   }
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let enumTypeProxy]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let enumTypeProxy]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeProxy:enumTypeProxy
+    !llvmBaseTypeName:mEnumerationName
     !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
     !safe:true
     !resultTypeProxy:integerTypeProxy

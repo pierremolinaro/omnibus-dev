@@ -22,7 +22,7 @@ map @propertyMap {
 
 setter @propertyMap addFunctionWithoutArgument
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?receiverTypeProxy:let @unifiedTypeMap-proxy inReceiverType
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
@@ -31,7 +31,7 @@ setter @propertyMap addFunctionWithoutArgument
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
-    !name:inMethodName
+    !name:inLLVMBaseTypeName + "." + inMethodName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:{}
     !returnTypeProxy:inResultType # Return type 
@@ -39,17 +39,17 @@ setter @propertyMap addFunctionWithoutArgument
     !canMutateProperties:inCanMutateProperties # Routine is declared with @mutating attribute
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
+  let routineNameForInvocationGraph = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    ![inMethodName nowhere]
+    !{}
+  )
   [!?self insertKey
-    ![inMethodName + "()" nowhere]
+    !routineNameForInvocationGraph
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
 #--- Routine mangled name
-  let routineNameForInvocationGraph = routineMangledNameFromAST (
-    ![inReceiverType key]
-    ![inMethodName nowhere]
-    !{}
-  )
   [!?ioSubprogramInvocationGraph addNode
     !routineNameForInvocationGraph
     !routineNameForInvocationGraph
@@ -61,7 +61,7 @@ setter @propertyMap addFunctionWithoutArgument
 setter @propertyMap addFunctionWithInputArgument
   ?!context:@semanticContext ioContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?receiverTypeProxy:let @unifiedTypeMap-proxy inReceiverType
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector:let @string inInputSelector
@@ -89,7 +89,7 @@ setter @propertyMap addFunctionWithInputArgument
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
   let methodMangledName = routineMangledNameFromAST (
-    !""
+    !inLLVMBaseTypeName
     !.new {!inMethodName !.nowhere}
     !argumentList
   )
@@ -98,13 +98,7 @@ setter @propertyMap addFunctionWithInputArgument
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
-#--- Routine mangled name
-  let routineNameForInvocationGraph = routineMangledNameFromAST (
-    ![inReceiverType key]
-    ![inMethodName nowhere]
-    !argumentList
-  )
-  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
+  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
 }
 
 #·······················································································································
@@ -112,7 +106,7 @@ setter @propertyMap addFunctionWithInputArgument
 setter @propertyMap addFunctionWithTwoInputArguments
   ?!context:@semanticContext ioContext
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
-  ?receiverTypeProxy:let @unifiedTypeMap-proxy inReceiverType
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector1:let @string inInputSelector1
@@ -148,7 +142,7 @@ setter @propertyMap addFunctionWithTwoInputArguments
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
   let methodMangledName = routineMangledNameFromAST (
-    !""
+    !inLLVMBaseTypeName
     !.new {!inMethodName !.nowhere}
     !argumentList
   )
@@ -158,12 +152,12 @@ setter @propertyMap addFunctionWithTwoInputArguments
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
 #--- Routine mangled name
-  let routineNameForInvocationGraph = routineMangledNameFromAST (
-    ![inReceiverType key]
-    ![inMethodName nowhere]
-    !argumentList
-  )
-  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
+#  let routineNameForInvocationGraph = routineMangledNameFromAST (
+#    !inLLVMBaseTypeName
+#    ![inMethodName nowhere]
+#    !argumentList
+#  )
+  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

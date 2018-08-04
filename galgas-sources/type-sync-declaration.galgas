@@ -141,7 +141,7 @@ override method @syncDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Enter functions in property map
-  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
+  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !mSyncToolName !?context:ioContext !?propertyMap]
 #---------------------------------------- Enter system routines in property map
   for system in mSystemRoutineListAST do
   #--- Attributes
@@ -153,7 +153,7 @@ override method @syncDeclarationAST enterInContext
     let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
   #--- Routine mangled name
     let routineMangledName = routineMangledNameFromAST (
-      !"" # mStructureName 
+      !mSyncToolName
       !system.mName
       !system.mFormalArgumentList
     )
@@ -191,7 +191,7 @@ override method @syncDeclarationAST enterInContext
   for guard in mGuardListAST do
   #--- Guard mangled name
     let guardMangledName = routineMangledNameFromAST (
-      !"" 
+      !mSyncToolName
       !guard.mGuardName
       !guard.mGuardFormalArgumentList
     )
@@ -211,7 +211,7 @@ override method @syncDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:guardMap
     !attributes:.instanciable
-    !plmTypeDescriptionName:"sync " + mSyncToolName
+    !plmTypeDescriptionName:mSyncToolName # "sync " + mSyncToolName
     !kind:.syncTool {!propertyList:propertyList}
     !llvmBaseTypeName:mSyncToolName
   }

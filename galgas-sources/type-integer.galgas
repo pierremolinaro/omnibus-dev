@@ -114,7 +114,7 @@ override method @integerDeclarationAST enterInContext
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:selfTypeProxy
+      !llvmBaseTypeName:integerTypeName
       !methodName:byteSwappedMethodName ()
       !safe:true
       !resultTypeProxy:selfTypeProxy
@@ -124,7 +124,7 @@ override method @integerDeclarationAST enterInContext
   if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:selfTypeProxy
+      !llvmBaseTypeName:integerTypeName
       !methodName:boolTypeName ()
       !safe:true
       !resultTypeProxy:boolTypeProxy
@@ -133,7 +133,7 @@ override method @integerDeclarationAST enterInContext
   end
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeProxy:selfTypeProxy
+    !llvmBaseTypeName:integerTypeName
     !methodName:bitReversedMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -141,7 +141,7 @@ override method @integerDeclarationAST enterInContext
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeProxy:selfTypeProxy
+    !llvmBaseTypeName:integerTypeName
     !methodName:countLeadingZerosMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -149,7 +149,7 @@ override method @integerDeclarationAST enterInContext
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeProxy:selfTypeProxy
+    !llvmBaseTypeName:integerTypeName
     !methodName:countTrainingZerosMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
@@ -157,7 +157,7 @@ override method @integerDeclarationAST enterInContext
   ]
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeProxy:selfTypeProxy
+    !llvmBaseTypeName:integerTypeName
     !methodName:setBitCountMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy

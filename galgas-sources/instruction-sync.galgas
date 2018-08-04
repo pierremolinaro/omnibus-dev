@@ -378,7 +378,7 @@ proc analyzeGuardCall
   !guardMangledName:@lstring outGuardMangledName
 {
   let guardMap = [[inReceiver type] guardMap]
-  let guardMangledName = routineMangledNameFromCall (!"" !inGuardName !inEffectiveParameterList)
+  let guardMangledName = routineMangledNameFromCall (![inReceiver type].llvmBaseTypeName !inGuardName !inEffectiveParameterList)
   [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature]
 #--- Check accessibility
   if not isPublic then

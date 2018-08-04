@@ -281,7 +281,7 @@ override method @staticListAST enterInContext
     case function (@mode mode @bool safe @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
       let routineMangledName = routineMangledNameFromAST (
-        !"" 
+        !llvmNameForStaticListElementType (!mStaticListName)
         !propertyName
         !formalArgs
       )

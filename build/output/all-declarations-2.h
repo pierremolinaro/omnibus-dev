@@ -3251,6 +3251,7 @@ void extensionMethod_enterFunctionInContext (const class GALGAS_functionDeclarat
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_enterFunctionsInPropertyMap (const class GALGAS_functionDeclarationListAST inObject,
+                                                  const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
                                                   class GALGAS_semanticContext & io_ioContext,
                                                   class GALGAS_propertyMap & io_ioPropertyMap,
                                                   class C_Compiler * inCompiler
@@ -3351,7 +3352,7 @@ extern C_StringListCommandLineOption gOption_plm_5F_options_pathList ;
 
 void extensionSetter_addFunctionWithoutArgument (class GALGAS_propertyMap & ioObject,
                                                  class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
-                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inReceiverType,
+                                                 const class GALGAS_string constin_inLLVMBaseTypeName,
                                                  const class GALGAS_string constin_inMethodName,
                                                  const class GALGAS_bool constin_inIsSafe,
                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
