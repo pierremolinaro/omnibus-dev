@@ -61,31 +61,31 @@ func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
 
 #·······················································································································
 
-func %once byteSwappedMethoName -> @string {
+func %once byteSwappedMethodName -> @string {
   result = "byteSwapped"
 }
 
 #·······················································································································
 
-func %once bitReversedMethoName -> @string {
+func %once bitReversedMethodName -> @string {
   result = "bitReversed"
 }
 
 #·······················································································································
 
-func %once countLeadingZerosMethoName -> @string {
+func %once countLeadingZerosMethodName -> @string {
   result = "leadingZeroCount"
 }
 
 #·······················································································································
 
-func %once countTrainingZerosMethoName -> @string {
+func %once countTrainingZerosMethodName -> @string {
   result = "trainingZeroCount"
 }
 
 #·······················································································································
 
-func %once setBitCountMethoName -> @string {
+func %once setBitCountMethodName -> @string {
   result = "setBitCount"
 }
 
@@ -115,7 +115,7 @@ override method @integerDeclarationAST enterInContext
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
       !receiverTypeProxy:selfTypeProxy
-      !methodName:byteSwappedMethoName ()
+      !methodName:byteSwappedMethodName ()
       !safe:true
       !resultTypeProxy:selfTypeProxy
       !canMutateProperties:false
@@ -134,7 +134,7 @@ override method @integerDeclarationAST enterInContext
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
     !receiverTypeProxy:selfTypeProxy
-    !methodName:bitReversedMethoName ()
+    !methodName:bitReversedMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
@@ -142,7 +142,7 @@ override method @integerDeclarationAST enterInContext
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
     !receiverTypeProxy:selfTypeProxy
-    !methodName:countLeadingZerosMethoName ()
+    !methodName:countLeadingZerosMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
@@ -150,7 +150,7 @@ override method @integerDeclarationAST enterInContext
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
     !receiverTypeProxy:selfTypeProxy
-    !methodName:countTrainingZerosMethoName ()
+    !methodName:countTrainingZerosMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
@@ -158,7 +158,7 @@ override method @integerDeclarationAST enterInContext
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
     !receiverTypeProxy:selfTypeProxy
-    !methodName:setBitCountMethoName ()
+    !methodName:setBitCountMethodName ()
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
@@ -725,7 +725,7 @@ proc generateLLVMCodeForIntegerType
     generateIntegerIntrinsicFunction (
       !PLMTypeName:llvmBaseTypeName
       !?ioLLVMcode
-      !method:byteSwappedMethoName ()
+      !method:byteSwappedMethodName ()
       !intrinsic:"bswap"
       !?ioGenerationAdds
       !LLVMTypeName:llvmTypeName
@@ -735,7 +735,7 @@ proc generateLLVMCodeForIntegerType
   generateIntegerIntrinsicFunction (
     !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
-    !method:bitReversedMethoName ()
+    !method:bitReversedMethodName ()
     !intrinsic:"bitreverse"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
@@ -744,7 +744,7 @@ proc generateLLVMCodeForIntegerType
   generateIntegerIntrinsicFunction (
     !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
-    !method:countLeadingZerosMethoName ()
+    !method:countLeadingZerosMethodName ()
     !intrinsic:"ctlz"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
@@ -753,7 +753,7 @@ proc generateLLVMCodeForIntegerType
   generateIntegerIntrinsicFunction (
     !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
-    !method:countTrainingZerosMethoName ()
+    !method:countTrainingZerosMethodName ()
     !intrinsic:"cttz"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
@@ -762,7 +762,7 @@ proc generateLLVMCodeForIntegerType
   generateIntegerIntrinsicFunction (
     !PLMTypeName:llvmBaseTypeName
     !?ioLLVMcode
-    !method:setBitCountMethoName ()
+    !method:setBitCountMethodName ()
     !intrinsic:"ctpop"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
