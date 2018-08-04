@@ -161,6 +161,11 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
       if variable.mPropertyTypeName.string != "" then
         [!?ioGraph noteNode !variable.mPropertyTypeName]
       end
+      switch variable.mInitialisation
+      case noExpression :
+      case expression (exp) :
+        [exp noteExpressionTypesInPrecedenceGraph !?ioGraph]
+      end
     end
     for setup in mTaskSetupListAST do
       [setup.mTaskSetupInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]

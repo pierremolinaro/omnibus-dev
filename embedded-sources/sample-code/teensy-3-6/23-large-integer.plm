@@ -1,0 +1,22 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 240
+
+import "carte-tp-teensy-3-6.plm-import"
+
+let largeConstant = 123_456_789_123_456_789_123_456_789_123_456_789_123_456_789
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche0 @stacksize 512 @activate {
+  var tick = $uint32 ()
+  var largeInteger = $uint1024 ()
+  var otherLargeInteger = $uint1024 ()
+  
+  on time.wait (!until: self.tick) {
+    self.otherLargeInteger = self.largeInteger
+    self.tick += 500
+    self.largeInteger += largeConstant
+  }
+}
+  
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

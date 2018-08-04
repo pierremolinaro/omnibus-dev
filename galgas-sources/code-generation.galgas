@@ -338,8 +338,7 @@ private proc generateCodeFiles
     !sectionIRlist
   )
 #----------------------------------------- Extern function declaration
-  generationAdds.mExternFunctionDeclarationSet += !"void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)"
-  generationAdds.mExternFunctionDeclarationSet += !"void @copy.word.array (i32* %dest, i32* %src, i32 %wordCount)"
+#  generationAdds.mExternFunctionDeclarationSet += !"void @copy.byte.array (i8* %dest, i8* %src, i32 %byteCount)"
   llvmCode += llvmTitleComment (!"LLVM extern functions")
   for (s) in generationAdds.mExternFunctionDeclarationSet do
     llvmCode += "declare " + s + "\n"
