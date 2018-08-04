@@ -10,15 +10,36 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            Routine 'getNewTempReference'                                            *
+//                                     Function 'interruptNameForInvocationGraph'                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_getNewTempReference (const class GALGAS_PLMType constinArgument0,
-                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                  class GALGAS_objectIR & outArgument2,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_interruptNameForInvocationGraph (const class GALGAS_lstring & constinArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                        Routine 'analyzeEffectiveParameters'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgument0,
+                                         const class GALGAS_routineAttributes constinArgument1,
+                                         const class GALGAS_routineTypedSignature constinArgument2,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
+                                         const class GALGAS_location constinArgument4,
+                                         const class GALGAS_lstring constinArgument5,
+                                         const class GALGAS_semanticContext constinArgument6,
+                                         const class GALGAS_mode constinArgument7,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument8,
+                                         class GALGAS_staticEntityMap & ioArgument9,
+                                         class GALGAS_universalValuedObjectMap & ioArgument10,
+                                         class GALGAS_allocaList & ioArgument11,
+                                         class GALGAS_instructionListIR & ioArgument12,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument13,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -88,45 +109,4 @@ void routine_analyzeStandaloneGuardCall (const class GALGAS_PLMType constinArgum
 
 class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Routine 'buildOrderedDeclarationList'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument0,
-                                          const class GALGAS_string constinArgument1,
-                                          const class GALGAS_location constinArgument2,
-                                          class GALGAS_declarationListAST & outArgument3,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Routine 'buildSemanticContext'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
-                                   const class GALGAS_ast constinArgument1,
-                                   class GALGAS_staticEntityMap & ioArgument2,
-                                   class GALGAS_staticListInitializationMap & ioArgument3,
-                                   class GALGAS_semanticContext & outArgument4,
-                                   class GALGAS_subprogramInvocationGraph & outArgument5,
-                                   class GALGAS_declarationDecorationList & outArgument6,
-                                   class GALGAS_globalVariableIRList & outArgument7,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Routine 'buildTypeMapHTMLFile'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildTypeMapHTMLFile (class GALGAS_unifiedTypeMap inArgument0,
-                                   const class GALGAS_lstring constinArgument1,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
 

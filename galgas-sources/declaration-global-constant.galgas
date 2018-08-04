@@ -5,7 +5,7 @@
 class @globalConstantDeclarationAST : @abstractDeclarationAST {
   @lstring mConstantName
   @lstringlist mAttributeList
-  @lstring mConstantTypeName
+  @lstring mConstantTypeName # Empty string if no type annotation
   @expressionAST mSourceExpression
 }
 
@@ -89,7 +89,7 @@ override method @globalConstantDeclarationAST enterInContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
@@ -103,45 +103,20 @@ override method @globalConstantDeclarationAST enterInContext
       displayValue = true
     end
   end
-#--- Get destination type
-  @PLMType annotationType
-  if mConstantTypeName.string == "" then
-    annotationType = voidType ()
-  else
-    annotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mConstantTypeName} type]
-  end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:voidType ()
-    !routineAttributes:.none
-    !routineNameForInvocationGraph:["compiler" nowhere]
-    !optionalTargetType:annotationType
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:*
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioContext.mValuedObjectMap # universalMap
-    !?alloca:*
-    !?instructionListIR:*
-    ?result:@objectIR expressionResult
-  ]
-#--- Check assignment compatibility
-  let result = checkAssignmentCompatibility (
-    !source:expressionResult
-    !targetAnnotationType:annotationType
+  computeStaticExpression (
+    !?context: ioContext
+    !expression:mSourceExpression
     !errorLocation:mConstantName.location
-    !staticTypeAllowed:true
+    !optionalContectualTypeName:mConstantTypeName
+    ?result:let @objectIR expressionResult
   )
-  drop annotationType, expressionResult
-  if not [result isStatic] then
-    error mConstantName : "source expression cannot be statically computed"
-  end
 #--- Enter in context
-  [!?ioContext.mGlobalConstantMap insertKey !mConstantName !result]
-  [!?ioContext.mValuedObjectMap insertGlobalConstant !mConstantName !result]
-#--- Diplay ?
+  [!?ioContext.mGlobalConstantMap insertKey !mConstantName !expressionResult]
+  [!?ioContext.mValuedObjectMap insertGlobalConstant !mConstantName !expressionResult]
+#--- Display ?
   if displayValue then
-    message "Global constant '" + mConstantName + "' = " + [result llvmValue] + "\n"
+    message "Global constant '" + mConstantName + "' = " + [expressionResult llvmValue] + "\n"
   end
 }
 

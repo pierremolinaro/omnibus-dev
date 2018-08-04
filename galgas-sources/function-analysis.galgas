@@ -1,0 +1,132 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @decoratedRoutine : @abstractDecoratedDeclaration {
+  @lstring mReceiverTypeName # Empty string if standalone function
+  @mode mMode
+  @routineKind mRoutineKind
+  @bool mWarnIfUnused
+  @bool mGlobalFunction
+  @routineAttributes mRoutineAttributes
+  @lstring mFunctionName
+  @lstringlist mFunctionAttributeList
+  @routineFormalArgumentListAST mFunctionFormalArgumentList
+  @lstring mFunctionReturnTypeName # Empty string if no return value
+  @instructionListAST mFunctionInstructionList
+  @location mEndOfFunctionDeclaration
+  @lstring mReturnTypeName  # Empty string if no returned value
+}
+
+##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#
+#method @decoratedRoutineList routineListSemanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  for routine in self do
+#    [routine routineSemanticAnalysis
+#      !context:inContext
+#      !?temporary: ioTemporaries
+#      !?intermediateCode: ioIntermediateCodeStruct
+#    ]
+#  end
+#}
+#
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @decoratedRoutine semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @decoratedRoutine routineSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Receiver type
+  let receiverType = if mReceiverTypeName.string == ""
+    then voidType ()
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
+    end
+#--- Reset index to temporaries
+  ioTemporaries.mTemporaryIndex = 0
+#--- Mangled routine name
+  let routineMangledName = routineMangledNameFromAST (
+    !if receiverType.kind == .void then "" else receiverType.plmTypeDescriptionName end
+    !mFunctionName
+    !mFunctionFormalArgumentList
+  )
+#--- Variable map
+  var universalMap = inContext.mValuedObjectMap
+  [!?universalMap openOverrideForSelectBlock]
+  [!?universalMap openBranch]
+  if mReturnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !mReturnTypeName.location}
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
+    [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
+  end
+#--- Analyse formal arguments
+  @routineFormalArgumentListIR formalArguments = {}
+  enterFormalArguments (
+    !context:inContext
+    !mFunctionFormalArgumentList
+    !?universalMap
+    !?formalArguments
+  )
+#--- Enter subprogram invocation graph
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineMangledName
+      !routineMangledName
+    ]
+  end
+#--- Analyze instruction list
+  @allocaList allocaList = {}
+  @instructionListIR instructionGenerationList = {}
+  [mFunctionInstructionList analyzeRoutineInstructionList
+    !self:receiverType
+    !routineAttributes:mRoutineAttributes
+    !routineNameForInvocationGraph:routineMangledName
+    !context:inContext
+    !mode:mMode
+    !?temporary:ioTemporaries
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
+    !?variableMap:universalMap
+    !?alloca:allocaList
+    !?generatedCode:instructionGenerationList
+  ]
+#--- End of variableMap
+  [universalMap checkLocalVariableFinalState !?instructionGenerationList]
+  [!?universalMap closeBranch !mEndOfFunctionDeclaration]
+  [!?universalMap closeOverride !mEndOfFunctionDeclaration]
+#--- Code generation
+  let returnType = if mReturnTypeName.string == "" then
+    voidType ()
+  else
+    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
+  end
+  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+    !routineMangledName
+    !receiverType
+    !routineMangledName
+    !formalArguments
+    !allocaList
+    !instructionGenerationList
+    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+    !mWarnIfUnused
+    !mGlobalFunction
+    !mRoutineKind
+    !returnType
+    !false
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
