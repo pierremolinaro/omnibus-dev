@@ -126,18 +126,6 @@ void routine_generateLLVMCodeForIntegerType (class GALGAS_string & ioArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Routine 'generateIntegerAssignmentFunction'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_generateIntegerAssignmentFunction (class GALGAS_string & ioArgument0,
-                                                const class GALGAS_string constinArgument1,
-                                                const class GALGAS_string constinArgument2,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                     Routine 'generateIntegerComparisonFunction'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

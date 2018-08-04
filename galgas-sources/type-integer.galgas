@@ -715,7 +715,7 @@ proc generateLLVMCodeForIntegerType
 #--- Add "bool" function for $uint1
   if (inSize == 1) && not inIsSigned then
     generateUInt1ToBoolFunction (
-      !PLMTypeName:llvmBaseTypeName
+      !plmBaseTypeName:llvmBaseTypeName
       !?ioLLVMcode
       !LLVMTypeName:llvmTypeName
     )
@@ -723,7 +723,7 @@ proc generateLLVMCodeForIntegerType
 #--- Add "byteSwapped" intrinsic function
   if (inSize mod 16) == 0 then
     generateIntegerIntrinsicFunction (
-      !PLMTypeName:llvmBaseTypeName
+      !plmBaseTypeName:llvmBaseTypeName
       !?ioLLVMcode
       !method:byteSwappedMethodName ()
       !intrinsic:"bswap"
@@ -733,7 +733,7 @@ proc generateLLVMCodeForIntegerType
   end
 #--- Add "bitReversed" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:bitReversedMethodName ()
     !intrinsic:"bitreverse"
@@ -742,7 +742,7 @@ proc generateLLVMCodeForIntegerType
   )
 #--- Add "count leading zeros" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:countLeadingZerosMethodName ()
     !intrinsic:"ctlz"
@@ -751,7 +751,7 @@ proc generateLLVMCodeForIntegerType
   )
 #--- Add "count training zeros" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:countTrainingZerosMethodName ()
     !intrinsic:"cttz"
@@ -760,58 +760,52 @@ proc generateLLVMCodeForIntegerType
   )
 #--- Add "count training zeros" intrinsic function
   generateIntegerIntrinsicFunction (
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !?ioLLVMcode
     !method:setBitCountMethodName ()
     !intrinsic:"ctpop"
     !?ioGenerationAdds
     !LLVMTypeName:llvmTypeName
   )
-#---------------------------- Generate assignment function
-  generateIntegerAssignmentFunction (
-    !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
-    !LLVMTypeName:llvmTypeName
-  )
 #---------------------------- Generate comparison functions
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !plmOperator:"eq"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:"eq"
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !plmOperator:"ne"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:"ne"
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !plmOperator:"lt"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "slt" else "ult" end
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !plmOperator:"le"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "sle" else "ule" end
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !plmOperator:"gt"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "sgt" else "ugt" end
   )
   generateIntegerComparisonFunction (
     !?ioLLVMcode
-    !PLMTypeName:llvmBaseTypeName
+    !plmBaseTypeName:llvmBaseTypeName
     !plmOperator:"ge"
     !LLVMTypeName:llvmTypeName
     !llvmOperator:if inIsSigned then "sge" else "uge" end
@@ -841,29 +835,14 @@ proc generateLLVMCodeForIntegerType
 
 #·······················································································································
 
-private proc generateIntegerAssignmentFunction
-  ?!@string ioLLVMcode
-  ?PLMTypeName:let @string inPLMtypeName
-  ?LLVMTypeName:let @string inLLVMtypeName
-{
-  ioLLVMcode += "define internal void @" + inPLMtypeName + "_assignment"
-  ioLLVMcode += " (" + inLLVMtypeName + "* %outTarget, " + inLLVMtypeName + "* %inSource) {\n"
-  ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inSource\n"
-  ioLLVMcode += "  store " + inLLVMtypeName + " %value, " + inLLVMtypeName + "* %outTarget\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#·······················································································································
-
 private proc generateIntegerComparisonFunction
   ?!@string ioLLVMcode
-  ?PLMTypeName:let @string inPLMtypeName
+  ?plmBaseTypeName:let @string inPLMBaseTypeName
   ?plmOperator:let @string inPLMOperatorName
   ?LLVMTypeName:let @string inLLVMtypeName
   ?llvmOperator:let @string inLLVMOperator
 {
-  ioLLVMcode += "define internal void @" + inPLMtypeName + "_" + inPLMOperatorName
+  ioLLVMcode += "define internal void @" + inPLMBaseTypeName + "_" + inPLMOperatorName
   ioLLVMcode += " (i1* %outResult, " + inLLVMtypeName + "* %inLeft, " + inLLVMtypeName + "* %inRight) {\n"
   ioLLVMcode += "  %left = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inLeft\n"
   ioLLVMcode += "  %right = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inRight\n"
@@ -876,7 +855,7 @@ private proc generateIntegerComparisonFunction
 #·······················································································································
 
 private proc generateIntegerIntrinsicFunction
-  ?PLMTypeName:let @string inPLMtypeName
+  ?plmBaseTypeName:let @string inPLMBaseTypeName
   ?!@string ioLLVMcode
   ?method:let @string inPLMMethodName
   ?intrinsic:let @string inIntrinsicName
@@ -884,14 +863,15 @@ private proc generateIntegerIntrinsicFunction
   ?LLVMTypeName:let @string inLLVMtypeName
 {
   let routineMangledName = routineMangledNameFromAST (
-    !inPLMtypeName
+    !inPLMBaseTypeName
     ![inPLMMethodName nowhere]
     !{}
   )
-  let functionName = llvmNameForFunction (!routineMangledName)
-  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + functionName + " (" + inLLVMtypeName + "* %inValue) {\n"
+  ioLLVMcode += "define internal " + inLLVMtypeName + " @" + llvmNameForFunction (!routineMangledName)
+  ioLLVMcode += " (" + inLLVMtypeName + "* %inValue) {\n"
   ioLLVMcode += "  %value = load " + inLLVMtypeName + ", " + inLLVMtypeName + "* %inValue\n"
-  ioLLVMcode += "  %result = call " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName + " (" + inLLVMtypeName + " %value)\n"
+  ioLLVMcode += "  %result = call " + inLLVMtypeName + " @llvm." + inIntrinsicName + "." + inLLVMtypeName
+  ioLLVMcode += " (" + inLLVMtypeName + " %value)\n"
   ioLLVMcode += "  ret " + inLLVMtypeName + " %result\n"
   ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet +=
@@ -902,12 +882,12 @@ private proc generateIntegerIntrinsicFunction
 #·······················································································································
 
 private proc generateUInt1ToBoolFunction
-  ?PLMTypeName:let @string inPLMtypeName
+  ?plmBaseTypeName:let @string inPLMBaseTypeName
   ?!@string ioLLVMcode
   ?LLVMTypeName:let @string inLLVMtypeName
 {
   let routineMangledName = routineMangledNameFromAST (
-    !inPLMtypeName
+    !inPLMBaseTypeName
     ![boolTypeName () nowhere]
     !{}
   )
