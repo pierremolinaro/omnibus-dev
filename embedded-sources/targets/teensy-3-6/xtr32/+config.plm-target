@@ -69,6 +69,8 @@ LL_FILES:
   "../ll-cortex-m4.ll"
   "../../ll-clear-bss.ll"
   "../../ll-copy-data-section.ll"
+  "../../ll-copy-byte-array.ll"
+  "../../ll-copy-word-array.ll"
   "../../ll-configuration-on-boot.ll"
 
 PLM_FILES:
