@@ -63,6 +63,37 @@ override getter @staticArrayTypeDeclarationAST location -> @location outLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  TYPE INVENTORY                                                                                                   
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @staticArrayTypeDeclarationAST typeInventory
+#  ?!context:@semanticContext ioContext
+#  ?!@typeInventoryMap ioTypeInventoryMap
+#{
+#  [ioTypeInventoryMap searchKey
+#    !lkey:mElementTypeName
+#    ?plmDescriptionName:let plmElementTypeDescriptionName
+#    ?llvmBaseTypeName:let llvmElementBaseTypeName
+#  ]
+#
+#   computeStaticExpression (
+#    !?context: ioContext
+#    !mSizeExpression
+#    !mSizeExpressionLocation
+#    ?let @objectIR sizeExpressionIR
+#  )
+#  [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
+#
+#  let plmTypeDescriptionName = "[" + arraySize + " • " + plmElementTypeDescriptionName + "]"
+#  let llvmBaseTypeName = llvmElementBaseTypeName + "-" + arraySize
+#  [!?ioTypeInventoryMap insertKey
+#    !lkey:mArrayTypeName
+#    !plmDescriptionName:plmTypeDescriptionName
+#    !llvmBaseTypeName:llvmBaseTypeName
+#  ]
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

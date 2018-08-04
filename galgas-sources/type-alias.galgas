@@ -2,14 +2,14 @@
 #!  AST                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typeAliasDeclaration : @abstractDeclarationAST {
+class @typeAliasDeclarationAST : @abstractDeclarationAST {
   @lstring mAliasTypeName
   @lstring mOriginalTypeName
 }
 
 #·······················································································································
 
-override getter @typeAliasDeclaration location -> @location outLocation {
+override getter @typeAliasDeclarationAST location -> @location outLocation {
   outLocation = mAliasTypeName.location
 }
 
@@ -26,7 +26,7 @@ syntax extension plm_syntax {
     $\$type$ ?let newTypeName
     $=$
     <type_definition> !?ioAST ?let typeName
-    ioAST.mDeclarationListAST += !@typeAliasDeclaration.new {!newTypeName !typeName}
+    ioAST.mDeclarationListAST += !@typeAliasDeclarationAST.new {!newTypeName !typeName}
   }
 
   #·····················································································································
@@ -43,7 +43,7 @@ syntax extension plm_syntax {
 #!  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeAliasDeclaration enterInPrecedenceGraph
+override method @typeAliasDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !mAliasTypeName !self]
@@ -52,15 +52,36 @@ override method @typeAliasDeclaration enterInPrecedenceGraph
 
 #·······················································································································
 
-override getter @typeAliasDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "typealias $" + mAliasTypeName 
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  TYPE INVENTORY                                                                                                   
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @typeAliasDeclarationAST typeInventory
+#  ?!context:@semanticContext unused ioContext
+#  ?!@typeInventoryMap ioTypeInventoryMap
+#{
+#  [ioTypeInventoryMap searchKey
+#    !lkey:mOriginalTypeName
+#    ?plmDescriptionName:let plmOriginalTypeDescriptionName
+#    ?llvmBaseTypeName:let llvmOriginalBaseTypeName
+#  ]
+#
+#  [!?ioTypeInventoryMap insertKey
+#    !lkey:mAliasTypeName
+#    !plmDescriptionName:plmOriginalTypeDescriptionName
+#    !llvmBaseTypeName:llvmOriginalBaseTypeName
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeAliasDeclaration enterInContext
+override method @typeAliasDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList

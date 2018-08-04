@@ -9799,22 +9799,22 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @typeAliasDeclaration class                                             *
+//                                           @typeAliasDeclarationAST class                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_typeAliasDeclaration : public GALGAS_abstractDeclarationAST {
+class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_typeAliasDeclaration (void) ;
+  public : GALGAS_typeAliasDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_typeAliasDeclaration constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_typeAliasDeclarationAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_typeAliasDeclaration * ptr (void) const { return (const cPtr_typeAliasDeclaration *) mObjectPtr ; }
+  public : inline const class cPtr_typeAliasDeclarationAST * ptr (void) const { return (const cPtr_typeAliasDeclarationAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_typeAliasDeclaration (const cPtr_typeAliasDeclaration * inSourcePtr) ;
+  public : GALGAS_typeAliasDeclarationAST (const cPtr_typeAliasDeclarationAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -9822,17 +9822,17 @@ class GALGAS_typeAliasDeclaration : public GALGAS_abstractDeclarationAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_typeAliasDeclaration extractObject (const GALGAS_object & inObject,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_typeAliasDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeAliasDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_lstring & inOperand1
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_typeAliasDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                        const class GALGAS_lstring & inOperand1
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_typeAliasDeclaration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_typeAliasDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9848,28 +9848,28 @@ class GALGAS_typeAliasDeclaration : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_typeAliasDeclaration class
+} ; // End of GALGAS_typeAliasDeclarationAST class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeAliasDeclaration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeAliasDeclarationAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @typeAliasDeclaration class                                    *
+//                                  Pointer class for @typeAliasDeclarationAST class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_typeAliasDeclaration : public cPtr_abstractDeclarationAST {
+class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mAliasTypeName ;
   public : GALGAS_lstring mProperty_mOriginalTypeName ;
 
 //--- Constructor
-  public : cPtr_typeAliasDeclaration (const GALGAS_lstring & in_mAliasTypeName,
-                                      const GALGAS_lstring & in_mOriginalTypeName
-                                      COMMA_LOCATION_ARGS) ;
+  public : cPtr_typeAliasDeclarationAST (const GALGAS_lstring & in_mAliasTypeName,
+                                         const GALGAS_lstring & in_mOriginalTypeName
+                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -9979,19 +9979,19 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @typeOpaqueDefinitionDeclaration class                                        *
+//                                           @typeOpaqueDeclarationAST class                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_typeOpaqueDefinitionDeclaration : public GALGAS_abstractDeclarationAST {
+class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_typeOpaqueDefinitionDeclaration (void) ;
+  public : GALGAS_typeOpaqueDeclarationAST (void) ;
 
 //---
-  public : inline const class cPtr_typeOpaqueDefinitionDeclaration * ptr (void) const { return (const cPtr_typeOpaqueDefinitionDeclaration *) mObjectPtr ; }
+  public : inline const class cPtr_typeOpaqueDeclarationAST * ptr (void) const { return (const cPtr_typeOpaqueDeclarationAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_typeOpaqueDefinitionDeclaration (const cPtr_typeOpaqueDefinitionDeclaration * inSourcePtr) ;
+  public : GALGAS_typeOpaqueDeclarationAST (const cPtr_typeOpaqueDeclarationAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -9999,19 +9999,19 @@ class GALGAS_typeOpaqueDefinitionDeclaration : public GALGAS_abstractDeclaration
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_typeOpaqueDefinitionDeclaration extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_typeOpaqueDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeOpaqueDefinitionDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                const class GALGAS_expressionAST & inOperand1,
-                                                                                const class GALGAS_location & inOperand2,
-                                                                                const class GALGAS_lstringlist & inOperand3
-                                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_typeOpaqueDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_expressionAST & inOperand1,
+                                                                         const class GALGAS_location & inOperand2,
+                                                                         const class GALGAS_lstringlist & inOperand3
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_typeOpaqueDefinitionDeclaration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_typeOpaqueDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -10031,20 +10031,20 @@ class GALGAS_typeOpaqueDefinitionDeclaration : public GALGAS_abstractDeclaration
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_typeOpaqueDefinitionDeclaration class
+} ; // End of GALGAS_typeOpaqueDeclarationAST class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeOpaqueDefinitionDeclaration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeOpaqueDeclarationAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @typeOpaqueDefinitionDeclaration class                               *
+//                                  Pointer class for @typeOpaqueDeclarationAST class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_typeOpaqueDefinitionDeclaration : public cPtr_abstractDeclarationAST {
+class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mOpaqueTypeName ;
   public : GALGAS_expressionAST mProperty_mSizeExpression ;
@@ -10052,11 +10052,11 @@ class cPtr_typeOpaqueDefinitionDeclaration : public cPtr_abstractDeclarationAST 
   public : GALGAS_lstringlist mProperty_mAttributeList ;
 
 //--- Constructor
-  public : cPtr_typeOpaqueDefinitionDeclaration (const GALGAS_lstring & in_mOpaqueTypeName,
-                                                 const GALGAS_expressionAST & in_mSizeExpression,
-                                                 const GALGAS_location & in_mSizeExpressionLocation,
-                                                 const GALGAS_lstringlist & in_mAttributeList
-                                                 COMMA_LOCATION_ARGS) ;
+  public : cPtr_typeOpaqueDeclarationAST (const GALGAS_lstring & in_mOpaqueTypeName,
+                                          const GALGAS_expressionAST & in_mSizeExpression,
+                                          const GALGAS_location & in_mSizeExpressionLocation,
+                                          const GALGAS_lstringlist & in_mAttributeList
+                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;

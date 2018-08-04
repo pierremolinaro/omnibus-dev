@@ -102,7 +102,7 @@ private proc compileProject
   #--- Literal integer type
     ast.mDeclarationListAST += !@literalIntegerDeclarationAST.new
   #--- Add String type
-    ast.mDeclarationListAST += !@literalStringDeclarationAST.new {![staticStringTypeName () nowhere]}
+    ast.mDeclarationListAST += !@literalStringDeclarationAST.new
   end
 #------------------------------------------------------------ Retain required drivers
   if @uint.errorCount == 0 then

@@ -3,13 +3,12 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalStringDeclarationAST : @abstractDeclarationAST {
-  @lstring mLiteralStringTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @literalStringDeclarationAST location -> @location outLocation {
-  outLocation = mLiteralStringTypeName.location
+  outLocation = .nowhere
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,14 +18,15 @@ override getter @literalStringDeclarationAST location -> @location outLocation {
 override method @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mLiteralStringTypeName !self]
-  [!?ioGraph addEdge !mLiteralStringTypeName !["$uint8" nowhere]]
+  let literalStringTypeName = [staticStringTypeName () nowhere]
+  [!?ioGraph addNode !literalStringTypeName !self]
+  [!?ioGraph addEdge !literalStringTypeName !["$uint8" nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "literal string " + mLiteralStringTypeName 
+  outRepresentation = "literal string " + staticStringTypeName () 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -45,7 +45,7 @@ override method @literalStringDeclarationAST enterInContext
 {
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
-    !lkey:mLiteralStringTypeName
+    !lkey:[staticStringTypeName () nowhere]
     !type:literalStringType ()
     !index:[ioContext.mTypeMap count]
   ]

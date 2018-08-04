@@ -1,0 +1,47 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPUTE STATIC EXPRESSION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc computeStaticExpression
+  ?!context:@semanticContext ioContext
+  ?expression:let @expressionAST inExpression
+  ?errorLocation:let @location inErrorLocation
+  ?optionalContectualTypeName:let @lstring inOptionalTypeName
+  !result:@objectIR outStaticExpressionIR
+{
+#--- Get destination type
+  @PLMType annotationType
+  if inOptionalTypeName.string == "" then
+    annotationType = voidType ()
+  else
+    annotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inOptionalTypeName} type]
+  end
+#---
+  [inExpression analyzeExpression
+    !self:voidType ()
+    !routineAttributes:.none
+    !routineNameForInvocationGraph:.new {!"static computation" !inErrorLocation}
+    !optionalTargetType:annotationType
+    !context:ioContext
+    !mode:.bootMode
+    !?temporary:*
+    !?staticEntityMap:*
+    !?variableMap:ioContext.mValuedObjectMap
+    !?alloca:*
+    !?instructionListIR:*
+    ?result:let @objectIR expressionIR
+  ]
+  if not [expressionIR isStatic] then
+    error inErrorLocation : "expression is not static" : outStaticExpressionIR
+  else
+  #--- Check assignment compatibility
+    outStaticExpressionIR = checkAssignmentCompatibility (
+      !source:expressionIR
+      !targetAnnotationType:annotationType
+      !errorLocation:inErrorLocation
+      !staticTypeAllowed:true
+    )
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

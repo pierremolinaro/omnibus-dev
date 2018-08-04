@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typeOpaqueDefinitionDeclaration : @abstractDeclarationAST {
+class @typeOpaqueDeclarationAST : @abstractDeclarationAST {
   @lstring mOpaqueTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation
@@ -30,7 +30,7 @@ syntax extension plm_syntax {
     <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $}$
-    ioAST.mDeclarationListAST += !@typeOpaqueDefinitionDeclaration.new {
+    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST.new {
       !opaqueTypeName
       !sizeExpression
       !sizeExpressionLocation
@@ -46,14 +46,14 @@ syntax extension plm_syntax {
 #!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @typeOpaqueDefinitionDeclaration noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @typeOpaqueDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !mOpaqueTypeName]
   [mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #·······················································································································
 
-override method @typeOpaqueDefinitionDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @typeOpaqueDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add structure type name as node
   [!?ioGraph addNode !mOpaqueTypeName !self]
 #--- Add size expression
@@ -62,13 +62,13 @@ override method @typeOpaqueDefinitionDeclaration enterInPrecedenceGraph ?!@seman
 
 #·······················································································································
 
-override getter @typeOpaqueDefinitionDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @typeOpaqueDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "opaque " + mOpaqueTypeName 
 }
 
 #·······················································································································
 
-override getter @typeOpaqueDefinitionDeclaration location -> @location outLocation {
+override getter @typeOpaqueDeclarationAST location -> @location outLocation {
   outLocation = mOpaqueTypeName.location
 }
 
@@ -76,7 +76,7 @@ override getter @typeOpaqueDefinitionDeclaration location -> @location outLocati
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeOpaqueDefinitionDeclaration enterInContext
+override method @typeOpaqueDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
