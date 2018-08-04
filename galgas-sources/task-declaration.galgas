@@ -368,15 +368,6 @@ override method @decoratedTaskListDeclaration semanticAnalysis
 
 #·······················································································································
 
-override method @decoratedTaskListDeclaration routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
-
-#·······················································································································
-
 private proc analyzeOrderedTaskRoutines
   ?let @PLMType inTaskType
   ?let @taskSetupListAST inTaskRoutineLISTAST

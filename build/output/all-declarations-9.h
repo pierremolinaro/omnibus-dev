@@ -885,3 +885,36 @@ void routine_startupSemanticAnalysis (const class GALGAS_semanticContext constin
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                     Function 'interruptNameForInvocationGraph'                                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_interruptNameForInvocationGraph (const class GALGAS_lstring & constinArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                        Routine 'analyzeEffectiveParameters'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgument0,
+                                         const class GALGAS_routineAttributes constinArgument1,
+                                         const class GALGAS_routineTypedSignature constinArgument2,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
+                                         const class GALGAS_location constinArgument4,
+                                         const class GALGAS_lstring constinArgument5,
+                                         const class GALGAS_semanticContext constinArgument6,
+                                         const class GALGAS_mode constinArgument7,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument8,
+                                         class GALGAS_staticEntityMap & ioArgument9,
+                                         class GALGAS_universalValuedObjectMap & ioArgument10,
+                                         class GALGAS_allocaList & ioArgument11,
+                                         class GALGAS_instructionListIR & ioArgument12,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument13,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+

@@ -152,14 +152,6 @@ class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
-override method @decoratedPanicRoutine routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
-#·······················································································································
-
 override method @decoratedPanicRoutine semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries

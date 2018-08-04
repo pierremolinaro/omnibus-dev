@@ -368,15 +368,6 @@ class @decoratedRequiredDriver : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
-override method @decoratedRequiredDriver routineSemanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
-
-#·······················································································································
-
 override method @decoratedRequiredDriver semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

@@ -18,35 +18,9 @@ class @decoratedRoutine : @abstractDecoratedDeclaration {
   @lstring mReturnTypeName  # Empty string if no returned value
 }
 
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#method @decoratedRoutineList routineListSemanticAnalysis
-#  ?context:let @semanticContext inContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  for routine in self do
-#    [routine routineSemanticAnalysis
-#      !context:inContext
-#      !?temporary: ioTemporaries
-#      !?intermediateCode: ioIntermediateCodeStruct
-#    ]
-#  end
-#}
-#
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @decoratedRoutine semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @decoratedRoutine routineSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
