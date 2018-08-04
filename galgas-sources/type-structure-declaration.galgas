@@ -328,7 +328,7 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter functions in property map
-  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !?context:ioContext !?propertyMap]
+  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !mStructureName !?context:ioContext !?propertyMap]
 #---------------------------------------- Enter system routines in property map
   for system in mSystemRoutineListAST do
   #--- Attributes
@@ -340,7 +340,7 @@ override method @structureDeclarationAST enterInContext
     let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
   #--- Routine mangled name
     let routineMangledName = routineMangledNameFromAST (
-      !"" # mStructureName 
+      !mStructureName 
       !system.mName
       !system.mFormalArgumentList
     )
@@ -378,7 +378,7 @@ override method @structureDeclarationAST enterInContext
   for guard in mGuardListAST do
   #--- Guard mangled name
     let guardMangledName = routineMangledNameFromAST (
-      !"" 
+      !mStructureName
       !guard.mGuardName
       !guard.mGuardFormalArgumentList
     )

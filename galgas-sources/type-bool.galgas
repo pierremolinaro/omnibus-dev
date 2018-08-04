@@ -50,12 +50,12 @@ override method @booleanDeclarationAST enterInContext
 {
 #---------- Property map
   @propertyMap propertyMap = {}
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap ![boolTypeName () nowhere] ?let boolTypeProxy]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap ![boolTypeName () nowhere] ?let boolTypeProxy]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]
 #--- Add uint1 accessor
   [!?propertyMap addFunctionWithoutArgument
     !?ioSubprogramInvocationGraph
-    !receiverTypeProxy:boolTypeProxy
+    !llvmBaseTypeName:boolTypeName ()
     !methodName:"uint1"
     !safe:true
     !resultTypeProxy:uint1TypeProxy

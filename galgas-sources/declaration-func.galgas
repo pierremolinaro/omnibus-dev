@@ -299,6 +299,7 @@ method @functionDeclarationListAST enterFunctionInContext
 #·······················································································································
 
 method @functionDeclarationListAST enterFunctionsInPropertyMap
+  ?let @string inReceiverLLVMBaseTypeName
   ?!context:@semanticContext ioContext
   ?!@propertyMap ioPropertyMap
 {
@@ -319,7 +320,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
   #--- Routine mangled name
     let routineMangledName = routineMangledNameFromAST (
-      !""
+      !inReceiverLLVMBaseTypeName
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
     )

@@ -88,7 +88,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !index:[ioContext.mTypeMap count]
     ]
   else
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !plmTypeDescriptionName ?let arrayTypeProxy]
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["$uint32" nowhere] ?let uint32TypeProxy]
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
@@ -96,7 +95,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #--- Method 'removeAll()'
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:arrayTypeProxy
+      !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"removeAll"
       !safe:false
       !resultTypeProxy: .null
@@ -105,7 +104,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #--- Method 'length()'
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:arrayTypeProxy
+      !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"length"
       !safe:false
       !resultTypeProxy: uint32TypeProxy
@@ -115,7 +114,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?propertyMap addFunctionWithInputArgument
       !?context:ioContext
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:arrayTypeProxy
+      !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"append"
       !safe:false
       !inputArgumentSelector:""
@@ -128,7 +127,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?propertyMap addFunctionWithTwoInputArguments
       !?context:ioContext
       !?ioSubprogramInvocationGraph
-      !receiverTypeProxy:arrayTypeProxy
+      !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"insert"
       !safe:false
       !inputArgumentSelector1:""
@@ -146,7 +145,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #-------------------------------------------- Type attributes
     let @PLMTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
-    let arrayType = @PLMType.new {
+    let dynamicArrayType = @PLMType.new {
       !propertyMap:propertyMap
       !classConstantMap:{}
       !constructorMap:constructorMap
@@ -158,7 +157,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     }
     [!?ioContext.mTypeMap insertType
       !lkey:mDynamicArrayTypeName
-      !type:arrayType
+      !type:dynamicArrayType
       !index:[ioContext.mTypeMap count]
     ]
   end
@@ -173,10 +172,9 @@ proc generateLLVMcodeForDynamicArray
   ?!@generationAdds ioGenerationAdds
   ?let @PLMType inArrayType
   ?let @PLMType inElementType
-  ?let @string inTemporaryTypeName
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  let llvmArrayBaseTypeName = inTemporaryTypeName # inArrayType.llvmBaseTypeName
+  let llvmArrayBaseTypeName = inArrayType.llvmBaseTypeName # inTemporaryTypeName
   let elementLLVMTypeName = [inElementType llvmTypeName]
 #---------- Method 'removeAll()'
   let removeAllRoutineMangledName = routineMangledNameFromAST (
@@ -185,7 +183,7 @@ proc generateLLVMcodeForDynamicArray
     !{}
   )
   let removeAllRoutineLLVMName = llvmNameForFunction (!removeAllRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName.string + " NEW")
+  ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName.string)
   ioLLVMcode += "define internal void @" + removeAllRoutineLLVMName + " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  call void @arc.release (%ptrtype %buffer.pointer)\n"
@@ -209,7 +207,7 @@ proc generateLLVMcodeForDynamicArray
   @routineFormalArgumentListAST argumentList = {
     !.input
     !["" nowhere]
-    ![inElementType.plmTypeDescriptionName nowhere]
+    ![inElementType.llvmBaseTypeName nowhere]
     !["inValue" nowhere]
   ,
     !.input
@@ -256,7 +254,7 @@ proc generateLLVMcodeForDynamicArray
   argumentList = {
     !.input
     !["" nowhere]
-    ![inElementType.plmTypeDescriptionName nowhere]
+    ![inElementType.llvmBaseTypeName nowhere]
     !["inValue" nowhere]
   }
   let routineMangledName = routineMangledNameFromAST (

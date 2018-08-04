@@ -567,7 +567,6 @@ proc declareLLVMTypes
           !?ioGenerationAdds
           !type
           !elementType
-          !type.plmTypeDescriptionName # !!!! Temporary
         )
       case function (*) :
       case pointer (unused pointee) :

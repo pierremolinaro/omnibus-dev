@@ -617,7 +617,7 @@ private proc handleFunctionCallInExpression
 {
   let receiverType = [ioObjectIR type]
   let @propertyMap propertyMap = receiverType.propertyMap
-  let key = routineMangledNameFromCall (!"" !inMethodName !inArguments)
+  let key = routineMangledNameFromCall (!receiverType.llvmBaseTypeName !inMethodName !inArguments)
   [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
   switch propertyAccess
   case constantProperty (*) :
@@ -659,7 +659,7 @@ private proc handleFunctionCallInExpression
     #--- New LLVM variable for function call result
       getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
     #--- Generate call
-      let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].plmTypeDescriptionName !inMethodName !inArguments)
+      let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].llvmBaseTypeName !inMethodName !inArguments)
       ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
         !""
         !callReturnedResult
