@@ -550,31 +550,6 @@ class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
 
 #·······················································································································
 
-override method @decoratedStructureDeclaration routineSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName} type]
-#----------- Analyze functions
-  for function in mFunctionDeclarationListAST do
-    var functionHasUserAccess = false
-    for (attribute) in function.mFunctionAttributeList while not functionHasUserAccess do
-      functionHasUserAccess = attribute.string == userAccessAttribute ()
-    end
-    if functionHasUserAccess then
-      [function functionSemanticAnalysis
-        !structureType:structureType
-        !context:inContext
-        !?temporary:ioTemporaries
-        !?intermediateCode:ioIntermediateCodeStruct
-      ]
-    end
-  end
-}
-
-#·······················································································································
-
 override method @decoratedStructureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
