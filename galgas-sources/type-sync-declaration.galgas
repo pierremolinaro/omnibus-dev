@@ -219,6 +219,7 @@ override method @syncDeclarationAST enterInContext
     !lkey:mSyncToolName
     !type:structureType
     !index:[ioContext.mTypeMap count]
+    !generate:true
   ]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {

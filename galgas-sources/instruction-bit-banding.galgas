@@ -75,7 +75,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   [inContext.mTypeMap searchKey
     !lkey:.new {!"uint1" !mSourceExpressionLocation}
     ?type:let requiredSourceExpressionType
-    ?1*
+    ?2*
   ]
 #--- Compute source expression
   [mSourceExpression analyzeExpression
@@ -132,7 +132,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   [inContext.mTypeMap searchKey
     !lkey:.new {!"$uint" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
     ?type:let requiredBitExpressionType
-    ?1*
+    ?2*
   ]
 #--- Compute bit expression
   [mBitExpression analyzeExpression

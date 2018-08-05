@@ -295,6 +295,7 @@ method @taskListAST enterInContext
       !lkey:task.mTaskName
       !type:taskType
       !index:[ioContext.mTypeMap count]
+      !generate:true
     ]
     [!?ioContext.mTaskMap insertKey !task.mTaskName !taskType]
     [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]

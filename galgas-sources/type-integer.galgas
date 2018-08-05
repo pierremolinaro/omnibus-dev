@@ -185,6 +185,7 @@ override method @integerDeclarationAST enterInContext
     !lkey:integerTypeName
     !type:integerType
     !index:[ioContext.mTypeMap count]
+    !generate:true
   ]
 #--------------------------------------- Enter integer <-> integer operators
   enter_integer_integer_operators (

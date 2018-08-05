@@ -1341,6 +1341,17 @@ class GALGAS_bool extensionGetter_deinitNeeded (const class GALGAS_PLMType & inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                               Extension method '@PLMType generateLLVMTypeDefinition'                                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_generateLLVMTypeDefinition (const class GALGAS_PLMType inObject,
+                                                 class GALGAS_string & io_ioLLVMcode,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                 Extension method '@routineMapIR llvmCodeGeneration'                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

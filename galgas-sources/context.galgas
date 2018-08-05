@@ -149,7 +149,7 @@ struct @semanticContext {
 #·······················································································································
 
 getter @semanticContext booleanType -> @PLMType {
-  [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result ?1*]
+  [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result ?2*]
 }
 
 #·······················································································································
