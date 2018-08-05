@@ -8071,13 +8071,15 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_structureDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_lstringlist & inOperand1,
-                                                                        const class GALGAS_bool & inOperand2,
-                                                                        const class GALGAS_structurePropertyListAST & inOperand3,
-                                                                        const class GALGAS_functionDeclarationListAST & inOperand4,
-                                                                        const class GALGAS_systemRoutineDeclarationListAST & inOperand5,
-                                                                        const class GALGAS_guardDeclarationListAST & inOperand6,
-                                                                        const class GALGAS_bool & inOperand7
+                                                                        const class GALGAS_lstring & inOperand1,
+                                                                        const class GALGAS_lstring & inOperand2,
+                                                                        const class GALGAS_lstringlist & inOperand3,
+                                                                        const class GALGAS_bool & inOperand4,
+                                                                        const class GALGAS_structurePropertyListAST & inOperand5,
+                                                                        const class GALGAS_functionDeclarationListAST & inOperand6,
+                                                                        const class GALGAS_systemRoutineDeclarationListAST & inOperand7,
+                                                                        const class GALGAS_guardDeclarationListAST & inOperand8,
+                                                                        const class GALGAS_bool & inOperand9
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8097,11 +8099,15 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPLMTypeSpecificName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
 
@@ -8980,7 +8986,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclar
 
 class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mStructureName ;
+  public : GALGAS_lstring mProperty_mStructureTypeName ;
+  public : GALGAS_lstring mProperty_mPLMTypeSpecificName ;
+  public : GALGAS_lstring mProperty_mLLVMBaseTypeName ;
   public : GALGAS_lstringlist mProperty_mAttributeListAST ;
   public : GALGAS_bool mProperty_mGenerateAssignmentRoutine ;
   public : GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
@@ -8990,7 +8998,9 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
-  public : cPtr_structureDeclarationAST (const GALGAS_lstring & in_mStructureName,
+  public : cPtr_structureDeclarationAST (const GALGAS_lstring & in_mStructureTypeName,
+                                         const GALGAS_lstring & in_mPLMTypeSpecificName,
+                                         const GALGAS_lstring & in_mLLVMBaseTypeName,
                                          const GALGAS_lstringlist & in_mAttributeListAST,
                                          const GALGAS_bool & in_mGenerateAssignmentRoutine,
                                          const GALGAS_structurePropertyListAST & in_mStructurePropertyListAST,
@@ -9004,7 +9014,9 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPLMTypeSpecificName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mGenerateAssignmentRoutine (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;

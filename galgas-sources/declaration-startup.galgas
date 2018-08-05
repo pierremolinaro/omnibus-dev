@@ -113,7 +113,7 @@ override method @decoratedStartupRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)} type]
   startupSemanticAnalysis (
     !context:inContext
     !?temporary:ioTemporaries
@@ -149,7 +149,7 @@ private proc startupSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.plmTypeDescriptionName !inLocation)
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.llvmBaseTypeName !inLocation)
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]

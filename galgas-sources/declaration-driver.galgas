@@ -186,8 +186,7 @@ syntax extension plm_syntax {
 
 override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mDriverName !self]
-  let driverTypeName = llvmDriverNameFromName (!mDriverName)
- [!?ioGraph addEdge !mDriverName !driverTypeName]
+ [!?ioGraph addEdge !mDriverName !typeNameForTypeMapForDriver (!mDriverName)]
  for (driver) in mDriverDependanceList do
    [!?ioGraph addEdge !mDriverName !driver]
  end
@@ -203,6 +202,26 @@ override getter @implementedDriverAST keyRepresentationForErrorSignaling -> @str
 
 override getter @implementedDriverAST location -> @location outLocation {
   outLocation = mDriverName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Driver Names
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func typeNameForTypeMapForDriver ?let @lstring inDriverName -> @lstring {
+  result = .new {!"driver." + inDriverName !inDriverName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func plmTypeSpecificNameForDriver ?let @lstring inDriverName -> @lstring {
+  result = .new {!"Driver " + inDriverName !inDriverName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmDriverNameFromName ?let @lstring inDriverName -> @lstring {
+  result = .new {!"driver$" + inDriverName !inDriverName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -289,7 +308,12 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !driverIsInstancied
     }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
+      !typeNameForTypeMapForDriver (!declaration.mDriverName) # driverTypeName
+      !driverTypeName # plmTypeSpecificNameForDriver (!declaration.mDriverName)
       !driverTypeName
+#      !driverTypeName
+#      !driverTypeName
+#      !driverTypeName
       !{}
       !false # Do not generate assignment routine
       !driverPropertyListAST
@@ -303,6 +327,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
     end
     if [declaration.mDriverInitListAST length] == 0 then
       ioAST.mDeclarationListAST += !@startupAST.new {
+       # !typeNameForTypeMapForDriver (!declaration.mDriverName)
         !declaration.mDriverName
         !declaration.mDriverDependanceList
         !declaration.mDriverName.location
@@ -352,7 +377,7 @@ override method @implementedDriverAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
-  let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !llvmDriverNameFromName (!mDriverName)} type]
+  let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)} type]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
@@ -373,10 +398,9 @@ override method @decoratedRequiredDriver semanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let driverTypeName = llvmDriverNameFromName (!mDriverName)
-  let driverTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !driverTypeName}
+  let driverTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)}
   let constructorMap = [driverTypeProxy type].constructorMap
-  [constructorMap  searchKey !.new {!"()" !driverTypeName.location} ?* ?let constructorValue]
+  [constructorMap  searchKey !.new {!"()" !mDriverName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}
   for (initialValue *) in sortedOperandList do

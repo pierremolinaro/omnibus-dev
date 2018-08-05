@@ -148,7 +148,7 @@ class GALGAS_decoratedStructureDeclaration : public GALGAS_abstractDecoratedDecl
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
 
@@ -171,14 +171,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStructureD
 
 class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mStructureName ;
+  public : GALGAS_lstring mProperty_mStructureTypeName ;
   public : GALGAS_functionDeclarationListAST mProperty_mFunctionDeclarationListAST ;
   public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
   public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
-  public : cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mStructureName,
+  public : cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mStructureTypeName,
                                                const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                                const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
                                                const GALGAS_guardDeclarationListAST & in_mGuardListAST,
@@ -189,7 +189,7 @@ class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclarat
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
