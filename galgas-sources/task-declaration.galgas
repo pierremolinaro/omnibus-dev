@@ -270,7 +270,6 @@ method @taskListAST enterInContext
       ]
     end
   #---- Add activate function
-#    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !task.mTaskName ?let taskTypeProxy]
     [!?propertyMap addFunctionWithoutArgument
       !?ioSubprogramInvocationGraph
       !llvmBaseTypeName:task.mTaskName

@@ -6889,47 +6889,47 @@ void extensionMethod_taskSemanticAnalysis (const GALGAS_decoratedTaskList_2D_ele
                                            GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                            C_Compiler * inCompiler
                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_PLMType var_taskType_16653 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mTaskName, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 456)).getter_type (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 456)) ;
-  GALGAS_bigint var_stackSize_16835 = inObject.mProperty_mStackSize.getter_bigint (HERE) ;
-  GALGAS_bool test_0 = GALGAS_bool (kIsStrictInf, var_stackSize_16835.objectCompare (GALGAS_bigint ("64", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 459)))) ;
+  GALGAS_PLMType var_taskType_16558 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mTaskName, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 455)).getter_type (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 455)) ;
+  GALGAS_bigint var_stackSize_16740 = inObject.mProperty_mStackSize.getter_bigint (HERE) ;
+  GALGAS_bool test_0 = GALGAS_bool (kIsStrictInf, var_stackSize_16740.objectCompare (GALGAS_bigint ("64", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 458)))) ;
   if (kBoolTrue != test_0.boolEnum ()) {
-    test_0 = GALGAS_bool (kIsNotEqual, var_stackSize_16835.modulo_operation (GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 459)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 459)).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 459)))) ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_stackSize_16740.modulo_operation (GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 458)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 458)).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 458)))) ;
   }
   const enumGalgasBool test_1 = test_0.boolEnum () ;
   if (kBoolTrue == test_1) {
     TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (inObject.mProperty_mStackSize.getter_location (SOURCE_FILE ("task-declaration.galgas", 460)), GALGAS_string ("stack size should be a multiple of 8, and >= 64"), fixItArray2  COMMA_SOURCE_FILE ("task-declaration.galgas", 460)) ;
+    inCompiler->emitSemanticError (inObject.mProperty_mStackSize.getter_location (SOURCE_FILE ("task-declaration.galgas", 459)), GALGAS_string ("stack size should be a multiple of 8, and >= 64"), fixItArray2  COMMA_SOURCE_FILE ("task-declaration.galgas", 459)) ;
   }
-  GALGAS_instructionListIR var_setupInstructionListIR_17267 ;
-  GALGAS_allocaList var_setupAllocaList_17292 ;
+  GALGAS_instructionListIR var_setupInstructionListIR_17172 ;
+  GALGAS_allocaList var_setupAllocaList_17197 ;
   {
-  routine_analyzeOrderedTaskRoutines (var_taskType_16653, inObject.mProperty_mTaskSetupListAST, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_setupInstructionListIR_17267, var_setupAllocaList_17292, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 463)) ;
+  routine_analyzeOrderedTaskRoutines (var_taskType_16558, inObject.mProperty_mTaskSetupListAST, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_setupInstructionListIR_17172, var_setupAllocaList_17197, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 462)) ;
   }
-  GALGAS_instructionListIR var_activateInstructionListIR_17580 ;
-  GALGAS_allocaList var_activateAllocaList_17608 ;
+  GALGAS_instructionListIR var_activateInstructionListIR_17485 ;
+  GALGAS_allocaList var_activateAllocaList_17513 ;
   {
-  routine_analyzeOrderedTaskRoutines (var_taskType_16653, inObject.mProperty_mTaskActivateListAST, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_activateInstructionListIR_17580, var_activateAllocaList_17608, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 473)) ;
+  routine_analyzeOrderedTaskRoutines (var_taskType_16558, inObject.mProperty_mTaskActivateListAST, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_activateInstructionListIR_17485, var_activateAllocaList_17513, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 472)) ;
   }
-  GALGAS_instructionListIR var_deactivateInstructionListIR_17902 ;
-  GALGAS_allocaList var_deactivateAllocaList_17932 ;
+  GALGAS_instructionListIR var_deactivateInstructionListIR_17807 ;
+  GALGAS_allocaList var_deactivateAllocaList_17837 ;
   {
-  routine_analyzeOrderedTaskRoutines (var_taskType_16653, inObject.mProperty_mTaskDeactivateListAST, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_deactivateInstructionListIR_17902, var_deactivateAllocaList_17932, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 483)) ;
+  routine_analyzeOrderedTaskRoutines (var_taskType_16558, inObject.mProperty_mTaskDeactivateListAST, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_deactivateInstructionListIR_17807, var_deactivateAllocaList_17837, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 482)) ;
   }
-  GALGAS_instructionListAST var_taskListInstructionList_18121 = GALGAS_instructionListAST::constructor_emptyList (SOURCE_FILE ("task-declaration.galgas", 494)) ;
-  const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, inObject.mProperty_mGuardedCommandList.getter_length (SOURCE_FILE ("task-declaration.galgas", 495)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  GALGAS_instructionListAST var_taskListInstructionList_18026 = GALGAS_instructionListAST::constructor_emptyList (SOURCE_FILE ("task-declaration.galgas", 493)) ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, inObject.mProperty_mGuardedCommandList.getter_length (SOURCE_FILE ("task-declaration.galgas", 494)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    GALGAS_syncInstructionAST var_syncInstruction_18193 = GALGAS_syncInstructionAST::constructor_new (inObject.mProperty_mTaskName.getter_location (HERE), inObject.mProperty_mGuardedCommandList, inObject.mProperty_mTaskName.getter_location (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 496)) ;
-    var_taskListInstructionList_18121.addAssign_operation (var_syncInstruction_18193  COMMA_SOURCE_FILE ("task-declaration.galgas", 497)) ;
+    GALGAS_syncInstructionAST var_syncInstruction_18098 = GALGAS_syncInstructionAST::constructor_new (inObject.mProperty_mTaskName.getter_location (HERE), inObject.mProperty_mGuardedCommandList, inObject.mProperty_mTaskName.getter_location (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 495)) ;
+    var_taskListInstructionList_18026.addAssign_operation (var_syncInstruction_18098  COMMA_SOURCE_FILE ("task-declaration.galgas", 496)) ;
   }
   {
-  routine_routineSemanticAnalysis (var_taskType_16653, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_userMode (SOURCE_FILE ("task-declaration.galgas", 501))  COMMA_SOURCE_FILE ("task-declaration.galgas", 501)), GALGAS_mode::constructor_userMode (SOURCE_FILE ("task-declaration.galgas", 502)), GALGAS_lstring::constructor_new (function_llvmNameForTaskLoopFunction (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 503)), inObject.mProperty_mTaskName.getter_location (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 503)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("task-declaration.galgas", 504)), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("task-declaration.galgas", 505)), var_taskListInstructionList_18121, inObject.mProperty_mTaskName.getter_location (HERE), GALGAS_routineAttributes::constructor_mutating (SOURCE_FILE ("task-declaration.galgas", 508)).operator_or (GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("task-declaration.galgas", 508)) COMMA_SOURCE_FILE ("task-declaration.galgas", 508)).operator_or (GALGAS_routineAttributes::constructor_panicAllowed (SOURCE_FILE ("task-declaration.galgas", 508)) COMMA_SOURCE_FILE ("task-declaration.galgas", 508)), GALGAS_bool (true), GALGAS_bool (false), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 499)) ;
+  routine_routineSemanticAnalysis (var_taskType_16558, GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_userMode (SOURCE_FILE ("task-declaration.galgas", 500))  COMMA_SOURCE_FILE ("task-declaration.galgas", 500)), GALGAS_mode::constructor_userMode (SOURCE_FILE ("task-declaration.galgas", 501)), GALGAS_lstring::constructor_new (function_llvmNameForTaskLoopFunction (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 502)), inObject.mProperty_mTaskName.getter_location (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 502)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("task-declaration.galgas", 503)), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("task-declaration.galgas", 504)), var_taskListInstructionList_18026, inObject.mProperty_mTaskName.getter_location (HERE), GALGAS_routineAttributes::constructor_mutating (SOURCE_FILE ("task-declaration.galgas", 507)).operator_or (GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("task-declaration.galgas", 507)) COMMA_SOURCE_FILE ("task-declaration.galgas", 507)).operator_or (GALGAS_routineAttributes::constructor_panicAllowed (SOURCE_FILE ("task-declaration.galgas", 507)) COMMA_SOURCE_FILE ("task-declaration.galgas", 507)), GALGAS_bool (true), GALGAS_bool (false), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 498)) ;
   }
-  GALGAS_uint var_taskNameStringIndex_19035 ;
+  GALGAS_uint var_taskNameStringIndex_18940 ;
   {
-  extensionSetter_findOrAddStaticString (ioArgument_ioIntermediateCodeStruct.mProperty_mStaticEntityMap, inObject.mProperty_mTaskName.getter_string (HERE), var_taskNameStringIndex_19035, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 516)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioIntermediateCodeStruct.mProperty_mStaticEntityMap, inObject.mProperty_mTaskName.getter_string (HERE), var_taskNameStringIndex_18940, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 515)) ;
   }
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mTaskMapIR.setter_insertKey (inObject.mProperty_mTaskName, var_taskType_16653, constinArgument_inPriority, inObject.mProperty_mStackSize.getter_bigint (HERE), var_setupAllocaList_17292, var_setupInstructionListIR_17267, var_activateAllocaList_17608, var_activateInstructionListIR_17580, var_deactivateAllocaList_17932, var_deactivateInstructionListIR_17902, var_taskNameStringIndex_19035, inObject.mProperty_mActivate, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 518)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mTaskMapIR.setter_insertKey (inObject.mProperty_mTaskName, var_taskType_16558, constinArgument_inPriority, inObject.mProperty_mStackSize.getter_bigint (HERE), var_setupAllocaList_17197, var_setupInstructionListIR_17172, var_activateAllocaList_17513, var_activateInstructionListIR_17485, var_deactivateAllocaList_17837, var_deactivateInstructionListIR_17807, var_taskNameStringIndex_18940, inObject.mProperty_mActivate, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 517)) ;
   }
 }
 
