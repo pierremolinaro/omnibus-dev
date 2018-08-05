@@ -84,7 +84,7 @@ proc buildOrderedDeclarationList
       end
       error inEndOfSourceFile : s
       for () in  unsortedSemanticDeclarationListAST do
-        error [mDeclaration location] : "the " + [mDeclaration keyRepresentationForErrorSignaling] + " is declared here"
+        error [mDeclaration locationForErrorSignaling] : "the " + [mDeclaration keyRepresentationForErrorSignaling] + " is declared here"
       end
     end
   end

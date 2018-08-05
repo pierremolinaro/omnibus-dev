@@ -266,7 +266,7 @@ override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSig
 
 #·······················································································································
 
-override getter @controlRegisterGroupDeclarationAST location -> @location {
+override getter @controlRegisterGroupDeclarationAST locationForErrorSignaling -> @location {
   result = [mRegisterGroupList mRegisterGroupNameAtIndex !0]
 }
 

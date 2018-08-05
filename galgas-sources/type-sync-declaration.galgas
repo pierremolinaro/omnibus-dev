@@ -94,7 +94,7 @@ override getter @syncDeclarationAST keyRepresentationForErrorSignaling -> @strin
 
 #·······················································································································
 
-override getter @syncDeclarationAST location -> @location outLocation {
+override getter @syncDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mSyncToolName.location
 }
 

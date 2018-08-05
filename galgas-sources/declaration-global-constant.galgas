@@ -11,7 +11,7 @@ class @globalConstantDeclarationAST : @abstractDeclarationAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @globalConstantDeclarationAST location -> @location outLocation {
+override getter @globalConstantDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mConstantName.location
 }
 

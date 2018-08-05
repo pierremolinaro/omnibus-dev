@@ -7168,24 +7168,24 @@ class GALGAS_bool extensionGetter_controlRegisterAccess (const class GALGAS_mode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Abstract extension getter '@abstractDeclarationAST location'                             *
+//                    Abstract extension getter '@abstractDeclarationAST locationForErrorSignaling'                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_location (*enterExtensionGetter_abstractDeclarationAST_location) (const class cPtr_abstractDeclarationAST * inObject,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_location (*enterExtensionGetter_abstractDeclarationAST_locationForErrorSignaling) (const class cPtr_abstractDeclarationAST * inObject,
+                                                                                                        class C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void enterExtensionGetter_location (const int32_t inClassIndex,
-                                    enterExtensionGetter_abstractDeclarationAST_location inMethod) ;
+void enterExtensionGetter_locationForErrorSignaling (const int32_t inClassIndex,
+                                                     enterExtensionGetter_abstractDeclarationAST_locationForErrorSignaling inMethod) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_location callExtensionGetter_location (const class cPtr_abstractDeclarationAST * inObject,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
+class GALGAS_location callExtensionGetter_locationForErrorSignaling (const class cPtr_abstractDeclarationAST * inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

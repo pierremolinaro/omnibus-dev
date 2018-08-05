@@ -69,7 +69,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
 
 #·······················································································································
 
-override getter @enumerationDeclarationAST location -> @location outLocation {
+override getter @enumerationDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mEnumerationName.location
 }
 

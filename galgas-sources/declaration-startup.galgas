@@ -66,7 +66,7 @@ override getter @startupAST keyRepresentationForErrorSignaling -> @string outRep
 
 #·······················································································································
 
-override getter @startupAST location -> @location outLocation {
+override getter @startupAST locationForErrorSignaling -> @location outLocation {
   outLocation = mStartupLocation
 }
 

@@ -89,7 +89,7 @@ override getter @panicAST keyRepresentationForErrorSignaling -> @string outRepre
 
 #·······················································································································
 
-override getter @panicAST location -> @location outLocation {
+override getter @panicAST locationForErrorSignaling -> @location outLocation {
   outLocation = mPriority.location
 }
 

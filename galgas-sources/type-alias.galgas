@@ -9,7 +9,7 @@ class @typeAliasDeclarationAST : @abstractDeclarationAST {
 
 #·······················································································································
 
-override getter @typeAliasDeclarationAST location -> @location outLocation {
+override getter @typeAliasDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mAliasTypeName.location
 }
 

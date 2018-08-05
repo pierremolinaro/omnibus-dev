@@ -7,7 +7,7 @@ class @literalStringDeclarationAST : @abstractDeclarationAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclarationAST location -> @location outLocation {
+override getter @literalStringDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
