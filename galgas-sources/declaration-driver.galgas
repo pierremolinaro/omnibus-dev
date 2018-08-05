@@ -200,7 +200,7 @@ override getter @implementedDriverAST keyRepresentationForErrorSignaling -> @str
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @implementedDriverAST location -> @location outLocation {
+override getter @implementedDriverAST locationForErrorSignaling -> @location outLocation {
   outLocation = mDriverName.location
 }
 
@@ -308,7 +308,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !driverIsInstancied
     }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
-      !typeNameForTypeMapForDriver (!declaration.mDriverName) # driverTypeName
+      !typeNameForTypeMapForDriver (!declaration.mDriverName)
       !driverTypeName # plmTypeSpecificNameForDriver (!declaration.mDriverName)
       !driverTypeName
 #      !driverTypeName

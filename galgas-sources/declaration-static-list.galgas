@@ -192,7 +192,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
 
 #·······················································································································
 
-override getter @staticListAST location -> @location {
+override getter @staticListAST locationForErrorSignaling -> @location {
   result = mStaticListName.location
 }
 

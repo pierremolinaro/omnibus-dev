@@ -7,7 +7,7 @@ class @booleanDeclarationAST : @abstractDeclarationAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @booleanDeclarationAST location -> @location outLocation {
+override getter @booleanDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 

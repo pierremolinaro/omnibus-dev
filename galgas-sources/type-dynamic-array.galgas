@@ -47,7 +47,7 @@ override getter @typeDynamicArrayDeclarationAST keyRepresentationForErrorSignali
 
 #·······················································································································
 
-override getter @typeDynamicArrayDeclarationAST location -> @location outLocation {
+override getter @typeDynamicArrayDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mDynamicArrayTypeName.location
 }
 

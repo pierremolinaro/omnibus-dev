@@ -7,7 +7,7 @@ abstract class @abstractDeclarationAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclarationAST location -> @location
+abstract getter @abstractDeclarationAST locationForErrorSignaling -> @location
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

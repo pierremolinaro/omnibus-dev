@@ -317,7 +317,7 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
 
 #·······················································································································
 
-override getter @configurationDeclarationAST location -> @location outLocation {
+override getter @configurationDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mPanicCodeTypeName.location
 }
 

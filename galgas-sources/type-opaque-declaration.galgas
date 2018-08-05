@@ -68,7 +68,7 @@ override getter @typeOpaqueDeclarationAST keyRepresentationForErrorSignaling -> 
 
 #·······················································································································
 
-override getter @typeOpaqueDeclarationAST location -> @location outLocation {
+override getter @typeOpaqueDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mOpaqueTypeName.location
 }
 

@@ -241,7 +241,7 @@ override getter @structureDeclarationAST keyRepresentationForErrorSignaling -> @
 
 #·······················································································································
 
-override getter @structureDeclarationAST location -> @location outLocation {
+override getter @structureDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mStructureTypeName.location
 }
 

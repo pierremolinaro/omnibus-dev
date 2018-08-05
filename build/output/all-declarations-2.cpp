@@ -2151,32 +2151,32 @@ void extensionMethod_generateLLVMForStaticLists (const GALGAS_staticListInitiali
                                                  GALGAS_string & ioArgument_ioLLVMcode,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bool var_first_22993 = GALGAS_bool (true) ;
+  GALGAS_bool var_first_23010 = GALGAS_bool (true) ;
   const GALGAS_staticListInitializationMap temp_0 = inObject ;
-  cEnumerator_staticListInitializationMap enumerator_23029 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_23029.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_23029.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 539)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 539)).boolEnum () ;
+  cEnumerator_staticListInitializationMap enumerator_23046 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_23046.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_23046.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 539)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 539)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      const enumGalgasBool test_2 = var_first_22993.boolEnum () ;
+      const enumGalgasBool test_2 = var_first_23010.boolEnum () ;
       if (kBoolTrue == test_2) {
-        var_first_22993 = GALGAS_bool (false) ;
+        var_first_23010 = GALGAS_bool (false) ;
         ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Static Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 542)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 542)) ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (enumerator_23029.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 544)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 544)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 544)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 544)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(enumerator_23029.current_mInitializationList (HERE).getter_length (SOURCE_FILE ("declaration-static-list.galgas", 545)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 545)).add_operation (GALGAS_string (" x %"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)).add_operation (function_llvmNameForStaticListElementType (enumerator_23029.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 545)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 545)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)).add_operation (GALGAS_string ("] [\n"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)) ;
-      cEnumerator_stringlist enumerator_23432 (enumerator_23029.current_mInitializationList (HERE), kENUMERATION_UP) ;
-      while (enumerator_23432.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %").add_operation (function_llvmNameForStaticListElementType (enumerator_23029.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 548)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 548)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)).add_operation (enumerator_23432.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)) ;
-        if (enumerator_23432.hasNextObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (enumerator_23046.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 544)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 544)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 544)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 544)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(enumerator_23046.current_mInitializationList (HERE).getter_length (SOURCE_FILE ("declaration-static-list.galgas", 545)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 545)).add_operation (GALGAS_string (" x %"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)).add_operation (function_llvmNameForStaticListElementType (enumerator_23046.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 545)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 545)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)).add_operation (GALGAS_string ("] [\n"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 545)) ;
+      cEnumerator_stringlist enumerator_23449 (enumerator_23046.current_mInitializationList (HERE), kENUMERATION_UP) ;
+      while (enumerator_23449.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %").add_operation (function_llvmNameForStaticListElementType (enumerator_23046.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 548)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 548)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)).add_operation (enumerator_23449.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 548)) ;
+        if (enumerator_23449.hasNextObject ()) {
           ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (",\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 550)) ;
         }
-        enumerator_23432.gotoNextObject () ;
+        enumerator_23449.gotoNextObject () ;
       }
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"
         "]\n"
         "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 552)) ;
     }
-    enumerator_23029.gotoNextObject () ;
+    enumerator_23046.gotoNextObject () ;
   }
 }
 
@@ -9334,54 +9334,54 @@ GALGAS_bool extensionGetter_controlRegisterAccess (const GALGAS_mode & inObject,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Abstract extension getter '@abstractDeclarationAST location'                             *
+//                    Abstract extension getter '@abstractDeclarationAST locationForErrorSignaling'                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static TC_UniqueArray <enterExtensionGetter_abstractDeclarationAST_location> gExtensionGetterTable_abstractDeclarationAST_location ;
+static TC_UniqueArray <enterExtensionGetter_abstractDeclarationAST_locationForErrorSignaling> gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void enterExtensionGetter_location (const int32_t inClassIndex,
-                                    enterExtensionGetter_abstractDeclarationAST_location inGetter) {
-  gExtensionGetterTable_abstractDeclarationAST_location.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
+void enterExtensionGetter_locationForErrorSignaling (const int32_t inClassIndex,
+                                                     enterExtensionGetter_abstractDeclarationAST_locationForErrorSignaling inGetter) {
+  gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static void freeExtensionGetter_abstractDeclarationAST_location (void) {
-  gExtensionGetterTable_abstractDeclarationAST_location.free () ;
+static void freeExtensionGetter_abstractDeclarationAST_locationForErrorSignaling (void) {
+  gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling.free () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-C_PrologueEpilogue gGetter_abstractDeclarationAST_location (NULL,
-                                                            freeExtensionGetter_abstractDeclarationAST_location) ;
+C_PrologueEpilogue gGetter_abstractDeclarationAST_locationForErrorSignaling (NULL,
+                                                                             freeExtensionGetter_abstractDeclarationAST_locationForErrorSignaling) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_location callExtensionGetter_location (const cPtr_abstractDeclarationAST * inObject,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+GALGAS_location callExtensionGetter_locationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   GALGAS_location result ;
 //--- Find Reader
   if (NULL != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractDeclarationAST) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
     const int32_t classIndex = info->mSlotID ;
-    enterExtensionGetter_abstractDeclarationAST_location f = NULL ;
-    if (classIndex < gExtensionGetterTable_abstractDeclarationAST_location.count ()) {
-      f = gExtensionGetterTable_abstractDeclarationAST_location (classIndex COMMA_HERE) ;
+    enterExtensionGetter_abstractDeclarationAST_locationForErrorSignaling f = NULL ;
+    if (classIndex < gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling.count ()) {
+      f = gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
        const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
        while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gExtensionGetterTable_abstractDeclarationAST_location.count ()) {
-           f = gExtensionGetterTable_abstractDeclarationAST_location (p->mSlotID COMMA_HERE) ;
+         if (p->mSlotID < gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling.count ()) {
+           f = gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling (p->mSlotID COMMA_HERE) ;
          }
          p = p->mSuperclassDescriptor ;
        }
-       gExtensionGetterTable_abstractDeclarationAST_location.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       gExtensionGetterTable_abstractDeclarationAST_locationForErrorSignaling.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
