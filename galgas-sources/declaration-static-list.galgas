@@ -309,6 +309,7 @@ override method @staticListAST enterInContext
           !lkey:routineMangledName
           !type:type
           !index:[ioContext.mTypeMap count]
+          !generate:false
         ]
       end
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]
@@ -336,6 +337,7 @@ override method @staticListAST enterInContext
     !lkey:plmElementTypeName
     !type:type
     !index:[ioContext.mTypeMap count]
+    !generate:true
   ]
 #-------------------------------------------------------------------- Enter static list values
   @stringlist stringValueList = {}
@@ -466,6 +468,7 @@ override method @staticListAST enterInContext
     !lkey:plmNameForStaticListType (!mStaticListName)
     !type:arrayType
     !index:[ioContext.mTypeMap count]
+    !generate:true
   ]
 #-------------------------------------------------------------------- Enter list in constant map
   let staticListType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmNameForStaticListType (!mStaticListName)}

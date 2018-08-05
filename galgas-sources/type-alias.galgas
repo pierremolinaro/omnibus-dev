@@ -92,9 +92,14 @@ override method @typeAliasDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
 #---------- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
+  [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?2*]
 #---------- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mAliasTypeName !type:type !index:[ioContext.mTypeMap count]]
+  [!?ioContext.mTypeMap insertType
+    !lkey:mAliasTypeName
+    !type:type
+    !index:[ioContext.mTypeMap count]
+    !generate:false
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

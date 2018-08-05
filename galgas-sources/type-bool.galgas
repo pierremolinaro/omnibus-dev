@@ -73,7 +73,12 @@ override method @booleanDeclarationAST enterInContext
     !llvmBaseTypeName:boolTypeName ()
   }
 #---------- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:[boolTypeName () nowhere] !type:booleanType !index:[ioContext.mTypeMap count]]
+  [!?ioContext.mTypeMap insertType
+    !lkey:[boolTypeName () nowhere]
+    !type:booleanType
+    !index:[ioContext.mTypeMap count]
+    !generate:true
+  ]
 #---------- Enter boolean operators
   enterBooleanOperators (!?context:ioContext)
 }
