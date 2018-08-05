@@ -10542,24 +10542,24 @@ void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_allocaList temp_0 = inObject ;
-  cEnumerator_allocaList enumerator_11504 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_11504.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_11504.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)).add_operation (extensionGetter_llvmTypeName (enumerator_11504.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)) ;
-    enumerator_11504.gotoNextObject () ;
+  cEnumerator_allocaList enumerator_11498 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_11498.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_11498.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)).add_operation (extensionGetter_llvmTypeName (enumerator_11498.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 279)) ;
+    enumerator_11498.gotoNextObject () ;
   }
   const GALGAS_allocaList temp_1 = inObject ;
-  cEnumerator_allocaList enumerator_11665 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_11665.hasCurrentObject ()) {
-    GALGAS_bool test_2 = enumerator_11665.current_mLLVMType (HERE).getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("semantic-routines.galgas", 283)) ;
+  cEnumerator_allocaList enumerator_11659 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_11659.hasCurrentObject ()) {
+    GALGAS_bool test_2 = enumerator_11659.current_mLLVMType (HERE).getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("semantic-routines.galgas", 283)) ;
     if (kBoolTrue == test_2.boolEnum ()) {
-      test_2 = enumerator_11665.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("semantic-routines.galgas", 283)) ;
+      test_2 = enumerator_11659.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("semantic-routines.galgas", 283)) ;
     }
     const enumGalgasBool test_3 = test_2.boolEnum () ;
     if (kBoolTrue == test_3) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- init dynamic array type '").add_operation (enumerator_11665.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 284)).add_operation (GALGAS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 284)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 284)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (extensionGetter_llvmTypeName (enumerator_11665.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (GALGAS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (extensionGetter_llvmTypeName (enumerator_11665.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (enumerator_11665.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- init dynamic array type '").add_operation (enumerator_11659.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 284)).add_operation (GALGAS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 284)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 284)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (extensionGetter_llvmTypeName (enumerator_11659.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (GALGAS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (extensionGetter_llvmTypeName (enumerator_11659.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (enumerator_11659.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 285)) ;
     }
-    enumerator_11665.gotoNextObject () ;
+    enumerator_11659.gotoNextObject () ;
   }
 }
 
