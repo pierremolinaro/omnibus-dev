@@ -58,7 +58,7 @@ proc routineSemanticAnalysis
   ioTemporaries.mTemporaryIndex = 0
 #--- Mangled routine name
   let routineMangledName = routineMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else inSelfType.plmTypeDescriptionName end
+    !if inSelfType.kind == .void then "" else inSelfType.llvmBaseTypeName end
     !inRoutineName
     !inRoutineFormalArgumentList
   )

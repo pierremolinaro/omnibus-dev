@@ -10313,10 +10313,10 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_5977 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5977.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_5977.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)) ;
-    enumerator_5977.gotoNextObject () ;
+  cEnumerator_routineMapIR enumerator_5971 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5971.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_5971.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)) ;
+    enumerator_5971.gotoNextObject () ;
   }
 }
 

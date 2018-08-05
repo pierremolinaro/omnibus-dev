@@ -301,7 +301,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
       end
     end
   #---
-    let driverTypeName = llvmDriverNameFromName (!declaration.mDriverName)
     ioAST.mDeclarationListAST += !@implementedDriverAST.new {
       !declaration.mDriverName
       !declaration.mDriverDependanceList
@@ -309,11 +308,8 @@ proc retainRequiredDrivers ?!@ast ioAST {
     }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !typeNameForTypeMapForDriver (!declaration.mDriverName)
-      !driverTypeName # plmTypeSpecificNameForDriver (!declaration.mDriverName)
-      !driverTypeName
-#      !driverTypeName
-#      !driverTypeName
-#      !driverTypeName
+      !plmTypeSpecificNameForDriver (!declaration.mDriverName)
+      !llvmDriverNameFromName (!declaration.mDriverName)
       !{}
       !false # Do not generate assignment routine
       !driverPropertyListAST
@@ -327,7 +323,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
     end
     if [declaration.mDriverInitListAST length] == 0 then
       ioAST.mDeclarationListAST += !@startupAST.new {
-       # !typeNameForTypeMapForDriver (!declaration.mDriverName)
         !declaration.mDriverName
         !declaration.mDriverDependanceList
         !declaration.mDriverName.location
