@@ -65,8 +65,9 @@ proc buildOrderedDeclarationList
   outDeclarationListAST = {}
   if [precedenceGraph undefinedNodeCount] > 0 then
     for () in  [precedenceGraph undefinedNodeReferenceList] do
-      error mValue : mValue.string + " is not defined"
+      error mValue : mValue.string + " is not defined in declaration dependency graph"
     end
+    log "" : [precedenceGraph keyList]
   else
     [precedenceGraph topologicalSort
       ?outDeclarationListAST

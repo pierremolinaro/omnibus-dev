@@ -19,24 +19,6 @@ func registerGroupNameFromPLMname ?let @lstring inName -> @lstring {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Driver
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmDriverStringFromName ?let @string inDriverName -> @string {
-  result = if inDriverName == "" then
-    inDriverName
-  else
-    "driver$" + inDriverName
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmDriverNameFromName ?let @lstring inDriverName -> @lstring {
-  result = .new {!llvmDriverStringFromName (!inDriverName.string) !inDriverName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

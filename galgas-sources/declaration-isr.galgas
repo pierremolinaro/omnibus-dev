@@ -88,7 +88,7 @@ override method @decoratedISRDeclarations semanticAnalysis
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
   #--- Self type
-   let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !llvmDriverNameFromName (!isr.mModuleName)} type]
+   let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeNameForTypeMapForDriver (!isr.mModuleName)} type]
   #--- Analyze instruction list
     @allocaList allocaList = {}
     @instructionListIR instructionGenerationList = {}
