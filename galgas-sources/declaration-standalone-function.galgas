@@ -1,0 +1,18 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    @functionDeclarationListAST standAloneFunctionDeclarationListAST = {}
+    <function> !?ioAST !?standAloneFunctionDeclarationListAST
+    ioAST.mStandaloneFunctionDeclarationListAST += standAloneFunctionDeclarationListAST
+  }
+
+  #·····················································································································
+
+}
+
