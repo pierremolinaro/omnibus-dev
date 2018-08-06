@@ -51,12 +51,13 @@ syntax extension plm_syntax {
 method @isrDeclarationListAST enterInContext
   ?!@semanticContext unused ioSemanticContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList ioDecoratedRoutineList
 {
 #---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
   ioDecoratedDeclarationList += !@decoratedISRDeclarations.new {!self}
 #---
   for isr in self do
-    ioDecoratedDeclarationList += !@decoratedRoutine.new {
+    ioDecoratedRoutineList +=
       !typeNameForTypeMapForDriver (!isr.mDriverName)
       !isr.mMode
       !.function {!executionMode: isr.mMode}
@@ -68,7 +69,6 @@ method @isrDeclarationListAST enterInContext
       !isr.mISRInstructionList
       !isr.mEndOfISRDeclaration
       !["" nowhere]  # Empty string if no returned value
-    }
   end
 }
 

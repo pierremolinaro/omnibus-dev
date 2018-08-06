@@ -566,6 +566,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList unused ioDecoratedRoutineList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap

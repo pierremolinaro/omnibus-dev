@@ -279,6 +279,7 @@ override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -442,7 +443,7 @@ override method @structureDeclarationAST enterInContext
           + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
     end
-    ioDecoratedDeclarationList += !@decoratedRoutine.new {
+    ioDecoratedRoutineList +=
       !mStructureTypeName
       !function.mMode
       !.function {!executionMode: function.mMode}
@@ -454,7 +455,6 @@ override method @structureDeclarationAST enterInContext
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
       !function.mFunctionReturnTypeName  # Empty string if no returned value
-    }
   end
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {

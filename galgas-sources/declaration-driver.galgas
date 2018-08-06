@@ -368,6 +368,7 @@ override method @implementedDriverAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
@@ -383,7 +384,7 @@ override method @implementedDriverAST enterInContext
 #---------------- Add decorated declaration (BEFORE adding boot and startup routine)
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 #---------------- Add boot routine
-  ioDecoratedDeclarationList += !@decoratedRoutine.new {
+  ioDecoratedRoutineList +=
     !typeNameForTypeMapForDriver (!mDriverName)
     !.bootMode
     !.function {!executionMode:.bootMode}
@@ -395,9 +396,8 @@ override method @implementedDriverAST enterInContext
     !mBootInstructionList
     !mBootEndLocation
     !.new {!"" !mBootLocation}  # Empty string if no returned value
-  }
 #---------------- Add startup routine
-  ioDecoratedDeclarationList += !@decoratedRoutine.new {
+  ioDecoratedRoutineList +=
     !typeNameForTypeMapForDriver (!mDriverName)
     !.startupMode
     !.function {!executionMode:.startupMode}
@@ -409,7 +409,6 @@ override method @implementedDriverAST enterInContext
     !mStartupInstructionList
     !mStartupEndLocation
     !.new {!"" !mStartupLocation}  # Empty string if no returned value
-  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

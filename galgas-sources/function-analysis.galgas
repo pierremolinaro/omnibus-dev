@@ -2,7 +2,7 @@
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @decoratedRoutine : @abstractDecoratedDeclaration {
+list @decoratedRoutineList {
   @lstring mReceiverTypeName # Empty string if standalone function
   @mode mMode
   @routineKind mRoutineKind
@@ -18,7 +18,23 @@ class @decoratedRoutine : @abstractDecoratedDeclaration {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @decoratedRoutine semanticAnalysis
+method @decoratedRoutineList routineSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for function in self do 
+    [function semanticAnalysis 
+      !context: inContext
+      !?temporary: ioTemporaries
+      !?intermediateCode: ioIntermediateCodeStruct
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @decoratedRoutineList-element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

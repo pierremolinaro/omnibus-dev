@@ -1596,6 +1596,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMap_2D_element 
 void extensionMethod_enterInContext (const class GALGAS_taskListAST inObject,
                                      class GALGAS_semanticContext & io_ioContext,
                                      class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
+                                     class GALGAS_decoratedRoutineList & io_ioDecoratedRoutineList,
                                      class GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
                                      class GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                      class GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
@@ -2798,6 +2799,273 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_declarationDecorati
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                             @decoratedRoutineList list                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_decoratedRoutineList : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_decoratedRoutineList (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_decoratedRoutineList (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_lstring & in_mReceiverTypeName,
+                                                  const class GALGAS_mode & in_mMode,
+                                                  const class GALGAS_routineKind & in_mRoutineKind,
+                                                  const class GALGAS_bool & in_mWarnIfUnused,
+                                                  const class GALGAS_bool & in_mExportedRoutine,
+                                                  const class GALGAS_routineAttributes & in_mRoutineAttributes,
+                                                  const class GALGAS_lstring & in_mRoutineName,
+                                                  const class GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
+                                                  const class GALGAS_instructionListAST & in_mRoutineInstructionList,
+                                                  const class GALGAS_location & in_mEndOfRoutineDeclaration,
+                                                  const class GALGAS_lstring & in_mReturnTypeName
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_decoratedRoutineList extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_decoratedRoutineList constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_decoratedRoutineList constructor_listWithValue (const class GALGAS_lstring & inOperand0,
+                                                                               const class GALGAS_mode & inOperand1,
+                                                                               const class GALGAS_routineKind & inOperand2,
+                                                                               const class GALGAS_bool & inOperand3,
+                                                                               const class GALGAS_bool & inOperand4,
+                                                                               const class GALGAS_routineAttributes & inOperand5,
+                                                                               const class GALGAS_lstring & inOperand6,
+                                                                               const class GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                                               const class GALGAS_instructionListAST & inOperand8,
+                                                                               const class GALGAS_location & inOperand9,
+                                                                               const class GALGAS_lstring & inOperand10
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_decoratedRoutineList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_mode & inOperand1,
+                                                      const class GALGAS_routineKind & inOperand2,
+                                                      const class GALGAS_bool & inOperand3,
+                                                      const class GALGAS_bool & inOperand4,
+                                                      const class GALGAS_routineAttributes & inOperand5,
+                                                      const class GALGAS_lstring & inOperand6,
+                                                      const class GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                      const class GALGAS_instructionListAST & inOperand8,
+                                                      const class GALGAS_location & inOperand9,
+                                                      const class GALGAS_lstring & inOperand10
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_decoratedRoutineList add_operation (const GALGAS_decoratedRoutineList & inOperand,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_append (class GALGAS_decoratedRoutineList_2D_element inArgument0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
+                                                       class GALGAS_mode constinArgument1,
+                                                       class GALGAS_routineKind constinArgument2,
+                                                       class GALGAS_bool constinArgument3,
+                                                       class GALGAS_bool constinArgument4,
+                                                       class GALGAS_routineAttributes constinArgument5,
+                                                       class GALGAS_lstring constinArgument6,
+                                                       class GALGAS_routineFormalArgumentListAST constinArgument7,
+                                                       class GALGAS_instructionListAST constinArgument8,
+                                                       class GALGAS_location constinArgument9,
+                                                       class GALGAS_lstring constinArgument10,
+                                                       class GALGAS_uint constinArgument11,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_mode & outArgument1,
+                                                  class GALGAS_routineKind & outArgument2,
+                                                  class GALGAS_bool & outArgument3,
+                                                  class GALGAS_bool & outArgument4,
+                                                  class GALGAS_routineAttributes & outArgument5,
+                                                  class GALGAS_lstring & outArgument6,
+                                                  class GALGAS_routineFormalArgumentListAST & outArgument7,
+                                                  class GALGAS_instructionListAST & outArgument8,
+                                                  class GALGAS_location & outArgument9,
+                                                  class GALGAS_lstring & outArgument10,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
+                                                 class GALGAS_mode & outArgument1,
+                                                 class GALGAS_routineKind & outArgument2,
+                                                 class GALGAS_bool & outArgument3,
+                                                 class GALGAS_bool & outArgument4,
+                                                 class GALGAS_routineAttributes & outArgument5,
+                                                 class GALGAS_lstring & outArgument6,
+                                                 class GALGAS_routineFormalArgumentListAST & outArgument7,
+                                                 class GALGAS_instructionListAST & outArgument8,
+                                                 class GALGAS_location & outArgument9,
+                                                 class GALGAS_lstring & outArgument10,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
+                                                       class GALGAS_mode & outArgument1,
+                                                       class GALGAS_routineKind & outArgument2,
+                                                       class GALGAS_bool & outArgument3,
+                                                       class GALGAS_bool & outArgument4,
+                                                       class GALGAS_routineAttributes & outArgument5,
+                                                       class GALGAS_lstring & outArgument6,
+                                                       class GALGAS_routineFormalArgumentListAST & outArgument7,
+                                                       class GALGAS_instructionListAST & outArgument8,
+                                                       class GALGAS_location & outArgument9,
+                                                       class GALGAS_lstring & outArgument10,
+                                                       class GALGAS_uint constinArgument11,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
+                                               class GALGAS_mode & outArgument1,
+                                               class GALGAS_routineKind & outArgument2,
+                                               class GALGAS_bool & outArgument3,
+                                               class GALGAS_bool & outArgument4,
+                                               class GALGAS_routineAttributes & outArgument5,
+                                               class GALGAS_lstring & outArgument6,
+                                               class GALGAS_routineFormalArgumentListAST & outArgument7,
+                                               class GALGAS_instructionListAST & outArgument8,
+                                               class GALGAS_location & outArgument9,
+                                               class GALGAS_lstring & outArgument10,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
+                                              class GALGAS_mode & outArgument1,
+                                              class GALGAS_routineKind & outArgument2,
+                                              class GALGAS_bool & outArgument3,
+                                              class GALGAS_bool & outArgument4,
+                                              class GALGAS_routineAttributes & outArgument5,
+                                              class GALGAS_lstring & outArgument6,
+                                              class GALGAS_routineFormalArgumentListAST & outArgument7,
+                                              class GALGAS_instructionListAST & outArgument8,
+                                              class GALGAS_location & outArgument9,
+                                              class GALGAS_lstring & outArgument10,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfRoutineDeclarationAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExportedRoutineAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineAttributes getter_mRoutineAttributesAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mRoutineFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                                C_Compiler * inCompiler
+                                                                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mRoutineInstructionListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                   C_Compiler * inCompiler
+                                                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKindAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnusedAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedRoutineList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedRoutineList getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_decoratedRoutineList getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_decoratedRoutineList ;
+ 
+} ; // End of GALGAS_decoratedRoutineList class
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Enumerator declaration                                                                                            *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumerator_decoratedRoutineList : public cGenericAbstractEnumerator {
+  public : cEnumerator_decoratedRoutineList (const GALGAS_decoratedRoutineList & inEnumeratedObject,
+                                             const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstring current_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
+  public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mExportedRoutine (LOCATION_ARGS) const ;
+  public : class GALGAS_routineAttributes current_mRoutineAttributes (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mRoutineName (LOCATION_ARGS) const ;
+  public : class GALGAS_routineFormalArgumentListAST current_mRoutineFormalArgumentList (LOCATION_ARGS) const ;
+  public : class GALGAS_instructionListAST current_mRoutineInstructionList (LOCATION_ARGS) const ;
+  public : class GALGAS_location current_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mReturnTypeName (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_decoratedRoutineList_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRoutineList ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                            @globalTaskVariableList list                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3255,7 +3523,7 @@ class cMapElement_propertyMap : public cMapElement {
 void extensionMethod_enterFunctionInContext (const class GALGAS_functionDeclarationListAST inObject,
                                              const class GALGAS_lstring constin_inSelfTypeName,
                                              class GALGAS_semanticContext & io_ioContext,
-                                             class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
+                                             class GALGAS_decoratedRoutineList & io_ioDecoratedRoutineList,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
