@@ -25,7 +25,7 @@ struct @driverDeclarationAST {
   @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
-  @startupListAST mDriverInitListAST
+  @startupListAST mDriverStartupListAST
   @bootListAST mDriverBootListAST
 }
 
@@ -55,6 +55,7 @@ class @implementedDriverAST : @abstractDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
   @bool mIsInstancied
+  @startupListAST mDriverStartupListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -305,6 +306,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mDriverName
       !declaration.mDriverDependanceList
       !driverIsInstancied
+      !{} # declaration.mDriverStartupListAST
     }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !typeNameForTypeMapForDriver (!declaration.mDriverName)
@@ -318,10 +320,10 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mDriverGuardListAST
       !false # Do not implement deinit
     }
-    for (init) in declaration.mDriverInitListAST do
-      ioAST.mDeclarationListAST += !init
+    for (startup) in declaration.mDriverStartupListAST do
+      ioAST.mDeclarationListAST += !startup
     end
-    if [declaration.mDriverInitListAST length] == 0 then
+    if [declaration.mDriverStartupListAST length] == 0 then
       ioAST.mDeclarationListAST += !@startupAST.new {
         !declaration.mDriverName
         !declaration.mDriverDependanceList
@@ -374,6 +376,22 @@ override method @implementedDriverAST enterInContext
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
   let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)} type]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
+#---------------- Add startup routine
+  for (startup) in mDriverStartupListAST do
+    ioDecoratedDeclarationList += !@decoratedRoutine.new {
+      !typeNameForTypeMapForDriver (!mDriverName)
+      !.startupMode
+      !.function {!executionMode:.startupMode}
+      !true # mWarnIfUnused
+      !false # mGlobalFunction
+      !.directPropertyAccess # @routineAttributes mRoutineAttributes
+      !.new {!"startup" !startup.mStartupLocation} # Function name
+      !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
+      !startup.mInstructionList
+      !startup.mEndOfStartupLocation
+      !.new {!"" !startup.mStartupLocation}  # Empty string if no returned value
+    }
+  end
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 }

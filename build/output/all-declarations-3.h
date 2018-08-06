@@ -5466,6 +5466,16 @@ void extensionMethod_generateLLVMinitCode (const class GALGAS_startupListIR inOb
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                          Function 'llvmDriverNameFromName'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring & constinArgument0,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //        Extension getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector' (as function)         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -689,7 +689,8 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_implementedDriverAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                      const class GALGAS_lstringlist & inOperand1,
-                                                                     const class GALGAS_bool & inOperand2
+                                                                     const class GALGAS_bool & inOperand2,
+                                                                     const class GALGAS_startupListAST & inOperand3
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -704,6 +705,8 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_startupListAST getter_mDriverStartupListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
 
@@ -729,11 +732,13 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_lstring mProperty_mDriverName ;
   public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
   public : GALGAS_bool mProperty_mIsInstancied ;
+  public : GALGAS_startupListAST mProperty_mDriverStartupListAST ;
 
 //--- Constructor
   public : cPtr_implementedDriverAST (const GALGAS_lstring & in_mDriverName,
                                       const GALGAS_lstringlist & in_mDriverDependanceList,
-                                      const GALGAS_bool & in_mIsInstancied
+                                      const GALGAS_bool & in_mIsInstancied,
+                                      const GALGAS_startupListAST & in_mDriverStartupListAST
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -743,6 +748,7 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_startupListAST getter_mDriverStartupListAST (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1537,12 +1543,10 @@ class GALGAS_decoratedRoutine : public GALGAS_abstractDecoratedDeclaration {
                                                                  const class GALGAS_bool & inOperand4,
                                                                  const class GALGAS_routineAttributes & inOperand5,
                                                                  const class GALGAS_lstring & inOperand6,
-                                                                 const class GALGAS_lstringlist & inOperand7,
-                                                                 const class GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                 const class GALGAS_lstring & inOperand9,
-                                                                 const class GALGAS_instructionListAST & inOperand10,
-                                                                 const class GALGAS_location & inOperand11,
-                                                                 const class GALGAS_lstring & inOperand12
+                                                                 const class GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                                 const class GALGAS_instructionListAST & inOperand8,
+                                                                 const class GALGAS_location & inOperand9,
+                                                                 const class GALGAS_lstring & inOperand10
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1556,15 +1560,11 @@ class GALGAS_decoratedRoutine : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionAttributeList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGlobalFunction (LOCATION_ARGS) const ;
 
@@ -1606,9 +1606,7 @@ class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
   public : GALGAS_bool mProperty_mGlobalFunction ;
   public : GALGAS_routineAttributes mProperty_mRoutineAttributes ;
   public : GALGAS_lstring mProperty_mFunctionName ;
-  public : GALGAS_lstringlist mProperty_mFunctionAttributeList ;
   public : GALGAS_routineFormalArgumentListAST mProperty_mFunctionFormalArgumentList ;
-  public : GALGAS_lstring mProperty_mFunctionReturnTypeName ;
   public : GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
   public : GALGAS_location mProperty_mEndOfFunctionDeclaration ;
   public : GALGAS_lstring mProperty_mReturnTypeName ;
@@ -1621,9 +1619,7 @@ class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
                                   const GALGAS_bool & in_mGlobalFunction,
                                   const GALGAS_routineAttributes & in_mRoutineAttributes,
                                   const GALGAS_lstring & in_mFunctionName,
-                                  const GALGAS_lstringlist & in_mFunctionAttributeList,
                                   const GALGAS_routineFormalArgumentListAST & in_mFunctionFormalArgumentList,
-                                  const GALGAS_lstring & in_mFunctionReturnTypeName,
                                   const GALGAS_instructionListAST & in_mFunctionInstructionList,
                                   const GALGAS_location & in_mEndOfFunctionDeclaration,
                                   const GALGAS_lstring & in_mReturnTypeName
@@ -1640,9 +1636,7 @@ class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mGlobalFunction (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineAttributes getter_mRoutineAttributes (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mFunctionAttributeList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;

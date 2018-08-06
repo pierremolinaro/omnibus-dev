@@ -10,9 +10,7 @@ class @decoratedRoutine : @abstractDecoratedDeclaration {
   @bool mGlobalFunction
   @routineAttributes mRoutineAttributes
   @lstring mFunctionName
-  @lstringlist mFunctionAttributeList
   @routineFormalArgumentListAST mFunctionFormalArgumentList
-  @lstring mFunctionReturnTypeName # Empty string if no return value
   @instructionListAST mFunctionInstructionList
   @location mEndOfFunctionDeclaration
   @lstring mReturnTypeName  # Empty string if no returned value
@@ -25,23 +23,25 @@ override method @decoratedRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+#--- Reset temporaries index
+  ioTemporaries.mTemporaryIndex = 0
 #--- Receiver type
   let receiverType = if mReceiverTypeName.string == ""
     then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
     end
-#--- Reset index to temporaries
-  ioTemporaries.mTemporaryIndex = 0
 #--- Mangled routine name
   let routineMangledName = routineMangledNameFromAST (
-    !if receiverType.kind == .void then "" else receiverType.plmTypeDescriptionName end
+    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
     !mFunctionName
     !mFunctionFormalArgumentList
   )
+  log routineMangledName
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
+#--- Return value ?
   if mReturnTypeName.string != "" then
     let resultVarName = @lstring.new {!functionResultVariableName () !mReturnTypeName.location}
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
@@ -56,12 +56,9 @@ override method @decoratedRoutine semanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineMangledName
-      !routineMangledName
-    ]
-  end
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
+   [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineMangledName !routineMangledName]
+ # end
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}

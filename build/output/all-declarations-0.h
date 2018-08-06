@@ -15690,7 +15690,7 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 
   public : GALGAS_guardDeclarationListAST mProperty_mDriverGuardListAST ;
 
-  public : GALGAS_startupListAST mProperty_mDriverInitListAST ;
+  public : GALGAS_startupListAST mProperty_mDriverStartupListAST ;
 
   public : GALGAS_bootListAST mProperty_mDriverBootListAST ;
 
@@ -15714,7 +15714,7 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
                                         const GALGAS_functionDeclarationListAST & in_mDriverFunctionDeclarationListAST,
                                         const GALGAS_systemRoutineDeclarationListAST & in_mDriverSystemRoutineListAST,
                                         const GALGAS_guardDeclarationListAST & in_mDriverGuardListAST,
-                                        const GALGAS_startupListAST & in_mDriverInitListAST,
+                                        const GALGAS_startupListAST & in_mDriverStartupListAST,
                                         const GALGAS_bootListAST & in_mDriverBootListAST) ;
 
 //-- Start of generic part --*
@@ -15758,11 +15758,11 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mDriverGuardListAST (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_startupListAST getter_mDriverInitListAST (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_driverPropertyListAST getter_mDriverPropertyListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_startupListAST getter_mDriverStartupListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mDriverSystemRoutineListAST (LOCATION_ARGS) const ;
 

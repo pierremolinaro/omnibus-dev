@@ -484,15 +484,6 @@ func linkForHTMLTypeMap ?let @string inTypeName -> @string {
 #!  LLVM TYPE GENERATION                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @orderedTypeList {
-  @PLMType mType
-  @uint mIndex
-}{
-  mIndex <
-}
-
-#·······················································································································
-
 method @PLMType generateLLVMTypeDefinition
   ?!@string ioLLVMcode
 {
@@ -526,6 +517,15 @@ method @PLMType generateLLVMTypeDefinition
   end
 }
 
+
+sortedlist @orderedTypeList {
+  @PLMType mType
+  @uint mIndex
+}{
+  mIndex <
+}
+
+#·······················································································································
 #·······················································································································
 
 proc declareLLVMTypes

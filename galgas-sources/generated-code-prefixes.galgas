@@ -22,12 +22,6 @@ func registerGroupNameFromPLMname ?let @lstring inName -> @lstring {
 #! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForInvocationGraph ?let @string inReceiverTypeName ?let @location inLocation -> @lstring {
-  result = .new {!"init " + inReceiverTypeName !inLocation}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @luint inPriority -> @lstring {
   var s = "setup " + inReceiverTypeName
   s += " " + inPriority.uint
