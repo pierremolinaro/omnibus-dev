@@ -43,24 +43,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-#  rule <declaration> ?!@ast ioAST {
-#    $panic$
-#    $loop$
-#    $integer$ ?let priority
-#    ${$
-#    <instructionList> !?ioAST ?let instructionList
-#    let endOfInstructionList = @location.here
-#    $}$
-#    ioAST.mDeclarationListAST += !@panicAST.new {
-#      !false
-#      !instructionList
-#      !endOfInstructionList
-#      !priority
-#    }
-#  }
-
-  #·····················································································································
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -164,12 +146,12 @@ override method @decoratedPanicRoutine semanticAnalysis
   [!?universalMap openBranch]
 #--- Insert predefined input arguments
   let codeArg = @lstring.new {!"CODE" !mPriority.location}
-  [!?universalMap insertUsedLocalConstant !codeArg ![inContext.mPanicCodeType type] !codeArg]
+  [!?universalMap insertUsedLocalConstant !codeArg !inContext.mPanicCodeType !codeArg]
   let fileArg = @lstring.new {!"FILE" !mPriority.location}
   let StaticStringType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]} type]
   [!?universalMap insertUsedLocalConstant !fileArg !StaticStringType !fileArg]
   let lineArg = @lstring.new {!"LINE" !mPriority.location}
-  [!?universalMap insertUsedLocalConstant !lineArg ![inContext.mPanicLineType type] !lineArg]
+  [!?universalMap insertUsedLocalConstant !lineArg !inContext.mPanicLineType !lineArg]
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   @allocaList initAllocaList = {}

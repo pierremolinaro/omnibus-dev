@@ -59,7 +59,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
     !self:inSelfType
     !routineAttributes:.none
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:[inContext.mPanicCodeType type]
+    !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !mode:inCurrentMode
     !?temporary:ioTemporaries
@@ -76,10 +76,11 @@ override method @panicInstructionAST instructionSemanticAnalysis
      || ([result plmTypeDescriptionName] != staticIntegerTypeName ()) then
     error mInstructionLocation : "throw expression should be a literal integer"
   else
-    [[inContext.mPanicCodeType type].kind integer ?min:let min ?max:let max ?2*]
+    [inContext.mPanicCodeType.kind integer ?min:let min ?max:let max ?2*]
     [result literalInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
-      error mInstructionLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]
+      error mInstructionLocation
+      : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.plmTypeDescriptionName
     elsif not [option plm_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@panicInstructionIR.new {
         !mInstructionLocation

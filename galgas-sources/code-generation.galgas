@@ -94,8 +94,8 @@ proc codeGeneration
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
   ?target:let @lstring inTargetName
-  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
-  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
+  ?panicCodeType:let @PLMType inPanicCodeType
+  ?panicLineType:let @PLMType inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
@@ -153,8 +153,8 @@ private proc generateCodeFiles
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
   ?target:let @lstring inTargetName
-  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
-  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
+  ?panicCodeType:let @PLMType inPanicCodeType
+  ?panicLineType:let @PLMType inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
@@ -164,8 +164,8 @@ private proc generateCodeFiles
   @generationAdds generationAdds = .default
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
   let @generationContext generationContext = .new {
-    ![inPanicCodeType type]
-    ![inPanicLineType type]
+    !inPanicCodeType
+    !inPanicLineType
     !inTargetParameters.mNopInstructionStringInLLVM.string
     !inIntermediateCodeStruct.mGlobalTaskVariableList
     !inAvailableInterruptMap

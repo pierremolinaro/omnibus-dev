@@ -1217,6 +1217,9 @@ class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
   public : GALGAS_releaseIR (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_releaseIR constructor_default (LOCATION_ARGS) ;
+
 //---
   public : inline const class cPtr_releaseIR * ptr (void) const { return (const cPtr_releaseIR *) mObjectPtr ; }
 
@@ -1879,6 +1882,9 @@ class GALGAS_copyFromReferencesIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
   public : GALGAS_copyFromReferencesIR (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_copyFromReferencesIR constructor_default (LOCATION_ARGS) ;
+
 //---
   public : inline const class cPtr_copyFromReferencesIR * ptr (void) const { return (const cPtr_copyFromReferencesIR *) mObjectPtr ; }
 
@@ -1991,6 +1997,9 @@ class GALGAS_LValueRepresentation : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_LValueRepresentation constructor_default (LOCATION_ARGS) ;
+
 //--------------------------------- Default constructor
   public : GALGAS_LValueRepresentation (void) ;
 
@@ -2090,6 +2099,9 @@ void extensionSetter_appendGetUniversalPropertyReference (class GALGAS_instructi
 class GALGAS_getUniversalPropertyReferenceIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
   public : GALGAS_getUniversalPropertyReferenceIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_getUniversalPropertyReferenceIR constructor_default (LOCATION_ARGS) ;
 
 //---
   public : inline const class cPtr_getUniversalPropertyReferenceIR * ptr (void) const { return (const cPtr_getUniversalPropertyReferenceIR *) mObjectPtr ; }
