@@ -7883,6 +7883,14 @@ GALGAS_abstractInstructionIR () {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_releaseIR GALGAS_releaseIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_releaseIR::constructor_new (GALGAS_PLMType::constructor_default (HERE),
+                                            GALGAS_lstring::constructor_default (HERE)
+                                            COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_releaseIR::GALGAS_releaseIR (const cPtr_releaseIR * inSourcePtr) :
 GALGAS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_releaseIR) ;
@@ -8264,6 +8272,15 @@ GALGAS_abstractInstructionIR () {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_copyFromReferencesIR GALGAS_copyFromReferencesIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_copyFromReferencesIR::constructor_new (GALGAS_PLMType::constructor_default (HERE),
+                                                       GALGAS_string::constructor_default (HERE),
+                                                       GALGAS_string::constructor_default (HERE)
+                                                       COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_copyFromReferencesIR::GALGAS_copyFromReferencesIR (const cPtr_copyFromReferencesIR * inSourcePtr) :
 GALGAS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_copyFromReferencesIR) ;
@@ -8468,6 +8485,17 @@ typeComparisonResult GALGAS_getUniversalPropertyReferenceIR::objectCompare (cons
 
 GALGAS_getUniversalPropertyReferenceIR::GALGAS_getUniversalPropertyReferenceIR (void) :
 GALGAS_abstractInstructionIR () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_getUniversalPropertyReferenceIR GALGAS_getUniversalPropertyReferenceIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_getUniversalPropertyReferenceIR::constructor_new (GALGAS_PLMType::constructor_default (HERE),
+                                                                  GALGAS_string::constructor_default (HERE),
+                                                                  GALGAS_string::constructor_default (HERE),
+                                                                  GALGAS_uint::constructor_default (HERE),
+                                                                  GALGAS_string::constructor_default (HERE)
+                                                                  COMMA_THERE) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9157,6 +9185,16 @@ mProperty_mPanicLineLLVMType (inOperand1),
 mProperty_mNopInstructionInLLVM (inOperand2),
 mProperty_mGlobalTaskVariableList (inOperand3),
 mProperty_mAvailableInterruptMap (inOperand4) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_generationContext GALGAS_generationContext::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_generationContext (GALGAS_PLMType::constructor_default (HERE),
+                                   GALGAS_PLMType::constructor_default (HERE),
+                                   GALGAS_string::constructor_default (HERE),
+                                   GALGAS_globalTaskVariableList::constructor_emptyList (HERE),
+                                   GALGAS_availableInterruptMap::constructor_emptyMap (HERE)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9884,6 +9922,13 @@ GALGAS_propertyList_2D_element::GALGAS_propertyList_2D_element (const GALGAS_str
                                                                 const GALGAS_PLMType & inOperand1) :
 mProperty_mPropertyName (inOperand0),
 mProperty_mType (inOperand1) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_propertyList_2D_element (GALGAS_string::constructor_default (HERE),
+                                         GALGAS_PLMType::constructor_default (HERE)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10785,6 +10830,22 @@ mProperty_mControlRegisterFieldList (inOperand7),
 mProperty_mRegisterBitCount (inOperand8),
 mProperty_mArraySize (inOperand9),
 mProperty_mElementArraySize (inOperand10) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_controlRegisterMap_2D_element GALGAS_controlRegisterMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_controlRegisterMap_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                               GALGAS_PLMType::constructor_default (HERE),
+                                               GALGAS_bool::constructor_default (HERE),
+                                               GALGAS_bool::constructor_default (HERE),
+                                               GALGAS_sliceMap::constructor_emptyMap (HERE),
+                                               GALGAS_controlRegisterFieldMap::constructor_emptyMap (HERE),
+                                               GALGAS_bigint::constructor_zero (HERE),
+                                               GALGAS_controlRegisterFieldList::constructor_emptyList (HERE),
+                                               GALGAS_uint::constructor_default (HERE),
+                                               GALGAS_uint::constructor_default (HERE),
+                                               GALGAS_uint::constructor_default (HERE)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13436,6 +13497,13 @@ mProperty_mTaskType (inOperand1) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_taskMap_2D_element GALGAS_taskMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_taskMap_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                    GALGAS_PLMType::constructor_default (HERE)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_taskMap_2D_element GALGAS_taskMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                       const GALGAS_PLMType & inOperand1 
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
@@ -13592,6 +13660,23 @@ mProperty_mDeactivateAllocaList (inOperand8),
 mProperty_mDeactivateInstructionListIR (inOperand9),
 mProperty_mTaskNameStringIndex (inOperand10),
 mProperty_mActivate (inOperand11) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskMapIR_2D_element GALGAS_taskMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_taskMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                      GALGAS_PLMType::constructor_default (HERE),
+                                      GALGAS_uint::constructor_default (HERE),
+                                      GALGAS_bigint::constructor_zero (HERE),
+                                      GALGAS_allocaList::constructor_emptyList (HERE),
+                                      GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                      GALGAS_allocaList::constructor_emptyList (HERE),
+                                      GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                      GALGAS_allocaList::constructor_emptyList (HERE),
+                                      GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                      GALGAS_uint::constructor_default (HERE),
+                                      GALGAS_bool::constructor_default (HERE)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -14437,136 +14522,6 @@ GALGAS_flatValuedObjectMap_2D_element GALGAS_flatValuedObjectMap_2D_element::ext
       result = *p ;
     }else{
       inCompiler->castError ("flatValuedObjectMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_referenceStateMap_2D_element::GALGAS_referenceStateMap_2D_element (void) :
-mProperty_lkey (),
-mProperty_mState () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_referenceStateMap_2D_element::~ GALGAS_referenceStateMap_2D_element (void) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_referenceStateMap_2D_element::GALGAS_referenceStateMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                          const GALGAS_valuedObjectState & inOperand1) :
-mProperty_lkey (inOperand0),
-mProperty_mState (inOperand1) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_referenceStateMap_2D_element GALGAS_referenceStateMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                          const GALGAS_valuedObjectState & inOperand1 
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_referenceStateMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_referenceStateMap_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_referenceStateMap_2D_element::objectCompare (const GALGAS_referenceStateMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mState.objectCompare (inOperand.mProperty_mState) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool GALGAS_referenceStateMap_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mState.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_referenceStateMap_2D_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mState.drop () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_referenceStateMap_2D_element::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "<struct @referenceStateMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mState.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_referenceStateMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mProperty_lkey ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_valuedObjectState GALGAS_referenceStateMap_2D_element::getter_mState (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mState ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @referenceStateMap-element type                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_referenceStateMap_2D_element ("referenceStateMap-element",
-                                                     NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_referenceStateMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_referenceStateMap_2D_element ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_referenceStateMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_referenceStateMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_referenceStateMap_2D_element GALGAS_referenceStateMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_referenceStateMap_2D_element result ;
-  const GALGAS_referenceStateMap_2D_element * p = (const GALGAS_referenceStateMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_referenceStateMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("referenceStateMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

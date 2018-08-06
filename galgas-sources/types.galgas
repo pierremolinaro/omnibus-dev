@@ -85,6 +85,7 @@ enum @typeKind {
   case dynamicArrayType (@PLMType elementType)
   case function (@routineDescriptor descriptor)
   case pointer (@PLMType pointee)
+  default void
 }
 
 #·······················································································································

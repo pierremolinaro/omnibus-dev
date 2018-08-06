@@ -13496,7 +13496,7 @@ class cCollectionElement_driverListIR : public cCollectionElement {
 
 //--- Constructor
   public : cCollectionElement_driverListIR (const GALGAS_string & in_mDriverName,
-                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                            const GALGAS_PLMType & in_mType,
                                             const GALGAS_operandIRList & in_mInitialValueList
                                             COMMA_LOCATION_ARGS) ;
 
@@ -13516,11 +13516,11 @@ class cCollectionElement_driverListIR : public cCollectionElement {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_driverListIR::cCollectionElement_driverListIR (const GALGAS_string & in_mDriverName,
-                                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                                  const GALGAS_PLMType & in_mType,
                                                                   const GALGAS_operandIRList & in_mInitialValueList
                                                                   COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mDriverName, in_mTypeProxy, in_mInitialValueList) {
+mObject (in_mDriverName, in_mType, in_mInitialValueList) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13533,7 +13533,7 @@ bool cCollectionElement_driverListIR::isValid (void) const {
 
 cCollectionElement * cCollectionElement_driverListIR::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_driverListIR (mObject.mProperty_mDriverName, mObject.mProperty_mTypeProxy, mObject.mProperty_mInitialValueList COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_driverListIR (mObject.mProperty_mDriverName, mObject.mProperty_mType, mObject.mProperty_mInitialValueList COMMA_HERE)) ;
   return result ;
 }
 
@@ -13546,8 +13546,8 @@ void cCollectionElement_driverListIR::description (C_String & ioString, const in
   mObject.mProperty_mDriverName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mTypeProxy" ":" ;
-  mObject.mProperty_mTypeProxy.description (ioString, inIndentation) ;
+  ioString << "mType" ":" ;
+  mObject.mProperty_mType.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInitialValueList" ":" ;
@@ -13583,7 +13583,7 @@ GALGAS_driverListIR GALGAS_driverListIR::constructor_emptyList (UNUSED_LOCATION_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_driverListIR GALGAS_driverListIR::constructor_listWithValue (const GALGAS_string & inOperand0,
-                                                                    const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                    const GALGAS_PLMType & inOperand1,
                                                                     const GALGAS_operandIRList & inOperand2
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_driverListIR result ;
@@ -13600,12 +13600,12 @@ GALGAS_driverListIR GALGAS_driverListIR::constructor_listWithValue (const GALGAS
 
 void GALGAS_driverListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                      const GALGAS_string & in_mDriverName,
-                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                     const GALGAS_PLMType & in_mType,
                                                      const GALGAS_operandIRList & in_mInitialValueList
                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement_driverListIR * p = NULL ;
   macroMyNew (p, cCollectionElement_driverListIR (in_mDriverName,
-                                                  in_mTypeProxy,
+                                                  in_mType,
                                                   in_mInitialValueList COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -13614,7 +13614,7 @@ void GALGAS_driverListIR::makeAttributesFromObjects (capCollectionElement & outA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::addAssign_operation (const GALGAS_string & inOperand0,
-                                               const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                               const GALGAS_PLMType & inOperand1,
                                                const GALGAS_operandIRList & inOperand2
                                                COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -13630,7 +13630,7 @@ void GALGAS_driverListIR::addAssign_operation (const GALGAS_string & inOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_insertAtIndex (const GALGAS_string inOperand0,
-                                                const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
+                                                const GALGAS_PLMType inOperand1,
                                                 const GALGAS_operandIRList inOperand2,
                                                 const GALGAS_uint inInsertionIndex,
                                                 C_Compiler * inCompiler
@@ -13648,7 +13648,7 @@ void GALGAS_driverListIR::setter_insertAtIndex (const GALGAS_string inOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_removeAtIndex (GALGAS_string & outOperand0,
-                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                                GALGAS_PLMType & outOperand1,
                                                 GALGAS_operandIRList & outOperand2,
                                                 const GALGAS_uint inRemoveIndex,
                                                 C_Compiler * inCompiler
@@ -13664,7 +13664,7 @@ void GALGAS_driverListIR::setter_removeAtIndex (GALGAS_string & outOperand0,
     }else{
       macroValidSharedObject (p, cCollectionElement_driverListIR) ;
       outOperand0 = p->mObject.mProperty_mDriverName ;
-      outOperand1 = p->mObject.mProperty_mTypeProxy ;
+      outOperand1 = p->mObject.mProperty_mType ;
       outOperand2 = p->mObject.mProperty_mInitialValueList ;
     }
   }
@@ -13673,7 +13673,7 @@ void GALGAS_driverListIR::setter_removeAtIndex (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_popFirst (GALGAS_string & outOperand0,
-                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                           GALGAS_PLMType & outOperand1,
                                            GALGAS_operandIRList & outOperand2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
@@ -13687,7 +13687,7 @@ void GALGAS_driverListIR::setter_popFirst (GALGAS_string & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_driverListIR) ;
     outOperand0 = p->mObject.mProperty_mDriverName ;
-    outOperand1 = p->mObject.mProperty_mTypeProxy ;
+    outOperand1 = p->mObject.mProperty_mType ;
     outOperand2 = p->mObject.mProperty_mInitialValueList ;
   }
 }
@@ -13695,7 +13695,7 @@ void GALGAS_driverListIR::setter_popFirst (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_popLast (GALGAS_string & outOperand0,
-                                          GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                          GALGAS_PLMType & outOperand1,
                                           GALGAS_operandIRList & outOperand2,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
@@ -13709,7 +13709,7 @@ void GALGAS_driverListIR::setter_popLast (GALGAS_string & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_driverListIR) ;
     outOperand0 = p->mObject.mProperty_mDriverName ;
-    outOperand1 = p->mObject.mProperty_mTypeProxy ;
+    outOperand1 = p->mObject.mProperty_mType ;
     outOperand2 = p->mObject.mProperty_mInitialValueList ;
   }
 }
@@ -13717,7 +13717,7 @@ void GALGAS_driverListIR::setter_popLast (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::method_first (GALGAS_string & outOperand0,
-                                        GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                        GALGAS_PLMType & outOperand1,
                                         GALGAS_operandIRList & outOperand2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
@@ -13731,7 +13731,7 @@ void GALGAS_driverListIR::method_first (GALGAS_string & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_driverListIR) ;
     outOperand0 = p->mObject.mProperty_mDriverName ;
-    outOperand1 = p->mObject.mProperty_mTypeProxy ;
+    outOperand1 = p->mObject.mProperty_mType ;
     outOperand2 = p->mObject.mProperty_mInitialValueList ;
   }
 }
@@ -13739,7 +13739,7 @@ void GALGAS_driverListIR::method_first (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::method_last (GALGAS_string & outOperand0,
-                                       GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                       GALGAS_PLMType & outOperand1,
                                        GALGAS_operandIRList & outOperand2,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
@@ -13753,7 +13753,7 @@ void GALGAS_driverListIR::method_last (GALGAS_string & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_driverListIR) ;
     outOperand0 = p->mObject.mProperty_mDriverName ;
-    outOperand1 = p->mObject.mProperty_mTypeProxy ;
+    outOperand1 = p->mObject.mProperty_mType ;
     outOperand2 = p->mObject.mProperty_mInitialValueList ;
   }
 }
@@ -13826,15 +13826,15 @@ GALGAS_string GALGAS_driverListIR::getter_mDriverNameAtIndex (const GALGAS_uint 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_driverListIR::getter_mTypeProxyAtIndex (const GALGAS_uint & inIndex,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_PLMType GALGAS_driverListIR::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_driverListIR * p = (cCollectionElement_driverListIR *) attributes.ptr () ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+  GALGAS_PLMType result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_driverListIR) ;
-    result = p->mObject.mProperty_mTypeProxy ;
+    result = p->mObject.mProperty_mType ;
   }
   return result ;
 }
@@ -13883,10 +13883,10 @@ GALGAS_string cEnumerator_driverListIR::current_mDriverName (LOCATION_ARGS) cons
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_driverListIR::current_mTypeProxy (LOCATION_ARGS) const {
+GALGAS_PLMType cEnumerator_driverListIR::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_driverListIR * p = (const cCollectionElement_driverListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_driverListIR) ;
-  return p->mObject.mProperty_mTypeProxy ;
+  return p->mObject.mProperty_mType ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -14313,34 +14313,34 @@ void extensionMethod_generateLLVMDriverCode (const GALGAS_driverListIR inObject,
                                              GALGAS_string & ioArgument_ioLLVMcode,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 492)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 492)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 493)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 493)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 493)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 493)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 486)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 486)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 487)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 487)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 487)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 487)) ;
   const GALGAS_driverListIR temp_0 = inObject ;
-  cEnumerator_driverListIR enumerator_20156 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_20156.hasCurrentObject ()) {
-    GALGAS_lstring var_startupRoutineMangledName_20193 = function_routineMangledNameFromAST (function_llvmDriverNameFromName (enumerator_20156.current (HERE).getter_mDriverName (HERE).getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 496)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 496)).getter_string (SOURCE_FILE ("declaration-driver.galgas", 496)), GALGAS_string ("boot").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 497)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 498)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 495)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmNameForFunction (var_startupRoutineMangledName_20193.getter_string (SOURCE_FILE ("declaration-driver.galgas", 500)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20156.current (HERE).getter_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)).add_operation (function_llvmNameForGlobalVariable (enumerator_20156.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)) ;
-    enumerator_20156.gotoNextObject () ;
+  cEnumerator_driverListIR enumerator_19594 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_19594.hasCurrentObject ()) {
+    GALGAS_lstring var_startupRoutineMangledName_19631 = function_routineMangledNameFromAST (function_llvmDriverNameFromName (enumerator_19594.current (HERE).getter_mDriverName (HERE).getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 490)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 490)).getter_string (SOURCE_FILE ("declaration-driver.galgas", 490)), GALGAS_string ("boot").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 491)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 492)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 489)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmNameForFunction (var_startupRoutineMangledName_19631.getter_string (SOURCE_FILE ("declaration-driver.galgas", 494)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 494)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 494)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 494)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 494)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_19594.current (HERE).getter_mType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 495)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 495)).add_operation (function_llvmNameForGlobalVariable (enumerator_19594.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 495)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 495)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 495)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 496)) ;
+    enumerator_19594.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 504)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 498)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 505)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Startup"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 507)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 507)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @startup ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 508)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 508)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 508)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 508)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Startup"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @startup ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)) ;
   const GALGAS_driverListIR temp_1 = inObject ;
-  cEnumerator_driverListIR enumerator_20778 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_20778.hasCurrentObject ()) {
-    GALGAS_lstring var_startupRoutineMangledName_20815 = function_routineMangledNameFromAST (function_llvmDriverNameFromName (enumerator_20778.current (HERE).getter_mDriverName (HERE).getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 511)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)).getter_string (SOURCE_FILE ("declaration-driver.galgas", 511)), GALGAS_string ("startup").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 512)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 513)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmNameForFunction (var_startupRoutineMangledName_20815.getter_string (SOURCE_FILE ("declaration-driver.galgas", 515)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 515)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 515)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 515)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 515)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20778.current (HERE).getter_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)).add_operation (function_llvmNameForGlobalVariable (enumerator_20778.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 517)) ;
-    enumerator_20778.gotoNextObject () ;
+  cEnumerator_driverListIR enumerator_20204 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_20204.hasCurrentObject ()) {
+    GALGAS_lstring var_startupRoutineMangledName_20241 = function_routineMangledNameFromAST (function_llvmDriverNameFromName (enumerator_20204.current (HERE).getter_mDriverName (HERE).getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 505)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 505)).getter_string (SOURCE_FILE ("declaration-driver.galgas", 505)), GALGAS_string ("startup").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 506)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 507)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 504)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmNameForFunction (var_startupRoutineMangledName_20241.getter_string (SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20204.current (HERE).getter_mType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)).add_operation (function_llvmNameForGlobalVariable (enumerator_20204.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)) ;
+    enumerator_20204.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 519)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 513)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 520)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 514)) ;
 }
 
 

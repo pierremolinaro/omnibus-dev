@@ -1528,6 +1528,9 @@ class GALGAS_taskMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_taskMap_2D_element constructor_default (LOCATION_ARGS) ;
+
 //--------------------------------- Default constructor
   public : GALGAS_taskMap_2D_element (void) ;
 
@@ -2078,6 +2081,76 @@ class cEnumerator_routineTypedSignature : public cGenericAbstractEnumerator {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineTypedSignature ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         @unifiedTypeMap_2D_proxy map proxy                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
+//--------------------------------- Default constructor
+  public : GALGAS_unifiedTypeMap_2D_proxy (void) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_unifiedTypeMap_2D_proxy extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_unifiedTypeMap_2D_proxy constructor_null (LOCATION_ARGS) ;
+
+  public : static class GALGAS_unifiedTypeMap_2D_proxy constructor_searchKey (const class GALGAS_unifiedTypeMap & inOperand0,
+                                                                              const class GALGAS_lstring & inOperand1,
+                                                                              class C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+  public : static void class_method_makeOptionalProxy (class GALGAS_unifiedTypeMap & ioArgument0,
+                                                       class GALGAS_lstring constinArgument1,
+                                                       class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : static void class_method_makeProxy (class GALGAS_unifiedTypeMap & ioArgument0,
+                                               class GALGAS_lstring constinArgument1,
+                                               class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
+                                               COMMA_LOCATION_ARGS) ;
+
+  public : static void class_method_makeProxyFromString (class GALGAS_unifiedTypeMap & ioArgument0,
+                                                         class GALGAS_string constinArgument1,
+                                                         class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
+                                                         COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_generate (C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_index (C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_type (C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_unifiedTypeMap_2D_proxy class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -4542,9 +4615,9 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_targetParameters mProperty_mTargetParameters ;
 
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mPanicCodeType ;
+  public : GALGAS_PLMType mProperty_mPanicCodeType ;
 
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mPanicLineType ;
+  public : GALGAS_PLMType mProperty_mPanicLineType ;
 
   public : GALGAS_panicRoutinePriorityMap mProperty_mPanicSetupRoutinePriorityMap ;
 
@@ -4641,8 +4714,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_semanticContext (const GALGAS_targetParameters & in_mTargetParameters,
-                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicCodeType,
-                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicLineType,
+                                   const GALGAS_PLMType & in_mPanicCodeType,
+                                   const GALGAS_PLMType & in_mPanicLineType,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMapForContext,
@@ -4696,8 +4769,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_semanticContext constructor_new (const class GALGAS_targetParameters & inOperand0,
-                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                const class GALGAS_PLMType & inOperand1,
+                                                                const class GALGAS_PLMType & inOperand2,
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand3,
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand4,
                                                                 const class GALGAS_routineMapForContext & inOperand5,
@@ -4800,9 +4873,9 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mOrOperatorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mPanicCodeType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mPanicCodeType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mPanicLineType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mPanicLineType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicLoopRoutinePriorityMap (LOCATION_ARGS) const ;
 
@@ -5887,6 +5960,9 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_taskMapIR_2D_element constructor_default (LOCATION_ARGS) ;
+
 //--------------------------------- Default constructor
   public : GALGAS_taskMapIR_2D_element (void) ;
 
@@ -5996,6 +6072,9 @@ class GALGAS_allocaList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_allocaList_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_allocaList_2D_element (void) ;
@@ -6981,6 +7060,9 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_generationContext constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_generationContext (void) ;

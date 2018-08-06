@@ -91,8 +91,8 @@ map @availableInterruptMap {
 struct @semanticContext {
   @targetParameters mTargetParameters
 
-  @unifiedTypeMap-proxy mPanicCodeType
-  @unifiedTypeMap-proxy mPanicLineType
+  @PLMType mPanicCodeType
+  @PLMType mPanicLineType
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
 

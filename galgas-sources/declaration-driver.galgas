@@ -329,17 +329,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
       end
     end
   #---
-    ioAST.mDeclarationListAST += !@implementedDriverAST.new {
-      !declaration.mDriverName
-      !declaration.mDriverDependanceList
-      !driverIsInstancied
-      !declaration.mBootLocation
-      !declaration.mBootInstructionList
-      !declaration.mBootEndLocation
-      !declaration.mStartupLocation
-      !declaration.mStartupInstructionList
-      !declaration.mStartupEndLocation
-    }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !typeNameForTypeMapForDriver (!declaration.mDriverName)
       !plmTypeSpecificNameForDriver (!declaration.mDriverName)
@@ -352,18 +341,17 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mDriverGuardListAST
       !false # Do not implement deinit
     }
-#    for (boot) in declaration.mDriverBootListAST do
-#      ioAST.mDeclarationListAST += !boot
-#    end
-#    if [declaration.mDriverBootListAST length] == 0 then
-#      ioAST.mDeclarationListAST += !@EXbootAST.new {
-#        !declaration.mDriverName
-#        !declaration.mDriverDependanceList
-#        !declaration.mDriverName.location
-#        !{}
-#        !declaration.mDriverName.location
-#      }
-#    end
+    ioAST.mDeclarationListAST += !@implementedDriverAST.new {
+      !declaration.mDriverName
+      !declaration.mDriverDependanceList
+      !driverIsInstancied
+      !declaration.mBootLocation
+      !declaration.mBootInstructionList
+      !declaration.mBootEndLocation
+      !declaration.mStartupLocation
+      !declaration.mStartupInstructionList
+      !declaration.mStartupEndLocation
+    }
   end
   ioAST.mDriverDeclarationListAST = {}
 #--- Check all drivers named in instanciation constructs have been implemented
@@ -394,7 +382,11 @@ override method @implementedDriverAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
-  let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)} type]
+  [ioContext.mTypeMap searchKey
+    !lkey:typeNameForTypeMapForDriver (!mDriverName)
+    ?type:let driverType
+    ?2*
+  ]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
 #---------------- Add boot routine
   ioDecoratedDeclarationList += !@decoratedRoutine.new {
@@ -445,8 +437,12 @@ override method @decoratedRequiredDriver semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let driverTypeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)}
-  let constructorMap = [driverTypeProxy type].constructorMap
+  [inContext.mTypeMap searchKey
+    !lkey:typeNameForTypeMapForDriver (!mDriverName)
+    ?type:let driverType
+    ?2*
+  ]
+  let constructorMap = driverType.constructorMap
   [constructorMap searchKey !.new {!"()" !mDriverName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}
@@ -455,12 +451,10 @@ override method @decoratedRequiredDriver semanticAnalysis
   end
   ioIntermediateCodeStruct.mDriverList += 
     !mDriverName.string
-    !driverTypeProxy
+    !driverType
     !initialValueList
 #--- Build initialized driver set
   ioTemporaries.mInitializedDriverSet += !mDriverName.string
-#--- Enter startup routine as required routine
-#  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -469,7 +463,7 @@ override method @decoratedRequiredDriver semanticAnalysis
 
 list @driverListIR {
   @string mDriverName
-  @unifiedTypeMap-proxy mTypeProxy
+  @PLMType mType
   @operandIRList mInitialValueList
 }
 
@@ -477,7 +471,7 @@ list @driverListIR {
 
 method @driverListIR-element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!mDriverName) + " = internal global "
-  ioLLVMcode += [[mTypeProxy type] llvmTypeName] + " {"
+  ioLLVMcode += [mType llvmTypeName] + " {"
   for (value) in mInitialValueList
     do ioLLVMcode += [value llvmTypeName] + " " + [value llvmValue]
     between ioLLVMcode += ", "  
@@ -498,7 +492,7 @@ method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
       !{}
     )
     ioLLVMcode += "  call void @" + llvmNameForFunction (!startupRoutineMangledName) + " ("
-    ioLLVMcode += [[boot.mTypeProxy type] llvmTypeName] + "* " + llvmNameForGlobalVariable (!boot.mDriverName)
+    ioLLVMcode += [boot.mType llvmTypeName] + "* " + llvmNameForGlobalVariable (!boot.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"
@@ -513,7 +507,7 @@ method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
       !{}
     )
     ioLLVMcode += "  call void @" + llvmNameForFunction (!startupRoutineMangledName) + " ("
-    ioLLVMcode += [[startup.mTypeProxy type] llvmTypeName] + "* " + llvmNameForGlobalVariable (!startup.mDriverName)
+    ioLLVMcode += [startup.mType llvmTypeName] + "* " + llvmNameForGlobalVariable (!startup.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"

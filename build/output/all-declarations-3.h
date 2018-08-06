@@ -1303,6 +1303,9 @@ class GALGAS_globalStructuredConstantList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_globalStructuredConstantList_2D_element constructor_default (LOCATION_ARGS) ;
+
 //--------------------------------- Default constructor
   public : GALGAS_globalStructuredConstantList_2D_element (void) ;
 
@@ -1992,6 +1995,9 @@ class GALGAS_arcAssignmentList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_arcAssignmentList_2D_element constructor_default (LOCATION_ARGS) ;
+
 //--------------------------------- Default constructor
   public : GALGAS_arcAssignmentList_2D_element (void) ;
 
@@ -2154,6 +2160,9 @@ class GALGAS_orderedTypeList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_orderedTypeList_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_orderedTypeList_2D_element (void) ;
@@ -2405,6 +2414,9 @@ class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_constructorSignature_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_constructorSignature_2D_element (void) ;
