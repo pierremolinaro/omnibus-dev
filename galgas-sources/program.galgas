@@ -137,6 +137,7 @@ private proc compileProject
   ast.mDeclarationListAST = orderedDeclarationListAST
   @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   @declarationDecorationList decoratedDeclarationList = {}
+  @decoratedRoutineList decoratedRoutineList = {}
   @globalVariableIRList globalVariableIRList = {}
   if @uint.errorCount == 0 then
     var @timer t = .start 
@@ -148,6 +149,7 @@ private proc compileProject
       ?context:semanticContext
       ?subprogramInvocationGraph
       ?decoratedDeclarationList
+      ?decoratedRoutineList
       ?globalVariableIRList
     )
     message "Context: " + [t string] + "\n" 
@@ -160,6 +162,7 @@ private proc compileProject
       !sourceFile:inSourceFile.string
       !ast:ast
       !decoratedDeclarationList:decoratedDeclarationList
+      !decoratedRoutineList: decoratedRoutineList
       !context:semanticContext
       !subprogramInvocationGraph
       !endOfSourceFile:inEndOfSourceFile

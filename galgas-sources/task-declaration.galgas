@@ -194,6 +194,7 @@ map @taskMap {
 method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
@@ -307,7 +308,7 @@ method @taskListAST enterInContext
     [task.mTaskFunctionList enterFunctionInContext
       !selfTypeName:task.mTaskName
       !?context:ioContext
-      !?ioDecoratedDeclarationList
+      !?ioDecoratedRoutineList
     ]
   #---
     decoratedTaskList += 

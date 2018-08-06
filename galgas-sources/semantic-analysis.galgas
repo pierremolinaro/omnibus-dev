@@ -98,6 +98,7 @@ proc semanticAnalysis
   ?sourceFile:let @string inSourceFile
   ?ast:let @ast inAST
   ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
+  ?decoratedRoutineList: let @decoratedRoutineList inDecoratedRoutineList
   ?context:let @semanticContext inSemanticContext
   ?@subprogramInvocationGraph inSubprogramInvocationGraph
   ?endOfSourceFile:let @location inEndOfSourceFile
@@ -122,6 +123,11 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
+  [inDecoratedRoutineList routineSemanticAnalysis
+    !context:inSemanticContext
+    !?temporary:temporaries
+    !?intermediateCode:outIntermediateCodeStruct
+   ]
   [inAST.mStandAloneSystemRoutineListAST systemRoutineSemanticAnalysis
     !receiverType:voidType ()
     !context:inSemanticContext

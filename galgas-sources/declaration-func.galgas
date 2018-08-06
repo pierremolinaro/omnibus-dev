@@ -215,7 +215,7 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 method @functionDeclarationListAST enterFunctionInContext 
   ?selfTypeName:let @lstring inSelfTypeName
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList ioDecoratedRoutineList
 {
   for function in self do
   #--- Signature
@@ -280,20 +280,7 @@ method @functionDeclarationListAST enterFunctionInContext
       }
     ]
   #---------------- Add decorated declaration
-#    ioDecoratedDeclarationList += !@decoratedFunction.new {
-#      !inSelfTypeName
-#      !function.mMode
-#      !function.mPublicFunction
-#      !function.mFunctionName
-#      !function.mFunctionFormalArgumentList
-#      !function.mFunctionReturnTypeName
-#      !function.mFunctionInstructionList
-#      !function.mEndOfFunctionDeclaration
-#      !warnIfUnused
-#      !globalFunction
-#      !isSafe
-#    }
-    ioDecoratedDeclarationList += !@decoratedRoutine.new {
+    ioDecoratedRoutineList +=
       !inSelfTypeName
       !function.mMode
       !.function {!executionMode:function.mMode}
@@ -305,7 +292,6 @@ method @functionDeclarationListAST enterFunctionInContext
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
       !function.mFunctionReturnTypeName
-    }
   end
 }
 

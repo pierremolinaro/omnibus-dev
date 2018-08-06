@@ -156,6 +156,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -172,16 +173,18 @@ proc buildSemanticContext
   !context:@semanticContext outSemanticContext
   !@subprogramInvocationGraph outSubprogramInvocationGraph
   !@declarationDecorationList outDecoratedDeclarationList
+  !@decoratedRoutineList outDecoratedRoutineList
   !@globalVariableIRList outGlobalVariableIRList
 {
   outSemanticContext = .default
   outDecoratedDeclarationList = {}
+  outDecoratedRoutineList = {}
 #--- Enter standalone procedures, functions, sections, services, guards in context
-  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList]
+  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList !?outDecoratedRoutineList]
   [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext
      !selfTypeName:["" nowhere]
      !?context:outSemanticContext
-     !?outDecoratedDeclarationList
+     !?outDecoratedRoutineList
    ]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
@@ -194,6 +197,7 @@ proc buildSemanticContext
       !procedureDeclarationList:inAST.mStandaloneFunctionDeclarationListAST
       !?context:outSemanticContext
       !?outDecoratedDeclarationList
+      !?outDecoratedRoutineList
       !?outSubprogramInvocationGraph
       !?staticlistValues:ioStaticListValueMap
       !?staticEntityMap:ioStaticEntityMap
@@ -224,6 +228,7 @@ proc buildSemanticContext
   [inAST.mTaskListAST enterInContext
      !?context: outSemanticContext
      !?outDecoratedDeclarationList
+     !?outDecoratedRoutineList
      !?outSubprogramInvocationGraph
      !?staticEntityMap:ioStaticEntityMap
      !?globalVariables:outGlobalVariableIRList
