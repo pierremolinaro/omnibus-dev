@@ -37,6 +37,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-global-constant.galgas"
   "galgas-sources/declaration-global-sync-instance.galgas"
   "galgas-sources/declaration-driver.galgas"
+  "galgas-sources/declaration-standalone-function.galgas"
   "galgas-sources/declaration-static-list.galgas"
   "galgas-sources/declaration-option.galgas"
 

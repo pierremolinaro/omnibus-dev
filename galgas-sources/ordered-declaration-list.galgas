@@ -36,7 +36,7 @@ proc buildOrderedDeclarationList
   for () in inAST.mDeclarationListAST do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
   end
-  [inAST.mStandAloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mStandaloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
