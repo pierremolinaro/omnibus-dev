@@ -40,7 +40,7 @@ override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
              + if bitCount < 32 then registerIndexName else [mIndexResult llvmName] end
              + ", " + mElementSize + " ; multiply index by size " + mElementSize + "\n"
   ioLLVMcode += "  " + mLLVMResultVarName + " = add i32 " + mAddressLLVMname
-             + ", " + scriptedRegisterOffsetName + " ; §\n"
+             + ", " + scriptedRegisterOffsetName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -107,7 +107,6 @@ struct @semanticContext {
   @unifiedTypeMap mTypeMap
 
 #--- Interrupts
-  @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
 
 #--- Operators

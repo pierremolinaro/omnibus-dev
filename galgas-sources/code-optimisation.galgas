@@ -134,13 +134,6 @@ private proc suppressInaccessibleSubprograms
       ]        
     end
   end
-#--- Then, boot and init clauses
-#  for boot in ioIntermediateCodeStruct.mBootList do
-#    [boot.mInstructionListIR enterAccessibleEntities
-#      !?outAccessibleEntities
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    ]
-#  end
 #--- Tasks (setup and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
     [task.mSetupInstructionListIR enterAccessibleEntities
@@ -173,11 +166,6 @@ private proc suppressInaccessibleSubprograms
       ]
     end
   end
-#--- interrupts
-  [ioIntermediateCodeStruct.mInterruptMapIR enterAccessibleEntities
-    !?outAccessibleEntities
-    !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-  ]
 #--- Explore routines
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count]

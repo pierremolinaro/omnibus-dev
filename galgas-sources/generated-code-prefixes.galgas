@@ -81,13 +81,6 @@ func llvmNameForFunction ?let @string inName -> @string {
 #!   Interrupt routine
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func interruptNameForInvocationGraph ?let @lstring inName -> @lstring {
-  let s = "interrupt " + inName
-  result = .new {!s !inName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func llvmNameForServiceInterrupt ?let @lstring inName -> @lstring {
   result = .new {!"interrupt.service." + inName !inName.location}
 }
