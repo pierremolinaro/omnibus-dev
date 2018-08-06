@@ -3229,7 +3229,7 @@ class cMapElement_propertyMap : public cMapElement {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_enterFunctionInContext (const class GALGAS_functionDeclarationListAST inObject,
-                                             const class GALGAS_string constin_inSelfTypeName,
+                                             const class GALGAS_lstring constin_inSelfTypeName,
                                              class GALGAS_semanticContext & io_ioContext,
                                              class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                              class C_Compiler * inCompiler

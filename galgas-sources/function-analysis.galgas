@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedRoutine : @abstractDecoratedDeclaration {
@@ -7,14 +7,13 @@ class @decoratedRoutine : @abstractDecoratedDeclaration {
   @mode mMode
   @routineKind mRoutineKind
   @bool mWarnIfUnused
-  @bool mExportedFunction
+  @bool mExportedRoutine
   @routineAttributes mRoutineAttributes
-  @lstring mFunctionName
-  @routineFormalArgumentListAST mFunctionFormalArgumentList
-  @instructionListAST mFunctionInstructionList
-  @location mEndOfFunctionDeclaration
+  @lstring mRoutineName
+  @routineFormalArgumentListAST mRoutineFormalArgumentList
+  @instructionListAST mRoutineInstructionList
+  @location mEndOfRoutineDeclaration
   @lstring mReturnTypeName  # Empty string if no returned value
-  @bool mIsRequired # If true, routine is marked as root of routine invocation graph
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -34,8 +33,8 @@ override method @decoratedRoutine semanticAnalysis
 #--- Mangled routine name
   let routineMangledName = routineMangledNameFromAST (
     !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
-    !mFunctionName
-    !mFunctionFormalArgumentList
+    !mRoutineName
+    !mRoutineFormalArgumentList
   )
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
@@ -51,7 +50,7 @@ override method @decoratedRoutine semanticAnalysis
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
-    !mFunctionFormalArgumentList
+    !mRoutineFormalArgumentList
     !?universalMap
     !?formalArguments
   )
@@ -60,7 +59,7 @@ override method @decoratedRoutine semanticAnalysis
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
-  [mFunctionInstructionList analyzeRoutineInstructionList
+  [mRoutineInstructionList analyzeRoutineInstructionList
     !self:receiverType
     !routineAttributes:mRoutineAttributes
     !routineNameForInvocationGraph:routineMangledName
@@ -74,8 +73,8 @@ override method @decoratedRoutine semanticAnalysis
   ]
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
-  [!?universalMap closeBranch !mEndOfFunctionDeclaration]
-  [!?universalMap closeOverride !mEndOfFunctionDeclaration]
+  [!?universalMap closeBranch !mEndOfRoutineDeclaration]
+  [!?universalMap closeOverride !mEndOfRoutineDeclaration]
 #--- Code generation
   let returnType = if mReturnTypeName.string == "" then
     voidType ()
@@ -89,9 +88,9 @@ override method @decoratedRoutine semanticAnalysis
     !formalArguments
     !allocaList
     !instructionGenerationList
-    !mIsRequired
+    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
     !mWarnIfUnused
-    !mExportedFunction
+    !mExportedRoutine
     !mRoutineKind
     !returnType
     !false

@@ -213,7 +213,7 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @functionDeclarationListAST enterFunctionInContext 
-  ?selfTypeName:let @string inSelfTypeName
+  ?selfTypeName:let @lstring inSelfTypeName
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
 {
@@ -280,18 +280,31 @@ method @functionDeclarationListAST enterFunctionInContext
       }
     ]
   #---------------- Add decorated declaration
-    ioDecoratedDeclarationList += !@decoratedFunction.new {
+#    ioDecoratedDeclarationList += !@decoratedFunction.new {
+#      !inSelfTypeName
+#      !function.mMode
+#      !function.mPublicFunction
+#      !function.mFunctionName
+#      !function.mFunctionFormalArgumentList
+#      !function.mFunctionReturnTypeName
+#      !function.mFunctionInstructionList
+#      !function.mEndOfFunctionDeclaration
+#      !warnIfUnused
+#      !globalFunction
+#      !isSafe
+#    }
+    ioDecoratedDeclarationList += !@decoratedRoutine.new {
       !inSelfTypeName
       !function.mMode
-      !function.mPublicFunction
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-      !function.mFunctionReturnTypeName
-      !function.mFunctionInstructionList
-      !function.mEndOfFunctionDeclaration
+      !.function {!executionMode:function.mMode}
       !warnIfUnused
       !globalFunction
-      !isSafe
+      !.directPropertyAccess # @routineAttributes mRoutineAttributes
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+      !function.mFunctionInstructionList
+      !function.mEndOfFunctionDeclaration
+      !function.mFunctionReturnTypeName
     }
   end
 }
@@ -339,58 +352,6 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
   #--- Enter in structure map
     [!?ioPropertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   SEMANTICS                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @decoratedFunction : @abstractDecoratedDeclaration {
-  @string mSelfTypeName
-  @mode mMode
-  @bool mPublicFunction
-  @lstring mFunctionName
-  @routineFormalArgumentListAST mFunctionFormalArgumentList
-  @lstring mFunctionReturnTypeName # Empty string if no return value
-  @instructionListAST mFunctionInstructionList
-  @location mEndOfFunctionDeclaration
-  @bool mWarnIfUnused
-  @bool mIsGlobalProcedure
-  @bool mIsSafe
-}
-
-#·······················································································································
-
-override method @decoratedFunction semanticAnalysis
-  ?context:let @semanticContext inSemanticContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let @PLMType receiverType = if mSelfTypeName == "" then
-    voidType ()
-  else
-    [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap ![mSelfTypeName nowhere]} type]
-  end
-  @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
-  if not mIsSafe then
-    attributes = attributes | .panicAllowed
-  end
-  routineSemanticAnalysis (
-    !receiverType:receiverType
-    !.function {!executionMode:mMode}
-    !mMode
-    !mFunctionName
-    !mFunctionFormalArgumentList
-    !returnTypeName:mFunctionReturnTypeName
-    !mFunctionInstructionList
-    !mEndOfFunctionDeclaration
-    !routineAttributes:attributes
-    !warnIfUnused:mWarnIfUnused
-    !globalFunction:mIsGlobalProcedure
-    !context:inSemanticContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
