@@ -28,10 +28,6 @@ syntax plm_syntax (plm_lexique) {
     while
       <declaration> !?ioAST
     while
-     @functionDeclarationListAST standAloneFunctionDeclarationListAST = {}
-      <function> !?ioAST !?standAloneFunctionDeclarationListAST
-      ioAST.mStandAloneFunctionDeclarationListAST += standAloneFunctionDeclarationListAST
-    while
       @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
       <system_routine> !?ioAST !?standAloneSystemRoutineListAST
       ioAST.mStandAloneSystemRoutineListAST += standAloneSystemRoutineListAST

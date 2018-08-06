@@ -179,7 +179,7 @@ proc buildSemanticContext
   outDecoratedDeclarationList = {}
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList]
-  [inAST.mStandAloneFunctionDeclarationListAST enterFunctionInContext
+  [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext
      !selfTypeName:"" 
      !?context:outSemanticContext
      !?outDecoratedDeclarationList
@@ -192,7 +192,7 @@ proc buildSemanticContext
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
-      !procedureDeclarationList:inAST.mStandAloneFunctionDeclarationListAST
+      !procedureDeclarationList:inAST.mStandaloneFunctionDeclarationListAST
       !?context:outSemanticContext
       !?outDecoratedDeclarationList
       !?outSubprogramInvocationGraph
