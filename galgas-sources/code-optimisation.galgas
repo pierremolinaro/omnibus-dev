@@ -110,7 +110,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mGlobal
+        !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
         !procedure.mAppendFileAndLineArgumentForPanicLocation
@@ -127,7 +127,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mGlobal
+        !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
         !procedure.mAppendFileAndLineArgumentForPanicLocation
@@ -135,14 +135,8 @@ private proc suppressInaccessibleSubprograms
     end
   end
 #--- Then, boot and init clauses
-  for boot in ioIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR enterAccessibleEntities
-      !?outAccessibleEntities
-      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-    ]
-  end
-#  for init in ioIntermediateCodeStruct.mStartupList do
-#    [init.mInstructionListIR enterAccessibleEntities
+#  for boot in ioIntermediateCodeStruct.mBootList do
+#    [boot.mInstructionListIR enterAccessibleEntities
 #      !?outAccessibleEntities
 #      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
 #    ]
@@ -247,7 +241,7 @@ private proc exploreProcs
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mGlobal
+        !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
         !procedure.mAppendFileAndLineArgumentForPanicLocation
@@ -264,7 +258,7 @@ private proc exploreProcs
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mGlobal
+        !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
         !procedure.mAppendFileAndLineArgumentForPanicLocation

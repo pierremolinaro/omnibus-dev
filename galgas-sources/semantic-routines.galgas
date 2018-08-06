@@ -167,7 +167,7 @@ method @routineMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += llvmTitleComment (!routineName)
   ioLLVMcode += "define"
-  if not mGlobal then
+  if not mExportedFunction then
     ioLLVMcode += " internal"
   end
   ioLLVMcode += " " + [mReturnType llvmTypeName]

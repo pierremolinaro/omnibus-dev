@@ -231,7 +231,7 @@ private proc generateCodeFiles
 #----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
 #----------------------------------------- Boot
-  [inIntermediateCodeStruct.mBootList generateCode !?llvmCode !generationContext !?generationAdds]
+#  [inIntermediateCodeStruct.mBootList generateCode !?llvmCode !generationContext !?generationAdds]
 #----------------------------------------- Enumeration uint() methods
   for (generation) in inIntermediateCodeStruct.mGenerationListIR do
     [generation generateLLVMcode !?llvmCode !?generationAdds]
