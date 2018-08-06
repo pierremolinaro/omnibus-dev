@@ -84,8 +84,13 @@ override method @startupAST enterInContext
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-   let routineNameForInvocationGraph = initNameForInvocationGraph (!llvmDriverNameFromName (!mDriverName) !mStartupLocation)
-  [!?ioSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
+  let mangledRoutineName = routineMangledNameFromAST (
+    !llvmDriverNameFromName (!mDriverName)
+    !.new {!"startup" !mStartupLocation}
+    !{}
+  )
+  log "ENTER IN CONTEXT" : mangledRoutineName
+  [!?ioSubprogramInvocationGraph addNode !mangledRoutineName !mangledRoutineName]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStartupRoutine.new {
     !mDriverName
@@ -115,6 +120,7 @@ override method @decoratedStartupRoutine semanticAnalysis
 {
   let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)} type]
   startupSemanticAnalysis (
+    !typeNameForTypeMapForDriver (!mDriverName)
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
@@ -138,6 +144,7 @@ override method @decoratedStartupRoutine semanticAnalysis
 #·······················································································································
 
 private proc startupSemanticAnalysis
+  ?let @lstring inDriverTypeName
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -149,11 +156,16 @@ private proc startupSemanticAnalysis
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType.llvmBaseTypeName !inLocation)
+#  let routineNameForInvocationGraph = startupNameForInvocationGraph (!inSelfType.llvmBaseTypeName !inLocation)
+   let mangledRoutineName = routineMangledNameFromAST (
+     !llvmDriverNameFromName (!inDriverTypeName)
+     !.new {!"startup" !inLocation}
+     !{}
+   )
 #---
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineNameForInvocationGraph !routineNameForInvocationGraph]
-  end
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !mangledRoutineName.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode !mangledRoutineName !mangledRoutineName]
+#  end
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -164,7 +176,7 @@ private proc startupSemanticAnalysis
   [inInstructionListAST analyzeRoutineInstructionList
     !self:inSelfType
     !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
+    !routineNameForInvocationGraph:mangledRoutineName
     !context:inContext
     !mode:.startupMode
     !?temporary:ioTemporaries
@@ -200,16 +212,29 @@ method @startupListIR generateLLVMinitCode
 {
   ioLLVMcode += llvmTitleComment (!"Startup")
   ioLLVMcode += "define internal void @startup ()" + llvmAttributeFunction () + "{\n"
-  for init in self do
-    ioLLVMcode += "  call void @startup." + init.mDriverName + " ("
-    ioLLVMcode += [init.mSelfType llvmTypeName] + "* " + llvmNameForGlobalVariable (!init.mDriverName)
+  for startup in self do
+    let startupRoutineMangledName = routineMangledNameFromAST (
+      !llvmDriverNameFromName (![startup.mDriverName nowhere])
+      !["startup" nowhere]
+      !{}
+    )
+    log startupRoutineMangledName
+#    ioLLVMcode += "  call void @startup." + startup.mDriverName + " ("
+    ioLLVMcode += "  call void @" + [startupRoutineMangledName assemblerRepresentation] + " ("
+    ioLLVMcode += [startup.mSelfType llvmTypeName] + "* " + llvmNameForGlobalVariable (!startup.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
   for startup in self do
     ioLLVMcode += llvmSeparatorLine () + "\n"
-    ioLLVMcode += "define internal void @startup." + startup.mDriverName + " ("
+    let startupRoutineMangledName = routineMangledNameFromAST (
+      !llvmDriverNameFromName (![startup.mDriverName nowhere])
+      !["startup" nowhere]
+      !{}
+    )
+#    ioLLVMcode += "define internal void @startup." + startup.mDriverName + " ("
+    ioLLVMcode += "define internal void @" + [startupRoutineMangledName assemblerRepresentation] + " ("
     if startup.mSelfType.kind != .void then
       ioLLVMcode += [startup.mSelfType llvmTypeName] + "* " + llvmNameForSelf ()
     end

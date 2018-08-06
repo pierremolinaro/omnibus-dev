@@ -388,16 +388,6 @@ class GALGAS_lstring function_plmTypeSpecificNameForDriver (const class GALGAS_l
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Function 'llvmDriverNameFromName'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring & constinArgument0,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                           Routine 'retainRequiredDrivers'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -866,30 +856,20 @@ void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Function 'initNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_initNameForInvocationGraph (const class GALGAS_string & constinArgument0,
-                                                          const class GALGAS_location & constinArgument1,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                          Routine 'startupSemanticAnalysis'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_startupSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                      class GALGAS_intermediateCodeStruct & ioArgument2,
-                                      const class GALGAS_PLMType constinArgument3,
-                                      const class GALGAS_location constinArgument4,
-                                      const class GALGAS_instructionListAST constinArgument5,
-                                      const class GALGAS_location constinArgument6,
-                                      class GALGAS_allocaList & outArgument7,
-                                      class GALGAS_instructionListIR & outArgument8,
+void routine_startupSemanticAnalysis (const class GALGAS_lstring constinArgument0,
+                                      const class GALGAS_semanticContext constinArgument1,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                      class GALGAS_intermediateCodeStruct & ioArgument3,
+                                      const class GALGAS_PLMType constinArgument4,
+                                      const class GALGAS_location constinArgument5,
+                                      const class GALGAS_instructionListAST constinArgument6,
+                                      const class GALGAS_location constinArgument7,
+                                      class GALGAS_allocaList & outArgument8,
+                                      class GALGAS_instructionListIR & outArgument9,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
