@@ -14,7 +14,7 @@ proc computeStaticExpression
   if inOptionalTypeName.string == "" then
     annotationType = voidType ()
   else
-    annotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inOptionalTypeName} type]
+    [ioContext.mTypeMap searchKey !lkey:inOptionalTypeName ?type:annotationType ?2*]
   end
 #---
   [inExpression analyzeExpression

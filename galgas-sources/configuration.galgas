@@ -347,7 +347,6 @@ override method @configurationDeclarationAST enterInContext
   end
   ioContext.mTargetParameters = mTargetParameters
 #--- Panic code type
-#  ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
   [ioContext.mTypeMap searchKey
     !lkey:mPanicCodeTypeName
     ?type:let panicCodeType
@@ -363,7 +362,6 @@ override method @configurationDeclarationAST enterInContext
     error mPanicCodeTypeName : "this type should be an unsigned integer type"
   end
 #--- Panic line type
-#  ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
   [ioContext.mTypeMap searchKey
     !lkey:mPanicLineTypeName
     ?type:let panicLineType

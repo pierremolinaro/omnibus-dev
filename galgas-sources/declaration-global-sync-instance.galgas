@@ -87,10 +87,11 @@ override method @syncToolInstanceDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
 #--- Get sync type
-  let optionalSyncType = if mSyncTypeName.string == "" then
-    voidType ()
+  @PLMType optionalSyncType
+  if mSyncTypeName.string == "" then
+    optionalSyncType = voidType ()
   else
-    [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mSyncTypeName} type]
+    [ioContext.mTypeMap searchKey !lkey:mSyncTypeName ?type:optionalSyncType ?2*]
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression

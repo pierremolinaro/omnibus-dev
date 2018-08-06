@@ -453,7 +453,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let taskType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName} type]
+  [inContext.mTypeMap searchKey !lkey:mTaskName ?type:let taskType ?2*]
 #------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = mStackSize.bigint
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
