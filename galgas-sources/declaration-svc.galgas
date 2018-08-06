@@ -323,7 +323,7 @@ method @routineMapIR svcDeclarationGeneration
       ioGenerationAdds.mExternFunctionDeclarationSet += !prototype
       switch svc.mKind
       case section :
-        ioSectionList += !svcCallName !svcImplementationName !true # Onvly incocation from user mode
+        ioSectionList += !svcCallName !svcImplementationName !true # Only invocation from user mode
       case primitive, service :
         ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
       case function (*) :

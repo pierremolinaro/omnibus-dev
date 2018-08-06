@@ -12,7 +12,6 @@ struct @intermediateCodeStruct {
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
-#  @bootListIR mBootList
   @instructionListSortedListIR mPanicSetupInstructionListIR
   @instructionListSortedListIR mPanicLoopInstructionListIR
   @taskMapIR mTaskMapIR
@@ -58,20 +57,6 @@ map @routineMapIR {
   @bool mAppendFileAndLineArgumentForPanicLocation
 
   insert insertKey error message "routine '%K' is already defined"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @interruptMapIR {
-  @PLMType mSelfType # void if standalone
-  @string mGlobalVariableName # "" if standalone
-  @allocaList mAllocaList
-  @instructionListIR mInstructionGenerationList
-  @mode mMode
-
-  insert insertKey error message "interrupt '%K' is already defined"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
 }

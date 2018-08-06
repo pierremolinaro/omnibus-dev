@@ -5,7 +5,7 @@
 list @isrDeclarationListAST {
   @lstring mISRName
   @mode mMode
-  @lstring mModuleName # "" if standalone
+  @lstring mDriverName
   @instructionListAST mISRInstructionList
   @location mEndOfISRDeclaration
 }
@@ -18,7 +18,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <isr> ?!@ast ioAST ?let @lstring inModuleName {
+  rule <isr> ?!@ast ioAST ?let @lstring inDriverName {
     $interrupt$
     @mode mode
     select
@@ -35,7 +35,7 @@ syntax extension plm_syntax {
     ioAST.mISRDeclarationListAST +=
       !isrName
       !mode
-      !inModuleName
+      !inDriverName
       !instructionList
       !.here
   }
@@ -49,14 +49,27 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @isrDeclarationListAST enterInContext
-  ?!@semanticContext ioSemanticContext
+  ?!@semanticContext unused ioSemanticContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
 {
-  for isr in self do
-    ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
-  end
-#---------------- Add decorated declaration
+#---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
   ioDecoratedDeclarationList += !@decoratedISRDeclarations.new {!self}
+#---
+  for isr in self do
+    ioDecoratedDeclarationList += !@decoratedRoutine.new {
+      !typeNameForTypeMapForDriver (!isr.mDriverName)
+      !isr.mMode
+      !.function {!executionMode: isr.mMode}
+      !true # mWarnIfUnused
+      !false # mExportedRoutine
+      !.mutating | .directPropertyAccess | .controlRegisterReadable | .panicAllowed
+      !isr.mISRName
+      !{}
+      !isr.mISRInstructionList
+      !isr.mEndOfISRDeclaration
+      !["" nowhere]  # Empty string if no returned value
+    }
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -71,51 +84,22 @@ class @decoratedISRDeclarations : @abstractDecoratedDeclaration {
 
 override method @decoratedISRDeclarations semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for isr in mISRDeclarationList do
-  #--- Invocation graph
-    let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
-    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-      [!?ioTemporaries.mSubprogramInvocationGraph addNode
-        !routineNameForInvocationGraph
-        !routineNameForInvocationGraph
-      ]
-    end
-  #--- Variable map
-  var universalMap = inContext.mValuedObjectMap
-  [!?universalMap openOverrideForSelectBlock]
-  [!?universalMap openBranch]
+  #--- Add isr routine in required routine set
+    let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
+    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
+    ioIntermediateCodeStruct.mRequiredProcedureSet += !isrRoutineMangledName.string
   #--- Self type
-   let selfType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeNameForTypeMapForDriver (!isr.mModuleName)} type]
-  #--- Analyze instruction list
-    @allocaList allocaList = {}
-    @instructionListIR instructionGenerationList = {}
-    [isr.mISRInstructionList analyzeRoutineInstructionList
-      !self:selfType
-      !routineAttributes:.mutating | .directPropertyAccess | .controlRegisterReadable | .panicAllowed
-      !routineNameForInvocationGraph:routineNameForInvocationGraph
-      !context:inContext
-      !mode:isr.mMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
-      !?variableMap:universalMap
-      !?alloca:allocaList
-      !?generatedCode:instructionGenerationList
-    ]
-  #--- End of variableMap
-    [universalMap checkLocalVariableFinalState !?instructionGenerationList]
-    [!?universalMap closeBranch !isr.mEndOfISRDeclaration]
-    [!?universalMap closeOverride !isr.mEndOfISRDeclaration]
+    [inContext.mTypeMap searchKey !lkey:typeNameForTypeMapForDriver (!isr.mDriverName) ?type:let selfType ?2*]
   #--- Code generation
     [inContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
       !isr.mISRName
       !selfType
-      !isr.mModuleName
-      !allocaList
-      !instructionGenerationList
+      !isr.mDriverName
       !isr.mMode
     ]  
   end
@@ -125,10 +109,12 @@ override method @decoratedISRDeclarations semanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @interruptMapIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-  for interrupt in self do
-    [interrupt.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  end
+map @interruptMapIR {
+  @PLMType mSelfType
+  @string mDriverName 
+  @mode mMode
+
+  insert insertKey error message "interrupt '%K' is already defined"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -139,7 +125,7 @@ method @interruptMapIR interruptCodeGeneration
   ?let @string inUndefinedInterruptString
   ?let @string inXTRInterruptHandlerString
   ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
+  ?!@generationAdds unused ioGenerationAdds
 {
 #--- Generate interrupt routines
   @stringset definedInterrupts = {}
@@ -152,17 +138,14 @@ method @interruptMapIR interruptCodeGeneration
     end
     ioLLVMcode += llvmTitleComment (!interruptImplementationName)
     ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
-  #--- Alloca
-    [interrupt.mAllocaList generateAllocaList !?ioLLVMcode]
   #--- Define self
-    if interrupt.mSelfType.kind != .void then
-      let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
-      let typeName = [interrupt.mSelfType llvmTypeName]
-      ioLLVMcode += "  " + llvmNameForSelf () + " = getelementptr inbounds " + typeName + ", " + typeName + "* " + varName 
-      ioLLVMcode += ", i32 0 ; Perform self = " + varName + " \n"
-    end
-  #--- Instruction list
-    [interrupt.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    let varName = llvmNameForGlobalVariable (!interrupt.mDriverName)
+    let llvmTypeName = [interrupt.mSelfType llvmTypeName]
+  #--- Call PLM function
+    let driverLLVMBaseTypeName = interrupt.mSelfType.llvmBaseTypeName
+    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !interrupt.lkey !{})
+    let isrRoutineLLVMName = llvmNameForFunction (!isrRoutineMangledName)
+    ioLLVMcode += "  call void @" + isrRoutineLLVMName + " (" + llvmTypeName + "* " + varName + "); §\n"
   #--- Epilog
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
