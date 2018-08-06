@@ -4854,19 +4854,19 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_functionDecl
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @decoratedFunction class                                               *
+//                                               @decoratedRoutine class                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
+class GALGAS_decoratedRoutine : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
-  public : GALGAS_decoratedFunction (void) ;
+  public : GALGAS_decoratedRoutine (void) ;
 
 //---
-  public : inline const class cPtr_decoratedFunction * ptr (void) const { return (const cPtr_decoratedFunction *) mObjectPtr ; }
+  public : inline const class cPtr_decoratedRoutine * ptr (void) const { return (const cPtr_decoratedRoutine *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_decoratedFunction (const cPtr_decoratedFunction * inSourcePtr) ;
+  public : GALGAS_decoratedRoutine (const cPtr_decoratedRoutine * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -4874,26 +4874,26 @@ class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedFunction extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_decoratedRoutine extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedFunction constructor_new (const class GALGAS_string & inOperand0,
-                                                                  const class GALGAS_mode & inOperand1,
-                                                                  const class GALGAS_bool & inOperand2,
-                                                                  const class GALGAS_lstring & inOperand3,
-                                                                  const class GALGAS_routineFormalArgumentListAST & inOperand4,
-                                                                  const class GALGAS_lstring & inOperand5,
-                                                                  const class GALGAS_instructionListAST & inOperand6,
-                                                                  const class GALGAS_location & inOperand7,
-                                                                  const class GALGAS_bool & inOperand8,
-                                                                  const class GALGAS_bool & inOperand9,
-                                                                  const class GALGAS_bool & inOperand10
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_decoratedRoutine constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                 const class GALGAS_mode & inOperand1,
+                                                                 const class GALGAS_routineKind & inOperand2,
+                                                                 const class GALGAS_bool & inOperand3,
+                                                                 const class GALGAS_bool & inOperand4,
+                                                                 const class GALGAS_routineAttributes & inOperand5,
+                                                                 const class GALGAS_lstring & inOperand6,
+                                                                 const class GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                                 const class GALGAS_instructionListAST & inOperand8,
+                                                                 const class GALGAS_location & inOperand9,
+                                                                 const class GALGAS_lstring & inOperand10
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedFunction & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedRoutine & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4901,25 +4901,25 @@ class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsGlobalProcedure (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExportedRoutine (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSelfTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineAttributes getter_mRoutineAttributes (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mRoutineFormalArgumentList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mRoutineInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
 
@@ -4927,62 +4927,62 @@ class GALGAS_decoratedFunction : public GALGAS_abstractDecoratedDeclaration {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_decoratedFunction class
+} ; // End of GALGAS_decoratedRoutine class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedFunction ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRoutine ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Pointer class for @decoratedFunction class                                      *
+//                                      Pointer class for @decoratedRoutine class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_decoratedFunction : public cPtr_abstractDecoratedDeclaration {
+class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_string mProperty_mSelfTypeName ;
+  public : GALGAS_lstring mProperty_mReceiverTypeName ;
   public : GALGAS_mode mProperty_mMode ;
-  public : GALGAS_bool mProperty_mPublicFunction ;
-  public : GALGAS_lstring mProperty_mFunctionName ;
-  public : GALGAS_routineFormalArgumentListAST mProperty_mFunctionFormalArgumentList ;
-  public : GALGAS_lstring mProperty_mFunctionReturnTypeName ;
-  public : GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
-  public : GALGAS_location mProperty_mEndOfFunctionDeclaration ;
+  public : GALGAS_routineKind mProperty_mRoutineKind ;
   public : GALGAS_bool mProperty_mWarnIfUnused ;
-  public : GALGAS_bool mProperty_mIsGlobalProcedure ;
-  public : GALGAS_bool mProperty_mIsSafe ;
+  public : GALGAS_bool mProperty_mExportedRoutine ;
+  public : GALGAS_routineAttributes mProperty_mRoutineAttributes ;
+  public : GALGAS_lstring mProperty_mRoutineName ;
+  public : GALGAS_routineFormalArgumentListAST mProperty_mRoutineFormalArgumentList ;
+  public : GALGAS_instructionListAST mProperty_mRoutineInstructionList ;
+  public : GALGAS_location mProperty_mEndOfRoutineDeclaration ;
+  public : GALGAS_lstring mProperty_mReturnTypeName ;
 
 //--- Constructor
-  public : cPtr_decoratedFunction (const GALGAS_string & in_mSelfTypeName,
-                                   const GALGAS_mode & in_mMode,
-                                   const GALGAS_bool & in_mPublicFunction,
-                                   const GALGAS_lstring & in_mFunctionName,
-                                   const GALGAS_routineFormalArgumentListAST & in_mFunctionFormalArgumentList,
-                                   const GALGAS_lstring & in_mFunctionReturnTypeName,
-                                   const GALGAS_instructionListAST & in_mFunctionInstructionList,
-                                   const GALGAS_location & in_mEndOfFunctionDeclaration,
-                                   const GALGAS_bool & in_mWarnIfUnused,
-                                   const GALGAS_bool & in_mIsGlobalProcedure,
-                                   const GALGAS_bool & in_mIsSafe
-                                   COMMA_LOCATION_ARGS) ;
+  public : cPtr_decoratedRoutine (const GALGAS_lstring & in_mReceiverTypeName,
+                                  const GALGAS_mode & in_mMode,
+                                  const GALGAS_routineKind & in_mRoutineKind,
+                                  const GALGAS_bool & in_mWarnIfUnused,
+                                  const GALGAS_bool & in_mExportedRoutine,
+                                  const GALGAS_routineAttributes & in_mRoutineAttributes,
+                                  const GALGAS_lstring & in_mRoutineName,
+                                  const GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
+                                  const GALGAS_instructionListAST & in_mRoutineInstructionList,
+                                  const GALGAS_location & in_mEndOfRoutineDeclaration,
+                                  const GALGAS_lstring & in_mReturnTypeName
+                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mSelfTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsGlobalProcedure (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mExportedRoutine (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_routineAttributes getter_mRoutineAttributes (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mRoutineFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mRoutineInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

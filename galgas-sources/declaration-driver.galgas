@@ -380,6 +380,8 @@ override method @implementedDriverAST enterInContext
     ?2*
   ]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
+#---------------- Add decorated declaration (BEFORE adding boot and startup routine)
+  ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 #---------------- Add boot routine
   ioDecoratedDeclarationList += !@decoratedRoutine.new {
     !typeNameForTypeMapForDriver (!mDriverName)
@@ -393,7 +395,6 @@ override method @implementedDriverAST enterInContext
     !mBootInstructionList
     !mBootEndLocation
     !.new {!"" !mBootLocation}  # Empty string if no returned value
-    !true # Is Required
   }
 #---------------- Add startup routine
   ioDecoratedDeclarationList += !@decoratedRoutine.new {
@@ -408,10 +409,7 @@ override method @implementedDriverAST enterInContext
     !mStartupInstructionList
     !mStartupEndLocation
     !.new {!"" !mStartupLocation}  # Empty string if no returned value
-    !true # Is Required
   }
-#---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -447,6 +445,12 @@ override method @decoratedRequiredDriver semanticAnalysis
     !initialValueList
 #--- Build initialized driver set
   ioTemporaries.mInitializedDriverSet += !mDriverName.string
+#--- Add boot and startup routine in required routine set
+  let driverLLVMBaseTypeName = driverType.llvmBaseTypeName
+  let bootRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !["boot" nowhere] !{})
+  ioIntermediateCodeStruct.mRequiredProcedureSet += !bootRoutineMangledName.string
+  let startupRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !["startup" nowhere] !{})
+  ioIntermediateCodeStruct.mRequiredProcedureSet += !startupRoutineMangledName.string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -478,12 +482,12 @@ method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
   ioLLVMcode += llvmTitleComment (!"Boot")
   ioLLVMcode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
   for boot in self do
-    let startupRoutineMangledName = routineMangledNameFromAST (
+    let bootRoutineMangledName = routineMangledNameFromAST (
       !llvmDriverNameFromName (![boot.mDriverName nowhere])
       !["boot" nowhere]
       !{}
     )
-    ioLLVMcode += "  call void @" + llvmNameForFunction (!startupRoutineMangledName) + " ("
+    ioLLVMcode += "  call void @" + llvmNameForFunction (!bootRoutineMangledName) + " ("
     ioLLVMcode += [boot.mType llvmTypeName] + "* " + llvmNameForGlobalVariable (!boot.mDriverName)
     ioLLVMcode += ")\n"
   end

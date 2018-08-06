@@ -180,7 +180,7 @@ proc buildSemanticContext
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList]
   [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext
-     !selfTypeName:"" 
+     !selfTypeName:["" nowhere]
      !?context:outSemanticContext
      !?outDecoratedDeclarationList
    ]
