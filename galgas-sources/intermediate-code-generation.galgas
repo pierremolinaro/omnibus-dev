@@ -13,7 +13,6 @@ struct @intermediateCodeStruct {
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
   @bootListIR mBootList
-  @startupListIR mStartupList
   @instructionListSortedListIR mPanicSetupInstructionListIR
   @instructionListSortedListIR mPanicLoopInstructionListIR
   @taskMapIR mTaskMapIR

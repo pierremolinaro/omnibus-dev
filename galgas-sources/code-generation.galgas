@@ -216,8 +216,8 @@ private proc generateCodeFiles
   llvmCode += "\n"
 #----------------------------------------- Drivers
   for driver in inIntermediateCodeStruct.mDriverList
-    before llvmCode += llvmTitleComment (!"Drivers")
-    do [driver generateLLVM !?llvmCode]
+    before llvmCode += llvmTitleComment (!"Driver variable definitions")
+    do [driver generateLLVMDriverVariableDefinition !?llvmCode]
     after llvmCode += "\n"
   end
 #----------------------------------------- Control register group array
@@ -236,13 +236,8 @@ private proc generateCodeFiles
   for (generation) in inIntermediateCodeStruct.mGenerationListIR do
     [generation generateLLVMcode !?llvmCode !?generationAdds]
   end
-#----------------------------------------- Init
-  [inIntermediateCodeStruct.mStartupList generateLLVMinitCode
-    !?llvmCode
-    !inIntermediateCodeStruct.mRoutineMapIR
-    !generationContext
-    !?generationAdds
-  ]
+#----------------------------------------- Driver Code
+  [inIntermediateCodeStruct.mDriverList generateLLVMDriverCode !?llvmCode]
 #----------------------------------------- Routines
   [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Interrupts

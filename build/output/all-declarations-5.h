@@ -10,46 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//              Extension getter '@effectiveArgumentPassingModeAST matchingFormalArgument' (as function)               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_effectiveArgumentPassingModeAST & inObject,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Extension getter '@objectIR llvmName' (as function)                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectIR & inObject,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'literalCharacterArrayName'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint & constinArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Extension getter '@objectIR llvmTypeName' (as function)                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_objectIR & inObject,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                   Extension getter '@objectIR type' (as function)                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3347,17 +3307,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                  const GALGAS_lstringlist inArgument2,
                                                  GALGAS_bootAST & outArgument3,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'declaration_startup' non terminal
-//--- 'parse' label
-  public : virtual void nt_declaration_5F_startup_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_declaration_5F_startup_ (GALGAS_ast & ioArgument0,
-                                                    const GALGAS_lstring inArgument1,
-                                                    const GALGAS_lstringlist inArgument2,
-                                                    GALGAS_startupAST & outArgument3,
-                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'driver_property' non terminal
 //--- 'parse' label

@@ -14,6 +14,7 @@ class @decoratedRoutine : @abstractDecoratedDeclaration {
   @instructionListAST mFunctionInstructionList
   @location mEndOfFunctionDeclaration
   @lstring mReturnTypeName  # Empty string if no returned value
+  @bool mIsRequired
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -36,7 +37,6 @@ override method @decoratedRoutine semanticAnalysis
     !mFunctionName
     !mFunctionFormalArgumentList
   )
-  log routineMangledName
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -91,7 +91,7 @@ override method @decoratedRoutine semanticAnalysis
     !formalArguments
     !allocaList
     !instructionGenerationList
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+    !mIsRequired
     !mWarnIfUnused
     !mGlobalFunction
     !mRoutineKind

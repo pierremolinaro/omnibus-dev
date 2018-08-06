@@ -690,7 +690,8 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
   public : static class GALGAS_implementedDriverAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                      const class GALGAS_lstringlist & inOperand1,
                                                                      const class GALGAS_bool & inOperand2,
-                                                                     const class GALGAS_startupListAST & inOperand3
+                                                                     const class GALGAS_location & inOperand3,
+                                                                     const class GALGAS_instructionListAST & inOperand4
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -706,9 +707,11 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_startupListAST getter_mDriverStartupListAST (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mStartupInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mStartupLocation (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -732,13 +735,15 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_lstring mProperty_mDriverName ;
   public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
   public : GALGAS_bool mProperty_mIsInstancied ;
-  public : GALGAS_startupListAST mProperty_mDriverStartupListAST ;
+  public : GALGAS_location mProperty_mStartupLocation ;
+  public : GALGAS_instructionListAST mProperty_mStartupInstructionList ;
 
 //--- Constructor
   public : cPtr_implementedDriverAST (const GALGAS_lstring & in_mDriverName,
                                       const GALGAS_lstringlist & in_mDriverDependanceList,
                                       const GALGAS_bool & in_mIsInstancied,
-                                      const GALGAS_startupListAST & in_mDriverStartupListAST
+                                      const GALGAS_location & in_mStartupLocation,
+                                      const GALGAS_instructionListAST & in_mStartupInstructionList
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -748,7 +753,8 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsInstancied (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_startupListAST getter_mDriverStartupListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mStartupLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mStartupInstructionList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1546,7 +1552,8 @@ class GALGAS_decoratedRoutine : public GALGAS_abstractDecoratedDeclaration {
                                                                  const class GALGAS_routineFormalArgumentListAST & inOperand7,
                                                                  const class GALGAS_instructionListAST & inOperand8,
                                                                  const class GALGAS_location & inOperand9,
-                                                                 const class GALGAS_lstring & inOperand10
+                                                                 const class GALGAS_lstring & inOperand10,
+                                                                 const class GALGAS_bool & inOperand11
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1567,6 +1574,8 @@ class GALGAS_decoratedRoutine : public GALGAS_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGlobalFunction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsRequired (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
@@ -1610,6 +1619,7 @@ class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
   public : GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
   public : GALGAS_location mProperty_mEndOfFunctionDeclaration ;
   public : GALGAS_lstring mProperty_mReturnTypeName ;
+  public : GALGAS_bool mProperty_mIsRequired ;
 
 //--- Constructor
   public : cPtr_decoratedRoutine (const GALGAS_lstring & in_mReceiverTypeName,
@@ -1622,7 +1632,8 @@ class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
                                   const GALGAS_routineFormalArgumentListAST & in_mFunctionFormalArgumentList,
                                   const GALGAS_instructionListAST & in_mFunctionInstructionList,
                                   const GALGAS_location & in_mEndOfFunctionDeclaration,
-                                  const GALGAS_lstring & in_mReturnTypeName
+                                  const GALGAS_lstring & in_mReturnTypeName,
+                                  const GALGAS_bool & in_mIsRequired
                                   COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1640,6 +1651,7 @@ class cPtr_decoratedRoutine : public cPtr_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsRequired (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1771,131 +1783,6 @@ class cPtr_decoratedBootRoutine : public cPtr_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mBootLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfBootLocation (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Extension method '@startupAST noteTypesInPrecedenceGraph'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef void (*extensionMethodSignature_startupAST_noteTypesInPrecedenceGraph) (const class cPtr_startupAST * inObject,
-                                                                                class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                                class C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
-                                                      extensionMethodSignature_startupAST_noteTypesInPrecedenceGraph inMethod) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_startupAST * inObject,
-                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @decoratedStartupRoutine class                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_decoratedStartupRoutine : public GALGAS_abstractDecoratedDeclaration {
-//--- Constructor
-  public : GALGAS_decoratedStartupRoutine (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_decoratedStartupRoutine constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_decoratedStartupRoutine * ptr (void) const { return (const cPtr_decoratedStartupRoutine *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_decoratedStartupRoutine (const cPtr_decoratedStartupRoutine * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_decoratedStartupRoutine extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedStartupRoutine constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_lstringlist & inOperand1,
-                                                                        const class GALGAS_instructionListAST & inOperand2,
-                                                                        const class GALGAS_location & inOperand3
-                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedStartupRoutine & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfStartupLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_decoratedStartupRoutine class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStartupRoutine ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Pointer class for @decoratedStartupRoutine class                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_decoratedStartupRoutine : public cPtr_abstractDecoratedDeclaration {
-//--- Attributes
-  public : GALGAS_lstring mProperty_mDriverName ;
-  public : GALGAS_lstringlist mProperty_mDriverDependanceList ;
-  public : GALGAS_instructionListAST mProperty_mInstructionList ;
-  public : GALGAS_location mProperty_mEndOfStartupLocation ;
-
-//--- Constructor
-  public : cPtr_decoratedStartupRoutine (const GALGAS_lstring & in_mDriverName,
-                                         const GALGAS_lstringlist & in_mDriverDependanceList,
-                                         const GALGAS_instructionListAST & in_mInstructionList,
-                                         const GALGAS_location & in_mEndOfStartupLocation
-                                         COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfStartupLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
