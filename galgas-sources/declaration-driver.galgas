@@ -364,13 +364,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @driverMap {
-  @bool mIsInstancied
-  insert insertKey error message "the '%K' driver is already declared in %L"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @implementedDriverAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -381,7 +374,6 @@ override method @implementedDriverAST enterInContext
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-  [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
   [ioContext.mTypeMap searchKey
     !lkey:typeNameForTypeMapForDriver (!mDriverName)
     ?type:let driverType
