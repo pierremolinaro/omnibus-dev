@@ -101,7 +101,6 @@ struct @semanticContext {
   @controlRegisterGroupMap mControlRegisterGroupMap
   @globalConstantMap mGlobalConstantMap
   @globalSyncInstanceMap mGlobalSyncInstanceMap
-  @driverMap mDriverMap
   @staticlistMap mStaticListMap
 
 #--- Types
