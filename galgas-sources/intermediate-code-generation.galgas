@@ -12,7 +12,7 @@ struct @intermediateCodeStruct {
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
-  @bootListIR mBootList
+#  @bootListIR mBootList
   @instructionListSortedListIR mPanicSetupInstructionListIR
   @instructionListSortedListIR mPanicLoopInstructionListIR
   @taskMapIR mTaskMapIR
@@ -52,7 +52,7 @@ map @routineMapIR {
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired
   @bool mWarnIfUnused
-  @bool mGlobal
+  @bool mExportedFunction # Function is not tagged with internal
   @routineKind mKind
   @PLMType mReturnType # .void if no return value
   @bool mAppendFileAndLineArgumentForPanicLocation

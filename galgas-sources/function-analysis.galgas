@@ -7,14 +7,14 @@ class @decoratedRoutine : @abstractDecoratedDeclaration {
   @mode mMode
   @routineKind mRoutineKind
   @bool mWarnIfUnused
-  @bool mGlobalFunction
+  @bool mExportedFunction
   @routineAttributes mRoutineAttributes
   @lstring mFunctionName
   @routineFormalArgumentListAST mFunctionFormalArgumentList
   @instructionListAST mFunctionInstructionList
   @location mEndOfFunctionDeclaration
   @lstring mReturnTypeName  # Empty string if no returned value
-  @bool mIsRequired
+  @bool mIsRequired # If true, routine is marked as root of routine invocation graph
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,9 +56,7 @@ override method @decoratedRoutine semanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-   [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineMangledName !routineMangledName]
- # end
+  [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineMangledName !routineMangledName]
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
@@ -93,7 +91,7 @@ override method @decoratedRoutine semanticAnalysis
     !instructionGenerationList
     !mIsRequired
     !mWarnIfUnused
-    !mGlobalFunction
+    !mExportedFunction
     !mRoutineKind
     !returnType
     !false

@@ -12,12 +12,6 @@ list @driverPropertyListAST {
 
 #·······················································································································
 
-list @bootListAST {
-  @bootAST mBoot
-}
-
-#·······················································································································
-
 struct @driverDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
@@ -25,11 +19,14 @@ struct @driverDeclarationAST {
   @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
-#  @EXstartupListAST mEXDriverStartupListAST
-  @bootListAST mDriverBootListAST
+#--- Boot
+  @location mBootLocation
+  @instructionListAST mBootInstructionList
+  @location mBootEndLocation
 #--- Startup
   @location mStartupLocation
   @instructionListAST mStartupInstructionList
+  @location mStartupEndLocation
 }
 
 #·······················································································································
@@ -58,10 +55,14 @@ class @implementedDriverAST : @abstractDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
   @bool mIsInstancied
-#  @EXstartupListAST mEXDriverStartupListAST
+#--- Boot
+  @location mBootLocation
+  @instructionListAST mBootInstructionList
+  @location mBootEndLocation
 #--- Startup
   @location mStartupLocation
   @instructionListAST mStartupInstructionList
+  @location mStartupEndLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -126,26 +127,33 @@ syntax extension plm_syntax {
     @driverPropertyListAST driverPropertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
-#    @EXstartupListAST startupList = {}
-    @bootListAST bootListAST = {}
-    @instructionListAST startupInstructionList = {}
+    var bootHandled = false
+    var bootLocation = @location.here
+    @instructionListAST bootInstructionList = {}
+    var bootEndLocation = @location.here
     var startupHandled = false
     var startupLocation = @location.here
+    @instructionListAST startupInstructionList = {}
+    var startupEndLocation = @location.here
     repeat
     while
-      <declaration_boot>  !?ioAST !driverName !driverDependenceList ?let @bootAST boot
-      if [bootListAST length] != 0 then
-        error [boot mBootLocation] : "a driver supports at most one boot routine" 
+      $boot$
+      bootLocation = .here
+      ${$
+      <instructionList> !?ioAST ?bootInstructionList
+      bootEndLocation = @location.here
+      $}$
+      if bootHandled then
+        error bootLocation : "a driver supports at most one boot routine" 
       end
-      bootListAST += !boot
+      bootHandled = true
     while
       $startup$
       startupLocation = .here
       ${$
       <instructionList> !?ioAST ?startupInstructionList
-#      let endOfStartup = @location.here
+      startupEndLocation = @location.here
       $}$
-#      <declaration_startup> !?ioAST !driverName !driverDependenceList ?let startup ?startupInstructionList
       if startupHandled then
         error startupLocation : "a driver supports at most one startup routine" 
       end
@@ -170,10 +178,12 @@ syntax extension plm_syntax {
       !functionDeclarationListAST
       !svcListAST
       !guardListAST
-#      !startupList
-      !bootListAST
+      !bootLocation
+      !bootInstructionList
+      !bootEndLocation
       !startupLocation
       !startupInstructionList
+      !startupEndLocation
     }
   }
 
@@ -323,9 +333,12 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mDriverName
       !declaration.mDriverDependanceList
       !driverIsInstancied
-#      !declaration.mEXDriverStartupListAST
+      !declaration.mBootLocation
+      !declaration.mBootInstructionList
+      !declaration.mBootEndLocation
       !declaration.mStartupLocation
       !declaration.mStartupInstructionList
+      !declaration.mStartupEndLocation
     }
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !typeNameForTypeMapForDriver (!declaration.mDriverName)
@@ -339,11 +352,11 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mDriverGuardListAST
       !false # Do not implement deinit
     }
-#    for (startup) in declaration.mEXDriverStartupListAST do
-#      ioAST.mDeclarationListAST += !startup
+#    for (boot) in declaration.mDriverBootListAST do
+#      ioAST.mDeclarationListAST += !boot
 #    end
-#    if [declaration.mEXDriverStartupListAST length] == 0 then
-#      ioAST.mDeclarationListAST += !@EXstartupAST.new {
+#    if [declaration.mDriverBootListAST length] == 0 then
+#      ioAST.mDeclarationListAST += !@EXbootAST.new {
 #        !declaration.mDriverName
 #        !declaration.mDriverDependanceList
 #        !declaration.mDriverName.location
@@ -351,18 +364,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
 #        !declaration.mDriverName.location
 #      }
 #    end
-    for (boot) in declaration.mDriverBootListAST do
-      ioAST.mDeclarationListAST += !boot
-    end
-    if [declaration.mDriverBootListAST length] == 0 then
-      ioAST.mDeclarationListAST += !@bootAST.new {
-        !declaration.mDriverName
-        !declaration.mDriverDependanceList
-        !declaration.mDriverName.location
-        !{}
-        !declaration.mDriverName.location
-      }
-    end
   end
   ioAST.mDriverDeclarationListAST = {}
 #--- Check all drivers named in instanciation constructs have been implemented
@@ -395,6 +396,21 @@ override method @implementedDriverAST enterInContext
   [!?ioContext.mDriverMap insertKey !mDriverName !mIsInstancied]
   let driverType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !typeNameForTypeMapForDriver (!mDriverName)} type]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
+#---------------- Add boot routine
+  ioDecoratedDeclarationList += !@decoratedRoutine.new {
+    !typeNameForTypeMapForDriver (!mDriverName)
+    !.bootMode
+    !.function {!executionMode:.bootMode}
+    !true # mWarnIfUnused
+    !false # mGlobalFunction
+    !.directPropertyAccess # @routineAttributes mRoutineAttributes
+    !.new {!"boot" !mBootLocation} # Function name
+    !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
+    !mBootInstructionList
+    !mBootEndLocation
+    !.new {!"" !mBootLocation}  # Empty string if no returned value
+    !true # Is Required
+  }
 #---------------- Add startup routine
   ioDecoratedDeclarationList += !@decoratedRoutine.new {
     !typeNameForTypeMapForDriver (!mDriverName)
@@ -406,7 +422,7 @@ override method @implementedDriverAST enterInContext
     !.new {!"startup" !mStartupLocation} # Function name
     !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
     !mStartupInstructionList
-    !mStartupLocation
+    !mStartupEndLocation
     !.new {!"" !mStartupLocation}  # Empty string if no returned value
     !true # Is Required
   }
@@ -472,6 +488,22 @@ method @driverListIR-element generateLLVMDriverVariableDefinition ?!@string ioLL
 #·······················································································································
 
 method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
+#--- Boot
+  ioLLVMcode += llvmTitleComment (!"Boot")
+  ioLLVMcode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
+  for boot in self do
+    let startupRoutineMangledName = routineMangledNameFromAST (
+      !llvmDriverNameFromName (![boot.mDriverName nowhere])
+      !["boot" nowhere]
+      !{}
+    )
+    ioLLVMcode += "  call void @" + llvmNameForFunction (!startupRoutineMangledName) + " ("
+    ioLLVMcode += [[boot.mTypeProxy type] llvmTypeName] + "* " + llvmNameForGlobalVariable (!boot.mDriverName)
+    ioLLVMcode += ")\n"
+  end
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+#--- Startup
   ioLLVMcode += llvmTitleComment (!"Startup")
   ioLLVMcode += "define internal void @startup ()" + llvmAttributeFunction () + "{\n"
   for startup in self do
