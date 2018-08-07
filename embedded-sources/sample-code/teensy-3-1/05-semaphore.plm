@@ -2,9 +2,11 @@ target "teensy-3-1/unprivileged"
 
 import "carte-tp-teensy-3-1.plm-import"
 
+typealias $sémaphore = $semaphore
+
 //——————————————————————————————————————————————————————————————————————————————
 
-sync sémaphore = $semaphore (!value:0)
+sync sémaphore = $sémaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————
 

@@ -46,13 +46,6 @@ method @decoratedRoutineList-element semanticAnalysis
     then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
     end
-#--- Mangled routine name
-  let routineMangledName = mRoutineMangledName
-#  let routineMangledName = routineMangledNameFromAST (
-#    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
-#    !mRoutineName
-#    !mRoutineFormalArgumentList
-#  )
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -72,14 +65,14 @@ method @decoratedRoutineList-element semanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addNode !routineMangledName !routineMangledName]
+  [!?ioTemporaries.mSubprogramInvocationGraph addNode !mRoutineMangledName !mRoutineMangledName]
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
   [mRoutineInstructionList analyzeRoutineInstructionList
     !self:receiverType
     !routineAttributes:mRoutineAttributes
-    !routineNameForInvocationGraph:routineMangledName
+    !routineNameForInvocationGraph:mRoutineMangledName
     !context:inContext
     !mode:mMode
     !?temporary:ioTemporaries
@@ -99,13 +92,13 @@ method @decoratedRoutineList-element semanticAnalysis
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
   end
   [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-    !routineMangledName
+    !mRoutineMangledName
     !receiverType
-    !routineMangledName
+    !mRoutineMangledName
     !formalArguments
     !allocaList
     !instructionGenerationList
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mRoutineMangledName.string]
     !mWarnIfUnused
     !mExportedRoutine
     !mRoutineKind

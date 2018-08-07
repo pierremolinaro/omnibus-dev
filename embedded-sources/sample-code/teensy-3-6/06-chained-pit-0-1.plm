@@ -2,11 +2,11 @@ target "teensy-3-6/xtr32"
 let F_CPU_MHZ = 192
 
 import "carte-tp-teensy-3-6.plm-import"
-driver timer ()
+driver chronomètre ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-driver timer > root {
+driver chronomètre > root {
 
   startup {
   //--- Power on DMA_MUX, #PIT, DMA
@@ -69,7 +69,7 @@ task Tâche @stacksize 512 @activate {
   }
 
   on time.wait (!until:self.compteur) {
-    let tick = timer.now ()
+    let tick = chronomètre.now ()
     digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:self.compteur)
