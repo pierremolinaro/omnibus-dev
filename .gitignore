@@ -9,6 +9,7 @@
 testsuite/*
 build/*
 
+xcode-project/build/*
 xcode-project/plm.xcodeproj/xcuserdata/*
 xcode-project/plm.xcodeproj/project.xcworkspace/*
 
