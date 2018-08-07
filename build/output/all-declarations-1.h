@@ -6089,7 +6089,7 @@ class GALGAS_driverListIR : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_string & in_mDriverName,
+                                                  const class GALGAS_lstring & in_mDriverName,
                                                   const class GALGAS_PLMType & in_mType,
                                                   const class GALGAS_operandIRList & in_mInitialValueList
                                                   COMMA_LOCATION_ARGS) ;
@@ -6107,7 +6107,7 @@ class GALGAS_driverListIR : public AC_GALGAS_list {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_driverListIR constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static class GALGAS_driverListIR constructor_listWithValue (const class GALGAS_string & inOperand0,
+  public : static class GALGAS_driverListIR constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                        const class GALGAS_PLMType & inOperand1,
                                                                        const class GALGAS_operandIRList & inOperand2
                                                                        COMMA_LOCATION_ARGS) ;
@@ -6118,7 +6118,7 @@ class GALGAS_driverListIR : public AC_GALGAS_list {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_PLMType & inOperand1,
                                                       const class GALGAS_operandIRList & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
@@ -6133,26 +6133,26 @@ class GALGAS_driverListIR : public AC_GALGAS_list {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_string constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
                                                        class GALGAS_PLMType constinArgument1,
                                                        class GALGAS_operandIRList constinArgument2,
                                                        class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_PLMType & outArgument1,
                                                   class GALGAS_operandIRList & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
                                                  class GALGAS_PLMType & outArgument1,
                                                  class GALGAS_operandIRList & outArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
                                                        class GALGAS_PLMType & outArgument1,
                                                        class GALGAS_operandIRList & outArgument2,
                                                        class GALGAS_uint constinArgument3,
@@ -6161,13 +6161,13 @@ class GALGAS_driverListIR : public AC_GALGAS_list {
 
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
                                                class GALGAS_PLMType & outArgument1,
                                                class GALGAS_operandIRList & outArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
                                               class GALGAS_PLMType & outArgument1,
                                               class GALGAS_operandIRList & outArgument2,
                                               C_Compiler * inCompiler
@@ -6176,9 +6176,9 @@ class GALGAS_driverListIR : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mDriverNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_operandIRList getter_mInitialValueListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                         C_Compiler * inCompiler
@@ -6218,7 +6218,7 @@ class cEnumerator_driverListIR : public cGenericAbstractEnumerator {
                                      const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_string current_mDriverName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mDriverName (LOCATION_ARGS) const ;
   public : class GALGAS_PLMType current_mType (LOCATION_ARGS) const ;
   public : class GALGAS_operandIRList current_mInitialValueList (LOCATION_ARGS) const ;
 //--- Current element access
@@ -6237,7 +6237,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverListIR ;
 
 class GALGAS_driverListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_string mProperty_mDriverName ;
+  public : GALGAS_lstring mProperty_mDriverName ;
 
   public : GALGAS_PLMType mProperty_mType ;
 
@@ -6257,7 +6257,7 @@ class GALGAS_driverListIR_2D_element : public AC_GALGAS_root {
   public : virtual ~ GALGAS_driverListIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_driverListIR_2D_element (const GALGAS_string & in_mDriverName,
+  public : GALGAS_driverListIR_2D_element (const GALGAS_lstring & in_mDriverName,
                                            const GALGAS_PLMType & in_mType,
                                            const GALGAS_operandIRList & in_mInitialValueList) ;
 
@@ -6272,7 +6272,7 @@ class GALGAS_driverListIR_2D_element : public AC_GALGAS_root {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_driverListIR_2D_element constructor_new (const class GALGAS_string & inOperand0,
+  public : static class GALGAS_driverListIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                         const class GALGAS_PLMType & inOperand1,
                                                                         const class GALGAS_operandIRList & inOperand2
                                                                         COMMA_LOCATION_ARGS) ;
@@ -6289,7 +6289,7 @@ class GALGAS_driverListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mDriverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_operandIRList getter_mInitialValueList (LOCATION_ARGS) const ;
 
@@ -6390,23 +6390,13 @@ class GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Function 'llvmDriverNameFromName'                                          *
+//                                      Function 'llvmBootRoutineNameFromDriver'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring & constinArgument0,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Function 'llvmNameForFunction'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForFunction (const class GALGAS_string & constinArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_llvmBootRoutineNameFromDriver (const class GALGAS_lstring & constinArgument0,
+                                                             class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -6420,6 +6410,16 @@ class GALGAS_string function_llvmNameForGlobalVariable (const class GALGAS_strin
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                     Function 'llvmStartupRoutineNameFromDriver'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_llvmStartupRoutineNameFromDriver (const class GALGAS_lstring & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                             Function 'llvmTitleComment'                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6427,18 +6427,6 @@ class GALGAS_string function_llvmNameForGlobalVariable (const class GALGAS_strin
 class GALGAS_string function_llvmTitleComment (const class GALGAS_string & constinArgument0,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'routineMangledNameFromAST'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_routineMangledNameFromAST (const class GALGAS_string & constinArgument0,
-                                                         const class GALGAS_lstring & constinArgument1,
-                                                         const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

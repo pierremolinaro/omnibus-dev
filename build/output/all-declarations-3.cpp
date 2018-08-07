@@ -1972,65 +1972,65 @@ void extensionMethod_interruptCodeGeneration (const GALGAS_interruptMapIR inObje
                                               GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_stringset var_definedInterrupts_5517 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-isr.galgas", 133)) ;
+  GALGAS_stringset var_definedInterrupts_5502 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-isr.galgas", 133)) ;
   const GALGAS_interruptMapIR temp_0 = inObject ;
-  cEnumerator_interruptMapIR enumerator_5546 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5546.hasCurrentObject ()) {
-    var_definedInterrupts_5517.addAssign_operation (enumerator_5546.current (HERE).getter_lkey (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 135)) ;
+  cEnumerator_interruptMapIR enumerator_5531 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5531.hasCurrentObject ()) {
+    var_definedInterrupts_5502.addAssign_operation (enumerator_5531.current (HERE).getter_lkey (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 135)) ;
     GALGAS_string temp_1 ;
-    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_5546.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 136)))).boolEnum () ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_5531.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 136)))).boolEnum () ;
     if (kBoolTrue == test_2) {
-      temp_1 = function_llvmNameForServiceInterrupt (enumerator_5546.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 137)).getter_string (HERE) ;
+      temp_1 = function_llvmNameForServiceInterrupt (enumerator_5531.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 137)).getter_string (HERE) ;
     }else if (kBoolFalse == test_2) {
-      temp_1 = function_llvmNameForSectionInterrupt (enumerator_5546.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 139)) ;
+      temp_1 = function_llvmNameForSectionInterrupt (enumerator_5531.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 139)) ;
     }
-    GALGAS_string var_interruptImplementationName_5633 = temp_1 ;
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_interruptImplementationName_5633, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 141)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 141)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_interruptImplementationName_5633, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (GALGAS_string (" {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)) ;
-    GALGAS_string var_varName_6019 = function_llvmNameForGlobalVariable (enumerator_5546.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 144)) ;
-    GALGAS_string var_llvmTypeName_6093 = extensionGetter_llvmTypeName (enumerator_5546.current (HERE).getter_mSelfType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 145)) ;
-    GALGAS_string var_driverLLVMBaseTypeName_6186 = enumerator_5546.current (HERE).getter_mSelfType (HERE).getter_llvmBaseTypeName (HERE) ;
-    GALGAS_lstring var_isrRoutineMangledName_6255 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_6186, enumerator_5546.current (HERE).getter_lkey (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 148)) ;
-    GALGAS_string var_isrRoutineLLVMName_6356 = function_llvmNameForFunction (var_isrRoutineMangledName_6255.getter_string (SOURCE_FILE ("declaration-isr.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 149)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (var_isrRoutineLLVMName_6356, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (var_llvmTypeName_6093, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (var_varName_6019, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string ("); \xC2""\xA7""\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)) ;
+    GALGAS_string var_interruptImplementationName_5618 = temp_1 ;
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_interruptImplementationName_5618, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 141)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 141)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_interruptImplementationName_5618, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (GALGAS_string (" {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)) ;
+    GALGAS_string var_varName_6004 = function_llvmNameForGlobalVariable (enumerator_5531.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 144)) ;
+    GALGAS_string var_llvmTypeName_6078 = extensionGetter_llvmTypeName (enumerator_5531.current (HERE).getter_mSelfType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 145)) ;
+    GALGAS_string var_driverLLVMBaseTypeName_6171 = enumerator_5531.current (HERE).getter_mSelfType (HERE).getter_llvmBaseTypeName (HERE) ;
+    GALGAS_lstring var_isrRoutineMangledName_6240 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_6171, enumerator_5531.current (HERE).getter_lkey (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 148)) ;
+    GALGAS_string var_isrRoutineLLVMName_6341 = function_llvmNameForFunction (var_isrRoutineMangledName_6240.getter_string (SOURCE_FILE ("declaration-isr.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 149)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (var_isrRoutineLLVMName_6341, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (var_llvmTypeName_6078, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (var_varName_6004, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string ("); \xC2""\xA7""\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 152)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
       "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 153)) ;
-    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5546.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 155)))).boolEnum () ;
+    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5531.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 155)))).boolEnum () ;
     if (kBoolTrue == test_3) {
-      GALGAS_string var_interruptHandlerName_6698 = function_llvmNameForServiceInterrupt (enumerator_5546.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 156)).getter_string (HERE) ;
-      GALGAS_string var_isrName_6770 = function_llvmNameForSectionInterrupt (enumerator_5546.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 157)) ;
-      GALGAS_string var_s_31__6837 = constinArgument_inXTRInterruptHandlerString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), var_isrName_6770, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 158)) ;
-      GALGAS_string var_s_32__6931 = var_s_31__6837.getter_stringByReplacingStringByString (GALGAS_string ("!HANDLER!"), var_interruptHandlerName_6698, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 159)) ;
-      ioArgument_ioAScode.plusAssign_operation(var_s_32__6931, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 160)) ;
+      GALGAS_string var_interruptHandlerName_6683 = function_llvmNameForServiceInterrupt (enumerator_5531.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 156)).getter_string (HERE) ;
+      GALGAS_string var_isrName_6755 = function_llvmNameForSectionInterrupt (enumerator_5531.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 157)) ;
+      GALGAS_string var_s_31__6822 = constinArgument_inXTRInterruptHandlerString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), var_isrName_6755, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 158)) ;
+      GALGAS_string var_s_32__6916 = var_s_31__6822.getter_stringByReplacingStringByString (GALGAS_string ("!HANDLER!"), var_interruptHandlerName_6683, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 159)) ;
+      ioArgument_ioAScode.plusAssign_operation(var_s_32__6916, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 160)) ;
     }
-    enumerator_5546.gotoNextObject () ;
+    enumerator_5531.gotoNextObject () ;
   }
-  cEnumerator_availableInterruptMap enumerator_7160 (constinArgument_inGenerationContext.getter_mAvailableInterruptMap (HERE), kENUMERATION_UP) ;
-  while (enumerator_7160.hasCurrentObject ()) {
-    const enumGalgasBool test_4 = var_definedInterrupts_5517.getter_hasKey (enumerator_7160.current_lkey (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-isr.galgas", 165)).operator_not (SOURCE_FILE ("declaration-isr.galgas", 165)).boolEnum () ;
+  cEnumerator_availableInterruptMap enumerator_7145 (constinArgument_inGenerationContext.getter_mAvailableInterruptMap (HERE), kENUMERATION_UP) ;
+  while (enumerator_7145.hasCurrentObject ()) {
+    const enumGalgasBool test_4 = var_definedInterrupts_5502.getter_hasKey (enumerator_7145.current_lkey (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-isr.galgas", 165)).operator_not (SOURCE_FILE ("declaration-isr.galgas", 165)).boolEnum () ;
     if (kBoolTrue == test_4) {
-      switch (enumerator_7160.current_mInterruptionPanicCode (HERE).enumValue ()) {
+      switch (enumerator_7145.current_mInterruptionPanicCode (HERE).enumValue ()) {
       case GALGAS_interruptionPanicCode::kNotBuilt:
         break ;
       case GALGAS_interruptionPanicCode::kEnum_noCode:
         {
-          GALGAS_string var_s_7276 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7160.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 168)) ;
-          ioArgument_ioAScode.plusAssign_operation(var_s_7276, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 169)) ;
+          GALGAS_string var_s_7261 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7145.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 168)) ;
+          ioArgument_ioAScode.plusAssign_operation(var_s_7261, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 169)) ;
         }
         break ;
       case GALGAS_interruptionPanicCode::kEnum_code:
         {
-          const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_8144 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_7160.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
-          const GALGAS_lbigint extractedValue_value = extractPtr_8144->mAssociatedValue0 ;
+          const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_8129 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_7145.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
+          const GALGAS_lbigint extractedValue_value = extractPtr_8129->mAssociatedValue0 ;
           const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
           if (kBoolTrue == test_5) {
-            GALGAS_string var_s_7526 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7160.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 172)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 172)) ;
-            ioArgument_ioAScode.plusAssign_operation(var_s_7526, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 173)) ;
+            GALGAS_string var_s_7511 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7145.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 172)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 172)) ;
+            ioArgument_ioAScode.plusAssign_operation(var_s_7511, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 173)) ;
           }else if (kBoolFalse == test_5) {
-            GALGAS_string var_name_7698 = function_llvmNameForSectionInterrupt (enumerator_7160.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 175)) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Panic code for ").add_operation (var_name_7698, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_name_7698, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (GALGAS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)) ;
+            GALGAS_string var_name_7683 = function_llvmNameForSectionInterrupt (enumerator_7145.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 175)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Panic code for ").add_operation (var_name_7683, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_name_7683, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (GALGAS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)) ;
             ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @panic.isr (").add_operation (extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicCodeLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (GALGAS_string (") noreturn \n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)) ;
             ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)) ;
             ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
@@ -2040,7 +2040,7 @@ void extensionMethod_interruptCodeGeneration (const GALGAS_interruptMapIR inObje
         break ;
       }
     }
-    enumerator_7160.gotoNextObject () ;
+    enumerator_7145.gotoNextObject () ;
   }
 }
 

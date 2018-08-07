@@ -6100,7 +6100,7 @@ GALGAS_driverListIR_2D_element::~ GALGAS_driverListIR_2D_element (void) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_driverListIR_2D_element::GALGAS_driverListIR_2D_element (const GALGAS_string & inOperand0,
+GALGAS_driverListIR_2D_element::GALGAS_driverListIR_2D_element (const GALGAS_lstring & inOperand0,
                                                                 const GALGAS_PLMType & inOperand1,
                                                                 const GALGAS_operandIRList & inOperand2) :
 mProperty_mDriverName (inOperand0),
@@ -6111,14 +6111,14 @@ mProperty_mInitialValueList (inOperand2) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_driverListIR_2D_element GALGAS_driverListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_driverListIR_2D_element (GALGAS_string::constructor_default (HERE),
+  return GALGAS_driverListIR_2D_element (GALGAS_lstring::constructor_default (HERE),
                                          GALGAS_PLMType::constructor_default (HERE),
                                          GALGAS_operandIRList::constructor_emptyList (HERE)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_driverListIR_2D_element GALGAS_driverListIR_2D_element::constructor_new (const GALGAS_string & inOperand0,
+GALGAS_driverListIR_2D_element GALGAS_driverListIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                 const GALGAS_PLMType & inOperand1,
                                                                                 const GALGAS_operandIRList & inOperand2 
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
@@ -6178,7 +6178,7 @@ void GALGAS_driverListIR_2D_element::description (C_String & ioString,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_string GALGAS_driverListIR_2D_element::getter_mDriverName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_driverListIR_2D_element::getter_mDriverName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mDriverName ;
 }
 
