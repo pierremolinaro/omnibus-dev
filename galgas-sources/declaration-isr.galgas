@@ -57,6 +57,8 @@ method @isrDeclarationListAST enterInContext
   ioDecoratedDeclarationList += !@decoratedISRDeclarations.new {!self}
 #---
   for isr in self do
+    let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
+    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
     ioDecoratedRoutineList +=
       !typeNameForTypeMapForDriver (!isr.mDriverName)
       !isr.mMode
@@ -64,7 +66,7 @@ method @isrDeclarationListAST enterInContext
       !true # mWarnIfUnused
       !false # mExportedRoutine
       !.mutating | .directPropertyAccess | .controlRegisterReadable | .panicAllowed
-      !isr.mISRName
+      !isrRoutineMangledName # isr.mISRName
       !{}
       !isr.mISRInstructionList
       !isr.mEndOfISRDeclaration

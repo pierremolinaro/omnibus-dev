@@ -2818,7 +2818,7 @@ class GALGAS_decoratedRoutineList : public AC_GALGAS_list {
                                                   const class GALGAS_bool & in_mWarnIfUnused,
                                                   const class GALGAS_bool & in_mExportedRoutine,
                                                   const class GALGAS_routineAttributes & in_mRoutineAttributes,
-                                                  const class GALGAS_lstring & in_mRoutineName,
+                                                  const class GALGAS_lstring & in_mRoutineMangledName,
                                                   const class GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
                                                   const class GALGAS_instructionListAST & in_mRoutineInstructionList,
                                                   const class GALGAS_location & in_mEndOfRoutineDeclaration,
@@ -3007,9 +3007,9 @@ class GALGAS_decoratedRoutineList : public AC_GALGAS_list {
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineMangledNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnusedAtIndex (const class GALGAS_uint & constinOperand0,
                                                                            C_Compiler * inCompiler
@@ -3051,7 +3051,7 @@ class cEnumerator_decoratedRoutineList : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mExportedRoutine (LOCATION_ARGS) const ;
   public : class GALGAS_routineAttributes current_mRoutineAttributes (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mRoutineName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mRoutineMangledName (LOCATION_ARGS) const ;
   public : class GALGAS_routineFormalArgumentListAST current_mRoutineFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListAST current_mRoutineInstructionList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;

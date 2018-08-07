@@ -384,19 +384,22 @@ override method @implementedDriverAST enterInContext
 #---------------- Add decorated declaration (BEFORE adding boot and startup routine)
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 #---------------- Add boot routine
+  let driverLLVMBaseTypeName = driverType.llvmBaseTypeName
+  let bootRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !["boot" nowhere] !{})
   ioDecoratedRoutineList +=
     !typeNameForTypeMapForDriver (!mDriverName)
     !.bootMode
     !.function {!executionMode:.bootMode}
     !true # mWarnIfUnused
     !false # mGlobalFunction
-    !.directPropertyAccess # @routineAttributes mRoutineAttributes
-    !.new {!"boot" !mBootLocation} # Function name
-    !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
+    !.directPropertyAccess
+    !bootRoutineMangledName # .new {!"boot" !mBootLocation} # Function name
+    !{}
     !mBootInstructionList
     !mBootEndLocation
     !.new {!"" !mBootLocation}  # Empty string if no returned value
 #---------------- Add startup routine
+  let startupRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !["startup" nowhere] !{})
   ioDecoratedRoutineList +=
     !typeNameForTypeMapForDriver (!mDriverName)
     !.startupMode
@@ -404,7 +407,7 @@ override method @implementedDriverAST enterInContext
     !true # mWarnIfUnused
     !false # mGlobalFunction
     !.directPropertyAccess # @routineAttributes mRoutineAttributes
-    !.new {!"startup" !mStartupLocation} # Function name
+    !startupRoutineMangledName # .new {!"startup" !mStartupLocation} # Function name
     !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
     !mStartupInstructionList
     !mStartupEndLocation

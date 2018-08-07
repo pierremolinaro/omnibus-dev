@@ -443,6 +443,7 @@ override method @structureDeclarationAST enterInContext
           + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
     end
+    let functionMangledName = routineMangledNameFromAST (!mLLVMBaseTypeName !function.mFunctionName !function.mFunctionFormalArgumentList)
     ioDecoratedRoutineList +=
       !mStructureTypeName
       !function.mMode
@@ -450,7 +451,7 @@ override method @structureDeclarationAST enterInContext
       !warnIfUnused
       !false # mExportedRoutine
       !functionAttributes
-      !function.mFunctionName
+      !functionMangledName # function.mFunctionName
       !function.mFunctionFormalArgumentList
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
