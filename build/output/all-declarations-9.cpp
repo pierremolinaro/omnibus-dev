@@ -2966,8 +2966,11 @@ static void extensionMethod_implementedDriverAST_enterInContext (const cPtr_abst
   extensionSetter_insertDriver (ioArgument_ioContext.mProperty_mValuedObjectMap, object->mProperty_mDriverName, object->mProperty_mIsInstancied, var_driverType_15150, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 383)) ;
   }
   ioArgument_ioDecoratedDeclarationList.addAssign_operation (GALGAS_decoratedRequiredDriver::constructor_new (object->mProperty_mDriverName  COMMA_SOURCE_FILE ("declaration-driver.galgas", 385))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 385)) ;
-  ioArgument_ioDecoratedRoutineList.addAssign_operation (function_typeNameForTypeMapForDriver (object->mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 388)), GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-driver.galgas", 389)), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-driver.galgas", 390))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 390)), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("declaration-driver.galgas", 393)), GALGAS_lstring::constructor_new (GALGAS_string ("boot"), object->mProperty_mBootLocation  COMMA_SOURCE_FILE ("declaration-driver.galgas", 394)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 395)), object->mProperty_mBootInstructionList, object->mProperty_mBootEndLocation, GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), object->mProperty_mBootLocation  COMMA_SOURCE_FILE ("declaration-driver.galgas", 398))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 387)) ;
-  ioArgument_ioDecoratedRoutineList.addAssign_operation (function_typeNameForTypeMapForDriver (object->mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 401)), GALGAS_mode::constructor_startupMode (SOURCE_FILE ("declaration-driver.galgas", 402)), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("declaration-driver.galgas", 403))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 403)), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("declaration-driver.galgas", 406)), GALGAS_lstring::constructor_new (GALGAS_string ("startup"), object->mProperty_mStartupLocation  COMMA_SOURCE_FILE ("declaration-driver.galgas", 407)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 408)), object->mProperty_mStartupInstructionList, object->mProperty_mStartupEndLocation, GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), object->mProperty_mStartupLocation  COMMA_SOURCE_FILE ("declaration-driver.galgas", 411))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 400)) ;
+  GALGAS_string var_driverLLVMBaseTypeName_15474 = var_driverType_15150.getter_llvmBaseTypeName (HERE) ;
+  GALGAS_lstring var_bootRoutineMangledName_15533 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_15474, GALGAS_string ("boot").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 388)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 388)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 388)) ;
+  ioArgument_ioDecoratedRoutineList.addAssign_operation (function_typeNameForTypeMapForDriver (object->mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 390)), GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-driver.galgas", 391)), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-driver.galgas", 392))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 392)), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("declaration-driver.galgas", 395)), var_bootRoutineMangledName_15533, GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 397)), object->mProperty_mBootInstructionList, object->mProperty_mBootEndLocation, GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), object->mProperty_mBootLocation  COMMA_SOURCE_FILE ("declaration-driver.galgas", 400))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 389)) ;
+  GALGAS_lstring var_startupRoutineMangledName_16094 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_15474, GALGAS_string ("startup").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 402)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 402)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 402)) ;
+  ioArgument_ioDecoratedRoutineList.addAssign_operation (function_typeNameForTypeMapForDriver (object->mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 404)), GALGAS_mode::constructor_startupMode (SOURCE_FILE ("declaration-driver.galgas", 405)), GALGAS_routineKind::constructor_function (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("declaration-driver.galgas", 406))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 406)), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("declaration-driver.galgas", 409)), var_startupRoutineMangledName_16094, GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 411)), object->mProperty_mStartupInstructionList, object->mProperty_mStartupEndLocation, GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), object->mProperty_mStartupLocation  COMMA_SOURCE_FILE ("declaration-driver.galgas", 414))  COMMA_SOURCE_FILE ("declaration-driver.galgas", 403)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2995,29 +2998,29 @@ static void extensionMethod_decoratedRequiredDriver_semanticAnalysis (const cPtr
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_decoratedRequiredDriver * object = (const cPtr_decoratedRequiredDriver *) inObject ;
   macroValidSharedObject (object, cPtr_decoratedRequiredDriver) ;
-  GALGAS_PLMType var_driverType_17401 ;
-  GALGAS_uint joker_17407_2 ; // Joker input parameter
-  GALGAS_bool joker_17407_1 ; // Joker input parameter
-  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (function_typeNameForTypeMapForDriver (object->mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 430)), var_driverType_17401, joker_17407_2, joker_17407_1, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)) ;
-  GALGAS_constructorMap var_constructorMap_17434 = var_driverType_17401.getter_constructorMap (HERE) ;
-  GALGAS_constructorValue var_constructorValue_17551 ;
-  GALGAS_constructorSignature joker_17528 ; // Joker input parameter
-  var_constructorMap_17434.method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("()"), object->mProperty_mDriverName.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 435)), joker_17528, var_constructorValue_17551, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 435)) ;
-  GALGAS_sortedOperandIRList var_sortedOperandList_17623 ;
-  var_constructorValue_17551.method_structure (var_sortedOperandList_17623, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 436)) ;
-  GALGAS_operandIRList var_initialValueList_17658 = GALGAS_operandIRList::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 437)) ;
-  cEnumerator_sortedOperandIRList enumerator_17707 (var_sortedOperandList_17623, kENUMERATION_UP) ;
-  while (enumerator_17707.hasCurrentObject ()) {
-    var_initialValueList_17658.addAssign_operation (enumerator_17707.current_mOperand (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 439)) ;
-    enumerator_17707.gotoNextObject () ;
+  GALGAS_PLMType var_driverType_17629 ;
+  GALGAS_uint joker_17635_2 ; // Joker input parameter
+  GALGAS_bool joker_17635_1 ; // Joker input parameter
+  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (function_typeNameForTypeMapForDriver (object->mProperty_mDriverName, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 433)), var_driverType_17629, joker_17635_2, joker_17635_1, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 432)) ;
+  GALGAS_constructorMap var_constructorMap_17662 = var_driverType_17629.getter_constructorMap (HERE) ;
+  GALGAS_constructorValue var_constructorValue_17779 ;
+  GALGAS_constructorSignature joker_17756 ; // Joker input parameter
+  var_constructorMap_17662.method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("()"), object->mProperty_mDriverName.getter_location (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 438)), joker_17756, var_constructorValue_17779, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 438)) ;
+  GALGAS_sortedOperandIRList var_sortedOperandList_17851 ;
+  var_constructorValue_17779.method_structure (var_sortedOperandList_17851, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 439)) ;
+  GALGAS_operandIRList var_initialValueList_17886 = GALGAS_operandIRList::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 440)) ;
+  cEnumerator_sortedOperandIRList enumerator_17935 (var_sortedOperandList_17851, kENUMERATION_UP) ;
+  while (enumerator_17935.hasCurrentObject ()) {
+    var_initialValueList_17886.addAssign_operation (enumerator_17935.current_mOperand (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 442)) ;
+    enumerator_17935.gotoNextObject () ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mDriverList.addAssign_operation (object->mProperty_mDriverName.getter_string (HERE), var_driverType_17401, var_initialValueList_17658  COMMA_SOURCE_FILE ("declaration-driver.galgas", 441)) ;
-  ioArgument_ioTemporaries.mProperty_mInitializedDriverSet.addAssign_operation (object->mProperty_mDriverName.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 446)) ;
-  GALGAS_string var_driverLLVMBaseTypeName_18041 = var_driverType_17401.getter_llvmBaseTypeName (HERE) ;
-  GALGAS_lstring var_bootRoutineMangledName_18100 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_18041, GALGAS_string ("boot").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 449)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 449)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 449)) ;
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_bootRoutineMangledName_18100.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 450)) ;
-  GALGAS_lstring var_startupRoutineMangledName_18291 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_18041, GALGAS_string ("startup").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 451)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 451)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 451)) ;
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_startupRoutineMangledName_18291.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 452)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mDriverList.addAssign_operation (object->mProperty_mDriverName.getter_string (HERE), var_driverType_17629, var_initialValueList_17886  COMMA_SOURCE_FILE ("declaration-driver.galgas", 444)) ;
+  ioArgument_ioTemporaries.mProperty_mInitializedDriverSet.addAssign_operation (object->mProperty_mDriverName.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 449)) ;
+  GALGAS_string var_driverLLVMBaseTypeName_18269 = var_driverType_17629.getter_llvmBaseTypeName (HERE) ;
+  GALGAS_lstring var_bootRoutineMangledName_18328 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_18269, GALGAS_string ("boot").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 452)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 452)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 452)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_bootRoutineMangledName_18328.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 453)) ;
+  GALGAS_lstring var_startupRoutineMangledName_18519 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_18269, GALGAS_string ("startup").getter_nowhere (SOURCE_FILE ("declaration-driver.galgas", 454)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 454)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 454)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_startupRoutineMangledName_18519.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-driver.galgas", 455)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4188,21 +4191,21 @@ static void extensionMethod_decoratedISRDeclarations_semanticAnalysis (const cPt
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_decoratedISRDeclarations * object = (const cPtr_decoratedISRDeclarations *) inObject ;
   macroValidSharedObject (object, cPtr_decoratedISRDeclarations) ;
-  cEnumerator_isrDeclarationListAST enumerator_3666 (object->mProperty_mISRDeclarationList, kENUMERATION_UP) ;
-  while (enumerator_3666.hasCurrentObject ()) {
-    GALGAS_lstring var_driverLLVMBaseTypeName_3747 = function_llvmDriverNameFromName (enumerator_3666.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 92)) ;
-    GALGAS_lstring var_isrRoutineMangledName_3821 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_3747.getter_string (SOURCE_FILE ("declaration-isr.galgas", 93)), enumerator_3666.current (HERE).getter_mISRName (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 93)) ;
-    ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_isrRoutineMangledName_3821.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 94)) ;
-    GALGAS_PLMType var_selfType_4100 ;
-    GALGAS_uint joker_4102_2 ; // Joker input parameter
-    GALGAS_bool joker_4102_1 ; // Joker input parameter
-    constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (function_typeNameForTypeMapForDriver (enumerator_3666.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 96)), var_selfType_4100, joker_4102_2, joker_4102_1, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 96)) ;
-    GALGAS_interruptionPanicCode joker_4192 ; // Joker input parameter
-    constinArgument_inContext.getter_mAvailableInterruptMap (HERE).method_searchKey (enumerator_3666.current (HERE).getter_mISRName (HERE), joker_4192, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 98)) ;
+  cEnumerator_isrDeclarationListAST enumerator_3867 (object->mProperty_mISRDeclarationList, kENUMERATION_UP) ;
+  while (enumerator_3867.hasCurrentObject ()) {
+    GALGAS_lstring var_driverLLVMBaseTypeName_3948 = function_llvmDriverNameFromName (enumerator_3867.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 94)) ;
+    GALGAS_lstring var_isrRoutineMangledName_4022 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_3948.getter_string (SOURCE_FILE ("declaration-isr.galgas", 95)), enumerator_3867.current (HERE).getter_mISRName (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 95)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 95)) ;
+    ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_isrRoutineMangledName_4022.getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 96)) ;
+    GALGAS_PLMType var_selfType_4301 ;
+    GALGAS_uint joker_4303_2 ; // Joker input parameter
+    GALGAS_bool joker_4303_1 ; // Joker input parameter
+    constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (function_typeNameForTypeMapForDriver (enumerator_3867.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 98)), var_selfType_4301, joker_4303_2, joker_4303_1, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 98)) ;
+    GALGAS_interruptionPanicCode joker_4393 ; // Joker input parameter
+    constinArgument_inContext.getter_mAvailableInterruptMap (HERE).method_searchKey (enumerator_3867.current (HERE).getter_mISRName (HERE), joker_4393, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 100)) ;
     {
-    ioArgument_ioIntermediateCodeStruct.mProperty_mInterruptMapIR.setter_insertKey (enumerator_3666.current (HERE).getter_mISRName (HERE), var_selfType_4100, enumerator_3666.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 102)), enumerator_3666.current (HERE).getter_mMode (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 99)) ;
+    ioArgument_ioIntermediateCodeStruct.mProperty_mInterruptMapIR.setter_insertKey (enumerator_3867.current (HERE).getter_mISRName (HERE), var_selfType_4301, enumerator_3867.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 104)), enumerator_3867.current (HERE).getter_mMode (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 101)) ;
     }
-    enumerator_3666.gotoNextObject () ;
+    enumerator_3867.gotoNextObject () ;
   }
 }
 

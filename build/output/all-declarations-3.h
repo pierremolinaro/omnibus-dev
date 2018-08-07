@@ -1148,7 +1148,7 @@ class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_routineAttributes mProperty_mRoutineAttributes ;
 
-  public : GALGAS_lstring mProperty_mRoutineName ;
+  public : GALGAS_lstring mProperty_mRoutineMangledName ;
 
   public : GALGAS_routineFormalArgumentListAST mProperty_mRoutineFormalArgumentList ;
 
@@ -1175,7 +1175,7 @@ class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
                                                    const GALGAS_bool & in_mWarnIfUnused,
                                                    const GALGAS_bool & in_mExportedRoutine,
                                                    const GALGAS_routineAttributes & in_mRoutineAttributes,
-                                                   const GALGAS_lstring & in_mRoutineName,
+                                                   const GALGAS_lstring & in_mRoutineMangledName,
                                                    const GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
                                                    const GALGAS_instructionListAST & in_mRoutineInstructionList,
                                                    const GALGAS_location & in_mEndOfRoutineDeclaration,
@@ -1235,7 +1235,7 @@ class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineMangledName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
 

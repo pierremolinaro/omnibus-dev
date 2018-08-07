@@ -9,7 +9,7 @@ list @decoratedRoutineList {
   @bool mWarnIfUnused
   @bool mExportedRoutine
   @routineAttributes mRoutineAttributes
-  @lstring mRoutineName
+  @lstring mRoutineMangledName
   @routineFormalArgumentListAST mRoutineFormalArgumentList
   @instructionListAST mRoutineInstructionList
   @location mEndOfRoutineDeclaration
@@ -47,11 +47,12 @@ method @decoratedRoutineList-element semanticAnalysis
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
     end
 #--- Mangled routine name
-  let routineMangledName = routineMangledNameFromAST (
-    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
-    !mRoutineName
-    !mRoutineFormalArgumentList
-  )
+  let routineMangledName = mRoutineMangledName
+#  let routineMangledName = routineMangledNameFromAST (
+#    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
+#    !mRoutineName
+#    !mRoutineFormalArgumentList
+#  )
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]

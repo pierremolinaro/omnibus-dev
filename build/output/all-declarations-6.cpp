@@ -7871,7 +7871,7 @@ mProperty_mRoutineKind (),
 mProperty_mWarnIfUnused (),
 mProperty_mExportedRoutine (),
 mProperty_mRoutineAttributes (),
-mProperty_mRoutineName (),
+mProperty_mRoutineMangledName (),
 mProperty_mRoutineFormalArgumentList (),
 mProperty_mRoutineInstructionList (),
 mProperty_mEndOfRoutineDeclaration (),
@@ -7902,7 +7902,7 @@ mProperty_mRoutineKind (inOperand2),
 mProperty_mWarnIfUnused (inOperand3),
 mProperty_mExportedRoutine (inOperand4),
 mProperty_mRoutineAttributes (inOperand5),
-mProperty_mRoutineName (inOperand6),
+mProperty_mRoutineMangledName (inOperand6),
 mProperty_mRoutineFormalArgumentList (inOperand7),
 mProperty_mRoutineInstructionList (inOperand8),
 mProperty_mEndOfRoutineDeclaration (inOperand9),
@@ -7953,7 +7953,7 @@ typeComparisonResult GALGAS_decoratedRoutineList_2D_element::objectCompare (cons
     result = mProperty_mRoutineAttributes.objectCompare (inOperand.mProperty_mRoutineAttributes) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mRoutineName.objectCompare (inOperand.mProperty_mRoutineName) ;
+    result = mProperty_mRoutineMangledName.objectCompare (inOperand.mProperty_mRoutineMangledName) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRoutineFormalArgumentList.objectCompare (inOperand.mProperty_mRoutineFormalArgumentList) ;
@@ -7973,7 +7973,7 @@ typeComparisonResult GALGAS_decoratedRoutineList_2D_element::objectCompare (cons
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedRoutineList_2D_element::isValid (void) const {
-  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
+  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7985,7 +7985,7 @@ void GALGAS_decoratedRoutineList_2D_element::drop (void) {
   mProperty_mWarnIfUnused.drop () ;
   mProperty_mExportedRoutine.drop () ;
   mProperty_mRoutineAttributes.drop () ;
-  mProperty_mRoutineName.drop () ;
+  mProperty_mRoutineMangledName.drop () ;
   mProperty_mRoutineFormalArgumentList.drop () ;
   mProperty_mRoutineInstructionList.drop () ;
   mProperty_mEndOfRoutineDeclaration.drop () ;
@@ -8012,7 +8012,7 @@ void GALGAS_decoratedRoutineList_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mRoutineAttributes.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mRoutineName.description (ioString, inIndentation+1) ;
+    mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRoutineFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -8063,8 +8063,8 @@ GALGAS_routineAttributes GALGAS_decoratedRoutineList_2D_element::getter_mRoutine
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineName ;
+GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mRoutineMangledName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineMangledName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

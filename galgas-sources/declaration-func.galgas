@@ -287,7 +287,7 @@ method @functionDeclarationListAST enterFunctionInContext
       !warnIfUnused
       !globalFunction
       !.directPropertyAccess # @routineAttributes mRoutineAttributes
-      !function.mFunctionName
+      !routineMangledName #function.mFunctionName
       !function.mFunctionFormalArgumentList
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
