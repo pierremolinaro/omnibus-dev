@@ -175,18 +175,6 @@ func %once acceptVariablePLMName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGuardCall ?let @string inName -> @string {
-  result = ["guard.call." + inName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForGuardImplementation ?let @string inName -> @string {
-  result = ["guard.implementation." + inName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func %once waitForGuardChangeFunctionName -> @string {
   result = "guard.wait.for.change"
 }
