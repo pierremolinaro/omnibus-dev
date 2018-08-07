@@ -148,7 +148,7 @@ private proc suppressInaccessibleSubprograms
       !?outAccessibleEntities
       !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
     ]
-    let loopName = task.lkey.string + "." + llvmNameForTaskLoopFunction () + "()"
+    let loopName = "func." + task.lkey.string + "." + llvmNameForTaskLoopFunction () + "()"
     outAccessibleEntities.mRoutineSet += !loopName
   end
 #--- Panic clauses (if panic code is generated)

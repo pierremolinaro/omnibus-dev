@@ -96,16 +96,17 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
                                ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
 {
-  result = if inReceiverTypeName == "" then
-    inRoutineName # @lstring.new {!"void." + inRoutineName !inRoutineName}
-  else
-    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
+  var s = "func."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
   end
-  result.string += "("
+  s += inRoutineName.string
+  s += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
-    result.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
-  result.string += ")"
+  s += ")"
+  result = .new {!s !inRoutineName.location}
 }
 
 #·······················································································································
@@ -114,16 +115,17 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
                                 ?let @lstring inRoutineName
                                 ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
 {
-  result = if inReceiverTypeName == "" then
-    inRoutineName # @lstring.new {!"void." + inRoutineName !inRoutineName}
-  else
-    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
+  var s = "func."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
   end
-  result.string += "("
+  s += inRoutineName.string
+  s += "("
   for (passingMode selector) in inEffectiveParameterList do
-    result.string += [passingMode matchingFormalArgument] + selector + ":"
+    s += [passingMode matchingFormalArgument] + selector + ":"
   end
-  result.string += ")"
+  s += ")"
+  result = .new {!s !inRoutineName.location}
 }
 
 #·······················································································································
