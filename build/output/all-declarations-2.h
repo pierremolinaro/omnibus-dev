@@ -8309,10 +8309,6 @@ class cMapElement_guardMapIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const char * kSearchErrorMessage_guardMapIR_searchKey ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 class GALGAS_guardMapIR : public AC_GALGAS_map {
 //--------------------------------- Default constructor
   public : GALGAS_guardMapIR (void) ;
@@ -8359,16 +8355,6 @@ class GALGAS_guardMapIR : public AC_GALGAS_map {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_routineFormalArgumentListIR & outArgument1,
-                                                   class GALGAS_PLMType & outArgument2,
-                                                   class GALGAS_guardKindGenerationIR & outArgument3,
-                                                   class GALGAS_allocaList & outArgument4,
-                                                   class GALGAS_instructionListIR & outArgument5,
-                                                   class GALGAS_bool & outArgument6,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
   public : VIRTUAL_IN_DEBUG void setter_setMAllocaListForKey (class GALGAS_allocaList constinArgument0,
                                                               class GALGAS_string constinArgument1,
                                                               C_Compiler * inCompiler
@@ -8401,16 +8387,6 @@ class GALGAS_guardMapIR : public AC_GALGAS_map {
 
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_routineFormalArgumentListIR & outArgument1,
-                                                   class GALGAS_PLMType & outArgument2,
-                                                   class GALGAS_guardKindGenerationIR & outArgument3,
-                                                   class GALGAS_allocaList & outArgument4,
-                                                   class GALGAS_instructionListIR & outArgument5,
-                                                   class GALGAS_bool & outArgument6,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
