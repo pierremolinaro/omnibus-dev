@@ -193,9 +193,11 @@ override method @ifInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let labelTrue = "if." + [mLocation locationIndex] + ".true"
-  let labelFalse = "if." + [mLocation locationIndex] + ".false"
-  let labelEnd = "if." + [mLocation locationIndex] + ".end"
+#--- Labels
+  let labelTrue = "if." + ioGenerationAdds.mUniqueIndex + ".true"
+  let labelFalse = "if." + ioGenerationAdds.mUniqueIndex + ".false"
+  let labelEnd = "if." + ioGenerationAdds.mUniqueIndex + ".end"
+  ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += "  br i1 " + [mTestVariable llvmName] + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioLLVMcode += labelTrue + ":\n"

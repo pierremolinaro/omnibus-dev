@@ -146,6 +146,7 @@ method @routineMapIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   for procedure in self do
+    ioGenerationAdds.mUniqueIndex = 0
     [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
   end
 }

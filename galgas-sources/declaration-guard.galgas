@@ -87,13 +87,13 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardImplementation ?let @string inName -> @string {
-  result = ["guard.implementation." + inName assemblerRepresentation]
+  result = ["guard.section." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardCall ?let @string inName -> @string {
-  result = ["guard.call." + inName assemblerRepresentation]
+  result = ["guard.user." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -577,7 +577,7 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "  call void @accept.guard ()\n"
     ioLLVMcode += "  ret i1 true\n\n"
     ioLLVMcode += rejected_label + ":\n"
-    ioLLVMcode += "  ret i1 false\n\n"
+    ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
     [baseGuardAllocaList generateAllocaList !?ioLLVMcode]
