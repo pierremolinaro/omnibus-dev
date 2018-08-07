@@ -73,12 +73,12 @@ driver myDriver > digital {
 
   //····················································································································
 
-   system section readCounter0 () -> $uint32 {
+   section readCounter0 () -> $uint32 {
     result = #FTM[0]:CNT
   }
   //····················································································································
 
-   system section readCounter1 () -> $uint32 {
+   section readCounter1 () -> $uint32 {
     result = #FTM[1]:CNT
   }
 

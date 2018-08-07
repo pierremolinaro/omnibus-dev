@@ -12,13 +12,13 @@ sync $synchronizationGate {
 
   //············································································
   
-  public system service close @noUnusedWarning @mutating () {
+  public service close @noUnusedWarning @mutating () {
     self.isOpen = no
   }
 
   //············································································
   
-  public system service open @noUnusedWarning @mutating () {
+  public service open @noUnusedWarning @mutating () {
     if not self.isOpen {
       var continue = yes
       while continue {
@@ -31,7 +31,7 @@ sync $synchronizationGate {
 
   //············································································
   
-  public system primitive wait @noUnusedWarning @mutating () {
+  public primitive wait @noUnusedWarning @mutating () {
     if not self.isOpen {
       block (!?inList:self.taskList)
     }

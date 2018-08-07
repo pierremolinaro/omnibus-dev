@@ -12,7 +12,7 @@ sync $periodicTimer {
 
   //············································································
   
-  public system primitive wait @noUnusedWarning @mutating () {
+  public primitive wait @noUnusedWarning @mutating () {
     if self.deadline ≤ time.now () {
       block (!onDeadline:self.deadline)
     }
@@ -30,7 +30,7 @@ sync $periodicTimer {
     }
   }
   
-  public system section deadline @noUnusedWarning () -> $uint32 {
+  public section deadline @noUnusedWarning () -> $uint32 {
     result = self.deadline
   }
 }

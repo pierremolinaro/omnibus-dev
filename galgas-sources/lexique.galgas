@@ -54,7 +54,6 @@ lexique plm_lexique {
     "staticArray",
     "switch",
     "sync",
-    "system",
     "target",
     "task",
     "truncate",
@@ -365,16 +364,6 @@ lexique plm_lexique {
       send $!selector:$
     end
   }
-  
-  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-  #! Optional token (end of instruction)
-  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-  
-#  $eoi$ %optional style selectorStyle error message "the ';' or end of line instruction separator"
-#
-#  rule ";" { send $eoi$ }
-#  
-#  rule "\n" { send $eoi$ }
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   #! Separators

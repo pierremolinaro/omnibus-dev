@@ -134,17 +134,17 @@ driver usb_device > digital {
   var état = [TRACE_SIZE • $uint4] (!repeated:0)
   var indexÉtat $uint32 = 0
 
-  public system section lireÉtat (?index $uint32) -> $uint32 {
+  public section lireÉtat (?index $uint32) -> $uint32 {
     result = extend (self.état [index])
   }
 
   var trace $uint32 = 0
 
-  public system section lireTrace () -> $uint32 {
+  public section lireTrace () -> $uint32 {
     result = self.trace
   }
 
-  public system section lireAddresseUSB () -> $uint32 {
+  public section lireAddresseUSB () -> $uint32 {
     result = extend (#USB0:ADDR)
   }
 

@@ -21,20 +21,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <system_routine_prefix> !@bool public {
+  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
+    @bool public
     select
       public = false
     or
       $public$
       public = true
     end
-    $system$
-  }
-  
-  #·····················································································································
-
-  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
-    <system_routine_prefix> ?let public
     $section$
     $identifier$ ?let name
     @lstringlist attributeList = {}
@@ -70,7 +64,13 @@ syntax extension plm_syntax {
   # A primitive or a service accepts only input arguments and does not return any value
 
   rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
-    <system_routine_prefix> ?let public
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
     @routineKind routineKind
     select
       $primitive$

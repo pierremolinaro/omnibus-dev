@@ -127,7 +127,7 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     identifier:@"taskStrictPriorityOrder"
     commandChar:0
     commandString:@"task-strict-priority-order"
-    comment:@"Ensure task stricyt priority order"
+    comment:@"Ensure task strict priority order"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

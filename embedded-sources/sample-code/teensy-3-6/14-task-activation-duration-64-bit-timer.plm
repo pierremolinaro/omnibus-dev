@@ -26,15 +26,15 @@ driver timer > root {
     #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}
   }
 
-  public system section setTick () {
+  public section setTick () {
     self.tick = self.now ()
   }
 
-  public system section getTick () -> $uint64 {
+  public section getTick () -> $uint64 {
     result = self.tick
   }
 
-  public system section now () -> $uint64 {
+  public section now () -> $uint64 {
     result = extend (#PIT:LTMR64H)
     result <<= 32
     result |= extend (#PIT:LTMR64L)

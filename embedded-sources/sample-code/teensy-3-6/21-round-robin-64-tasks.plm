@@ -22,11 +22,11 @@ driver myDriver > digital {
 
   var tick = $uint32 ()
 
-  public system section noteTick () {
+  public section noteTick () {
     self.tick = #SYST:CVR
   }
 
-  public system section getDuration () -> $uint32 {
+  public section getDuration () -> $uint32 {
     result = self.tick - #SYST:CVR
   }
 

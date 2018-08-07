@@ -164,7 +164,7 @@ task backgroundTask @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-system section externalSection (?in: inData $dArray) {
+section externalSection (?in: inData $dArray) {
   var d = inData
   d.append (!0)
   var xxxx = [$bool] ()
