@@ -40,9 +40,16 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-standalone-function.galgas"
   "galgas-sources/declaration-static-list.galgas"
   "galgas-sources/declaration-option.galgas"
-
-#--- Tasks
   "galgas-sources/task-declaration.galgas"
+
+#--- Routines
+  "galgas-sources/declaration-func.galgas"
+  "galgas-sources/declaration-svc.galgas"
+  "galgas-sources/declaration-required-proc.galgas"
+  "galgas-sources/declaration-extern-proc.galgas"
+  "galgas-sources/declaration-isr.galgas"
+  "galgas-sources/declaration-guard.galgas"
+  "galgas-sources/function-analysis.galgas"
 
 #--- Modes
   "galgas-sources/logical-modes.galgas"
@@ -64,15 +71,6 @@ project (1:0:0) -> "plm" {
 #--- Panic
   "galgas-sources/panic.galgas"
   "galgas-sources/panic-codes.galgas"
-
-#--- Routines
-  "galgas-sources/function-analysis.galgas"
-  "galgas-sources/declaration-svc.galgas"
-  "galgas-sources/declaration-func.galgas"
-  "galgas-sources/declaration-required-proc.galgas"
-  "galgas-sources/declaration-extern-proc.galgas"
-  "galgas-sources/declaration-isr.galgas"
-  "galgas-sources/declaration-guard.galgas"
 
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"

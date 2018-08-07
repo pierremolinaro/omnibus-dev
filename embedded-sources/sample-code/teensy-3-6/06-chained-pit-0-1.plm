@@ -24,7 +24,7 @@ driver timer > root {
     #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}
   }
 
-  public system section now @noUnusedWarning () -> $uptime {
+  public section now @noUnusedWarning () -> $uptime {
     var r $uint64 = extend (#PIT:LTMR64H)
     r <<= 32
     r |= extend (#PIT:LTMR64L)

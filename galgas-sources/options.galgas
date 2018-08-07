@@ -18,7 +18,7 @@ option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
 
 #---
-  @bool taskStrictPriorityOrder : '\0', "task-strict-priority-order" -> "Ensure task stricyt priority order"
+  @bool taskStrictPriorityOrder : '\0', "task-strict-priority-order" -> "Ensure task strict priority order"
  
 #--- Optimization
   @bool optimization_displayDeadCodeElimination : 'z', "display-deadcode-elimination" -> "Display dead code elimination"

@@ -5,17 +5,17 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-system section emptySection () {
+section emptySection () {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
 
-system service emptyService () {
+service emptyService () {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
 
-system section getSysTick () -> $uint32 {
+section getSysTick () -> $uint32 {
   result = #SYST:CVR
 }
 

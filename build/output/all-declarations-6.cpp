@@ -11258,280 +11258,6 @@ GALGAS_decoratedPanicRoutine GALGAS_decoratedPanicRoutine::extractObject (const 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedRoutineList_2D_element::GALGAS_decoratedRoutineList_2D_element (void) :
-mProperty_mReceiverTypeName (),
-mProperty_mMode (),
-mProperty_mRoutineKind (),
-mProperty_mWarnIfUnused (),
-mProperty_mExportedRoutine (),
-mProperty_mRoutineAttributes (),
-mProperty_mRoutineName (),
-mProperty_mRoutineFormalArgumentList (),
-mProperty_mRoutineInstructionList (),
-mProperty_mEndOfRoutineDeclaration (),
-mProperty_mReturnTypeName () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedRoutineList_2D_element::~ GALGAS_decoratedRoutineList_2D_element (void) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedRoutineList_2D_element::GALGAS_decoratedRoutineList_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                const GALGAS_mode & inOperand1,
-                                                                                const GALGAS_routineKind & inOperand2,
-                                                                                const GALGAS_bool & inOperand3,
-                                                                                const GALGAS_bool & inOperand4,
-                                                                                const GALGAS_routineAttributes & inOperand5,
-                                                                                const GALGAS_lstring & inOperand6,
-                                                                                const GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                                                const GALGAS_instructionListAST & inOperand8,
-                                                                                const GALGAS_location & inOperand9,
-                                                                                const GALGAS_lstring & inOperand10) :
-mProperty_mReceiverTypeName (inOperand0),
-mProperty_mMode (inOperand1),
-mProperty_mRoutineKind (inOperand2),
-mProperty_mWarnIfUnused (inOperand3),
-mProperty_mExportedRoutine (inOperand4),
-mProperty_mRoutineAttributes (inOperand5),
-mProperty_mRoutineName (inOperand6),
-mProperty_mRoutineFormalArgumentList (inOperand7),
-mProperty_mRoutineInstructionList (inOperand8),
-mProperty_mEndOfRoutineDeclaration (inOperand9),
-mProperty_mReturnTypeName (inOperand10) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedRoutineList_2D_element GALGAS_decoratedRoutineList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                const GALGAS_mode & inOperand1,
-                                                                                                const GALGAS_routineKind & inOperand2,
-                                                                                                const GALGAS_bool & inOperand3,
-                                                                                                const GALGAS_bool & inOperand4,
-                                                                                                const GALGAS_routineAttributes & inOperand5,
-                                                                                                const GALGAS_lstring & inOperand6,
-                                                                                                const GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                                                                const GALGAS_instructionListAST & inOperand8,
-                                                                                                const GALGAS_location & inOperand9,
-                                                                                                const GALGAS_lstring & inOperand10 
-                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_decoratedRoutineList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
-    result = GALGAS_decoratedRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_decoratedRoutineList_2D_element::objectCompare (const GALGAS_decoratedRoutineList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mReceiverTypeName.objectCompare (inOperand.mProperty_mReceiverTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mWarnIfUnused.objectCompare (inOperand.mProperty_mWarnIfUnused) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mExportedRoutine.objectCompare (inOperand.mProperty_mExportedRoutine) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineAttributes.objectCompare (inOperand.mProperty_mRoutineAttributes) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineName.objectCompare (inOperand.mProperty_mRoutineName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineFormalArgumentList.objectCompare (inOperand.mProperty_mRoutineFormalArgumentList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineInstructionList.objectCompare (inOperand.mProperty_mRoutineInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mEndOfRoutineDeclaration.objectCompare (inOperand.mProperty_mEndOfRoutineDeclaration) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mReturnTypeName.objectCompare (inOperand.mProperty_mReturnTypeName) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool GALGAS_decoratedRoutineList_2D_element::isValid (void) const {
-  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_decoratedRoutineList_2D_element::drop (void) {
-  mProperty_mReceiverTypeName.drop () ;
-  mProperty_mMode.drop () ;
-  mProperty_mRoutineKind.drop () ;
-  mProperty_mWarnIfUnused.drop () ;
-  mProperty_mExportedRoutine.drop () ;
-  mProperty_mRoutineAttributes.drop () ;
-  mProperty_mRoutineName.drop () ;
-  mProperty_mRoutineFormalArgumentList.drop () ;
-  mProperty_mRoutineInstructionList.drop () ;
-  mProperty_mEndOfRoutineDeclaration.drop () ;
-  mProperty_mReturnTypeName.drop () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_decoratedRoutineList_2D_element::description (C_String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString << "<struct @decoratedRoutineList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mMode.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mExportedRoutine.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineAttributes.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineFormalArgumentList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mEndOfRoutineDeclaration.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mReturnTypeName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReceiverTypeName ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_mode GALGAS_decoratedRoutineList_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mMode ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineKind GALGAS_decoratedRoutineList_2D_element::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineKind ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_decoratedRoutineList_2D_element::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWarnIfUnused ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_decoratedRoutineList_2D_element::getter_mExportedRoutine (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExportedRoutine ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineAttributes GALGAS_decoratedRoutineList_2D_element::getter_mRoutineAttributes (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineAttributes ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineName ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineFormalArgumentListAST GALGAS_decoratedRoutineList_2D_element::getter_mRoutineFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineFormalArgumentList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_instructionListAST GALGAS_decoratedRoutineList_2D_element::getter_mRoutineInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineInstructionList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location GALGAS_decoratedRoutineList_2D_element::getter_mEndOfRoutineDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfRoutineDeclaration ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReturnTypeName ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         @decoratedRoutineList-element type                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_decoratedRoutineList_2D_element ("decoratedRoutineList-element",
-                                                        NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_decoratedRoutineList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_decoratedRoutineList_2D_element ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_decoratedRoutineList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_decoratedRoutineList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedRoutineList_2D_element GALGAS_decoratedRoutineList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_decoratedRoutineList_2D_element result ;
-  const GALGAS_decoratedRoutineList_2D_element * p = (const GALGAS_decoratedRoutineList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_decoratedRoutineList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("decoratedRoutineList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_externProcedureDeclarationListAST_2D_element::GALGAS_externProcedureDeclarationListAST_2D_element (void) :
 mProperty_mExternProcedureName (),
 mProperty_mMode (),
@@ -12301,6 +12027,280 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
   }
 }
 
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedRoutineList_2D_element::GALGAS_decoratedRoutineList_2D_element (void) :
+mProperty_mReceiverTypeName (),
+mProperty_mMode (),
+mProperty_mRoutineKind (),
+mProperty_mWarnIfUnused (),
+mProperty_mExportedRoutine (),
+mProperty_mRoutineAttributes (),
+mProperty_mRoutineName (),
+mProperty_mRoutineFormalArgumentList (),
+mProperty_mRoutineInstructionList (),
+mProperty_mEndOfRoutineDeclaration (),
+mProperty_mReturnTypeName () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedRoutineList_2D_element::~ GALGAS_decoratedRoutineList_2D_element (void) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedRoutineList_2D_element::GALGAS_decoratedRoutineList_2D_element (const GALGAS_lstring & inOperand0,
+                                                                                const GALGAS_mode & inOperand1,
+                                                                                const GALGAS_routineKind & inOperand2,
+                                                                                const GALGAS_bool & inOperand3,
+                                                                                const GALGAS_bool & inOperand4,
+                                                                                const GALGAS_routineAttributes & inOperand5,
+                                                                                const GALGAS_lstring & inOperand6,
+                                                                                const GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                                                const GALGAS_instructionListAST & inOperand8,
+                                                                                const GALGAS_location & inOperand9,
+                                                                                const GALGAS_lstring & inOperand10) :
+mProperty_mReceiverTypeName (inOperand0),
+mProperty_mMode (inOperand1),
+mProperty_mRoutineKind (inOperand2),
+mProperty_mWarnIfUnused (inOperand3),
+mProperty_mExportedRoutine (inOperand4),
+mProperty_mRoutineAttributes (inOperand5),
+mProperty_mRoutineName (inOperand6),
+mProperty_mRoutineFormalArgumentList (inOperand7),
+mProperty_mRoutineInstructionList (inOperand8),
+mProperty_mEndOfRoutineDeclaration (inOperand9),
+mProperty_mReturnTypeName (inOperand10) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedRoutineList_2D_element GALGAS_decoratedRoutineList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                                const GALGAS_mode & inOperand1,
+                                                                                                const GALGAS_routineKind & inOperand2,
+                                                                                                const GALGAS_bool & inOperand3,
+                                                                                                const GALGAS_bool & inOperand4,
+                                                                                                const GALGAS_routineAttributes & inOperand5,
+                                                                                                const GALGAS_lstring & inOperand6,
+                                                                                                const GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                                                                const GALGAS_instructionListAST & inOperand8,
+                                                                                                const GALGAS_location & inOperand9,
+                                                                                                const GALGAS_lstring & inOperand10 
+                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_decoratedRoutineList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+    result = GALGAS_decoratedRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_decoratedRoutineList_2D_element::objectCompare (const GALGAS_decoratedRoutineList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mReceiverTypeName.objectCompare (inOperand.mProperty_mReceiverTypeName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mWarnIfUnused.objectCompare (inOperand.mProperty_mWarnIfUnused) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mExportedRoutine.objectCompare (inOperand.mProperty_mExportedRoutine) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineAttributes.objectCompare (inOperand.mProperty_mRoutineAttributes) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineName.objectCompare (inOperand.mProperty_mRoutineName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineFormalArgumentList.objectCompare (inOperand.mProperty_mRoutineFormalArgumentList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mRoutineInstructionList.objectCompare (inOperand.mProperty_mRoutineInstructionList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mEndOfRoutineDeclaration.objectCompare (inOperand.mProperty_mEndOfRoutineDeclaration) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mReturnTypeName.objectCompare (inOperand.mProperty_mReturnTypeName) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+bool GALGAS_decoratedRoutineList_2D_element::isValid (void) const {
+  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_decoratedRoutineList_2D_element::drop (void) {
+  mProperty_mReceiverTypeName.drop () ;
+  mProperty_mMode.drop () ;
+  mProperty_mRoutineKind.drop () ;
+  mProperty_mWarnIfUnused.drop () ;
+  mProperty_mExportedRoutine.drop () ;
+  mProperty_mRoutineAttributes.drop () ;
+  mProperty_mRoutineName.drop () ;
+  mProperty_mRoutineFormalArgumentList.drop () ;
+  mProperty_mRoutineInstructionList.drop () ;
+  mProperty_mEndOfRoutineDeclaration.drop () ;
+  mProperty_mReturnTypeName.drop () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_decoratedRoutineList_2D_element::description (C_String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString << "<struct @decoratedRoutineList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mMode.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mExportedRoutine.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRoutineAttributes.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRoutineName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRoutineFormalArgumentList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mRoutineInstructionList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mEndOfRoutineDeclaration.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mReturnTypeName.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReceiverTypeName ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_mode GALGAS_decoratedRoutineList_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mMode ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineKind GALGAS_decoratedRoutineList_2D_element::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineKind ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_decoratedRoutineList_2D_element::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mWarnIfUnused ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_decoratedRoutineList_2D_element::getter_mExportedRoutine (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExportedRoutine ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineAttributes GALGAS_decoratedRoutineList_2D_element::getter_mRoutineAttributes (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineAttributes ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineName ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineFormalArgumentListAST GALGAS_decoratedRoutineList_2D_element::getter_mRoutineFormalArgumentList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineFormalArgumentList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListAST GALGAS_decoratedRoutineList_2D_element::getter_mRoutineInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineInstructionList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_location GALGAS_decoratedRoutineList_2D_element::getter_mEndOfRoutineDeclaration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfRoutineDeclaration ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_decoratedRoutineList_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReturnTypeName ;
+}
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         @decoratedRoutineList-element type                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_decoratedRoutineList_2D_element ("decoratedRoutineList-element",
+                                                        NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_decoratedRoutineList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_decoratedRoutineList_2D_element ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_decoratedRoutineList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_decoratedRoutineList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedRoutineList_2D_element GALGAS_decoratedRoutineList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_decoratedRoutineList_2D_element result ;
+  const GALGAS_decoratedRoutineList_2D_element * p = (const GALGAS_decoratedRoutineList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_decoratedRoutineList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("decoratedRoutineList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Object comparison                                                                                                 *

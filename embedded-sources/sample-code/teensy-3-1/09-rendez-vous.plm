@@ -10,7 +10,7 @@ sync $rendezVous {
   var inputGuardList = $guardList ()
   var outputGuardList = $guardList ()
 
-  public system primitive input @mutating () {
+  public primitive input @mutating () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
     if not found {
       notifyChange (!?forGuard:self.outputGuardList)
@@ -18,7 +18,7 @@ sync $rendezVous {
     }
   }
 
-  public system primitive output @mutating () {
+  public primitive output @mutating () {
     makeTaskReady (!?fromList:self.inputWaitList ?found:let found)
     if not found {
       notifyChange (!?forGuard:self.inputGuardList)

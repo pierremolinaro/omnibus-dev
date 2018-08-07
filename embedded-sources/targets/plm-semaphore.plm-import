@@ -7,7 +7,7 @@ sync $semaphore {
 
   //····················································································································
   
-  public system service signal @noUnusedWarning @mutating () {
+  public service signal @noUnusedWarning @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
@@ -17,7 +17,7 @@ sync $semaphore {
 
   //····················································································································
 
-  public system primitive wait @noUnusedWarning @mutating () {
+  public primitive wait @noUnusedWarning @mutating () {
     if self.value > 0 {
       self.value -= 1
     }else{

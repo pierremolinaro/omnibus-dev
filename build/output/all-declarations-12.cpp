@@ -639,13 +639,13 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "system section ledOn () {\n"
+  "section ledOn () {\n"
   "  #IO1:CLR  = 1 << 23 // Led On\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "system section ledOff () {\n"
+  "section ledOff () {\n"
   "  #IO1:SET  = 1 << 23 // Led Off\n"
   "}\n"
   "\n"
@@ -669,7 +669,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  582, // Text length
+  568, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -949,17 +949,17 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system section emptySection () {\n"
+  "section emptySection () {\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system service emptyService () {\n"
+  "service emptyService () {\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system section getSysTick () -> $uint32 {\n"
+  "section getSysTick () -> $uint32 {\n"
   "  result = #SYST:CVR\n"
   "}\n"
   "\n"
@@ -1019,7 +1019,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  1915, // Text length
+  1894, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1297,7 +1297,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "  var inputGuardList = $guardList ()\n"
   "  var outputGuardList = $guardList ()\n"
   "\n"
-  "  public system primitive input @mutating () {\n"
+  "  public primitive input @mutating () {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:let found)\n"
   "    if not found {\n"
   "      notifyChange (!\?forGuard:self.outputGuardList)\n"
@@ -1305,7 +1305,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "    }\n"
   "  }\n"
   "\n"
-  "  public system primitive output @mutating () {\n"
+  "  public primitive output @mutating () {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:let found)\n"
   "    if not found {\n"
   "      notifyChange (!\?forGuard:self.inputGuardList)\n"
@@ -1376,7 +1376,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  2276, // Text length
+  2262, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1495,7 +1495,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "system section setupPIT () {\n"
+  "section setupPIT () {\n"
   "  #PIT:MCR = 0\n"
   "  #PIT:LDVAL [0] = 200000\n"
   "  #PIT:TCTRL [0] = {#PIT:TCTRL !TIE:1 !TEN:1} // Interrupt, enabled\n"
@@ -1513,7 +1513,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    #SIM:SCGC6 |= SIM_SCGC6_PIT\n"
   "  }\n"
   "\n"
-  "  system section getPITValue (!outValue $uint32) {\n"
+  "  section getPITValue (!outValue $uint32) {\n"
   "    outValue = self.gPITValue\n"
   "  }\n"
   "\n"
@@ -1557,7 +1557,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1482, // Text length
+  1468, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -1716,13 +1716,13 @@ const char * gWrapperFileContent_14_embeddedSampleCode = "target \"teensy-3-1/un
   "  var \xC3""\xA9""tat = [TRACE_SIZE \xE2""\x80""\xA2"" $uint4] (!repeated:0)\n"
   "  var index\xC3""\x89""tat $uint32 = 0\n"
   "\n"
-  "  public system section lire\xC3""\x89""tat (\?index $uint32) -> $uint32 {\n"
+  "  public section lire\xC3""\x89""tat (\?index $uint32) -> $uint32 {\n"
   "    result = extend (self.\xC3""\xA9""tat [index])\n"
   "  }\n"
   "\n"
   "  var trace $uint32 = 0\n"
   "\n"
-  "  public system section lireAddresseUSB () -> $uint32 {\n"
+  "  public section lireAddresseUSB () -> $uint32 {\n"
   "    result = extend (#USB0:ADDR)\n"
   "  }\n"
   "\n"
@@ -2048,7 +2048,7 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  15208, // Text length
+  15194, // Text length
   gWrapperFileContent_14_embeddedSampleCode
 ) ;
 
@@ -2190,15 +2190,15 @@ const char * gWrapperFileContent_16_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "driver RegisterRead > root {\n"
   "\n"
-  "  public system section SIM_CLKDIV1 () -> $uint32 {\n"
+  "  public section SIM_CLKDIV1 () -> $uint32 {\n"
   "    result = #SIM:CLKDIV1\n"
   "  }\n"
   "\n"
-  "  public system section MCG_C5 () -> $uint8 {\n"
+  "  public section MCG_C5 () -> $uint8 {\n"
   "    result = #MCG:C5\n"
   "  }\n"
   "\n"
-  "  public system section MCG_C6 () -> $uint8 {\n"
+  "  public section MCG_C6 () -> $uint8 {\n"
   "    result = #MCG:C6\n"
   "  }\n"
   "}\n"
@@ -2238,7 +2238,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1466, // Text length
+  1445, // Text length
   gWrapperFileContent_16_embeddedSampleCode
 ) ;
 
@@ -2422,7 +2422,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system section initializeDMA (\?!pattern $patternArray) {\n"
+  "section initializeDMA (\?!pattern $patternArray) {\n"
   "//--- Transform pattern for encoding level changes\n"
   "  var current = no\n"
   "  var index $uint32 = 0\n"
@@ -2546,7 +2546,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7528, // Text length
+  7521, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
@@ -2615,7 +2615,7 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system primitive wait @noUnusedWarning @mutating () {\n"
+  "  public primitive wait @noUnusedWarning @mutating () {\n"
   "    if self.deadline \xE2""\x89""\xA4"" time.now () {\n"
   "      block (!onDeadline:self.deadline)\n"
   "    }\n"
@@ -2633,7 +2633,7 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/xt
   "    }\n"
   "  }\n"
   "  \n"
-  "  public system section deadline @noUnusedWarning () -> $uint32 {\n"
+  "  public section deadline @noUnusedWarning () -> $uint32 {\n"
   "    result = self.deadline\n"
   "  }\n"
   "}\n"
@@ -2665,7 +2665,7 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "05-periodic-timer.plm",
   "plm",
   true, // Text file
-  1611, // Text length
+  1597, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
@@ -2697,7 +2697,7 @@ const char * gWrapperFileContent_21_embeddedSampleCode = "target \"teensy-3-6/xt
   "    #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}\n"
   "  }\n"
   "\n"
-  "  public system section now @noUnusedWarning () -> $uptime {\n"
+  "  public section now @noUnusedWarning () -> $uptime {\n"
   "    var r $uint64 = extend (#PIT:LTMR64H)\n"
   "    r <<= 32\n"
   "    r |= extend (#PIT:LTMR64L)\n"
@@ -2764,7 +2764,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedSampleCode (
   "06-chained-pit-0-1.plm",
   "plm",
   true, // Text file
-  2442, // Text length
+  2435, // Text length
   gWrapperFileContent_21_embeddedSampleCode
 ) ;
 
@@ -2784,13 +2784,13 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system service close @noUnusedWarning @mutating () {\n"
+  "  public service close @noUnusedWarning @mutating () {\n"
   "    self.isOpen = no\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system service open @noUnusedWarning @mutating () {\n"
+  "  public service open @noUnusedWarning @mutating () {\n"
   "    if not self.isOpen {\n"
   "      var continue = yes\n"
   "      while continue {\n"
@@ -2803,7 +2803,7 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public system primitive wait @noUnusedWarning @mutating () {\n"
+  "  public primitive wait @noUnusedWarning @mutating () {\n"
   "    if not self.isOpen {\n"
   "      block (!\?inList:self.taskList)\n"
   "    }\n"
@@ -2877,7 +2877,7 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
   "07-synchronization-gate.plm",
   "plm",
   true, // Text file
-  2796, // Text length
+  2775, // Text length
   gWrapperFileContent_22_embeddedSampleCode
 ) ;
 
@@ -3269,7 +3269,7 @@ const char * gWrapperFileContent_26_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system section externalSection (\?in: inData $dArray) {\n"
+  "section externalSection (\?in: inData $dArray) {\n"
   "  var d = inData\n"
   "  d.append (!0)\n"
   "  var xxxx = [$bool] ()\n"
@@ -3283,7 +3283,7 @@ const cRegularFileWrapper gWrapperFile_26_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5009, // Text length
+  5002, // Text length
   gWrapperFileContent_26_embeddedSampleCode
 ) ;
 
@@ -3296,17 +3296,17 @@ const char * gWrapperFileContent_27_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system section emptySection () {\n"
+  "section emptySection () {\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system service emptyService () {\n"
+  "service emptyService () {\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "system section getSysTick () -> $uint32 {\n"
+  "section getSysTick () -> $uint32 {\n"
   "  result = #SYST:CVR\n"
   "}\n"
   "\n"
@@ -3365,7 +3365,7 @@ const cRegularFileWrapper gWrapperFile_27_embeddedSampleCode (
   "12-section-service-duration.plm",
   "plm",
   true, // Text file
-  1883, // Text length
+  1862, // Text length
   gWrapperFileContent_27_embeddedSampleCode
 ) ;
 
@@ -3507,17 +3507,17 @@ const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/xt
   "  var \xC3""\xA9""tat = [TRACE_SIZE \xE2""\x80""\xA2"" $uint4] (!repeated:0)\n"
   "  var index\xC3""\x89""tat $uint32 = 0\n"
   "\n"
-  "  public system section lire\xC3""\x89""tat (\?index $uint32) -> $uint32 {\n"
+  "  public section lire\xC3""\x89""tat (\?index $uint32) -> $uint32 {\n"
   "    result = extend (self.\xC3""\xA9""tat [index])\n"
   "  }\n"
   "\n"
   "  var trace $uint32 = 0\n"
   "\n"
-  "  public system section lireTrace () -> $uint32 {\n"
+  "  public section lireTrace () -> $uint32 {\n"
   "    result = self.trace\n"
   "  }\n"
   "\n"
-  "  public system section lireAddresseUSB () -> $uint32 {\n"
+  "  public section lireAddresseUSB () -> $uint32 {\n"
   "    result = extend (#USB0:ADDR)\n"
   "  }\n"
   "\n"
@@ -3880,7 +3880,7 @@ const cRegularFileWrapper gWrapperFile_28_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20360, // Text length
+  20339, // Text length
   gWrapperFileContent_28_embeddedSampleCode
 ) ;
 
@@ -3914,15 +3914,15 @@ const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xt
   "    #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}\n"
   "  }\n"
   "\n"
-  "  public system section setTick () {\n"
+  "  public section setTick () {\n"
   "    self.tick = self.now ()\n"
   "  }\n"
   "\n"
-  "  public system section getTick () -> $uint64 {\n"
+  "  public section getTick () -> $uint64 {\n"
   "    result = self.tick\n"
   "  }\n"
   "\n"
-  "  public system section now () -> $uint64 {\n"
+  "  public section now () -> $uint64 {\n"
   "    result = extend (#PIT:LTMR64H)\n"
   "    result <<= 32\n"
   "    result |= extend (#PIT:LTMR64L)\n"
@@ -3963,7 +3963,7 @@ const cRegularFileWrapper gWrapperFile_29_embeddedSampleCode (
   "14-task-activation-duration-64-bit-timer.plm",
   "plm",
   true, // Text file
-  1923, // Text length
+  1902, // Text length
   gWrapperFileContent_29_embeddedSampleCode
 ) ;
 
@@ -3981,11 +3981,11 @@ const char * gWrapperFileContent_30_embeddedSampleCode = "target \"teensy-3-6/xt
   "driver myDriver > time {\n"
   "  var tick = $uint32 ()\n"
   "\n"
-  "  public system section noteTick () {\n"
+  "  public section noteTick () {\n"
   "    self.tick = #SYST:CVR\n"
   "  } \n"
   "\n"
-  "  public system section getDuration () -> $uint32 {\n"
+  "  public section getDuration () -> $uint32 {\n"
   "    result = self.tick - #SYST:CVR\n"
   "  }\n"
   "}\n"
@@ -4023,7 +4023,7 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
   "15-task-activation-duration-systick.plm",
   "plm",
   true, // Text file
-  1316, // Text length
+  1302, // Text length
   gWrapperFileContent_30_embeddedSampleCode
 ) ;
 
@@ -4226,12 +4226,12 @@ const char * gWrapperFileContent_33_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "   system section readCounter0 () -> $uint32 {\n"
+  "   section readCounter0 () -> $uint32 {\n"
   "    result = #FTM[0]:CNT\n"
   "  }\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "   system section readCounter1 () -> $uint32 {\n"
+  "   section readCounter1 () -> $uint32 {\n"
   "    result = #FTM[1]:CNT\n"
   "  }\n"
   "\n"
@@ -4296,7 +4296,7 @@ const cRegularFileWrapper gWrapperFile_33_embeddedSampleCode (
   "18-flextimer-external-clock.plm",
   "plm",
   true, // Text file
-  5193, // Text length
+  5179, // Text length
   gWrapperFileContent_33_embeddedSampleCode
 ) ;
 
@@ -4423,11 +4423,11 @@ const char * gWrapperFileContent_35_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  var tick = $uint32 ()\n"
   "\n"
-  "  public system section noteTick () {\n"
+  "  public section noteTick () {\n"
   "    self.tick = #SYST:CVR\n"
   "  }\n"
   "\n"
-  "  public system section getDuration () -> $uint32 {\n"
+  "  public section getDuration () -> $uint32 {\n"
   "    result = self.tick - #SYST:CVR\n"
   "  }\n"
   "\n"
@@ -4743,7 +4743,7 @@ const cRegularFileWrapper gWrapperFile_35_embeddedSampleCode (
   "20-round-robin-32-tasks.plm",
   "plm",
   true, // Text file
-  9974, // Text length
+  9960, // Text length
   gWrapperFileContent_35_embeddedSampleCode
 ) ;
 
@@ -4773,11 +4773,11 @@ const char * gWrapperFileContent_36_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  var tick = $uint32 ()\n"
   "\n"
-  "  public system section noteTick () {\n"
+  "  public section noteTick () {\n"
   "    self.tick = #SYST:CVR\n"
   "  }\n"
   "\n"
-  "  public system section getDuration () -> $uint32 {\n"
+  "  public section getDuration () -> $uint32 {\n"
   "    result = self.tick - #SYST:CVR\n"
   "  }\n"
   "\n"
@@ -5381,7 +5381,7 @@ const cRegularFileWrapper gWrapperFile_36_embeddedSampleCode (
   "21-round-robin-64-tasks.plm",
   "plm",
   true, // Text file
-  18242, // Text length
+  18228, // Text length
   gWrapperFileContent_36_embeddedSampleCode
 ) ;
 
