@@ -352,8 +352,6 @@ proc procAnalyzeAccesListInExpression
 #--- Access list
   for (access) in inAccessList do
     switch access
-#    case register (@lstring registerName) :
-#      error registerName : "invalid register access"
     case integerSlice (@lbigint low @lbigint high) :
       handleSliceInExpression (
         !context: inContext
@@ -432,8 +430,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 #--- Access list
   for (access) in mAccessList do
     switch access
-#    case register (@lstring registerName) :
-#      error registerName : "invalid register access"
     case integerSlice (@lbigint low @lbigint high) :
       handleSliceInExpression (
         !context: inContext
