@@ -10,66 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                   Abstract extension method '@infixOperatorDescription generateInfixOperatorCode'                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef void (*extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                             class GALGAS_semanticTemporariesStruct & ioArgument0,
-                                                                                             class GALGAS_instructionListIR & ioArgument1,
-                                                                                             const class GALGAS_objectIR constinArgument2,
-                                                                                             const class GALGAS_location constinArgument3,
-                                                                                             const class GALGAS_objectIR constinArgument4,
-                                                                                             const class GALGAS_PLMType constinArgument5,
-                                                                                             class GALGAS_objectIR & outArgument6,
-                                                                                             class C_Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_generateInfixOperatorCode (const int32_t inClassIndex,
-                                                     extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode inMethod) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_generateInfixOperatorCode (const class cPtr_infixOperatorDescription * inObject,
-                                                    GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                    GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                    const GALGAS_objectIR constin_inLeftOperand,
-                                                    const GALGAS_location constin_inOperatorLocation,
-                                                    const GALGAS_objectIR constin_inRightOperand,
-                                                    const GALGAS_PLMType constin_inResultType,
-                                                    GALGAS_objectIR & out_outResultValue,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                         Extension getter '@infixOperatorDescription performStaticOperation'                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef class GALGAS_bigint (*enterExtensionGetter_infixOperatorDescription_performStaticOperation) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                                     const class GALGAS_bigint constinArgument0,
-                                                                                                     const class GALGAS_bigint constinArgument1,
-                                                                                                     C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionGetter_performStaticOperation (const int32_t inClassIndex,
-                                                  enterExtensionGetter_infixOperatorDescription_performStaticOperation inGetter) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
-                                                                const GALGAS_bigint constin_inLeft,
-                                                                const GALGAS_bigint constin_inRight,
-                                                                class C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                      Extension method '@primaryInExpressionAST analyzePrimaryExpressionNoSelf'                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

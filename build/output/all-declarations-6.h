@@ -965,6 +965,79 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                              Extension method '@routineMapIR svcDeclarationGeneration'                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_svcDeclarationGeneration (const class GALGAS_routineMapIR inObject,
+                                               class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
+                                               class GALGAS_sectionIRlist & io_ioSectionList,
+                                               class GALGAS_generationAdds & io_ioGenerationAdds,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'llvmFunctionPrototype'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
+                                                    const class GALGAS_string & constinArgument1,
+                                                    const class GALGAS_PLMType & constinArgument2,
+                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'llvmNameForSVCCall'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_llvmNameForSVCCall (const class GALGAS_lstring & constinArgument0,
+                                                 const class GALGAS_routineKind & constinArgument1,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'llvmNameForSVCImplementation'                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_llvmNameForSVCImplementation (const class GALGAS_lstring & constinArgument0,
+                                                           const class GALGAS_routineKind & constinArgument1,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           Routine 'enterFormalArguments'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
+                                   const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                   class GALGAS_universalValuedObjectMap & ioArgument2,
+                                   class GALGAS_routineFormalArgumentListIR & ioArgument3,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                           Extension method '@guardMapIR-element enterAccessibleEntities'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_enterAccessibleEntities (const class GALGAS_guardMapIR_2D_element inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                     Extension getter '@effectiveArgumentListAST routineSignature' (as function)                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1388,34 +1461,6 @@ void extensionMethod_generateLLVMTypeDefinition (const class GALGAS_PLMType inOb
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Extension method '@routineMapIR llvmCodeGeneration'                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class GALGAS_string & io_ioAssemblerCode,
-                                         const class GALGAS_generationContext constin_inGenerationContext,
-                                         class GALGAS_generationAdds & io_ioGenerationAdds,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                             Extension method '@routineMapIR-element llvmCodeGeneration'                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class GALGAS_string & io_ioAssemblerCode,
-                                         const class GALGAS_generationContext constin_inGenerationContext,
-                                         class GALGAS_generationAdds & io_ioGenerationAdds,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                               Extension method '@panicAST noteTypesInPrecedenceGraph'                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1538,31 +1583,6 @@ class cPtr_decoratedPanicRoutine : public cPtr_abstractDecoratedDeclaration {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Routine 'enterFormalArguments'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
-                                   const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                   class GALGAS_universalValuedObjectMap & ioArgument2,
-                                   class GALGAS_routineFormalArgumentListIR & ioArgument3,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                           Extension method '@guardMapIR-element enterAccessibleEntities'                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_enterAccessibleEntities (const class GALGAS_guardMapIR_2D_element inObject,
-                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -1743,4 +1763,64 @@ class cPtr_sizeofInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                   Abstract extension method '@infixOperatorDescription generateInfixOperatorCode'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode) (const class cPtr_infixOperatorDescription * inObject,
+                                                                                             class GALGAS_semanticTemporariesStruct & ioArgument0,
+                                                                                             class GALGAS_instructionListIR & ioArgument1,
+                                                                                             const class GALGAS_objectIR constinArgument2,
+                                                                                             const class GALGAS_location constinArgument3,
+                                                                                             const class GALGAS_objectIR constinArgument4,
+                                                                                             const class GALGAS_PLMType constinArgument5,
+                                                                                             class GALGAS_objectIR & outArgument6,
+                                                                                             class C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateInfixOperatorCode (const int32_t inClassIndex,
+                                                     extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateInfixOperatorCode (const class cPtr_infixOperatorDescription * inObject,
+                                                    GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                    GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                    const GALGAS_objectIR constin_inLeftOperand,
+                                                    const GALGAS_location constin_inOperatorLocation,
+                                                    const GALGAS_objectIR constin_inRightOperand,
+                                                    const GALGAS_PLMType constin_inResultType,
+                                                    GALGAS_objectIR & out_outResultValue,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                         Extension getter '@infixOperatorDescription performStaticOperation'                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef class GALGAS_bigint (*enterExtensionGetter_infixOperatorDescription_performStaticOperation) (const class cPtr_infixOperatorDescription * inObject,
+                                                                                                     const class GALGAS_bigint constinArgument0,
+                                                                                                     const class GALGAS_bigint constinArgument1,
+                                                                                                     C_Compiler * inCompiler
+                                                                                                     COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionGetter_performStaticOperation (const int32_t inClassIndex,
+                                                  enterExtensionGetter_infixOperatorDescription_performStaticOperation inGetter) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
+                                                                const GALGAS_bigint constin_inLeft,
+                                                                const GALGAS_bigint constin_inRight,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 

@@ -727,7 +727,7 @@ method @taskMapIR generateCode
       ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
     end
     ioLLVMcode += "  call void " + activateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  call void @" + llvmNameForFunction (!task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @func." + llvmNameForFunction (!task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void " + deactivateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     if task.mActivate then
       ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
