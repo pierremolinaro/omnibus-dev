@@ -28,9 +28,9 @@ method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccess
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineListIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-}
+#method @routineListIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

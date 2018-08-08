@@ -305,30 +305,28 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineListIR svcDeclarationGeneration
+override method @regularRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds ioGenerationAdds
 {
-  for svc in self do
-    if not [svc.mKind isFunction] then
-      let svcCallName = llvmNameForSVCCall (!svc.mRoutineMangledName !svc.mKind)
-      let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineMangledName !svc.mKind)
-      let prototype = llvmFunctionPrototype (
-        ![svc.mReturnType llvmTypeName]
-        !svcCallName
-        !svc.mReceiverType
-        !svc.mFormalArgumentListForGeneration
-      )
-      ioGenerationAdds.mExternFunctionDeclarationSet += !prototype
-      switch svc.mKind
-      case section :
-        ioSectionList += !svcCallName !svcImplementationName !true # Only invocation from user mode
-      case primitive, service :
-        ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
-      case function (*) :
-        error .nowhere : "INTERNAL ERROR"
-      end
+  if not [mKind isFunction] then
+    let svcCallName = llvmNameForSVCCall (!mRoutineMangledName !mKind)
+    let svcImplementationName = llvmNameForSVCImplementation (!mRoutineMangledName !mKind)
+    let prototype = llvmFunctionPrototype (
+      ![mReturnType llvmTypeName]
+      !svcCallName
+      !mReceiverType
+      !mFormalArgumentListForGeneration
+    )
+    ioGenerationAdds.mExternFunctionDeclarationSet += !prototype
+    switch mKind
+    case section :
+      ioSectionList += !svcCallName !svcImplementationName !true # Only invocation from user mode
+    case primitive, service :
+      ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
+    case function (*) :
+      error .nowhere : "INTERNAL ERROR"
     end
   end
 }

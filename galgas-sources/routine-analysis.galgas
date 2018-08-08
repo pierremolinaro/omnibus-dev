@@ -91,10 +91,9 @@ method @decoratedRoutineList-element semanticAnalysis
   else
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
   end
-  ioIntermediateCodeStruct.mRoutineListIR +=
+  ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !mRoutineMangledName
     !receiverType
-#    !mRoutineMangledName
     !formalArguments
     !allocaList
     !instructionGenerationList
@@ -104,6 +103,7 @@ method @decoratedRoutineList-element semanticAnalysis
     !mRoutineKind
     !returnType
     !false
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

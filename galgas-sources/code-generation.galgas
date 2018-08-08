@@ -285,11 +285,13 @@ private proc generateCodeFiles
   end
 #----------------------------------------- SVC
   @sectionIRlist sectionIRlist = {}
-  [inIntermediateCodeStruct.mRoutineListIR svcDeclarationGeneration
-    !?primitiveAndServiceList
-    !?sectionIRlist
-    !?generationAdds
-  ]
+  for routine in inIntermediateCodeStruct.mRoutineListIR do
+    [routine.mRoutine svcDeclarationGeneration
+      !?primitiveAndServiceList
+      !?sectionIRlist
+      !?generationAdds
+    ]
+  end
 #----------------------------------------- Guards
   [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
     !?llvmCode

@@ -44,7 +44,23 @@ map @globalConstantMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @routineListIR {
+abstract class @abstractRoutineIR {
+}
+
+abstract method @abstractRoutineIR svcDeclarationGeneration
+  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
+  ?!@sectionIRlist ioSectionList
+  ?!@generationAdds ioGenerationAdds
+
+abstract method @abstractRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @regularRoutineIR : @abstractRoutineIR {
   @lstring mRoutineMangledName
   @PLMType mReceiverType # .void if standalone function
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -56,6 +72,12 @@ list @routineListIR {
   @routineKind mKind
   @PLMType mReturnType # .void if no return value
   @bool mAppendFileAndLineArgumentForPanicLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @routineListIR {
+  @abstractRoutineIR mRoutine
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

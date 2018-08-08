@@ -965,54 +965,6 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Extension method '@routineListIR svcDeclarationGeneration'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_svcDeclarationGeneration (const class GALGAS_routineListIR inObject,
-                                               class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
-                                               class GALGAS_sectionIRlist & io_ioSectionList,
-                                               class GALGAS_generationAdds & io_ioGenerationAdds,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'llvmFunctionPrototype'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
-                                                    const class GALGAS_string & constinArgument1,
-                                                    const class GALGAS_PLMType & constinArgument2,
-                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'llvmNameForSVCCall'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForSVCCall (const class GALGAS_lstring & constinArgument0,
-                                                 const class GALGAS_routineKind & constinArgument1,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'llvmNameForSVCImplementation'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForSVCImplementation (const class GALGAS_lstring & constinArgument0,
-                                                           const class GALGAS_routineKind & constinArgument1,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                           Routine 'enterFormalArguments'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1458,6 +1410,20 @@ void extensionMethod_generateLLVMTypeDefinition (const class GALGAS_PLMType inOb
                                                  class GALGAS_string & io_ioLLVMcode,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                Extension method '@routineListIR llvmCodeGeneration'                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_llvmCodeGeneration (const class GALGAS_routineListIR inObject,
+                                         class GALGAS_string & io_ioLLVMcode,
+                                         class GALGAS_string & io_ioAssemblerCode,
+                                         const class GALGAS_generationContext constin_inGenerationContext,
+                                         class GALGAS_generationAdds & io_ioGenerationAdds,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

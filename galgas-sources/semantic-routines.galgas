@@ -111,10 +111,9 @@ proc routineSemanticAnalysis
   else
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName} type]
   end
-  ioIntermediateCodeStruct.mRoutineListIR +=
+  ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !routineMangledName
     !inSelfType
-#    !routineMangledName
     !formalArguments
     !allocaList
     !instructionGenerationList
@@ -124,6 +123,7 @@ proc routineSemanticAnalysis
     !inRoutineKind
     !returnType
     !false
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -146,13 +146,13 @@ method @routineListIR llvmCodeGeneration
 {
   for procedure in self do
     ioGenerationAdds.mUniqueIndex = 0
-    [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+    [procedure.mRoutine llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineListIR-element llvmCodeGeneration 
+override method @regularRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
