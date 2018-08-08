@@ -305,13 +305,13 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forInstructionOnArrayIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mWhileInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  [mDoInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  ioAccessibleEntities.mRoutineSet += mInvokedFunctionSet
-  ioAccessibleEntities.mGlobalVariableSet += !mIteratedObjectName
+  [mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  ioInvokedRoutineSet += mInvokedFunctionSet
+#  ioAccessibleEntities.mGlobalVariableSet += !mIteratedObjectName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -385,11 +385,11 @@ override method @forInstructionOnStringIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forInstructionOnStringIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mWhileInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  [mDoInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

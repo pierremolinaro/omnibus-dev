@@ -279,7 +279,7 @@ override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRoutineList ioDecoratedRoutineList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap

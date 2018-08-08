@@ -104,7 +104,7 @@ override method @enumerationDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRoutineList unused ioDecoratedRoutineList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap

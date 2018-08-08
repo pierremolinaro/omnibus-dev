@@ -118,7 +118,7 @@ override method @panicInstructionIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

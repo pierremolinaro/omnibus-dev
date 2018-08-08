@@ -57,7 +57,7 @@ override method @copyFromReferencesIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @copyFromReferencesIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

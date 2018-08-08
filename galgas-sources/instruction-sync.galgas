@@ -623,7 +623,7 @@ override method @syncInstructionIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
   let branchCount = [mOnInstructionBranchListIR length]
@@ -631,17 +631,17 @@ override method @syncInstructionIR enterAccessibleEntities
     ioMaxBranchOfOnInstructions = branchCount
   end
   for branch in mOnInstructionBranchListIR do
-    [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    [branch.mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
     switch branch.mGuardedCommand
     case booleanGuard (* instructionGenerationList *) :
-      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    case sync (* guardMangledName guardInstructionGenerationList *) :
-      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      ioAccessibleEntities.mGuardSet += !guardMangledName
-    case boolAndSync (* instructionGenerationList * guardMangledName guardInstructionGenerationList *) :
-      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      ioAccessibleEntities.mGuardSet += !guardMangledName
+      [instructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+    case sync (* * guardInstructionGenerationList *) :
+      [guardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+#      ioAccessibleEntities.mGuardSet += !guardMangledName
+    case boolAndSync (* instructionGenerationList * * guardInstructionGenerationList *) :
+      [instructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+      [guardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+#      ioAccessibleEntities.mGuardSet += !guardMangledName
     end
   end
 }

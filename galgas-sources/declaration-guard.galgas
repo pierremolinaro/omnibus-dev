@@ -690,15 +690,15 @@ method @guardMapIR-element llvmCodeGeneration
 #·······················································································································
 
 method @guardMapIR-element enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   switch mGuardKindGenerationIR
   case baseGuard :
-  case convenienceGuard (* baseGuardInstructionGenerationList baseGuardMangledName *) :
-    [baseGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    ioAccessibleEntities.mGuardSet += !baseGuardMangledName
+  case convenienceGuard (* baseGuardInstructionGenerationList * *) :
+    [baseGuardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+#    ioAccessibleEntities.mGuardSet += !baseGuardMangledName
   end
 }
 

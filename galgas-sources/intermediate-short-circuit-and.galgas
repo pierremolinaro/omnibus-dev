@@ -32,11 +32,11 @@ class @shortCircuitAndOperationIR : @abstractInstructionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @shortCircuitAndOperationIR enterAccessibleEntities 
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mLeftInstructionList  enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  [mRightInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mLeftInstructionList  enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [mRightInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

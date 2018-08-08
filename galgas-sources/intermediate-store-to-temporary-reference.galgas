@@ -30,7 +30,7 @@ override method @storeFromTemporaryReferenceIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeFromTemporaryReferenceIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

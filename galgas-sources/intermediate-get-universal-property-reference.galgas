@@ -35,7 +35,7 @@ override method @getUniversalPropertyReferenceIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @getUniversalPropertyReferenceIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

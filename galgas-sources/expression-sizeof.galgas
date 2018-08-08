@@ -161,7 +161,7 @@ class @sizeofInstructionIR : @abstractInstructionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sizeofInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

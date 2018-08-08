@@ -45,12 +45,17 @@ map @globalConstantMapIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @abstractRoutineIR {
+  @lstring mRoutineMangledName
 }
+
+#·······················································································································
 
 abstract method @abstractRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds ioGenerationAdds
+
+#·······················································································································
 
 abstract method @abstractRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -58,21 +63,11 @@ abstract method @abstractRoutineIR llvmCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-class @regularRoutineIR : @abstractRoutineIR {
-  @lstring mRoutineMangledName
-  @PLMType mReceiverType # .void if standalone function
-  @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @allocaList mAllocaList
-  @instructionListIR mInstructionGenerationList
-  @bool mIsRequired
-  @bool mWarnIfUnused
-  @bool mExportedFunction # Function is not tagged with internal
-  @routineKind mKind
-  @PLMType mReturnType # .void if no return value
-  @bool mAppendFileAndLineArgumentForPanicLocation
-}
+abstract method @abstractRoutineIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint ioMaxBranchOfOnInstructions
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

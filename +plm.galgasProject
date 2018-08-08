@@ -49,7 +49,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-extern-proc.galgas"
   "galgas-sources/declaration-isr.galgas"
   "galgas-sources/declaration-guard.galgas"
-  "galgas-sources/routine-analysis.galgas"
+  "galgas-sources/regular-routine-analysis.galgas"
 
 #--- Modes
   "galgas-sources/logical-modes.galgas"

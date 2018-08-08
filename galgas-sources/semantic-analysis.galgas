@@ -98,9 +98,8 @@ proc semanticAnalysis
   ?sourceFile:let @string unused inSourceFile
   ?ast:let @ast inAST
   ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
-  ?decoratedRoutineList: let @decoratedRoutineList inDecoratedRoutineList
+  ?decoratedRoutineList: let @decoratedRegularRoutineList inDecoratedRoutineList
   ?context:let @semanticContext inSemanticContext
-#  ?@subprogramInvocationGraph inSubprogramInvocationGraph
   ?endOfSourceFile:let @location inEndOfSourceFile
   ?staticEntityMap:let @staticEntityMap inStaticEntityMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct

@@ -26,10 +26,9 @@ override method @sourceLocationIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sourceLocationIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }
-
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -58,13 +58,13 @@ override method @standaloneRoutineCallIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneRoutineCallIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
-  if mGlobalVariableName != "" then
-    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
-  end
-  ioAccessibleEntities.mRoutineSet += !mFunctionMangledName.string
+#  if mGlobalVariableName != "" then
+#    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
+#  end
+  ioInvokedRoutineSet += !mFunctionMangledName.string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

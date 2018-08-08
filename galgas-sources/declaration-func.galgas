@@ -215,7 +215,7 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 method @functionDeclarationListAST enterFunctionInContext 
   ?selfTypeName:let @lstring inSelfTypeName
   ?!context:@semanticContext ioContext
-  ?!@decoratedRoutineList ioDecoratedRoutineList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
 {
   for function in self do
   #--- Signature

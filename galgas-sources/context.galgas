@@ -156,7 +156,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRoutineList ioDecoratedRoutineList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -173,7 +173,7 @@ proc buildSemanticContext
   !context:@semanticContext outSemanticContext
   !@subprogramInvocationGraph outSubprogramInvocationGraph
   !@declarationDecorationList outDecoratedDeclarationList
-  !@decoratedRoutineList outDecoratedRoutineList
+  !@decoratedRegularRoutineList outDecoratedRoutineList
   !@globalVariableIRList outGlobalVariableIRList
 {
   outSemanticContext = .default

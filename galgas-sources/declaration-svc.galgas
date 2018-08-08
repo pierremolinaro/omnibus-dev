@@ -305,34 +305,6 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @regularRoutineIR svcDeclarationGeneration
-  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
-  ?!@sectionIRlist ioSectionList
-  ?!@generationAdds ioGenerationAdds
-{
-  if not [mKind isFunction] then
-    let svcCallName = llvmNameForSVCCall (!mRoutineMangledName !mKind)
-    let svcImplementationName = llvmNameForSVCImplementation (!mRoutineMangledName !mKind)
-    let prototype = llvmFunctionPrototype (
-      ![mReturnType llvmTypeName]
-      !svcCallName
-      !mReceiverType
-      !mFormalArgumentListForGeneration
-    )
-    ioGenerationAdds.mExternFunctionDeclarationSet += !prototype
-    switch mKind
-    case section :
-      ioSectionList += !svcCallName !svcImplementationName !true # Only invocation from user mode
-    case primitive, service :
-      ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
-    case function (*) :
-      error .nowhere : "INTERNAL ERROR"
-    end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc generateSectionDispatcher
   ?let @string inCurrentDirectory
   ?let @string inTargetName

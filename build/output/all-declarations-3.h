@@ -125,7 +125,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_isrDeclarationListA
 void extensionMethod_enterInContext (const class GALGAS_isrDeclarationListAST inObject,
                                      class GALGAS_semanticContext & io_ioSemanticContext,
                                      class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
-                                     class GALGAS_decoratedRoutineList & io_ioDecoratedRoutineList,
+                                     class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
@@ -900,11 +900,11 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_elemen
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @decoratedRoutineList_2D_element struct                                       *
+//                                   @decoratedRegularRoutineList_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
+class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mReceiverTypeName ;
 
@@ -933,23 +933,23 @@ class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_decoratedRoutineList_2D_element (void) ;
+  public : GALGAS_decoratedRegularRoutineList_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_decoratedRoutineList_2D_element (void) ;
+  public : virtual ~ GALGAS_decoratedRegularRoutineList_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_decoratedRoutineList_2D_element (const GALGAS_lstring & in_mReceiverTypeName,
-                                                   const GALGAS_mode & in_mMode,
-                                                   const GALGAS_routineKind & in_mRoutineKind,
-                                                   const GALGAS_bool & in_mWarnIfUnused,
-                                                   const GALGAS_bool & in_mExportedRoutine,
-                                                   const GALGAS_routineAttributes & in_mRoutineAttributes,
-                                                   const GALGAS_lstring & in_mRoutineMangledName,
-                                                   const GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
-                                                   const GALGAS_instructionListAST & in_mRoutineInstructionList,
-                                                   const GALGAS_location & in_mEndOfRoutineDeclaration,
-                                                   const GALGAS_lstring & in_mReturnTypeName) ;
+  public : GALGAS_decoratedRegularRoutineList_2D_element (const GALGAS_lstring & in_mReceiverTypeName,
+                                                          const GALGAS_mode & in_mMode,
+                                                          const GALGAS_routineKind & in_mRoutineKind,
+                                                          const GALGAS_bool & in_mWarnIfUnused,
+                                                          const GALGAS_bool & in_mExportedRoutine,
+                                                          const GALGAS_routineAttributes & in_mRoutineAttributes,
+                                                          const GALGAS_lstring & in_mRoutineMangledName,
+                                                          const GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
+                                                          const GALGAS_instructionListAST & in_mRoutineInstructionList,
+                                                          const GALGAS_location & in_mEndOfRoutineDeclaration,
+                                                          const GALGAS_lstring & in_mReturnTypeName) ;
 
 //-- Start of generic part --*
 
@@ -957,29 +957,29 @@ class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_decoratedRoutineList_2D_element extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_decoratedRegularRoutineList_2D_element extractObject (const GALGAS_object & inObject,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_decoratedRoutineList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                const class GALGAS_mode & inOperand1,
-                                                                                const class GALGAS_routineKind & inOperand2,
-                                                                                const class GALGAS_bool & inOperand3,
-                                                                                const class GALGAS_bool & inOperand4,
-                                                                                const class GALGAS_routineAttributes & inOperand5,
-                                                                                const class GALGAS_lstring & inOperand6,
-                                                                                const class GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                                                const class GALGAS_instructionListAST & inOperand8,
-                                                                                const class GALGAS_location & inOperand9,
-                                                                                const class GALGAS_lstring & inOperand10
-                                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_decoratedRegularRoutineList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                       const class GALGAS_mode & inOperand1,
+                                                                                       const class GALGAS_routineKind & inOperand2,
+                                                                                       const class GALGAS_bool & inOperand3,
+                                                                                       const class GALGAS_bool & inOperand4,
+                                                                                       const class GALGAS_routineAttributes & inOperand5,
+                                                                                       const class GALGAS_lstring & inOperand6,
+                                                                                       const class GALGAS_routineFormalArgumentListAST & inOperand7,
+                                                                                       const class GALGAS_instructionListAST & inOperand8,
+                                                                                       const class GALGAS_location & inOperand9,
+                                                                                       const class GALGAS_lstring & inOperand10
+                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_decoratedRoutineList_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedRegularRoutineList_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1013,20 +1013,20 @@ class GALGAS_decoratedRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_decoratedRoutineList_2D_element class
+} ; // End of GALGAS_decoratedRegularRoutineList_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRoutineList_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRegularRoutineList_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension method '@decoratedRoutineList routineSemanticAnalysis'                           *
+//                       Extension method '@decoratedRegularRoutineList routineSemanticAnalysis'                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_routineSemanticAnalysis (const class GALGAS_decoratedRoutineList inObject,
+void extensionMethod_routineSemanticAnalysis (const class GALGAS_decoratedRegularRoutineList inObject,
                                               const class GALGAS_semanticContext constin_inContext,
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -1035,11 +1035,11 @@ void extensionMethod_routineSemanticAnalysis (const class GALGAS_decoratedRoutin
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension method '@decoratedRoutineList-element semanticAnalysis'                          *
+//                      Extension method '@decoratedRegularRoutineList-element semanticAnalysis'                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_semanticAnalysis (const class GALGAS_decoratedRoutineList_2D_element inObject,
+void extensionMethod_semanticAnalysis (const class GALGAS_decoratedRegularRoutineList_2D_element inObject,
                                        const class GALGAS_semanticContext constin_inContext,
                                        class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                        class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -3179,7 +3179,7 @@ typedef void (*extensionMethodSignature_abstractDeclarationAST_enterInContext) (
                                                                                 const class GALGAS_functionDeclarationListAST constinArgument0,
                                                                                 class GALGAS_semanticContext & ioArgument1,
                                                                                 class GALGAS_declarationDecorationList & ioArgument2,
-                                                                                class GALGAS_decoratedRoutineList & ioArgument3,
+                                                                                class GALGAS_decoratedRegularRoutineList & ioArgument3,
                                                                                 class GALGAS_subprogramInvocationGraph & ioArgument4,
                                                                                 class GALGAS_staticListInitializationMap & ioArgument5,
                                                                                 class GALGAS_staticEntityMap & ioArgument6,
@@ -3199,7 +3199,7 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST
                                          const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
                                          GALGAS_semanticContext & io_ioContext,
                                          GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
-                                         GALGAS_decoratedRoutineList & io_ioDecoratedRoutineList,
+                                         GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
                                          GALGAS_subprogramInvocationGraph & io_ioSubprogramInvocationGraph,
                                          GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
                                          GALGAS_staticEntityMap & io_ioStaticEntityMap,
@@ -3846,81 +3846,4 @@ class cEnumAssociatedValues_constructorValue_arrayValue : public cEnumAssociated
 
   public : virtual ~ cEnumAssociatedValues_constructorValue_arrayValue (void) {}
 } ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       @constructorSignature_2D_element struct                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public : GALGAS_string mProperty_mSelector ;
-
-  public : GALGAS_PLMType mProperty_mType ;
-
-  public : GALGAS_uint mProperty_mFieldIndex ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_constructorSignature_2D_element constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_constructorSignature_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_constructorSignature_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_constructorSignature_2D_element (const GALGAS_string & in_mSelector,
-                                                   const GALGAS_PLMType & in_mType,
-                                                   const GALGAS_uint & in_mFieldIndex) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_constructorSignature_2D_element extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_constructorSignature_2D_element constructor_new (const class GALGAS_string & inOperand0,
-                                                                                const class GALGAS_PLMType & inOperand1,
-                                                                                const class GALGAS_uint & inOperand2
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_constructorSignature_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mFieldIndex (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSelector (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_constructorSignature_2D_element class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorSignature_2D_element ;
 

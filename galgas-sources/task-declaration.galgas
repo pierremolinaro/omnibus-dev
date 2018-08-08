@@ -194,7 +194,7 @@ map @taskMap {
 method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRoutineList ioDecoratedRoutineList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList

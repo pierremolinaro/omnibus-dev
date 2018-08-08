@@ -51,7 +51,7 @@ syntax extension plm_syntax {
 method @isrDeclarationListAST enterInContext
   ?!@semanticContext unused ioSemanticContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRoutineList ioDecoratedRoutineList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
 {
 #---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
   ioDecoratedDeclarationList += !@decoratedISRDeclarations.new {!self}

@@ -65,7 +65,7 @@ class @binaryOperationIR : @abstractInstructionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @binaryOperationIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

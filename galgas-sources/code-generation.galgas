@@ -21,7 +21,7 @@ struct @generationAdds {
 abstract class @abstractInstructionIR {
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 abstract method @abstractInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode

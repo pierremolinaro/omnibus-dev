@@ -224,7 +224,7 @@ override method @bitbandInstructionIR llvmInstructionCode
 #·······················································································································
 
 override method @bitbandInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

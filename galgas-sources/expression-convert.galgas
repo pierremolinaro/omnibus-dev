@@ -155,7 +155,7 @@ class @convertInstructionIR : @abstractInstructionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

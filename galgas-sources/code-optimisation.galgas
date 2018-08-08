@@ -4,37 +4,68 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @accessibleEntities {
-  @stringset mRoutineSet
-  @stringset mGuardSet
-  @stringset mSectionSet
-  @stringset mGlobalVariableSet
-  @stringset mTaskVariableSet
-}
+#struct @accessibleEntities {
+#  @stringset mRoutineSet
+#  @stringset mGuardSet
+#  @stringset mSectionSet
+#  @stringset mGlobalVariableSet
+#  @stringset mTaskVariableSet
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet ?!@uint ioMaxBranchOfOnInstructions {
   for (instruction) in self do
-    [instruction enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    [instruction enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @routineListIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#}
+graph @routineInvocationGraph (@stringlist) {
+  insert addNode error message "the '%K' symbol is already declared at %L"
+}
+
+#·······················································································································
+
+list @routineAccessibilityIR {
+  @abstractRoutineIR mRoutine
+  @stringset mAccessibleRoutineSet
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct {
+proc codeOptimization
+ ?let @string inSourceFile
+ ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  @uint maxBranchOfOnInstructions = 0
+  @routineAccessibilityIR routineAccessibilityIR = {}
+#--- Compute accessiblity graph
+  for routine in ioIntermediateCodeStruct.mRoutineListIR do
+    @stringset accessibleRoutineSet = {}
+    [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?maxBranchOfOnInstructions]
+    routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
+  end
+#--- Display invocation graph
+  if [option plm_options.writeRoutineInvocationGraphFile value] then
+    @routineInvocationGraph routineInvocationGraph = .emptyGraph
+    for (routine accessibleSet) in routineAccessibilityIR do
+      [!?routineInvocationGraph addNode !routine.mRoutineMangledName !routine.mRoutineMangledName]
+      for acc in accessibleSet do
+        [!?routineInvocationGraph addEdge !routine.mRoutineMangledName !.new {!acc !routine.mRoutineMangledName}]
+      end
+    end
+    let s = [routineInvocationGraph graphviz]
+    let filePath = inSourceFile + ".routineInvocation.dot"
+    [s writeToFileWhenDifferentContents !filePath ?*]
+  end
 #  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineListIR
 #  let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
 #  @uint pass = 0
@@ -84,7 +115,7 @@ method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccess
 #      warning lkey: "unused guard; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
 #    end
 #  end
-#}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

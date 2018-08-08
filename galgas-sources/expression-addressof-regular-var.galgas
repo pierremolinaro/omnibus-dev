@@ -118,7 +118,7 @@ override method @addressofInstructionIR llvmInstructionCode
 #·······················································································································
 
 override method @addressofInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }

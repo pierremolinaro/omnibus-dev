@@ -145,7 +145,7 @@ private proc compileProject
   ast.mDeclarationListAST = orderedDeclarationListAST
   @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   @declarationDecorationList decoratedDeclarationList = {}
-  @decoratedRoutineList decoratedRoutineList = {}
+  @decoratedRegularRoutineList decoratedRoutineList = {}
   @globalVariableIRList globalVariableIRList = {}
   if @uint.errorCount == 0 then
     let @timer t = .start 
@@ -174,7 +174,6 @@ private proc compileProject
       !decoratedDeclarationList:decoratedDeclarationList
       !decoratedRoutineList: decoratedRoutineList
       !context:semanticContext
-#      !subprogramInvocationGraph
       !endOfSourceFile:inEndOfSourceFile
       !staticEntityMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct
@@ -184,13 +183,13 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Code optimization
-#  if @uint.errorCount == 0 then
-#    let @timer tOpt = .start 
-#    codeOptimisation (!?intermediateCode:intermediateCodeStruct)
-#    if [option plm_options.timePasses value] then
-#      message "Optimization: " + [tOpt string] + "\n" 
-#    end
-#  end
+  if @uint.errorCount == 0 then
+    let @timer tOpt = .start 
+    codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
+    if [option plm_options.timePasses value] then
+      message "Optimization: " + [tOpt string] + "\n" 
+    end
+  end
 #------------------------------------------------------------ Code generation
   if @uint.errorCount == 0 then
     codeGeneration (

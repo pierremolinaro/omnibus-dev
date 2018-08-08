@@ -983,7 +983,7 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_enterAccessibleEntities (const class GALGAS_guardMapIR_2D_element inObject,
-                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_stringset & io_ioInvokedRoutineSet,
                                               class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
@@ -1424,6 +1424,35 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineListIR inObje
                                          class GALGAS_generationAdds & io_ioGenerationAdds,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                          Abstract extension method '@abstractRoutineIR llvmCodeGeneration'                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_abstractRoutineIR_llvmCodeGeneration) (const class cPtr_abstractRoutineIR * inObject,
+                                                                               class GALGAS_string & ioArgument0,
+                                                                               class GALGAS_string & ioArgument1,
+                                                                               const class GALGAS_generationContext constinArgument2,
+                                                                               class GALGAS_generationAdds & ioArgument3,
+                                                                               class C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_llvmCodeGeneration (const int32_t inClassIndex,
+                                              extensionMethodSignature_abstractRoutineIR_llvmCodeGeneration inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_llvmCodeGeneration (const class cPtr_abstractRoutineIR * inObject,
+                                             GALGAS_string & io_ioLLVMcode,
+                                             GALGAS_string & io_ioAssemblerCode,
+                                             const GALGAS_generationContext constin_inGenerationContext,
+                                             GALGAS_generationAdds & io_ioGenerationAdds,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
