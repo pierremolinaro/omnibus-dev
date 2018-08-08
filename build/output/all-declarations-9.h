@@ -406,54 +406,6 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Function 'guardUserMangledNameFromAST'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardUserMangledNameFromAST (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_lstring & constinArgument1,
-                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'guardUserMangledNameFromCall'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardUserMangledNameFromCall (const class GALGAS_string & constinArgument0,
-                                                            const class GALGAS_lstring & constinArgument1,
-                                                            const class GALGAS_effectiveArgumentListAST & constinArgument2,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Function 'guardImplementationMangledNameFromAST'                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardImplementationMangledNameFromAST (const class GALGAS_string & constinArgument0,
-                                                                     const class GALGAS_lstring & constinArgument1,
-                                                                     const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                                     class C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Function 'guardImplementationMangledNameFromCall'                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardImplementationMangledNameFromCall (const class GALGAS_string & constinArgument0,
-                                                                      const class GALGAS_lstring & constinArgument1,
-                                                                      const class GALGAS_effectiveArgumentListAST & constinArgument2,
-                                                                      class C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -38,56 +38,6 @@ class GALGAS_string function_memoryFreeSectionName (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             Routine 'codeOptimisation'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_codeOptimisation (class GALGAS_intermediateCodeStruct & ioArgument0,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Routine 'suppressInaccessibleSubprograms'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_suppressInaccessibleSubprograms (class GALGAS_intermediateCodeStruct & ioArgument0,
-                                              class GALGAS_accessibleEntities & outArgument1,
-                                              class GALGAS_bool & ioArgument2,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               Routine 'exploreGuards'                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_exploreGuards (class GALGAS_guardMapIR & ioArgument0,
-                            class GALGAS_accessibleEntities & ioArgument1,
-                            class GALGAS_guardMapIR & ioArgument2,
-                            class GALGAS_bool & ioArgument3,
-                            class GALGAS_uint & ioArgument4,
-                            class C_Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               Routine 'exploreProcs'                                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_exploreProcs (class GALGAS_routineListIR & ioArgument0,
-                           class GALGAS_accessibleEntities & ioArgument1,
-                           class GALGAS_routineListIR & ioArgument2,
-                           class GALGAS_bool & ioArgument3,
-                           class GALGAS_uint & ioArgument4,
-                           class C_Compiler * inCompiler
-                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                             Function 'asSeparatorLine'                                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

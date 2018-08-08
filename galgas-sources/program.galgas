@@ -183,18 +183,14 @@ private proc compileProject
       message "Semantic: " + [t string] + "\n" 
     end
   end
-#------------------------------------------------------------ Code optimisation
-  if @uint.errorCount == 0 then
-    let @timer tOpt = .start 
-    codeOptimisation (!?intermediateCode:intermediateCodeStruct)
-    if [option plm_options.timePasses value] then
-      message "Optimization: " + [tOpt string] + "\n" 
-    end
-  end
-#------------------------------------------------------------ Product directory
-#  let productDirectory = homeDir
-#    + if [option plm_options.noPanicGeneration value] then "no-panic" else "" end
-#    + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
+#------------------------------------------------------------ Code optimization
+#  if @uint.errorCount == 0 then
+#    let @timer tOpt = .start 
+#    codeOptimisation (!?intermediateCode:intermediateCodeStruct)
+#    if [option plm_options.timePasses value] then
+#      message "Optimization: " + [tOpt string] + "\n" 
+#    end
+#  end
 #------------------------------------------------------------ Code generation
   if @uint.errorCount == 0 then
     codeGeneration (
