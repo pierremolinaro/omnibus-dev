@@ -172,7 +172,7 @@ syntax extension plm_target_specific_syntax {
     $"string"$ ?let sectionDispatcherHeader
     <configuration_key> !"SECTION_DISPATCHER_ENTRY"
     $"string"$ ?let sectionDispatcherEntry
-    <configuration_key> !"SECTION_ENTRY_FROM_ANY_MODE"
+    <configuration_key> !"SECTION_ENTRY_FROM_UNKNOWN_MODE"
     $"string"$ ?let sectionDispatcherInvocationFromAnyMode
     <configuration_key> !"SECTION_ENTRY_FROM_USER_MODE"
     $"string"$ ?let sectionDispatcherInvocationFromUserMode

@@ -13,18 +13,18 @@ xcode-project/build/*
 xcode-project/plm.xcodeproj/xcuserdata/*
 xcode-project/plm.xcodeproj/project.xcworkspace/*
 
-makefile-macosx/galgas
-makefile-macosx/galgas-debug
-makefile-x86linux32-on-macosx/galgas
-makefile-x86linux32-on-macosx/galgas-debug
-makefile-x86linux64-on-macosx/galgas
-makefile-x86linux64-on-macosx/galgas-debug
-makefile-win32-on-macosx/galgas.exe
-makefile-win32-on-macosx/galgas-debug.exe
+makefile-macosx/plm
+makefile-macosx/plm-debug
+makefile-x86linux32-on-macosx/plm
+makefile-x86linux32-on-macosx/plm-debug
+makefile-x86linux64-on-macosx/plm
+makefile-x86linux64-on-macosx/plm-debug
+makefile-win32-on-macosx/plm.exe
+makefile-win32-on-macosx/plm-debug.exe
 
-galgas-documentation-latex-sources/galgas-book.pdf
-galgas-documentation-latex-sources/temp.galgas
-galgas-documentation-latex-sources/temp.galgas.tex
+doc-plm/galgas-book.pdf
+doc-plm/temp.galgas
+doc-plm/temp.galgas.tex
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

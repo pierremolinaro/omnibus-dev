@@ -87,13 +87,89 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardImplementation ?let @string inName -> @string {
-  result = ["guard.section." + inName assemblerRepresentation]
+  result = ["guard." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardCall ?let @string inName -> @string {
   result = ["guard.user." + inName assemblerRepresentation]
+}
+
+#·······················································································································
+
+func guardUserMangledNameFromAST ?let @string inReceiverTypeName
+                                 ?let @lstring inGuardName
+                                 ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+{
+  var s = "guard.user."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#·······················································································································
+
+func guardUserMangledNameFromCall ?let @string inReceiverTypeName
+                                  ?let @lstring inGuardName
+                                  ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
+{
+  var s = "guard.user."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    s += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#·······················································································································
+
+func guardImplementationMangledNameFromAST ?let @string inReceiverTypeName
+                                           ?let @lstring inGuardName
+                                           ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+{
+  var s = "guard."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#·······················································································································
+
+func guardImplementationMangledNameFromCall ?let @string inReceiverTypeName
+                                            ?let @lstring inGuardName
+                                            ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
+{
+  var s = "guard."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    s += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -459,6 +535,7 @@ enum @guardKindGenerationIR {
 map @guardMapIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @PLMType mReceiverType
+#  @string mGuardName
   @guardKindGenerationIR mGuardKindGenerationIR
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
@@ -484,7 +561,7 @@ method @guardMapIR guardCodeGeneration
       ioSectionList +=
         !guardCallName
         !guardImplementationName
-        !true # Onvly incocation from user mode
+        !true # Only invocation from user mode
     end
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
@@ -501,6 +578,7 @@ method @guardMapIR-element llvmCodeGeneration
   switch mGuardKindGenerationIR
   case convenienceGuard (* * * *) :
     guardRoutineName = llvmNameForGuardCall (!lkey.string)
+#    guardRoutineName = guardUserMangledNameFromCall
     ioLLVMcode += llvmTitleComment (!guardRoutineName)
   case baseGuard :
     guardRoutineName = llvmNameForGuardImplementation (!lkey.string)

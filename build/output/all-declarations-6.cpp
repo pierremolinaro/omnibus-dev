@@ -6920,26 +6920,26 @@ void extensionMethod_svcDeclarationGeneration (const GALGAS_routineMapIR inObjec
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_11028 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_11028.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = enumerator_11028.current (HERE).getter_mKind (HERE).getter_isFunction (SOURCE_FILE ("declaration-svc.galgas", 314)).operator_not (SOURCE_FILE ("declaration-svc.galgas", 314)).boolEnum () ;
+  cEnumerator_routineMapIR enumerator_11031 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_11031.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = enumerator_11031.current (HERE).getter_mKind (HERE).getter_isFunction (SOURCE_FILE ("declaration-svc.galgas", 314)).operator_not (SOURCE_FILE ("declaration-svc.galgas", 314)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_string var_svcCallName_11092 = function_llvmNameForSVCCall (enumerator_11028.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11028.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 315)) ;
-      GALGAS_string var_svcImplementationName_11189 = function_llvmNameForSVCImplementation (enumerator_11028.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11028.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 316)) ;
-      GALGAS_string var_prototype_11284 = function_llvmFunctionPrototype (extensionGetter_llvmTypeName (enumerator_11028.current (HERE).getter_mReturnType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 318)), var_svcCallName_11092, enumerator_11028.current (HERE).getter_mReceiverType (HERE), enumerator_11028.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 317)) ;
-      ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (var_prototype_11284  COMMA_SOURCE_FILE ("declaration-svc.galgas", 323)) ;
-      switch (enumerator_11028.current (HERE).getter_mKind (HERE).enumValue ()) {
+      GALGAS_string var_svcCallName_11095 = function_llvmNameForSVCCall (enumerator_11031.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11031.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 315)) ;
+      GALGAS_string var_svcImplementationName_11192 = function_llvmNameForSVCImplementation (enumerator_11031.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11031.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 316)) ;
+      GALGAS_string var_prototype_11287 = function_llvmFunctionPrototype (extensionGetter_llvmTypeName (enumerator_11031.current (HERE).getter_mReturnType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 318)), var_svcCallName_11095, enumerator_11031.current (HERE).getter_mReceiverType (HERE), enumerator_11031.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 317)) ;
+      ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (var_prototype_11287  COMMA_SOURCE_FILE ("declaration-svc.galgas", 323)) ;
+      switch (enumerator_11031.current (HERE).getter_mKind (HERE).enumValue ()) {
       case GALGAS_routineKind::kNotBuilt:
         break ;
       case GALGAS_routineKind::kEnum_section:
         {
-          ioArgument_ioSectionList.addAssign_operation (var_svcCallName_11092, var_svcImplementationName_11189, GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 326)) ;
+          ioArgument_ioSectionList.addAssign_operation (var_svcCallName_11095, var_svcImplementationName_11192, GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 326)) ;
         }
         break ;
       case GALGAS_routineKind::kEnum_primitive:
       case GALGAS_routineKind::kEnum_service:
         {
-          ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_svcCallName_11092, var_svcImplementationName_11189, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 328)) ;
+          ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_svcCallName_11095, var_svcImplementationName_11192, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 328)) ;
         }
         break ;
       case GALGAS_routineKind::kEnum_function:
@@ -6950,7 +6950,7 @@ void extensionMethod_svcDeclarationGeneration (const GALGAS_routineMapIR inObjec
         break ;
       }
     }
-    enumerator_11028.gotoNextObject () ;
+    enumerator_11031.gotoNextObject () ;
   }
 }
 
@@ -7841,7 +7841,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 618)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 696)) ;
   switch (inObject.mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
@@ -7851,11 +7851,11 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_25665 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_25665->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_25665->mAssociatedValue2 ;
-      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 622)) ;
-      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 623)) ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_28569 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_28569->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_28569->mAssociatedValue2 ;
+      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 700)) ;
+      ioArgument_ioAccessibleEntities.mProperty_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 701)) ;
     }
     break ;
   }

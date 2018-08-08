@@ -411,8 +411,8 @@ private proc generateCodeFiles
   json += "  ],\n"
 #--- sections
   json += "  \"sections\" : ["
-  for (* sectionImplementation *) in sectionIRlist
-    do json += "\n    \"" + sectionImplementation + "\""
+  for section in sectionIRlist
+    do json += "\n    \"" + section.mSectionImplementationName + "\""
     between json += ","
     after json += "\n"
   end

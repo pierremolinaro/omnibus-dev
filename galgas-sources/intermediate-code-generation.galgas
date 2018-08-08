@@ -7,7 +7,6 @@
 struct @intermediateCodeStruct {
   @staticEntityMap mStaticEntityMap
   @globalConstantMapIR mGlobalConstantMap
-  @routineMapIR mRoutineMapIR
   @guardMapIR mGuardMapIR
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
@@ -23,6 +22,15 @@ struct @intermediateCodeStruct {
   @generationListIR mGenerationListIR
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
+#--- Routines
+  @routineMapIR mRoutineMapIR
+  @routineSectionDictionary mRoutineSectionDictionary
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+dict @routineSectionDictionary : @string { # key is routine mangled name for invocation in user mode 
+  @string mSectionRoutineMangledName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

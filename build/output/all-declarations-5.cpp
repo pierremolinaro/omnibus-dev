@@ -2222,6 +2222,749 @@ GALGAS_generationListIR GALGAS_generationListIR::extractObject (const GALGAS_obj
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cNode_routineSectionDictionary : public GALGAS_routineSectionDictionary_2D_element {
+  public : cNode_routineSectionDictionary * mInfPtr ;
+  public : cNode_routineSectionDictionary * mSupPtr ;
+  public : int32_t mBalance ;
+
+  public : cNode_routineSectionDictionary (const GALGAS_string & in_key,
+                                           const GALGAS_string & inProperty_mSectionRoutineMangledName) :
+  GALGAS_routineSectionDictionary_2D_element (in_key, inProperty_mSectionRoutineMangledName),
+  mInfPtr (NULL),
+  mSupPtr (NULL),
+  mBalance (0) {
+  }
+
+  public : cNode_routineSectionDictionary (cNode_routineSectionDictionary * inNode) ;
+
+  public : virtual ~ cNode_routineSectionDictionary (void) {
+    macroMyDelete (mInfPtr) ;
+    macroMyDelete (mSupPtr) ;
+  }
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cSharedDictRoot_routineSectionDictionary : public C_SharedObject {
+//--------------------------------- Attributes
+  private : cNode_routineSectionDictionary * mRoot ;
+  private : uint32_t mCount ;
+
+//--------------------------------- Constructor
+  protected : cSharedDictRoot_routineSectionDictionary (LOCATION_ARGS) :
+  C_SharedObject (THERE),
+  mRoot (NULL),
+  mCount (0) {
+  }
+
+//--------------------------------- Virtual destructor
+  protected : virtual ~ cSharedDictRoot_routineSectionDictionary (void) {
+    macroMyDelete (mRoot) ;
+  }
+
+//--------------------------------- No copy
+  private : cSharedDictRoot_routineSectionDictionary (const cSharedDictRoot_routineSectionDictionary &) ;
+  private : cSharedDictRoot_routineSectionDictionary & operator = (const cSharedDictRoot_routineSectionDictionary &) ;
+
+//--------------------------------- Copy a map
+  protected : VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_routineSectionDictionary * inSource) ;
+
+//--------------------------------- Insert
+  protected : VIRTUAL_IN_DEBUG void performInsert (const GALGAS_routineSectionDictionary_2D_element & inNewNode) {
+    macroUniqueSharedObject (this) ;
+    bool extension = false ;
+    bool entryAdded = false ;
+    recursiveAddEntry (mRoot, inNewNode, entryAdded, extension) ;
+    if (entryAdded) {
+      mCount ++ ;
+    }
+    #ifndef DO_NOT_GENERATE_CHECKINGS
+      checkDict (HERE) ;
+    #endif
+  }
+
+  protected : static void rotateLeft (cNode_routineSectionDictionary * & ioRootPtr) {
+    cNode_routineSectionDictionary * ptr = ioRootPtr->mSupPtr ;
+    ioRootPtr->mSupPtr = ptr->mInfPtr ;
+    ptr->mInfPtr = ioRootPtr;
+
+    if (ptr->mBalance >= 0) {
+      ioRootPtr->mBalance ++ ;
+    }else{
+      ioRootPtr->mBalance += 1 - ptr->mBalance ;
+    }
+
+    if (ioRootPtr->mBalance > 0) {
+      ptr->mBalance += ioRootPtr->mBalance + 1 ;
+    }else{
+      ptr->mBalance ++ ;
+    }
+    ioRootPtr = ptr ;
+  }
+
+  protected : static void rotateRight (cNode_routineSectionDictionary * & ioRootPtr) {
+    cNode_routineSectionDictionary * ptr = ioRootPtr->mInfPtr ;
+    ioRootPtr->mInfPtr = ptr->mSupPtr ;
+    ptr->mSupPtr = ioRootPtr ;
+   
+    if (ptr->mBalance > 0) {
+      ioRootPtr->mBalance += -ptr->mBalance - 1 ;
+    }else{
+      ioRootPtr->mBalance -- ;
+    }
+    if (ioRootPtr->mBalance >= 0) {
+      ptr->mBalance -- ;
+    }else{
+      ptr->mBalance += ioRootPtr->mBalance - 1 ;
+    }
+    ioRootPtr = ptr ;
+  }
+
+  protected : static void recursiveAddEntry (cNode_routineSectionDictionary * & ioRootPtr,
+                                             const GALGAS_routineSectionDictionary_2D_element & inNewNode,
+                                             bool & outEntryAdded,
+                                             bool & ioExtension) {
+    if (ioRootPtr == NULL) {
+      macroMyNew (ioRootPtr, cNode_routineSectionDictionary (inNewNode.mProperty_key, inNewNode.mProperty_mSectionRoutineMangledName)) ;
+      ioExtension = true ;
+      outEntryAdded = true ;
+    }else{
+      macroValidPointer (ioRootPtr) ;
+      const typeComparisonResult comparaison = ioRootPtr->mProperty_key.objectCompare (inNewNode.mProperty_key) ;
+      if (comparaison == kFirstOperandGreaterThanSecond) {
+        recursiveAddEntry (ioRootPtr->mInfPtr, inNewNode, outEntryAdded, ioExtension) ;
+        if (ioExtension) {
+          ioRootPtr->mBalance++;
+          if (ioRootPtr->mBalance == 0) {
+            ioExtension = false;
+          }else if (ioRootPtr->mBalance == 2) {
+            if (ioRootPtr->mInfPtr->mBalance == -1) {
+              rotateLeft (ioRootPtr->mInfPtr) ;
+            }
+            rotateRight (ioRootPtr) ;
+            ioExtension = false;
+          }
+        }
+      }else if (comparaison == kFirstOperandLowerThanSecond) {
+        recursiveAddEntry (ioRootPtr->mSupPtr, inNewNode, outEntryAdded, ioExtension) ;
+        if (ioExtension) {
+          ioRootPtr->mBalance-- ;
+          if (ioRootPtr->mBalance == 0) {
+            ioExtension = false ;
+          }else if (ioRootPtr->mBalance == -2) {
+            if (ioRootPtr->mSupPtr->mBalance == 1) {
+              rotateRight (ioRootPtr->mSupPtr) ;
+            }
+            rotateLeft (ioRootPtr) ;
+            ioExtension = false;
+          }
+        }
+      }else{  // Found
+        ioExtension = false ;
+        outEntryAdded = false ;
+        ioRootPtr->mProperty_mSectionRoutineMangledName = inNewNode.mProperty_mSectionRoutineMangledName ;
+      }
+    }
+  }
+
+//--------------------------------- Search
+  private : VIRTUAL_IN_DEBUG cNode_routineSectionDictionary * findEntryInDict (const GALGAS_string & inKey) const {
+    cNode_routineSectionDictionary * result = NULL ;
+    cNode_routineSectionDictionary * currentNode = mRoot ;
+    while ((currentNode != NULL) && (NULL == result)) {
+      macroValidPointer (currentNode) ;
+      const typeComparisonResult comparaison = currentNode->mProperty_key.objectCompare (inKey) ;
+      if (comparaison == kFirstOperandGreaterThanSecond) {
+        currentNode = currentNode->mInfPtr ;
+      }else if (comparaison == kFirstOperandLowerThanSecond) {
+        currentNode = currentNode->mSupPtr ;
+      }else{ // Found
+        result = currentNode ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- Remove
+  protected : VIRTUAL_IN_DEBUG void performRemove (const GALGAS_string & inKey, cNode_routineSectionDictionary * & outRemovedNodePtr) {
+    bool branchHasBeenRemoved = false ; // Unused here
+    internalRemoveRecursively (mRoot, inKey, outRemovedNodePtr, branchHasBeenRemoved) ;
+    if (NULL != outRemovedNodePtr) {
+      mCount -- ;
+    }
+  }
+
+  protected : static void supBranchDecreased (cNode_routineSectionDictionary * & ioRoot,
+                                              bool & ioBranchHasBeenRemoved) {
+    ioRoot->mBalance ++ ;
+    switch (ioRoot->mBalance) {
+    case 0:
+      break;
+    case 1:
+      ioBranchHasBeenRemoved = false;
+      break;
+    case 2:
+      switch (ioRoot->mInfPtr->mBalance) {
+      case -1:
+        rotateLeft (ioRoot->mInfPtr) ;
+        rotateRight (ioRoot) ;
+        break;
+      case 0:
+        rotateRight (ioRoot) ;
+        ioBranchHasBeenRemoved = false;
+        break;
+      case 1:
+        rotateRight (ioRoot) ;
+        break;
+      }
+      break;
+    }
+  }
+
+  protected : static void infBranchDecreased (cNode_routineSectionDictionary * & ioRoot,
+                                              bool & ioBranchHasBeenRemoved) {
+    ioRoot->mBalance -- ;
+    switch (ioRoot->mBalance) {
+    case 0:
+      break;
+    case -1:
+      ioBranchHasBeenRemoved = false;
+      break;
+    case -2:
+      switch (ioRoot->mSupPtr->mBalance) {
+      case 1:
+        rotateRight (ioRoot->mSupPtr) ;
+        rotateLeft (ioRoot) ;
+        break;
+      case 0:
+        rotateLeft (ioRoot) ;
+        ioBranchHasBeenRemoved = false;
+        break;
+      case -1:
+        rotateLeft (ioRoot) ;
+        break;
+      }
+      break;
+    }
+  }
+
+  protected : static void  getPreviousElement (cNode_routineSectionDictionary * & ioRoot,
+                                               cNode_routineSectionDictionary * & ioElement,
+                                               bool & ioBranchHasBeenRemoved) {
+    if (ioRoot->mSupPtr == NULL) {
+      ioElement = ioRoot ;
+      ioRoot = ioRoot->mInfPtr ;
+      ioBranchHasBeenRemoved = true ;
+    }else{
+      getPreviousElement (ioRoot->mSupPtr, ioElement, ioBranchHasBeenRemoved) ;
+      if (ioBranchHasBeenRemoved) {
+        supBranchDecreased (ioRoot, ioBranchHasBeenRemoved) ;
+      }
+    }
+  }
+
+  protected : static void  internalRemoveRecursively (cNode_routineSectionDictionary * & ioRoot,
+                                                      const GALGAS_string & inKeyToRemove,
+                                                      cNode_routineSectionDictionary * & outRemovedNode,
+                                                      bool & ioBranchHasBeenRemoved) {
+    if (ioRoot != NULL) {
+      const typeComparisonResult comparaison = ioRoot->mProperty_key.objectCompare (inKeyToRemove) ;
+      if (comparaison == kFirstOperandGreaterThanSecond) {
+        internalRemoveRecursively (ioRoot->mInfPtr, inKeyToRemove, outRemovedNode, ioBranchHasBeenRemoved);
+        if (ioBranchHasBeenRemoved) {
+          infBranchDecreased (ioRoot, ioBranchHasBeenRemoved) ;
+        }
+      }else if (comparaison == kFirstOperandLowerThanSecond) {
+        internalRemoveRecursively (ioRoot->mSupPtr, inKeyToRemove, outRemovedNode, ioBranchHasBeenRemoved);
+        if (ioBranchHasBeenRemoved) {
+          supBranchDecreased (ioRoot, ioBranchHasBeenRemoved);
+        }
+      }else{
+        cNode_routineSectionDictionary * p = ioRoot ;
+        if (p->mInfPtr == NULL) {
+          ioRoot = p->mSupPtr;
+          p->mSupPtr = NULL;
+          ioBranchHasBeenRemoved = true;
+        }else if (p->mSupPtr == NULL) {
+          ioRoot = p->mInfPtr;
+          p->mInfPtr = NULL;
+          ioBranchHasBeenRemoved = true;
+        }else{
+          getPreviousElement (p->mInfPtr, ioRoot, ioBranchHasBeenRemoved) ;
+          ioRoot->mSupPtr = p->mSupPtr;
+          p->mSupPtr = NULL;
+          ioRoot->mInfPtr = p->mInfPtr;
+          p->mInfPtr = NULL;
+          ioRoot->mBalance = p->mBalance;
+          p->mBalance = 0;
+          if (ioBranchHasBeenRemoved) {
+            infBranchDecreased (ioRoot, ioBranchHasBeenRemoved) ;
+          }
+        }
+        outRemovedNode = p ;
+      }
+    }
+  }
+
+//--------------------------------- Internal method for enumeration
+  protected : VIRTUAL_IN_DEBUG void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
+
+//--------------------------------- Check Dictionary
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+      private : VIRTUAL_IN_DEBUG void checkDict (LOCATION_ARGS) const {
+      uint32_t n = 0 ;
+      checkNode (mRoot, n) ;
+      MF_AssertThere (n == mCount, "n (%lld) != mCount (%lld)", n, mCount) ;
+    }
+  #endif
+
+
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    private : static void checkNode (const cNode_routineSectionDictionary * inNode,
+                                     uint32_t & ioCount) {
+      if (NULL != inNode) {
+        checkNode (inNode->mInfPtr, ioCount) ;
+        ioCount ++ ;
+        checkNode (inNode->mSupPtr, ioCount) ;
+      }
+    }
+  #endif
+
+//--------------------------------- Compare Dictionaries
+  public : typeComparisonResult compare (const cSharedDictRoot_routineSectionDictionary * inOperand) const {
+    typeComparisonResult result = kOperandEqual ;
+    if (mCount < inOperand->mCount) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mCount > inOperand->mCount) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      capCollectionElementArray enumerationArray ;
+      populateEnumerationArray (enumerationArray) ;
+      capCollectionElementArray operandEnumerationArray ;
+      inOperand->populateEnumerationArray (operandEnumerationArray) ;
+      result = enumerationArray.compareCollectionElementArray (operandEnumerationArray) ;
+    }
+    return result ;
+  }
+
+//--------------------------------- Friend
+  friend class GALGAS_routineSectionDictionary ;
+} ;
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary::GALGAS_routineSectionDictionary (void) :
+AC_GALGAS_root (),
+mSharedDict (NULL) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary::~ GALGAS_routineSectionDictionary (void) {
+  macroDetachSharedObject (mSharedDict) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary::GALGAS_routineSectionDictionary (const GALGAS_routineSectionDictionary & inSource) :
+AC_GALGAS_root (),
+mSharedDict (NULL) {
+  macroAssignSharedObject (mSharedDict, inSource.mSharedDict) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary & GALGAS_routineSectionDictionary::operator = (const GALGAS_routineSectionDictionary & inSource) {
+  macroAssignSharedObject (mSharedDict, inSource.mSharedDict) ;
+  return * this ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::drop (void) {
+  macroDetachSharedObject (mSharedDict) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary GALGAS_routineSectionDictionary::constructor_emptyDict (LOCATION_ARGS) {
+  GALGAS_routineSectionDictionary result ;
+  macroMyNew (result.mSharedDict, cSharedDictRoot_routineSectionDictionary (THERE)) ;
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#ifdef PRAGMA_MARK_ALLOWED
+  #pragma mark Description
+#endif
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void internalDescription_routineSectionDictionary (const cNode_routineSectionDictionary * inNode,
+                                 C_String & ioString,
+                                 const int32_t inIndentation) {
+  if (NULL != inNode) {
+    internalDescription_routineSectionDictionary (inNode->mInfPtr, ioString, inIndentation) ;
+    ioString << "\n" ;
+    inNode->description (ioString, inIndentation) ;
+    internalDescription_routineSectionDictionary (inNode->mSupPtr, ioString, inIndentation) ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::description (C_String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString << "<dict @" << staticTypeDescriptor ()->mGalgasTypeName << ":" ;
+  if (isValid ()) {
+    internalDescription_routineSectionDictionary (mSharedDict->mRoot, ioString, inIndentation) ;
+  }else{
+    ioString << " not built" ;
+  }
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#ifdef PRAGMA_MARK_ALLOWED
+  #pragma mark Insulate
+#endif
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cNode_routineSectionDictionary::cNode_routineSectionDictionary (cNode_routineSectionDictionary * inNode) :
+GALGAS_routineSectionDictionary_2D_element (inNode->mProperty_key, inNode->mProperty_mSectionRoutineMangledName),
+mInfPtr (NULL),
+mSupPtr (NULL),
+mBalance (inNode->mBalance) {
+  if (inNode->mInfPtr != NULL) {
+    macroMyNew (mInfPtr, cNode_routineSectionDictionary (inNode->mInfPtr)) ;
+  }
+  if (inNode->mSupPtr != NULL) {
+    macroMyNew (mSupPtr, cNode_routineSectionDictionary (inNode->mSupPtr)) ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cSharedDictRoot_routineSectionDictionary::copyFrom (const cSharedDictRoot_routineSectionDictionary * inSource) {
+  macroUniqueSharedObject (this) ;
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    inSource->checkDict (HERE) ;
+  #endif
+  macroValidSharedObject (inSource, cSharedDictRoot_routineSectionDictionary) ;
+  mCount = inSource->mCount ;
+  if (NULL != inSource->mRoot) {
+    macroMyNew (mRoot, cNode_routineSectionDictionary (inSource->mRoot)) ;
+  }
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    checkDict (HERE) ;
+  #endif
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::insulate (LOCATION_ARGS) {
+  if ((NULL != mSharedDict) && !mSharedDict->isUniquelyReferenced ()) {
+    cSharedDictRoot_routineSectionDictionary * p = NULL ;
+    macroMyNew (p, cSharedDictRoot_routineSectionDictionary (THERE)) ;
+    p->copyFrom (mSharedDict) ;
+    macroAssignSharedObject (mSharedDict, p) ;
+    macroDetachSharedObject (p) ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#ifdef PRAGMA_MARK_ALLOWED
+  #pragma mark Insert
+#endif
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::addAssign_operation (const GALGAS_string & inKey,
+                                                           const GALGAS_string & inArgument0,
+                                                           C_Compiler * /* inCompiler */
+                                                           COMMA_LOCATION_ARGS) {
+  GALGAS_routineSectionDictionary_2D_element newElement (inKey, inArgument0) ;
+  if (isValid () && newElement.isValid ()) {
+    insulate (THERE) ;
+    macroUniqueSharedObject (mSharedDict) ;
+    mSharedDict->performInsert (newElement) ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::method_searchKey (GALGAS_string inKey,
+                                                        GALGAS_string & outArgument0,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
+  const cNode_routineSectionDictionary * p = NULL ;
+  if (isValid () && inKey.isValid ()) {
+    p = mSharedDict->findEntryInDict (inKey) ;
+    if (NULL == p) {
+    //--- Build error message
+      C_String message ;
+      message << "cannot search in dict: the key does not exist" ;
+    //--- Emit error message
+      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
+    }
+  }
+  if (NULL == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cNode_routineSectionDictionary) ;
+    outArgument0 = p->mProperty_mSectionRoutineMangledName ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::setter_removeKey (GALGAS_string inKey,
+                                                        GALGAS_string & outArgument0,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
+  cNode_routineSectionDictionary * p = NULL ;
+  if (isValid () && inKey.isValid ()) {
+    insulate (THERE) ;
+    macroUniqueSharedObject (mSharedDict) ;
+    mSharedDict->performRemove (inKey, p) ;
+    if (NULL == p) {
+    //--- Build error message
+      C_String message ;
+      message << "cannot remove in dict: the key does not exist" ;
+    //--- Emit error message
+      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
+    }
+  }
+  if (NULL == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cNode_routineSectionDictionary) ;
+    outArgument0 = p->mProperty_mSectionRoutineMangledName ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_routineSectionDictionary::getter_mSectionRoutineMangledNameForKey (const GALGAS_string & inKey,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (isValid () && inKey.isValid ()) {
+  const cNode_routineSectionDictionary * p = mSharedDict->findEntryInDict (inKey) ;
+   if (NULL == p) {
+    //--- Build error message
+      C_String message ;
+      message << "cannot get mSectionRoutineMangledName ForKey in dict: the key does not exist" ;
+    //--- Emit error message
+      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (p, cNode_routineSectionDictionary) ;
+      result = p->mProperty_mSectionRoutineMangledName  ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::setter_setMSectionRoutineMangledNameForKey (GALGAS_string inPropertyValue,
+                                                                                  GALGAS_string inKey,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  if (isValid () && inKey.isValid ()) {
+    insulate (THERE) ;
+    macroUniqueSharedObject (mSharedDict) ;
+    cNode_routineSectionDictionary * p = mSharedDict->findEntryInDict (inKey) ;
+    if (NULL == p) {
+    //--- Build error message
+      C_String message ;
+      message << "cannot setMSectionRoutineMangledNameForKey in dict: the key does not exist" ;
+    //--- Emit error message
+      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
+    }else{
+      p->mProperty_mSectionRoutineMangledName = inPropertyValue ;
+    }
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#ifdef PRAGMA_MARK_ALLOWED
+  #pragma mark Object compare
+#endif
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_routineSectionDictionary::objectCompare (const GALGAS_routineSectionDictionary & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    result = mSharedDict->compare (inOperand.mSharedDict) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#ifdef PRAGMA_MARK_ALLOWED
+  #pragma mark map Enumeration
+#endif
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cCollectionElement_routineSectionDictionary : public cCollectionElement {
+  public : GALGAS_routineSectionDictionary_2D_element mElement ;
+
+//--- Constructor
+  public : cCollectionElement_routineSectionDictionary (const GALGAS_routineSectionDictionary_2D_element & inElement) :
+  cCollectionElement (HERE),
+  mElement (inElement) {
+  }
+
+//--- No copy
+  private : cCollectionElement_routineSectionDictionary (const cCollectionElement_routineSectionDictionary &) ;
+  private : cCollectionElement_routineSectionDictionary & operator = (const cCollectionElement_routineSectionDictionary &) ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const { return mElement.isValid () ; }
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const {
+    const cCollectionElement_routineSectionDictionary * p = (const cCollectionElement_routineSectionDictionary *) inOperand ;
+    return mElement.objectCompare (p->mElement) ;
+  }
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cCollectionElement * copy (void) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_routineSectionDictionary (mElement)) ;
+    return p ;
+  }
+
+//--- Description
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const {
+    mElement.description (ioString, inIndentation) ;
+  }
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void enterAscendingEnumeration_routineSectionDictionary (cNode_routineSectionDictionary * inNode,
+                                                       capCollectionElementArray & ioEnumerationArray) {
+  if (inNode != NULL) {
+    enterAscendingEnumeration_routineSectionDictionary (inNode->mInfPtr, ioEnumerationArray) ;
+    cCollectionElement_routineSectionDictionary * p = NULL ;
+    macroMyNew (p, cCollectionElement_routineSectionDictionary (*inNode)) ;
+    capCollectionElement element ;
+    element.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    ioEnumerationArray.appendObject (element) ;
+    enterAscendingEnumeration_routineSectionDictionary (inNode->mSupPtr, ioEnumerationArray) ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cSharedDictRoot_routineSectionDictionary::populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const {
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    checkDict (HERE) ;
+  #endif
+  ioEnumerationArray.setCapacity (mCount) ;
+  enterAscendingEnumeration_routineSectionDictionary (mRoot, ioEnumerationArray) ;
+  MF_Assert (mCount == ioEnumerationArray.count (), "mCount (%lld) != ioEnumerationArray.count () (%lld)", mCount, ioEnumerationArray.count ()) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary::populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const {
+  if (NULL != mSharedDict) {
+    mSharedDict->populateEnumerationArray (ioEnumerationArray) ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumerator_routineSectionDictionary::cEnumerator_routineSectionDictionary (const GALGAS_routineSectionDictionary & inEnumeratedObject,
+                                                        const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element cEnumerator_routineSectionDictionary::current (LOCATION_ARGS) const {
+  const cCollectionElement_routineSectionDictionary* p = dynamic_cast  <const cCollectionElement_routineSectionDictionary*> (currentObjectPtr (THERE)) ;
+  macroValidSharedObject (p, cCollectionElement_routineSectionDictionary) ;
+  return GALGAS_routineSectionDictionary_2D_element (p->mElement) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string cEnumerator_routineSectionDictionary::current_key (LOCATION_ARGS) const {
+  const cCollectionElement_routineSectionDictionary* p = dynamic_cast  <const cCollectionElement_routineSectionDictionary*> (currentObjectPtr (THERE)) ;
+  macroValidSharedObject (p, cCollectionElement_routineSectionDictionary) ;
+  return p->mElement.mProperty_key ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string cEnumerator_routineSectionDictionary::current_mSectionRoutineMangledName (LOCATION_ARGS) const {
+  const cCollectionElement_routineSectionDictionary* p = dynamic_cast  <const cCollectionElement_routineSectionDictionary*> (currentObjectPtr (THERE)) ;
+  macroValidSharedObject (p, cCollectionElement_routineSectionDictionary) ;
+  return p->mElement.mProperty_mSectionRoutineMangledName ;
+}
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           @routineSectionDictionary type                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_routineSectionDictionary ("routineSectionDictionary",
+                                                 NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_routineSectionDictionary::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_routineSectionDictionary ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_routineSectionDictionary::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_routineSectionDictionary (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary GALGAS_routineSectionDictionary::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_routineSectionDictionary result ;
+  const GALGAS_routineSectionDictionary * p = (const GALGAS_routineSectionDictionary *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_routineSectionDictionary *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("routineSectionDictionary", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                   Extension method '@instructionListIR appendNOP'                                   *
 //                                                                                                                     *
@@ -8578,7 +9321,7 @@ GALGAS_sectionIRlist_2D_element GALGAS_sectionIRlist_2D_element::extractObject (
 GALGAS_primitiveAndServiceIRlist_2D_element::GALGAS_primitiveAndServiceIRlist_2D_element (void) :
 mProperty_mCallName (),
 mProperty_mImplementationName (),
-mProperty_mReturnValue () {
+mProperty_mHasReturnValue () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8593,7 +9336,7 @@ GALGAS_primitiveAndServiceIRlist_2D_element::GALGAS_primitiveAndServiceIRlist_2D
                                                                                           const GALGAS_bool & inOperand2) :
 mProperty_mCallName (inOperand0),
 mProperty_mImplementationName (inOperand1),
-mProperty_mReturnValue (inOperand2) {
+mProperty_mHasReturnValue (inOperand2) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8628,7 +9371,7 @@ typeComparisonResult GALGAS_primitiveAndServiceIRlist_2D_element::objectCompare 
     result = mProperty_mImplementationName.objectCompare (inOperand.mProperty_mImplementationName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mReturnValue.objectCompare (inOperand.mProperty_mReturnValue) ;
+    result = mProperty_mHasReturnValue.objectCompare (inOperand.mProperty_mHasReturnValue) ;
   }
   return result ;
 }
@@ -8636,7 +9379,7 @@ typeComparisonResult GALGAS_primitiveAndServiceIRlist_2D_element::objectCompare 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_primitiveAndServiceIRlist_2D_element::isValid (void) const {
-  return mProperty_mCallName.isValid () && mProperty_mImplementationName.isValid () && mProperty_mReturnValue.isValid () ;
+  return mProperty_mCallName.isValid () && mProperty_mImplementationName.isValid () && mProperty_mHasReturnValue.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8644,7 +9387,7 @@ bool GALGAS_primitiveAndServiceIRlist_2D_element::isValid (void) const {
 void GALGAS_primitiveAndServiceIRlist_2D_element::drop (void) {
   mProperty_mCallName.drop () ;
   mProperty_mImplementationName.drop () ;
-  mProperty_mReturnValue.drop () ;
+  mProperty_mHasReturnValue.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8659,7 +9402,7 @@ void GALGAS_primitiveAndServiceIRlist_2D_element::description (C_String & ioStri
     ioString << ", " ;
     mProperty_mImplementationName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mReturnValue.description (ioString, inIndentation+1) ;
+    mProperty_mHasReturnValue.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -8678,8 +9421,8 @@ GALGAS_string GALGAS_primitiveAndServiceIRlist_2D_element::getter_mImplementatio
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_primitiveAndServiceIRlist_2D_element::getter_mReturnValue (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReturnValue ;
+GALGAS_bool GALGAS_primitiveAndServiceIRlist_2D_element::getter_mHasReturnValue (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mHasReturnValue ;
 }
 
 
@@ -10652,6 +11395,143 @@ GALGAS_accessInAssignmentListAST_2D_element GALGAS_accessInAssignmentListAST_2D_
       result = *p ;
     }else{
       inCompiler->castError ("accessInAssignmentListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element::GALGAS_routineSectionDictionary_2D_element (void) :
+mProperty_key (),
+mProperty_mSectionRoutineMangledName () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element::~ GALGAS_routineSectionDictionary_2D_element (void) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element::GALGAS_routineSectionDictionary_2D_element (const GALGAS_string & inOperand0,
+                                                                                        const GALGAS_string & inOperand1) :
+mProperty_key (inOperand0),
+mProperty_mSectionRoutineMangledName (inOperand1) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element GALGAS_routineSectionDictionary_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_routineSectionDictionary_2D_element (GALGAS_string::constructor_default (HERE),
+                                                     GALGAS_string::constructor_default (HERE)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element GALGAS_routineSectionDictionary_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                                        const GALGAS_string & inOperand1 
+                                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineSectionDictionary_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_routineSectionDictionary_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_routineSectionDictionary_2D_element::objectCompare (const GALGAS_routineSectionDictionary_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_key.objectCompare (inOperand.mProperty_key) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionRoutineMangledName.objectCompare (inOperand.mProperty_mSectionRoutineMangledName) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+bool GALGAS_routineSectionDictionary_2D_element::isValid (void) const {
+  return mProperty_key.isValid () && mProperty_mSectionRoutineMangledName.isValid () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary_2D_element::drop (void) {
+  mProperty_key.drop () ;
+  mProperty_mSectionRoutineMangledName.drop () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_routineSectionDictionary_2D_element::description (C_String & ioString,
+                                                              const int32_t inIndentation) const {
+  ioString << "<struct @routineSectionDictionary-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_key.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionRoutineMangledName.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_routineSectionDictionary_2D_element::getter_key (UNUSED_LOCATION_ARGS) const {
+  return mProperty_key ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_routineSectionDictionary_2D_element::getter_mSectionRoutineMangledName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionRoutineMangledName ;
+}
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       @routineSectionDictionary-element type                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_routineSectionDictionary_2D_element ("routineSectionDictionary-element",
+                                                            NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_routineSectionDictionary_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_routineSectionDictionary_2D_element ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_routineSectionDictionary_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_routineSectionDictionary_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineSectionDictionary_2D_element GALGAS_routineSectionDictionary_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_routineSectionDictionary_2D_element result ;
+  const GALGAS_routineSectionDictionary_2D_element * p = (const GALGAS_routineSectionDictionary_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_routineSectionDictionary_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("routineSectionDictionary-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

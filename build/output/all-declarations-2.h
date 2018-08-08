@@ -7110,7 +7110,7 @@ class GALGAS_primitiveAndServiceIRlist : public AC_GALGAS_list {
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mCallName,
                                                   const class GALGAS_string & in_mImplementationName,
-                                                  const class GALGAS_bool & in_mReturnValue
+                                                  const class GALGAS_bool & in_mHasReturnValue
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -7199,13 +7199,13 @@ class GALGAS_primitiveAndServiceIRlist : public AC_GALGAS_list {
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasReturnValueAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mImplementationNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mReturnValueAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_primitiveAndServiceIRlist getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                             C_Compiler * inCompiler
@@ -7239,7 +7239,7 @@ class cEnumerator_primitiveAndServiceIRlist : public cGenericAbstractEnumerator 
 //--- Current element access
   public : class GALGAS_string current_mCallName (LOCATION_ARGS) const ;
   public : class GALGAS_string current_mImplementationName (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mReturnValue (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mHasReturnValue (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_primitiveAndServiceIRlist_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -7947,6 +7947,121 @@ class cEnumerator_instructionListSortedListIR : public cGenericAbstractEnumerato
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListSortedListIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           @routineSectionDictionary dict                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cSharedDictRoot_routineSectionDictionary ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_routineSectionDictionary : public AC_GALGAS_root {
+//--------------------------------- Attributes
+  private : cSharedDictRoot_routineSectionDictionary * mSharedDict ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_routineSectionDictionary (void) ;
+
+//--------------------------------- Destructor
+  public : virtual ~ GALGAS_routineSectionDictionary (void) ;
+
+//--------------------------------- Handle copy
+  public : GALGAS_routineSectionDictionary (const GALGAS_routineSectionDictionary & inSource) ;
+  public : GALGAS_routineSectionDictionary & operator = (const GALGAS_routineSectionDictionary & inSource) ;
+
+//--- isValid
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return mSharedDict != NULL ; }
+
+//--- drop
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+
+//--- Insulate
+  private : void insulate (LOCATION_ARGS) ;
+
+//--- Object compare
+  public : VIRTUAL_IN_DEBUG typeComparisonResult objectCompare (const GALGAS_routineSectionDictionary & inOperand) const ;
+
+//--- Enumeration
+  public : void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_routineSectionDictionary extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_routineSectionDictionary constructor_emptyDict (LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
+                                                      const class GALGAS_string & inOperand1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_string constinArgument0,
+                                                   class GALGAS_string & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSectionRoutineMangledNameForKey (class GALGAS_string constinArgument0,
+                                                                             class GALGAS_string constinArgument1,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_string constinArgument0,
+                                                   class GALGAS_string & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSectionRoutineMangledNameForKey (const class GALGAS_string & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_routineSectionDictionary ;
+ 
+} ; // End of GALGAS_routineSectionDictionary class
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Enumerator declaration                                                                                            *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumerator_routineSectionDictionary : public cGenericAbstractEnumerator {
+  public : cEnumerator_routineSectionDictionary (const GALGAS_routineSectionDictionary & inEnumeratedObject,
+                                                 const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_string current_key (LOCATION_ARGS) const ;
+  public : class GALGAS_string current_mSectionRoutineMangledName (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_routineSectionDictionary_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineSectionDictionary ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -8834,8 +8949,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : GALGAS_globalConstantMapIR mProperty_mGlobalConstantMap ;
 
-  public : GALGAS_routineMapIR mProperty_mRoutineMapIR ;
-
   public : GALGAS_guardMapIR mProperty_mGuardMapIR ;
 
   public : GALGAS_interruptMapIR mProperty_mInterruptMapIR ;
@@ -8866,6 +8979,10 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : GALGAS_controlRegisterGroupArrayList mProperty_mControlRegisterGroupArrayList ;
 
+  public : GALGAS_routineMapIR mProperty_mRoutineMapIR ;
+
+  public : GALGAS_routineSectionDictionary mProperty_mRoutineSectionDictionary ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -8882,7 +8999,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_intermediateCodeStruct (const GALGAS_staticEntityMap & in_mStaticEntityMap,
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
-                                          const GALGAS_routineMapIR & in_mRoutineMapIR,
                                           const GALGAS_guardMapIR & in_mGuardMapIR,
                                           const GALGAS_interruptMapIR & in_mInterruptMapIR,
                                           const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
@@ -8897,7 +9013,9 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_staticListInvokedFunctionSetMap & in_mStaticArrayMapForIntermediate,
                                           const GALGAS_generationListIR & in_mGenerationListIR,
                                           const GALGAS_globalSyncInstanceMapIR & in_mGlobalSyncInstanceMap,
-                                          const GALGAS_controlRegisterGroupArrayList & in_mControlRegisterGroupArrayList) ;
+                                          const GALGAS_controlRegisterGroupArrayList & in_mControlRegisterGroupArrayList,
+                                          const GALGAS_routineMapIR & in_mRoutineMapIR,
+                                          const GALGAS_routineSectionDictionary & in_mRoutineSectionDictionary) ;
 
 //-- Start of generic part --*
 
@@ -8912,22 +9030,23 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_staticEntityMap & inOperand0,
                                                                        const class GALGAS_globalConstantMapIR & inOperand1,
-                                                                       const class GALGAS_routineMapIR & inOperand2,
-                                                                       const class GALGAS_guardMapIR & inOperand3,
-                                                                       const class GALGAS_interruptMapIR & inOperand4,
-                                                                       const class GALGAS_externProcedureMapIR & inOperand5,
-                                                                       const class GALGAS_stringset & inOperand6,
+                                                                       const class GALGAS_guardMapIR & inOperand2,
+                                                                       const class GALGAS_interruptMapIR & inOperand3,
+                                                                       const class GALGAS_externProcedureMapIR & inOperand4,
+                                                                       const class GALGAS_stringset & inOperand5,
+                                                                       const class GALGAS_instructionListSortedListIR & inOperand6,
                                                                        const class GALGAS_instructionListSortedListIR & inOperand7,
-                                                                       const class GALGAS_instructionListSortedListIR & inOperand8,
-                                                                       const class GALGAS_taskMapIR & inOperand9,
-                                                                       const class GALGAS_globalTaskVariableList & inOperand10,
-                                                                       const class GALGAS_uint & inOperand11,
-                                                                       const class GALGAS_targetParameters & inOperand12,
-                                                                       const class GALGAS_driverListIR & inOperand13,
-                                                                       const class GALGAS_staticListInvokedFunctionSetMap & inOperand14,
-                                                                       const class GALGAS_generationListIR & inOperand15,
-                                                                       const class GALGAS_globalSyncInstanceMapIR & inOperand16,
-                                                                       const class GALGAS_controlRegisterGroupArrayList & inOperand17
+                                                                       const class GALGAS_taskMapIR & inOperand8,
+                                                                       const class GALGAS_globalTaskVariableList & inOperand9,
+                                                                       const class GALGAS_uint & inOperand10,
+                                                                       const class GALGAS_targetParameters & inOperand11,
+                                                                       const class GALGAS_driverListIR & inOperand12,
+                                                                       const class GALGAS_staticListInvokedFunctionSetMap & inOperand13,
+                                                                       const class GALGAS_generationListIR & inOperand14,
+                                                                       const class GALGAS_globalSyncInstanceMapIR & inOperand15,
+                                                                       const class GALGAS_controlRegisterGroupArrayList & inOperand16,
+                                                                       const class GALGAS_routineMapIR & inOperand17,
+                                                                       const class GALGAS_routineSectionDictionary & inOperand18
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -8969,6 +9088,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRequiredProcedureSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapIR getter_mRoutineMapIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineSectionDictionary getter_mRoutineSectionDictionary (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticListInvokedFunctionSetMap getter_mStaticArrayMapForIntermediate (LOCATION_ARGS) const ;
 
@@ -9328,7 +9449,7 @@ class GALGAS_primitiveAndServiceIRlist_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_string mProperty_mImplementationName ;
 
-  public : GALGAS_bool mProperty_mReturnValue ;
+  public : GALGAS_bool mProperty_mHasReturnValue ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -9346,7 +9467,7 @@ class GALGAS_primitiveAndServiceIRlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_primitiveAndServiceIRlist_2D_element (const GALGAS_string & in_mCallName,
                                                         const GALGAS_string & in_mImplementationName,
-                                                        const GALGAS_bool & in_mReturnValue) ;
+                                                        const GALGAS_bool & in_mHasReturnValue) ;
 
 //-- Start of generic part --*
 
@@ -9378,9 +9499,9 @@ class GALGAS_primitiveAndServiceIRlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mCallName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mImplementationName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasReturnValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mReturnValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mImplementationName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

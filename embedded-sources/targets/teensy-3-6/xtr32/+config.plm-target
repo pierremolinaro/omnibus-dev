@@ -37,7 +37,7 @@ SECTION_HANDLER: "../udfcoded-section-handler.s"
 SECTION_SYSTEM_STACK_SIZE: 8 // saves 2 registers on system stack
 SECTION_DISPATCHER_HEADER: "../udfcoded-section-dispatcher-header.s"
 SECTION_DISPATCHER_ENTRY: "../udfcoded-section-dispatcher-entry.s"
-SECTION_ENTRY_FROM_ANY_MODE: "../udfcoded-section-invocation-from-any-mode.s"
+SECTION_ENTRY_FROM_UNKNOWN_MODE: "../udfcoded-section-invocation-from-unknown-mode.s"
 SECTION_ENTRY_FROM_USER_MODE: "../udfcoded-section-invocation-from-user-mode.s"
 
 INTERRUPT_HANDLER: "../s-interrupt-handler.s"

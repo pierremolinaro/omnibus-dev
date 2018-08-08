@@ -268,7 +268,7 @@ list @sectionIRlist {
 list @primitiveAndServiceIRlist {
   @string mCallName
   @string mImplementationName
-  @bool mReturnValue
+  @bool mHasReturnValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -342,14 +342,14 @@ proc generateSectionDispatcher
   ?!@string ioAssemblerCode
   ?let @sectionIRlist inSectionIRlist
 {
-  for (callName implementationName invocationFromUserModeOnly) in inSectionIRlist do (idx)
-    if invocationFromUserModeOnly then
+  for section in inSectionIRlist do (idx)
+    if section.mInvocationFromUserModeOnly then
       var s = getTargetTextFile (
         !currentDir:inCurrentDirectory
         !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocationFromUserMode
       )
-      s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
-      s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
+      s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !section.mSectionCallName]
+      s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !section.mSectionImplementationName]
       s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
       ioAssemblerCode += s
     else
@@ -357,8 +357,8 @@ proc generateSectionDispatcher
         !currentDir:inCurrentDirectory
         !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocationFromAnyMode
       )
-      s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
-      s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
+      s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !section.mSectionCallName]
+      s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !section.mSectionImplementationName]
       s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
       ioAssemblerCode += s
     end
@@ -401,13 +401,13 @@ proc generatePrimitiveAndServiceDispatcher
     !from:inTargetName + "/" + inTargetParameters.mServiceHandler
   )
 #---
-  for (callName * hasReturnValue) in inServiceList do (idx)
-    if hasReturnValue then
+  for service in inServiceList do (idx)
+    if service.mHasReturnValue then
       var s = getTargetTextFile (
         !currentDir:inCurrentDirectory
         !from:inTargetName + "/" + inTargetParameters.mServiceEntryWithReturnValue
       )
-      s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+      s = [s stringByReplacingStringByString !"!ENTRY!" !service.mCallName]
       s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
       ioAssemblerCode += s
     else
@@ -415,7 +415,7 @@ proc generatePrimitiveAndServiceDispatcher
         !currentDir:inCurrentDirectory
         !from:inTargetName + "/" + inTargetParameters.mServiceEntryNoReturnedValue
       )
-      s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+      s = [s stringByReplacingStringByString !"!ENTRY!" !service.mCallName]
       s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
       ioAssemblerCode += s
     end
@@ -424,12 +424,12 @@ proc generatePrimitiveAndServiceDispatcher
     !currentDir:inCurrentDirectory
     !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherHeader
   )
-  for (* implementationName *) in inServiceList do (idx)
+  for service in inServiceList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
       !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherEntry
     )
-    s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
+    s = [s stringByReplacingStringByString !"!ENTRY!" !service.mImplementationName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end

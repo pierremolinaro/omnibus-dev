@@ -10866,7 +10866,7 @@ class cCollectionElement_primitiveAndServiceIRlist : public cCollectionElement {
 //--- Constructors
   public : cCollectionElement_primitiveAndServiceIRlist (const GALGAS_string & in_mCallName,
                                                          const GALGAS_string & in_mImplementationName,
-                                                         const GALGAS_bool & in_mReturnValue
+                                                         const GALGAS_bool & in_mHasReturnValue
                                                          COMMA_LOCATION_ARGS) ;
   public : cCollectionElement_primitiveAndServiceIRlist (const GALGAS_primitiveAndServiceIRlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
@@ -10887,17 +10887,17 @@ class cCollectionElement_primitiveAndServiceIRlist : public cCollectionElement {
 
 cCollectionElement_primitiveAndServiceIRlist::cCollectionElement_primitiveAndServiceIRlist (const GALGAS_string & in_mCallName,
                                                                                             const GALGAS_string & in_mImplementationName,
-                                                                                            const GALGAS_bool & in_mReturnValue
+                                                                                            const GALGAS_bool & in_mHasReturnValue
                                                                                             COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mCallName, in_mImplementationName, in_mReturnValue) {
+mObject (in_mCallName, in_mImplementationName, in_mHasReturnValue) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_primitiveAndServiceIRlist::cCollectionElement_primitiveAndServiceIRlist (const GALGAS_primitiveAndServiceIRlist_2D_element & inElement COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (inElement.mProperty_mCallName, inElement.mProperty_mImplementationName, inElement.mProperty_mReturnValue) {
+mObject (inElement.mProperty_mCallName, inElement.mProperty_mImplementationName, inElement.mProperty_mHasReturnValue) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10910,7 +10910,7 @@ bool cCollectionElement_primitiveAndServiceIRlist::isValid (void) const {
 
 cCollectionElement * cCollectionElement_primitiveAndServiceIRlist::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_primitiveAndServiceIRlist (mObject.mProperty_mCallName, mObject.mProperty_mImplementationName, mObject.mProperty_mReturnValue COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_primitiveAndServiceIRlist (mObject.mProperty_mCallName, mObject.mProperty_mImplementationName, mObject.mProperty_mHasReturnValue COMMA_HERE)) ;
   return result ;
 }
 
@@ -10927,8 +10927,8 @@ void cCollectionElement_primitiveAndServiceIRlist::description (C_String & ioStr
   mObject.mProperty_mImplementationName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mReturnValue" ":" ;
-  mObject.mProperty_mReturnValue.description (ioString, inIndentation) ;
+  ioString << "mHasReturnValue" ":" ;
+  mObject.mProperty_mHasReturnValue.description (ioString, inIndentation) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10978,12 +10978,12 @@ GALGAS_primitiveAndServiceIRlist GALGAS_primitiveAndServiceIRlist::constructor_l
 void GALGAS_primitiveAndServiceIRlist::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                   const GALGAS_string & in_mCallName,
                                                                   const GALGAS_string & in_mImplementationName,
-                                                                  const GALGAS_bool & in_mReturnValue
+                                                                  const GALGAS_bool & in_mHasReturnValue
                                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement_primitiveAndServiceIRlist * p = NULL ;
   macroMyNew (p, cCollectionElement_primitiveAndServiceIRlist (in_mCallName,
                                                                in_mImplementationName,
-                                                               in_mReturnValue COMMA_THERE)) ;
+                                                               in_mHasReturnValue COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -11057,7 +11057,7 @@ void GALGAS_primitiveAndServiceIRlist::setter_removeAtIndex (GALGAS_string & out
       macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
       outOperand0 = p->mObject.mProperty_mCallName ;
       outOperand1 = p->mObject.mProperty_mImplementationName ;
-      outOperand2 = p->mObject.mProperty_mReturnValue ;
+      outOperand2 = p->mObject.mProperty_mHasReturnValue ;
     }
   }
 }
@@ -11080,7 +11080,7 @@ void GALGAS_primitiveAndServiceIRlist::setter_popFirst (GALGAS_string & outOpera
     macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
     outOperand0 = p->mObject.mProperty_mCallName ;
     outOperand1 = p->mObject.mProperty_mImplementationName ;
-    outOperand2 = p->mObject.mProperty_mReturnValue ;
+    outOperand2 = p->mObject.mProperty_mHasReturnValue ;
   }
 }
 
@@ -11102,7 +11102,7 @@ void GALGAS_primitiveAndServiceIRlist::setter_popLast (GALGAS_string & outOperan
     macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
     outOperand0 = p->mObject.mProperty_mCallName ;
     outOperand1 = p->mObject.mProperty_mImplementationName ;
-    outOperand2 = p->mObject.mProperty_mReturnValue ;
+    outOperand2 = p->mObject.mProperty_mHasReturnValue ;
   }
 }
 
@@ -11124,7 +11124,7 @@ void GALGAS_primitiveAndServiceIRlist::method_first (GALGAS_string & outOperand0
     macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
     outOperand0 = p->mObject.mProperty_mCallName ;
     outOperand1 = p->mObject.mProperty_mImplementationName ;
-    outOperand2 = p->mObject.mProperty_mReturnValue ;
+    outOperand2 = p->mObject.mProperty_mHasReturnValue ;
   }
 }
 
@@ -11146,7 +11146,7 @@ void GALGAS_primitiveAndServiceIRlist::method_last (GALGAS_string & outOperand0,
     macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
     outOperand0 = p->mObject.mProperty_mCallName ;
     outOperand1 = p->mObject.mProperty_mImplementationName ;
-    outOperand2 = p->mObject.mProperty_mReturnValue ;
+    outOperand2 = p->mObject.mProperty_mHasReturnValue ;
   }
 }
 
@@ -11233,15 +11233,15 @@ GALGAS_string GALGAS_primitiveAndServiceIRlist::getter_mImplementationNameAtInde
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_primitiveAndServiceIRlist::getter_mReturnValueAtIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_primitiveAndServiceIRlist::getter_mHasReturnValueAtIndex (const GALGAS_uint & inIndex,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_primitiveAndServiceIRlist * p = (cCollectionElement_primitiveAndServiceIRlist *) attributes.ptr () ;
   GALGAS_bool result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
-    result = p->mObject.mProperty_mReturnValue ;
+    result = p->mObject.mProperty_mHasReturnValue ;
   }
   return result ;
 }
@@ -11283,10 +11283,10 @@ GALGAS_string cEnumerator_primitiveAndServiceIRlist::current_mImplementationName
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool cEnumerator_primitiveAndServiceIRlist::current_mReturnValue (LOCATION_ARGS) const {
+GALGAS_bool cEnumerator_primitiveAndServiceIRlist::current_mHasReturnValue (LOCATION_ARGS) const {
   const cCollectionElement_primitiveAndServiceIRlist * p = (const cCollectionElement_primitiveAndServiceIRlist *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_primitiveAndServiceIRlist) ;
-  return p->mObject.mProperty_mReturnValue ;
+  return p->mObject.mProperty_mHasReturnValue ;
 }
 
 
