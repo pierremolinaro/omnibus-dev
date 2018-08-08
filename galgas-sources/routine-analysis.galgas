@@ -65,7 +65,7 @@ method @decoratedRoutineList-element semanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addNode !mRoutineMangledName !mRoutineMangledName]
+#  [!?ioTemporaries.mSubprogramInvocationGraph addNode !mRoutineMangledName !mRoutineMangledName]
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}

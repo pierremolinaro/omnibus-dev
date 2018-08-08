@@ -125,15 +125,15 @@ method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
 
 method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Routine mangled name
-  let routineMangledName = routineMangledNameFromAST (
-    !"" 
-    !mExternProcedureName
-    !mProcFormalArgumentList
-  )
+#  let routineMangledName = routineMangledNameFromAST (
+#    !"" 
+#    !mExternProcedureName
+#    !mProcFormalArgumentList
+#  )
 #--- Analyse formal arguments
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
@@ -143,12 +143,12 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineMangledName
-      !routineMangledName
-    ]
-  end
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !routineMangledName
+#      !routineMangledName
+#    ]
+#  end
 #--- Return type
   let returnType = if mReturnTypeName.string == "" then
     @unifiedTypeMap-proxy.null

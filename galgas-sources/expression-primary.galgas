@@ -665,7 +665,7 @@ private proc handleFunctionCallInExpression
         !effectiveParameterListIR
       }
     #--- Enter in invocation graph
-      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+#      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
     #---
       ioObjectIR = callReturnedResult
     end

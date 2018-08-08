@@ -9158,8 +9158,6 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 
   public : GALGAS_panicRoutinePriorityMap mProperty_mPanicLoopRoutinePriorityMap ;
 
-  public : GALGAS_subprogramInvocationGraph mProperty_mSubprogramInvocationGraph ;
-
   public : GALGAS_staticListInvokedFunctionSetMap mProperty_mStaticArrayMapForTemporaries ;
 
   public : GALGAS_stringset mProperty_mInitializedDriverSet ;
@@ -9181,7 +9179,6 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
   public : GALGAS_semanticTemporariesStruct (const GALGAS_uint & in_mTemporaryIndex,
                                              const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                              const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
-                                             const GALGAS_subprogramInvocationGraph & in_mSubprogramInvocationGraph,
                                              const GALGAS_staticListInvokedFunctionSetMap & in_mStaticArrayMapForTemporaries,
                                              const GALGAS_stringset & in_mInitializedDriverSet) ;
 
@@ -9199,9 +9196,8 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
   public : static class GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
                                                                           const class GALGAS_panicRoutinePriorityMap & inOperand1,
                                                                           const class GALGAS_panicRoutinePriorityMap & inOperand2,
-                                                                          const class GALGAS_subprogramInvocationGraph & inOperand3,
-                                                                          const class GALGAS_staticListInvokedFunctionSetMap & inOperand4,
-                                                                          const class GALGAS_stringset & inOperand5
+                                                                          const class GALGAS_staticListInvokedFunctionSetMap & inOperand3,
+                                                                          const class GALGAS_stringset & inOperand4
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -9223,8 +9219,6 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicSetupRoutinePriorityMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticListInvokedFunctionSetMap getter_mStaticArrayMapForTemporaries (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph getter_mSubprogramInvocationGraph (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTemporaryIndex (LOCATION_ARGS) const ;
 

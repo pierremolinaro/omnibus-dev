@@ -165,7 +165,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !mArguments
   )
 #--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
 #--- Check modes
   let routineKindIR = checkMode (
     !callerMode:inCurrentMode
@@ -370,7 +370,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
           !effectiveParameterListIR
         }
       #--- Enter in invocation graph
-        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+#        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       end
     case singleton  (* errorLocation) :
       error errorLocation : "a property cannot be used as method"

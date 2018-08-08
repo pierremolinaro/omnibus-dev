@@ -256,12 +256,12 @@ proc guardSemanticAnalysis
     !inRoutineFormalArgumentList
   )
 #--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !guardMangledName
-      !inRoutineName
-    ]
-  end
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !guardMangledName
+#      !inRoutineName
+#    ]
+#  end
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -503,7 +503,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       #--- Get function name and map containing the function definition
         let routineMangledName = routineMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
       #--- Enter in invocation graph
-        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+#        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       #--- Generate guards
         outConvenienceGuardGenerationIR = .convenienceGuard {
           !baseGuardAllocaList:baseGuardAllocaList

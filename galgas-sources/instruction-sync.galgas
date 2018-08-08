@@ -390,7 +390,7 @@ proc analyzeGuardCall
       !inEffectiveParameterList
     )
   #--- Enter in invocation graph
-    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
+#    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
   #--- Analyze effective parameters
     outEffectiveParameterListIR = {!.outputInput !inReceiver}
     analyzeEffectiveParameters (
@@ -449,7 +449,7 @@ proc analyzeStandaloneGuardCall
     end
   end  
 #--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
+#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
 #--- Analyze effective parameters
   outEffectiveParameterListIR = {}
   analyzeEffectiveParameters (

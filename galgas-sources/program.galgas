@@ -174,7 +174,7 @@ private proc compileProject
       !decoratedDeclarationList:decoratedDeclarationList
       !decoratedRoutineList: decoratedRoutineList
       !context:semanticContext
-      !subprogramInvocationGraph
+#      !subprogramInvocationGraph
       !endOfSourceFile:inEndOfSourceFile
       !staticEntityMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct

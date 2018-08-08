@@ -570,10 +570,9 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                const class GALGAS_declarationDecorationList constinArgument2,
                                const class GALGAS_decoratedRoutineList constinArgument3,
                                const class GALGAS_semanticContext constinArgument4,
-                               class GALGAS_subprogramInvocationGraph inArgument5,
-                               const class GALGAS_location constinArgument6,
-                               const class GALGAS_staticEntityMap constinArgument7,
-                               class GALGAS_intermediateCodeStruct & outArgument8,
+                               const class GALGAS_location constinArgument5,
+                               const class GALGAS_staticEntityMap constinArgument6,
+                               class GALGAS_intermediateCodeStruct & outArgument7,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

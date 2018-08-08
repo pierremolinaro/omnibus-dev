@@ -50,7 +50,7 @@ struct @semanticTemporariesStruct {
   @uint mTemporaryIndex
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-  @subprogramInvocationGraph mSubprogramInvocationGraph
+#  @subprogramInvocationGraph mSubprogramInvocationGraph
   @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
   @stringset mInitializedDriverSet
 }
@@ -95,12 +95,12 @@ proc getNewTempReference
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc semanticAnalysis
-  ?sourceFile:let @string inSourceFile
+  ?sourceFile:let @string unused inSourceFile
   ?ast:let @ast inAST
   ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
   ?decoratedRoutineList: let @decoratedRoutineList inDecoratedRoutineList
   ?context:let @semanticContext inSemanticContext
-  ?@subprogramInvocationGraph inSubprogramInvocationGraph
+#  ?@subprogramInvocationGraph inSubprogramInvocationGraph
   ?endOfSourceFile:let @location inEndOfSourceFile
   ?staticEntityMap:let @staticEntityMap inStaticEntityMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
@@ -115,7 +115,7 @@ proc semanticAnalysis
   end 
 #---
   @semanticTemporariesStruct temporaries = .default
-  temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph
+#  temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph
   for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext
@@ -146,34 +146,34 @@ proc semanticAnalysis
     !endOfSourceFile:inEndOfSourceFile
   )
 #--- Print procedure invocation graph
-  if (@uint.errorCount == 0) && [option plm_options.writeRoutineInvocationGraphFile value] then
-    let s = [temporaries.mSubprogramInvocationGraph graphviz]
-    let filePath = [inSourceFile stringByDeletingPathExtension] + ".routineInvocation.dot"
-    [s writeToFileWhenDifferentContents !filePath ?*]
-  end
-#--- Check procedure invocation graph
-  if (@uint.errorCount == 0) && not [option plm_options.doNotDetectRecursiveCalls value] then
-    let undefinedNodeKeyList = [temporaries.mSubprogramInvocationGraph undefinedNodeKeyList]
-    if [undefinedNodeKeyList length] > 0 then
-        var s = "subprogram invocation graph error, undefined nodes:"
-        for (str) in undefinedNodeKeyList do
-          s += "\n - " + str
-        end
-        error inEndOfSourceFile : s
-    else
-      [temporaries.mSubprogramInvocationGraph circularities
-         ?let @lstringlist unused unsortedInformationList
-         ?let @lstringlist unsortedLKeyList
-      ]
-      if [unsortedLKeyList length] > 0 then
-        var s = "the following routines are recursive:"
-        for (str) in unsortedLKeyList do
-          s += "\n - " + str
-        end
-        error inEndOfSourceFile : s
-      end
-    end
-  end
+#  if (@uint.errorCount == 0) && [option plm_options.writeRoutineInvocationGraphFile value] then
+#    let s = [temporaries.mSubprogramInvocationGraph graphviz]
+#    let filePath = [inSourceFile stringByDeletingPathExtension] + ".routineInvocation.dot"
+#    [s writeToFileWhenDifferentContents !filePath ?*]
+#  end
+##--- Check procedure invocation graph
+#  if (@uint.errorCount == 0) && not [option plm_options.doNotDetectRecursiveCalls value] then
+#    let undefinedNodeKeyList = [temporaries.mSubprogramInvocationGraph undefinedNodeKeyList]
+#    if [undefinedNodeKeyList length] > 0 then
+#        var s = "subprogram invocation graph error, undefined nodes:"
+#        for (str) in undefinedNodeKeyList do
+#          s += "\n - " + str
+#        end
+#        error inEndOfSourceFile : s
+#    else
+#      [temporaries.mSubprogramInvocationGraph circularities
+#         ?let @lstringlist unused unsortedInformationList
+#         ?let @lstringlist unsortedLKeyList
+#      ]
+#      if [unsortedLKeyList length] > 0 then
+#        var s = "the following routines are recursive:"
+#        for (str) in unsortedLKeyList do
+#          s += "\n - " + str
+#        end
+#        error inEndOfSourceFile : s
+#      end
+#    end
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
