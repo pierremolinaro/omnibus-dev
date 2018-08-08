@@ -23,7 +23,7 @@ struct @intermediateCodeStruct {
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
 #--- Routines
-  @routineMapIR mRoutineMapIR
+  @routineListIR mRoutineListIR
   @routineSectionDictionary mRoutineSectionDictionary
 }
 
@@ -51,7 +51,8 @@ map @globalConstantMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @routineMapIR {
+list @routineListIR {
+  @lstring mRoutineMangledName
   @PLMType mReceiverType # .void if standalone function
   @lstring mRoutineNameForGeneration
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -63,10 +64,6 @@ map @routineMapIR {
   @routineKind mKind
   @PLMType mReturnType # .void if no return value
   @bool mAppendFileAndLineArgumentForPanicLocation
-
-  insert insertKey error message "routine '%K' is already defined"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

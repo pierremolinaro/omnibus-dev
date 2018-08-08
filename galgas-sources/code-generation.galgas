@@ -252,7 +252,7 @@ private proc generateCodeFiles
 #----------------------------------------- Driver Code
   [inIntermediateCodeStruct.mDriverList generateLLVMDriverCode !?llvmCode]
 #----------------------------------------- Routines
-  [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+  [inIntermediateCodeStruct.mRoutineListIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Interrupts
   let undefinedInterruptString = getTargetTextFile (
     !currentDir:inCurrentDirectory
@@ -285,7 +285,7 @@ private proc generateCodeFiles
   end
 #----------------------------------------- SVC
   @sectionIRlist sectionIRlist = {}
-  [inIntermediateCodeStruct.mRoutineMapIR svcDeclarationGeneration
+  [inIntermediateCodeStruct.mRoutineListIR svcDeclarationGeneration
     !?primitiveAndServiceList
     !?sectionIRlist
     !?generationAdds

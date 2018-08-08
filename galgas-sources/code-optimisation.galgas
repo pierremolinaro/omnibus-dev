@@ -28,18 +28,18 @@ method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccess
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+method @routineListIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct {
-  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
+  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineListIR
   let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
   @uint pass = 0
   @bool optimizing = true
-  loop ([ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count] + 1)
+  loop ([ioIntermediateCodeStruct.mRoutineListIR length] + [ioIntermediateCodeStruct.mGuardMapIR count] + 1)
   while optimizing do
     optimizing = false
     pass ++
@@ -48,9 +48,9 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
       var s = "Optimisation pass " + pass + "\n"
       s += "  " + [ioIntermediateCodeStruct.mStaticEntityMap.mStaticStringMap count] + " static strings\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
-      s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routine(s)\n"
-      for routine in ioIntermediateCodeStruct.mRoutineMapIR do
-        s += "   - " + routine.lkey + "\n"
+      s += "  " + [ioIntermediateCodeStruct.mRoutineListIR length] + " routine(s)\n"
+      for routine in ioIntermediateCodeStruct.mRoutineListIR do
+        s += "   - " + routine.mRoutineMangledName + "\n"
       end
       s += "  " + [ioIntermediateCodeStruct.mGuardMapIR count] + " guards\n"
       message s
@@ -73,11 +73,11 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
     ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
   end
 #--- Warn on unused routines
-  for () in initialProcedureMap do
-    if (not [ioIntermediateCodeStruct.mRoutineMapIR hasKey !lkey.string]) && mWarnIfUnused then
-      warning lkey: "unused procedure; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
-    end
-  end
+#  for () in initialProcedureMap do
+#    if (not [ioIntermediateCodeStruct.mRoutineListIR hasKey !lkey.string]) && mWarnIfUnused then
+#      warning mRoutineMangledName: "unused procedure; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
+#    end
+#  end
 #--- Warn on unused guard
   for () in initialGuardMap do
     if (not [ioIntermediateCodeStruct.mGuardMapIR hasKey !lkey.string]) && mWarnIfUnused then
@@ -94,15 +94,15 @@ private proc suppressInaccessibleSubprograms
   ?!@bool ioOptimizing
 {
   outAccessibleEntities = .default
-  @routineMapIR accessibleProcedureMap = {}
-  @routineMapIR nonExploredProcedureMap = {}
+  @routineListIR accessibleProcedureMap = {}
+  @routineListIR nonExploredProcedureMap = {}
   @guardMapIR accessibleGuardMap = {}
   @guardMapIR nonExploredGuardMap = ioIntermediateCodeStruct.mGuardMapIR
 #--- First, required procedures
-  for procedure in ioIntermediateCodeStruct.mRoutineMapIR do
+  for procedure in ioIntermediateCodeStruct.mRoutineListIR do
     if procedure.mIsRequired then
-      [!?accessibleProcedureMap insertKey
-        !procedure.lkey
+      accessibleProcedureMap +=
+        !procedure.mRoutineMangledName
         !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
@@ -113,13 +113,12 @@ private proc suppressInaccessibleSubprograms
         !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
-        !procedure.mAppendFileAndLineArgumentForPanicLocation
-      ]        
+        !procedure.mAppendFileAndLineArgumentForPanicLocation       
       [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
       outAccessibleEntities.mRoutineSet += !procedure.mRoutineNameForGeneration.string
     else
-      [!?nonExploredProcedureMap insertKey
-        !procedure.lkey
+      nonExploredProcedureMap +=
+        !procedure.mRoutineMangledName
         !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
@@ -131,7 +130,6 @@ private proc suppressInaccessibleSubprograms
         !procedure.mKind
         !procedure.mReturnType
         !procedure.mAppendFileAndLineArgumentForPanicLocation
-      ]        
     end
   end
 #--- Tasks (setup and loop)
@@ -168,7 +166,7 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Explore routines
   var continues = true
-  let bound = [ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count]
+  let bound = [ioIntermediateCodeStruct.mRoutineListIR length] + [ioIntermediateCodeStruct.mGuardMapIR count]
   loop (bound + 1) while continues do
     continues = false
     exploreProcs (
@@ -186,8 +184,8 @@ private proc suppressInaccessibleSubprograms
       !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
     )
   end
-  if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
-    ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
+  if ioIntermediateCodeStruct.mRoutineListIR != accessibleProcedureMap then
+    ioIntermediateCodeStruct.mRoutineListIR = accessibleProcedureMap
     ioOptimizing = true
   end
   if ioIntermediateCodeStruct.mGuardMapIR != accessibleGuardMap then
@@ -210,18 +208,18 @@ private proc suppressInaccessibleSubprograms
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc exploreProcs
-  ?!@routineMapIR ioAccessibleProcedureMap
+  ?!@routineListIR ioAccessibleProcedureMap
   ?!@accessibleEntities ioAccessibleEntities
-  ?!@routineMapIR ioNonExploredProcedureMap
+  ?!@routineListIR ioNonExploredProcedureMap
   ?!@bool ioContinueExploreRoutines
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
+  let @routineListIR exNonExploredProcedureMap = ioNonExploredProcedureMap
   ioNonExploredProcedureMap = {}
   for procedure in exNonExploredProcedureMap do
     if [ioAccessibleEntities.mRoutineSet hasKey !procedure.mRoutineNameForGeneration.string] then
-     [!?ioAccessibleProcedureMap insertKey
-        !procedure.lkey
+     ioAccessibleProcedureMap +=
+        !procedure.mRoutineMangledName
         !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
@@ -232,13 +230,12 @@ private proc exploreProcs
         !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
-        !procedure.mAppendFileAndLineArgumentForPanicLocation
-      ]        
+        !procedure.mAppendFileAndLineArgumentForPanicLocation       
       [procedure enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioContinueExploreRoutines = true
     else
-      [!?ioNonExploredProcedureMap insertKey
-        !procedure.lkey
+      ioNonExploredProcedureMap +=
+        !procedure.mRoutineMangledName
         !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
@@ -249,8 +246,7 @@ private proc exploreProcs
         !procedure.mExportedFunction
         !procedure.mKind
         !procedure.mReturnType
-        !procedure.mAppendFileAndLineArgumentForPanicLocation
-    ]        
+        !procedure.mAppendFileAndLineArgumentForPanicLocation       
     end
   end
 }

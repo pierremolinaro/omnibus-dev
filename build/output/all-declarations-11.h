@@ -78,9 +78,9 @@ void routine_exploreGuards (class GALGAS_guardMapIR & ioArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
+void routine_exploreProcs (class GALGAS_routineListIR & ioArgument0,
                            class GALGAS_accessibleEntities & ioArgument1,
-                           class GALGAS_routineMapIR & ioArgument2,
+                           class GALGAS_routineListIR & ioArgument2,
                            class GALGAS_bool & ioArgument3,
                            class GALGAS_uint & ioArgument4,
                            class C_Compiler * inCompiler

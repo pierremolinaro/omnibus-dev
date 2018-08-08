@@ -8039,11 +8039,11 @@ GALGAS_getUniversalArrayElementReferenceIR GALGAS_getUniversalArrayElementRefere
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension method '@routineMapIR-element enterAccessibleEntities'                           *
+//                          Extension method '@routineListIR-element enterAccessibleEntities'                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_enterAccessibleEntities (const GALGAS_routineMapIR_2D_element inObject,
+void extensionMethod_enterAccessibleEntities (const GALGAS_routineListIR_2D_element inObject,
                                               GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler

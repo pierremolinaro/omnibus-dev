@@ -111,7 +111,7 @@ proc routineSemanticAnalysis
   else
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName} type]
   end
-  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+  ioIntermediateCodeStruct.mRoutineListIR +=
     !routineMangledName
     !inSelfType
     !routineMangledName
@@ -124,7 +124,6 @@ proc routineSemanticAnalysis
     !inRoutineKind
     !returnType
     !false
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -139,7 +138,7 @@ list @allocaList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR llvmCodeGeneration 
+method @routineListIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
   ?let @generationContext inGenerationContext
@@ -153,7 +152,7 @@ method @routineMapIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR-element llvmCodeGeneration 
+method @routineListIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext

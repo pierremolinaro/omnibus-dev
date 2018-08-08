@@ -965,11 +965,11 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Extension method '@routineMapIR svcDeclarationGeneration'                              *
+//                             Extension method '@routineListIR svcDeclarationGeneration'                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_svcDeclarationGeneration (const class GALGAS_routineMapIR inObject,
+void extensionMethod_svcDeclarationGeneration (const class GALGAS_routineListIR inObject,
                                                class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
                                                class GALGAS_sectionIRlist & io_ioSectionList,
                                                class GALGAS_generationAdds & io_ioGenerationAdds,

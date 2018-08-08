@@ -305,7 +305,7 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR svcDeclarationGeneration
+method @routineListIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds ioGenerationAdds

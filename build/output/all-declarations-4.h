@@ -211,11 +211,11 @@ void callExtensionMethod_semanticAnalysis (const class cPtr_abstractDecoratedDec
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Extension method '@routineMapIR llvmCodeGeneration'                                 *
+//                                Extension method '@routineListIR llvmCodeGeneration'                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject,
+void extensionMethod_llvmCodeGeneration (const class GALGAS_routineListIR inObject,
                                          class GALGAS_string & io_ioLLVMcode,
                                          class GALGAS_string & io_ioAssemblerCode,
                                          const class GALGAS_generationContext constin_inGenerationContext,
@@ -225,11 +225,11 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObjec
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Extension method '@routineMapIR-element llvmCodeGeneration'                             *
+//                            Extension method '@routineListIR-element llvmCodeGeneration'                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
+void extensionMethod_llvmCodeGeneration (const class GALGAS_routineListIR_2D_element inObject,
                                          class GALGAS_string & io_ioLLVMcode,
                                          class GALGAS_string & io_ioAssemblerCode,
                                          const class GALGAS_generationContext constin_inGenerationContext,

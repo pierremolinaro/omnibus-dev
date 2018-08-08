@@ -876,11 +876,11 @@ class cPtr_indirectRoutineCallIR : public cPtr_abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension method '@routineMapIR-element enterAccessibleEntities'                           *
+//                          Extension method '@routineListIR-element enterAccessibleEntities'                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_element inObject,
+void extensionMethod_enterAccessibleEntities (const class GALGAS_routineListIR_2D_element inObject,
                                               class GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                               class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                               class C_Compiler * inCompiler
