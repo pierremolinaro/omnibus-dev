@@ -312,8 +312,8 @@ method @routineListIR svcDeclarationGeneration
 {
   for svc in self do
     if not [svc.mKind isFunction] then
-      let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
-      let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
+      let svcCallName = llvmNameForSVCCall (!svc.mRoutineMangledName !svc.mKind)
+      let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineMangledName !svc.mKind)
       let prototype = llvmFunctionPrototype (
         ![svc.mReturnType llvmTypeName]
         !svcCallName

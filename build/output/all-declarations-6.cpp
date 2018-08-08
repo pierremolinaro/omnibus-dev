@@ -6924,22 +6924,22 @@ void extensionMethod_svcDeclarationGeneration (const GALGAS_routineListIR inObje
   while (enumerator_11032.hasCurrentObject ()) {
     const enumGalgasBool test_1 = enumerator_11032.current (HERE).getter_mKind (HERE).getter_isFunction (SOURCE_FILE ("declaration-svc.galgas", 314)).operator_not (SOURCE_FILE ("declaration-svc.galgas", 314)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_string var_svcCallName_11096 = function_llvmNameForSVCCall (enumerator_11032.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11032.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 315)) ;
-      GALGAS_string var_svcImplementationName_11193 = function_llvmNameForSVCImplementation (enumerator_11032.current (HERE).getter_mRoutineNameForGeneration (HERE), enumerator_11032.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 316)) ;
-      GALGAS_string var_prototype_11288 = function_llvmFunctionPrototype (extensionGetter_llvmTypeName (enumerator_11032.current (HERE).getter_mReturnType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 318)), var_svcCallName_11096, enumerator_11032.current (HERE).getter_mReceiverType (HERE), enumerator_11032.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 317)) ;
-      ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (var_prototype_11288  COMMA_SOURCE_FILE ("declaration-svc.galgas", 323)) ;
+      GALGAS_string var_svcCallName_11096 = function_llvmNameForSVCCall (enumerator_11032.current (HERE).getter_mRoutineMangledName (HERE), enumerator_11032.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 315)) ;
+      GALGAS_string var_svcImplementationName_11187 = function_llvmNameForSVCImplementation (enumerator_11032.current (HERE).getter_mRoutineMangledName (HERE), enumerator_11032.current (HERE).getter_mKind (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 316)) ;
+      GALGAS_string var_prototype_11276 = function_llvmFunctionPrototype (extensionGetter_llvmTypeName (enumerator_11032.current (HERE).getter_mReturnType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 318)), var_svcCallName_11096, enumerator_11032.current (HERE).getter_mReceiverType (HERE), enumerator_11032.current (HERE).getter_mFormalArgumentListForGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 317)) ;
+      ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (var_prototype_11276  COMMA_SOURCE_FILE ("declaration-svc.galgas", 323)) ;
       switch (enumerator_11032.current (HERE).getter_mKind (HERE).enumValue ()) {
       case GALGAS_routineKind::kNotBuilt:
         break ;
       case GALGAS_routineKind::kEnum_section:
         {
-          ioArgument_ioSectionList.addAssign_operation (var_svcCallName_11096, var_svcImplementationName_11193, GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 326)) ;
+          ioArgument_ioSectionList.addAssign_operation (var_svcCallName_11096, var_svcImplementationName_11187, GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 326)) ;
         }
         break ;
       case GALGAS_routineKind::kEnum_primitive:
       case GALGAS_routineKind::kEnum_service:
         {
-          ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_svcCallName_11096, var_svcImplementationName_11193, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 328)) ;
+          ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_svcCallName_11096, var_svcImplementationName_11187, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-svc.galgas", 328)) ;
         }
         break ;
       case GALGAS_routineKind::kEnum_function:
@@ -10896,7 +10896,6 @@ void extensionMethod_generateLLVMTypeDefinition (const GALGAS_PLMType inObject,
 GALGAS_routineListIR_2D_element::GALGAS_routineListIR_2D_element (void) :
 mProperty_mRoutineMangledName (),
 mProperty_mReceiverType (),
-mProperty_mRoutineNameForGeneration (),
 mProperty_mFormalArgumentListForGeneration (),
 mProperty_mAllocaList (),
 mProperty_mInstructionGenerationList (),
@@ -10917,48 +10916,45 @@ GALGAS_routineListIR_2D_element::~ GALGAS_routineListIR_2D_element (void) {
 
 GALGAS_routineListIR_2D_element::GALGAS_routineListIR_2D_element (const GALGAS_lstring & inOperand0,
                                                                   const GALGAS_PLMType & inOperand1,
-                                                                  const GALGAS_lstring & inOperand2,
-                                                                  const GALGAS_routineFormalArgumentListIR & inOperand3,
-                                                                  const GALGAS_allocaList & inOperand4,
-                                                                  const GALGAS_instructionListIR & inOperand5,
+                                                                  const GALGAS_routineFormalArgumentListIR & inOperand2,
+                                                                  const GALGAS_allocaList & inOperand3,
+                                                                  const GALGAS_instructionListIR & inOperand4,
+                                                                  const GALGAS_bool & inOperand5,
                                                                   const GALGAS_bool & inOperand6,
                                                                   const GALGAS_bool & inOperand7,
-                                                                  const GALGAS_bool & inOperand8,
-                                                                  const GALGAS_routineKind & inOperand9,
-                                                                  const GALGAS_PLMType & inOperand10,
-                                                                  const GALGAS_bool & inOperand11) :
+                                                                  const GALGAS_routineKind & inOperand8,
+                                                                  const GALGAS_PLMType & inOperand9,
+                                                                  const GALGAS_bool & inOperand10) :
 mProperty_mRoutineMangledName (inOperand0),
 mProperty_mReceiverType (inOperand1),
-mProperty_mRoutineNameForGeneration (inOperand2),
-mProperty_mFormalArgumentListForGeneration (inOperand3),
-mProperty_mAllocaList (inOperand4),
-mProperty_mInstructionGenerationList (inOperand5),
-mProperty_mIsRequired (inOperand6),
-mProperty_mWarnIfUnused (inOperand7),
-mProperty_mExportedFunction (inOperand8),
-mProperty_mKind (inOperand9),
-mProperty_mReturnType (inOperand10),
-mProperty_mAppendFileAndLineArgumentForPanicLocation (inOperand11) {
+mProperty_mFormalArgumentListForGeneration (inOperand2),
+mProperty_mAllocaList (inOperand3),
+mProperty_mInstructionGenerationList (inOperand4),
+mProperty_mIsRequired (inOperand5),
+mProperty_mWarnIfUnused (inOperand6),
+mProperty_mExportedFunction (inOperand7),
+mProperty_mKind (inOperand8),
+mProperty_mReturnType (inOperand9),
+mProperty_mAppendFileAndLineArgumentForPanicLocation (inOperand10) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_routineListIR_2D_element GALGAS_routineListIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                   const GALGAS_PLMType & inOperand1,
-                                                                                  const GALGAS_lstring & inOperand2,
-                                                                                  const GALGAS_routineFormalArgumentListIR & inOperand3,
-                                                                                  const GALGAS_allocaList & inOperand4,
-                                                                                  const GALGAS_instructionListIR & inOperand5,
+                                                                                  const GALGAS_routineFormalArgumentListIR & inOperand2,
+                                                                                  const GALGAS_allocaList & inOperand3,
+                                                                                  const GALGAS_instructionListIR & inOperand4,
+                                                                                  const GALGAS_bool & inOperand5,
                                                                                   const GALGAS_bool & inOperand6,
                                                                                   const GALGAS_bool & inOperand7,
-                                                                                  const GALGAS_bool & inOperand8,
-                                                                                  const GALGAS_routineKind & inOperand9,
-                                                                                  const GALGAS_PLMType & inOperand10,
-                                                                                  const GALGAS_bool & inOperand11 
+                                                                                  const GALGAS_routineKind & inOperand8,
+                                                                                  const GALGAS_PLMType & inOperand9,
+                                                                                  const GALGAS_bool & inOperand10 
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
-    result = GALGAS_routineListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+    result = GALGAS_routineListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
   }
   return result ;
 }
@@ -10972,9 +10968,6 @@ typeComparisonResult GALGAS_routineListIR_2D_element::objectCompare (const GALGA
   }
   if (result == kOperandEqual) {
     result = mProperty_mReceiverType.objectCompare (inOperand.mProperty_mReceiverType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineNameForGeneration.objectCompare (inOperand.mProperty_mRoutineNameForGeneration) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mFormalArgumentListForGeneration.objectCompare (inOperand.mProperty_mFormalArgumentListForGeneration) ;
@@ -11009,7 +11002,7 @@ typeComparisonResult GALGAS_routineListIR_2D_element::objectCompare (const GALGA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_routineListIR_2D_element::isValid (void) const {
-  return mProperty_mRoutineMangledName.isValid () && mProperty_mReceiverType.isValid () && mProperty_mRoutineNameForGeneration.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mIsRequired.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedFunction.isValid () && mProperty_mKind.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
+  return mProperty_mRoutineMangledName.isValid () && mProperty_mReceiverType.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mIsRequired.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedFunction.isValid () && mProperty_mKind.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11017,7 +11010,6 @@ bool GALGAS_routineListIR_2D_element::isValid (void) const {
 void GALGAS_routineListIR_2D_element::drop (void) {
   mProperty_mRoutineMangledName.drop () ;
   mProperty_mReceiverType.drop () ;
-  mProperty_mRoutineNameForGeneration.drop () ;
   mProperty_mFormalArgumentListForGeneration.drop () ;
   mProperty_mAllocaList.drop () ;
   mProperty_mInstructionGenerationList.drop () ;
@@ -11040,8 +11032,6 @@ void GALGAS_routineListIR_2D_element::description (C_String & ioString,
     mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mReceiverType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineNameForGeneration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -11074,12 +11064,6 @@ GALGAS_lstring GALGAS_routineListIR_2D_element::getter_mRoutineMangledName (UNUS
 
 GALGAS_PLMType GALGAS_routineListIR_2D_element::getter_mReceiverType (UNUSED_LOCATION_ARGS) const {
   return mProperty_mReceiverType ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_routineListIR_2D_element::getter_mRoutineNameForGeneration (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineNameForGeneration ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

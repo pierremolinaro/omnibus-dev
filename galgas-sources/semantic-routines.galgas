@@ -114,7 +114,7 @@ proc routineSemanticAnalysis
   ioIntermediateCodeStruct.mRoutineListIR +=
     !routineMangledName
     !inSelfType
-    !routineMangledName
+#    !routineMangledName
     !formalArguments
     !allocaList
     !instructionGenerationList
@@ -160,10 +160,10 @@ method @routineListIR-element llvmCodeGeneration
 {
   @string routineName
   switch mKind
-  case function (*) : routineName = llvmNameForFunction (!mRoutineNameForGeneration.string)
-  case section : routineName = llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
-  case service : routineName = llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
-  case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
+  case function (*) : routineName = llvmNameForFunction (!mRoutineMangledName.string)
+  case section : routineName = llvmNameForSectionImplementation (!mRoutineMangledName.string)
+  case service : routineName = llvmNameForServiceImplementation (!mRoutineMangledName.string)
+  case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineMangledName.string)
   end
   ioLLVMcode += llvmTitleComment (!routineName)
   ioLLVMcode += "define"

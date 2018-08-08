@@ -24,13 +24,6 @@ struct @intermediateCodeStruct {
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
 #--- Routines
   @routineListIR mRoutineListIR
-  @routineSectionDictionary mRoutineSectionDictionary
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-dict @routineSectionDictionary : @string { # key is routine mangled name for invocation in user mode 
-  @string mSectionRoutineMangledName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -54,7 +47,6 @@ map @globalConstantMapIR {
 list @routineListIR {
   @lstring mRoutineMangledName
   @PLMType mReceiverType # .void if standalone function
-  @lstring mRoutineNameForGeneration
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList

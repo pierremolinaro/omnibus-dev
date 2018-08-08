@@ -94,7 +94,7 @@ method @decoratedRoutineList-element semanticAnalysis
   ioIntermediateCodeStruct.mRoutineListIR +=
     !mRoutineMangledName
     !receiverType
-    !mRoutineMangledName
+#    !mRoutineMangledName
     !formalArguments
     !allocaList
     !instructionGenerationList
