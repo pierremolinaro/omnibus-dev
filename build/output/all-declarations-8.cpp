@@ -7226,6 +7226,12 @@ C_BoolCommandLineOption gOption_plm_5F_options_taskStrictPriorityOrder ("plm_opt
                                          "task-strict-priority-order",
                                          "Ensure task strict priority order") ;
 
+C_BoolCommandLineOption gOption_plm_5F_options_timePasses ("plm_options",
+                                         "timePasses",
+                                         0,
+                                         "time-passes",
+                                         "Print the amount of time needed for each pass") ;
+
 C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ("plm_options",
                                          "writeControlRegisterHTMLDumpFile",
                                          0,

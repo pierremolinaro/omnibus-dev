@@ -86,6 +86,7 @@ private proc compileProject
   ?currentDirectory:let @string inCurrentDirectory
   ?importedFilePathSet:let @stringset inImportedFileAbsolutePathSet
 {
+  let @timer parsingTime = .start 
   @ast ast = inAST
   @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
 #------------------------------------------------------------ Add target specific files
@@ -108,15 +109,22 @@ private proc compileProject
   if @uint.errorCount == 0 then
     retainRequiredDrivers (!?ast)
   end
+  if [option plm_options.timePasses value] then
+    message "Parsing: " + [parsingTime string] + "\n" 
+  end
 #------------------------------------------------------------ Ordered declaration list
   @declarationListAST orderedDeclarationListAST = .default
   if @uint.errorCount == 0 then
+    let @timer t = .start 
     buildOrderedDeclarationList (
       !ast:ast
       !sourceFile:inSourceFile.string
       !endOfSourceFile:inEndOfSourceFile
       ?orderedDeclarationList:orderedDeclarationListAST
     )
+    if [option plm_options.timePasses value] then
+      message "Declaration sorting: " + [t string] + "\n" 
+    end
   end
 #------------------------------------------------------------ Check "check target" declarations
   if @uint.errorCount == 0 then
@@ -140,7 +148,7 @@ private proc compileProject
   @decoratedRoutineList decoratedRoutineList = {}
   @globalVariableIRList globalVariableIRList = {}
   if @uint.errorCount == 0 then
-    var @timer t = .start 
+    let @timer t = .start 
     buildSemanticContext (
       !sourceFile:inSourceFile
       !ast:ast
@@ -152,12 +160,14 @@ private proc compileProject
       ?decoratedRoutineList
       ?globalVariableIRList
     )
-    message "Context: " + [t string] + "\n" 
+    if [option plm_options.timePasses value] then
+      message "Context: " + [t string] + "\n" 
+    end
   end
 #------------------------------------------------------------ Semantic analysis
   @intermediateCodeStruct intermediateCodeStruct = .default
   if @uint.errorCount == 0 then
-    var @timer t = .start 
+    let @timer t = .start 
     semanticAnalysis (
       !sourceFile:inSourceFile.string
       !ast:ast
@@ -169,17 +179,24 @@ private proc compileProject
       !staticEntityMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct
     )
-    message "Semantic: " + [t string] + "\n" 
+    if [option plm_options.timePasses value] then
+      message "Semantic: " + [t string] + "\n" 
+    end
   end
 #------------------------------------------------------------ Code optimisation
   if @uint.errorCount == 0 then
-    var @timer tOpt = .start 
+    let @timer tOpt = .start 
     codeOptimisation (!?intermediateCode:intermediateCodeStruct)
-    message "Optimization: " + [tOpt string] + "\n" 
+    if [option plm_options.timePasses value] then
+      message "Optimization: " + [tOpt string] + "\n" 
+    end
   end
+#------------------------------------------------------------ Product directory
+#  let productDirectory = homeDir
+#    + if [option plm_options.noPanicGeneration value] then "no-panic" else "" end
+#    + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
 #------------------------------------------------------------ Code generation
   if @uint.errorCount == 0 then
-    var @timer tGen = .start 
     codeGeneration (
       !currentDir:inCurrentDirectory
       !outputFile:inSourceFile.string
@@ -195,7 +212,6 @@ private proc compileProject
       !targetParameters:semanticContext.mTargetParameters
       !globalVariables:globalVariableIRList
     )
-    message "Code generation: " + [tGen string] + "\n" 
   end
 }
 
@@ -249,21 +265,6 @@ private proc addTargetSpecificFiles
         : "This target is not defined in embedded targets"
     end
   end
-#  ioAST.mDeclarationListAST = ast.mDeclarationListAST + ioAST.mDeclarationListAST
-#  ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST
-#  ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
-#  ioAST.mExtendStaticArrayDeclarationAST = ast.mExtendStaticArrayDeclarationAST + ioAST.mExtendStaticArrayDeclarationAST
-#  ioAST.mStandAloneFunctionDeclarationListAST = ast.mStandAloneFunctionDeclarationListAST + ioAST.mStandAloneFunctionDeclarationListAST
-#  ioAST.mRequiredProcListAST = ast.mRequiredProcListAST + ioAST.mRequiredProcListAST
-#  ioAST.mExternProcListAST = ast.mExternProcListAST + ioAST.mExternProcListAST
-#  ioAST.mStandAloneSystemRoutineListAST = ast.mStandAloneSystemRoutineListAST + ioAST.mStandAloneSystemRoutineListAST
-#  ioAST.mGuardListAST = ast.mGuardListAST + ioAST.mGuardListAST
-#  ioAST.mTargetListAST += ast.mTargetListAST
-#  ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
-#  ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
-#  ioAST.mModuleDeclarationListAST = ast.mModuleDeclarationListAST + ioAST.mModuleDeclarationListAST
-#  ioAST.mRequiredModuleListAST = ast.mRequiredModuleListAST + ioAST.mRequiredModuleListAST
-#  ioAST.mCheckTargetListAST = ast.mCheckTargetListAST + ioAST.mCheckTargetListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

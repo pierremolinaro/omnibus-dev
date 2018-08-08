@@ -20,6 +20,8 @@ option plm_options {
 #---
   @bool taskStrictPriorityOrder : '\0', "task-strict-priority-order" -> "Ensure task strict priority order"
  
+  @bool timePasses : '\0', "time-passes" -> "Print the amount of time needed for each pass"
+ 
 #--- Optimization
   @bool optimization_displayDeadCodeElimination : 'z', "display-deadcode-elimination" -> "Display dead code elimination"
   @bool optimization1 : '\0', "O1" -> "Optimization level 1"

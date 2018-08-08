@@ -3593,6 +3593,8 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_5F_displayDea
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_taskStrictPriorityOrder ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_timePasses ;
+
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeDeclarationDependencyGraphFile ;
