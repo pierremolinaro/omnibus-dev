@@ -142,13 +142,6 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !?* # universalMap
     !?formalArguments
   )
-#--- Enter subprogram invocation graph
-#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-#      !routineMangledName
-#      !routineMangledName
-#    ]
-#  end
 #--- Return type
   let returnType = if mReturnTypeName.string == "" then
     @unifiedTypeMap-proxy.null
@@ -161,10 +154,77 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !formalArguments
     !returnType
   ]  
+  ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR.new {
+    !mRoutineNameForGeneration
+    !false # Is not root
+    !false # inWarnIfUnused
+    !formalArguments
+    !returnType
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
+#!  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @externRoutineIR : @abstractRoutineIR {
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  @unifiedTypeMap-proxy mReturnType
+}
+
+#·······················································································································
+
+override method @externRoutineIR enterAccessibleEntities
+   ?!@stringset unused ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#·······················································································································
+
+override method @externRoutineIR svcDeclarationGeneration
+  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
+  ?!@sectionIRlist unused ioSectionList
+  ?!@generationAdds unused ioGenerationAdds
+{
+}
+
+#·······················································································································
+
+override method @externRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "declare"
+  if mReturnType == .null then
+    ioLLVMcode += " void"
+  else
+      ioLLVMcode += " " + [[mReturnType type] llvmTypeName]
+  end
+  ioLLVMcode += " @" + [mRoutineMangledName assemblerRepresentation] + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {
@@ -176,11 +236,11 @@ map @externProcedureMapIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  ioLLVMcode += llvmTitleComment (!"extern functions")
-  for externProc in self do
-    [externProc llvmPrototypeGeneration !?ioLLVMcode]
-  end
-  ioLLVMcode += "\n"
+#  ioLLVMcode += llvmTitleComment (!"extern functions")
+#  for externProc in self do
+#    [externProc llvmPrototypeGeneration !?ioLLVMcode]
+#  end
+#  ioLLVMcode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
