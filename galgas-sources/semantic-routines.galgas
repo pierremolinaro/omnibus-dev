@@ -126,13 +126,12 @@ list @allocaList {
 
 method @routineListIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   for procedure in self do
     ioGenerationAdds.mUniqueIndex = 0
-    [procedure.mRoutine llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+    [procedure.mRoutine llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
 }
 

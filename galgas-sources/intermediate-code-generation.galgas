@@ -62,7 +62,6 @@ method @abstractRoutineIR svcDeclarationGeneration
 
 abstract method @abstractRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 

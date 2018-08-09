@@ -512,7 +512,6 @@ override method @guardUserRoutineIR svcDeclarationGeneration
 
 override method @guardUserRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
@@ -540,7 +539,6 @@ class @guardImplementationRoutineIR : @abstractRoutineIR {
 
 override method @guardImplementationRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {

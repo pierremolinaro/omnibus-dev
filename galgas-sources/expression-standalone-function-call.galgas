@@ -100,7 +100,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     !""
     !mStandaloneFunctionName
     !signature
-    ?let @lstring LLVMInvocationRoutineName
+    ?* # let @lstring LLVMInvocationRoutineName
     ?@routineDescriptor routineDescriptor
     ?*
   ]

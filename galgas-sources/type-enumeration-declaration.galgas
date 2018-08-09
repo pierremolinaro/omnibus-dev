@@ -244,7 +244,6 @@ class @enumToUintRoutineIR : @abstractRoutineIR {
 
 override method @enumToUintRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {

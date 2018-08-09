@@ -153,7 +153,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !""
     !mSandAloneRoutineName
     !calledRoutineSignature
-    ?let @lstring LLVMInvocationRoutineName
+    ?* # let @lstring LLVMInvocationRoutineName
     ?let @routineDescriptor routineDescriptor
     ?let @location unused keyLocation
   ]

@@ -164,7 +164,6 @@ override method @regularRoutineIR svcDeclarationGeneration
 
 override method @regularRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {

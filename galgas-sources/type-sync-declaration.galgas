@@ -342,7 +342,6 @@ override method @syncDeclarationAST enterInContext
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
     !mSyncToolName
-    !{} # mSystemRoutineListAST
     !mGuardListAST
     !false # Do not implement deinit
   }

@@ -252,7 +252,11 @@ private proc generateCodeFiles
 #----------------------------------------- Driver Code
   [inIntermediateCodeStruct.mDriverList generateLLVMDriverCode !?llvmCode]
 #----------------------------------------- Routines
-  [inIntermediateCodeStruct.mRoutineListIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+  [inIntermediateCodeStruct.mRoutineListIR llvmCodeGeneration
+    !?llvmCode
+    !generationContext
+    !?generationAdds
+  ]
 #----------------------------------------- Interrupts
   let undefinedInterruptString = getTargetTextFile (
     !currentDir:inCurrentDirectory
@@ -283,7 +287,7 @@ private proc generateCodeFiles
     generationAdds.mExternFunctionDeclarationSet +=
       !"i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
-#----------------------------------------- SVC
+#----------------------------------------- Routine list
   @sectionIRlist sectionIRlist = {}
   for routine in inIntermediateCodeStruct.mRoutineListIR do
     [routine.mRoutine svcDeclarationGeneration

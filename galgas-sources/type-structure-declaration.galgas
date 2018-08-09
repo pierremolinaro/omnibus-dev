@@ -535,7 +535,6 @@ override method @structureDeclarationAST enterInContext
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
     !mStructureTypeName
-    !mSystemRoutineListAST
     !mGuardListAST
     !mMayImplementDeinit
   }
@@ -665,7 +664,6 @@ method @structurePropertyListAST-element enterPropertyInContext
 
 class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
   @lstring mStructureTypeName
-  @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
 }
@@ -678,13 +676,6 @@ override method @decoratedStructureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureTypeName} type]
-#----------- Analyze system routines
-#  [mSystemRoutineListAST systemRoutineSemanticAnalysis
-#    !receiverType:structureType
-#    !context:inContext
-#    !?temporary:ioTemporaries
-#    !?intermediateCode:ioIntermediateCodeStruct
-#  ]
 #----------- Analyze guards
   [mGuardListAST guardSemanticAnalysis
     !receiverType:structureType
@@ -692,61 +683,6 @@ override method @decoratedStructureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-}
-
-#·······················································································································
-
-method @functionDeclarationListAST-element functionSemanticAnalysis
-  ?structureType:let @PLMType inStructureType
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  var warnIfUnused = true
-  var functionAttributes = @routineAttributes.panicAllowed | .controlRegisterReadable
-  for (attribute) in mFunctionAttributeList do
-    if attribute.string == noUnusedWarningAttribute () then
-      if not warnIfUnused then
-        error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
-      end
-      warnIfUnused = false    
-    elsif attribute.string == userAccessAttribute () then
-      if [functionAttributes directPropertyAccess] then
-        error attribute : "duplicated @" + userAccessAttribute () + " attribute"
-      end
-      functionAttributes = functionAttributes | .directPropertyAccess   
-    elsif attribute.string == safeAttribute () then
-      if not [functionAttributes panicAllowed] then
-        error attribute : "duplicated @" + safeAttribute () + " attribute"
-      end
-      functionAttributes = functionAttributes - .panicAllowed   
-    elsif attribute.string == mutatingAttribute () then
-      if [functionAttributes mutating] then
-        error attribute : "duplicated @" + mutatingAttribute () + " attribute"
-      end
-      functionAttributes = functionAttributes | .mutating    
-    else
-      error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
-        + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
-    end
-  end
-#    accessProperties = function.mMode != .userMode
-  routineSemanticAnalysis (
-    !receiverType:inStructureType
-    !.function {!executionMode:mMode}
-    !mMode
-    !mFunctionName
-    !mFunctionFormalArgumentList
-    !returnTypeName:mFunctionReturnTypeName
-    !mFunctionInstructionList
-    !mEndOfFunctionDeclaration
-    !routineAttributes:functionAttributes
-    !warnIfUnused:warnIfUnused
-    !globalFunction:false
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -853,4 +789,3 @@ proc generateLLVMcodeForStructure
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-

@@ -177,7 +177,6 @@ class @externRoutineIR : @abstractRoutineIR {
 
 override method @externRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
