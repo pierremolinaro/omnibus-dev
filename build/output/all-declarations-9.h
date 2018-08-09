@@ -429,6 +429,18 @@ class GALGAS_string function_llvmNameForGuardCall (const class GALGAS_string & c
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                       Function 'guardUserMangledNameFromAST'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardUserMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                           const class GALGAS_lstring & constinArgument1,
+                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

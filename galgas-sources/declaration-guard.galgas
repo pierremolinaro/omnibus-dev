@@ -98,22 +98,22 @@ func llvmNameForGuardCall ?let @string inName -> @string {
 
 #·······················································································································
 
-#func guardUserMangledNameFromAST ?let @string inReceiverTypeName
-#                                 ?let @lstring inGuardName
-#                                 ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
-#{
-#  var s = "guard.call.func."
-#  if inReceiverTypeName != "" then
-#    s += inReceiverTypeName + "."
-#  end
-#  s += inGuardName.string
-#  s += "("
-#  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
-#    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-#  end
-#  s += ")"
-#  result = .new {!s !inGuardName.location}
-#}
+func guardUserMangledNameFromAST ?let @string inReceiverTypeName
+                                 ?let @lstring inGuardName
+                                 ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+{
+  var s = "guard.user."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
 
 #·······················································································································
 
@@ -121,7 +121,7 @@ func llvmNameForGuardCall ?let @string inName -> @string {
 #                                  ?let @lstring inGuardName
 #                                  ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
 #{
-#  var s = "guard.user.func."
+#  var s = "guard.user."
 #  if inReceiverTypeName != "" then
 #    s += inReceiverTypeName + "."
 #  end
@@ -239,7 +239,7 @@ method @guardDeclarationListAST guardSemanticAnalysis
 
 proc guardSemanticAnalysis
   ?receiverType:let @PLMType inSelfType
-  ?let @lstring inRoutineName
+  ?let @lstring inGuardName
   ?let @routineFormalArgumentListAST inRoutineFormalArgumentList
   ?let @guardKind inGuardKind
   ?let @instructionListAST inRoutineInstructionList
@@ -250,9 +250,9 @@ proc guardSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Guard mangled name
-  let guardMangledName = routineMangledNameFromAST (
+  let guardMangledName = guardUserMangledNameFromAST (
     !if inSelfType.kind == .void then "" else inSelfType.plmTypeDescriptionName end
-    !inRoutineName
+    !inGuardName
     !inRoutineFormalArgumentList
   )
 #--- Variable map
@@ -266,7 +266,7 @@ proc guardSemanticAnalysis
   switch inGuardKind
   case baseGuard :
   #--- Add 'accept" output variable
-    let resultVarName = @lstring.new {!acceptVariablePLMName() !inRoutineName.location}
+    let resultVarName = @lstring.new {!acceptVariablePLMName() !inGuardName.location}
     [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType ?2*]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
@@ -345,7 +345,7 @@ proc guardSemanticAnalysis
     !instructionGenerationList
     !inWarnIfUnused
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
-    !.new {!llvmNameForGuardCall (!guardMangledName) !guardMangledName}
+    !guardMangledName #.new {!llvmNameForGuardCall (!guardMangledName) !guardMangledName}
     !false # Is not root
     !inWarnIfUnused
     !llvmNameForGuardImplementation (!guardMangledName)
@@ -560,12 +560,14 @@ override method @guardUserRoutineIR svcDeclarationGeneration
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
 {
+  let name = [mRoutineMangledName assemblerRepresentation]
+  log name
   switch mGuardKindGenerationIR
   case convenienceGuard (* * * *) :
-    ioPrimitiveAndServiceList += !mRoutineMangledName !mMangledImplementationGuardName !false
+    ioPrimitiveAndServiceList += !name !mMangledImplementationGuardName !false
   case baseGuard :
     ioSectionList +=
-      !mRoutineMangledName
+      !name
       !mMangledImplementationGuardName
       !true # Only invocation from user mode
   end
@@ -582,10 +584,12 @@ override method @guardUserRoutineIR llvmCodeGeneration
   ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   let prototype = llvmFunctionPrototype (
     !"i1" # Boolean
-    !mRoutineMangledName
+    ![mRoutineMangledName assemblerRepresentation]
     !mReceiverType
     !mFormalArgumentListForGeneration
   )
+  log prototype
+  log mRoutineMangledName
   ioLLVMcode += "declare " + prototype + "\n\n"
 }
 
