@@ -717,46 +717,6 @@ class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Class for element of '@guardMapIR' map                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cMapElement_guardMapIR : public cMapElement {
-//--- Map attributes
-  public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_PLMType mProperty_mReceiverType ;
-  public : GALGAS_lstring mProperty_mGuardName ;
-  public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
-  public : GALGAS_allocaList mProperty_mAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
-  public : GALGAS_bool mProperty_mWarnIfUnused ;
-
-//--- Constructor
-  public : cMapElement_guardMapIR (const GALGAS_lstring & inKey,
-                                   const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                   const GALGAS_PLMType & in_mReceiverType,
-                                   const GALGAS_lstring & in_mGuardName,
-                                   const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
-                                   const GALGAS_allocaList & in_mAllocaList,
-                                   const GALGAS_instructionListIR & in_mInstructionGenerationList,
-                                   const GALGAS_bool & in_mWarnIfUnused
-                                   COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cMapElement * copy (void) ;
-
-//--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            @guardMapIR_2D_element struct                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -867,6 +827,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapIR_2D_eleme
 
 void extensionMethod_guardCodeGeneration (const class GALGAS_guardMapIR inObject,
                                           class GALGAS_string & io_ioLLVMcode,
+                                          class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
                                           class GALGAS_sectionIRlist & io_ioSectionList,
                                           const class GALGAS_generationContext constin_inGenerationContext,
                                           class GALGAS_generationAdds & io_ioGenerationAdds,
@@ -3800,58 +3761,4 @@ void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_propertyMap 
                                                        const class GALGAS_bool constin_inCanMutateProperties,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      @constructorValue enum, associated values                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_constructorValue_simple : public cEnumAssociatedValues {
-  public : const GALGAS_bigint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_constructorValue_simple (const GALGAS_bigint & inAssociatedValue0
-                                                          COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_constructorValue_simple (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_constructorValue_structure : public cEnumAssociatedValues {
-  public : const GALGAS_sortedOperandIRList mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_constructorValue_structure (const GALGAS_sortedOperandIRList & inAssociatedValue0
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_constructorValue_structure (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_constructorValue_arrayValue : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
-  public : const GALGAS_uint mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_PLMType & inAssociatedValue0,
-                                                              const GALGAS_uint & inAssociatedValue1
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_constructorValue_arrayValue (void) {}
-} ;
 

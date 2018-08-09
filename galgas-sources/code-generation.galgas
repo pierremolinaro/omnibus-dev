@@ -293,8 +293,9 @@ private proc generateCodeFiles
     ]
   end
 #----------------------------------------- Guards
-  [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
+  [inIntermediateCodeStruct.mGuardListIR guardCodeGeneration
     !?llvmCode
+    !?primitiveAndServiceList
     !?sectionIRlist
     !generationContext
     !?generationAdds

@@ -7,7 +7,6 @@
 struct @intermediateCodeStruct {
   @staticEntityMap mStaticEntityMap
   @globalConstantMapIR mGlobalConstantMap
-  @guardMapIR mGuardMapIR
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
@@ -23,6 +22,7 @@ struct @intermediateCodeStruct {
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
 #--- Routines
+  @guardMapIR mGuardListIR
   @routineListIR mRoutineListIR
 }
 
