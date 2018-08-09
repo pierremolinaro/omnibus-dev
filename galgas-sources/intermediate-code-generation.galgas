@@ -22,7 +22,6 @@ struct @intermediateCodeStruct {
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
 #--- Routines
-  @guardMapIR mGuardListIR
   @routineListIR mRoutineListIR
 }
 
