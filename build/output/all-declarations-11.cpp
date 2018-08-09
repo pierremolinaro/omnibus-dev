@@ -9,6 +9,76 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                        Once function 'llvmAttributeFunction'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompiler */
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string (" nounwind minsize optsize ") ;
+//---
+  return result_result ;
+}
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//  Function implementation                                                                                            *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static bool gOnceFunctionResultAvailable_llvmAttributeFunction = false ;
+static GALGAS_string gOnceFunctionResult_llvmAttributeFunction ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_llvmAttributeFunction) {
+    gOnceFunctionResult_llvmAttributeFunction = onceFunction_llvmAttributeFunction (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmAttributeFunction = true ;
+  }
+  return gOnceFunctionResult_llvmAttributeFunction ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void releaseOnceFunctionResult_llvmAttributeFunction (void) {
+  gOnceFunctionResult_llvmAttributeFunction.drop () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (NULL,
+                                                                   releaseOnceFunctionResult_llvmAttributeFunction) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//  Function introspection                                                                                             *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static const C_galgas_type_descriptor * functionArgs_llvmAttributeFunction [1] = {
+  NULL
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static GALGAS_object functionWithGenericHeader_llvmAttributeFunction (C_Compiler * inCompiler,
+                                                                      const cObjectArray & /* inEffectiveParameterArray */,
+                                                                      const GALGAS_location & /* inErrorLocation */
+                                                                      COMMA_LOCATION_ARGS) {
+  return function_llvmAttributeFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_galgas_function_descriptor functionDescriptor_llvmAttributeFunction ("llvmAttributeFunction",
+                                                                       functionWithGenericHeader_llvmAttributeFunction,
+                                                                       & kTypeDescriptor_GALGAS_string,
+                                                                       0,
+                                                                       functionArgs_llvmAttributeFunction) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                           Once function 'staticAttribute'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4724,36 +4794,36 @@ void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
                                GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_uint var_maxBranchOfOnInstructions_2157 = GALGAS_uint ((uint32_t) 0U) ;
-  GALGAS_routineAccessibilityIR var_routineAccessibilityIR_2210 = GALGAS_routineAccessibilityIR::constructor_emptyList (SOURCE_FILE ("code-optimisation.galgas", 49)) ;
-  cEnumerator_routineListIR enumerator_2304 (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), kENUMERATION_UP) ;
-  while (enumerator_2304.hasCurrentObject ()) {
-    GALGAS_stringset var_accessibleRoutineSet_2343 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 52)) ;
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_2304.current (HERE).getter_mRoutine (HERE).ptr (), var_accessibleRoutineSet_2343, var_maxBranchOfOnInstructions_2157, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 53)) ;
-    var_routineAccessibilityIR_2210.addAssign_operation (enumerator_2304.current (HERE).getter_mRoutine (HERE), var_accessibleRoutineSet_2343  COMMA_SOURCE_FILE ("code-optimisation.galgas", 54)) ;
-    enumerator_2304.gotoNextObject () ;
+  GALGAS_uint var_maxBranchOfOnInstructions_1861 = GALGAS_uint ((uint32_t) 0U) ;
+  GALGAS_routineAccessibilityIR var_routineAccessibilityIR_1914 = GALGAS_routineAccessibilityIR::constructor_emptyList (SOURCE_FILE ("code-optimisation.galgas", 39)) ;
+  cEnumerator_routineListIR enumerator_2008 (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), kENUMERATION_UP) ;
+  while (enumerator_2008.hasCurrentObject ()) {
+    GALGAS_stringset var_accessibleRoutineSet_2047 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 42)) ;
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_2008.current (HERE).getter_mRoutine (HERE).ptr (), var_accessibleRoutineSet_2047, var_maxBranchOfOnInstructions_1861, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 43)) ;
+    var_routineAccessibilityIR_1914.addAssign_operation (enumerator_2008.current (HERE).getter_mRoutine (HERE), var_accessibleRoutineSet_2047  COMMA_SOURCE_FILE ("code-optimisation.galgas", 44)) ;
+    enumerator_2008.gotoNextObject () ;
   }
   const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeRoutineInvocationGraphFile.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_routineInvocationGraph var_routineInvocationGraph_2672 = GALGAS_routineInvocationGraph::constructor_emptyGraph (SOURCE_FILE ("code-optimisation.galgas", 58)) ;
-    cEnumerator_routineAccessibilityIR enumerator_2744 (var_routineAccessibilityIR_2210, kENUMERATION_UP) ;
-    while (enumerator_2744.hasCurrentObject ()) {
+    GALGAS_routineInvocationGraph var_routineInvocationGraph_2376 = GALGAS_routineInvocationGraph::constructor_emptyGraph (SOURCE_FILE ("code-optimisation.galgas", 48)) ;
+    cEnumerator_routineAccessibilityIR enumerator_2448 (var_routineAccessibilityIR_1914, kENUMERATION_UP) ;
+    while (enumerator_2448.hasCurrentObject ()) {
       {
-      var_routineInvocationGraph_2672.setter_addNode (enumerator_2744.current_mRoutine (HERE).getter_mRoutineMangledName (HERE), enumerator_2744.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 60)) ;
+      var_routineInvocationGraph_2376.setter_addNode (enumerator_2448.current_mRoutine (HERE).getter_mRoutineMangledName (HERE), enumerator_2448.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 50)) ;
       }
-      cEnumerator_stringset enumerator_2877 (enumerator_2744.current_mAccessibleRoutineSet (HERE), kENUMERATION_UP) ;
-      while (enumerator_2877.hasCurrentObject ()) {
+      cEnumerator_stringset enumerator_2581 (enumerator_2448.current_mAccessibleRoutineSet (HERE), kENUMERATION_UP) ;
+      while (enumerator_2581.hasCurrentObject ()) {
         {
-        var_routineInvocationGraph_2672.setter_addEdge (enumerator_2744.current_mRoutine (HERE).getter_mRoutineMangledName (HERE), GALGAS_lstring::constructor_new (enumerator_2877.current (HERE), enumerator_2744.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_location (SOURCE_FILE ("code-optimisation.galgas", 62))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 62)) COMMA_SOURCE_FILE ("code-optimisation.galgas", 62)) ;
+        var_routineInvocationGraph_2376.setter_addEdge (enumerator_2448.current_mRoutine (HERE).getter_mRoutineMangledName (HERE), GALGAS_lstring::constructor_new (enumerator_2581.current (HERE), enumerator_2448.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_location (SOURCE_FILE ("code-optimisation.galgas", 52))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 52)) COMMA_SOURCE_FILE ("code-optimisation.galgas", 52)) ;
         }
-        enumerator_2877.gotoNextObject () ;
+        enumerator_2581.gotoNextObject () ;
       }
-      enumerator_2744.gotoNextObject () ;
+      enumerator_2448.gotoNextObject () ;
     }
-    GALGAS_string var_s_3022 = var_routineInvocationGraph_2672.getter_graphviz (SOURCE_FILE ("code-optimisation.galgas", 65)) ;
-    GALGAS_string var_filePath_3075 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 66)) ;
-    GALGAS_bool joker_3169 ; // Joker input parameter
-    var_s_3022.method_writeToFileWhenDifferentContents (var_filePath_3075, joker_3169, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 67)) ;
+    GALGAS_string var_s_2726 = var_routineInvocationGraph_2376.getter_graphviz (SOURCE_FILE ("code-optimisation.galgas", 55)) ;
+    GALGAS_string var_filePath_2779 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 56)) ;
+    GALGAS_bool joker_2873 ; // Joker input parameter
+    var_s_2726.method_writeToFileWhenDifferentContents (var_filePath_2779, joker_2873, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 57)) ;
   }
 }
 

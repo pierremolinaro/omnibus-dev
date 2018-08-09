@@ -725,6 +725,7 @@ class cMapElement_guardMapIR : public cMapElement {
 //--- Map attributes
   public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
   public : GALGAS_PLMType mProperty_mReceiverType ;
+  public : GALGAS_lstring mProperty_mGuardName ;
   public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
   public : GALGAS_allocaList mProperty_mAllocaList ;
   public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
@@ -734,6 +735,7 @@ class cMapElement_guardMapIR : public cMapElement {
   public : cMapElement_guardMapIR (const GALGAS_lstring & inKey,
                                    const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                    const GALGAS_PLMType & in_mReceiverType,
+                                   const GALGAS_lstring & in_mGuardName,
                                    const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                    const GALGAS_allocaList & in_mAllocaList,
                                    const GALGAS_instructionListIR & in_mInstructionGenerationList,
@@ -767,6 +769,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_PLMType mProperty_mReceiverType ;
 
+  public : GALGAS_lstring mProperty_mGuardName ;
+
   public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
 
   public : GALGAS_allocaList mProperty_mAllocaList ;
@@ -789,6 +793,7 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_guardMapIR_2D_element (const GALGAS_lstring & in_lkey,
                                          const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                          const GALGAS_PLMType & in_mReceiverType,
+                                         const GALGAS_lstring & in_mGuardName,
                                          const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                          const GALGAS_allocaList & in_mAllocaList,
                                          const GALGAS_instructionListIR & in_mInstructionGenerationList,
@@ -808,10 +813,11 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_guardMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                       const class GALGAS_routineFormalArgumentListIR & inOperand1,
                                                                       const class GALGAS_PLMType & inOperand2,
-                                                                      const class GALGAS_guardKindGenerationIR & inOperand3,
-                                                                      const class GALGAS_allocaList & inOperand4,
-                                                                      const class GALGAS_instructionListIR & inOperand5,
-                                                                      const class GALGAS_bool & inOperand6
+                                                                      const class GALGAS_lstring & inOperand3,
+                                                                      const class GALGAS_guardKindGenerationIR & inOperand4,
+                                                                      const class GALGAS_allocaList & inOperand5,
+                                                                      const class GALGAS_instructionListIR & inOperand6,
+                                                                      const class GALGAS_bool & inOperand7
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -833,6 +839,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGuardName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 

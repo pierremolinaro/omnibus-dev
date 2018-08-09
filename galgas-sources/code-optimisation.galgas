@@ -1,24 +1,14 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #                                                                                                                       
-#    C O D E    O P T I M I S A T I O N                                                                                 
+#    C O D E    O P T I M I Z A T I O N                                                                                 
 #                                                                                                                       
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#struct @accessibleEntities {
-#  @stringset mRoutineSet
-#  @stringset mGuardSet
-#  @stringset mSectionSet
-#  @stringset mGlobalVariableSet
-#  @stringset mTaskVariableSet
-#}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet ?!@uint ioMaxBranchOfOnInstructions {
   for (instruction) in self do
@@ -26,7 +16,7 @@ method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineS
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 graph @routineInvocationGraph (@stringlist) {
   insert addNode error message "the '%K' symbol is already declared at %L"
