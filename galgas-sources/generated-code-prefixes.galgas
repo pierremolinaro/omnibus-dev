@@ -19,23 +19,6 @@ func registerGroupNameFromPLMname ?let @lstring inName -> @lstring {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! Names for invocation graph
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @luint inPriority -> @lstring {
-#  var s = "setup " + inReceiverTypeName
-#  s += " " + inPriority.uint
-#  result = .new {!s !inPriority.location}
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func panicNameForInvocationGraph ?let @string inName ?let @lbigint inPriority -> @lstring {
-#  let s = "panic " + inName + " " + inPriority.bigint
-#  result = .new {!s !inPriority.location}
-#}
-#
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  Literal Strings
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -128,7 +111,7 @@ func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForPrimitiveCall ?let @string inName -> @string {
-  result = ["primitive.call." + inName assemblerRepresentation]
+  result = ["primitive.user." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -142,7 +125,7 @@ func llvmNameForPrimitiveImplementation ?let @string inName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceCall ?let @string inName -> @string {
-  result = ["service.call." + inName assemblerRepresentation]
+  result = ["service.user." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -156,7 +139,7 @@ func llvmNameForServiceImplementation ?let @string inName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForSectionCall ?let @string inName -> @string {
-  result = ["section.call." + inName assemblerRepresentation]
+  result = ["section.user." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

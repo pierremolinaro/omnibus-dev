@@ -193,7 +193,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !""
     !.void
     !routineMangledName
-    !LLVMInvocationRoutineName
+    !routineDescriptor.nameForLLVMGeneration
     !routineKindIR
     !effectiveParameterListIR
   }
@@ -315,7 +315,6 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
       }
     #---
-    #  let isPublic = routineDescriptor.mIsPublic
       let routineKind = routineDescriptor.routineKind
       let calleeMode = [routineKind executionMode]
       let formalSignature = routineDescriptor.signature

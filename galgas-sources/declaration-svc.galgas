@@ -119,6 +119,70 @@ method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTy
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   UTILITIES                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
+                                  ?let @routineKind inKind
+                                  ?let @lstring inGuardName
+                                  ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+{
+  @string s
+  switch inKind 
+  case section :
+    s = "section"
+  case service :
+    s = "service"
+  case primitive :
+    s = "primitive"
+  case function (*) :
+    s = "???"
+  end
+  s += ".user."
+  if inReceiverLLVMBaseTypeName != "" then
+    s += inReceiverLLVMBaseTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
+                                            ?let @routineKind inKind
+                                            ?let @lstring inGuardName
+                                            ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+{
+  @string s
+  switch inKind 
+  case section :
+    s = "section"
+  case service :
+    s = "service"
+  case primitive :
+    s = "primitive"
+  case function (*) :
+    s = "???"
+  end
+  s += ".implementation."
+  if inReceiverLLVMBaseTypeName != "" then
+    s += inReceiverLLVMBaseTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -386,6 +450,82 @@ proc generatePrimitiveAndServiceDispatcher
     ioAssemblerCode += s
   end
   ioAssemblerCode += "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! SYSTEM USER ROUTINE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @systemUserRoutineIR : @abstractRoutineIR {
+  @string mMangledImplementationName
+  @routineTypedSignature mFormalArgumentList
+  @unifiedTypeMap-proxy mReceiverTypeProxy
+  @bool mIsSection # If false, service or primitive
+  @unifiedTypeMap-proxy mReturnTypeProxy
+}
+
+#·······················································································································
+
+override method @systemUserRoutineIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioInvokedRoutineSet += !mMangledImplementationName
+}
+
+#·······················································································································
+
+override method @systemUserRoutineIR svcDeclarationGeneration
+  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
+  ?!@sectionIRlist ioSectionList
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let userMangledName = [mRoutineMangledName assemblerRepresentation]
+  let implementationMangledName = [mMangledImplementationName assemblerRepresentation]
+  if mIsSection then
+    ioSectionList += !userMangledName !implementationMangledName !false
+  else
+    ioPrimitiveAndServiceList += !userMangledName !implementationMangledName !false
+  end
+}
+
+#·······················································································································
+
+override method @systemUserRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "declare "
+  if mReturnTypeProxy == .null then
+    ioLLVMcode += "void"
+  else
+    ioLLVMcode += [[mReturnTypeProxy type] llvmTypeName]
+  end
+  ioLLVMcode += " @" + [mRoutineMangledName assemblerRepresentation] + " ("
+  var first = true
+  if mReceiverTypeProxy != .null then
+    ioLLVMcode += [[mReceiverTypeProxy type] llvmTypeName] + "* %receiver"
+    first = false
+  end
+  for () in mFormalArgumentList do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
+    switch mFormalArgumentPassingMode
+    case input :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName]
+    case output :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "*"
+   case inputOutput :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "*"
+    end
+  end
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; §\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

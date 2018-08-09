@@ -280,12 +280,14 @@ override method @structureDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
+#---------------------------------------- Self type proxy
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mStructureTypeName ?let selfTypeProxy]
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
@@ -343,9 +345,16 @@ override method @structureDeclarationAST enterInContext
     end
     let exportedRoutine = [attributeSet hasKey !exportedAttribute ()]
     let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !mLLVMBaseTypeName 
+  #--- Routine mangled names
+    let userRoutineMangledName = systemUserMangledNameFromAST (
+      !mLLVMBaseTypeName
+      !system.mRoutineKind
+      !system.mName
+      !system.mFormalArgumentList
+    )
+    let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
+      !mLLVMBaseTypeName
+      !system.mRoutineKind
       !system.mName
       !system.mFormalArgumentList
     )
@@ -355,29 +364,94 @@ override method @structureDeclarationAST enterInContext
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
   #--- Attributes
     var mutating = false
-    var safe = false
+    var noUnusedWarning = false
+    var isSafe = false
     for (attribute) in system.mAttributeList do
-      if attribute.string == mutatingAttribute () then
+      if attribute.string == noUnusedWarningAttribute () then
+        if noUnusedWarning then
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
+        end
+        noUnusedWarning = true    
+      elsif attribute.string == mutatingAttribute () then
+        if mutating then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
+        end
         mutating = true    
       elsif attribute.string == safeAttribute () then
-        safe = true    
+        if isSafe then
+          error attribute : "duplicated @" + safeAttribute () + " attribute" fixit { remove }
+        end
+        isSafe = true    
+      else
+        error attribute 
+        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
+        fixit { remove }
       end
     end
   #--- Routine descriptor
+    var s = ""
+    if mLLVMBaseTypeName.string != "" then
+      s += mLLVMBaseTypeName.string + "."
+    end
+    s += system.mName.string
+    s += "("
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in system.mFormalArgumentList do
+      s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    end
+    s += ")"
     let descriptor = @routineDescriptor.new {
       !isPublic:system.mPublic
       !exported:exportedRoutine
       !name:system.mName
-      !nameForLLVMGeneration:routineMangledName
+      !nameForLLVMGeneration:s # userRoutineMangledName
       !routineKind:system.mRoutineKind
       !signature:signature
       !returnTypeProxy:returnTypeProxy
       !canAccessProperties:true
       !canMutateProperties:canMutateProperties
-      !safe:safe
+      !safe:isSafe
     }
   #--- Enter in structure map
+    let routineMangledName = routineMangledNameFromAST (
+      !mLLVMBaseTypeName
+      !system.mName
+      !system.mFormalArgumentList
+    )
     [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
+  #--- 
+    ioRoutineListIR += !@systemUserRoutineIR.new {
+      !userRoutineMangledName
+      !false
+      !false
+      !implementationRoutineMangledName
+      !signature
+      !selfTypeProxy
+      !system.mRoutineKind == .section # If false, service or primitive
+      !returnTypeProxy
+    }
+    @mode mode
+    switch system.mRoutineKind
+    case section : mode = .sectionMode
+    case primitive : mode = .primitiveMode
+    case service : mode = .serviceMode
+    case function (*) : error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
+    end
+    @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
+    if not isSafe then
+      attributes = attributes | .panicAllowed
+    end
+    ioDecoratedRoutineList +=
+      !mStructureTypeName
+      !mode
+      !.function {!executionMode: mode}
+      !noUnusedWarning
+      !true # mExportedRoutine
+      !attributes
+      !implementationRoutineMangledName
+      !system.mFormalArgumentList
+      !system.mInstructionList
+      !system.mEndOfInstructionListLocation
+      !system.mReturnTypeName  # Empty string if no returned value
   end
 #---------------------------------------- Enter guards in guard map
   @guardMapForContext guardMap = {}
@@ -604,28 +678,13 @@ override method @decoratedStructureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureTypeName} type]
-##----------- Analyze functions
-#  for function in mFunctionDeclarationListAST do
-#    var functionHasUserAccess = false
-#    for (attribute) in function.mFunctionAttributeList while not functionHasUserAccess do
-#      functionHasUserAccess = attribute.string == userAccessAttribute ()
-#    end
-#    if not functionHasUserAccess then
-#      [function functionSemanticAnalysis
-#        !structureType:structureType
-#        !context:inContext
-#        !?temporary:ioTemporaries
-#        !?intermediateCode:ioIntermediateCodeStruct
-#      ]
-#    end
-#  end
 #----------- Analyze system routines
-  [mSystemRoutineListAST systemRoutineSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
+#  [mSystemRoutineListAST systemRoutineSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
 #----------- Analyze guards
   [mGuardListAST guardSemanticAnalysis
     !receiverType:structureType

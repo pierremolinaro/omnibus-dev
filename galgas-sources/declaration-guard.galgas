@@ -86,12 +86,6 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 #!   UTILITIES                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func llvmNameForGuardImplementation ?let @string inName -> @string {
-#  result = ["guard.implementation." + inName assemblerRepresentation]
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func guardUserMangledNameFromAST ?let @string inReceiverTypeName
                                  ?let @lstring inGuardName
                                  ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring

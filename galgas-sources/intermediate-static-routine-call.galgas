@@ -43,11 +43,11 @@ override method @standaloneRoutineCallIR llvmInstructionCode
   for () in mArgumentList do
     switch mEffectiveParameterPassingMode
     case input:
-      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]
     case output:
       ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
     case outputInput:
-      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]
     end
   between
     ioLLVMcode += ", "

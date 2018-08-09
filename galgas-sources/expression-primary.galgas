@@ -638,7 +638,7 @@ private proc handleFunctionCallInExpression
         !""
         !callReturnedResult
         !routineMangledName
-        !routineMangledName # LLVMInvocationRoutineName
+        !routineDescriptor.nameForLLVMGeneration  # routineMangledName # LLVMInvocationRoutineName
         !calleeKind
         !effectiveParameterListIR
       }
