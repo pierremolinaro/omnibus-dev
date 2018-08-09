@@ -21,7 +21,7 @@ map @propertyMap {
 #·······················································································································
 
 setter @propertyMap addFunctionWithoutArgument
-  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
+  ?!@routineListIR unused ioRoutineListIR
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
@@ -61,7 +61,7 @@ setter @propertyMap addFunctionWithoutArgument
 
 setter @propertyMap addFunctionWithInputArgument
   ?!context:@semanticContext ioContext
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR unused ioRoutineListIR
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
@@ -107,7 +107,7 @@ setter @propertyMap addFunctionWithInputArgument
 
 setter @propertyMap addFunctionWithTwoInputArguments
   ?!context:@semanticContext ioContext
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR unused ioRoutineListIR
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe

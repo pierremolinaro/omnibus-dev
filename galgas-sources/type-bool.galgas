@@ -43,7 +43,7 @@ override method @booleanDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
@@ -54,7 +54,7 @@ override method @booleanDeclarationAST enterInContext
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]
 #--- Add uint1 accessor
   [!?propertyMap addFunctionWithoutArgument
-    !?ioSubprogramInvocationGraph
+    !?ioRoutineListIR
     !llvmBaseTypeName:boolTypeName ()
     !methodName:"uint1"
     !safe:true

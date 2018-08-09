@@ -5781,7 +5781,7 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GALGAS_control
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                       Abstract extension method '@abstractRoutineIR svcDeclarationGeneration'                       *
+//                           Extension method '@abstractRoutineIR svcDeclarationGeneration'                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5796,25 +5796,12 @@ void enterExtensionMethod_svcDeclarationGeneration (const int32_t inClassIndex,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static void freeExtensionMethod_abstractRoutineIR_svcDeclarationGeneration (void) {
-  gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration.free () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_abstractRoutineIR_svcDeclarationGeneration (NULL,
-                                                                       freeExtensionMethod_abstractRoutineIR_svcDeclarationGeneration) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 void callExtensionMethod_svcDeclarationGeneration (const cPtr_abstractRoutineIR * inObject,
                                                    GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
                                                    GALGAS_sectionIRlist & io_ioSectionList,
                                                    GALGAS_generationAdds & io_ioGenerationAdds,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
   if (NULL != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractRoutineIR) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
@@ -5824,14 +5811,14 @@ void callExtensionMethod_svcDeclarationGeneration (const cPtr_abstractRoutineIR 
       f = gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
-      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-      while ((NULL == f) && (NULL != p)) {
-        if (p->mSlotID < gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration.count ()) {
-          f = gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration (p->mSlotID COMMA_HERE) ;
-        }
-        p = p->mSuperclassDescriptor ;
-      }
-      gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration.count ()) {
+           f = gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
@@ -5840,6 +5827,33 @@ void callExtensionMethod_svcDeclarationGeneration (const cPtr_abstractRoutineIR 
     }
   }
 }
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_abstractRoutineIR_svcDeclarationGeneration (const cPtr_abstractRoutineIR * /* inObject */,
+                                                                        GALGAS_primitiveAndServiceIRlist & /* ioArgument_ioPrimitiveAndServiceList */,
+                                                                        GALGAS_sectionIRlist & /* ioArgument_ioSectionList */,
+                                                                        GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
+                                                                        C_Compiler * /* inCompiler */
+                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+}
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_abstractRoutineIR_svcDeclarationGeneration (void) {
+  enterExtensionMethod_svcDeclarationGeneration (kTypeDescriptor_GALGAS_abstractRoutineIR.mSlotID,
+                                                 extensionMethod_abstractRoutineIR_svcDeclarationGeneration) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void freeExtensionMethod_abstractRoutineIR_svcDeclarationGeneration (void) {
+  gExtensionMethodTable_abstractRoutineIR_svcDeclarationGeneration.free () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_abstractRoutineIR_svcDeclarationGeneration (defineExtensionMethod_abstractRoutineIR_svcDeclarationGeneration,
+                                                                       freeExtensionMethod_abstractRoutineIR_svcDeclarationGeneration) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -5906,7 +5920,7 @@ void callExtensionMethod_llvmCodeGeneration (const cPtr_abstractRoutineIR * inOb
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                       Abstract extension method '@abstractRoutineIR enterAccessibleEntities'                        *
+//                            Extension method '@abstractRoutineIR enterAccessibleEntities'                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5921,24 +5935,11 @@ void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static void freeExtensionMethod_abstractRoutineIR_enterAccessibleEntities (void) {
-  gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities.free () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_abstractRoutineIR_enterAccessibleEntities (NULL,
-                                                                      freeExtensionMethod_abstractRoutineIR_enterAccessibleEntities) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractRoutineIR * inObject,
                                                   GALGAS_stringset & io_ioInvokedRoutineSet,
                                                   GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
   if (NULL != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractRoutineIR) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
@@ -5948,14 +5949,14 @@ void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractRoutineIR *
       f = gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
-      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-      while ((NULL == f) && (NULL != p)) {
-        if (p->mSlotID < gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities.count ()) {
-          f = gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
-        }
-        p = p->mSuperclassDescriptor ;
-      }
-      gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities.count ()) {
+           f = gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
@@ -5964,6 +5965,32 @@ void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractRoutineIR *
     }
   }
 }
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_abstractRoutineIR_enterAccessibleEntities (const cPtr_abstractRoutineIR * /* inObject */,
+                                                                       GALGAS_stringset & /* ioArgument_ioInvokedRoutineSet */,
+                                                                       GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
+                                                                       C_Compiler * /* inCompiler */
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+}
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_abstractRoutineIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_abstractRoutineIR.mSlotID,
+                                                extensionMethod_abstractRoutineIR_enterAccessibleEntities) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void freeExtensionMethod_abstractRoutineIR_enterAccessibleEntities (void) {
+  gExtensionMethodTable_abstractRoutineIR_enterAccessibleEntities.free () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_abstractRoutineIR_enterAccessibleEntities (defineExtensionMethod_abstractRoutineIR_enterAccessibleEntities,
+                                                                      freeExtensionMethod_abstractRoutineIR_enterAccessibleEntities) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Object comparison                                                                                                 *

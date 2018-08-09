@@ -52,10 +52,12 @@ abstract class @abstractRoutineIR {
 
 #·······················································································································
 
-abstract method @abstractRoutineIR svcDeclarationGeneration
-  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
-  ?!@sectionIRlist ioSectionList
-  ?!@generationAdds ioGenerationAdds
+method @abstractRoutineIR svcDeclarationGeneration
+  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
+  ?!@sectionIRlist unused ioSectionList
+  ?!@generationAdds unused ioGenerationAdds
+{
+}
 
 #·······················································································································
 
@@ -67,9 +69,11 @@ abstract method @abstractRoutineIR llvmCodeGeneration
 
 #·······················································································································
 
-abstract method @abstractRoutineIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
-   ?!@uint ioMaxBranchOfOnInstructions
+method @abstractRoutineIR enterAccessibleEntities
+   ?!@stringset unused ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

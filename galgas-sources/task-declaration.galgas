@@ -195,7 +195,7 @@ method @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR ioRoutineListIR
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
 {
@@ -272,7 +272,7 @@ method @taskListAST enterInContext
     end
   #---- Add activate function
     [!?propertyMap addFunctionWithoutArgument
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:task.mTaskName
       !methodName:"activate"
       !safe:true

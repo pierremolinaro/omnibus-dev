@@ -105,7 +105,7 @@ override method @enumerationDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
@@ -133,7 +133,7 @@ override method @enumerationDeclarationAST enterInContext
     !.new {!"$uint" + representationBitCount !mEnumerationName}
   }
   [!?propertyMap addFunctionWithoutArgument
-    !?ioSubprogramInvocationGraph
+    !?ioRoutineListIR
     !llvmBaseTypeName:mEnumerationName
     !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
     !safe:true
@@ -159,6 +159,19 @@ override method @enumerationDeclarationAST enterInContext
   ]
 #---------------- Infix operators
   enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
+#---------------- Enumeration functions
+#--- Conversion to uintN
+  let conversionToUIntN = routineMangledNameFromAST (
+    !mEnumerationName
+    !.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !.nowhere}
+    !{}
+  )
+  ioRoutineListIR += !@enumToUintRoutineIR.new {
+    !conversionToUIntN
+    !false
+    !false
+    ![enumerationType llvmTypeName]
+  }
 }
 
 #·······················································································································
@@ -207,30 +220,40 @@ proc enterEnumerationComparisonOperators
 
 proc generateLLVMcodeForEnumeration
   ?!@string ioLLVMcode
-  ?!@generationAdds unused ioGenerationAdds
   ?let @PLMType inType
-  ?let @uint inBitCount
 {
   let llvmTypeName = [inType llvmTypeName]
   let llvmBaseTypeName = inType.llvmBaseTypeName
-#--- Conversion to uintN
-  let routineMangledName = routineMangledNameFromAST (
-    !llvmBaseTypeName
-    !.new {!integerEnumAccessorName (!forBitCount:inBitCount) !.nowhere}
-    !{}
-  )
-  let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal " + llvmTypeName + "  @" + routineLLVMName + " (" + llvmTypeName + "* %inValue) nounwind {\n"
-  ioLLVMcode += "  %r = load " + llvmTypeName + ", " + llvmTypeName + "* %inValue\n"
-  ioLLVMcode += "  ret " + llvmTypeName + " %r\n"
-  ioLLVMcode += "}\n\n"
+  ioLLVMcode += llvmTitleComment (!"@plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName)
 #--- Assignment
   ioLLVMcode += "define internal void @plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName
   ioLLVMcode += " (" + llvmTypeName + "* %target, " + llvmTypeName + "*%source) {\n"
   ioLLVMcode += "  %value = load " + llvmTypeName + ", " + llvmTypeName + "* %source\n"
   ioLLVMcode += "  store " + llvmTypeName + " %value, " + llvmTypeName + "* %target\n"
   ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
+class @enumToUintRoutineIR : @abstractRoutineIR {
+  @string mEnumerationLLVMTypeName
+}
+
+#·······················································································································
+
+override method @enumToUintRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let routineLLVMName = llvmNameForFunction (!mRoutineMangledName.string)
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "define internal " + mEnumerationLLVMTypeName + "  @" + routineLLVMName
+  ioLLVMcode += " (" + mEnumerationLLVMTypeName + "* %inValue) nounwind {\n"
+  ioLLVMcode += "  %r = load " + mEnumerationLLVMTypeName + ", " + mEnumerationLLVMTypeName + "* %inValue\n"
+  ioLLVMcode += "  ret " + mEnumerationLLVMTypeName + " %r\n"
   ioLLVMcode += "}\n\n"
 }
 

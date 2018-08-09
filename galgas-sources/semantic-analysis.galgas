@@ -99,12 +99,14 @@ proc semanticAnalysis
   ?ast:let @ast inAST
   ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
   ?decoratedRoutineList: let @decoratedRegularRoutineList inDecoratedRoutineList
+  ?routineListIR:let @routineListIR inRoutineListIR
   ?context:let @semanticContext inSemanticContext
   ?endOfSourceFile:let @location inEndOfSourceFile
   ?staticEntityMap:let @staticEntityMap inStaticEntityMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
 {
   outIntermediateCodeStruct = .default
+  outIntermediateCodeStruct.mRoutineListIR = inRoutineListIR
   outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
   outIntermediateCodeStruct.mStaticEntityMap = inStaticEntityMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList

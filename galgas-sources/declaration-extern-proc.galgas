@@ -175,23 +175,6 @@ class @externRoutineIR : @abstractRoutineIR {
 
 #·······················································································································
 
-override method @externRoutineIR enterAccessibleEntities
-   ?!@stringset unused ioInvokedRoutineSet
-   ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#·······················································································································
-
-override method @externRoutineIR svcDeclarationGeneration
-  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
-  ?!@sectionIRlist unused ioSectionList
-  ?!@generationAdds unused ioGenerationAdds
-{
-}
-
-#·······················································································································
-
 override method @externRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string unused ioAssemblerCode
@@ -236,12 +219,7 @@ map @externProcedureMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
-#  ioLLVMcode += llvmTitleComment (!"extern functions")
-#  for externProc in self do
-#    [externProc llvmPrototypeGeneration !?ioLLVMcode]
-#  end
-#  ioLLVMcode += "\n"
+method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcode {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

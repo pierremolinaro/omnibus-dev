@@ -143,10 +143,10 @@ private proc compileProject
   @staticEntityMap globalLiteralStringMap = .default
   @staticListInitializationMap staticListValueMap = {}
   ast.mDeclarationListAST = orderedDeclarationListAST
-  @subprogramInvocationGraph subprogramInvocationGraph = .emptyGraph
   @declarationDecorationList decoratedDeclarationList = {}
   @decoratedRegularRoutineList decoratedRoutineList = {}
   @globalVariableIRList globalVariableIRList = {}
+  @routineListIR routineListIR = {}
   if @uint.errorCount == 0 then
     let @timer t = .start 
     buildSemanticContext (
@@ -155,9 +155,9 @@ private proc compileProject
       !?staticEntityMap:globalLiteralStringMap
       !?staticlistValues:staticListValueMap
       ?context:semanticContext
-      ?subprogramInvocationGraph
       ?decoratedDeclarationList
       ?decoratedRoutineList
+      ?routineListIR
       ?globalVariableIRList
     )
     if [option plm_options.timePasses value] then
@@ -173,6 +173,7 @@ private proc compileProject
       !ast:ast
       !decoratedDeclarationList:decoratedDeclarationList
       !decoratedRoutineList: decoratedRoutineList
+      !routineListIR:routineListIR
       !context:semanticContext
       !endOfSourceFile:inEndOfSourceFile
       !staticEntityMap:globalLiteralStringMap

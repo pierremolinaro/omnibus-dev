@@ -157,7 +157,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
@@ -171,9 +171,9 @@ proc buildSemanticContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   !context:@semanticContext outSemanticContext
-  !@subprogramInvocationGraph outSubprogramInvocationGraph
   !@declarationDecorationList outDecoratedDeclarationList
   !@decoratedRegularRoutineList outDecoratedRoutineList
+  !@routineListIR outRoutineListIR
   !@globalVariableIRList outGlobalVariableIRList
 {
   outSemanticContext = .default
@@ -189,8 +189,8 @@ proc buildSemanticContext
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
 #---
-  outSubprogramInvocationGraph = .emptyGraph
   outGlobalVariableIRList = {}
+  outRoutineListIR = {}
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
@@ -198,7 +198,7 @@ proc buildSemanticContext
       !?context:outSemanticContext
       !?outDecoratedDeclarationList
       !?outDecoratedRoutineList
-      !?outSubprogramInvocationGraph
+      !?outRoutineListIR
       !?staticlistValues:ioStaticListValueMap
       !?staticEntityMap:ioStaticEntityMap
       !?globalVariables:outGlobalVariableIRList
@@ -229,7 +229,7 @@ proc buildSemanticContext
      !?context: outSemanticContext
      !?outDecoratedDeclarationList
      !?outDecoratedRoutineList
-     !?outSubprogramInvocationGraph
+     !?outRoutineListIR
      !?staticEntityMap:ioStaticEntityMap
      !?globalVariables:outGlobalVariableIRList
    ]

@@ -629,7 +629,7 @@ void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                       Abstract extension method '@abstractRoutineIR svcDeclarationGeneration'                       *
+//                           Extension method '@abstractRoutineIR svcDeclarationGeneration'                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -656,7 +656,7 @@ void callExtensionMethod_svcDeclarationGeneration (const class cPtr_abstractRout
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                       Abstract extension method '@abstractRoutineIR enterAccessibleEntities'                        *
+//                            Extension method '@abstractRoutineIR enterAccessibleEntities'                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

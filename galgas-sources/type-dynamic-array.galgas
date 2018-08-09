@@ -60,7 +60,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
@@ -96,7 +96,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @propertyMap propertyMap = {}
   #--- Method 'removeAll()'
     [!?propertyMap addFunctionWithoutArgument
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"removeAll"
       !safe:false
@@ -105,7 +105,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
   #--- Method 'length()'
     [!?propertyMap addFunctionWithoutArgument
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"length"
       !safe:false
@@ -115,7 +115,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #--- Method 'append(?:)'
     [!?propertyMap addFunctionWithInputArgument
       !?context:ioContext
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"append"
       !safe:false
@@ -128,7 +128,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #--- Method 'insert(?:?atIndex:)'
     [!?propertyMap addFunctionWithTwoInputArguments
       !?context:ioContext
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"insert"
       !safe:false

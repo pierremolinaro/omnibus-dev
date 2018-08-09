@@ -98,7 +98,7 @@ override method @integerDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
@@ -114,7 +114,7 @@ override method @integerDeclarationAST enterInContext
   @propertyMap propertyMap = {}
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
     [!?propertyMap addFunctionWithoutArgument
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:integerTypeName
       !methodName:byteSwappedMethodName ()
       !safe:true
@@ -124,7 +124,7 @@ override method @integerDeclarationAST enterInContext
   end
   if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
     [!?propertyMap addFunctionWithoutArgument
-      !?ioSubprogramInvocationGraph
+      !?ioRoutineListIR
       !llvmBaseTypeName:integerTypeName
       !methodName:boolTypeName ()
       !safe:true
@@ -133,7 +133,7 @@ override method @integerDeclarationAST enterInContext
     ]
   end
   [!?propertyMap addFunctionWithoutArgument
-    !?ioSubprogramInvocationGraph
+    !?ioRoutineListIR
     !llvmBaseTypeName:integerTypeName
     !methodName:bitReversedMethodName ()
     !safe:true
@@ -141,7 +141,7 @@ override method @integerDeclarationAST enterInContext
     !canMutateProperties:false
   ]
   [!?propertyMap addFunctionWithoutArgument
-    !?ioSubprogramInvocationGraph
+    !?ioRoutineListIR
     !llvmBaseTypeName:integerTypeName
     !methodName:countLeadingZerosMethodName ()
     !safe:true
@@ -149,7 +149,7 @@ override method @integerDeclarationAST enterInContext
     !canMutateProperties:false
   ]
   [!?propertyMap addFunctionWithoutArgument
-    !?ioSubprogramInvocationGraph
+    !?ioRoutineListIR
     !llvmBaseTypeName:integerTypeName
     !methodName:countTrainingZerosMethodName ()
     !safe:true
@@ -157,7 +157,7 @@ override method @integerDeclarationAST enterInContext
     !canMutateProperties:false
   ]
   [!?propertyMap addFunctionWithoutArgument
-    !?ioSubprogramInvocationGraph
+    !?ioRoutineListIR
     !llvmBaseTypeName:integerTypeName
     !methodName:setBitCountMethodName ()
     !safe:true

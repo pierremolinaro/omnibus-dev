@@ -541,9 +541,9 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
                                    class GALGAS_staticEntityMap & ioArgument2,
                                    class GALGAS_staticListInitializationMap & ioArgument3,
                                    class GALGAS_semanticContext & outArgument4,
-                                   class GALGAS_subprogramInvocationGraph & outArgument5,
-                                   class GALGAS_declarationDecorationList & outArgument6,
-                                   class GALGAS_decoratedRegularRoutineList & outArgument7,
+                                   class GALGAS_declarationDecorationList & outArgument5,
+                                   class GALGAS_decoratedRegularRoutineList & outArgument6,
+                                   class GALGAS_routineListIR & outArgument7,
                                    class GALGAS_globalVariableIRList & outArgument8,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
@@ -634,12 +634,22 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                const class GALGAS_ast constinArgument1,
                                const class GALGAS_declarationDecorationList constinArgument2,
                                const class GALGAS_decoratedRegularRoutineList constinArgument3,
-                               const class GALGAS_semanticContext constinArgument4,
-                               const class GALGAS_location constinArgument5,
-                               const class GALGAS_staticEntityMap constinArgument6,
-                               class GALGAS_intermediateCodeStruct & outArgument7,
+                               const class GALGAS_routineListIR constinArgument4,
+                               const class GALGAS_semanticContext constinArgument5,
+                               const class GALGAS_location constinArgument6,
+                               const class GALGAS_staticEntityMap constinArgument7,
+                               class GALGAS_intermediateCodeStruct & outArgument8,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              Function 'panicModeName'                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -651,15 +661,6 @@ class GALGAS_lstring function_panicNameForInvocationGraph (const class GALGAS_st
                                                            const class GALGAS_lbigint & constinArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                              Function 'panicModeName'                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

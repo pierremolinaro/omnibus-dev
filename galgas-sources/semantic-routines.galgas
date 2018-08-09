@@ -10,12 +10,6 @@ list @routineFormalArgumentListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-graph @subprogramInvocationGraph (@lstringlist) {
-  insert addNode error message "the '%K' routine is already declared at %L"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
