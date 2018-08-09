@@ -98,7 +98,6 @@ override method @syncToolInstanceDeclarationAST enterInContext
   [mSourceExpression analyzeExpression
      !self:voidType ()
      !routineAttributes:.none
-     !routineNameForInvocationGraph:["compiler" nowhere]
      !optionalTargetType:optionalSyncType
      !context:ioContext
      !mode:.bootMode

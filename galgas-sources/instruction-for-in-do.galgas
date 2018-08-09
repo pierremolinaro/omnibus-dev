@@ -80,7 +80,6 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 override method @forInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -114,7 +113,6 @@ override method @forInstructionAST instructionSemanticAnalysis
   [mWhileExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
@@ -138,7 +136,6 @@ override method @forInstructionAST instructionSemanticAnalysis
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_for_instruction
     !context:inContext
     !mode:inCurrentMode

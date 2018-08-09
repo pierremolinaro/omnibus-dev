@@ -22,19 +22,19 @@ func registerGroupNameFromPLMname ?let @lstring inName -> @lstring {
 #! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @luint inPriority -> @lstring {
-  var s = "setup " + inReceiverTypeName
-  s += " " + inPriority.uint
-  result = .new {!s !inPriority.location}
-}
+#func setupNameForInvocationGraph ?let @string inReceiverTypeName ?let @luint inPriority -> @lstring {
+#  var s = "setup " + inReceiverTypeName
+#  s += " " + inPriority.uint
+#  result = .new {!s !inPriority.location}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func panicNameForInvocationGraph ?let @string inName ?let @lbigint inPriority -> @lstring {
-  let s = "panic " + inName + " " + inPriority.bigint
-  result = .new {!s !inPriority.location}
-}
-
+#func panicNameForInvocationGraph ?let @string inName ?let @lbigint inPriority -> @lstring {
+#  let s = "panic " + inName + " " + inPriority.bigint
+#  result = .new {!s !inPriority.location}
+#}
+#
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  Literal Strings
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -420,7 +420,6 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 abstract method @expressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -444,7 +443,6 @@ method @expressionAST analyzeStaticExpression
   [self analyzeExpression
     !self:voidType ()
     !routineAttributes:.none
-    !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:.bootMode

@@ -40,7 +40,6 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 override method @panicInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -58,7 +57,6 @@ override method @panicInstructionAST instructionSemanticAnalysis
   [mCodeExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !mode:inCurrentMode

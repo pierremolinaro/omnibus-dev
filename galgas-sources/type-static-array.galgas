@@ -92,7 +92,6 @@ override method @staticArrayTypeDeclarationAST enterInContext
   [mSizeExpression analyzeExpression
     !self:voidType ()
     !routineAttributes:.none
-    !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode

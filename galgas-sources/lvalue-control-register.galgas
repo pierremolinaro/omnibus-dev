@@ -110,7 +110,6 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ?writeAccess:let @bool inWriteAccess
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -189,7 +188,6 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       handleArraySubscriptNew (
         !self: inSelfType
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
         !mode: inMode
         !?temporary: ioTemporaries
@@ -224,7 +222,6 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries

@@ -150,7 +150,6 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 override method @syncInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -168,7 +167,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes: inRoutineAttributes | .guard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
         !mode:inMode
@@ -199,7 +197,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
       [exp analyzeExpression
         !self:inSelfType
         !routineAttributes:.guard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:voidType ()
         !context:inContext
         !mode:inMode
@@ -244,7 +241,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
             !receiver:currentObject
             !guardName:guardName
             !effective:parameterList
-            !callerForInvocationGraph:inCallerNameForInvocationGraph
             !context:inContext
             !requiredMode:inMode
             !?temporary:ioTemporaries
@@ -262,7 +258,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
           !routineAttributes:inRoutineAttributes
           !guardName:[nameList mValueAtIndex !0]
           !effective:parameterList
-          !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries
@@ -297,7 +292,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
           !receiver:currentObjectIR
           !guardName:guardName
           !effective:parameterList
-          !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries
@@ -341,7 +335,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext
       !mode:inMode
@@ -366,7 +359,6 @@ proc analyzeGuardCall
   ?receiver:let @objectIR inReceiver
   ?guardName:let @lstring inGuardName
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -399,7 +391,6 @@ proc analyzeGuardCall
       !formal:formalSignature
       !effective:inEffectiveParameterList
       !errorLocation:inGuardName.location
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !requiredMode:inRequiredMode
       !?temporary:ioTemporaries
@@ -419,7 +410,6 @@ proc analyzeStandaloneGuardCall
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?guardName:let @lstring inGuardName
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -458,7 +448,6 @@ proc analyzeStandaloneGuardCall
     !formal:formalSignature
     !effective:inEffectiveParameterList
     !errorLocation:inGuardName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredMode:inRequiredMode
     !?temporary:ioTemporaries

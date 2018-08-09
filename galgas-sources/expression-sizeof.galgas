@@ -86,7 +86,6 @@ override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
 override method @sizeofExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
@@ -122,7 +121,6 @@ override method @sizeofExpressionAST analyzeExpression
 override method @sizeofTypeAST analyzeExpression
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode

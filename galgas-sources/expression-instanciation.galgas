@@ -41,7 +41,6 @@ override method @instanciationAST addDependenceEdgeForStaticExpression
 
 override method @instanciationAST analyzeExpression
   ?self:let @PLMType inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -63,7 +62,6 @@ override method @instanciationAST analyzeExpression
 override method @instanciationAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?inGuard:let @bool unused inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode

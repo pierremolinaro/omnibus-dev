@@ -288,7 +288,6 @@ proc guardSemanticAnalysis
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
       !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
-      !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.guardMode
       !?temporary:ioTemporaries
@@ -309,7 +308,6 @@ proc guardSemanticAnalysis
     [baseGuardInstruction baseGuardAnalyze 
       !self:inSelfType
       !routineAttributes:.mutating | .directPropertyAccess
-      !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
       !?temporary:ioTemporaries
@@ -321,7 +319,6 @@ proc guardSemanticAnalysis
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
       !routineAttributes: .mutating | .directPropertyAccess | .panicAllowed
-      !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
       !?temporary:ioTemporaries
@@ -360,7 +357,6 @@ proc guardSemanticAnalysis
 abstract method @callInstructionAST baseGuardAnalyze
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -373,7 +369,6 @@ abstract method @callInstructionAST baseGuardAnalyze
 override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
@@ -389,7 +384,6 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
 override method @procedureCallInstructionAST baseGuardAnalyze
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -491,7 +485,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !formal:formalSignature
           !effective:mArguments
           !errorLocation:methodName.location
-          !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries

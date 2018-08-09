@@ -57,7 +57,6 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -74,7 +73,6 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
     !mode:inCurrentMode

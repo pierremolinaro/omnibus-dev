@@ -114,7 +114,6 @@ override method @typeOpaqueDeclarationAST enterInContext
   [mSizeExpression analyzeExpression
     !self:voidType ()
     !routineAttributes:.none
-    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode

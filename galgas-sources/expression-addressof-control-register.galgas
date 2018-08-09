@@ -53,7 +53,6 @@ override method @addressofControlRegisterAST noteExpressionTypesInPrecedenceGrap
 override method @addressofControlRegisterAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -68,7 +67,6 @@ override method @addressofControlRegisterAST analyzeExpression
     !writeAccess:false
     !self: inSelfType
     !routineAttributes: inRoutineAttributes
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
     !mode: inMode
     !?temporary: ioTemporaries

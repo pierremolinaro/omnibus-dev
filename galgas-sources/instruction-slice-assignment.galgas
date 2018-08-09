@@ -113,7 +113,6 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
 override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -138,7 +137,6 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:resultType
     !context:inContext
     !mode:inCurrentMode
@@ -239,7 +237,6 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
         !self: inSelfType
         !readAccess:false
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
         !mode: inCurrentMode
         !?temporary: ioTemporaries

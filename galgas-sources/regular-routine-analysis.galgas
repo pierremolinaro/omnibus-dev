@@ -70,7 +70,6 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   [mRoutineInstructionList analyzeRoutineInstructionList
     !self:receiverType
     !routineAttributes:mRoutineAttributes
-    !routineNameForInvocationGraph:mRoutineMangledName
     !context:inContext
     !mode:mMode
     !?temporary:ioTemporaries

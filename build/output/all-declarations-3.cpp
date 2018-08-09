@@ -2343,10 +2343,10 @@ void extensionMethod_guardCodeGeneration (const GALGAS_guardMapIR inObject,
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_guardMapIR temp_0 = inObject ;
-  cEnumerator_guardMapIR enumerator_24736 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_24736.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_24736.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 620)) ;
-    enumerator_24736.gotoNextObject () ;
+  cEnumerator_guardMapIR enumerator_24269 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_24269.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_24269.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 613)) ;
+    enumerator_24269.gotoNextObject () ;
   }
 }
 

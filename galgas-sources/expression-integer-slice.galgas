@@ -89,7 +89,6 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
 override method @integerSliceExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -143,7 +142,6 @@ override method @integerSliceExpressionAST analyzeExpression
         [expression analyzeExpression
           !self:inSelfType
           !routineAttributes:inRoutineAttributes
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !optionalTargetType:expressionTargetType
           !context:inContext
           !mode:inCurrentMode

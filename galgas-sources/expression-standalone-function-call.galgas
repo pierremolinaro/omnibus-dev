@@ -77,7 +77,6 @@ override method @standaloneFunctionInExpressionAST noteExpressionTypesInPreceden
 override method @standaloneFunctionInExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -128,7 +127,6 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !formal:formalSignature
       !effective:mArguments
       !errorLocation:mStandaloneFunctionName.location
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !requiredMode:inCurrentMode
       !?temporary:ioTemporaries

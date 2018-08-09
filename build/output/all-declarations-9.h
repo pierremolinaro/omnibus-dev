@@ -344,17 +344,6 @@ void routine_setupSemanticAnalysis (const class GALGAS_semanticContext constinAr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Function 'setupNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_setupNameForInvocationGraph (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_luint & constinArgument1,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                          Function 'llvmFunctionPrototype'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -462,15 +451,14 @@ void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgum
                                          const class GALGAS_routineTypedSignature constinArgument2,
                                          const class GALGAS_effectiveArgumentListAST constinArgument3,
                                          const class GALGAS_location constinArgument4,
-                                         const class GALGAS_lstring constinArgument5,
-                                         const class GALGAS_semanticContext constinArgument6,
-                                         const class GALGAS_mode constinArgument7,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument8,
-                                         class GALGAS_staticEntityMap & ioArgument9,
-                                         class GALGAS_universalValuedObjectMap & ioArgument10,
-                                         class GALGAS_allocaList & ioArgument11,
-                                         class GALGAS_instructionListIR & ioArgument12,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument13,
+                                         const class GALGAS_semanticContext constinArgument5,
+                                         const class GALGAS_mode constinArgument6,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                         class GALGAS_staticEntityMap & ioArgument8,
+                                         class GALGAS_universalValuedObjectMap & ioArgument9,
+                                         class GALGAS_allocaList & ioArgument10,
+                                         class GALGAS_instructionListIR & ioArgument11,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -662,17 +650,6 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 
 class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'panicNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_panicNameForInvocationGraph (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_lbigint & constinArgument1,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

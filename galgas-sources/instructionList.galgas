@@ -74,7 +74,6 @@ boolset @routineAttributes {
 abstract method @instructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -88,7 +87,6 @@ abstract method @instructionAST instructionSemanticAnalysis
 method @instructionListAST analyzeBranchInstructionList
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -105,7 +103,6 @@ method @instructionListAST analyzeBranchInstructionList
     [mInstruction instructionSemanticAnalysis 
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !mode:inCurrentMode
       !?temporary:ioTemporaries
@@ -124,7 +121,6 @@ method @instructionListAST analyzeBranchInstructionList
 method @instructionListAST analyzeRoutineInstructionList
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -138,7 +134,6 @@ method @instructionListAST analyzeRoutineInstructionList
     [mInstruction instructionSemanticAnalysis 
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !mode:inCurrentMode
       !?temporary:ioTemporaries

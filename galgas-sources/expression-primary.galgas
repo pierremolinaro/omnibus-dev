@@ -151,7 +151,6 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -170,7 +169,6 @@ override method @primaryInExpressionAST analyzeExpression
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !optionalTargetType: inOptionalTargetType
         !context: inContext
         !mode: inMode
@@ -188,7 +186,6 @@ override method @primaryInExpressionAST analyzeExpression
     [self analyzePrimaryExpressionWithSelf
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -207,7 +204,6 @@ override method @primaryInExpressionAST analyzeExpression
 method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -225,7 +221,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -245,7 +240,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -264,7 +258,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -282,7 +275,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -300,7 +292,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -317,7 +308,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
@@ -337,7 +327,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 proc procAnalyzeAccesListInExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -375,7 +364,6 @@ proc procAnalyzeAccesListInExpression
         !endOfIndex
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
         !mode:inMode
@@ -393,7 +381,6 @@ proc procAnalyzeAccesListInExpression
           !methodName
           !?ioResult
           !self:inSelfType
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !mode:inMode
           !routineAttributes:inRoutineAttributes
@@ -414,7 +401,6 @@ proc procAnalyzeAccesListInExpression
 method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -453,7 +439,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !endOfIndex
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
         !mode:inMode
@@ -471,7 +456,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
           !methodName
           !?outResult
           !self:inSelfType
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !mode:inMode
           !routineAttributes:inRoutineAttributes
@@ -550,7 +534,6 @@ private proc handleArrayAccessInExpression
   ?let @location inEndOfIndex
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -566,7 +549,6 @@ private proc handleArrayAccessInExpression
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
       !mode: inMode
       !?temporary: ioTemporaries
@@ -580,8 +562,6 @@ private proc handleArrayAccessInExpression
       !?ioInstructionGenerationList
       ?let @objectIR indexIR
     )
-#    [!?ioTemporaries newTempLLVMVar ?let llvmName]
-#    let result = @objectIR.reference {!type:elementType !llvmName:llvmName}
     [!?ioInstructionGenerationList appendGetArrayElementReference
       !?temporary: ioTemporaries
       !arrayReference:ioResult
@@ -600,7 +580,6 @@ private proc handleFunctionCallInExpression
   ?let @lstring inMethodName
   ?!@objectIR ioObjectIR
   ?self:let @PLMType inSelfType
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?routineAttributes:let @routineAttributes inRoutineAttributes
@@ -642,7 +621,6 @@ private proc handleFunctionCallInExpression
         !formal:routineDescriptor.signature
         !effective:inArguments
         !errorLocation:inMethodName.location
-        !callerForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
         !requiredMode:inMode
         !?temporary:ioTemporaries
@@ -695,7 +673,6 @@ private proc handleFunctionCallInExpression
           !formal:descriptor.signature
           !effective:inArguments
           !errorLocation:inMethodName.location
-          !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !requiredMode:inMode
           !?temporary:ioTemporaries

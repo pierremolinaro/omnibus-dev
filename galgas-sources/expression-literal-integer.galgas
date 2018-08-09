@@ -49,7 +49,6 @@ override method @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGr
 override method @literalIntegerInExpressionAST analyzeExpression
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode

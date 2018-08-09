@@ -140,7 +140,6 @@ override method @decoratedPanicRoutine semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -159,7 +158,6 @@ override method @decoratedPanicRoutine semanticAnalysis
   [mPanicInstructionList analyzeRoutineInstructionList
     !self:voidType ()
     !routineAttributes:.none
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !mode:.panicMode
     !?temporary:ioTemporaries

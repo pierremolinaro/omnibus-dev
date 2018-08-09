@@ -73,7 +73,6 @@ override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@s
 override method @truncateExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -88,7 +87,6 @@ override method @truncateExpressionAST analyzeExpression
   [mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode

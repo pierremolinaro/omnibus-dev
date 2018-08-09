@@ -78,7 +78,6 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 override method @switchInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -92,7 +91,6 @@ override method @switchInstructionAST instructionSemanticAnalysis
   [mSwitchExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
@@ -137,7 +135,6 @@ override method @switchInstructionAST instructionSemanticAnalysis
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:mEndOf_switch_instruction
       !context:inContext
       !mode:inCurrentMode

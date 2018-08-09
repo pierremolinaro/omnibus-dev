@@ -55,7 +55,6 @@ override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 override method @whileInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -69,7 +68,6 @@ override method @whileInstructionAST instructionSemanticAnalysis
   [m_while_Expression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
@@ -96,7 +94,6 @@ override method @whileInstructionAST instructionSemanticAnalysis
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
     !context:inContext
     !mode:inCurrentMode

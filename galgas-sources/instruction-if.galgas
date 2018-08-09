@@ -98,7 +98,6 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 override method @ifInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -111,7 +110,6 @@ override method @ifInstructionAST instructionSemanticAnalysis
   [mTestExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
@@ -140,7 +138,6 @@ override method @ifInstructionAST instructionSemanticAnalysis
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
     !mode:inCurrentMode
@@ -155,7 +152,6 @@ override method @ifInstructionAST instructionSemanticAnalysis
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext
     !mode:inCurrentMode

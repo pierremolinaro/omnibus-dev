@@ -67,7 +67,6 @@ override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInP
 override method @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -81,7 +80,6 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !writeAccess:true
     !self: inSelfType
     !routineAttributes: inRoutineAttributes
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
     !mode: inMode
     !?temporary: ioTemporaries
@@ -98,7 +96,6 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:registerType
     !context:inContext
     !mode:inMode

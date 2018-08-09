@@ -362,7 +362,6 @@ override method @staticListAST enterInContext
             [exp analyzeExpression
               !self:voidType ()
               !routineAttributes:.none
-              !routineNameForInvocationGraph:["compiler" nowhere]
               !optionalTargetType:type
               !context:ioContext
               !mode:.bootMode

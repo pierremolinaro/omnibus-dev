@@ -56,7 +56,6 @@ override method @literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGr
 override method @literalBooleanInExpressionAST analyzeExpression
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode

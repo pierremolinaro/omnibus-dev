@@ -500,7 +500,6 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
       [arraySizeExpression analyzeExpression
         !self:voidType ()
         !routineAttributes:.none
-        !routineNameForInvocationGraph:["compiler" nowhere]
         !optionalTargetType:voidType ()
         !context:ioContext
         !mode:.bootMode

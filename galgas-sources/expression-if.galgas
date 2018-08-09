@@ -86,7 +86,6 @@ override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanti
 override method @ifExpressionAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -101,7 +100,6 @@ override method @ifExpressionAST analyzeExpression
   [mIfExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inCurrentMode
@@ -124,7 +122,6 @@ override method @ifExpressionAST analyzeExpression
   [mThenExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inCurrentMode
@@ -149,7 +146,6 @@ override method @ifExpressionAST analyzeExpression
   [mElseExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inCurrentMode

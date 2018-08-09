@@ -73,20 +73,12 @@ proc routineSemanticAnalysis
     !?universalMap
     !?formalArguments
   )
-#--- Enter subprogram invocation graph
-#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-#      !routineMangledName
-#      !routineMangledName
-#    ]
-#  end
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:routineMangledName
     !context:inContext
     !mode:inRoutineMode
     !?temporary:ioTemporaries

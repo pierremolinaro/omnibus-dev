@@ -98,7 +98,6 @@ proc analyzeEffectiveParameters
   ?formal:let @routineTypedSignature inFormalSignature
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?errorLocation:let @location inErrorLocation
-  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -150,7 +149,6 @@ proc analyzeEffectiveParameters
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:[formal_mTypeProxy type]
         !context:inContext
         !mode:inRequiredMode

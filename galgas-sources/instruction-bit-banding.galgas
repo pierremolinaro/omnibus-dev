@@ -61,7 +61,6 @@ override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@
 override method @bitbandInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -81,7 +80,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:requiredSourceExpressionType
     !context:inContext
     !mode:inMode
@@ -113,7 +111,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !writeAccess:false
     !self: inSelfType
     !routineAttributes: inRoutineAttributes
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
     !mode: inMode
     !?temporary: ioTemporaries
@@ -138,7 +135,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   [mBitExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:requiredBitExpressionType
     !context:inContext
     !mode:inMode

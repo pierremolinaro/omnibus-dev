@@ -83,20 +83,10 @@ struct @LValueRepresentation {
 
 #·······················································································································
 
-#getter @LValueRepresentation type -> @PLMType {
-#  switch self
-#  case universalReference (@PLMType type *) :
-#    result = type
-#  end
-#}
-
-#·······················································································································
-
 method @LValueAST analyzeLValue
   ?self:let @PLMType inSelfType
   ?readAccess:let @bool inIsReadAccess # If false, write access
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -117,7 +107,6 @@ method @LValueAST analyzeLValue
       analyzeSelfAssignmentTarget (
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
         !mode:inMode
         !?temporary: ioTemporaries
@@ -150,7 +139,6 @@ method @LValueAST analyzeLValue
         !self: inSelfType
         !readAccess:inIsReadAccess
         !routineAttributes:inRoutineAttributes
-        !routineNameForInvocationGraph: inCallerNameForInvocationGraph
         !context: inContext
         !mode: inMode
         !?temporary: ioTemporaries
@@ -174,7 +162,6 @@ private proc analyzeVariableInLValue
   ?self:let @PLMType inSelfType
   ?readAccess:let @bool inIsReadAccess # If false, write access
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -233,7 +220,6 @@ private proc analyzeVariableInLValue
           handleArraySubscriptNew (
             !self: inSelfType
             !routineAttributes:inRoutineAttributes
-            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
             !context: inContext
             !mode: inMode
             !?temporary: ioTemporaries
@@ -271,7 +257,6 @@ private proc analyzeVariableInLValue
 private proc analyzeSelfAssignmentTarget
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -319,7 +304,6 @@ private proc analyzeSelfAssignmentTarget
           handleArraySubscriptNew (
             !self: inSelfType
             !routineAttributes:inRoutineAttributes
-            !routineNameForInvocationGraph: inCallerNameForInvocationGraph
             !context: inContext
             !mode: inMode
             !?temporary: ioTemporaries

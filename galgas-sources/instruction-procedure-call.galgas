@@ -138,7 +138,6 @@ list @procEffectiveParameterList {
 override method @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -164,8 +163,6 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !mSandAloneRoutineName
     !mArguments
   )
-#--- Enter in invocation graph
-#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
 #--- Check modes
   let routineKindIR = checkMode (
     !callerMode:inCurrentMode
@@ -181,7 +178,6 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !formal:routineDescriptor.signature
     !effective:mArguments
     !errorLocation:mSandAloneRoutineName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredMode:inCurrentMode
     !?temporary:ioTemporaries
@@ -208,7 +204,6 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 override method @procedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -348,7 +343,6 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
           !formal:formalSignature
           !effective:mArguments
           !errorLocation:methodName.location
-          !callerForInvocationGraph:inCallerNameForInvocationGraph
           !context:inContext
           !requiredMode:inCurrentMode
           !?temporary:ioTemporaries
@@ -396,7 +390,6 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
             !formal:descriptor.signature
             !effective:mArguments
             !errorLocation:methodName.location
-            !callerForInvocationGraph:inCallerNameForInvocationGraph
             !context:inContext
             !requiredMode:inCurrentMode
             !?temporary:ioTemporaries
