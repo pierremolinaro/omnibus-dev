@@ -86,17 +86,11 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 #!   UTILITIES                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGuardImplementation ?let @string inName -> @string {
-  result = ["guard.implementation." + inName assemblerRepresentation]
-}
+#func llvmNameForGuardImplementation ?let @string inName -> @string {
+#  result = ["guard.implementation." + inName assemblerRepresentation]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForGuardCall ?let @string inName -> @string {
-  result = ["guard.user." + inName assemblerRepresentation]
-}
-
-#·······················································································································
 
 func guardUserMangledNameFromAST ?let @string inReceiverTypeName
                                  ?let @lstring inGuardName
@@ -117,85 +111,59 @@ func guardUserMangledNameFromAST ?let @string inReceiverTypeName
 
 #·······················································································································
 
-#func guardUserMangledNameFromCall ?let @string inReceiverTypeName
-#                                  ?let @lstring inGuardName
-#                                  ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
-#{
-#  var s = "guard.user."
-#  if inReceiverTypeName != "" then
-#    s += inReceiverTypeName + "."
-#  end
-#  s += inGuardName.string
-#  s += "("
-#  for (passingMode selector) in inEffectiveParameterList do
-#    s += [passingMode matchingFormalArgument] + selector + ":"
-#  end
-#  s += ")"
-#  result = .new {!s !inGuardName.location}
-#}
-
-#·······················································································································
-
-#func guardImplementationMangledNameFromAST ?let @string inReceiverTypeName
-#                                           ?let @lstring inGuardName
-#                                           ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
-#{
-#  var s = "guard."
-#  if inReceiverTypeName != "" then
-#    s += inReceiverTypeName + "."
-#  end
-#  s += inGuardName.string
-#  s += "("
-#  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
-#    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-#  end
-#  s += ")"
-#  result = .new {!s !inGuardName.location}
-#}
-
-#·······················································································································
-
-#func guardImplementationMangledNameFromCall ?let @string inReceiverTypeName
-#                                            ?let @lstring inGuardName
-#                                            ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
-#{
-#  var s = "guard."
-#  if inReceiverTypeName != "" then
-#    s += inReceiverTypeName + "."
-#  end
-#  s += inGuardName.string
-#  s += "("
-#  for (passingMode selector) in inEffectiveParameterList do
-#    s += [passingMode matchingFormalArgument] + selector + ":"
-#  end
-#  s += ")"
-#  result = .new {!s !inGuardName.location}
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   CONTEXT                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @guardDeclarationListAST enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
+func guardUserMangledNameFromCall ?let @string inReceiverTypeName
+                                  ?let @lstring inGuardName
+                                  ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
 {
-  for guard in self do
-  #--- Guard mangled name
-    let guardMangledName = routineMangledNameFromAST (
-      !inReceiverTypeName 
-      !guard.mGuardName
-      !guard.mGuardFormalArgumentList
-    )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
-  #--- Enter in context
-    [!?ioContext.mGuardMapForContext insertKey
-      !guardMangledName
-      !guard.mIsPublic
-      !signature
-    ]
+  var s = "guard.user."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
   end
+  s += inGuardName.string
+  s += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    s += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func guardImplementationMangledNameFromAST ?let @string inReceiverTypeName
+                                           ?let @lstring inGuardName
+                                           ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+{
+  var s = "guard.implementation."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
+}
+
+#·······················································································································
+
+func guardImplementationMangledNameFromCall ?let @string inReceiverTypeName
+                                            ?let @lstring inGuardName
+                                            ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
+{
+  var s = "guard.implementation."
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inGuardName.string
+  s += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    s += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inGuardName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -249,12 +217,6 @@ proc guardSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Guard mangled name
-  let guardMangledName = guardUserMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else inSelfType.plmTypeDescriptionName end
-    !inGuardName
-    !inRoutineFormalArgumentList
-  )
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -332,20 +294,32 @@ proc guardSemanticAnalysis
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !inEndOfRoutineDeclaration]
   [!?universalMap closeOverride !inEndOfRoutineDeclaration]
+#--- Guard mangled name
+  let guardUserMangledName = guardUserMangledNameFromAST (
+    !if inSelfType.kind == .void then "" else inSelfType.llvmBaseTypeName end
+    !inGuardName
+    !inRoutineFormalArgumentList
+  )
+  let guardImplementationMangledName = guardImplementationMangledNameFromAST (
+    !if inSelfType.kind == .void then "" else inSelfType.llvmBaseTypeName end
+    !inGuardName
+    !inRoutineFormalArgumentList
+  )
 #--- Code generation
   ioIntermediateCodeStruct.mGuardListIR +=
-    !guardMangledName
+    !guardUserMangledName
     !formalArguments
     !inSelfType
     !convenienceGuardGenerationIR
     !allocaList
     !instructionGenerationList
     !inWarnIfUnused
+    !guardImplementationMangledName
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
-    !guardMangledName #.new {!llvmNameForGuardCall (!guardMangledName) !guardMangledName}
+    !guardUserMangledName
     !false # Is not root
     !inWarnIfUnused
-    !llvmNameForGuardImplementation (!guardMangledName)
+    !guardImplementationMangledName
     !formalArguments
     !inSelfType
     !convenienceGuardGenerationIR
@@ -446,17 +420,19 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    let @propertyMap propertyMap = currentType.propertyMap
-    let key = routineMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
-    [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
-    switch propertyAccess
-    case singleton  (* errorLocation) :
-      error errorLocation : "a property cannot be used as method" : outConvenienceGuardGenerationIR
-    case constantProperty (*) :
-      error methodName : "a constant cannot be used as method" : outConvenienceGuardGenerationIR
-    case indexed (* *) :
-      error methodName : "a property cannot be used as method" : outConvenienceGuardGenerationIR
-    case nonVirtualMethod (@routineDescriptor routineDescriptor) :
+#    let @propertyMap propertyMap = currentType.propertyMap
+#    let key = routineMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
+#    [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
+    let key = guardUserMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
+    [currentType.guardMap searchKey !key ?* ?let formalSignature] # ?let @propertyAccessKind propertyAccess]
+#    switch propertyAccess
+#    case singleton  (* errorLocation) :
+#      error errorLocation : "a property cannot be used as method" : outConvenienceGuardGenerationIR
+#    case constantProperty (*) :
+#      error methodName : "a constant cannot be used as method" : outConvenienceGuardGenerationIR
+#    case indexed (* *) :
+#      error methodName : "a property cannot be used as method" : outConvenienceGuardGenerationIR
+#    case nonVirtualMethod (@routineDescriptor routineDescriptor) :
     #--- Add receiver as first parameter
       @procCallEffectiveParameterListIR effectiveParameterListIR = {
         !.outputInput
@@ -466,11 +442,11 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     #  let isPublic = routineDescriptor.mIsPublic
 #      let routineKind = routineDescriptor.routineKind
 #      let calleeMode = [routineKind executionMode]
-      let formalSignature = routineDescriptor.signature
+#      let formalSignature = routineDescriptor.signature
     #--- Check routine is actually a procedure (does not return any value)
-      if routineDescriptor.returnTypeProxy != .null then
-        error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
-      else
+#      if routineDescriptor.returnTypeProxy != .null then
+#        error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
+#      else
       #--- Check modes
 #        let calleeKind = checkMode (
 #          !callerMode:inMode
@@ -495,7 +471,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !?effectiveIR:effectiveParameterListIR
         )
       #--- Get function name and map containing the function definition
-        let routineMangledName = routineMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
+        let routineMangledName = guardImplementationMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
       #--- Generate guards
         outConvenienceGuardGenerationIR = .convenienceGuard {
           !baseGuardAllocaList:baseGuardAllocaList
@@ -503,8 +479,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !baseGuardMangledName:routineMangledName.string
           !baseGuardEffectiveParameterList:effectiveParameterListIR
         }
-      end
-    end
+#      end
+#    end
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here" : outConvenienceGuardGenerationIR
   end
@@ -553,15 +529,15 @@ override method @guardUserRoutineIR svcDeclarationGeneration
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
 {
-  let name = [mRoutineMangledName assemblerRepresentation]
-  log name
+  let userMangledName = [mRoutineMangledName assemblerRepresentation]
+  let implementationMangledName = [mMangledImplementationGuardName assemblerRepresentation]
   switch mGuardKindGenerationIR
   case convenienceGuard (* * * *) :
-    ioPrimitiveAndServiceList += !name !mMangledImplementationGuardName !false
+    ioPrimitiveAndServiceList += !userMangledName !implementationMangledName !false
   case baseGuard :
     ioSectionList +=
-      !name
-      !mMangledImplementationGuardName
+      !userMangledName
+      !implementationMangledName
       !true # Only invocation from user mode
   end
 }
@@ -581,8 +557,6 @@ override method @guardUserRoutineIR llvmCodeGeneration
     !mReceiverType
     !mFormalArgumentListForGeneration
   )
-  log prototype
-  log mRoutineMangledName
   ioLLVMcode += "declare " + prototype + "\n\n"
 }
 
@@ -598,6 +572,7 @@ list @guardMapIR {
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mWarnIfUnused
+  @string mGuardImplementationMangledName
 }
 
 #·······················································································································
@@ -621,7 +596,7 @@ method @guardMapIR-element llvmCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
+  let guardRoutineName = [mGuardImplementationMangledName assemblerRepresentation]
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
   let receiverLLVMTypeName = if mReceiverType.kind == .void then
@@ -692,7 +667,7 @@ method @guardMapIR-element llvmCodeGeneration
   case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
     [baseGuardAllocaList generateAllocaList !?ioLLVMcode]
     [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  %invoked.guard.result = call i1 @" + llvmNameForGuardImplementation (!baseGuardMangledName)
+    ioLLVMcode += "  %invoked.guard.result = call i1 @" + [baseGuardMangledName assemblerRepresentation]
     ioLLVMcode += " ("
     for () in baseGuardEffectiveParameterList do
       switch mEffectiveParameterPassingMode

@@ -147,8 +147,6 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !calleeKind
       !effectiveParameterListIR
     }
-  #--- Enter in invocation graph
-#    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   end
 }
 

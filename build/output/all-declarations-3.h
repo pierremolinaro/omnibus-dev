@@ -411,18 +411,6 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_guardDeclara
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Extension method '@guardDeclarationListAST enterInContext'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_enterInContext (const class GALGAS_guardDeclarationListAST inObject,
-                                     const class GALGAS_string constin_inReceiverTypeName,
-                                     class GALGAS_semanticContext & io_ioContext,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                          Extension method '@guardDeclarationListAST guardSemanticAnalysis'                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -726,6 +714,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_mWarnIfUnused ;
 
+  public : GALGAS_string mProperty_mGuardImplementationMangledName ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -743,7 +733,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
                                          const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                          const GALGAS_allocaList & in_mAllocaList,
                                          const GALGAS_instructionListIR & in_mInstructionGenerationList,
-                                         const GALGAS_bool & in_mWarnIfUnused) ;
+                                         const GALGAS_bool & in_mWarnIfUnused,
+                                         const GALGAS_string & in_mGuardImplementationMangledName) ;
 
 //-- Start of generic part --*
 
@@ -762,7 +753,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
                                                                       const class GALGAS_guardKindGenerationIR & inOperand3,
                                                                       const class GALGAS_allocaList & inOperand4,
                                                                       const class GALGAS_instructionListIR & inOperand5,
-                                                                      const class GALGAS_bool & inOperand6
+                                                                      const class GALGAS_bool & inOperand6,
+                                                                      const class GALGAS_string & inOperand7
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -782,6 +774,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGuardImplementationMangledName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIR (LOCATION_ARGS) const ;
 

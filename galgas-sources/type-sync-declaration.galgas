@@ -192,7 +192,7 @@ override method @syncDeclarationAST enterInContext
   @guardMapForContext guardMap = {}
   for guard in mGuardListAST do
   #--- Guard mangled name
-    let guardMangledName = routineMangledNameFromAST (
+    let guardMangledName = guardUserMangledNameFromAST (
       !mSyncToolName
       !guard.mGuardName
       !guard.mGuardFormalArgumentList

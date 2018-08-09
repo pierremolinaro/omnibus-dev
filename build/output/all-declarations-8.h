@@ -352,16 +352,6 @@ class GALGAS_string function_acceptVariablePLMName (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      Function 'llvmNameForGuardImplementation'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForGuardImplementation (const class GALGAS_string & constinArgument0,
-                                                             class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                        Function 'functionResultVariableName'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -617,6 +607,18 @@ void routine_generateLLVMcodeForEnumeration (class GALGAS_string & ioArgument0,
 
 class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'guardUserMangledNameFromAST'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardUserMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                           const class GALGAS_lstring & constinArgument1,
+                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

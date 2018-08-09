@@ -8147,7 +8147,8 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                   const class GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                                   const class GALGAS_allocaList & in_mAllocaList,
                                                   const class GALGAS_instructionListIR & in_mInstructionGenerationList,
-                                                  const class GALGAS_bool & in_mWarnIfUnused
+                                                  const class GALGAS_bool & in_mWarnIfUnused,
+                                                  const class GALGAS_string & in_mGuardImplementationMangledName
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -8169,7 +8170,8 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                                      const class GALGAS_guardKindGenerationIR & inOperand3,
                                                                      const class GALGAS_allocaList & inOperand4,
                                                                      const class GALGAS_instructionListIR & inOperand5,
-                                                                     const class GALGAS_bool & inOperand6
+                                                                     const class GALGAS_bool & inOperand6,
+                                                                     const class GALGAS_string & inOperand7
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -8184,7 +8186,8 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                       const class GALGAS_guardKindGenerationIR & inOperand3,
                                                       const class GALGAS_allocaList & inOperand4,
                                                       const class GALGAS_instructionListIR & inOperand5,
-                                                      const class GALGAS_bool & inOperand6
+                                                      const class GALGAS_bool & inOperand6,
+                                                      const class GALGAS_string & inOperand7
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_guardMapIR add_operation (const GALGAS_guardMapIR & inOperand,
@@ -8204,7 +8207,8 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                        class GALGAS_allocaList constinArgument4,
                                                        class GALGAS_instructionListIR constinArgument5,
                                                        class GALGAS_bool constinArgument6,
-                                                       class GALGAS_uint constinArgument7,
+                                                       class GALGAS_string constinArgument7,
+                                                       class GALGAS_uint constinArgument8,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8215,6 +8219,7 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                   class GALGAS_allocaList & outArgument4,
                                                   class GALGAS_instructionListIR & outArgument5,
                                                   class GALGAS_bool & outArgument6,
+                                                  class GALGAS_string & outArgument7,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -8225,6 +8230,7 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                  class GALGAS_allocaList & outArgument4,
                                                  class GALGAS_instructionListIR & outArgument5,
                                                  class GALGAS_bool & outArgument6,
+                                                 class GALGAS_string & outArgument7,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -8235,7 +8241,8 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                        class GALGAS_allocaList & outArgument4,
                                                        class GALGAS_instructionListIR & outArgument5,
                                                        class GALGAS_bool & outArgument6,
-                                                       class GALGAS_uint constinArgument7,
+                                                       class GALGAS_string & outArgument7,
+                                                       class GALGAS_uint constinArgument8,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8248,6 +8255,7 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                class GALGAS_allocaList & outArgument4,
                                                class GALGAS_instructionListIR & outArgument5,
                                                class GALGAS_bool & outArgument6,
+                                               class GALGAS_string & outArgument7,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -8258,6 +8266,7 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                               class GALGAS_allocaList & outArgument4,
                                               class GALGAS_instructionListIR & outArgument5,
                                               class GALGAS_bool & outArgument6,
+                                              class GALGAS_string & outArgument7,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -8275,6 +8284,10 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGenerationAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                                      C_Compiler * inCompiler
                                                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGuardImplementationMangledNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIRAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                      C_Compiler * inCompiler
@@ -8329,6 +8342,7 @@ class cEnumerator_guardMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
+  public : class GALGAS_string current_mGuardImplementationMangledName (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_guardMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;

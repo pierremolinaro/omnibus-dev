@@ -7971,7 +7971,8 @@ mProperty_mReceiverType (),
 mProperty_mGuardKindGenerationIR (),
 mProperty_mAllocaList (),
 mProperty_mInstructionGenerationList (),
-mProperty_mWarnIfUnused () {
+mProperty_mWarnIfUnused (),
+mProperty_mGuardImplementationMangledName () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7987,14 +7988,16 @@ GALGAS_guardMapIR_2D_element::GALGAS_guardMapIR_2D_element (const GALGAS_lstring
                                                             const GALGAS_guardKindGenerationIR & inOperand3,
                                                             const GALGAS_allocaList & inOperand4,
                                                             const GALGAS_instructionListIR & inOperand5,
-                                                            const GALGAS_bool & inOperand6) :
+                                                            const GALGAS_bool & inOperand6,
+                                                            const GALGAS_string & inOperand7) :
 mProperty_lkey (inOperand0),
 mProperty_mFormalArgumentListForGeneration (inOperand1),
 mProperty_mReceiverType (inOperand2),
 mProperty_mGuardKindGenerationIR (inOperand3),
 mProperty_mAllocaList (inOperand4),
 mProperty_mInstructionGenerationList (inOperand5),
-mProperty_mWarnIfUnused (inOperand6) {
+mProperty_mWarnIfUnused (inOperand6),
+mProperty_mGuardImplementationMangledName (inOperand7) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8005,11 +8008,12 @@ GALGAS_guardMapIR_2D_element GALGAS_guardMapIR_2D_element::constructor_new (cons
                                                                             const GALGAS_guardKindGenerationIR & inOperand3,
                                                                             const GALGAS_allocaList & inOperand4,
                                                                             const GALGAS_instructionListIR & inOperand5,
-                                                                            const GALGAS_bool & inOperand6 
+                                                                            const GALGAS_bool & inOperand6,
+                                                                            const GALGAS_string & inOperand7 
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_guardMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_guardMapIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
+    result = GALGAS_guardMapIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
   }
   return result ;
 }
@@ -8039,13 +8043,16 @@ typeComparisonResult GALGAS_guardMapIR_2D_element::objectCompare (const GALGAS_g
   if (result == kOperandEqual) {
     result = mProperty_mWarnIfUnused.objectCompare (inOperand.mProperty_mWarnIfUnused) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mGuardImplementationMangledName.objectCompare (inOperand.mProperty_mGuardImplementationMangledName) ;
+  }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_guardMapIR_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mReceiverType.isValid () && mProperty_mGuardKindGenerationIR.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mWarnIfUnused.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mReceiverType.isValid () && mProperty_mGuardKindGenerationIR.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mGuardImplementationMangledName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8058,6 +8065,7 @@ void GALGAS_guardMapIR_2D_element::drop (void) {
   mProperty_mAllocaList.drop () ;
   mProperty_mInstructionGenerationList.drop () ;
   mProperty_mWarnIfUnused.drop () ;
+  mProperty_mGuardImplementationMangledName.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8081,6 +8089,8 @@ void GALGAS_guardMapIR_2D_element::description (C_String & ioString,
     mProperty_mInstructionGenerationList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGuardImplementationMangledName.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -8125,6 +8135,12 @@ GALGAS_instructionListIR GALGAS_guardMapIR_2D_element::getter_mInstructionGenera
 
 GALGAS_bool GALGAS_guardMapIR_2D_element::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
   return mProperty_mWarnIfUnused ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_guardMapIR_2D_element::getter_mGuardImplementationMangledName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardImplementationMangledName ;
 }
 
 
@@ -8183,7 +8199,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 728)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 703)) ;
   switch (inObject.mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
@@ -8193,9 +8209,9 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_29573 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_29573->mAssociatedValue1 ;
-      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 732)) ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_28866 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_28866->mAssociatedValue1 ;
+      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 707)) ;
     }
     break ;
   }
