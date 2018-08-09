@@ -813,19 +813,6 @@ void extensionMethod_guardCodeGeneration (const class GALGAS_guardMapIR inObject
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Extension method '@guardMapIR-element llvmCodeGeneration'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_element inObject,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         const class GALGAS_generationContext constin_inGenerationContext,
-                                         class GALGAS_generationAdds & io_ioGenerationAdds,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                   @decoratedRegularRoutineList_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

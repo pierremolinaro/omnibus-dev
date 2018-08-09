@@ -324,6 +324,16 @@ proc guardSemanticAnalysis
     !inSelfType
     !convenienceGuardGenerationIR
   }
+  ioIntermediateCodeStruct.mRoutineListIR += !@guardImplementationRoutineIR.new {
+    !guardImplementationMangledName
+    !false # Is not root
+    !inWarnIfUnused
+    !formalArguments
+    !inSelfType
+    !convenienceGuardGenerationIR
+    !allocaList
+    !instructionGenerationList
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -420,67 +430,38 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-#    let @propertyMap propertyMap = currentType.propertyMap
-#    let key = routineMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
-#    [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
     let key = guardUserMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
     [currentType.guardMap searchKey !key ?* ?let formalSignature] # ?let @propertyAccessKind propertyAccess]
-#    switch propertyAccess
-#    case singleton  (* errorLocation) :
-#      error errorLocation : "a property cannot be used as method" : outConvenienceGuardGenerationIR
-#    case constantProperty (*) :
-#      error methodName : "a constant cannot be used as method" : outConvenienceGuardGenerationIR
-#    case indexed (* *) :
-#      error methodName : "a property cannot be used as method" : outConvenienceGuardGenerationIR
-#    case nonVirtualMethod (@routineDescriptor routineDescriptor) :
-    #--- Add receiver as first parameter
-      @procCallEffectiveParameterListIR effectiveParameterListIR = {
-        !.outputInput
-        !.reference {!type:currentType !llvmName:[currentObject llvmName]}
-      }
-    #---
-    #  let isPublic = routineDescriptor.mIsPublic
-#      let routineKind = routineDescriptor.routineKind
-#      let calleeMode = [routineKind executionMode]
-#      let formalSignature = routineDescriptor.signature
-    #--- Check routine is actually a procedure (does not return any value)
-#      if routineDescriptor.returnTypeProxy != .null then
-#        error methodName : "not a procedure (returns a value)" : outConvenienceGuardGenerationIR
-#      else
-      #--- Check modes
-#        let calleeKind = checkMode (
-#          !callerMode:inMode
-#          !calleeMode:calleeMode
-#          !kind:routineKind
-#          !error:methodName.location
-#        )
-      #--- Analyze effective parameters
-        analyzeEffectiveParameters (
-          !self:inSelfType
-          !routineAttributes:inRoutineAttributes
-          !formal:formalSignature
-          !effective:mArguments
-          !errorLocation:methodName.location
-          !context:inContext
-          !requiredMode:inMode
-          !?temporary:ioTemporaries
-          !?staticEntityMap:ioStaticEntityMap
-          !?variableMap:ioUniversalMap
-          !?alloca:baseGuardAllocaList
-          !?instructionListIR:baseGuardInstructionGenerationList
-          !?effectiveIR:effectiveParameterListIR
-        )
-      #--- Get function name and map containing the function definition
-        let routineMangledName = guardImplementationMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
-      #--- Generate guards
-        outConvenienceGuardGenerationIR = .convenienceGuard {
-          !baseGuardAllocaList:baseGuardAllocaList
-          !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-          !baseGuardMangledName:routineMangledName.string
-          !baseGuardEffectiveParameterList:effectiveParameterListIR
-        }
-#      end
-#    end
+  #--- Add receiver as first parameter
+    @procCallEffectiveParameterListIR effectiveParameterListIR = {
+      !.outputInput
+      !.reference {!type:currentType !llvmName:[currentObject llvmName]}
+    }
+  #--- Analyze effective parameters
+    analyzeEffectiveParameters (
+      !self:inSelfType
+      !routineAttributes:inRoutineAttributes
+      !formal:formalSignature
+      !effective:mArguments
+      !errorLocation:methodName.location
+      !context:inContext
+      !requiredMode:inMode
+      !?temporary:ioTemporaries
+      !?staticEntityMap:ioStaticEntityMap
+      !?variableMap:ioUniversalMap
+      !?alloca:baseGuardAllocaList
+      !?instructionListIR:baseGuardInstructionGenerationList
+      !?effectiveIR:effectiveParameterListIR
+    )
+  #--- Get function name and map containing the function definition
+    let routineMangledName = guardImplementationMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
+  #--- Generate guards
+    outConvenienceGuardGenerationIR = .convenienceGuard {
+      !baseGuardAllocaList:baseGuardAllocaList
+      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+      !baseGuardMangledName:routineMangledName.string
+      !baseGuardEffectiveParameterList:effectiveParameterListIR
+    }
   case arrayAccess (* @location endOfIndex) :
     error endOfIndex : "a property access is required here" : outConvenienceGuardGenerationIR
   end
@@ -561,6 +542,136 @@ override method @guardUserRoutineIR llvmCodeGeneration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @guardImplementationRoutineIR : @abstractRoutineIR {
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  @PLMType mReceiverType
+  @guardKindGenerationIR mGuardKindGenerationIR
+  @allocaList mAllocaList
+  @instructionListIR mInstructionGenerationList
+}
+
+#·······················································································································
+
+override method @guardImplementationRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let guardRoutineName = [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += llvmTitleComment (!guardRoutineName)
+  ioLLVMcode += "define i1 @" + guardRoutineName + " ("
+  let receiverLLVMTypeName = if mReceiverType.kind == .void then
+    ""
+  else
+    [mReceiverType llvmTypeName]
+  end
+  var first = true
+  if receiverLLVMTypeName != "" then
+    ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
+    first = false
+  end
+  for () in mFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* " + llvmNameForLocalVariable (!mFormalArgumentName)
+    end
+  end
+  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+#--- Allocate local variables 
+  var allocaList = mAllocaList
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      allocaList += !llvmNameForLocalVariable (!mFormalArgumentName) !mFormalArgumentType !true
+    case output, inputOutput :
+    end
+  end
+#--- Allocate local variables 
+  [allocaList generateAllocaList !?ioLLVMcode]
+#---
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", "
+         + llvmType + " * " + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
+    case output, inputOutput :
+    end
+  end
+#--- Declare "accept" variable 
+  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariablePLMName ())
+  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariablePLMName () + ".loaded")
+#--- Base guard or convenience guard ?
+  switch mGuardKindGenerationIR
+  case baseGuard :
+    let accepted_label = acceptVariablePLMName () + ".guard.accepted"
+    let rejected_label = acceptVariablePLMName () + ".guard.rejected"
+    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  " + accepted_llvmName_loaded + " = load i1, i1* " + accepted_llvmName + "\n"
+    ioLLVMcode += "  br i1 " + accepted_llvmName_loaded + ", label %" + accepted_label + ", label %" + rejected_label + "\n\n"
+    ioLLVMcode += accepted_label + ":\n"
+    ioLLVMcode += "  call void @accept.guard ()\n"
+    ioLLVMcode += "  ret i1 true\n\n"
+    ioLLVMcode += rejected_label + ":\n"
+    ioLLVMcode += "  ret i1 false\n"
+    ioLLVMcode += "}\n\n"
+  case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
+    [baseGuardAllocaList generateAllocaList !?ioLLVMcode]
+    [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  %invoked.guard.result = call i1 @" + [baseGuardMangledName assemblerRepresentation]
+    ioLLVMcode += " ("
+    for () in baseGuardEffectiveParameterList do
+      switch mEffectiveParameterPassingMode
+      case input:
+        ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]
+      case output:
+        ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+      case outputInput:
+        ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]
+      end
+    between
+      ioLLVMcode += ", "
+    end
+    ioLLVMcode += ")\n"
+    ioLLVMcode += "  br i1 %invoked.guard.result, label %invoked.guard.acceptation, label %invoked.guard.rejection\n\n"
+    ioLLVMcode += "invoked.guard.acceptation:\n"
+    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  ret i1 true\n\n"
+    ioLLVMcode += "invoked.guard.rejection:\n"
+    ioLLVMcode += "  ret i1 false\n"
+    ioLLVMcode += "}\n\n"
+  end
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"void @accept.guard ()"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"i1 @xtr.user.result ()"
+}
+
+#·······················································································································
+
+override method @guardImplementationRoutineIR enterAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  switch mGuardKindGenerationIR
+  case baseGuard :
+  case convenienceGuard (* baseGuardInstructionGenerationList baseGuardImplementationMangledName *) :
+    ioInvokedRoutineSet += !baseGuardImplementationMangledName
+    [baseGuardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -584,9 +695,9 @@ method @guardMapIR guardCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  for guard in self do
-    [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  end
+#  for guard in self do
+#    [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#  end
 }
 
 #·······················································································································

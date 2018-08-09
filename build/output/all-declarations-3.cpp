@@ -2356,20 +2356,14 @@ GALGAS_guardMapIR GALGAS_guardMapIR::extractObject (const GALGAS_object & inObje
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_guardCodeGeneration (const GALGAS_guardMapIR inObject,
-                                          GALGAS_string & ioArgument_ioLLVMcode,
+void extensionMethod_guardCodeGeneration (const GALGAS_guardMapIR /* inObject */,
+                                          GALGAS_string & /* ioArgument_ioLLVMcode */,
                                           GALGAS_primitiveAndServiceIRlist & /* ioArgument_ioPrimitiveAndServiceList */,
                                           GALGAS_sectionIRlist & /* ioArgument_ioSectionList */,
-                                          const GALGAS_generationContext constinArgument_inGenerationContext,
-                                          GALGAS_generationAdds & ioArgument_ioGenerationAdds,
-                                          C_Compiler * inCompiler
+                                          const GALGAS_generationContext /* constinArgument_inGenerationContext */,
+                                          GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
+                                          C_Compiler * /* inCompiler */
                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_guardMapIR temp_0 = inObject ;
-  cEnumerator_guardMapIR enumerator_23558 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_23558.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_23558.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 588)) ;
-    enumerator_23558.gotoNextObject () ;
-  }
 }
 
 
