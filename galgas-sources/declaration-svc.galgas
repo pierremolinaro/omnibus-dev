@@ -103,25 +103,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <procedure_input_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
-    outProcFormalArgumentList = {}
-    $($
-    repeat
-    while
-      $?selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
-      <type_definition> !?ioAST  ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.input
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    end
-    $)$
-  }
-
-  #·····················································································································
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

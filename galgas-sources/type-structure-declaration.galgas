@@ -452,7 +452,7 @@ override method @structureDeclarationAST enterInContext
       !warnIfUnused
       !false # mExportedRoutine
       !functionAttributes
-      !functionMangledName # function.mFunctionName
+      !functionMangledName
       !function.mFunctionFormalArgumentList
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
@@ -461,7 +461,6 @@ override method @structureDeclarationAST enterInContext
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
     !mStructureTypeName
-    !{} #mFunctionDeclarationListAST
     !mSystemRoutineListAST
     !mGuardListAST
     !mMayImplementDeinit
@@ -592,7 +591,6 @@ method @structurePropertyListAST-element enterPropertyInContext
 
 class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
   @lstring mStructureTypeName
-  @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
@@ -606,21 +604,21 @@ override method @decoratedStructureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureTypeName} type]
-#----------- Analyze functions
-  for function in mFunctionDeclarationListAST do
-    var functionHasUserAccess = false
-    for (attribute) in function.mFunctionAttributeList while not functionHasUserAccess do
-      functionHasUserAccess = attribute.string == userAccessAttribute ()
-    end
-    if not functionHasUserAccess then
-      [function functionSemanticAnalysis
-        !structureType:structureType
-        !context:inContext
-        !?temporary:ioTemporaries
-        !?intermediateCode:ioIntermediateCodeStruct
-      ]
-    end
-  end
+##----------- Analyze functions
+#  for function in mFunctionDeclarationListAST do
+#    var functionHasUserAccess = false
+#    for (attribute) in function.mFunctionAttributeList while not functionHasUserAccess do
+#      functionHasUserAccess = attribute.string == userAccessAttribute ()
+#    end
+#    if not functionHasUserAccess then
+#      [function functionSemanticAnalysis
+#        !structureType:structureType
+#        !context:inContext
+#        !?temporary:ioTemporaries
+#        !?intermediateCode:ioIntermediateCodeStruct
+#      ]
+#    end
+#  end
 #----------- Analyze system routines
   [mSystemRoutineListAST systemRoutineSemanticAnalysis
     !receiverType:structureType

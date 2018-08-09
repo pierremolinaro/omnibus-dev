@@ -127,10 +127,9 @@ class GALGAS_decoratedStructureDeclaration : public GALGAS_abstractDecoratedDecl
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_decoratedStructureDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                              const class GALGAS_functionDeclarationListAST & inOperand1,
-                                                                              const class GALGAS_systemRoutineDeclarationListAST & inOperand2,
-                                                                              const class GALGAS_guardDeclarationListAST & inOperand3,
-                                                                              const class GALGAS_bool & inOperand4
+                                                                              const class GALGAS_systemRoutineDeclarationListAST & inOperand1,
+                                                                              const class GALGAS_guardDeclarationListAST & inOperand2,
+                                                                              const class GALGAS_bool & inOperand3
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -142,8 +141,6 @@ class GALGAS_decoratedStructureDeclaration : public GALGAS_abstractDecoratedDecl
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
@@ -172,14 +169,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStructureD
 class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
   public : GALGAS_lstring mProperty_mStructureTypeName ;
-  public : GALGAS_functionDeclarationListAST mProperty_mFunctionDeclarationListAST ;
   public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
   public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
   public : cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mStructureTypeName,
-                                               const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                                const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
                                                const GALGAS_guardDeclarationListAST & in_mGuardListAST,
                                                const GALGAS_bool & in_mMayImplementDeinit
@@ -190,7 +185,6 @@ class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclarat
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
@@ -2187,4 +2181,39 @@ class cPtr_sizeofInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                   Abstract extension method '@infixOperatorDescription generateInfixOperatorCode'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode) (const class cPtr_infixOperatorDescription * inObject,
+                                                                                             class GALGAS_semanticTemporariesStruct & ioArgument0,
+                                                                                             class GALGAS_instructionListIR & ioArgument1,
+                                                                                             const class GALGAS_objectIR constinArgument2,
+                                                                                             const class GALGAS_location constinArgument3,
+                                                                                             const class GALGAS_objectIR constinArgument4,
+                                                                                             const class GALGAS_PLMType constinArgument5,
+                                                                                             class GALGAS_objectIR & outArgument6,
+                                                                                             class C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateInfixOperatorCode (const int32_t inClassIndex,
+                                                     extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateInfixOperatorCode (const class cPtr_infixOperatorDescription * inObject,
+                                                    GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                    GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                    const GALGAS_objectIR constin_inLeftOperand,
+                                                    const GALGAS_location constin_inOperatorLocation,
+                                                    const GALGAS_objectIR constin_inRightOperand,
+                                                    const GALGAS_PLMType constin_inResultType,
+                                                    GALGAS_objectIR & out_outResultValue,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 

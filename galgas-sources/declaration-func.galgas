@@ -13,46 +13,6 @@ list @functionDeclarationListAST {
   @location mEndOfFunctionDeclaration
 }
 
-#·······················································································································
-
-enum @procFormalArgumentPassingMode {
-  case input
-  case output
-  case inputOutput
-}
-
-#·······················································································································
-
-list @routineFormalArgumentListAST {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @lstring mFormalArgumentTypeName
-  @lstring mFormalArgumentName
-}
-
-#·······················································································································
-
-getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
-  switch self
-  case input : result = "?"
-  case output : result = "!"
-  case inputOutput : result = "?!"
-  end
-}
-
-#·······················································································································
-
-getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
-  switch self
-  case input : result = "!"
-  case output : result = "?"
-  case inputOutput : result = "!?"
-  end
-  if inSelector != "" then
-    result += inSelector + ":"
-  end
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -149,43 +109,6 @@ syntax extension plm_syntax {
       outAttributeList += !attribute
     end
     <procedure_formal_arguments>  !?ioAST ?outProcFormalArgumentList
-  }
-
-  #·····················································································································
-
-  rule <procedure_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
-    outProcFormalArgumentList = {}
-    $($
-    repeat
-    while
-      $!selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
-      <type_definition> !?ioAST  ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.output
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    while
-      $?!selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
-      <type_definition> !?ioAST ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.inputOutput
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    while
-      $?selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
-      <type_definition> !?ioAST  ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.input
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    end
-    $)$
   }
 
   #·····················································································································
