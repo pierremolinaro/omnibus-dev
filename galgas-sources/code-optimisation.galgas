@@ -18,12 +18,6 @@ method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineS
 
 #·······················································································································
 
-graph @routineInvocationGraph (@stringlist) {
-  insert addNode error message "the '%K' symbol is already declared at %L"
-}
-
-#·······················································································································
-
 list @routineAccessibilityIR {
   @abstractRoutineIR mRoutine
   @stringset mAccessibleRoutineSet
@@ -45,16 +39,7 @@ proc codeOptimization
   end
 #--- Display invocation graph
   if [option plm_options.writeRoutineInvocationGraphFile value] then
-    @routineInvocationGraph routineInvocationGraph = .emptyGraph
-    for (routine accessibleSet) in routineAccessibilityIR do
-      [!?routineInvocationGraph addNode !routine.mRoutineMangledName !routine.mRoutineMangledName]
-      for acc in accessibleSet do
-        [!?routineInvocationGraph addEdge !routine.mRoutineMangledName !.new {!acc !routine.mRoutineMangledName}]
-      end
-    end
-    let s = [routineInvocationGraph graphviz]
-    let filePath = inSourceFile + ".routineInvocation.dot"
-    [s writeToFileWhenDifferentContents !filePath ?*]
+    displayInvocationGraph (!routineAccessibilityIR !inSourceFile)
   end
 #  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineListIR
 #  let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
@@ -309,5 +294,41 @@ proc codeOptimization
 #    end
 #  end
 #}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc displayInvocationGraph
+  ?let @routineAccessibilityIR inRoutineAccessibilityIR
+  ?let @string inSourceFile
+{
+  var s = "digraph G {\n"
+#--- Build graph
+  @stringset definedRoutines = {}
+  @stringset allRoutines = {}
+  for (routine accessibleSet) in inRoutineAccessibilityIR do
+    definedRoutines += !routine.mRoutineMangledName
+    allRoutines += !routine.mRoutineMangledName
+    allRoutines += accessibleSet
+    s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"
+    if routine.mIsRequired then
+      s += ", color=blue" # Required routines are blue
+    end
+    s += "] ;\n"
+    for accessible in accessibleSet do
+      s += "  \"" + routine.mRoutineMangledName + "\" -> \"" + accessible + "\" ;\n"
+    end
+  end
+#--- For undefined routines, create red nodes
+  let undefinedRoutineSet = allRoutines - definedRoutines
+  for undefined in undefinedRoutineSet do
+    s += "  \"" + undefined + "\" [shape=rectangle, color=red] ;\n"  
+  end
+  s += "}\n"
+  let filePath = inSourceFile + ".routineInvocation.dot"
+  [s writeToFileWhenDifferentContents !filePath ?*]
+  if [undefinedRoutineSet count] > 0 then
+    warning .nowhere : [[undefinedRoutineSet count] string] + " undefined routine(s) in routine invocation graph"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
