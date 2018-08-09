@@ -91,12 +91,12 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !mRoutineMangledName
+    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mRoutineMangledName.string]
+    !mWarnIfUnused
     !receiverType
     !formalArguments
     !allocaList
     !instructionGenerationList
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mRoutineMangledName.string]
-    !mWarnIfUnused
     !mExportedRoutine
     !mRoutineKind
     !returnType
@@ -113,8 +113,6 @@ class @regularRoutineIR : @abstractRoutineIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
-  @bool mIsRequired
-  @bool mWarnIfUnused
   @bool mExportedFunction # Function is not tagged with internal
   @routineKind mKind
   @PLMType mReturnType # .void if no return value

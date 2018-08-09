@@ -46,6 +46,8 @@ map @globalConstantMapIR {
 
 abstract class @abstractRoutineIR {
   @lstring mRoutineMangledName
+  @bool mIsRequired
+  @bool mWarnIfUnused
 }
 
 #·······················································································································

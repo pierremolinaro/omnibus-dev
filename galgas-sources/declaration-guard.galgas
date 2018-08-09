@@ -255,13 +255,6 @@ proc guardSemanticAnalysis
     !inRoutineName
     !inRoutineFormalArgumentList
   )
-#--- Enter subprogram invocation graph
-#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
-#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-#      !guardMangledName
-#      !inRoutineName
-#    ]
-#  end
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -347,11 +340,19 @@ proc guardSemanticAnalysis
     !guardMangledName
     !formalArguments
     !inSelfType
-    !inRoutineName
     !convenienceGuardGenerationIR
     !allocaList
     !instructionGenerationList
     !inWarnIfUnused
+  ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
+    !.new {!llvmNameForGuardCall (!guardMangledName) !guardMangledName}
+    !false # Is not root
+    !inWarnIfUnused
+    !llvmNameForGuardImplementation (!guardMangledName)
+    !formalArguments
+    !inSelfType
+    !convenienceGuardGenerationIR
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -530,42 +531,88 @@ enum @guardKindGenerationIR {
 
 #·······················································································································
 
+class @guardUserRoutineIR : @abstractRoutineIR {
+  @string mMangledImplementationGuardName
+  @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  @PLMType mReceiverType
+  @guardKindGenerationIR mGuardKindGenerationIR
+}
+
+#·······················································································································
+
+override method @guardUserRoutineIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioInvokedRoutineSet += !mMangledImplementationGuardName
+#  for instruction in mInstructionGenerationList do
+#    [instruction.mInstructionGeneration enterAccessibleEntities
+#      !?ioInvokedRoutineSet
+#      !?ioMaxBranchOfOnInstructions
+#    ]
+#  end
+}
+
+#·······················································································································
+
+override method @guardUserRoutineIR svcDeclarationGeneration
+  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
+  ?!@sectionIRlist ioSectionList
+  ?!@generationAdds unused ioGenerationAdds
+{
+  switch mGuardKindGenerationIR
+  case convenienceGuard (* * * *) :
+    ioPrimitiveAndServiceList += !mRoutineMangledName !mMangledImplementationGuardName !false
+  case baseGuard :
+    ioSectionList +=
+      !mRoutineMangledName
+      !mMangledImplementationGuardName
+      !true # Only invocation from user mode
+  end
+}
+
+#·······················································································································
+
+override method @guardUserRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  let prototype = llvmFunctionPrototype (
+    !"i1" # Boolean
+    !mRoutineMangledName
+    !mReceiverType
+    !mFormalArgumentListForGeneration
+  )
+  ioLLVMcode += "declare " + prototype + "\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @guardMapIR {
   @lstring lkey
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @PLMType mReceiverType
-  @lstring mGuardName
   @guardKindGenerationIR mGuardKindGenerationIR
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mWarnIfUnused
-
-#  insert insertKey error message "guard '%K' is already defined"
 }
 
 #·······················································································································
 
 method @guardMapIR guardCodeGeneration
   ?!@string ioLLVMcode
-  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
-  ?!@sectionIRlist ioSectionList
+  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
+  ?!@sectionIRlist unused ioSectionList
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   for guard in self do
-    switch guard.mGuardKindGenerationIR
-    case convenienceGuard (* * * *) :
-      let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
-      let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
-      ioPrimitiveAndServiceList += !guardCallName !guardImplementationName !false
-    case baseGuard :
-      let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
-      let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
-      ioSectionList +=
-        !guardCallName
-        !guardImplementationName
-        !true # Only invocation from user mode
-    end
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
 }
@@ -579,13 +626,6 @@ method @guardMapIR-element llvmCodeGeneration
 {
   let guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
-  let prototype = llvmFunctionPrototype (
-    !"i1" # Boolean
-    !llvmNameForGuardCall (!lkey.string)
-    !mReceiverType
-    !mFormalArgumentListForGeneration
-  )
-  ioLLVMcode += "declare " + prototype + "\n\n"
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
   let receiverLLVMTypeName = if mReceiverType.kind == .void then
     ""

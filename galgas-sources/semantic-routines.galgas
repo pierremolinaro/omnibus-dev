@@ -113,12 +113,12 @@ proc routineSemanticAnalysis
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !routineMangledName
+    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+    !inWarnIfUnused
     !inSelfType
     !formalArguments
     !allocaList
     !instructionGenerationList
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-    !inWarnIfUnused
     !inGlobalFunction
     !inRoutineKind
     !returnType

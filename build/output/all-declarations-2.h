@@ -8095,7 +8095,6 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
                                                   const class GALGAS_lstring & in_lkey,
                                                   const class GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                                   const class GALGAS_PLMType & in_mReceiverType,
-                                                  const class GALGAS_lstring & in_mGuardName,
                                                   const class GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                                   const class GALGAS_allocaList & in_mAllocaList,
                                                   const class GALGAS_instructionListIR & in_mInstructionGenerationList,
@@ -8118,11 +8117,10 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
   public : static class GALGAS_guardMapIR constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                      const class GALGAS_routineFormalArgumentListIR & inOperand1,
                                                                      const class GALGAS_PLMType & inOperand2,
-                                                                     const class GALGAS_lstring & inOperand3,
-                                                                     const class GALGAS_guardKindGenerationIR & inOperand4,
-                                                                     const class GALGAS_allocaList & inOperand5,
-                                                                     const class GALGAS_instructionListIR & inOperand6,
-                                                                     const class GALGAS_bool & inOperand7
+                                                                     const class GALGAS_guardKindGenerationIR & inOperand3,
+                                                                     const class GALGAS_allocaList & inOperand4,
+                                                                     const class GALGAS_instructionListIR & inOperand5,
+                                                                     const class GALGAS_bool & inOperand6
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -8134,11 +8132,10 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_routineFormalArgumentListIR & inOperand1,
                                                       const class GALGAS_PLMType & inOperand2,
-                                                      const class GALGAS_lstring & inOperand3,
-                                                      const class GALGAS_guardKindGenerationIR & inOperand4,
-                                                      const class GALGAS_allocaList & inOperand5,
-                                                      const class GALGAS_instructionListIR & inOperand6,
-                                                      const class GALGAS_bool & inOperand7
+                                                      const class GALGAS_guardKindGenerationIR & inOperand3,
+                                                      const class GALGAS_allocaList & inOperand4,
+                                                      const class GALGAS_instructionListIR & inOperand5,
+                                                      const class GALGAS_bool & inOperand6
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_guardMapIR add_operation (const GALGAS_guardMapIR & inOperand,
@@ -8154,46 +8151,42 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
                                                        class GALGAS_routineFormalArgumentListIR constinArgument1,
                                                        class GALGAS_PLMType constinArgument2,
-                                                       class GALGAS_lstring constinArgument3,
-                                                       class GALGAS_guardKindGenerationIR constinArgument4,
-                                                       class GALGAS_allocaList constinArgument5,
-                                                       class GALGAS_instructionListIR constinArgument6,
-                                                       class GALGAS_bool constinArgument7,
-                                                       class GALGAS_uint constinArgument8,
+                                                       class GALGAS_guardKindGenerationIR constinArgument3,
+                                                       class GALGAS_allocaList constinArgument4,
+                                                       class GALGAS_instructionListIR constinArgument5,
+                                                       class GALGAS_bool constinArgument6,
+                                                       class GALGAS_uint constinArgument7,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_routineFormalArgumentListIR & outArgument1,
                                                   class GALGAS_PLMType & outArgument2,
-                                                  class GALGAS_lstring & outArgument3,
-                                                  class GALGAS_guardKindGenerationIR & outArgument4,
-                                                  class GALGAS_allocaList & outArgument5,
-                                                  class GALGAS_instructionListIR & outArgument6,
-                                                  class GALGAS_bool & outArgument7,
+                                                  class GALGAS_guardKindGenerationIR & outArgument3,
+                                                  class GALGAS_allocaList & outArgument4,
+                                                  class GALGAS_instructionListIR & outArgument5,
+                                                  class GALGAS_bool & outArgument6,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
                                                  class GALGAS_routineFormalArgumentListIR & outArgument1,
                                                  class GALGAS_PLMType & outArgument2,
-                                                 class GALGAS_lstring & outArgument3,
-                                                 class GALGAS_guardKindGenerationIR & outArgument4,
-                                                 class GALGAS_allocaList & outArgument5,
-                                                 class GALGAS_instructionListIR & outArgument6,
-                                                 class GALGAS_bool & outArgument7,
+                                                 class GALGAS_guardKindGenerationIR & outArgument3,
+                                                 class GALGAS_allocaList & outArgument4,
+                                                 class GALGAS_instructionListIR & outArgument5,
+                                                 class GALGAS_bool & outArgument6,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
                                                        class GALGAS_routineFormalArgumentListIR & outArgument1,
                                                        class GALGAS_PLMType & outArgument2,
-                                                       class GALGAS_lstring & outArgument3,
-                                                       class GALGAS_guardKindGenerationIR & outArgument4,
-                                                       class GALGAS_allocaList & outArgument5,
-                                                       class GALGAS_instructionListIR & outArgument6,
-                                                       class GALGAS_bool & outArgument7,
-                                                       class GALGAS_uint constinArgument8,
+                                                       class GALGAS_guardKindGenerationIR & outArgument3,
+                                                       class GALGAS_allocaList & outArgument4,
+                                                       class GALGAS_instructionListIR & outArgument5,
+                                                       class GALGAS_bool & outArgument6,
+                                                       class GALGAS_uint constinArgument7,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8202,22 +8195,20 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
                                                class GALGAS_routineFormalArgumentListIR & outArgument1,
                                                class GALGAS_PLMType & outArgument2,
-                                               class GALGAS_lstring & outArgument3,
-                                               class GALGAS_guardKindGenerationIR & outArgument4,
-                                               class GALGAS_allocaList & outArgument5,
-                                               class GALGAS_instructionListIR & outArgument6,
-                                               class GALGAS_bool & outArgument7,
+                                               class GALGAS_guardKindGenerationIR & outArgument3,
+                                               class GALGAS_allocaList & outArgument4,
+                                               class GALGAS_instructionListIR & outArgument5,
+                                               class GALGAS_bool & outArgument6,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
                                               class GALGAS_routineFormalArgumentListIR & outArgument1,
                                               class GALGAS_PLMType & outArgument2,
-                                              class GALGAS_lstring & outArgument3,
-                                              class GALGAS_guardKindGenerationIR & outArgument4,
-                                              class GALGAS_allocaList & outArgument5,
-                                              class GALGAS_instructionListIR & outArgument6,
-                                              class GALGAS_bool & outArgument7,
+                                              class GALGAS_guardKindGenerationIR & outArgument3,
+                                              class GALGAS_allocaList & outArgument4,
+                                              class GALGAS_instructionListIR & outArgument5,
+                                              class GALGAS_bool & outArgument6,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -8239,10 +8230,6 @@ class GALGAS_guardMapIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIRAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                      C_Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGuardNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                      C_Compiler * inCompiler
@@ -8289,7 +8276,6 @@ class cEnumerator_guardMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_routineFormalArgumentListIR current_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
   public : class GALGAS_PLMType current_mReceiverType (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mGuardName (LOCATION_ARGS) const ;
   public : class GALGAS_guardKindGenerationIR current_mGuardKindGenerationIR (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
