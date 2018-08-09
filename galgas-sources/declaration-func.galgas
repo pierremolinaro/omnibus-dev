@@ -271,6 +271,7 @@ method @functionDeclarationListAST enterFunctionInContext
         !isPublic:function.mPublicFunction
         !exported:globalFunction
         !name:function.mFunctionName
+        !nameForLLVMGeneration:routineMangledName
         !routineKind:.function {!executionMode:function.mMode}
         !signature:signature
         !returnTypeProxy:returnTypeProxy
@@ -328,6 +329,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !isPublic:function.mPublicFunction
       !exported:exportedFunction
       !name:function.mFunctionName
+      !nameForLLVMGeneration:routineMangledName
       !routineKind:.function {!executionMode:function.mMode}
       !signature:signature
       !returnTypeProxy:returnTypeProxy

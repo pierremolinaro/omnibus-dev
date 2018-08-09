@@ -6918,7 +6918,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 GALGAS_standaloneRoutineCallIR GALGAS_standaloneRoutineCallIR::constructor_new (const GALGAS_string & inAttribute_mGlobalVariableName,
                                                                                 const GALGAS_objectIR & inAttribute_mResult,
                                                                                 const GALGAS_lstring & inAttribute_mFunctionMangledName,
-                                                                                const GALGAS_lstring & inAttribute_mFunctionNameForGeneration,
+                                                                                const GALGAS_string & inAttribute_mFunctionNameForGeneration,
                                                                                 const GALGAS_calleeKindIR & inAttribute_mKind,
                                                                                 const GALGAS_procCallEffectiveParameterListIR & inAttribute_mArgumentList
                                                                                 COMMA_LOCATION_ARGS) {
@@ -6985,8 +6985,8 @@ GALGAS_lstring cPtr_standaloneRoutineCallIR::getter_mFunctionMangledName (UNUSED
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_standaloneRoutineCallIR::getter_mFunctionNameForGeneration (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
+GALGAS_string GALGAS_standaloneRoutineCallIR::getter_mFunctionNameForGeneration (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_standaloneRoutineCallIR * p = (const cPtr_standaloneRoutineCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_standaloneRoutineCallIR) ;
@@ -6997,7 +6997,7 @@ GALGAS_lstring GALGAS_standaloneRoutineCallIR::getter_mFunctionNameForGeneration
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_standaloneRoutineCallIR::getter_mFunctionNameForGeneration (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_standaloneRoutineCallIR::getter_mFunctionNameForGeneration (UNUSED_LOCATION_ARGS) const {
   return mProperty_mFunctionNameForGeneration ;
 }
 
@@ -7044,7 +7044,7 @@ GALGAS_procCallEffectiveParameterListIR cPtr_standaloneRoutineCallIR::getter_mAr
 cPtr_standaloneRoutineCallIR::cPtr_standaloneRoutineCallIR (const GALGAS_string & in_mGlobalVariableName,
                                                             const GALGAS_objectIR & in_mResult,
                                                             const GALGAS_lstring & in_mFunctionMangledName,
-                                                            const GALGAS_lstring & in_mFunctionNameForGeneration,
+                                                            const GALGAS_string & in_mFunctionNameForGeneration,
                                                             const GALGAS_calleeKindIR & in_mKind,
                                                             const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
                                                             COMMA_LOCATION_ARGS) :

@@ -365,12 +365,10 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
           !mIdentifier
           !.void # No result
           !routineMangledName
-          !routineMangledName # LLVMInvocationRoutineName
+          !routineDescriptor.nameForLLVMGeneration # routineMangledName
           !calleeKind
           !effectiveParameterListIR
         }
-      #--- Enter in invocation graph
-#        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
       end
     case singleton  (* errorLocation) :
       error errorLocation : "a property cannot be used as method"

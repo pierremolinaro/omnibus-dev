@@ -82,6 +82,7 @@ struct @routineDescriptor {
   @bool isPublic %selector # Routine is declared with "public"
   @bool exported %selector # Routine is declared with @exported attribute
   @string name %selector
+  @string nameForLLVMGeneration %selector
   @routineKind routineKind %selector
   @routineTypedSignature signature %selector
   @unifiedTypeMap-proxy returnTypeProxy %selector # Nécessaire car le type n'est pas forcément résolu au moment de la construction 

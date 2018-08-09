@@ -7129,23 +7129,23 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externProcedu
                                                       GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListIR var_formalArguments_5617 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 138)) ;
-  GALGAS_universalValuedObjectMap joker_5706 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
+  GALGAS_routineFormalArgumentListIR var_formalArguments_5672 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 139)) ;
+  GALGAS_universalValuedObjectMap joker_5761 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 143)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5706, var_formalArguments_5617, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 139)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5761, var_formalArguments_5672, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 147)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 148)) ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 149)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5782 = temp_0 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5837 = temp_0 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5617, var_returnType_5782, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 152)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5672, var_returnType_5837, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 153)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5617, var_returnType_5782  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 157))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 157)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5672, var_returnType_5837  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 158))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 158)) ;
 }
 
 
@@ -8863,6 +8863,7 @@ GALGAS_routineDescriptor::GALGAS_routineDescriptor (void) :
 mProperty_isPublic (),
 mProperty_exported (),
 mProperty_name (),
+mProperty_nameForLLVMGeneration (),
 mProperty_routineKind (),
 mProperty_signature (),
 mProperty_returnTypeProxy (),
@@ -8881,21 +8882,23 @@ GALGAS_routineDescriptor::~ GALGAS_routineDescriptor (void) {
 GALGAS_routineDescriptor::GALGAS_routineDescriptor (const GALGAS_bool & inOperand0,
                                                     const GALGAS_bool & inOperand1,
                                                     const GALGAS_string & inOperand2,
-                                                    const GALGAS_routineKind & inOperand3,
-                                                    const GALGAS_routineTypedSignature & inOperand4,
-                                                    const GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
-                                                    const GALGAS_bool & inOperand6,
+                                                    const GALGAS_string & inOperand3,
+                                                    const GALGAS_routineKind & inOperand4,
+                                                    const GALGAS_routineTypedSignature & inOperand5,
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
                                                     const GALGAS_bool & inOperand7,
-                                                    const GALGAS_bool & inOperand8) :
+                                                    const GALGAS_bool & inOperand8,
+                                                    const GALGAS_bool & inOperand9) :
 mProperty_isPublic (inOperand0),
 mProperty_exported (inOperand1),
 mProperty_name (inOperand2),
-mProperty_routineKind (inOperand3),
-mProperty_signature (inOperand4),
-mProperty_returnTypeProxy (inOperand5),
-mProperty_canAccessProperties (inOperand6),
-mProperty_canMutateProperties (inOperand7),
-mProperty_safe (inOperand8) {
+mProperty_nameForLLVMGeneration (inOperand3),
+mProperty_routineKind (inOperand4),
+mProperty_signature (inOperand5),
+mProperty_returnTypeProxy (inOperand6),
+mProperty_canAccessProperties (inOperand7),
+mProperty_canMutateProperties (inOperand8),
+mProperty_safe (inOperand9) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8903,16 +8906,17 @@ mProperty_safe (inOperand8) {
 GALGAS_routineDescriptor GALGAS_routineDescriptor::constructor_new (const GALGAS_bool & inOperand0,
                                                                     const GALGAS_bool & inOperand1,
                                                                     const GALGAS_string & inOperand2,
-                                                                    const GALGAS_routineKind & inOperand3,
-                                                                    const GALGAS_routineTypedSignature & inOperand4,
-                                                                    const GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
-                                                                    const GALGAS_bool & inOperand6,
+                                                                    const GALGAS_string & inOperand3,
+                                                                    const GALGAS_routineKind & inOperand4,
+                                                                    const GALGAS_routineTypedSignature & inOperand5,
+                                                                    const GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
                                                                     const GALGAS_bool & inOperand7,
-                                                                    const GALGAS_bool & inOperand8 
+                                                                    const GALGAS_bool & inOperand8,
+                                                                    const GALGAS_bool & inOperand9 
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineDescriptor result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
-    result = GALGAS_routineDescriptor (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
+    result = GALGAS_routineDescriptor (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
   }
   return result ;
 }
@@ -8929,6 +8933,9 @@ typeComparisonResult GALGAS_routineDescriptor::objectCompare (const GALGAS_routi
   }
   if (result == kOperandEqual) {
     result = mProperty_name.objectCompare (inOperand.mProperty_name) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_nameForLLVMGeneration.objectCompare (inOperand.mProperty_nameForLLVMGeneration) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_routineKind.objectCompare (inOperand.mProperty_routineKind) ;
@@ -8954,7 +8961,7 @@ typeComparisonResult GALGAS_routineDescriptor::objectCompare (const GALGAS_routi
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_routineDescriptor::isValid (void) const {
-  return mProperty_isPublic.isValid () && mProperty_exported.isValid () && mProperty_name.isValid () && mProperty_routineKind.isValid () && mProperty_signature.isValid () && mProperty_returnTypeProxy.isValid () && mProperty_canAccessProperties.isValid () && mProperty_canMutateProperties.isValid () && mProperty_safe.isValid () ;
+  return mProperty_isPublic.isValid () && mProperty_exported.isValid () && mProperty_name.isValid () && mProperty_nameForLLVMGeneration.isValid () && mProperty_routineKind.isValid () && mProperty_signature.isValid () && mProperty_returnTypeProxy.isValid () && mProperty_canAccessProperties.isValid () && mProperty_canMutateProperties.isValid () && mProperty_safe.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8963,6 +8970,7 @@ void GALGAS_routineDescriptor::drop (void) {
   mProperty_isPublic.drop () ;
   mProperty_exported.drop () ;
   mProperty_name.drop () ;
+  mProperty_nameForLLVMGeneration.drop () ;
   mProperty_routineKind.drop () ;
   mProperty_signature.drop () ;
   mProperty_returnTypeProxy.drop () ;
@@ -8984,6 +8992,8 @@ void GALGAS_routineDescriptor::description (C_String & ioString,
     mProperty_exported.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_name.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_nameForLLVMGeneration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_routineKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9016,6 +9026,12 @@ GALGAS_bool GALGAS_routineDescriptor::getter_exported (UNUSED_LOCATION_ARGS) con
 
 GALGAS_string GALGAS_routineDescriptor::getter_name (UNUSED_LOCATION_ARGS) const {
   return mProperty_name ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_routineDescriptor::getter_nameForLLVMGeneration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_nameForLLVMGeneration ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

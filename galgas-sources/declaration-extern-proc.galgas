@@ -82,6 +82,12 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
       safe = true
     end
   end
+#--- Routine mangled name
+#  let routineMangledName = routineMangledNameFromAST (
+#    !"" 
+#    !mExternProcedureName
+#    !mProcFormalArgumentList
+#  )
 #--- Enter in context
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
   [!?ioContext.mRoutineMapForContext insertRoutine
@@ -93,6 +99,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
       !isPublic:true
       !exported:false
       !name:mExternProcedureName
+      !nameForLLVMGeneration:mRoutineNameForGeneration
       !routineKind:.function {!executionMode:mMode}
       !signature:signature
       !returnTypeProxy:returnTypeProxy
@@ -128,12 +135,6 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Routine mangled name
-#  let routineMangledName = routineMangledNameFromAST (
-#    !"" 
-#    !mExternProcedureName
-#    !mProcFormalArgumentList
-#  )
 #--- Analyse formal arguments
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (

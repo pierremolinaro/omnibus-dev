@@ -4,7 +4,7 @@ class @standaloneRoutineCallIR : @abstractInstructionIR {
   @string mGlobalVariableName
   @objectIR mResult
   @lstring mFunctionMangledName
-  @lstring mFunctionNameForGeneration
+  @string mFunctionNameForGeneration
   @calleeKindIR mKind
   @procCallEffectiveParameterListIR mArgumentList
 }
@@ -25,19 +25,19 @@ override method @standaloneRoutineCallIR llvmInstructionCode
   ioLLVMcode += " @"
   switch mKind 
   case function :
-    ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration)
   case serviceFromProcessorUserMode :
-    ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration)
   case serviceFromProcessorPrivilegedMode :
-    ioLLVMcode += llvmNameForServiceImplementation (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForServiceImplementation (!mFunctionNameForGeneration)
   case sectionFromProcessorUserMode :
-    ioLLVMcode += llvmNameForSectionCall (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForSectionCall (!mFunctionNameForGeneration)
   case sectionFromProcessorPrivilegedMode :
-    ioLLVMcode += llvmNameForSectionImplementation (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForSectionImplementation (!mFunctionNameForGeneration)
   case primitiveFromProcessorUserMode :
-    ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration)
   case primitiveFromProcessorPrivilegedMode :
-    ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration.string)
+    ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration)
   end
   ioLLVMcode += " ("
   for () in mArgumentList do
@@ -64,7 +64,7 @@ override method @standaloneRoutineCallIR enterAccessibleEntities
 #  if mGlobalVariableName != "" then
 #    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
 #  end
-  ioInvokedRoutineSet += !mFunctionMangledName.string
+  ioInvokedRoutineSet += !mFunctionNameForGeneration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

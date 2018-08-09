@@ -176,6 +176,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
         !isPublic:svc.mPublic
         !exported:false
         !name:svc.mName
+        !nameForLLVMGeneration:routineMangledName
         !routineKind:svc.mRoutineKind
         !signature:signature
         !returnTypeProxy:returnTypeProxy

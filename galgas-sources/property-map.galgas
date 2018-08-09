@@ -21,17 +21,23 @@ map @propertyMap {
 #·······················································································································
 
 setter @propertyMap addFunctionWithoutArgument
-  ?!@subprogramInvocationGraph ioSubprogramInvocationGraph
+  ?!@subprogramInvocationGraph unused ioSubprogramInvocationGraph
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   ?canMutateProperties:let @bool inCanMutateProperties
 {
+  let routineMangledName = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    ![inMethodName nowhere]
+    !{}
+  )
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
     !name:inLLVMBaseTypeName + "." + inMethodName
+    !nameForLLVMGeneration:routineMangledName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:{}
     !returnTypeProxy:inResultType # Return type 
@@ -39,21 +45,16 @@ setter @propertyMap addFunctionWithoutArgument
     !canMutateProperties:inCanMutateProperties # Routine is declared with @mutating attribute
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
-  let routineNameForInvocationGraph = routineMangledNameFromAST (
-    !inLLVMBaseTypeName
-    ![inMethodName nowhere]
-    !{}
-  )
   [!?self insertKey
-    !routineNameForInvocationGraph
+    !routineMangledName
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
 #--- Routine mangled name
-  [!?ioSubprogramInvocationGraph addNode
-    !routineNameForInvocationGraph
-    !routineNameForInvocationGraph
-  ]
+#  [!?ioSubprogramInvocationGraph addNode
+#    !routineNameForInvocationGraph
+#    !routineNameForInvocationGraph
+#  ]
 }
 
 #·······················································································································
@@ -77,10 +78,16 @@ setter @propertyMap addFunctionWithInputArgument
     ![inInputArgumentName nowhere]
   }
   routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
+  let routineMangledName = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    !.new {!inMethodName !.nowhere}
+    !argumentList
+  )
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
     !name:inMethodName
+    !nameForLLVMGeneration:routineMangledName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:signature
     !returnTypeProxy:inResultType # Return type 
@@ -88,17 +95,12 @@ setter @propertyMap addFunctionWithInputArgument
     !canMutateProperties:inCanMutateProperties
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
-  let methodMangledName = routineMangledNameFromAST (
-    !inLLVMBaseTypeName
-    !.new {!inMethodName !.nowhere}
-    !argumentList
-  )
   [!?self insertKey
-    !methodMangledName
+    !routineMangledName
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
-  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
+#  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
 }
 
 #·······················································································································
@@ -129,11 +131,17 @@ setter @propertyMap addFunctionWithTwoInputArguments
     ![[inInputArgumentTypeProxy2 key] nowhere]
     ![inInputArgumentName2 nowhere]
   }
+  let routineMangledName = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    !.new {!inMethodName !.nowhere}
+    !argumentList
+  )
   routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false
     !name:inMethodName
+    !nameForLLVMGeneration:routineMangledName
     !routineKind:.function {!executionMode:.anyMode}
     !signature:signature
     !returnTypeProxy:inResultType # Return type 
@@ -141,13 +149,8 @@ setter @propertyMap addFunctionWithTwoInputArguments
     !canMutateProperties:inCanMutateProperties
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
-  let methodMangledName = routineMangledNameFromAST (
-    !inLLVMBaseTypeName
-    !.new {!inMethodName !.nowhere}
-    !argumentList
-  )
   [!?self insertKey
-    !methodMangledName
+    !routineMangledName
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
@@ -157,7 +160,7 @@ setter @propertyMap addFunctionWithTwoInputArguments
 #    ![inMethodName nowhere]
 #    !argumentList
 #  )
-  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
+#  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

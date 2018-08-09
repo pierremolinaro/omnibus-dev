@@ -771,7 +771,7 @@ class GALGAS_standaloneRoutineCallIR : public GALGAS_abstractInstructionIR {
   public : static class GALGAS_standaloneRoutineCallIR constructor_new (const class GALGAS_string & inOperand0,
                                                                         const class GALGAS_objectIR & inOperand1,
                                                                         const class GALGAS_lstring & inOperand2,
-                                                                        const class GALGAS_lstring & inOperand3,
+                                                                        const class GALGAS_string & inOperand3,
                                                                         const class GALGAS_calleeKindIR & inOperand4,
                                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand5
                                                                         COMMA_LOCATION_ARGS) ;
@@ -789,7 +789,7 @@ class GALGAS_standaloneRoutineCallIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
 
@@ -819,7 +819,7 @@ class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mProperty_mGlobalVariableName ;
   public : GALGAS_objectIR mProperty_mResult ;
   public : GALGAS_lstring mProperty_mFunctionMangledName ;
-  public : GALGAS_lstring mProperty_mFunctionNameForGeneration ;
+  public : GALGAS_string mProperty_mFunctionNameForGeneration ;
   public : GALGAS_calleeKindIR mProperty_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mProperty_mArgumentList ;
 
@@ -827,7 +827,7 @@ class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
   public : cPtr_standaloneRoutineCallIR (const GALGAS_string & in_mGlobalVariableName,
                                          const GALGAS_objectIR & in_mResult,
                                          const GALGAS_lstring & in_mFunctionMangledName,
-                                         const GALGAS_lstring & in_mFunctionNameForGeneration,
+                                         const GALGAS_string & in_mFunctionNameForGeneration,
                                          const GALGAS_calleeKindIR & in_mKind,
                                          const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
                                          COMMA_LOCATION_ARGS) ;
@@ -839,7 +839,7 @@ class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_calleeKindIR getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
 //--- Description

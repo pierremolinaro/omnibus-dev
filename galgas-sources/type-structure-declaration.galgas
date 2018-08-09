@@ -368,6 +368,7 @@ override method @structureDeclarationAST enterInContext
       !isPublic:system.mPublic
       !exported:exportedRoutine
       !name:system.mName
+      !nameForLLVMGeneration:routineMangledName
       !routineKind:system.mRoutineKind
       !signature:signature
       !returnTypeProxy:returnTypeProxy

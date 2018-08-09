@@ -297,6 +297,7 @@ override method @staticListAST enterInContext
         !isPublic:true # Routine is declared with "public"
         !exported:false # Routine is declared with @exported attribute
         !name:propertyName
+        !nameForLLVMGeneration:routineMangledName
         !routineKind:.function {!executionMode:mode} # @routineKind mRoutineKind
         !signature:signature
         !returnTypeProxy:returnTypeProxy 
