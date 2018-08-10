@@ -255,7 +255,7 @@ func setupNameForTaskType ?let @string inTaskTypeName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func activateNameForTaskType ?let @string inTaskTypeName -> @string {
-  result = "@" + ["task.activate." + inTaskTypeName assemblerRepresentation]
+  result = "task.activate." + inTaskTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

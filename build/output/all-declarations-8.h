@@ -10,22 +10,22 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @enumToUintRoutineIR class                                              *
+//                                         @dynArrayRemoveAllFunctionIR class                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_enumToUintRoutineIR : public GALGAS_abstractRoutineIR {
+class GALGAS_dynArrayRemoveAllFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
-  public : GALGAS_enumToUintRoutineIR (void) ;
+  public : GALGAS_dynArrayRemoveAllFunctionIR (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_enumToUintRoutineIR constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_dynArrayRemoveAllFunctionIR constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_enumToUintRoutineIR * ptr (void) const { return (const cPtr_enumToUintRoutineIR *) mObjectPtr ; }
+  public : inline const class cPtr_dynArrayRemoveAllFunctionIR * ptr (void) const { return (const cPtr_dynArrayRemoveAllFunctionIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_enumToUintRoutineIR (const cPtr_enumToUintRoutineIR * inSourcePtr) ;
+  public : GALGAS_dynArrayRemoveAllFunctionIR (const cPtr_dynArrayRemoveAllFunctionIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -33,19 +33,18 @@ class GALGAS_enumToUintRoutineIR : public GALGAS_abstractRoutineIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_enumToUintRoutineIR extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_enumToUintRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_bool & inOperand1,
-                                                                    const class GALGAS_bool & inOperand2,
-                                                                    const class GALGAS_string & inOperand3
+  public : static GALGAS_dynArrayRemoveAllFunctionIR extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_dynArrayRemoveAllFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                            const class GALGAS_bool & inOperand1,
+                                                                            const class GALGAS_bool & inOperand2
+                                                                            COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_enumToUintRoutineIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_dynArrayRemoveAllFunctionIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -53,41 +52,132 @@ class GALGAS_enumToUintRoutineIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mEnumerationLLVMTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_enumToUintRoutineIR class
+} ; // End of GALGAS_dynArrayRemoveAllFunctionIR class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumToUintRoutineIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayRemoveAllFunctionIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @enumToUintRoutineIR class                                     *
+//                                Pointer class for @dynArrayRemoveAllFunctionIR class                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
+class cPtr_dynArrayRemoveAllFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public : GALGAS_string mProperty_mEnumerationLLVMTypeName ;
 
 //--- Constructor
-  public : cPtr_enumToUintRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                     const GALGAS_bool & in_mIsRequired,
-                                     const GALGAS_bool & in_mWarnIfUnused,
-                                     const GALGAS_string & in_mEnumerationLLVMTypeName
-                                     COMMA_LOCATION_ARGS) ;
+  public : cPtr_dynArrayRemoveAllFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                             const GALGAS_bool & in_mIsRequired,
+                                             const GALGAS_bool & in_mWarnIfUnused
+                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mEnumerationLLVMTypeName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           @dynArrayAppendFunctionIR class                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
+//--- Constructor
+  public : GALGAS_dynArrayAppendFunctionIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_dynArrayAppendFunctionIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_dynArrayAppendFunctionIR * ptr (void) const { return (const cPtr_dynArrayAppendFunctionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_dynArrayAppendFunctionIR (const cPtr_dynArrayAppendFunctionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_dynArrayAppendFunctionIR extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_dynArrayAppendFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_bool & inOperand1,
+                                                                         const class GALGAS_bool & inOperand2,
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_dynArrayAppendFunctionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_dynArrayAppendFunctionIR class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                  Pointer class for @dynArrayAppendFunctionIR class                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
+//--- Attributes
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mArrayTypeProxy ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mElementTypeProxy ;
+
+//--- Constructor
+  public : cPtr_dynArrayAppendFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                          const GALGAS_bool & in_mIsRequired,
+                                          const GALGAS_bool & in_mWarnIfUnused,
+                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mArrayTypeProxy,
+                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy
+                                          COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -534,7 +624,6 @@ void routine_generateLLVMCodeForStaticArrayType (class GALGAS_string & ioArgumen
 void routine_generateLLVMcodeForDynamicArray (class GALGAS_string & ioArgument0,
                                               class GALGAS_generationAdds & ioArgument1,
                                               const class GALGAS_PLMType constinArgument2,
-                                              const class GALGAS_PLMType constinArgument3,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
@@ -632,71 +721,4 @@ void routine_generateLLVMcodeForStructure (class GALGAS_string & ioArgument0,
                                            const class GALGAS_uint constinArgument3,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'minValueForInteger'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'maxValueForInteger'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'byteSwappedMethodName'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_byteSwappedMethodName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'bitReversedMethodName'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_bitReversedMethodName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'countLeadingZerosMethodName'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_countLeadingZerosMethodName (class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'countTrainingZerosMethodName'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_countTrainingZerosMethodName (class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'setBitCountMethodName'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_setBitCountMethodName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
 

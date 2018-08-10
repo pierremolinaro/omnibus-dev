@@ -3596,7 +3596,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_orderedTypeList_2D_
 
 void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & ioObject,
                                                    class GALGAS_semanticContext & io_ioContext,
-                                                   class GALGAS_routineListIR & io_ioRoutineListIR,
                                                    const class GALGAS_string constin_inLLVMBaseTypeName,
                                                    const class GALGAS_string constin_inMethodName,
                                                    const class GALGAS_bool constin_inIsSafe,
@@ -3616,7 +3615,6 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & io
 
 void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_propertyMap & ioObject,
                                                        class GALGAS_semanticContext & io_ioContext,
-                                                       class GALGAS_routineListIR & io_ioRoutineListIR,
                                                        const class GALGAS_string constin_inLLVMBaseTypeName,
                                                        const class GALGAS_string constin_inMethodName,
                                                        const class GALGAS_bool constin_inIsSafe,

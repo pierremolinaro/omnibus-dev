@@ -69,6 +69,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   if not ioContext.mTargetParameters.mHandleDynamicArray then
     error mElementTypeName : "this target does not handle dynamic array"
   end
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mDynamicArrayTypeName ?let arrayTypeProxy]
 #-------------------------------------------- Get element type
   [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?2*]
   if not [elementType copyable] then
@@ -96,39 +97,33 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @propertyMap propertyMap = {}
   #--- Method 'removeAll()'
     [!?propertyMap addFunctionWithoutArgument
-      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"removeAll"
       !safe:false
       !resultTypeProxy: .null
       !canMutateProperties:true
     ]
+    ioRoutineListIR += !@dynArrayRemoveAllFunctionIR.new {
+      !routineMangledNameFromAST (!llvmBaseTypeName !["removeAll" nowhere] ! {})
+      !false
+      !false
+    }
   #--- Method 'length()'
     [!?propertyMap addFunctionWithoutArgument
-      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"length"
       !safe:false
       !resultTypeProxy: uint32TypeProxy
       !canMutateProperties:false
     ]
-  #--- Method 'append(?:)'
-    [!?propertyMap addFunctionWithInputArgument
-      !?context:ioContext
-      !?ioRoutineListIR
-      !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:"append"
-      !safe:false
-      !inputArgumentSelector:""
-      !inputArgumentTypeProxy:elementTypeProxy
-      !inputArgumentName:"inValue"
-      !resultTypeProxy:.null
-      !canMutateProperties:true
-    ]
+    ioRoutineListIR += !@dynArrayLengthFunctionIR.new {
+      !routineMangledNameFromAST (!llvmBaseTypeName !["length" nowhere] ! {})
+      !false
+      !false
+    }
   #--- Method 'insert(?:?atIndex:)'
     [!?propertyMap addFunctionWithTwoInputArguments
       !?context:ioContext
-      !?ioRoutineListIR
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"insert"
       !safe:false
@@ -141,6 +136,48 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !resultTypeProxy:.null
       !canMutateProperties:true
     ]
+    let @routineFormalArgumentListAST insert_argumentList = {
+      !.input
+      !["" nowhere]
+      ![elementType.llvmBaseTypeName nowhere]
+      !["inValue" nowhere]
+    ,
+      !.input
+      !["atIndex" nowhere]
+      !["$uint32" nowhere]
+      !["inIndex" nowhere]
+    }
+    ioRoutineListIR += !@dynArrayInsertFunctionIR.new {
+      !routineMangledNameFromAST (!llvmBaseTypeName !["insert" nowhere] !insert_argumentList)
+      !false
+      !false
+      !elementTypeProxy
+    }
+  #--- Method 'append(?:)'
+    [!?propertyMap addFunctionWithInputArgument
+      !?context:ioContext
+      !llvmBaseTypeName:llvmBaseTypeName
+      !methodName:"append"
+      !safe:false
+      !inputArgumentSelector:""
+      !inputArgumentTypeProxy:elementTypeProxy
+      !inputArgumentName:"inValue"
+      !resultTypeProxy:.null
+      !canMutateProperties:true
+    ]
+    let append_argumentList = @routineFormalArgumentListAST {
+      !.input
+      !["" nowhere]
+      ![mElementTypeName nowhere]
+      !["" nowhere]
+    }
+    ioRoutineListIR += !@dynArrayAppendFunctionIR.new {
+      !routineMangledNameFromAST (!llvmBaseTypeName !["append" nowhere] !append_argumentList)
+      !false
+      !false
+      !arrayTypeProxy
+      !elementTypeProxy
+    }
   #-------------------------------------------- Constructor map
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["()" nowhere] !{} !.null]
@@ -174,58 +211,154 @@ proc generateLLVMcodeForDynamicArray
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
   ?let @PLMType inArrayType
-  ?let @PLMType inElementType
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  let llvmArrayBaseTypeName = inArrayType.llvmBaseTypeName # inTemporaryTypeName
-  let elementLLVMTypeName = [inElementType llvmTypeName]
-#---------- Method 'removeAll()'
-  let removeAllRoutineMangledName = routineMangledNameFromAST (
-    !llvmArrayBaseTypeName
-    !["removeAll" nowhere]
-    !{}
-  )
-  let removeAllRoutineLLVMName = llvmNameForFunction (!removeAllRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!removeAllRoutineMangledName.string)
-  ioLLVMcode += "define internal void @" + removeAllRoutineLLVMName + " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
+#--- Assignment
+  ioLLVMcode += llvmSeparatorLine () + "\n"
+  ioLLVMcode += "define internal void @plm.assign."
+  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += "."
+  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
+  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
+  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
+  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
+  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
+  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: removeAll
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @dynArrayRemoveAllFunctionIR : @abstractRoutineIR {
+}
+
+#·······················································································································
+
+override method @dynArrayRemoveAllFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  call void @arc.release (%ptrtype %buffer.pointer)\n"
   ioLLVMcode += "  store %ptrtype null, %ptrtype* %ioArray\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
-#---------- Method 'length()'
-  let lengthRoutineMangledName = routineMangledNameFromAST (
-    !llvmArrayBaseTypeName
-    !["length" nowhere]
-    !{}
-  )
-  let lengthRoutineLLVMName = llvmNameForFunction (!lengthRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!lengthRoutineMangledName)
-  ioLLVMcode += "define internal i32 @" + lengthRoutineLLVMName + " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: length
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @dynArrayLengthFunctionIR : @abstractRoutineIR {
+}
+
+#·······················································································································
+
+override method @dynArrayLengthFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "define internal i32 @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  %length = call i32 @arc.length (%ptrtype %buffer.pointer)\n"
   ioLLVMcode += "  ret i32 %length\n"
   ioLLVMcode += "}\n\n"
-#---------- Method 'insert(?:?atIndex:)'
-  @routineFormalArgumentListAST argumentList = {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: append(?:)
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @dynArrayAppendFunctionIR : @abstractRoutineIR {
+  @unifiedTypeMap-proxy mArrayTypeProxy
+  @unifiedTypeMap-proxy mElementTypeProxy
+}
+
+#·······················································································································
+
+override method @dynArrayAppendFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let elementType = [mElementTypeProxy type]
+  let @routineFormalArgumentListAST argumentList = {
     !.input
     !["" nowhere]
-    ![inElementType.llvmBaseTypeName nowhere]
+    ![elementType.llvmBaseTypeName nowhere]
     !["inValue" nowhere]
   ,
     !.input
     !["atIndex" nowhere]
-    !["uint32" nowhere]
+    !["$uint32" nowhere]
     !["inIndex" nowhere]
   }
   let insertRoutineMangledName = routineMangledNameFromAST (
-    !llvmArrayBaseTypeName
+    ![mArrayTypeProxy type].llvmBaseTypeName
     !["insert" nowhere]
     !argumentList
   )
   let insertRoutineLLVMName = llvmNameForFunction (!insertRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!insertRoutineMangledName)
-  ioLLVMcode += "define internal void @" + insertRoutineLLVMName + " (%ptrtype* %ioArray"
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+             + " (%ptrtype* %ioArray, " + [elementType llvmTypeName] + " %inValue)" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += ";--- Get buffer length\n"
+  ioLLVMcode += "  %current.buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
+  ioLLVMcode += "  %current.buffer.length = call i32 @arc.length (%ptrtype %current.buffer.pointer)\n"
+  ioLLVMcode += ";--- Insert\n"
+  ioLLVMcode += "  call void @" + insertRoutineLLVMName
+             + "(%ptrtype* %ioArray, " + [elementType llvmTypeName] + " %inValue, i32 %current.buffer.length)\n"
+  ioLLVMcode += ";--- Return\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: insert(?:)
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @dynArrayInsertFunctionIR : @abstractRoutineIR {
+  @unifiedTypeMap-proxy mElementTypeProxy
+}
+
+#·······················································································································
+
+override method @dynArrayInsertFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
+  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
+#  @routineFormalArgumentListAST argumentList = {
+#    !.input
+#    !["" nowhere]
+#    ![inElementType.llvmBaseTypeName nowhere]
+#    !["inValue" nowhere]
+#  ,
+#    !.input
+#    !["atIndex" nowhere]
+#    !["uint32" nowhere]
+#    !["inIndex" nowhere]
+#  }
+#  let insertRoutineMangledName = routineMangledNameFromAST (
+#    !llvmArrayBaseTypeName
+#    !["insert" nowhere]
+#    !argumentList
+#  )
+#  let insertRoutineLLVMName = llvmNameForFunction (!insertRoutineMangledName.string)
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"
   ioLLVMcode += ", i32 %inIndex"
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
@@ -244,55 +377,15 @@ proc generateLLVMcodeForDynamicArray
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
   ioLLVMcode += "  call void @plm.assign."
-  ioLLVMcode += [inElementType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += [elementLLVMBaseTypeName assemblerRepresentation]
   ioLLVMcode += "."
-  ioLLVMcode += [inElementType.llvmBaseTypeName assemblerRepresentation]
+  ioLLVMcode += [elementLLVMBaseTypeName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
   ioLLVMcode += "  store %ptrtype %new.buffer.pointer, %ptrtype* %ioArray\n"
   ioLLVMcode += ";--- Return\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
-#---------- Method 'append(?:)'
-  argumentList = {
-    !.input
-    !["" nowhere]
-    ![inElementType.llvmBaseTypeName nowhere]
-    !["inValue" nowhere]
-  }
-  let routineMangledName = routineMangledNameFromAST (
-    !llvmArrayBaseTypeName
-    !["append" nowhere]
-    !argumentList
-  )
-  var routineLLVMName = llvmNameForFunction (!routineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal void @" + routineLLVMName
-             + " (%ptrtype* %ioArray, " + elementLLVMTypeName + " %inValue)" + llvmAttributeFunction () + "{\n"
-  ioLLVMcode += ";--- Get buffer length\n"
-  ioLLVMcode += "  %current.buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
-  ioLLVMcode += "  %current.buffer.length = call i32 @arc.length (%ptrtype %current.buffer.pointer)\n"
-  ioLLVMcode += ";--- Insert\n"
-  ioLLVMcode += "  call void @" + insertRoutineLLVMName
-             + "(%ptrtype* %ioArray, " + elementLLVMTypeName + " %inValue, i32 %current.buffer.length)\n"
-  ioLLVMcode += ";--- Return\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-#--- Assignment
-  ioLLVMcode += llvmSeparatorLine () + "\n"
-  ioLLVMcode += "define internal void @plm.assign."
-  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
-  ioLLVMcode += "."
-  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
-  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
-  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
-  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
-  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
-  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

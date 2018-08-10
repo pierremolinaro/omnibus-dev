@@ -251,7 +251,7 @@ method @taskListAST enterInContext
   end
 #---
   @decoratedTaskList decoratedTaskList = {}
-  for task in sortedTaskList do
+  for task in sortedTaskList do (taskIndex)
   #--- task variables
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
@@ -272,13 +272,22 @@ method @taskListAST enterInContext
     end
   #---- Add activate function
     [!?propertyMap addFunctionWithoutArgument
-      !?ioRoutineListIR
       !llvmBaseTypeName:task.mTaskName
       !methodName:"activate"
       !safe:true
       !resultTypeProxy:.null
       !canMutateProperties:false
     ]
+    let assemblerTaskName = [task.mTaskName assemblerRepresentation]
+    let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
+    ioRoutineListIR += !@taskActivateFunctionIR.new {
+      !routineMangledNameFromAST (!task.mTaskName !["activate" nowhere] !{})
+      !false
+      !false
+      !assemblerTaskName
+      !activateTaskCallName
+      !taskIndex
+    }
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap !task.mTaskName !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map
@@ -675,17 +684,17 @@ method @taskMapIR generateCode
     let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
   #---------- Activate method
-    let activateFunctionName = routineMangledNameFromAST (
-      !task.mTaskName
-      !["activate" nowhere]
-      !{}
-    )
-    ioLLVMcode += "define internal void @" + llvmNameForFunction (!activateFunctionName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
-    ioLLVMcode += "  call void @" + activateTaskCallName + " (i8 " + taskIndex + ")\n"
-    ioLLVMcode += "  ret void\n"
-    ioLLVMcode += "}\n\n"
-    ioLLVMcode += llvmSeparatorLine ()
-    ioLLVMcode += "\n"
+#    let activateFunctionName = routineMangledNameFromAST (
+#      !task.mTaskName
+#      !["activate" nowhere]
+#      !{}
+#    )
+#    ioLLVMcode += "define internal void @" + llvmNameForFunction (!activateFunctionName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+#    ioLLVMcode += "  call void @" + activateTaskCallName + " (i8 " + taskIndex + ")\n"
+#    ioLLVMcode += "  ret void\n"
+#    ioLLVMcode += "}\n\n"
+#    ioLLVMcode += llvmSeparatorLine ()
+#    ioLLVMcode += "\n"
   #---------- Setup
     ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     [task.mSetupAllocaList generateAllocaList !?ioLLVMcode]
@@ -695,7 +704,8 @@ method @taskMapIR generateCode
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
   #---------- Activate
-    ioLLVMcode += "define internal void " + activateNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    ioLLVMcode += "define internal void @" + [activateNameForTaskType (!task.mTaskName) assemblerRepresentation] + " "
+    ioLLVMcode += formalArgument + llvmAttributeFunction () + "{\n"
     [task.mActivateAllocaList generateAllocaList !?ioLLVMcode]
     [task.mActivateInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
@@ -719,7 +729,7 @@ method @taskMapIR generateCode
     if not task.mActivate then
       ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
     end
-    ioLLVMcode += "  call void " + activateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @" + [activateNameForTaskType (!task.mTaskName) assemblerRepresentation] + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void @func." + llvmNameForFunction (!task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void " + deactivateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     if task.mActivate then
@@ -746,6 +756,32 @@ method @taskMapIR generateCode
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: ACTIVATE FUNCTION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @taskActivateFunctionIR : @abstractRoutineIR {
+  @string mAssemblerTaskName
+  @string mActivateServiceInvocationName
+  @uint mTaskIndex
+}
+
+#·······················································································································
+
+override method @taskActivateFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " "
+  ioLLVMcode += "(%" + mAssemblerTaskName + "* " + llvmNameForSelf () + ")" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += "  call void @" + mActivateServiceInvocationName + " (i8 " + mTaskIndex + ")\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+  ioLLVMcode += llvmSeparatorLine ()
+  ioLLVMcode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

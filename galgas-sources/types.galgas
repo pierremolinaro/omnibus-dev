@@ -586,12 +586,11 @@ proc declareLLVMTypes
         !type
         !arraySize
       )
-    case dynamicArrayType (@PLMType elementType) :
+    case dynamicArrayType (*) :
       generateLLVMcodeForDynamicArray (
         !?ioLLVMcode
         !?ioGenerationAdds
         !type
-        !elementType
       )
     case function (*) :
     case pointer (unused pointee) :

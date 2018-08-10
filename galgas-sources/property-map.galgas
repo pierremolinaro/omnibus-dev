@@ -21,7 +21,6 @@ map @propertyMap {
 #·······················································································································
 
 setter @propertyMap addFunctionWithoutArgument
-  ?!@routineListIR unused ioRoutineListIR
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
@@ -50,18 +49,12 @@ setter @propertyMap addFunctionWithoutArgument
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
-#--- Routine mangled name
-#  [!?ioSubprogramInvocationGraph addNode
-#    !routineNameForInvocationGraph
-#    !routineNameForInvocationGraph
-#  ]
 }
 
 #·······················································································································
 
 setter @propertyMap addFunctionWithInputArgument
   ?!context:@semanticContext ioContext
-  ?!@routineListIR unused ioRoutineListIR
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
@@ -100,14 +93,12 @@ setter @propertyMap addFunctionWithInputArgument
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
-#  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
 }
 
 #·······················································································································
 
 setter @propertyMap addFunctionWithTwoInputArguments
   ?!context:@semanticContext ioContext
-  ?!@routineListIR unused ioRoutineListIR
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @string inMethodName
   ?safe:let @bool inIsSafe
@@ -154,13 +145,6 @@ setter @propertyMap addFunctionWithTwoInputArguments
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]
-#--- Routine mangled name
-#  let routineNameForInvocationGraph = routineMangledNameFromAST (
-#    !inLLVMBaseTypeName
-#    ![inMethodName nowhere]
-#    !argumentList
-#  )
-#  [!?ioSubprogramInvocationGraph addNode !methodMangledName !methodMangledName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -581,7 +581,7 @@ proc generatePrimitiveAndServiceDispatcher
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SYSTEM USER ROUTINE
+#! SYSTEM USER ROUTINE IR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @systemUserRoutineIR : @abstractRoutineIR {

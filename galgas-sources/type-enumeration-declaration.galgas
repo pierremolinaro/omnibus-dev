@@ -133,7 +133,6 @@ override method @enumerationDeclarationAST enterInContext
     !.new {!"$uint" + representationBitCount !mEnumerationName}
   }
   [!?propertyMap addFunctionWithoutArgument
-    !?ioRoutineListIR
     !llvmBaseTypeName:mEnumerationName
     !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
     !safe:true
