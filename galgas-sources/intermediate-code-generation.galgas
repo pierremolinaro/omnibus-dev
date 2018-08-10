@@ -10,8 +10,8 @@ struct @intermediateCodeStruct {
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
-  @instructionListSortedListIR mPanicSetupInstructionListIR
-  @instructionListSortedListIR mPanicLoopInstructionListIR
+  @panicSortedListIR mPanicSetupListIR
+  @panicSortedListIR mPanicLoopListIR
   @taskMapIR mTaskMapIR
   @globalTaskVariableList mGlobalTaskVariableList
   @uint mMaxBranchOfOnInstructions

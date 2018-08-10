@@ -8821,13 +8821,13 @@ void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externP
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @instructionListSortedListIR sorted list                                       *
+//                                           @panicSortedListIR sorted list                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_instructionListSortedListIR : public AC_GALGAS_sortedlist {
+class GALGAS_panicSortedListIR : public AC_GALGAS_sortedlist {
 //--------------------------------- Default constructor
-  public : GALGAS_instructionListSortedListIR (void) ;
+  public : GALGAS_panicSortedListIR (void) ;
 
 //-- Start of generic part --*
 
@@ -8835,47 +8835,41 @@ class GALGAS_instructionListSortedListIR : public AC_GALGAS_sortedlist {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_instructionListSortedListIR extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicSortedListIR extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_instructionListSortedListIR constructor_emptySortedList (LOCATION_ARGS) ;
+  public : static class GALGAS_panicSortedListIR constructor_emptySortedList (LOCATION_ARGS) ;
 
-  public : static class GALGAS_instructionListSortedListIR constructor_sortedListWithValue (const class GALGAS_instructionListIR & inOperand0,
-                                                                                            const class GALGAS_bigint & inOperand1
-                                                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_panicSortedListIR constructor_sortedListWithValue (const class GALGAS_bigint & inOperand0
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_instructionListSortedListIR inOperand,
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_panicSortedListIR inOperand,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_instructionListIR & inOperand0,
-                                                      const class GALGAS_bigint & inOperand1
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_bigint & inOperand0
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_popGreatest (class GALGAS_instructionListIR & outArgument0,
-                                                     class GALGAS_bigint & outArgument1,
+  public : VIRTUAL_IN_DEBUG void setter_popGreatest (class GALGAS_bigint & outArgument0,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popSmallest (class GALGAS_instructionListIR & outArgument0,
-                                                     class GALGAS_bigint & outArgument1,
+  public : VIRTUAL_IN_DEBUG void setter_popSmallest (class GALGAS_bigint & outArgument0,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_greatest (class GALGAS_instructionListIR & outArgument0,
-                                                  class GALGAS_bigint & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_greatest (class GALGAS_bigint & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_smallest (class GALGAS_instructionListIR & outArgument0,
-                                                  class GALGAS_bigint & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_smallest (class GALGAS_bigint & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -8887,28 +8881,27 @@ class GALGAS_instructionListSortedListIR : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
 //--------------------------------- Friend
 
-  friend class cEnumerator_instructionListSortedListIR ;
+  friend class cEnumerator_panicSortedListIR ;
  
-} ; // End of GALGAS_instructionListSortedListIR class
+} ; // End of GALGAS_panicSortedListIR class
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Enumerator declaration                                                                                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumerator_instructionListSortedListIR : public cGenericAbstractEnumerator {
-  public : cEnumerator_instructionListSortedListIR (const GALGAS_instructionListSortedListIR & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) ;
+class cEnumerator_panicSortedListIR : public cGenericAbstractEnumerator {
+  public : cEnumerator_panicSortedListIR (const GALGAS_panicSortedListIR & inEnumeratedObject,
+                                          const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_instructionListIR current_mInstructionList (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_instructionListSortedListIR_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_panicSortedListIR_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListSortedListIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicSortedListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -9398,9 +9391,9 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : GALGAS_stringset mProperty_mRequiredProcedureSet ;
 
-  public : GALGAS_instructionListSortedListIR mProperty_mPanicSetupInstructionListIR ;
+  public : GALGAS_panicSortedListIR mProperty_mPanicSetupListIR ;
 
-  public : GALGAS_instructionListSortedListIR mProperty_mPanicLoopInstructionListIR ;
+  public : GALGAS_panicSortedListIR mProperty_mPanicLoopListIR ;
 
   public : GALGAS_taskMapIR mProperty_mTaskMapIR ;
 
@@ -9441,8 +9434,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_interruptMapIR & in_mInterruptMapIR,
                                           const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
-                                          const GALGAS_instructionListSortedListIR & in_mPanicSetupInstructionListIR,
-                                          const GALGAS_instructionListSortedListIR & in_mPanicLoopInstructionListIR,
+                                          const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
+                                          const GALGAS_panicSortedListIR & in_mPanicLoopListIR,
                                           const GALGAS_taskMapIR & in_mTaskMapIR,
                                           const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
                                           const GALGAS_uint & in_mMaxBranchOfOnInstructions,
@@ -9470,8 +9463,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                        const class GALGAS_interruptMapIR & inOperand2,
                                                                        const class GALGAS_externProcedureMapIR & inOperand3,
                                                                        const class GALGAS_stringset & inOperand4,
-                                                                       const class GALGAS_instructionListSortedListIR & inOperand5,
-                                                                       const class GALGAS_instructionListSortedListIR & inOperand6,
+                                                                       const class GALGAS_panicSortedListIR & inOperand5,
+                                                                       const class GALGAS_panicSortedListIR & inOperand6,
                                                                        const class GALGAS_taskMapIR & inOperand7,
                                                                        const class GALGAS_globalTaskVariableList & inOperand8,
                                                                        const class GALGAS_uint & inOperand9,
@@ -9514,9 +9507,9 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMaxBranchOfOnInstructions (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListSortedListIR getter_mPanicLoopInstructionListIR (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicSortedListIR getter_mPanicLoopListIR (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListSortedListIR getter_mPanicSetupInstructionListIR (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicSortedListIR getter_mPanicSetupListIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRequiredProcedureSet (LOCATION_ARGS) const ;
 

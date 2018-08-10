@@ -27,8 +27,6 @@ void routine_generatePanicCode (class GALGAS_string & ioArgument0,
                                 const class GALGAS_stringset constinArgument1,
                                 const class GALGAS_generationContext constinArgument2,
                                 class GALGAS_generationAdds & ioArgument3,
-                                const class GALGAS_instructionListSortedListIR constinArgument4,
-                                const class GALGAS_instructionListSortedListIR constinArgument5,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 

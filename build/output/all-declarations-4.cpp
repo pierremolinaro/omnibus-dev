@@ -417,41 +417,40 @@ void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_allocaList temp_0 = inObject ;
-  cEnumerator_allocaList enumerator_5737 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5737.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_5737.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)).add_operation (extensionGetter_llvmTypeName (enumerator_5737.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)) ;
-    enumerator_5737.gotoNextObject () ;
+  cEnumerator_allocaList enumerator_2706 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_2706.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_2706.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)).add_operation (extensionGetter_llvmTypeName (enumerator_2706.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)) ;
+    enumerator_2706.gotoNextObject () ;
   }
   const GALGAS_allocaList temp_1 = inObject ;
-  cEnumerator_allocaList enumerator_5898 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_5898.hasCurrentObject ()) {
-    GALGAS_bool test_2 = enumerator_5898.current_mLLVMType (HERE).getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("semantic-routines.galgas", 147)) ;
+  cEnumerator_allocaList enumerator_2867 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_2867.hasCurrentObject ()) {
+    GALGAS_bool test_2 = enumerator_2867.current_mLLVMType (HERE).getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("semantic-routines.galgas", 65)) ;
     if (kBoolTrue == test_2.boolEnum ()) {
-      test_2 = enumerator_5898.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("semantic-routines.galgas", 147)) ;
+      test_2 = enumerator_2867.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("semantic-routines.galgas", 65)) ;
     }
     const enumGalgasBool test_3 = test_2.boolEnum () ;
     if (kBoolTrue == test_3) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- init dynamic array type '").add_operation (enumerator_5898.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)).add_operation (GALGAS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (extensionGetter_llvmTypeName (enumerator_5898.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)).add_operation (GALGAS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)).add_operation (extensionGetter_llvmTypeName (enumerator_5898.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)).add_operation (enumerator_5898.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- init dynamic array type '").add_operation (enumerator_2867.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 66)).add_operation (GALGAS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 66)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 66)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (extensionGetter_llvmTypeName (enumerator_2867.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)).add_operation (GALGAS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)).add_operation (extensionGetter_llvmTypeName (enumerator_2867.current_mLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)).add_operation (enumerator_2867.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 67)) ;
     }
-    enumerator_5898.gotoNextObject () ;
+    enumerator_2867.gotoNextObject () ;
   }
 }
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                           Class for element of '@instructionListSortedListIR' sorted list                           *
+//                                Class for element of '@panicSortedListIR' sorted list                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cSortedListElement_instructionListSortedListIR : public cSortedListElement {
-  public : GALGAS_instructionListSortedListIR_2D_element mObject ;
+class cSortedListElement_panicSortedListIR : public cSortedListElement {
+  public : GALGAS_panicSortedListIR_2D_element mObject ;
 
 //--- Constructor
-  public : cSortedListElement_instructionListSortedListIR (const GALGAS_instructionListIR & in_mInstructionList,
-                                                           const GALGAS_bigint & in_mPriority
-                                                           COMMA_LOCATION_ARGS) ;
+  public : cSortedListElement_panicSortedListIR (const GALGAS_bigint & in_mPriority
+                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method that checks that all attributes are valid
   public : virtual bool isValid (void) const ;
@@ -471,34 +470,29 @@ class cSortedListElement_instructionListSortedListIR : public cSortedListElement
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cSortedListElement_instructionListSortedListIR::cSortedListElement_instructionListSortedListIR (const GALGAS_instructionListIR & in_mInstructionList,
-                                                                                                const GALGAS_bigint & in_mPriority
-                                                                                                COMMA_LOCATION_ARGS) :
+cSortedListElement_panicSortedListIR::cSortedListElement_panicSortedListIR (const GALGAS_bigint & in_mPriority
+                                                                            COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
-mObject (in_mInstructionList, in_mPriority) {
+mObject (in_mPriority) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-bool cSortedListElement_instructionListSortedListIR::isValid (void) const {
+bool cSortedListElement_panicSortedListIR::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cSortedListElement * cSortedListElement_instructionListSortedListIR::copy (void) {
+cSortedListElement * cSortedListElement_panicSortedListIR::copy (void) {
   cSortedListElement * result = NULL ;
-  macroMyNew (result, cSortedListElement_instructionListSortedListIR (mObject.mProperty_mInstructionList, mObject.mProperty_mPriority COMMA_HERE)) ;
+  macroMyNew (result, cSortedListElement_panicSortedListIR (mObject.mProperty_mPriority COMMA_HERE)) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void cSortedListElement_instructionListSortedListIR::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInstructionList" ":" ;
-  mObject.mProperty_mInstructionList.description (ioString, inIndentation) ;
+void cSortedListElement_panicSortedListIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mPriority" ":" ;
@@ -507,24 +501,24 @@ void cSortedListElement_instructionListSortedListIR::description (C_String & ioS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cSortedListElement_instructionListSortedListIR::compare (const cCollectionElement * inOperand) const {
-  cSortedListElement_instructionListSortedListIR * operand = (cSortedListElement_instructionListSortedListIR *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_instructionListSortedListIR) ;
+typeComparisonResult cSortedListElement_panicSortedListIR::compare (const cCollectionElement * inOperand) const {
+  cSortedListElement_panicSortedListIR * operand = (cSortedListElement_panicSortedListIR *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_panicSortedListIR) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR::GALGAS_instructionListSortedListIR (void) :
+GALGAS_panicSortedListIR::GALGAS_panicSortedListIR (void) :
 AC_GALGAS_sortedlist () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cSortedListElement_instructionListSortedListIR::compareForSorting (const cSortedListElement * inOperand) const {
+typeComparisonResult cSortedListElement_panicSortedListIR::compareForSorting (const cSortedListElement * inOperand) const {
   typeComparisonResult result = kOperandEqual ;
-  const cSortedListElement_instructionListSortedListIR * operand = (const cSortedListElement_instructionListSortedListIR *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_instructionListSortedListIR) ;
+  const cSortedListElement_panicSortedListIR * operand = (const cSortedListElement_panicSortedListIR *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_panicSortedListIR) ;
   if (result == kOperandEqual) {
     result = mObject.mProperty_mPriority.objectCompare (operand->mObject.mProperty_mPriority) ;
   }
@@ -533,20 +527,19 @@ typeComparisonResult cSortedListElement_instructionListSortedListIR::compareForS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR GALGAS_instructionListSortedListIR::constructor_emptySortedList (LOCATION_ARGS) {
-  GALGAS_instructionListSortedListIR result ;
+GALGAS_panicSortedListIR GALGAS_panicSortedListIR::constructor_emptySortedList (LOCATION_ARGS) {
+  GALGAS_panicSortedListIR result ;
   result.createNewEmptySortedList (THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR GALGAS_instructionListSortedListIR::constructor_sortedListWithValue (const GALGAS_instructionListIR & inOperand0,
-                                                                                                        const GALGAS_bigint & inOperand1
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_instructionListSortedListIR result = constructor_emptySortedList (THERE) ;
+GALGAS_panicSortedListIR GALGAS_panicSortedListIR::constructor_sortedListWithValue (const GALGAS_bigint & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_panicSortedListIR result = constructor_emptySortedList (THERE) ;
   cSortedListElement * p = NULL ;
-  macroMyNew (p, cSortedListElement_instructionListSortedListIR (inOperand0, inOperand1 COMMA_THERE)) ;
+  macroMyNew (p, cSortedListElement_panicSortedListIR (inOperand0 COMMA_THERE)) ;
   capSortedListElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -556,12 +549,11 @@ GALGAS_instructionListSortedListIR GALGAS_instructionListSortedListIR::construct
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR::addAssign_operation (const GALGAS_instructionListIR & inOperand0,
-                                                              const GALGAS_bigint & inOperand1
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_panicSortedListIR::addAssign_operation (const GALGAS_bigint & inOperand0
+                                                    COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cSortedListElement * p = NULL ;
-    macroMyNew (p, cSortedListElement_instructionListSortedListIR (inOperand0, inOperand1 COMMA_THERE)) ;
+    macroMyNew (p, cSortedListElement_panicSortedListIR (inOperand0 COMMA_THERE)) ;
     capSortedListElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -571,9 +563,9 @@ void GALGAS_instructionListSortedListIR::addAssign_operation (const GALGAS_instr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR::plusAssign_operation (const GALGAS_instructionListSortedListIR inOperand,
-                                                               C_Compiler * /* inCompiler */
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_panicSortedListIR::plusAssign_operation (const GALGAS_panicSortedListIR inOperand,
+                                                     C_Compiler * /* inCompiler */
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid ()) {
     appendSortedList (inOperand) ;
   }
@@ -581,109 +573,89 @@ void GALGAS_instructionListSortedListIR::plusAssign_operation (const GALGAS_inst
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR::setter_popSmallest (GALGAS_instructionListIR & outOperand0,
-                                                             GALGAS_bigint & outOperand1,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_panicSortedListIR::setter_popSmallest (GALGAS_bigint & outOperand0,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_instructionListSortedListIR * p = (cSortedListElement_instructionListSortedListIR *) attributes.ptr () ;
+  cSortedListElement_panicSortedListIR * p = (cSortedListElement_panicSortedListIR *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
-    outOperand1.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
-    outOperand0 = p->mObject.mProperty_mInstructionList ;
-    outOperand1 = p->mObject.mProperty_mPriority ;
+    macroValidSharedObject (p, cSortedListElement_panicSortedListIR) ;
+    outOperand0 = p->mObject.mProperty_mPriority ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR::setter_popGreatest (GALGAS_instructionListIR & outOperand0,
-                                                             GALGAS_bigint & outOperand1,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_panicSortedListIR::setter_popGreatest (GALGAS_bigint & outOperand0,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_instructionListSortedListIR * p = (cSortedListElement_instructionListSortedListIR *) attributes.ptr () ;
+  cSortedListElement_panicSortedListIR * p = (cSortedListElement_panicSortedListIR *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
-    outOperand1.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
-    outOperand0 = p->mObject.mProperty_mInstructionList ;
-    outOperand1 = p->mObject.mProperty_mPriority ;
+    macroValidSharedObject (p, cSortedListElement_panicSortedListIR) ;
+    outOperand0 = p->mObject.mProperty_mPriority ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR::method_smallest (GALGAS_instructionListIR & outOperand0,
-                                                          GALGAS_bigint & outOperand1,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
+void GALGAS_panicSortedListIR::method_smallest (GALGAS_bigint & outOperand0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
   capSortedListElement attributes ;
   smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_instructionListSortedListIR * p = (cSortedListElement_instructionListSortedListIR *) attributes.ptr () ;
+  cSortedListElement_panicSortedListIR * p = (cSortedListElement_panicSortedListIR *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
-    outOperand1.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
-    outOperand0 = p->mObject.mProperty_mInstructionList ;
-    outOperand1 = p->mObject.mProperty_mPriority ;
+    macroValidSharedObject (p, cSortedListElement_panicSortedListIR) ;
+    outOperand0 = p->mObject.mProperty_mPriority ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR::method_greatest (GALGAS_instructionListIR & outOperand0,
-                                                          GALGAS_bigint & outOperand1,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
+void GALGAS_panicSortedListIR::method_greatest (GALGAS_bigint & outOperand0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
   capSortedListElement attributes ;
   greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_instructionListSortedListIR * p = (cSortedListElement_instructionListSortedListIR *) attributes.ptr () ;
+  cSortedListElement_panicSortedListIR * p = (cSortedListElement_panicSortedListIR *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
-    outOperand1.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
-    outOperand0 = p->mObject.mProperty_mInstructionList ;
-    outOperand1 = p->mObject.mProperty_mPriority ;
+    macroValidSharedObject (p, cSortedListElement_panicSortedListIR) ;
+    outOperand0 = p->mObject.mProperty_mPriority ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumerator_instructionListSortedListIR::cEnumerator_instructionListSortedListIR (const GALGAS_instructionListSortedListIR & inEnumeratedObject,
-                                                                                  const typeEnumerationOrder inOrder) :
+cEnumerator_panicSortedListIR::cEnumerator_panicSortedListIR (const GALGAS_panicSortedListIR & inEnumeratedObject,
+                                                              const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element cEnumerator_instructionListSortedListIR::current (LOCATION_ARGS) const {
-  const cSortedListElement_instructionListSortedListIR * p = (const cSortedListElement_instructionListSortedListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
+GALGAS_panicSortedListIR_2D_element cEnumerator_panicSortedListIR::current (LOCATION_ARGS) const {
+  const cSortedListElement_panicSortedListIR * p = (const cSortedListElement_panicSortedListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicSortedListIR) ;
   return p->mObject ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListIR cEnumerator_instructionListSortedListIR::current_mInstructionList (LOCATION_ARGS) const {
-  const cSortedListElement_instructionListSortedListIR * p = (const cSortedListElement_instructionListSortedListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
-  return p->mObject.mProperty_mInstructionList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bigint cEnumerator_instructionListSortedListIR::current_mPriority (LOCATION_ARGS) const {
-  const cSortedListElement_instructionListSortedListIR * p = (const cSortedListElement_instructionListSortedListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_instructionListSortedListIR) ;
+GALGAS_bigint cEnumerator_panicSortedListIR::current_mPriority (LOCATION_ARGS) const {
+  const cSortedListElement_panicSortedListIR * p = (const cSortedListElement_panicSortedListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicSortedListIR) ;
   return p->mObject.mProperty_mPriority ;
 }
 
@@ -691,42 +663,42 @@ GALGAS_bigint cEnumerator_instructionListSortedListIR::current_mPriority (LOCATI
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @instructionListSortedListIR type                                          *
+//                                               @panicSortedListIR type                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionListSortedListIR ("instructionListSortedListIR",
-                                                    NULL) ;
+kTypeDescriptor_GALGAS_panicSortedListIR ("panicSortedListIR",
+                                          NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_instructionListSortedListIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionListSortedListIR ;
+const C_galgas_type_descriptor * GALGAS_panicSortedListIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_panicSortedListIR ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_instructionListSortedListIR::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_panicSortedListIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionListSortedListIR (*this)) ;
+    macroMyNew (result, GALGAS_panicSortedListIR (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR GALGAS_instructionListSortedListIR::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_instructionListSortedListIR result ;
-  const GALGAS_instructionListSortedListIR * p = (const GALGAS_instructionListSortedListIR *) inObject.embeddedObject () ;
+GALGAS_panicSortedListIR GALGAS_panicSortedListIR::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_panicSortedListIR result ;
+  const GALGAS_panicSortedListIR * p = (const GALGAS_panicSortedListIR *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListSortedListIR *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_panicSortedListIR *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("instructionListSortedListIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("panicSortedListIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

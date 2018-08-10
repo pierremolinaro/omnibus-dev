@@ -13012,11 +13012,11 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineListIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineListIR temp_0 = inObject ;
-  cEnumerator_routineListIR enumerator_5374 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5374.hasCurrentObject ()) {
+  cEnumerator_routineListIR enumerator_2343 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_2343.hasCurrentObject ()) {
     ioArgument_ioGenerationAdds.mProperty_mUniqueIndex = GALGAS_uint ((uint32_t) 0U) ;
-    callExtensionMethod_llvmCodeGeneration ((const cPtr_abstractRoutineIR *) enumerator_5374.current (HERE).getter_mRoutine (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 134)) ;
-    enumerator_5374.gotoNextObject () ;
+    callExtensionMethod_llvmCodeGeneration ((const cPtr_abstractRoutineIR *) enumerator_2343.current (HERE).getter_mRoutine (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 52)) ;
+    enumerator_2343.gotoNextObject () ;
   }
 }
 
@@ -13346,12 +13346,6 @@ typeComparisonResult cPtr_decoratedPanicRoutine::dynamicObjectCompare (const acP
     result = mProperty_mIsSetup.objectCompare (p->mProperty_mIsSetup) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mPanicInstructionList.objectCompare (p->mProperty_mPanicInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mEndOfPanicInstructions.objectCompare (p->mProperty_mEndOfPanicInstructions) ;
-  }
-  if (kOperandEqual == result) {
     result = mProperty_mPriority.objectCompare (p->mProperty_mPriority) ;
   }
   return result ;
@@ -13386,8 +13380,6 @@ GALGAS_abstractDecoratedDeclaration () {
 
 GALGAS_decoratedPanicRoutine GALGAS_decoratedPanicRoutine::constructor_default (LOCATION_ARGS) {
   return GALGAS_decoratedPanicRoutine::constructor_new (GALGAS_bool::constructor_default (HERE),
-                                                        GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                        GALGAS_location::constructor_nowhere (HERE),
                                                         GALGAS_lbigint::constructor_default (HERE)
                                                         COMMA_THERE) ;
 }
@@ -13402,13 +13394,11 @@ GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_decoratedPanicRoutine GALGAS_decoratedPanicRoutine::constructor_new (const GALGAS_bool & inAttribute_mIsSetup,
-                                                                            const GALGAS_instructionListAST & inAttribute_mPanicInstructionList,
-                                                                            const GALGAS_location & inAttribute_mEndOfPanicInstructions,
                                                                             const GALGAS_lbigint & inAttribute_mPriority
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_decoratedPanicRoutine result ;
-  if (inAttribute_mIsSetup.isValid () && inAttribute_mPanicInstructionList.isValid () && inAttribute_mEndOfPanicInstructions.isValid () && inAttribute_mPriority.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedPanicRoutine (inAttribute_mIsSetup, inAttribute_mPanicInstructionList, inAttribute_mEndOfPanicInstructions, inAttribute_mPriority COMMA_THERE)) ;
+  if (inAttribute_mIsSetup.isValid () && inAttribute_mPriority.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_decoratedPanicRoutine (inAttribute_mIsSetup, inAttribute_mPriority COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13429,42 +13419,6 @@ GALGAS_bool GALGAS_decoratedPanicRoutine::getter_mIsSetup (UNUSED_LOCATION_ARGS)
 
 GALGAS_bool cPtr_decoratedPanicRoutine::getter_mIsSetup (UNUSED_LOCATION_ARGS) const {
   return mProperty_mIsSetup ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_instructionListAST GALGAS_decoratedPanicRoutine::getter_mPanicInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedPanicRoutine * p = (const cPtr_decoratedPanicRoutine *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedPanicRoutine) ;
-    result = p->mProperty_mPanicInstructionList ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_instructionListAST cPtr_decoratedPanicRoutine::getter_mPanicInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPanicInstructionList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location GALGAS_decoratedPanicRoutine::getter_mEndOfPanicInstructions (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedPanicRoutine * p = (const cPtr_decoratedPanicRoutine *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedPanicRoutine) ;
-    result = p->mProperty_mEndOfPanicInstructions ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location cPtr_decoratedPanicRoutine::getter_mEndOfPanicInstructions (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfPanicInstructions ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13490,14 +13444,10 @@ GALGAS_lbigint cPtr_decoratedPanicRoutine::getter_mPriority (UNUSED_LOCATION_ARG
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_decoratedPanicRoutine::cPtr_decoratedPanicRoutine (const GALGAS_bool & in_mIsSetup,
-                                                        const GALGAS_instructionListAST & in_mPanicInstructionList,
-                                                        const GALGAS_location & in_mEndOfPanicInstructions,
                                                         const GALGAS_lbigint & in_mPriority
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractDecoratedDeclaration (THERE),
 mProperty_mIsSetup (in_mIsSetup),
-mProperty_mPanicInstructionList (in_mPanicInstructionList),
-mProperty_mEndOfPanicInstructions (in_mEndOfPanicInstructions),
 mProperty_mPriority (in_mPriority) {
 }
 
@@ -13512,10 +13462,6 @@ void cPtr_decoratedPanicRoutine::description (C_String & ioString,
   ioString << "[@decoratedPanicRoutine:" ;
   mProperty_mIsSetup.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mPanicInstructionList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mEndOfPanicInstructions.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mProperty_mPriority.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -13524,7 +13470,7 @@ void cPtr_decoratedPanicRoutine::description (C_String & ioString,
 
 acPtr_class * cPtr_decoratedPanicRoutine::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedPanicRoutine (mProperty_mIsSetup, mProperty_mPanicInstructionList, mProperty_mEndOfPanicInstructions, mProperty_mPriority COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedPanicRoutine (mProperty_mIsSetup, mProperty_mPriority COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -13567,6 +13513,214 @@ GALGAS_decoratedPanicRoutine GALGAS_decoratedPanicRoutine::extractObject (const 
       result = *p ;
     }else{
       inCompiler->castError ("decoratedPanicRoutine", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_sectionPanicRoutineIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_sectionPanicRoutineIR * p = (const cPtr_sectionPanicRoutineIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_sectionPanicRoutineIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mPanicSetupListIR.objectCompare (p->mProperty_mPanicSetupListIR) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mPanicLoopListIR.objectCompare (p->mProperty_mPanicLoopListIR) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_sectionPanicRoutineIR::objectCompare (const GALGAS_sectionPanicRoutineIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_sectionPanicRoutineIR::GALGAS_sectionPanicRoutineIR (void) :
+GALGAS_abstractRoutineIR () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_sectionPanicRoutineIR GALGAS_sectionPanicRoutineIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_sectionPanicRoutineIR::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                        GALGAS_bool::constructor_default (HERE),
+                                                        GALGAS_bool::constructor_default (HERE),
+                                                        GALGAS_panicSortedListIR::constructor_emptySortedList (HERE),
+                                                        GALGAS_panicSortedListIR::constructor_emptySortedList (HERE)
+                                                        COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_sectionPanicRoutineIR::GALGAS_sectionPanicRoutineIR (const cPtr_sectionPanicRoutineIR * inSourcePtr) :
+GALGAS_abstractRoutineIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_sectionPanicRoutineIR) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_sectionPanicRoutineIR GALGAS_sectionPanicRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
+                                                                            const GALGAS_bool & inAttribute_mIsRequired,
+                                                                            const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                            const GALGAS_panicSortedListIR & inAttribute_mPanicSetupListIR,
+                                                                            const GALGAS_panicSortedListIR & inAttribute_mPanicLoopListIR
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_sectionPanicRoutineIR result ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mPanicSetupListIR.isValid () && inAttribute_mPanicLoopListIR.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_sectionPanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mPanicSetupListIR, inAttribute_mPanicLoopListIR COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_panicSortedListIR GALGAS_sectionPanicRoutineIR::getter_mPanicSetupListIR (UNUSED_LOCATION_ARGS) const {
+  GALGAS_panicSortedListIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_sectionPanicRoutineIR * p = (const cPtr_sectionPanicRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_sectionPanicRoutineIR) ;
+    result = p->mProperty_mPanicSetupListIR ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_panicSortedListIR cPtr_sectionPanicRoutineIR::getter_mPanicSetupListIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicSetupListIR ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_panicSortedListIR GALGAS_sectionPanicRoutineIR::getter_mPanicLoopListIR (UNUSED_LOCATION_ARGS) const {
+  GALGAS_panicSortedListIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_sectionPanicRoutineIR * p = (const cPtr_sectionPanicRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_sectionPanicRoutineIR) ;
+    result = p->mProperty_mPanicLoopListIR ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_panicSortedListIR cPtr_sectionPanicRoutineIR::getter_mPanicLoopListIR (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPanicLoopListIR ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                   Pointer class for @sectionPanicRoutineIR class                                    *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_sectionPanicRoutineIR::cPtr_sectionPanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                                        const GALGAS_bool & in_mIsRequired,
+                                                        const GALGAS_bool & in_mWarnIfUnused,
+                                                        const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
+                                                        const GALGAS_panicSortedListIR & in_mPanicLoopListIR
+                                                        COMMA_LOCATION_ARGS) :
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+mProperty_mPanicSetupListIR (in_mPanicSetupListIR),
+mProperty_mPanicLoopListIR (in_mPanicLoopListIR) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_sectionPanicRoutineIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sectionPanicRoutineIR ;
+}
+
+void cPtr_sectionPanicRoutineIR::description (C_String & ioString,
+                                              const int32_t inIndentation) const {
+  ioString << "[@sectionPanicRoutineIR:" ;
+  mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mPanicSetupListIR.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mPanicLoopListIR.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_sectionPanicRoutineIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_sectionPanicRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mPanicSetupListIR, mProperty_mPanicLoopListIR COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             @sectionPanicRoutineIR type                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_sectionPanicRoutineIR ("sectionPanicRoutineIR",
+                                              & kTypeDescriptor_GALGAS_abstractRoutineIR) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_sectionPanicRoutineIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sectionPanicRoutineIR ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_sectionPanicRoutineIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_sectionPanicRoutineIR (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_sectionPanicRoutineIR GALGAS_sectionPanicRoutineIR::extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_sectionPanicRoutineIR result ;
+  const GALGAS_sectionPanicRoutineIR * p = (const GALGAS_sectionPanicRoutineIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_sectionPanicRoutineIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sectionPanicRoutineIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -14173,208 +14327,6 @@ GALGAS_extendExpressionAST GALGAS_extendExpressionAST::extractObject (const GALG
       result = *p ;
     }else{
       inCompiler->castError ("extendExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cPtr_truncateExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_truncateExpressionAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mExpression.objectCompare (p->mProperty_mExpression) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mTypeName.objectCompare (p->mProperty_mTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mEndOfExpression.objectCompare (p->mProperty_mEndOfExpression) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_truncateExpressionAST::objectCompare (const GALGAS_truncateExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_truncateExpressionAST::GALGAS_truncateExpressionAST (void) :
-GALGAS_expressionAST () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_truncateExpressionAST::GALGAS_truncateExpressionAST (const cPtr_truncateExpressionAST * inSourcePtr) :
-GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_truncateExpressionAST) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_truncateExpressionAST GALGAS_truncateExpressionAST::constructor_new (const GALGAS_expressionAST & inAttribute_mExpression,
-                                                                            const GALGAS_lstring & inAttribute_mTypeName,
-                                                                            const GALGAS_location & inAttribute_mEndOfExpression
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_truncateExpressionAST result ;
-  if (inAttribute_mExpression.isValid () && inAttribute_mTypeName.isValid () && inAttribute_mEndOfExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_truncateExpressionAST (inAttribute_mExpression, inAttribute_mTypeName, inAttribute_mEndOfExpression COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_expressionAST GALGAS_truncateExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_truncateExpressionAST) ;
-    result = p->mProperty_mExpression ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_expressionAST cPtr_truncateExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExpression ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_truncateExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_truncateExpressionAST) ;
-    result = p->mProperty_mTypeName ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring cPtr_truncateExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTypeName ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location GALGAS_truncateExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_truncateExpressionAST) ;
-    result = p->mProperty_mEndOfExpression ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location cPtr_truncateExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfExpression ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                   Pointer class for @truncateExpressionAST class                                    *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_truncateExpressionAST::cPtr_truncateExpressionAST (const GALGAS_expressionAST & in_mExpression,
-                                                        const GALGAS_lstring & in_mTypeName,
-                                                        const GALGAS_location & in_mEndOfExpression
-                                                        COMMA_LOCATION_ARGS) :
-cPtr_expressionAST (THERE),
-mProperty_mExpression (in_mExpression),
-mProperty_mTypeName (in_mTypeName),
-mProperty_mEndOfExpression (in_mEndOfExpression) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_truncateExpressionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_truncateExpressionAST ;
-}
-
-void cPtr_truncateExpressionAST::description (C_String & ioString,
-                                              const int32_t inIndentation) const {
-  ioString << "[@truncateExpressionAST:" ;
-  mProperty_mExpression.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_truncateExpressionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_truncateExpressionAST (mProperty_mExpression, mProperty_mTypeName, mProperty_mEndOfExpression COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             @truncateExpressionAST type                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_truncateExpressionAST ("truncateExpressionAST",
-                                              & kTypeDescriptor_GALGAS_expressionAST) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_truncateExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_truncateExpressionAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_truncateExpressionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_truncateExpressionAST (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_truncateExpressionAST GALGAS_truncateExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_truncateExpressionAST result ;
-  const GALGAS_truncateExpressionAST * p = (const GALGAS_truncateExpressionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_truncateExpressionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("truncateExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

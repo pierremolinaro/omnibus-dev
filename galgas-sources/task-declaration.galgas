@@ -308,23 +308,6 @@ method @taskListAST enterInContext
       !taskListInstructionList # @instructionListAST mRoutineInstructionList
       !task.mTaskName.location # @location mEndOfRoutineDeclaration
       !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
-
-#    routineSemanticAnalysis (
-#      !receiverType:taskType
-#      !.function{!executionMode:.userMode}
-#      !.userMode
-#      !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
-#      !{} # No argument
-#      !returnTypeName:["" nowhere]
-#      !taskListInstructionList
-#      !mTaskName.location
-#      !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
-#      !warnIfUnused:true
-#      !globalFunction:false
-#      !context:inContext
-#      !?temporary:ioTemporaries
-#      !?intermediateCode:ioIntermediateCodeStruct
-#    )
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap !task.mTaskName !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map

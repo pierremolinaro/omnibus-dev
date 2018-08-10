@@ -128,52 +128,19 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
    ]
-#  [inAST.mStandAloneSystemRoutineListAST systemRoutineSemanticAnalysis2
-#    !receiverType:voidType ()
-#    !context:inSemanticContext
-#    !?temporary:temporaries
-#    !?intermediateCode:outIntermediateCodeStruct
-#  ]
   [inAST.mExternProcListAST externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
+#--- Add panic routines
+  appendPanicRoutines (!?intermediateCode:outIntermediateCodeStruct)
 #--- Check required procedure are defined
   checkRequiredProcedures (
     !ast:inAST
     !context:inSemanticContext
     !endOfSourceFile:inEndOfSourceFile
   )
-#--- Print procedure invocation graph
-#  if (@uint.errorCount == 0) && [option plm_options.writeRoutineInvocationGraphFile value] then
-#    let s = [temporaries.mSubprogramInvocationGraph graphviz]
-#    let filePath = [inSourceFile stringByDeletingPathExtension] + ".routineInvocation.dot"
-#    [s writeToFileWhenDifferentContents !filePath ?*]
-#  end
-##--- Check procedure invocation graph
-#  if (@uint.errorCount == 0) && not [option plm_options.doNotDetectRecursiveCalls value] then
-#    let undefinedNodeKeyList = [temporaries.mSubprogramInvocationGraph undefinedNodeKeyList]
-#    if [undefinedNodeKeyList length] > 0 then
-#        var s = "subprogram invocation graph error, undefined nodes:"
-#        for (str) in undefinedNodeKeyList do
-#          s += "\n - " + str
-#        end
-#        error inEndOfSourceFile : s
-#    else
-#      [temporaries.mSubprogramInvocationGraph circularities
-#         ?let @lstringlist unused unsortedInformationList
-#         ?let @lstringlist unsortedLKeyList
-#      ]
-#      if [unsortedLKeyList length] > 0 then
-#        var s = "the following routines are recursive:"
-#        for (str) in unsortedLKeyList do
-#          s += "\n - " + str
-#        end
-#        error inEndOfSourceFile : s
-#      end
-#    end
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

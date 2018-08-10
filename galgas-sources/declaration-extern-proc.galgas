@@ -201,7 +201,7 @@ override method @externRoutineIR llvmCodeGeneration
   between
     ioLLVMcode += ", "
   end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -245,7 +245,7 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
   between
     ioLLVMcode += ", "
   end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -8537,50 +8537,42 @@ GALGAS_operandIRList_2D_element GALGAS_operandIRList_2D_element::extractObject (
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element::GALGAS_instructionListSortedListIR_2D_element (void) :
-mProperty_mInstructionList (),
+GALGAS_panicSortedListIR_2D_element::GALGAS_panicSortedListIR_2D_element (void) :
 mProperty_mPriority () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element::~ GALGAS_instructionListSortedListIR_2D_element (void) {
+GALGAS_panicSortedListIR_2D_element::~ GALGAS_panicSortedListIR_2D_element (void) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element::GALGAS_instructionListSortedListIR_2D_element (const GALGAS_instructionListIR & inOperand0,
-                                                                                              const GALGAS_bigint & inOperand1) :
-mProperty_mInstructionList (inOperand0),
-mProperty_mPriority (inOperand1) {
+GALGAS_panicSortedListIR_2D_element::GALGAS_panicSortedListIR_2D_element (const GALGAS_bigint & inOperand0) :
+mProperty_mPriority (inOperand0) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element GALGAS_instructionListSortedListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_instructionListSortedListIR_2D_element (GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                                        GALGAS_bigint::constructor_zero (HERE)) ;
+GALGAS_panicSortedListIR_2D_element GALGAS_panicSortedListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_panicSortedListIR_2D_element (GALGAS_bigint::constructor_zero (HERE)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element GALGAS_instructionListSortedListIR_2D_element::constructor_new (const GALGAS_instructionListIR & inOperand0,
-                                                                                                              const GALGAS_bigint & inOperand1 
-                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_instructionListSortedListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_instructionListSortedListIR_2D_element (inOperand0, inOperand1) ;
+GALGAS_panicSortedListIR_2D_element GALGAS_panicSortedListIR_2D_element::constructor_new (const GALGAS_bigint & inOperand0 
+                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_panicSortedListIR_2D_element result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_panicSortedListIR_2D_element (inOperand0) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult GALGAS_instructionListSortedListIR_2D_element::objectCompare (const GALGAS_instructionListSortedListIR_2D_element & inOperand) const {
+typeComparisonResult GALGAS_panicSortedListIR_2D_element::objectCompare (const GALGAS_panicSortedListIR_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mInstructionList.objectCompare (inOperand.mProperty_mInstructionList) ;
-  }
   if (result == kOperandEqual) {
     result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
@@ -8589,27 +8581,24 @@ typeComparisonResult GALGAS_instructionListSortedListIR_2D_element::objectCompar
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-bool GALGAS_instructionListSortedListIR_2D_element::isValid (void) const {
-  return mProperty_mInstructionList.isValid () && mProperty_mPriority.isValid () ;
+bool GALGAS_panicSortedListIR_2D_element::isValid (void) const {
+  return mProperty_mPriority.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR_2D_element::drop (void) {
-  mProperty_mInstructionList.drop () ;
+void GALGAS_panicSortedListIR_2D_element::drop (void) {
   mProperty_mPriority.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_instructionListSortedListIR_2D_element::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString << "<struct @instructionListSortedListIR-element:" ;
+void GALGAS_panicSortedListIR_2D_element::description (C_String & ioString,
+                                                       const int32_t inIndentation) const {
+  ioString << "<struct @panicSortedListIR-element:" ;
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mProperty_mInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
     mProperty_mPriority.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
@@ -8617,13 +8606,7 @@ void GALGAS_instructionListSortedListIR_2D_element::description (C_String & ioSt
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListIR GALGAS_instructionListSortedListIR_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInstructionList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bigint GALGAS_instructionListSortedListIR_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_panicSortedListIR_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
   return mProperty_mPriority ;
 }
 
@@ -8631,42 +8614,42 @@ GALGAS_bigint GALGAS_instructionListSortedListIR_2D_element::getter_mPriority (U
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @instructionListSortedListIR-element type                                      *
+//                                           @panicSortedListIR-element type                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionListSortedListIR_2D_element ("instructionListSortedListIR-element",
-                                                               NULL) ;
+kTypeDescriptor_GALGAS_panicSortedListIR_2D_element ("panicSortedListIR-element",
+                                                     NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_instructionListSortedListIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionListSortedListIR_2D_element ;
+const C_galgas_type_descriptor * GALGAS_panicSortedListIR_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_panicSortedListIR_2D_element ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_instructionListSortedListIR_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_panicSortedListIR_2D_element::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionListSortedListIR_2D_element (*this)) ;
+    macroMyNew (result, GALGAS_panicSortedListIR_2D_element (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_instructionListSortedListIR_2D_element GALGAS_instructionListSortedListIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                            C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_instructionListSortedListIR_2D_element result ;
-  const GALGAS_instructionListSortedListIR_2D_element * p = (const GALGAS_instructionListSortedListIR_2D_element *) inObject.embeddedObject () ;
+GALGAS_panicSortedListIR_2D_element GALGAS_panicSortedListIR_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_panicSortedListIR_2D_element result ;
+  const GALGAS_panicSortedListIR_2D_element * p = (const GALGAS_panicSortedListIR_2D_element *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListSortedListIR_2D_element *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_panicSortedListIR_2D_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("instructionListSortedListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("panicSortedListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

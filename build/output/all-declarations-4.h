@@ -83,14 +83,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineListIR_2D_el
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @instructionListSortedListIR_2D_element struct                                    *
+//                                        @panicSortedListIR_2D_element struct                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_instructionListSortedListIR_2D_element : public AC_GALGAS_root {
+class GALGAS_panicSortedListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_instructionListIR mProperty_mInstructionList ;
-
   public : GALGAS_bigint mProperty_mPriority ;
 
 //--------------------------------- Accessors
@@ -98,17 +96,16 @@ class GALGAS_instructionListSortedListIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_instructionListSortedListIR_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_panicSortedListIR_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_instructionListSortedListIR_2D_element (void) ;
+  public : GALGAS_panicSortedListIR_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_instructionListSortedListIR_2D_element (void) ;
+  public : virtual ~ GALGAS_panicSortedListIR_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_instructionListSortedListIR_2D_element (const GALGAS_instructionListIR & in_mInstructionList,
-                                                          const GALGAS_bigint & in_mPriority) ;
+  public : GALGAS_panicSortedListIR_2D_element (const GALGAS_bigint & in_mPriority) ;
 
 //-- Start of generic part --*
 
@@ -116,20 +113,19 @@ class GALGAS_instructionListSortedListIR_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_instructionListSortedListIR_2D_element extractObject (const GALGAS_object & inObject,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicSortedListIR_2D_element extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_instructionListSortedListIR_2D_element constructor_new (const class GALGAS_instructionListIR & inOperand0,
-                                                                                       const class GALGAS_bigint & inOperand1
-                                                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_panicSortedListIR_2D_element constructor_new (const class GALGAS_bigint & inOperand0
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_instructionListSortedListIR_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_panicSortedListIR_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -137,20 +133,18 @@ class GALGAS_instructionListSortedListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPriority (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_instructionListSortedListIR_2D_element class
+} ; // End of GALGAS_panicSortedListIR_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListSortedListIR_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicSortedListIR_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

@@ -322,8 +322,6 @@ private proc generateCodeFiles
       !sourceFileSet: inSourceFileAbsolutePathSet
       !generationContext: generationContext
       !?generationAdds: generationAdds
-      !setup: inIntermediateCodeStruct.mPanicSetupInstructionListIR
-      !loop: inIntermediateCodeStruct.mPanicLoopInstructionListIR
     )
   end
 #----------------------------------------- Section, safe dispatcher
