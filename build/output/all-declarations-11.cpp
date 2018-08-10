@@ -6360,22 +6360,69 @@ void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_uint var_maxBranchOfOnInstructions_1615 = GALGAS_uint ((uint32_t) 0U) ;
   GALGAS_routineAccessibilityIR var_routineAccessibilityIR_1668 = GALGAS_routineAccessibilityIR::constructor_emptyList (SOURCE_FILE ("code-optimisation.galgas", 33)) ;
-  cEnumerator_routineListIR enumerator_1762 (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), kENUMERATION_UP) ;
-  while (enumerator_1762.hasCurrentObject ()) {
-    GALGAS_stringset var_accessibleRoutineSet_1801 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 36)) ;
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_1762.current (HERE).getter_mRoutine (HERE).ptr (), var_accessibleRoutineSet_1801, var_maxBranchOfOnInstructions_1615, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 37)) ;
-    var_routineAccessibilityIR_1668.addAssign_operation (enumerator_1762.current (HERE).getter_mRoutine (HERE), var_accessibleRoutineSet_1801  COMMA_SOURCE_FILE ("code-optimisation.galgas", 38)) ;
-    enumerator_1762.gotoNextObject () ;
-  }
-  GALGAS_string var_filePath_2025 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 41)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeRoutineInvocationGraphFile.getter_value ()).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    {
-    routine_displayInvocationGraph (var_routineAccessibilityIR_1668, var_filePath_2025, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 43)) ;
+  GALGAS_stringset var_exploreRoutineSet_1736 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 35)) ;
+  cEnumerator_routineListIR enumerator_1798 (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), kENUMERATION_UP) ;
+  while (enumerator_1798.hasCurrentObject ()) {
+    GALGAS_stringset var_accessibleRoutineSet_1837 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 37)) ;
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_1798.current (HERE).getter_mRoutine (HERE).ptr (), var_accessibleRoutineSet_1837, var_maxBranchOfOnInstructions_1615, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 38)) ;
+    var_routineAccessibilityIR_1668.addAssign_operation (enumerator_1798.current (HERE).getter_mRoutine (HERE), var_accessibleRoutineSet_1837  COMMA_SOURCE_FILE ("code-optimisation.galgas", 39)) ;
+    const enumGalgasBool test_0 = enumerator_1798.current (HERE).getter_mRoutine (HERE).getter_mIsRequired (HERE).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      var_exploreRoutineSet_1736.addAssign_operation (enumerator_1798.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 41))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 41)) ;
     }
-  }else if (kBoolFalse == test_0) {
+    enumerator_1798.gotoNextObject () ;
+  }
+  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination.getter_value ()).operator_or (GALGAS_bool (true) COMMA_SOURCE_FILE ("code-optimisation.galgas", 44)).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    GALGAS_string var_m_2223 = GALGAS_string ("Dead Code Elimination\n") ;
+    var_m_2223.plusAssign_operation(GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("code-optimisation.galgas", 46)).getter_string (SOURCE_FILE ("code-optimisation.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 46)).add_operation (GALGAS_string (" routines, "), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 46)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 46)) ;
+    var_m_2223.plusAssign_operation(var_exploreRoutineSet_1736.getter_count (SOURCE_FILE ("code-optimisation.galgas", 47)).getter_string (SOURCE_FILE ("code-optimisation.galgas", 47)).add_operation (GALGAS_string (" root routines.\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 47)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 47)) ;
+    inCompiler->printMessage (var_m_2223  COMMA_SOURCE_FILE ("code-optimisation.galgas", 48)) ;
+  }
+  GALGAS_stringset var_usefulRoutineSet_2488 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 51)) ;
+  if (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("code-optimisation.galgas", 52)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 52)).isValid ()) {
+    uint32_t variant_2500 = ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("code-optimisation.galgas", 52)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 52)).uintValue () ;
+    bool loop_2500 = true ;
+    while (loop_2500) {
+      loop_2500 = GALGAS_bool (kIsStrictSup, var_exploreRoutineSet_1736.getter_count (SOURCE_FILE ("code-optimisation.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).isValid () ;
+      if (loop_2500) {
+        loop_2500 = GALGAS_bool (kIsStrictSup, var_exploreRoutineSet_1736.getter_count (SOURCE_FILE ("code-optimisation.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolValue () ;
+      }
+      if (loop_2500 && (0 == variant_2500)) {
+        loop_2500 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 52)) ;
+      }
+      if (loop_2500) {
+        variant_2500 -- ;
+        GALGAS_stringset var_currentSet_2613 = var_exploreRoutineSet_1736 ;
+        var_exploreRoutineSet_1736 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 54)) ;
+        cEnumerator_routineAccessibilityIR enumerator_2702 (var_routineAccessibilityIR_1668, kENUMERATION_UP) ;
+        while (enumerator_2702.hasCurrentObject ()) {
+          GALGAS_lstring var_routineMangledName_2734 = enumerator_2702.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE) ;
+          const enumGalgasBool test_2 = var_currentSet_2613.getter_hasKey (var_routineMangledName_2734.getter_string (SOURCE_FILE ("code-optimisation.galgas", 57)) COMMA_SOURCE_FILE ("code-optimisation.galgas", 57)).operator_and (var_usefulRoutineSet_2488.getter_hasKey (var_routineMangledName_2734.getter_string (SOURCE_FILE ("code-optimisation.galgas", 57)) COMMA_SOURCE_FILE ("code-optimisation.galgas", 57)).operator_not (SOURCE_FILE ("code-optimisation.galgas", 57)) COMMA_SOURCE_FILE ("code-optimisation.galgas", 57)).boolEnum () ;
+          if (kBoolTrue == test_2) {
+            var_usefulRoutineSet_2488.addAssign_operation (var_routineMangledName_2734.getter_string (SOURCE_FILE ("code-optimisation.galgas", 58))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 58)) ;
+            var_exploreRoutineSet_1736.plusAssign_operation(enumerator_2702.current (HERE).getter_mAccessibleRoutineSet (HERE), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 59)) ;
+          }
+          enumerator_2702.gotoNextObject () ;
+        }
+      }
+    }
+  }
+  const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination.getter_value ()).operator_or (GALGAS_bool (true) COMMA_SOURCE_FILE ("code-optimisation.galgas", 63)).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    GALGAS_string var_m_3103 = GALGAS_string ("  ").add_operation (var_usefulRoutineSet_2488.getter_count (SOURCE_FILE ("code-optimisation.galgas", 64)).getter_string (SOURCE_FILE ("code-optimisation.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 64)).add_operation (GALGAS_string (" useful routines.\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 64)) ;
+    inCompiler->printMessage (var_m_3103  COMMA_SOURCE_FILE ("code-optimisation.galgas", 68)) ;
+  }
+  GALGAS_string var_filePath_3584 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 78)) ;
+  const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_emitRoutineInvocationGraphFile.getter_value ()).operator_or (GALGAS_bool (true) COMMA_SOURCE_FILE ("code-optimisation.galgas", 79)).boolEnum () ;
+  if (kBoolTrue == test_4) {
     {
-    GALGAS_string::class_method_deleteFileIfExists (var_filePath_2025, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 45)) ;
+    routine_displayInvocationGraph (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), var_filePath_3584, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 80)) ;
+    }
+  }else if (kBoolFalse == test_4) {
+    {
+    GALGAS_string::class_method_deleteFileIfExists (var_filePath_3584, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 82)) ;
     }
   }
 }
@@ -6387,44 +6434,47 @@ void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_displayInvocationGraph (const GALGAS_routineAccessibilityIR constinArgument_inRoutineAccessibilityIR,
+void routine_displayInvocationGraph (const GALGAS_routineListIR constinArgument_inRoutineListIR,
                                      const GALGAS_string constinArgument_inFilePath,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_s_12795 = GALGAS_string ("digraph G {\n") ;
-  GALGAS_stringset var_definedRoutines_12859 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 309)) ;
-  GALGAS_stringset var_allRoutines_12889 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 310)) ;
-  cEnumerator_routineAccessibilityIR enumerator_12952 (constinArgument_inRoutineAccessibilityIR, kENUMERATION_UP) ;
-  while (enumerator_12952.hasCurrentObject ()) {
-    var_definedRoutines_12859.addAssign_operation (enumerator_12952.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 312))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 312)) ;
-    var_allRoutines_12889.addAssign_operation (enumerator_12952.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 313))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 313)) ;
-    var_allRoutines_12889.plusAssign_operation(enumerator_12952.current_mAccessibleRoutineSet (HERE), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 314)) ;
-    var_s_12795.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_12952.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 315)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 315)).add_operation (GALGAS_string ("\" [shape=rectangle"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 315)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 315)) ;
-    const enumGalgasBool test_0 = enumerator_12952.current_mRoutine (HERE).getter_mIsRequired (HERE).boolEnum () ;
+  GALGAS_string var_s_4071 = GALGAS_string ("digraph G {\n") ;
+  GALGAS_stringset var_definedRoutines_4135 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 94)) ;
+  GALGAS_stringset var_allRoutines_4165 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 95)) ;
+  cEnumerator_routineListIR enumerator_4205 (constinArgument_inRoutineListIR, kENUMERATION_UP) ;
+  while (enumerator_4205.hasCurrentObject ()) {
+    var_definedRoutines_4135.addAssign_operation (enumerator_4205.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 97))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 97)) ;
+    var_allRoutines_4165.addAssign_operation (enumerator_4205.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 98))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 98)) ;
+    GALGAS_stringset var_accessibleRoutineSet_4344 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("code-optimisation.galgas", 99)) ;
+    GALGAS_uint joker_4412 = GALGAS_uint::constructor_default (SOURCE_FILE ("code-optimisation.galgas", 100)) ;
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_4205.current_mRoutine (HERE).ptr (), var_accessibleRoutineSet_4344, joker_4412, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 100)) ;
+    var_allRoutines_4165.plusAssign_operation(var_accessibleRoutineSet_4344, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 101)) ;
+    var_s_4071.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4205.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 102)).add_operation (GALGAS_string ("\" [shape=rectangle"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 102)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 102)) ;
+    const enumGalgasBool test_0 = enumerator_4205.current_mRoutine (HERE).getter_mIsRequired (HERE).boolEnum () ;
     if (kBoolTrue == test_0) {
-      var_s_12795.plusAssign_operation(GALGAS_string (", color=blue"), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 317)) ;
+      var_s_4071.plusAssign_operation(GALGAS_string (", color=blue"), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 104)) ;
     }
-    var_s_12795.plusAssign_operation(GALGAS_string ("] ;\n"), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 319)) ;
-    cEnumerator_stringset enumerator_13306 (enumerator_12952.current_mAccessibleRoutineSet (HERE), kENUMERATION_UP) ;
-    while (enumerator_13306.hasCurrentObject ()) {
-      var_s_12795.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_12952.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 321)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 321)).add_operation (GALGAS_string ("\" -> \""), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 321)).add_operation (enumerator_13306.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 321)).add_operation (GALGAS_string ("\" ;\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 321)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 321)) ;
-      enumerator_13306.gotoNextObject () ;
+    var_s_4071.plusAssign_operation(GALGAS_string ("] ;\n"), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 106)) ;
+    cEnumerator_stringset enumerator_4679 (var_accessibleRoutineSet_4344, kENUMERATION_UP) ;
+    while (enumerator_4679.hasCurrentObject ()) {
+      var_s_4071.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4205.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("code-optimisation.galgas", 108)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 108)).add_operation (GALGAS_string ("\" -> \""), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 108)).add_operation (enumerator_4679.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 108)).add_operation (GALGAS_string ("\" ;\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 108)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 108)) ;
+      enumerator_4679.gotoNextObject () ;
     }
-    enumerator_12952.gotoNextObject () ;
+    enumerator_4205.gotoNextObject () ;
   }
-  GALGAS_stringset var_undefinedRoutineSet_13480 = var_allRoutines_12889.substract_operation (var_definedRoutines_12859, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 325)) ;
-  cEnumerator_stringset enumerator_13551 (var_undefinedRoutineSet_13480, kENUMERATION_UP) ;
-  while (enumerator_13551.hasCurrentObject ()) {
-    var_s_12795.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_13551.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 327)).add_operation (GALGAS_string ("\" [shape=rectangle, color=red] ;\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 327)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 327)) ;
-    enumerator_13551.gotoNextObject () ;
+  GALGAS_stringset var_undefinedRoutineSet_4853 = var_allRoutines_4165.substract_operation (var_definedRoutines_4135, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 112)) ;
+  cEnumerator_stringset enumerator_4924 (var_undefinedRoutineSet_4853, kENUMERATION_UP) ;
+  while (enumerator_4924.hasCurrentObject ()) {
+    var_s_4071.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4924.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 114)).add_operation (GALGAS_string ("\" [shape=rectangle, color=red] ;\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 114)), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 114)) ;
+    enumerator_4924.gotoNextObject () ;
   }
-  var_s_12795.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 329)) ;
-  GALGAS_bool joker_13695 ; // Joker input parameter
-  var_s_12795.method_writeToFileWhenDifferentContents (constinArgument_inFilePath, joker_13695, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 330)) ;
-  const enumGalgasBool test_1 = GALGAS_bool (kIsStrictSup, var_undefinedRoutineSet_13480.getter_count (SOURCE_FILE ("code-optimisation.galgas", 331)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  var_s_4071.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 116)) ;
+  GALGAS_bool joker_5068 ; // Joker input parameter
+  var_s_4071.method_writeToFileWhenDifferentContents (constinArgument_inFilePath, joker_5068, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 117)) ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsStrictSup, var_undefinedRoutineSet_4853.getter_count (SOURCE_FILE ("code-optimisation.galgas", 118)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_1) {
     TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("code-optimisation.galgas", 332)), var_undefinedRoutineSet_13480.getter_count (SOURCE_FILE ("code-optimisation.galgas", 332)).getter_string (SOURCE_FILE ("code-optimisation.galgas", 332)).add_operation (GALGAS_string (" undefined routine(s) in routine invocation graph"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 332)), fixItArray2  COMMA_SOURCE_FILE ("code-optimisation.galgas", 332)) ;
+    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("code-optimisation.galgas", 119)), var_undefinedRoutineSet_4853.getter_count (SOURCE_FILE ("code-optimisation.galgas", 119)).getter_string (SOURCE_FILE ("code-optimisation.galgas", 119)).add_operation (GALGAS_string (" undefined routine(s) in routine invocation graph"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 119)), fixItArray2  COMMA_SOURCE_FILE ("code-optimisation.galgas", 119)) ;
   }
 }
 

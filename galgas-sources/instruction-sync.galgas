@@ -377,11 +377,6 @@ proc analyzeGuardCall
     error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
   else  
     outGuardMangledName = guardMangledName
-#    guardUserMangledNameFromCall (
-#      ![inReceiver type].llvmBaseTypeName
-#      !inGuardName
-#      !inEffectiveParameterList
-#    )
   #--- Analyze effective parameters
     outEffectiveParameterListIR = {!.outputInput !inReceiver}
     analyzeEffectiveParameters (
@@ -621,13 +616,13 @@ override method @syncInstructionIR enterAccessibleEntities
     switch branch.mGuardedCommand
     case booleanGuard (* instructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-    case sync (* * guardInstructionGenerationList *) :
+    case sync (* guardMangledName guardInstructionGenerationList *) :
       [guardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-#      ioAccessibleEntities.mGuardSet += !guardMangledName
-    case boolAndSync (* instructionGenerationList * * guardInstructionGenerationList *) :
+      ioInvokedRoutineSet += !guardMangledName
+    case boolAndSync (* instructionGenerationList * guardMangledName guardInstructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
       [guardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-#      ioAccessibleEntities.mGuardSet += !guardMangledName
+      ioInvokedRoutineSet += !guardMangledName
     end
   end
 }

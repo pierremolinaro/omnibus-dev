@@ -288,6 +288,43 @@ method @taskListAST enterInContext
       !activateTaskCallName
       !taskIndex
     }
+  #------------------------------------------- Analyze task guarded command
+  #  Build a "task.loop" function that contains a sync instruction
+    @instructionListAST taskListInstructionList = {}
+    if [task.mGuardedCommandList length] > 0 then
+      let syncInstruction = @syncInstructionAST.new {!task.mTaskName.location !task.mGuardedCommandList !task.mTaskName.location}
+      taskListInstructionList += !syncInstruction
+    end
+    let routineMangledName = routineMangledNameFromAST (!task.mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! {})
+    ioDecoratedRoutineList +=
+      !task.mTaskName # @lstring mReceiverTypeName # Empty string if standalone function
+      !.userMode
+      !.function {!executionMode:.userMode}
+      !true # @bool mWarnIfUnused
+      !false # @bool mExportedRoutine
+      !.mutating | .directPropertyAccess | .panicAllowed # @routineAttributes mRoutineAttributes
+      !routineMangledName # .new {!llvmNameForTaskLoopFunction () !task.mTaskName.location} # @lstring mRoutineMangledName
+      !{} #@routineFormalArgumentListAST mRoutineFormalArgumentList
+      !taskListInstructionList # @instructionListAST mRoutineInstructionList
+      !task.mTaskName.location # @location mEndOfRoutineDeclaration
+      !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
+
+#    routineSemanticAnalysis (
+#      !receiverType:taskType
+#      !.function{!executionMode:.userMode}
+#      !.userMode
+#      !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
+#      !{} # No argument
+#      !returnTypeName:["" nowhere]
+#      !taskListInstructionList
+#      !mTaskName.location
+#      !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
+#      !warnIfUnused:true
+#      !globalFunction:false
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    )
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap !task.mTaskName !?context:ioContext !?propertyMap]
   #---------------- Enter task variable map as structure type in type map
@@ -500,28 +537,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
     ?let deactivateAllocaList
   )
 #------------------------------------------- Analyze task guarded command
-#  Build a "task.loop" function that contains a sync instruction
-  @instructionListAST taskListInstructionList = {}
-  if [mGuardedCommandList length] > 0 then
-    let syncInstruction = @syncInstructionAST.new {!mTaskName.location !mGuardedCommandList !mTaskName.location}
-    taskListInstructionList += !syncInstruction
-  end
-  routineSemanticAnalysis (
-    !receiverType:taskType
-    !.function{!executionMode:.userMode}
-    !.userMode
-    !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
-    !{} # No argument
-    !returnTypeName:["" nowhere]
-    !taskListInstructionList
-    !mTaskName.location
-    !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
-    !warnIfUnused:true
-    !globalFunction:false
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  )
+  ioIntermediateCodeStruct.mRequiredProcedureSet += !routineMangledNameFromAST (!mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! {})
 #------------------------------------------- Task Name string constant index
   [!?ioIntermediateCodeStruct.mStaticEntityMap findOrAddStaticString !mTaskName.string ?let taskNameStringIndex]
 #------------------------------------------- Generate task
@@ -675,7 +691,7 @@ method @taskMapIR generateCode
   ioLLVMcode += llvmTitleComment (!"Create task extern routine")
   ioLLVMcode += "declare void @kernel_create_task (i32 %inTaskIndex, i8* %inTaskName, i32* %inStackBufferAddress, "
   ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
-  for task in orderedTaskList do (taskIndex)
+  for task in orderedTaskList do
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
     let assemblerTaskName = [task.mTaskName assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
@@ -683,18 +699,6 @@ method @taskMapIR generateCode
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
     let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
-  #---------- Activate method
-#    let activateFunctionName = routineMangledNameFromAST (
-#      !task.mTaskName
-#      !["activate" nowhere]
-#      !{}
-#    )
-#    ioLLVMcode += "define internal void @" + llvmNameForFunction (!activateFunctionName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
-#    ioLLVMcode += "  call void @" + activateTaskCallName + " (i8 " + taskIndex + ")\n"
-#    ioLLVMcode += "  ret void\n"
-#    ioLLVMcode += "}\n\n"
-#    ioLLVMcode += llvmSeparatorLine ()
-#    ioLLVMcode += "\n"
   #---------- Setup
     ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     [task.mSetupAllocaList generateAllocaList !?ioLLVMcode]

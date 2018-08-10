@@ -53,7 +53,7 @@ void routine_codeOptimization (const class GALGAS_string constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_displayInvocationGraph (const class GALGAS_routineAccessibilityIR constinArgument0,
+void routine_displayInvocationGraph (const class GALGAS_routineListIR constinArgument0,
                                      const class GALGAS_string constinArgument1,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;

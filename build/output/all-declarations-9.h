@@ -727,3 +727,26 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'routineSemanticAnalysis'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_routineSemanticAnalysis (const class GALGAS_PLMType constinArgument0,
+                                      const class GALGAS_routineKind constinArgument1,
+                                      const class GALGAS_mode constinArgument2,
+                                      const class GALGAS_lstring constinArgument3,
+                                      const class GALGAS_routineFormalArgumentListAST constinArgument4,
+                                      const class GALGAS_lstring constinArgument5,
+                                      const class GALGAS_instructionListAST constinArgument6,
+                                      const class GALGAS_location constinArgument7,
+                                      const class GALGAS_routineAttributes constinArgument8,
+                                      const class GALGAS_bool constinArgument9,
+                                      const class GALGAS_bool constinArgument10,
+                                      const class GALGAS_semanticContext constinArgument11,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument12,
+                                      class GALGAS_intermediateCodeStruct & ioArgument13,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+

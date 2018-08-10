@@ -2,7 +2,7 @@ option plm_options {
   @bool noPanicGeneration: '\0', "no-panic-generation" -> "Do not generate panic code"
 
   @bool emitTypeMap : 't', "emit-type-map" -> "Emit type map in an HTML file"
-  @bool writeRoutineInvocationGraphFile : 'i', "emit-routine-invocation-graph" -> "Emit routine invocation graph file"
+  @bool emitRoutineInvocationGraphFile : 'i', "emit-routine-invocation-graph" -> "Emit routine invocation graph file"
   @bool writeDeclarationDependencyGraphFile : 'd', "emit-declaration-dependency-graph" -> "Emit declaration dependency graph file"
   @bool emitGlobalConstantHTMLDumpFile : '\0', "emit-global-constant-map" -> "Emit global constant map in an HTML file"
   @bool writeControlRegisterHTMLDumpFile : '\0', "emit-control-register-map" -> "Emit control register map in an HTML file"

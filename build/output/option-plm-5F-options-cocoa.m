@@ -34,6 +34,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"emitRoutineInvocationGraphFile"
+    commandChar:105
+    commandString:@"emit-routine-invocation-graph"
+    comment:@"Emit routine invocation graph file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"emitTypeMap"
     commandChar:116
     commandString:@"emit-type-map"
@@ -155,15 +164,6 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:100
     commandString:@"emit-declaration-dependency-graph"
     comment:@"Emit declaration dependency graph file"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"writeRoutineInvocationGraphFile"
-    commandChar:105
-    commandString:@"emit-routine-invocation-graph"
-    comment:@"Emit routine invocation graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
