@@ -12,6 +12,7 @@ list @decoratedRegularRoutineList {
   @routineAttributes mRoutineAttributes
   @lstring mRoutineMangledName
   @routineFormalArgumentListAST mRoutineFormalArgumentList
+  @bool warningOnUnusedArgs
   @instructionListAST mRoutineInstructionList
   @location mEndOfRoutineDeclaration
   @lstring mReturnTypeName  # Empty string if no returned value
@@ -64,6 +65,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
     !mRoutineFormalArgumentList
     !?universalMap
     !?formalArguments
+    !warningOnUnusedArgs: warningOnUnusedArgs
   )
 #--- Analyze instruction list
   @allocaList allocaList = {}

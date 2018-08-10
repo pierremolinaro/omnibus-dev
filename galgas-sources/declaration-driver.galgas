@@ -406,6 +406,7 @@ override method @implementedDriverAST enterInContext
     !.directPropertyAccess
     !llvmBootRoutineNameFromDriver (!mDriverName)
     !{}
+    !true # warningOnUnusedArgs
     !mBootInstructionList
     !mBootEndLocation
     !.new {!"" !mBootLocation}  # Empty string if no returned value
@@ -420,6 +421,7 @@ override method @implementedDriverAST enterInContext
     !.directPropertyAccess # @routineAttributes mRoutineAttributes
     !llvmStartupRoutineNameFromDriver (!mDriverName)
     !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
+    !true # warningOnUnusedArgs
     !mStartupInstructionList
     !mStartupEndLocation
     !.new {!"" !mStartupLocation}  # Empty string if no returned value

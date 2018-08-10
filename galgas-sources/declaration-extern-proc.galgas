@@ -142,6 +142,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !mProcFormalArgumentList
     !?* # universalMap
     !?formalArguments
+    !warningOnUnusedArgs: true
   )
 #--- Return type
   let returnType = if mReturnTypeName.string == "" then

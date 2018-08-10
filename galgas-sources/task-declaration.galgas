@@ -293,6 +293,7 @@ method @taskListAST enterInContext
         !.mutating | .directPropertyAccess | .panicAllowed
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
+        !true # warningOnUnusedArgs
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
         !["" nowhere] # Empty string if no returned value
@@ -309,6 +310,7 @@ method @taskListAST enterInContext
         !.mutating | .directPropertyAccess | .panicAllowed
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
+        !true # warningOnUnusedArgs
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
         !["" nowhere] # Empty string if no returned value
@@ -325,6 +327,7 @@ method @taskListAST enterInContext
         !.mutating | .directPropertyAccess | .panicAllowed
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
+        !true # warningOnUnusedArgs
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
         !["" nowhere] # Empty string if no returned value
@@ -347,6 +350,7 @@ method @taskListAST enterInContext
       !.mutating | .directPropertyAccess | .panicAllowed # @routineAttributes mRoutineAttributes
       !routineMangledName # .new {!llvmNameForTaskLoopFunction () !task.mTaskName.location} # @lstring mRoutineMangledName
       !{} #@routineFormalArgumentListAST mRoutineFormalArgumentList
+      !true # warningOnUnusedArgs
       !taskListInstructionList # @instructionListAST mRoutineInstructionList
       !task.mTaskName.location # @location mEndOfRoutineDeclaration
       !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value

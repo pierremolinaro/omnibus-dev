@@ -225,6 +225,7 @@ method @functionDeclarationListAST enterFunctionInContext
       !.directPropertyAccess # @routineAttributes mRoutineAttributes
       !routineMangledName #function.mFunctionName
       !function.mFunctionFormalArgumentList
+      !true # warningOnUnusedArgs
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
       !function.mFunctionReturnTypeName

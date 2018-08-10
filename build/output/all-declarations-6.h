@@ -1507,6 +1507,7 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
                                    const class GALGAS_routineFormalArgumentListAST constinArgument1,
                                    class GALGAS_universalValuedObjectMap & ioArgument2,
                                    class GALGAS_routineFormalArgumentListIR & ioArgument3,
+                                   const class GALGAS_bool constinArgument4,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 

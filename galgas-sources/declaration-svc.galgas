@@ -305,31 +305,11 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !attributes
       !implementationRoutineMangledName
       !system.mFormalArgumentList
+      !true # warningOnUnusedArgs
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
       !system.mReturnTypeName  # Empty string if no returned value
-#  #--- Routine mangled name
-##    let routineMangledName = routineMangledNameFromAST (
-##      !inReceiverTypeName 
-##      !svc.mName
-##      !svc.mFormalArgumentList
-##    )
-##    log routineMangledName
-#  #--- Signature
-#    routineSignature (!?ioContext.mTypeMap !svc.mFormalArgumentList ?let signature)
-#  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !svc.mReturnTypeName ?let returnTypeProxy]
-#  #--- Attributes
-#    var mutating = false
-#    var safe = false
-#    for (attribute) in svc.mAttributeList do
-#      if attribute.string == mutatingAttribute () then
-#        mutating = true    
-#      elsif attribute.string == safeAttribute () then
-#        safe = true    
-#      end
-#    end
-#  #--- Enter in context
+  #--- Enter in context
     var s = ""
     if inReceiverTypeName != "" then
       s += inReceiverTypeName + "."
@@ -340,7 +320,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
     s += ")"
-#    log s
     [!?ioContext.mRoutineMapForContext insertRoutine
       !inReceiverTypeName
       !system.mName

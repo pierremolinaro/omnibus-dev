@@ -69,6 +69,7 @@ method @isrDeclarationListAST enterInContext
       !.mutating | .directPropertyAccess | .controlRegisterReadable | .panicAllowed
       !isrRoutineMangledName
       !{}
+      !true # warningOnUnusedArgs
       !isr.mISRInstructionList
       !isr.mEndOfISRDeclaration
       !["" nowhere]  # Empty string if no returned value

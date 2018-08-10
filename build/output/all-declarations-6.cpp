@@ -8546,20 +8546,20 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externProcedu
   GALGAS_routineFormalArgumentListIR var_formalArguments_5672 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 139)) ;
   GALGAS_universalValuedObjectMap joker_5761 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 143)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5761, var_formalArguments_5672, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5761, var_formalArguments_5672, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 148)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 149)) ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 151)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5837 = temp_0 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5868 = temp_0 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5672, var_returnType_5837, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 153)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5672, var_returnType_5868, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 154)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5672, var_returnType_5837  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 158))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 158)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5672, var_returnType_5868  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 159))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 159)) ;
 }
 
 
@@ -9589,6 +9589,7 @@ mProperty_mExportedRoutine (),
 mProperty_mRoutineAttributes (),
 mProperty_mRoutineMangledName (),
 mProperty_mRoutineFormalArgumentList (),
+mProperty_warningOnUnusedArgs (),
 mProperty_mRoutineInstructionList (),
 mProperty_mEndOfRoutineDeclaration (),
 mProperty_mReturnTypeName () {
@@ -9610,9 +9611,10 @@ GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineLis
                                                                                               const GALGAS_routineAttributes & inOperand6,
                                                                                               const GALGAS_lstring & inOperand7,
                                                                                               const GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                                              const GALGAS_instructionListAST & inOperand9,
-                                                                                              const GALGAS_location & inOperand10,
-                                                                                              const GALGAS_lstring & inOperand11) :
+                                                                                              const GALGAS_bool & inOperand9,
+                                                                                              const GALGAS_instructionListAST & inOperand10,
+                                                                                              const GALGAS_location & inOperand11,
+                                                                                              const GALGAS_lstring & inOperand12) :
 mProperty_mReceiverTypeName (inOperand0),
 mProperty_mMode (inOperand1),
 mProperty_mIsRequired (inOperand2),
@@ -9622,9 +9624,10 @@ mProperty_mExportedRoutine (inOperand5),
 mProperty_mRoutineAttributes (inOperand6),
 mProperty_mRoutineMangledName (inOperand7),
 mProperty_mRoutineFormalArgumentList (inOperand8),
-mProperty_mRoutineInstructionList (inOperand9),
-mProperty_mEndOfRoutineDeclaration (inOperand10),
-mProperty_mReturnTypeName (inOperand11) {
+mProperty_warningOnUnusedArgs (inOperand9),
+mProperty_mRoutineInstructionList (inOperand10),
+mProperty_mEndOfRoutineDeclaration (inOperand11),
+mProperty_mReturnTypeName (inOperand12) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9638,13 +9641,14 @@ GALGAS_decoratedRegularRoutineList_2D_element GALGAS_decoratedRegularRoutineList
                                                                                                               const GALGAS_routineAttributes & inOperand6,
                                                                                                               const GALGAS_lstring & inOperand7,
                                                                                                               const GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                                                              const GALGAS_instructionListAST & inOperand9,
-                                                                                                              const GALGAS_location & inOperand10,
-                                                                                                              const GALGAS_lstring & inOperand11 
+                                                                                                              const GALGAS_bool & inOperand9,
+                                                                                                              const GALGAS_instructionListAST & inOperand10,
+                                                                                                              const GALGAS_location & inOperand11,
+                                                                                                              const GALGAS_lstring & inOperand12 
                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedRegularRoutineList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
-    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
+    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
   }
   return result ;
 }
@@ -9681,6 +9685,9 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
     result = mProperty_mRoutineFormalArgumentList.objectCompare (inOperand.mProperty_mRoutineFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
+    result = mProperty_warningOnUnusedArgs.objectCompare (inOperand.mProperty_warningOnUnusedArgs) ;
+  }
+  if (result == kOperandEqual) {
     result = mProperty_mRoutineInstructionList.objectCompare (inOperand.mProperty_mRoutineInstructionList) ;
   }
   if (result == kOperandEqual) {
@@ -9695,7 +9702,7 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedRegularRoutineList_2D_element::isValid (void) const {
-  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mIsRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
+  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mIsRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_warningOnUnusedArgs.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9710,6 +9717,7 @@ void GALGAS_decoratedRegularRoutineList_2D_element::drop (void) {
   mProperty_mRoutineAttributes.drop () ;
   mProperty_mRoutineMangledName.drop () ;
   mProperty_mRoutineFormalArgumentList.drop () ;
+  mProperty_warningOnUnusedArgs.drop () ;
   mProperty_mRoutineInstructionList.drop () ;
   mProperty_mEndOfRoutineDeclaration.drop () ;
   mProperty_mReturnTypeName.drop () ;
@@ -9740,6 +9748,8 @@ void GALGAS_decoratedRegularRoutineList_2D_element::description (C_String & ioSt
     mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRoutineFormalArgumentList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_warningOnUnusedArgs.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRoutineInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9802,6 +9812,12 @@ GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_mRoutineMan
 
 GALGAS_routineFormalArgumentListAST GALGAS_decoratedRegularRoutineList_2D_element::getter_mRoutineFormalArgumentList (UNUSED_LOCATION_ARGS) const {
   return mProperty_mRoutineFormalArgumentList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_warningOnUnusedArgs (UNUSED_LOCATION_ARGS) const {
+  return mProperty_warningOnUnusedArgs ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13011,11 +13027,11 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineListIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineListIR temp_0 = inObject ;
-  cEnumerator_routineListIR enumerator_2343 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_2343.hasCurrentObject ()) {
+  cEnumerator_routineListIR enumerator_2719 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_2719.hasCurrentObject ()) {
     ioArgument_ioGenerationAdds.mProperty_mUniqueIndex = GALGAS_uint ((uint32_t) 0U) ;
-    callExtensionMethod_llvmCodeGeneration ((const cPtr_abstractRoutineIR *) enumerator_2343.current (HERE).getter_mRoutine (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 52)) ;
-    enumerator_2343.gotoNextObject () ;
+    callExtensionMethod_llvmCodeGeneration ((const cPtr_abstractRoutineIR *) enumerator_2719.current (HERE).getter_mRoutine (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 61)) ;
+    enumerator_2719.gotoNextObject () ;
   }
 }
 

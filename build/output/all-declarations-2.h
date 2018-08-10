@@ -2830,6 +2830,7 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                   const class GALGAS_routineAttributes & in_mRoutineAttributes,
                                                   const class GALGAS_lstring & in_mRoutineMangledName,
                                                   const class GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
+                                                  const class GALGAS_bool & in_warningOnUnusedArgs,
                                                   const class GALGAS_instructionListAST & in_mRoutineInstructionList,
                                                   const class GALGAS_location & in_mEndOfRoutineDeclaration,
                                                   const class GALGAS_lstring & in_mReturnTypeName
@@ -2857,9 +2858,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                                                       const class GALGAS_routineAttributes & inOperand6,
                                                                                       const class GALGAS_lstring & inOperand7,
                                                                                       const class GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                                      const class GALGAS_instructionListAST & inOperand9,
-                                                                                      const class GALGAS_location & inOperand10,
-                                                                                      const class GALGAS_lstring & inOperand11
+                                                                                      const class GALGAS_bool & inOperand9,
+                                                                                      const class GALGAS_instructionListAST & inOperand10,
+                                                                                      const class GALGAS_location & inOperand11,
+                                                                                      const class GALGAS_lstring & inOperand12
                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -2877,9 +2879,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                       const class GALGAS_routineAttributes & inOperand6,
                                                       const class GALGAS_lstring & inOperand7,
                                                       const class GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                      const class GALGAS_instructionListAST & inOperand9,
-                                                      const class GALGAS_location & inOperand10,
-                                                      const class GALGAS_lstring & inOperand11
+                                                      const class GALGAS_bool & inOperand9,
+                                                      const class GALGAS_instructionListAST & inOperand10,
+                                                      const class GALGAS_location & inOperand11,
+                                                      const class GALGAS_lstring & inOperand12
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_decoratedRegularRoutineList add_operation (const GALGAS_decoratedRegularRoutineList & inOperand,
@@ -2901,10 +2904,11 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                        class GALGAS_routineAttributes constinArgument6,
                                                        class GALGAS_lstring constinArgument7,
                                                        class GALGAS_routineFormalArgumentListAST constinArgument8,
-                                                       class GALGAS_instructionListAST constinArgument9,
-                                                       class GALGAS_location constinArgument10,
-                                                       class GALGAS_lstring constinArgument11,
-                                                       class GALGAS_uint constinArgument12,
+                                                       class GALGAS_bool constinArgument9,
+                                                       class GALGAS_instructionListAST constinArgument10,
+                                                       class GALGAS_location constinArgument11,
+                                                       class GALGAS_lstring constinArgument12,
+                                                       class GALGAS_uint constinArgument13,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -2917,9 +2921,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                   class GALGAS_routineAttributes & outArgument6,
                                                   class GALGAS_lstring & outArgument7,
                                                   class GALGAS_routineFormalArgumentListAST & outArgument8,
-                                                  class GALGAS_instructionListAST & outArgument9,
-                                                  class GALGAS_location & outArgument10,
-                                                  class GALGAS_lstring & outArgument11,
+                                                  class GALGAS_bool & outArgument9,
+                                                  class GALGAS_instructionListAST & outArgument10,
+                                                  class GALGAS_location & outArgument11,
+                                                  class GALGAS_lstring & outArgument12,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -2932,9 +2937,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                  class GALGAS_routineAttributes & outArgument6,
                                                  class GALGAS_lstring & outArgument7,
                                                  class GALGAS_routineFormalArgumentListAST & outArgument8,
-                                                 class GALGAS_instructionListAST & outArgument9,
-                                                 class GALGAS_location & outArgument10,
-                                                 class GALGAS_lstring & outArgument11,
+                                                 class GALGAS_bool & outArgument9,
+                                                 class GALGAS_instructionListAST & outArgument10,
+                                                 class GALGAS_location & outArgument11,
+                                                 class GALGAS_lstring & outArgument12,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -2947,10 +2953,11 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                        class GALGAS_routineAttributes & outArgument6,
                                                        class GALGAS_lstring & outArgument7,
                                                        class GALGAS_routineFormalArgumentListAST & outArgument8,
-                                                       class GALGAS_instructionListAST & outArgument9,
-                                                       class GALGAS_location & outArgument10,
-                                                       class GALGAS_lstring & outArgument11,
-                                                       class GALGAS_uint constinArgument12,
+                                                       class GALGAS_bool & outArgument9,
+                                                       class GALGAS_instructionListAST & outArgument10,
+                                                       class GALGAS_location & outArgument11,
+                                                       class GALGAS_lstring & outArgument12,
+                                                       class GALGAS_uint constinArgument13,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -2965,9 +2972,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                class GALGAS_routineAttributes & outArgument6,
                                                class GALGAS_lstring & outArgument7,
                                                class GALGAS_routineFormalArgumentListAST & outArgument8,
-                                               class GALGAS_instructionListAST & outArgument9,
-                                               class GALGAS_location & outArgument10,
-                                               class GALGAS_lstring & outArgument11,
+                                               class GALGAS_bool & outArgument9,
+                                               class GALGAS_instructionListAST & outArgument10,
+                                               class GALGAS_location & outArgument11,
+                                               class GALGAS_lstring & outArgument12,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -2980,9 +2988,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                               class GALGAS_routineAttributes & outArgument6,
                                               class GALGAS_lstring & outArgument7,
                                               class GALGAS_routineFormalArgumentListAST & outArgument8,
-                                              class GALGAS_instructionListAST & outArgument9,
-                                              class GALGAS_location & outArgument10,
-                                              class GALGAS_lstring & outArgument11,
+                                              class GALGAS_bool & outArgument9,
+                                              class GALGAS_instructionListAST & outArgument10,
+                                              class GALGAS_location & outArgument11,
+                                              class GALGAS_lstring & outArgument12,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -3049,6 +3058,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                                                               C_Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warningOnUnusedArgsAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -3076,6 +3089,7 @@ class cEnumerator_decoratedRegularRoutineList : public cGenericAbstractEnumerato
   public : class GALGAS_routineAttributes current_mRoutineAttributes (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineMangledName (LOCATION_ARGS) const ;
   public : class GALGAS_routineFormalArgumentListAST current_mRoutineFormalArgumentList (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_warningOnUnusedArgs (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListAST current_mRoutineInstructionList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mReturnTypeName (LOCATION_ARGS) const ;

@@ -15,15 +15,24 @@ proc enterFormalArguments
   ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
   ?!@universalValuedObjectMap ioUniversalMap
   ?!@routineFormalArgumentListIR ioFormalArguments
+  ?warningOnUnusedArgs:let @bool inUnusedWarning
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :
-      [!?ioUniversalMap insertLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
+      if inUnusedWarning then
+        [!?ioUniversalMap insertLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
+      else
+        [!?ioUniversalMap insertUsedLocalConstant !formalArgumentName !typeProxy !formalArgumentName]
+      end
     case inputOutput :
-      [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
+      if inUnusedWarning then
+        [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
+      else
+        [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasReadValue !true]
+      end
     case output :
       [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.noValue !true]
     end

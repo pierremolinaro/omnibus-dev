@@ -450,6 +450,7 @@ override method @structureDeclarationAST enterInContext
       !attributes
       !implementationRoutineMangledName
       !system.mFormalArgumentList
+      !true # warningOnUnusedArgs
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
       !system.mReturnTypeName  # Empty string if no returned value
@@ -530,6 +531,7 @@ override method @structureDeclarationAST enterInContext
       !functionAttributes
       !functionMangledName
       !function.mFunctionFormalArgumentList
+      !true # warningOnUnusedArgs
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
       !function.mFunctionReturnTypeName  # Empty string if no returned value

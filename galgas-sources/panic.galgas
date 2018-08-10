@@ -164,6 +164,7 @@ override method @panicAST enterInContext
     !.none # @routineAttributes mRoutineAttributes
     !routineMangledName
     !arguments
+    !false # warningOnUnusedArgs
     !mPanicInstructionList
     !mEndOfPanicInstructions
     !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value

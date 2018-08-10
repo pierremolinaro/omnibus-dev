@@ -720,13 +720,3 @@ void routine_appendPanicRoutines (const class GALGAS_stringset constinArgument0,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'panicRoutineNameForFilePath'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_panicRoutineNameForFilePath (const class GALGAS_string & constinArgument0,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-

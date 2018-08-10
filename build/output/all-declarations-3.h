@@ -893,6 +893,8 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_routineFormalArgumentListAST mProperty_mRoutineFormalArgumentList ;
 
+  public : GALGAS_bool mProperty_warningOnUnusedArgs ;
+
   public : GALGAS_instructionListAST mProperty_mRoutineInstructionList ;
 
   public : GALGAS_location mProperty_mEndOfRoutineDeclaration ;
@@ -919,6 +921,7 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
                                                           const GALGAS_routineAttributes & in_mRoutineAttributes,
                                                           const GALGAS_lstring & in_mRoutineMangledName,
                                                           const GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
+                                                          const GALGAS_bool & in_warningOnUnusedArgs,
                                                           const GALGAS_instructionListAST & in_mRoutineInstructionList,
                                                           const GALGAS_location & in_mEndOfRoutineDeclaration,
                                                           const GALGAS_lstring & in_mReturnTypeName) ;
@@ -943,9 +946,10 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
                                                                                        const class GALGAS_routineAttributes & inOperand6,
                                                                                        const class GALGAS_lstring & inOperand7,
                                                                                        const class GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                                       const class GALGAS_instructionListAST & inOperand9,
-                                                                                       const class GALGAS_location & inOperand10,
-                                                                                       const class GALGAS_lstring & inOperand11
+                                                                                       const class GALGAS_bool & inOperand9,
+                                                                                       const class GALGAS_instructionListAST & inOperand10,
+                                                                                       const class GALGAS_location & inOperand11,
+                                                                                       const class GALGAS_lstring & inOperand12
                                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -983,6 +987,8 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineMangledName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warningOnUnusedArgs (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -3922,15 +3928,4 @@ class GALGAS_routineListIR_2D_element : public AC_GALGAS_root {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineListIR_2D_element ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Extension method '@allocaList generateAllocaList'                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_generateAllocaList (const class GALGAS_allocaList inObject,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 

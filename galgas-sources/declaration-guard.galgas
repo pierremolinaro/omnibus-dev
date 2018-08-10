@@ -238,6 +238,7 @@ proc guardSemanticAnalysis
       !inRoutineFormalArgumentList
       !?universalMap
       !?formalArguments
+      !warningOnUnusedArgs: true
     )
     convenienceGuardGenerationIR = .baseGuard
   #--- Analyze instruction list
@@ -259,6 +260,7 @@ proc guardSemanticAnalysis
       !inRoutineFormalArgumentList
       !?universalMap
       !?formalArguments
+      !warningOnUnusedArgs: true
     )
   #--- Analyze base guard
     [baseGuardInstruction baseGuardAnalyze 
