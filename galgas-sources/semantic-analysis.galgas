@@ -116,7 +116,6 @@ proc semanticAnalysis
   end 
 #---
   @semanticTemporariesStruct temporaries = .default
-#  temporaries.mSubprogramInvocationGraph = inSubprogramInvocationGraph
   for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext
@@ -129,12 +128,12 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
    ]
-  [inAST.mStandAloneSystemRoutineListAST systemRoutineSemanticAnalysis
-    !receiverType:voidType ()
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
+#  [inAST.mStandAloneSystemRoutineListAST systemRoutineSemanticAnalysis2
+#    !receiverType:voidType ()
+#    !context:inSemanticContext
+#    !?temporary:temporaries
+#    !?intermediateCode:outIntermediateCodeStruct
+#  ]
   [inAST.mExternProcListAST externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries

@@ -64,7 +64,22 @@ override method @standaloneRoutineCallIR enterAccessibleEntities
 #  if mGlobalVariableName != "" then
 #    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
 #  end
-  ioInvokedRoutineSet += !mFunctionNameForGeneration
+  switch mKind 
+  case function :
+    ioInvokedRoutineSet += !mFunctionNameForGeneration
+  case serviceFromProcessorUserMode :
+    ioInvokedRoutineSet += !"service.user." + mFunctionNameForGeneration
+  case serviceFromProcessorPrivilegedMode :
+    ioInvokedRoutineSet += !"service.implementation." + mFunctionNameForGeneration
+  case sectionFromProcessorUserMode :
+    ioInvokedRoutineSet += !"section.user." + mFunctionNameForGeneration
+  case sectionFromProcessorPrivilegedMode :
+    ioInvokedRoutineSet += !"section.implementation." + mFunctionNameForGeneration
+  case primitiveFromProcessorUserMode :
+    ioInvokedRoutineSet += !"primitive.user." + mFunctionNameForGeneration
+  case primitiveFromProcessorPrivilegedMode :
+    ioInvokedRoutineSet += !"primitive.implementation." + mFunctionNameForGeneration
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

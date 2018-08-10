@@ -184,12 +184,23 @@ method @functionDeclarationListAST enterFunctionInContext
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
     )
+#    var s = ""
+#    if inSelfTypeName.string != "" then
+#      s += inSelfTypeName.string + "."
+#    end
+#    s += function.mFunctionName.string
+#    s += "("
+#    for (formalArgumentPassingMode selector formalArgumentTypeName *) in function.mFunctionFormalArgumentList do
+#      s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+#    end
+#    s += ")"
+#    log s
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertRoutine # Raises a redefinition error
       !inSelfTypeName 
       !function.mFunctionName
       ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-      !routineMangledName
+      !routineMangledName # .new {!s !function.mFunctionName}
       !.new{
         !isPublic:function.mPublicFunction
         !exported:globalFunction

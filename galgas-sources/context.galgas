@@ -179,6 +179,7 @@ proc buildSemanticContext
   outSemanticContext = .default
   outDecoratedDeclarationList = {}
   outDecoratedRoutineList = {}
+  outRoutineListIR = {}
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList !?outDecoratedRoutineList]
   [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext
@@ -187,10 +188,14 @@ proc buildSemanticContext
      !?outDecoratedRoutineList
    ]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
-  [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext !receiverType:"" !?context: outSemanticContext]
+  [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
+    !receiverType:""
+    !?context: outSemanticContext
+    !?outDecoratedRoutineList
+    !?outRoutineListIR
+  ]
 #---
   outGlobalVariableIRList = {}
-  outRoutineListIR = {}
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext

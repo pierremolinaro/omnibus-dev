@@ -38,8 +38,11 @@ proc codeOptimization
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
   end
 #--- Display invocation graph
+  let filePath = inSourceFile + ".routineInvocation.dot"
   if [option plm_options.writeRoutineInvocationGraphFile value] then
-    displayInvocationGraph (!routineAccessibilityIR !inSourceFile)
+    displayInvocationGraph (!routineAccessibilityIR !filePath)
+  else
+    [@string deleteFileIfExists !filePath]
   end
 #  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineListIR
 #  let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
@@ -299,7 +302,7 @@ proc codeOptimization
 
 private proc displayInvocationGraph
   ?let @routineAccessibilityIR inRoutineAccessibilityIR
-  ?let @string inSourceFile
+  ?let @string inFilePath
 {
   var s = "digraph G {\n"
 #--- Build graph
@@ -324,10 +327,9 @@ private proc displayInvocationGraph
     s += "  \"" + undefined + "\" [shape=rectangle, color=red] ;\n"  
   end
   s += "}\n"
-  let filePath = inSourceFile + ".routineInvocation.dot"
-  [s writeToFileWhenDifferentContents !filePath ?*]
+  [s writeToFileWhenDifferentContents !inFilePath ?*]
   if [undefinedRoutineSet count] > 0 then
-    warning .nowhere : [[undefinedRoutineSet count] string] + " undefined routine(s) in routine invocation graph"
+    error .nowhere : [[undefinedRoutineSet count] string] + " undefined routine(s) in routine invocation graph"
   end
 }
 
