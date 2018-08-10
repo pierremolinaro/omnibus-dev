@@ -75,38 +75,6 @@ func llvmNameForSectionInterrupt ?let @string inName -> @string {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   SVC
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForSVCCall ?let @lstring inName ?let @routineKind inMode -> @string {
-  switch inMode
-  case primitive :
-    result = llvmNameForPrimitiveCall (!inName.string)
-  case service :
-    result = llvmNameForServiceCall (!inName.string)
-  case section :
-    result = llvmNameForSectionCall (!inName.string)
-  case function (*) :
-    error inName : "INTERNAL ERROR" : result
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode -> @string {
-  switch inMode
-  case primitive :
-    result = llvmNameForPrimitiveImplementation (!inName.string)
-  case service :
-    result = llvmNameForServiceImplementation (!inName.string)
-  case section :
-    result = llvmNameForSectionImplementation (!inName.string)
-  case function (*) :
-    error inName : "INTERNAL ERROR" : result
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Primitives
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

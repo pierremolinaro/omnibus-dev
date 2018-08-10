@@ -137,53 +137,18 @@ override method @regularRoutineIR enterAccessibleEntities
 
 #·······················································································································
 
-override method @regularRoutineIR svcDeclarationGeneration
-  ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
-  ?!@sectionIRlist ioSectionList
-  ?!@generationAdds ioGenerationAdds
-{
-  if not [mKind isFunction] then
-    let svcCallName = llvmNameForSVCCall (!mRoutineMangledName !mKind)
-    let svcImplementationName = llvmNameForSVCImplementation (!mRoutineMangledName !mKind)
-    let prototype = llvmFunctionPrototype (
-      ![mReturnType llvmTypeName]
-      !svcCallName
-      !mReceiverType
-      !mFormalArgumentListForGeneration
-    )
-    ioGenerationAdds.mExternFunctionDeclarationSet += !prototype
-    switch mKind
-    case section :
-      ioSectionList += !svcCallName !svcImplementationName !true # Only invocation from user mode
-    case primitive, service :
-      ioPrimitiveAndServiceList += !svcCallName !svcImplementationName !false
-    case function (*) :
-      error .nowhere : "INTERNAL ERROR"
-    end
-  end
-}
-
-#·······················································································································
-
 override method @regularRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  @string routineName
-  switch mKind
-  case function (*) : routineName = llvmNameForFunction (!mRoutineMangledName.string)
-  case section : routineName = llvmNameForSectionImplementation (!mRoutineMangledName.string)
-  case service : routineName = llvmNameForServiceImplementation (!mRoutineMangledName.string)
-  case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineMangledName.string)
-  end
-  ioLLVMcode += llvmTitleComment (!routineName)
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define"
   if not mExportedFunction then
     ioLLVMcode += " internal"
   end
   ioLLVMcode += " " + [mReturnType llvmTypeName]
-  ioLLVMcode += " @" + routineName + " ("
+  ioLLVMcode += " @" + [mRoutineMangledName assemblerRepresentation] + " ("
   let receiverLLVMTypeName = if mReceiverType.kind == .void
     then ""
     else [mReceiverType llvmTypeName]
