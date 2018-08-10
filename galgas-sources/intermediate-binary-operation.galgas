@@ -68,7 +68,9 @@ override method @binaryOperationIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mLocation)
+  if not [option plm_options.noPanicGeneration value] then
+    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mLocation)
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -80,10 +82,6 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
-#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
   let llvmType = [mOperandType llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioLLVMcode += " (" + llvmType + " " + [mLeft llvmName] + ", " + llvmType + " " + [mRight llvmName] + ")\n"
@@ -111,10 +109,6 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
   let llvmType = [mOperandType llvmTypeName]
   ioLLVMcode += "  " + [mRight llvmName] + ".isZero = icmp eq " + llvmType + " " + [mRight llvmName] + ", 0\n"
   let labelName = "label." + ioGenerationAdds.mUniqueIndex

@@ -154,7 +154,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-select-instruction.galgas"
 
   "galgas-sources/intermediate-test-array-index.galgas"
-  "galgas-sources/intermediate-upper-bound-check.galgas"
   "galgas-sources/intermediate-comment-source-line.galgas"
   "galgas-sources/dead-code-elimination.galgas"
   "galgas-sources/code-generation.galgas"

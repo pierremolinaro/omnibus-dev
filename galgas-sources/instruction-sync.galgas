@@ -589,10 +589,6 @@ override method @syncInstructionIR llvmInstructionCode
   if [option plm_options.noPanicGeneration value] then
     ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
   else
-#    [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-#      ![[[mSelectInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
-#      ?let staticStringIndex
-#    ]
     ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mSelectInstructionLocation) assemblerRepresentation] + " ("
     ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mSelectInstructionLocation line] + ", "
     ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForClosedSync () + ")\n"
@@ -625,7 +621,9 @@ override method @syncInstructionIR enterAccessibleEntities
       ioInvokedRoutineSet += !guardMangledName
     end
   end
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mSelectInstructionLocation)
+  if not [option plm_options.noPanicGeneration value] then
+    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mSelectInstructionLocation)
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

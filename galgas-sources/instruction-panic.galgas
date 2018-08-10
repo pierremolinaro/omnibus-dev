@@ -104,10 +104,6 @@ override method @panicInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-#    ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mThrowLocation) assemblerRepresentation] + " ("
   ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mThrowLocation line] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + mPanicCode + ")\n"

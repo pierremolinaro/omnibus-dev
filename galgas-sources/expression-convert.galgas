@@ -166,10 +166,6 @@ override method @convertInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
   let lbl = [[mLocation locationIndex] string]
   let convertMinOkLabel = "min." + lbl + ".ok"
   let convertMaxOkLabel = "max." + lbl + ".ok"

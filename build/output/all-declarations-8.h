@@ -363,22 +363,6 @@ void routine_analyzeOrderedTaskRoutines (const class GALGAS_taskSetupListAST con
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Routine 'analyzeOrderedTaskRoutinesEX'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_analyzeOrderedTaskRoutinesEX (const class GALGAS_PLMType constinArgument0,
-                                           const class GALGAS_taskSetupListAST constinArgument1,
-                                           const class GALGAS_semanticContext constinArgument2,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument3,
-                                           class GALGAS_intermediateCodeStruct & ioArgument4,
-                                           class GALGAS_instructionListIR & outArgument5,
-                                           class GALGAS_allocaList & outArgument6,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                      Extension method '@externProcedureMapIR-element llvmPrototypeGeneration'                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -702,4 +686,17 @@ class GALGAS_lstring function_guardUserMangledNameFromAST (const class GALGAS_st
 
 class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Routine 'generateLLVMcodeForStructure'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generateLLVMcodeForStructure (class GALGAS_string & ioArgument0,
+                                           class GALGAS_generationAdds & ioArgument1,
+                                           const class GALGAS_PLMType constinArgument2,
+                                           const class GALGAS_uint constinArgument3,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 

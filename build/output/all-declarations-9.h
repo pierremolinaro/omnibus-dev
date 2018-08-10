@@ -10,19 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Routine 'generateLLVMcodeForStructure'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_generateLLVMcodeForStructure (class GALGAS_string & ioArgument0,
-                                           class GALGAS_generationAdds & ioArgument1,
-                                           const class GALGAS_PLMType constinArgument2,
-                                           const class GALGAS_uint constinArgument3,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            Function 'minValueForInteger'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -400,25 +387,6 @@ class GALGAS_PLMType function_functionType (const class GALGAS_routineDescriptor
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           Routine 'setupSemanticAnalysis'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_setupSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
-                                    class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                    class GALGAS_intermediateCodeStruct & ioArgument2,
-                                    const class GALGAS_PLMType constinArgument3,
-                                    const class GALGAS_luint constinArgument4,
-                                    const class GALGAS_mode constinArgument5,
-                                    const class GALGAS_instructionListAST constinArgument6,
-                                    const class GALGAS_location constinArgument7,
-                                    class GALGAS_allocaList & outArgument8,
-                                    class GALGAS_instructionListIR & outArgument9,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                          Function 'llvmFunctionPrototype'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -696,4 +664,69 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
 class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & constinArgument0,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Routine 'declareLLVMTypes'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_declareLLVMTypes (const class GALGAS_unifiedTypeMap constinArgument0,
+                               const class GALGAS_uint constinArgument1,
+                               class GALGAS_generationAdds & ioArgument2,
+                               class GALGAS_string & ioArgument3,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Routine 'getNewTempReference'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_getNewTempReference (const class GALGAS_PLMType constinArgument0,
+                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                  class GALGAS_objectIR & outArgument2,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Routine 'semanticAnalysis'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
+                               const class GALGAS_ast constinArgument1,
+                               const class GALGAS_stringset constinArgument2,
+                               const class GALGAS_declarationDecorationList constinArgument3,
+                               const class GALGAS_decoratedRegularRoutineList constinArgument4,
+                               const class GALGAS_routineListIR constinArgument5,
+                               const class GALGAS_semanticContext constinArgument6,
+                               const class GALGAS_location constinArgument7,
+                               const class GALGAS_staticEntityMap constinArgument8,
+                               class GALGAS_intermediateCodeStruct & outArgument9,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Routine 'appendPanicRoutines'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_appendPanicRoutines (const class GALGAS_stringset constinArgument0,
+                                  class GALGAS_intermediateCodeStruct & ioArgument1,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'panicRoutineNameForFilePath'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_panicRoutineNameForFilePath (const class GALGAS_string & constinArgument0,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 

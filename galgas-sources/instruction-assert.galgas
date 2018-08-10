@@ -105,10 +105,6 @@ override method @assertInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
-#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
-#    ![[[mAssertInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
   let labelAssertOk = "assert.ok." + ioGenerationAdds.mUniqueIndex
   let labelAssertEr = "assert.not.ok." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++

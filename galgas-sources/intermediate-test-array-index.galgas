@@ -25,10 +25,6 @@ override method @testArrayIndexIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-#    ![[[mErrorLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
   [[mIndex type].kind integer ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
 #--- Test index >= 0 (for signed index)
   if not isUnsigned then
@@ -75,7 +71,9 @@ override method @testArrayIndexIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mErrorLocation)
+  if not [option plm_options.noPanicGeneration value] then
+    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mErrorLocation)
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
