@@ -2433,22 +2433,22 @@ class cPtr_decoratedPanicRoutine : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @sectionPanicRoutineIR class                                             *
+//                                          @fileSpecificPanicRoutineIR class                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_sectionPanicRoutineIR : public GALGAS_abstractRoutineIR {
+class GALGAS_fileSpecificPanicRoutineIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
-  public : GALGAS_sectionPanicRoutineIR (void) ;
+  public : GALGAS_fileSpecificPanicRoutineIR (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_sectionPanicRoutineIR constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_fileSpecificPanicRoutineIR constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_sectionPanicRoutineIR * ptr (void) const { return (const cPtr_sectionPanicRoutineIR *) mObjectPtr ; }
+  public : inline const class cPtr_fileSpecificPanicRoutineIR * ptr (void) const { return (const cPtr_fileSpecificPanicRoutineIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_sectionPanicRoutineIR (const cPtr_sectionPanicRoutineIR * inSourcePtr) ;
+  public : GALGAS_fileSpecificPanicRoutineIR (const cPtr_fileSpecificPanicRoutineIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -2456,20 +2456,194 @@ class GALGAS_sectionPanicRoutineIR : public GALGAS_abstractRoutineIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_sectionPanicRoutineIR extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_fileSpecificPanicRoutineIR extractObject (const GALGAS_object & inObject,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_sectionPanicRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                      const class GALGAS_bool & inOperand1,
-                                                                      const class GALGAS_bool & inOperand2,
-                                                                      const class GALGAS_panicSortedListIR & inOperand3,
-                                                                      const class GALGAS_panicSortedListIR & inOperand4
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_fileSpecificPanicRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                           const class GALGAS_bool & inOperand1,
+                                                                           const class GALGAS_bool & inOperand2,
+                                                                           const class GALGAS_string & inOperand3
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_sectionPanicRoutineIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_fileSpecificPanicRoutineIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_inFilePath (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_fileSpecificPanicRoutineIR class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fileSpecificPanicRoutineIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Pointer class for @fileSpecificPanicRoutineIR class                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_fileSpecificPanicRoutineIR : public cPtr_abstractRoutineIR {
+//--- Attributes
+  public : GALGAS_string mProperty_inFilePath ;
+
+//--- Constructor
+  public : cPtr_fileSpecificPanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                            const GALGAS_bool & in_mIsRequired,
+                                            const GALGAS_bool & in_mWarnIfUnused,
+                                            const GALGAS_string & in_inFilePath
+                                            COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_inFilePath (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         @universalModePanicRoutineIR class                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_universalModePanicRoutineIR : public GALGAS_abstractRoutineIR {
+//--- Constructor
+  public : GALGAS_universalModePanicRoutineIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_universalModePanicRoutineIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_universalModePanicRoutineIR * ptr (void) const { return (const cPtr_universalModePanicRoutineIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_universalModePanicRoutineIR (const cPtr_universalModePanicRoutineIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_universalModePanicRoutineIR extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_universalModePanicRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                            const class GALGAS_bool & inOperand1,
+                                                                            const class GALGAS_bool & inOperand2
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_universalModePanicRoutineIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_universalModePanicRoutineIR class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_universalModePanicRoutineIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                Pointer class for @universalModePanicRoutineIR class                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_universalModePanicRoutineIR : public cPtr_abstractRoutineIR {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_universalModePanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                             const GALGAS_bool & in_mIsRequired,
+                                             const GALGAS_bool & in_mWarnIfUnused
+                                             COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          @sectionModePanicRoutineIR class                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_sectionModePanicRoutineIR : public GALGAS_abstractRoutineIR {
+//--- Constructor
+  public : GALGAS_sectionModePanicRoutineIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_sectionModePanicRoutineIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_sectionModePanicRoutineIR * ptr (void) const { return (const cPtr_sectionModePanicRoutineIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_sectionModePanicRoutineIR (const cPtr_sectionModePanicRoutineIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_sectionModePanicRoutineIR extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_sectionModePanicRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                          const class GALGAS_bool & inOperand1,
+                                                                          const class GALGAS_bool & inOperand2,
+                                                                          const class GALGAS_panicSortedListIR & inOperand3,
+                                                                          const class GALGAS_panicSortedListIR & inOperand4
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_sectionModePanicRoutineIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2485,31 +2659,31 @@ class GALGAS_sectionPanicRoutineIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_sectionPanicRoutineIR class
+} ; // End of GALGAS_sectionModePanicRoutineIR class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionPanicRoutineIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionModePanicRoutineIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @sectionPanicRoutineIR class                                    *
+//                                 Pointer class for @sectionModePanicRoutineIR class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_sectionPanicRoutineIR : public cPtr_abstractRoutineIR {
+class cPtr_sectionModePanicRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
   public : GALGAS_panicSortedListIR mProperty_mPanicSetupListIR ;
   public : GALGAS_panicSortedListIR mProperty_mPanicLoopListIR ;
 
 //--- Constructor
-  public : cPtr_sectionPanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                       const GALGAS_bool & in_mIsRequired,
-                                       const GALGAS_bool & in_mWarnIfUnused,
-                                       const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
-                                       const GALGAS_panicSortedListIR & in_mPanicLoopListIR
-                                       COMMA_LOCATION_ARGS) ;
+  public : cPtr_sectionModePanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                           const GALGAS_bool & in_mIsRequired,
+                                           const GALGAS_bool & in_mWarnIfUnused,
+                                           const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
+                                           const GALGAS_panicSortedListIR & in_mPanicLoopListIR
+                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -2517,99 +2691,6 @@ class cPtr_sectionPanicRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_panicSortedListIR getter_mPanicSetupListIR (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_panicSortedListIR getter_mPanicLoopListIR (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             @convertInstructionIR class                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_convertInstructionIR (void) ;
-
-//---
-  public : inline const class cPtr_convertInstructionIR * ptr (void) const { return (const cPtr_convertInstructionIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_convertInstructionIR (const cPtr_convertInstructionIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_convertInstructionIR extractObject (const GALGAS_object & inObject,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_convertInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                     const class GALGAS_objectIR & inOperand1,
-                                                                     const class GALGAS_location & inOperand2
-                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_convertInstructionIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_convertInstructionIR class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionIR ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Pointer class for @convertInstructionIR class                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_objectIR mProperty_mTarget ;
-  public : GALGAS_objectIR mProperty_mOperand ;
-  public : GALGAS_location mProperty_mLocation ;
-
-//--- Constructor
-  public : cPtr_convertInstructionIR (const GALGAS_objectIR & in_mTarget,
-                                      const GALGAS_objectIR & in_mOperand,
-                                      const GALGAS_location & in_mLocation
-                                      COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

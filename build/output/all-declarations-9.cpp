@@ -8663,6 +8663,7 @@ void routine_getNewTempReference (const GALGAS_PLMType constinArgument_inType,
 
 void routine_semanticAnalysis (const GALGAS_string /* constinArgument_inSourceFile */,
                                const GALGAS_ast constinArgument_inAST,
+                               const GALGAS_stringset constinArgument_inSourceFileAbsolutePathSet,
                                const GALGAS_declarationDecorationList constinArgument_inDecoratedDeclarationList,
                                const GALGAS_decoratedRegularRoutineList constinArgument_inDecoratedRoutineList,
                                const GALGAS_routineListIR constinArgument_inRoutineListIR,
@@ -8673,30 +8674,30 @@ void routine_semanticAnalysis (const GALGAS_string /* constinArgument_inSourceFi
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIntermediateCodeStruct.drop () ; // Release 'out' argument
-  outArgument_outIntermediateCodeStruct = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 108)) ;
+  outArgument_outIntermediateCodeStruct = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 109)) ;
   outArgument_outIntermediateCodeStruct.mProperty_mRoutineListIR = constinArgument_inRoutineListIR ;
   outArgument_outIntermediateCodeStruct.mProperty_mTargetParameters = constinArgument_inSemanticContext.getter_mTargetParameters (HERE) ;
   outArgument_outIntermediateCodeStruct.mProperty_mStaticEntityMap = constinArgument_inStaticEntityMap ;
   outArgument_outIntermediateCodeStruct.mProperty_mGlobalTaskVariableList = constinArgument_inSemanticContext.getter_mGlobalTaskVariableList (HERE) ;
-  cEnumerator_requiredProcedureDeclarationListAST enumerator_5033 (constinArgument_inAST.getter_mRequiredProcListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_5033.hasCurrentObject ()) {
-    GALGAS_lstring var_procedureMangledName_5065 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), enumerator_5033.current (HERE).getter_mName (HERE), enumerator_5033.current (HERE).getter_mFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 114)) ;
-    outArgument_outIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_procedureMangledName_5065.getter_string (HERE)  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 115)) ;
-    enumerator_5033.gotoNextObject () ;
+  cEnumerator_requiredProcedureDeclarationListAST enumerator_5098 (constinArgument_inAST.getter_mRequiredProcListAST (HERE), kENUMERATION_UP) ;
+  while (enumerator_5098.hasCurrentObject ()) {
+    GALGAS_lstring var_procedureMangledName_5130 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), enumerator_5098.current (HERE).getter_mName (HERE), enumerator_5098.current (HERE).getter_mFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 115)) ;
+    outArgument_outIntermediateCodeStruct.mProperty_mRequiredProcedureSet.addAssign_operation (var_procedureMangledName_5130.getter_string (HERE)  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 116)) ;
+    enumerator_5098.gotoNextObject () ;
   }
-  GALGAS_semanticTemporariesStruct var_temporaries_5290 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 118)) ;
-  cEnumerator_declarationDecorationList enumerator_5351 (constinArgument_inDecoratedDeclarationList, kENUMERATION_UP) ;
-  while (enumerator_5351.hasCurrentObject ()) {
-    callExtensionMethod_semanticAnalysis ((const cPtr_abstractDecoratedDeclaration *) enumerator_5351.current_mDeclaration (HERE).ptr (), constinArgument_inSemanticContext, var_temporaries_5290, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 120)) ;
-    enumerator_5351.gotoNextObject () ;
+  GALGAS_semanticTemporariesStruct var_temporaries_5355 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 119)) ;
+  cEnumerator_declarationDecorationList enumerator_5416 (constinArgument_inDecoratedDeclarationList, kENUMERATION_UP) ;
+  while (enumerator_5416.hasCurrentObject ()) {
+    callExtensionMethod_semanticAnalysis ((const cPtr_abstractDecoratedDeclaration *) enumerator_5416.current_mDeclaration (HERE).ptr (), constinArgument_inSemanticContext, var_temporaries_5355, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 121)) ;
+    enumerator_5416.gotoNextObject () ;
   }
-  extensionMethod_routineSemanticAnalysis (constinArgument_inDecoratedRoutineList, constinArgument_inSemanticContext, var_temporaries_5290, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 126)) ;
-  extensionMethod_externProcedureSemanticAnalysis (constinArgument_inAST.getter_mExternProcListAST (HERE), constinArgument_inSemanticContext, var_temporaries_5290, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 131)) ;
+  extensionMethod_routineSemanticAnalysis (constinArgument_inDecoratedRoutineList, constinArgument_inSemanticContext, var_temporaries_5355, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 127)) ;
+  extensionMethod_externProcedureSemanticAnalysis (constinArgument_inAST.getter_mExternProcListAST (HERE), constinArgument_inSemanticContext, var_temporaries_5355, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 132)) ;
   {
-  routine_appendPanicRoutines (outArgument_outIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 137)) ;
+  routine_appendPanicRoutines (constinArgument_inSourceFileAbsolutePathSet, outArgument_outIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 138)) ;
   }
   {
-  routine_checkRequiredProcedures (constinArgument_inAST, constinArgument_inSemanticContext, constinArgument_inEndOfSourceFile, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 139)) ;
+  routine_checkRequiredProcedures (constinArgument_inAST, constinArgument_inSemanticContext, constinArgument_inEndOfSourceFile, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 143)) ;
   }
 }
 

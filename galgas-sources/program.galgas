@@ -171,6 +171,7 @@ private proc compileProject
     semanticAnalysis (
       !sourceFile:inSourceFile.string
       !ast:ast
+      !allSourceFilePaths:sourceFileAbsolutePathSet
       !decoratedDeclarationList:decoratedDeclarationList
       !decoratedRoutineList: decoratedRoutineList
       !routineListIR:routineListIR

@@ -717,13 +717,14 @@ void routine_getNewTempReference (const class GALGAS_PLMType constinArgument0,
 
 void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                const class GALGAS_ast constinArgument1,
-                               const class GALGAS_declarationDecorationList constinArgument2,
-                               const class GALGAS_decoratedRegularRoutineList constinArgument3,
-                               const class GALGAS_routineListIR constinArgument4,
-                               const class GALGAS_semanticContext constinArgument5,
-                               const class GALGAS_location constinArgument6,
-                               const class GALGAS_staticEntityMap constinArgument7,
-                               class GALGAS_intermediateCodeStruct & outArgument8,
+                               const class GALGAS_stringset constinArgument2,
+                               const class GALGAS_declarationDecorationList constinArgument3,
+                               const class GALGAS_decoratedRegularRoutineList constinArgument4,
+                               const class GALGAS_routineListIR constinArgument5,
+                               const class GALGAS_semanticContext constinArgument6,
+                               const class GALGAS_location constinArgument7,
+                               const class GALGAS_staticEntityMap constinArgument8,
+                               class GALGAS_intermediateCodeStruct & outArgument9,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -733,7 +734,8 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_appendPanicRoutines (class GALGAS_intermediateCodeStruct & ioArgument0,
+void routine_appendPanicRoutines (const class GALGAS_stringset constinArgument0,
+                                  class GALGAS_intermediateCodeStruct & ioArgument1,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 

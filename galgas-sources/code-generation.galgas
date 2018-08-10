@@ -313,10 +313,10 @@ private proc generateCodeFiles
   )
 #----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
-    sectionIRlist += 
-      !llvmNameForSectionCall (!panicRoutineName ())
-      !llvmNameForSectionImplementation (!panicRoutineName ())
-      !false # Invocation from any mode
+#    sectionIRlist += 
+#      !llvmNameForSectionCall (!panicRoutineName ())
+#      !llvmNameForSectionImplementation (!panicRoutineName ())
+#      !false # Invocation from any mode
     generatePanicCode (
       !?llvmCode
       !sourceFileSet: inSourceFileAbsolutePathSet

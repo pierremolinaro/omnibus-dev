@@ -97,6 +97,7 @@ proc getNewTempReference
 proc semanticAnalysis
   ?sourceFile:let @string unused inSourceFile
   ?ast:let @ast inAST
+  ?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet
   ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
   ?decoratedRoutineList: let @decoratedRegularRoutineList inDecoratedRoutineList
   ?routineListIR:let @routineListIR inRoutineListIR
@@ -134,7 +135,10 @@ proc semanticAnalysis
     !?intermediateCode:outIntermediateCodeStruct
   ]
 #--- Add panic routines
-  appendPanicRoutines (!?intermediateCode:outIntermediateCodeStruct)
+  appendPanicRoutines (
+    !allSourceFilePaths:inSourceFileAbsolutePathSet
+    !?intermediateCode:outIntermediateCodeStruct
+  )
 #--- Check required procedure are defined
   checkRequiredProcedures (
     !ast:inAST

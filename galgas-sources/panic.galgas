@@ -140,7 +140,7 @@ override method @panicAST enterInContext
     !false # @bool mExportedRoutine
     !.none # @routineAttributes mRoutineAttributes
     !routineMangledName
-    !arguments # @routineFormalArgumentListAST mRoutineFormalArgumentList
+    !arguments
     !mPanicInstructionList
     !mEndOfPanicInstructions
     !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
@@ -151,17 +151,32 @@ override method @panicAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendPanicRoutines
+  ?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-
+  ioIntermediateCodeStruct.mRoutineListIR += !@universalModePanicRoutineIR.new {
+    !["section.user.handle.panic" nowhere]
+    !false
+    !false
+  }
 #--- Section panic routine
-  ioIntermediateCodeStruct.mRoutineListIR += !@sectionPanicRoutineIR.new {
+  ioIntermediateCodeStruct.mRoutineListIR += !@sectionModePanicRoutineIR.new {
     !["section.implementation.handle.panic" nowhere]
     !false
     !false
     !ioIntermediateCodeStruct.mPanicSetupListIR
     !ioIntermediateCodeStruct.mPanicLoopListIR
   }
+#--- Panic routines, specific to every source file
+#  for (sourceFilePath) in inSourceFileAbsolutePathSet do
+#    let fileBaseName = [[sourceFilePath lastPathComponent] stringByDeletingPathExtension]
+#    ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR.new {
+#      !["raise.panic.file." + fileBaseName nowhere]
+#      !false
+#      !false
+#      !sourceFilePath
+#    }
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -214,11 +229,6 @@ proc generatePanicCode
   ?generationContext:let @generationContext inGenerationContext
   ?!generationAdds:@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!"Raise Panic internal")
-  ioLLVMcode += "declare void @" + llvmNameForSectionCall (!panicRoutineName ()) + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %in.LINE, "
-  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE, "
-  ioLLVMcode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn\n\n"
 #--- Panic for isr
   [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString !"" ?let emptyStringIndex]
   ioLLVMcode += llvmTitleComment (!"Panic for ISR")
@@ -252,22 +262,113 @@ proc generatePanicCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: Generate 
+#! CODE GENERATION: Panic routine, specific to a source file 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @sectionPanicRoutineIR : @abstractRoutineIR {
+class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
+  @string inFilePath
+}
+
+#·······················································································································
+
+override method @fileSpecificPanicRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let arguments = " ("
+    + [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %in.LINE, "
+    + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE, "
+    + "i8* %in.FILE)"
+  let fileBaseName = [[inFilePath lastPathComponent] stringByDeletingPathExtension]
+  
+  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
+    !fileBaseName
+    ?let staticStringIndex
+  ]
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " ("
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %in.LINE, "
+  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE)" + llvmAttributeFunction () + "noreturn {\n"
+  ioLLVMcode += "  %in.FILE = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioLLVMcode += "  call void @" + llvmNameForSectionCall (!panicRoutineName ()) + arguments + "\n"
+  ioLLVMcode += "  unreachable\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#·······················································································································
+
+override method @fileSpecificPanicRoutineIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioInvokedRoutineSet += !llvmNameForSectionCall (!panicRoutineName ())
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: Panic routine, in universal mode 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @universalModePanicRoutineIR : @abstractRoutineIR {
+}
+
+#·······················································································································
+
+override method @universalModePanicRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let arguments = " ("
+    + [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %in.LINE, "
+    + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE, "
+    + "i8* %in.FILE)"
+
+  ioLLVMcode += llvmTitleComment (!"Raise Panic internal")
+  ioLLVMcode += "declare void @" + llvmNameForSectionCall (!panicRoutineName ())
+  ioLLVMcode += arguments
+  ioLLVMcode += llvmAttributeFunction () + "noreturn\n\n"
+}
+
+#·······················································································································
+
+override method @universalModePanicRoutineIR svcDeclarationGeneration
+  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
+  ?!@sectionIRlist ioSectionList
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioSectionList += 
+    !llvmNameForSectionCall (!panicRoutineName ())
+    !llvmNameForSectionImplementation (!panicRoutineName ())
+    !false # Invocation from any mode
+}
+
+#·······················································································································
+
+override method @universalModePanicRoutineIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioInvokedRoutineSet += !llvmNameForSectionImplementation (!panicRoutineName ())
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: Panic routine, in section mode 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @sectionModePanicRoutineIR : @abstractRoutineIR {
   @panicSortedListIR mPanicSetupListIR
   @panicSortedListIR mPanicLoopListIR
 }
 
 #·······················································································································
 
-override method @sectionPanicRoutineIR llvmCodeGeneration 
+override method @sectionModePanicRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!"Raise Panic internal")
+  ioLLVMcode += llvmTitleComment (!"Raise Panic internal (section mode)")
   
   let arguments = " ("
     + [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %in.LINE, "
@@ -291,7 +392,7 @@ override method @sectionPanicRoutineIR llvmCodeGeneration
 
 #·······················································································································
 
-override method @sectionPanicRoutineIR enterAccessibleEntities
+override method @sectionModePanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
