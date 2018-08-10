@@ -103,6 +103,8 @@ struct @semanticContext {
   @globalSyncInstanceMap mGlobalSyncInstanceMap
   @staticlistMap mStaticListMap
 
+  @stringset mRequiredRoutineSet
+
 #--- Types
   @unifiedTypeMap mTypeMap
 
@@ -180,6 +182,11 @@ proc buildSemanticContext
   outDecoratedDeclarationList = {}
   outDecoratedRoutineList = {}
   outRoutineListIR = {}
+#--- Enter required routine
+  for requiredProc in inAST.mRequiredProcListAST do
+    let procedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
+    outSemanticContext.mRequiredRoutineSet += !procedureMangledName.string
+  end 
 #--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList !?outDecoratedRoutineList]
   [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext

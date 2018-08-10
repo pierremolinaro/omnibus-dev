@@ -9,7 +9,7 @@ struct @intermediateCodeStruct {
   @globalConstantMapIR mGlobalConstantMap
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
-  @stringset mRequiredProcedureSet
+#  @stringset mRequiredProcedureSet
   @panicSortedListIR mPanicSetupListIR
   @panicSortedListIR mPanicLoopListIR
   @taskMapIR mTaskMapIR

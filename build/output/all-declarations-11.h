@@ -93,9 +93,8 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_PLMType constinArgument7,
                              const class GALGAS_availableInterruptMap constinArgument8,
                              const class GALGAS_staticListInitializationMap constinArgument9,
-                             const class GALGAS_stringset constinArgument10,
-                             const class GALGAS_targetParameters constinArgument11,
-                             const class GALGAS_globalVariableIRList constinArgument12,
+                             const class GALGAS_targetParameters constinArgument10,
+                             const class GALGAS_globalVariableIRList constinArgument11,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -114,9 +113,8 @@ void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
                                 const class GALGAS_PLMType constinArgument6,
                                 const class GALGAS_availableInterruptMap constinArgument7,
                                 const class GALGAS_staticListInitializationMap constinArgument8,
-                                const class GALGAS_stringset constinArgument9,
-                                const class GALGAS_targetParameters constinArgument10,
-                                const class GALGAS_globalVariableIRList constinArgument11,
+                                const class GALGAS_targetParameters constinArgument9,
+                                const class GALGAS_globalVariableIRList constinArgument10,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 

@@ -78,6 +78,28 @@ override getter @panicAST locationForErrorSignaling -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! UTILITY                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
+  if [inLocation isNowhere] then
+    result = "raise.panic.nofile"
+  else
+    result = "raise.panic.file." + [[[inLocation file] lastPathComponent] stringByDeletingPathExtension]
+  end
+}
+
+#·······················································································································
+
+func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
+  if inFilePath == "" then
+    result = "raise.panic.nofile"
+  else
+    result = "raise.panic.file." + [[inFilePath lastPathComponent] stringByDeletingPathExtension]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -135,6 +157,7 @@ override method @panicAST enterInContext
   ioDecoratedRoutineList +=
     !["" nowhere] # Empty string if standalone function
     !.panicMode # @mode mMode
+    !false
     !.function {!executionMode:.panicMode} # @routineKind mRoutineKind
     !true # @bool mWarnIfUnused
     !false # @bool mExportedRoutine
@@ -168,15 +191,20 @@ proc appendPanicRoutines
     !ioIntermediateCodeStruct.mPanicLoopListIR
   }
 #--- Panic routines, specific to every source file
-#  for (sourceFilePath) in inSourceFileAbsolutePathSet do
-#    let fileBaseName = [[sourceFilePath lastPathComponent] stringByDeletingPathExtension]
-#    ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR.new {
-#      !["raise.panic.file." + fileBaseName nowhere]
-#      !false
-#      !false
-#      !sourceFilePath
-#    }
-#  end
+  for (sourceFilePath) in inSourceFileAbsolutePathSet do
+    ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR.new {
+      ![panicRoutineNameForFilePath (!sourceFilePath) nowhere]
+      !false
+      !false
+      !sourceFilePath
+    }
+  end
+  ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR.new {
+    ![panicRoutineNameForFilePath (!"") nowhere]
+    !false
+    !false
+    !""
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -225,7 +253,6 @@ sortedlist @panicSortedListIR {
 
 proc generatePanicCode
   ?!@string ioLLVMcode
-  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?generationContext:let @generationContext inGenerationContext
   ?!generationAdds:@generationAdds ioGenerationAdds
 {
@@ -241,24 +268,6 @@ proc generatePanicCode
   ioLLVMcode += " )\n"    
   ioLLVMcode += "  unreachable\n"    
   ioLLVMcode += "}\n\n"    
-#--- File specific routines
-  for (filePath) in inSourceFileAbsolutePathSet do
-    [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-      ![[filePath lastPathComponent] stringByDeletingPathExtension]
-      ?let staticStringIndex
-    ]
-    let routineName = "@raise.panic." + staticStringIndex
-    ioLLVMcode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
-    ioLLVMcode += "define internal void " + routineName + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %inSourceLine, "
-    ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
-    ioLLVMcode += "  %str.FILE = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-    ioLLVMcode += "  call void @" + llvmNameForSectionCall (!panicRoutineName ()) + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %inSourceLine, "
-    ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %inCode, i8* %str.FILE)\n"
-    ioLLVMcode += "  unreachable\n"
-    ioLLVMcode += "}\n\n"
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

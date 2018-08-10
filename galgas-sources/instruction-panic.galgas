@@ -102,13 +102,13 @@ class @panicInstructionIR : @abstractInstructionIR {
 override method @panicInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
+  ?!@generationAdds unused ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-    ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
-  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
+#    ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mThrowLocation) assemblerRepresentation] + " ("
   ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mThrowLocation line] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + mPanicCode + ")\n"
 }
@@ -116,9 +116,10 @@ override method @panicInstructionIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mThrowLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

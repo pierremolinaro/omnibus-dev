@@ -105,16 +105,16 @@ override method @assertInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
-    ![[[mAssertInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
+#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
+#    ![[[mAssertInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
   let labelAssertOk = "assert.ok." + ioGenerationAdds.mUniqueIndex
   let labelAssertEr = "assert.not.ok." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += "  br i1 " + [mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
   ioLLVMcode += labelAssertEr + ":\n"
-  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mAssertInstructionLocation) assemblerRepresentation] + " ("
   ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mAssertInstructionLocation line] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForAssertViolation () + ")\n"
   ioLLVMcode += "  unreachable\n\n"
@@ -128,6 +128,7 @@ override method @assertInstructionIR enterAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {
   [mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mAssertInstructionLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

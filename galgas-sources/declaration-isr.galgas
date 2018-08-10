@@ -62,6 +62,7 @@ method @isrDeclarationListAST enterInContext
     ioDecoratedRoutineList +=
       !typeNameForTypeMapForDriver (!isr.mDriverName)
       !isr.mMode
+      !true
       !.function {!executionMode: isr.mMode}
       !true # mWarnIfUnused
       !false # mExportedRoutine
@@ -91,9 +92,9 @@ override method @decoratedISRDeclarations semanticAnalysis
 {
   for isr in mISRDeclarationList do
   #--- Add isr routine in required routine set
-    let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
-    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
-    ioIntermediateCodeStruct.mRequiredProcedureSet += !isrRoutineMangledName.string
+#    let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
+#    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
+#    ioIntermediateCodeStruct.mRequiredProcedureSet += !isrRoutineMangledName.string
   #--- Self type
     [inContext.mTypeMap searchKey !lkey:typeNameForTypeMapForDriver (!isr.mDriverName) ?type:let selfType ?2*]
   #--- Code generation

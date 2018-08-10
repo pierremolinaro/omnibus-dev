@@ -5,6 +5,7 @@
 list @decoratedRegularRoutineList {
   @lstring mReceiverTypeName # Empty string if standalone function
   @mode mMode
+  @bool mIsRequired
   @routineKind mRoutineKind
   @bool mWarnIfUnused
   @bool mExportedRoutine
@@ -90,7 +91,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !mRoutineMangledName
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mRoutineMangledName.string]
+    !mIsRequired
     !mWarnIfUnused
     !receiverType
     !formalArguments

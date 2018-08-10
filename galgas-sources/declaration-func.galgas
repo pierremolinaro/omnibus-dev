@@ -218,6 +218,7 @@ method @functionDeclarationListAST enterFunctionInContext
     ioDecoratedRoutineList +=
       !inSelfTypeName
       !function.mMode
+      ![ioContext.mRequiredRoutineSet hasKey !routineMangledName.string]
       !.function {!executionMode:function.mMode}
       !warnIfUnused
       !globalFunction

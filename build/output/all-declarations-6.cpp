@@ -7551,7 +7551,6 @@ mProperty_mTaskProcList (),
 mProperty_mTaskSetupListAST (),
 mProperty_mTaskActivateListAST (),
 mProperty_mTaskDeactivateListAST (),
-mProperty_mGuardedCommandList (),
 mProperty_mEndOfTaskDeclaration (),
 mProperty_mActivate () {
 }
@@ -7570,9 +7569,8 @@ GALGAS_decoratedTaskList_2D_element::GALGAS_decoratedTaskList_2D_element (const 
                                                                           const GALGAS_taskSetupListAST & inOperand4,
                                                                           const GALGAS_taskSetupListAST & inOperand5,
                                                                           const GALGAS_taskSetupListAST & inOperand6,
-                                                                          const GALGAS_syncInstructionBranchListAST & inOperand7,
-                                                                          const GALGAS_location & inOperand8,
-                                                                          const GALGAS_bool & inOperand9) :
+                                                                          const GALGAS_location & inOperand7,
+                                                                          const GALGAS_bool & inOperand8) :
 mProperty_mTaskName (inOperand0),
 mProperty_mStackSize (inOperand1),
 mProperty_mVarList (inOperand2),
@@ -7580,9 +7578,8 @@ mProperty_mTaskProcList (inOperand3),
 mProperty_mTaskSetupListAST (inOperand4),
 mProperty_mTaskActivateListAST (inOperand5),
 mProperty_mTaskDeactivateListAST (inOperand6),
-mProperty_mGuardedCommandList (inOperand7),
-mProperty_mEndOfTaskDeclaration (inOperand8),
-mProperty_mActivate (inOperand9) {
+mProperty_mEndOfTaskDeclaration (inOperand7),
+mProperty_mActivate (inOperand8) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7595,7 +7592,6 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
                                               GALGAS_taskSetupListAST::constructor_emptyList (HERE),
                                               GALGAS_taskSetupListAST::constructor_emptyList (HERE),
                                               GALGAS_taskSetupListAST::constructor_emptyList (HERE),
-                                              GALGAS_syncInstructionBranchListAST::constructor_emptyList (HERE),
                                               GALGAS_location::constructor_nowhere (HERE),
                                               GALGAS_bool::constructor_default (HERE)) ;
 }
@@ -7609,13 +7605,12 @@ GALGAS_decoratedTaskList_2D_element GALGAS_decoratedTaskList_2D_element::constru
                                                                                           const GALGAS_taskSetupListAST & inOperand4,
                                                                                           const GALGAS_taskSetupListAST & inOperand5,
                                                                                           const GALGAS_taskSetupListAST & inOperand6,
-                                                                                          const GALGAS_syncInstructionBranchListAST & inOperand7,
-                                                                                          const GALGAS_location & inOperand8,
-                                                                                          const GALGAS_bool & inOperand9 
+                                                                                          const GALGAS_location & inOperand7,
+                                                                                          const GALGAS_bool & inOperand8 
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedTaskList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
-    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
+    result = GALGAS_decoratedTaskList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8) ;
   }
   return result ;
 }
@@ -7646,9 +7641,6 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
     result = mProperty_mTaskDeactivateListAST.objectCompare (inOperand.mProperty_mTaskDeactivateListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mGuardedCommandList.objectCompare (inOperand.mProperty_mGuardedCommandList) ;
-  }
-  if (result == kOperandEqual) {
     result = mProperty_mEndOfTaskDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskDeclaration) ;
   }
   if (result == kOperandEqual) {
@@ -7660,7 +7652,7 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedTaskList_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7673,7 +7665,6 @@ void GALGAS_decoratedTaskList_2D_element::drop (void) {
   mProperty_mTaskSetupListAST.drop () ;
   mProperty_mTaskActivateListAST.drop () ;
   mProperty_mTaskDeactivateListAST.drop () ;
-  mProperty_mGuardedCommandList.drop () ;
   mProperty_mEndOfTaskDeclaration.drop () ;
   mProperty_mActivate.drop () ;
 }
@@ -7699,8 +7690,6 @@ void GALGAS_decoratedTaskList_2D_element::description (C_String & ioString,
     mProperty_mTaskActivateListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTaskDeactivateListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mGuardedCommandList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mEndOfTaskDeclaration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -7749,12 +7738,6 @@ GALGAS_taskSetupListAST GALGAS_decoratedTaskList_2D_element::getter_mTaskActivat
 
 GALGAS_taskSetupListAST GALGAS_decoratedTaskList_2D_element::getter_mTaskDeactivateListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mTaskDeactivateListAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_syncInstructionBranchListAST GALGAS_decoratedTaskList_2D_element::getter_mGuardedCommandList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mGuardedCommandList ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9599,6 +9582,7 @@ GALGAS_guardImplementationRoutineIR GALGAS_guardImplementationRoutineIR::extract
 GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineList_2D_element (void) :
 mProperty_mReceiverTypeName (),
 mProperty_mMode (),
+mProperty_mIsRequired (),
 mProperty_mRoutineKind (),
 mProperty_mWarnIfUnused (),
 mProperty_mExportedRoutine (),
@@ -9619,45 +9603,48 @@ GALGAS_decoratedRegularRoutineList_2D_element::~ GALGAS_decoratedRegularRoutineL
 
 GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineList_2D_element (const GALGAS_lstring & inOperand0,
                                                                                               const GALGAS_mode & inOperand1,
-                                                                                              const GALGAS_routineKind & inOperand2,
-                                                                                              const GALGAS_bool & inOperand3,
+                                                                                              const GALGAS_bool & inOperand2,
+                                                                                              const GALGAS_routineKind & inOperand3,
                                                                                               const GALGAS_bool & inOperand4,
-                                                                                              const GALGAS_routineAttributes & inOperand5,
-                                                                                              const GALGAS_lstring & inOperand6,
-                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                                                              const GALGAS_instructionListAST & inOperand8,
-                                                                                              const GALGAS_location & inOperand9,
-                                                                                              const GALGAS_lstring & inOperand10) :
+                                                                                              const GALGAS_bool & inOperand5,
+                                                                                              const GALGAS_routineAttributes & inOperand6,
+                                                                                              const GALGAS_lstring & inOperand7,
+                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand8,
+                                                                                              const GALGAS_instructionListAST & inOperand9,
+                                                                                              const GALGAS_location & inOperand10,
+                                                                                              const GALGAS_lstring & inOperand11) :
 mProperty_mReceiverTypeName (inOperand0),
 mProperty_mMode (inOperand1),
-mProperty_mRoutineKind (inOperand2),
-mProperty_mWarnIfUnused (inOperand3),
-mProperty_mExportedRoutine (inOperand4),
-mProperty_mRoutineAttributes (inOperand5),
-mProperty_mRoutineMangledName (inOperand6),
-mProperty_mRoutineFormalArgumentList (inOperand7),
-mProperty_mRoutineInstructionList (inOperand8),
-mProperty_mEndOfRoutineDeclaration (inOperand9),
-mProperty_mReturnTypeName (inOperand10) {
+mProperty_mIsRequired (inOperand2),
+mProperty_mRoutineKind (inOperand3),
+mProperty_mWarnIfUnused (inOperand4),
+mProperty_mExportedRoutine (inOperand5),
+mProperty_mRoutineAttributes (inOperand6),
+mProperty_mRoutineMangledName (inOperand7),
+mProperty_mRoutineFormalArgumentList (inOperand8),
+mProperty_mRoutineInstructionList (inOperand9),
+mProperty_mEndOfRoutineDeclaration (inOperand10),
+mProperty_mReturnTypeName (inOperand11) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_decoratedRegularRoutineList_2D_element GALGAS_decoratedRegularRoutineList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                               const GALGAS_mode & inOperand1,
-                                                                                                              const GALGAS_routineKind & inOperand2,
-                                                                                                              const GALGAS_bool & inOperand3,
+                                                                                                              const GALGAS_bool & inOperand2,
+                                                                                                              const GALGAS_routineKind & inOperand3,
                                                                                                               const GALGAS_bool & inOperand4,
-                                                                                                              const GALGAS_routineAttributes & inOperand5,
-                                                                                                              const GALGAS_lstring & inOperand6,
-                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                                                                              const GALGAS_instructionListAST & inOperand8,
-                                                                                                              const GALGAS_location & inOperand9,
-                                                                                                              const GALGAS_lstring & inOperand10 
+                                                                                                              const GALGAS_bool & inOperand5,
+                                                                                                              const GALGAS_routineAttributes & inOperand6,
+                                                                                                              const GALGAS_lstring & inOperand7,
+                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand8,
+                                                                                                              const GALGAS_instructionListAST & inOperand9,
+                                                                                                              const GALGAS_location & inOperand10,
+                                                                                                              const GALGAS_lstring & inOperand11 
                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedRegularRoutineList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
-    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
+    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
   }
   return result ;
 }
@@ -9671,6 +9658,9 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
   }
   if (result == kOperandEqual) {
     result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mIsRequired.objectCompare (inOperand.mProperty_mIsRequired) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
@@ -9705,7 +9695,7 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedRegularRoutineList_2D_element::isValid (void) const {
-  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
+  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mIsRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9713,6 +9703,7 @@ bool GALGAS_decoratedRegularRoutineList_2D_element::isValid (void) const {
 void GALGAS_decoratedRegularRoutineList_2D_element::drop (void) {
   mProperty_mReceiverTypeName.drop () ;
   mProperty_mMode.drop () ;
+  mProperty_mIsRequired.drop () ;
   mProperty_mRoutineKind.drop () ;
   mProperty_mWarnIfUnused.drop () ;
   mProperty_mExportedRoutine.drop () ;
@@ -9735,6 +9726,8 @@ void GALGAS_decoratedRegularRoutineList_2D_element::description (C_String & ioSt
     mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mMode.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mIsRequired.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9767,6 +9760,12 @@ GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_mReceiverTy
 
 GALGAS_mode GALGAS_decoratedRegularRoutineList_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
   return mProperty_mMode ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_mIsRequired (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIsRequired ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

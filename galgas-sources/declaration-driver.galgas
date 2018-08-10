@@ -399,6 +399,7 @@ override method @implementedDriverAST enterInContext
   ioDecoratedRoutineList +=
     !typeNameForTypeMapForDriver (!mDriverName)
     !.bootMode
+    !true
     !.function {!executionMode:.bootMode}
     !true # mWarnIfUnused
     !false # mGlobalFunction
@@ -412,6 +413,7 @@ override method @implementedDriverAST enterInContext
   ioDecoratedRoutineList +=
     !typeNameForTypeMapForDriver (!mDriverName)
     !.startupMode
+    !true
     !.function {!executionMode:.startupMode}
     !true # mWarnIfUnused
     !false # mGlobalFunction
@@ -457,8 +459,8 @@ override method @decoratedRequiredDriver semanticAnalysis
 #--- Build initialized driver set
   ioTemporaries.mInitializedDriverSet += !mDriverName.string
 #--- Add boot and startup routine in required routine set
-  ioIntermediateCodeStruct.mRequiredProcedureSet += !llvmBootRoutineNameFromDriver (!mDriverName).string
-  ioIntermediateCodeStruct.mRequiredProcedureSet += !llvmStartupRoutineNameFromDriver (!mDriverName).string
+#  ioIntermediateCodeStruct.mRequiredProcedureSet += !llvmBootRoutineNameFromDriver (!mDriverName).string
+#  ioIntermediateCodeStruct.mRequiredProcedureSet += !llvmStartupRoutineNameFromDriver (!mDriverName).string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

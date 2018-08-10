@@ -298,6 +298,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
     ioDecoratedRoutineList +=
       !["" nowhere] # mStructureTypeName
       !mode
+      !false
       !.function {!executionMode: mode}
       !noUnusedWarning
       !true # mExportedRoutine

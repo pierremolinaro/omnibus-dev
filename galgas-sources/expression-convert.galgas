@@ -153,9 +153,10 @@ class @convertInstructionIR : @abstractInstructionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertInstructionIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -163,12 +164,12 @@ override method @convertInstructionIR enterAccessibleEntities
 override method @convertInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
+  ?!@generationAdds unused ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
+#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
+#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
   let lbl = [[mLocation locationIndex] string]
   let convertMinOkLabel = "min." + lbl + ".ok"
   let convertMaxOkLabel = "max." + lbl + ".ok"
@@ -190,7 +191,7 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
-  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mLocation) assemblerRepresentation] + " ("
   ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mLocation line] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"

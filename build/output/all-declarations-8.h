@@ -126,7 +126,8 @@ class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
                                                                          const class GALGAS_bool & inOperand1,
                                                                          const class GALGAS_bool & inOperand2,
                                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                                         const class GALGAS_string & inOperand5
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -141,6 +142,8 @@ class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -163,13 +166,15 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mArrayTypeProxy ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mElementTypeProxy ;
+  public : GALGAS_string mProperty_mInsertFunctionMangledName ;
 
 //--- Constructor
   public : cPtr_dynArrayAppendFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
                                           const GALGAS_bool & in_mIsRequired,
                                           const GALGAS_bool & in_mWarnIfUnused,
                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mArrayTypeProxy,
-                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy
+                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy,
+                                          const GALGAS_string & in_mInsertFunctionMangledName
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -178,6 +183,7 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -350,15 +356,26 @@ void extensionMethod_taskSemanticAnalysis (const class GALGAS_decoratedTaskList_
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeOrderedTaskRoutines (const class GALGAS_PLMType constinArgument0,
-                                         const class GALGAS_taskSetupListAST constinArgument1,
-                                         const class GALGAS_semanticContext constinArgument2,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument3,
-                                         class GALGAS_intermediateCodeStruct & ioArgument4,
-                                         class GALGAS_instructionListIR & outArgument5,
-                                         class GALGAS_allocaList & outArgument6,
+void routine_analyzeOrderedTaskRoutines (const class GALGAS_taskSetupListAST constinArgument0,
+                                         class GALGAS_stringlist & outArgument1,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Routine 'analyzeOrderedTaskRoutinesEX'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeOrderedTaskRoutinesEX (const class GALGAS_PLMType constinArgument0,
+                                           const class GALGAS_taskSetupListAST constinArgument1,
+                                           const class GALGAS_semanticContext constinArgument2,
+                                           class GALGAS_semanticTemporariesStruct & ioArgument3,
+                                           class GALGAS_intermediateCodeStruct & ioArgument4,
+                                           class GALGAS_instructionListIR & outArgument5,
+                                           class GALGAS_allocaList & outArgument6,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -685,17 +702,4 @@ class GALGAS_lstring function_guardUserMangledNameFromAST (const class GALGAS_st
 
 class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Routine 'generateLLVMcodeForStructure'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_generateLLVMcodeForStructure (class GALGAS_string & ioArgument0,
-                                           class GALGAS_generationAdds & ioArgument1,
-                                           const class GALGAS_PLMType constinArgument2,
-                                           const class GALGAS_uint constinArgument3,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 

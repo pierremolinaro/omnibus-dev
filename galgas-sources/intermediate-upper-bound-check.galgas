@@ -23,19 +23,19 @@ class @upperBoundCheckIR : @abstractInstructionIR {
 override method @upperBoundCheckIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
+  ?!@generationAdds unused ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
-    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
+#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString 
+#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
   let llvmType = [[mSource type] llvmTypeName]
   let llvmSourceName = [mSource llvmName]
   let llvmLabelName = [mSource name]
   ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
   ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
   ioLLVMcode += llvmLabelName + ".ovf:\n"
-  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mLocation) assemblerRepresentation] + " ("
   ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mLocation line] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + mPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
@@ -45,9 +45,10 @@ override method @upperBoundCheckIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @upperBoundCheckIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

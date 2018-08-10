@@ -288,6 +288,23 @@ method @taskListAST enterInContext
       !activateTaskCallName
       !taskIndex
     }
+  #------------------------------------------- Analyze task setup routines
+    for setup in task.mTaskSetupListAST do
+      let setupMangledName = "task.setup." + task.mTaskName + "." + setup.mName
+      ioDecoratedRoutineList +=
+        !task.mTaskName
+        !.userMode
+        !true
+        !.function {!executionMode:.userMode}
+        !true # @bool mWarnIfUnused
+        !false # @bool mExportedRoutine
+        !.mutating | .directPropertyAccess | .panicAllowed
+        !.new {!setupMangledName !setup.mName.location}
+        !@routineFormalArgumentListAST {}
+        !setup.mTaskSetupInstructionList
+        !setup.mEndOfTaskSetupDeclaration
+        !["" nowhere] # Empty string if no returned value
+    end
   #------------------------------------------- Analyze task guarded command
   #  Build a "task.loop" function that contains a sync instruction
     @instructionListAST taskListInstructionList = {}
@@ -297,8 +314,9 @@ method @taskListAST enterInContext
     end
     let routineMangledName = routineMangledNameFromAST (!task.mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! {})
     ioDecoratedRoutineList +=
-      !task.mTaskName # @lstring mReceiverTypeName # Empty string if standalone function
+      !task.mTaskName
       !.userMode
+      !true
       !.function {!executionMode:.userMode}
       !true # @bool mWarnIfUnused
       !false # @bool mExportedRoutine
@@ -348,7 +366,6 @@ method @taskListAST enterInContext
       !task.mTaskSetupListAST
       !task.mTaskActivateListAST
       !task.mTaskDeactivateListAST
-      !task.mGuardedCommandList
       !task.mEndOfTaskDeclaration
       !task.mActivate
   end
@@ -368,7 +385,6 @@ list @decoratedTaskList {
   @taskSetupListAST mTaskSetupListAST
   @taskSetupListAST mTaskActivateListAST
   @taskSetupListAST mTaskDeactivateListAST
-  @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
   @bool mActivate
 }
@@ -399,6 +415,61 @@ override method @decoratedTaskListDeclaration semanticAnalysis
 #·······················································································································
 
 private proc analyzeOrderedTaskRoutines
+  ?let @taskSetupListAST inTaskRoutineLISTAST
+  !@stringlist outSetupOrderedList
+{
+  outSetupOrderedList = {}
+  if [inTaskRoutineLISTAST length] > 0 then
+  #--- Check there is exactly one entry without any precedence
+    @uint numberOfEntriesWithoutAnyPrecedence = 0
+    for (* precedenceList 2*) in inTaskRoutineLISTAST do
+      if [precedenceList length] == 0 then
+        numberOfEntriesWithoutAnyPrecedence += numberOfEntriesWithoutAnyPrecedence + 1
+      end
+    end
+    if numberOfEntriesWithoutAnyPrecedence == 0 then
+      for (name 3*) in inTaskRoutineLISTAST do
+        error name : "Exactly one routine should have no precedence"
+      end
+    elsif numberOfEntriesWithoutAnyPrecedence > 1 then
+      for (name precedenceList 2*) in inTaskRoutineLISTAST do
+        if [precedenceList length] == 0 then
+          error name : "Exactly one routine should have no precedence"
+        end
+      end    
+    end
+  #--- Signal unsorted entries as error
+    @taskSetupListAST taskSetupListAST = inTaskRoutineLISTAST
+    @stringset precedenceSet = {}
+    var continue = true
+    loop ([inTaskRoutineLISTAST length]) while continue && ([taskSetupListAST length] > 0) do
+      continue = false
+      var idx = 0
+      for (name precedenceList instructionList endOfDeclaration) in taskSetupListAST do
+        var allPrecedenceDefined = true
+        for (precedenceName) in precedenceList while allPrecedenceDefined do
+          allPrecedenceDefined = [precedenceSet hasKey !precedenceName.string]
+        end
+        if allPrecedenceDefined then
+          outSetupOrderedList += !name.string
+          precedenceSet += !name.string
+          continue = true
+          [!?taskSetupListAST removeAtIndex ?4* !idx]
+        else
+          idx = idx + 1
+        end
+      end
+    end
+  #--- Signal unsorted entries as error
+    for (name 3*) in taskSetupListAST do
+      error name : "this routine is out of execution order"
+    end
+  end
+}
+
+#·······················································································································
+
+private proc analyzeOrderedTaskRoutinesEX
   ?let @PLMType inTaskType
   ?let @taskSetupListAST inTaskRoutineLISTAST
   ?context:let @semanticContext inContext
@@ -454,7 +525,7 @@ private proc analyzeOrderedTaskRoutines
     for (name 3*) in taskSetupListAST do
       error name : "this routine is out of execution order"
     end
-  end
+  end  
   outInstructionListIR = {}
   outAllocaList= {}
   for (taskInitInstructionList endOfTaskInitDeclaration taskInitPriority) in taskSetupSortedListAST do
@@ -491,16 +562,11 @@ method @decoratedTaskList-element taskSemanticAnalysis
   end
 #------------------------------------------- Analyze task setup routines
   analyzeOrderedTaskRoutines (
-    !taskType
     !mTaskSetupListAST
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode: ioIntermediateCodeStruct
-    ?let setupInstructionListIR
-    ?let setupAllocaList
+    ?let setupOrderedList
   )
 #------------------------------------------- Analyze task activate routines
-  analyzeOrderedTaskRoutines (
+  analyzeOrderedTaskRoutinesEX (
     !taskType
     !mTaskActivateListAST
     !context:inContext
@@ -510,7 +576,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
     ?let activateAllocaList
   )
 #------------------------------------------- Analyze task deactivate routines
-  analyzeOrderedTaskRoutines (
+  analyzeOrderedTaskRoutinesEX (
     !taskType
     !mTaskDeactivateListAST
     !context:inContext
@@ -519,8 +585,6 @@ method @decoratedTaskList-element taskSemanticAnalysis
     ?let deactivateInstructionListIR
     ?let deactivateAllocaList
   )
-#------------------------------------------- Analyze task guarded command
-  ioIntermediateCodeStruct.mRequiredProcedureSet += !routineMangledNameFromAST (!mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! {})
 #------------------------------------------- Task Name string constant index
   [!?ioIntermediateCodeStruct.mStaticEntityMap findOrAddStaticString !mTaskName.string ?let taskNameStringIndex]
 #------------------------------------------- Generate task
@@ -529,8 +593,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
     !taskType
     !inPriority
     !mStackSize.bigint
-    !setupAllocaList
-    !setupInstructionListIR
+    !setupOrderedList
     !activateAllocaList
     !activateInstructionListIR
     !deactivateAllocaList
@@ -586,14 +649,14 @@ map @taskMapIR {
   @PLMType mTaskType
   @uint mPriority
   @bigint mStackSize
-  @allocaList mSetupAllocaList
-  @instructionListIR mSetupInstructionListIR
+  @stringlist mSetupOrderedList
   @allocaList mActivateAllocaList
   @instructionListIR mActivateInstructionListIR
   @allocaList mDeactivateAllocaList
   @instructionListIR mDeactivateInstructionListIR
   @uint mTaskNameStringIndex
   @bool mActivate
+
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
@@ -605,8 +668,7 @@ sortedlist @taskSortedListIR {
   @string mTaskName
   @uint mPriority
   @bigint mStackSize
-  @allocaList mSetupAllocaList
-  @instructionListIR mSetupInstructionListIR
+  @stringlist mSetupOrderedList
   @allocaList mActivateAllocaList
   @instructionListIR mActivateInstructionListIR
   @allocaList mDeactivateAllocaList
@@ -661,8 +723,7 @@ method @taskMapIR generateCode
       !task.lkey.string
       !task.mPriority
       !task.mStackSize
-      !task.mSetupAllocaList
-      !task.mSetupInstructionListIR
+      !task.mSetupOrderedList
       !task.mActivateAllocaList
       !task.mActivateInstructionListIR
       !task.mDeactivateAllocaList
@@ -680,18 +741,20 @@ method @taskMapIR generateCode
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
-    let formalArgument = "(%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
+    let formalArgument = " (%" + assemblerTaskName + "* " + llvmNameForSelf () + ")"
     ioLLVMcode += llvmSeparatorLine () + "\n"
   #---------- Setup
-    ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
-    [task.mSetupAllocaList generateAllocaList !?ioLLVMcode]
-    [task.mSetupInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + formalArgument + llvmAttributeFunction () + "{\n"
+    for (setupName) in task.mSetupOrderedList do
+      let setupMangledName = "task.setup." + task.mTaskName + "." + setupName
+      ioLLVMcode += "  call void @" + [setupMangledName assemblerRepresentation] + formalArgument + "\n"
+    end
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
   #---------- Activate
-    ioLLVMcode += "define internal void @" + [activateNameForTaskType (!task.mTaskName) assemblerRepresentation] + " "
+    ioLLVMcode += "define internal void @" + [activateNameForTaskType (!task.mTaskName) assemblerRepresentation]
     ioLLVMcode += formalArgument + llvmAttributeFunction () + "{\n"
     [task.mActivateAllocaList generateAllocaList !?ioLLVMcode]
     [task.mActivateInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
@@ -700,7 +763,7 @@ method @taskMapIR generateCode
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
   #---------- Deactivate
-    ioLLVMcode += "define internal void " + deactivateNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    ioLLVMcode += "define internal void " + deactivateNameForTaskType (!task.mTaskName) + formalArgument + llvmAttributeFunction () + "{\n"
     [task.mDeactivateAllocaList generateAllocaList !?ioLLVMcode]
     [task.mDeactivateInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"

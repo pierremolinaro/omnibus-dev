@@ -902,7 +902,7 @@ void extensionMethod_enterInContext (const GALGAS_isrDeclarationListAST inObject
   while (enumerator_2353.hasCurrentObject ()) {
     GALGAS_lstring var_driverLLVMBaseTypeName_2387 = function_llvmDriverNameFromName (enumerator_2353.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 60)) ;
     GALGAS_lstring var_isrRoutineMangledName_2461 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_2387.getter_string (SOURCE_FILE ("declaration-isr.galgas", 61)), enumerator_2353.current (HERE).getter_mISRName (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 61)) ;
-    ioArgument_ioDecoratedRoutineList.addAssign_operation (function_typeNameForTypeMapForDriver (enumerator_2353.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 63)), enumerator_2353.current (HERE).getter_mMode (HERE), GALGAS_routineKind::constructor_function (enumerator_2353.current (HERE).getter_mMode (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 65)), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineAttributes::constructor_mutating (SOURCE_FILE ("declaration-isr.galgas", 68)).operator_or (GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("declaration-isr.galgas", 68)) COMMA_SOURCE_FILE ("declaration-isr.galgas", 68)).operator_or (GALGAS_routineAttributes::constructor_controlRegisterReadable (SOURCE_FILE ("declaration-isr.galgas", 68)) COMMA_SOURCE_FILE ("declaration-isr.galgas", 68)).operator_or (GALGAS_routineAttributes::constructor_panicAllowed (SOURCE_FILE ("declaration-isr.galgas", 68)) COMMA_SOURCE_FILE ("declaration-isr.galgas", 68)), var_isrRoutineMangledName_2461, GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 70)), enumerator_2353.current (HERE).getter_mISRInstructionList (HERE), enumerator_2353.current (HERE).getter_mEndOfISRDeclaration (HERE), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-isr.galgas", 73))  COMMA_SOURCE_FILE ("declaration-isr.galgas", 62)) ;
+    ioArgument_ioDecoratedRoutineList.addAssign_operation (function_typeNameForTypeMapForDriver (enumerator_2353.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 63)), enumerator_2353.current (HERE).getter_mMode (HERE), GALGAS_bool (true), GALGAS_routineKind::constructor_function (enumerator_2353.current (HERE).getter_mMode (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 66)), GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineAttributes::constructor_mutating (SOURCE_FILE ("declaration-isr.galgas", 69)).operator_or (GALGAS_routineAttributes::constructor_directPropertyAccess (SOURCE_FILE ("declaration-isr.galgas", 69)) COMMA_SOURCE_FILE ("declaration-isr.galgas", 69)).operator_or (GALGAS_routineAttributes::constructor_controlRegisterReadable (SOURCE_FILE ("declaration-isr.galgas", 69)) COMMA_SOURCE_FILE ("declaration-isr.galgas", 69)).operator_or (GALGAS_routineAttributes::constructor_panicAllowed (SOURCE_FILE ("declaration-isr.galgas", 69)) COMMA_SOURCE_FILE ("declaration-isr.galgas", 69)), var_isrRoutineMangledName_2461, GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 71)), enumerator_2353.current (HERE).getter_mISRInstructionList (HERE), enumerator_2353.current (HERE).getter_mEndOfISRDeclaration (HERE), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-isr.galgas", 74))  COMMA_SOURCE_FILE ("declaration-isr.galgas", 62)) ;
     enumerator_2353.gotoNextObject () ;
   }
 }
@@ -1412,75 +1412,75 @@ void extensionMethod_interruptCodeGeneration (const GALGAS_interruptMapIR inObje
                                               GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_stringset var_definedInterrupts_5509 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-isr.galgas", 133)) ;
+  GALGAS_stringset var_definedInterrupts_5524 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-isr.galgas", 134)) ;
   const GALGAS_interruptMapIR temp_0 = inObject ;
-  cEnumerator_interruptMapIR enumerator_5538 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5538.hasCurrentObject ()) {
-    var_definedInterrupts_5509.addAssign_operation (enumerator_5538.current (HERE).getter_lkey (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 135)) ;
+  cEnumerator_interruptMapIR enumerator_5553 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5553.hasCurrentObject ()) {
+    var_definedInterrupts_5524.addAssign_operation (enumerator_5553.current (HERE).getter_lkey (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-isr.galgas", 136)) ;
     GALGAS_string temp_1 ;
-    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_5538.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 136)))).boolEnum () ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_5553.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 137)))).boolEnum () ;
     if (kBoolTrue == test_2) {
-      temp_1 = function_llvmNameForServiceInterrupt (enumerator_5538.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 137)).getter_string (HERE) ;
+      temp_1 = function_llvmNameForServiceInterrupt (enumerator_5553.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 138)).getter_string (HERE) ;
     }else if (kBoolFalse == test_2) {
-      temp_1 = function_llvmNameForSectionInterrupt (enumerator_5538.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 139)) ;
+      temp_1 = function_llvmNameForSectionInterrupt (enumerator_5553.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 140)) ;
     }
-    GALGAS_string var_interruptImplementationName_5625 = temp_1 ;
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_interruptImplementationName_5625, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 141)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 141)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_interruptImplementationName_5625, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)).add_operation (GALGAS_string (" {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)) ;
-    GALGAS_string var_varName_6011 = function_llvmNameForGlobalVariable (enumerator_5538.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 144)) ;
-    GALGAS_string var_llvmTypeName_6085 = extensionGetter_llvmTypeName (enumerator_5538.current (HERE).getter_mSelfType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 145)) ;
-    GALGAS_string var_driverLLVMBaseTypeName_6178 = enumerator_5538.current (HERE).getter_mSelfType (HERE).getter_llvmBaseTypeName (HERE) ;
-    GALGAS_lstring var_isrRoutineMangledName_6247 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_6178, enumerator_5538.current (HERE).getter_lkey (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 148)) ;
-    GALGAS_string var_isrRoutineLLVMName_6348 = function_llvmNameForFunction (var_isrRoutineMangledName_6247.getter_string (SOURCE_FILE ("declaration-isr.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 149)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (var_isrRoutineLLVMName_6348, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (var_llvmTypeName_6085, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (var_varName_6011, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)).add_operation (GALGAS_string ("); \xC2""\xA7""\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 152)) ;
+    GALGAS_string var_interruptImplementationName_5640 = temp_1 ;
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_interruptImplementationName_5640, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 142)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_interruptImplementationName_5640, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)).add_operation (GALGAS_string (" {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)) ;
+    GALGAS_string var_varName_6026 = function_llvmNameForGlobalVariable (enumerator_5553.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 145)) ;
+    GALGAS_string var_llvmTypeName_6100 = extensionGetter_llvmTypeName (enumerator_5553.current (HERE).getter_mSelfType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 146)) ;
+    GALGAS_string var_driverLLVMBaseTypeName_6193 = enumerator_5553.current (HERE).getter_mSelfType (HERE).getter_llvmBaseTypeName (HERE) ;
+    GALGAS_lstring var_isrRoutineMangledName_6262 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_6193, enumerator_5553.current (HERE).getter_lkey (HERE), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 149)) ;
+    GALGAS_string var_isrRoutineLLVMName_6363 = function_llvmNameForFunction (var_isrRoutineMangledName_6262.getter_string (SOURCE_FILE ("declaration-isr.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 150)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (var_isrRoutineLLVMName_6363, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)).add_operation (var_llvmTypeName_6100, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)).add_operation (var_varName_6026, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)).add_operation (GALGAS_string ("); \xC2""\xA7""\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 151)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 153)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-      "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 153)) ;
-    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5538.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 155)))).boolEnum () ;
+      "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 154)) ;
+    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5553.current (HERE).getter_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 156)))).boolEnum () ;
     if (kBoolTrue == test_3) {
-      GALGAS_string var_interruptHandlerName_6690 = function_llvmNameForServiceInterrupt (enumerator_5538.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 156)).getter_string (HERE) ;
-      GALGAS_string var_isrName_6762 = function_llvmNameForSectionInterrupt (enumerator_5538.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 157)) ;
-      GALGAS_string var_s_31__6829 = constinArgument_inXTRInterruptHandlerString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), var_isrName_6762, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 158)) ;
-      GALGAS_string var_s_32__6923 = var_s_31__6829.getter_stringByReplacingStringByString (GALGAS_string ("!HANDLER!"), var_interruptHandlerName_6690, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 159)) ;
-      ioArgument_ioAScode.plusAssign_operation(var_s_32__6923, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 160)) ;
+      GALGAS_string var_interruptHandlerName_6705 = function_llvmNameForServiceInterrupt (enumerator_5553.current (HERE).getter_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 157)).getter_string (HERE) ;
+      GALGAS_string var_isrName_6777 = function_llvmNameForSectionInterrupt (enumerator_5553.current (HERE).getter_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 158)) ;
+      GALGAS_string var_s_31__6844 = constinArgument_inXTRInterruptHandlerString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), var_isrName_6777, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 159)) ;
+      GALGAS_string var_s_32__6938 = var_s_31__6844.getter_stringByReplacingStringByString (GALGAS_string ("!HANDLER!"), var_interruptHandlerName_6705, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 160)) ;
+      ioArgument_ioAScode.plusAssign_operation(var_s_32__6938, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 161)) ;
     }
-    enumerator_5538.gotoNextObject () ;
+    enumerator_5553.gotoNextObject () ;
   }
-  cEnumerator_availableInterruptMap enumerator_7152 (constinArgument_inGenerationContext.getter_mAvailableInterruptMap (HERE), kENUMERATION_UP) ;
-  while (enumerator_7152.hasCurrentObject ()) {
-    const enumGalgasBool test_4 = var_definedInterrupts_5509.getter_hasKey (enumerator_7152.current_lkey (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-isr.galgas", 165)).operator_not (SOURCE_FILE ("declaration-isr.galgas", 165)).boolEnum () ;
+  cEnumerator_availableInterruptMap enumerator_7167 (constinArgument_inGenerationContext.getter_mAvailableInterruptMap (HERE), kENUMERATION_UP) ;
+  while (enumerator_7167.hasCurrentObject ()) {
+    const enumGalgasBool test_4 = var_definedInterrupts_5524.getter_hasKey (enumerator_7167.current_lkey (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-isr.galgas", 166)).operator_not (SOURCE_FILE ("declaration-isr.galgas", 166)).boolEnum () ;
     if (kBoolTrue == test_4) {
-      switch (enumerator_7152.current_mInterruptionPanicCode (HERE).enumValue ()) {
+      switch (enumerator_7167.current_mInterruptionPanicCode (HERE).enumValue ()) {
       case GALGAS_interruptionPanicCode::kNotBuilt:
         break ;
       case GALGAS_interruptionPanicCode::kEnum_noCode:
         {
-          GALGAS_string var_s_7268 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7152.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 168)) ;
-          ioArgument_ioAScode.plusAssign_operation(var_s_7268, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 169)) ;
+          GALGAS_string var_s_7283 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7167.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 169)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 169)) ;
+          ioArgument_ioAScode.plusAssign_operation(var_s_7283, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 170)) ;
         }
         break ;
       case GALGAS_interruptionPanicCode::kEnum_code:
         {
-          const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_8136 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_7152.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
-          const GALGAS_lbigint extractedValue_value = extractPtr_8136->mAssociatedValue0 ;
+          const cEnumAssociatedValues_interruptionPanicCode_code * extractPtr_8151 = (const cEnumAssociatedValues_interruptionPanicCode_code *) (enumerator_7167.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
+          const GALGAS_lbigint extractedValue_value = extractPtr_8151->mAssociatedValue0 ;
           const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
           if (kBoolTrue == test_5) {
-            GALGAS_string var_s_7518 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7152.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 172)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 172)) ;
-            ioArgument_ioAScode.plusAssign_operation(var_s_7518, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 173)) ;
+            GALGAS_string var_s_7533 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7167.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 173)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 173)) ;
+            ioArgument_ioAScode.plusAssign_operation(var_s_7533, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 174)) ;
           }else if (kBoolFalse == test_5) {
-            GALGAS_string var_name_7690 = function_llvmNameForSectionInterrupt (enumerator_7152.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 175)) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Panic code for ").add_operation (var_name_7690, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_name_7690, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)).add_operation (GALGAS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @panic.isr (").add_operation (extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicCodeLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (GALGAS_string (") noreturn \n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)) ;
+            GALGAS_string var_name_7705 = function_llvmNameForSectionInterrupt (enumerator_7167.current_lkey (HERE).getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Panic code for ").add_operation (var_name_7705, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 177)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_name_7705, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)).add_operation (GALGAS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @panic.isr (").add_operation (extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicCodeLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)).add_operation (extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-isr.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)).add_operation (GALGAS_string (") noreturn \n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)) ;
             ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-              "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)) ;
+              "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 181)) ;
           }
         }
         break ;
       }
     }
-    enumerator_7152.gotoNextObject () ;
+    enumerator_7167.gotoNextObject () ;
   }
 }
 
@@ -2123,6 +2123,7 @@ class cCollectionElement_decoratedRegularRoutineList : public cCollectionElement
 //--- Constructors
   public : cCollectionElement_decoratedRegularRoutineList (const GALGAS_lstring & in_mReceiverTypeName,
                                                            const GALGAS_mode & in_mMode,
+                                                           const GALGAS_bool & in_mIsRequired,
                                                            const GALGAS_routineKind & in_mRoutineKind,
                                                            const GALGAS_bool & in_mWarnIfUnused,
                                                            const GALGAS_bool & in_mExportedRoutine,
@@ -2152,6 +2153,7 @@ class cCollectionElement_decoratedRegularRoutineList : public cCollectionElement
 
 cCollectionElement_decoratedRegularRoutineList::cCollectionElement_decoratedRegularRoutineList (const GALGAS_lstring & in_mReceiverTypeName,
                                                                                                 const GALGAS_mode & in_mMode,
+                                                                                                const GALGAS_bool & in_mIsRequired,
                                                                                                 const GALGAS_routineKind & in_mRoutineKind,
                                                                                                 const GALGAS_bool & in_mWarnIfUnused,
                                                                                                 const GALGAS_bool & in_mExportedRoutine,
@@ -2163,14 +2165,14 @@ cCollectionElement_decoratedRegularRoutineList::cCollectionElement_decoratedRegu
                                                                                                 const GALGAS_lstring & in_mReturnTypeName
                                                                                                 COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mReceiverTypeName, in_mMode, in_mRoutineKind, in_mWarnIfUnused, in_mExportedRoutine, in_mRoutineAttributes, in_mRoutineMangledName, in_mRoutineFormalArgumentList, in_mRoutineInstructionList, in_mEndOfRoutineDeclaration, in_mReturnTypeName) {
+mObject (in_mReceiverTypeName, in_mMode, in_mIsRequired, in_mRoutineKind, in_mWarnIfUnused, in_mExportedRoutine, in_mRoutineAttributes, in_mRoutineMangledName, in_mRoutineFormalArgumentList, in_mRoutineInstructionList, in_mEndOfRoutineDeclaration, in_mReturnTypeName) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_decoratedRegularRoutineList::cCollectionElement_decoratedRegularRoutineList (const GALGAS_decoratedRegularRoutineList_2D_element & inElement COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (inElement.mProperty_mReceiverTypeName, inElement.mProperty_mMode, inElement.mProperty_mRoutineKind, inElement.mProperty_mWarnIfUnused, inElement.mProperty_mExportedRoutine, inElement.mProperty_mRoutineAttributes, inElement.mProperty_mRoutineMangledName, inElement.mProperty_mRoutineFormalArgumentList, inElement.mProperty_mRoutineInstructionList, inElement.mProperty_mEndOfRoutineDeclaration, inElement.mProperty_mReturnTypeName) {
+mObject (inElement.mProperty_mReceiverTypeName, inElement.mProperty_mMode, inElement.mProperty_mIsRequired, inElement.mProperty_mRoutineKind, inElement.mProperty_mWarnIfUnused, inElement.mProperty_mExportedRoutine, inElement.mProperty_mRoutineAttributes, inElement.mProperty_mRoutineMangledName, inElement.mProperty_mRoutineFormalArgumentList, inElement.mProperty_mRoutineInstructionList, inElement.mProperty_mEndOfRoutineDeclaration, inElement.mProperty_mReturnTypeName) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2183,7 +2185,7 @@ bool cCollectionElement_decoratedRegularRoutineList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_decoratedRegularRoutineList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_decoratedRegularRoutineList (mObject.mProperty_mReceiverTypeName, mObject.mProperty_mMode, mObject.mProperty_mRoutineKind, mObject.mProperty_mWarnIfUnused, mObject.mProperty_mExportedRoutine, mObject.mProperty_mRoutineAttributes, mObject.mProperty_mRoutineMangledName, mObject.mProperty_mRoutineFormalArgumentList, mObject.mProperty_mRoutineInstructionList, mObject.mProperty_mEndOfRoutineDeclaration, mObject.mProperty_mReturnTypeName COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_decoratedRegularRoutineList (mObject.mProperty_mReceiverTypeName, mObject.mProperty_mMode, mObject.mProperty_mIsRequired, mObject.mProperty_mRoutineKind, mObject.mProperty_mWarnIfUnused, mObject.mProperty_mExportedRoutine, mObject.mProperty_mRoutineAttributes, mObject.mProperty_mRoutineMangledName, mObject.mProperty_mRoutineFormalArgumentList, mObject.mProperty_mRoutineInstructionList, mObject.mProperty_mEndOfRoutineDeclaration, mObject.mProperty_mReturnTypeName COMMA_HERE)) ;
   return result ;
 }
 
@@ -2198,6 +2200,10 @@ void cCollectionElement_decoratedRegularRoutineList::description (C_String & ioS
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mMode" ":" ;
   mObject.mProperty_mMode.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsRequired" ":" ;
+  mObject.mProperty_mIsRequired.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRoutineKind" ":" ;
@@ -2266,21 +2272,22 @@ GALGAS_decoratedRegularRoutineList GALGAS_decoratedRegularRoutineList::construct
 
 GALGAS_decoratedRegularRoutineList GALGAS_decoratedRegularRoutineList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                                   const GALGAS_mode & inOperand1,
-                                                                                                  const GALGAS_routineKind & inOperand2,
-                                                                                                  const GALGAS_bool & inOperand3,
+                                                                                                  const GALGAS_bool & inOperand2,
+                                                                                                  const GALGAS_routineKind & inOperand3,
                                                                                                   const GALGAS_bool & inOperand4,
-                                                                                                  const GALGAS_routineAttributes & inOperand5,
-                                                                                                  const GALGAS_lstring & inOperand6,
-                                                                                                  const GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                                                                  const GALGAS_instructionListAST & inOperand8,
-                                                                                                  const GALGAS_location & inOperand9,
-                                                                                                  const GALGAS_lstring & inOperand10
+                                                                                                  const GALGAS_bool & inOperand5,
+                                                                                                  const GALGAS_routineAttributes & inOperand6,
+                                                                                                  const GALGAS_lstring & inOperand7,
+                                                                                                  const GALGAS_routineFormalArgumentListAST & inOperand8,
+                                                                                                  const GALGAS_instructionListAST & inOperand9,
+                                                                                                  const GALGAS_location & inOperand10,
+                                                                                                  const GALGAS_lstring & inOperand11
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_decoratedRegularRoutineList result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
     result = GALGAS_decoratedRegularRoutineList (capCollectionElementArray ()) ;
     capCollectionElement attributes ;
-    GALGAS_decoratedRegularRoutineList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10 COMMA_THERE) ;
+    GALGAS_decoratedRegularRoutineList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11 COMMA_THERE) ;
     result.appendObject (attributes) ;
   }
   return result ;
@@ -2291,6 +2298,7 @@ GALGAS_decoratedRegularRoutineList GALGAS_decoratedRegularRoutineList::construct
 void GALGAS_decoratedRegularRoutineList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                     const GALGAS_lstring & in_mReceiverTypeName,
                                                                     const GALGAS_mode & in_mMode,
+                                                                    const GALGAS_bool & in_mIsRequired,
                                                                     const GALGAS_routineKind & in_mRoutineKind,
                                                                     const GALGAS_bool & in_mWarnIfUnused,
                                                                     const GALGAS_bool & in_mExportedRoutine,
@@ -2304,6 +2312,7 @@ void GALGAS_decoratedRegularRoutineList::makeAttributesFromObjects (capCollectio
   cCollectionElement_decoratedRegularRoutineList * p = NULL ;
   macroMyNew (p, cCollectionElement_decoratedRegularRoutineList (in_mReceiverTypeName,
                                                                  in_mMode,
+                                                                 in_mIsRequired,
                                                                  in_mRoutineKind,
                                                                  in_mWarnIfUnused,
                                                                  in_mExportedRoutine,
@@ -2321,19 +2330,20 @@ void GALGAS_decoratedRegularRoutineList::makeAttributesFromObjects (capCollectio
 
 void GALGAS_decoratedRegularRoutineList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                               const GALGAS_mode & inOperand1,
-                                                              const GALGAS_routineKind & inOperand2,
-                                                              const GALGAS_bool & inOperand3,
+                                                              const GALGAS_bool & inOperand2,
+                                                              const GALGAS_routineKind & inOperand3,
                                                               const GALGAS_bool & inOperand4,
-                                                              const GALGAS_routineAttributes & inOperand5,
-                                                              const GALGAS_lstring & inOperand6,
-                                                              const GALGAS_routineFormalArgumentListAST & inOperand7,
-                                                              const GALGAS_instructionListAST & inOperand8,
-                                                              const GALGAS_location & inOperand9,
-                                                              const GALGAS_lstring & inOperand10
+                                                              const GALGAS_bool & inOperand5,
+                                                              const GALGAS_routineAttributes & inOperand6,
+                                                              const GALGAS_lstring & inOperand7,
+                                                              const GALGAS_routineFormalArgumentListAST & inOperand8,
+                                                              const GALGAS_instructionListAST & inOperand9,
+                                                              const GALGAS_location & inOperand10,
+                                                              const GALGAS_lstring & inOperand11
                                                               COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_decoratedRegularRoutineList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_decoratedRegularRoutineList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -2360,21 +2370,22 @@ void GALGAS_decoratedRegularRoutineList::setter_append (GALGAS_decoratedRegularR
 
 void GALGAS_decoratedRegularRoutineList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                                const GALGAS_mode inOperand1,
-                                                               const GALGAS_routineKind inOperand2,
-                                                               const GALGAS_bool inOperand3,
+                                                               const GALGAS_bool inOperand2,
+                                                               const GALGAS_routineKind inOperand3,
                                                                const GALGAS_bool inOperand4,
-                                                               const GALGAS_routineAttributes inOperand5,
-                                                               const GALGAS_lstring inOperand6,
-                                                               const GALGAS_routineFormalArgumentListAST inOperand7,
-                                                               const GALGAS_instructionListAST inOperand8,
-                                                               const GALGAS_location inOperand9,
-                                                               const GALGAS_lstring inOperand10,
+                                                               const GALGAS_bool inOperand5,
+                                                               const GALGAS_routineAttributes inOperand6,
+                                                               const GALGAS_lstring inOperand7,
+                                                               const GALGAS_routineFormalArgumentListAST inOperand8,
+                                                               const GALGAS_instructionListAST inOperand9,
+                                                               const GALGAS_location inOperand10,
+                                                               const GALGAS_lstring inOperand11,
                                                                const GALGAS_uint inInsertionIndex,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_decoratedRegularRoutineList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_decoratedRegularRoutineList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -2386,15 +2397,16 @@ void GALGAS_decoratedRegularRoutineList::setter_insertAtIndex (const GALGAS_lstr
 
 void GALGAS_decoratedRegularRoutineList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                                GALGAS_mode & outOperand1,
-                                                               GALGAS_routineKind & outOperand2,
-                                                               GALGAS_bool & outOperand3,
+                                                               GALGAS_bool & outOperand2,
+                                                               GALGAS_routineKind & outOperand3,
                                                                GALGAS_bool & outOperand4,
-                                                               GALGAS_routineAttributes & outOperand5,
-                                                               GALGAS_lstring & outOperand6,
-                                                               GALGAS_routineFormalArgumentListAST & outOperand7,
-                                                               GALGAS_instructionListAST & outOperand8,
-                                                               GALGAS_location & outOperand9,
-                                                               GALGAS_lstring & outOperand10,
+                                                               GALGAS_bool & outOperand5,
+                                                               GALGAS_routineAttributes & outOperand6,
+                                                               GALGAS_lstring & outOperand7,
+                                                               GALGAS_routineFormalArgumentListAST & outOperand8,
+                                                               GALGAS_instructionListAST & outOperand9,
+                                                               GALGAS_location & outOperand10,
+                                                               GALGAS_lstring & outOperand11,
                                                                const GALGAS_uint inRemoveIndex,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
@@ -2414,19 +2426,21 @@ void GALGAS_decoratedRegularRoutineList::setter_removeAtIndex (GALGAS_lstring & 
       outOperand8.drop () ;
       outOperand9.drop () ;
       outOperand10.drop () ;
+      outOperand11.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
       outOperand0 = p->mObject.mProperty_mReceiverTypeName ;
       outOperand1 = p->mObject.mProperty_mMode ;
-      outOperand2 = p->mObject.mProperty_mRoutineKind ;
-      outOperand3 = p->mObject.mProperty_mWarnIfUnused ;
-      outOperand4 = p->mObject.mProperty_mExportedRoutine ;
-      outOperand5 = p->mObject.mProperty_mRoutineAttributes ;
-      outOperand6 = p->mObject.mProperty_mRoutineMangledName ;
-      outOperand7 = p->mObject.mProperty_mRoutineFormalArgumentList ;
-      outOperand8 = p->mObject.mProperty_mRoutineInstructionList ;
-      outOperand9 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
-      outOperand10 = p->mObject.mProperty_mReturnTypeName ;
+      outOperand2 = p->mObject.mProperty_mIsRequired ;
+      outOperand3 = p->mObject.mProperty_mRoutineKind ;
+      outOperand4 = p->mObject.mProperty_mWarnIfUnused ;
+      outOperand5 = p->mObject.mProperty_mExportedRoutine ;
+      outOperand6 = p->mObject.mProperty_mRoutineAttributes ;
+      outOperand7 = p->mObject.mProperty_mRoutineMangledName ;
+      outOperand8 = p->mObject.mProperty_mRoutineFormalArgumentList ;
+      outOperand9 = p->mObject.mProperty_mRoutineInstructionList ;
+      outOperand10 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
+      outOperand11 = p->mObject.mProperty_mReturnTypeName ;
     }
   }
 }
@@ -2435,15 +2449,16 @@ void GALGAS_decoratedRegularRoutineList::setter_removeAtIndex (GALGAS_lstring & 
 
 void GALGAS_decoratedRegularRoutineList::setter_popFirst (GALGAS_lstring & outOperand0,
                                                           GALGAS_mode & outOperand1,
-                                                          GALGAS_routineKind & outOperand2,
-                                                          GALGAS_bool & outOperand3,
+                                                          GALGAS_bool & outOperand2,
+                                                          GALGAS_routineKind & outOperand3,
                                                           GALGAS_bool & outOperand4,
-                                                          GALGAS_routineAttributes & outOperand5,
-                                                          GALGAS_lstring & outOperand6,
-                                                          GALGAS_routineFormalArgumentListAST & outOperand7,
-                                                          GALGAS_instructionListAST & outOperand8,
-                                                          GALGAS_location & outOperand9,
-                                                          GALGAS_lstring & outOperand10,
+                                                          GALGAS_bool & outOperand5,
+                                                          GALGAS_routineAttributes & outOperand6,
+                                                          GALGAS_lstring & outOperand7,
+                                                          GALGAS_routineFormalArgumentListAST & outOperand8,
+                                                          GALGAS_instructionListAST & outOperand9,
+                                                          GALGAS_location & outOperand10,
+                                                          GALGAS_lstring & outOperand11,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -2461,19 +2476,21 @@ void GALGAS_decoratedRegularRoutineList::setter_popFirst (GALGAS_lstring & outOp
     outOperand8.drop () ;
     outOperand9.drop () ;
     outOperand10.drop () ;
+    outOperand11.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
     outOperand0 = p->mObject.mProperty_mReceiverTypeName ;
     outOperand1 = p->mObject.mProperty_mMode ;
-    outOperand2 = p->mObject.mProperty_mRoutineKind ;
-    outOperand3 = p->mObject.mProperty_mWarnIfUnused ;
-    outOperand4 = p->mObject.mProperty_mExportedRoutine ;
-    outOperand5 = p->mObject.mProperty_mRoutineAttributes ;
-    outOperand6 = p->mObject.mProperty_mRoutineMangledName ;
-    outOperand7 = p->mObject.mProperty_mRoutineFormalArgumentList ;
-    outOperand8 = p->mObject.mProperty_mRoutineInstructionList ;
-    outOperand9 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
-    outOperand10 = p->mObject.mProperty_mReturnTypeName ;
+    outOperand2 = p->mObject.mProperty_mIsRequired ;
+    outOperand3 = p->mObject.mProperty_mRoutineKind ;
+    outOperand4 = p->mObject.mProperty_mWarnIfUnused ;
+    outOperand5 = p->mObject.mProperty_mExportedRoutine ;
+    outOperand6 = p->mObject.mProperty_mRoutineAttributes ;
+    outOperand7 = p->mObject.mProperty_mRoutineMangledName ;
+    outOperand8 = p->mObject.mProperty_mRoutineFormalArgumentList ;
+    outOperand9 = p->mObject.mProperty_mRoutineInstructionList ;
+    outOperand10 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
+    outOperand11 = p->mObject.mProperty_mReturnTypeName ;
   }
 }
 
@@ -2481,15 +2498,16 @@ void GALGAS_decoratedRegularRoutineList::setter_popFirst (GALGAS_lstring & outOp
 
 void GALGAS_decoratedRegularRoutineList::setter_popLast (GALGAS_lstring & outOperand0,
                                                          GALGAS_mode & outOperand1,
-                                                         GALGAS_routineKind & outOperand2,
-                                                         GALGAS_bool & outOperand3,
+                                                         GALGAS_bool & outOperand2,
+                                                         GALGAS_routineKind & outOperand3,
                                                          GALGAS_bool & outOperand4,
-                                                         GALGAS_routineAttributes & outOperand5,
-                                                         GALGAS_lstring & outOperand6,
-                                                         GALGAS_routineFormalArgumentListAST & outOperand7,
-                                                         GALGAS_instructionListAST & outOperand8,
-                                                         GALGAS_location & outOperand9,
-                                                         GALGAS_lstring & outOperand10,
+                                                         GALGAS_bool & outOperand5,
+                                                         GALGAS_routineAttributes & outOperand6,
+                                                         GALGAS_lstring & outOperand7,
+                                                         GALGAS_routineFormalArgumentListAST & outOperand8,
+                                                         GALGAS_instructionListAST & outOperand9,
+                                                         GALGAS_location & outOperand10,
+                                                         GALGAS_lstring & outOperand11,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -2507,19 +2525,21 @@ void GALGAS_decoratedRegularRoutineList::setter_popLast (GALGAS_lstring & outOpe
     outOperand8.drop () ;
     outOperand9.drop () ;
     outOperand10.drop () ;
+    outOperand11.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
     outOperand0 = p->mObject.mProperty_mReceiverTypeName ;
     outOperand1 = p->mObject.mProperty_mMode ;
-    outOperand2 = p->mObject.mProperty_mRoutineKind ;
-    outOperand3 = p->mObject.mProperty_mWarnIfUnused ;
-    outOperand4 = p->mObject.mProperty_mExportedRoutine ;
-    outOperand5 = p->mObject.mProperty_mRoutineAttributes ;
-    outOperand6 = p->mObject.mProperty_mRoutineMangledName ;
-    outOperand7 = p->mObject.mProperty_mRoutineFormalArgumentList ;
-    outOperand8 = p->mObject.mProperty_mRoutineInstructionList ;
-    outOperand9 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
-    outOperand10 = p->mObject.mProperty_mReturnTypeName ;
+    outOperand2 = p->mObject.mProperty_mIsRequired ;
+    outOperand3 = p->mObject.mProperty_mRoutineKind ;
+    outOperand4 = p->mObject.mProperty_mWarnIfUnused ;
+    outOperand5 = p->mObject.mProperty_mExportedRoutine ;
+    outOperand6 = p->mObject.mProperty_mRoutineAttributes ;
+    outOperand7 = p->mObject.mProperty_mRoutineMangledName ;
+    outOperand8 = p->mObject.mProperty_mRoutineFormalArgumentList ;
+    outOperand9 = p->mObject.mProperty_mRoutineInstructionList ;
+    outOperand10 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
+    outOperand11 = p->mObject.mProperty_mReturnTypeName ;
   }
 }
 
@@ -2527,15 +2547,16 @@ void GALGAS_decoratedRegularRoutineList::setter_popLast (GALGAS_lstring & outOpe
 
 void GALGAS_decoratedRegularRoutineList::method_first (GALGAS_lstring & outOperand0,
                                                        GALGAS_mode & outOperand1,
-                                                       GALGAS_routineKind & outOperand2,
-                                                       GALGAS_bool & outOperand3,
+                                                       GALGAS_bool & outOperand2,
+                                                       GALGAS_routineKind & outOperand3,
                                                        GALGAS_bool & outOperand4,
-                                                       GALGAS_routineAttributes & outOperand5,
-                                                       GALGAS_lstring & outOperand6,
-                                                       GALGAS_routineFormalArgumentListAST & outOperand7,
-                                                       GALGAS_instructionListAST & outOperand8,
-                                                       GALGAS_location & outOperand9,
-                                                       GALGAS_lstring & outOperand10,
+                                                       GALGAS_bool & outOperand5,
+                                                       GALGAS_routineAttributes & outOperand6,
+                                                       GALGAS_lstring & outOperand7,
+                                                       GALGAS_routineFormalArgumentListAST & outOperand8,
+                                                       GALGAS_instructionListAST & outOperand9,
+                                                       GALGAS_location & outOperand10,
+                                                       GALGAS_lstring & outOperand11,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -2553,19 +2574,21 @@ void GALGAS_decoratedRegularRoutineList::method_first (GALGAS_lstring & outOpera
     outOperand8.drop () ;
     outOperand9.drop () ;
     outOperand10.drop () ;
+    outOperand11.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
     outOperand0 = p->mObject.mProperty_mReceiverTypeName ;
     outOperand1 = p->mObject.mProperty_mMode ;
-    outOperand2 = p->mObject.mProperty_mRoutineKind ;
-    outOperand3 = p->mObject.mProperty_mWarnIfUnused ;
-    outOperand4 = p->mObject.mProperty_mExportedRoutine ;
-    outOperand5 = p->mObject.mProperty_mRoutineAttributes ;
-    outOperand6 = p->mObject.mProperty_mRoutineMangledName ;
-    outOperand7 = p->mObject.mProperty_mRoutineFormalArgumentList ;
-    outOperand8 = p->mObject.mProperty_mRoutineInstructionList ;
-    outOperand9 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
-    outOperand10 = p->mObject.mProperty_mReturnTypeName ;
+    outOperand2 = p->mObject.mProperty_mIsRequired ;
+    outOperand3 = p->mObject.mProperty_mRoutineKind ;
+    outOperand4 = p->mObject.mProperty_mWarnIfUnused ;
+    outOperand5 = p->mObject.mProperty_mExportedRoutine ;
+    outOperand6 = p->mObject.mProperty_mRoutineAttributes ;
+    outOperand7 = p->mObject.mProperty_mRoutineMangledName ;
+    outOperand8 = p->mObject.mProperty_mRoutineFormalArgumentList ;
+    outOperand9 = p->mObject.mProperty_mRoutineInstructionList ;
+    outOperand10 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
+    outOperand11 = p->mObject.mProperty_mReturnTypeName ;
   }
 }
 
@@ -2573,15 +2596,16 @@ void GALGAS_decoratedRegularRoutineList::method_first (GALGAS_lstring & outOpera
 
 void GALGAS_decoratedRegularRoutineList::method_last (GALGAS_lstring & outOperand0,
                                                       GALGAS_mode & outOperand1,
-                                                      GALGAS_routineKind & outOperand2,
-                                                      GALGAS_bool & outOperand3,
+                                                      GALGAS_bool & outOperand2,
+                                                      GALGAS_routineKind & outOperand3,
                                                       GALGAS_bool & outOperand4,
-                                                      GALGAS_routineAttributes & outOperand5,
-                                                      GALGAS_lstring & outOperand6,
-                                                      GALGAS_routineFormalArgumentListAST & outOperand7,
-                                                      GALGAS_instructionListAST & outOperand8,
-                                                      GALGAS_location & outOperand9,
-                                                      GALGAS_lstring & outOperand10,
+                                                      GALGAS_bool & outOperand5,
+                                                      GALGAS_routineAttributes & outOperand6,
+                                                      GALGAS_lstring & outOperand7,
+                                                      GALGAS_routineFormalArgumentListAST & outOperand8,
+                                                      GALGAS_instructionListAST & outOperand9,
+                                                      GALGAS_location & outOperand10,
+                                                      GALGAS_lstring & outOperand11,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -2599,19 +2623,21 @@ void GALGAS_decoratedRegularRoutineList::method_last (GALGAS_lstring & outOperan
     outOperand8.drop () ;
     outOperand9.drop () ;
     outOperand10.drop () ;
+    outOperand11.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
     outOperand0 = p->mObject.mProperty_mReceiverTypeName ;
     outOperand1 = p->mObject.mProperty_mMode ;
-    outOperand2 = p->mObject.mProperty_mRoutineKind ;
-    outOperand3 = p->mObject.mProperty_mWarnIfUnused ;
-    outOperand4 = p->mObject.mProperty_mExportedRoutine ;
-    outOperand5 = p->mObject.mProperty_mRoutineAttributes ;
-    outOperand6 = p->mObject.mProperty_mRoutineMangledName ;
-    outOperand7 = p->mObject.mProperty_mRoutineFormalArgumentList ;
-    outOperand8 = p->mObject.mProperty_mRoutineInstructionList ;
-    outOperand9 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
-    outOperand10 = p->mObject.mProperty_mReturnTypeName ;
+    outOperand2 = p->mObject.mProperty_mIsRequired ;
+    outOperand3 = p->mObject.mProperty_mRoutineKind ;
+    outOperand4 = p->mObject.mProperty_mWarnIfUnused ;
+    outOperand5 = p->mObject.mProperty_mExportedRoutine ;
+    outOperand6 = p->mObject.mProperty_mRoutineAttributes ;
+    outOperand7 = p->mObject.mProperty_mRoutineMangledName ;
+    outOperand8 = p->mObject.mProperty_mRoutineFormalArgumentList ;
+    outOperand9 = p->mObject.mProperty_mRoutineInstructionList ;
+    outOperand10 = p->mObject.mProperty_mEndOfRoutineDeclaration ;
+    outOperand11 = p->mObject.mProperty_mReturnTypeName ;
   }
 }
 
@@ -2692,6 +2718,21 @@ GALGAS_mode GALGAS_decoratedRegularRoutineList::getter_mModeAtIndex (const GALGA
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
     result = p->mObject.mProperty_mMode ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_decoratedRegularRoutineList::getter_mIsRequiredAtIndex (const GALGAS_uint & inIndex,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_decoratedRegularRoutineList * p = (cCollectionElement_decoratedRegularRoutineList *) attributes.ptr () ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
+    result = p->mObject.mProperty_mIsRequired ;
   }
   return result ;
 }
@@ -2864,6 +2905,14 @@ GALGAS_mode cEnumerator_decoratedRegularRoutineList::current_mMode (LOCATION_ARG
   const cCollectionElement_decoratedRegularRoutineList * p = (const cCollectionElement_decoratedRegularRoutineList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
   return p->mObject.mProperty_mMode ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool cEnumerator_decoratedRegularRoutineList::current_mIsRequired (LOCATION_ARGS) const {
+  const cCollectionElement_decoratedRegularRoutineList * p = (const cCollectionElement_decoratedRegularRoutineList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_decoratedRegularRoutineList) ;
+  return p->mObject.mProperty_mIsRequired ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3296,10 +3345,10 @@ void extensionMethod_routineSemanticAnalysis (const GALGAS_decoratedRegularRouti
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_decoratedRegularRoutineList temp_0 = inObject ;
-  cEnumerator_decoratedRegularRoutineList enumerator_1208 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_1208.hasCurrentObject ()) {
-    extensionMethod_semanticAnalysis (enumerator_1208.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 27)) ;
-    enumerator_1208.gotoNextObject () ;
+  cEnumerator_decoratedRegularRoutineList enumerator_1228 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_1228.hasCurrentObject ()) {
+    extensionMethod_semanticAnalysis (enumerator_1228.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 28)) ;
+    enumerator_1228.gotoNextObject () ;
   }
 }
 
@@ -14697,193 +14746,5 @@ void callExtensionMethod_semanticAnalysis (const cPtr_abstractDecoratedDeclarati
       f (inObject, constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
     }
   }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (void) :
-mProperty_mTemporaryIndex (),
-mProperty_mPanicSetupRoutinePriorityMap (),
-mProperty_mPanicLoopRoutinePriorityMap (),
-mProperty_mStaticArrayMapForTemporaries (),
-mProperty_mInitializedDriverSet () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_semanticTemporariesStruct::~ GALGAS_semanticTemporariesStruct (void) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS_uint & inOperand0,
-                                                                    const GALGAS_panicRoutinePriorityMap & inOperand1,
-                                                                    const GALGAS_panicRoutinePriorityMap & inOperand2,
-                                                                    const GALGAS_staticListInvokedFunctionSetMap & inOperand3,
-                                                                    const GALGAS_stringset & inOperand4) :
-mProperty_mTemporaryIndex (inOperand0),
-mProperty_mPanicSetupRoutinePriorityMap (inOperand1),
-mProperty_mPanicLoopRoutinePriorityMap (inOperand2),
-mProperty_mStaticArrayMapForTemporaries (inOperand3),
-mProperty_mInitializedDriverSet (inOperand4) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_semanticTemporariesStruct (GALGAS_uint::constructor_default (HERE),
-                                           GALGAS_panicRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_panicRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_staticListInvokedFunctionSetMap::constructor_emptyMap (HERE),
-                                           GALGAS_stringset::constructor_emptySet (HERE)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_new (const GALGAS_uint & inOperand0,
-                                                                                    const GALGAS_panicRoutinePriorityMap & inOperand1,
-                                                                                    const GALGAS_panicRoutinePriorityMap & inOperand2,
-                                                                                    const GALGAS_staticListInvokedFunctionSetMap & inOperand3,
-                                                                                    const GALGAS_stringset & inOperand4 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_semanticTemporariesStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mTemporaryIndex.objectCompare (inOperand.mProperty_mTemporaryIndex) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mPanicSetupRoutinePriorityMap.objectCompare (inOperand.mProperty_mPanicSetupRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mPanicLoopRoutinePriorityMap.objectCompare (inOperand.mProperty_mPanicLoopRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mStaticArrayMapForTemporaries.objectCompare (inOperand.mProperty_mStaticArrayMapForTemporaries) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mInitializedDriverSet.objectCompare (inOperand.mProperty_mInitializedDriverSet) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool GALGAS_semanticTemporariesStruct::isValid (void) const {
-  return mProperty_mTemporaryIndex.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mStaticArrayMapForTemporaries.isValid () && mProperty_mInitializedDriverSet.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_semanticTemporariesStruct::drop (void) {
-  mProperty_mTemporaryIndex.drop () ;
-  mProperty_mPanicSetupRoutinePriorityMap.drop () ;
-  mProperty_mPanicLoopRoutinePriorityMap.drop () ;
-  mProperty_mStaticArrayMapForTemporaries.drop () ;
-  mProperty_mInitializedDriverSet.drop () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @semanticTemporariesStruct:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mTemporaryIndex.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mPanicSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mPanicLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mStaticArrayMapForTemporaries.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mInitializedDriverSet.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_uint GALGAS_semanticTemporariesStruct::getter_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTemporaryIndex ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_panicRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mPanicSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPanicSetupRoutinePriorityMap ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_panicRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mPanicLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPanicLoopRoutinePriorityMap ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_staticListInvokedFunctionSetMap GALGAS_semanticTemporariesStruct::getter_mStaticArrayMapForTemporaries (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStaticArrayMapForTemporaries ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_stringset GALGAS_semanticTemporariesStruct::getter_mInitializedDriverSet (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInitializedDriverSet ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @semanticTemporariesStruct type                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticTemporariesStruct ("semanticTemporariesStruct",
-                                                  NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_semanticTemporariesStruct::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_semanticTemporariesStruct::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticTemporariesStruct (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_semanticTemporariesStruct result ;
-  const GALGAS_semanticTemporariesStruct * p = (const GALGAS_semanticTemporariesStruct *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticTemporariesStruct *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticTemporariesStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
 }
 

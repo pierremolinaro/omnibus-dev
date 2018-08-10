@@ -147,8 +147,9 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !["$uint32" nowhere]
       !["inIndex" nowhere]
     }
+    let insertFunctionMangledName = routineMangledNameFromAST (!llvmBaseTypeName !["insert" nowhere] !insert_argumentList)
     ioRoutineListIR += !@dynArrayInsertFunctionIR.new {
-      !routineMangledNameFromAST (!llvmBaseTypeName !["insert" nowhere] !insert_argumentList)
+      !insertFunctionMangledName
       !false
       !false
       !elementTypeProxy
@@ -177,6 +178,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !false
       !arrayTypeProxy
       !elementTypeProxy
+      !insertFunctionMangledName
     }
   #-------------------------------------------- Constructor map
     @constructorMap constructorMap = {}
@@ -282,6 +284,16 @@ override method @dynArrayLengthFunctionIR llvmCodeGeneration
 class @dynArrayAppendFunctionIR : @abstractRoutineIR {
   @unifiedTypeMap-proxy mArrayTypeProxy
   @unifiedTypeMap-proxy mElementTypeProxy
+  @string mInsertFunctionMangledName
+}
+
+#·······················································································································
+
+override method @dynArrayAppendFunctionIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioInvokedRoutineSet += !mInsertFunctionMangledName
 }
 
 #·······················································································································
@@ -340,23 +352,6 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
 {
   let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
   let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
-#  @routineFormalArgumentListAST argumentList = {
-#    !.input
-#    !["" nowhere]
-#    ![inElementType.llvmBaseTypeName nowhere]
-#    !["inValue" nowhere]
-#  ,
-#    !.input
-#    !["atIndex" nowhere]
-#    !["uint32" nowhere]
-#    !["inIndex" nowhere]
-#  }
-#  let insertRoutineMangledName = routineMangledNameFromAST (
-#    !llvmArrayBaseTypeName
-#    !["insert" nowhere]
-#    !argumentList
-#  )
-#  let insertRoutineLLVMName = llvmNameForFunction (!insertRoutineMangledName.string)
   ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"

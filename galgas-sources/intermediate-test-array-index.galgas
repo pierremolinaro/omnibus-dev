@@ -25,10 +25,10 @@ override method @testArrayIndexIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-    ![[[mErrorLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
+#  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
+#    ![[[mErrorLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
   [[mIndex type].kind integer ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
 #--- Test index >= 0 (for signed index)
   if not isUnsigned then
@@ -40,7 +40,7 @@ override method @testArrayIndexIR llvmInstructionCode
     ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
   
     ioLLVMcode += testToZeroFailure + ":\n"
-    ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mErrorLocation) assemblerRepresentation] + " ("
     ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mErrorLocation line] + ", "
     ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
@@ -58,7 +58,7 @@ override method @testArrayIndexIR llvmInstructionCode
     ioLLVMcode += "  br i1 " + testToSize + ", label %" + testToSizeOk + ", label %" + testToSizeFailure + "\n\n"
   
     ioLLVMcode += testToSizeFailure + ":\n"
-    ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mErrorLocation) assemblerRepresentation] + " ("
     ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mErrorLocation line] + ", "
     ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
@@ -72,9 +72,10 @@ override method @testArrayIndexIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @testArrayIndexIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
+  ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mErrorLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -98,7 +98,6 @@ proc codeGeneration
   ?panicLineType:let @PLMType inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
-  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?targetParameters:let @targetParameters inTargetParameters
   ?globalVariables:let @globalVariableIRList inGlobalVariableIRList
 {
@@ -128,7 +127,6 @@ proc codeGeneration
     !panicLineType:inPanicLineType
     !interrupts:inAvailableInterruptMap
     !staticlistValues:inStaticListValueMap
-    !sourceFileSet:inSourceFileAbsolutePathSet
     !targetParameters:inTargetParameters
     !globalVariables:inGlobalVariableIRList
   )
@@ -172,7 +170,6 @@ private proc generateCodeFiles
   ?panicLineType:let @PLMType inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
-  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
   ?targetParameters:let @targetParameters inTargetParameters
   ?globalVariables:let @globalVariableIRList inGlobalVariableIRList
 {
@@ -313,13 +310,8 @@ private proc generateCodeFiles
   )
 #----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
-#    sectionIRlist += 
-#      !llvmNameForSectionCall (!panicRoutineName ())
-#      !llvmNameForSectionImplementation (!panicRoutineName ())
-#      !false # Invocation from any mode
     generatePanicCode (
       !?llvmCode
-      !sourceFileSet: inSourceFileAbsolutePathSet
       !generationContext: generationContext
       !?generationAdds: generationAdds
     )

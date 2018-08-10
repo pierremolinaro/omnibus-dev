@@ -68,12 +68,12 @@ proc codeOptimization
     message m
   end
 #--- Eliminate useless routines
-#  ioIntermediateCodeStruct.mRoutineListIR = {}
-#  for (routine *) in routineAccessibilityIR do
-#    if [usefulRoutineSet hasKey !routine.mRoutineMangledName] then
-#      ioIntermediateCodeStruct.mRoutineListIR += !routine
-#    end
-#  end
+  ioIntermediateCodeStruct.mRoutineListIR = {}
+  for (routine *) in routineAccessibilityIR do
+    if [usefulRoutineSet hasKey !routine.mRoutineMangledName] then
+      ioIntermediateCodeStruct.mRoutineListIR += !routine
+    end
+  end
 #--- Display invocation graph
   let filePath = inSourceFile + ".routineInvocation.dot"
   if [option plm_options.emitRoutineInvocationGraphFile value] |true then
@@ -116,7 +116,11 @@ private proc displayInvocationGraph
   s += "}\n"
   [s writeToFileWhenDifferentContents !inFilePath ?*]
   if [undefinedRoutineSet count] > 0 then
-    error .nowhere : [[undefinedRoutineSet count] string] + " undefined routine(s) in routine invocation graph"
+    var m = [[undefinedRoutineSet count] string] + " undefined routine(s) in routine invocation graph"
+    for (r) in undefinedRoutineSet do
+      m += "\n    - " + r
+    end
+    error .nowhere : m
   end
 }
 

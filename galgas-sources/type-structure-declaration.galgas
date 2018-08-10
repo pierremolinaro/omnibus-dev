@@ -443,6 +443,7 @@ override method @structureDeclarationAST enterInContext
     ioDecoratedRoutineList +=
       !mStructureTypeName
       !mode
+      !false
       !.function {!executionMode: mode}
       !noUnusedWarning
       !true # mExportedRoutine
@@ -522,6 +523,7 @@ override method @structureDeclarationAST enterInContext
     ioDecoratedRoutineList +=
       !mStructureTypeName
       !function.mMode
+      !false
       !.function {!executionMode: function.mMode}
       !warnIfUnused
       !false # mExportedRoutine

@@ -9,6 +9,139 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                       Extension Getter '@objectIR llvmValue'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string extensionGetter_llvmValue (const GALGAS_objectIR & inObject,
+                                         C_Compiler * inCompiler
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  const GALGAS_objectIR temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_objectIR::kNotBuilt:
+    break ;
+  case GALGAS_objectIR::kEnum_void:
+    {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 61)), GALGAS_string ("<<@objectIR llvmName null>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 61)) ;
+      result_result.drop () ; // Release error dropped variable
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_zero:
+    {
+      result_result = GALGAS_string ("zeroinitializer") ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_null:
+    {
+      result_result = GALGAS_string ("null") ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_literalInteger:
+    {
+      const cEnumAssociatedValues_objectIR_literalInteger * extractPtr_2827 = (const cEnumAssociatedValues_objectIR_literalInteger *) (temp_0.unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_value = extractPtr_2827->mAssociatedValue1 ;
+      result_result = extractedValue_value.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 64)) ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmValue:
+    {
+      const cEnumAssociatedValues_objectIR_llvmValue * extractPtr_2877 = (const cEnumAssociatedValues_objectIR_llvmValue *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_2877->mAssociatedValue1 ;
+      result_result = extractedValue_llvmName ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_reference:
+    {
+      const cEnumAssociatedValues_objectIR_reference * extractPtr_2927 = (const cEnumAssociatedValues_objectIR_reference *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_2927->mAssociatedValue1 ;
+      result_result = extractedValue_llvmName ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_literalString:
+    {
+      const cEnumAssociatedValues_objectIR_literalString * extractPtr_3165 = (const cEnumAssociatedValues_objectIR_literalString *) (temp_0.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_size = extractPtr_3165->mAssociatedValue0 ;
+      const GALGAS_uint extractedValue_index = extractPtr_3165->mAssociatedValue1 ;
+      GALGAS_string var_sizeStr_2992 = extractedValue_size.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 68)) ;
+      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_2992, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (var_sizeStr_2992, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)) ;
+      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_index, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)) ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmStructureValue:
+    {
+      const cEnumAssociatedValues_objectIR_llvmStructureValue * extractPtr_3394 = (const cEnumAssociatedValues_objectIR_llvmStructureValue *) (temp_0.unsafePointer ()) ;
+      const GALGAS_sortedOperandIRList extractedValue_inValues = extractPtr_3394->mAssociatedValue1 ;
+      result_result = GALGAS_string ("{") ;
+      cEnumerator_sortedOperandIRList enumerator_3267 (extractedValue_inValues, kENUMERATION_UP) ;
+      while (enumerator_3267.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3267.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)).add_operation (extensionGetter_llvmValue (enumerator_3267.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)) ;
+        if (enumerator_3267.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 75)) ;
+        }
+        enumerator_3267.gotoNextObject () ;
+      }
+      result_result.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 77)) ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmArrayStaticValues:
+    {
+      const cEnumAssociatedValues_objectIR_llvmArrayStaticValues * extractPtr_3622 = (const cEnumAssociatedValues_objectIR_llvmArrayStaticValues *) (temp_0.unsafePointer ()) ;
+      const GALGAS_operandIRList extractedValue_inValues = extractPtr_3622->mAssociatedValue1 ;
+      result_result = GALGAS_string ("[") ;
+      cEnumerator_operandIRList enumerator_3495 (extractedValue_inValues, kENUMERATION_UP) ;
+      while (enumerator_3495.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3495.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)).add_operation (extensionGetter_llvmValue (enumerator_3495.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)) ;
+        if (enumerator_3495.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 82)) ;
+        }
+        enumerator_3495.gotoNextObject () ;
+      }
+      result_result.plusAssign_operation(GALGAS_string ("]"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 84)) ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmArrayRepeatedStaticValue:
+    {
+      const cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue * extractPtr_3839 = (const cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue *) (temp_0.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_size = extractPtr_3839->mAssociatedValue1 ;
+      const GALGAS_objectIR extractedValue_value = extractPtr_3839->mAssociatedValue2 ;
+      result_result = GALGAS_string ("[") ;
+      cEnumerator_range enumerator_3718 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), extractedValue_size.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 87))), kENUMERATION_UP) ;
+      while (enumerator_3718.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (extractedValue_value, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)).add_operation (extensionGetter_llvmValue (extractedValue_value, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)) ;
+        if (enumerator_3718.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 89)) ;
+        }
+        enumerator_3718.gotoNextObject () ;
+      }
+      result_result.plusAssign_operation(GALGAS_string ("]"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 91)) ;
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
+    {
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 93)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 93)) ;
+      result_result.drop () ; // Release error dropped variable
+    }
+    break ;
+  case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
+    {
+      TC_Array <C_FixItDescription> fixItArray3 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 95)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 95)) ;
+      result_result.drop () ; // Release error dropped variable
+    }
+    break ;
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                          Extension Getter '@objectIR type'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -5264,7 +5397,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_instructionListIR inO
   const GALGAS_instructionListIR temp_0 = inObject ;
   cEnumerator_instructionListIR enumerator_1012 (temp_0, kENUMERATION_UP) ;
   while (enumerator_1012.hasCurrentObject ()) {
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1012.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 15)) ;
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1012.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 15)) ;
     enumerator_1012.gotoNextObject () ;
   }
 }
@@ -7140,8 +7273,7 @@ GALGAS_taskSortedListIR_2D_element::GALGAS_taskSortedListIR_2D_element (void) :
 mProperty_mTaskName (),
 mProperty_mPriority (),
 mProperty_mStackSize (),
-mProperty_mSetupAllocaList (),
-mProperty_mSetupInstructionListIR (),
+mProperty_mSetupOrderedList (),
 mProperty_mActivateAllocaList (),
 mProperty_mActivateInstructionListIR (),
 mProperty_mDeactivateAllocaList (),
@@ -7160,25 +7292,23 @@ GALGAS_taskSortedListIR_2D_element::~ GALGAS_taskSortedListIR_2D_element (void) 
 GALGAS_taskSortedListIR_2D_element::GALGAS_taskSortedListIR_2D_element (const GALGAS_string & inOperand0,
                                                                         const GALGAS_uint & inOperand1,
                                                                         const GALGAS_bigint & inOperand2,
-                                                                        const GALGAS_allocaList & inOperand3,
-                                                                        const GALGAS_instructionListIR & inOperand4,
-                                                                        const GALGAS_allocaList & inOperand5,
-                                                                        const GALGAS_instructionListIR & inOperand6,
-                                                                        const GALGAS_allocaList & inOperand7,
-                                                                        const GALGAS_instructionListIR & inOperand8,
-                                                                        const GALGAS_uint & inOperand9,
-                                                                        const GALGAS_bool & inOperand10) :
+                                                                        const GALGAS_stringlist & inOperand3,
+                                                                        const GALGAS_allocaList & inOperand4,
+                                                                        const GALGAS_instructionListIR & inOperand5,
+                                                                        const GALGAS_allocaList & inOperand6,
+                                                                        const GALGAS_instructionListIR & inOperand7,
+                                                                        const GALGAS_uint & inOperand8,
+                                                                        const GALGAS_bool & inOperand9) :
 mProperty_mTaskName (inOperand0),
 mProperty_mPriority (inOperand1),
 mProperty_mStackSize (inOperand2),
-mProperty_mSetupAllocaList (inOperand3),
-mProperty_mSetupInstructionListIR (inOperand4),
-mProperty_mActivateAllocaList (inOperand5),
-mProperty_mActivateInstructionListIR (inOperand6),
-mProperty_mDeactivateAllocaList (inOperand7),
-mProperty_mDeactivateInstructionListIR (inOperand8),
-mProperty_mTaskNameStringIndex (inOperand9),
-mProperty_mActivate (inOperand10) {
+mProperty_mSetupOrderedList (inOperand3),
+mProperty_mActivateAllocaList (inOperand4),
+mProperty_mActivateInstructionListIR (inOperand5),
+mProperty_mDeactivateAllocaList (inOperand6),
+mProperty_mDeactivateInstructionListIR (inOperand7),
+mProperty_mTaskNameStringIndex (inOperand8),
+mProperty_mActivate (inOperand9) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7187,8 +7317,7 @@ GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::construct
   return GALGAS_taskSortedListIR_2D_element (GALGAS_string::constructor_default (HERE),
                                              GALGAS_uint::constructor_default (HERE),
                                              GALGAS_bigint::constructor_zero (HERE),
-                                             GALGAS_allocaList::constructor_emptyList (HERE),
-                                             GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                             GALGAS_stringlist::constructor_emptyList (HERE),
                                              GALGAS_allocaList::constructor_emptyList (HERE),
                                              GALGAS_instructionListIR::constructor_emptyList (HERE),
                                              GALGAS_allocaList::constructor_emptyList (HERE),
@@ -7202,18 +7331,17 @@ GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::construct
 GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::constructor_new (const GALGAS_string & inOperand0,
                                                                                         const GALGAS_uint & inOperand1,
                                                                                         const GALGAS_bigint & inOperand2,
-                                                                                        const GALGAS_allocaList & inOperand3,
-                                                                                        const GALGAS_instructionListIR & inOperand4,
-                                                                                        const GALGAS_allocaList & inOperand5,
-                                                                                        const GALGAS_instructionListIR & inOperand6,
-                                                                                        const GALGAS_allocaList & inOperand7,
-                                                                                        const GALGAS_instructionListIR & inOperand8,
-                                                                                        const GALGAS_uint & inOperand9,
-                                                                                        const GALGAS_bool & inOperand10 
+                                                                                        const GALGAS_stringlist & inOperand3,
+                                                                                        const GALGAS_allocaList & inOperand4,
+                                                                                        const GALGAS_instructionListIR & inOperand5,
+                                                                                        const GALGAS_allocaList & inOperand6,
+                                                                                        const GALGAS_instructionListIR & inOperand7,
+                                                                                        const GALGAS_uint & inOperand8,
+                                                                                        const GALGAS_bool & inOperand9 
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_taskSortedListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
-    result = GALGAS_taskSortedListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
+    result = GALGAS_taskSortedListIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
   }
   return result ;
 }
@@ -7232,10 +7360,7 @@ typeComparisonResult GALGAS_taskSortedListIR_2D_element::objectCompare (const GA
     result = mProperty_mStackSize.objectCompare (inOperand.mProperty_mStackSize) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mSetupAllocaList.objectCompare (inOperand.mProperty_mSetupAllocaList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mSetupInstructionListIR.objectCompare (inOperand.mProperty_mSetupInstructionListIR) ;
+    result = mProperty_mSetupOrderedList.objectCompare (inOperand.mProperty_mSetupOrderedList) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mActivateAllocaList.objectCompare (inOperand.mProperty_mActivateAllocaList) ;
@@ -7261,7 +7386,7 @@ typeComparisonResult GALGAS_taskSortedListIR_2D_element::objectCompare (const GA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_taskSortedListIR_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mSetupAllocaList.isValid () && mProperty_mSetupInstructionListIR.isValid () && mProperty_mActivateAllocaList.isValid () && mProperty_mActivateInstructionListIR.isValid () && mProperty_mDeactivateAllocaList.isValid () && mProperty_mDeactivateInstructionListIR.isValid () && mProperty_mTaskNameStringIndex.isValid () && mProperty_mActivate.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mSetupOrderedList.isValid () && mProperty_mActivateAllocaList.isValid () && mProperty_mActivateInstructionListIR.isValid () && mProperty_mDeactivateAllocaList.isValid () && mProperty_mDeactivateInstructionListIR.isValid () && mProperty_mTaskNameStringIndex.isValid () && mProperty_mActivate.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7270,8 +7395,7 @@ void GALGAS_taskSortedListIR_2D_element::drop (void) {
   mProperty_mTaskName.drop () ;
   mProperty_mPriority.drop () ;
   mProperty_mStackSize.drop () ;
-  mProperty_mSetupAllocaList.drop () ;
-  mProperty_mSetupInstructionListIR.drop () ;
+  mProperty_mSetupOrderedList.drop () ;
   mProperty_mActivateAllocaList.drop () ;
   mProperty_mActivateInstructionListIR.drop () ;
   mProperty_mDeactivateAllocaList.drop () ;
@@ -7294,9 +7418,7 @@ void GALGAS_taskSortedListIR_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mStackSize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mSetupAllocaList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mSetupInstructionListIR.description (ioString, inIndentation+1) ;
+    mProperty_mSetupOrderedList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mActivateAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -7333,14 +7455,8 @@ GALGAS_bigint GALGAS_taskSortedListIR_2D_element::getter_mStackSize (UNUSED_LOCA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_allocaList GALGAS_taskSortedListIR_2D_element::getter_mSetupAllocaList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSetupAllocaList ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_instructionListIR GALGAS_taskSortedListIR_2D_element::getter_mSetupInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSetupInstructionListIR ;
+GALGAS_stringlist GALGAS_taskSortedListIR_2D_element::getter_mSetupOrderedList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSetupOrderedList ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
