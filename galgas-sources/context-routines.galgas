@@ -11,10 +11,10 @@ list @routineTypedSignature {
 
 #·······················································································································
 
-getter @routineTypedSignature string -> @string {
+getter @routineTypedSignature typedString -> @string {
   result = "("
-  for (formalArgumentPassingMode selector *) in self do
-    result += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  for (formalArgumentPassingMode selector typeProxy) in self do
+    result += [formalArgumentPassingMode formalPassingModeString] + selector + ":" + [typeProxy key]
   end
   result += ")"
 }

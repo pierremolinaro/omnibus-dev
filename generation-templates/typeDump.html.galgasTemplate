@@ -60,12 +60,33 @@ end
 <p>%
 !TABLE_OF_TYPES_STRING%
 </p>
-<table class="result">
-<tr><td class="result_title">Type Name</td><td class="result_title">Kind</td><td class="result_title">Description</td><td class="result_title">LLVM Base Name</td><td class="result_title">LLVM Type Name</td></tr>\n%
-for () in GLOBAL_TYPE_MAP do
-  %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>%![type descriptionForHTMLFile]%</td><td>%![type plmTypeDescriptionName]%</td><td>%![type llvmBaseTypeName]%</td><td>%![type llvmTypeName]%</td></tr>\n%
-end%
-</table>
+%for () in GLOBAL_TYPE_MAP do%
+<h2>
+  <a name="%!lkey.string%">%!lkey.string%</a>
+</h2>
+<p>
+Kind: %![type descriptionForHTMLFile]%<br>
+Description: %![type plmTypeDescriptionName]%<br>
+LLVM Base Name: %![type llvmBaseTypeName]%<br>
+LLVM Name: %![type llvmTypeName]%
+</p>
+  %if [[type guardMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Guard Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Typed signature</td>
+      </tr>
+    %for () in [type guardMap] : guard_ do%
+      <tr class="result_line">
+        <td>%!guard_lkey.string%</td>
+        <td>%if guard_mIsPublic then !"public" else !"private" end%</td>
+        <td>%![guard_mSignature typedString]%</td>
+      </tr>
+    %end%
+    </table>
+  %end%
+%end%
 </div>
 </body>
 </html>

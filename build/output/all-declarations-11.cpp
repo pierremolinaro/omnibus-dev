@@ -6158,7 +6158,7 @@ void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
   }
   const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_printPasses.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_1) {
-    GALGAS_string var_m_2189 = GALGAS_string ("** Dead Code Elimination\n") ;
+    GALGAS_string var_m_2189 = GALGAS_string ("** Dead code elimination\n") ;
     var_m_2189.plusAssign_operation(GALGAS_string ("    ").add_operation (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 46)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 46)).add_operation (GALGAS_string (" routines, "), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 46)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 46)) ;
     var_m_2189.plusAssign_operation(var_exploreRoutineSet_1736.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 47)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 47)).add_operation (GALGAS_string (" root routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 47)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 47)) ;
     inCompiler->printMessage (var_m_2189  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 48)) ;

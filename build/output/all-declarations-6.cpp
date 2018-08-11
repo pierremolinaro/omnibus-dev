@@ -10368,15 +10368,15 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_2436 = GALGAS_string ("(") ;
+  GALGAS_string var_key_2467 = GALGAS_string ("(") ;
   const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_2479 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_2479.hasCurrentObject ()) {
-    var_key_2436.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_2479.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)).add_operation (enumerator_2479.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 52)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 52)) ;
-    enumerator_2479.gotoNextObject () ;
+  cEnumerator_effectiveArgumentListAST enumerator_2510 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_2510.hasCurrentObject ()) {
+    var_key_2467.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_2510.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)).add_operation (enumerator_2510.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 52)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 52)) ;
+    enumerator_2510.gotoNextObject () ;
   }
-  var_key_2436.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 54)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_2436, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 55)) ;
+  var_key_2467.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 54)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_2467, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 55)) ;
 //---
   return result_result ;
 }

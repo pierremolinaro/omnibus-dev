@@ -42,7 +42,7 @@ proc codeOptimization
     end
   end
   if [option plm_options.printPasses value] then
-    var m = "** Dead Code Elimination\n"
+    var m = "** Dead code elimination\n"
     m += "    " + [[ioIntermediateCodeStruct.mRoutineListIR length] string] + " routines, "
     m += [[exploreRoutineSet count] string] + " root routines.\n"
     message m

@@ -41,6 +41,7 @@ proc buildOrderedDeclarationList
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
+  var addintegerTypeCount = 0
   for () in [precedenceGraph undefinedNodeKeyList] do
     let split = [mValue componentsSeparatedByString !"int"]
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
@@ -48,12 +49,18 @@ proc buildOrderedDeclarationList
         let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
         let declaration = @integerDeclarationAST.new {!false !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
+        addintegerTypeCount ++
       elsif [split mValueAtIndex !0] == "$" then
         let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
         let declaration = @integerDeclarationAST.new {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
+        addintegerTypeCount ++
       end
     end
+  end
+#------------------------------------------  Display ?
+  if (@uint.errorCount == 0) &&[option plm_options.printPasses value] then
+    message "    Added " + addintegerTypeCount + " integer types\n" 
   end
 #------------------------------------------  Write precedence graph file ?
   if (@uint.errorCount == 0) && [option plm_options.emitDeclarationDependencyGraphFile value] then

@@ -121,6 +121,9 @@ private proc compileProject
   @declarationListAST orderedDeclarationListAST = .default
   if @uint.errorCount == 0 then
     let @timer t = .start 
+    if [option plm_options.printPasses value] then
+      message "** Declaration sorting\n" 
+    end
     buildOrderedDeclarationList (
       !ast:ast
       !sourceFile:inSourceFile.string
@@ -128,7 +131,7 @@ private proc compileProject
       ?orderedDeclarationList:orderedDeclarationListAST
     )
     if [option plm_options.printPasses value] then
-      message "** Declaration sorting: " + [t string] + "\n" 
+      message "    Duration: " + [t string] + "\n" 
     end
   end
 #------------------------------------------------------------ Check "check target" declarations
