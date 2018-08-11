@@ -352,22 +352,13 @@ override method @structureDeclarationAST enterInContext
   ]
 #---------------------------------------- Enter guards in guard map
   @guardMapForContext guardMap = {}
-  for guard in mGuardListAST do
-  #--- Guard mangled name
-    let guardMangledName = guardUserMangledNameFromAST (
-      !mLLVMBaseTypeName
-      !guard.mGuardName
-      !guard.mGuardFormalArgumentList
-    )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
-  #--- Enter in context
-    [!?guardMap insertKey
-      !guardMangledName
-      !guard.mIsPublic
-      !signature
-    ]
-  end
+  [mGuardListAST enterGuardsInContext
+    !receiverTypeName:mReceiverTypeName
+    !receiverLLVMBaseTypeName:mLLVMBaseTypeName
+    !?context: ioContext
+    !?guardMap: guardMap
+    !?ioDecoratedDeclarationList
+  ]
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
     !propertyMap:propertyMap
@@ -385,12 +376,6 @@ override method @structureDeclarationAST enterInContext
     !index:[ioContext.mTypeMap count]
     !generate:true
   ]
-#---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
-    !mReceiverTypeName
-    !mGuardListAST
-    !mMayImplementDeinit
-  }
 }
 
 #·······················································································································
@@ -509,33 +494,6 @@ method @structurePropertyListAST-element enterPropertyInContext
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
-  @lstring mReceiverTypeName
-  @guardDeclarationListAST mGuardListAST
-  @bool mMayImplementDeinit
-}
-
-#·······················································································································
-
-override method @decoratedStructureDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
-#----------- Analyze guards
-  [mGuardListAST guardSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -728,13 +728,3 @@ class GALGAS_string function_llvmNameForSectionImplementation (const class GALGA
 class GALGAS_string function_panicRoutineName (class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'llvmNameForSectionCall'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-

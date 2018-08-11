@@ -197,36 +197,153 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_guardDeclara
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension method '@guardDeclarationListAST guardSemanticAnalysis'                          *
+//                          Extension method '@guardDeclarationListAST enterGuardsInContext'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_guardSemanticAnalysis (const class GALGAS_guardDeclarationListAST inObject,
-                                            class GALGAS_PLMType in_inReceiverType,
-                                            const class GALGAS_semanticContext constin_inSemanticContext,
-                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                            class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterGuardsInContext (const class GALGAS_guardDeclarationListAST inObject,
+                                           const class GALGAS_lstring constin_inReceiverTypeName,
+                                           const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
+                                           class GALGAS_semanticContext & io_ioContext,
+                                           class GALGAS_guardMapForContext & io_ioGuardMap,
+                                           class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           Routine 'guardSemanticAnalysis'                                           *
+//                                          @decoratedGuardDeclaration class                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_guardSemanticAnalysis (const class GALGAS_PLMType constinArgument0,
-                                    const class GALGAS_lstring constinArgument1,
-                                    const class GALGAS_routineFormalArgumentListAST constinArgument2,
-                                    const class GALGAS_guardKind constinArgument3,
-                                    const class GALGAS_instructionListAST constinArgument4,
-                                    const class GALGAS_location constinArgument5,
-                                    const class GALGAS_bool constinArgument6,
-                                    const class GALGAS_semanticContext constinArgument7,
-                                    class GALGAS_semanticTemporariesStruct & ioArgument8,
-                                    class GALGAS_intermediateCodeStruct & ioArgument9,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+class GALGAS_decoratedGuardDeclaration : public GALGAS_abstractDecoratedDeclaration {
+//--- Constructor
+  public : GALGAS_decoratedGuardDeclaration (void) ;
+
+//---
+  public : inline const class cPtr_decoratedGuardDeclaration * ptr (void) const { return (const cPtr_decoratedGuardDeclaration *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_decoratedGuardDeclaration (const cPtr_decoratedGuardDeclaration * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_decoratedGuardDeclaration extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_decoratedGuardDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                          const class GALGAS_lstring & inOperand1,
+                                                                          const class GALGAS_bool & inOperand2,
+                                                                          const class GALGAS_lstringlist & inOperand3,
+                                                                          const class GALGAS_routineFormalArgumentListAST & inOperand4,
+                                                                          const class GALGAS_guardKind & inOperand5,
+                                                                          const class GALGAS_instructionListAST & inOperand6,
+                                                                          const class GALGAS_location & inOperand7
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedGuardDeclaration & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfGuardDeclaration (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mGuardAttributeList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mGuardFormalArgumentList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mGuardInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardKind getter_mGuardKind (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGuardName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_decoratedGuardDeclaration class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedGuardDeclaration ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Pointer class for @decoratedGuardDeclaration class                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_decoratedGuardDeclaration : public cPtr_abstractDecoratedDeclaration {
+//--- Attributes
+  public : GALGAS_lstring mProperty_mReceiverTypeName ;
+  public : GALGAS_lstring mProperty_mGuardName ;
+  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_lstringlist mProperty_mGuardAttributeList ;
+  public : GALGAS_routineFormalArgumentListAST mProperty_mGuardFormalArgumentList ;
+  public : GALGAS_guardKind mProperty_mGuardKind ;
+  public : GALGAS_instructionListAST mProperty_mGuardInstructionList ;
+  public : GALGAS_location mProperty_mEndOfGuardDeclaration ;
+
+//--- Constructor
+  public : cPtr_decoratedGuardDeclaration (const GALGAS_lstring & in_mReceiverTypeName,
+                                           const GALGAS_lstring & in_mGuardName,
+                                           const GALGAS_bool & in_mIsPublic,
+                                           const GALGAS_lstringlist & in_mGuardAttributeList,
+                                           const GALGAS_routineFormalArgumentListAST & in_mGuardFormalArgumentList,
+                                           const GALGAS_guardKind & in_mGuardKind,
+                                           const GALGAS_instructionListAST & in_mGuardInstructionList,
+                                           const GALGAS_location & in_mEndOfGuardDeclaration
+                                           COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mGuardName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mGuardAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mGuardFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_guardKind getter_mGuardKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mGuardInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfGuardDeclaration (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'guardUserMangledNameFromAST'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardUserMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                           const class GALGAS_lstring & constinArgument1,
+                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

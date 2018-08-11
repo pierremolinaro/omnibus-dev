@@ -3352,217 +3352,6 @@ GALGAS_structurePropertyListAST_2D_element GALGAS_structurePropertyListAST_2D_el
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cPtr_decoratedStructureDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_decoratedStructureDeclaration * p = (const cPtr_decoratedStructureDeclaration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_decoratedStructureDeclaration) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mReceiverTypeName.objectCompare (p->mProperty_mReceiverTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mGuardListAST.objectCompare (p->mProperty_mGuardListAST) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mMayImplementDeinit.objectCompare (p->mProperty_mMayImplementDeinit) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_decoratedStructureDeclaration::objectCompare (const GALGAS_decoratedStructureDeclaration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedStructureDeclaration::GALGAS_decoratedStructureDeclaration (void) :
-GALGAS_abstractDecoratedDeclaration () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedStructureDeclaration GALGAS_decoratedStructureDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_decoratedStructureDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                                GALGAS_guardDeclarationListAST::constructor_emptyList (HERE),
-                                                                GALGAS_bool::constructor_default (HERE)
-                                                                COMMA_THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedStructureDeclaration::GALGAS_decoratedStructureDeclaration (const cPtr_decoratedStructureDeclaration * inSourcePtr) :
-GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_decoratedStructureDeclaration) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedStructureDeclaration GALGAS_decoratedStructureDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mReceiverTypeName,
-                                                                                            const GALGAS_guardDeclarationListAST & inAttribute_mGuardListAST,
-                                                                                            const GALGAS_bool & inAttribute_mMayImplementDeinit
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_decoratedStructureDeclaration result ;
-  if (inAttribute_mReceiverTypeName.isValid () && inAttribute_mGuardListAST.isValid () && inAttribute_mMayImplementDeinit.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedStructureDeclaration (inAttribute_mReceiverTypeName, inAttribute_mGuardListAST, inAttribute_mMayImplementDeinit COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_decoratedStructureDeclaration::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedStructureDeclaration * p = (const cPtr_decoratedStructureDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedStructureDeclaration) ;
-    result = p->mProperty_mReceiverTypeName ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring cPtr_decoratedStructureDeclaration::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReceiverTypeName ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardDeclarationListAST GALGAS_decoratedStructureDeclaration::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
-  GALGAS_guardDeclarationListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedStructureDeclaration * p = (const cPtr_decoratedStructureDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedStructureDeclaration) ;
-    result = p->mProperty_mGuardListAST ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardDeclarationListAST cPtr_decoratedStructureDeclaration::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mGuardListAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_decoratedStructureDeclaration::getter_mMayImplementDeinit (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_decoratedStructureDeclaration * p = (const cPtr_decoratedStructureDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_decoratedStructureDeclaration) ;
-    result = p->mProperty_mMayImplementDeinit ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool cPtr_decoratedStructureDeclaration::getter_mMayImplementDeinit (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mMayImplementDeinit ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                               Pointer class for @decoratedStructureDeclaration class                                *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_decoratedStructureDeclaration::cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mReceiverTypeName,
-                                                                        const GALGAS_guardDeclarationListAST & in_mGuardListAST,
-                                                                        const GALGAS_bool & in_mMayImplementDeinit
-                                                                        COMMA_LOCATION_ARGS) :
-cPtr_abstractDecoratedDeclaration (THERE),
-mProperty_mReceiverTypeName (in_mReceiverTypeName),
-mProperty_mGuardListAST (in_mGuardListAST),
-mProperty_mMayImplementDeinit (in_mMayImplementDeinit) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_decoratedStructureDeclaration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_decoratedStructureDeclaration ;
-}
-
-void cPtr_decoratedStructureDeclaration::description (C_String & ioString,
-                                                      const int32_t inIndentation) const {
-  ioString << "[@decoratedStructureDeclaration:" ;
-  mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mMayImplementDeinit.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_decoratedStructureDeclaration::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedStructureDeclaration (mProperty_mReceiverTypeName, mProperty_mGuardListAST, mProperty_mMayImplementDeinit COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         @decoratedStructureDeclaration type                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_decoratedStructureDeclaration ("decoratedStructureDeclaration",
-                                                      & kTypeDescriptor_GALGAS_abstractDecoratedDeclaration) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_decoratedStructureDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_decoratedStructureDeclaration ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_decoratedStructureDeclaration::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_decoratedStructureDeclaration (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_decoratedStructureDeclaration GALGAS_decoratedStructureDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_decoratedStructureDeclaration result ;
-  const GALGAS_decoratedStructureDeclaration * p = (const GALGAS_decoratedStructureDeclaration *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_decoratedStructureDeclaration *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("decoratedStructureDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 typeComparisonResult cPtr_syncDeclarationAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_syncDeclarationAST * p = (const cPtr_syncDeclarationAST *) inOperandPtr ;
@@ -8929,6 +8718,338 @@ GALGAS_externProcedureMapIR_2D_element GALGAS_externProcedureMapIR_2D_element::e
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+typeComparisonResult cPtr_decoratedGuardDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mReceiverTypeName.objectCompare (p->mProperty_mReceiverTypeName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mGuardName.objectCompare (p->mProperty_mGuardName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mIsPublic.objectCompare (p->mProperty_mIsPublic) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mGuardAttributeList.objectCompare (p->mProperty_mGuardAttributeList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mGuardFormalArgumentList.objectCompare (p->mProperty_mGuardFormalArgumentList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mGuardKind.objectCompare (p->mProperty_mGuardKind) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mGuardInstructionList.objectCompare (p->mProperty_mGuardInstructionList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mEndOfGuardDeclaration.objectCompare (p->mProperty_mEndOfGuardDeclaration) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_decoratedGuardDeclaration::objectCompare (const GALGAS_decoratedGuardDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedGuardDeclaration::GALGAS_decoratedGuardDeclaration (void) :
+GALGAS_abstractDecoratedDeclaration () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedGuardDeclaration::GALGAS_decoratedGuardDeclaration (const cPtr_decoratedGuardDeclaration * inSourcePtr) :
+GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_decoratedGuardDeclaration) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedGuardDeclaration GALGAS_decoratedGuardDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mReceiverTypeName,
+                                                                                    const GALGAS_lstring & inAttribute_mGuardName,
+                                                                                    const GALGAS_bool & inAttribute_mIsPublic,
+                                                                                    const GALGAS_lstringlist & inAttribute_mGuardAttributeList,
+                                                                                    const GALGAS_routineFormalArgumentListAST & inAttribute_mGuardFormalArgumentList,
+                                                                                    const GALGAS_guardKind & inAttribute_mGuardKind,
+                                                                                    const GALGAS_instructionListAST & inAttribute_mGuardInstructionList,
+                                                                                    const GALGAS_location & inAttribute_mEndOfGuardDeclaration
+                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_decoratedGuardDeclaration result ;
+  if (inAttribute_mReceiverTypeName.isValid () && inAttribute_mGuardName.isValid () && inAttribute_mIsPublic.isValid () && inAttribute_mGuardAttributeList.isValid () && inAttribute_mGuardFormalArgumentList.isValid () && inAttribute_mGuardKind.isValid () && inAttribute_mGuardInstructionList.isValid () && inAttribute_mEndOfGuardDeclaration.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_decoratedGuardDeclaration (inAttribute_mReceiverTypeName, inAttribute_mGuardName, inAttribute_mIsPublic, inAttribute_mGuardAttributeList, inAttribute_mGuardFormalArgumentList, inAttribute_mGuardKind, inAttribute_mGuardInstructionList, inAttribute_mEndOfGuardDeclaration COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_decoratedGuardDeclaration::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mReceiverTypeName ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring cPtr_decoratedGuardDeclaration::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReceiverTypeName ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_decoratedGuardDeclaration::getter_mGuardName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mGuardName ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring cPtr_decoratedGuardDeclaration::getter_mGuardName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardName ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_decoratedGuardDeclaration::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mIsPublic ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool cPtr_decoratedGuardDeclaration::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIsPublic ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstringlist GALGAS_decoratedGuardDeclaration::getter_mGuardAttributeList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mGuardAttributeList ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstringlist cPtr_decoratedGuardDeclaration::getter_mGuardAttributeList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardAttributeList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineFormalArgumentListAST GALGAS_decoratedGuardDeclaration::getter_mGuardFormalArgumentList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_routineFormalArgumentListAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mGuardFormalArgumentList ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineFormalArgumentListAST cPtr_decoratedGuardDeclaration::getter_mGuardFormalArgumentList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardFormalArgumentList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_guardKind GALGAS_decoratedGuardDeclaration::getter_mGuardKind (UNUSED_LOCATION_ARGS) const {
+  GALGAS_guardKind result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mGuardKind ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_guardKind cPtr_decoratedGuardDeclaration::getter_mGuardKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardKind ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListAST GALGAS_decoratedGuardDeclaration::getter_mGuardInstructionList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_instructionListAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mGuardInstructionList ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListAST cPtr_decoratedGuardDeclaration::getter_mGuardInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardInstructionList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_location GALGAS_decoratedGuardDeclaration::getter_mEndOfGuardDeclaration (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_decoratedGuardDeclaration * p = (const cPtr_decoratedGuardDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_decoratedGuardDeclaration) ;
+    result = p->mProperty_mEndOfGuardDeclaration ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_location cPtr_decoratedGuardDeclaration::getter_mEndOfGuardDeclaration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfGuardDeclaration ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                 Pointer class for @decoratedGuardDeclaration class                                  *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_decoratedGuardDeclaration::cPtr_decoratedGuardDeclaration (const GALGAS_lstring & in_mReceiverTypeName,
+                                                                const GALGAS_lstring & in_mGuardName,
+                                                                const GALGAS_bool & in_mIsPublic,
+                                                                const GALGAS_lstringlist & in_mGuardAttributeList,
+                                                                const GALGAS_routineFormalArgumentListAST & in_mGuardFormalArgumentList,
+                                                                const GALGAS_guardKind & in_mGuardKind,
+                                                                const GALGAS_instructionListAST & in_mGuardInstructionList,
+                                                                const GALGAS_location & in_mEndOfGuardDeclaration
+                                                                COMMA_LOCATION_ARGS) :
+cPtr_abstractDecoratedDeclaration (THERE),
+mProperty_mReceiverTypeName (in_mReceiverTypeName),
+mProperty_mGuardName (in_mGuardName),
+mProperty_mIsPublic (in_mIsPublic),
+mProperty_mGuardAttributeList (in_mGuardAttributeList),
+mProperty_mGuardFormalArgumentList (in_mGuardFormalArgumentList),
+mProperty_mGuardKind (in_mGuardKind),
+mProperty_mGuardInstructionList (in_mGuardInstructionList),
+mProperty_mEndOfGuardDeclaration (in_mEndOfGuardDeclaration) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_decoratedGuardDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_decoratedGuardDeclaration ;
+}
+
+void cPtr_decoratedGuardDeclaration::description (C_String & ioString,
+                                                  const int32_t inIndentation) const {
+  ioString << "[@decoratedGuardDeclaration:" ;
+  mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mGuardName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mIsPublic.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mGuardAttributeList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mGuardFormalArgumentList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mGuardKind.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mGuardInstructionList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mEndOfGuardDeclaration.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_decoratedGuardDeclaration::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_decoratedGuardDeclaration (mProperty_mReceiverTypeName, mProperty_mGuardName, mProperty_mIsPublic, mProperty_mGuardAttributeList, mProperty_mGuardFormalArgumentList, mProperty_mGuardKind, mProperty_mGuardInstructionList, mProperty_mEndOfGuardDeclaration COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           @decoratedGuardDeclaration type                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_decoratedGuardDeclaration ("decoratedGuardDeclaration",
+                                                  & kTypeDescriptor_GALGAS_abstractDecoratedDeclaration) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_decoratedGuardDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_decoratedGuardDeclaration ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_decoratedGuardDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_decoratedGuardDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_decoratedGuardDeclaration GALGAS_decoratedGuardDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_decoratedGuardDeclaration result ;
+  const GALGAS_decoratedGuardDeclaration * p = (const GALGAS_decoratedGuardDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_decoratedGuardDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("decoratedGuardDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 
 
 typeComparisonResult GALGAS_callInstructionAST::objectCompare (const GALGAS_callInstructionAST & inOperand) const {
@@ -14070,208 +14191,6 @@ GALGAS_sectionModePanicRoutineIR GALGAS_sectionModePanicRoutineIR::extractObject
       result = *p ;
     }else{
       inCompiler->castError ("sectionModePanicRoutineIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cPtr_convertExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_convertExpressionAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mExpression.objectCompare (p->mProperty_mExpression) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mTypeName.objectCompare (p->mProperty_mTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mEndOfExpression.objectCompare (p->mProperty_mEndOfExpression) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_convertExpressionAST::objectCompare (const GALGAS_convertExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_convertExpressionAST::GALGAS_convertExpressionAST (void) :
-GALGAS_expressionAST () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_convertExpressionAST::GALGAS_convertExpressionAST (const cPtr_convertExpressionAST * inSourcePtr) :
-GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_convertExpressionAST) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_convertExpressionAST GALGAS_convertExpressionAST::constructor_new (const GALGAS_expressionAST & inAttribute_mExpression,
-                                                                          const GALGAS_lstring & inAttribute_mTypeName,
-                                                                          const GALGAS_location & inAttribute_mEndOfExpression
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_convertExpressionAST result ;
-  if (inAttribute_mExpression.isValid () && inAttribute_mTypeName.isValid () && inAttribute_mEndOfExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_convertExpressionAST (inAttribute_mExpression, inAttribute_mTypeName, inAttribute_mEndOfExpression COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_expressionAST GALGAS_convertExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_convertExpressionAST) ;
-    result = p->mProperty_mExpression ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_expressionAST cPtr_convertExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExpression ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_convertExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_convertExpressionAST) ;
-    result = p->mProperty_mTypeName ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring cPtr_convertExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTypeName ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location GALGAS_convertExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_convertExpressionAST) ;
-    result = p->mProperty_mEndOfExpression ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location cPtr_convertExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mEndOfExpression ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                    Pointer class for @convertExpressionAST class                                    *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_convertExpressionAST::cPtr_convertExpressionAST (const GALGAS_expressionAST & in_mExpression,
-                                                      const GALGAS_lstring & in_mTypeName,
-                                                      const GALGAS_location & in_mEndOfExpression
-                                                      COMMA_LOCATION_ARGS) :
-cPtr_expressionAST (THERE),
-mProperty_mExpression (in_mExpression),
-mProperty_mTypeName (in_mTypeName),
-mProperty_mEndOfExpression (in_mEndOfExpression) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_convertExpressionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_convertExpressionAST ;
-}
-
-void cPtr_convertExpressionAST::description (C_String & ioString,
-                                             const int32_t inIndentation) const {
-  ioString << "[@convertExpressionAST:" ;
-  mProperty_mExpression.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_convertExpressionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_convertExpressionAST (mProperty_mExpression, mProperty_mTypeName, mProperty_mEndOfExpression COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             @convertExpressionAST type                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_convertExpressionAST ("convertExpressionAST",
-                                             & kTypeDescriptor_GALGAS_expressionAST) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_convertExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_convertExpressionAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_convertExpressionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_convertExpressionAST (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_convertExpressionAST GALGAS_convertExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_convertExpressionAST result ;
-  const GALGAS_convertExpressionAST * p = (const GALGAS_convertExpressionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_convertExpressionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("convertExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

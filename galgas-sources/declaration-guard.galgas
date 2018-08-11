@@ -161,56 +161,80 @@ func guardImplementationMangledNameFromCall ?let @string inReceiverTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
+#!  ENTER IN CONTEXT                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @guardDeclarationListAST guardSemanticAnalysis
-  ?receiverType:@PLMType inReceiverType
-  ?context:let @semanticContext inSemanticContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+method @guardDeclarationListAST enterGuardsInContext
+  ?receiverTypeName:let @lstring inReceiverTypeName
+  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
+  ?!context:@semanticContext ioContext
+  ?!guardMap:@guardMapForContext ioGuardMap
+  ?!@declarationDecorationList ioDecoratedDeclarationList
 {
+#---------------------------------------- Enter guards in guard map
   for guard in self do
-    var warnIfUnused = true
-    for (attribute) in guard.mGuardAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
-        end
-        warnIfUnused = false    
-      else
-        error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
-      end
-    end
-    guardSemanticAnalysis (
-      !receiverType:inReceiverType
+  #--- Guard mangled name
+    let guardMangledName = guardUserMangledNameFromAST (
+      !inReceiverLLVMBaseTypeName
       !guard.mGuardName
+      !guard.mGuardFormalArgumentList
+    )
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
+  #--- Enter in context
+    [!?ioGuardMap insertKey
+      !guardMangledName
+      !guard.mIsPublic
+      !signature
+    ]
+    ioDecoratedDeclarationList += !@decoratedGuardDeclaration.new {
+      !inReceiverTypeName
+      !guard.mGuardName
+      !guard.mIsPublic
+      !guard.mGuardAttributeList
       !guard.mGuardFormalArgumentList
       !guard.mGuardKind
       !guard.mGuardInstructionList
       !guard.mEndOfGuardDeclaration
-      !warnIfUnused:warnIfUnused
-      !context:inSemanticContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
+    }
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc guardSemanticAnalysis
-  ?receiverType:let @PLMType inSelfType
-  ?let @lstring inGuardName
-  ?let @routineFormalArgumentListAST inRoutineFormalArgumentList
-  ?let @guardKind inGuardKind
-  ?let @instructionListAST inRoutineInstructionList
-  ?let @location inEndOfRoutineDeclaration
-  ?warnIfUnused:let @bool inWarnIfUnused
+class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
+  @lstring mReceiverTypeName
+  @lstring mGuardName
+  @bool mIsPublic
+  @lstringlist mGuardAttributeList
+  @routineFormalArgumentListAST mGuardFormalArgumentList
+  @guardKind mGuardKind
+  @instructionListAST mGuardInstructionList
+  @location mEndOfGuardDeclaration
+}
+
+#·······················································································································
+
+override method @decoratedGuardDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  let receiverType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
+#----------- 
+  var warnIfUnused = true
+  for (attribute) in mGuardAttributeList do
+    if attribute.string == noUnusedWarningAttribute () then
+      if not warnIfUnused then
+        error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
+      end
+      warnIfUnused = false    
+    else
+      error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
+    end
+  end
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
@@ -219,10 +243,10 @@ proc guardSemanticAnalysis
   @guardKindGenerationIR convenienceGuardGenerationIR
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
-  switch inGuardKind
+  switch mGuardKind
   case baseGuard :
   #--- Add 'accept" output variable
-    let resultVarName = @lstring.new {!acceptVariablePLMName() !inGuardName.location}
+    let resultVarName = @lstring.new {!acceptVariablePLMName() !mGuardName.location}
     [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType ?2*]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
@@ -235,15 +259,15 @@ proc guardSemanticAnalysis
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
-      !inRoutineFormalArgumentList
+      !mGuardFormalArgumentList
       !?universalMap
       !?formalArguments
       !warningOnUnusedArgs: true
     )
     convenienceGuardGenerationIR = .baseGuard
   #--- Analyze instruction list
-    [inRoutineInstructionList analyzeRoutineInstructionList
-      !self:inSelfType
+    [mGuardInstructionList analyzeRoutineInstructionList
+      !self:receiverType
       !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
       !context:inContext
       !mode:.guardMode
@@ -257,14 +281,14 @@ proc guardSemanticAnalysis
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
-      !inRoutineFormalArgumentList
+      !mGuardFormalArgumentList
       !?universalMap
       !?formalArguments
       !warningOnUnusedArgs: true
     )
   #--- Analyze base guard
     [baseGuardInstruction baseGuardAnalyze 
-      !self:inSelfType
+      !self:receiverType
       !routineAttributes:.mutating | .directPropertyAccess
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
@@ -274,8 +298,8 @@ proc guardSemanticAnalysis
       ?convenienceGuardGenerationIR
     ]
   #--- Analyze instruction list
-    [inRoutineInstructionList analyzeRoutineInstructionList
-      !self:inSelfType
+    [mGuardInstructionList analyzeRoutineInstructionList
+      !self:receiverType
       !routineAttributes: .mutating | .directPropertyAccess | .panicAllowed
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
@@ -288,41 +312,43 @@ proc guardSemanticAnalysis
   end 
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
-  [!?universalMap closeBranch !inEndOfRoutineDeclaration]
-  [!?universalMap closeOverride !inEndOfRoutineDeclaration]
+  [!?universalMap closeBranch !mEndOfGuardDeclaration]
+  [!?universalMap closeOverride !mEndOfGuardDeclaration]
 #--- Guard mangled name
   let guardUserMangledName = guardUserMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else inSelfType.llvmBaseTypeName end
-    !inGuardName
-    !inRoutineFormalArgumentList
+    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
+    !mGuardName
+    !mGuardFormalArgumentList
   )
   let guardImplementationMangledName = guardImplementationMangledNameFromAST (
-    !if inSelfType.kind == .void then "" else inSelfType.llvmBaseTypeName end
-    !inGuardName
-    !inRoutineFormalArgumentList
+    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
+    !mGuardName
+    !mGuardFormalArgumentList
   )
 #--- Code generation
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
     !guardUserMangledName
     !false # Is not root
-    !inWarnIfUnused
+    !warnIfUnused
     !guardImplementationMangledName
     !formalArguments
-    !inSelfType
+    !receiverType
     !convenienceGuardGenerationIR
   }
   ioIntermediateCodeStruct.mRoutineListIR += !@guardImplementationRoutineIR.new {
     !guardImplementationMangledName
     !false # Is not root
-    !inWarnIfUnused
+    !warnIfUnused
     !formalArguments
-    !inSelfType
+    !receiverType
     !convenienceGuardGenerationIR
     !allocaList
     !instructionGenerationList
   }
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @callInstructionAST baseGuardAnalyze
@@ -482,12 +508,6 @@ override method @guardUserRoutineIR enterAccessibleEntities
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
   ioInvokedRoutineSet += !mMangledImplementationGuardName
-#  for instruction in mInstructionGenerationList do
-#    [instruction.mInstructionGeneration enterAccessibleEntities
-#      !?ioInvokedRoutineSet
-#      !?ioMaxBranchOfOnInstructions
-#    ]
-#  end
 }
 
 #·······················································································································
