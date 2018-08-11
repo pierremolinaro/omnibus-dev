@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @structureDeclarationAST : @abstractDeclarationAST {
-  @lstring mStructureTypeName
+  @lstring mReceiverTypeName
   @lstring mPLMTypeSpecificName
   @lstring mLLVMBaseTypeName
   @lstringlist mAttributeListAST
@@ -206,16 +206,16 @@ syntax extension plm_syntax {
 
 override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add structure type name as node
-  [!?ioGraph addNode !mStructureTypeName !self]
+  [!?ioGraph addNode !mReceiverTypeName !self]
 #--- Add property types
   for (4* fieldTypeName initExpression *) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      [!?ioGraph addEdge !mStructureTypeName !fieldTypeName]
+      [!?ioGraph addEdge !mReceiverTypeName !fieldTypeName]
     end
     switch initExpression
     case noExpression :
     case expression (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !mStructureTypeName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
     end
   end
 #--- Add structure functions
@@ -236,13 +236,13 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #·······················································································································
 
 override getter @structureDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = mStructureTypeName 
+  outRepresentation = mReceiverTypeName 
 }
 
 #·······················································································································
 
 override getter @structureDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mStructureTypeName.location
+  outLocation = mReceiverTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -286,8 +286,6 @@ override method @structureDeclarationAST enterInContext
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-#---------------------------------------- Self type proxy
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mStructureTypeName ?let selfTypeProxy]
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
@@ -313,7 +311,7 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Constructor map
   @constructorMap constructorMap = {}
   [!?constructorMap insertKey
-    !.new {!constructorKey !mStructureTypeName.location}
+    !.new {!constructorKey !mReceiverTypeName.location}
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
@@ -325,7 +323,7 @@ override method @structureDeclarationAST enterInContext
       if [typeAttributes copyable] then
         error s : "duplicated attribute"
       elsif not canBeCopied then
-        error mStructureTypeName : "this structure cannot be copied, one field is not copyable"
+        error mReceiverTypeName : "this structure cannot be copied, one field is not copyable"
       end
     else
       error s : "only @copyable attribute is allowed here"
@@ -335,126 +333,20 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter functions in property map
-  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !mLLVMBaseTypeName !?context:ioContext !?propertyMap]
+  [mFunctionDeclarationListAST enterFunctionsInPropertyMap
+    !mLLVMBaseTypeName
+    !?context:ioContext
+    !?propertyMap
+  ]
 #---------------------------------------- Enter system routines in property map
-  for system in mSystemRoutineListAST do
-  #--- Attributes
-    @stringset attributeSet = {}
-    for attribute in system.mAttributeList do
-      attributeSet += !attribute.mValue.string
-    end
-    let exportedRoutine = [attributeSet hasKey !exportedAttribute ()]
-    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
-  #--- Routine mangled names
-    let userRoutineMangledName = systemUserMangledNameFromAST (
-      !mLLVMBaseTypeName
-      !system.mRoutineKind
-      !system.mName
-      !system.mFormalArgumentList
-    )
-    let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
-      !mLLVMBaseTypeName
-      !system.mRoutineKind
-      !system.mName
-      !system.mFormalArgumentList
-    )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
-  #--- Attributes
-    var mutating = false
-    var noUnusedWarning = false
-    var isSafe = false
-    for (attribute) in system.mAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if noUnusedWarning then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
-        end
-        noUnusedWarning = true    
-      elsif attribute.string == mutatingAttribute () then
-        if mutating then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
-        end
-        mutating = true    
-      elsif attribute.string == safeAttribute () then
-        if isSafe then
-          error attribute : "duplicated @" + safeAttribute () + " attribute" fixit { remove }
-        end
-        isSafe = true    
-      else
-        error attribute 
-        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
-        fixit { remove }
-      end
-    end
-  #--- Routine descriptor
-    var s = ""
-    if mLLVMBaseTypeName.string != "" then
-      s += mLLVMBaseTypeName.string + "."
-    end
-    s += system.mName.string
-    s += "("
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in system.mFormalArgumentList do
-      s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-    end
-    s += ")"
-    let descriptor = @routineDescriptor.new {
-      !isPublic:system.mPublic
-      !exported:exportedRoutine
-      !name:system.mName
-      !nameForLLVMGeneration:s # userRoutineMangledName
-      !routineKind:system.mRoutineKind
-      !signature:signature
-      !returnTypeProxy:returnTypeProxy
-      !canAccessProperties:true
-      !canMutateProperties:canMutateProperties
-      !safe:isSafe
-    }
-  #--- Enter in structure map
-    let routineMangledName = routineMangledNameFromAST (
-      !mLLVMBaseTypeName
-      !system.mName
-      !system.mFormalArgumentList
-    )
-    [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
-  #--- 
-    ioRoutineListIR += !@systemUserRoutineIR.new {
-      !userRoutineMangledName
-      !false
-      !false
-      !implementationRoutineMangledName
-      !signature
-      !selfTypeProxy
-      !system.mRoutineKind == .section # If false, service or primitive
-      !returnTypeProxy
-    }
-    @mode mode
-    switch system.mRoutineKind
-    case section : mode = .sectionMode
-    case primitive : mode = .primitiveMode
-    case service : mode = .serviceMode
-    case function (*) : error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
-    end
-    @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
-    if not isSafe then
-      attributes = attributes | .panicAllowed
-    end
-    ioDecoratedRoutineList +=
-      !mStructureTypeName
-      !mode
-      !false
-      !.function {!executionMode: mode}
-      !noUnusedWarning
-      !true # mExportedRoutine
-      !attributes
-      !implementationRoutineMangledName
-      !system.mFormalArgumentList
-      !true # warningOnUnusedArgs
-      !system.mInstructionList
-      !system.mEndOfInstructionListLocation
-      !system.mReturnTypeName  # Empty string if no returned value
-  end
+  [mSystemRoutineListAST enterSystemRoutineInContext
+    !receiverTypeName: mReceiverTypeName
+    !receiverLLVMBaseTypeName: mLLVMBaseTypeName
+    !?propertyMap: propertyMap
+    !?context: ioContext
+    !?ioDecoratedRoutineList
+    !?ioRoutineListIR
+  ]
 #---------------------------------------- Enter guards in guard map
   @guardMapForContext guardMap = {}
   for guard in mGuardListAST do
@@ -485,7 +377,7 @@ override method @structureDeclarationAST enterInContext
     !llvmBaseTypeName:mLLVMBaseTypeName
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:mStructureTypeName
+    !lkey:mReceiverTypeName
     !type:structureType
     !index:[ioContext.mTypeMap count]
     !generate:true
@@ -522,7 +414,7 @@ override method @structureDeclarationAST enterInContext
     end
     let functionMangledName = routineMangledNameFromAST (!mLLVMBaseTypeName !function.mFunctionName !function.mFunctionFormalArgumentList)
     ioDecoratedRoutineList +=
-      !mStructureTypeName
+      !mReceiverTypeName
       !function.mMode
       !false
       !.function {!executionMode: function.mMode}
@@ -538,7 +430,7 @@ override method @structureDeclarationAST enterInContext
   end
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
-    !mStructureTypeName
+    !mReceiverTypeName
     !mGuardListAST
     !mMayImplementDeinit
   }
@@ -667,7 +559,7 @@ method @structurePropertyListAST-element enterPropertyInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedStructureDeclaration : @abstractDecoratedDeclaration {
-  @lstring mStructureTypeName
+  @lstring mReceiverTypeName
   @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
 }
@@ -679,7 +571,7 @@ override method @decoratedStructureDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureTypeName} type]
+  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
 #----------- Analyze guards
   [mGuardListAST guardSemanticAnalysis
     !receiverType:structureType

@@ -2508,7 +2508,7 @@ typeComparisonResult cPtr_structureDeclarationAST::dynamicObjectCompare (const a
   const cPtr_structureDeclarationAST * p = (const cPtr_structureDeclarationAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_structureDeclarationAST) ;
   if (kOperandEqual == result) {
-    result = mProperty_mStructureTypeName.objectCompare (p->mProperty_mStructureTypeName) ;
+    result = mProperty_mReceiverTypeName.objectCompare (p->mProperty_mReceiverTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mPLMTypeSpecificName.objectCompare (p->mProperty_mPLMTypeSpecificName) ;
@@ -2590,7 +2590,7 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_structureDeclarationAST GALGAS_structureDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mStructureTypeName,
+GALGAS_structureDeclarationAST GALGAS_structureDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mReceiverTypeName,
                                                                                 const GALGAS_lstring & inAttribute_mPLMTypeSpecificName,
                                                                                 const GALGAS_lstring & inAttribute_mLLVMBaseTypeName,
                                                                                 const GALGAS_lstringlist & inAttribute_mAttributeListAST,
@@ -2602,28 +2602,28 @@ GALGAS_structureDeclarationAST GALGAS_structureDeclarationAST::constructor_new (
                                                                                 const GALGAS_bool & inAttribute_mMayImplementDeinit
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_structureDeclarationAST result ;
-  if (inAttribute_mStructureTypeName.isValid () && inAttribute_mPLMTypeSpecificName.isValid () && inAttribute_mLLVMBaseTypeName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mGenerateAssignmentRoutine.isValid () && inAttribute_mStructurePropertyListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mSystemRoutineListAST.isValid () && inAttribute_mGuardListAST.isValid () && inAttribute_mMayImplementDeinit.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_structureDeclarationAST (inAttribute_mStructureTypeName, inAttribute_mPLMTypeSpecificName, inAttribute_mLLVMBaseTypeName, inAttribute_mAttributeListAST, inAttribute_mGenerateAssignmentRoutine, inAttribute_mStructurePropertyListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mSystemRoutineListAST, inAttribute_mGuardListAST, inAttribute_mMayImplementDeinit COMMA_THERE)) ;
+  if (inAttribute_mReceiverTypeName.isValid () && inAttribute_mPLMTypeSpecificName.isValid () && inAttribute_mLLVMBaseTypeName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mGenerateAssignmentRoutine.isValid () && inAttribute_mStructurePropertyListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mSystemRoutineListAST.isValid () && inAttribute_mGuardListAST.isValid () && inAttribute_mMayImplementDeinit.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_structureDeclarationAST (inAttribute_mReceiverTypeName, inAttribute_mPLMTypeSpecificName, inAttribute_mLLVMBaseTypeName, inAttribute_mAttributeListAST, inAttribute_mGenerateAssignmentRoutine, inAttribute_mStructurePropertyListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mSystemRoutineListAST, inAttribute_mGuardListAST, inAttribute_mMayImplementDeinit COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_structureDeclarationAST::getter_mStructureTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_structureDeclarationAST::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_structureDeclarationAST * p = (const cPtr_structureDeclarationAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_structureDeclarationAST) ;
-    result = p->mProperty_mStructureTypeName ;
+    result = p->mProperty_mReceiverTypeName ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_structureDeclarationAST::getter_mStructureTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStructureTypeName ;
+GALGAS_lstring cPtr_structureDeclarationAST::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReceiverTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2792,7 +2792,7 @@ GALGAS_bool cPtr_structureDeclarationAST::getter_mMayImplementDeinit (UNUSED_LOC
 //                                  Pointer class for @structureDeclarationAST class                                   *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_structureDeclarationAST::cPtr_structureDeclarationAST (const GALGAS_lstring & in_mStructureTypeName,
+cPtr_structureDeclarationAST::cPtr_structureDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
                                                             const GALGAS_lstring & in_mPLMTypeSpecificName,
                                                             const GALGAS_lstring & in_mLLVMBaseTypeName,
                                                             const GALGAS_lstringlist & in_mAttributeListAST,
@@ -2804,7 +2804,7 @@ cPtr_structureDeclarationAST::cPtr_structureDeclarationAST (const GALGAS_lstring
                                                             const GALGAS_bool & in_mMayImplementDeinit
                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
-mProperty_mStructureTypeName (in_mStructureTypeName),
+mProperty_mReceiverTypeName (in_mReceiverTypeName),
 mProperty_mPLMTypeSpecificName (in_mPLMTypeSpecificName),
 mProperty_mLLVMBaseTypeName (in_mLLVMBaseTypeName),
 mProperty_mAttributeListAST (in_mAttributeListAST),
@@ -2825,7 +2825,7 @@ const C_galgas_type_descriptor * cPtr_structureDeclarationAST::classDescriptor (
 void cPtr_structureDeclarationAST::description (C_String & ioString,
                                                 const int32_t inIndentation) const {
   ioString << "[@structureDeclarationAST:" ;
-  mProperty_mStructureTypeName.description (ioString, inIndentation+1) ;
+  mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mPLMTypeSpecificName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -2851,7 +2851,7 @@ void cPtr_structureDeclarationAST::description (C_String & ioString,
 
 acPtr_class * cPtr_structureDeclarationAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_structureDeclarationAST (mProperty_mStructureTypeName, mProperty_mPLMTypeSpecificName, mProperty_mLLVMBaseTypeName, mProperty_mAttributeListAST, mProperty_mGenerateAssignmentRoutine, mProperty_mStructurePropertyListAST, mProperty_mFunctionDeclarationListAST, mProperty_mSystemRoutineListAST, mProperty_mGuardListAST, mProperty_mMayImplementDeinit COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_structureDeclarationAST (mProperty_mReceiverTypeName, mProperty_mPLMTypeSpecificName, mProperty_mLLVMBaseTypeName, mProperty_mAttributeListAST, mProperty_mGenerateAssignmentRoutine, mProperty_mStructurePropertyListAST, mProperty_mFunctionDeclarationListAST, mProperty_mSystemRoutineListAST, mProperty_mGuardListAST, mProperty_mMayImplementDeinit COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -3357,7 +3357,7 @@ typeComparisonResult cPtr_decoratedStructureDeclaration::dynamicObjectCompare (c
   const cPtr_decoratedStructureDeclaration * p = (const cPtr_decoratedStructureDeclaration *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_decoratedStructureDeclaration) ;
   if (kOperandEqual == result) {
-    result = mProperty_mStructureTypeName.objectCompare (p->mProperty_mStructureTypeName) ;
+    result = mProperty_mReceiverTypeName.objectCompare (p->mProperty_mReceiverTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mGuardListAST.objectCompare (p->mProperty_mGuardListAST) ;
@@ -3411,33 +3411,33 @@ GALGAS_abstractDecoratedDeclaration (inSourcePtr) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_decoratedStructureDeclaration GALGAS_decoratedStructureDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mStructureTypeName,
+GALGAS_decoratedStructureDeclaration GALGAS_decoratedStructureDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mReceiverTypeName,
                                                                                             const GALGAS_guardDeclarationListAST & inAttribute_mGuardListAST,
                                                                                             const GALGAS_bool & inAttribute_mMayImplementDeinit
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_decoratedStructureDeclaration result ;
-  if (inAttribute_mStructureTypeName.isValid () && inAttribute_mGuardListAST.isValid () && inAttribute_mMayImplementDeinit.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_decoratedStructureDeclaration (inAttribute_mStructureTypeName, inAttribute_mGuardListAST, inAttribute_mMayImplementDeinit COMMA_THERE)) ;
+  if (inAttribute_mReceiverTypeName.isValid () && inAttribute_mGuardListAST.isValid () && inAttribute_mMayImplementDeinit.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_decoratedStructureDeclaration (inAttribute_mReceiverTypeName, inAttribute_mGuardListAST, inAttribute_mMayImplementDeinit COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_decoratedStructureDeclaration::getter_mStructureTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_decoratedStructureDeclaration::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_decoratedStructureDeclaration * p = (const cPtr_decoratedStructureDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_decoratedStructureDeclaration) ;
-    result = p->mProperty_mStructureTypeName ;
+    result = p->mProperty_mReceiverTypeName ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cPtr_decoratedStructureDeclaration::getter_mStructureTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStructureTypeName ;
+GALGAS_lstring cPtr_decoratedStructureDeclaration::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReceiverTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3480,12 +3480,12 @@ GALGAS_bool cPtr_decoratedStructureDeclaration::getter_mMayImplementDeinit (UNUS
 //                               Pointer class for @decoratedStructureDeclaration class                                *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_decoratedStructureDeclaration::cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mStructureTypeName,
+cPtr_decoratedStructureDeclaration::cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mReceiverTypeName,
                                                                         const GALGAS_guardDeclarationListAST & in_mGuardListAST,
                                                                         const GALGAS_bool & in_mMayImplementDeinit
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractDecoratedDeclaration (THERE),
-mProperty_mStructureTypeName (in_mStructureTypeName),
+mProperty_mReceiverTypeName (in_mReceiverTypeName),
 mProperty_mGuardListAST (in_mGuardListAST),
 mProperty_mMayImplementDeinit (in_mMayImplementDeinit) {
 }
@@ -3499,7 +3499,7 @@ const C_galgas_type_descriptor * cPtr_decoratedStructureDeclaration::classDescri
 void cPtr_decoratedStructureDeclaration::description (C_String & ioString,
                                                       const int32_t inIndentation) const {
   ioString << "[@decoratedStructureDeclaration:" ;
-  mProperty_mStructureTypeName.description (ioString, inIndentation+1) ;
+  mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -3511,7 +3511,7 @@ void cPtr_decoratedStructureDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_decoratedStructureDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_decoratedStructureDeclaration (mProperty_mStructureTypeName, mProperty_mGuardListAST, mProperty_mMayImplementDeinit COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedStructureDeclaration (mProperty_mReceiverTypeName, mProperty_mGuardListAST, mProperty_mMayImplementDeinit COMMA_THERE)) ;
   return ptr ;
 }
 

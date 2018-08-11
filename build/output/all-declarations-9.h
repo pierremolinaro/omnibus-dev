@@ -688,3 +688,12 @@ class GALGAS_string function_panicRoutineNameForFilePath (const class GALGAS_str
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              Function 'panicModeName'                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+

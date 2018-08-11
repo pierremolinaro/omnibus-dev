@@ -7193,7 +7193,9 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_systemRoutin
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_enterSystemRoutineInContext (const class GALGAS_systemRoutineDeclarationListAST inObject,
-                                                  const class GALGAS_string constin_inReceiverTypeName,
+                                                  const class GALGAS_lstring constin_inReceiverTypeName,
+                                                  const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
+                                                  class GALGAS_propertyMap & io_ioPropertyMap,
                                                   class GALGAS_semanticContext & io_ioContext,
                                                   class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
                                                   class GALGAS_routineListIR & io_ioRoutineListIR,

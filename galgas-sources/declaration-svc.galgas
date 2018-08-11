@@ -187,11 +187,16 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @systemRoutineDeclarationListAST enterSystemRoutineInContext
-  ?receiverType:let @string inReceiverTypeName
+  ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
+  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
+  ?!propertyMap: @propertyMap ioPropertyMap
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR ioRoutineListIR
 {
+#---------------------------------------- Self type proxy
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !inReceiverTypeName ?let selfTypeProxy]
+#---------------------------------------- Self type proxy
   for system in self do
   #--- Attributes
     @stringset attributeSet = {}
@@ -202,13 +207,13 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
 #    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
   #--- Routine mangled names
     let userRoutineMangledName = systemUserMangledNameFromAST (
-      !"" # mLLVMBaseTypeName
+      !inReceiverLLVMBaseTypeName
       !system.mRoutineKind
       !system.mName
       !system.mFormalArgumentList
     )
     let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
-      !"" # mLLVMBaseTypeName
+      !inReceiverLLVMBaseTypeName
       !system.mRoutineKind
       !system.mName
       !system.mFormalArgumentList
@@ -243,36 +248,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
         fixit { remove }
       end
     end
-  #--- Routine descriptor
-#    var s = ""
-#    if mLLVMBaseTypeName.string != "" then
-#      s += mLLVMBaseTypeName.string + "."
-#    end
-#    s += system.mName.string
-#    s += "("
-#    for (formalArgumentPassingMode selector formalArgumentTypeName *) in system.mFormalArgumentList do
-#      s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-#    end
-#    s += ")"
-#    let descriptor = @routineDescriptor.new {
-#      !isPublic:system.mPublic
-#      !exported:exportedRoutine
-#      !name:system.mName
-#      !nameForLLVMGeneration:s # userRoutineMangledName
-#      !routineKind:system.mRoutineKind
-#      !signature:signature
-#      !returnTypeProxy:returnTypeProxy
-#      !canAccessProperties:true
-#      !canMutateProperties:canMutateProperties
-#      !safe:isSafe
-#    }
-  #--- Enter in structure map
-#    let routineMangledName = routineMangledNameFromAST (
-#      !mLLVMBaseTypeName
-#      !system.mName
-#      !system.mFormalArgumentList
-#    )
-#    [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
   #--- 
     ioRoutineListIR += !@systemUserRoutineIR.new {
       !userRoutineMangledName
@@ -280,7 +255,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !false
       !implementationRoutineMangledName
       !signature
-      !.null # selfTypeProxy
+      !selfTypeProxy
       !system.mRoutineKind == .section # If false, service or primitive
       !returnTypeProxy
     }
@@ -296,7 +271,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       attributes = attributes | .panicAllowed
     end
     ioDecoratedRoutineList +=
-      !["" nowhere] # mStructureTypeName
+      !inReceiverTypeName
       !mode
       !false
       !.function {!executionMode: mode}
@@ -311,8 +286,8 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !system.mReturnTypeName  # Empty string if no returned value
   #--- Enter in context
     var s = ""
-    if inReceiverTypeName != "" then
-      s += inReceiverTypeName + "."
+    if inReceiverLLVMBaseTypeName != "" then
+      s += inReceiverLLVMBaseTypeName + "."
     end
     s += system.mName.string
     s += "("
@@ -320,24 +295,32 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
     s += ")"
+    let descriptor = @routineDescriptor.new {
+      !isPublic:system.mPublic
+      !exported:false
+      !name:system.mName
+      !nameForLLVMGeneration:s # routineMangledName
+      !routineKind:system.mRoutineKind
+      !signature:signature
+      !returnTypeProxy:returnTypeProxy
+      !canAccessProperties:true
+      !canMutateProperties:mutating
+      !safe:isSafe
+    }
     [!?ioContext.mRoutineMapForContext insertRoutine
       !inReceiverTypeName
       !system.mName
       ![system.mFormalArgumentList routineSignature !system.mName]
       !.new{ !s !system.mName} # routineMangledName
-      !.new {
-        !isPublic:system.mPublic
-        !exported:false
-        !name:system.mName
-        !nameForLLVMGeneration:s # routineMangledName
-        !routineKind:system.mRoutineKind
-        !signature:signature
-        !returnTypeProxy:returnTypeProxy
-        !canAccessProperties:true
-        !canMutateProperties:mutating
-        !safe:isSafe
-      }
+      !descriptor
     ]
+  #--- Enter in structure map
+    let routineMangledName = routineMangledNameFromAST (
+      !inReceiverLLVMBaseTypeName
+      !system.mName
+      !system.mFormalArgumentList
+    )
+    [!?ioPropertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
   end
 }
 

@@ -113,8 +113,6 @@ override method @syncDeclarationAST enterInContext
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-#---------------------------------------- Self type proxy
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mSyncToolName ?let selfTypeProxy]
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
@@ -144,124 +142,20 @@ override method @syncDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Enter functions in property map
-  [mFunctionDeclarationListAST enterFunctionsInPropertyMap !mSyncToolName !?context:ioContext !?propertyMap]
+  [mFunctionDeclarationListAST enterFunctionsInPropertyMap
+    !mSyncToolName
+    !?context:ioContext
+    !?propertyMap
+  ]
 #---------------------------------------- Enter system routines in property map
-  for system in mSystemRoutineListAST do
-  #--- Attributes
-    @stringset attributeSet = {}
-    for attribute in system.mAttributeList do
-      attributeSet += !attribute.mValue.string
-    end
-    let exportedRoutine = [attributeSet hasKey !exportedAttribute ()]
-    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !mSyncToolName
-      !system.mName
-      !system.mFormalArgumentList
-    )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
-  #--- Attributes
-    var mutating = false
-    var noUnusedWarning = false
-    var isSafe = false
-    for (attribute) in system.mAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if noUnusedWarning then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
-        end
-        noUnusedWarning = true    
-      elsif attribute.string == mutatingAttribute () then
-        if mutating then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
-        end
-        mutating = true    
-      elsif attribute.string == safeAttribute () then
-        if isSafe then
-          error attribute : "duplicated @" + safeAttribute () + " attribute" fixit { remove }
-        end
-        isSafe = true    
-      else
-        error attribute 
-        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
-        fixit { remove }
-      end
-    end
-  #--- Routine descriptor
-    var s = mSyncToolName.string + "."
-    s += system.mName.string
-    s += "("
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in system.mFormalArgumentList do
-      s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-    end
-    s += ")"
-    let descriptor = @routineDescriptor.new {
-      !isPublic:system.mPublic
-      !exported:exportedRoutine
-      !name:system.mName
-      !nameForLLVMGeneration:s # routineMangledName
-      !routineKind:system.mRoutineKind
-      !signature:signature
-      !returnTypeProxy:returnTypeProxy
-      !canAccessProperties:true
-      !canMutateProperties:canMutateProperties
-      !safe:isSafe
-    }
-  #--- Enter in structure map
-    [!?propertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
-  #--- 
-  #--- Routine mangled names
-    let userRoutineMangledName = systemUserMangledNameFromAST (
-      !mSyncToolName
-      !system.mRoutineKind
-      !system.mName
-      !system.mFormalArgumentList
-    )
-    let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
-      !mSyncToolName
-      !system.mRoutineKind
-      !system.mName
-      !system.mFormalArgumentList
-    )
-    ioRoutineListIR += !@systemUserRoutineIR.new {
-      !userRoutineMangledName
-      !false
-      !false
-      !implementationRoutineMangledName
-      !signature
-      !selfTypeProxy
-      !system.mRoutineKind == .section # If false, service or primitive
-      !returnTypeProxy
-    }
-    @mode mode
-    switch system.mRoutineKind
-    case section : mode = .sectionMode
-    case primitive : mode = .primitiveMode
-    case service : mode = .serviceMode
-    case function (*) : error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
-    end
-    @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
-    if not isSafe then
-      attributes = attributes | .panicAllowed
-    end
-    ioDecoratedRoutineList +=
-      !mSyncToolName
-      !mode
-      !false
-      !.function {!executionMode: mode}
-      !noUnusedWarning
-      !true # mExportedRoutine
-      !attributes
-      !implementationRoutineMangledName
-      !system.mFormalArgumentList
-      !true # warningOnUnusedArgs
-      !system.mInstructionList
-      !system.mEndOfInstructionListLocation
-      !system.mReturnTypeName  # Empty string if no returned value
-  end
+  [mSystemRoutineListAST enterSystemRoutineInContext
+    !receiverTypeName: mSyncToolName
+    !receiverLLVMBaseTypeName: mSyncToolName
+    !?propertyMap: propertyMap
+    !?context: ioContext
+    !?ioDecoratedRoutineList
+    !?ioRoutineListIR
+  ]
 #---------------------------------------- Enter guards in guard map
   @guardMapForContext guardMap = {}
   for guard in mGuardListAST do

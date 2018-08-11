@@ -408,7 +408,7 @@ class GALGAS_decoratedStructureDeclaration : public GALGAS_abstractDecoratedDecl
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -429,12 +429,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStructureD
 
 class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mStructureTypeName ;
+  public : GALGAS_lstring mProperty_mReceiverTypeName ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
   public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
-  public : cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mStructureTypeName,
+  public : cPtr_decoratedStructureDeclaration (const GALGAS_lstring & in_mReceiverTypeName,
                                                const GALGAS_guardDeclarationListAST & in_mGuardListAST,
                                                const GALGAS_bool & in_mMayImplementDeinit
                                                COMMA_LOCATION_ARGS) ;
@@ -443,7 +443,7 @@ class cPtr_decoratedStructureDeclaration : public cPtr_abstractDecoratedDeclarat
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 //--- Description

@@ -196,7 +196,9 @@ proc buildSemanticContext
    ]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
-    !receiverType:""
+    !receiverTypeName:["" nowhere] # Empty string if standalone
+    !receiverLLVMBaseTypeName:""  # Empty string if standalone
+    !?propertyMap: * # @propertyMap ioPropertyMap
     !?context: outSemanticContext
     !?outDecoratedRoutineList
     !?outRoutineListIR

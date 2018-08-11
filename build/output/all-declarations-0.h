@@ -7905,9 +7905,9 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPLMTypeSpecificName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
 
@@ -8802,7 +8802,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclar
 
 class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mStructureTypeName ;
+  public : GALGAS_lstring mProperty_mReceiverTypeName ;
   public : GALGAS_lstring mProperty_mPLMTypeSpecificName ;
   public : GALGAS_lstring mProperty_mLLVMBaseTypeName ;
   public : GALGAS_lstringlist mProperty_mAttributeListAST ;
@@ -8814,7 +8814,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_bool mProperty_mMayImplementDeinit ;
 
 //--- Constructor
-  public : cPtr_structureDeclarationAST (const GALGAS_lstring & in_mStructureTypeName,
+  public : cPtr_structureDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
                                          const GALGAS_lstring & in_mPLMTypeSpecificName,
                                          const GALGAS_lstring & in_mLLVMBaseTypeName,
                                          const GALGAS_lstringlist & in_mAttributeListAST,
@@ -8830,7 +8830,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPLMTypeSpecificName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
