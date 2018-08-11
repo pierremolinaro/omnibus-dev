@@ -325,73 +325,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis2
-#  ?receiverType:@PLMType inReceiverType
-#  ?context:let @semanticContext inSemanticContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  for system in self do
-#    var mutating = false
-#    var noUnusedWarning = false
-#    var isSafe = false
-#    for (attribute) in system.mAttributeList do
-#      if attribute.string == noUnusedWarningAttribute () then
-#        if noUnusedWarning then
-#          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
-#        end
-#        noUnusedWarning = true    
-#      elsif attribute.string == mutatingAttribute () then
-#        if mutating then
-#          error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
-#        end
-#        mutating = true    
-#      elsif attribute.string == safeAttribute () then
-#        if isSafe then
-#          error attribute : "duplicated @" + safeAttribute () + " attribute" fixit { remove }
-#        end
-#        isSafe = true    
-#      else
-#        error attribute 
-#        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
-#        fixit { remove }
-#      end
-#    end
-#    @mode mode
-#    switch system.mRoutineKind
-#    case section : mode = .sectionMode
-#    case primitive : mode = .primitiveMode
-#    case service : mode = .serviceMode
-#    case function (*) : error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
-#    end
-#    @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
-#    if not isSafe then
-#      attributes = attributes | .panicAllowed
-#    end
-#    routineSemanticAnalysis (
-#      !receiverType:inReceiverType
-#      !system.mRoutineKind
-#      !mode
-#      !system.mName
-#      !system.mFormalArgumentList
-#      !returnTypeName:system.mReturnTypeName
-#      !system.mInstructionList
-#      !system.mEndOfInstructionListLocation
-#      !routineAttributes:attributes
-#      !warnIfUnused:not noUnusedWarning
-#      !globalFunction:true
-#      !context:inSemanticContext
-#      !?temporary:ioTemporaries
-#      !?intermediateCode:ioIntermediateCodeStruct
-#    )
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
+#!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @sectionIRlist {

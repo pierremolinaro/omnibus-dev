@@ -235,9 +235,12 @@ method @functionDeclarationListAST enterFunctionInContext
 #·······················································································································
 
 method @functionDeclarationListAST enterFunctionsInPropertyMap
-  ?let @string inReceiverLLVMBaseTypeName
+  ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
+  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
+  ?!propertyMap: @propertyMap ioPropertyMap
   ?!context:@semanticContext ioContext
-  ?!@propertyMap ioPropertyMap
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
 {
 #----
   for function in self do
@@ -275,6 +278,53 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     }
   #--- Enter in structure map
     [!?ioPropertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
+    var warnIfUnused = true
+    var functionAttributes = @routineAttributes.panicAllowed | .controlRegisterReadable
+    for (attribute) in function.mFunctionAttributeList do
+      if attribute.string == noUnusedWarningAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      elsif attribute.string == userAccessAttribute () then
+        if [functionAttributes directPropertyAccess] then
+          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
+        end
+        functionAttributes = functionAttributes | .directPropertyAccess   
+      elsif attribute.string == safeAttribute () then
+        if not [functionAttributes panicAllowed] then
+          error attribute : "duplicated @" + safeAttribute () + " attribute"
+        end
+        functionAttributes = functionAttributes - .panicAllowed   
+      elsif attribute.string == mutatingAttribute () then
+        if [functionAttributes mutating] then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+        end
+        functionAttributes = functionAttributes | .mutating    
+      else
+        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
+          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
+      end
+    end
+    let functionMangledName = routineMangledNameFromAST (
+      !inReceiverLLVMBaseTypeName
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
+    ioDecoratedRoutineList +=
+      !inReceiverTypeName
+      !function.mMode
+      !false
+      !.function {!executionMode: function.mMode}
+      !warnIfUnused
+      !false # mExportedRoutine
+      !functionAttributes
+      !functionMangledName
+      !function.mFunctionFormalArgumentList
+      !true # warningOnUnusedArgs
+      !function.mFunctionInstructionList
+      !function.mEndOfFunctionDeclaration
+      !function.mFunctionReturnTypeName  # Empty string if no returned value
   end
 }
 

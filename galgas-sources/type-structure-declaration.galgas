@@ -334,9 +334,12 @@ override method @structureDeclarationAST enterInContext
   end
 #---------------------------------------- Enter functions in property map
   [mFunctionDeclarationListAST enterFunctionsInPropertyMap
-    !mLLVMBaseTypeName
-    !?context:ioContext
-    !?propertyMap
+    !receiverTypeName: mReceiverTypeName
+    !receiverLLVMBaseTypeName: mLLVMBaseTypeName
+    !?propertyMap: propertyMap
+    !?context: ioContext
+    !?ioDecoratedRoutineList
+    !?ioRoutineListIR
   ]
 #---------------------------------------- Enter system routines in property map
   [mSystemRoutineListAST enterSystemRoutineInContext
@@ -382,52 +385,6 @@ override method @structureDeclarationAST enterInContext
     !index:[ioContext.mTypeMap count]
     !generate:true
   ]
-#---------------- Enter decorated functions
-  for function in mFunctionDeclarationListAST do
-    var warnIfUnused = true
-    var functionAttributes = @routineAttributes.panicAllowed | .controlRegisterReadable
-    for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
-        end
-        warnIfUnused = false    
-      elsif attribute.string == userAccessAttribute () then
-        if [functionAttributes directPropertyAccess] then
-          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes | .directPropertyAccess   
-      elsif attribute.string == safeAttribute () then
-        if not [functionAttributes panicAllowed] then
-          error attribute : "duplicated @" + safeAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes - .panicAllowed   
-      elsif attribute.string == mutatingAttribute () then
-        if [functionAttributes mutating] then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes | .mutating    
-      else
-        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
-          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
-      end
-    end
-    let functionMangledName = routineMangledNameFromAST (!mLLVMBaseTypeName !function.mFunctionName !function.mFunctionFormalArgumentList)
-    ioDecoratedRoutineList +=
-      !mReceiverTypeName
-      !function.mMode
-      !false
-      !.function {!executionMode: function.mMode}
-      !warnIfUnused
-      !false # mExportedRoutine
-      !functionAttributes
-      !functionMangledName
-      !function.mFunctionFormalArgumentList
-      !true # warningOnUnusedArgs
-      !function.mFunctionInstructionList
-      !function.mEndOfFunctionDeclaration
-      !function.mFunctionReturnTypeName  # Empty string if no returned value
-  end
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStructureDeclaration.new {
     !mReceiverTypeName

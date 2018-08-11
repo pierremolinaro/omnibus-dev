@@ -182,19 +182,25 @@ proc buildSemanticContext
   outDecoratedDeclarationList = {}
   outDecoratedRoutineList = {}
   outRoutineListIR = {}
-#--- Enter required routine
+#--- Enter required routines
   for requiredProc in inAST.mRequiredProcListAST do
     let procedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
     outSemanticContext.mRequiredRoutineSet += !procedureMangledName.string
   end 
 #--- Enter standalone procedures, functions, sections, services, guards in context
-  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext !?outDecoratedDeclarationList !?outDecoratedRoutineList]
+  [inAST.mISRDeclarationListAST enterInContext
+    !?outSemanticContext
+    !?outDecoratedDeclarationList
+    !?outDecoratedRoutineList
+  ]
   [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext
      !selfTypeName:["" nowhere]
      !?context:outSemanticContext
      !?outDecoratedRoutineList
    ]
-  [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
+  [inAST.mExternProcListAST enterExternProcInContext
+    !?context: outSemanticContext
+  ]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName:["" nowhere] # Empty string if standalone
     !receiverLLVMBaseTypeName:""  # Empty string if standalone
