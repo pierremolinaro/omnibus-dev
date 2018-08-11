@@ -284,53 +284,53 @@ method @taskListAST enterInContext
     for setup in task.mTaskSetupListAST do
       let mangledName = "task.setup." + task.mTaskName + "." + setup.mName
       ioDecoratedRoutineList +=
-        !task.mTaskName
-        !.userMode
-        !true
+        !receiverTypeName: task.mTaskName
+        !mode:.userMode
+        !isRequired:true
         !.function {!executionMode:.userMode}
-        !true # @bool mWarnIfUnused
-        !false # @bool mExportedRoutine
+        !warnIfUnused: true
+        !exportedRoutine: false
         !.mutating | .directPropertyAccess | .panicAllowed
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
         !true # warningOnUnusedArgs
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
-        !["" nowhere] # Empty string if no returned value
+        !returnTypeName: ["" nowhere] # Empty string if no returned value
     end
     for setup in task.mTaskActivateListAST do
       let mangledName = "task.activate." + task.mTaskName + "." + setup.mName
       ioDecoratedRoutineList +=
-        !task.mTaskName
-        !.userMode
-        !true
+        !receiverTypeName: task.mTaskName
+        !mode:.userMode
+        !isRequired:true
         !.function {!executionMode:.userMode}
-        !true # @bool mWarnIfUnused
-        !false # @bool mExportedRoutine
+        !warnIfUnused:true
+        !exportedRoutine: false
         !.mutating | .directPropertyAccess | .panicAllowed
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
         !true # warningOnUnusedArgs
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
-        !["" nowhere] # Empty string if no returned value
+        !returnTypeName: ["" nowhere] # Empty string if no returned value
     end
     for setup in task.mTaskDeactivateListAST do
       let mangledName = "task.deactivate." + task.mTaskName + "." + setup.mName
       ioDecoratedRoutineList +=
-        !task.mTaskName
-        !.userMode
-        !true
+        !receiverTypeName: task.mTaskName
+        !mode:.userMode
+        !isRequired:true
         !.function {!executionMode:.userMode}
-        !true # @bool mWarnIfUnused
-        !false # @bool mExportedRoutine
+        !warnIfUnused: true
+        !exportedRoutine: false
         !.mutating | .directPropertyAccess | .panicAllowed
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
         !true # warningOnUnusedArgs
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
-        !["" nowhere] # Empty string if no returned value
+        !returnTypeName: ["" nowhere] # Empty string if no returned value
     end
   #------------------------------------------- Analyze task guarded command
   #  Build a "task.loop" function that contains a sync instruction
@@ -341,19 +341,19 @@ method @taskListAST enterInContext
     end
     let routineMangledName = routineMangledNameFromAST (!task.mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! {})
     ioDecoratedRoutineList +=
-      !task.mTaskName
-      !.userMode
-      !true
+      !receiverTypeName: task.mTaskName
+      !mode:.userMode
+      !isRequired:true
       !.function {!executionMode:.userMode}
-      !true # @bool mWarnIfUnused
-      !false # @bool mExportedRoutine
+      !warnIfUnused: true
+      !exportedRoutine: false
       !.mutating | .directPropertyAccess | .panicAllowed # @routineAttributes mRoutineAttributes
       !routineMangledName # .new {!llvmNameForTaskLoopFunction () !task.mTaskName.location} # @lstring mRoutineMangledName
       !{} #@routineFormalArgumentListAST mRoutineFormalArgumentList
       !true # warningOnUnusedArgs
       !taskListInstructionList # @instructionListAST mRoutineInstructionList
       !task.mTaskName.location # @location mEndOfRoutineDeclaration
-      !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
+      !returnTypeName: ["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap
       !receiverTypeName: task.mTaskName

@@ -271,19 +271,19 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       attributes = attributes | .panicAllowed
     end
     ioDecoratedRoutineList +=
-      !inReceiverTypeName
-      !mode
-      !false
+      !receiverTypeName: inReceiverTypeName
+      !mode:mode
+      !isRequired:false
       !.function {!executionMode: mode}
-      !not noUnusedWarning
-      !true # mExportedRoutine
+      !warnIfUnused: not noUnusedWarning
+      !exportedRoutine: true
       !attributes
       !implementationRoutineMangledName
       !system.mFormalArgumentList
       !noUnusedWarning
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
-      !system.mReturnTypeName  # Empty string if no returned value
+      !returnTypeName: system.mReturnTypeName  # Empty string if no returned value
   #--- Enter in context
     var s = ""
     if inReceiverLLVMBaseTypeName != "" then

@@ -60,19 +60,19 @@ method @isrDeclarationListAST enterInContext
     let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
     let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
     ioDecoratedRoutineList +=
-      !typeNameForTypeMapForDriver (!isr.mDriverName)
-      !isr.mMode
-      !true
+      !receiverTypeName: typeNameForTypeMapForDriver (!isr.mDriverName)
+      !mode:isr.mMode
+      !isRequired:true
       !.function {!executionMode: isr.mMode}
-      !true # mWarnIfUnused
-      !false # mExportedRoutine
+      !warnIfUnused: true
+      !exportedRoutine: false
       !.mutating | .directPropertyAccess | .controlRegisterReadable | .panicAllowed
       !isrRoutineMangledName
       !{}
       !true # warningOnUnusedArgs
       !isr.mISRInstructionList
       !isr.mEndOfISRDeclaration
-      !["" nowhere]  # Empty string if no returned value
+      !returnTypeName: ["" nowhere]  # Empty string if no returned value
   end
 }
 

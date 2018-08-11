@@ -155,19 +155,19 @@ override method @panicAST enterInContext
     !mPriority.location
   }
   ioDecoratedRoutineList +=
-    !["" nowhere] # Empty string if standalone function
-    !.panicMode # @mode mMode
-    !false
+    !receiverTypeName: ["" nowhere] # Empty string if standalone function
+    !mode:.panicMode
+    !isRequired:false
     !.function {!executionMode:.panicMode} # @routineKind mRoutineKind
-    !false # @bool mWarnIfUnused
-    !false # @bool mExportedRoutine
+    !warnIfUnused: false
+    !exportedRoutine: false
     !.none # @routineAttributes mRoutineAttributes
     !routineMangledName
     !arguments
     !false # warningOnUnusedArgs
     !mPanicInstructionList
     !mEndOfPanicInstructions
-    !["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
+    !returnTypeName: ["" nowhere]  # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

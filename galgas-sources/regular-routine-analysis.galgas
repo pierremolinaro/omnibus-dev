@@ -3,19 +3,19 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @decoratedRegularRoutineList {
-  @lstring mReceiverTypeName # Empty string if standalone function
-  @mode mMode
-  @bool mIsRequired
+  @lstring receiverTypeName %selector # Empty string if standalone function
+  @mode mode %selector
+  @bool isRequired %selector
   @routineKind mRoutineKind
-  @bool mWarnIfUnused
-  @bool mExportedRoutine
+  @bool warnIfUnused %selector
+  @bool exportedRoutine %selector
   @routineAttributes mRoutineAttributes
   @lstring mRoutineMangledName
   @routineFormalArgumentListAST mRoutineFormalArgumentList
   @bool warningOnUnusedArgs
   @instructionListAST mRoutineInstructionList
   @location mEndOfRoutineDeclaration
-  @lstring mReturnTypeName  # Empty string if no returned value
+  @lstring returnTypeName %selector # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -44,18 +44,18 @@ method @decoratedRegularRoutineList-element semanticAnalysis
 #--- Reset temporaries index
   ioTemporaries.mTemporaryIndex = 0
 #--- Receiver type
-  let receiverType = if mReceiverTypeName.string == ""
+  let receiverType = if receiverTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !receiverTypeName} type]
     end
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
 #--- Return value ?
-  if mReturnTypeName.string != "" then
-    let resultVarName = @lstring.new {!functionResultVariableName () !mReturnTypeName.location}
-    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
+  if returnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !returnTypeName.location}
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !returnTypeName} type]
     [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
   end
 #--- Analyse formal arguments
@@ -74,7 +74,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
     !self:receiverType
     !routineAttributes:mRoutineAttributes
     !context:inContext
-    !mode:mMode
+    !mode:mode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap
@@ -86,20 +86,20 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   [!?universalMap closeBranch !mEndOfRoutineDeclaration]
   [!?universalMap closeOverride !mEndOfRoutineDeclaration]
 #--- Code generation
-  let returnType = if mReturnTypeName.string == "" then
+  let returnType = if returnTypeName.string == "" then
     voidType ()
   else
-    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName} type]
+    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !returnTypeName} type]
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !mRoutineMangledName
-    !mIsRequired
-    !mWarnIfUnused
+    !isRequired
+    !warnIfUnused
     !receiverType
     !formalArguments
     !allocaList
     !instructionGenerationList
-    !mExportedRoutine
+    !exportedRoutine
     !mRoutineKind
     !returnType
     !false

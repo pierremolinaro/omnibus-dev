@@ -216,19 +216,19 @@ method @functionDeclarationListAST enterFunctionInContext
     ]
   #---------------- Add decorated declaration
     ioDecoratedRoutineList +=
-      !inSelfTypeName
-      !function.mMode
-      ![ioContext.mRequiredRoutineSet hasKey !routineMangledName.string]
+      !receiverTypeName: inSelfTypeName
+      !mode:function.mMode
+      !isRequired:[ioContext.mRequiredRoutineSet hasKey !routineMangledName.string]
       !.function {!executionMode:function.mMode}
-      !warnIfUnused
-      !globalFunction
+      !warnIfUnused: warnIfUnused
+      !exportedRoutine: globalFunction
       !.directPropertyAccess # @routineAttributes mRoutineAttributes
       !routineMangledName #function.mFunctionName
       !function.mFunctionFormalArgumentList
       !true # warningOnUnusedArgs
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
-      !function.mFunctionReturnTypeName
+      !returnTypeName: function.mFunctionReturnTypeName
   end
 }
 
@@ -312,19 +312,19 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !function.mFunctionFormalArgumentList
     )
     ioDecoratedRoutineList +=
-      !inReceiverTypeName
-      !function.mMode
-      !false
+      !receiverTypeName: inReceiverTypeName
+      !mode:function.mMode
+      !isRequired:false
       !.function {!executionMode: function.mMode}
-      !warnIfUnused
-      !false # mExportedRoutine
+      !warnIfUnused: warnIfUnused
+      !exportedRoutine: false
       !functionAttributes
       !functionMangledName
       !function.mFunctionFormalArgumentList
       !true # warningOnUnusedArgs
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
-      !function.mFunctionReturnTypeName  # Empty string if no returned value
+      !returnTypeName: function.mFunctionReturnTypeName  # Empty string if no returned value
   end
 }
 

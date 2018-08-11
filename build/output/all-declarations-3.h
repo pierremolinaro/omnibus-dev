@@ -1182,17 +1182,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentLi
 
 class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_lstring mProperty_mReceiverTypeName ;
+  public : GALGAS_lstring mProperty_receiverTypeName ;
 
-  public : GALGAS_mode mProperty_mMode ;
+  public : GALGAS_mode mProperty_mode ;
 
-  public : GALGAS_bool mProperty_mIsRequired ;
+  public : GALGAS_bool mProperty_isRequired ;
 
   public : GALGAS_routineKind mProperty_mRoutineKind ;
 
-  public : GALGAS_bool mProperty_mWarnIfUnused ;
+  public : GALGAS_bool mProperty_warnIfUnused ;
 
-  public : GALGAS_bool mProperty_mExportedRoutine ;
+  public : GALGAS_bool mProperty_exportedRoutine ;
 
   public : GALGAS_routineAttributes mProperty_mRoutineAttributes ;
 
@@ -1206,7 +1206,7 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_location mProperty_mEndOfRoutineDeclaration ;
 
-  public : GALGAS_lstring mProperty_mReturnTypeName ;
+  public : GALGAS_lstring mProperty_returnTypeName ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1219,19 +1219,19 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
   public : virtual ~ GALGAS_decoratedRegularRoutineList_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_decoratedRegularRoutineList_2D_element (const GALGAS_lstring & in_mReceiverTypeName,
-                                                          const GALGAS_mode & in_mMode,
-                                                          const GALGAS_bool & in_mIsRequired,
+  public : GALGAS_decoratedRegularRoutineList_2D_element (const GALGAS_lstring & in_receiverTypeName,
+                                                          const GALGAS_mode & in_mode,
+                                                          const GALGAS_bool & in_isRequired,
                                                           const GALGAS_routineKind & in_mRoutineKind,
-                                                          const GALGAS_bool & in_mWarnIfUnused,
-                                                          const GALGAS_bool & in_mExportedRoutine,
+                                                          const GALGAS_bool & in_warnIfUnused,
+                                                          const GALGAS_bool & in_exportedRoutine,
                                                           const GALGAS_routineAttributes & in_mRoutineAttributes,
                                                           const GALGAS_lstring & in_mRoutineMangledName,
                                                           const GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
                                                           const GALGAS_bool & in_warningOnUnusedArgs,
                                                           const GALGAS_instructionListAST & in_mRoutineInstructionList,
                                                           const GALGAS_location & in_mEndOfRoutineDeclaration,
-                                                          const GALGAS_lstring & in_mReturnTypeName) ;
+                                                          const GALGAS_lstring & in_returnTypeName) ;
 
 //-- Start of generic part --*
 
@@ -1271,17 +1271,11 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_exportedRoutine (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRequired (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExportedRoutine (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsRequired (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineAttributes getter_mRoutineAttributes (LOCATION_ARGS) const ;
 
@@ -1293,7 +1287,13 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineMangledName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_receiverTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_returnTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warnIfUnused (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warningOnUnusedArgs (LOCATION_ARGS) const ;
 

@@ -9728,19 +9728,19 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineList_2D_element (void) :
-mProperty_mReceiverTypeName (),
-mProperty_mMode (),
-mProperty_mIsRequired (),
+mProperty_receiverTypeName (),
+mProperty_mode (),
+mProperty_isRequired (),
 mProperty_mRoutineKind (),
-mProperty_mWarnIfUnused (),
-mProperty_mExportedRoutine (),
+mProperty_warnIfUnused (),
+mProperty_exportedRoutine (),
 mProperty_mRoutineAttributes (),
 mProperty_mRoutineMangledName (),
 mProperty_mRoutineFormalArgumentList (),
 mProperty_warningOnUnusedArgs (),
 mProperty_mRoutineInstructionList (),
 mProperty_mEndOfRoutineDeclaration (),
-mProperty_mReturnTypeName () {
+mProperty_returnTypeName () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9763,19 +9763,19 @@ GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineLis
                                                                                               const GALGAS_instructionListAST & inOperand10,
                                                                                               const GALGAS_location & inOperand11,
                                                                                               const GALGAS_lstring & inOperand12) :
-mProperty_mReceiverTypeName (inOperand0),
-mProperty_mMode (inOperand1),
-mProperty_mIsRequired (inOperand2),
+mProperty_receiverTypeName (inOperand0),
+mProperty_mode (inOperand1),
+mProperty_isRequired (inOperand2),
 mProperty_mRoutineKind (inOperand3),
-mProperty_mWarnIfUnused (inOperand4),
-mProperty_mExportedRoutine (inOperand5),
+mProperty_warnIfUnused (inOperand4),
+mProperty_exportedRoutine (inOperand5),
 mProperty_mRoutineAttributes (inOperand6),
 mProperty_mRoutineMangledName (inOperand7),
 mProperty_mRoutineFormalArgumentList (inOperand8),
 mProperty_warningOnUnusedArgs (inOperand9),
 mProperty_mRoutineInstructionList (inOperand10),
 mProperty_mEndOfRoutineDeclaration (inOperand11),
-mProperty_mReturnTypeName (inOperand12) {
+mProperty_returnTypeName (inOperand12) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9806,22 +9806,22 @@ GALGAS_decoratedRegularRoutineList_2D_element GALGAS_decoratedRegularRoutineList
 typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompare (const GALGAS_decoratedRegularRoutineList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mProperty_mReceiverTypeName.objectCompare (inOperand.mProperty_mReceiverTypeName) ;
+    result = mProperty_receiverTypeName.objectCompare (inOperand.mProperty_receiverTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
+    result = mProperty_mode.objectCompare (inOperand.mProperty_mode) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mIsRequired.objectCompare (inOperand.mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (inOperand.mProperty_isRequired) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mWarnIfUnused.objectCompare (inOperand.mProperty_mWarnIfUnused) ;
+    result = mProperty_warnIfUnused.objectCompare (inOperand.mProperty_warnIfUnused) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mExportedRoutine.objectCompare (inOperand.mProperty_mExportedRoutine) ;
+    result = mProperty_exportedRoutine.objectCompare (inOperand.mProperty_exportedRoutine) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRoutineAttributes.objectCompare (inOperand.mProperty_mRoutineAttributes) ;
@@ -9842,7 +9842,7 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
     result = mProperty_mEndOfRoutineDeclaration.objectCompare (inOperand.mProperty_mEndOfRoutineDeclaration) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mReturnTypeName.objectCompare (inOperand.mProperty_mReturnTypeName) ;
+    result = mProperty_returnTypeName.objectCompare (inOperand.mProperty_returnTypeName) ;
   }
   return result ;
 }
@@ -9850,25 +9850,25 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedRegularRoutineList_2D_element::isValid (void) const {
-  return mProperty_mReceiverTypeName.isValid () && mProperty_mMode.isValid () && mProperty_mIsRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mExportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_warningOnUnusedArgs.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_mReturnTypeName.isValid () ;
+  return mProperty_receiverTypeName.isValid () && mProperty_mode.isValid () && mProperty_isRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_warnIfUnused.isValid () && mProperty_exportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_warningOnUnusedArgs.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_returnTypeName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_decoratedRegularRoutineList_2D_element::drop (void) {
-  mProperty_mReceiverTypeName.drop () ;
-  mProperty_mMode.drop () ;
-  mProperty_mIsRequired.drop () ;
+  mProperty_receiverTypeName.drop () ;
+  mProperty_mode.drop () ;
+  mProperty_isRequired.drop () ;
   mProperty_mRoutineKind.drop () ;
-  mProperty_mWarnIfUnused.drop () ;
-  mProperty_mExportedRoutine.drop () ;
+  mProperty_warnIfUnused.drop () ;
+  mProperty_exportedRoutine.drop () ;
   mProperty_mRoutineAttributes.drop () ;
   mProperty_mRoutineMangledName.drop () ;
   mProperty_mRoutineFormalArgumentList.drop () ;
   mProperty_warningOnUnusedArgs.drop () ;
   mProperty_mRoutineInstructionList.drop () ;
   mProperty_mEndOfRoutineDeclaration.drop () ;
-  mProperty_mReturnTypeName.drop () ;
+  mProperty_returnTypeName.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9879,17 +9879,17 @@ void GALGAS_decoratedRegularRoutineList_2D_element::description (C_String & ioSt
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mProperty_mReceiverTypeName.description (ioString, inIndentation+1) ;
+    mProperty_receiverTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mMode.description (ioString, inIndentation+1) ;
+    mProperty_mode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+    mProperty_isRequired.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+    mProperty_warnIfUnused.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mExportedRoutine.description (ioString, inIndentation+1) ;
+    mProperty_exportedRoutine.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRoutineAttributes.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9903,27 +9903,27 @@ void GALGAS_decoratedRegularRoutineList_2D_element::description (C_String & ioSt
     ioString << ", " ;
     mProperty_mEndOfRoutineDeclaration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mReturnTypeName.description (ioString, inIndentation+1) ;
+    mProperty_returnTypeName.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_mReceiverTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReceiverTypeName ;
+GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_receiverTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_receiverTypeName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_mode GALGAS_decoratedRegularRoutineList_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mMode ;
+GALGAS_mode GALGAS_decoratedRegularRoutineList_2D_element::getter_mode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mode ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_mIsRequired (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIsRequired ;
+GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_isRequired (UNUSED_LOCATION_ARGS) const {
+  return mProperty_isRequired ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9934,14 +9934,14 @@ GALGAS_routineKind GALGAS_decoratedRegularRoutineList_2D_element::getter_mRoutin
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWarnIfUnused ;
+GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_warnIfUnused (UNUSED_LOCATION_ARGS) const {
+  return mProperty_warnIfUnused ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_mExportedRoutine (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExportedRoutine ;
+GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_exportedRoutine (UNUSED_LOCATION_ARGS) const {
+  return mProperty_exportedRoutine ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9982,8 +9982,8 @@ GALGAS_location GALGAS_decoratedRegularRoutineList_2D_element::getter_mEndOfRout
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReturnTypeName ;
+GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_returnTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_returnTypeName ;
 }
 
 

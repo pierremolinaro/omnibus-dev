@@ -397,34 +397,34 @@ override method @implementedDriverAST enterInContext
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 #---------------- Add boot routine
   ioDecoratedRoutineList +=
-    !typeNameForTypeMapForDriver (!mDriverName)
-    !.bootMode
-    !true
+    !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
+    !mode:.bootMode
+    !isRequired:true
     !.function {!executionMode:.bootMode}
-    !true # mWarnIfUnused
-    !false # mGlobalFunction
+    !warnIfUnused: true
+    !exportedRoutine: false
     !.directPropertyAccess
     !llvmBootRoutineNameFromDriver (!mDriverName)
     !{}
     !true # warningOnUnusedArgs
     !mBootInstructionList
     !mBootEndLocation
-    !.new {!"" !mBootLocation}  # Empty string if no returned value
+    !returnTypeName:.new {!"" !mBootLocation}  # Empty string if no returned value
 #---------------- Add startup routine
   ioDecoratedRoutineList +=
-    !typeNameForTypeMapForDriver (!mDriverName)
-    !.startupMode
-    !true
+    !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
+    !mode:.startupMode
+    !isRequired:true
     !.function {!executionMode:.startupMode}
-    !true # mWarnIfUnused
-    !false # mGlobalFunction
+    !warnIfUnused: true
+    !exportedRoutine: false
     !.directPropertyAccess # @routineAttributes mRoutineAttributes
     !llvmStartupRoutineNameFromDriver (!mDriverName)
     !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
     !true # warningOnUnusedArgs
     !mStartupInstructionList
     !mStartupEndLocation
-    !.new {!"" !mStartupLocation}  # Empty string if no returned value
+    !returnTypeName: .new {!"" !mStartupLocation}  # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

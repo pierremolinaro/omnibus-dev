@@ -2821,19 +2821,19 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_lstring & in_mReceiverTypeName,
-                                                  const class GALGAS_mode & in_mMode,
-                                                  const class GALGAS_bool & in_mIsRequired,
+                                                  const class GALGAS_lstring & in_receiverTypeName,
+                                                  const class GALGAS_mode & in_mode,
+                                                  const class GALGAS_bool & in_isRequired,
                                                   const class GALGAS_routineKind & in_mRoutineKind,
-                                                  const class GALGAS_bool & in_mWarnIfUnused,
-                                                  const class GALGAS_bool & in_mExportedRoutine,
+                                                  const class GALGAS_bool & in_warnIfUnused,
+                                                  const class GALGAS_bool & in_exportedRoutine,
                                                   const class GALGAS_routineAttributes & in_mRoutineAttributes,
                                                   const class GALGAS_lstring & in_mRoutineMangledName,
                                                   const class GALGAS_routineFormalArgumentListAST & in_mRoutineFormalArgumentList,
                                                   const class GALGAS_bool & in_warningOnUnusedArgs,
                                                   const class GALGAS_instructionListAST & in_mRoutineInstructionList,
                                                   const class GALGAS_location & in_mEndOfRoutineDeclaration,
-                                                  const class GALGAS_lstring & in_mReturnTypeName
+                                                  const class GALGAS_lstring & in_returnTypeName
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -2998,29 +2998,17 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_exportedRoutineAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRequiredAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfRoutineDeclarationAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                           C_Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExportedRoutineAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsRequiredAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineAttributes getter_mRoutineAttributesAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                              C_Compiler * inCompiler
@@ -3042,9 +3030,17 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnusedAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_modeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_receiverTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_returnTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_decoratedRegularRoutineList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                               C_Compiler * inCompiler
@@ -3057,6 +3053,10 @@ class GALGAS_decoratedRegularRoutineList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_decoratedRegularRoutineList getter_subListWithRange (const class GALGAS_range & constinOperand0,
                                                                                               C_Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warnIfUnusedAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warningOnUnusedArgsAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                  C_Compiler * inCompiler
@@ -3080,19 +3080,19 @@ class cEnumerator_decoratedRegularRoutineList : public cGenericAbstractEnumerato
                                                     const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_lstring current_mReceiverTypeName (LOCATION_ARGS) const ;
-  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mIsRequired (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_receiverTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mode (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_isRequired (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mExportedRoutine (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_warnIfUnused (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_exportedRoutine (LOCATION_ARGS) const ;
   public : class GALGAS_routineAttributes current_mRoutineAttributes (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineMangledName (LOCATION_ARGS) const ;
   public : class GALGAS_routineFormalArgumentListAST current_mRoutineFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_warningOnUnusedArgs (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListAST current_mRoutineInstructionList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfRoutineDeclaration (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mReturnTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_returnTypeName (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_decoratedRegularRoutineList_2D_element current (LOCATION_ARGS) const ;
 } ;
