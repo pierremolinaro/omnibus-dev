@@ -6197,30 +6197,40 @@ void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
         }
       }
     }
-    const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_printPasses.getter_value ()).boolEnum () ;
-    if (kBoolTrue == test_4) {
-      GALGAS_string var_m_3248 = GALGAS_string ("    ").add_operation (var_usefulRoutineSet_2641.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 67)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 67)).add_operation (GALGAS_string (" useful routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 67)) ;
-      inCompiler->printMessage (var_m_3248  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 71)) ;
-    }
-    ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 74)) ;
-    cEnumerator_routineAccessibilityIR enumerator_3554 (var_routineAccessibilityIR_1668, kENUMERATION_UP) ;
-    while (enumerator_3554.hasCurrentObject ()) {
-      const enumGalgasBool test_5 = var_usefulRoutineSet_2641.getter_hasKey (enumerator_3554.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 76)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 76)).boolEnum () ;
-      if (kBoolTrue == test_5) {
-        ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (enumerator_3554.current_mRoutine (HERE)  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 77)) ;
+    cEnumerator_routineAccessibilityIR enumerator_3255 (var_routineAccessibilityIR_1668, kENUMERATION_UP) ;
+    while (enumerator_3255.hasCurrentObject ()) {
+      GALGAS_lstring var_routineMangledName_3287 = enumerator_3255.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE) ;
+      const enumGalgasBool test_4 = enumerator_3255.current (HERE).getter_mRoutine (HERE).getter_mWarnIfUnused (HERE).operator_and (var_usefulRoutineSet_2641.getter_hasKey (var_routineMangledName_3287.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 69)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 69)).operator_not (SOURCE_FILE ("dead-code-elimination.galgas", 69)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 69)).boolEnum () ;
+      if (kBoolTrue == test_4) {
+        TC_Array <C_FixItDescription> fixItArray5 ;
+        inCompiler->emitSemanticWarning (var_routineMangledName_3287.getter_location (SOURCE_FILE ("dead-code-elimination.galgas", 70)), GALGAS_string ("unused routine"), fixItArray5  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 70)) ;
       }
-      enumerator_3554.gotoNextObject () ;
+      enumerator_3255.gotoNextObject () ;
+    }
+    const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_printPasses.getter_value ()).boolEnum () ;
+    if (kBoolTrue == test_6) {
+      GALGAS_string var_m_3565 = GALGAS_string ("    ").add_operation (var_usefulRoutineSet_2641.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 75)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 75)).add_operation (GALGAS_string (" useful routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 75)) ;
+      inCompiler->printMessage (var_m_3565  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 79)) ;
+    }
+    ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 82)) ;
+    cEnumerator_routineAccessibilityIR enumerator_3871 (var_routineAccessibilityIR_1668, kENUMERATION_UP) ;
+    while (enumerator_3871.hasCurrentObject ()) {
+      const enumGalgasBool test_7 = var_usefulRoutineSet_2641.getter_hasKey (enumerator_3871.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 84)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 84)).boolEnum () ;
+      if (kBoolTrue == test_7) {
+        ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (enumerator_3871.current_mRoutine (HERE)  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 85)) ;
+      }
+      enumerator_3871.gotoNextObject () ;
     }
   }
-  GALGAS_string var_filePath_3755 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 82)) ;
-  const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_emitRoutineInvocationGraphFile.getter_value ()).boolEnum () ;
-  if (kBoolTrue == test_6) {
+  GALGAS_string var_filePath_4072 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 90)) ;
+  const enumGalgasBool test_8 = GALGAS_bool (gOption_plm_5F_options_emitRoutineInvocationGraphFile.getter_value ()).boolEnum () ;
+  if (kBoolTrue == test_8) {
     {
-    routine_displayInvocationGraph (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), var_filePath_3755, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 84)) ;
+    routine_displayInvocationGraph (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), var_filePath_4072, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 92)) ;
     }
-  }else if (kBoolFalse == test_6) {
+  }else if (kBoolFalse == test_8) {
     {
-    GALGAS_string::class_method_deleteFileIfExists (var_filePath_3755, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 86)) ;
+    GALGAS_string::class_method_deleteFileIfExists (var_filePath_4072, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 94)) ;
     }
   }
 }
@@ -6236,50 +6246,50 @@ void routine_displayInvocationGraph (const GALGAS_routineListIR constinArgument_
                                      const GALGAS_string constinArgument_inFilePath,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_s_4236 = GALGAS_string ("digraph G {\n") ;
-  GALGAS_stringset var_definedRoutines_4300 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 98)) ;
-  GALGAS_stringset var_allRoutines_4330 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 99)) ;
-  cEnumerator_routineListIR enumerator_4370 (constinArgument_inRoutineListIR, kENUMERATION_UP) ;
-  while (enumerator_4370.hasCurrentObject ()) {
-    var_definedRoutines_4300.addAssign_operation (enumerator_4370.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 101))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 101)) ;
-    var_allRoutines_4330.addAssign_operation (enumerator_4370.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 102))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 102)) ;
-    GALGAS_stringset var_accessibleRoutineSet_4509 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 103)) ;
-    GALGAS_uint joker_4577 = GALGAS_uint::constructor_default (SOURCE_FILE ("dead-code-elimination.galgas", 104)) ;
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_4370.current_mRoutine (HERE).ptr (), var_accessibleRoutineSet_4509, joker_4577, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 104)) ;
-    var_allRoutines_4330.plusAssign_operation(var_accessibleRoutineSet_4509, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 105)) ;
-    var_s_4236.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4370.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 106)).add_operation (GALGAS_string ("\" [shape=rectangle"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 106)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 106)) ;
-    const enumGalgasBool test_0 = enumerator_4370.current_mRoutine (HERE).getter_mIsRequired (HERE).boolEnum () ;
+  GALGAS_string var_s_4553 = GALGAS_string ("digraph G {\n") ;
+  GALGAS_stringset var_definedRoutines_4617 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 106)) ;
+  GALGAS_stringset var_allRoutines_4647 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 107)) ;
+  cEnumerator_routineListIR enumerator_4687 (constinArgument_inRoutineListIR, kENUMERATION_UP) ;
+  while (enumerator_4687.hasCurrentObject ()) {
+    var_definedRoutines_4617.addAssign_operation (enumerator_4687.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 109))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 109)) ;
+    var_allRoutines_4647.addAssign_operation (enumerator_4687.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 110))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 110)) ;
+    GALGAS_stringset var_accessibleRoutineSet_4826 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 111)) ;
+    GALGAS_uint joker_4894 = GALGAS_uint::constructor_default (SOURCE_FILE ("dead-code-elimination.galgas", 112)) ;
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_4687.current_mRoutine (HERE).ptr (), var_accessibleRoutineSet_4826, joker_4894, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 112)) ;
+    var_allRoutines_4647.plusAssign_operation(var_accessibleRoutineSet_4826, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 113)) ;
+    var_s_4553.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4687.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 114)).add_operation (GALGAS_string ("\" [shape=rectangle"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 114)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 114)) ;
+    const enumGalgasBool test_0 = enumerator_4687.current_mRoutine (HERE).getter_mIsRequired (HERE).boolEnum () ;
     if (kBoolTrue == test_0) {
-      var_s_4236.plusAssign_operation(GALGAS_string (", color=blue"), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 108)) ;
+      var_s_4553.plusAssign_operation(GALGAS_string (", color=blue"), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 116)) ;
     }
-    var_s_4236.plusAssign_operation(GALGAS_string ("] ;\n"), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 110)) ;
-    cEnumerator_stringset enumerator_4844 (var_accessibleRoutineSet_4509, kENUMERATION_UP) ;
-    while (enumerator_4844.hasCurrentObject ()) {
-      var_s_4236.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4370.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 112)).add_operation (GALGAS_string ("\" -> \""), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 112)).add_operation (enumerator_4844.current (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 112)).add_operation (GALGAS_string ("\" ;\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 112)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 112)) ;
-      enumerator_4844.gotoNextObject () ;
+    var_s_4553.plusAssign_operation(GALGAS_string ("] ;\n"), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 118)) ;
+    cEnumerator_stringset enumerator_5161 (var_accessibleRoutineSet_4826, kENUMERATION_UP) ;
+    while (enumerator_5161.hasCurrentObject ()) {
+      var_s_4553.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_4687.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 120)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)).add_operation (GALGAS_string ("\" -> \""), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)).add_operation (enumerator_5161.current (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)).add_operation (GALGAS_string ("\" ;\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)) ;
+      enumerator_5161.gotoNextObject () ;
     }
-    enumerator_4370.gotoNextObject () ;
+    enumerator_4687.gotoNextObject () ;
   }
-  GALGAS_stringset var_undefinedRoutineSet_5018 = var_allRoutines_4330.substract_operation (var_definedRoutines_4300, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 116)) ;
-  cEnumerator_stringset enumerator_5089 (var_undefinedRoutineSet_5018, kENUMERATION_UP) ;
-  while (enumerator_5089.hasCurrentObject ()) {
-    var_s_4236.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_5089.current (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 118)).add_operation (GALGAS_string ("\" [shape=rectangle, color=red] ;\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 118)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 118)) ;
-    enumerator_5089.gotoNextObject () ;
+  GALGAS_stringset var_undefinedRoutineSet_5335 = var_allRoutines_4647.substract_operation (var_definedRoutines_4617, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 124)) ;
+  cEnumerator_stringset enumerator_5406 (var_undefinedRoutineSet_5335, kENUMERATION_UP) ;
+  while (enumerator_5406.hasCurrentObject ()) {
+    var_s_4553.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_5406.current (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 126)).add_operation (GALGAS_string ("\" [shape=rectangle, color=red] ;\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 126)) ;
+    enumerator_5406.gotoNextObject () ;
   }
-  var_s_4236.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)) ;
-  GALGAS_bool joker_5233 ; // Joker input parameter
-  var_s_4236.method_writeToFileWhenDifferentContents (constinArgument_inFilePath, joker_5233, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 121)) ;
-  const enumGalgasBool test_1 = GALGAS_bool (kIsStrictSup, var_undefinedRoutineSet_5018.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 122)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  var_s_4553.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 128)) ;
+  GALGAS_bool joker_5550 ; // Joker input parameter
+  var_s_4553.method_writeToFileWhenDifferentContents (constinArgument_inFilePath, joker_5550, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 129)) ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsStrictSup, var_undefinedRoutineSet_5335.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 130)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_1) {
-    GALGAS_string var_m_5287 = var_undefinedRoutineSet_5018.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 123)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 123)).add_operation (GALGAS_string (" undefined routine(s) in routine invocation graph"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 123)) ;
-    cEnumerator_stringset enumerator_5415 (var_undefinedRoutineSet_5018, kENUMERATION_UP) ;
-    while (enumerator_5415.hasCurrentObject ()) {
-      var_m_5287.plusAssign_operation(GALGAS_string ("\n"
-        "    - ").add_operation (enumerator_5415.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 125)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 125)) ;
-      enumerator_5415.gotoNextObject () ;
+    GALGAS_string var_m_5604 = var_undefinedRoutineSet_5335.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 131)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 131)).add_operation (GALGAS_string (" undefined routine(s) in routine invocation graph"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 131)) ;
+    cEnumerator_stringset enumerator_5732 (var_undefinedRoutineSet_5335, kENUMERATION_UP) ;
+    while (enumerator_5732.hasCurrentObject ()) {
+      var_m_5604.plusAssign_operation(GALGAS_string ("\n"
+        "    - ").add_operation (enumerator_5732.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 133)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 133)) ;
+      enumerator_5732.gotoNextObject () ;
     }
     TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 127)), var_m_5287, fixItArray2  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 127)) ;
+    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 135)), var_m_5604, fixItArray2  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 135)) ;
   }
 }
 

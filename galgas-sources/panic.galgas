@@ -159,7 +159,7 @@ override method @panicAST enterInContext
     !.panicMode # @mode mMode
     !false
     !.function {!executionMode:.panicMode} # @routineKind mRoutineKind
-    !true # @bool mWarnIfUnused
+    !false # @bool mWarnIfUnused
     !false # @bool mExportedRoutine
     !.none # @routineAttributes mRoutineAttributes
     !routineMangledName

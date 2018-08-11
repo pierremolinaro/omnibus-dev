@@ -275,12 +275,12 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !mode
       !false
       !.function {!executionMode: mode}
-      !noUnusedWarning
+      !not noUnusedWarning
       !true # mExportedRoutine
       !attributes
       !implementationRoutineMangledName
       !system.mFormalArgumentList
-      !true # warningOnUnusedArgs
+      !noUnusedWarning
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
       !system.mReturnTypeName  # Empty string if no returned value

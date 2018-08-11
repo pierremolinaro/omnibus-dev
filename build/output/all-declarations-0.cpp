@@ -5940,31 +5940,31 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_65 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_selector_2205 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_selector_2207 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21_selector_3A_ COMMA_SOURCE_FILE ("formal-arguments.galgas", 56)) ;
-      GALGAS_lstring var_formalArgumentName_2248 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_formalArgumentName_2250 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("formal-arguments.galgas", 57)) ;
-      GALGAS_lstring var_formalArgumentTypeName_2309 ;
-      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_2309, inCompiler) ;
-      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_output (SOURCE_FILE ("formal-arguments.galgas", 60)), var_selector_2205, var_formalArgumentTypeName_2309, var_formalArgumentName_2248  COMMA_SOURCE_FILE ("formal-arguments.galgas", 59)) ;
+      GALGAS_lstring var_formalArgumentTypeName_2311 ;
+      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_2311, inCompiler) ;
+      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_output (SOURCE_FILE ("formal-arguments.galgas", 60)), var_selector_2207, var_formalArgumentTypeName_2311, var_formalArgumentName_2250  COMMA_SOURCE_FILE ("formal-arguments.galgas", 59)) ;
     } break ;
     case 3: {
-      GALGAS_lstring var_selector_2513 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_selector_2515 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3F__21_selector_3A_ COMMA_SOURCE_FILE ("formal-arguments.galgas", 65)) ;
-      GALGAS_lstring var_formalArgumentName_2556 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_formalArgumentName_2558 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("formal-arguments.galgas", 66)) ;
-      GALGAS_lstring var_formalArgumentTypeName_2616 ;
-      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_2616, inCompiler) ;
-      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_inputOutput (SOURCE_FILE ("formal-arguments.galgas", 69)), var_selector_2513, var_formalArgumentTypeName_2616, var_formalArgumentName_2556  COMMA_SOURCE_FILE ("formal-arguments.galgas", 68)) ;
+      GALGAS_lstring var_formalArgumentTypeName_2618 ;
+      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_2618, inCompiler) ;
+      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_inputOutput (SOURCE_FILE ("formal-arguments.galgas", 69)), var_selector_2515, var_formalArgumentTypeName_2618, var_formalArgumentName_2558  COMMA_SOURCE_FILE ("formal-arguments.galgas", 68)) ;
     } break ;
     case 4: {
-      GALGAS_lstring var_selector_2824 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_selector_2826 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3F_selector_3A_ COMMA_SOURCE_FILE ("formal-arguments.galgas", 74)) ;
-      GALGAS_lstring var_formalArgumentName_2867 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_formalArgumentName_2869 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("formal-arguments.galgas", 75)) ;
-      GALGAS_lstring var_formalArgumentTypeName_2928 ;
-      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_2928, inCompiler) ;
-      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("formal-arguments.galgas", 78)), var_selector_2824, var_formalArgumentTypeName_2928, var_formalArgumentName_2867  COMMA_SOURCE_FILE ("formal-arguments.galgas", 77)) ;
+      GALGAS_lstring var_formalArgumentTypeName_2930 ;
+      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_2930, inCompiler) ;
+      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("formal-arguments.galgas", 78)), var_selector_2826, var_formalArgumentTypeName_2930, var_formalArgumentName_2869  COMMA_SOURCE_FILE ("formal-arguments.galgas", 77)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -6017,13 +6017,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_input_5F_formal_5F_a
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_66 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_selector_3441 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_selector_3443 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3F_selector_3A_ COMMA_SOURCE_FILE ("formal-arguments.galgas", 93)) ;
-      GALGAS_lstring var_formalArgumentName_3484 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_formalArgumentName_3486 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("formal-arguments.galgas", 94)) ;
-      GALGAS_lstring var_formalArgumentTypeName_3545 ;
-      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_3545, inCompiler) ;
-      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("formal-arguments.galgas", 97)), var_selector_3441, var_formalArgumentTypeName_3545, var_formalArgumentName_3484  COMMA_SOURCE_FILE ("formal-arguments.galgas", 96)) ;
+      GALGAS_lstring var_formalArgumentTypeName_3547 ;
+      nt_type_5F_definition_ (ioArgument_ioAST, var_formalArgumentTypeName_3547, inCompiler) ;
+      outArgument_outProcFormalArgumentList.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("formal-arguments.galgas", 97)), var_selector_3443, var_formalArgumentTypeName_3547, var_formalArgumentName_3486  COMMA_SOURCE_FILE ("formal-arguments.galgas", 96)) ;
     } break ;
     default:
       repeatFlag_0 = false ;

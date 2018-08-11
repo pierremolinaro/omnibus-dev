@@ -393,7 +393,7 @@ override method @implementedDriverAST enterInContext
     ?2*
   ]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
-#---------------- Add decorated declaration (BEFORE adding boot and startup routine)
+#---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
 #---------------- Add boot routine
   ioDecoratedRoutineList +=
@@ -460,9 +460,6 @@ override method @decoratedRequiredDriver semanticAnalysis
     !initialValueList
 #--- Build initialized driver set
   ioTemporaries.mInitializedDriverSet += !mDriverName.string
-#--- Add boot and startup routine in required routine set
-#  ioIntermediateCodeStruct.mRequiredProcedureSet += !llvmBootRoutineNameFromDriver (!mDriverName).string
-#  ioIntermediateCodeStruct.mRequiredProcedureSet += !llvmStartupRoutineNameFromDriver (!mDriverName).string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

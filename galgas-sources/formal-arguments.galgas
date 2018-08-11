@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
+#!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procFormalArgumentPassingMode {
@@ -41,7 +41,7 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_syntax {
@@ -104,6 +104,63 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! ROUTINE TYPED SIGNATURE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
+
+list @routineTypedSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
+}
+
+#·······················································································································
+
+getter @routineTypedSignature typedString -> @string {
+  result = "("
+  for (formalArgumentPassingMode selector typeProxy) in self do
+    result += [formalArgumentPassingMode formalPassingModeString] + selector + ":" + [typeProxy key]
+  end
+  result += ")"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! ROUTINE SIGNATURE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# La signature d'une routine est une chaîne de caractères constituée :
+#   - du caractère "(" ;
+#   - pour chaque argument :
+#       * du mode de passage de l'argument formel ("?", "?!" ou "!"),
+#       * du sélecteur,
+#       * du caractère ":"
+#   - du caractère ")".
+# Le couple (nom de routine, signature) est unique. Pour un nom de routine donné, la signature identifie la routine.
+# La signature est facilement calculable à partir de la liste des paramètres formels ou de la liste des arguments
+# effectifs d'un appel.
+
+#·······················································································································
+
+getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+  var key = "("
+  for (formalArgumentPassingMode selector * *) in self do
+    key += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  key += ")"
+  result = .new {!key !inRoutineNameLocation}
+}
+
+#·······················································································································
+
+getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+  var key = "("
+  for (passingMode selector) in self do
+    key += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  key += ")"
+  result = .new {!key !inRoutineNameLocation}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

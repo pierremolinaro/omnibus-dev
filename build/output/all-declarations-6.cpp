@@ -9699,6 +9699,33 @@ GALGAS_guardImplementationRoutineIR GALGAS_guardImplementationRoutineIR::extract
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                            Extension Getter '@effectiveArgumentListAST routineSignature'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentListAST & inObject,
+                                                 const GALGAS_location & constinArgument_inRoutineNameLocation,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_result ; // Returned variable
+  GALGAS_string var_key_6321 = GALGAS_string ("(") ;
+  const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
+  cEnumerator_effectiveArgumentListAST enumerator_6364 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6364.hasCurrentObject ()) {
+    var_key_6321.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_6364.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 160)).add_operation (enumerator_6364.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 160)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 160)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 160)) ;
+    enumerator_6364.gotoNextObject () ;
+  }
+  var_key_6321.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 162)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_6321, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 163)) ;
+//---
+  return result_result ;
+}
+
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineList_2D_element (void) :
 mProperty_mReceiverTypeName (),
@@ -10356,33 +10383,6 @@ GALGAS_regularRoutineIR GALGAS_regularRoutineIR::extractObject (const GALGAS_obj
   }
   return result ;
 }
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Extension Getter '@effectiveArgumentListAST routineSignature'                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentListAST & inObject,
-                                                 const GALGAS_location & constinArgument_inRoutineNameLocation,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_2467 = GALGAS_string ("(") ;
-  const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_2510 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_2510.hasCurrentObject ()) {
-    var_key_2467.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_2510.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)).add_operation (enumerator_2510.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 52)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 52)) ;
-    enumerator_2510.gotoNextObject () ;
-  }
-  var_key_2467.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 54)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_2467, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 55)) ;
-//---
-  return result_result ;
-}
-
-
-
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

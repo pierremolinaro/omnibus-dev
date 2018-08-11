@@ -63,6 +63,14 @@ proc codeOptimization
         end
       end
     end
+  #--- Warn unused routines
+    for routine in routineAccessibilityIR do
+      let routineMangledName = routine.mRoutine.mRoutineMangledName
+      if routine.mRoutine.mWarnIfUnused & not [usefulRoutineSet hasKey !routineMangledName] then
+        warning routineMangledName : "unused routine"
+      end
+    end
+  #---
     if [option plm_options.printPasses value] then
       var m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
   #    for (r) in usefulRoutineSet do
