@@ -25,6 +25,24 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"emitControlRegisterHTMLDumpFile"
+    commandChar:0
+    commandString:@"emit-control-register-map"
+    comment:@"Emit control register map in an HTML file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"emitDeclarationDependencyGraphFile"
+    commandChar:100
+    commandString:@"emit-declaration-dependency-graph"
+    comment:@"Emit declaration dependency graph file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"emitGlobalConstantHTMLDumpFile"
     commandChar:0
     commandString:@"emit-global-constant-map"
@@ -65,6 +83,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:76
     commandString:@"list-targets"
     comment:@"List targets"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"noDeadCodeElimination"
+    commandChar:0
+    commandString:@"no-deadcode-elimination"
+    comment:@"No dead code elimination"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
@@ -124,10 +151,10 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"optimization_displayDeadCodeElimination"
-    commandChar:122
-    commandString:@"display-deadcode-elimination"
-    comment:@"Display dead code elimination"
+    identifier:@"printPasses"
+    commandChar:0
+    commandString:@"print-passes"
+    comment:@"Print pass information"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
@@ -137,33 +164,6 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:0
     commandString:@"task-strict-priority-order"
     comment:@"Ensure task strict priority order"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"timePasses"
-    commandChar:0
-    commandString:@"time-passes"
-    comment:@"Print the amount of time needed for each pass"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"writeControlRegisterHTMLDumpFile"
-    commandChar:0
-    commandString:@"emit-control-register-map"
-    comment:@"Emit control register map in an HTML file"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"writeDeclarationDependencyGraphFile"
-    commandChar:100
-    commandString:@"emit-declaration-dependency-graph"
-    comment:@"Emit declaration dependency graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

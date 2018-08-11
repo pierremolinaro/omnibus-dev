@@ -3733,6 +3733,10 @@ void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropert
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_emitControlRegisterHTMLDumpFile ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_emitDeclarationDependencyGraphFile ;
+
 extern C_BoolCommandLineOption gOption_plm_5F_options_emitGlobalConstantHTMLDumpFile ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_emitRoutineInvocationGraphFile ;
@@ -3742,6 +3746,8 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_emitTypeMap ;
 extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_listTargets ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_noDeadCodeElimination ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ;
 
@@ -3755,15 +3761,9 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination ;
+extern C_BoolCommandLineOption gOption_plm_5F_options_printPasses ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_taskStrictPriorityOrder ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_timePasses ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeDeclarationDependencyGraphFile ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

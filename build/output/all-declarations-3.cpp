@@ -4703,24 +4703,24 @@ GALGAS_mode extensionGetter_executionMode (const GALGAS_routineKind & inObject,
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
-      const cEnumAssociatedValues_routineKind_function * extractPtr_3077 = (const cEnumAssociatedValues_routineKind_function *) (temp_0.unsafePointer ()) ;
-      const GALGAS_mode extractedValue_mode = extractPtr_3077->mAssociatedValue0 ;
+      const cEnumAssociatedValues_routineKind_function * extractPtr_3065 = (const cEnumAssociatedValues_routineKind_function *) (temp_0.unsafePointer ()) ;
+      const GALGAS_mode extractedValue_mode = extractPtr_3065->mAssociatedValue0 ;
       result_result = extractedValue_mode ;
     }
     break ;
   case GALGAS_routineKind::kEnum_section:
     {
-      result_result = GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("context-routines.galgas", 73)) ;
+      result_result = GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("context-routines.galgas", 72)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_service:
     {
-      result_result = GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("context-routines.galgas", 74)) ;
+      result_result = GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("context-routines.galgas", 73)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_primitive:
     {
-      result_result = GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("context-routines.galgas", 75)) ;
+      result_result = GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("context-routines.galgas", 74)) ;
     }
     break ;
   }

@@ -130,8 +130,8 @@ proc codeGeneration
     !targetParameters:inTargetParameters
     !globalVariables:inGlobalVariableIRList
   )
-  if [option plm_options.timePasses value] then
-    message "Code generation: " + [generationTime string] + "\n" 
+  if [option plm_options.printPasses value] then
+    message "** Code generation: " + [generationTime string] + "\n" 
   end
 #----------------------------------------- Run compilation script
   if (@uint.errorCount == 0) then
@@ -142,8 +142,8 @@ proc codeGeneration
     if result != 0S then
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
-    if [option plm_options.timePasses value] then
-      message "Compilation script: " + [scriptTime string] + "\n" 
+    if [option plm_options.printPasses value] then
+      message "** Compilation script: " + [scriptTime string] + "\n" 
     end
   end
 }

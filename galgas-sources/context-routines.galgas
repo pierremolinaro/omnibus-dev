@@ -47,8 +47,7 @@ getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNa
 #·······················································································································
 
 getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
-  var key = ""
-  key += "("
+  var key = "("
   for (passingMode selector) in self do
     key += [passingMode matchingFormalArgument] + selector + ":"
   end

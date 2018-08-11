@@ -87,6 +87,9 @@ private proc compileProject
   ?importedFilePathSet:let @stringset inImportedFileAbsolutePathSet
 {
   let @timer parsingTime = .start 
+  if [option plm_options.printPasses value] then
+    message "** Parsing\n" 
+  end
   @ast ast = inAST
   @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
 #------------------------------------------------------------ Add target specific files
@@ -109,8 +112,10 @@ private proc compileProject
   if @uint.errorCount == 0 then
     retainRequiredDrivers (!?ast)
   end
-  if [option plm_options.timePasses value] then
-    message "Parsing: " + [parsingTime string] + "\n" 
+#------------------------------------------------------------ printPasses option
+  if [option plm_options.printPasses value] & (@uint.errorCount == 0) then
+    message "    " + [ast.mDeclarationListAST length] + " declarations\n" 
+    message "    Duration: " + [parsingTime string] + "\n" 
   end
 #------------------------------------------------------------ Ordered declaration list
   @declarationListAST orderedDeclarationListAST = .default
@@ -122,8 +127,8 @@ private proc compileProject
       !endOfSourceFile:inEndOfSourceFile
       ?orderedDeclarationList:orderedDeclarationListAST
     )
-    if [option plm_options.timePasses value] then
-      message "Declaration sorting: " + [t string] + "\n" 
+    if [option plm_options.printPasses value] then
+      message "** Declaration sorting: " + [t string] + "\n" 
     end
   end
 #------------------------------------------------------------ Check "check target" declarations
@@ -160,8 +165,8 @@ private proc compileProject
       ?routineListIR
       ?globalVariableIRList
     )
-    if [option plm_options.timePasses value] then
-      message "Context: " + [t string] + "\n" 
+    if [option plm_options.printPasses value] then
+      message "** Context: " + [t string] + "\n" 
     end
   end
 #------------------------------------------------------------ Semantic analysis
@@ -180,16 +185,16 @@ private proc compileProject
       !staticEntityMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct
     )
-    if [option plm_options.timePasses value] then
-      message "Semantic: " + [t string] + "\n" 
+    if [option plm_options.printPasses value] then
+      message "** Semantic: " + [t string] + "\n" 
     end
   end
 #------------------------------------------------------------ Code optimization
   if @uint.errorCount == 0 then
     let @timer tOpt = .start 
     codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
-    if [option plm_options.timePasses value] then
-      message "Optimization: " + [tOpt string] + "\n" 
+    if [option plm_options.printPasses value] then
+      message "    Duration: " + [tOpt string] + "\n" 
     end
   end
 #------------------------------------------------------------ Code generation

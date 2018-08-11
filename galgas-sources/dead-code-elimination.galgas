@@ -41,42 +41,46 @@ proc codeOptimization
       exploreRoutineSet += !routine.mRoutine.mRoutineMangledName
     end
   end
-  if [option plm_options.optimization_displayDeadCodeElimination value] |true then
-    var m = "Dead Code Elimination\n"
-    m += "  " + [[ioIntermediateCodeStruct.mRoutineListIR length] string] + " routines, "
+  if [option plm_options.printPasses value] then
+    var m = "** Dead Code Elimination\n"
+    m += "    " + [[ioIntermediateCodeStruct.mRoutineListIR length] string] + " routines, "
     m += [[exploreRoutineSet count] string] + " root routines.\n"
     message m
   end
 #--- Compute useful routines
-  @stringset usefulRoutineSet = {}
-  loop ([ioIntermediateCodeStruct.mRoutineListIR length] + 1) while [exploreRoutineSet count] > 0 do
-    let currentSet = exploreRoutineSet
-    exploreRoutineSet = {}
-    for routine in routineAccessibilityIR do
-      let routineMangledName = routine.mRoutine.mRoutineMangledName
-      if [currentSet hasKey !routineMangledName] & not [usefulRoutineSet hasKey !routineMangledName] then
-        usefulRoutineSet += !routineMangledName
-        exploreRoutineSet += routine.mAccessibleRoutineSet
+  if [option plm_options.noDeadCodeElimination value] then
+    message "    No dead code elimination (option --" + [option plm_options.noDeadCodeElimination string] + ")\n"
+  else
+    @stringset usefulRoutineSet = {}
+    loop ([ioIntermediateCodeStruct.mRoutineListIR length] + 1) while [exploreRoutineSet count] > 0 do
+      let currentSet = exploreRoutineSet
+      exploreRoutineSet = {}
+      for routine in routineAccessibilityIR do
+        let routineMangledName = routine.mRoutine.mRoutineMangledName
+        if [currentSet hasKey !routineMangledName] & not [usefulRoutineSet hasKey !routineMangledName] then
+          usefulRoutineSet += !routineMangledName
+          exploreRoutineSet += routine.mAccessibleRoutineSet
+        end
       end
     end
-  end
-  if [option plm_options.optimization_displayDeadCodeElimination value] |true then
-    var m = "  " + [[usefulRoutineSet count] string] + " useful routines.\n"
-#    for (r) in usefulRoutineSet do
-#      m += "    - " + r + "\n"
-#    end
-    message m
-  end
-#--- Eliminate useless routines
-  ioIntermediateCodeStruct.mRoutineListIR = {}
-  for (routine *) in routineAccessibilityIR do
-    if [usefulRoutineSet hasKey !routine.mRoutineMangledName] then
-      ioIntermediateCodeStruct.mRoutineListIR += !routine
+    if [option plm_options.printPasses value] then
+      var m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
+  #    for (r) in usefulRoutineSet do
+  #      m += "    - " + r + "\n"
+  #    end
+      message m
+    end
+  #--- Eliminate useless routines
+    ioIntermediateCodeStruct.mRoutineListIR = {}
+    for (routine *) in routineAccessibilityIR do
+      if [usefulRoutineSet hasKey !routine.mRoutineMangledName] then
+        ioIntermediateCodeStruct.mRoutineListIR += !routine
+      end
     end
   end
 #--- Display invocation graph
   let filePath = inSourceFile + ".routineInvocation.dot"
-  if [option plm_options.emitRoutineInvocationGraphFile value] |true then
+  if [option plm_options.emitRoutineInvocationGraphFile value] then
     displayInvocationGraph (!ioIntermediateCodeStruct.mRoutineListIR !filePath)
   else
     [@string deleteFileIfExists !filePath]

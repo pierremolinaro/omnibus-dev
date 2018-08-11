@@ -56,7 +56,7 @@ proc buildOrderedDeclarationList
     end
   end
 #------------------------------------------  Write precedence graph file ?
-  if (@uint.errorCount == 0) && [option plm_options.writeDeclarationDependencyGraphFile value] then
+  if (@uint.errorCount == 0) && [option plm_options.emitDeclarationDependencyGraphFile value] then
     let s = [precedenceGraph graphviz]
     let filePath = inSourceFile + ".declarationDependency.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]

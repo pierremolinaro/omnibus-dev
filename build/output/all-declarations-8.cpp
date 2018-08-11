@@ -9635,6 +9635,18 @@ C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ("plm_o
                                          "do-not-detect-recursive-calls",
                                          "Do not detect recursive calls") ;
 
+C_BoolCommandLineOption gOption_plm_5F_options_emitControlRegisterHTMLDumpFile ("plm_options",
+                                         "emitControlRegisterHTMLDumpFile",
+                                         0,
+                                         "emit-control-register-map",
+                                         "Emit control register map in an HTML file") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_emitDeclarationDependencyGraphFile ("plm_options",
+                                         "emitDeclarationDependencyGraphFile",
+                                         100,
+                                         "emit-declaration-dependency-graph",
+                                         "Emit declaration dependency graph file") ;
+
 C_BoolCommandLineOption gOption_plm_5F_options_emitGlobalConstantHTMLDumpFile ("plm_options",
                                          "emitGlobalConstantHTMLDumpFile",
                                          0,
@@ -9664,6 +9676,12 @@ C_BoolCommandLineOption gOption_plm_5F_options_listTargets ("plm_options",
                                          76,
                                          "list-targets",
                                          "List targets") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_noDeadCodeElimination ("plm_options",
+                                         "noDeadCodeElimination",
+                                         0,
+                                         "no-deadcode-elimination",
+                                         "No dead code elimination") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ("plm_options",
                                          "noPanicGeneration",
@@ -9701,35 +9719,17 @@ C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ("plm_options",
                                          "O3",
                                          "Optimization level 3") ;
 
-C_BoolCommandLineOption gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination ("plm_options",
-                                         "optimization_displayDeadCodeElimination",
-                                         122,
-                                         "display-deadcode-elimination",
-                                         "Display dead code elimination") ;
+C_BoolCommandLineOption gOption_plm_5F_options_printPasses ("plm_options",
+                                         "printPasses",
+                                         0,
+                                         "print-passes",
+                                         "Print pass information") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_taskStrictPriorityOrder ("plm_options",
                                          "taskStrictPriorityOrder",
                                          0,
                                          "task-strict-priority-order",
                                          "Ensure task strict priority order") ;
-
-C_BoolCommandLineOption gOption_plm_5F_options_timePasses ("plm_options",
-                                         "timePasses",
-                                         0,
-                                         "time-passes",
-                                         "Print the amount of time needed for each pass") ;
-
-C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ("plm_options",
-                                         "writeControlRegisterHTMLDumpFile",
-                                         0,
-                                         "emit-control-register-map",
-                                         "Emit control register map in an HTML file") ;
-
-C_BoolCommandLineOption gOption_plm_5F_options_writeDeclarationDependencyGraphFile ("plm_options",
-                                         "writeDeclarationDependencyGraphFile",
-                                         100,
-                                         "emit-declaration-dependency-graph",
-                                         "Emit declaration dependency graph file") ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

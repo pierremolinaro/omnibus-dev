@@ -3,9 +3,9 @@ option plm_options {
 
   @bool emitTypeMap : 't', "emit-type-map" -> "Emit type map in an HTML file"
   @bool emitRoutineInvocationGraphFile : 'i', "emit-routine-invocation-graph" -> "Emit routine invocation graph file"
-  @bool writeDeclarationDependencyGraphFile : 'd', "emit-declaration-dependency-graph" -> "Emit declaration dependency graph file"
+  @bool emitDeclarationDependencyGraphFile : 'd', "emit-declaration-dependency-graph" -> "Emit declaration dependency graph file"
   @bool emitGlobalConstantHTMLDumpFile : '\0', "emit-global-constant-map" -> "Emit global constant map in an HTML file"
-  @bool writeControlRegisterHTMLDumpFile : '\0', "emit-control-register-map" -> "Emit control register map in an HTML file"
+  @bool emitControlRegisterHTMLDumpFile : '\0', "emit-control-register-map" -> "Emit control register map in an HTML file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
 
   @bool listEmbeddedSampleFiles : 'l', "list-embedded-samples" -> "List embedded sample files"
@@ -20,10 +20,10 @@ option plm_options {
 #---
   @bool taskStrictPriorityOrder : '\0', "task-strict-priority-order" -> "Ensure task strict priority order"
  
-  @bool timePasses : '\0', "time-passes" -> "Print the amount of time needed for each pass"
+  @bool printPasses : '\0', "print-passes" -> "Print pass information"
  
 #--- Optimization
-  @bool optimization_displayDeadCodeElimination : 'z', "display-deadcode-elimination" -> "Display dead code elimination"
+  @bool noDeadCodeElimination : '\0', "no-deadcode-elimination" -> "No dead code elimination"
   @bool optimization1 : '\0', "O1" -> "Optimization level 1"
   @bool optimization2 : '\0', "O2" -> "Optimization level 2"
   @bool optimizationS : '\0', "Os" -> "Like previous option with extra optimizations for size"
