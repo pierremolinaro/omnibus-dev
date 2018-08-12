@@ -3809,13 +3809,15 @@ class cMapElement_routineMapCTXT : public cMapElement {
   public : GALGAS_routineTypedSignature mProperty_mSignature ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
   public : GALGAS_routineLLVMNameDict mProperty_mModeDictionary ;
+  public : GALGAS_bool mProperty_mIsSafe ;
 
 //--- Constructor
   public : cMapElement_routineMapCTXT (const GALGAS_lstring & inKey,
                                        const GALGAS_bool & in_mIsPublic,
                                        const GALGAS_routineTypedSignature & in_mSignature,
                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
-                                       const GALGAS_routineLLVMNameDict & in_mModeDictionary
+                                       const GALGAS_routineLLVMNameDict & in_mModeDictionary,
+                                       const GALGAS_bool & in_mIsSafe
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -7370,6 +7372,8 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_routineLLVMNameDict mProperty_mModeDictionary ;
 
+  public : GALGAS_bool mProperty_mIsSafe ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -7388,7 +7392,8 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
                                              const GALGAS_bool & in_mIsPublic,
                                              const GALGAS_routineTypedSignature & in_mSignature,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
-                                             const GALGAS_routineLLVMNameDict & in_mModeDictionary) ;
+                                             const GALGAS_routineLLVMNameDict & in_mModeDictionary,
+                                             const GALGAS_bool & in_mIsSafe) ;
 
 //-- Start of generic part --*
 
@@ -7405,7 +7410,8 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
                                                                           const class GALGAS_bool & inOperand1,
                                                                           const class GALGAS_routineTypedSignature & inOperand2,
                                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                          const class GALGAS_routineLLVMNameDict & inOperand4
+                                                                          const class GALGAS_routineLLVMNameDict & inOperand4,
+                                                                          const class GALGAS_bool & inOperand5
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -7423,6 +7429,8 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineLLVMNameDict getter_mModeDictionary (LOCATION_ARGS) const ;
 
@@ -8072,11 +8080,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primitiveAndService
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               @requiredProcedureDeclarationListAST_2D_element struct                                *
+//                                @requiredFunctionDeclarationListAST_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
+class GALGAS_requiredFunctionDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mName ;
 
@@ -8095,18 +8103,18 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
+  public : GALGAS_requiredFunctionDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_requiredFunctionDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mName,
-                                                                  const GALGAS_mode & in_mExecutionMode,
-                                                                  const GALGAS_bool & in_mIsExported,
-                                                                  const GALGAS_bool & in_mIsSafe,
-                                                                  const GALGAS_routineFormalArgumentListAST & in_mFormalArgumentList,
-                                                                  const GALGAS_location & in_mEndOfProcLocation) ;
+  public : GALGAS_requiredFunctionDeclarationListAST_2D_element (const GALGAS_lstring & in_mName,
+                                                                 const GALGAS_mode & in_mExecutionMode,
+                                                                 const GALGAS_bool & in_mIsExported,
+                                                                 const GALGAS_bool & in_mIsSafe,
+                                                                 const GALGAS_routineFormalArgumentListAST & in_mFormalArgumentList,
+                                                                 const GALGAS_location & in_mEndOfProcLocation) ;
 
 //-- Start of generic part --*
 
@@ -8114,24 +8122,24 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_requiredProcedureDeclarationListAST_2D_element extractObject (const GALGAS_object & inObject,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_requiredFunctionDeclarationListAST_2D_element extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_requiredProcedureDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                               const class GALGAS_mode & inOperand1,
-                                                                                               const class GALGAS_bool & inOperand2,
-                                                                                               const class GALGAS_bool & inOperand3,
-                                                                                               const class GALGAS_routineFormalArgumentListAST & inOperand4,
-                                                                                               const class GALGAS_location & inOperand5
-                                                                                               COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_requiredFunctionDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                              const class GALGAS_mode & inOperand1,
+                                                                                              const class GALGAS_bool & inOperand2,
+                                                                                              const class GALGAS_bool & inOperand3,
+                                                                                              const class GALGAS_routineFormalArgumentListAST & inOperand4,
+                                                                                              const class GALGAS_location & inOperand5
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_requiredProcedureDeclarationListAST_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_requiredFunctionDeclarationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8155,20 +8163,20 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_requiredProcedureDeclarationListAST_2D_element class
+} ; // End of GALGAS_requiredFunctionDeclarationListAST_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredProcedureDeclarationListAST_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredFunctionDeclarationListAST_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                @externProcedureDeclarationListAST_2D_element struct                                 *
+//                                 @externFunctionDeclarationListAST_2D_element struct                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
+class GALGAS_externFunctionDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mExternProcedureName ;
 
@@ -8189,19 +8197,19 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_externProcedureDeclarationListAST_2D_element (void) ;
+  public : GALGAS_externFunctionDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_externProcedureDeclarationListAST_2D_element (void) ;
+  public : virtual ~ GALGAS_externFunctionDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_externProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mExternProcedureName,
-                                                                const GALGAS_mode & in_mMode,
-                                                                const GALGAS_lstringlist & in_mAttributeList,
-                                                                const GALGAS_routineFormalArgumentListAST & in_mProcFormalArgumentList,
-                                                                const GALGAS_lstring & in_mReturnTypeName,
-                                                                const GALGAS_lstring & in_mRoutineNameForGeneration,
-                                                                const GALGAS_location & in_mEndOfProcLocation) ;
+  public : GALGAS_externFunctionDeclarationListAST_2D_element (const GALGAS_lstring & in_mExternProcedureName,
+                                                               const GALGAS_mode & in_mMode,
+                                                               const GALGAS_lstringlist & in_mAttributeList,
+                                                               const GALGAS_routineFormalArgumentListAST & in_mProcFormalArgumentList,
+                                                               const GALGAS_lstring & in_mReturnTypeName,
+                                                               const GALGAS_lstring & in_mRoutineNameForGeneration,
+                                                               const GALGAS_location & in_mEndOfProcLocation) ;
 
 //-- Start of generic part --*
 
@@ -8209,25 +8217,25 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_externProcedureDeclarationListAST_2D_element extractObject (const GALGAS_object & inObject,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_externFunctionDeclarationListAST_2D_element extractObject (const GALGAS_object & inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_externProcedureDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                             const class GALGAS_mode & inOperand1,
-                                                                                             const class GALGAS_lstringlist & inOperand2,
-                                                                                             const class GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                             const class GALGAS_lstring & inOperand4,
-                                                                                             const class GALGAS_lstring & inOperand5,
-                                                                                             const class GALGAS_location & inOperand6
-                                                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_externFunctionDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                            const class GALGAS_mode & inOperand1,
+                                                                                            const class GALGAS_lstringlist & inOperand2,
+                                                                                            const class GALGAS_routineFormalArgumentListAST & inOperand3,
+                                                                                            const class GALGAS_lstring & inOperand4,
+                                                                                            const class GALGAS_lstring & inOperand5,
+                                                                                            const class GALGAS_location & inOperand6
+                                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_externProcedureDeclarationListAST_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_externFunctionDeclarationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8253,53 +8261,53 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_externProcedureDeclarationListAST_2D_element class
+} ; // End of GALGAS_externFunctionDeclarationListAST_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureDeclarationListAST_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externFunctionDeclarationListAST_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                  Extension method '@externProcedureDeclarationListAST noteTypesInPrecedenceGraph'                   *
+//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externProcedureDeclarationListAST inObject,
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externFunctionDeclarationListAST inObject,
                                                  class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                   Extension method '@externProcedureDeclarationListAST enterExternProcInContext'                    *
+//                    Extension method '@externFunctionDeclarationListAST enterExternProcInContext'                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_enterExternProcInContext (const class GALGAS_externProcedureDeclarationListAST inObject,
+void extensionMethod_enterExternProcInContext (const class GALGAS_externFunctionDeclarationListAST inObject,
                                                class GALGAS_semanticContext & io_ioContext,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//               Extension method '@externProcedureDeclarationListAST-element enterExternProcInContext'                *
+//                Extension method '@externFunctionDeclarationListAST-element enterExternProcInContext'                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_enterExternProcInContext (const class GALGAS_externProcedureDeclarationListAST_2D_element inObject,
+void extensionMethod_enterExternProcInContext (const class GALGAS_externFunctionDeclarationListAST_2D_element inObject,
                                                class GALGAS_semanticContext & io_ioContext,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                Extension method '@externProcedureDeclarationListAST externProcedureSemanticAnalysis'                *
+//                Extension method '@externFunctionDeclarationListAST externProcedureSemanticAnalysis'                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externProcedureDeclarationListAST inObject,
+void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externFunctionDeclarationListAST inObject,
                                                       const class GALGAS_semanticContext constin_inContext,
                                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                       class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -8308,11 +8316,11 @@ void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externP
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//            Extension method '@externProcedureDeclarationListAST-element externProcedureSemanticAnalysis'            *
+//            Extension method '@externFunctionDeclarationListAST-element externProcedureSemanticAnalysis'             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externProcedureDeclarationListAST_2D_element inObject,
+void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externFunctionDeclarationListAST_2D_element inObject,
                                                       const class GALGAS_semanticContext constin_inContext,
                                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                       class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,

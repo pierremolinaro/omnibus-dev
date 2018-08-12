@@ -193,6 +193,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
+      !isSafe
     ]
   #--- Enter in context
     [!?ioContext.mRoutineMapForContextEX insertRoutine # Raises a redefinition error
@@ -301,6 +302,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
+      !safe
     ]
   #--- Prepare annalysis
     var warnIfUnused = true
@@ -355,6 +357,7 @@ map @routineMapCTXT {
   @routineTypedSignature mSignature
   @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
   @routineLLVMNameDict mModeDictionary
+  @bool mIsSafe
 
   insert insertKey error message "the '%K' function is already declared in %L"
   search searchKey error message "there is no '%K' function"

@@ -920,6 +920,7 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                       const class GALGAS_routineTypedSignature & inOperand2,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                       const class GALGAS_routineLLVMNameDict & inOperand4,
+                                                      const class GALGAS_bool & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -929,6 +930,7 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                    class GALGAS_routineTypedSignature constinArgument2,
                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
                                                    class GALGAS_routineLLVMNameDict constinArgument4,
+                                                   class GALGAS_bool constinArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -936,6 +938,11 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                             class GALGAS_string constinArgument1,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIsSafeForKey (class GALGAS_bool constinArgument0,
+                                                          class GALGAS_string constinArgument1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMModeDictionaryForKey (class GALGAS_routineLLVMNameDict constinArgument0,
                                                                   class GALGAS_string constinArgument1,
@@ -959,6 +966,7 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                    class GALGAS_routineTypedSignature & outArgument2,
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
                                                    class GALGAS_routineLLVMNameDict & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -968,6 +976,10 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublicForKey (const class GALGAS_string & constinOperand0,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafeForKey (const class GALGAS_string & constinOperand0,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineLLVMNameDict getter_mModeDictionaryForKey (const class GALGAS_string & constinOperand0,
                                                                                            C_Compiler * inCompiler
@@ -1011,6 +1023,7 @@ class cEnumerator_routineMapCTXT : public cGenericAbstractEnumerator {
   public : class GALGAS_routineTypedSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnTypeProxy (LOCATION_ARGS) const ;
   public : class GALGAS_routineLLVMNameDict current_mModeDictionary (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mIsSafe (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_routineMapCTXT_2D_element current (LOCATION_ARGS) const ;
 } ;

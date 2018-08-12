@@ -5944,8 +5944,8 @@ GALGAS_ast::~ GALGAS_ast (void) {
 GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
                         const GALGAS_extendStaticArrayDeclarationAST & inOperand1,
                         const GALGAS_functionDeclarationListAST & inOperand2,
-                        const GALGAS_requiredProcedureDeclarationListAST & inOperand3,
-                        const GALGAS_externProcedureDeclarationListAST & inOperand4,
+                        const GALGAS_requiredFunctionDeclarationListAST & inOperand3,
+                        const GALGAS_externFunctionDeclarationListAST & inOperand4,
                         const GALGAS_isrDeclarationListAST & inOperand5,
                         const GALGAS_systemRoutineDeclarationListAST & inOperand6,
                         const GALGAS_lstringlist & inOperand7,
@@ -5977,8 +5977,8 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_ast (GALGAS_declarationListAST::constructor_emptyList (HERE),
                      GALGAS_extendStaticArrayDeclarationAST::constructor_emptyList (HERE),
                      GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_requiredProcedureDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_externProcedureDeclarationListAST::constructor_emptyList (HERE),
+                     GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (HERE),
+                     GALGAS_externFunctionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_isrDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_lstringlist::constructor_emptyList (HERE),
@@ -5995,8 +5995,8 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
 GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_declarationListAST & inOperand0,
                                         const GALGAS_extendStaticArrayDeclarationAST & inOperand1,
                                         const GALGAS_functionDeclarationListAST & inOperand2,
-                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand3,
-                                        const GALGAS_externProcedureDeclarationListAST & inOperand4,
+                                        const GALGAS_requiredFunctionDeclarationListAST & inOperand3,
+                                        const GALGAS_externFunctionDeclarationListAST & inOperand4,
                                         const GALGAS_isrDeclarationListAST & inOperand5,
                                         const GALGAS_systemRoutineDeclarationListAST & inOperand6,
                                         const GALGAS_lstringlist & inOperand7,
@@ -6147,13 +6147,13 @@ GALGAS_functionDeclarationListAST GALGAS_ast::getter_mStandaloneFunctionDeclarat
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_requiredProcedureDeclarationListAST GALGAS_ast::getter_mRequiredFunctionListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_requiredFunctionDeclarationListAST GALGAS_ast::getter_mRequiredFunctionListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mRequiredFunctionListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_externProcedureDeclarationListAST GALGAS_ast::getter_mExternFunctionListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_externFunctionDeclarationListAST GALGAS_ast::getter_mExternFunctionListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mExternFunctionListAST ;
 }
 

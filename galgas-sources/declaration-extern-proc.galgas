@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @externProcedureDeclarationListAST {
+list @externFunctionDeclarationListAST {
   @lstring mExternProcedureName
   @mode mMode
   @lstringlist mAttributeList
@@ -48,7 +48,7 @@ syntax extension plm_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
       [!?ioGraph noteNode !formalArgumentTypeName]
@@ -63,7 +63,7 @@ method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semantic
 #   ENTER IN CONTEXT                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST enterExternProcInContext
+method @externFunctionDeclarationListAST enterExternProcInContext
   ?!context:@semanticContext ioContext
 {
   for externProcedure in self do
@@ -72,7 +72,7 @@ method @externProcedureDeclarationListAST enterExternProcInContext
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
+method @externFunctionDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
 #--- Signature
   routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #---
@@ -93,6 +93,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
     !signature
     !returnTypeProxy
     !routineLLVMNameDict
+    !safe
   ]
 #--- Enter in context (EX)
   [!?ioContext.mRoutineMapForContextEX insertRoutine
@@ -119,7 +120,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
+method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -135,7 +136,7 @@ method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysis
+method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

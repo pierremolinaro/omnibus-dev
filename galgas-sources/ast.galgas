@@ -28,8 +28,8 @@ struct @ast {
   @declarationListAST mDeclarationListAST
   @extendStaticArrayDeclarationAST mExtendStaticArrayDeclarationAST
   @functionDeclarationListAST mStandaloneFunctionDeclarationListAST
-  @requiredProcedureDeclarationListAST mRequiredFunctionListAST
-  @externProcedureDeclarationListAST mExternFunctionListAST
+  @requiredFunctionDeclarationListAST mRequiredFunctionListAST
+  @externFunctionDeclarationListAST mExternFunctionListAST
   @isrDeclarationListAST mISRDeclarationListAST
   @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
   @lstringlist mTargetListAST

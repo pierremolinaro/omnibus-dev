@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @requiredProcedureDeclarationListAST {
+list @requiredFunctionDeclarationListAST {
   @lstring mName
   @mode mExecutionMode
   @bool mIsExported
@@ -66,14 +66,14 @@ proc checkRequiredProcedures
   ?context:let @semanticContext inSemanticContext
   ?endOfSourceFile:let @location unused inEndOfSourceFile
 {
-  for requiredProc in inAST.mRequiredFunctionListAST do
-    let argumentSignature = [requiredProc.mFormalArgumentList routineSignature !requiredProc.mName]
-    if not [inSemanticContext.mRoutineMapForContextEX hasKey !"" !requiredProc.mName !argumentSignature] then
-      error requiredProc.mName : "required func is not implemented"
+  for requiredFunction in inAST.mRequiredFunctionListAST do
+    let argumentSignature = [requiredFunction.mFormalArgumentList routineSignature !requiredFunction.mName]
+    if not [inSemanticContext.mRoutineMapForContextEX hasKey !"" !requiredFunction.mName !argumentSignature] then
+      error requiredFunction.mName : "required func is not implemented"
     else
       [inSemanticContext.mRoutineMapForContextEX searchKey
         !""
-        !requiredProc.mName
+        !requiredFunction.mName
         !argumentSignature
         ?*
         ?let @routineDescriptor routineDescriptor
@@ -82,15 +82,15 @@ proc checkRequiredProcedures
       let isExported = routineDescriptor.exported
       let mode = [routineDescriptor.routineKind executionMode]
     #--- Check modes
-      if mode != requiredProc.mExecutionMode then
-        error routineLocation : "required mode should be '" + requiredProc.mExecutionMode + "'"    
+      if mode != requiredFunction.mExecutionMode then
+        error routineLocation : "required mode should be '" + requiredFunction.mExecutionMode + "'"    
       end
     #--- Check attributes
-      if requiredProc.mIsExported && not isExported then
+      if requiredFunction.mIsExported && not isExported then
         error routineLocation
         : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
         fixit { after " @" + exportedAttribute () }
-      elsif isExported && not requiredProc.mIsExported then
+      elsif isExported && not requiredFunction.mIsExported then
         error routineLocation
         : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"
       end

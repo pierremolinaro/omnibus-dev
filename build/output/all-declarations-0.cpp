@@ -5682,46 +5682,46 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_system_5F_routine_i33_parse (C_Le
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i34_ (GALGAS_ast & ioArgument_ioAST,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_required COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 23)) ;
-  GALGAS_mode var_mode_1199 ;
-  GALGAS_lstring var_procName_1224 ;
-  GALGAS_lstringlist var_attributeList_1260 ;
-  GALGAS_routineFormalArgumentListAST var_procFormalArgumentList_1310 ;
-  nt_function_5F_header_ (ioArgument_ioAST, var_mode_1199, var_procName_1224, var_attributeList_1260, var_procFormalArgumentList_1310, inCompiler) ;
-  GALGAS_bool var_isGlobal_1327 = GALGAS_bool (false) ;
-  GALGAS_bool var_isSafe_1350 = GALGAS_bool (false) ;
-  cEnumerator_lstringlist enumerator_1395 (var_attributeList_1260, kENUMERATION_UP) ;
-  while (enumerator_1395.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_1395.current_mValue (HERE).getter_string (HERE).objectCompare (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 33)))).boolEnum () ;
+  GALGAS_mode var_mode_1198 ;
+  GALGAS_lstring var_procName_1223 ;
+  GALGAS_lstringlist var_attributeList_1259 ;
+  GALGAS_routineFormalArgumentListAST var_procFormalArgumentList_1309 ;
+  nt_function_5F_header_ (ioArgument_ioAST, var_mode_1198, var_procName_1223, var_attributeList_1259, var_procFormalArgumentList_1309, inCompiler) ;
+  GALGAS_bool var_isGlobal_1326 = GALGAS_bool (false) ;
+  GALGAS_bool var_isSafe_1349 = GALGAS_bool (false) ;
+  cEnumerator_lstringlist enumerator_1394 (var_attributeList_1259, kENUMERATION_UP) ;
+  while (enumerator_1394.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_1394.current_mValue (HERE).getter_string (HERE).objectCompare (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 33)))).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = var_isGlobal_1327.boolEnum () ;
+      const enumGalgasBool test_1 = var_isGlobal_1326.boolEnum () ;
       if (kBoolTrue == test_1) {
         TC_Array <C_FixItDescription> fixItArray2 ;
         fixItArray2.appendObject (C_FixItDescription (kFixItRemove, "")) ;
-        inCompiler->emitSemanticError (enumerator_1395.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 35)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 35)) ;
+        inCompiler->emitSemanticError (enumerator_1394.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 35)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 35)) ;
       }else if (kBoolFalse == test_1) {
-        var_isGlobal_1327 = GALGAS_bool (true) ;
+        var_isGlobal_1326 = GALGAS_bool (true) ;
       }
     }else if (kBoolFalse == test_0) {
-      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_1395.current_mValue (HERE).getter_string (HERE).objectCompare (function_safeAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 39)))).boolEnum () ;
+      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_1394.current_mValue (HERE).getter_string (HERE).objectCompare (function_safeAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 39)))).boolEnum () ;
       if (kBoolTrue == test_3) {
-        const enumGalgasBool test_4 = var_isSafe_1350.boolEnum () ;
+        const enumGalgasBool test_4 = var_isSafe_1349.boolEnum () ;
         if (kBoolTrue == test_4) {
           TC_Array <C_FixItDescription> fixItArray5 ;
           fixItArray5.appendObject (C_FixItDescription (kFixItRemove, "")) ;
-          inCompiler->emitSemanticError (enumerator_1395.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 41)), GALGAS_string ("duplicated attribute"), fixItArray5  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 41)) ;
+          inCompiler->emitSemanticError (enumerator_1394.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 41)), GALGAS_string ("duplicated attribute"), fixItArray5  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 41)) ;
         }else if (kBoolFalse == test_4) {
-          var_isSafe_1350 = GALGAS_bool (true) ;
+          var_isSafe_1349 = GALGAS_bool (true) ;
         }
       }else if (kBoolFalse == test_3) {
         TC_Array <C_FixItDescription> fixItArray6 ;
         appendFixItActions (fixItArray6, kFixItReplace, GALGAS_string ("@").add_operation (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46))) ;
         appendFixItActions (fixItArray6, kFixItReplace, GALGAS_string ("@").add_operation (function_safeAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46))) ;
-        inCompiler->emitSemanticError (enumerator_1395.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 46)), GALGAS_string ("invalid attribute"), fixItArray6  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46)) ;
+        inCompiler->emitSemanticError (enumerator_1394.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 46)), GALGAS_string ("invalid attribute"), fixItArray6  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46)) ;
       }
     }
-    enumerator_1395.gotoNextObject () ;
+    enumerator_1394.gotoNextObject () ;
   }
-  ioArgument_ioAST.mProperty_mRequiredFunctionListAST.addAssign_operation (var_procName_1224, var_mode_1199, var_isGlobal_1327, var_isSafe_1350, var_procFormalArgumentList_1310, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 55))  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 49)) ;
+  ioArgument_ioAST.mProperty_mRequiredFunctionListAST.addAssign_operation (var_procName_1223, var_mode_1198, var_isGlobal_1326, var_isSafe_1349, var_procFormalArgumentList_1309, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 55))  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 49)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5737,27 +5737,27 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i34_parse (C_Lexique_
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i35_ (GALGAS_ast & ioArgument_ioAST,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_extern COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 24)) ;
-  GALGAS_mode var_mode_1263 ;
-  GALGAS_lstring var_procName_1288 ;
-  GALGAS_lstringlist var_attributeList_1324 ;
-  GALGAS_routineFormalArgumentListAST var_procFormalArgumentList_1374 ;
-  nt_function_5F_header_ (ioArgument_ioAST, var_mode_1263, var_procName_1288, var_attributeList_1324, var_procFormalArgumentList_1374, inCompiler) ;
-  GALGAS_lstring var_returnTypeName_1402 ;
+  GALGAS_mode var_mode_1262 ;
+  GALGAS_lstring var_procName_1287 ;
+  GALGAS_lstringlist var_attributeList_1323 ;
+  GALGAS_routineFormalArgumentListAST var_procFormalArgumentList_1373 ;
+  nt_function_5F_header_ (ioArgument_ioAST, var_mode_1262, var_procName_1287, var_attributeList_1323, var_procFormalArgumentList_1373, inCompiler) ;
+  GALGAS_lstring var_returnTypeName_1401 ;
   switch (select_plm_5F_syntax_60 (inCompiler)) {
   case 1: {
-    var_returnTypeName_1402 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 33)) ;
+    var_returnTypeName_1401 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 33)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 35)) ;
-    nt_type_5F_definition_ (ioArgument_ioAST, var_returnTypeName_1402, inCompiler) ;
+    nt_type_5F_definition_ (ioArgument_ioAST, var_returnTypeName_1401, inCompiler) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 38)) ;
-  GALGAS_lstring var_llvmName_1557 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_llvmName_1556 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 39)) ;
-  ioArgument_ioAST.mProperty_mExternFunctionListAST.addAssign_operation (var_procName_1288, var_mode_1263, var_attributeList_1324, var_procFormalArgumentList_1374, var_returnTypeName_1402, var_llvmName_1557, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40)) ;
+  ioArgument_ioAST.mProperty_mExternFunctionListAST.addAssign_operation (var_procName_1287, var_mode_1262, var_attributeList_1323, var_procFormalArgumentList_1373, var_returnTypeName_1401, var_llvmName_1556, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
