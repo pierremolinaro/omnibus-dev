@@ -149,14 +149,21 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 #--- Called routine signature
   let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
 #--- Search routine in map
-  [inContext.mRoutineMapForContextEX searchKey
-    !""
-    !mSandAloneRoutineName
-    !calledRoutineSignature
-    ?* # let @lstring LLVMInvocationRoutineName
-    ?let @routineDescriptor routineDescriptor
-    ?let @location unused keyLocation
+  let requiredFunctionMangledName = mSandAloneRoutineName.string + calledRoutineSignature
+  [inContext.mRoutineMap searchKey
+    !.new {!requiredFunctionMangledName !mSandAloneRoutineName}
+    ?let unused implementedPublic
+    ?let formalSignature
+    ?let formalReturnTypeProxy # null if no returned value
+    ?let implementedModeDictionary
+    ?let unused implementedIsSafe
+    ?let unused implementedIsExported
+    ?let unused implementedMode
   ]
+#--- Check return type proxy is null
+  if formalReturnTypeProxy != .null then
+    error mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
+  end
 #--- Routine name for invocation graph
   let routineMangledName = routineMangledNameFromCall (
     !""
@@ -164,18 +171,27 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !mArguments
   )
 #--- Check modes
-  let routineKindIR = checkMode (
-    !callerMode:inCurrentMode
-    !calleeMode:[routineDescriptor.routineKind executionMode]
-    !kind:routineDescriptor.routineKind
-    !error:mSandAloneRoutineName.location
-  )
+    @string functionLLVMName
+    if [implementedModeDictionary hasKey !inCurrentMode] then
+      [implementedModeDictionary searchKey !inCurrentMode ?functionLLVMName]
+    elsif [implementedModeDictionary hasKey !.anyMode] then
+      [implementedModeDictionary searchKey !.anyMode ?functionLLVMName]
+    else
+      error mSandAloneRoutineName : "this function cannot be invoked in " + inCurrentMode + " mode" : functionLLVMName
+    end
+
+#  let routineKindIR = checkMode (
+#    !callerMode:inCurrentMode
+#    !calleeMode:[routineDescriptor.routineKind executionMode]
+#    !kind:routineDescriptor.routineKind
+#    !error:mSandAloneRoutineName.location
+#  )
 #--- Analyze effective parameters
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   analyzeEffectiveParameters (
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !formal:routineDescriptor.signature
+    !formal:formalSignature
     !effective:mArguments
     !errorLocation:mSandAloneRoutineName.location
     !context:inContext
@@ -193,8 +209,8 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !""
     !.void
     !routineMangledName
-    !routineDescriptor.nameForLLVMGeneration
-    !routineKindIR
+    !functionLLVMName
+    !.function
     !effectiveParameterListIR
   }
 }

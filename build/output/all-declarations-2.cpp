@@ -12807,10 +12807,10 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_externFunctionDeclarationListAST temp_0 = inObject ;
-  cEnumerator_externFunctionDeclarationListAST enumerator_5267 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5267.hasCurrentObject ()) {
-    extensionMethod_externProcedureSemanticAnalysis (enumerator_5267.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 134)) ;
-    enumerator_5267.gotoNextObject () ;
+  cEnumerator_externFunctionDeclarationListAST enumerator_5778 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5778.hasCurrentObject ()) {
+    extensionMethod_externProcedureSemanticAnalysis (enumerator_5778.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 144)) ;
+    enumerator_5778.gotoNextObject () ;
   }
 }
 

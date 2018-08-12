@@ -8294,13 +8294,30 @@ void extensionMethod_enterExternProcInContext (const GALGAS_externFunctionDeclar
   }
   GALGAS_routineLLVMNameDict temp_1 = GALGAS_routineLLVMNameDict::constructor_emptyDict (SOURCE_FILE ("declaration-extern-proc.galgas", 91)) ;
   temp_1.addAssign_operation (inObject.mProperty_mMode, inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 91)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 91)) ;
-  GALGAS_routineLLVMNameDict var_routineLLVMNameDict_3785 = temp_1 ;
-  GALGAS_lstring var_routineMangledName_3848 = extensionGetter_mangledName (var_signature_3451, inObject.mProperty_mExternProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 92)) ;
+  GALGAS_routineLLVMNameDict var_routineLLVMNameDict_3782 = temp_1 ;
+  const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, inObject.mProperty_mMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-extern-proc.galgas", 92)))).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    var_routineLLVMNameDict_3782.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("declaration-extern-proc.galgas", 93)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 93)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 93)) ;
+    var_routineLLVMNameDict_3782.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("declaration-extern-proc.galgas", 94)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 94)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 94)) ;
+  }else if (kBoolFalse == test_2) {
+    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, inObject.mProperty_mMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("declaration-extern-proc.galgas", 95)))).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      var_routineLLVMNameDict_3782.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("declaration-extern-proc.galgas", 96)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 96)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 96)) ;
+      var_routineLLVMNameDict_3782.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-extern-proc.galgas", 97)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 97)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 97)) ;
+      var_routineLLVMNameDict_3782.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("declaration-extern-proc.galgas", 98)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 98)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 98)) ;
+    }else if (kBoolFalse == test_3) {
+      const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, inObject.mProperty_mMode.objectCompare (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("declaration-extern-proc.galgas", 99)))).boolEnum () ;
+      if (kBoolTrue == test_4) {
+        var_routineLLVMNameDict_3782.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-extern-proc.galgas", 100)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 100)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 100)) ;
+      }
+    }
+  }
+  GALGAS_lstring var_routineMangledName_4359 = extensionGetter_mangledName (var_signature_3451, inObject.mProperty_mExternProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 102)) ;
   {
-  ioArgument_ioContext.mProperty_mRoutineMap.setter_insertKey (var_routineMangledName_3848, GALGAS_bool (true), var_signature_3451, var_returnTypeProxy_3715, var_routineLLVMNameDict_3785, var_safe_3468, GALGAS_bool (false), inObject.mProperty_mMode, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 93)) ;
+  ioArgument_ioContext.mProperty_mRoutineMap.setter_insertKey (var_routineMangledName_4359, GALGAS_bool (true), var_signature_3451, var_returnTypeProxy_3715, var_routineLLVMNameDict_3782, var_safe_3468, GALGAS_bool (false), inObject.mProperty_mMode, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 103)) ;
   }
   {
-  extensionSetter_insertRoutine (ioArgument_ioContext.mProperty_mRoutineMapForContextEX, GALGAS_string::makeEmptyString (), inObject.mProperty_mExternProcedureName, extensionGetter_routineSignature (inObject.mProperty_mProcFormalArgumentList, inObject.mProperty_mExternProcedureName.getter_location (SOURCE_FILE ("declaration-extern-proc.galgas", 107)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 107)), inObject.mProperty_mRoutineNameForGeneration, GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), inObject.mProperty_mExternProcedureName.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 112)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 113)), GALGAS_routineKind::constructor_function (inObject.mProperty_mMode  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 114)), var_signature_3451, var_returnTypeProxy_3715, GALGAS_bool (false), GALGAS_bool (false), var_safe_3468  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 104)) ;
+  extensionSetter_insertRoutine (ioArgument_ioContext.mProperty_mRoutineMapForContextEX, GALGAS_string::makeEmptyString (), inObject.mProperty_mExternProcedureName, extensionGetter_routineSignature (inObject.mProperty_mProcFormalArgumentList, inObject.mProperty_mExternProcedureName.getter_location (SOURCE_FILE ("declaration-extern-proc.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 117)), inObject.mProperty_mRoutineNameForGeneration, GALGAS_routineDescriptor::constructor_new (GALGAS_bool (true), GALGAS_bool (false), inObject.mProperty_mExternProcedureName.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 122)), inObject.mProperty_mRoutineNameForGeneration.getter_string (SOURCE_FILE ("declaration-extern-proc.galgas", 123)), GALGAS_routineKind::constructor_function (inObject.mProperty_mMode  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 124)), var_signature_3451, var_returnTypeProxy_3715, GALGAS_bool (false), GALGAS_bool (false), var_safe_3468  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 114)) ;
   }
 }
 
@@ -8315,43 +8332,43 @@ void extensionMethod_llvmPrototypeGeneration (const GALGAS_externProcedureMapIR_
                                               GALGAS_string & ioArgument_ioLLVMcode,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_procName_9076 = function_llvmNameForFunction (inObject.mProperty_lkey.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare"), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 236)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 237)))).boolEnum () ;
+  GALGAS_string var_procName_9587 = function_llvmNameForFunction (inObject.mProperty_lkey.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 245)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare"), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 246)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 247)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" void"), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 238)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" void"), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 248)) ;
   }else if (kBoolFalse == test_0) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ").add_operation (extensionGetter_llvmTypeName (inObject.mProperty_mReturnType.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 240)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 240)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 240)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 240)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ").add_operation (extensionGetter_llvmTypeName (inObject.mProperty_mReturnType.getter_type (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 250)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 250)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 250)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 250)) ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" @").add_operation (var_procName_9076, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 242)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 242)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 242)) ;
-  cEnumerator_routineFormalArgumentListIR enumerator_9353 (inObject.mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
-  while (enumerator_9353.hasCurrentObject ()) {
-    switch (enumerator_9353.current_mFormalArgumentKind (HERE).enumValue ()) {
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" @").add_operation (var_procName_9587, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 252)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 252)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 252)) ;
+  cEnumerator_routineFormalArgumentListIR enumerator_9864 (inObject.mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
+  while (enumerator_9864.hasCurrentObject ()) {
+    switch (enumerator_9864.current_mFormalArgumentKind (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_9353.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 247)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 247)).add_operation (enumerator_9353.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 247)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 247)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_9864.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 257)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 257)).add_operation (enumerator_9864.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 257)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 257)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_9353.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 249)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 249)).add_operation (function_llvmNameForLocalVariable (enumerator_9353.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 249)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 249)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 249)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_9864.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 259)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 259)).add_operation (function_llvmNameForLocalVariable (enumerator_9864.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 259)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 259)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 259)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_9353.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 251)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 251)).add_operation (function_llvmNameForLocalVariable (enumerator_9353.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 251)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 251)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_9864.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 261)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 261)).add_operation (function_llvmNameForLocalVariable (enumerator_9864.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 261)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 261)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 261)) ;
       }
       break ;
     }
-    if (enumerator_9353.hasNextObject ()) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 254)) ;
+    if (enumerator_9864.hasNextObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 264)) ;
     }
-    enumerator_9353.gotoNextObject () ;
+    enumerator_9864.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 256)).add_operation (GALGAS_string ("; declared by extern PLM function declaration\n"
-    "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 256)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 256)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 266)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 266)).add_operation (GALGAS_string ("; declared by extern PLM function declaration\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 266)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 266)) ;
 }
 
 
