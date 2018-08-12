@@ -86,14 +86,12 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 #!   UTILITIES                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func guardUserMangledNameFromAST ?let @string inReceiverTypeName
-                                 ?let @lstring inGuardName
-                                 ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+private func guardUserLLVMName ?let @string inReceiverLLVMBaseTypeName
+                               ?let @lstring inGuardName
+                               ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
 {
   var s = "guard.user."
-  if inReceiverTypeName != "" then
-    s += inReceiverTypeName + "."
-  end
+  s += inReceiverLLVMBaseTypeName + "."
   s += inGuardName.string
   s += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
@@ -105,56 +103,16 @@ func guardUserMangledNameFromAST ?let @string inReceiverTypeName
 
 #·······················································································································
 
-func guardUserMangledNameFromCall ?let @string inReceiverTypeName
-                                  ?let @lstring inGuardName
-                                  ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
-{
-  var s = "guard.user."
-  if inReceiverTypeName != "" then
-    s += inReceiverTypeName + "."
-  end
-  s += inGuardName.string
-  s += "("
-  for (passingMode selector) in inEffectiveParameterList do
-    s += [passingMode matchingFormalArgument] + selector + ":"
-  end
-  s += ")"
-  result = .new {!s !inGuardName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func guardImplementationMangledNameFromAST ?let @string inReceiverTypeName
-                                           ?let @lstring inGuardName
-                                           ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
+                                         ?let @lstring inGuardName
+                                         ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
 {
   var s = "guard.implementation."
-  if inReceiverTypeName != "" then
-    s += inReceiverTypeName + "."
-  end
+  s += inReceiverLLVMBaseTypeName + "."
   s += inGuardName.string
   s += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-  end
-  s += ")"
-  result = .new {!s !inGuardName.location}
-}
-
-#·······················································································································
-
-func guardImplementationMangledNameFromCall ?let @string inReceiverTypeName
-                                            ?let @lstring inGuardName
-                                            ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
-{
-  var s = "guard.implementation."
-  if inReceiverTypeName != "" then
-    s += inReceiverTypeName + "."
-  end
-  s += inGuardName.string
-  s += "("
-  for (passingMode selector) in inEffectiveParameterList do
-    s += [passingMode matchingFormalArgument] + selector + ":"
   end
   s += ")"
   result = .new {!s !inGuardName.location}
@@ -164,28 +122,50 @@ func guardImplementationMangledNameFromCall ?let @string inReceiverTypeName
 #!  ENTER IN CONTEXT                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @guardMapCTXT {
+  @bool mIsPublic
+  @routineTypedSignature mSignature
+  @lstring mUserRoutineLLVMName
+  @lstring mImplementationRoutineLLVMName
+
+  insert insertKey error message "the '%K' guard is already declared in %L"
+  search searchKey error message "there is no '%K' guard"
+}
+
+#·······················································································································
+
 method @guardDeclarationListAST enterGuardsInContext
   ?receiverTypeName:let @lstring inReceiverTypeName
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
   ?!context:@semanticContext ioContext
-  ?!guardMap:@guardMapForContext ioGuardMap
+  ?!guardMap:@guardMapCTXT ioGuardMap
   ?!@declarationDecorationList ioDecoratedDeclarationList
 {
 #---------------------------------------- Enter guards in guard map
   for guard in self do
+  #--- Signature
+    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
   #--- Guard mangled name
-    let guardMangledName = guardUserMangledNameFromAST (
+    let guardMangledName = [signature mangledName !guard.mGuardName]
+  #--- Guard user routine LLVM name
+    let guardUserLLVMName = guardUserLLVMName (
       !inReceiverLLVMBaseTypeName
       !guard.mGuardName
       !guard.mGuardFormalArgumentList
     )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
+  #--- Guard implementation routine LLVM name
+    let guardImplementationLLVMName = guardImplementationLLVMName (
+      !inReceiverLLVMBaseTypeName
+      !guard.mGuardName
+      !guard.mGuardFormalArgumentList
+    )
   #--- Enter in context
     [!?ioGuardMap insertKey
       !guardMangledName
       !guard.mIsPublic
       !signature
+      !guardUserLLVMName
+      !guardImplementationLLVMName
     ]
     ioDecoratedDeclarationList += !@decoratedGuardDeclaration.new {
       !inReceiverTypeName
@@ -315,28 +295,28 @@ override method @decoratedGuardDeclaration semanticAnalysis
   [!?universalMap closeBranch !mEndOfGuardDeclaration]
   [!?universalMap closeOverride !mEndOfGuardDeclaration]
 #--- Guard mangled name
-  let guardUserMangledName = guardUserMangledNameFromAST (
-    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
+  let guardUserLLVMName = guardUserLLVMName (
+    !receiverType.llvmBaseTypeName
     !mGuardName
     !mGuardFormalArgumentList
   )
-  let guardImplementationMangledName = guardImplementationMangledNameFromAST (
-    !if receiverType.kind == .void then "" else receiverType.llvmBaseTypeName end
+  let guardImplementationLLVMName = guardImplementationLLVMName (
+    !receiverType.llvmBaseTypeName
     !mGuardName
     !mGuardFormalArgumentList
   )
 #--- Code generation
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
-    !guardUserMangledName
+    !guardUserLLVMName
     !false # Is not root
     !warnIfUnused
-    !guardImplementationMangledName
+    !guardImplementationLLVMName
     !formalArguments
     !receiverType
     !convenienceGuardGenerationIR
   }
   ioIntermediateCodeStruct.mRoutineListIR += !@guardImplementationRoutineIR.new {
-    !guardImplementationMangledName
+    !guardImplementationLLVMName
     !false # Is not root
     !warnIfUnused
     !formalArguments
@@ -443,8 +423,9 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    let key = guardUserMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
-    [currentType.guardMap searchKey !key ?* ?let formalSignature] # ?let @propertyAccessKind propertyAccess]
+#    let key = guardUserMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
+    let guardMangledName = [mArguments mangledName !methodName]
+    [currentType.guardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
   #--- Add receiver as first parameter
     @procCallEffectiveParameterListIR effectiveParameterListIR = {
       !.outputInput
@@ -466,13 +447,11 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !?instructionListIR:baseGuardInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
     )
-  #--- Get function name and map containing the function definition
-    let routineMangledName = guardImplementationMangledNameFromCall (!currentType.plmTypeDescriptionName !methodName !mArguments)
   #--- Generate guards
     outConvenienceGuardGenerationIR = .convenienceGuard {
       !baseGuardAllocaList:baseGuardAllocaList
       !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-      !baseGuardMangledName:routineMangledName.string
+      !baseGuardMangledName:guardRoutineImplentationLLVMName.string
       !baseGuardEffectiveParameterList:effectiveParameterListIR
     }
   case arrayAccess (* @location endOfIndex) :

@@ -76,12 +76,16 @@ LLVM Name: %![type llvmTypeName]%
         <td class="result_title">Guard Name</td>
         <td class="result_title">Visibility</td>
         <td class="result_title">Typed signature</td>
+        <td class="result_title">User routine LLVM Name</td>
+        <td class="result_title">Implementation routine LLVM Name</td>
       </tr>
     %for () in [type guardMap] : guard_ do%
       <tr class="result_line">
         <td>%!guard_lkey.string%</td>
         <td>%if guard_mIsPublic then !"public" else !"private" end%</td>
         <td>%![guard_mSignature typedString]%</td>
+        <td>%![guard_mUserRoutineLLVMName string]%</td>
+        <td>%![guard_mImplementationRoutineLLVMName string]%</td>
       </tr>
     %end%
     </table>

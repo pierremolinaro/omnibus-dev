@@ -14,7 +14,7 @@ struct @PLMType {
   @propertyMap propertyMap %selector # Properties and methods
   @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
   @constructorMap constructorMap %selector # $type (!... !...)
-  @guardMapForContext guardMap %selector
+  @guardMapCTXT guardMap %selector
   @PLMTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string plmTypeDescriptionName %selector # used for type checking and type display
   @typeKind kind %selector

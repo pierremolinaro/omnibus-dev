@@ -10,6 +10,56 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                   Extension getter '@objectIR type' (as function)                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_PLMType extensionGetter_type (const class GALGAS_objectIR & inObject,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'literalStringType'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_PLMType function_literalStringType (class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                          Extension getter '@objectIR plmTypeDescriptionName' (as function)                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_plmTypeDescriptionName (const class GALGAS_objectIR & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Extension getter '@objectIR withType' (as function)                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_objectIR extensionGetter_withType (const class GALGAS_objectIR & inObject,
+                                                const class GALGAS_PLMType & constinArgument0,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Extension getter '@objectIR name' (as function)                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                   Class for element of '@globalConstantMapIR' map                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

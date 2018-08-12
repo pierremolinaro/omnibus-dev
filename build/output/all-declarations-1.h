@@ -618,25 +618,25 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorMap ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @guardMapForContext map                                               *
+//                                                  @guardMapCTXT map                                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_guardMapForContext ;
+class cMapElement_guardMapCTXT ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const char * kSearchErrorMessage_guardMapForContext_searchKey ;
+extern const char * kSearchErrorMessage_guardMapCTXT_searchKey ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_guardMapForContext : public AC_GALGAS_map {
+class GALGAS_guardMapCTXT : public AC_GALGAS_map {
 //--------------------------------- Default constructor
-  public : GALGAS_guardMapForContext (void) ;
+  public : GALGAS_guardMapCTXT (void) ;
 
 //--------------------------------- Handle copy
-  public : GALGAS_guardMapForContext (const GALGAS_guardMapForContext & inSource) ;
-  public : GALGAS_guardMapForContext & operator = (const GALGAS_guardMapForContext & inSource) ;
+  public : GALGAS_guardMapCTXT (const GALGAS_guardMapCTXT & inSource) ;
+  public : GALGAS_guardMapCTXT & operator = (const GALGAS_guardMapCTXT & inSource) ;
 
 //-- Start of generic part --*
 
@@ -644,20 +644,22 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_guardMapForContext extractObject (const GALGAS_object & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_guardMapCTXT extractObject (const GALGAS_object & inObject,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_guardMapForContext constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_guardMapCTXT constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static class GALGAS_guardMapForContext constructor_mapWithMapToOverride (const class GALGAS_guardMapForContext & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_guardMapCTXT constructor_mapWithMapToOverride (const class GALGAS_guardMapCTXT & inOperand0
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_bool & inOperand1,
                                                       const class GALGAS_routineTypedSignature & inOperand2,
+                                                      const class GALGAS_lstring & inOperand3,
+                                                      const class GALGAS_lstring & inOperand4,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -665,8 +667,15 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_bool constinArgument1,
                                                    class GALGAS_routineTypedSignature constinArgument2,
+                                                   class GALGAS_lstring constinArgument3,
+                                                   class GALGAS_lstring constinArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMImplementationRoutineLLVMNameForKey (class GALGAS_lstring constinArgument0,
+                                                                                 class GALGAS_string constinArgument1,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMIsPublicForKey (class GALGAS_bool constinArgument0,
                                                             class GALGAS_string constinArgument1,
@@ -678,17 +687,28 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMUserRoutineLLVMNameForKey (class GALGAS_lstring constinArgument0,
+                                                                       class GALGAS_string constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_bool & outArgument1,
                                                    class GALGAS_routineTypedSignature & outArgument2,
+                                                   class GALGAS_lstring & outArgument3,
+                                                   class GALGAS_lstring & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mImplementationRoutineLLVMNameForKey (const class GALGAS_string & constinOperand0,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublicForKey (const class GALGAS_string & constinOperand0,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const ;
@@ -697,41 +717,47 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_overriddenMap (C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mUserRoutineLLVMNameForKey (const class GALGAS_string & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapCTXT getter_overriddenMap (C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_guardMapForContext * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                const GALGAS_string & inKey
-                                                                                                COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG cMapElement_guardMapCTXT * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                          const GALGAS_string & inKey
+                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
 
-  friend class cEnumerator_guardMapForContext ;
+  friend class cEnumerator_guardMapCTXT ;
  
-} ; // End of GALGAS_guardMapForContext class
+} ; // End of GALGAS_guardMapCTXT class
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Enumerator declaration                                                                                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumerator_guardMapForContext : public cGenericAbstractEnumerator {
-  public : cEnumerator_guardMapForContext (const GALGAS_guardMapForContext & inEnumeratedObject,
-                                           const typeEnumerationOrder inOrder) ;
+class cEnumerator_guardMapCTXT : public cGenericAbstractEnumerator {
+  public : cEnumerator_guardMapCTXT (const GALGAS_guardMapCTXT & inEnumeratedObject,
+                                     const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsPublic (LOCATION_ARGS) const ;
   public : class GALGAS_routineTypedSignature current_mSignature (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mUserRoutineLLVMName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mImplementationRoutineLLVMName (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_guardMapForContext_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_guardMapCTXT_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapCTXT ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -864,7 +890,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : GALGAS_constructorMap mProperty_constructorMap ;
 
-  public : GALGAS_guardMapForContext mProperty_guardMap ;
+  public : GALGAS_guardMapCTXT mProperty_guardMap ;
 
   public : GALGAS_PLMTypeAttributes mProperty_attributes ;
 
@@ -891,7 +917,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
   public : GALGAS_PLMType (const GALGAS_propertyMap & in_propertyMap,
                            const GALGAS_classConstantMap & in_classConstantMap,
                            const GALGAS_constructorMap & in_constructorMap,
-                           const GALGAS_guardMapForContext & in_guardMap,
+                           const GALGAS_guardMapCTXT & in_guardMap,
                            const GALGAS_PLMTypeAttributes & in_attributes,
                            const GALGAS_string & in_plmTypeDescriptionName,
                            const GALGAS_typeKind & in_kind,
@@ -911,7 +937,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
   public : static class GALGAS_PLMType constructor_new (const class GALGAS_propertyMap & inOperand0,
                                                         const class GALGAS_classConstantMap & inOperand1,
                                                         const class GALGAS_constructorMap & inOperand2,
-                                                        const class GALGAS_guardMapForContext & inOperand3,
+                                                        const class GALGAS_guardMapCTXT & inOperand3,
                                                         const class GALGAS_PLMTypeAttributes & inOperand4,
                                                         const class GALGAS_string & inOperand5,
                                                         const class GALGAS_typeKind & inOperand6,
@@ -936,7 +962,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap getter_constructorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_guardMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapCTXT getter_guardMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kind (LOCATION_ARGS) const ;
 

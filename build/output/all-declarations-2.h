@@ -3514,20 +3514,24 @@ class cMapElement_constructorMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Class for element of '@guardMapForContext' map                                    *
+//                                      Class for element of '@guardMapCTXT' map                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_guardMapForContext : public cMapElement {
+class cMapElement_guardMapCTXT : public cMapElement {
 //--- Map attributes
   public : GALGAS_bool mProperty_mIsPublic ;
   public : GALGAS_routineTypedSignature mProperty_mSignature ;
+  public : GALGAS_lstring mProperty_mUserRoutineLLVMName ;
+  public : GALGAS_lstring mProperty_mImplementationRoutineLLVMName ;
 
 //--- Constructor
-  public : cMapElement_guardMapForContext (const GALGAS_lstring & inKey,
-                                           const GALGAS_bool & in_mIsPublic,
-                                           const GALGAS_routineTypedSignature & in_mSignature
-                                           COMMA_LOCATION_ARGS) ;
+  public : cMapElement_guardMapCTXT (const GALGAS_lstring & inKey,
+                                     const GALGAS_bool & in_mIsPublic,
+                                     const GALGAS_routineTypedSignature & in_mSignature,
+                                     const GALGAS_lstring & in_mUserRoutineLLVMName,
+                                     const GALGAS_lstring & in_mImplementationRoutineLLVMName
+                                     COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -5076,7 +5080,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_routineMapForContext mProperty_mRoutineMapForContext ;
 
-  public : GALGAS_guardMapForContext mProperty_mGuardMapForContext ;
+  public : GALGAS_guardMapCTXT mProperty_mGuardMapForContext ;
 
   public : GALGAS_controlRegisterGroupMap mProperty_mControlRegisterGroupMap ;
 
@@ -5168,7 +5172,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMapForContext,
-                                   const GALGAS_guardMapForContext & in_mGuardMapForContext,
+                                   const GALGAS_guardMapCTXT & in_mGuardMapForContext,
                                    const GALGAS_controlRegisterGroupMap & in_mControlRegisterGroupMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalSyncInstanceMap & in_mGlobalSyncInstanceMap,
@@ -5222,7 +5226,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand3,
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand4,
                                                                 const class GALGAS_routineMapForContext & inOperand5,
-                                                                const class GALGAS_guardMapForContext & inOperand6,
+                                                                const class GALGAS_guardMapCTXT & inOperand6,
                                                                 const class GALGAS_controlRegisterGroupMap & inOperand7,
                                                                 const class GALGAS_globalConstantMap & inOperand8,
                                                                 const class GALGAS_globalSyncInstanceMap & inOperand9,
@@ -5296,7 +5300,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_mGuardMapForContext (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapCTXT getter_mGuardMapForContext (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 

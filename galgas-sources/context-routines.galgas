@@ -85,16 +85,3 @@ proc routineSignature ?!@unifiedTypeMap ioTypeMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! OLD
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-# Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
-map @guardMapForContext {
-  @bool mIsPublic
-  @routineTypedSignature mSignature
-
-  insert insertKey error message "the '%K' guard is already declared in %L"
-  search searchKey error message "there is no '%K' guard"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

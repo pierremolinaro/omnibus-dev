@@ -127,6 +127,17 @@ getter @routineTypedSignature typedString -> @string {
   result += ")"
 }
 
+#·······················································································································
+
+getter @routineTypedSignature mangledName ?let @lstring inRoutineName -> @lstring {
+  var s = inRoutineName.string + "("
+  for (formalArgumentPassingMode selector typeProxy) in self do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inRoutineName.location}
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! ROUTINE SIGNATURE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

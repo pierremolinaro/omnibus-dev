@@ -29,6 +29,17 @@ list @effectiveArgumentListAST {
   @lstring mSelector
 }
 
+#·······················································································································
+
+getter @effectiveArgumentListAST mangledName ?let @lstring inRoutineName -> @lstring {
+  var s = inRoutineName.string + "("
+  for (effectiveArgumentPassingMode selector) in self do
+    s += [effectiveArgumentPassingMode matchingFormalArgument] + selector + ":"
+  end
+  s += ")"
+  result = .new {!s !inRoutineName.location}
+}
+
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! SYNTAX                                                                                                               
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -369,14 +369,15 @@ proc analyzeGuardCall
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
 {
+#  let guardMangledName = guardUserMangledNameFromCall (![inReceiver type].llvmBaseTypeName !inGuardName !inEffectiveParameterList)
+  let guardMangledName = [inEffectiveParameterList mangledName !inGuardName]
   let guardMap = [[inReceiver type] guardMap]
-  let guardMangledName = guardUserMangledNameFromCall (![inReceiver type].llvmBaseTypeName !inGuardName !inEffectiveParameterList)
-  [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature]
+  [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
 #--- Check accessibility
   if not isPublic then
     error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
   else  
-    outGuardMangledName = guardMangledName
+    outGuardMangledName = guardRoutineUserLLVMName
   #--- Analyze effective parameters
     outEffectiveParameterListIR = {!.outputInput !inReceiver}
     analyzeEffectiveParameters (
@@ -423,6 +424,7 @@ proc analyzeStandaloneGuardCall
     !outGuardMangledName
     ?let isPublic
     ?let @routineTypedSignature formalSignature
+    ?2*
   ]
 #--- Check accessibility
   if not isPublic then
