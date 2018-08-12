@@ -79,3 +79,17 @@ list @routineListIR {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @routineListIR llvmCodeGeneration
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  for procedure in self do
+    ioGenerationAdds.mUniqueIndex = 0
+    [procedure.mRoutine llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  end
+}
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

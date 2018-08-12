@@ -63,7 +63,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/property-map.galgas"
   "galgas-sources/constructor-map.galgas"
   "galgas-sources/semantic-analysis.galgas"
-  "galgas-sources/semantic-routines.galgas"
 
 #--- Panic
   "galgas-sources/panic.galgas"

@@ -107,6 +107,29 @@ method @decoratedRegularRoutineList-element semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @allocaList {
+  @string mVarLLVMName
+  @PLMType mLLVMType
+  @bool mFormalInputArgument
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @allocaList generateAllocaList ?!@string ioLLVMcode {
+  for (variable type *) in self do
+    ioLLVMcode += "  " + variable + " = alloca " + [type llvmTypeName] + "\n"
+  end
+#--- Init ARC variables
+  for (variable type formalInputArgument) in self do
+    if [type.kind isDynamicArrayType] && not formalInputArgument then
+      ioLLVMcode += ";--- init dynamic array type '" + variable + "'\n"
+      ioLLVMcode += "  store " + [type llvmTypeName] + " null, " + [type llvmTypeName] + "* " + variable + " ; init ARC value\n"
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

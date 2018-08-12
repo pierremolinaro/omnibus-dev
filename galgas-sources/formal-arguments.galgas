@@ -175,3 +175,42 @@ getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLo
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @routineFormalArgumentListIR {
+  @procFormalArgumentPassingMode mFormalArgumentKind
+  @PLMType mFormalArgumentType
+  @string mFormalArgumentName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc enterFormalArguments
+  ?context:let @semanticContext inContext
+  ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
+  ?!@universalValuedObjectMap ioUniversalMap
+  ?!@routineFormalArgumentListIR ioFormalArguments
+  ?warningOnUnusedArgs:let @bool inUnusedWarning
+{
+  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
+    let typeProxy = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
+    ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
+    switch argumentKind
+    case input :
+      if inUnusedWarning then
+        [!?ioUniversalMap insertLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
+      else
+        [!?ioUniversalMap insertUsedLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
+      end
+    case inputOutput :
+      if inUnusedWarning then
+        [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
+      else
+        [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasReadValue !true]
+      end
+    case output :
+      [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.noValue !true]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
