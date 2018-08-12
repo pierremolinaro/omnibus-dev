@@ -134,6 +134,7 @@ override method @typeOpaqueDeclarationAST enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     let opaqueType = @PLMType.new {
       !propertyMap:{}
+      !routineMap: {}
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}

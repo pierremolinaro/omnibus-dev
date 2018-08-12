@@ -188,6 +188,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @PLMType.new {
       !propertyMap:propertyMap
+      !routineMap: {}
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}

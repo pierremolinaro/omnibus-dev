@@ -90,7 +90,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
 #  )
 #--- Enter in context
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
-  [!?ioContext.mRoutineMapForContext insertRoutine
+  [!?ioContext.mRoutineMapForContextEX insertRoutine
     !""
     !mExternProcedureName
     ![mProcFormalArgumentList routineSignature !mExternProcedureName]

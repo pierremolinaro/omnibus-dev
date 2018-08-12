@@ -96,7 +96,10 @@ struct @semanticContext {
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
 
-  @routineMapForContext mRoutineMapForContext
+  @routineMapCTXT mRoutineMap
+
+  @routineMapForContext mRoutineMapForContextEX
+  
   @controlRegisterGroupMap mControlRegisterGroupMap
   @globalConstantMap mGlobalConstantMap
   @globalSyncInstanceMap mGlobalSyncInstanceMap
@@ -187,27 +190,30 @@ proc buildSemanticContext
     outSemanticContext.mRequiredRoutineSet += !procedureMangledName.string
   end 
 #--- Enter standalone procedures, functions, sections, services, guards in context
+  @routineMapCTXT routineMapCTXT = {}
   [inAST.mISRDeclarationListAST enterInContext
     !?outSemanticContext
     !?outDecoratedDeclarationList
     !?outDecoratedRoutineList
   ]
-  [inAST.mStandaloneFunctionDeclarationListAST enterFunctionInContext
-     !selfTypeName:["" nowhere]
-     !?context:outSemanticContext
-     !?outDecoratedRoutineList
-   ]
+  [inAST.mStandaloneFunctionDeclarationListAST enterStandaloneFunctionsInContext
+    !?context:outSemanticContext
+    !?routineMap: routineMapCTXT
+    !?outDecoratedRoutineList
+  ]
   [inAST.mExternProcListAST enterExternProcInContext
     !?context: outSemanticContext
   ]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName:["" nowhere] # Empty string if standalone
     !receiverLLVMBaseTypeName:""  # Empty string if standalone
-    !?propertyMap: * # @propertyMap ioPropertyMap
+    !?propertyMap: * 
+    !?routineMap: routineMapCTXT
     !?context: outSemanticContext
     !?outDecoratedRoutineList
     !?outRoutineListIR
   ]
+  outSemanticContext.mRoutineMap = routineMapCTXT
 #---
   outGlobalVariableIRList = {}
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST

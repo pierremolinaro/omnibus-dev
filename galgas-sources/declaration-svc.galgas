@@ -190,6 +190,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
   ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
   ?!propertyMap: @propertyMap ioPropertyMap
+  ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR ioRoutineListIR
@@ -259,17 +260,35 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !system.mRoutineKind == .section # If false, service or primitive
       !returnTypeProxy
     }
+  #--- Set execution mode and routine name dictionary 
     @mode mode
     switch system.mRoutineKind
-    case section : mode = .sectionMode
-    case primitive : mode = .primitiveMode
-    case service : mode = .serviceMode
-    case function (*) : error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
+    case section :
+      mode = .sectionMode
+    case primitive :
+      mode = .primitiveMode
+    case service :
+      mode = .serviceMode
+    case function (*) :
+      error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
     end
     @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
     if not isSafe then
       attributes = attributes | .panicAllowed
     end
+  #--- Enter in routine map
+    @routineLLVMNameDict routineLLVMNameDict = {}
+    routineLLVMNameDict += !.userMode !userRoutineMangledName
+    routineLLVMNameDict += !mode !implementationRoutineMangledName
+    let routineMangledName = [signature mangledName !system.mName]
+    [!?ioRoutineMapCTXT insertKey
+      !routineMangledName
+      !system.mPublic
+      !signature
+      !returnTypeProxy
+      !routineLLVMNameDict
+    ]
+  #--- Prepare semantic analysis
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:mode
@@ -307,7 +326,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !canMutateProperties:mutating
       !safe:isSafe
     }
-    [!?ioContext.mRoutineMapForContext insertRoutine
+    [!?ioContext.mRoutineMapForContextEX insertRoutine
       !inReceiverTypeName
       !system.mName
       ![system.mFormalArgumentList routineSignature !system.mName]
@@ -315,12 +334,12 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !descriptor
     ]
   #--- Enter in structure map
-    let routineMangledName = routineMangledNameFromAST (
+    let routineMangledNameEX = routineMangledNameFromAST (
       !inReceiverLLVMBaseTypeName
       !system.mName
       !system.mFormalArgumentList
     )
-    [!?ioPropertyMap insertKey !routineMangledName !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
+    [!?ioPropertyMap insertKey !routineMangledNameEX !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
   end
 }
 

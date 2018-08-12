@@ -96,7 +96,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
 #--- Get called function signature
   let signature = [mArguments routineSignature !mStandaloneFunctionName.location]
 #--- Search function in map
-  [inContext.mRoutineMapForContext searchKey
+  [inContext.mRoutineMapForContextEX searchKey
     !""
     !mStandaloneFunctionName
     !signature

@@ -327,6 +327,7 @@ override method @staticListAST enterInContext
 #-------------------------------------------------------------------- Enter element type in type map
   let type = @PLMType.new {
     !propertyMap:propertyMap
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -391,7 +392,7 @@ override method @staticListAST enterInContext
           else
             [type.kind function ?descriptor:let descriptor]
             let argumentSignature = [formalArgs routineSignature !functionName]
-            [ioContext.mRoutineMapForContext searchKey
+            [ioContext.mRoutineMapForContextEX searchKey
               !""
               !functionName
               !argumentSignature
@@ -457,6 +458,7 @@ override method @staticListAST enterInContext
   let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmElementTypeName} type]
   let arrayType = @PLMType.new {
     !propertyMap:listTypePropertyMap
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

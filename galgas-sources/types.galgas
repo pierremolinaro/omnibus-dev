@@ -12,6 +12,7 @@ boolset @PLMTypeAttributes {
 
 struct @PLMType {
   @propertyMap propertyMap %selector # Properties and methods
+  @routineMapCTXT routineMap %selector
   @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
   @constructorMap constructorMap %selector # $type (!... !...)
   @guardMapCTXT guardMap %selector
@@ -93,6 +94,7 @@ enum @typeKind {
 func staticIntegerType -> @PLMType {
   result = .new {
     !propertyMap:{}
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -108,6 +110,7 @@ func staticIntegerType -> @PLMType {
 func literalStringType -> @PLMType {
   result = .new {
     !propertyMap:{}
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -123,6 +126,7 @@ func literalStringType -> @PLMType {
 func voidType -> @PLMType {
   result = .new {
     !propertyMap:{}
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -155,6 +159,7 @@ func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
     llvmTypeName += ")*"
   result = .new{
     !propertyMap:{}
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

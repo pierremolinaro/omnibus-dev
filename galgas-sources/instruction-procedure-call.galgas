@@ -149,7 +149,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 #--- Called routine signature
   let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
 #--- Search routine in map
-  [inContext.mRoutineMapForContext searchKey
+  [inContext.mRoutineMapForContextEX searchKey
     !""
     !mSandAloneRoutineName
     !calledRoutineSignature

@@ -144,6 +144,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
     #-------------------------------------------- Enter in type map
       let arrayType = @PLMType.new {
         !propertyMap:arrayTypePropertyMap
+        !routineMap: {}
         !classConstantMap:classConstantMap
         !constructorMap:constructorMap
         !guardMap:{}

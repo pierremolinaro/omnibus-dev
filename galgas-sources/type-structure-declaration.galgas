@@ -333,10 +333,12 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter functions in property map
+  @routineMapCTXT routineMapCTXT = {}
   [mFunctionDeclarationListAST enterFunctionsInPropertyMap
     !receiverTypeName: mReceiverTypeName
     !receiverLLVMBaseTypeName: mLLVMBaseTypeName
     !?propertyMap: propertyMap
+    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
@@ -346,6 +348,7 @@ override method @structureDeclarationAST enterInContext
     !receiverTypeName: mReceiverTypeName
     !receiverLLVMBaseTypeName: mLLVMBaseTypeName
     !?propertyMap: propertyMap
+    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
@@ -361,7 +364,8 @@ override method @structureDeclarationAST enterInContext
   ]
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
-    !propertyMap:propertyMap
+    !propertyMap: propertyMap
+    !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap

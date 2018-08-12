@@ -135,9 +135,9 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST enterFunctionInContext 
-  ?selfTypeName:let @lstring inSelfTypeName
+method @functionDeclarationListAST enterStandaloneFunctionsInContext 
   ?!context:@semanticContext ioContext
+  ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
 {
   for function in self do
@@ -179,22 +179,32 @@ method @functionDeclarationListAST enterFunctionInContext
     end
     let canAccessProperties = function.mMode != .userMode
   #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !inSelfTypeName 
+    let functionLLVMName = routineMangledNameFromAST (
+      !"" 
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
     )
+  #--- Enter in routine map
+    @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
+    let routineMangledName = [signature mangledName !function.mFunctionName]
+    [!?ioRoutineMapCTXT insertKey
+      !routineMangledName
+      !function.mPublicFunction
+      !signature
+      !returnTypeProxy
+      !routineLLVMNameDict
+    ]
   #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertRoutine # Raises a redefinition error
-      !inSelfTypeName 
+    [!?ioContext.mRoutineMapForContextEX insertRoutine # Raises a redefinition error
+      !"" 
       !function.mFunctionName
       ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-      !routineMangledName # .new {!s !function.mFunctionName}
+      !functionLLVMName
       !.new{
         !isPublic:function.mPublicFunction
         !exported:globalFunction
         !name:function.mFunctionName
-        !nameForLLVMGeneration:routineMangledName
+        !nameForLLVMGeneration:functionLLVMName
         !routineKind:.function {!executionMode:function.mMode}
         !signature:signature
         !returnTypeProxy:returnTypeProxy
@@ -205,14 +215,14 @@ method @functionDeclarationListAST enterFunctionInContext
     ]
   #---------------- Add decorated declaration
     ioDecoratedRoutineList +=
-      !receiverTypeName: inSelfTypeName
+      !receiverTypeName: ["" nowhere]
       !mode:function.mMode
-      !isRequired:[ioContext.mRequiredRoutineSet hasKey !routineMangledName.string]
+      !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
       !.function {!executionMode:function.mMode}
       !warnIfUnused: warnIfUnused
       !exportedRoutine: globalFunction
       !.directPropertyAccess # @routineAttributes mRoutineAttributes
-      !routineMangledName #function.mFunctionName
+      !functionLLVMName
       !function.mFunctionFormalArgumentList
       !true # warningOnUnusedArgs
       !function.mFunctionInstructionList
@@ -227,6 +237,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
   ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
   ?!propertyMap: @propertyMap ioPropertyMap
+  ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
@@ -246,8 +257,8 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
+  #--- Routine LLVM Name name
+    let functionLLVMName = routineMangledNameFromAST (
       !inReceiverLLVMBaseTypeName
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
@@ -257,7 +268,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !isPublic:function.mPublicFunction
       !exported:exportedFunction
       !name:function.mFunctionName
-      !nameForLLVMGeneration:routineMangledName
+      !nameForLLVMGeneration:functionLLVMName
       !routineKind:.function {!executionMode:function.mMode}
       !signature:signature
       !returnTypeProxy:returnTypeProxy
@@ -266,7 +277,32 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !safe:safe
     }
   #--- Enter in structure map
-    [!?ioPropertyMap insertKey !routineMangledName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
+    [!?ioPropertyMap insertKey !functionLLVMName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
+  #--- Enter in routine map
+    @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
+    switch function.mMode
+    case anyMode :
+    case bootMode :
+    case guardMode :
+    case panicMode :
+    case primitiveMode :
+      routineLLVMNameDict += !.serviceMode !functionLLVMName
+      routineLLVMNameDict += !.sectionMode !functionLLVMName
+    case sectionMode :
+    case serviceMode :
+      routineLLVMNameDict += !.sectionMode !functionLLVMName
+    case startupMode :
+    case userMode :
+    end
+    let routineMangledName = [signature mangledName !function.mFunctionName]
+    [!?ioRoutineMapCTXT insertKey
+      !routineMangledName
+      !function.mPublicFunction
+      !signature
+      !returnTypeProxy
+      !routineLLVMNameDict
+    ]
+  #--- Prepare annalysis
     var warnIfUnused = true
     var functionAttributes = @routineAttributes.panicAllowed | .controlRegisterReadable
     for (attribute) in function.mFunctionAttributeList do
@@ -295,26 +331,39 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
           + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
     end
-    let functionMangledName = routineMangledNameFromAST (
-      !inReceiverLLVMBaseTypeName
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-    )
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:function.mMode
-      !isRequired:false
+      !isRequired: false
       !.function {!executionMode: function.mMode}
       !warnIfUnused: warnIfUnused
       !exportedRoutine: false
       !functionAttributes
-      !functionMangledName
+      !functionLLVMName
       !function.mFunctionFormalArgumentList
       !true # warningOnUnusedArgs
       !function.mFunctionInstructionList
       !function.mEndOfFunctionDeclaration
       !returnTypeName: function.mFunctionReturnTypeName  # Empty string if no returned value
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @routineMapCTXT {
+  @bool mIsPublic
+  @routineTypedSignature mSignature
+  @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
+  @routineLLVMNameDict mModeDictionary
+
+  insert insertKey error message "the '%K' function is already declared in %L"
+  search searchKey error message "there is no '%K' function"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+dict @routineLLVMNameDict : @mode {
+  @string mRoutineLLVMName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

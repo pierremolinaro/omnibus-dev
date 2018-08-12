@@ -63,6 +63,7 @@ override method @booleanDeclarationAST enterInContext
 #---------- Define boolean type composition
   let booleanType = @PLMType.new {
     !propertyMap:propertyMap
+    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

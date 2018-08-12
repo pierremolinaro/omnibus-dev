@@ -68,10 +68,10 @@ proc checkRequiredProcedures
 {
   for requiredProc in inAST.mRequiredProcListAST do
     let argumentSignature = [requiredProc.mFormalArgumentList routineSignature !requiredProc.mName]
-    if not [inSemanticContext.mRoutineMapForContext hasKey !"" !requiredProc.mName !argumentSignature] then
+    if not [inSemanticContext.mRoutineMapForContextEX hasKey !"" !requiredProc.mName !argumentSignature] then
       error requiredProc.mName : "required func is not implemented"
     else
-      [inSemanticContext.mRoutineMapForContext searchKey
+      [inSemanticContext.mRoutineMapForContextEX searchKey
         !""
         !requiredProc.mName
         !argumentSignature

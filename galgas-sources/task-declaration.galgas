@@ -355,10 +355,12 @@ method @taskListAST enterInContext
       !task.mTaskName.location # @location mEndOfRoutineDeclaration
       !returnTypeName: ["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
   #---------------- Enter task functions in property map
+    @routineMapCTXT routineMapCTXT = {}
     [task.mTaskFunctionList enterFunctionsInPropertyMap
       !receiverTypeName: task.mTaskName
       !receiverLLVMBaseTypeName: task.mTaskName
       !?propertyMap: propertyMap
+      !?routineMap: routineMapCTXT
       !?context: ioContext
       !?ioDecoratedRoutineList
       !?ioRoutineListIR
@@ -366,6 +368,7 @@ method @taskListAST enterInContext
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
       !propertyMap:propertyMap
+      !routineMap: routineMapCTXT
       !classConstantMap:{}
       !constructorMap:{}
       !guardMap:{}

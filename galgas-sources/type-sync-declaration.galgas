@@ -142,10 +142,12 @@ override method @syncDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Enter functions in property map
+  @routineMapCTXT routineMapCTXT = {}
   [mFunctionDeclarationListAST enterFunctionsInPropertyMap
     !receiverTypeName: mSyncToolName
     !receiverLLVMBaseTypeName: mSyncToolName
     !?propertyMap: propertyMap
+    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
@@ -155,6 +157,7 @@ override method @syncDeclarationAST enterInContext
     !receiverTypeName: mSyncToolName
     !receiverLLVMBaseTypeName: mSyncToolName
     !?propertyMap: propertyMap
+    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
@@ -171,6 +174,7 @@ override method @syncDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
     !propertyMap:propertyMap
+    !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap
