@@ -46,7 +46,7 @@ syntax extension plm_syntax {
         error attribute : "invalid attribute" fixit { replace "@" + exportedAttribute () replace "@" + safeAttribute () }
       end
     end
-    ioAST.mRequiredProcListAST +=
+    ioAST.mRequiredFunctionListAST +=
       !procName
       !mode
       !isGlobal
@@ -66,7 +66,7 @@ proc checkRequiredProcedures
   ?context:let @semanticContext inSemanticContext
   ?endOfSourceFile:let @location unused inEndOfSourceFile
 {
-  for requiredProc in inAST.mRequiredProcListAST do
+  for requiredProc in inAST.mRequiredFunctionListAST do
     let argumentSignature = [requiredProc.mFormalArgumentList routineSignature !requiredProc.mName]
     if not [inSemanticContext.mRoutineMapForContextEX hasKey !"" !requiredProc.mName !argumentSignature] then
       error requiredProc.mName : "required func is not implemented"

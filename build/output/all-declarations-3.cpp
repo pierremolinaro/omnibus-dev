@@ -5921,8 +5921,8 @@ GALGAS_ast::GALGAS_ast (void) :
 mProperty_mDeclarationListAST (),
 mProperty_mExtendStaticArrayDeclarationAST (),
 mProperty_mStandaloneFunctionDeclarationListAST (),
-mProperty_mRequiredProcListAST (),
-mProperty_mExternProcListAST (),
+mProperty_mRequiredFunctionListAST (),
+mProperty_mExternFunctionListAST (),
 mProperty_mISRDeclarationListAST (),
 mProperty_mStandAloneSystemRoutineListAST (),
 mProperty_mTargetListAST (),
@@ -5958,8 +5958,8 @@ GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
 mProperty_mDeclarationListAST (inOperand0),
 mProperty_mExtendStaticArrayDeclarationAST (inOperand1),
 mProperty_mStandaloneFunctionDeclarationListAST (inOperand2),
-mProperty_mRequiredProcListAST (inOperand3),
-mProperty_mExternProcListAST (inOperand4),
+mProperty_mRequiredFunctionListAST (inOperand3),
+mProperty_mExternFunctionListAST (inOperand4),
 mProperty_mISRDeclarationListAST (inOperand5),
 mProperty_mStandAloneSystemRoutineListAST (inOperand6),
 mProperty_mTargetListAST (inOperand7),
@@ -6028,10 +6028,10 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
     result = mProperty_mStandaloneFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mStandaloneFunctionDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mRequiredProcListAST.objectCompare (inOperand.mProperty_mRequiredProcListAST) ;
+    result = mProperty_mRequiredFunctionListAST.objectCompare (inOperand.mProperty_mRequiredFunctionListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mExternProcListAST.objectCompare (inOperand.mProperty_mExternProcListAST) ;
+    result = mProperty_mExternFunctionListAST.objectCompare (inOperand.mProperty_mExternFunctionListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mISRDeclarationListAST.objectCompare (inOperand.mProperty_mISRDeclarationListAST) ;
@@ -6066,7 +6066,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandaloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredProcListAST.isValid () && mProperty_mExternProcListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
+  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandaloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredFunctionListAST.isValid () && mProperty_mExternFunctionListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6075,8 +6075,8 @@ void GALGAS_ast::drop (void) {
   mProperty_mDeclarationListAST.drop () ;
   mProperty_mExtendStaticArrayDeclarationAST.drop () ;
   mProperty_mStandaloneFunctionDeclarationListAST.drop () ;
-  mProperty_mRequiredProcListAST.drop () ;
-  mProperty_mExternProcListAST.drop () ;
+  mProperty_mRequiredFunctionListAST.drop () ;
+  mProperty_mExternFunctionListAST.drop () ;
   mProperty_mISRDeclarationListAST.drop () ;
   mProperty_mStandAloneSystemRoutineListAST.drop () ;
   mProperty_mTargetListAST.drop () ;
@@ -6102,9 +6102,9 @@ void GALGAS_ast::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mStandaloneFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mRequiredProcListAST.description (ioString, inIndentation+1) ;
+    mProperty_mRequiredFunctionListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mExternProcListAST.description (ioString, inIndentation+1) ;
+    mProperty_mExternFunctionListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mISRDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -6147,14 +6147,14 @@ GALGAS_functionDeclarationListAST GALGAS_ast::getter_mStandaloneFunctionDeclarat
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_requiredProcedureDeclarationListAST GALGAS_ast::getter_mRequiredProcListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRequiredProcListAST ;
+GALGAS_requiredProcedureDeclarationListAST GALGAS_ast::getter_mRequiredFunctionListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRequiredFunctionListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_externProcedureDeclarationListAST GALGAS_ast::getter_mExternProcListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExternProcListAST ;
+GALGAS_externProcedureDeclarationListAST GALGAS_ast::getter_mExternFunctionListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExternFunctionListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

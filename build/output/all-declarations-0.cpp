@@ -5721,7 +5721,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i34_ (GALGAS_ast & io
     }
     enumerator_1395.gotoNextObject () ;
   }
-  ioArgument_ioAST.mProperty_mRequiredProcListAST.addAssign_operation (var_procName_1224, var_mode_1199, var_isGlobal_1327, var_isSafe_1350, var_procFormalArgumentList_1310, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 55))  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 49)) ;
+  ioArgument_ioAST.mProperty_mRequiredFunctionListAST.addAssign_operation (var_procName_1224, var_mode_1199, var_isGlobal_1327, var_isSafe_1350, var_procFormalArgumentList_1310, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 55))  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 49)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5757,7 +5757,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i35_ (GALGAS_ast & io
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 38)) ;
   GALGAS_lstring var_llvmName_1557 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 39)) ;
-  ioArgument_ioAST.mProperty_mExternProcListAST.addAssign_operation (var_procName_1288, var_mode_1263, var_attributeList_1324, var_procFormalArgumentList_1374, var_returnTypeName_1402, var_llvmName_1557, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40)) ;
+  ioArgument_ioAST.mProperty_mExternFunctionListAST.addAssign_operation (var_procName_1288, var_mode_1263, var_attributeList_1324, var_procFormalArgumentList_1374, var_returnTypeName_1402, var_llvmName_1557, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 40)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

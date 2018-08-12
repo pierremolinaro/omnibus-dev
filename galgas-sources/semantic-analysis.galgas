@@ -111,10 +111,6 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
   outIntermediateCodeStruct.mStaticEntityMap = inStaticEntityMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
-#  for requiredProc in inAST.mRequiredProcListAST do
-#    let procedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
-#    outIntermediateCodeStruct.mRequiredProcedureSet += !procedureMangledName.string
-#  end 
 #---
   @semanticTemporariesStruct temporaries = .default
   for (declaration) in inDecoratedDeclarationList do
@@ -129,7 +125,7 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
    ]
-  [inAST.mExternProcListAST externProcedureSemanticAnalysis
+  [inAST.mExternFunctionListAST externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct

@@ -15187,9 +15187,9 @@ class GALGAS_ast : public AC_GALGAS_root {
 
   public : GALGAS_functionDeclarationListAST mProperty_mStandaloneFunctionDeclarationListAST ;
 
-  public : GALGAS_requiredProcedureDeclarationListAST mProperty_mRequiredProcListAST ;
+  public : GALGAS_requiredProcedureDeclarationListAST mProperty_mRequiredFunctionListAST ;
 
-  public : GALGAS_externProcedureDeclarationListAST mProperty_mExternProcListAST ;
+  public : GALGAS_externProcedureDeclarationListAST mProperty_mExternFunctionListAST ;
 
   public : GALGAS_isrDeclarationListAST mProperty_mISRDeclarationListAST ;
 
@@ -15226,8 +15226,8 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : GALGAS_ast (const GALGAS_declarationListAST & in_mDeclarationListAST,
                        const GALGAS_extendStaticArrayDeclarationAST & in_mExtendStaticArrayDeclarationAST,
                        const GALGAS_functionDeclarationListAST & in_mStandaloneFunctionDeclarationListAST,
-                       const GALGAS_requiredProcedureDeclarationListAST & in_mRequiredProcListAST,
-                       const GALGAS_externProcedureDeclarationListAST & in_mExternProcListAST,
+                       const GALGAS_requiredProcedureDeclarationListAST & in_mRequiredFunctionListAST,
+                       const GALGAS_externProcedureDeclarationListAST & in_mExternFunctionListAST,
                        const GALGAS_isrDeclarationListAST & in_mISRDeclarationListAST,
                        const GALGAS_systemRoutineDeclarationListAST & in_mStandAloneSystemRoutineListAST,
                        const GALGAS_lstringlist & in_mTargetListAST,
@@ -15287,13 +15287,13 @@ class GALGAS_ast : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_extendStaticArrayDeclarationAST getter_mExtendStaticArrayDeclarationAST (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureDeclarationListAST getter_mExternProcListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureDeclarationListAST getter_mExternFunctionListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_isrDeclarationListAST getter_mISRDeclarationListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_driverInstanciationListAST getter_mRequiredDriverListAST (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_requiredProcedureDeclarationListAST getter_mRequiredProcListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_requiredProcedureDeclarationListAST getter_mRequiredFunctionListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mStandAloneSystemRoutineListAST (LOCATION_ARGS) const ;
 
