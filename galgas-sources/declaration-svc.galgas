@@ -331,7 +331,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
 list @sectionIRlist {
   @string mSectionCallName
   @string mSectionImplementationName
-  @bool mInvocationFromUserModeOnly
+  @bool invocationFromAnyMode %selector
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -384,10 +384,10 @@ proc generateSectionDispatcher
   ?let @sectionIRlist inSectionIRlist
 {
   for section in inSectionIRlist do (idx)
-    if section.mInvocationFromUserModeOnly then
+    if section.invocationFromAnyMode then
       var s = getTargetTextFile (
         !currentDir:inCurrentDirectory
-        !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocationFromUserMode
+        !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocationFromAnyMode
       )
       s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !section.mSectionCallName]
       s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !section.mSectionImplementationName]
@@ -396,7 +396,7 @@ proc generateSectionDispatcher
     else
       var s = getTargetTextFile (
         !currentDir:inCurrentDirectory
-        !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocationFromAnyMode
+        !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocationFromUserMode
       )
       s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !section.mSectionCallName]
       s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !section.mSectionImplementationName]
@@ -508,7 +508,7 @@ override method @systemUserRoutineIR svcDeclarationGeneration
   let userMangledName = [mRoutineMangledName assemblerRepresentation]
   let implementationMangledName = [mMangledImplementationName assemblerRepresentation]
   if mIsSection then
-    ioSectionList += !userMangledName !implementationMangledName !false
+    ioSectionList += !userMangledName !implementationMangledName !invocationFromAnyMode: false
   else
     ioPrimitiveAndServiceList += !userMangledName !implementationMangledName !false
   end
@@ -549,7 +549,7 @@ override method @systemUserRoutineIR llvmCodeGeneration
       ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "*"
     end
   end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "; §\n\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

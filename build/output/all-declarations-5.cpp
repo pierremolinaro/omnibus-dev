@@ -7125,7 +7125,7 @@ GALGAS_globalTaskVariableList_2D_element GALGAS_globalTaskVariableList_2D_elemen
 GALGAS_sectionIRlist_2D_element::GALGAS_sectionIRlist_2D_element (void) :
 mProperty_mSectionCallName (),
 mProperty_mSectionImplementationName (),
-mProperty_mInvocationFromUserModeOnly () {
+mProperty_invocationFromAnyMode () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7140,7 +7140,7 @@ GALGAS_sectionIRlist_2D_element::GALGAS_sectionIRlist_2D_element (const GALGAS_s
                                                                   const GALGAS_bool & inOperand2) :
 mProperty_mSectionCallName (inOperand0),
 mProperty_mSectionImplementationName (inOperand1),
-mProperty_mInvocationFromUserModeOnly (inOperand2) {
+mProperty_invocationFromAnyMode (inOperand2) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7175,7 +7175,7 @@ typeComparisonResult GALGAS_sectionIRlist_2D_element::objectCompare (const GALGA
     result = mProperty_mSectionImplementationName.objectCompare (inOperand.mProperty_mSectionImplementationName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mInvocationFromUserModeOnly.objectCompare (inOperand.mProperty_mInvocationFromUserModeOnly) ;
+    result = mProperty_invocationFromAnyMode.objectCompare (inOperand.mProperty_invocationFromAnyMode) ;
   }
   return result ;
 }
@@ -7183,7 +7183,7 @@ typeComparisonResult GALGAS_sectionIRlist_2D_element::objectCompare (const GALGA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_sectionIRlist_2D_element::isValid (void) const {
-  return mProperty_mSectionCallName.isValid () && mProperty_mSectionImplementationName.isValid () && mProperty_mInvocationFromUserModeOnly.isValid () ;
+  return mProperty_mSectionCallName.isValid () && mProperty_mSectionImplementationName.isValid () && mProperty_invocationFromAnyMode.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7191,7 +7191,7 @@ bool GALGAS_sectionIRlist_2D_element::isValid (void) const {
 void GALGAS_sectionIRlist_2D_element::drop (void) {
   mProperty_mSectionCallName.drop () ;
   mProperty_mSectionImplementationName.drop () ;
-  mProperty_mInvocationFromUserModeOnly.drop () ;
+  mProperty_invocationFromAnyMode.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7206,7 +7206,7 @@ void GALGAS_sectionIRlist_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mSectionImplementationName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mInvocationFromUserModeOnly.description (ioString, inIndentation+1) ;
+    mProperty_invocationFromAnyMode.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -7225,8 +7225,8 @@ GALGAS_string GALGAS_sectionIRlist_2D_element::getter_mSectionImplementationName
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_sectionIRlist_2D_element::getter_mInvocationFromUserModeOnly (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInvocationFromUserModeOnly ;
+GALGAS_bool GALGAS_sectionIRlist_2D_element::getter_invocationFromAnyMode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_invocationFromAnyMode ;
 }
 
 

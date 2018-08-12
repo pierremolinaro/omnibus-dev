@@ -350,7 +350,7 @@ override method @universalModePanicRoutineIR svcDeclarationGeneration
   ioSectionList += 
     !llvmNameForSectionCall (!panicRoutineName ())
     !llvmNameForSectionImplementation (!panicRoutineName ())
-    !false # Invocation from any mode
+    !invocationFromAnyMode: true
 }
 
 #·······················································································································

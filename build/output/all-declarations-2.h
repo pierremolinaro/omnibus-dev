@@ -7379,7 +7379,7 @@ class GALGAS_sectionIRlist : public AC_GALGAS_list {
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mSectionCallName,
                                                   const class GALGAS_string & in_mSectionImplementationName,
-                                                  const class GALGAS_bool & in_mInvocationFromUserModeOnly
+                                                  const class GALGAS_bool & in_invocationFromAnyMode
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -7464,9 +7464,9 @@ class GALGAS_sectionIRlist : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mInvocationFromUserModeOnlyAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_invocationFromAnyModeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSectionCallNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                 C_Compiler * inCompiler
@@ -7508,7 +7508,7 @@ class cEnumerator_sectionIRlist : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_string current_mSectionCallName (LOCATION_ARGS) const ;
   public : class GALGAS_string current_mSectionImplementationName (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mInvocationFromUserModeOnly (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_invocationFromAnyMode (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_sectionIRlist_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -7529,7 +7529,7 @@ class GALGAS_sectionIRlist_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_string mProperty_mSectionImplementationName ;
 
-  public : GALGAS_bool mProperty_mInvocationFromUserModeOnly ;
+  public : GALGAS_bool mProperty_invocationFromAnyMode ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -7547,7 +7547,7 @@ class GALGAS_sectionIRlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_sectionIRlist_2D_element (const GALGAS_string & in_mSectionCallName,
                                             const GALGAS_string & in_mSectionImplementationName,
-                                            const GALGAS_bool & in_mInvocationFromUserModeOnly) ;
+                                            const GALGAS_bool & in_invocationFromAnyMode) ;
 
 //-- Start of generic part --*
 
@@ -7577,7 +7577,7 @@ class GALGAS_sectionIRlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mInvocationFromUserModeOnly (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_invocationFromAnyMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSectionCallName (LOCATION_ARGS) const ;
 

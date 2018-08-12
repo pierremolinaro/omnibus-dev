@@ -8624,7 +8624,7 @@ class cCollectionElement_sectionIRlist : public cCollectionElement {
 //--- Constructors
   public : cCollectionElement_sectionIRlist (const GALGAS_string & in_mSectionCallName,
                                              const GALGAS_string & in_mSectionImplementationName,
-                                             const GALGAS_bool & in_mInvocationFromUserModeOnly
+                                             const GALGAS_bool & in_invocationFromAnyMode
                                              COMMA_LOCATION_ARGS) ;
   public : cCollectionElement_sectionIRlist (const GALGAS_sectionIRlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
@@ -8645,17 +8645,17 @@ class cCollectionElement_sectionIRlist : public cCollectionElement {
 
 cCollectionElement_sectionIRlist::cCollectionElement_sectionIRlist (const GALGAS_string & in_mSectionCallName,
                                                                     const GALGAS_string & in_mSectionImplementationName,
-                                                                    const GALGAS_bool & in_mInvocationFromUserModeOnly
+                                                                    const GALGAS_bool & in_invocationFromAnyMode
                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mSectionCallName, in_mSectionImplementationName, in_mInvocationFromUserModeOnly) {
+mObject (in_mSectionCallName, in_mSectionImplementationName, in_invocationFromAnyMode) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_sectionIRlist::cCollectionElement_sectionIRlist (const GALGAS_sectionIRlist_2D_element & inElement COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (inElement.mProperty_mSectionCallName, inElement.mProperty_mSectionImplementationName, inElement.mProperty_mInvocationFromUserModeOnly) {
+mObject (inElement.mProperty_mSectionCallName, inElement.mProperty_mSectionImplementationName, inElement.mProperty_invocationFromAnyMode) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8668,7 +8668,7 @@ bool cCollectionElement_sectionIRlist::isValid (void) const {
 
 cCollectionElement * cCollectionElement_sectionIRlist::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_sectionIRlist (mObject.mProperty_mSectionCallName, mObject.mProperty_mSectionImplementationName, mObject.mProperty_mInvocationFromUserModeOnly COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_sectionIRlist (mObject.mProperty_mSectionCallName, mObject.mProperty_mSectionImplementationName, mObject.mProperty_invocationFromAnyMode COMMA_HERE)) ;
   return result ;
 }
 
@@ -8685,8 +8685,8 @@ void cCollectionElement_sectionIRlist::description (C_String & ioString, const i
   mObject.mProperty_mSectionImplementationName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInvocationFromUserModeOnly" ":" ;
-  mObject.mProperty_mInvocationFromUserModeOnly.description (ioString, inIndentation) ;
+  ioString << "invocationFromAnyMode" ":" ;
+  mObject.mProperty_invocationFromAnyMode.description (ioString, inIndentation) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8736,12 +8736,12 @@ GALGAS_sectionIRlist GALGAS_sectionIRlist::constructor_listWithValue (const GALG
 void GALGAS_sectionIRlist::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                       const GALGAS_string & in_mSectionCallName,
                                                       const GALGAS_string & in_mSectionImplementationName,
-                                                      const GALGAS_bool & in_mInvocationFromUserModeOnly
+                                                      const GALGAS_bool & in_invocationFromAnyMode
                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_sectionIRlist * p = NULL ;
   macroMyNew (p, cCollectionElement_sectionIRlist (in_mSectionCallName,
                                                    in_mSectionImplementationName,
-                                                   in_mInvocationFromUserModeOnly COMMA_THERE)) ;
+                                                   in_invocationFromAnyMode COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -8815,7 +8815,7 @@ void GALGAS_sectionIRlist::setter_removeAtIndex (GALGAS_string & outOperand0,
       macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
       outOperand0 = p->mObject.mProperty_mSectionCallName ;
       outOperand1 = p->mObject.mProperty_mSectionImplementationName ;
-      outOperand2 = p->mObject.mProperty_mInvocationFromUserModeOnly ;
+      outOperand2 = p->mObject.mProperty_invocationFromAnyMode ;
     }
   }
 }
@@ -8838,7 +8838,7 @@ void GALGAS_sectionIRlist::setter_popFirst (GALGAS_string & outOperand0,
     macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
     outOperand0 = p->mObject.mProperty_mSectionCallName ;
     outOperand1 = p->mObject.mProperty_mSectionImplementationName ;
-    outOperand2 = p->mObject.mProperty_mInvocationFromUserModeOnly ;
+    outOperand2 = p->mObject.mProperty_invocationFromAnyMode ;
   }
 }
 
@@ -8860,7 +8860,7 @@ void GALGAS_sectionIRlist::setter_popLast (GALGAS_string & outOperand0,
     macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
     outOperand0 = p->mObject.mProperty_mSectionCallName ;
     outOperand1 = p->mObject.mProperty_mSectionImplementationName ;
-    outOperand2 = p->mObject.mProperty_mInvocationFromUserModeOnly ;
+    outOperand2 = p->mObject.mProperty_invocationFromAnyMode ;
   }
 }
 
@@ -8882,7 +8882,7 @@ void GALGAS_sectionIRlist::method_first (GALGAS_string & outOperand0,
     macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
     outOperand0 = p->mObject.mProperty_mSectionCallName ;
     outOperand1 = p->mObject.mProperty_mSectionImplementationName ;
-    outOperand2 = p->mObject.mProperty_mInvocationFromUserModeOnly ;
+    outOperand2 = p->mObject.mProperty_invocationFromAnyMode ;
   }
 }
 
@@ -8904,7 +8904,7 @@ void GALGAS_sectionIRlist::method_last (GALGAS_string & outOperand0,
     macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
     outOperand0 = p->mObject.mProperty_mSectionCallName ;
     outOperand1 = p->mObject.mProperty_mSectionImplementationName ;
-    outOperand2 = p->mObject.mProperty_mInvocationFromUserModeOnly ;
+    outOperand2 = p->mObject.mProperty_invocationFromAnyMode ;
   }
 }
 
@@ -8991,15 +8991,15 @@ GALGAS_string GALGAS_sectionIRlist::getter_mSectionImplementationNameAtIndex (co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_sectionIRlist::getter_mInvocationFromUserModeOnlyAtIndex (const GALGAS_uint & inIndex,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_sectionIRlist::getter_invocationFromAnyModeAtIndex (const GALGAS_uint & inIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_sectionIRlist * p = (cCollectionElement_sectionIRlist *) attributes.ptr () ;
   GALGAS_bool result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
-    result = p->mObject.mProperty_mInvocationFromUserModeOnly ;
+    result = p->mObject.mProperty_invocationFromAnyMode ;
   }
   return result ;
 }
@@ -9041,10 +9041,10 @@ GALGAS_string cEnumerator_sectionIRlist::current_mSectionImplementationName (LOC
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool cEnumerator_sectionIRlist::current_mInvocationFromUserModeOnly (LOCATION_ARGS) const {
+GALGAS_bool cEnumerator_sectionIRlist::current_invocationFromAnyMode (LOCATION_ARGS) const {
   const cCollectionElement_sectionIRlist * p = (const cCollectionElement_sectionIRlist *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_sectionIRlist) ;
-  return p->mObject.mProperty_mInvocationFromUserModeOnly ;
+  return p->mObject.mProperty_invocationFromAnyMode ;
 }
 
 

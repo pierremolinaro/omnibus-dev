@@ -321,11 +321,11 @@ private proc generateCodeFiles
     sectionIRlist += 
       !llvmNameForSectionCall (!memoryAllocSectionName ())
       !llvmNameForSectionImplementation (!memoryAllocSectionName ())
-      !false # Invocation from any mode
+      !invocationFromAnyMode: true
     sectionIRlist += 
       !llvmNameForSectionCall (!memoryFreeSectionName ())
       !llvmNameForSectionImplementation (!memoryFreeSectionName ())
-      !false # Invocation from any mode
+      !invocationFromAnyMode: true
   end
   generateSectionDispatcher (
     !inCurrentDirectory

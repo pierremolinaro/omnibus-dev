@@ -505,7 +505,7 @@ override method @guardUserRoutineIR svcDeclarationGeneration
     ioSectionList +=
       !userMangledName
       !implementationMangledName
-      !true # Only invocation from user mode
+      !invocationFromAnyMode: false
   end
 }
 
