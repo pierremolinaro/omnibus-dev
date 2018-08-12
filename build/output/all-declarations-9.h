@@ -567,8 +567,9 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_buildTypeMapHTMLFile (class GALGAS_unifiedTypeMap inArgument0,
-                                   const class GALGAS_lstring constinArgument1,
+void routine_buildTypeMapHTMLFile (const class GALGAS_unifiedTypeMap constinArgument0,
+                                   const class GALGAS_routineMapCTXT constinArgument1,
+                                   const class GALGAS_lstring constinArgument2,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -599,7 +600,8 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
                                                                    const class GALGAS_string & in_PROJECT_5F_NAME,
                                                                    const class GALGAS_unifiedTypeMap & in_GLOBAL_5F_TYPE_5F_MAP,
                                                                    const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                   const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                   const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
+                                                                   const class GALGAS_routineMapCTXT & in_STANDALONE_5F_ROUTINE_5F_MAP
                                                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

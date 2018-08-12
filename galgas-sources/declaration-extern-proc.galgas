@@ -70,9 +70,12 @@ method @externFunctionDeclarationListAST enterExternProcInContext
     [externProcedure enterExternProcInContext !?context:ioContext]
   end
 }
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
+method @externFunctionDeclarationListAST-element enterExternProcInContext
+  ?!context:@semanticContext ioContext
+{
 #--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #---

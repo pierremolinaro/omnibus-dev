@@ -22,7 +22,7 @@ override method @standaloneRoutineCallIR llvmInstructionCode
   else
     ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]
   end
-  ioLLVMcode += " @"
+  ioLLVMcode += " @" # + [mFunctionNameForGeneration assemblerRepresentation]
   switch mKind 
   case function :
     ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration)

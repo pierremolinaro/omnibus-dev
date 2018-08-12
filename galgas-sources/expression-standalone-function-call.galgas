@@ -92,33 +92,34 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     error mStandaloneFunctionName.location : "a routine cannot be called in guard"
   end
 #--- Get function name and map containing the function definition
-  let routineMangledName = routineMangledNameFromCall (!"" !mStandaloneFunctionName !mArguments)
+  let routineLLVMName = routineMangledNameFromCall (!"" !mStandaloneFunctionName !mArguments)
 #--- Get called function signature
   let signature = [mArguments routineSignature !mStandaloneFunctionName.location]
 #--- Search function in map
-  [inContext.mRoutineMapForContextEX searchKey
-    !""
-    !mStandaloneFunctionName
-    !signature
-    ?* # let @lstring LLVMInvocationRoutineName
-    ?@routineDescriptor routineDescriptor
-    ?*
+  let requiredFunctionMangledName = mStandaloneFunctionName.string + signature
+  [inContext.mRoutineMap searchKey
+    !.new {!requiredFunctionMangledName !mStandaloneFunctionName}
+    ?let unused implementedPublic
+    ?let formalSignature
+    ?let formalReturnTypeProxy # null if no returned value
+    ?let implementedModeDictionary
+    ?let unused implementedIsSafe
+    ?let unused implementedIsExported
+    ?let unused implementedMode
   ]
-#  let isPublic = routineDescriptor.mIsPublic
-  let routineKind = routineDescriptor.routineKind
-  let calleeMode = [routineKind executionMode]
-  let formalSignature = routineDescriptor.signature
 #--- Check routine is actually a function
-  if routineDescriptor.returnTypeProxy == .null then
-    error mStandaloneFunctionName : "not a function (returns no value)" : routineDescriptor, outFunctionCallReturnedValue
+  if formalReturnTypeProxy == .null then
+    error mStandaloneFunctionName : "this function does not return any value" : outFunctionCallReturnedValue
   else
   #--- Check modes
-    let calleeKind = checkMode (
-      !callerMode:inCurrentMode
-      !calleeMode:calleeMode
-      !kind:routineKind
-      !error:mStandaloneFunctionName.location
-    )
+    @string functionLLVMName
+    if [implementedModeDictionary hasKey !inCurrentMode] then
+      [implementedModeDictionary searchKey !inCurrentMode ?functionLLVMName]
+    elsif [implementedModeDictionary hasKey !.anyMode] then
+      [implementedModeDictionary searchKey !.anyMode ?functionLLVMName]
+    else
+      error mStandaloneFunctionName : "this function cannot be invoked in " + inCurrentMode + " mode" : functionLLVMName
+    end
   #--- Analyze effective parameters
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     analyzeEffectiveParameters (
@@ -137,14 +138,14 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !?effectiveIR:effectiveParameterListIR
     )
   #--- New LLVM variable for function call result
-    getNewTempValue (![routineDescriptor.returnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
+    getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
   #--- Code generation
     ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
       !"" # globalVariableReceiverName
       !outFunctionCallReturnedValue
-      !routineMangledName
-      !routineDescriptor.nameForLLVMGeneration # LLVMInvocationRoutineName
-      !calleeKind
+      !routineLLVMName
+      !functionLLVMName
+      !.function # calleeKind
       !effectiveParameterListIR
     }
   end

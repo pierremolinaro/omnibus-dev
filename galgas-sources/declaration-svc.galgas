@@ -333,7 +333,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !inReceiverTypeName
       !system.mName
       ![system.mFormalArgumentList routineSignature !system.mName]
-      !.new{ !s !system.mName} # routineMangledName
+      !.new{ !s !system.mName}
       !descriptor
     ]
   #--- Enter in structure map

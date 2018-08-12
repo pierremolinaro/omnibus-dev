@@ -3765,6 +3765,9 @@ class GALGAS_routineLLVMNameDict : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_hasKey (const class GALGAS_mode & constinOperand0
+                                                             COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mRoutineLLVMNameForKey (const class GALGAS_mode & constinOperand0,
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) const ;
@@ -7205,7 +7208,6 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_functionDecl
 
 void extensionMethod_enterStandaloneFunctionsInContext (const class GALGAS_functionDeclarationListAST inObject,
                                                         class GALGAS_semanticContext & io_ioContext,
-                                                        class GALGAS_routineMapCTXT & io_ioRoutineMapCTXT,
                                                         class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
                                                         class C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;

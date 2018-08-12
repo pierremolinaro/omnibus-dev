@@ -392,29 +392,32 @@ override method @staticListAST enterInContext
           else
             [type.kind function ?descriptor:let descriptor]
             let argumentSignature = [formalArgs routineSignature !functionName]
-            [ioContext.mRoutineMapForContextEX searchKey
-              !""
-              !functionName
-              !argumentSignature
-              ?let @lstring candidateRoutineLLVMName
-              ?let @routineDescriptor routineDescriptor
-              ?let functionDefinitionLocation
+            let functionMangledName = @lstring.new {!functionName.string + argumentSignature !functionName}
+            [ioContext.mRoutineMap searchKey
+              !functionMangledName
+              ?let unused candidateIsPublic
+              ?let candidateSignature
+              ?let candidateReturnTypeProxy # null if no returned value
+              ?let implementedModeDictionary
+              ?let unused implementedIsSafe
+              ?let unused implementedIsExported
+              ?let candidateMode
             ]
-            let candidateIsPublic = routineDescriptor.isPublic
-            let candidateRoutineKind = routineDescriptor.routineKind
-            let candidateMode = [routineDescriptor.routineKind executionMode]
-            let candidateSignature = routineDescriptor.signature
-            let candidateReturnTypeProxy = routineDescriptor.returnTypeProxy
           #--- Check accessibility
-            if not candidateIsPublic then
-              let declarationFile = [functionDefinitionLocation file]
-              let invocationFile = [functionName.location file]
-              if invocationFile != declarationFile then
-                error functionName : "this function is not public"
-              end
-            end
-            if not [candidateRoutineKind isFunction] then
-              error functionName : "this routine is not a function"
+#            if not candidateIsPublic then
+#              let declarationFile = [functionDefinitionLocation file]
+#              let invocationFile = [functionName.location file]
+#              if invocationFile != declarationFile then
+#                error functionName : "this function is not public"
+#              end
+#            end
+            @string routineLLVMName
+            if [implementedModeDictionary hasKey !.userMode] then
+              [implementedModeDictionary searchKey !.userMode ?routineLLVMName]
+            elsif [implementedModeDictionary hasKey !.anyMode] then
+              [implementedModeDictionary searchKey !.anyMode ?routineLLVMName]
+            else
+              error functionName : "the function should be callable from user mode" :routineLLVMName
             end
             let currentMode = [descriptor.routineKind executionMode]
             if currentMode != candidateMode then
@@ -436,7 +439,7 @@ override method @staticListAST enterInContext
                 end
               end
             end
-            staticValue += [type llvmTypeName] + " @" + llvmNameForFunction (!candidateRoutineLLVMName)
+            staticValue += [type llvmTypeName] + " @" + [routineLLVMName assemblerRepresentation]
           end
         end
       between

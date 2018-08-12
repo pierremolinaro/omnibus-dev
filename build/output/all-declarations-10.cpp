@@ -9,6 +9,87 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                          Overriding extension getter '@panicAST locationForErrorSignaling'                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static GALGAS_location extensionGetter_panicAST_locationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
+                                                                           C_Compiler * /* inCompiler */
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_location result_outLocation ; // Returned variable
+  const cPtr_panicAST * object = (const cPtr_panicAST *) inObject ;
+  macroValidSharedObject (object, cPtr_panicAST) ;
+  result_outLocation = object->mProperty_mPriority.getter_location (HERE) ;
+//---
+  return result_outLocation ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionGetter_panicAST_locationForErrorSignaling (void) {
+  enterExtensionGetter_locationForErrorSignaling (kTypeDescriptor_GALGAS_panicAST.mSlotID,
+                                                  extensionGetter_panicAST_locationForErrorSignaling) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gGetter_panicAST_locationForErrorSignaling (defineExtensionGetter_panicAST_locationForErrorSignaling, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                     Function 'panicRoutineNameForLocationFile'                                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string function_panicRoutineNameForLocationFile (const GALGAS_location & constinArgument_inLocation,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  const enumGalgasBool test_0 = constinArgument_inLocation.getter_isNowhere (SOURCE_FILE ("panic.galgas", 85)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    result_result = GALGAS_string ("raise.panic.nofile") ;
+  }else if (kBoolFalse == test_0) {
+    result_result = GALGAS_string ("raise.panic.file.").add_operation (constinArgument_inLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 88)).getter_lastPathComponent (SOURCE_FILE ("panic.galgas", 88)).getter_stringByDeletingPathExtension (SOURCE_FILE ("panic.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 88)) ;
+  }
+//---
+  return result_result ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//  Function introspection                                                                                             *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static const C_galgas_type_descriptor * functionArgs_panicRoutineNameForLocationFile [2] = {
+  & kTypeDescriptor_GALGAS_location,
+  NULL
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static GALGAS_object functionWithGenericHeader_panicRoutineNameForLocationFile (C_Compiler * inCompiler,
+                                                                                const cObjectArray & inEffectiveParameterArray,
+                                                                                const GALGAS_location & /* inErrorLocation */
+                                                                                COMMA_LOCATION_ARGS) {
+  const GALGAS_location operand0 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                   inCompiler
+                                                                   COMMA_THERE) ;
+  return function_panicRoutineNameForLocationFile (operand0,
+                                                   inCompiler
+                                                   COMMA_THERE).getter_object (THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_galgas_function_descriptor functionDescriptor_panicRoutineNameForLocationFile ("panicRoutineNameForLocationFile",
+                                                                                 functionWithGenericHeader_panicRoutineNameForLocationFile,
+                                                                                 & kTypeDescriptor_GALGAS_string,
+                                                                                 1,
+                                                                                 functionArgs_panicRoutineNameForLocationFile) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                       Function 'panicRoutineNameForFilePath'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -5936,31 +6017,45 @@ static void extensionMethod_standaloneFunctionInExpressionAST_analyzeExpression 
     TC_Array <C_FixItDescription> fixItArray1 ;
     inCompiler->emitSemanticError (object->mProperty_mStandaloneFunctionName.getter_location (HERE), GALGAS_string ("a routine cannot be called in guard"), fixItArray1  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 92)) ;
   }
-  GALGAS_lstring var_routineMangledName_4591 = function_routineMangledNameFromCall (GALGAS_string::makeEmptyString (), object->mProperty_mStandaloneFunctionName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 95)) ;
-  GALGAS_lstring var_signature_4714 = extensionGetter_routineSignature (object->mProperty_mArguments, object->mProperty_mStandaloneFunctionName.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 97)) ;
-  GALGAS_routineDescriptor var_routineDescriptor_4997 ;
-  GALGAS_lstring joker_4913 ; // Joker input parameter
-  GALGAS_location joker_5003 ; // Joker input parameter
-  extensionMethod_searchKey (constinArgument_inContext.getter_mRoutineMapForContextEX (HERE), GALGAS_string::makeEmptyString (), object->mProperty_mStandaloneFunctionName, var_signature_4714, joker_4913, var_routineDescriptor_4997, joker_5003, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 99)) ;
-  GALGAS_routineKind var_routineKind_5072 = var_routineDescriptor_4997.getter_routineKind (HERE) ;
-  GALGAS_mode var_calleeMode_5121 = extensionGetter_executionMode (var_routineKind_5072, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 109)) ;
-  GALGAS_routineTypedSignature var_formalSignature_5173 = var_routineDescriptor_4997.getter_signature (HERE) ;
-  const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_routineDescriptor_4997.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-standalone-function-call.galgas", 112)))).boolEnum () ;
+  GALGAS_lstring var_routineLLVMName_4588 = function_routineMangledNameFromCall (GALGAS_string::makeEmptyString (), object->mProperty_mStandaloneFunctionName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 95)) ;
+  GALGAS_lstring var_signature_4711 = extensionGetter_routineSignature (object->mProperty_mArguments, object->mProperty_mStandaloneFunctionName.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 97)) ;
+  GALGAS_string var_requiredFunctionMangledName_4839 = object->mProperty_mStandaloneFunctionName.getter_string (HERE).add_operation (var_signature_4711.getter_string (SOURCE_FILE ("expression-standalone-function-call.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 99)) ;
+  GALGAS_bool var_implementedPublic_5019 ;
+  GALGAS_routineTypedSignature var_formalSignature_5044 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_formalReturnTypeProxy_5075 ;
+  GALGAS_routineLLVMNameDict var_implementedModeDictionary_5138 ;
+  GALGAS_bool var_implementedIsSafe_5172 ;
+  GALGAS_bool var_implementedIsExported_5210 ;
+  GALGAS_mode var_implementedMode_5242 ;
+  constinArgument_inContext.getter_mRoutineMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (var_requiredFunctionMangledName_4839, object->mProperty_mStandaloneFunctionName.getter_location (SOURCE_FILE ("expression-standalone-function-call.galgas", 101))  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 101)), var_implementedPublic_5019, var_formalSignature_5044, var_formalReturnTypeProxy_5075, var_implementedModeDictionary_5138, var_implementedIsSafe_5172, var_implementedIsExported_5210, var_implementedMode_5242, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 100)) ;
+  const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_formalReturnTypeProxy_5075.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-standalone-function-call.galgas", 111)))).boolEnum () ;
   if (kBoolTrue == test_2) {
     TC_Array <C_FixItDescription> fixItArray3 ;
-    inCompiler->emitSemanticError (object->mProperty_mStandaloneFunctionName.getter_location (SOURCE_FILE ("expression-standalone-function-call.galgas", 113)), GALGAS_string ("not a function (returns no value)"), fixItArray3  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 113)) ;
-    var_routineDescriptor_4997.drop () ; // Release error dropped variable
+    inCompiler->emitSemanticError (object->mProperty_mStandaloneFunctionName.getter_location (SOURCE_FILE ("expression-standalone-function-call.galgas", 112)), GALGAS_string ("this function does not return any value"), fixItArray3  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 112)) ;
     outArgument_outFunctionCallReturnedValue.drop () ; // Release error dropped variable
   }else if (kBoolFalse == test_2) {
-    GALGAS_calleeKindIR var_calleeKind_5465 = function_checkMode (constinArgument_inCurrentMode, var_calleeMode_5121, var_routineKind_5072, object->mProperty_mStandaloneFunctionName.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 116)) ;
-    GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_5715 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("expression-standalone-function-call.galgas", 123)) ;
+    GALGAS_string var_functionLLVMName_5493 ;
+    const enumGalgasBool test_4 = var_implementedModeDictionary_5138.getter_hasKey (constinArgument_inCurrentMode COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 116)).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      var_implementedModeDictionary_5138.method_searchKey (constinArgument_inCurrentMode, var_functionLLVMName_5493, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 117)) ;
+    }else if (kBoolFalse == test_4) {
+      const enumGalgasBool test_5 = var_implementedModeDictionary_5138.getter_hasKey (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("expression-standalone-function-call.galgas", 118)) COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 118)).boolEnum () ;
+      if (kBoolTrue == test_5) {
+        var_implementedModeDictionary_5138.method_searchKey (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("expression-standalone-function-call.galgas", 119)), var_functionLLVMName_5493, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 119)) ;
+      }else if (kBoolFalse == test_5) {
+        TC_Array <C_FixItDescription> fixItArray6 ;
+        inCompiler->emitSemanticError (object->mProperty_mStandaloneFunctionName.getter_location (SOURCE_FILE ("expression-standalone-function-call.galgas", 121)), GALGAS_string ("this function cannot be invoked in ").add_operation (extensionGetter_string (constinArgument_inCurrentMode, inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 121)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 121)), fixItArray6  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 121)) ;
+        var_functionLLVMName_5493.drop () ; // Release error dropped variable
+      }
+    }
+    GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_6001 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("expression-standalone-function-call.galgas", 124)) ;
     {
-    routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_5173, object->mProperty_mArguments, object->mProperty_mStandaloneFunctionName.getter_location (HERE), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_5715, inCompiler  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 124)) ;
+    routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_5044, object->mProperty_mArguments, object->mProperty_mStandaloneFunctionName.getter_location (HERE), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_6001, inCompiler  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 125)) ;
     }
     {
-    routine_getNewTempValue (var_routineDescriptor_4997.getter_returnTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 140)), ioArgument_ioTemporaries, outArgument_outFunctionCallReturnedValue, inCompiler  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 140)) ;
+    routine_getNewTempValue (var_formalReturnTypeProxy_5075.getter_type (inCompiler COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 141)), ioArgument_ioTemporaries, outArgument_outFunctionCallReturnedValue, inCompiler  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 141)) ;
     }
-    ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (GALGAS_string::makeEmptyString (), outArgument_outFunctionCallReturnedValue, var_routineMangledName_4591, var_routineDescriptor_4997.getter_nameForLLVMGeneration (HERE), var_calleeKind_5465, var_effectiveParameterListIR_5715  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 142))  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 142)) ;
+    ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (GALGAS_string::makeEmptyString (), outArgument_outFunctionCallReturnedValue, var_routineLLVMName_4588, var_functionLLVMName_5493, GALGAS_calleeKindIR::constructor_function (SOURCE_FILE ("expression-standalone-function-call.galgas", 148)), var_effectiveParameterListIR_6001  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 143))  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 143)) ;
   }
 }
 

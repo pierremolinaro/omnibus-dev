@@ -195,15 +195,7 @@ proc buildSemanticContext
     !?outDecoratedDeclarationList
     !?outDecoratedRoutineList
   ]
-  [inAST.mExternFunctionListAST enterExternProcInContext
-    !?context: outSemanticContext
-  ]
   @routineMapCTXT routineMapCTXT = {}
-  [inAST.mStandaloneFunctionDeclarationListAST enterStandaloneFunctionsInContext
-    !?context:outSemanticContext
-    !?routineMap: routineMapCTXT
-    !?outDecoratedRoutineList
-  ]
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName:["" nowhere] # Empty string if standalone
     !receiverLLVMBaseTypeName:""  # Empty string if standalone
@@ -214,6 +206,13 @@ proc buildSemanticContext
     !?outRoutineListIR
   ]
   outSemanticContext.mRoutineMap = routineMapCTXT
+  [inAST.mExternFunctionListAST enterExternProcInContext
+    !?context: outSemanticContext
+  ]
+  [inAST.mStandaloneFunctionDeclarationListAST enterStandaloneFunctionsInContext
+    !?context:outSemanticContext
+    !?outDecoratedRoutineList
+  ]
 #---
   outGlobalVariableIRList = {}
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
@@ -242,6 +241,7 @@ proc buildSemanticContext
 #--- Build an HTML containing all types
   buildTypeMapHTMLFile (
     !outSemanticContext.mTypeMap
+    !outSemanticContext.mRoutineMap
     !sourceFile:inSourceFile
   )
 #--- Enter control registers in context

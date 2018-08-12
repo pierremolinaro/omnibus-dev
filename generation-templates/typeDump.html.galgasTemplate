@@ -111,6 +111,27 @@ LLVM Name: %![type llvmTypeName]%
     <br>
   %end%
 %end%
+<p>
+<h2>
+  Standalone routines
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Standalone routine Name</td>
+      <td class="result_title">Visibility</td>
+      <td class="result_title">Typed signature</td>
+      <td class="result_title">Routine LLVM Name, by mode</td>
+    </tr>
+  %for () in STANDALONE_ROUTINE_MAP: routine_ do%
+    <tr class="result_line">
+      <td>%!routine_lkey.string%</td>
+      <td>%if routine_mIsPublic then !"public" else !"private" end%</td>
+      <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy isNull] then else % -> %![routine_mReturnTypeProxy key] end%</td>
+      <td>%for () in routine_mModeDictionary : mode_ do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
+    </tr>
+  %end%
+  </table>
+</p>
 </div>
 </body>
 </html>
