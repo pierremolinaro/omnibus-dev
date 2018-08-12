@@ -181,28 +181,6 @@ void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Routine 'analyzeStandaloneGuardCall'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_analyzeStandaloneGuardCall (const class GALGAS_PLMType constinArgument0,
-                                         const class GALGAS_routineAttributes constinArgument1,
-                                         const class GALGAS_lstring constinArgument2,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
-                                         const class GALGAS_semanticContext constinArgument4,
-                                         const class GALGAS_mode constinArgument5,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                         class GALGAS_staticEntityMap & ioArgument7,
-                                         class GALGAS_universalValuedObjectMap & ioArgument8,
-                                         class GALGAS_allocaList & ioArgument9,
-                                         class GALGAS_instructionListIR & ioArgument10,
-                                         class GALGAS_procCallEffectiveParameterListIR & outArgument11,
-                                         class GALGAS_lstring & outArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                      Function 'waitForGuardChangeFunctionName'                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

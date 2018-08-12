@@ -7388,44 +7388,44 @@ void routine_buildSemanticContext (const GALGAS_lstring constinArgument_inSource
   outArgument_outDecoratedRoutineList.drop () ; // Release 'out' argument
   outArgument_outRoutineListIR.drop () ; // Release 'out' argument
   outArgument_outGlobalVariableIRList.drop () ; // Release 'out' argument
-  outArgument_outSemanticContext = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("context.galgas", 181)) ;
-  outArgument_outDecoratedDeclarationList = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("context.galgas", 182)) ;
-  outArgument_outDecoratedRoutineList = GALGAS_decoratedRegularRoutineList::constructor_emptyList (SOURCE_FILE ("context.galgas", 183)) ;
-  outArgument_outRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("context.galgas", 184)) ;
-  cEnumerator_requiredProcedureDeclarationListAST enumerator_7567 (constinArgument_inAST.getter_mRequiredProcListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_7567.hasCurrentObject ()) {
-    GALGAS_lstring var_procedureMangledName_7599 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), enumerator_7567.current (HERE).getter_mName (HERE), enumerator_7567.current (HERE).getter_mFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("context.galgas", 187)) ;
-    outArgument_outSemanticContext.mProperty_mRequiredRoutineSet.addAssign_operation (var_procedureMangledName_7599.getter_string (HERE)  COMMA_SOURCE_FILE ("context.galgas", 188)) ;
-    enumerator_7567.gotoNextObject () ;
+  outArgument_outSemanticContext = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("context.galgas", 180)) ;
+  outArgument_outDecoratedDeclarationList = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("context.galgas", 181)) ;
+  outArgument_outDecoratedRoutineList = GALGAS_decoratedRegularRoutineList::constructor_emptyList (SOURCE_FILE ("context.galgas", 182)) ;
+  outArgument_outRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("context.galgas", 183)) ;
+  cEnumerator_requiredProcedureDeclarationListAST enumerator_7531 (constinArgument_inAST.getter_mRequiredProcListAST (HERE), kENUMERATION_UP) ;
+  while (enumerator_7531.hasCurrentObject ()) {
+    GALGAS_lstring var_procedureMangledName_7563 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), enumerator_7531.current (HERE).getter_mName (HERE), enumerator_7531.current (HERE).getter_mFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("context.galgas", 186)) ;
+    outArgument_outSemanticContext.mProperty_mRequiredRoutineSet.addAssign_operation (var_procedureMangledName_7563.getter_string (HERE)  COMMA_SOURCE_FILE ("context.galgas", 187)) ;
+    enumerator_7531.gotoNextObject () ;
   }
-  extensionMethod_enterInContext (constinArgument_inAST.getter_mISRDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outDecoratedRoutineList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 191)) ;
-  extensionMethod_enterFunctionInContext (constinArgument_inAST.getter_mStandaloneFunctionDeclarationListAST (HERE), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 197)), outArgument_outSemanticContext, outArgument_outDecoratedRoutineList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 196)) ;
-  extensionMethod_enterExternProcInContext (constinArgument_inAST.getter_mExternProcListAST (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 201)) ;
-  GALGAS_propertyMap joker_8470 = GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("context.galgas", 207)) ;
-  extensionMethod_enterSystemRoutineInContext (constinArgument_inAST.getter_mStandAloneSystemRoutineListAST (HERE), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 205)), GALGAS_string::makeEmptyString (), joker_8470, outArgument_outSemanticContext, outArgument_outDecoratedRoutineList, outArgument_outRoutineListIR, inCompiler COMMA_SOURCE_FILE ("context.galgas", 204)) ;
-  outArgument_outGlobalVariableIRList = GALGAS_globalVariableIRList::constructor_emptySortedList (SOURCE_FILE ("context.galgas", 213)) ;
-  GALGAS_controlRegisterUserAccesMapAST var_controlRegisterUserAccesMapAST_8665 = constinArgument_inAST.getter_mControlRegisterUserAccesMapAST (HERE) ;
-  cEnumerator_declarationListAST enumerator_8754 (constinArgument_inAST.getter_mDeclarationListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_8754.hasCurrentObject ()) {
-    callExtensionMethod_enterInContext ((const cPtr_abstractDeclarationAST *) enumerator_8754.current_mDeclaration (HERE).ptr (), constinArgument_inAST.getter_mStandaloneFunctionDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outDecoratedRoutineList, outArgument_outRoutineListIR, ioArgument_ioStaticListValueMap, ioArgument_ioStaticEntityMap, outArgument_outGlobalVariableIRList, var_controlRegisterUserAccesMapAST_8665, inCompiler COMMA_SOURCE_FILE ("context.galgas", 216)) ;
-    enumerator_8754.gotoNextObject () ;
+  extensionMethod_enterInContext (constinArgument_inAST.getter_mISRDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outDecoratedRoutineList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 190)) ;
+  extensionMethod_enterFunctionInContext (constinArgument_inAST.getter_mStandaloneFunctionDeclarationListAST (HERE), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 196)), outArgument_outSemanticContext, outArgument_outDecoratedRoutineList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 195)) ;
+  extensionMethod_enterExternProcInContext (constinArgument_inAST.getter_mExternProcListAST (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 200)) ;
+  GALGAS_propertyMap joker_8434 = GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("context.galgas", 206)) ;
+  extensionMethod_enterSystemRoutineInContext (constinArgument_inAST.getter_mStandAloneSystemRoutineListAST (HERE), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 204)), GALGAS_string::makeEmptyString (), joker_8434, outArgument_outSemanticContext, outArgument_outDecoratedRoutineList, outArgument_outRoutineListIR, inCompiler COMMA_SOURCE_FILE ("context.galgas", 203)) ;
+  outArgument_outGlobalVariableIRList = GALGAS_globalVariableIRList::constructor_emptySortedList (SOURCE_FILE ("context.galgas", 212)) ;
+  GALGAS_controlRegisterUserAccesMapAST var_controlRegisterUserAccesMapAST_8629 = constinArgument_inAST.getter_mControlRegisterUserAccesMapAST (HERE) ;
+  cEnumerator_declarationListAST enumerator_8718 (constinArgument_inAST.getter_mDeclarationListAST (HERE), kENUMERATION_UP) ;
+  while (enumerator_8718.hasCurrentObject ()) {
+    callExtensionMethod_enterInContext ((const cPtr_abstractDeclarationAST *) enumerator_8718.current_mDeclaration (HERE).ptr (), constinArgument_inAST.getter_mStandaloneFunctionDeclarationListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outDecoratedRoutineList, outArgument_outRoutineListIR, ioArgument_ioStaticListValueMap, ioArgument_ioStaticEntityMap, outArgument_outGlobalVariableIRList, var_controlRegisterUserAccesMapAST_8629, inCompiler COMMA_SOURCE_FILE ("context.galgas", 215)) ;
+    enumerator_8718.gotoNextObject () ;
   }
-  cEnumerator_controlRegisterUserAccesMapAST enumerator_9310 (var_controlRegisterUserAccesMapAST_8665, kENUMERATION_UP) ;
-  while (enumerator_9310.hasCurrentObject ()) {
+  cEnumerator_controlRegisterUserAccesMapAST enumerator_9274 (var_controlRegisterUserAccesMapAST_8629, kENUMERATION_UP) ;
+  while (enumerator_9274.hasCurrentObject ()) {
     TC_Array <C_FixItDescription> fixItArray0 ;
-    inCompiler->emitSemanticError (enumerator_9310.current_lkey (HERE).getter_location (SOURCE_FILE ("context.galgas", 230)), GALGAS_string ("this control register is not defined"), fixItArray0  COMMA_SOURCE_FILE ("context.galgas", 230)) ;
-    enumerator_9310.gotoNextObject () ;
+    inCompiler->emitSemanticError (enumerator_9274.current_lkey (HERE).getter_location (SOURCE_FILE ("context.galgas", 229)), GALGAS_string ("this control register is not defined"), fixItArray0  COMMA_SOURCE_FILE ("context.galgas", 229)) ;
+    enumerator_9274.gotoNextObject () ;
   }
   {
-  routine_buildGlobalConstantMapHTMLFile (outArgument_outSemanticContext.getter_mGlobalConstantMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 233)) ;
+  routine_buildGlobalConstantMapHTMLFile (outArgument_outSemanticContext.getter_mGlobalConstantMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 232)) ;
   }
   {
-  routine_buildTypeMapHTMLFile (outArgument_outSemanticContext.getter_mTypeMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 238)) ;
+  routine_buildTypeMapHTMLFile (outArgument_outSemanticContext.getter_mTypeMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 237)) ;
   }
   {
-  routine_buildControlRegisterMapHTMLFile (outArgument_outSemanticContext.getter_mControlRegisterGroupMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 243)) ;
+  routine_buildControlRegisterMapHTMLFile (outArgument_outSemanticContext.getter_mControlRegisterGroupMap (HERE), constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 242)) ;
   }
-  extensionMethod_enterInContext (constinArgument_inAST.getter_mTaskListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outDecoratedRoutineList, outArgument_outRoutineListIR, ioArgument_ioStaticEntityMap, outArgument_outGlobalVariableIRList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 248)) ;
+  extensionMethod_enterInContext (constinArgument_inAST.getter_mTaskListAST (HERE), outArgument_outSemanticContext, outArgument_outDecoratedDeclarationList, outArgument_outDecoratedRoutineList, outArgument_outRoutineListIR, ioArgument_ioStaticEntityMap, outArgument_outGlobalVariableIRList, inCompiler COMMA_SOURCE_FILE ("context.galgas", 247)) ;
 }
 
 
@@ -7440,7 +7440,7 @@ GALGAS_lstring function_combineTypeNamesForInfixOperator (const GALGAS_string & 
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  result_result = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 261)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("context.galgas", 261)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 261)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("context.galgas", 261)).getter_nowhere (SOURCE_FILE ("context.galgas", 261)) ;
+  result_result = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 260)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("context.galgas", 260)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 260)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("context.galgas", 260)).getter_nowhere (SOURCE_FILE ("context.galgas", 260)) ;
 //---
   return result_result ;
 }

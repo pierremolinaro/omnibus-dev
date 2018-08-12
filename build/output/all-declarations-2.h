@@ -5080,8 +5080,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_routineMapForContext mProperty_mRoutineMapForContext ;
 
-  public : GALGAS_guardMapCTXT mProperty_mGuardMapForContext ;
-
   public : GALGAS_controlRegisterGroupMap mProperty_mControlRegisterGroupMap ;
 
   public : GALGAS_globalConstantMap mProperty_mGlobalConstantMap ;
@@ -5172,7 +5170,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMapForContext,
-                                   const GALGAS_guardMapCTXT & in_mGuardMapForContext,
                                    const GALGAS_controlRegisterGroupMap & in_mControlRegisterGroupMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalSyncInstanceMap & in_mGlobalSyncInstanceMap,
@@ -5226,14 +5223,14 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand3,
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand4,
                                                                 const class GALGAS_routineMapForContext & inOperand5,
-                                                                const class GALGAS_guardMapCTXT & inOperand6,
-                                                                const class GALGAS_controlRegisterGroupMap & inOperand7,
-                                                                const class GALGAS_globalConstantMap & inOperand8,
-                                                                const class GALGAS_globalSyncInstanceMap & inOperand9,
-                                                                const class GALGAS_staticlistMap & inOperand10,
-                                                                const class GALGAS_stringset & inOperand11,
-                                                                const class GALGAS_unifiedTypeMap & inOperand12,
-                                                                const class GALGAS_availableInterruptMap & inOperand13,
+                                                                const class GALGAS_controlRegisterGroupMap & inOperand6,
+                                                                const class GALGAS_globalConstantMap & inOperand7,
+                                                                const class GALGAS_globalSyncInstanceMap & inOperand8,
+                                                                const class GALGAS_staticlistMap & inOperand9,
+                                                                const class GALGAS_stringset & inOperand10,
+                                                                const class GALGAS_unifiedTypeMap & inOperand11,
+                                                                const class GALGAS_availableInterruptMap & inOperand12,
+                                                                const class GALGAS_infixOperatorMap & inOperand13,
                                                                 const class GALGAS_infixOperatorMap & inOperand14,
                                                                 const class GALGAS_infixOperatorMap & inOperand15,
                                                                 const class GALGAS_infixOperatorMap & inOperand16,
@@ -5255,13 +5252,12 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_infixOperatorMap & inOperand32,
                                                                 const class GALGAS_infixOperatorMap & inOperand33,
                                                                 const class GALGAS_infixOperatorMap & inOperand34,
-                                                                const class GALGAS_infixOperatorMap & inOperand35,
+                                                                const class GALGAS_prefixOperatorMap & inOperand35,
                                                                 const class GALGAS_prefixOperatorMap & inOperand36,
                                                                 const class GALGAS_prefixOperatorMap & inOperand37,
-                                                                const class GALGAS_prefixOperatorMap & inOperand38,
-                                                                const class GALGAS_taskMap & inOperand39,
-                                                                const class GALGAS_globalTaskVariableList & inOperand40,
-                                                                const class GALGAS_universalValuedObjectMap & inOperand41
+                                                                const class GALGAS_taskMap & inOperand38,
+                                                                const class GALGAS_globalTaskVariableList & inOperand39,
+                                                                const class GALGAS_universalValuedObjectMap & inOperand40
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5299,8 +5295,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalSyncInstanceMap getter_mGlobalSyncInstanceMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapCTXT getter_mGuardMapForContext (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 

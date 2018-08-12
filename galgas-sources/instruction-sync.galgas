@@ -253,21 +253,22 @@ override method @syncInstructionAST instructionSemanticAnalysis
           )
         end
       elsif [nameList length] == 1 then # Standalone guard: g (…)
-        analyzeStandaloneGuardCall (
-          !self:inSelfType
-          !routineAttributes:inRoutineAttributes
-          !guardName:[nameList mValueAtIndex !0]
-          !effective:parameterList
-          !context:inContext
-          !requiredMode:inMode
-          !?temporary:ioTemporaries
-          !?staticEntityMap:ioStaticEntityMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:guardInstructionGenerationList
-          ?effectiveIR:guardEffectiveParameterListIR
-          ?guardMangledName: guardMangledName
-        )
+        error [nameList mValueAtIndex !0] : "Standalone guard are not handled" : guardMangledName, guardEffectiveParameterListIR
+#        analyzeStandaloneGuardCall (
+#          !self:inSelfType
+#          !routineAttributes:inRoutineAttributes
+#          !guardName:[nameList mValueAtIndex !0]
+#          !effective:parameterList
+#          !context:inContext
+#          !requiredMode:inMode
+#          !?temporary:ioTemporaries
+#          !?staticEntityMap:ioStaticEntityMap
+#          !?variableMap:ioUniversalMap
+#          !?alloca:ioAllocaList
+#          !?instructionListIR:guardInstructionGenerationList
+#          ?effectiveIR:guardEffectiveParameterListIR
+#          ?guardMangledName: guardMangledName
+#        )
       else # Global variable method, or driver method: g.h. … (…)
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
@@ -400,58 +401,58 @@ proc analyzeGuardCall
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc analyzeStandaloneGuardCall
-  ?self:let @PLMType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?guardName:let @lstring inGuardName
-  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?context:let @semanticContext inContext
-  ?requiredMode:let @mode inRequiredMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
-  !guardMangledName:@lstring outGuardMangledName
-{
-  outGuardMangledName = routineMangledNameFromCall (
-    !""
-    !inGuardName
-    !inEffectiveParameterList
-  )
-  [inContext.mGuardMapForContext searchKey
-    !outGuardMangledName
-    ?let isPublic
-    ?let @routineTypedSignature formalSignature
-    ?2*
-  ]
-#--- Check accessibility
-  if not isPublic then
-    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !outGuardMangledName.string] file]
-    let invocationFile = [inGuardName.location file]
-    if invocationFile != declarationFile then
-      error inGuardName : "this guard is not public"
-    end
-  end  
-#--- Analyze effective parameters
-  outEffectiveParameterListIR = {}
-  analyzeEffectiveParameters (
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !formal:formalSignature
-    !effective:inEffectiveParameterList
-    !errorLocation:inGuardName.location
-    !context:inContext
-    !requiredMode:inRequiredMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    !?effectiveIR:outEffectiveParameterListIR
-  )
-}
+#proc analyzeStandaloneGuardCall
+#  ?self:let @PLMType inSelfType
+#  ?routineAttributes:let @routineAttributes inRoutineAttributes
+#  ?guardName:let @lstring inGuardName
+#  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
+#  ?context:let @semanticContext inContext
+#  ?requiredMode:let @mode inRequiredMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+#  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
+#  !guardMangledName:@lstring outGuardMangledName
+#{
+#  outGuardMangledName = routineMangledNameFromCall (
+#    !""
+#    !inGuardName
+#    !inEffectiveParameterList
+#  )
+#  [inContext.mGuardMapForContext searchKey
+#    !outGuardMangledName
+#    ?let isPublic
+#    ?let @routineTypedSignature formalSignature
+#    ?2*
+#  ]
+##--- Check accessibility
+#  if not isPublic then
+#    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !outGuardMangledName.string] file]
+#    let invocationFile = [inGuardName.location file]
+#    if invocationFile != declarationFile then
+#      error inGuardName : "this guard is not public"
+#    end
+#  end  
+##--- Analyze effective parameters
+#  outEffectiveParameterListIR = {}
+#  analyzeEffectiveParameters (
+#    !self:inSelfType
+#    !routineAttributes:inRoutineAttributes
+#    !formal:formalSignature
+#    !effective:inEffectiveParameterList
+#    !errorLocation:inGuardName.location
+#    !context:inContext
+#    !requiredMode:inRequiredMode
+#    !?temporary:ioTemporaries
+#    !?staticEntityMap:ioStaticEntityMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    !?effectiveIR:outEffectiveParameterListIR
+#  )
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                      
