@@ -149,7 +149,7 @@ method @interruptMapIR interruptCodeGeneration
     let driverLLVMBaseTypeName = interrupt.mSelfType.llvmBaseTypeName
     let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !interrupt.lkey !{})
     let isrRoutineLLVMName = llvmNameForFunction (!isrRoutineMangledName)
-    ioLLVMcode += "  call void @" + isrRoutineLLVMName + " (" + llvmTypeName + "* " + varName + "); §\n"
+    ioLLVMcode += "  call void @" + isrRoutineLLVMName + " (" + llvmTypeName + "* " + varName + ")\n"
   #--- Epilog
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"

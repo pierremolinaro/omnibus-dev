@@ -107,6 +107,7 @@ setter @universalValuedObjectMap insertLocalConstant
 
 setter @universalValuedObjectMap insertUsedLocalConstant
   ?let @lstring inLocalConstantName
+  ?let @bool inIsFormalInputArgument
   ?let @PLMType inType
   ?let @lstring inPLMConstantName
 {
@@ -114,7 +115,7 @@ setter @universalValuedObjectMap insertUsedLocalConstant
     !inLocalConstantName
     !.hasReadValue
     !false
-    !.localConstant {!type:inType !plmName:inPLMConstantName !isFormalInputArgument:false}
+    !.localConstant {!type:inType !plmName:inPLMConstantName !isFormalInputArgument:inIsFormalInputArgument}
   ]
   mLocalObjectList += !inLocalConstantName
 }

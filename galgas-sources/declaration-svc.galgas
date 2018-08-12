@@ -274,7 +274,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !receiverTypeName: inReceiverTypeName
       !mode:mode
       !isRequired:false
-      !.function {!executionMode: mode}
+      !system.mRoutineKind # .function {!executionMode: mode}
       !warnIfUnused: not noUnusedWarning
       !exportedRoutine: true
       !attributes

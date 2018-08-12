@@ -25,7 +25,7 @@ proc enterFormalArguments
       if inUnusedWarning then
         [!?ioUniversalMap insertLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
       else
-        [!?ioUniversalMap insertUsedLocalConstant !formalArgumentName !typeProxy !formalArgumentName]
+        [!?ioUniversalMap insertUsedLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
       end
     case inputOutput :
       if inUnusedWarning then

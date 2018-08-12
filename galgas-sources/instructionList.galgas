@@ -155,7 +155,11 @@ method @instructionListIR instructionListLLVMCode
   ?!@generationAdds ioGenerationAdds
 {
   for () in self do
-    [mInstructionGeneration llvmInstructionCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    [mInstructionGeneration llvmInstructionCode
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
   end
 }
 

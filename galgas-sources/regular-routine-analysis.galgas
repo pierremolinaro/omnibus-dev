@@ -220,11 +220,11 @@ override method @regularRoutineIR llvmCodeGeneration
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Generate release instructions for input arguments
 #    Insulate output and input/output arguments
-  ioLLVMcode += ";--------- Release input arguments\n"
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      [mFormalArgumentType generateRelease !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      ioLLVMcode += ";--------- Release input argument '" + mFormalArgumentName + "'\n"
+     [mFormalArgumentType generateRelease !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
     case inputOutput :
       if mKind == .section then
        ioLLVMcode += ";--------- Insulate input/output argument '" + mFormalArgumentName + "'\n"

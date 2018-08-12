@@ -277,7 +277,7 @@ method @PLMType generateRelease
     let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
-    ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
+    ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ") ; §\n"
   else
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 

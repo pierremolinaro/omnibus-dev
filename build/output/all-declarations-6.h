@@ -1872,6 +1872,7 @@ void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap 
 
 void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                               const class GALGAS_lstring constin_inLocalConstantName,
+                                              const class GALGAS_bool constin_inIsFormalInputArgument,
                                               const class GALGAS_PLMType constin_inType,
                                               const class GALGAS_lstring constin_inPLMConstantName,
                                               class C_Compiler * inCompiler
