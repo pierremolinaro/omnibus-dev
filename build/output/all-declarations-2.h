@@ -3810,6 +3810,8 @@ class cMapElement_routineMapCTXT : public cMapElement {
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
   public : GALGAS_routineLLVMNameDict mProperty_mModeDictionary ;
   public : GALGAS_bool mProperty_mIsSafe ;
+  public : GALGAS_bool mProperty_mIsExported ;
+  public : GALGAS_mode mProperty_mMode ;
 
 //--- Constructor
   public : cMapElement_routineMapCTXT (const GALGAS_lstring & inKey,
@@ -3817,7 +3819,9 @@ class cMapElement_routineMapCTXT : public cMapElement {
                                        const GALGAS_routineTypedSignature & in_mSignature,
                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                        const GALGAS_routineLLVMNameDict & in_mModeDictionary,
-                                       const GALGAS_bool & in_mIsSafe
+                                       const GALGAS_bool & in_mIsSafe,
+                                       const GALGAS_bool & in_mIsExported,
+                                       const GALGAS_mode & in_mMode
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -7248,15 +7252,15 @@ class GALGAS_lstring extensionGetter_mangledName (const class GALGAS_routineType
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             Routine 'routineSignature'                                              *
+//                                           Routine 'routineTypedSignature'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_routineSignature (class GALGAS_unifiedTypeMap & ioArgument0,
-                               const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                               class GALGAS_routineTypedSignature & outArgument2,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
+void routine_routineTypedSignature (class GALGAS_unifiedTypeMap & ioArgument0,
+                                    const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                    class GALGAS_routineTypedSignature & outArgument2,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -7374,12 +7378,13 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_mIsSafe ;
 
+  public : GALGAS_bool mProperty_mIsExported ;
+
+  public : GALGAS_mode mProperty_mMode ;
+
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_routineMapCTXT_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_routineMapCTXT_2D_element (void) ;
@@ -7393,7 +7398,9 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
                                              const GALGAS_routineTypedSignature & in_mSignature,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                              const GALGAS_routineLLVMNameDict & in_mModeDictionary,
-                                             const GALGAS_bool & in_mIsSafe) ;
+                                             const GALGAS_bool & in_mIsSafe,
+                                             const GALGAS_bool & in_mIsExported,
+                                             const GALGAS_mode & in_mMode) ;
 
 //-- Start of generic part --*
 
@@ -7411,7 +7418,9 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
                                                                           const class GALGAS_routineTypedSignature & inOperand2,
                                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                                           const class GALGAS_routineLLVMNameDict & inOperand4,
-                                                                          const class GALGAS_bool & inOperand5
+                                                                          const class GALGAS_bool & inOperand5,
+                                                                          const class GALGAS_bool & inOperand6,
+                                                                          const class GALGAS_mode & inOperand7
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -7428,9 +7437,13 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsExported (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineLLVMNameDict getter_mModeDictionary (LOCATION_ARGS) const ;
 
@@ -9353,111 +9366,4 @@ class GALGAS_routineFormalArgumentListIR_2D_element : public AC_GALGAS_root {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgumentListIR_2D_element ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Class for element of '@externProcedureMapIR' map                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cMapElement_externProcedureMapIR : public cMapElement {
-//--- Map attributes
-  public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
-
-//--- Constructor
-  public : cMapElement_externProcedureMapIR (const GALGAS_lstring & inKey,
-                                             const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
-                                             COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cMapElement * copy (void) ;
-
-//--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       @externProcedureMapIR_2D_element struct                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public : GALGAS_lstring mProperty_lkey ;
-
-  public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_externProcedureMapIR_2D_element constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_externProcedureMapIR_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_externProcedureMapIR_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_externProcedureMapIR_2D_element (const GALGAS_lstring & in_lkey,
-                                                   const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_externProcedureMapIR_2D_element extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_externProcedureMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                const class GALGAS_routineFormalArgumentListIR & inOperand1,
-                                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_externProcedureMapIR_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_externProcedureMapIR_2D_element class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureMapIR_2D_element ;
 

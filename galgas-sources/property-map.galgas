@@ -70,7 +70,7 @@ setter @propertyMap addFunctionWithInputArgument
     ![[inInputArgumentTypeProxy key] nowhere]
     ![inInputArgumentName nowhere]
   }
-  routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let routineMangledName = routineMangledNameFromAST (
     !inLLVMBaseTypeName
     !.new {!inMethodName !.nowhere}
@@ -127,7 +127,7 @@ setter @propertyMap addFunctionWithTwoInputArguments
     !.new {!inMethodName !.nowhere}
     !argumentList
   )
-  routineSignature (!?ioContext.mTypeMap !argumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let @routineDescriptor descriptor = .new {
     !isPublic:true
     !exported:false

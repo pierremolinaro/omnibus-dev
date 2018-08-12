@@ -8349,23 +8349,23 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
                                                       GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListIR var_formalArguments_5866 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
-  GALGAS_universalValuedObjectMap joker_5955 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 149)) ;
+  GALGAS_routineFormalArgumentListIR var_formalArguments_5893 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 147)) ;
+  GALGAS_universalValuedObjectMap joker_5982 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 151)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5955, var_formalArguments_5866, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 146)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5982, var_formalArguments_5893, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 148)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 155)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 157)) ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 157)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 159)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_6062 = temp_0 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_6089 = temp_0 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5866, var_returnType_6062, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 160)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5893, var_returnType_6089, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 162)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5866, var_returnType_6062  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 165))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 165)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5893, var_returnType_6089  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 167))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 167)) ;
 }
 
 
@@ -9726,15 +9726,15 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_6771 = GALGAS_string ("(") ;
+  GALGAS_string var_key_7987 = GALGAS_string ("(") ;
   const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_6814 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6814.hasCurrentObject ()) {
-    var_key_6771.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_6814.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 171)).add_operation (enumerator_6814.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 171)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 171)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 171)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 171)) ;
-    enumerator_6814.gotoNextObject () ;
+  cEnumerator_effectiveArgumentListAST enumerator_8030 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_8030.hasCurrentObject ()) {
+    var_key_7987.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8030.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)).add_operation (enumerator_8030.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 197)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)) ;
+    enumerator_8030.gotoNextObject () ;
   }
-  var_key_6771.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 173)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_6771, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 174)) ;
+  var_key_7987.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 199)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_7987, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 200)) ;
 //---
   return result_result ;
 }

@@ -74,7 +74,7 @@ method @externFunctionDeclarationListAST enterExternProcInContext
 
 method @externFunctionDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
 #--- Signature
-  routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #---
   var safe = false
   for (attribute) in mAttributeList do
@@ -94,6 +94,8 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext ?!cont
     !returnTypeProxy
     !routineLLVMNameDict
     !safe
+    !false
+    !mMode
   ]
 #--- Enter in context (EX)
   [!?ioContext.mRoutineMapForContextEX insertRoutine
@@ -211,10 +213,6 @@ override method @externRoutineIR llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern PLM function declaration\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {

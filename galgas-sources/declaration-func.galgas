@@ -142,12 +142,12 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
 {
   for function in self do
   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
+    routineTypedSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
   #--- Attributes
     var warnIfUnused = true
-    var globalFunction = false
+    var exportedFunction = false
     var canMutateProperties = false
     var isSafe = false
     for (attribute) in function.mFunctionAttributeList do
@@ -157,10 +157,10 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
         end
         warnIfUnused = false    
       elsif attribute.string == exportedAttribute () then
-        if globalFunction then
+        if exportedFunction then
           error attribute : "duplicated @" + exportedAttribute () + " attribute"
         end
-        globalFunction = true
+        exportedFunction = true
       elsif attribute.string == mutatingAttribute () then
         if canMutateProperties then
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
@@ -194,6 +194,8 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !returnTypeProxy
       !routineLLVMNameDict
       !isSafe
+      !exportedFunction
+      !function.mMode
     ]
   #--- Enter in context
     [!?ioContext.mRoutineMapForContextEX insertRoutine # Raises a redefinition error
@@ -203,7 +205,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !functionLLVMName
       !.new{
         !isPublic:function.mPublicFunction
-        !exported:globalFunction
+        !exported:exportedFunction
         !name:function.mFunctionName
         !nameForLLVMGeneration:functionLLVMName
         !routineKind:.function {!executionMode:function.mMode}
@@ -221,7 +223,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
       !.function {!executionMode:function.mMode}
       !warnIfUnused: warnIfUnused
-      !exportedRoutine: globalFunction
+      !exportedRoutine: exportedFunction
       !.directPropertyAccess # @routineAttributes mRoutineAttributes
       !functionLLVMName
       !function.mFunctionFormalArgumentList
@@ -255,7 +257,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     let safe = [attributeSet hasKey !safeAttribute ()]
     let canAccessProperties = function.mMode != .userMode
   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
+    routineTypedSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
   #--- Routine LLVM Name name
@@ -303,6 +305,8 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !returnTypeProxy
       !routineLLVMNameDict
       !safe
+      !exportedFunction
+      !function.mMode
     ]
   #--- Prepare annalysis
     var warnIfUnused = true
@@ -358,6 +362,8 @@ map @routineMapCTXT {
   @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
   @routineLLVMNameDict mModeDictionary
   @bool mIsSafe
+  @bool mIsExported
+  @mode mMode
 
   insert insertKey error message "the '%K' function is already declared in %L"
   search searchKey error message "there is no '%K' function"

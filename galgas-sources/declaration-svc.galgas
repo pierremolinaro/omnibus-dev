@@ -220,7 +220,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !system.mFormalArgumentList
     )
   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
+    routineTypedSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
   #--- Attributes
@@ -288,6 +288,8 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !returnTypeProxy
       !routineLLVMNameDict
       !isSafe
+      !true
+      !mode
     ]
   #--- Prepare semantic analysis
     ioDecoratedRoutineList +=

@@ -63,35 +63,59 @@ syntax extension plm_syntax {
 
 proc checkRequiredProcedures
   ?ast:let @ast inAST
-  ?context:let @semanticContext inSemanticContext
+  ?context: let @semanticContext inContext
   ?endOfSourceFile:let @location unused inEndOfSourceFile
 {
   for requiredFunction in inAST.mRequiredFunctionListAST do
-    let argumentSignature = [requiredFunction.mFormalArgumentList routineSignature !requiredFunction.mName]
-    if not [inSemanticContext.mRoutineMapForContextEX hasKey !"" !requiredFunction.mName !argumentSignature] then
+    let requiredFunctionSignature = [requiredFunction.mFormalArgumentList routineSignature !requiredFunction.mName]
+    let requiredFunctionMangledName = requiredFunction.mName.string + requiredFunctionSignature
+    if not [inContext.mRoutineMap hasKey !requiredFunctionMangledName] then
       error requiredFunction.mName : "required func is not implemented"
     else
-      [inSemanticContext.mRoutineMapForContextEX searchKey
-        !""
-        !requiredFunction.mName
-        !argumentSignature
-        ?*
-        ?let @routineDescriptor routineDescriptor
-        ?let @location routineLocation
+      [inContext.mRoutineMap searchKey
+        ![requiredFunctionMangledName nowhere]
+        ?let implementedPublic
+        ?let implementedSignature
+        ?let implementedReturnTypeProxy # null if no returned value
+        ?let unused implementedModeDictionary
+        ?let implementedIsSafe
+        ?let implementedIsExported
+        ?let implementedMode
       ]
-      let isExported = routineDescriptor.exported
-      let mode = [routineDescriptor.routineKind executionMode]
-    #--- Check modes
-      if mode != requiredFunction.mExecutionMode then
-        error routineLocation : "required mode should be '" + requiredFunction.mExecutionMode + "'"    
+      let errorLocation = [inContext.mRoutineMap locationForKey !requiredFunctionMangledName]
+    #--- Check signatures
+      routineTypedSignature2 (!inContext.mTypeMap !requiredFunction.mFormalArgumentList ?let requiredTypedSignature)
+      if [requiredTypedSignature typedString] != [implementedSignature typedString] then
+        error errorLocation
+        : "function signature should be " + [requiredTypedSignature typedString] + " (as required by required function declaration)"    
+      end
+    #--- Check return type
+      if implementedReturnTypeProxy != .null then
+        error errorLocation : "function should not return a value (as required by required function declaration)"    
+      elsif requiredFunction.mIsSafe && not implementedIsSafe then
+        error errorLocation : "function should be @safe (as required by required function declaration)"    
+      end
+    #--- Check safety
+      if implementedIsSafe && not requiredFunction.mIsSafe then
+        error errorLocation : "function should not be @safe (as required by required function declaration)"    
+      elsif requiredFunction.mIsSafe && not implementedIsSafe then
+        error errorLocation : "function should be @safe (as required by required function declaration)"    
+      end
+    #--- Check mode
+      if implementedMode != requiredFunction.mExecutionMode then
+        error errorLocation : "required mode is '" + requiredFunction.mExecutionMode + "'"    
+      end
+    #--- Check public
+      if not implementedPublic then
+        error errorLocation : "function should be public (as required by required function declaration)"    
       end
     #--- Check attributes
-      if requiredFunction.mIsExported && not isExported then
-        error routineLocation
+      if requiredFunction.mIsExported && not implementedIsExported then
+        error errorLocation
         : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
         fixit { after " @" + exportedAttribute () }
-      elsif isExported && not requiredFunction.mIsExported then
-        error routineLocation
+      elsif implementedIsExported && not requiredFunction.mIsExported then
+        error errorLocation
         : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"
       end
     end

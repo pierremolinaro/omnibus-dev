@@ -138,6 +138,32 @@ getter @routineTypedSignature mangledName ?let @lstring inRoutineName -> @lstrin
   result = .new {!s !inRoutineName.location}
 }
 
+#·······················································································································
+
+proc routineTypedSignature ?!@unifiedTypeMap ioTypeMap
+                           ?let @routineFormalArgumentListAST inFormalArgumentList
+                           !@routineTypedSignature outSignature
+{
+  outSignature = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
+    outSignature += !formalArgumentPassingMode !selector !typeProxy
+  end
+}
+
+#·······················································································································
+
+proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
+                            ?let @routineFormalArgumentListAST inFormalArgumentList
+                            !@routineTypedSignature outSignature
+{
+  outSignature = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inTypeMap !formalArgumentTypeName}
+    outSignature += !formalArgumentPassingMode !selector !typeProxy
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! ROUTINE SIGNATURE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -144,7 +144,7 @@ method @guardDeclarationListAST enterGuardsInContext
 #---------------------------------------- Enter guards in guard map
   for guard in self do
   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
+    routineTypedSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
   #--- Guard mangled name
     let guardMangledName = [signature mangledName !guard.mGuardName]
   #--- Guard user routine LLVM name
