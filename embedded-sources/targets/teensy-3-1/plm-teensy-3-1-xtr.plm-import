@@ -8,19 +8,19 @@ check target "teensy-3-1/unprivileged"
 opaque $taskList @instantiable {32}
 
 //--- Block running task
-extern func primitive
-block (?!inList:ioWaitingList $taskList) : "blockInList"
+extern func
+block primitive (?!inList:ioWaitingList $taskList) : "blockInList"
 
-extern func primitive
-block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
+extern func
+block primitive (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
 //--- Make task Ready
-extern func service
-makeTaskReady (?!fromList:ioWaitingList $taskList
+extern func
+makeTaskReady service (?!fromList:ioWaitingList $taskList
                !found: outFound $bool) : "makeTaskReady"
 
-extern func service
-makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
+extern func
+makeTasksReady service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD
@@ -28,26 +28,26 @@ makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCur
 
 opaque $guardList @instantiable {32}
 
-extern func guard
-handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
+extern func
+handle guard (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern func guard
-handle (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
+extern func
+handle guard (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
 
-extern func service
-notifyChange (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
+extern func
+notifyChange service (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
 
-extern func service
-notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
+extern func
+notifyChangeForGuardedWaitUntil service (?withCurrentDate:inCurrentDate $uint32)
 : "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED
 //——————————————————————————————————————————————————————————————————————————————
 
-required func section activityLedOn @safe @exported ()
+required func activityLedOn safe section@safe @exported ()
 
-required func section activityLedOff @safe @exported ()
+required func activityLedOff safe section @safe @exported ()
 
 //——————————————————————————————————————————————————————————————————————————————
 

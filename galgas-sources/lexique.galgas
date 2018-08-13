@@ -45,6 +45,7 @@ lexique plm_lexique {
     "public",
     "registers",
     "required",
+    "safe",
     "section",
     "self",
     "service",

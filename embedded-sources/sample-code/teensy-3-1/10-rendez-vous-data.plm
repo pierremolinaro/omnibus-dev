@@ -9,7 +9,7 @@ sync $rendezVousData {
   var writeBarrier = $semaphore (!value:1)
   var data $uint32 = 0
 
-  public func user output @mutating @noUnusedWarning (?data:inData $uint32) {
+  public func output user @mutating @noUnusedWarning (?data:inData $uint32) {
     self.writeBarrier.wait ()
     self.data = inData
     self.readBarrier.signal ()
@@ -20,7 +20,7 @@ sync $rendezVousData {
     self.readBarrier.signal ()
   }
 
-  public func user input @mutating @noUnusedWarning (!data:outData $uint32) {
+  public func input user @mutating @noUnusedWarning (!data:outData $uint32) {
     self.readBarrier.wait ()
     outData = self.data
     self.writeBarrier.signal ()

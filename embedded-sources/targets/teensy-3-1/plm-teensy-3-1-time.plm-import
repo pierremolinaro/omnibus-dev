@@ -21,13 +21,13 @@ driver time > root {
 
   //············································································
 
-  public func startup oneMillisecondBusyWait @noUnusedWarning @safe () {
+  public func oneMillisecondBusyWait startup @noUnusedWarning @safe () {
     while #SYST:CSR:COUNTFLAG == 0 {}
   }
 
   //············································································
 
-  public func panic panicOneMillisecondBusyWait @noUnusedWarning @safe () {
+  public func panicOneMillisecondBusyWait panic @noUnusedWarning @safe () {
     while #SYST:CSR:COUNTFLAG == 0 {}
   }
 
@@ -39,7 +39,7 @@ driver time > root {
 
   //············································································
 
-  public func startup busyWaitingDuringMS @noUnusedWarning @mutating @safe (?inDelay $uint32) {
+  public func busyWaitingDuringMS startup @noUnusedWarning @mutating @safe (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
@@ -47,7 +47,7 @@ driver time > root {
 
   //············································································
 
-  public func panic panicBusyWaitingDuringMS @noUnusedWarning @mutating @safe (?inDelay $uint32) {
+  public func panicBusyWaitingDuringMS panic @noUnusedWarning @mutating @safe (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.panicOneMillisecondBusyWait ()
     }

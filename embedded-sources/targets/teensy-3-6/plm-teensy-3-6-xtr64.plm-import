@@ -5,15 +5,15 @@ check target "teensy-3-6/xtr64"
 //   UTILITY ROUTINES                                                                                                   
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-extern func user currentStackPointer () -> $uint32 : "current.stack.pointer"
+extern func currentStackPointer user () -> $uint32 : "current.stack.pointer"
 
-extern func user freeStackSize () -> $uint32 : "freeStackSize"
+extern func freeStackSize user () -> $uint32 : "freeStackSize"
 
-extern func user noteFreeStackSize () : "noteFreeStackSize"
+extern func noteFreeStackSize user () : "noteFreeStackSize"
 
-extern func service noteCurrentTaskFreeStackSize () : "noteCurrentTaskFreeStackSize"
+extern func noteCurrentTaskFreeStackSize service () : "noteCurrentTaskFreeStackSize"
 
-extern func user taskCount () -> $uint32 : "taskCount"
+extern func taskCount user () -> $uint32 : "taskCount"
 
 enum $guardState {
   case evaluatingOrOutside
@@ -21,13 +21,13 @@ enum $guardState {
   case waitingForChange
 }
 
-extern func user taskGuardState (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
+extern func taskGuardState user (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
 
-extern func user taskAllocatedStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskAllocatedStackSize"
+extern func taskAllocatedStackSize user (?taskIndex: inIndex $uint32) -> $uint32 : "taskAllocatedStackSize"
 
-extern func user taskFreeStackSize (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
+extern func taskFreeStackSize user (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
 
-extern func user taskName (?taskIndex: inIndex $uint32) -> $staticString : "taskName"
+extern func taskName user (?taskIndex: inIndex $uint32) -> $staticString : "taskName"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   SYNCHRONIZATION TOOLS ROUTINES                                                                                     
@@ -36,19 +36,19 @@ extern func user taskName (?taskIndex: inIndex $uint32) -> $staticString : "task
 opaque $taskList @instantiable {64}
 
 //--- Block running task
-extern func primitive
-block (?!inList:ioWaitingList $taskList) : "blockInList"
+extern func
+block primitive (?!inList:ioWaitingList $taskList) : "blockInList"
 
-extern func primitive
-block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
+extern func
+block primitive (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
 //--- Make task Ready
-extern func service
-makeTaskReady (?!fromList:ioWaitingList $taskList
-               !found: outFound $bool) : "makeTaskReady"
+extern func
+makeTaskReady service (?!fromList:ioWaitingList $taskList
+                       !found: outFound $bool) : "makeTaskReady"
 
-extern func service
-makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
+extern func
+makeTasksReady service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   GUARD                                                                                                              
@@ -56,25 +56,25 @@ makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCur
 
 opaque $guardList @instantiable {64}
 
-extern func guard
-handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
+extern func
+handle guard (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern func guard
-handle (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
+extern func
+handle guard (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
 
-extern func service
-notifyChange (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
+extern func
+notifyChange service (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
 
-extern func service
-notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
+extern func
+notifyChangeForGuardedWaitUntil service (?withCurrentDate:inCurrentDate $uint32)
 : "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                                                                       
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-required func section activityLedOn @safe @exported ()
+required func activityLedOn safe section @safe @exported ()
 
-required func section activityLedOff @safe @exported ()
+required func activityLedOff safe section @safe @exported ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

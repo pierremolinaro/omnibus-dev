@@ -86,6 +86,35 @@ syntax extension plm_syntax {
     or
       $guard$
       outMode = .guardMode
+    or
+      $safe$
+      select
+        outMode = .anyMode
+      or
+        $user$
+        outMode = .userMode
+      or
+        $panic$
+        outMode = .panicMode
+      or
+        $boot$
+        outMode = .bootMode
+      or
+        $startup$
+        outMode = .startupMode
+      or
+        $section$
+        outMode = .sectionMode
+      or
+        $service$
+        outMode = .serviceMode
+      or
+        $primitive$
+        outMode = .primitiveMode
+      or
+        $guard$
+        outMode = .guardMode
+      end
     end
   }
 
@@ -98,17 +127,16 @@ syntax extension plm_syntax {
     !attributes:@lstringlist outAttributeList
     !formalArguments:@routineFormalArgumentListAST outProcFormalArgumentList
   {
-  #---
     $func$
-    <mode> ?outMode
     $identifier$ ?outProcName
+    <mode> ?outMode
     outAttributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       outAttributeList += !attribute
     end
-    <procedure_formal_arguments>  !?ioAST ?outProcFormalArgumentList
+    <procedure_formal_arguments> !?ioAST ?outProcFormalArgumentList
   }
 
   #·····················································································································

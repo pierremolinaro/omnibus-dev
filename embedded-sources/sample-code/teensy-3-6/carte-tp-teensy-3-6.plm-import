@@ -18,11 +18,11 @@ driver ActivityLed ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-public func section activityLedOn @safe @exported () {
+public func activityLedOn safe section @safe @exported () {
   digital.write (!yes !toPort:.D13)
 }
 
-public func section activityLedOff @safe @exported () {
+public func activityLedOff safe section @safe @exported () {
   digital.write (!no !toPort:.D13)
 }
 

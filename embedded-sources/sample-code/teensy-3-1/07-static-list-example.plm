@@ -11,21 +11,21 @@ staticArray maListeStatique {
   let f func user (?arg: x $uint32) -> $uint32
 }
 
-func user toggleL2 (?!par: y $uint32) {
+func toggleL2 user (?!par: y $uint32) {
   digital.toggle (!port:LED_L2)
   y += 1
 }
 
-func user p2 (?arg: x $uint32) -> $uint32 {
+func p2 user (?arg: x $uint32) -> $uint32 {
   result = 10 + x
 }
 
-func user toggleL3 (?!par: y $uint32) {
+func toggleL3 user (?!par: y $uint32) {
   digital.toggle (!port:LED_L3)
   y += 1
 }
 
-func user p3 (?arg: x $uint32) -> $uint32 {
+func p3 user (?arg: x $uint32) -> $uint32 {
   result = 15 + x
 }
 

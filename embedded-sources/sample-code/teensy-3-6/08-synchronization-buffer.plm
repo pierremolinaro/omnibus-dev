@@ -16,7 +16,7 @@ sync $synchronizationBuffer {
 
   //············································································
   
-  public func user write @mutating @noUnusedWarning (? value $uint32) {
+  public func write user @mutating @noUnusedWarning (? value $uint32) {
     self.writeSemaphore.wait ()
     self.data [self.writeIndex] = value
     self.writeIndex += 1
@@ -28,7 +28,7 @@ sync $synchronizationBuffer {
   
   //············································································
   
-  public func user read @mutating @noUnusedWarning (! value $uint32) {
+  public func read user @mutating @noUnusedWarning (! value $uint32) {
     self.readSemaphore.wait ()
     value = self.data [self.readIndex]
     self.readIndex += 1

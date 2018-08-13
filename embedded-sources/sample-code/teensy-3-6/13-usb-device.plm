@@ -245,7 +245,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func section configureEndPoint0OnReset @mutating () {
+  func configureEndPoint0OnReset section @mutating () {
 //      self.état [self.indexÉtat] = 1
 //      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
       #USB0:CTL |= {#USB0:CTL !ODDRST:1}
@@ -292,7 +292,7 @@ driver usb_device > digital {
   // a new TX buffer for that endpoint when data becomes available
   // again, the handler will only be called AFTER the transmission!
 
-  func section tokenCompleted @mutating () {
+  func tokenCompleted section @mutating () {
     let transactionStatus = #USB0:STAT
     let endPoint $uint4 = transactionStatus [4...7]
     let TX_transitionStatus = transactionStatus [3...3]
@@ -343,7 +343,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func section setupDevice @mutating () {
+  func setupDevice section @mutating () {
     self.trace |= 8
     let bRequest = self.ep0_rx0_buf [1]
     if bRequest == 6 { // mGET_DESC
@@ -357,7 +357,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func section endpoint_0_handler @mutating (?transactionStatus $uint8) {
+  func endpoint_0_handler section @mutating (?transactionStatus $uint8) {
     self.trace |= 4
   }
 

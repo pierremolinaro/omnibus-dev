@@ -31,7 +31,7 @@ let BDT_STALL = 0x04
 
 let EP0_SIZE = 64
 
-func section BDT_DESC (?count $uint32 ?data $uint1) -> $uint32 {
+func BDT_DESC section (?count $uint32 ?data $uint1) -> $uint32 {
   result = BDT_OWN | BDT_DTS | (count << 16) | if data ≠ 0 {BDT_DATA1} else {BDT_DATA0}
 }
 
@@ -42,7 +42,7 @@ let EVEN = 0
 let DATA0 = 0
 let DATA1 = 1
 
-func section index (? endpoint $uint32 ?tx $uint32 ?odd $uint32) -> $uint32 {
+func index section (? endpoint $uint32 ?tx $uint32 ?odd $uint32) -> $uint32 {
   result = (endpoint << 2) | (tx << 1) | odd
 }
 
@@ -166,7 +166,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func section configureEndPoint0OnReset @mutating () {
+  func  configureEndPoint0OnReset section @mutating () {
 //      self.état [self.indexÉtat] = 1
 //      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
       #USB0:CTL |= {#USB0:CTL !ODDRST:1}
@@ -213,7 +213,7 @@ driver usb_device > digital {
   // a new TX buffer for that endpoint when data becomes available
   // again, the handler will only be called AFTER the transmission!
 
-  func section tokenCompleted @mutating () {
+  func tokenCompleted section @mutating () {
     let transactionStatus = #USB0:STAT
     let endPoint $uint4 = transactionStatus [4...7]
 //    let TX_transitionStatus = transactionStatus [3...3]
@@ -244,7 +244,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func section endpoint_0_handler @mutating (?transactionStatus $uint8) {
+  func endpoint_0_handler section @mutating (?transactionStatus $uint8) {
   }
 
   //····················································································································
