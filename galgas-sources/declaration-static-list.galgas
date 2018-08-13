@@ -321,7 +321,7 @@ override method @staticListAST enterInContext
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
     #--- Enter routine type in type map
-      let type = @PLMType.new {
+      let propertyType = @PLMType.new {
         !propertyMap:{}
         !routineMap: {}
         !classConstantMap:{}
@@ -330,7 +330,6 @@ override method @staticListAST enterInContext
         !attributes:.none
         !plmTypeDescriptionName:""
         !kind:.function {
-#          !name:propertyName
           !mode:mode
           !signature:signature
           !returnTypeProxy:returnTypeProxy 
@@ -338,15 +337,6 @@ override method @staticListAST enterInContext
         }
         !llvmBaseTypeName:""
       }
-      if not [ioContext.mTypeMap hasKey !routineLLVMName] then
-        [!?ioContext.mTypeMap insertType
-          !lkey:routineLLVMName
-          !type:type
-          !index:[ioContext.mTypeMap count]
-          !generate:false
-        ]
-      end
-      let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineLLVMName} type]
    #--- Enter property
       propertyList += !propertyName !propertyType
     #--- Enter in routine map
@@ -378,7 +368,7 @@ override method @staticListAST enterInContext
   end
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
-  let type = @PLMType.new {
+  let elementType = @PLMType.new {
     !propertyMap:propertyMap
     !routineMap: routineMap
     !classConstantMap:{}
@@ -391,7 +381,7 @@ override method @staticListAST enterInContext
   }
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
-    !type:type
+    !type:elementType
     !index:[ioContext.mTypeMap count]
     !generate:true
   ]
@@ -404,10 +394,10 @@ override method @staticListAST enterInContext
       + [[element length] string] + " provided"
     else
       var staticValue = "{"
-      for (operand endOfExp) in element, (* type) in propertyList do
+      for (operand endOfExp) in element, (* propertyType) in propertyList do
         switch operand
         case expression (@expressionAST exp) :
-          if [type.kind isFunction] then
+          if [propertyType.kind isFunction] then
             error endOfExp : "a function name is expected here"
           else
             @semanticTemporariesStruct temporaries = .default
@@ -416,7 +406,7 @@ override method @staticListAST enterInContext
             [exp analyzeExpression
               !self:voidType ()
               !routineAttributes:.none
-              !optionalTargetType:type
+              !optionalTargetType:propertyType
               !context:ioContext
               !mode:.bootMode
               !?temporary:temporaries
@@ -429,7 +419,7 @@ override method @staticListAST enterInContext
           #--- Check assignment compatibility
             let result = checkAssignmentCompatibility (
               !source:expressionResult
-              !targetAnnotationType:type
+              !targetAnnotationType:propertyType
               !errorLocation:endOfExp
               !staticTypeAllowed:false
             )
@@ -437,13 +427,13 @@ override method @staticListAST enterInContext
               error endOfExp : "source expression cannot be statically computed"
             end
           #--- Enter in static value
-            staticValue += [type llvmTypeName] + " " + [expressionResult llvmName]
+            staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
           end      
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
-          if not [type.kind isFunction] then
+          if not [propertyType.kind isFunction] then
             error endOfExp : "a static expression is expected here"
           else
-            [type.kind function
+            [propertyType.kind function
               ?mode:let mode
               ?signature:let functionSignature
               ?returnTypeProxy:let functionReturnTypeProxy
@@ -493,7 +483,7 @@ override method @staticListAST enterInContext
                 end
               end
             end
-            staticValue += [type llvmTypeName] + " @" + [routineLLVMName assemblerRepresentation]
+            staticValue += [propertyType llvmTypeName] + " @" + [routineLLVMName assemblerRepresentation]
           end
         end
       between
@@ -512,7 +502,6 @@ override method @staticListAST enterInContext
     !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:[mValueList length]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
-  let elementType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmElementTypeName} type]
   let arrayType = @PLMType.new {
     !propertyMap:listTypePropertyMap
     !routineMap: {}
