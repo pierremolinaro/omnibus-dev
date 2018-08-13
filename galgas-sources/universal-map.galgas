@@ -360,8 +360,6 @@ method @universalValuedObjectMap searchValuedObjectType
         outType = [object type]
       case indexed  (type *) :
         outType = type
-      case nonVirtualMethod (*) :
-        error propertyName : "a method cannot be used in this context" : outType
       end
     case arrayAccess (* *) :
       if [outType.kind isArrayType] then

@@ -277,8 +277,6 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         ?let @propertyAccessKind propertyAccess
       ]
       switch propertyAccess
-      case nonVirtualMethod (*) :
-         error propertyName : "a method cannot be used in this context" : currentType, currentLLVMAddressVar
       case constantProperty (*) :
         error propertyName
           : "a context property cannot be used in this context"

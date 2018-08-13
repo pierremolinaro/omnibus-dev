@@ -320,6 +320,7 @@ override method @staticListAST enterInContext
       else
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
+    #--- Enter routine type in 
       let descriptor = @routineDescriptor.new {
         !isPublic:true # Routine is declared with "public"
         !exported:false # Routine is declared with @exported attribute
@@ -342,13 +343,8 @@ override method @staticListAST enterInContext
         ]
       end
       let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineLLVMName} type]
+   #--- Enter property
       propertyList += !propertyName !propertyType
-    #--- Ex
-      [!?propertyMap insertKey
-        !routineLLVMName # propertyName
-        !true # Public
-        !.indexed{!type:propertyType !index:propertyIndex}
-      ]
     #--- Enter in routine map
       let routineMangledName = @lstring.new {
         !propertyName.string + [formalArgs routineSignature !propertyName]

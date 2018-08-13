@@ -195,8 +195,6 @@ private proc analyzeVariableInLValue
         let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
-        case nonVirtualMethod (*) :
-           error propertyName : "a method cannot be written" : currentType, currentLLVMName
         case singleton  (@objectIR object *) :
           currentType = [object type]
           currentLLVMName = [object llvmName]
@@ -279,8 +277,6 @@ private proc analyzeSelfAssignmentTarget
         let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
-        case nonVirtualMethod (*) :
-           error propertyName : "a method cannot be written" : currentType, currentLLVMName
         case constantProperty (*) :
           error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
         case singleton  (@objectIR object *) :

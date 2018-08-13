@@ -356,11 +356,9 @@ method @taskListAST enterInContext
       !task.mTaskName.location # @location mEndOfRoutineDeclaration
       !returnTypeName: ["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
   #---------------- Enter task functions in property map
-#    @routineMapCTXT routineMapCTXT = {}
     [task.mTaskFunctionList enterFunctionsInPropertyMap
       !receiverTypeName: task.mTaskName
       !receiverLLVMBaseTypeName: task.mTaskName
-      !?propertyMap: propertyMap
       !?routineMap: routineMap
       !?context: ioContext
       !?ioDecoratedRoutineList

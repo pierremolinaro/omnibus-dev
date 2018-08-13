@@ -307,36 +307,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
       !returnTypeName: system.mReturnTypeName  # Empty string if no returned value
-  #--- Enter in context
-    var s = ""
-    if inReceiverLLVMBaseTypeName != "" then
-      s += inReceiverLLVMBaseTypeName + "."
-    end
-    s += system.mName.string
-    s += "("
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in system.mFormalArgumentList do
-      s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-    end
-    s += ")"
-    let descriptor = @routineDescriptor.new {
-      !isPublic:system.mPublic
-      !exported:false
-      !name:system.mName
-      !nameForLLVMGeneration:s # routineMangledName
-      !routineKind:system.mRoutineKind
-      !signature:signature
-      !returnTypeProxy:returnTypeProxy
-      !canAccessProperties:true
-      !canMutateProperties:mutating
-      !safe:isSafe
-    }
-  #--- Enter in structure map
-    let routineMangledNameEX = routineMangledNameFromAST (
-      !inReceiverLLVMBaseTypeName
-      !system.mName
-      !system.mFormalArgumentList
-    )
-    [!?ioPropertyMap insertKey !routineMangledNameEX !system.mPublic !.nonVirtualMethod {!descriptor:descriptor}]
   end
 }
 

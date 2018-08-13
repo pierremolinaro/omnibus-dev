@@ -398,8 +398,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       let @propertyMap propertyMap = currentType.propertyMap
       [propertyMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess
-      case nonVirtualMethod (*) :
-        error propertyName : "a method cannot be used in this context" : currentObject
       case constantProperty (*) :
         error propertyName: "a constant property not available in this context" : currentObject
       case singleton  (object *) :

@@ -146,7 +146,6 @@ override method @syncDeclarationAST enterInContext
   [mFunctionDeclarationListAST enterFunctionsInPropertyMap
     !receiverTypeName: mSyncToolName
     !receiverLLVMBaseTypeName: mSyncToolName
-    !?propertyMap: propertyMap
     !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList

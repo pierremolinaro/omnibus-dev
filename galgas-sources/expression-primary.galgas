@@ -507,8 +507,6 @@ proc handlePropertyAccessInExpression
   let @propertyMap propertyMap = type.propertyMap
   [propertyMap searchKey !inPropertyName ?* ?let @propertyAccessKind accessKind]
   switch accessKind
-  case nonVirtualMethod (*) :
-    error inPropertyName : "a method cannot be used in this context" : ioResult
   case constantProperty (@objectIR value) :
     ioResult = value
   case singleton  (object *) :

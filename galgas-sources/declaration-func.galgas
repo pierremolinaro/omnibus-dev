@@ -218,7 +218,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
 method @functionDeclarationListAST enterFunctionsInPropertyMap
   ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
-  ?!propertyMap: @propertyMap ioPropertyMap
   ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -232,9 +231,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       attributeSet += !attribute.mValue.string
     end
     let exportedFunction = [attributeSet hasKey !exportedAttribute ()]
-    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
     let safe = [attributeSet hasKey !safeAttribute ()]
-    let canAccessProperties = function.mMode != .userMode
   #--- Signature
     routineTypedSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
@@ -245,21 +242,6 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
     )
-  #--- Routine descriptor
-    let descriptor = @routineDescriptor.new {
-      !isPublic:function.mPublicFunction
-      !exported:exportedFunction
-      !name:function.mFunctionName
-      !nameForLLVMGeneration:functionLLVMName
-      !routineKind:.function {!executionMode:function.mMode}
-      !signature:signature
-      !returnTypeProxy:returnTypeProxy
-      !canAccessProperties:canAccessProperties
-      !canMutateProperties:canMutateProperties
-      !safe:safe
-    }
-  #--- Enter in structure map
-    [!?ioPropertyMap insertKey !functionLLVMName !function.mPublicFunction !.nonVirtualMethod {!descriptor:descriptor}]
   #--- Enter in routine map
     @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
     switch function.mMode

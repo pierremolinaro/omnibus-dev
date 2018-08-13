@@ -337,7 +337,6 @@ override method @structureDeclarationAST enterInContext
   [mFunctionDeclarationListAST enterFunctionsInPropertyMap
     !receiverTypeName: mReceiverTypeName
     !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-    !?propertyMap: propertyMap
     !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
