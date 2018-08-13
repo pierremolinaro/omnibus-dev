@@ -112,6 +112,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -190,6 +191,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !routineAttributes:inRoutineAttributes
         !context: inContext
         !mode: inMode
+        !safe: inIsSafe
         !?temporary: ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
@@ -224,6 +226,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       !routineAttributes:inRoutineAttributes
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap

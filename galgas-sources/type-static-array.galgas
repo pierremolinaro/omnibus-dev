@@ -95,6 +95,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
     !optionalTargetType:voidType ()
     !context:ioContext
     !mode:.bootMode
+    !safe: true
     !?temporary:temporaries
     !?staticEntityMap:*
     !?variableMap:ioContext.mValuedObjectMap

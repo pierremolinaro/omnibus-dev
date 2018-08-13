@@ -101,6 +101,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
      !optionalTargetType:optionalSyncType
      !context:ioContext
      !mode:.bootMode
+     !safe: true
      !?temporary:*
      !?staticEntityMap:ioStaticEntityMap
      !?variableMap:ioContext.mValuedObjectMap

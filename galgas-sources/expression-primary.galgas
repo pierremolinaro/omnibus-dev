@@ -154,6 +154,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -172,6 +173,7 @@ override method @primaryInExpressionAST analyzeExpression
         !optionalTargetType: inOptionalTargetType
         !context: inContext
         !mode: inMode
+        !safe: inIsSafe
         !?temporary: ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
@@ -189,6 +191,7 @@ override method @primaryInExpressionAST analyzeExpression
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -207,6 +210,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -224,6 +228,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -243,6 +248,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -261,6 +267,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -278,6 +285,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -295,6 +303,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -311,6 +320,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !optionalTargetType: inOptionalTargetType
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -330,6 +340,7 @@ proc procAnalyzeAccesListInExpression
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -367,6 +378,7 @@ proc procAnalyzeAccesListInExpression
         !optionalTargetType:inOptionalTargetType
         !context:inContext
         !mode:inMode
+        !safe: inIsSafe
         !?temporary:ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
@@ -383,6 +395,7 @@ proc procAnalyzeAccesListInExpression
           !self:inSelfType
           !context:inContext
           !mode:inMode
+          !safe: inIsSafe
           !routineAttributes:inRoutineAttributes
           !?temporary:ioTemporaries
           !?staticEntityMap:ioStaticEntityMap
@@ -404,6 +417,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -442,6 +456,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !optionalTargetType:inOptionalTargetType
         !context:inContext
         !mode:inMode
+        !safe: inIsSafe
         !?temporary:ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
@@ -458,6 +473,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
           !self:inSelfType
           !context:inContext
           !mode:inMode
+          !safe: inIsSafe
           !routineAttributes:inRoutineAttributes
           !?temporary:ioTemporaries
           !?staticEntityMap:ioStaticEntityMap
@@ -535,6 +551,7 @@ private proc handleArrayAccessInExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -549,6 +566,7 @@ private proc handleArrayAccessInExpression
       !routineAttributes:inRoutineAttributes
       !context: inContext
       !mode: inMode
+      !safe: inIsSafe
       !?temporary: ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
@@ -580,6 +598,7 @@ private proc handleFunctionCallInExpression
   ?self:let @PLMType inSelfType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -633,6 +652,7 @@ private proc handleFunctionCallInExpression
       !errorLocation:inMethodName.location
       !context:inContext
       !requiredMode:inMode
+      !safe: inIsSafe
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap

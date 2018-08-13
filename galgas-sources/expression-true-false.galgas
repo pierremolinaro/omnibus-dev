@@ -59,6 +59,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
+  ?safe:let @bool unused inIsSafe
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap

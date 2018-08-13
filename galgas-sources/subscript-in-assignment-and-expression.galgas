@@ -5,6 +5,7 @@ proc handleArraySubscriptNew
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -23,6 +24,7 @@ proc handleArraySubscriptNew
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

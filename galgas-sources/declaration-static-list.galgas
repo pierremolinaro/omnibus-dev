@@ -409,6 +409,7 @@ override method @staticListAST enterInContext
               !optionalTargetType:propertyType
               !context:ioContext
               !mode:.bootMode
+              !safe: true
               !?temporary:temporaries
               !?staticEntityMap:ioStaticEntityMap
               !?variableMap:ioContext.mValuedObjectMap # universalMap

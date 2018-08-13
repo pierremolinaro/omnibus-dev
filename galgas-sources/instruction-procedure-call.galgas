@@ -184,6 +184,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !errorLocation:mSandAloneRoutineName.location
     !context:inContext
     !requiredMode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -354,6 +355,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       !errorLocation:methodName.location
       !context:inContext
       !requiredMode:inMode
+      !safe: inIsSafe
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap

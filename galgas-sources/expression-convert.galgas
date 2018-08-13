@@ -76,6 +76,7 @@ override method @convertExpressionAST analyzeExpression
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -90,6 +91,7 @@ override method @convertExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

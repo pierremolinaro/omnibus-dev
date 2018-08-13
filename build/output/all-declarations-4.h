@@ -200,12 +200,13 @@ typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const 
                                                                           const class GALGAS_PLMType constinArgument2,
                                                                           const class GALGAS_semanticContext constinArgument3,
                                                                           const class GALGAS_mode constinArgument4,
-                                                                          class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                          class GALGAS_staticEntityMap & ioArgument6,
-                                                                          class GALGAS_universalValuedObjectMap & ioArgument7,
-                                                                          class GALGAS_allocaList & ioArgument8,
-                                                                          class GALGAS_instructionListIR & ioArgument9,
-                                                                          class GALGAS_objectIR & outArgument10,
+                                                                          const class GALGAS_bool constinArgument5,
+                                                                          class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                                                          class GALGAS_staticEntityMap & ioArgument7,
+                                                                          class GALGAS_universalValuedObjectMap & ioArgument8,
+                                                                          class GALGAS_allocaList & ioArgument9,
+                                                                          class GALGAS_instructionListIR & ioArgument10,
+                                                                          class GALGAS_objectIR & outArgument11,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -222,6 +223,7 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
                                             const GALGAS_PLMType constin_inTargetType,
                                             const GALGAS_semanticContext constin_inContext,
                                             const GALGAS_mode constin_inCurrentMode,
+                                            const GALGAS_bool constin_inIsSafe,
                                             GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                             GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                             GALGAS_universalValuedObjectMap & io_ioUniversalMap,

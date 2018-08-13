@@ -141,6 +141,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     !optionalTargetType:resultType
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -240,6 +241,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
         !routineAttributes:inRoutineAttributes
         !context: inContext
         !mode: inCurrentMode
+        !safe: inIsSafe
         !?temporary: ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap

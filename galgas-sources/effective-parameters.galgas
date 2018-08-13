@@ -111,6 +111,7 @@ proc analyzeEffectiveParameters
   ?errorLocation:let @location inErrorLocation
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -163,6 +164,7 @@ proc analyzeEffectiveParameters
         !optionalTargetType:[formal_mTypeProxy type]
         !context:inContext
         !mode:inRequiredMode
+        !safe: inIsSafe
         !?temporary:ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap

@@ -52,6 +52,7 @@ override method @literalStringInExpressionAST analyzeExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
+  ?safe:let @bool unused inIsSafe
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap

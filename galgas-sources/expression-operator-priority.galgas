@@ -423,6 +423,7 @@ abstract method @expressionAST analyzeExpression
   ?optionalTargetType:let @PLMType inTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -446,6 +447,7 @@ method @expressionAST analyzeStaticExpression
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:.bootMode
+    !safe: true
     !?temporary:*
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:*

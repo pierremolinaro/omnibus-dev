@@ -62,6 +62,7 @@ override method @registerInExpressionAST analyzeExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -75,6 +76,7 @@ override method @registerInExpressionAST analyzeExpression
     !routineAttributes: inRoutineAttributes
     !context: inContext
     !mode: inMode
+    !safe: inIsSafe
     !?temporary: ioTemporaries
     !?staticEntityMap: ioStaticEntityMap
     !?variableMap: ioUniversalMap

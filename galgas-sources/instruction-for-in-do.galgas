@@ -117,6 +117,7 @@ override method @forInstructionAST instructionSemanticAnalysis
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

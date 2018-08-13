@@ -77,6 +77,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     !optionalTargetType:targetType
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

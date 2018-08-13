@@ -117,6 +117,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !optionalTargetType:type
       !context:inContext
       !mode:inCurrentMode
+      !safe: inIsSafe
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
@@ -134,6 +135,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !optionalTargetType:type
       !context:inContext
       !mode:inCurrentMode
+      !safe: inIsSafe
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap

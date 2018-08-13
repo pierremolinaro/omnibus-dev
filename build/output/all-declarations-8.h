@@ -383,10 +383,11 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_routineAttributes constinArgument1,
                                                                               const class GALGAS_semanticContext constinArgument2,
                                                                               const class GALGAS_mode constinArgument3,
-                                                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                                                              class GALGAS_staticEntityMap & ioArgument5,
-                                                                              class GALGAS_universalValuedObjectMap & ioArgument6,
-                                                                              class GALGAS_guardKindGenerationIR & outArgument7,
+                                                                              const class GALGAS_bool constinArgument4,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                                                              class GALGAS_staticEntityMap & ioArgument6,
+                                                                              class GALGAS_universalValuedObjectMap & ioArgument7,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -402,6 +403,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_routineAttributes constin_inRoutineAttributes,
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_mode constin_inMode,
+                                           const GALGAS_bool constin_inIsSafe,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                            GALGAS_universalValuedObjectMap & io_ioUniversalMap,

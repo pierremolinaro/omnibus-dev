@@ -103,6 +103,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !optionalTargetType:targetType
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

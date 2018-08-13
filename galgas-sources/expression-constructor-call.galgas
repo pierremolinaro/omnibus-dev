@@ -74,6 +74,7 @@ override method @constructorCallAST analyzeExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -102,6 +103,7 @@ override method @constructorCallAST analyzeExpression
         !optionalTargetType:elementType
         !context:inContext
         !mode:inCurrentMode
+        !safe: inIsSafe
         !?temporary:ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
@@ -142,6 +144,7 @@ override method @constructorCallAST analyzeExpression
             !optionalTargetType:elementType
             !context:inContext
             !mode:inCurrentMode
+            !safe: inIsSafe
             !?temporary:ioTemporaries
             !?staticEntityMap:ioStaticEntityMap
             !?variableMap:ioUniversalMap
@@ -195,6 +198,7 @@ override method @constructorCallAST analyzeExpression
           !optionalTargetType:formal_mType
           !context:inContext
           !mode:inCurrentMode
+          !safe: inIsSafe
           !?temporary:ioTemporaries
           !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap

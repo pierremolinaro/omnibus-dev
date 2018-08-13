@@ -61,6 +61,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

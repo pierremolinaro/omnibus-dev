@@ -65,6 +65,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !optionalTargetType:targetType
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -79,6 +80,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !routineAttributes:inRoutineAttributes
     !context: inContext
     !mode: inCurrentMode
+    !safe: inIsSafe
     !?temporary: ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

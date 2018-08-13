@@ -501,6 +501,7 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
         !optionalTargetType:voidType ()
         !context:ioContext
         !mode:.bootMode
+        !safe: true
         !?temporary:temporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioContext.mValuedObjectMap # universalMap

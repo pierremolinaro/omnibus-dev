@@ -83,6 +83,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !routineAttributes: inRoutineAttributes
     !context: inContext
     !mode: inMode
+    !safe: inIsSafe
     !?temporary: ioTemporaries
     !?staticEntityMap: ioStaticEntityMap
     !?variableMap: ioUniversalMap
@@ -100,6 +101,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !optionalTargetType:registerType
     !context:inContext
     !mode:inMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

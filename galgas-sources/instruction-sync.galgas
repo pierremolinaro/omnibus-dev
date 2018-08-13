@@ -171,6 +171,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !optionalTargetType:voidType ()
         !context:inContext
         !mode:inMode
+        !safe: inIsSafe
         !?temporary:ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
@@ -201,6 +202,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !optionalTargetType:voidType ()
         !context:inContext
         !mode:inMode
+        !safe: inIsSafe
         !?temporary:ioTemporaries
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap:ioUniversalMap
@@ -244,6 +246,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
             !effective:parameterList
             !context:inContext
             !requiredMode:inMode
+            !safe: inIsSafe
             !?temporary:ioTemporaries
             !?staticEntityMap:ioStaticEntityMap
             !?variableMap:ioUniversalMap
@@ -296,6 +299,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
           !effective:parameterList
           !context:inContext
           !requiredMode:inMode
+          !safe: inIsSafe
           !?temporary:ioTemporaries
           !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
@@ -364,6 +368,7 @@ proc analyzeGuardCall
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -391,6 +396,7 @@ proc analyzeGuardCall
       !errorLocation:inGuardName.location
       !context:inContext
       !requiredMode:inRequiredMode
+      !safe: inIsSafe
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
