@@ -9,6 +9,296 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_taskListAST_2D_element::GALGAS_taskListAST_2D_element (void) :
+mProperty_mTaskName (),
+mProperty_mLowerPriorityTaskList (),
+mProperty_mStackSize (),
+mProperty_mVarList (),
+mProperty_mTaskFunctionList (),
+mProperty_mTaskSetupListAST (),
+mProperty_mTaskActivateListAST (),
+mProperty_mTaskDeactivateListAST (),
+mProperty_mGuardedCommandList (),
+mProperty_mEndOfTaskDeclaration (),
+mProperty_mActivate () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskListAST_2D_element::~ GALGAS_taskListAST_2D_element (void) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskListAST_2D_element::GALGAS_taskListAST_2D_element (const GALGAS_lstring & inOperand0,
+                                                              const GALGAS_lstringlist & inOperand1,
+                                                              const GALGAS_lbigint & inOperand2,
+                                                              const GALGAS_structurePropertyListAST & inOperand3,
+                                                              const GALGAS_functionDeclarationListAST & inOperand4,
+                                                              const GALGAS_taskSetupListAST & inOperand5,
+                                                              const GALGAS_taskSetupListAST & inOperand6,
+                                                              const GALGAS_taskSetupListAST & inOperand7,
+                                                              const GALGAS_syncInstructionBranchListAST & inOperand8,
+                                                              const GALGAS_location & inOperand9,
+                                                              const GALGAS_bool & inOperand10) :
+mProperty_mTaskName (inOperand0),
+mProperty_mLowerPriorityTaskList (inOperand1),
+mProperty_mStackSize (inOperand2),
+mProperty_mVarList (inOperand3),
+mProperty_mTaskFunctionList (inOperand4),
+mProperty_mTaskSetupListAST (inOperand5),
+mProperty_mTaskActivateListAST (inOperand6),
+mProperty_mTaskDeactivateListAST (inOperand7),
+mProperty_mGuardedCommandList (inOperand8),
+mProperty_mEndOfTaskDeclaration (inOperand9),
+mProperty_mActivate (inOperand10) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskListAST_2D_element GALGAS_taskListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_taskListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                        GALGAS_lstringlist::constructor_emptyList (HERE),
+                                        GALGAS_lbigint::constructor_default (HERE),
+                                        GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
+                                        GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
+                                        GALGAS_taskSetupListAST::constructor_emptyList (HERE),
+                                        GALGAS_taskSetupListAST::constructor_emptyList (HERE),
+                                        GALGAS_taskSetupListAST::constructor_emptyList (HERE),
+                                        GALGAS_syncInstructionBranchListAST::constructor_emptyList (HERE),
+                                        GALGAS_location::constructor_nowhere (HERE),
+                                        GALGAS_bool::constructor_default (HERE)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskListAST_2D_element GALGAS_taskListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                              const GALGAS_lstringlist & inOperand1,
+                                                                              const GALGAS_lbigint & inOperand2,
+                                                                              const GALGAS_structurePropertyListAST & inOperand3,
+                                                                              const GALGAS_functionDeclarationListAST & inOperand4,
+                                                                              const GALGAS_taskSetupListAST & inOperand5,
+                                                                              const GALGAS_taskSetupListAST & inOperand6,
+                                                                              const GALGAS_taskSetupListAST & inOperand7,
+                                                                              const GALGAS_syncInstructionBranchListAST & inOperand8,
+                                                                              const GALGAS_location & inOperand9,
+                                                                              const GALGAS_bool & inOperand10 
+                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_taskListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+    result = GALGAS_taskListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_taskListAST_2D_element::objectCompare (const GALGAS_taskListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskName.objectCompare (inOperand.mProperty_mTaskName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mLowerPriorityTaskList.objectCompare (inOperand.mProperty_mLowerPriorityTaskList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mStackSize.objectCompare (inOperand.mProperty_mStackSize) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mVarList.objectCompare (inOperand.mProperty_mVarList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskFunctionList.objectCompare (inOperand.mProperty_mTaskFunctionList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskSetupListAST.objectCompare (inOperand.mProperty_mTaskSetupListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskActivateListAST.objectCompare (inOperand.mProperty_mTaskActivateListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mTaskDeactivateListAST.objectCompare (inOperand.mProperty_mTaskDeactivateListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGuardedCommandList.objectCompare (inOperand.mProperty_mGuardedCommandList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mEndOfTaskDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskDeclaration) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mActivate.objectCompare (inOperand.mProperty_mActivate) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+bool GALGAS_taskListAST_2D_element::isValid (void) const {
+  return mProperty_mTaskName.isValid () && mProperty_mLowerPriorityTaskList.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskFunctionList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mGuardedCommandList.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_taskListAST_2D_element::drop (void) {
+  mProperty_mTaskName.drop () ;
+  mProperty_mLowerPriorityTaskList.drop () ;
+  mProperty_mStackSize.drop () ;
+  mProperty_mVarList.drop () ;
+  mProperty_mTaskFunctionList.drop () ;
+  mProperty_mTaskSetupListAST.drop () ;
+  mProperty_mTaskActivateListAST.drop () ;
+  mProperty_mTaskDeactivateListAST.drop () ;
+  mProperty_mGuardedCommandList.drop () ;
+  mProperty_mEndOfTaskDeclaration.drop () ;
+  mProperty_mActivate.drop () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_taskListAST_2D_element::description (C_String & ioString,
+                                                 const int32_t inIndentation) const {
+  ioString << "<struct @taskListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mTaskName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mLowerPriorityTaskList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mStackSize.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mVarList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskFunctionList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskSetupListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskActivateListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mTaskDeactivateListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGuardedCommandList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mEndOfTaskDeclaration.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mActivate.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_taskListAST_2D_element::getter_mTaskName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskName ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstringlist GALGAS_taskListAST_2D_element::getter_mLowerPriorityTaskList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLowerPriorityTaskList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lbigint GALGAS_taskListAST_2D_element::getter_mStackSize (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mStackSize ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_structurePropertyListAST GALGAS_taskListAST_2D_element::getter_mVarList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mVarList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_functionDeclarationListAST GALGAS_taskListAST_2D_element::getter_mTaskFunctionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskFunctionList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskSetupListAST GALGAS_taskListAST_2D_element::getter_mTaskSetupListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskSetupListAST ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskSetupListAST GALGAS_taskListAST_2D_element::getter_mTaskActivateListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskActivateListAST ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskSetupListAST GALGAS_taskListAST_2D_element::getter_mTaskDeactivateListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTaskDeactivateListAST ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_syncInstructionBranchListAST GALGAS_taskListAST_2D_element::getter_mGuardedCommandList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardedCommandList ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_location GALGAS_taskListAST_2D_element::getter_mEndOfTaskDeclaration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfTaskDeclaration ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_taskListAST_2D_element::getter_mActivate (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mActivate ;
+}
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              @taskListAST-element type                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_taskListAST_2D_element ("taskListAST-element",
+                                               NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_taskListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_taskListAST_2D_element ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_taskListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_taskListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_taskListAST_2D_element GALGAS_taskListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_taskListAST_2D_element result ;
+  const GALGAS_taskListAST_2D_element * p = (const GALGAS_taskListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_taskListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("taskListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_taskSetupListAST_2D_element::GALGAS_taskSetupListAST_2D_element (void) :
 mProperty_mName (),
 mProperty_mDependanceList (),

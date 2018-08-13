@@ -141,11 +141,9 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
   #--- Code generation
     ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
-      !"" # globalVariableReceiverName
       !outFunctionCallReturnedValue
       !routineLLVMName
       !functionLLVMName
-      !.function # calleeKind
       !effectiveParameterListIR
     }
   end
