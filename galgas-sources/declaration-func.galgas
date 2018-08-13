@@ -176,7 +176,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
           + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()+ ", @" + safeAttribute ()
       end
     end
-    let canAccessProperties = function.mMode != .userMode
   #--- Routine mangled name
     let functionLLVMName = routineMangledNameFromAST (
       !"" 
@@ -195,25 +194,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !isSafe
       !exportedFunction
       !function.mMode
-    ]
-  #--- Enter in context
-    [!?ioContext.mRoutineMapForContextEX insertRoutine # Raises a redefinition error
-      !"" 
-      !function.mFunctionName
-      ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-      !functionLLVMName
-      !.new{
-        !isPublic:function.mPublicFunction
-        !exported:exportedFunction
-        !name:function.mFunctionName
-        !nameForLLVMGeneration:functionLLVMName
-        !routineKind:.function {!executionMode:function.mMode}
-        !signature:signature
-        !returnTypeProxy:returnTypeProxy
-        !canAccessProperties:canAccessProperties
-        !canMutateProperties:canMutateProperties
-        !safe:isSafe
-      }
     ]
   #---------------- Add decorated declaration
     ioDecoratedRoutineList +=

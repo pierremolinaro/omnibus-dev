@@ -10,19 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Routine 'generateLLVMcodeForStructure'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_generateLLVMcodeForStructure (class GALGAS_string & ioArgument0,
-                                           class GALGAS_generationAdds & ioArgument1,
-                                           const class GALGAS_PLMType constinArgument2,
-                                           const class GALGAS_uint constinArgument3,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            Function 'minValueForInteger'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -668,4 +655,23 @@ void routine_appendPanicRoutines (const class GALGAS_stringset constinArgument0,
                                   class GALGAS_intermediateCodeStruct & ioArgument1,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'panicRoutineNameForFilePath'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_panicRoutineNameForFilePath (const class GALGAS_string & constinArgument0,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              Function 'panicModeName'                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 

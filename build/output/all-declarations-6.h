@@ -1773,35 +1773,6 @@ class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Extension method '@routineMapForContext searchKey'                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_searchKey (const class GALGAS_routineMapForContext inObject,
-                                const class GALGAS_string constin_inReceiverTypeName,
-                                const class GALGAS_lstring constin_inRoutineName,
-                                const class GALGAS_lstring constin_inArgumentSignature,
-                                class GALGAS_lstring & out_outRoutineLLVMName,
-                                class GALGAS_routineDescriptor & out_outDescriptor,
-                                class GALGAS_location & out_outKeyLocation,
-                                class C_Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Extension getter '@routineMapForContext hasKey' (as function)                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bool extensionGetter_hasKey (const class GALGAS_routineMapForContext & inObject,
-                                          const class GALGAS_string & constinArgument0,
-                                          const class GALGAS_lstring & constinArgument1,
-                                          const class GALGAS_lstring & constinArgument2,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                              Extension setter '@universalValuedObjectMap insertDriver'                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

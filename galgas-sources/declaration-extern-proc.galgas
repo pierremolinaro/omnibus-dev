@@ -110,25 +110,6 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
     !false
     !mMode
   ]
-#--- Enter in context (EX)
-  [!?ioContext.mRoutineMapForContextEX insertRoutine
-    !""
-    !mExternProcedureName
-    ![mProcFormalArgumentList routineSignature !mExternProcedureName]
-    !mRoutineNameForGeneration
-    !.new {
-      !isPublic:true
-      !exported:false
-      !name:mExternProcedureName
-      !nameForLLVMGeneration:mRoutineNameForGeneration
-      !routineKind:.function {!executionMode:mMode}
-      !signature:signature
-      !returnTypeProxy:returnTypeProxy
-      !canAccessProperties:false
-      !canMutateProperties:false
-      !safe:safe
-    }
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

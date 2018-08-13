@@ -281,8 +281,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !userRoutineMangledName
       !implementationRoutineMangledName
     ]
-#    routineLLVMNameDict += !.userMode !userRoutineMangledName
-#    routineLLVMNameDict += !mode !implementationRoutineMangledName
     let routineMangledName = [signature mangledName !system.mName]
     [!?ioRoutineMapCTXT insertKey
       !routineMangledName
@@ -332,13 +330,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !canMutateProperties:mutating
       !safe:isSafe
     }
-    [!?ioContext.mRoutineMapForContextEX insertRoutine
-      !inReceiverTypeName
-      !system.mName
-      ![system.mFormalArgumentList routineSignature !system.mName]
-      !.new{ !s !system.mName}
-      !descriptor
-    ]
   #--- Enter in structure map
     let routineMangledNameEX = routineMangledNameFromAST (
       !inReceiverLLVMBaseTypeName

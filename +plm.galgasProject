@@ -55,7 +55,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/ast.galgas"
   "galgas-sources/compute-static-expression.galgas"
   "galgas-sources/context-routines.galgas"
-  "galgas-sources/routine-map.galgas"
   "galgas-sources/universal-map.galgas"
   "galgas-sources/ordered-declaration-list.galgas"
   "galgas-sources/context.galgas"

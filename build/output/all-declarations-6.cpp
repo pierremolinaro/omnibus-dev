@@ -8349,23 +8349,23 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
                                                       GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListIR var_formalArguments_6452 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 160)) ;
-  GALGAS_universalValuedObjectMap joker_6541 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 164)) ;
+  GALGAS_routineFormalArgumentListIR var_formalArguments_5883 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 141)) ;
+  GALGAS_universalValuedObjectMap joker_5972 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_6541, var_formalArguments_6452, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 161)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5972, var_formalArguments_5883, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 170)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 151)) ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 172)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 153)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_6648 = temp_0 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_6079 = temp_0 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_6452, var_returnType_6648, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 175)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5883, var_returnType_6079, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 156)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_6452, var_returnType_6648  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 180))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 180)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5883, var_returnType_6079  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 161))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 161)) ;
 }
 
 
@@ -10658,192 +10658,6 @@ GALGAS_routineDescriptor GALGAS_routineDescriptor::extractObject (const GALGAS_o
   }
   return result ;
 }
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineMapForContext::GALGAS_routineMapForContext (void) :
-mProperty_mInternalRoutineMap () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineMapForContext::~ GALGAS_routineMapForContext (void) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineMapForContext::GALGAS_routineMapForContext (const GALGAS_routineArgumentSignatureMapForContext & inOperand0) :
-mProperty_mInternalRoutineMap (inOperand0) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_routineMapForContext (GALGAS_routineArgumentSignatureMapForContext::constructor_emptyMap (HERE)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_new (const GALGAS_routineArgumentSignatureMapForContext & inOperand0 
-                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineMapForContext result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_routineMapForContext (inOperand0) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_routineMapForContext::objectCompare (const GALGAS_routineMapForContext & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mInternalRoutineMap.objectCompare (inOperand.mProperty_mInternalRoutineMap) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool GALGAS_routineMapForContext::isValid (void) const {
-  return mProperty_mInternalRoutineMap.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_routineMapForContext::drop (void) {
-  mProperty_mInternalRoutineMap.drop () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_routineMapForContext::description (C_String & ioString,
-                                               const int32_t inIndentation) const {
-  ioString << "<struct @routineMapForContext:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mInternalRoutineMap.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineArgumentSignatureMapForContext GALGAS_routineMapForContext::getter_mInternalRoutineMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInternalRoutineMap ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             @routineMapForContext type                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineMapForContext ("routineMapForContext",
-                                             NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_routineMapForContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineMapForContext ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_routineMapForContext::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_routineMapForContext (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_routineMapForContext result ;
-  const GALGAS_routineMapForContext * p = (const GALGAS_routineMapForContext *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_routineMapForContext *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineMapForContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Extension method '@routineMapForContext insertRoutine'                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionSetter_insertRoutine (GALGAS_routineMapForContext & ioObject,
-                                    const GALGAS_string constinArgument_inReceiverTypeName,
-                                    const GALGAS_lstring constinArgument_inRoutineName,
-                                    const GALGAS_lstring constinArgument_inArgumentSignature,
-                                    const GALGAS_lstring constinArgument_inRoutineLLVMName,
-                                    const GALGAS_routineDescriptor constinArgument_inDescriptor,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring var_routineName_1301 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 30)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 30)).add_operation (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 30)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 30)) ;
-  {
-  ioObject.mProperty_mInternalRoutineMap.setter_insertKey (var_routineName_1301, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 31)) ;
-  }
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Extension method '@routineMapForContext searchKey'                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_searchKey (const GALGAS_routineMapForContext inObject,
-                                const GALGAS_string constinArgument_inReceiverTypeName,
-                                const GALGAS_lstring constinArgument_inRoutineName,
-                                const GALGAS_lstring constinArgument_inArgumentSignature,
-                                GALGAS_lstring & outArgument_outRoutineLLVMName,
-                                GALGAS_routineDescriptor & outArgument_outDescriptor,
-                                GALGAS_location & outArgument_outKeyLocation,
-                                C_Compiler * inCompiler
-                                COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
-  outArgument_outDescriptor.drop () ; // Release 'out' argument
-  outArgument_outKeyLocation.drop () ; // Release 'out' argument
-  GALGAS_lstring var_routineName_2034 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 46)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 46)).add_operation (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 46)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 46)) ;
-  inObject.mProperty_mInternalRoutineMap.method_searchKey (var_routineName_2034, outArgument_outRoutineLLVMName, outArgument_outDescriptor, outArgument_outKeyLocation, inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 48)) ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Extension Getter '@routineMapForContext hasKey'                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool extensionGetter_hasKey (const GALGAS_routineMapForContext & inObject,
-                                    const GALGAS_string & constinArgument_inReceiverTypeName,
-                                    const GALGAS_lstring & constinArgument_inRoutineName,
-                                    const GALGAS_lstring & constinArgument_inArgumentSignature,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bool result_result ; // Returned variable
-  GALGAS_lstring var_routineName_2697 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 61)).add_operation (constinArgument_inRoutineName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 61)).add_operation (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("routine-map.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("routine-map.galgas", 61)), constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("routine-map.galgas", 61)) ;
-  result_result = inObject.mProperty_mInternalRoutineMap.getter_hasKey (var_routineName_2697.getter_string (SOURCE_FILE ("routine-map.galgas", 62)) COMMA_SOURCE_FILE ("routine-map.galgas", 62)) ;
-//---
-  return result_result ;
-}
-
-
-
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -14187,6 +14001,208 @@ GALGAS_sectionModePanicRoutineIR GALGAS_sectionModePanicRoutineIR::extractObject
       result = *p ;
     }else{
       inCompiler->castError ("sectionModePanicRoutineIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_convertExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_convertExpressionAST) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mExpression.objectCompare (p->mProperty_mExpression) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mTypeName.objectCompare (p->mProperty_mTypeName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mEndOfExpression.objectCompare (p->mProperty_mEndOfExpression) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_convertExpressionAST::objectCompare (const GALGAS_convertExpressionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_convertExpressionAST::GALGAS_convertExpressionAST (void) :
+GALGAS_expressionAST () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_convertExpressionAST::GALGAS_convertExpressionAST (const cPtr_convertExpressionAST * inSourcePtr) :
+GALGAS_expressionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_convertExpressionAST) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_convertExpressionAST GALGAS_convertExpressionAST::constructor_new (const GALGAS_expressionAST & inAttribute_mExpression,
+                                                                          const GALGAS_lstring & inAttribute_mTypeName,
+                                                                          const GALGAS_location & inAttribute_mEndOfExpression
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_convertExpressionAST result ;
+  if (inAttribute_mExpression.isValid () && inAttribute_mTypeName.isValid () && inAttribute_mEndOfExpression.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_convertExpressionAST (inAttribute_mExpression, inAttribute_mTypeName, inAttribute_mEndOfExpression COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_expressionAST GALGAS_convertExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_expressionAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_convertExpressionAST) ;
+    result = p->mProperty_mExpression ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_expressionAST cPtr_convertExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mExpression ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring GALGAS_convertExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_convertExpressionAST) ;
+    result = p->mProperty_mTypeName ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_lstring cPtr_convertExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTypeName ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_location GALGAS_convertExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_convertExpressionAST) ;
+    result = p->mProperty_mEndOfExpression ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_location cPtr_convertExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mEndOfExpression ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                    Pointer class for @convertExpressionAST class                                    *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_convertExpressionAST::cPtr_convertExpressionAST (const GALGAS_expressionAST & in_mExpression,
+                                                      const GALGAS_lstring & in_mTypeName,
+                                                      const GALGAS_location & in_mEndOfExpression
+                                                      COMMA_LOCATION_ARGS) :
+cPtr_expressionAST (THERE),
+mProperty_mExpression (in_mExpression),
+mProperty_mTypeName (in_mTypeName),
+mProperty_mEndOfExpression (in_mEndOfExpression) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_convertExpressionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_convertExpressionAST ;
+}
+
+void cPtr_convertExpressionAST::description (C_String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString << "[@convertExpressionAST:" ;
+  mProperty_mExpression.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mTypeName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_convertExpressionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_convertExpressionAST (mProperty_mExpression, mProperty_mTypeName, mProperty_mEndOfExpression COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             @convertExpressionAST type                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_convertExpressionAST ("convertExpressionAST",
+                                             & kTypeDescriptor_GALGAS_expressionAST) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_convertExpressionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_convertExpressionAST ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_convertExpressionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_convertExpressionAST (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_convertExpressionAST GALGAS_convertExpressionAST::extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_convertExpressionAST result ;
+  const GALGAS_convertExpressionAST * p = (const GALGAS_convertExpressionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_convertExpressionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("convertExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

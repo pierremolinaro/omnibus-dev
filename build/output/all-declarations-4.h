@@ -10,47 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Extension setter '@propertyMap addFunctionWithInputArgument'                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & ioObject,
-                                                   class GALGAS_semanticContext & io_ioContext,
-                                                   const class GALGAS_string constin_inLLVMBaseTypeName,
-                                                   const class GALGAS_string constin_inMethodName,
-                                                   const class GALGAS_bool constin_inIsSafe,
-                                                   const class GALGAS_string constin_inInputSelector,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
-                                                   const class GALGAS_string constin_inInputArgumentName,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                   const class GALGAS_bool constin_inCanMutateProperties,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Extension setter '@propertyMap addFunctionWithTwoInputArguments'                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_propertyMap & ioObject,
-                                                       class GALGAS_semanticContext & io_ioContext,
-                                                       const class GALGAS_string constin_inLLVMBaseTypeName,
-                                                       const class GALGAS_string constin_inMethodName,
-                                                       const class GALGAS_bool constin_inIsSafe,
-                                                       const class GALGAS_string constin_inInputSelector_31_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_31_,
-                                                       const class GALGAS_string constin_inInputArgumentName_31_,
-                                                       const class GALGAS_string constin_inInputSelector_32_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_32_,
-                                                       const class GALGAS_string constin_inInputArgumentName_32_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                       const class GALGAS_bool constin_inCanMutateProperties,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                      @constructorValue enum, associated values                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
