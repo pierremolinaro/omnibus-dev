@@ -53,7 +53,6 @@ project (1:0:0) -> "plm" {
 
 #--- Compilation phases
   "galgas-sources/ast.galgas"
-  "galgas-sources/compute-static-expression.galgas"
   "galgas-sources/context-routines.galgas"
   "galgas-sources/universal-map.galgas"
   "galgas-sources/ordered-declaration-list.galgas"
@@ -68,6 +67,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/panic-codes.galgas"
 
 #--- Expression
+  "galgas-sources/compute-static-expression.galgas"
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-convert.galgas"
   "galgas-sources/expression-extend.galgas"

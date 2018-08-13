@@ -196,6 +196,30 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                                 Function 'voidType'                                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_PLMType function_voidType (class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'computeStaticExpression'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_computeStaticExpression (class GALGAS_semanticContext & ioArgument0,
+                                      class GALGAS_staticEntityMap & ioArgument1,
+                                      const class GALGAS_expressionAST constinArgument2,
+                                      const class GALGAS_location constinArgument3,
+                                      const class GALGAS_lstring constinArgument4,
+                                      class GALGAS_objectIR & outArgument5,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                     @infixObjectObjectOperatorDescription class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -262,20 +262,6 @@ class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & consti
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Routine 'computeStaticExpression'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_computeStaticExpression (class GALGAS_semanticContext & ioArgument0,
-                                      const class GALGAS_expressionAST constinArgument1,
-                                      const class GALGAS_location constinArgument2,
-                                      const class GALGAS_lstring constinArgument3,
-                                      class GALGAS_objectIR & outArgument4,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

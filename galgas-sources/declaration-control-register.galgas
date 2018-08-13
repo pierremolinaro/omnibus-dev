@@ -469,12 +469,14 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
       end
     end
   #--- Analyse register address expression
-    [register.mRegisterOffset analyzeStaticExpression
-      !errorLocation:register.mRegisterOffsetLocation
-      !context:ioContext
+    computeStaticExpression (
+      !?context: ioContext
       !?staticEntityMap:ioStaticEntityMap
+      !expression:register.mRegisterOffset
+      !errorLocation:register.mRegisterOffsetLocation
+      !optionalContextualTypeName: ["" nowhere]
       ?result:let @objectIR addressOffsetExpressionResult
-    ]
+    )
     @bigint registerAddressOffset
     if not [addressOffsetExpressionResult isLiteralInteger] then
       error register.mRegisterOffsetLocation
@@ -492,23 +494,14 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
     case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
                         @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
     #--- Analyse register array size expression
-      @semanticTemporariesStruct temporaries = .default
-      @instructionListIR instructionGenerationList = {}
-      @allocaList allocaList = {}
-      [arraySizeExpression analyzeExpression
-        !self:voidType ()
-        !routineAttributes:.none
-        !optionalTargetType:voidType ()
-        !context:ioContext
-        !mode:.bootMode
-        !safe: true
-        !?temporary:temporaries
+      computeStaticExpression (
+        !?context: ioContext
         !?staticEntityMap:ioStaticEntityMap
-        !?variableMap:ioContext.mValuedObjectMap # universalMap
-        !?alloca:allocaList
-        !?instructionListIR:instructionGenerationList
-        ?result:@objectIR sizeExpressionResult
-      ]
+        !expression:arraySizeExpression
+        !errorLocation:arraySizeLocation
+        !optionalContextualTypeName:["" nowhere]
+        ?result:let @objectIR sizeExpressionResult
+      )
       if not [sizeExpressionResult isLiteralInteger] then
         error arraySizeLocation : "control register address is not a static integer expression" : arraySize
       else
@@ -517,22 +510,17 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
           error arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
             : arraySize
-#        else
-#          let powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
-#          if arraySize != (1G << powerOfTwoForArraySize) then
-#            error arraySizeLocation
-#              : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-#              : arraySize
-#          end
         end
       end
     #--- Analyse element array size expression
-      [arrayElementSizeExpression analyzeStaticExpression
-        !errorLocation:arrayElementSizeLocation
-        !context:ioContext
+      computeStaticExpression (
+        !?context: ioContext
         !?staticEntityMap:ioStaticEntityMap
+        !expression:arrayElementSizeExpression
+        !errorLocation:arrayElementSizeLocation
+        !optionalContextualTypeName:["" nowhere]
         ?result:let @objectIR elementArraySizeExpressionResult
-      ]
+      )
       if not [elementArraySizeExpressionResult isLiteralInteger] then
         error arrayElementSizeLocation
           : "element size is not a static integer expression"

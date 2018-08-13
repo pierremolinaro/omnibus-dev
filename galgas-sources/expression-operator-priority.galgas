@@ -431,33 +431,4 @@ abstract method @expressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 
-#·······················································································································
-
-method @expressionAST analyzeStaticExpression
-  ?errorLocation:let @location inErrorLocation
-  ?context:let @semanticContext inContext
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  !result:@objectIR outResult
-{
-  @instructionListIR instructionGenerationList = {}
-  @allocaList allocaList = {}
-  [self analyzeExpression
-    !self:voidType ()
-    !routineAttributes:.none
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:.bootMode
-    !safe: true
-    !?temporary:*
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:*
-    !?alloca:allocaList
-    !?instructionListIR:instructionGenerationList
-    ?result:outResult
-  ]
-  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult isStatic] then
-    error inErrorLocation : "this expression should be a static expression" : outResult
-  end
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

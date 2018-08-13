@@ -420,23 +420,14 @@ method @structurePropertyListAST-element enterPropertyInContext
 #---------- Init expression
   switch mInitialisation
   case expression (initExpression) :
-    [initExpression analyzeExpression
-      !self:voidType ()
-      !routineAttributes:.none
-      !optionalTargetType:optionalPropertyType
-      !context:ioContext
-      !mode:.bootMode
-      !safe: true
-      !?temporary:*
+    computeStaticExpression (
+      !?context: ioContext
       !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioContext.mValuedObjectMap
-      !?alloca:*
-      !?instructionListIR:*
+      !expression: initExpression
+      !errorLocation: mPropertyName.location
+      !optionalContextualTypeName: mPropertyTypeName
       ?result:let @objectIR expressionIR
-    ]
-    if not [expressionIR isStatic] then
-      error mPropertyName : "initialization expression cannot be computed statically"
-    end
+    )
     @PLMType actualPropertyType
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType

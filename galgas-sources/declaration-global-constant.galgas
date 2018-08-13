@@ -90,7 +90,7 @@ override method @globalConstantDeclarationAST enterInContext
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
@@ -107,9 +107,10 @@ override method @globalConstantDeclarationAST enterInContext
 #--- Analyze source expression
   computeStaticExpression (
     !?context: ioContext
+    !?staticEntityMap:ioStaticEntityMap
     !expression:mSourceExpression
     !errorLocation:mConstantName.location
-    !optionalContectualTypeName:mConstantTypeName
+    !optionalContextualTypeName:mConstantTypeName
     ?result:let @objectIR expressionResult
   )
 #--- Enter in context

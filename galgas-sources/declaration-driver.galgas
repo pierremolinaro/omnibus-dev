@@ -401,7 +401,7 @@ override method @implementedDriverAST enterInContext
     !mode:.bootMode
     !safe: true
     !isRequired:true
-    !.function # {!executionMode:.bootMode}
+    !.function
     !warnIfUnused: true
     !exportedRoutine: false
     !.directPropertyAccess

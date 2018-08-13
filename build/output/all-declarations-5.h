@@ -60,6 +60,16 @@ class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                 Extension getter '@objectIR isStatic' (as function)                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_bool extensionGetter_isStatic (const class GALGAS_objectIR & inObject,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                   Class for element of '@globalConstantMapIR' map                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

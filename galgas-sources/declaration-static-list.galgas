@@ -400,33 +400,14 @@ override method @staticListAST enterInContext
           if [propertyType.kind isFunction] then
             error endOfExp : "a function name is expected here"
           else
-            @semanticTemporariesStruct temporaries = .default
-            @instructionListIR instructionGenerationList = {}
-            @allocaList allocaList = {}
-            [exp analyzeExpression
-              !self:voidType ()
-              !routineAttributes:.none
-              !optionalTargetType:propertyType
-              !context:ioContext
-              !mode:.bootMode
-              !safe: true
-              !?temporary:temporaries
+            computeStaticExpression (
+              !?context: ioContext
               !?staticEntityMap:ioStaticEntityMap
-              !?variableMap:ioContext.mValuedObjectMap # universalMap
-              !?alloca:allocaList
-              !?instructionListIR:instructionGenerationList
-              ?result:let @objectIR expressionResult
-            ]
-          #--- Check assignment compatibility
-            let result = checkAssignmentCompatibility (
-              !source:expressionResult
-              !targetAnnotationType:propertyType
+              !expression:exp
               !errorLocation:endOfExp
-              !staticTypeAllowed:false
+              !optionalContextualTypeName:["" nowhere]
+              ?result:let @objectIR expressionResult
             )
-            if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
-              error endOfExp : "source expression cannot be statically computed"
-            end
           #--- Enter in static value
             staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
           end      

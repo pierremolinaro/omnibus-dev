@@ -235,54 +235,6 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Extension method '@expressionAST analyzeStaticExpression'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef void (*extensionMethodSignature_expressionAST_analyzeStaticExpression) (const class cPtr_expressionAST * inObject,
-                                                                                const class GALGAS_location constinArgument0,
-                                                                                const class GALGAS_semanticContext constinArgument1,
-                                                                                class GALGAS_staticEntityMap & ioArgument2,
-                                                                                class GALGAS_objectIR & outArgument3,
-                                                                                class C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_analyzeStaticExpression (const int32_t inClassIndex,
-                                                   extensionMethodSignature_expressionAST_analyzeStaticExpression inMethod) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_analyzeStaticExpression (const class cPtr_expressionAST * inObject,
-                                                  const GALGAS_location constin_inErrorLocation,
-                                                  const GALGAS_semanticContext constin_inContext,
-                                                  GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                  GALGAS_objectIR & out_outResult,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                 Function 'voidType'                                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_PLMType function_voidType (class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Extension getter '@objectIR isStatic' (as function)                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bool extensionGetter_isStatic (const class GALGAS_objectIR & inObject,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            @truncateInstructionIR class                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

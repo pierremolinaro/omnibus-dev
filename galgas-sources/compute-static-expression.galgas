@@ -4,9 +4,10 @@
 
 proc computeStaticExpression
   ?!context:@semanticContext ioContext
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?expression:let @expressionAST inExpression
   ?errorLocation:let @location inErrorLocation
-  ?optionalContectualTypeName:let @lstring inOptionalTypeName
+  ?optionalContextualTypeName:let @lstring inOptionalTypeName
   !result:@objectIR outStaticExpressionIR
 {
 #--- Get destination type
@@ -25,7 +26,7 @@ proc computeStaticExpression
     !mode:.bootMode
     !safe: true
     !?temporary:*
-    !?staticEntityMap:*
+    !?staticEntityMap: ioStaticEntityMap
     !?variableMap:ioContext.mValuedObjectMap
     !?alloca:*
     !?instructionListIR:*

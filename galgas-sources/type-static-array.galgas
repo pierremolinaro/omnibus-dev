@@ -73,7 +73,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
@@ -86,25 +86,16 @@ override method @staticArrayTypeDeclarationAST enterInContext
     error mElementTypeName : "an array element should be instanciable"
   end
 #--- Compute array size
-  @instructionListIR initInstructionGenerationList = {}
-  @allocaList allocaList = {}
-  @semanticTemporariesStruct temporaries = .default
-  [mSizeExpression analyzeExpression
-    !self:voidType ()
-    !routineAttributes:.none
-    !optionalTargetType:voidType ()
-    !context:ioContext
-    !mode:.bootMode
-    !safe: true
-    !?temporary:temporaries
-    !?staticEntityMap:*
-    !?variableMap:ioContext.mValuedObjectMap
-    !?alloca:allocaList
-    !?instructionListIR:initInstructionGenerationList
+  computeStaticExpression (
+    !?context: ioContext
+    !?staticEntityMap:ioStaticEntityMap
+    !expression:mSizeExpression
+    !errorLocation:mSizeExpressionLocation
+    !optionalContextualTypeName:["" nowhere]
     ?result:let @objectIR sizeExpressionIR
-  ]
+  )
   if not [sizeExpressionIR isLiteralInteger] then
-    error mSizeExpressionLocation : "array size expression is not static"
+    error mSizeExpressionLocation : "array size expression is a literal interger expression"
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name

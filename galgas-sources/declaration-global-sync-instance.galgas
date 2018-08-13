@@ -95,23 +95,14 @@ override method @syncToolInstanceDeclarationAST enterInContext
     [ioContext.mTypeMap searchKey !lkey:mSyncTypeName ?type:optionalSyncType ?2*]
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
-     !self:voidType ()
-     !routineAttributes:.none
-     !optionalTargetType:optionalSyncType
-     !context:ioContext
-     !mode:.bootMode
-     !safe: true
-     !?temporary:*
-     !?staticEntityMap:ioStaticEntityMap
-     !?variableMap:ioContext.mValuedObjectMap
-     !?alloca:*
-     !?instructionListIR:*
-     ?result:@objectIR expressionResult
-  ]
-  if not [expressionResult isStatic] then
-    error mSyncInstanceName : "source expression cannot be statically computed"
-  end
+  computeStaticExpression (
+    !?context: ioContext
+    !?staticEntityMap:ioStaticEntityMap
+    !expression:mSourceExpression
+    !errorLocation:mSyncInstanceName
+    !optionalContextualTypeName:["" nowhere]
+    ?result:let @objectIR expressionResult
+  )
 #--- Check variable type and expression type
   let result = checkAssignmentCompatibility (
     !source:expressionResult

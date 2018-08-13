@@ -9,78 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                 Overriding extension method '@universalModePanicRoutineIR enterAccessibleEntities'                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_universalModePanicRoutineIR_enterAccessibleEntities (const cPtr_abstractRoutineIR * /* inObject */,
-                                                                                 GALGAS_stringset & ioArgument_ioInvokedRoutineSet,
-                                                                                 GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioInvokedRoutineSet.addAssign_operation (function_llvmNameForSectionImplementation (function_panicRoutineName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 363)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 363))  COMMA_SOURCE_FILE ("panic.galgas", 363)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_universalModePanicRoutineIR_enterAccessibleEntities (void) {
-  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_universalModePanicRoutineIR.mSlotID,
-                                                extensionMethod_universalModePanicRoutineIR_enterAccessibleEntities) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_universalModePanicRoutineIR_enterAccessibleEntities (defineExtensionMethod_universalModePanicRoutineIR_enterAccessibleEntities, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                     Overriding extension method '@sectionModePanicRoutineIR llvmCodeGeneration'                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_sectionModePanicRoutineIR_llvmCodeGeneration (const cPtr_abstractRoutineIR * inObject,
-                                                                          GALGAS_string & ioArgument_ioLLVMcode,
-                                                                          const GALGAS_generationContext constinArgument_inGenerationContext,
-                                                                          GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_sectionModePanicRoutineIR * object = (const cPtr_sectionModePanicRoutineIR *) inObject ;
-  macroValidSharedObject (object, cPtr_sectionModePanicRoutineIR) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Raise Panic internal (section mode)"), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 382)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 382)) ;
-  GALGAS_string var_arguments_16626 = GALGAS_string (" (").add_operation (extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicLineLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 385)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 384)).add_operation (GALGAS_string (" %in.LINE, "), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 385)).add_operation (extensionGetter_llvmTypeName (constinArgument_inGenerationContext.getter_mPanicCodeLLVMType (HERE), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 386)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 385)).add_operation (GALGAS_string (" %in.CODE, "), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 386)).add_operation (GALGAS_string ("i8* %in.FILE)"), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 386)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (function_llvmNameForSectionImplementation (function_panicRoutineName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 389)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 389)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 389)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 389)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(var_arguments_16626.add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 390)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 390)).add_operation (GALGAS_string ("noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 390)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 390)) ;
-  cEnumerator_panicSortedListIR enumerator_17013 (object->mProperty_mPanicSetupListIR, kENUMERATION_UP) ;
-  while (enumerator_17013.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @panic.setup.").add_operation (enumerator_17013.current_mPriority (HERE).getter_string (SOURCE_FILE ("panic.galgas", 393)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 393)).add_operation (var_arguments_16626, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 393)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 393)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 393)) ;
-    enumerator_17013.gotoNextObject () ;
-  }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %panic.loop\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 395)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("panic.loop:\n"), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 396)) ;
-  cEnumerator_panicSortedListIR enumerator_17212 (object->mProperty_mPanicLoopListIR, kENUMERATION_UP) ;
-  while (enumerator_17212.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @panic.loop.").add_operation (enumerator_17212.current_mPriority (HERE).getter_string (SOURCE_FILE ("panic.galgas", 398)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 398)).add_operation (var_arguments_16626, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 398)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 398)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 398)) ;
-    enumerator_17212.gotoNextObject () ;
-  }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %panic.loop\n"), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 400)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 401)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_sectionModePanicRoutineIR_llvmCodeGeneration (void) {
-  enterExtensionMethod_llvmCodeGeneration (kTypeDescriptor_GALGAS_sectionModePanicRoutineIR.mSlotID,
-                                           extensionMethod_sectionModePanicRoutineIR_llvmCodeGeneration) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_sectionModePanicRoutineIR_llvmCodeGeneration (defineExtensionMethod_sectionModePanicRoutineIR_llvmCodeGeneration, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                  Overriding extension method '@sectionModePanicRoutineIR enterAccessibleEntities'                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1234,6 +1162,46 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForClosedSync ("panicCo
                                                                         & kTypeDescriptor_GALGAS_bigint,
                                                                         0,
                                                                         functionArgs_panicCodeForClosedSync) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'computeStaticExpression'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_computeStaticExpression (GALGAS_semanticContext & ioArgument_ioContext,
+                                      GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
+                                      const GALGAS_expressionAST constinArgument_inExpression,
+                                      const GALGAS_location constinArgument_inErrorLocation,
+                                      const GALGAS_lstring constinArgument_inOptionalTypeName,
+                                      GALGAS_objectIR & outArgument_outStaticExpressionIR,
+                                      C_Compiler * inCompiler
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outStaticExpressionIR.drop () ; // Release 'out' argument
+  GALGAS_PLMType var_annotationType_744 ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inOptionalTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    var_annotationType_744 = function_voidType (inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 16)) ;
+  }else if (kBoolFalse == test_0) {
+    GALGAS_uint joker_908_2 ; // Joker input parameter
+    GALGAS_bool joker_908_1 ; // Joker input parameter
+    ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (constinArgument_inOptionalTypeName, var_annotationType_744, joker_908_2, joker_908_1, inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 18)) ;
+  }
+  GALGAS_semanticTemporariesStruct joker_1122 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("compute-static-expression.galgas", 28)) ;
+  GALGAS_allocaList joker_1223 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("compute-static-expression.galgas", 31)) ;
+  GALGAS_instructionListIR joker_1249 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("compute-static-expression.galgas", 32)) ;
+  GALGAS_objectIR var_expressionIR_1289 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) constinArgument_inExpression.ptr (), function_voidType (inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 22)), GALGAS_routineAttributes::constructor_none (SOURCE_FILE ("compute-static-expression.galgas", 23)), var_annotationType_744, ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("compute-static-expression.galgas", 26)), GALGAS_bool (true), joker_1122, ioArgument_ioStaticEntityMap, ioArgument_ioContext.mProperty_mValuedObjectMap, joker_1223, joker_1249, var_expressionIR_1289, inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 21)) ;
+  const enumGalgasBool test_1 = extensionGetter_isStatic (var_expressionIR_1289, inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 35)).operator_not (SOURCE_FILE ("compute-static-expression.galgas", 35)).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    TC_Array <C_FixItDescription> fixItArray2 ;
+    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("expression is not static"), fixItArray2  COMMA_SOURCE_FILE ("compute-static-expression.galgas", 36)) ;
+    outArgument_outStaticExpressionIR.drop () ; // Release error dropped variable
+  }else if (kBoolFalse == test_1) {
+    outArgument_outStaticExpressionIR = function_checkAssignmentCompatibility (var_expressionIR_1289, var_annotationType_744, constinArgument_inErrorLocation, GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 39)) ;
+  }
+}
+
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -8100,4 +8068,32 @@ static void defineExtensionMethod_forInstructionOnStringIR_llvmInstructionCode (
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_PrologueEpilogue gMethod_forInstructionOnStringIR_llvmInstructionCode (defineExtensionMethod_forInstructionOnStringIR_llvmInstructionCode, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                   Overriding extension method '@forInstructionOnStringIR enterAccessibleEntities'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_forInstructionOnStringIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                              GALGAS_stringset & ioArgument_ioInvokedRoutineSet,
+                                                                              GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_forInstructionOnStringIR * object = (const cPtr_forInstructionOnStringIR *) inObject ;
+  macroValidSharedObject (object, cPtr_forInstructionOnStringIR) ;
+  extensionMethod_enterAccessibleEntities (object->mProperty_mWhileInstructionList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 391)) ;
+  extensionMethod_enterAccessibleEntities (object->mProperty_mDoInstructionList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 392)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_forInstructionOnStringIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_forInstructionOnStringIR.mSlotID,
+                                                extensionMethod_forInstructionOnStringIR_enterAccessibleEntities) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_forInstructionOnStringIR_enterAccessibleEntities (defineExtensionMethod_forInstructionOnStringIR_enterAccessibleEntities, NULL) ;
 
