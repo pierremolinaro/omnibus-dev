@@ -135,7 +135,7 @@ func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
     s = "service"
   case primitive :
     s = "primitive"
-  case function (*) :
+  case function :
     s = "???"
   end
   s += ".user."
@@ -166,7 +166,7 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
     s = "service"
   case primitive :
     s = "primitive"
-  case function (*) :
+  case function :
     s = "???"
   end
   s += ".implementation."
@@ -268,7 +268,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       mode = .primitiveMode
     case service :
       mode = .serviceMode
-    case function (*) :
+    case function :
       error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
     end
     @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable

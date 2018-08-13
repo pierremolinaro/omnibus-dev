@@ -288,7 +288,7 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.userMode
         !isRequired:true
-        !.function {!executionMode:.userMode}
+        !.function # {!executionMode:.userMode}
         !warnIfUnused: true
         !exportedRoutine: false
         !.mutating | .directPropertyAccess | .panicAllowed
@@ -305,7 +305,7 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.userMode
         !isRequired:true
-        !.function {!executionMode:.userMode}
+        !.function # {!executionMode:.userMode}
         !warnIfUnused:true
         !exportedRoutine: false
         !.mutating | .directPropertyAccess | .panicAllowed
@@ -322,7 +322,7 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.userMode
         !isRequired:true
-        !.function {!executionMode:.userMode}
+        !.function # {!executionMode:.userMode}
         !warnIfUnused: true
         !exportedRoutine: false
         !.mutating | .directPropertyAccess | .panicAllowed
@@ -345,7 +345,7 @@ method @taskListAST enterInContext
       !receiverTypeName: task.mTaskName
       !mode:.userMode
       !isRequired:true
-      !.function {!executionMode:.userMode}
+      !.function # {!executionMode:.userMode}
       !warnIfUnused: true
       !exportedRoutine: false
       !.mutating | .directPropertyAccess | .panicAllowed # @routineAttributes mRoutineAttributes

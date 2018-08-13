@@ -96,9 +96,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case syncTool (*) :
       error mOperatorLocation : "internal error" : leftOperand
-    case function (5*) :
-      error mOperatorLocation : "internal error" : leftOperand
-    case pointer (*) :
+    case function (4*) :
       error mOperatorLocation : "internal error" : leftOperand
     case staticInteger :
       if [inOptionalTargetType.kind isInteger] then

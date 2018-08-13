@@ -193,9 +193,7 @@ override method @integerSliceExpressionAST analyzeExpression
           error expressionLocation: "an unsigned integer expression is required here"
         case literalString :
           error expressionLocation: "an unsigned integer expression is required here"
-        case pointer (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case function (5*) :
+        case function (4*) :
           error expressionLocation: "an unsigned integer expression is required here"
         case staticInteger :
           [expressionResult literalInteger ?1* ?value:let @bigint value]

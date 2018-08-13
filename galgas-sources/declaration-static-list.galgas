@@ -321,7 +321,7 @@ override method @staticListAST enterInContext
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
     #--- Enter routine type in type map
-      let type = @PLMType.new{
+      let type = @PLMType.new {
         !propertyMap:{}
         !routineMap: {}
         !classConstantMap:{}
@@ -330,7 +330,7 @@ override method @staticListAST enterInContext
         !attributes:.none
         !plmTypeDescriptionName:""
         !kind:.function {
-          !name:propertyName
+#          !name:propertyName
           !mode:mode
           !signature:signature
           !returnTypeProxy:returnTypeProxy 
@@ -444,7 +444,6 @@ override method @staticListAST enterInContext
             error endOfExp : "a static expression is expected here"
           else
             [type.kind function
-              ?name:let name
               ?mode:let mode
               ?signature:let functionSignature
               ?returnTypeProxy:let functionReturnTypeProxy

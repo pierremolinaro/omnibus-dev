@@ -200,7 +200,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !receiverTypeName: ["" nowhere]
       !mode:function.mMode
       !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
-      !.function {!executionMode:function.mMode}
+      !.function
       !warnIfUnused: warnIfUnused
       !exportedRoutine: exportedFunction
       !.directPropertyAccess # @routineAttributes mRoutineAttributes
@@ -302,7 +302,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !receiverTypeName: inReceiverTypeName
       !mode:function.mMode
       !isRequired: false
-      !.function {!executionMode: function.mMode}
+      !.function
       !warnIfUnused: warnIfUnused
       !exportedRoutine: false
       !functionAttributes

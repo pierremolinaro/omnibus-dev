@@ -158,10 +158,10 @@ override method @panicAST enterInContext
     !receiverTypeName: ["" nowhere] # Empty string if standalone function
     !mode:.panicMode
     !isRequired:false
-    !.function {!executionMode:.panicMode} # @routineKind mRoutineKind
+    !.function # {!executionMode:.panicMode}
     !warnIfUnused: false
     !exportedRoutine: false
-    !.none # @routineAttributes mRoutineAttributes
+    !.none
     !routineMangledName
     !arguments
     !false # warningOnUnusedArgs

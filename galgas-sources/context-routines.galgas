@@ -1,7 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @routineKind {
-  case function (@mode executionMode)
+  case function # (@mode executionMode)
   case section
   case service
   case primitive

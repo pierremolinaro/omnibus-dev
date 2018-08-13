@@ -2439,18 +2439,16 @@ class cEnumAssociatedValues_typeKind_dynamicArrayType : public cEnumAssociatedVa
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cEnumAssociatedValues_typeKind_function : public cEnumAssociatedValues {
-  public : const GALGAS_string mAssociatedValue0 ;
-  public : const GALGAS_mode mAssociatedValue1 ;
-  public : const GALGAS_routineTypedSignature mAssociatedValue2 ;
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue3 ;
-  public : const GALGAS_bool mAssociatedValue4 ;
+  public : const GALGAS_mode mAssociatedValue0 ;
+  public : const GALGAS_routineTypedSignature mAssociatedValue1 ;
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue2 ;
+  public : const GALGAS_bool mAssociatedValue3 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_function (const GALGAS_string & inAssociatedValue0,
-                                                    const GALGAS_mode & inAssociatedValue1,
-                                                    const GALGAS_routineTypedSignature & inAssociatedValue2,
-                                                    const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue3,
-                                                    const GALGAS_bool & inAssociatedValue4
+  public : cEnumAssociatedValues_typeKind_function (const GALGAS_mode & inAssociatedValue0,
+                                                    const GALGAS_routineTypedSignature & inAssociatedValue1,
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
+                                                    const GALGAS_bool & inAssociatedValue3
                                                     COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -2458,22 +2456,6 @@ class cEnumAssociatedValues_typeKind_function : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_typeKind_function (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_typeKind_pointer : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_pointer (const GALGAS_PLMType & inAssociatedValue0
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_pointer (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

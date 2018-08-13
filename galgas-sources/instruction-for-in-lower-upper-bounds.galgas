@@ -106,9 +106,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     error mTypeName : "an integer type is required here"
   case syncTool (*) :
     error mTypeName : "an integer type is required here"
-  case pointer (*) :
-    error mTypeName : "an integer type is required here"
-  case function (5*) :
+  case function (4*) :
     error mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions

@@ -343,8 +343,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_opaque,
     kEnum_arrayType,
     kEnum_dynamicArrayType,
-    kEnum_function,
-    kEnum_pointer
+    kEnum_function
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -383,11 +382,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static class GALGAS_typeKind constructor_enumeration (const class GALGAS_uint & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_function (const class GALGAS_string & inOperand0,
-                                                              const class GALGAS_mode & inOperand1,
-                                                              const class GALGAS_routineTypedSignature & inOperand2,
-                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                              const class GALGAS_bool & inOperand4
+  public : static class GALGAS_typeKind constructor_function (const class GALGAS_mode & inOperand0,
+                                                              const class GALGAS_routineTypedSignature & inOperand1,
+                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                              const class GALGAS_bool & inOperand3
                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
@@ -400,9 +398,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : static class GALGAS_typeKind constructor_opaque (const class GALGAS_bigint & inOperand0
                                                             COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_typeKind constructor_pointer (const class GALGAS_PLMType & inOperand0
-                                                             COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
@@ -436,11 +431,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_string & outArgument0,
-                                                  class GALGAS_mode & outArgument1,
-                                                  class GALGAS_routineTypedSignature & outArgument2,
-                                                  class GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
-                                                  class GALGAS_bool & outArgument4,
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_mode & outArgument0,
+                                                  class GALGAS_routineTypedSignature & outArgument1,
+                                                  class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
+                                                  class GALGAS_bool & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -454,10 +448,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_opaque (class GALGAS_bigint & outArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_pointer (class GALGAS_PLMType & outArgument0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyList & outArgument0,
                                                    C_Compiler * inCompiler
@@ -485,8 +475,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOpaque (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPointer (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticInteger (LOCATION_ARGS) const ;
 

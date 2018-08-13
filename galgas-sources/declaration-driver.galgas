@@ -400,7 +400,7 @@ override method @implementedDriverAST enterInContext
     !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
     !mode:.bootMode
     !isRequired:true
-    !.function {!executionMode:.bootMode}
+    !.function # {!executionMode:.bootMode}
     !warnIfUnused: true
     !exportedRoutine: false
     !.directPropertyAccess
@@ -415,7 +415,7 @@ override method @implementedDriverAST enterInContext
     !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
     !mode:.startupMode
     !isRequired:true
-    !.function {!executionMode:.startupMode}
+    !.function # {!executionMode:.startupMode}
     !warnIfUnused: true
     !exportedRoutine: false
     !.directPropertyAccess # @routineAttributes mRoutineAttributes
