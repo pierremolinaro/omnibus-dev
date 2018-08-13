@@ -3812,7 +3812,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 
 //----------- '' label
   public : virtual void nt_staticArray_5F_exp_ (GALGAS_ast & ioArgument0,
-                                                GALGAS_extendStaticListElementListAST & ioArgument1,
+                                                GALGAS_extendStaticListElementAST & ioArgument1,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'struct_property_declaration' non terminal

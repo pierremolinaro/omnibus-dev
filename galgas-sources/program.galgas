@@ -92,9 +92,19 @@ private proc compileProject
   end
   @ast ast = inAST
   @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
-#------------------------------------------------------------ Add static array extensions
-  for () in ast.mExtendStaticArrayDeclarationAST do
-  
+#------------------------------------------------------------ Enter extensions
+  ast.mDeclarationListAST = {}
+  for (declaration) in inAST.mDeclarationListAST do
+    [declaration enterExtension
+      !?ast.mExtendStaticArrayDeclarationAST
+      ?let newDeclaration
+    ]
+    ast.mDeclarationListAST += !newDeclaration
+  end
+  for (staticListName elementList) in ast.mExtendStaticArrayDeclarationAST do
+    for (element errorLocation) in elementList do
+      error errorLocation : "'" + staticListName + "' static list is not defined"
+    end
   end
 #------------------------------------------------------------ Add target specific files
   addTargetSpecificFiles (

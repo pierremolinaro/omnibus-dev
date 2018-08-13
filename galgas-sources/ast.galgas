@@ -11,6 +11,14 @@ abstract getter @abstractDeclarationAST locationForErrorSignaling -> @location
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @abstractDeclarationAST enterExtension
+  ?!@extendStaticArrayDeclarationDictAST unused ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration {
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @declarationListAST {
   @abstractDeclarationAST mDeclaration
 }
@@ -26,7 +34,7 @@ list @checkTargetListAST {
 
 struct @ast {
   @declarationListAST mDeclarationListAST
-  @extendStaticArrayDeclarationAST mExtendStaticArrayDeclarationAST
+  @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST
   @functionDeclarationListAST mStandaloneFunctionDeclarationListAST
   @requiredFunctionDeclarationListAST mRequiredFunctionListAST
   @externFunctionDeclarationListAST mExternFunctionListAST

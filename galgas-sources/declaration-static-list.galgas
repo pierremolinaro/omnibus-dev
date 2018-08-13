@@ -25,7 +25,8 @@ class @staticListAST : @abstractDeclarationAST {
 #·······················································································································
 
 list @staticListValueListAST {
-  @extendStaticListElementListAST mExpressions
+  @extendStaticListElementAST mElement
+  @location mLocation
 }
 
 #·······················································································································
@@ -37,16 +38,15 @@ enum @extendStaticListExpressionAST {
 
 #·······················································································································
 
-list @extendStaticListElementListAST {
+list @extendStaticListElementAST {
   @extendStaticListExpressionAST mExpression
   @location mEndOfExpression
 }
 
 #·······················································································································
 
-list @extendStaticArrayDeclarationAST {
-  @lstring mStaticListName
-  @extendStaticListElementListAST mExpressions
+dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
+  @staticListValueListAST mExpressions
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -121,13 +121,18 @@ syntax extension plm_syntax {
     $identifier$ ?let staticListName
     $($
     repeat
-      @extendStaticListElementListAST expressions = {}
+      @extendStaticListElementAST expressions = {}
       repeat
         <staticArray_exp> !?ioAST !?expressions
       while
         $,$
       end
-      ioAST.mExtendStaticArrayDeclarationAST += !staticListName !expressions
+      @staticListValueListAST expressionList = {}
+      if [ioAST.mExtendStaticArrayDeclarationAST hasKey !staticListName] then
+        [ioAST.mExtendStaticArrayDeclarationAST searchKey !staticListName ?expressionList]
+      end
+      expressionList += !expressions !.here
+      ioAST.mExtendStaticArrayDeclarationAST += !staticListName !expressionList
     while
       $::$
     end
@@ -136,7 +141,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <staticArray_exp> ?!@ast ioAST ?!@extendStaticListElementListAST ioExpressions {
+  rule <staticArray_exp> ?!@ast ioAST ?!@extendStaticListElementAST ioExpressions {
     select
       <expression> !?ioAST ?let exp
       ioExpressions += !.expression {!exp:exp} !.here
@@ -152,6 +157,26 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER EXTENSIONS                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @staticListAST enterExtension
+  ?!@extendStaticArrayDeclarationDictAST ioExtendStaticArrayDeclarationAST
+  !@abstractDeclarationAST outNewDeclaration
+{
+  if [ioExtendStaticArrayDeclarationAST hasKey !mStaticListName.string] then
+    [!?ioExtendStaticArrayDeclarationAST removeKey !mStaticListName.string ? let elements]
+    outNewDeclaration = @staticListAST.new {
+      !mStaticListName
+      !mPropertyList
+      !mValueList + elements
+    }
+  else
+    outNewDeclaration = self
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -176,7 +201,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
     end
   end
 #--- Add dependency edge for static type values declarations
-  for (value) in mValueList do
+  for (value *) in mValueList do
     for (operand *) in value do
       switch operand
       case expression (@expressionAST exp) :
@@ -340,9 +365,6 @@ override method @staticListAST enterInContext
         !.userMode
       ]
     #--- Generate glue function
-#      routineTypedSignature !?ioContext.mTypeMap !
-#                           ?let @routineFormalArgumentListAST inFormalArgumentList
-#                           !@routineTypedSignature outSignature
       ioRoutineListIR += !@staticListIndirectRoutineIR.new {
         !routineLLVMName
         !true
@@ -375,14 +397,14 @@ override method @staticListAST enterInContext
   ]
 #-------------------------------------------------------------------- Enter static list values
   @stringlist stringValueList = {}
-  for value in mValueList do
-    if [propertyList length] != [value.mExpressions length] then
+  for (element *) in mValueList do
+    if [propertyList length] != [element length] then
       error mStaticListName
       : [[propertyList length] string] + " expressions required, "
-      + [[value.mExpressions length] string] + " provided"
+      + [[element length] string] + " provided"
     else
       var staticValue = "{"
-      for (operand endOfExp) in value.mExpressions, (* type) in propertyList do
+      for (operand endOfExp) in element, (* type) in propertyList do
         switch operand
         case expression (@expressionAST exp) :
           if [type.kind isFunction] then
@@ -547,8 +569,8 @@ override method @decoratedStaticList semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   @stringset invokedFunctionSet = {}
-  for value in mValueList do
-    for (operand endOfExp) in value.mExpressions do
+  for (element *) in mValueList do
+    for (operand endOfExp) in element do
       switch operand
       case expression (@expressionAST unused exp) :
       case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
@@ -609,8 +631,8 @@ class @staticListIndirectRoutineIR : @abstractRoutineIR {
 #·······················································································································
 
 override method @staticListIndirectRoutineIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
-   ?!@uint ioMaxBranchOfOnInstructions
+   ?!@stringset unused ioInvokedRoutineSet
+   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }
 

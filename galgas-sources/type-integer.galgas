@@ -807,7 +807,6 @@ proc generateLLVMCodeForIntegerType
 #    !LLVMTypeName:llvmTypeName
 #    !llvmOperator:if inIsSigned then "sge" else "uge" end
 #  )
-  ioLLVMcode += llvmSeparatorLine () + "\n"
   ioLLVMcode += "define internal void @plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName
   ioLLVMcode += " (" + llvmTypeName + "* %outTarget, " + llvmTypeName + "* %inSource) {\n"
   ioLLVMcode += ";--- Compute type size\n"
