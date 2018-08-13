@@ -100,6 +100,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
+  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -141,6 +142,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -155,6 +157,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext
     !mode:inCurrentMode
+    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

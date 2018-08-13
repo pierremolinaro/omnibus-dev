@@ -295,6 +295,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:mode
+      !safe: isSafe
       !isRequired:false
       !system.mRoutineKind # .function {!executionMode: mode}
       !warnIfUnused: not noUnusedWarning

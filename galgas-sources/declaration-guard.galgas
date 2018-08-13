@@ -251,6 +251,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
       !context:inContext
       !mode:.guardMode
+      !safe: false
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
@@ -283,6 +284,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !routineAttributes: .mutating | .directPropertyAccess | .panicAllowed
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
+      !safe: false
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap

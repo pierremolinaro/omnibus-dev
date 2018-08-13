@@ -1618,6 +1618,8 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_mode mProperty_mode ;
 
+  public : GALGAS_bool mProperty_safe ;
+
   public : GALGAS_bool mProperty_isRequired ;
 
   public : GALGAS_routineKind mProperty_mRoutineKind ;
@@ -1653,6 +1655,7 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_decoratedRegularRoutineList_2D_element (const GALGAS_lstring & in_receiverTypeName,
                                                           const GALGAS_mode & in_mode,
+                                                          const GALGAS_bool & in_safe,
                                                           const GALGAS_bool & in_isRequired,
                                                           const GALGAS_routineKind & in_mRoutineKind,
                                                           const GALGAS_bool & in_warnIfUnused,
@@ -1679,16 +1682,17 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_decoratedRegularRoutineList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                        const class GALGAS_mode & inOperand1,
                                                                                        const class GALGAS_bool & inOperand2,
-                                                                                       const class GALGAS_routineKind & inOperand3,
-                                                                                       const class GALGAS_bool & inOperand4,
+                                                                                       const class GALGAS_bool & inOperand3,
+                                                                                       const class GALGAS_routineKind & inOperand4,
                                                                                        const class GALGAS_bool & inOperand5,
-                                                                                       const class GALGAS_routineAttributes & inOperand6,
-                                                                                       const class GALGAS_lstring & inOperand7,
-                                                                                       const class GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                                       const class GALGAS_bool & inOperand9,
-                                                                                       const class GALGAS_instructionListAST & inOperand10,
-                                                                                       const class GALGAS_location & inOperand11,
-                                                                                       const class GALGAS_lstring & inOperand12
+                                                                                       const class GALGAS_bool & inOperand6,
+                                                                                       const class GALGAS_routineAttributes & inOperand7,
+                                                                                       const class GALGAS_lstring & inOperand8,
+                                                                                       const class GALGAS_routineFormalArgumentListAST & inOperand9,
+                                                                                       const class GALGAS_bool & inOperand10,
+                                                                                       const class GALGAS_instructionListAST & inOperand11,
+                                                                                       const class GALGAS_location & inOperand12,
+                                                                                       const class GALGAS_lstring & inOperand13
                                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1724,6 +1728,8 @@ class GALGAS_decoratedRegularRoutineList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_receiverTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_returnTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_safe (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_warnIfUnused (LOCATION_ARGS) const ;
 

@@ -199,6 +199,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
     ioDecoratedRoutineList +=
       !receiverTypeName: ["" nowhere]
       !mode:function.mMode
+      !safe: isSafe
       !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
       !.function
       !warnIfUnused: warnIfUnused
@@ -301,6 +302,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:function.mMode
+      !safe: safe
       !isRequired: false
       !.function
       !warnIfUnused: warnIfUnused

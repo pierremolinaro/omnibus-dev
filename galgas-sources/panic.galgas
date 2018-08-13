@@ -157,6 +157,7 @@ override method @panicAST enterInContext
   ioDecoratedRoutineList +=
     !receiverTypeName: ["" nowhere] # Empty string if standalone function
     !mode:.panicMode
+    !safe: true
     !isRequired:false
     !.function # {!executionMode:.panicMode}
     !warnIfUnused: false

@@ -287,6 +287,7 @@ method @taskListAST enterInContext
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
         !mode:.userMode
+        !safe: false
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true
@@ -304,6 +305,7 @@ method @taskListAST enterInContext
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
         !mode:.userMode
+        !safe: false
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused:true
@@ -321,6 +323,7 @@ method @taskListAST enterInContext
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
         !mode:.userMode
+        !safe: false
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true
@@ -344,6 +347,7 @@ method @taskListAST enterInContext
     ioDecoratedRoutineList +=
       !receiverTypeName: task.mTaskName
       !mode:.userMode
+      !safe: false
       !isRequired:true
       !.function # {!executionMode:.userMode}
       !warnIfUnused: true
