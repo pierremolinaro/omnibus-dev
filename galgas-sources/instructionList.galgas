@@ -62,7 +62,6 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 
 boolset @routineAttributes {
   mutating,
-  directPropertyAccess,
   guard,
   controlRegisterReadable
 }

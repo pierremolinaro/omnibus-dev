@@ -271,7 +271,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
     case function :
       error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
     end
-    @routineAttributes attributes = .mutating | .directPropertyAccess | .controlRegisterReadable
+    let @routineAttributes attributes = .mutating | .controlRegisterReadable
   #--- Enter in routine map
     let @routineLLVMNameDict routineLLVMNameDict = [mode routineLLVMDictionaryForSystemRoutine
       !userRoutineMangledName

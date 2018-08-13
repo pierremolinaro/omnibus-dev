@@ -404,7 +404,7 @@ override method @implementedDriverAST enterInContext
     !.function
     !warnIfUnused: true
     !exportedRoutine: false
-    !.directPropertyAccess
+    !.none
     !llvmBootRoutineNameFromDriver (!mDriverName)
     !{}
     !true # warningOnUnusedArgs
@@ -420,7 +420,7 @@ override method @implementedDriverAST enterInContext
     !.function
     !warnIfUnused: true
     !exportedRoutine: false
-    !.directPropertyAccess # @routineAttributes mRoutineAttributes
+    !.none
     !llvmStartupRoutineNameFromDriver (!mDriverName)
     !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
     !true # warningOnUnusedArgs

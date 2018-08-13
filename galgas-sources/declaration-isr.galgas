@@ -67,7 +67,7 @@ method @isrDeclarationListAST enterInContext
       !.function # {!executionMode: isr.mMode}
       !warnIfUnused: true
       !exportedRoutine: false
-      !.mutating | .directPropertyAccess | .controlRegisterReadable
+      !.mutating | .controlRegisterReadable
       !isrRoutineMangledName
       !{}
       !true # warningOnUnusedArgs

@@ -293,7 +293,7 @@ method @taskListAST enterInContext
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true
         !exportedRoutine: false
-        !.mutating | .directPropertyAccess
+        !.mutating
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
         !true # warningOnUnusedArgs
@@ -311,7 +311,7 @@ method @taskListAST enterInContext
         !.function # {!executionMode:.userMode}
         !warnIfUnused:true
         !exportedRoutine: false
-        !.mutating | .directPropertyAccess
+        !.mutating
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
         !true # warningOnUnusedArgs
@@ -329,7 +329,7 @@ method @taskListAST enterInContext
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true
         !exportedRoutine: false
-        !.mutating | .directPropertyAccess
+        !.mutating
         !.new {!mangledName !setup.mName.location}
         !@routineFormalArgumentListAST {}
         !true # warningOnUnusedArgs
@@ -353,7 +353,7 @@ method @taskListAST enterInContext
       !.function # {!executionMode:.userMode}
       !warnIfUnused: true
       !exportedRoutine: false
-      !.mutating | .directPropertyAccess
+      !.mutating
       !routineMangledName # .new {!llvmNameForTaskLoopFunction () !task.mTaskName.location} # @lstring mRoutineMangledName
       !{} #@routineFormalArgumentListAST mRoutineFormalArgumentList
       !true # warningOnUnusedArgs

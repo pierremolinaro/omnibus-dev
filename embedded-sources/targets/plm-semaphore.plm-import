@@ -27,7 +27,7 @@ sync $semaphore {
 
   //····················································································································
 
-  public func wait @user @noUnusedWarning @mutating (?until: inDeadline $uint32) -> $bool {
+  public func wait @noUnusedWarning @mutating (?until: inDeadline $uint32) -> $bool {
      sync{
      on self.wait () exit : result = yes
      on time.wait (!until: inDeadline) exit : result = no

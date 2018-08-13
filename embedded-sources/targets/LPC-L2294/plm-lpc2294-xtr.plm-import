@@ -111,7 +111,7 @@ driver time {
 
   //············································································
 
-  public func user wait @noUnusedWarning @mutating @user (?during: inDelay $uint32) {
+  public func user wait @noUnusedWarning @mutating (?during: inDelay $uint32) {
     self.wait (!until:self.now () + inDelay)
   }
 

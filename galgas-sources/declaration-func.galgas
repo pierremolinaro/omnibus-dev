@@ -204,7 +204,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !.function
       !warnIfUnused: warnIfUnused
       !exportedRoutine: exportedFunction
-      !.directPropertyAccess # @routineAttributes mRoutineAttributes
+      !.none
       !functionLLVMName
       !function.mFunctionFormalArgumentList
       !true # warningOnUnusedArgs
@@ -252,11 +252,6 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
           error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
         end
         warnIfUnused = false    
-      elsif attribute.string == userAccessAttribute () then
-        if [functionAttributes directPropertyAccess] then
-          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes | .directPropertyAccess   
       elsif attribute.string == safeAttribute () then
         if safe then
           error attribute : "duplicated @" + safeAttribute () + " attribute"
@@ -269,7 +264,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
         functionAttributes = functionAttributes | .mutating    
       else
         error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
-          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
+          + " and @" + mutatingAttribute ()
       end
     end
   #--- Enter in routine map

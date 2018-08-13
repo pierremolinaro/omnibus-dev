@@ -1732,8 +1732,6 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
 
   public : static class GALGAS_routineAttributes constructor_controlRegisterReadable (LOCATION_ARGS) ;
 
-  public : static class GALGAS_routineAttributes constructor_directPropertyAccess (LOCATION_ARGS) ;
-
   public : static class GALGAS_routineAttributes constructor_guard (LOCATION_ARGS) ;
 
   public : static class GALGAS_routineAttributes constructor_mutating (LOCATION_ARGS) ;
@@ -1775,8 +1773,6 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_controlRegisterReadable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_directPropertyAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_guard (LOCATION_ARGS) const ;
 
@@ -7033,15 +7029,6 @@ void routine_routineTypedSignature (class GALGAS_unifiedTypeMap & ioArgument0,
                                     class GALGAS_routineTypedSignature & outArgument2,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Function 'userAccessAttribute'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
