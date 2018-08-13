@@ -361,129 +361,13 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       !?instructionListIR:ioInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
     )
-  #--- New LLVM variable for function call result
-#    getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
   #--- Generate call
-#    let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].llvmBaseTypeName !inMethodName !inArguments)
     ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
       !.void
       !methodMangledName
       !functionLLVMName
       !effectiveParameterListIR
     }
-
-
-
-
-
-#    let propertyMap = currentObjectPropertyMap # ????
-#    let key = routineMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
-#    [propertyMap searchKey !key ?* ?let @propertyAccessKind propertyAccess]
-#    switch propertyAccess
-#    case constantProperty (*) :
-#      error methodName : "a constant cannot be used as method"
-#    case nonVirtualMethod (@routineDescriptor routineDescriptor) :
-#    #--- Add receiver as first parameter
-#      @procCallEffectiveParameterListIR effectiveParameterListIR = {
-#        !.outputInput
-#        !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-#      }
-#    #---
-#      let routineKind = routineDescriptor.routineKind
-#      let calleeMode = [routineKind executionMode]
-#      let formalSignature = routineDescriptor.signature
-#    #--- If method mutates its properties, check it is allowed 
-#    #    note that mIdentifier.string is empty string if call instruction is self. ...
-#      if (mIdentifier.string == "") && routineDescriptor.canMutateProperties && not [inRoutineAttributes mutating] then
-#        error methodName
-#        : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
-#      end
-#    #--- Check routine is actually a procedure (does not return any value)
-#      if routineDescriptor.returnTypeProxy != .null then
-#        error methodName : "not a procedure (returns a value)"
-#      else
-#      #--- Check modes
-#        let calleeKind = checkMode (
-#          !callerMode:inMode
-#          !calleeMode:calleeMode
-#          !kind:routineKind
-#          !error:methodName.location
-#        )
-#      #--- Analyze effective parameters
-#        analyzeEffectiveParameters (
-#          !self:inSelfType
-#          !routineAttributes:inRoutineAttributes
-#          !formal:formalSignature
-#          !effective:mArguments
-#          !errorLocation:methodName.location
-#          !context:inContext
-#          !requiredMode:inMode
-#          !?temporary:ioTemporaries
-#          !?staticEntityMap:ioStaticEntityMap
-#          !?variableMap:ioUniversalMap
-#          !?alloca:ioAllocaList
-#          !?instructionListIR:ioInstructionGenerationList
-#          !?effectiveIR:effectiveParameterListIR
-#        )
-#      #--- Get function name and map containing the function definition
-#        let routineMangledName = routineMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
-#      #--- Code generation
-#        ioInstructionGenerationList += !@standaloneRoutineCallIR_EX.new {
-##          !mIdentifier
-#          !.void # No result
-#          !routineMangledName
-#          !routineDescriptor.nameForLLVMGeneration # routineMangledName
-#          !calleeKind
-#          !effectiveParameterListIR
-#        }
-#      end
-#    case singleton  (* errorLocation) :
-#      error errorLocation : "a property cannot be used as method"
-#    case indexed  (@PLMType propertyType @uint propertyIndex) :
-#      if not [propertyType.kind isFunction] then
-#        error methodName : "an indexed property cannot be used as method"
-#      else
-#        [propertyType.kind function ?descriptor:let descriptor]
-#      #--- Check routine is actually a function
-#        if descriptor.returnTypeProxy != .null then
-#          error methodName : "a function returns a value and cannot be called as a procedure"
-#        else
-#        #--- Analyze effective parameters
-#          @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#          analyzeEffectiveParameters (
-#            !self:inSelfType
-#            !routineAttributes:inRoutineAttributes
-#            !formal:descriptor.signature
-#            !effective:mArguments
-#            !errorLocation:methodName.location
-#            !context:inContext
-#            !requiredMode:inMode
-#            !?temporary:ioTemporaries
-#            !?staticEntityMap:ioStaticEntityMap
-#            !?variableMap:ioUniversalMap
-#            !?alloca:ioAllocaList
-#            !?instructionListIR:ioInstructionGenerationList
-#            !?effectiveIR:effectiveParameterListIR
-#          )
-#        #--- Load routine reference
-#          [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
-#          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-#            !currentType
-#            !currentLLVMAddressVar
-#            !property_llvmName
-#            !propertyIndex
-#            !methodName
-#          ]
-#        #--- Code generation
-#          ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-#            !.reference {!type:propertyType !llvmName:property_llvmName}
-#            !propertyType
-#            !.void # Function does not return any value
-#            !effectiveParameterListIR
-#          }
-#        end
-#      end
-#    end
   end
 }
 
@@ -502,18 +386,6 @@ enum @procEffectiveParameterPassingModeIR {
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
   @objectIR mParameter
-}
-
-#·······················································································································
-
-enum @calleeKindIR {
-  case function
-  case primitiveFromProcessorUserMode
-  case sectionFromProcessorUserMode
-  case serviceFromProcessorUserMode
-  case primitiveFromProcessorPrivilegedMode
-  case sectionFromProcessorPrivilegedMode
-  case serviceFromProcessorPrivilegedMode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

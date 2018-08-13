@@ -69,66 +69,6 @@ getter @mode routineLLVMDictionaryForSystemRoutine
   end
 }
 
-#·······················································································································
-
-func checkMode
-  ?callerMode:let @mode inCallerMode
-  ?calleeMode:let @mode inCalleeMode
-  ?kind:let @routineKind inRoutineKind
-  ?error:let @location inErrorLocation
-  -> @calleeKindIR outResult
-{
-  switch inRoutineKind
-  case section :
-    if inCallerMode == .userMode then
-      outResult = .sectionFromProcessorUserMode
-    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .sectionMode) || (inCallerMode == .startupMode) || (inCallerMode == .guardMode) then
-      outResult = .sectionFromProcessorPrivilegedMode
-    else
-      error inErrorLocation : "a section cannot be called from " + inCallerMode + " mode" : outResult
-    end
-  case primitive :
-    if inCallerMode == .userMode then
-      outResult = .primitiveFromProcessorUserMode
-    else
-      error inErrorLocation : "a primitive cannot be called from " + inCallerMode + " mode" : outResult
-    end
-  case service :
-    if inCallerMode == .userMode then
-      outResult = .serviceFromProcessorUserMode
-    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .serviceMode) || (inCallerMode == .guardMode) then
-      outResult = .serviceFromProcessorPrivilegedMode
-    else
-      error inErrorLocation : "a service cannot be called from " + inCallerMode + " mode" : outResult
-    end
-  case function (*) :
-    var ok = inCallerMode == inCalleeMode
-    if not ok then
-      switch inCallerMode
-      case userMode :
-        ok = inCalleeMode == .anyMode
-      case sectionMode :
-        ok = inCalleeMode == .anyMode
-      case serviceMode :
-        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .anyMode)
-      case primitiveMode :
-        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .anyMode)
-      case guardMode :
-        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .anyMode)
-      case panicMode, startupMode :
-        ok = (inCalleeMode == .anyMode)
-      case bootMode :
-      case anyMode :
-      end
-    end
-    if not ok then
-      error inErrorLocation
-      : "a func " + inCalleeMode + " cannot be called from " + inCallerMode + " mode"
-    end
-    outResult = .function
-  end
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @mode controlRegisterAccess ?let @bool inIsAccessibleInUserMode -> @bool {
