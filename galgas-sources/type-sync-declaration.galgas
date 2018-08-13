@@ -155,7 +155,6 @@ override method @syncDeclarationAST enterInContext
   [mSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName: mSyncToolName
     !receiverLLVMBaseTypeName: mSyncToolName
-    !?propertyMap: propertyMap
     !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList

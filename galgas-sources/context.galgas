@@ -197,7 +197,6 @@ proc buildSemanticContext
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName:["" nowhere] # Empty string if standalone
     !receiverLLVMBaseTypeName:""  # Empty string if standalone
-    !?propertyMap: * 
     !?routineMap: routineMapCTXT
     !?context: outSemanticContext
     !?outDecoratedRoutineList

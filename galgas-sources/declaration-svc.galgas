@@ -189,7 +189,6 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
 method @systemRoutineDeclarationListAST enterSystemRoutineInContext
   ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
-  ?!propertyMap: @propertyMap ioPropertyMap
   ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList

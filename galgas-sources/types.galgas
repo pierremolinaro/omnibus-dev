@@ -48,14 +48,14 @@ getter @PLMType llvmTypeName -> @string {
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case dynamicArrayType (*) :
     result = "%ptrtype" # "i" + ptrSize
-  case function (@routineDescriptor descriptor) :
-    if descriptor.returnTypeProxy == .null then
+  case function (2* signature returnTypeProxy *) :
+    if returnTypeProxy == .null then
       result = "void"
     else
-      result = [[descriptor.returnTypeProxy type] llvmTypeName]
+      result = [[returnTypeProxy type] llvmTypeName]
     end
     result += "("
-    for () in descriptor.signature 
+    for () in signature 
     do
       result += [[mTypeProxy type] llvmTypeName]
       switch mFormalArgumentPassingMode
@@ -84,7 +84,11 @@ enum @typeKind {
   case opaque (@bigint bitCount)
   case arrayType (@PLMType elementType @bigint size)
   case dynamicArrayType (@PLMType elementType)
-  case function (@routineDescriptor descriptor)
+  case function (@string name
+                 @mode mode
+                 @routineTypedSignature signature
+                 @unifiedTypeMap-proxy returnTypeProxy
+                 @bool safe)
   case pointer (@PLMType pointee)
   default void
 }
@@ -139,19 +143,19 @@ func voidType -> @PLMType {
 
 #·······················································································································
 
-func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
-  result = .new{
-    !propertyMap:{}
-    !routineMap: {}
-    !classConstantMap:{}
-    !constructorMap:{}
-    !guardMap:{}
-    !attributes:.none
-    !plmTypeDescriptionName:""
-    !kind:.function {!descriptor:inDescriptor}
-    !llvmBaseTypeName:""
-  }
-}
+#func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
+#  result = .new{
+#    !propertyMap:{}
+#    !routineMap: {}
+#    !classConstantMap:{}
+#    !constructorMap:{}
+#    !guardMap:{}
+#    !attributes:.none
+#    !plmTypeDescriptionName:""
+#    !kind:.function {!descriptor:inDescriptor}
+#    !llvmBaseTypeName:""
+#  }
+#}
 
 #·······················································································································
 
@@ -311,7 +315,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Static array"
   case dynamicArrayType (*) :
     result = "Dynamic array"
-  case function (*) :
+  case function (5*) :
     result = "Function"
   case pointer (pointee) :
     result = "Pointer to " + [pointee llvmTypeName]
@@ -362,7 +366,7 @@ getter @PLMType defaultAlignment -> @uint{
     result = [elementType defaultAlignment]
   case dynamicArrayType (*) :
     result = 4
-  case function (*) :
+  case function (5*) :
     result = 4
   case pointer (*) :
     result = 4
@@ -504,7 +508,7 @@ method @PLMType generateLLVMTypeDefinition
   case arrayType (elementType arraySize) :
     ioLLVMcode += [self llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
   case dynamicArrayType (*) :
-  case function (*) :
+  case function (5*) :
   case pointer (unused pointee) :
   end
 }
@@ -583,7 +587,7 @@ proc declareLLVMTypes
         !?ioGenerationAdds
         !type
       )
-    case function (*) :
+    case function (5*) :
     case pointer (unused pointee) :
     end
   end

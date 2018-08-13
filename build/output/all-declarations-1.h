@@ -383,7 +383,11 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static class GALGAS_typeKind constructor_enumeration (const class GALGAS_uint & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_function (const class GALGAS_routineDescriptor & inOperand0
+  public : static class GALGAS_typeKind constructor_function (const class GALGAS_string & inOperand0,
+                                                              const class GALGAS_mode & inOperand1,
+                                                              const class GALGAS_routineTypedSignature & inOperand2,
+                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                              const class GALGAS_bool & inOperand4
                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
@@ -432,7 +436,11 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_routineDescriptor & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_string & outArgument0,
+                                                  class GALGAS_mode & outArgument1,
+                                                  class GALGAS_routineTypedSignature & outArgument2,
+                                                  class GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
+                                                  class GALGAS_bool & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 

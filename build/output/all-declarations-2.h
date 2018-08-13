@@ -2314,92 +2314,6 @@ class cPtr_taskActivateFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @routineDescriptor struct                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_routineDescriptor : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public : GALGAS_string mProperty_name ;
-
-  public : GALGAS_mode mProperty_mode ;
-
-  public : GALGAS_routineTypedSignature mProperty_signature ;
-
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_returnTypeProxy ;
-
-  public : GALGAS_bool mProperty_safe ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_routineDescriptor (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_routineDescriptor (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_routineDescriptor (const GALGAS_string & in_name,
-                                     const GALGAS_mode & in_mode,
-                                     const GALGAS_routineTypedSignature & in_signature,
-                                     const GALGAS_unifiedTypeMap_2D_proxy & in_returnTypeProxy,
-                                     const GALGAS_bool & in_safe) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_routineDescriptor extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_routineDescriptor constructor_new (const class GALGAS_string & inOperand0,
-                                                                  const class GALGAS_mode & inOperand1,
-                                                                  const class GALGAS_routineTypedSignature & inOperand2,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                  const class GALGAS_bool & inOperand4
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_routineDescriptor & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_name (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_returnTypeProxy (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_safe (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineTypedSignature getter_signature (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_routineDescriptor class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineDescriptor ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                          @typeKind enum, associated values                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2525,10 +2439,18 @@ class cEnumAssociatedValues_typeKind_dynamicArrayType : public cEnumAssociatedVa
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cEnumAssociatedValues_typeKind_function : public cEnumAssociatedValues {
-  public : const GALGAS_routineDescriptor mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
+  public : const GALGAS_mode mAssociatedValue1 ;
+  public : const GALGAS_routineTypedSignature mAssociatedValue2 ;
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue3 ;
+  public : const GALGAS_bool mAssociatedValue4 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_function (const GALGAS_routineDescriptor & inAssociatedValue0
+  public : cEnumAssociatedValues_typeKind_function (const GALGAS_string & inAssociatedValue0,
+                                                    const GALGAS_mode & inAssociatedValue1,
+                                                    const GALGAS_routineTypedSignature & inAssociatedValue2,
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue3,
+                                                    const GALGAS_bool & inAssociatedValue4
                                                     COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -7376,7 +7298,6 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_systemRoutin
 void extensionMethod_enterSystemRoutineInContext (const class GALGAS_systemRoutineDeclarationListAST inObject,
                                                   const class GALGAS_lstring constin_inReceiverTypeName,
                                                   const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
-                                                  class GALGAS_propertyMap & io_ioPropertyMap,
                                                   class GALGAS_routineMapCTXT & io_ioRoutineMapCTXT,
                                                   class GALGAS_semanticContext & io_ioContext,
                                                   class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,

@@ -9,16 +9,6 @@ enum @routineKind {
 
 #·······················································································································
 
-struct @routineDescriptor {
-  @string name %selector
-  @mode mode %selector
-  @routineTypedSignature signature %selector
-  @unifiedTypeMap-proxy returnTypeProxy %selector # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
-  @bool safe %selector # Routine is declared with @safe attribute
-}
-
-#·······················································································································
-
 func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
                                ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring

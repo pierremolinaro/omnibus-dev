@@ -346,7 +346,6 @@ override method @structureDeclarationAST enterInContext
   [mSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName: mReceiverTypeName
     !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-    !?propertyMap: propertyMap
     !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList

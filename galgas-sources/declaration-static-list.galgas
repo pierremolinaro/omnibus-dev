@@ -320,15 +320,24 @@ override method @staticListAST enterInContext
       else
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
-    #--- Enter routine type in 
-      let descriptor = @routineDescriptor.new {
-        !name:propertyName
-        !mode:mode
-        !signature:signature
-        !returnTypeProxy:returnTypeProxy 
-        !safe:safe # Routine is declared with @safe attribute
+    #--- Enter routine type in type map
+      let type = @PLMType.new{
+        !propertyMap:{}
+        !routineMap: {}
+        !classConstantMap:{}
+        !constructorMap:{}
+        !guardMap:{}
+        !attributes:.none
+        !plmTypeDescriptionName:""
+        !kind:.function {
+          !name:propertyName
+          !mode:mode
+          !signature:signature
+          !returnTypeProxy:returnTypeProxy 
+          !safe:safe
+        }
+        !llvmBaseTypeName:""
       }
-      let type = functionType (!descriptor)
       if not [ioContext.mTypeMap hasKey !routineLLVMName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineLLVMName
@@ -434,7 +443,13 @@ override method @staticListAST enterInContext
           if not [type.kind isFunction] then
             error endOfExp : "a static expression is expected here"
           else
-            [type.kind function ?descriptor:let descriptor]
+            [type.kind function
+              ?name:let name
+              ?mode:let mode
+              ?signature:let functionSignature
+              ?returnTypeProxy:let functionReturnTypeProxy
+              ?safe: let safe
+            ]
             let argumentSignature = [formalArgs routineSignature !functionName]
             let functionMangledName = @lstring.new {!functionName.string + argumentSignature !functionName}
             [ioContext.mRoutineMap searchKey
@@ -463,17 +478,17 @@ override method @staticListAST enterInContext
             else
               error functionName : "the function should be callable from user mode" :routineLLVMName
             end
-            if (descriptor.returnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
+            if (functionReturnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
-            elsif (descriptor.returnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
+            elsif (functionReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
               error functionName : "this function should return no object"
             end
-            if [descriptor.signature length] != [candidateSignature length] then
+            if [functionSignature length] != [candidateSignature length] then
               error functionName
               : "this function has " + [candidateSignature length] + " argument(s) ("
-              + [descriptor.signature length] + " required)"
+              + [functionSignature length] + " required)"
             else
-              for required in descriptor.signature, candidate in candidateSignature do
+              for required in functionSignature, candidate in candidateSignature do
                 if required.mTypeProxy != candidate.mTypeProxy then
                   error candidate.mSelector : "argument type should be $" + [required.mTypeProxy key]
                 end
