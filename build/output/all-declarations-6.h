@@ -1992,7 +1992,7 @@ void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap i
 
 void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjectMap inObject,
                                          const class GALGAS_lstring constin_inValuedObjectName,
-                                         const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                         const class GALGAS_mode constin_inMode,
                                          const class GALGAS_stringset constin_inInitializedDriverSet,
                                          class GALGAS_objectIR & out_outObjectIR,
                                          class C_Compiler * inCompiler

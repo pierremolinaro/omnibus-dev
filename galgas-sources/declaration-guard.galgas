@@ -387,7 +387,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   else
     [ioUniversalMap searchValuedObject
       !mIdentifier
-      !inRoutineAttributes
+      !inMode
       !ioTemporaries.mInitializedDriverSet
       ?currentObject
     ]

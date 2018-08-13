@@ -257,29 +257,16 @@ override method @syncInstructionAST instructionSemanticAnalysis
           )
         end
       elsif [nameList length] == 1 then # Standalone guard: g (…)
-        error [nameList mValueAtIndex !0] : "Standalone guard are not handled" : guardMangledName, guardEffectiveParameterListIR
-#        analyzeStandaloneGuardCall (
-#          !self:inSelfType
-#          !routineAttributes:inRoutineAttributes
-#          !guardName:[nameList mValueAtIndex !0]
-#          !effective:parameterList
-#          !context:inContext
-#          !requiredMode:inMode
-#          !?temporary:ioTemporaries
-#          !?staticEntityMap:ioStaticEntityMap
-#          !?variableMap:ioUniversalMap
-#          !?alloca:ioAllocaList
-#          !?instructionListIR:guardInstructionGenerationList
-#          ?effectiveIR:guardEffectiveParameterListIR
-#          ?guardMangledName: guardMangledName
-#        )
+        error [nameList mValueAtIndex !0]
+        : "Standalone guard are not handled"
+        : guardMangledName, guardEffectiveParameterListIR
       else # Global variable method, or driver method: g.h. … (…)
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
         [!?propertyList popLast ?let guardName]
         [ioUniversalMap searchValuedObject
           !globalReceiverName
-          !inRoutineAttributes
+          !inMode
           !ioTemporaries.mInitializedDriverSet
           ?var currentObjectIR
         ]

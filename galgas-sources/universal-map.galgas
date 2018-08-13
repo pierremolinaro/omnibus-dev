@@ -153,20 +153,20 @@ method @universalValuedObjectMap searchEntity
 
 method @universalValuedObjectMap searchValuedObject
   ?let @lstring inValuedObjectName
-  ?let @routineAttributes inRoutineAttributes
+  ?let @mode inMode
   ?let @stringset inInitializedDriverSet
   !@objectIR outObjectIR
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
   case task (@PLMType type) :
-    if [inRoutineAttributes boot] then
+    if inMode == .bootMode then
       error inValuedObjectName : "cannot call a task entry in a boot routine" : outObjectIR
     else
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     end
   case driver (@PLMType type instancied) :
-    if [inRoutineAttributes boot] then
+    if inMode == .bootMode then
       error inValuedObjectName : "cannot call a driver in a boot routine" : outObjectIR
     elsif not instancied then
       error inValuedObjectName : "the driver should be instancied" : outObjectIR

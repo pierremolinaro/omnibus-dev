@@ -4934,7 +4934,7 @@ GALGAS_routineAttributes GALGAS_routineAttributes::constructor_none (UNUSED_LOCA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineAttributes GALGAS_routineAttributes::constructor_all (UNUSED_LOCATION_ARGS) {
-  return GALGAS_routineAttributes ((uint64_t) 0x1F) ;
+  return GALGAS_routineAttributes ((uint64_t) 0xF) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4957,14 +4957,8 @@ GALGAS_routineAttributes GALGAS_routineAttributes::constructor_guard (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineAttributes GALGAS_routineAttributes::constructor_boot (UNUSED_LOCATION_ARGS) {
-  return GALGAS_routineAttributes (((uint64_t) 1) << 3) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_routineAttributes GALGAS_routineAttributes::constructor_controlRegisterReadable (UNUSED_LOCATION_ARGS) {
-  return GALGAS_routineAttributes (((uint64_t) 1) << 4) ;
+  return GALGAS_routineAttributes (((uint64_t) 1) << 3) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5044,7 +5038,7 @@ GALGAS_routineAttributes GALGAS_routineAttributes::substract_operation (const GA
 GALGAS_routineAttributes GALGAS_routineAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
   GALGAS_routineAttributes result ;
   if (mIsValid) {
-    result = GALGAS_routineAttributes (((uint64_t) 0x1F) ^ mFlags) ;
+    result = GALGAS_routineAttributes (((uint64_t) 0xF) ^ mFlags) ;
   }
   return result ;
 }
@@ -5067,9 +5061,6 @@ void GALGAS_routineAttributes::description (C_String & ioString,
       ioString << " guard" ;
     }
     if ((mFlags & ((uint64_t) 1) << 3) != 0) {
-      ioString << " boot" ;
-    }
-    if ((mFlags & ((uint64_t) 1) << 4) != 0) {
       ioString << " controlRegisterReadable" ;
     }
   }
@@ -5091,7 +5082,7 @@ GALGAS_bool GALGAS_routineAttributes::getter_none (UNUSED_LOCATION_ARGS) const {
 GALGAS_bool GALGAS_routineAttributes::getter_all (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool (mFlags == (uint64_t) 0x1F) ;
+    result = GALGAS_bool (mFlags == (uint64_t) 0xF) ;
   }
   return result ;
 }
@@ -5128,20 +5119,10 @@ GALGAS_bool GALGAS_routineAttributes::getter_guard (UNUSED_LOCATION_ARGS) const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_routineAttributes::getter_boot (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (mIsValid) {
-    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 3) != 0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_bool GALGAS_routineAttributes::getter_controlRegisterReadable (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 4) != 0) ;
+    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 3) != 0) ;
   }
   return result ;
 }

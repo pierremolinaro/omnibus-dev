@@ -64,7 +64,6 @@ boolset @routineAttributes {
   mutating,
   directPropertyAccess,
   guard,
-  boot,
   controlRegisterReadable
 }
 

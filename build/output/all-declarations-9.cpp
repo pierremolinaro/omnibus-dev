@@ -6219,29 +6219,29 @@ static void extensionMethod_procedureCallInstructionAST_baseGuardAnalyze (const 
       var_currentObject_14763 = GALGAS_objectIR::constructor_reference (constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 385))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 385)) ;
     }
   }else if (kBoolFalse == test_0) {
-    extensionMethod_searchValuedObject (ioArgument_ioUniversalMap, object->mProperty_mIdentifier, constinArgument_inRoutineAttributes, ioArgument_ioTemporaries.getter_mInitializedDriverSet (HERE), var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 388)) ;
+    extensionMethod_searchValuedObject (ioArgument_ioUniversalMap, object->mProperty_mIdentifier, constinArgument_inMode, ioArgument_ioTemporaries.getter_mInitializedDriverSet (HERE), var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 388)) ;
   }
-  GALGAS_location var_currentErrorLocation_15229 = object->mProperty_mIdentifier.getter_location (HERE) ;
-  GALGAS_accessInAssignmentListAST var_accessList_15295 = object->mProperty_mAccessList ;
-  GALGAS_accessInAssignmentAST var_lastAccess_15349 ;
+  GALGAS_location var_currentErrorLocation_15216 = object->mProperty_mIdentifier.getter_location (HERE) ;
+  GALGAS_accessInAssignmentListAST var_accessList_15282 = object->mProperty_mAccessList ;
+  GALGAS_accessInAssignmentAST var_lastAccess_15336 ;
   {
-  var_accessList_15295.setter_popLast (var_lastAccess_15349, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 398)) ;
+  var_accessList_15282.setter_popLast (var_lastAccess_15336, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 398)) ;
   }
-  cEnumerator_accessInAssignmentListAST enumerator_15405 (var_accessList_15295, kENUMERATION_UP) ;
-  while (enumerator_15405.hasCurrentObject ()) {
-    GALGAS_PLMType var_currentType_15428 = extensionGetter_type (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)) ;
-    switch (enumerator_15405.current_mAccess (HERE).enumValue ()) {
+  cEnumerator_accessInAssignmentListAST enumerator_15392 (var_accessList_15282, kENUMERATION_UP) ;
+  while (enumerator_15392.hasCurrentObject ()) {
+    GALGAS_PLMType var_currentType_15415 = extensionGetter_type (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)) ;
+    switch (enumerator_15392.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_16317 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_15405.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_16317->mAssociatedValue0 ;
-        GALGAS_propertyMap var_propertyMap_15548 = var_currentType_15428.getter_propertyMap (HERE) ;
-        GALGAS_propertyAccessKind var_propertyAccess_15640 ;
-        GALGAS_bool joker_15619 ; // Joker input parameter
-        var_propertyMap_15548.method_searchKey (extractedValue_propertyName, joker_15619, var_propertyAccess_15640, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 405)) ;
-        switch (var_propertyAccess_15640.enumValue ()) {
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_16304 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_15392.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_16304->mAssociatedValue0 ;
+        GALGAS_propertyMap var_propertyMap_15535 = var_currentType_15415.getter_propertyMap (HERE) ;
+        GALGAS_propertyAccessKind var_propertyAccess_15627 ;
+        GALGAS_bool joker_15606 ; // Joker input parameter
+        var_propertyMap_15535.method_searchKey (extractedValue_propertyName, joker_15606, var_propertyAccess_15627, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 405)) ;
+        switch (var_propertyAccess_15627.enumValue ()) {
         case GALGAS_propertyAccessKind::kNotBuilt:
           break ;
         case GALGAS_propertyAccessKind::kEnum_constantProperty:
@@ -6253,24 +6253,24 @@ static void extensionMethod_procedureCallInstructionAST_baseGuardAnalyze (const 
           break ;
         case GALGAS_propertyAccessKind::kEnum_singleton:
           {
-            const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_15865 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_15640.unsafePointer ()) ;
-            const GALGAS_objectIR extractedValue_object = extractPtr_15865->mAssociatedValue0 ;
+            const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_15852 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_15627.unsafePointer ()) ;
+            const GALGAS_objectIR extractedValue_object = extractPtr_15852->mAssociatedValue0 ;
             var_currentObject_14763 = extractedValue_object ;
           }
           break ;
         case GALGAS_propertyAccessKind::kEnum_indexed:
           {
-            const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_16307 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_15640.unsafePointer ()) ;
-            const GALGAS_PLMType extractedValue_propertyType = extractPtr_16307->mAssociatedValue0 ;
-            const GALGAS_uint extractedValue_propertyIndex = extractPtr_16307->mAssociatedValue1 ;
-            GALGAS_string var_property_5F_llvmName_15993 ;
+            const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_16294 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_15627.unsafePointer ()) ;
+            const GALGAS_PLMType extractedValue_propertyType = extractPtr_16294->mAssociatedValue0 ;
+            const GALGAS_uint extractedValue_propertyIndex = extractPtr_16294->mAssociatedValue1 ;
+            GALGAS_string var_property_5F_llvmName_15980 ;
             {
-            extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_property_5F_llvmName_15993, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 412)) ;
+            extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_property_5F_llvmName_15980, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 412)) ;
             }
             {
-            extensionSetter_appendGetUniversalPropertyReference (var_baseGuardInstructionGenerationList_14632, var_currentType_15428, extensionGetter_llvmName (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 415)), var_property_5F_llvmName_15993, extractedValue_propertyIndex, extractedValue_propertyName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 418)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 413)) ;
+            extensionSetter_appendGetUniversalPropertyReference (var_baseGuardInstructionGenerationList_14632, var_currentType_15415, extensionGetter_llvmName (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 415)), var_property_5F_llvmName_15980, extractedValue_propertyIndex, extractedValue_propertyName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 418)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 413)) ;
             }
-            var_currentObject_14763 = GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_15993  COMMA_SOURCE_FILE ("declaration-guard.galgas", 420)) ;
+            var_currentObject_14763 = GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_15980  COMMA_SOURCE_FILE ("declaration-guard.galgas", 420)) ;
           }
           break ;
         }
@@ -6278,44 +6278,44 @@ static void extensionMethod_procedureCallInstructionAST_baseGuardAnalyze (const 
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_16460 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_15405.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_16460->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_16460->mAssociatedValue1 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_16447 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_15392.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_16447->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_16447->mAssociatedValue1 ;
         TC_Array <C_FixItDescription> fixItArray4 ;
         inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray4  COMMA_SOURCE_FILE ("declaration-guard.galgas", 423)) ;
         var_currentObject_14763.drop () ; // Release error dropped variable
       }
       break ;
     }
-    enumerator_15405.gotoNextObject () ;
+    enumerator_15392.gotoNextObject () ;
   }
-  switch (var_lastAccess_15349.enumValue ()) {
+  switch (var_lastAccess_15336.enumValue ()) {
   case GALGAS_accessInAssignmentAST::kNotBuilt:
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_property:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_17999 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_15349.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_methodName = extractPtr_17999->mAssociatedValue0 ;
-      GALGAS_PLMType var_currentType_16578 = extensionGetter_type (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 429)) ;
-      GALGAS_lstring var_guardMangledName_16726 = extensionGetter_mangledName (object->mProperty_mArguments, extractedValue_methodName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 431)) ;
-      GALGAS_routineTypedSignature var_formalSignature_16843 ;
-      GALGAS_lstring var_guardRoutineImplentationLLVMName_16884 ;
-      GALGAS_bool joker_16821 ; // Joker input parameter
-      GALGAS_lstring joker_16845 ; // Joker input parameter
-      var_currentType_16578.getter_guardMap (HERE).method_searchKey (var_guardMangledName_16726, joker_16821, var_formalSignature_16843, joker_16845, var_guardRoutineImplentationLLVMName_16884, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 432)) ;
+      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_17986 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_15336.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_methodName = extractPtr_17986->mAssociatedValue0 ;
+      GALGAS_PLMType var_currentType_16565 = extensionGetter_type (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 429)) ;
+      GALGAS_lstring var_guardMangledName_16713 = extensionGetter_mangledName (object->mProperty_mArguments, extractedValue_methodName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 431)) ;
+      GALGAS_routineTypedSignature var_formalSignature_16830 ;
+      GALGAS_lstring var_guardRoutineImplentationLLVMName_16871 ;
+      GALGAS_bool joker_16808 ; // Joker input parameter
+      GALGAS_lstring joker_16832 ; // Joker input parameter
+      var_currentType_16565.getter_guardMap (HERE).method_searchKey (var_guardMangledName_16713, joker_16808, var_formalSignature_16830, joker_16832, var_guardRoutineImplentationLLVMName_16871, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 432)) ;
       GALGAS_procCallEffectiveParameterListIR temp_5 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 436)) ;
-      temp_5.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 435)), GALGAS_objectIR::constructor_reference (var_currentType_16578, extensionGetter_llvmName (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 436))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 436))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 436)) ;
-      GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_16987 = temp_5 ;
+      temp_5.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 435)), GALGAS_objectIR::constructor_reference (var_currentType_16565, extensionGetter_llvmName (var_currentObject_14763, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 436))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 436))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 436)) ;
+      GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_16974 = temp_5 ;
       {
-      routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_16843, object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inContext, constinArgument_inMode, constinArgument_inIsSafe, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_14571, var_baseGuardInstructionGenerationList_14632, var_effectiveParameterListIR_16987, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 439)) ;
+      routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_16830, object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inContext, constinArgument_inMode, constinArgument_inIsSafe, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, var_baseGuardAllocaList_14571, var_baseGuardInstructionGenerationList_14632, var_effectiveParameterListIR_16974, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 439)) ;
       }
-      outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList_14571, var_baseGuardInstructionGenerationList_14632, var_guardRoutineImplentationLLVMName_16884.getter_string (HERE), var_effectiveParameterListIR_16987  COMMA_SOURCE_FILE ("declaration-guard.galgas", 456)) ;
+      outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList_14571, var_baseGuardInstructionGenerationList_14632, var_guardRoutineImplentationLLVMName_16871.getter_string (HERE), var_effectiveParameterListIR_16974  COMMA_SOURCE_FILE ("declaration-guard.galgas", 456)) ;
     }
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_18139 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_15349.unsafePointer ()) ;
-      const GALGAS_location extractedValue_endOfIndex = extractPtr_18139->mAssociatedValue1 ;
+      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_18126 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_15336.unsafePointer ()) ;
+      const GALGAS_location extractedValue_endOfIndex = extractPtr_18126->mAssociatedValue1 ;
       TC_Array <C_FixItDescription> fixItArray6 ;
       inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property access is required here"), fixItArray6  COMMA_SOURCE_FILE ("declaration-guard.galgas", 463)) ;
       outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
@@ -6376,19 +6376,19 @@ static void extensionMethod_guardUserRoutineIR_svcDeclarationGeneration (const c
                                                                          COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_guardUserRoutineIR * object = (const cPtr_guardUserRoutineIR *) inObject ;
   macroValidSharedObject (object, cPtr_guardUserRoutineIR) ;
-  GALGAS_string var_userMangledName_19866 = object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 504)) ;
-  GALGAS_string var_implementationMangledName_19946 = object->mProperty_mMangledImplementationGuardName.getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 505)) ;
+  GALGAS_string var_userMangledName_19853 = object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 504)) ;
+  GALGAS_string var_implementationMangledName_19933 = object->mProperty_mMangledImplementationGuardName.getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 505)) ;
   switch (object->mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_userMangledName_19866, var_implementationMangledName_19946, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 508)) ;
+      ioArgument_ioPrimitiveAndServiceList.addAssign_operation (var_userMangledName_19853, var_implementationMangledName_19933, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 508)) ;
     }
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_baseGuard:
     {
-      ioArgument_ioSectionList.addAssign_operation (var_userMangledName_19866, var_implementationMangledName_19946, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 510)) ;
+      ioArgument_ioSectionList.addAssign_operation (var_userMangledName_19853, var_implementationMangledName_19933, GALGAS_bool (false)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 510)) ;
     }
     break ;
   }
@@ -6420,8 +6420,8 @@ static void extensionMethod_guardUserRoutineIR_llvmCodeGeneration (const cPtr_ab
   const cPtr_guardUserRoutineIR * object = (const cPtr_guardUserRoutineIR *) inObject ;
   macroValidSharedObject (object, cPtr_guardUserRoutineIR) ;
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (object->mProperty_mRoutineMangledName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 524)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 524)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 524)) ;
-  GALGAS_string var_prototype_20671 = function_llvmFunctionPrototype (GALGAS_string ("i1"), object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 527)), object->mProperty_mReceiverType, object->mProperty_mFormalArgumentListForGeneration, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 525)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare ").add_operation (var_prototype_20671, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 531)).add_operation (GALGAS_string ("\n"
+  GALGAS_string var_prototype_20658 = function_llvmFunctionPrototype (GALGAS_string ("i1"), object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 527)), object->mProperty_mReceiverType, object->mProperty_mFormalArgumentListForGeneration, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 525)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare ").add_operation (var_prototype_20658, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 531)).add_operation (GALGAS_string ("\n"
     "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 531)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 531)) ;
 }
 
@@ -6450,9 +6450,9 @@ static void extensionMethod_guardImplementationRoutineIR_llvmCodeGeneration (con
                                                                              COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_guardImplementationRoutineIR * object = (const cPtr_guardImplementationRoutineIR *) inObject ;
   macroValidSharedObject (object, cPtr_guardImplementationRoutineIR) ;
-  GALGAS_string var_guardRoutineName_21594 = object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 551)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_guardRoutineName_21594, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 552)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 552)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define i1 @").add_operation (var_guardRoutineName_21594, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 553)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 553)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 553)) ;
+  GALGAS_string var_guardRoutineName_21581 = object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 551)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_guardRoutineName_21581, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 552)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 552)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define i1 @").add_operation (var_guardRoutineName_21581, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 553)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 553)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 553)) ;
   GALGAS_string temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, object->mProperty_mReceiverType.getter_kind (HERE).objectCompare (GALGAS_typeKind::constructor_void (SOURCE_FILE ("declaration-guard.galgas", 554)))).boolEnum () ;
   if (kBoolTrue == test_1) {
@@ -6460,52 +6460,52 @@ static void extensionMethod_guardImplementationRoutineIR_llvmCodeGeneration (con
   }else if (kBoolFalse == test_1) {
     temp_0 = extensionGetter_llvmTypeName (object->mProperty_mReceiverType, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)) ;
   }
-  GALGAS_string var_receiverLLVMTypeName_21778 = temp_0 ;
-  GALGAS_bool var_first_21881 = GALGAS_bool (true) ;
-  const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_receiverLLVMTypeName_21778.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  GALGAS_string var_receiverLLVMTypeName_21765 = temp_0 ;
+  GALGAS_bool var_first_21868 = GALGAS_bool (true) ;
+  const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_receiverLLVMTypeName_21765.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_2) {
-    ioArgument_ioLLVMcode.plusAssign_operation(var_receiverLLVMTypeName_21778.add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)).add_operation (function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)) ;
-    var_first_21881 = GALGAS_bool (false) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(var_receiverLLVMTypeName_21765.add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)).add_operation (function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 561)) ;
+    var_first_21868 = GALGAS_bool (false) ;
   }
-  cEnumerator_routineFormalArgumentListIR enumerator_22061 (object->mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
-  while (enumerator_22061.hasCurrentObject ()) {
-    const enumGalgasBool test_3 = var_first_21881.boolEnum () ;
+  cEnumerator_routineFormalArgumentListIR enumerator_22048 (object->mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
+  while (enumerator_22048.hasCurrentObject ()) {
+    const enumGalgasBool test_3 = var_first_21868.boolEnum () ;
     if (kBoolTrue == test_3) {
-      var_first_21881 = GALGAS_bool (false) ;
+      var_first_21868 = GALGAS_bool (false) ;
     }else if (kBoolFalse == test_3) {
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 568)) ;
     }
-    switch (enumerator_22061.current_mFormalArgumentKind (HERE).enumValue ()) {
+    switch (enumerator_22048.current_mFormalArgumentKind (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22061.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)).add_operation (enumerator_22061.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22048.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)).add_operation (enumerator_22048.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 572)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22061.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)).add_operation (function_llvmNameForLocalVariable (enumerator_22061.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22048.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)).add_operation (function_llvmNameForLocalVariable (enumerator_22048.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 574)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22061.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)).add_operation (function_llvmNameForLocalVariable (enumerator_22061.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_22048.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)).add_operation (function_llvmNameForLocalVariable (enumerator_22048.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 576)) ;
       }
       break ;
     }
-    enumerator_22061.gotoNextObject () ;
+    enumerator_22048.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 579)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 579)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 579)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 579)) ;
-  GALGAS_allocaList var_allocaList_22660 = object->mProperty_mAllocaList ;
-  cEnumerator_routineFormalArgumentListIR enumerator_22756 (object->mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
-  while (enumerator_22756.hasCurrentObject ()) {
-    switch (enumerator_22756.current_mFormalArgumentKind (HERE).enumValue ()) {
+  GALGAS_allocaList var_allocaList_22647 = object->mProperty_mAllocaList ;
+  cEnumerator_routineFormalArgumentListIR enumerator_22743 (object->mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
+  while (enumerator_22743.hasCurrentObject ()) {
+    switch (enumerator_22743.current_mFormalArgumentKind (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
-        var_allocaList_22660.addAssign_operation (function_llvmNameForLocalVariable (enumerator_22756.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 586)), enumerator_22756.current_mFormalArgumentType (HERE), GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 586)) ;
+        var_allocaList_22647.addAssign_operation (function_llvmNameForLocalVariable (enumerator_22743.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 586)), enumerator_22743.current_mFormalArgumentType (HERE), GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 586)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
@@ -6514,18 +6514,18 @@ static void extensionMethod_guardImplementationRoutineIR_llvmCodeGeneration (con
       }
       break ;
     }
-    enumerator_22756.gotoNextObject () ;
+    enumerator_22743.gotoNextObject () ;
   }
-  extensionMethod_generateAllocaList (var_allocaList_22660, ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 591)) ;
-  cEnumerator_routineFormalArgumentListIR enumerator_23076 (object->mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
-  while (enumerator_23076.hasCurrentObject ()) {
-    switch (enumerator_23076.current_mFormalArgumentKind (HERE).enumValue ()) {
+  extensionMethod_generateAllocaList (var_allocaList_22647, ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 591)) ;
+  cEnumerator_routineFormalArgumentListIR enumerator_23063 (object->mProperty_mFormalArgumentListForGeneration, kENUMERATION_UP) ;
+  while (enumerator_23063.hasCurrentObject ()) {
+    switch (enumerator_23063.current_mFormalArgumentKind (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
-        GALGAS_string var_llvmType_23146 = extensionGetter_llvmTypeName (enumerator_23076.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 596)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmType_23146, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (enumerator_23076.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (var_llvmType_23146, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)).add_operation (function_llvmNameForLocalVariable (enumerator_23076.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)) ;
+        GALGAS_string var_llvmType_23133 = extensionGetter_llvmTypeName (enumerator_23063.current_mFormalArgumentType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 596)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmType_23133, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (enumerator_23063.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (var_llvmType_23133, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)).add_operation (GALGAS_string (" * "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)).add_operation (function_llvmNameForLocalVariable (enumerator_23063.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 598)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 597)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
@@ -6534,26 +6534,26 @@ static void extensionMethod_guardImplementationRoutineIR_llvmCodeGeneration (con
       }
       break ;
     }
-    enumerator_23076.gotoNextObject () ;
+    enumerator_23063.gotoNextObject () ;
   }
-  GALGAS_string var_accepted_5F_llvmName_23450 = function_llvmNameForLocalVariable (function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 603)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 603)) ;
-  GALGAS_string var_accepted_5F_llvmName_5F_loaded_23536 = function_llvmNameForLocalVariable (function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 604)).add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 604)) ;
+  GALGAS_string var_accepted_5F_llvmName_23437 = function_llvmNameForLocalVariable (function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 603)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 603)) ;
+  GALGAS_string var_accepted_5F_llvmName_5F_loaded_23523 = function_llvmNameForLocalVariable (function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 604)).add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 604)) ;
   switch (object->mProperty_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_baseGuard:
     {
-      GALGAS_string var_accepted_5F_label_23716 = function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 608)).add_operation (GALGAS_string (".guard.accepted"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 608)) ;
-      GALGAS_string var_rejected_5F_label_23786 = function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 609)).add_operation (GALGAS_string (".guard.rejected"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 609)) ;
+      GALGAS_string var_accepted_5F_label_23703 = function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 608)).add_operation (GALGAS_string (".guard.accepted"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 608)) ;
+      GALGAS_string var_rejected_5F_label_23773 = function_acceptVariablePLMName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 609)).add_operation (GALGAS_string (".guard.rejected"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 609)) ;
       extensionMethod_instructionListLLVMCode (object->mProperty_mInstructionGenerationList, ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 610)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_accepted_5F_llvmName_5F_loaded_23536, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)).add_operation (GALGAS_string (" = load i1, i1* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)).add_operation (var_accepted_5F_llvmName_23450, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (var_accepted_5F_llvmName_5F_loaded_23536, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (GALGAS_string (", label %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (var_accepted_5F_label_23716, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (GALGAS_string (", label %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (var_rejected_5F_label_23786, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (GALGAS_string ("\n"
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_accepted_5F_llvmName_5F_loaded_23523, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)).add_operation (GALGAS_string (" = load i1, i1* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)).add_operation (var_accepted_5F_llvmName_23437, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 611)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (var_accepted_5F_llvmName_5F_loaded_23523, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (GALGAS_string (", label %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (var_accepted_5F_label_23703, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (GALGAS_string (", label %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (var_rejected_5F_label_23773, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)).add_operation (GALGAS_string ("\n"
         "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 612)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(var_accepted_5F_label_23716.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 613)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 613)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(var_accepted_5F_label_23703.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 613)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 613)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @accept.guard ()\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 614)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret i1 true\n"
         "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 615)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(var_rejected_5F_label_23786.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 616)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 616)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(var_rejected_5F_label_23773.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 616)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 616)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret i1 false\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 617)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
         "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 618)) ;
@@ -6561,40 +6561,40 @@ static void extensionMethod_guardImplementationRoutineIR_llvmCodeGeneration (con
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_25738 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (object->mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_allocaList extractedValue_baseGuardAllocaList = extractPtr_25738->mAssociatedValue0 ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_25738->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_25738->mAssociatedValue2 ;
-      const GALGAS_procCallEffectiveParameterListIR extractedValue_baseGuardEffectiveParameterList = extractPtr_25738->mAssociatedValue3 ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_25725 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (object->mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_allocaList extractedValue_baseGuardAllocaList = extractPtr_25725->mAssociatedValue0 ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_25725->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_25725->mAssociatedValue2 ;
+      const GALGAS_procCallEffectiveParameterListIR extractedValue_baseGuardEffectiveParameterList = extractPtr_25725->mAssociatedValue3 ;
       extensionMethod_generateAllocaList (extractedValue_baseGuardAllocaList, ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 620)) ;
       extensionMethod_instructionListLLVMCode (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 621)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %invoked.guard.result = call i1 @").add_operation (extractedValue_baseGuardMangledName.getter_assemblerRepresentation (SOURCE_FILE ("declaration-guard.galgas", 622)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 622)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 622)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ("), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 623)) ;
-      cEnumerator_procCallEffectiveParameterListIR enumerator_24888 (extractedValue_baseGuardEffectiveParameterList, kENUMERATION_UP) ;
-      while (enumerator_24888.hasCurrentObject ()) {
-        switch (enumerator_24888.current_mEffectiveParameterPassingMode (HERE).enumValue ()) {
+      cEnumerator_procCallEffectiveParameterListIR enumerator_24875 (extractedValue_baseGuardEffectiveParameterList, kENUMERATION_UP) ;
+      while (enumerator_24875.hasCurrentObject ()) {
+        switch (enumerator_24875.current_mEffectiveParameterPassingMode (HERE).enumValue ()) {
         case GALGAS_procEffectiveParameterPassingModeIR::kNotBuilt:
           break ;
         case GALGAS_procEffectiveParameterPassingModeIR::kEnum_input:
           {
-            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_24888.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)).add_operation (extensionGetter_llvmName (enumerator_24888.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_24875.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)).add_operation (extensionGetter_llvmName (enumerator_24875.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 627)) ;
           }
           break ;
         case GALGAS_procEffectiveParameterPassingModeIR::kEnum_output:
           {
-            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_24888.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)).add_operation (extensionGetter_llvmName (enumerator_24888.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_24875.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)).add_operation (extensionGetter_llvmName (enumerator_24875.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 629)) ;
           }
           break ;
         case GALGAS_procEffectiveParameterPassingModeIR::kEnum_outputInput:
           {
-            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_24888.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)).add_operation (extensionGetter_llvmName (enumerator_24888.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_24875.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)).add_operation (extensionGetter_llvmName (enumerator_24875.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 631)) ;
           }
           break ;
         }
-        if (enumerator_24888.hasNextObject ()) {
+        if (enumerator_24875.hasNextObject ()) {
           ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 634)) ;
         }
-        enumerator_24888.gotoNextObject () ;
+        enumerator_24875.gotoNextObject () ;
       }
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 636)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %invoked.guard.result, label %invoked.guard.acceptation, label %invoked.guard.rejection\n"
@@ -6648,9 +6648,9 @@ static void extensionMethod_guardImplementationRoutineIR_enterAccessibleEntities
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_26609 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (object->mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_26609->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardImplementationMangledName = extractPtr_26609->mAssociatedValue2 ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_26596 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (object->mProperty_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_26596->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardImplementationMangledName = extractPtr_26596->mAssociatedValue2 ;
       ioArgument_ioInvokedRoutineSet.addAssign_operation (extractedValue_baseGuardImplementationMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 659)) ;
       extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 660)) ;
     }
