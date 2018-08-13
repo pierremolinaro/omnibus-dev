@@ -140,23 +140,6 @@ func voidType -> @PLMType {
 #·······················································································································
 
 func functionType ?let @routineDescriptor inDescriptor -> @PLMType {
-  @string llvmTypeName
-    if inDescriptor.returnTypeProxy == .null then
-      llvmTypeName = "void"
-    else
-      llvmTypeName = [[inDescriptor.returnTypeProxy type] llvmTypeName]
-    end
-    llvmTypeName += "("
-    for () in inDescriptor.signature 
-    do
-      llvmTypeName += [[mTypeProxy type] llvmTypeName]
-      switch mFormalArgumentPassingMode
-      case inputOutput, output : llvmTypeName += "*"
-      case input :
-      end
-    between llvmTypeName += ", "
-    end
-    llvmTypeName += ")*"
   result = .new{
     !propertyMap:{}
     !routineMap: {}

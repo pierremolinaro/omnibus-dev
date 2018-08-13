@@ -10,15 +10,10 @@ enum @routineKind {
 #·······················································································································
 
 struct @routineDescriptor {
-  @bool isPublic %selector # Routine is declared with "public"
-  @bool exported %selector # Routine is declared with @exported attribute
   @string name %selector
-  @string nameForLLVMGeneration %selector
-  @routineKind routineKind %selector
+  @mode mode %selector
   @routineTypedSignature signature %selector
   @unifiedTypeMap-proxy returnTypeProxy %selector # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
-  @bool canAccessProperties %selector # Routine is declared with @access attribute
-  @bool canMutateProperties %selector # Routine is declared with @mutating attribute
   @bool safe %selector # Routine is declared with @safe attribute
 }
 

@@ -2320,23 +2320,13 @@ class cPtr_taskActivateFunctionIR : public cPtr_abstractRoutineIR {
 
 class GALGAS_routineDescriptor : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_bool mProperty_isPublic ;
-
-  public : GALGAS_bool mProperty_exported ;
-
   public : GALGAS_string mProperty_name ;
 
-  public : GALGAS_string mProperty_nameForLLVMGeneration ;
-
-  public : GALGAS_routineKind mProperty_routineKind ;
+  public : GALGAS_mode mProperty_mode ;
 
   public : GALGAS_routineTypedSignature mProperty_signature ;
 
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_returnTypeProxy ;
-
-  public : GALGAS_bool mProperty_canAccessProperties ;
-
-  public : GALGAS_bool mProperty_canMutateProperties ;
 
   public : GALGAS_bool mProperty_safe ;
 
@@ -2351,15 +2341,10 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : virtual ~ GALGAS_routineDescriptor (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_routineDescriptor (const GALGAS_bool & in_isPublic,
-                                     const GALGAS_bool & in_exported,
-                                     const GALGAS_string & in_name,
-                                     const GALGAS_string & in_nameForLLVMGeneration,
-                                     const GALGAS_routineKind & in_routineKind,
+  public : GALGAS_routineDescriptor (const GALGAS_string & in_name,
+                                     const GALGAS_mode & in_mode,
                                      const GALGAS_routineTypedSignature & in_signature,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_returnTypeProxy,
-                                     const GALGAS_bool & in_canAccessProperties,
-                                     const GALGAS_bool & in_canMutateProperties,
                                      const GALGAS_bool & in_safe) ;
 
 //-- Start of generic part --*
@@ -2373,16 +2358,11 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_routineDescriptor constructor_new (const class GALGAS_bool & inOperand0,
-                                                                  const class GALGAS_bool & inOperand1,
-                                                                  const class GALGAS_string & inOperand2,
-                                                                  const class GALGAS_string & inOperand3,
-                                                                  const class GALGAS_routineKind & inOperand4,
-                                                                  const class GALGAS_routineTypedSignature & inOperand5,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
-                                                                  const class GALGAS_bool & inOperand7,
-                                                                  const class GALGAS_bool & inOperand8,
-                                                                  const class GALGAS_bool & inOperand9
+  public : static class GALGAS_routineDescriptor constructor_new (const class GALGAS_string & inOperand0,
+                                                                  const class GALGAS_mode & inOperand1,
+                                                                  const class GALGAS_routineTypedSignature & inOperand2,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                                  const class GALGAS_bool & inOperand4
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2397,21 +2377,11 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_canAccessProperties (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_canMutateProperties (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_exported (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPublic (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_name (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_nameForLLVMGeneration (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_returnTypeProxy (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_routineKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_safe (LOCATION_ARGS) const ;
 

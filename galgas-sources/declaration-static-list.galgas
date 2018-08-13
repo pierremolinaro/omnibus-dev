@@ -322,15 +322,10 @@ override method @staticListAST enterInContext
       end
     #--- Enter routine type in 
       let descriptor = @routineDescriptor.new {
-        !isPublic:true # Routine is declared with "public"
-        !exported:false # Routine is declared with @exported attribute
         !name:propertyName
-        !nameForLLVMGeneration:routineLLVMName
-        !routineKind:.function {!executionMode:mode} # @routineKind mRoutineKind
+        !mode:mode
         !signature:signature
         !returnTypeProxy:returnTypeProxy 
-        !canAccessProperties:true # Routine is declared with @access attribute
-        !canMutateProperties:true # Routine is declared with @mutating attribute
         !safe:safe # Routine is declared with @safe attribute
       }
       let type = functionType (!descriptor)
