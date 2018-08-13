@@ -104,7 +104,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     ?let formalSignature
     ?let formalReturnTypeProxy # null if no returned value
     ?let implementedModeDictionary
-    ?let unused implementedIsSafe
+    ?safe:let unused implementedIsSafe
     ?let unused implementedIsExported
     ?let unused implementedMode
   ]

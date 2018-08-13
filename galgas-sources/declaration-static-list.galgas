@@ -350,7 +350,7 @@ override method @staticListAST enterInContext
         !signature
         !returnTypeProxy
         !{!.userMode !routineLLVMName}
-        !true
+        !safe:true
         !false
         !.userMode
       ]
@@ -429,7 +429,7 @@ override method @staticListAST enterInContext
               ?let candidateSignature
               ?let candidateReturnTypeProxy # null if no returned value
               ?let implementedModeDictionary
-              ?let implementedIsSafe
+              ?safe:let implementedIsSafe
               ?let unused implementedIsExported
               ?let candidateMode
             ]

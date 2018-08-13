@@ -617,7 +617,7 @@ private proc handleFunctionCallInExpression
     ?let formalSignature
     ?let formalReturnTypeProxy # null if no returned value
     ?let implementedModeDictionary
-    ?let implementedIsSafe
+    ?safe:let implementedIsSafe
     ?let unused implementedIsExported
     ?let unused implementedMode
   ]

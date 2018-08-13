@@ -106,7 +106,7 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
     !signature
     !returnTypeProxy
     !routineLLVMNameDict
-    !safe
+    !safe:safe
     !false
     !mMode
   ]

@@ -78,7 +78,7 @@ proc checkRequiredProcedures
         ?let implementedSignature
         ?let implementedReturnTypeProxy # null if no returned value
         ?let unused implementedModeDictionary
-        ?let implementedIsSafe
+        ?safe:let implementedIsSafe
         ?let implementedIsExported
         ?let implementedMode
       ]

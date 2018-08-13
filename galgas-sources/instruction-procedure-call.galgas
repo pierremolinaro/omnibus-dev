@@ -157,7 +157,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     ?let formalSignature
     ?let formalReturnTypeProxy # null if no returned value
     ?let implementedModeDictionary
-    ?let unused implementedIsSafe
+    ?safe:let unused implementedIsSafe
     ?let unused implementedIsExported
     ?let unused implementedMode
   ]
@@ -318,7 +318,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       ?let formalSignature
       ?let formalReturnTypeProxy # null if no returned value
       ?let implementedModeDictionary
-      ?let implementedIsSafe
+      ?safe:let implementedIsSafe
       ?let unused implementedIsExported
       ?let unused implementedMode
     ]

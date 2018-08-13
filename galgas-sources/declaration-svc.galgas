@@ -284,7 +284,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !isSafe
+      !safe:isSafe
       !true
       !mode
     ]

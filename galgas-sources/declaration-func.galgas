@@ -191,7 +191,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !isSafe
+      !safe:isSafe
       !exportedFunction
       !function.mMode
     ]
@@ -290,7 +290,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !if function.mMode == .panicMode then true else safe end
+      !safe:if function.mMode == .panicMode then true else safe end
       !exportedFunction
       !function.mMode
     ]
@@ -357,7 +357,7 @@ setter @routineMapCTXT addFunctionWithoutArgument
     !{}
     !inResultType
     !{!inMode !outRoutineLLVMName}
-    !if inMode == .panicMode then true else inIsSafe end
+    !safe:if inMode == .panicMode then true else inIsSafe end
     !false
     !.anyMode
   ]
@@ -395,7 +395,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
     !signature
     !inResultType
     !{!inMode !outRoutineLLVMName}
-    !if inMode == .panicMode then true else inIsSafe end
+    !safe:if inMode == .panicMode then true else inIsSafe end
     !false
     !.anyMode
   ]
@@ -445,7 +445,7 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
     !signature
     !inResultType
     !{!inMode !outRoutineLLVMName}
-    !if inMode == .panicMode then true else inIsSafe end
+    !safe:if inMode == .panicMode then true else inIsSafe end
     !false
     !.anyMode
   ]
