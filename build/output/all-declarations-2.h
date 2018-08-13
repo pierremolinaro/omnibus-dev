@@ -7776,6 +7776,18 @@ class GALGAS_lstring function_systemUserMangledNameFromAST (const class GALGAS_s
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                    Extension getter '@mode routineLLVMDictionaryForSystemRoutine' (as function)                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemRoutine (const class GALGAS_mode & inObject,
+                                                                                        const class GALGAS_string & constinArgument0,
+                                                                                        const class GALGAS_string & constinArgument1,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //               Extension getter '@procFormalArgumentPassingMode formalPassingModeString' (as function)               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

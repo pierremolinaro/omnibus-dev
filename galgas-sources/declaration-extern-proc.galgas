@@ -88,17 +88,17 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
 #--- Return type
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
 #--- Enter in context
-   @routineLLVMNameDict routineLLVMNameDict = {!mMode !mRoutineNameForGeneration}
-  if mMode == .serviceMode then
-    routineLLVMNameDict += !.primitiveMode !mRoutineNameForGeneration
-    routineLLVMNameDict += !.guardMode !mRoutineNameForGeneration
-  elsif mMode == .sectionMode then
-    routineLLVMNameDict += !.primitiveMode !mRoutineNameForGeneration
-    routineLLVMNameDict += !.serviceMode !mRoutineNameForGeneration
-    routineLLVMNameDict += !.guardMode !mRoutineNameForGeneration
-  elsif mMode == .guardMode then
-    routineLLVMNameDict += !.serviceMode !mRoutineNameForGeneration
-  end
+  let @routineLLVMNameDict routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !mRoutineNameForGeneration]
+#  if mMode == .serviceMode then
+#    routineLLVMNameDict += !.primitiveMode !mRoutineNameForGeneration
+#    routineLLVMNameDict += !.guardMode !mRoutineNameForGeneration
+#  elsif mMode == .sectionMode then
+#    routineLLVMNameDict += !.primitiveMode !mRoutineNameForGeneration
+#    routineLLVMNameDict += !.serviceMode !mRoutineNameForGeneration
+#    routineLLVMNameDict += !.guardMode !mRoutineNameForGeneration
+#  elsif mMode == .guardMode then
+#    routineLLVMNameDict += !.serviceMode !mRoutineNameForGeneration
+#  end
   let routineMangledName = [signature mangledName !mExternProcedureName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName

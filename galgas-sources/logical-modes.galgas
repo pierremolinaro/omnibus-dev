@@ -32,6 +32,45 @@ getter @mode string -> @string {
 
 #·······················································································································
 
+getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
+  result = {!self !inRoutineNameForGeneration}
+  if self == .serviceMode then
+    result += !.primitiveMode !inRoutineNameForGeneration
+    result += !.guardMode !inRoutineNameForGeneration
+  elsif self == .sectionMode then
+    result += !.primitiveMode !inRoutineNameForGeneration
+    result += !.serviceMode !inRoutineNameForGeneration
+    result += !.guardMode !inRoutineNameForGeneration
+    result += !.startupMode !inRoutineNameForGeneration
+  elsif self == .guardMode then
+    result += !.serviceMode !inRoutineNameForGeneration
+  end
+}
+
+#·······················································································································
+
+getter @mode routineLLVMDictionaryForSystemRoutine
+  ?let @string inUserRoutineNameForGeneration
+  ?let @string inImplementationRoutineNameForGeneration
+  -> @routineLLVMNameDict
+{
+  result = {!self !inImplementationRoutineNameForGeneration}
+  result += !.userMode !inUserRoutineNameForGeneration
+  if self == .serviceMode then
+    result += !.primitiveMode !inImplementationRoutineNameForGeneration
+    result += !.guardMode !inImplementationRoutineNameForGeneration
+  elsif self == .sectionMode then
+    result += !.primitiveMode !inImplementationRoutineNameForGeneration
+    result += !.serviceMode !inImplementationRoutineNameForGeneration
+#    result += !.guardMode !inImplementationRoutineNameForGeneration
+    result += !.startupMode !inImplementationRoutineNameForGeneration
+  elsif self == .guardMode then
+    result += !.serviceMode !inImplementationRoutineNameForGeneration
+  end
+}
+
+#·······················································································································
+
 func checkMode
   ?callerMode:let @mode inCallerMode
   ?calleeMode:let @mode inCalleeMode

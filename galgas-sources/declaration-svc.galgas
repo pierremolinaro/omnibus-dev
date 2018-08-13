@@ -277,9 +277,12 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       attributes = attributes | .panicAllowed
     end
   #--- Enter in routine map
-    @routineLLVMNameDict routineLLVMNameDict = {}
-    routineLLVMNameDict += !.userMode !userRoutineMangledName
-    routineLLVMNameDict += !mode !implementationRoutineMangledName
+    let @routineLLVMNameDict routineLLVMNameDict = [mode routineLLVMDictionaryForSystemRoutine
+      !userRoutineMangledName
+      !implementationRoutineMangledName
+    ]
+#    routineLLVMNameDict += !.userMode !userRoutineMangledName
+#    routineLLVMNameDict += !mode !implementationRoutineMangledName
     let routineMangledName = [signature mangledName !system.mName]
     [!?ioRoutineMapCTXT insertKey
       !routineMangledName

@@ -5282,6 +5282,93 @@ GALGAS_string extensionGetter_string (const GALGAS_mode & inObject,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                              Extension Getter '@mode routineLLVMDictionaryForFunction'                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForFunction (const GALGAS_mode & inObject,
+                                                                             const GALGAS_string & constinArgument_inRoutineNameForGeneration,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineLLVMNameDict result_result ; // Returned variable
+  GALGAS_routineLLVMNameDict temp_0 = GALGAS_routineLLVMNameDict::constructor_emptyDict (SOURCE_FILE ("logical-modes.galgas", 36)) ;
+  const GALGAS_mode temp_1 = inObject ;
+  temp_0.addAssign_operation (temp_1, constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 36)) ;
+  result_result = temp_0 ;
+  const GALGAS_mode temp_2 = inObject ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, temp_2.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 37)))).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 38)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 38)) ;
+    result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 39)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 39)) ;
+  }else if (kBoolFalse == test_3) {
+    const GALGAS_mode temp_4 = inObject ;
+    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, temp_4.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 40)))).boolEnum () ;
+    if (kBoolTrue == test_5) {
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 41)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 41)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 42)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 42)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 43)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 43)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("logical-modes.galgas", 44)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 44)) ;
+    }else if (kBoolFalse == test_5) {
+      const GALGAS_mode temp_6 = inObject ;
+      const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, temp_6.objectCompare (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 45)))).boolEnum () ;
+      if (kBoolTrue == test_7) {
+        result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 46)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 46)) ;
+      }
+    }
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                           Extension Getter '@mode routineLLVMDictionaryForSystemRoutine'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemRoutine (const GALGAS_mode & inObject,
+                                                                                  const GALGAS_string & constinArgument_inUserRoutineNameForGeneration,
+                                                                                  const GALGAS_string & constinArgument_inImplementationRoutineNameForGeneration,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineLLVMNameDict result_result ; // Returned variable
+  GALGAS_routineLLVMNameDict temp_0 = GALGAS_routineLLVMNameDict::constructor_emptyDict (SOURCE_FILE ("logical-modes.galgas", 57)) ;
+  const GALGAS_mode temp_1 = inObject ;
+  temp_0.addAssign_operation (temp_1, constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 57)) ;
+  result_result = temp_0 ;
+  result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 58)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 58)) ;
+  const GALGAS_mode temp_2 = inObject ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, temp_2.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 59)))).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 60)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 60)) ;
+    result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 61)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 61)) ;
+  }else if (kBoolFalse == test_3) {
+    const GALGAS_mode temp_4 = inObject ;
+    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, temp_4.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 62)))).boolEnum () ;
+    if (kBoolTrue == test_5) {
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 63)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 63)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 64)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 64)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("logical-modes.galgas", 66)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 66)) ;
+    }else if (kBoolFalse == test_5) {
+      const GALGAS_mode temp_6 = inObject ;
+      const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, temp_6.objectCompare (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 67)))).boolEnum () ;
+      if (kBoolTrue == test_7) {
+        result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 68)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 68)) ;
+      }
+    }
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                   Extension Getter '@mode controlRegisterAccess'                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
