@@ -164,7 +164,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?routineMap addFunctionWithInputArgument
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:"append"
+      !methodName:.new {!"append" !mDynamicArrayTypeName}
       !safe:false
       !inputArgumentSelector:""
       !inputArgumentTypeProxy:elementTypeProxy
@@ -172,15 +172,16 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !resultTypeProxy:.null
       !canMutateProperties:true
       !?propertyMap
+      ?routineLLVMName: routineLLVMName
     ]
-    let append_argumentList = @routineFormalArgumentListAST {
-      !.input
-      !["" nowhere]
-      ![mElementTypeName nowhere]
-      !["" nowhere]
-    }
+#    let append_argumentList = @routineFormalArgumentListAST {
+#      !.input
+#      !["" nowhere]
+#      ![mElementTypeName nowhere]
+#      !["" nowhere]
+#    }
     ioRoutineListIR += !@dynArrayAppendFunctionIR.new {
-      !routineMangledNameFromAST (!llvmBaseTypeName !["append" nowhere] !append_argumentList)
+      !routineLLVMName # routineMangledNameFromAST (!llvmBaseTypeName !["append" nowhere] !append_argumentList)
       !false
       !false
       !arrayTypeProxy

@@ -690,7 +690,7 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
                                                                                      const GALGAS_PLMType constinArgument_inSelfType,
                                                                                      const GALGAS_routineAttributes constinArgument_inRoutineAttributes,
                                                                                      const GALGAS_semanticContext constinArgument_inContext,
-                                                                                     const GALGAS_mode constinArgument_inCurrentMode,
+                                                                                     const GALGAS_mode constinArgument_inMode,
                                                                                      GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                                                                      GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
                                                                                      GALGAS_universalValuedObjectMap & ioArgument_ioUniversalMap,
@@ -700,48 +700,48 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_procedureCallInstructionAST * object = (const cPtr_procedureCallInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_procedureCallInstructionAST) ;
-  GALGAS_PLMType var_currentType_9117 ;
-  GALGAS_string var_currentLLVMAddressVar_9149 ;
+  GALGAS_PLMType var_currentType_9110 ;
+  GALGAS_string var_currentLLVMAddressVar_9142 ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, object->mProperty_mIdentifier.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.getter_kind (HERE).objectCompare (GALGAS_typeKind::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 227)))).boolEnum () ;
     if (kBoolTrue == test_1) {
       TC_Array <C_FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (object->mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 228)), GALGAS_string ("self is not available in this context"), fixItArray2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 228)) ;
-      var_currentType_9117.drop () ; // Release error dropped variable
-      var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+      var_currentType_9110.drop () ; // Release error dropped variable
+      var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
     }else if (kBoolFalse == test_1) {
-      var_currentType_9117 = constinArgument_inSelfType ;
-      var_currentLLVMAddressVar_9149 = function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 231)) ;
+      var_currentType_9110 = constinArgument_inSelfType ;
+      var_currentLLVMAddressVar_9142 = function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 231)) ;
     }
   }else if (kBoolFalse == test_0) {
-    GALGAS_valuedObject var_entity_9519 ;
-    extensionMethod_searchEntity (ioArgument_ioUniversalMap, object->mProperty_mIdentifier, var_entity_9519, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 234)) ;
-    switch (var_entity_9519.enumValue ()) {
+    GALGAS_valuedObject var_entity_9512 ;
+    extensionMethod_searchEntity (ioArgument_ioUniversalMap, object->mProperty_mIdentifier, var_entity_9512, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 234)) ;
+    switch (var_entity_9512.enumValue ()) {
     case GALGAS_valuedObject::kNotBuilt:
       break ;
     case GALGAS_valuedObject::kEnum_task:
       {
-        const cEnumAssociatedValues_valuedObject_task * extractPtr_9666 = (const cEnumAssociatedValues_valuedObject_task *) (var_entity_9519.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_type = extractPtr_9666->mAssociatedValue0 ;
-        var_currentType_9117 = extractedValue_type ;
-        var_currentLLVMAddressVar_9149 = function_llvmNameForGlobalVariable (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 238)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 238)) ;
+        const cEnumAssociatedValues_valuedObject_task * extractPtr_9659 = (const cEnumAssociatedValues_valuedObject_task *) (var_entity_9512.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_9659->mAssociatedValue0 ;
+        var_currentType_9110 = extractedValue_type ;
+        var_currentLLVMAddressVar_9142 = function_llvmNameForGlobalVariable (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 238)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 238)) ;
       }
       break ;
     case GALGAS_valuedObject::kEnum_driver:
       {
-        const cEnumAssociatedValues_valuedObject_driver * extractPtr_9956 = (const cEnumAssociatedValues_valuedObject_driver *) (var_entity_9519.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_type = extractPtr_9956->mAssociatedValue0 ;
-        const GALGAS_bool extractedValue_instancied = extractPtr_9956->mAssociatedValue1 ;
+        const cEnumAssociatedValues_valuedObject_driver * extractPtr_9949 = (const cEnumAssociatedValues_valuedObject_driver *) (var_entity_9512.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_9949->mAssociatedValue0 ;
+        const GALGAS_bool extractedValue_instancied = extractPtr_9949->mAssociatedValue1 ;
         const enumGalgasBool test_3 = extractedValue_instancied.boolEnum () ;
         if (kBoolTrue == test_3) {
-          var_currentType_9117 = extractedValue_type ;
-          var_currentLLVMAddressVar_9149 = function_llvmNameForGlobalVariable (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 242)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 242)) ;
+          var_currentType_9110 = extractedValue_type ;
+          var_currentLLVMAddressVar_9142 = function_llvmNameForGlobalVariable (object->mProperty_mIdentifier.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 242)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 242)) ;
         }else if (kBoolFalse == test_3) {
           TC_Array <C_FixItDescription> fixItArray4 ;
           inCompiler->emitSemanticError (object->mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 244)), GALGAS_string ("the driver should be instancied"), fixItArray4  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 244)) ;
-          var_currentType_9117.drop () ; // Release error dropped variable
-          var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+          var_currentType_9110.drop () ; // Release error dropped variable
+          var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
         }
       }
       break ;
@@ -749,108 +749,108 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
       {
         TC_Array <C_FixItDescription> fixItArray5 ;
         inCompiler->emitSemanticError (object->mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 247)), GALGAS_string ("a control register constant cannot be used in this context"), fixItArray5  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 247)) ;
-        var_currentType_9117.drop () ; // Release error dropped variable
-        var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+        var_currentType_9110.drop () ; // Release error dropped variable
+        var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
       }
       break ;
     case GALGAS_valuedObject::kEnum_globalConstant:
       {
         TC_Array <C_FixItDescription> fixItArray6 ;
         inCompiler->emitSemanticError (object->mProperty_mIdentifier.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 251)), GALGAS_string ("a global constant cannot be used in this context"), fixItArray6  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 251)) ;
-        var_currentType_9117.drop () ; // Release error dropped variable
-        var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+        var_currentType_9110.drop () ; // Release error dropped variable
+        var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
       }
       break ;
     case GALGAS_valuedObject::kEnum_localConstant:
       {
-        const cEnumAssociatedValues_valuedObject_localConstant * extractPtr_10437 = (const cEnumAssociatedValues_valuedObject_localConstant *) (var_entity_9519.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_type = extractPtr_10437->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_plmName = extractPtr_10437->mAssociatedValue1 ;
-        var_currentType_9117 = extractedValue_type ;
-        var_currentLLVMAddressVar_9149 = function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 256)) ;
+        const cEnumAssociatedValues_valuedObject_localConstant * extractPtr_10430 = (const cEnumAssociatedValues_valuedObject_localConstant *) (var_entity_9512.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_10430->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_plmName = extractPtr_10430->mAssociatedValue1 ;
+        var_currentType_9110 = extractedValue_type ;
+        var_currentLLVMAddressVar_9142 = function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 256)) ;
       }
       break ;
     case GALGAS_valuedObject::kEnum_localVariable:
       {
-        const cEnumAssociatedValues_valuedObject_localVariable * extractPtr_10586 = (const cEnumAssociatedValues_valuedObject_localVariable *) (var_entity_9519.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_type = extractPtr_10586->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_plmName = extractPtr_10586->mAssociatedValue1 ;
-        var_currentType_9117 = extractedValue_type ;
-        var_currentLLVMAddressVar_9149 = function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 259)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 259)) ;
+        const cEnumAssociatedValues_valuedObject_localVariable * extractPtr_10579 = (const cEnumAssociatedValues_valuedObject_localVariable *) (var_entity_9512.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_10579->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_plmName = extractPtr_10579->mAssociatedValue1 ;
+        var_currentType_9110 = extractedValue_type ;
+        var_currentLLVMAddressVar_9142 = function_llvmNameForLocalVariable (extractedValue_plmName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 259)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 259)) ;
       }
       break ;
     case GALGAS_valuedObject::kEnum_globalSyncInstance:
       {
-        const cEnumAssociatedValues_valuedObject_globalSyncInstance * extractPtr_10745 = (const cEnumAssociatedValues_valuedObject_globalSyncInstance *) (var_entity_9519.unsafePointer ()) ;
-        const GALGAS_PLMType extractedValue_type = extractPtr_10745->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_plmName = extractPtr_10745->mAssociatedValue1 ;
-        var_currentType_9117 = extractedValue_type ;
-        var_currentLLVMAddressVar_9149 = function_llvmNameForGlobalSyncInstance (extractedValue_plmName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 262)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 262)) ;
+        const cEnumAssociatedValues_valuedObject_globalSyncInstance * extractPtr_10738 = (const cEnumAssociatedValues_valuedObject_globalSyncInstance *) (var_entity_9512.unsafePointer ()) ;
+        const GALGAS_PLMType extractedValue_type = extractPtr_10738->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_plmName = extractPtr_10738->mAssociatedValue1 ;
+        var_currentType_9110 = extractedValue_type ;
+        var_currentLLVMAddressVar_9142 = function_llvmNameForGlobalSyncInstance (extractedValue_plmName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 262)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 262)) ;
       }
       break ;
     }
   }
-  GALGAS_propertyMap var_currentObjectPropertyMap_10836 = var_currentType_9117.getter_propertyMap (HERE) ;
-  GALGAS_accessInAssignmentListAST var_accessList_10951 = object->mProperty_mAccessList ;
-  GALGAS_accessInAssignmentAST var_lastAccess_11005 ;
+  GALGAS_propertyMap var_currentObjectPropertyMap_10829 = var_currentType_9110.getter_propertyMap (HERE) ;
+  GALGAS_accessInAssignmentListAST var_accessList_10944 = object->mProperty_mAccessList ;
+  GALGAS_accessInAssignmentAST var_lastAccess_10998 ;
   {
-  var_accessList_10951.setter_popLast (var_lastAccess_11005, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 269)) ;
+  var_accessList_10944.setter_popLast (var_lastAccess_10998, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 269)) ;
   }
-  cEnumerator_accessInAssignmentListAST enumerator_11060 (var_accessList_10951, kENUMERATION_UP) ;
-  while (enumerator_11060.hasCurrentObject ()) {
-    switch (enumerator_11060.current_mAccess (HERE).enumValue ()) {
+  cEnumerator_accessInAssignmentListAST enumerator_11053 (var_accessList_10944, kENUMERATION_UP) ;
+  while (enumerator_11053.hasCurrentObject ()) {
+    switch (enumerator_11053.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_12328 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_11060.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_12328->mAssociatedValue0 ;
-        GALGAS_bool var_isPublic_11224 ;
-        GALGAS_propertyAccessKind var_propertyAccess_11272 ;
-        var_currentObjectPropertyMap_10836.method_searchKey (extractedValue_propertyName, var_isPublic_11224, var_propertyAccess_11272, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 274)) ;
-        switch (var_propertyAccess_11272.enumValue ()) {
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_12321 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_11053.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_12321->mAssociatedValue0 ;
+        GALGAS_bool var_isPublic_11217 ;
+        GALGAS_propertyAccessKind var_propertyAccess_11265 ;
+        var_currentObjectPropertyMap_10829.method_searchKey (extractedValue_propertyName, var_isPublic_11217, var_propertyAccess_11265, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 274)) ;
+        switch (var_propertyAccess_11265.enumValue ()) {
         case GALGAS_propertyAccessKind::kNotBuilt:
           break ;
         case GALGAS_propertyAccessKind::kEnum_nonVirtualMethod:
           {
             TC_Array <C_FixItDescription> fixItArray7 ;
             inCompiler->emitSemanticError (extractedValue_propertyName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 281)), GALGAS_string ("a method cannot be used in this context"), fixItArray7  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 281)) ;
-            var_currentType_9117.drop () ; // Release error dropped variable
-            var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+            var_currentType_9110.drop () ; // Release error dropped variable
+            var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
           }
           break ;
         case GALGAS_propertyAccessKind::kEnum_constantProperty:
           {
             TC_Array <C_FixItDescription> fixItArray8 ;
             inCompiler->emitSemanticError (extractedValue_propertyName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 283)), GALGAS_string ("a context property cannot be used in this context"), fixItArray8  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 283)) ;
-            var_currentType_9117.drop () ; // Release error dropped variable
-            var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+            var_currentType_9110.drop () ; // Release error dropped variable
+            var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
           }
           break ;
         case GALGAS_propertyAccessKind::kEnum_singleton:
           {
-            const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_11815 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_11272.unsafePointer ()) ;
-            const GALGAS_objectIR extractedValue_object = extractPtr_11815->mAssociatedValue0 ;
-            var_currentType_9117 = extensionGetter_type (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 287)) ;
-            var_currentLLVMAddressVar_9149 = extensionGetter_llvmName (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 288)) ;
-            var_currentObjectPropertyMap_10836 = extensionGetter_type (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 289)).getter_propertyMap (HERE) ;
+            const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_11808 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_11265.unsafePointer ()) ;
+            const GALGAS_objectIR extractedValue_object = extractPtr_11808->mAssociatedValue0 ;
+            var_currentType_9110 = extensionGetter_type (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 287)) ;
+            var_currentLLVMAddressVar_9142 = extensionGetter_llvmName (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 288)) ;
+            var_currentObjectPropertyMap_10829 = extensionGetter_type (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 289)).getter_propertyMap (HERE) ;
           }
           break ;
         case GALGAS_propertyAccessKind::kEnum_indexed:
           {
-            const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_12311 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_11272.unsafePointer ()) ;
-            const GALGAS_PLMType extractedValue_propertyType = extractPtr_12311->mAssociatedValue0 ;
-            const GALGAS_uint extractedValue_propertyIndex = extractPtr_12311->mAssociatedValue1 ;
-            GALGAS_string var_llvmPropertyName_11949 ;
+            const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_12304 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_11265.unsafePointer ()) ;
+            const GALGAS_PLMType extractedValue_propertyType = extractPtr_12304->mAssociatedValue0 ;
+            const GALGAS_uint extractedValue_propertyIndex = extractPtr_12304->mAssociatedValue1 ;
+            GALGAS_string var_llvmPropertyName_11942 ;
             {
-            extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_llvmPropertyName_11949, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 291)) ;
+            extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_llvmPropertyName_11942, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 291)) ;
             }
             {
-            extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, var_currentType_9117, var_currentLLVMAddressVar_9149, var_llvmPropertyName_11949, extractedValue_propertyIndex, extractedValue_propertyName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 297)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 292)) ;
+            extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, var_currentType_9110, var_currentLLVMAddressVar_9142, var_llvmPropertyName_11942, extractedValue_propertyIndex, extractedValue_propertyName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 297)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 292)) ;
             }
-            var_currentType_9117 = extractedValue_propertyType ;
-            var_currentLLVMAddressVar_9149 = var_llvmPropertyName_11949 ;
-            var_currentObjectPropertyMap_10836 = var_currentType_9117.getter_propertyMap (HERE) ;
+            var_currentType_9110 = extractedValue_propertyType ;
+            var_currentLLVMAddressVar_9142 = var_llvmPropertyName_11942 ;
+            var_currentObjectPropertyMap_10829 = var_currentType_9110.getter_propertyMap (HERE) ;
           }
           break ;
         }
@@ -858,126 +858,69 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_12492 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_11060.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_12492->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_12492->mAssociatedValue1 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_12485 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_11053.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_12485->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_12485->mAssociatedValue1 ;
         TC_Array <C_FixItDescription> fixItArray9 ;
         inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("not handled yet"), fixItArray9  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 304)) ;
-        var_currentType_9117.drop () ; // Release error dropped variable
-        var_currentLLVMAddressVar_9149.drop () ; // Release error dropped variable
+        var_currentType_9110.drop () ; // Release error dropped variable
+        var_currentLLVMAddressVar_9142.drop () ; // Release error dropped variable
       }
       break ;
     }
-    enumerator_11060.gotoNextObject () ;
+    enumerator_11053.gotoNextObject () ;
   }
-  switch (var_lastAccess_11005.enumValue ()) {
+  switch (var_lastAccess_10998.enumValue ()) {
   case GALGAS_accessInAssignmentAST::kNotBuilt:
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_12649 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_11005.unsafePointer ()) ;
-      const GALGAS_location extractedValue_endOfIndex = extractPtr_12649->mAssociatedValue1 ;
+      const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_12642 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (var_lastAccess_10998.unsafePointer ()) ;
+      const GALGAS_location extractedValue_endOfIndex = extractPtr_12642->mAssociatedValue1 ;
       TC_Array <C_FixItDescription> fixItArray10 ;
       inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("a property is required here"), fixItArray10  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 310)) ;
     }
     break ;
   case GALGAS_accessInAssignmentAST::kEnum_property:
     {
-      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_17626 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_11005.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_methodName = extractPtr_17626->mAssociatedValue0 ;
-      GALGAS_propertyMap var_propertyMap_12709 = var_currentObjectPropertyMap_10836 ;
-      GALGAS_lstring var_key_12755 = function_routineMangledNameFromCall (var_currentType_9117.getter_llvmBaseTypeName (HERE), extractedValue_methodName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 313)) ;
-      GALGAS_propertyAccessKind var_propertyAccess_12915 ;
-      GALGAS_bool joker_12874 ; // Joker input parameter
-      var_propertyMap_12709.method_searchKey (var_key_12755, joker_12874, var_propertyAccess_12915, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 314)) ;
-      switch (var_propertyAccess_12915.enumValue ()) {
-      case GALGAS_propertyAccessKind::kNotBuilt:
-        break ;
-      case GALGAS_propertyAccessKind::kEnum_constantProperty:
-        {
-          TC_Array <C_FixItDescription> fixItArray11 ;
-          inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 317)), GALGAS_string ("a constant cannot be used as method"), fixItArray11  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 317)) ;
+      const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_15249 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (var_lastAccess_10998.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_methodName = extractPtr_15249->mAssociatedValue0 ;
+      GALGAS_routineMapCTXT var_routineMap_12717 = var_currentType_9110.getter_routineMap (SOURCE_FILE ("instruction-procedure-call.galgas", 312)) ;
+      GALGAS_lstring var_methodMangledName_12770 = extensionGetter_mangledName (object->mProperty_mArguments, extractedValue_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 313)) ;
+      GALGAS_bool var_implementedPublic_12896 ;
+      GALGAS_routineTypedSignature var_formalSignature_12923 ;
+      GALGAS_unifiedTypeMap_2D_proxy var_formalReturnTypeProxy_12956 ;
+      GALGAS_routineLLVMNameDict var_implementedModeDictionary_13021 ;
+      GALGAS_bool var_implementedIsSafe_13050 ;
+      GALGAS_bool var_implementedIsExported_13090 ;
+      GALGAS_mode var_implementedMode_13124 ;
+      var_routineMap_12717.method_searchKey (var_methodMangledName_12770, var_implementedPublic_12896, var_formalSignature_12923, var_formalReturnTypeProxy_12956, var_implementedModeDictionary_13021, var_implementedIsSafe_13050, var_implementedIsExported_13090, var_implementedMode_13124, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 314)) ;
+      GALGAS_string var_functionLLVMName_13178 ;
+      const enumGalgasBool test_11 = var_implementedModeDictionary_13021.getter_hasKey (constinArgument_inMode COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 326)).boolEnum () ;
+      if (kBoolTrue == test_11) {
+        var_implementedModeDictionary_13021.method_searchKey (constinArgument_inMode, var_functionLLVMName_13178, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 327)) ;
+      }else if (kBoolFalse == test_11) {
+        const enumGalgasBool test_12 = var_implementedModeDictionary_13021.getter_hasKey (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("instruction-procedure-call.galgas", 328)) COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 328)).boolEnum () ;
+        if (kBoolTrue == test_12) {
+          var_implementedModeDictionary_13021.method_searchKey (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("instruction-procedure-call.galgas", 329)), var_functionLLVMName_13178, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 329)) ;
+        }else if (kBoolFalse == test_12) {
+          TC_Array <C_FixItDescription> fixItArray13 ;
+          inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 331)), GALGAS_string ("this function cannot be invoked in ").add_operation (extensionGetter_string (constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 331)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 331)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 331)), fixItArray13  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 331)) ;
+          var_functionLLVMName_13178.drop () ; // Release error dropped variable
         }
-        break ;
-      case GALGAS_propertyAccessKind::kEnum_nonVirtualMethod:
-        {
-          const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod * extractPtr_15439 = (const cEnumAssociatedValues_propertyAccessKind_nonVirtualMethod *) (var_propertyAccess_12915.unsafePointer ()) ;
-          const GALGAS_routineDescriptor extractedValue_routineDescriptor = extractPtr_15439->mAssociatedValue0 ;
-          GALGAS_procCallEffectiveParameterListIR temp_12 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-procedure-call.galgas", 322)) ;
-          temp_12.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-procedure-call.galgas", 321)), GALGAS_objectIR::constructor_reference (var_currentType_9117, var_currentLLVMAddressVar_9149  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 322))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 322)) ;
-          GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_13210 = temp_12 ;
-          GALGAS_routineKind var_routineKind_13347 = extractedValue_routineDescriptor.getter_routineKind (HERE) ;
-          GALGAS_mode var_calleeMode_13400 = extensionGetter_executionMode (var_routineKind_13347, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 326)) ;
-          GALGAS_routineTypedSignature var_formalSignature_13456 = extractedValue_routineDescriptor.getter_signature (HERE) ;
-          GALGAS_bool test_13 = GALGAS_bool (kIsEqual, object->mProperty_mIdentifier.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())) ;
-          if (kBoolTrue == test_13.boolEnum ()) {
-            test_13 = extractedValue_routineDescriptor.getter_canMutateProperties (HERE) ;
-          }
-          GALGAS_bool test_14 = test_13 ;
-          if (kBoolTrue == test_14.boolEnum ()) {
-            test_14 = constinArgument_inRoutineAttributes.getter_mutating (SOURCE_FILE ("instruction-procedure-call.galgas", 330)).operator_not (SOURCE_FILE ("instruction-procedure-call.galgas", 330)) ;
-          }
-          const enumGalgasBool test_15 = test_14.boolEnum () ;
-          if (kBoolTrue == test_15) {
-            TC_Array <C_FixItDescription> fixItArray16 ;
-            inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 331)), GALGAS_string ("cannot mutate properties, current method is not declared with @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 332)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 332)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 332)), fixItArray16  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 331)) ;
-          }
-          const enumGalgasBool test_17 = GALGAS_bool (kIsNotEqual, extractedValue_routineDescriptor.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 335)))).boolEnum () ;
-          if (kBoolTrue == test_17) {
-            TC_Array <C_FixItDescription> fixItArray18 ;
-            inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 336)), GALGAS_string ("not a procedure (returns a value)"), fixItArray18  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 336)) ;
-          }else if (kBoolFalse == test_17) {
-            GALGAS_calleeKindIR var_calleeKind_14158 = function_checkMode (constinArgument_inCurrentMode, var_calleeMode_13400, var_routineKind_13347, extractedValue_methodName.getter_location (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 339)) ;
-            {
-            routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_13456, object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_13210, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 346)) ;
-            }
-            GALGAS_lstring var_routineMangledName_15020 = function_routineMangledNameFromCall (var_currentType_9117.getter_llvmBaseTypeName (HERE), extractedValue_methodName, object->mProperty_mArguments, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 362)) ;
-            ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR_5F_EX::constructor_new (GALGAS_objectIR::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 366)), var_routineMangledName_15020, extractedValue_routineDescriptor.getter_nameForLLVMGeneration (HERE), var_calleeKind_14158, var_effectiveParameterListIR_13210  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 364))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 364)) ;
-          }
-        }
-        break ;
-      case GALGAS_propertyAccessKind::kEnum_singleton:
-        {
-          const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_15545 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_12915.unsafePointer ()) ;
-          const GALGAS_location extractedValue_errorLocation = extractPtr_15545->mAssociatedValue1 ;
-          TC_Array <C_FixItDescription> fixItArray19 ;
-          inCompiler->emitSemanticError (extractedValue_errorLocation, GALGAS_string ("a property cannot be used as method"), fixItArray19  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 374)) ;
-        }
-        break ;
-      case GALGAS_propertyAccessKind::kEnum_indexed:
-        {
-          const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_17618 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_12915.unsafePointer ()) ;
-          const GALGAS_PLMType extractedValue_propertyType = extractPtr_17618->mAssociatedValue0 ;
-          const GALGAS_uint extractedValue_propertyIndex = extractPtr_17618->mAssociatedValue1 ;
-          const enumGalgasBool test_20 = extractedValue_propertyType.getter_kind (HERE).getter_isFunction (SOURCE_FILE ("instruction-procedure-call.galgas", 376)).operator_not (SOURCE_FILE ("instruction-procedure-call.galgas", 376)).boolEnum () ;
-          if (kBoolTrue == test_20) {
-            TC_Array <C_FixItDescription> fixItArray21 ;
-            inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 377)), GALGAS_string ("an indexed property cannot be used as method"), fixItArray21  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 377)) ;
-          }else if (kBoolFalse == test_20) {
-            GALGAS_routineDescriptor var_descriptor_15806 ;
-            extractedValue_propertyType.getter_kind (HERE).method_function (var_descriptor_15806, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 379)) ;
-            const enumGalgasBool test_22 = GALGAS_bool (kIsNotEqual, var_descriptor_15806.getter_returnTypeProxy (HERE).objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 381)))).boolEnum () ;
-            if (kBoolTrue == test_22) {
-              TC_Array <C_FixItDescription> fixItArray23 ;
-              inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 382)), GALGAS_string ("a function returns a value and cannot be called as a procedure"), fixItArray23  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 382)) ;
-            }else if (kBoolFalse == test_22) {
-              GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_16357 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-procedure-call.galgas", 392)) ;
-              {
-              routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_descriptor_15806.getter_signature (HERE), object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_16357, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 393)) ;
-              }
-              GALGAS_string var_property_5F_llvmName_17059 ;
-              {
-              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_property_5F_llvmName_17059, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 409)) ;
-              }
-              {
-              extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, var_currentType_9117, var_currentLLVMAddressVar_9149, var_property_5F_llvmName_17059, extractedValue_propertyIndex, extractedValue_methodName.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 415)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 410)) ;
-              }
-              ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_indirectRoutineCallIR::constructor_new (GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_17059  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 419)), extractedValue_propertyType, GALGAS_objectIR::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 421)), var_effectiveParameterListIR_16357  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 418))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 418)) ;
-            }
-          }
-        }
-        break ;
       }
+      const enumGalgasBool test_14 = GALGAS_bool (kIsNotEqual, var_formalReturnTypeProxy_12956.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 338)))).boolEnum () ;
+      if (kBoolTrue == test_14) {
+        TC_Array <C_FixItDescription> fixItArray15 ;
+        inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 339)), GALGAS_string ("cannot be called in instruction, returns a value"), fixItArray15  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 339)) ;
+      }
+      GALGAS_procCallEffectiveParameterListIR temp_16 = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-procedure-call.galgas", 346)) ;
+      temp_16.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-procedure-call.galgas", 345)), GALGAS_objectIR::constructor_reference (var_currentType_9110, var_currentLLVMAddressVar_9142  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 346))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 346)) ;
+      GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_14166 = temp_16 ;
+      {
+      routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_formalSignature_12923, object->mProperty_mArguments, extractedValue_methodName.getter_location (HERE), constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_14166, inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 349)) ;
+      }
+      ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_standaloneRoutineCallIR::constructor_new (GALGAS_objectIR::constructor_void (SOURCE_FILE ("instruction-procedure-call.galgas", 369)), var_methodMangledName_12770, var_functionLLVMName_13178, var_effectiveParameterListIR_14166  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 368))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 368)) ;
     }
     break ;
   }
@@ -12841,8 +12784,8 @@ const char * gWrapperFileContent_58_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public func set @noUnusedWarning (\?mode:mode $digitalMode\n"
-  "                                    \?toPort:port $digitalPort) {\n"
+  "  public func set @noUnusedWarning @safe (\?mode:mode $digitalMode\n"
+  "                                          \?toPort:port $digitalPort) {\n"
   "  //--- Set config and dir to apply\n"
   "   var config $uint32\n"
   "    var dir $uint1\n"
@@ -12939,8 +12882,8 @@ const char * gWrapperFileContent_58_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public func write @noUnusedWarning (\?value $bool\n"
-  "                                      \?toPort:port $digitalPort) {\n"
+  "  public func write @noUnusedWarning @safe (\?value $bool\n"
+  "                                            \?toPort:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      if value {\n"
@@ -13091,7 +13034,7 @@ const char * gWrapperFileContent_58_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public func read @noUnusedWarning (\?port:port $digitalPort) -> $bool {\n"
+  "  public func read @noUnusedWarning @safe (\?port:port $digitalPort) -> $bool {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      result = (#GPIOB:PDIR & (1 << 16)) \xE2""\x89""\xA0"" 0\n"
@@ -13146,7 +13089,7 @@ const char * gWrapperFileContent_58_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  public func toggle @noUnusedWarning (\?port:port $digitalPort) {\n"
+  "  public func toggle @noUnusedWarning @safe (\?port:port $digitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      #GPIOB:PTOR = 1 << 16\n"
@@ -13208,7 +13151,7 @@ const cRegularFileWrapper gWrapperFile_58_targetTemplates (
   "driver-digital-teensy-3-1.plm-import",
   "plm-import",
   true, // Text file
-  12420, // Text length
+  12456, // Text length
   gWrapperFileContent_58_targetTemplates
 ) ;
 
@@ -14797,7 +14740,7 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func startup configurePorts @noUnusedWarning () {\n"
+  "  func startup configurePorts @noUnusedWarning @safe () {\n"
   "    digital.set (!mode:.OUTPUT !toPort:self.DB4)\n"
   "    digital.set (!mode:.OUTPUT !toPort:self.DB5)\n"
   "    digital.set (!mode:.OUTPUT !toPort:self.DB6)\n"
@@ -14808,50 +14751,50 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func driveHighE @noUnusedWarning () {\n"
+  "  func driveHighE @noUnusedWarning @safe () {\n"
   "    digital.write (!yes !toPort:self.ENABLE)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func driveLowE @noUnusedWarning () {\n"
+  "  func driveLowE @noUnusedWarning @safe () {\n"
   "    digital.write (!no !toPort:self.ENABLE)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "\n"
-  "  func driveHighRS @noUnusedWarning () {\n"
+  "  func driveHighRS @noUnusedWarning @safe () {\n"
   "   digital.write (!yes !toPort:self.RS)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func driveLowRS @noUnusedWarning () {\n"
+  "  func driveLowRS @noUnusedWarning @safe () {\n"
   "    digital.write (!no !toPort:self.RS)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func setD4 @noUnusedWarning (\?inValue $bool) {\n"
+  "  func setD4 @noUnusedWarning @safe (\?inValue $bool) {\n"
   "    digital.write (!inValue !toPort:self.DB4)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func setD5 @noUnusedWarning (\?inValue $bool) {\n"
+  "  func setD5 @noUnusedWarning @safe (\?inValue $bool) {\n"
   "    digital.write (!inValue !toPort:self.DB5)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func setD6 @noUnusedWarning (\?inValue $bool) {\n"
+  "  func setD6 @noUnusedWarning @safe (\?inValue $bool) {\n"
   "    digital.write (!inValue !toPort:self.DB6)\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func setD7 @noUnusedWarning (\?inValue $bool) {\n"
+  "  func setD7 @noUnusedWarning @safe (\?inValue $bool) {\n"
   "    digital.write (!inValue !toPort:self.DB7)\n"
   "  }\n"
   "\n"
@@ -14859,7 +14802,7 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "  //   UTILITY ROUTINES\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func programLcd4BitDataBusOutput @noUnusedWarning (\?inValue $uint8) {\n"
+  "  func programLcd4BitDataBusOutput @noUnusedWarning @safe (\?inValue $uint8) {\n"
   "    self.setD4 (!(inValue & 0x01) \xE2""\x89""\xA0"" 0)\n"
   "    self.setD5 (!(inValue & 0x02) \xE2""\x89""\xA0"" 0)\n"
   "    self.setD6 (!(inValue & 0x04) \xE2""\x89""\xA0"" 0)\n"
@@ -14868,7 +14811,7 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func writeFirstNibbleOf8bitCommand @noUnusedWarning (\?inValue $uint8) {\n"
+  "  func writeFirstNibbleOf8bitCommand @noUnusedWarning @safe (\?inValue $uint8) {\n"
   "    self.driveLowRS ()\n"
   "    self.programLcd4BitDataBusOutput (!inValue)\n"
   "    self.driveHighE ()\n"
@@ -14876,7 +14819,7 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func writeFirstNibbleOf8bitData @noUnusedWarning (\?inValue $uint8) {\n"
+  "  func writeFirstNibbleOf8bitData @noUnusedWarning @safe (\?inValue $uint8) {\n"
   "    self.driveHighRS ()\n"
   "    self.programLcd4BitDataBusOutput (!inValue)\n"
   "    self.driveHighE ()\n"
@@ -14884,14 +14827,14 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "\n"
   "   //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func writeSecondNibble @noUnusedWarning (\?inValue $uint8) {\n"
+  "  func writeSecondNibble @noUnusedWarning @safe (\?inValue $uint8) {\n"
   "    self.programLcd4BitDataBusOutput (!inValue)\n"
   "    self.driveHighE ()\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func startup write4BitCommand @noUnusedWarning (\?inValue $uint8) {\n"
+  "  func startup write4BitCommand @noUnusedWarning @safe (\?inValue $uint8) {\n"
   "    time.busyWaitingDuringMS (!1)\n"
   "    self.writeFirstNibbleOf8bitCommand (!inValue)\n"
   "    time.busyWaitingDuringMS (!1)\n"
@@ -14900,7 +14843,7 @@ const char * gWrapperFileContent_63_targetTemplates = "\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  func startup write8bitCommand @noUnusedWarning (\?inCommand $uint8) {\n"
+  "  func startup write8bitCommand @noUnusedWarning @safe (\?inCommand $uint8) {\n"
   "    time.busyWaitingDuringMS (!1)\n"
   "    self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)\n"
   "    time.busyWaitingDuringMS (!1)\n"
@@ -15245,7 +15188,7 @@ const cRegularFileWrapper gWrapperFile_63_targetTemplates (
   "plm-teensy-3-1-lcd.plm-import",
   "plm-import",
   true, // Text file
-  15342, // Text length
+  15432, // Text length
   gWrapperFileContent_63_targetTemplates
 ) ;
 
@@ -15317,13 +15260,13 @@ const char * gWrapperFileContent_65_targetTemplates = "check target \"teensy-3-1
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public func startup oneMillisecondBusyWait @noUnusedWarning () {\n"
+  "  public func startup oneMillisecondBusyWait @noUnusedWarning @safe () {\n"
   "    while #SYST:CSR:COUNTFLAG == 0 {}\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public func panic panicOneMillisecondBusyWait @noUnusedWarning () {\n"
+  "  public func panic panicOneMillisecondBusyWait @noUnusedWarning @safe () {\n"
   "    while #SYST:CSR:COUNTFLAG == 0 {}\n"
   "  }\n"
   "\n"
@@ -15335,7 +15278,7 @@ const char * gWrapperFileContent_65_targetTemplates = "check target \"teensy-3-1
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public func startup busyWaitingDuringMS @noUnusedWarning @mutating (\?inDelay $uint32) {\n"
+  "  public func startup busyWaitingDuringMS @noUnusedWarning @mutating @safe (\?inDelay $uint32) {\n"
   "    for _ $uint32 in 0 ..< inDelay {\n"
   "      self.oneMillisecondBusyWait ()\n"
   "    }\n"
@@ -15343,7 +15286,7 @@ const char * gWrapperFileContent_65_targetTemplates = "check target \"teensy-3-1
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public func panic panicBusyWaitingDuringMS @noUnusedWarning @mutating (\?inDelay $uint32) {\n"
+  "  public func panic panicBusyWaitingDuringMS @noUnusedWarning @mutating @safe (\?inDelay $uint32) {\n"
   "    for _ $uint32 in 0 ..< inDelay {\n"
   "      self.panicOneMillisecondBusyWait ()\n"
   "    }\n"
@@ -15360,7 +15303,7 @@ const char * gWrapperFileContent_65_targetTemplates = "check target \"teensy-3-1
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  public primitive wait @noUnusedWarning (\?until: inDate $uint32) {\n"
+  "  public primitive wait @noUnusedWarning @safe (\?until: inDate $uint32) {\n"
   "    if inDate > self.mUptime {\n"
   "      block (!onDeadline:inDate)\n"
   "    }\n"
@@ -15393,7 +15336,7 @@ const cRegularFileWrapper gWrapperFile_65_targetTemplates (
   "plm-teensy-3-1-time.plm-import",
   "plm-import",
   true, // Text file
-  2900, // Text length
+  2930, // Text length
   gWrapperFileContent_65_targetTemplates
 ) ;
 

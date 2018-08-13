@@ -413,7 +413,7 @@ setter @routineMapCTXT addFunctionWithoutArgument
 setter @routineMapCTXT addFunctionWithInputArgument
   ?!context:@semanticContext ioContext
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?methodName:let @string inMethodName
+  ?methodName:let @lstring inMethodName
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector:let @string inInputSelector
   ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
@@ -421,6 +421,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   ?canMutateProperties:let @bool inCanMutateProperties
   ?!@propertyMap ioPropertyMap
+  !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {
     !.input
@@ -429,7 +430,27 @@ setter @routineMapCTXT addFunctionWithInputArgument
     ![inInputArgumentName nowhere]
   }
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
-  let routineMangledName = routineMangledNameFromAST (
+  let routineMangledName = @lstring.new {
+    !inMethodName.string + [argumentList routineSignature !inMethodName]
+    !inMethodName
+  }
+  outRoutineLLVMName = routineMangledNameFromAST (!inLLVMBaseTypeName !inMethodName !argumentList)
+  [!?self insertKey
+    !routineMangledName
+    !true
+    !signature
+    !inResultType
+    !{!.anyMode !outRoutineLLVMName}
+    !true
+    !false
+    !.anyMode
+  ]
+  
+  
+  
+  
+#--- EX
+  let routineMangledNameEX = routineMangledNameFromAST (
     !inLLVMBaseTypeName
     !.new {!inMethodName !.nowhere}
     !argumentList
@@ -438,7 +459,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
     !isPublic:true
     !exported:false
     !name:inMethodName
-    !nameForLLVMGeneration:routineMangledName
+    !nameForLLVMGeneration:routineMangledNameEX
     !routineKind:.function {!executionMode:.anyMode}
     !signature:signature
     !returnTypeProxy:inResultType # Return type 
@@ -447,7 +468,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
     !safe:inIsSafe # Routine is declared with @safe attribute
   }
   [!?ioPropertyMap insertKey
-    !routineMangledName
+    !routineMangledNameEX
     !true
     !.nonVirtualMethod {!descriptor:descriptor}
   ]

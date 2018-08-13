@@ -10,6 +10,17 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externFunctionDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                    Extension method '@externFunctionDeclarationListAST enterExternProcInContext'                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

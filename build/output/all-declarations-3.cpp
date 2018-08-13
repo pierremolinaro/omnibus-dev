@@ -9,6 +9,37 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_noteTypesInPrecedenceGraph (const GALGAS_externFunctionDeclarationListAST inObject,
+                                                 GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                 C_Compiler * /* inCompiler */
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_externFunctionDeclarationListAST temp_0 = inObject ;
+  cEnumerator_externFunctionDeclarationListAST enumerator_2300 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_2300.hasCurrentObject ()) {
+    cEnumerator_routineFormalArgumentListAST enumerator_2369 (enumerator_2300.current_mProcFormalArgumentList (HERE), kENUMERATION_UP) ;
+    while (enumerator_2369.hasCurrentObject ()) {
+      {
+      ioArgument_ioGraph.setter_noteNode (enumerator_2369.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 54)) ;
+      }
+      enumerator_2369.gotoNextObject () ;
+    }
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_2300.current_mReturnTypeName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      {
+      ioArgument_ioGraph.setter_noteNode (enumerator_2300.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 57)) ;
+      }
+    }
+    enumerator_2300.gotoNextObject () ;
+  }
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                    Extension method '@externFunctionDeclarationListAST enterExternProcInContext'                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

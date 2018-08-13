@@ -591,7 +591,7 @@ private proc handleFunctionCallInExpression
   ?!@instructionListIR ioInstructionGenerationList
 {
   let receiverType = [ioObjectIR type]
-#--- Searck routine in receiver type routine map
+#--- Search routine in receiver type routine map
   let @routineMapCTXT routineMap = [receiverType routineMap]
   let methodMangledName = [inArguments mangledName !inMethodName]
   [routineMap searchKey

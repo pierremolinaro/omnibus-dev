@@ -7439,7 +7439,7 @@ class GALGAS_lstring extensionGetter_routineSignature (const class GALGAS_routin
 void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapCTXT & ioObject,
                                                    class GALGAS_semanticContext & io_ioContext,
                                                    const class GALGAS_string constin_inLLVMBaseTypeName,
-                                                   const class GALGAS_string constin_inMethodName,
+                                                   const class GALGAS_lstring constin_inMethodName,
                                                    const class GALGAS_bool constin_inIsSafe,
                                                    const class GALGAS_string constin_inInputSelector,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
@@ -7447,6 +7447,7 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapCTXT &
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
                                                    const class GALGAS_bool constin_inCanMutateProperties,
                                                    class GALGAS_propertyMap & io_ioPropertyMap,
+                                                   class GALGAS_lstring & out_outRoutineLLVMName,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -8161,15 +8162,4 @@ class GALGAS_externFunctionDeclarationListAST_2D_element : public AC_GALGAS_root
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externFunctionDeclarationListAST_2D_element ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externFunctionDeclarationListAST inObject,
-                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
