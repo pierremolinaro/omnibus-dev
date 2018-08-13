@@ -65,8 +65,7 @@ boolset @routineAttributes {
   directPropertyAccess,
   guard,
   boot,
-  controlRegisterReadable,
-  panicAllowed # Routine is not declared with @safe attribute
+  controlRegisterReadable
 }
 
 #·······················································································································

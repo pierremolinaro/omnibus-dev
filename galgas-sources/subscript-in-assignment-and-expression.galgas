@@ -51,8 +51,8 @@ proc handleArraySubscriptNew
         !inArraySize
         ?let @bool generatePanicInstruction
       ]
-      if generatePanicInstruction && not [inRoutineAttributes panicAllowed] then
-        error inErrorLocation : "index computation can generate panic"
+      if generatePanicInstruction && inIsSafe then
+        error inErrorLocation : "index computation can generate panic and routine is not safe"
       end
     end
     outIndexIR = indexResult

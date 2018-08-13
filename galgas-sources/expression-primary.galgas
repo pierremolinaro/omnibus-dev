@@ -631,7 +631,7 @@ private proc handleFunctionCallInExpression
     error inMethodName : "this function cannot be invoked in " + inMode + " mode" : functionLLVMName
   end
 #--- Check safety
-  if not [inRoutineAttributes panicAllowed] && not implementedIsSafe then
+  if inIsSafe && not implementedIsSafe then
     error inMethodName : "an unsafe routine cannot call a safe routine"
   end
 #--- Check routine is actually a function

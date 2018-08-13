@@ -1742,8 +1742,6 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
 
   public : static class GALGAS_routineAttributes constructor_none (LOCATION_ARGS) ;
 
-  public : static class GALGAS_routineAttributes constructor_panicAllowed (LOCATION_ARGS) ;
-
 //--------------------------------- & operator
   public : VIRTUAL_IN_DEBUG GALGAS_routineAttributes operator_and (const GALGAS_routineAttributes & inOperand
                                                                    COMMA_LOCATION_ARGS) const ;
@@ -1789,8 +1787,6 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mutating (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_none (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_panicAllowed (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -3790,7 +3786,7 @@ class cMapElement_routineMapCTXT : public cMapElement {
   public : GALGAS_routineTypedSignature mProperty_mSignature ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
   public : GALGAS_routineLLVMNameDict mProperty_mModeDictionary ;
-  public : GALGAS_bool mProperty_mIsSafe ;
+  public : GALGAS_bool mProperty_safe ;
   public : GALGAS_bool mProperty_mIsExported ;
   public : GALGAS_mode mProperty_mMode ;
 
@@ -3800,7 +3796,7 @@ class cMapElement_routineMapCTXT : public cMapElement {
                                        const GALGAS_routineTypedSignature & in_mSignature,
                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                        const GALGAS_routineLLVMNameDict & in_mModeDictionary,
-                                       const GALGAS_bool & in_mIsSafe,
+                                       const GALGAS_bool & in_safe,
                                        const GALGAS_bool & in_mIsExported,
                                        const GALGAS_mode & in_mMode
                                        COMMA_LOCATION_ARGS) ;
@@ -3932,6 +3928,7 @@ extern C_StringListCommandLineOption gOption_plm_5F_options_pathList ;
 void extensionSetter_addFunctionWithoutArgument (class GALGAS_routineMapCTXT & ioObject,
                                                  const class GALGAS_string constin_inLLVMBaseTypeName,
                                                  const class GALGAS_lstring constin_inMethodName,
+                                                 const class GALGAS_mode constin_inMode,
                                                  const class GALGAS_bool constin_inIsSafe,
                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
                                                  class GALGAS_lstring & out_outRoutineLLVMName,
@@ -7068,7 +7065,7 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_routineLLVMNameDict mProperty_mModeDictionary ;
 
-  public : GALGAS_bool mProperty_mIsSafe ;
+  public : GALGAS_bool mProperty_safe ;
 
   public : GALGAS_bool mProperty_mIsExported ;
 
@@ -7090,7 +7087,7 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
                                              const GALGAS_routineTypedSignature & in_mSignature,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                              const GALGAS_routineLLVMNameDict & in_mModeDictionary,
-                                             const GALGAS_bool & in_mIsSafe,
+                                             const GALGAS_bool & in_safe,
                                              const GALGAS_bool & in_mIsExported,
                                              const GALGAS_mode & in_mMode) ;
 
@@ -7133,8 +7130,6 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSafe (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineLLVMNameDict getter_mModeDictionary (LOCATION_ARGS) const ;
@@ -7142,6 +7137,8 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineTypedSignature getter_mSignature (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_safe (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -7243,6 +7240,7 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapCTXT &
                                                    class GALGAS_semanticContext & io_ioContext,
                                                    const class GALGAS_string constin_inLLVMBaseTypeName,
                                                    const class GALGAS_lstring constin_inMethodName,
+                                                   const class GALGAS_mode constin_inMode,
                                                    const class GALGAS_bool constin_inIsSafe,
                                                    const class GALGAS_string constin_inInputSelector,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
@@ -7262,6 +7260,7 @@ void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_routineMapCT
                                                        class GALGAS_semanticContext & io_ioContext,
                                                        const class GALGAS_string constin_inLLVMBaseTypeName,
                                                        const class GALGAS_lstring constin_inMethodName,
+                                                       const class GALGAS_mode constin_inMode,
                                                        const class GALGAS_bool constin_inIsSafe,
                                                        const class GALGAS_string constin_inInputSelector_31_,
                                                        const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_31_,

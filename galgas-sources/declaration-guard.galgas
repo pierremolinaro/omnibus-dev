@@ -248,7 +248,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyze instruction list
     [mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
-      !routineAttributes:.mutating | .directPropertyAccess | .panicAllowed
+      !routineAttributes:.mutating | .directPropertyAccess
       !context:inContext
       !mode:.guardMode
       !safe: false
@@ -282,7 +282,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyze instruction list
     [mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
-      !routineAttributes: .mutating | .directPropertyAccess | .panicAllowed
+      !routineAttributes: .mutating | .directPropertyAccess
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
       !safe: false

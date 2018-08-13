@@ -429,10 +429,18 @@ override method @staticListAST enterInContext
               ?let candidateSignature
               ?let candidateReturnTypeProxy # null if no returned value
               ?let implementedModeDictionary
-              ?let unused implementedIsSafe
+              ?let implementedIsSafe
               ?let unused implementedIsExported
               ?let candidateMode
             ]
+          #--- Check safety
+            if safe && not implementedIsSafe then
+              error functionName : "an unsafe routine cannot call a safe routine"
+            end
+          #--- Check mode
+            if mode != candidateMode then
+              error functionName : "invalid function mode: '" + mode + "' required"
+            end
           #--- Check accessibility
 #            if not candidateIsPublic then
 #              let declarationFile = [functionDefinitionLocation file]

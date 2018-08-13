@@ -89,7 +89,7 @@ override method @sizeofExpressionAST analyzeExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?safe:let @bool unused inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -125,7 +125,7 @@ override method @sizeofTypeAST analyzeExpression
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?safe:let @bool unused inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused  ioUniversalMap

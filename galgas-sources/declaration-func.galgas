@@ -232,7 +232,6 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       attributeSet += !attribute.mValue.string
     end
     let exportedFunction = [attributeSet hasKey !exportedAttribute ()]
-    let safe = [attributeSet hasKey !safeAttribute ()]
   #--- Signature
     routineTypedSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
@@ -243,6 +242,36 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
     )
+  #--- Prepare annalysis
+    var warnIfUnused = true
+    var safe = false
+    var functionAttributes = @routineAttributes.controlRegisterReadable
+    for (attribute) in function.mFunctionAttributeList do
+      if attribute.string == noUnusedWarningAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      elsif attribute.string == userAccessAttribute () then
+        if [functionAttributes directPropertyAccess] then
+          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
+        end
+        functionAttributes = functionAttributes | .directPropertyAccess   
+      elsif attribute.string == safeAttribute () then
+        if safe then
+          error attribute : "duplicated @" + safeAttribute () + " attribute"
+        end
+        safe = true   
+      elsif attribute.string == mutatingAttribute () then
+        if [functionAttributes mutating] then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+        end
+        functionAttributes = functionAttributes | .mutating    
+      else
+        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
+          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
+      end
+    end
   #--- Enter in routine map
     @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
     switch function.mMode
@@ -266,39 +295,10 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !safe
+      !if function.mMode == .panicMode then true else safe end
       !exportedFunction
       !function.mMode
     ]
-  #--- Prepare annalysis
-    var warnIfUnused = true
-    var functionAttributes = @routineAttributes.panicAllowed | .controlRegisterReadable
-    for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
-        end
-        warnIfUnused = false    
-      elsif attribute.string == userAccessAttribute () then
-        if [functionAttributes directPropertyAccess] then
-          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes | .directPropertyAccess   
-      elsif attribute.string == safeAttribute () then
-        if not [functionAttributes panicAllowed] then
-          error attribute : "duplicated @" + safeAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes - .panicAllowed   
-      elsif attribute.string == mutatingAttribute () then
-        if [functionAttributes mutating] then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
-        end
-        functionAttributes = functionAttributes | .mutating    
-      else
-        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
-          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
-      end
-    end
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:function.mMode
@@ -326,7 +326,7 @@ map @routineMapCTXT {
   @routineTypedSignature mSignature
   @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
   @routineLLVMNameDict mModeDictionary
-  @bool mIsSafe
+  @bool safe %selector
   @bool mIsExported
   @mode mMode
 
@@ -345,6 +345,7 @@ dict @routineLLVMNameDict : @mode {
 setter @routineMapCTXT addFunctionWithoutArgument
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
+  ?mode:let @mode inMode
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
@@ -360,8 +361,8 @@ setter @routineMapCTXT addFunctionWithoutArgument
     !true
     !{}
     !inResultType
-    !{!.anyMode !outRoutineLLVMName}
-    !true
+    !{!inMode !outRoutineLLVMName}
+    !if inMode == .panicMode then true else inIsSafe end
     !false
     !.anyMode
   ]
@@ -373,6 +374,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
   ?!context:@semanticContext ioContext
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
+  ?mode:let @mode inMode
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector:let @string inInputSelector
   ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
@@ -397,8 +399,8 @@ setter @routineMapCTXT addFunctionWithInputArgument
     !true
     !signature
     !inResultType
-    !{!.anyMode !outRoutineLLVMName}
-    !true
+    !{!inMode !outRoutineLLVMName}
+    !if inMode == .panicMode then true else inIsSafe end
     !false
     !.anyMode
   ]
@@ -410,6 +412,7 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
   ?!context:@semanticContext ioContext
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
+  ?mode:let @mode inMode
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector1:let @string inInputSelector1
   ?inputArgumentTypeProxy1:let @unifiedTypeMap-proxy inInputArgumentTypeProxy1
@@ -446,8 +449,8 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
     !true
     !signature
     !inResultType
-    !{!.anyMode !outRoutineLLVMName}
-    !true
+    !{!inMode !outRoutineLLVMName}
+    !if inMode == .panicMode then true else inIsSafe end
     !false
     !.anyMode
   ]

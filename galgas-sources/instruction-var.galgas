@@ -139,7 +139,7 @@ override method @varInstructionAST instructionSemanticAnalysis
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?safe:let @bool unused inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap

@@ -417,7 +417,7 @@ override method @implementedDriverAST enterInContext
     !mode:.startupMode
     !safe: true
     !isRequired:true
-    !.function # {!executionMode:.startupMode}
+    !.function
     !warnIfUnused: true
     !exportedRoutine: false
     !.directPropertyAccess # @routineAttributes mRoutineAttributes

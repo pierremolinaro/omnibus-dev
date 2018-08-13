@@ -24,13 +24,13 @@ driver time > root {
   //   Functions callable in startup mode
   //····················································································································
 
-  public func startup oneMillisecondBusyWait @noUnusedWarning () {
+  public func startup oneMillisecondBusyWait @noUnusedWarning @safe () {
     while #SYST:CSR:COUNTFLAG == 0 {}
   }
 
   //····················································································································
 
-  public func startup busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  public func startup busyWaitingDuringMS @noUnusedWarning @safe (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }

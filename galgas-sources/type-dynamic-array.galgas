@@ -100,6 +100,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:.new {!"removeAll" !mDynamicArrayTypeName}
+      !mode:.anyMode
       !safe:false
       !resultTypeProxy: .null
       ?routineLLVMName:var routineLLVMName
@@ -113,6 +114,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:. new {!"length" !mDynamicArrayTypeName}
+      !mode:.anyMode
       !safe:false
       !resultTypeProxy: uint32TypeProxy
       ?routineLLVMName:routineLLVMName
@@ -127,6 +129,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:. new {!"insert" !mDynamicArrayTypeName}
+      !mode:.anyMode
       !safe:false
       !inputArgumentSelector1:""
       !inputArgumentTypeProxy1:elementTypeProxy
@@ -148,6 +151,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:.new {!"append" !mDynamicArrayTypeName}
+      !mode:.anyMode
       !safe:false
       !inputArgumentSelector:""
       !inputArgumentTypeProxy:elementTypeProxy

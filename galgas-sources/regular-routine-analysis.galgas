@@ -76,7 +76,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
     !routineAttributes:mRoutineAttributes
     !context:inContext
     !mode:mode
-    !safe:safe
+    !safe:if mode == .panicMode then true else safe end
     !?temporary:ioTemporaries
     !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap

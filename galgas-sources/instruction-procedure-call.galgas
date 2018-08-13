@@ -332,9 +332,9 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       error methodName : "this function cannot be invoked in " + inMode + " mode" : functionLLVMName
     end
   #--- Check safety
-#    if not [inRoutineAttributes panicAllowed] && not implementedIsSafe then
-#      error methodName : "an unsafe routine cannot call a safe routine"
-#    end
+    if inIsSafe && not implementedIsSafe then
+      error methodName : "an safe routine cannot call an unsafe routine"
+    end
   #--- Check routine does not return any value
     if formalReturnTypeProxy != .null then
       error methodName : "cannot be called in instruction, returns a value"

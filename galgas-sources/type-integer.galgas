@@ -118,6 +118,7 @@ override method @integerDeclarationAST enterInContext
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:integerTypeName
       !methodName:[byteSwappedMethodName () nowhere]
+      !mode:.anyMode
       !safe:true
       !resultTypeProxy:selfTypeProxy
       ?routineLLVMName: let routineLLVMName
@@ -134,6 +135,7 @@ override method @integerDeclarationAST enterInContext
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:integerTypeName
       !methodName:[boolTypeName () nowhere]
+      !mode:.anyMode
       !safe:true
       !resultTypeProxy:boolTypeProxy
       ?routineLLVMName: let routineLLVMName
@@ -148,6 +150,7 @@ override method @integerDeclarationAST enterInContext
   [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
     !methodName:[bitReversedMethodName () nowhere]
+    !mode:.anyMode
     !safe:true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: var routineLLVMName
@@ -162,6 +165,7 @@ override method @integerDeclarationAST enterInContext
   [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
     !methodName:[countLeadingZerosMethodName () nowhere]
+    !mode:.anyMode
     !safe:true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
@@ -176,6 +180,7 @@ override method @integerDeclarationAST enterInContext
   [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
     !methodName:[countTrainingZerosMethodName () nowhere]
+    !mode:.anyMode
     !safe:true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
@@ -190,6 +195,7 @@ override method @integerDeclarationAST enterInContext
   [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
     !methodName:[setBitCountMethodName () nowhere]
+    !mode:.anyMode
     !safe:true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
