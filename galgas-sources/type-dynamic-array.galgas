@@ -102,8 +102,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !methodName:.new {!"removeAll" !mDynamicArrayTypeName}
       !safe:false
       !resultTypeProxy: .null
-      !canMutateProperties:true
-      !?propertyMap
       ?routineLLVMName:var routineLLVMName
     ]
     ioRoutineListIR += !@dynArrayRemoveAllFunctionIR.new {
@@ -117,8 +115,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !methodName:. new {!"length" !mDynamicArrayTypeName}
       !safe:false
       !resultTypeProxy: uint32TypeProxy
-      !canMutateProperties:false
-      !?propertyMap
       ?routineLLVMName:routineLLVMName
     ]
     ioRoutineListIR += !@dynArrayLengthFunctionIR.new {
@@ -130,7 +126,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?routineMap addFunctionWithTwoInputArguments
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:"insert"
+      !methodName:. new {!"insert" !mDynamicArrayTypeName}
       !safe:false
       !inputArgumentSelector1:""
       !inputArgumentTypeProxy1:elementTypeProxy
@@ -139,21 +135,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !inputArgumentTypeProxy2:uint32TypeProxy
       !inputArgumentName2:"inIndex"
       !resultTypeProxy:.null
-      !canMutateProperties:true
-      !?propertyMap
+      ?routineLLVMName: let insertFunctionMangledName
     ]
-    let @routineFormalArgumentListAST insert_argumentList = {
-      !.input
-      !["" nowhere]
-      ![elementType.llvmBaseTypeName nowhere]
-      !["inValue" nowhere]
-    ,
-      !.input
-      !["atIndex" nowhere]
-      !["$uint32" nowhere]
-      !["inIndex" nowhere]
-    }
-    let insertFunctionMangledName = routineMangledNameFromAST (!llvmBaseTypeName !["insert" nowhere] !insert_argumentList)
     ioRoutineListIR += !@dynArrayInsertFunctionIR.new {
       !insertFunctionMangledName
       !false
@@ -170,18 +153,10 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !inputArgumentTypeProxy:elementTypeProxy
       !inputArgumentName:"inValue"
       !resultTypeProxy:.null
-      !canMutateProperties:true
-      !?propertyMap
       ?routineLLVMName: routineLLVMName
     ]
-#    let append_argumentList = @routineFormalArgumentListAST {
-#      !.input
-#      !["" nowhere]
-#      ![mElementTypeName nowhere]
-#      !["" nowhere]
-#    }
     ioRoutineListIR += !@dynArrayAppendFunctionIR.new {
-      !routineLLVMName # routineMangledNameFromAST (!llvmBaseTypeName !["append" nowhere] !append_argumentList)
+      !routineLLVMName
       !false
       !false
       !arrayTypeProxy

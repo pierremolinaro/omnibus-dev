@@ -472,10 +472,6 @@ override method @staticListAST enterInContext
             else
               error functionName : "the function should be callable from user mode" :routineLLVMName
             end
-            let currentMode = [descriptor.routineKind executionMode]
-            if currentMode != candidateMode then
-              error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
-            end
             if (descriptor.returnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
             elsif (descriptor.returnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then

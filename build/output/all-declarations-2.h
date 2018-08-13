@@ -4057,8 +4057,6 @@ void extensionSetter_addFunctionWithoutArgument (class GALGAS_routineMapCTXT & i
                                                  const class GALGAS_lstring constin_inMethodName,
                                                  const class GALGAS_bool constin_inIsSafe,
                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                 const class GALGAS_bool constin_inCanMutateProperties,
-                                                 class GALGAS_propertyMap & io_ioPropertyMap,
                                                  class GALGAS_lstring & out_outRoutineLLVMName,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
@@ -7445,8 +7443,6 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapCTXT &
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
                                                    const class GALGAS_string constin_inInputArgumentName,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                   const class GALGAS_bool constin_inCanMutateProperties,
-                                                   class GALGAS_propertyMap & io_ioPropertyMap,
                                                    class GALGAS_lstring & out_outRoutineLLVMName,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
@@ -7460,7 +7456,7 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapCTXT &
 void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_routineMapCTXT & ioObject,
                                                        class GALGAS_semanticContext & io_ioContext,
                                                        const class GALGAS_string constin_inLLVMBaseTypeName,
-                                                       const class GALGAS_string constin_inMethodName,
+                                                       const class GALGAS_lstring constin_inMethodName,
                                                        const class GALGAS_bool constin_inIsSafe,
                                                        const class GALGAS_string constin_inInputSelector_31_,
                                                        const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_31_,
@@ -7469,8 +7465,7 @@ void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_routineMapCT
                                                        const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_32_,
                                                        const class GALGAS_string constin_inInputArgumentName_32_,
                                                        const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                       const class GALGAS_bool constin_inCanMutateProperties,
-                                                       class GALGAS_propertyMap & io_ioPropertyMap,
+                                                       class GALGAS_lstring & out_outRoutineLLVMName,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8162,4 +8157,37 @@ class GALGAS_externFunctionDeclarationListAST_2D_element : public AC_GALGAS_root
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externFunctionDeclarationListAST_2D_element ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externFunctionDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                    Extension method '@externFunctionDeclarationListAST enterExternProcInContext'                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_enterExternProcInContext (const class GALGAS_externFunctionDeclarationListAST inObject,
+                                               class GALGAS_semanticContext & io_ioContext,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                Extension method '@externFunctionDeclarationListAST-element enterExternProcInContext'                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_enterExternProcInContext (const class GALGAS_externFunctionDeclarationListAST_2D_element inObject,
+                                               class GALGAS_semanticContext & io_ioContext,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 

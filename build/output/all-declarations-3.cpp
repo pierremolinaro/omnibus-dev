@@ -9,56 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_noteTypesInPrecedenceGraph (const GALGAS_externFunctionDeclarationListAST inObject,
-                                                 GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                 C_Compiler * /* inCompiler */
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_externFunctionDeclarationListAST temp_0 = inObject ;
-  cEnumerator_externFunctionDeclarationListAST enumerator_2300 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_2300.hasCurrentObject ()) {
-    cEnumerator_routineFormalArgumentListAST enumerator_2369 (enumerator_2300.current_mProcFormalArgumentList (HERE), kENUMERATION_UP) ;
-    while (enumerator_2369.hasCurrentObject ()) {
-      {
-      ioArgument_ioGraph.setter_noteNode (enumerator_2369.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 54)) ;
-      }
-      enumerator_2369.gotoNextObject () ;
-    }
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_2300.current_mReturnTypeName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_1) {
-      {
-      ioArgument_ioGraph.setter_noteNode (enumerator_2300.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 57)) ;
-      }
-    }
-    enumerator_2300.gotoNextObject () ;
-  }
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                    Extension method '@externFunctionDeclarationListAST enterExternProcInContext'                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_enterExternProcInContext (const GALGAS_externFunctionDeclarationListAST inObject,
-                                               GALGAS_semanticContext & ioArgument_ioContext,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_externFunctionDeclarationListAST temp_0 = inObject ;
-  cEnumerator_externFunctionDeclarationListAST enumerator_3034 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_3034.hasCurrentObject ()) {
-    extensionMethod_enterExternProcInContext (enumerator_3034.current (HERE), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 70)) ;
-    enumerator_3034.gotoNextObject () ;
-  }
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                Extension method '@externFunctionDeclarationListAST externProcedureSemanticAnalysis'                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7258,50 +7208,6 @@ GALGAS_ast GALGAS_ast::extractObject (const GALGAS_object & inObject,
   }
   return result ;
 }
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Extension Getter '@routineKind executionMode'                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_mode extensionGetter_executionMode (const GALGAS_routineKind & inObject,
-                                           C_Compiler * /* inCompiler */
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_mode result_result ; // Returned variable
-  const GALGAS_routineKind temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_routineKind::kNotBuilt:
-    break ;
-  case GALGAS_routineKind::kEnum_function:
-    {
-      const cEnumAssociatedValues_routineKind_function * extractPtr_448 = (const cEnumAssociatedValues_routineKind_function *) (temp_0.unsafePointer ()) ;
-      const GALGAS_mode extractedValue_mode = extractPtr_448->mAssociatedValue0 ;
-      result_result = extractedValue_mode ;
-    }
-    break ;
-  case GALGAS_routineKind::kEnum_section:
-    {
-      result_result = GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("context-routines.galgas", 15)) ;
-    }
-    break ;
-  case GALGAS_routineKind::kEnum_service:
-    {
-      result_result = GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("context-routines.galgas", 16)) ;
-    }
-    break ;
-  case GALGAS_routineKind::kEnum_primitive:
-    {
-      result_result = GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("context-routines.galgas", 17)) ;
-    }
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

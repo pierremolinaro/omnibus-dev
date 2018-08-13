@@ -269,8 +269,6 @@ method @taskListAST enterInContext
       !methodName:.new {!"activate" !task.mTaskName}
       !safe:true
       !resultTypeProxy:.null
-      !canMutateProperties:false
-      !?propertyMap
       ?routineLLVMName:*
     ]
     let assemblerTaskName = [task.mTaskName assemblerRepresentation]

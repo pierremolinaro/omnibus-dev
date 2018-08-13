@@ -52,7 +52,6 @@ override method @booleanDeclarationAST enterInContext
 #---------- Self type proxy
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]
 #---------- routine map
-   @propertyMap propertyMap = {}
    @routineMapCTXT routineMap = {}
 #--- Add uint1 accessor
   [!?routineMap addFunctionWithoutArgument
@@ -60,14 +59,12 @@ override method @booleanDeclarationAST enterInContext
     !methodName:["uint1" nowhere]
     !safe:true
     !resultTypeProxy:uint1TypeProxy
-    !canMutateProperties:false
-    !?propertyMap
     ?routineLLVMName:*
   ]
 #---------- Define boolean type composition
   let booleanType = @PLMType.new {
-    !propertyMap:propertyMap
-    !routineMap: {}
+    !propertyMap:{}
+    !routineMap: routineMap
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

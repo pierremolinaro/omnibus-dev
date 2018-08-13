@@ -120,8 +120,6 @@ override method @integerDeclarationAST enterInContext
       !methodName:[byteSwappedMethodName () nowhere]
       !safe:true
       !resultTypeProxy:selfTypeProxy
-      !canMutateProperties:false
-      !?propertyMap
       ?routineLLVMName: let routineLLVMName
     ]
     ioRoutineListIR += !@integerBuiltinFunctionIR.new {
@@ -138,8 +136,6 @@ override method @integerDeclarationAST enterInContext
       !methodName:[boolTypeName () nowhere]
       !safe:true
       !resultTypeProxy:boolTypeProxy
-      !canMutateProperties:false
-      !?propertyMap
       ?routineLLVMName: let routineLLVMName
     ]
     ioRoutineListIR += !@uint1ToBoolFunctionIR.new {
@@ -154,8 +150,6 @@ override method @integerDeclarationAST enterInContext
     !methodName:[bitReversedMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !canMutateProperties:false
-    !?propertyMap
     ?routineLLVMName: var routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
@@ -170,8 +164,6 @@ override method @integerDeclarationAST enterInContext
     !methodName:[countLeadingZerosMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !canMutateProperties:false
-    !?propertyMap
     ?routineLLVMName: routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
@@ -186,8 +178,6 @@ override method @integerDeclarationAST enterInContext
     !methodName:[countTrainingZerosMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !canMutateProperties:false
-    !?propertyMap
     ?routineLLVMName: routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
@@ -202,8 +192,6 @@ override method @integerDeclarationAST enterInContext
     !methodName:[setBitCountMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
-    !canMutateProperties:false
-    !?propertyMap
     ?routineLLVMName: routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {

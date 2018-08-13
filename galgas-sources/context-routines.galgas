@@ -9,17 +9,6 @@ enum @routineKind {
 
 #·······················································································································
 
-getter @routineKind executionMode -> @mode {
-  switch self
-  case function (mode) : result = mode
-  case section : result = .sectionMode
-  case service : result = .serviceMode
-  case primitive : result = .primitiveMode
-  end
-}
-
-#·······················································································································
-
 struct @routineDescriptor {
   @bool isPublic %selector # Routine is declared with "public"
   @bool exported %selector # Routine is declared with @exported attribute

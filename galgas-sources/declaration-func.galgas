@@ -363,8 +363,6 @@ setter @routineMapCTXT addFunctionWithoutArgument
   ?methodName:let @lstring inMethodName
   ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
-  ?canMutateProperties:let @bool inCanMutateProperties
-  ?!@propertyMap ioPropertyMap
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let @routineFormalArgumentListAST formalArguments = {}
@@ -383,29 +381,6 @@ setter @routineMapCTXT addFunctionWithoutArgument
     !false
     !.anyMode
   ]
-#-----
-  let routineMangledNameEX = routineMangledNameFromAST (
-    !inLLVMBaseTypeName
-    ![inMethodName nowhere]
-    !{}
-  )
-  let @routineDescriptor descriptor = .new {
-    !isPublic:true
-    !exported:false
-    !name:inLLVMBaseTypeName + "." + inMethodName
-    !nameForLLVMGeneration:routineMangledNameEX
-    !routineKind:.function {!executionMode:.anyMode}
-    !signature:{}
-    !returnTypeProxy:inResultType # Return type 
-    !canAccessProperties:false # Routine is declared with @access attribute
-    !canMutateProperties:inCanMutateProperties # Routine is declared with @mutating attribute
-    !safe:inIsSafe # Routine is declared with @safe attribute
-  }
-  [!?ioPropertyMap insertKey
-    !routineMangledNameEX
-    !true
-    !.nonVirtualMethod {!descriptor:descriptor}
-  ]
 }
 
 #·······················································································································
@@ -419,8 +394,6 @@ setter @routineMapCTXT addFunctionWithInputArgument
   ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
   ?inputArgumentName: let @string inInputArgumentName
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
-  ?canMutateProperties:let @bool inCanMutateProperties
-  ?!@propertyMap ioPropertyMap
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {
@@ -445,33 +418,6 @@ setter @routineMapCTXT addFunctionWithInputArgument
     !false
     !.anyMode
   ]
-  
-  
-  
-  
-#--- EX
-  let routineMangledNameEX = routineMangledNameFromAST (
-    !inLLVMBaseTypeName
-    !.new {!inMethodName !.nowhere}
-    !argumentList
-  )
-  let @routineDescriptor descriptor = .new {
-    !isPublic:true
-    !exported:false
-    !name:inMethodName
-    !nameForLLVMGeneration:routineMangledNameEX
-    !routineKind:.function {!executionMode:.anyMode}
-    !signature:signature
-    !returnTypeProxy:inResultType # Return type 
-    !canAccessProperties:false
-    !canMutateProperties:inCanMutateProperties
-    !safe:inIsSafe # Routine is declared with @safe attribute
-  }
-  [!?ioPropertyMap insertKey
-    !routineMangledNameEX
-    !true
-    !.nonVirtualMethod {!descriptor:descriptor}
-  ]
 }
 
 #·······················································································································
@@ -479,7 +425,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
 setter @routineMapCTXT addFunctionWithTwoInputArguments
   ?!context:@semanticContext ioContext
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?methodName:let @string inMethodName
+  ?methodName:let @lstring inMethodName
   ?safe:let @bool inIsSafe
   ?inputArgumentSelector1:let @string inInputSelector1
   ?inputArgumentTypeProxy1:let @unifiedTypeMap-proxy inInputArgumentTypeProxy1
@@ -488,8 +434,7 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
   ?inputArgumentTypeProxy2:let @unifiedTypeMap-proxy inInputArgumentTypeProxy2
   ?inputArgumentName2: let @string inInputArgumentName2
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
-  ?canMutateProperties:let @bool inCanMutateProperties
-  ?!@propertyMap ioPropertyMap
+  !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {
     !.input
@@ -502,28 +447,25 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
     ![[inInputArgumentTypeProxy2 key] nowhere]
     ![inInputArgumentName2 nowhere]
   }
-  let routineMangledName = routineMangledNameFromAST (
+  outRoutineLLVMName = routineMangledNameFromAST (
     !inLLVMBaseTypeName
     !.new {!inMethodName !.nowhere}
     !argumentList
   )
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
-  let @routineDescriptor descriptor = .new {
-    !isPublic:true
-    !exported:false
-    !name:inMethodName
-    !nameForLLVMGeneration:routineMangledName
-    !routineKind:.function {!executionMode:.anyMode}
-    !signature:signature
-    !returnTypeProxy:inResultType # Return type 
-    !canAccessProperties:false
-    !canMutateProperties:inCanMutateProperties
-    !safe:inIsSafe # Routine is declared with @safe attribute
+  let routineMangledName = @lstring.new {
+    !inMethodName.string + [argumentList routineSignature !inMethodName]
+    !inMethodName
   }
-  [!?ioPropertyMap insertKey
+  [!?self insertKey
     !routineMangledName
     !true
-    !.nonVirtualMethod {!descriptor:descriptor}
+    !signature
+    !inResultType
+    !{!.anyMode !outRoutineLLVMName}
+    !true
+    !false
+    !.anyMode
   ]
 }
 

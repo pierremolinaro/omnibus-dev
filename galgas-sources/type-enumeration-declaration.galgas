@@ -138,8 +138,6 @@ override method @enumerationDeclarationAST enterInContext
     !methodName:.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !mEnumerationName}
     !safe:true
     !resultTypeProxy:integerTypeProxy
-    !canMutateProperties:false
-    !?propertyMap
     ?routineLLVMName: *
   ]
 #---------------- Insert enumeration in type map

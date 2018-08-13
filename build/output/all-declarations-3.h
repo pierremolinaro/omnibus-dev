@@ -10,39 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                   Extension method '@externFunctionDeclarationListAST noteTypesInPrecedenceGraph'                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externFunctionDeclarationListAST inObject,
-                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                    Extension method '@externFunctionDeclarationListAST enterExternProcInContext'                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_enterExternProcInContext (const class GALGAS_externFunctionDeclarationListAST inObject,
-                                               class GALGAS_semanticContext & io_ioContext,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                Extension method '@externFunctionDeclarationListAST-element enterExternProcInContext'                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_enterExternProcInContext (const class GALGAS_externFunctionDeclarationListAST_2D_element inObject,
-                                               class GALGAS_semanticContext & io_ioContext,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                Extension method '@externFunctionDeclarationListAST externProcedureSemanticAnalysis'                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3063,16 +3030,6 @@ class GALGAS_checkTargetListAST_2D_element : public AC_GALGAS_root {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkTargetListAST_2D_element ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                             Extension getter '@routineKind executionMode' (as function)                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_mode extensionGetter_executionMode (const class GALGAS_routineKind & inObject,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
