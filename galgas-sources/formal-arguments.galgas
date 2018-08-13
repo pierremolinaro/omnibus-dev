@@ -115,13 +115,14 @@ list @routineTypedSignature {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
   @lstring mSelector
   @unifiedTypeMap-proxy mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
+  @lstring mFormalArgumentName
 }
 
 #·······················································································································
 
 getter @routineTypedSignature typedString -> @string {
   result = "("
-  for (formalArgumentPassingMode selector typeProxy) in self do
+  for (formalArgumentPassingMode selector typeProxy *) in self do
     result += [formalArgumentPassingMode formalPassingModeString] + selector + ":" + [typeProxy key]
   end
   result += ")"
@@ -131,7 +132,7 @@ getter @routineTypedSignature typedString -> @string {
 
 getter @routineTypedSignature mangledName ?let @lstring inRoutineName -> @lstring {
   var s = inRoutineName.string + "("
-  for (formalArgumentPassingMode selector typeProxy) in self do
+  for (formalArgumentPassingMode selector typeProxy *) in self do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
@@ -145,9 +146,9 @@ proc routineTypedSignature ?!@unifiedTypeMap ioTypeMap
                            !@routineTypedSignature outSignature
 {
   outSignature = {}
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector formalArgumentTypeName formalArgumentName) in inFormalArgumentList do
     [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
-    outSignature += !formalArgumentPassingMode !selector !typeProxy
+    outSignature += !formalArgumentPassingMode !selector !typeProxy !formalArgumentName
   end
 }
 
@@ -158,9 +159,9 @@ proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
                             !@routineTypedSignature outSignature
 {
   outSignature = {}
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector formalArgumentTypeName formalArgumentName) in inFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inTypeMap !formalArgumentTypeName}
-    outSignature += !formalArgumentPassingMode !selector !typeProxy
+    outSignature += !formalArgumentPassingMode !selector !typeProxy !formalArgumentName
   end
 }
 
@@ -212,12 +213,12 @@ list @routineFormalArgumentListIR {
 
 proc enterFormalArguments
   ?context:let @semanticContext inContext
-  ?let @routineFormalArgumentListAST inFormalArgumentPassingMode
+  ?let @routineFormalArgumentListAST inFormalArgumentsAST
   ?!@universalValuedObjectMap ioUniversalMap
   ?!@routineFormalArgumentListIR ioFormalArguments
   ?warningOnUnusedArgs:let @bool inUnusedWarning
 {
-  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
+  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentsAST do
     let typeProxy = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind

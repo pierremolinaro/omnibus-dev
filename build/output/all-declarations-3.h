@@ -1530,17 +1530,6 @@ class GALGAS_string extensionGetter_typedString (const class GALGAS_routineTyped
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                   Extension getter '@routineFormalArgumentListAST routineSignature' (as function)                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring extensionGetter_routineSignature (const class GALGAS_routineFormalArgumentListAST & inObject,
-                                                       const class GALGAS_location & constinArgument0,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                     @effectiveArgumentListAST_2D_element struct                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4162,42 +4151,55 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_orderedTypeList_2D_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Extension setter '@propertyMap addFunctionWithInputArgument'                             *
+//                                      @constructorValue enum, associated values                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionSetter_addFunctionWithInputArgument (class GALGAS_propertyMap & ioObject,
-                                                   class GALGAS_semanticContext & io_ioContext,
-                                                   const class GALGAS_string constin_inLLVMBaseTypeName,
-                                                   const class GALGAS_string constin_inMethodName,
-                                                   const class GALGAS_bool constin_inIsSafe,
-                                                   const class GALGAS_string constin_inInputSelector,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
-                                                   const class GALGAS_string constin_inInputArgumentName,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                   const class GALGAS_bool constin_inCanMutateProperties,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+class cEnumAssociatedValues_constructorValue_simple : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_constructorValue_simple (const GALGAS_bigint & inAssociatedValue0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_constructorValue_simple (void) {}
+} ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Extension setter '@propertyMap addFunctionWithTwoInputArguments'                           *
-//                                                                                                                     *
+
+class cEnumAssociatedValues_constructorValue_structure : public cEnumAssociatedValues {
+  public : const GALGAS_sortedOperandIRList mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_constructorValue_structure (const GALGAS_sortedOperandIRList & inAssociatedValue0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_constructorValue_structure (void) {}
+} ;
+
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_propertyMap & ioObject,
-                                                       class GALGAS_semanticContext & io_ioContext,
-                                                       const class GALGAS_string constin_inLLVMBaseTypeName,
-                                                       const class GALGAS_string constin_inMethodName,
-                                                       const class GALGAS_bool constin_inIsSafe,
-                                                       const class GALGAS_string constin_inInputSelector_31_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_31_,
-                                                       const class GALGAS_string constin_inInputArgumentName_31_,
-                                                       const class GALGAS_string constin_inInputSelector_32_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_32_,
-                                                       const class GALGAS_string constin_inInputArgumentName_32_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                       const class GALGAS_bool constin_inCanMutateProperties,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+class cEnumAssociatedValues_constructorValue_arrayValue : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_PLMType & inAssociatedValue0,
+                                                              const GALGAS_uint & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_constructorValue_arrayValue (void) {}
+} ;
 

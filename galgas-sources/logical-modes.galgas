@@ -62,7 +62,7 @@ getter @mode routineLLVMDictionaryForSystemRoutine
   elsif self == .sectionMode then
     result += !.primitiveMode !inImplementationRoutineNameForGeneration
     result += !.serviceMode !inImplementationRoutineNameForGeneration
-#    result += !.guardMode !inImplementationRoutineNameForGeneration
+    result += !.guardMode !inImplementationRoutineNameForGeneration
     result += !.startupMode !inImplementationRoutineNameForGeneration
   elsif self == .guardMode then
     result += !.serviceMode !inImplementationRoutineNameForGeneration

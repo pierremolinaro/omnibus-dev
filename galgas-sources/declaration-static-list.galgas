@@ -253,16 +253,18 @@ override method @staticListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
+  @routineMapCTXT routineMap = {}
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   @stringset propertyNameSet = {}
   let plmElementTypeName = plmNameForStaticListElementType (!mStaticListName)
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !plmElementTypeName ?let elementTypeProxy]
 #-------------------------------------------------------------------- Build property list, map
   for (propertyName kind) in mPropertyList do (propertyIndex)
     switch kind
@@ -280,8 +282,8 @@ override method @staticListAST enterInContext
         ]
       end
     case function (@mode mode @bool safe @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
-    #--- Routine mangled name
-      let routineMangledName = routineMangledNameFromAST (
+    #--- Routine LLVM name
+      let routineLLVMName = routineMangledNameFromAST (
         !llvmNameForStaticListElementType (!mStaticListName)
         !propertyName
         !formalArgs
@@ -297,37 +299,66 @@ override method @staticListAST enterInContext
         !isPublic:true # Routine is declared with "public"
         !exported:false # Routine is declared with @exported attribute
         !name:propertyName
-        !nameForLLVMGeneration:routineMangledName
+        !nameForLLVMGeneration:routineLLVMName
         !routineKind:.function {!executionMode:mode} # @routineKind mRoutineKind
         !signature:signature
         !returnTypeProxy:returnTypeProxy 
         !canAccessProperties:true # Routine is declared with @access attribute
         !canMutateProperties:true # Routine is declared with @mutating attribute
         !safe:safe # Routine is declared with @safe attribute
-     }
-     let type = functionType (!descriptor)
-      if not [ioContext.mTypeMap hasKey !routineMangledName] then
+      }
+      let type = functionType (!descriptor)
+      if not [ioContext.mTypeMap hasKey !routineLLVMName] then
         [!?ioContext.mTypeMap insertType
-          !lkey:routineMangledName
+          !lkey:routineLLVMName
           !type:type
           !index:[ioContext.mTypeMap count]
           !generate:false
         ]
       end
-      let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName} type]
+      let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineLLVMName} type]
       propertyList += !propertyName !propertyType
+    #--- Ex
       [!?propertyMap insertKey
-        !routineMangledName # propertyName
+        !routineLLVMName # propertyName
         !true # Public
         !.indexed{!type:propertyType !index:propertyIndex}
       ]
+    #--- Enter in routine map
+      let routineMangledName = @lstring.new {
+        !propertyName.string + [formalArgs routineSignature !propertyName]
+        !propertyName
+      }
+      [!?routineMap insertKey
+        !routineMangledName
+        !true
+        !signature
+        !returnTypeProxy
+        !{!.userMode !routineLLVMName}
+        !true
+        !false
+        !.userMode
+      ]
+    #--- Generate glue function
+#      routineTypedSignature !?ioContext.mTypeMap !
+#                           ?let @routineFormalArgumentListAST inFormalArgumentList
+#                           !@routineTypedSignature outSignature
+      ioRoutineListIR += !@staticListIndirectRoutineIR.new {
+        !routineLLVMName
+        !true
+        !true
+        !elementTypeProxy
+        !signature
+        !returnTypeProxy # .void if no return value
+        !propertyIndex
+      }
     end
   end
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
   let type = @PLMType.new {
     !propertyMap:propertyMap
-    !routineMap: {}
+    !routineMap: routineMap
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -535,6 +566,7 @@ override method @decoratedStaticList semanticAnalysis
   [!?ioIntermediateCodeStruct.mStaticArrayMapForIntermediate insertKey !mStaticListName !invokedFunctionSet]
 }
 
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -561,6 +593,123 @@ method @staticListInitializationMap generateLLVMForStaticLists
       ioLLVMcode += "\n]\n\n"
     end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: INDIRECT FUNCTION CALL
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @staticListIndirectRoutineIR : @abstractRoutineIR {
+  @unifiedTypeMap-proxy mStaticListElementType
+  @routineTypedSignature mFormalArgumentListForGeneration
+  @unifiedTypeMap-proxy mReturnTypeProxy # .void if no return value
+  @uint mPropertyIndex
+}
+
+#·······················································································································
+
+override method @staticListIndirectRoutineIR enterAccessibleEntities
+   ?!@stringset ioInvokedRoutineSet
+   ?!@uint ioMaxBranchOfOnInstructions
+{
+}
+
+#·······················································································································
+
+override method @staticListIndirectRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
+  ioLLVMcode += "define internal "
+  if mReturnTypeProxy == .null then
+    ioLLVMcode += "void"
+  else
+    ioLLVMcode += [[mReturnTypeProxy type] llvmTypeName]
+  end
+  ioLLVMcode += " @" + [mRoutineMangledName assemblerRepresentation] + " ("
+  let receiverLLVMTypeName = [[mStaticListElementType type] llvmTypeName]
+  var first = true
+  if receiverLLVMTypeName != "" then
+    ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
+    first = false
+  end
+  for () in mFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
+    switch mFormalArgumentPassingMode
+    case input :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + " %in." + [mFormalArgumentName assemblerRepresentation]
+    case output :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %out." + [mFormalArgumentName assemblerRepresentation]
+   case inputOutput :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %inout." + [mFormalArgumentName assemblerRepresentation]
+    end
+  end
+  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+#--- Indirect function LLVM type name
+  @string llvmFunctionTypeName
+  if mReturnTypeProxy == .null then
+    llvmFunctionTypeName = "void"
+  else
+    llvmFunctionTypeName = [[mReturnTypeProxy type] llvmTypeName]
+  end
+  llvmFunctionTypeName += "("
+  first = true
+  for () in mFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      llvmFunctionTypeName += ", "
+    end
+    switch mFormalArgumentPassingMode
+    case input :
+      llvmFunctionTypeName += [[mTypeProxy type] llvmTypeName]
+    case output :
+      llvmFunctionTypeName += [[mTypeProxy type] llvmTypeName] + "*"
+   case inputOutput :
+      llvmFunctionTypeName += [[mTypeProxy type] llvmTypeName] + "*"
+    end
+  end
+  llvmFunctionTypeName += ")*"
+#--- Indirect call
+  ioLLVMcode += "  %ptr = getelementptr inbounds " + receiverLLVMTypeName 
+  ioLLVMcode += ", " + receiverLLVMTypeName + "* %self, i32 0, i32 " + mPropertyIndex + "\n"
+  ioLLVMcode += "  %f = load " + llvmFunctionTypeName + ", " + llvmFunctionTypeName + "* %ptr\n"
+  if mReturnTypeProxy == .null then
+    ioLLVMcode += "  call void"
+  else
+    ioLLVMcode += "  %result = call " + [[mReturnTypeProxy type] llvmTypeName]
+  end
+  ioLLVMcode += " %f ("
+  first = true
+  for () in mFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
+    switch mFormalArgumentPassingMode
+    case input :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + " %in." + [mFormalArgumentName assemblerRepresentation]
+    case output :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %out." + [mFormalArgumentName assemblerRepresentation]
+   case inputOutput :
+      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %inout." + [mFormalArgumentName assemblerRepresentation]
+    end
+  end
+  ioLLVMcode += ")\n"
+#--- Epilog
+  if mReturnTypeProxy == .null then
+    ioLLVMcode += "  ret void\n"
+  else
+    ioLLVMcode += "  ret " + [[mReturnTypeProxy type] llvmTypeName] + " %result\n"
+  end
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

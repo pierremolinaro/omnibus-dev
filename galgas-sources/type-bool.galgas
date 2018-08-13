@@ -49,16 +49,20 @@ override method @booleanDeclarationAST enterInContext
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
 {
-#---------- Property map
-  @propertyMap propertyMap = {}
+#---------- Self type proxy
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]
+#---------- routine map
+   @propertyMap propertyMap = {}
+   @routineMapCTXT routineMap = {}
 #--- Add uint1 accessor
-  [!?propertyMap addFunctionWithoutArgument
+  [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:boolTypeName ()
-    !methodName:"uint1"
+    !methodName:["uint1" nowhere]
     !safe:true
     !resultTypeProxy:uint1TypeProxy
     !canMutateProperties:false
+    !?propertyMap
+    ?routineLLVMName:*
   ]
 #---------- Define boolean type composition
   let booleanType = @PLMType.new {

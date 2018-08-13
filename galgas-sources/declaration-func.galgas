@@ -334,6 +334,8 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! ROUTINE MAP
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @routineMapCTXT {
   @bool mIsPublic
@@ -348,10 +350,160 @@ map @routineMapCTXT {
   search searchKey error message "there is no '%K' function"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 dict @routineLLVMNameDict : @mode {
   @string mRoutineLLVMName
+}
+
+#·······················································································································
+
+setter @routineMapCTXT addFunctionWithoutArgument
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
+  ?methodName:let @lstring inMethodName
+  ?safe:let @bool inIsSafe
+  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?canMutateProperties:let @bool inCanMutateProperties
+  ?!@propertyMap ioPropertyMap
+  !routineLLVMName:@lstring outRoutineLLVMName
+{
+  let @routineFormalArgumentListAST formalArguments = {}
+  let routineMangledName = @lstring.new {
+    !inMethodName.string + [formalArguments routineSignature !inMethodName]
+    !inMethodName
+  }
+  outRoutineLLVMName = routineMangledNameFromAST (!inLLVMBaseTypeName !inMethodName !formalArguments)
+  [!?self insertKey
+    !routineMangledName
+    !true
+    !{}
+    !inResultType
+    !{!.anyMode !outRoutineLLVMName}
+    !true
+    !false
+    !.anyMode
+  ]
+#-----
+  let routineMangledNameEX = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    ![inMethodName nowhere]
+    !{}
+  )
+  let @routineDescriptor descriptor = .new {
+    !isPublic:true
+    !exported:false
+    !name:inLLVMBaseTypeName + "." + inMethodName
+    !nameForLLVMGeneration:routineMangledNameEX
+    !routineKind:.function {!executionMode:.anyMode}
+    !signature:{}
+    !returnTypeProxy:inResultType # Return type 
+    !canAccessProperties:false # Routine is declared with @access attribute
+    !canMutateProperties:inCanMutateProperties # Routine is declared with @mutating attribute
+    !safe:inIsSafe # Routine is declared with @safe attribute
+  }
+  [!?ioPropertyMap insertKey
+    !routineMangledNameEX
+    !true
+    !.nonVirtualMethod {!descriptor:descriptor}
+  ]
+}
+
+#·······················································································································
+
+setter @routineMapCTXT addFunctionWithInputArgument
+  ?!context:@semanticContext ioContext
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
+  ?methodName:let @string inMethodName
+  ?safe:let @bool inIsSafe
+  ?inputArgumentSelector:let @string inInputSelector
+  ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
+  ?inputArgumentName: let @string inInputArgumentName
+  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?canMutateProperties:let @bool inCanMutateProperties
+  ?!@propertyMap ioPropertyMap
+{
+  let argumentList = @routineFormalArgumentListAST {
+    !.input
+    ![inInputSelector nowhere]
+    ![[inInputArgumentTypeProxy key] nowhere]
+    ![inInputArgumentName nowhere]
+  }
+  routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
+  let routineMangledName = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    !.new {!inMethodName !.nowhere}
+    !argumentList
+  )
+  let @routineDescriptor descriptor = .new {
+    !isPublic:true
+    !exported:false
+    !name:inMethodName
+    !nameForLLVMGeneration:routineMangledName
+    !routineKind:.function {!executionMode:.anyMode}
+    !signature:signature
+    !returnTypeProxy:inResultType # Return type 
+    !canAccessProperties:false
+    !canMutateProperties:inCanMutateProperties
+    !safe:inIsSafe # Routine is declared with @safe attribute
+  }
+  [!?ioPropertyMap insertKey
+    !routineMangledName
+    !true
+    !.nonVirtualMethod {!descriptor:descriptor}
+  ]
+}
+
+#·······················································································································
+
+setter @routineMapCTXT addFunctionWithTwoInputArguments
+  ?!context:@semanticContext ioContext
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
+  ?methodName:let @string inMethodName
+  ?safe:let @bool inIsSafe
+  ?inputArgumentSelector1:let @string inInputSelector1
+  ?inputArgumentTypeProxy1:let @unifiedTypeMap-proxy inInputArgumentTypeProxy1
+  ?inputArgumentName1: let @string inInputArgumentName1
+  ?inputArgumentSelector2:let @string inInputSelector2
+  ?inputArgumentTypeProxy2:let @unifiedTypeMap-proxy inInputArgumentTypeProxy2
+  ?inputArgumentName2: let @string inInputArgumentName2
+  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?canMutateProperties:let @bool inCanMutateProperties
+  ?!@propertyMap ioPropertyMap
+{
+  let argumentList = @routineFormalArgumentListAST {
+    !.input
+    ![inInputSelector1 nowhere]
+    ![[inInputArgumentTypeProxy1 key] nowhere]
+    ![inInputArgumentName1 nowhere]
+  ,
+    !.input
+    ![inInputSelector2 nowhere]
+    ![[inInputArgumentTypeProxy2 key] nowhere]
+    ![inInputArgumentName2 nowhere]
+  }
+  let routineMangledName = routineMangledNameFromAST (
+    !inLLVMBaseTypeName
+    !.new {!inMethodName !.nowhere}
+    !argumentList
+  )
+  routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
+  let @routineDescriptor descriptor = .new {
+    !isPublic:true
+    !exported:false
+    !name:inMethodName
+    !nameForLLVMGeneration:routineMangledName
+    !routineKind:.function {!executionMode:.anyMode}
+    !signature:signature
+    !returnTypeProxy:inResultType # Return type 
+    !canAccessProperties:false
+    !canMutateProperties:inCanMutateProperties
+    !safe:inIsSafe # Routine is declared with @safe attribute
+  }
+  [!?ioPropertyMap insertKey
+    !routineMangledName
+    !true
+    !.nonVirtualMethod {!descriptor:descriptor}
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

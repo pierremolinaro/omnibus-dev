@@ -112,17 +112,20 @@ override method @integerDeclarationAST enterInContext
   let max = maxValueForInteger (!not mIsSigned !mSize)
 #--------------------------------------- Property map
   let llvmTypeName = "i" + mSize
+  @routineMapCTXT routineMap = {}
   @propertyMap propertyMap = {}
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
-    [!?propertyMap addFunctionWithoutArgument
+    [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:integerTypeName
-      !methodName:byteSwappedMethodName ()
+      !methodName:[byteSwappedMethodName () nowhere]
       !safe:true
       !resultTypeProxy:selfTypeProxy
       !canMutateProperties:false
+      !?propertyMap
+      ?routineLLVMName: let routineLLVMName
     ]
     ioRoutineListIR += !@integerBuiltinFunctionIR.new {
-      !routineMangledNameFromAST (!integerTypeName ![byteSwappedMethodName () nowhere] ! {})
+      !routineLLVMName
       !false
       !false
       !llvmTypeName
@@ -130,71 +133,81 @@ override method @integerDeclarationAST enterInContext
     }
   end
   if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
-    [!?propertyMap addFunctionWithoutArgument
+    [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:integerTypeName
-      !methodName:boolTypeName ()
+      !methodName:[boolTypeName () nowhere]
       !safe:true
       !resultTypeProxy:boolTypeProxy
       !canMutateProperties:false
+      !?propertyMap
+      ?routineLLVMName: let routineLLVMName
     ]
     ioRoutineListIR += !@uint1ToBoolFunctionIR.new {
-      !routineMangledNameFromAST (!integerTypeName ![boolTypeName () nowhere] ! {})
+      !routineLLVMName
       !false
       !false
       !llvmTypeName
     }
   end
-  [!?propertyMap addFunctionWithoutArgument
+  [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
-    !methodName:bitReversedMethodName ()
+    !methodName:[bitReversedMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
+    !?propertyMap
+    ?routineLLVMName: var routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
-    !routineMangledNameFromAST (!integerTypeName ![bitReversedMethodName () nowhere] ! {})
+    !routineLLVMName
     !false
     !false
     !llvmTypeName
     !"bitreverse"
   }
-  [!?propertyMap addFunctionWithoutArgument
+  [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
-    !methodName:countLeadingZerosMethodName ()
+    !methodName:[countLeadingZerosMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
+    !?propertyMap
+    ?routineLLVMName: routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
-    !routineMangledNameFromAST (!integerTypeName ![countLeadingZerosMethodName () nowhere] ! {})
+    !routineLLVMName
     !false
     !false
     !llvmTypeName
     !"ctlz"
   }
-  [!?propertyMap addFunctionWithoutArgument
+  [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
-    !methodName:countTrainingZerosMethodName ()
+    !methodName:[countTrainingZerosMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
+    !?propertyMap
+    ?routineLLVMName: routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
-    !routineMangledNameFromAST (!integerTypeName ![countTrainingZerosMethodName () nowhere] ! {})
+    !routineLLVMName
     !false
     !false
     !llvmTypeName
     !"cttz"
   }
-  [!?propertyMap addFunctionWithoutArgument
+  [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:integerTypeName
-    !methodName:setBitCountMethodName ()
+    !methodName:[setBitCountMethodName () nowhere]
     !safe:true
     !resultTypeProxy:selfTypeProxy
     !canMutateProperties:false
+    !?propertyMap
+    ?routineLLVMName: routineLLVMName
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
-    !routineMangledNameFromAST (!integerTypeName ![setBitCountMethodName () nowhere] ! {})
+    !routineLLVMName
     !false
     !false
     !llvmTypeName
@@ -210,7 +223,7 @@ override method @integerDeclarationAST enterInContext
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
     !propertyMap:propertyMap
-    !routineMap: {}
+    !routineMap: routineMap
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !guardMap:{}

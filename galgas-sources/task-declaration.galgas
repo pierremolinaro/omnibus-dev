@@ -245,6 +245,7 @@ method @taskListAST enterInContext
   @decoratedTaskList decoratedTaskList = {}
   for task in sortedTaskList do (taskIndex)
   #--- task variables
+    @routineMapCTXT routineMap = {}
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
     @sortedOperandIRList initialValueList = {}
@@ -263,12 +264,14 @@ method @taskListAST enterInContext
       ]
     end
   #---- Add activate function
-    [!?propertyMap addFunctionWithoutArgument
+    [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:task.mTaskName
-      !methodName:"activate"
+      !methodName:.new {!"activate" !task.mTaskName}
       !safe:true
       !resultTypeProxy:.null
       !canMutateProperties:false
+      !?propertyMap
+      ?routineLLVMName:*
     ]
     let assemblerTaskName = [task.mTaskName assemblerRepresentation]
     let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
@@ -355,12 +358,12 @@ method @taskListAST enterInContext
       !task.mTaskName.location # @location mEndOfRoutineDeclaration
       !returnTypeName: ["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
   #---------------- Enter task functions in property map
-    @routineMapCTXT routineMapCTXT = {}
+#    @routineMapCTXT routineMapCTXT = {}
     [task.mTaskFunctionList enterFunctionsInPropertyMap
       !receiverTypeName: task.mTaskName
       !receiverLLVMBaseTypeName: task.mTaskName
       !?propertyMap: propertyMap
-      !?routineMap: routineMapCTXT
+      !?routineMap: routineMap
       !?context: ioContext
       !?ioDecoratedRoutineList
       !?ioRoutineListIR
@@ -368,7 +371,7 @@ method @taskListAST enterInContext
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
       !propertyMap:propertyMap
-      !routineMap: routineMapCTXT
+      !routineMap: routineMap
       !classConstantMap:{}
       !constructorMap:{}
       !guardMap:{}

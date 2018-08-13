@@ -92,6 +92,10 @@ private proc compileProject
   end
   @ast ast = inAST
   @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
+#------------------------------------------------------------ Add static array extensions
+  for () in ast.mExtendStaticArrayDeclarationAST do
+  
+  end
 #------------------------------------------------------------ Add target specific files
   addTargetSpecificFiles (
     !forTarget:inTargetName

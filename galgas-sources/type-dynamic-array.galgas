@@ -94,35 +94,40 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["$uint32" nowhere] ?let uint32TypeProxy]
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
+    @routineMapCTXT routineMap = {}
     @propertyMap propertyMap = {}
   #--- Method 'removeAll()'
-    [!?propertyMap addFunctionWithoutArgument
+    [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:"removeAll"
+      !methodName:.new {!"removeAll" !mDynamicArrayTypeName}
       !safe:false
       !resultTypeProxy: .null
       !canMutateProperties:true
+      !?propertyMap
+      ?routineLLVMName:var routineLLVMName
     ]
     ioRoutineListIR += !@dynArrayRemoveAllFunctionIR.new {
-      !routineMangledNameFromAST (!llvmBaseTypeName !["removeAll" nowhere] ! {})
+      !routineLLVMName
       !false
       !false
     }
   #--- Method 'length()'
-    [!?propertyMap addFunctionWithoutArgument
+    [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:"length"
+      !methodName:. new {!"length" !mDynamicArrayTypeName}
       !safe:false
       !resultTypeProxy: uint32TypeProxy
       !canMutateProperties:false
+      !?propertyMap
+      ?routineLLVMName:routineLLVMName
     ]
     ioRoutineListIR += !@dynArrayLengthFunctionIR.new {
-      !routineMangledNameFromAST (!llvmBaseTypeName !["length" nowhere] ! {})
+      !routineLLVMName
       !false
       !false
     }
   #--- Method 'insert(?:?atIndex:)'
-    [!?propertyMap addFunctionWithTwoInputArguments
+    [!?routineMap addFunctionWithTwoInputArguments
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"insert"
@@ -135,6 +140,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !inputArgumentName2:"inIndex"
       !resultTypeProxy:.null
       !canMutateProperties:true
+      !?propertyMap
     ]
     let @routineFormalArgumentListAST insert_argumentList = {
       !.input
@@ -155,7 +161,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !elementTypeProxy
     }
   #--- Method 'append(?:)'
-    [!?propertyMap addFunctionWithInputArgument
+    [!?routineMap addFunctionWithInputArgument
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:"append"
@@ -165,6 +171,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !inputArgumentName:"inValue"
       !resultTypeProxy:.null
       !canMutateProperties:true
+      !?propertyMap
     ]
     let append_argumentList = @routineFormalArgumentListAST {
       !.input
@@ -188,7 +195,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @PLMType.new {
       !propertyMap:propertyMap
-      !routineMap: {}
+      !routineMap: routineMap
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}

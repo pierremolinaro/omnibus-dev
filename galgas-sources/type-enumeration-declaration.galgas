@@ -127,22 +127,25 @@ override method @enumerationDeclarationAST enterInContext
     maxValue = maxValue / 2G
   end
 #---------------- Property map: add uintN() accessor
+  @routineMapCTXT routineMap = {}
   @propertyMap propertyMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
     !.new {!"$uint" + representationBitCount !mEnumerationName}
   }
-  [!?propertyMap addFunctionWithoutArgument
+  [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:mEnumerationName
-    !methodName:integerEnumAccessorName (!forBitCount:representationBitCount)
+    !methodName:.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !mEnumerationName}
     !safe:true
     !resultTypeProxy:integerTypeProxy
     !canMutateProperties:false
+    !?propertyMap
+    ?routineLLVMName: *
   ]
 #---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
     !propertyMap:propertyMap
-    !routineMap: {}
+    !routineMap: routineMap
     !classConstantMap:enumConstantMap
     !constructorMap:{}
     !guardMap:{}
