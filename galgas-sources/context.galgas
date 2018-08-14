@@ -184,7 +184,11 @@ proc buildSemanticContext
   outRoutineListIR = {}
 #--- Enter required routines
   for requiredProc in inAST.mRequiredFunctionListAST do
-    let procedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
+    let procedureMangledName = routineMangledNameFromAST (
+      !""
+      !requiredProc.mName
+      !requiredProc.mFormalArgumentList
+    )
     outSemanticContext.mRequiredRoutineSet += !procedureMangledName.string
   end 
 #--- Enter standalone procedures, functions, sections, services, guards in context

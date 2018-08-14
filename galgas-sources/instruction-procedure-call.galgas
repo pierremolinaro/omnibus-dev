@@ -71,7 +71,7 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
   for (access) in mAccessList do
     switch access
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     end
   end
@@ -298,13 +298,13 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         currentLLVMAddressVar = llvmPropertyName
         currentObjectPropertyMap = currentType.propertyMap # ????
       end
-    case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
+    case arrayAccess (* @location endOfIndex *) :
       error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar
     end
   end
 #--- Handle last access
   switch lastAccess
-  case arrayAccess (* @location endOfIndex) :
+  case arrayAccess (* @location endOfIndex *) :
     error endOfIndex : "a property is required here"
   case property (@lstring methodName) :
     let @routineMapCTXT routineMap = [currentType routineMap]

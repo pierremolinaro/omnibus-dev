@@ -4,7 +4,7 @@
 
 enum @accessInAssignmentAST {
   case property (@lstring name)
-  case arrayAccess (@expressionAST index @location endOfIndex)
+  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
 
 #·······················································································································
@@ -48,8 +48,15 @@ syntax extension plm_syntax {
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      $]$
-      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+      @bool checkIndexExpression
+      select
+        $]$
+        checkIndexExpression = true
+      or
+        $]!$
+        checkIndexExpression = false
+      end
+      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
     end
     outAssignmentTargetAST = .new {!receiver !accessList}
   }
@@ -66,7 +73,7 @@ method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
   for (access) in mAccessList do
     switch access
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     end
   end
@@ -212,7 +219,7 @@ private proc analyzeVariableInLValue
           currentType = propertyType
           currentLLVMName = newLLVMvariable
         end
-      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+      case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
         if [currentType.kind isArrayType] then
           [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
@@ -226,6 +233,7 @@ private proc analyzeVariableInLValue
             !?alloca: ioAllocaList
             !indexExpression 
             !endOfIndex
+            !checkIndexExpression
             !arraySize:arraySize
             !elementType:elementType
             !?ioInstructionGenerationList
@@ -294,7 +302,7 @@ private proc analyzeSelfAssignmentTarget
           currentType = propertyType
           currentLLVMName = newLLVMvariable
         end
-      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+      case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
         if [currentType.kind isArrayType] then
           [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
           handleArraySubscriptNew (
@@ -308,6 +316,7 @@ private proc analyzeSelfAssignmentTarget
             !?alloca: ioAllocaList
             !indexExpression 
             !endOfIndex
+            !checkIndexExpression
             !arraySize:arraySize
             !elementType:elementType
             !?ioInstructionGenerationList

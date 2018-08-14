@@ -267,7 +267,7 @@ method @taskListAST enterInContext
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:task.mTaskName
       !methodName:.new {!"activate" !task.mTaskName}
-      !mode:.anySafeMode
+      !mode:.safeUserMode
       !resultTypeProxy:.null
       ?routineLLVMName:*
     ]
@@ -303,7 +303,7 @@ method @taskListAST enterInContext
       let mangledName = "task.activate." + task.mTaskName + "." + setup.mName
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
-        !mode:.userMode
+        !mode:.safeUserMode
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused:true
@@ -320,7 +320,7 @@ method @taskListAST enterInContext
       let mangledName = "task.deactivate." + task.mTaskName + "." + setup.mName
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
-        !mode:.userMode
+        !mode:.safeUserMode
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true

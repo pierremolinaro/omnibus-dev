@@ -144,6 +144,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__2265_,
    kToken__5B_,
    kToken__5D_,
+   kToken__5D__21_,
    kToken__3C__3C_,
    kToken__3E__3E_,
    kToken__7E_,
@@ -213,7 +214,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 118 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 119 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -1400,6 +1401,14 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_126 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_127 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_128 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_129 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_130 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -1566,7 +1575,8 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_registerGroupIndexAST constructor_index (const class GALGAS_expressionAST & inOperand0,
-                                                                        const class GALGAS_location & inOperand1
+                                                                        const class GALGAS_location & inOperand1,
+                                                                        const class GALGAS_bool & inOperand2
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_registerGroupIndexAST constructor_noIndex (LOCATION_ARGS) ;
@@ -1582,6 +1592,7 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_index (class GALGAS_expressionAST & outArgument0,
                                                class GALGAS_location & outArgument1,
+                                               class GALGAS_bool & outArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -1645,7 +1656,8 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_registerIndexAST constructor_index (const class GALGAS_expressionAST & inOperand0,
-                                                                   const class GALGAS_location & inOperand1
+                                                                   const class GALGAS_location & inOperand1,
+                                                                   const class GALGAS_bool & inOperand2
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_registerIndexAST constructor_noIndex (LOCATION_ARGS) ;
@@ -1661,6 +1673,7 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_index (class GALGAS_expressionAST & outArgument0,
                                                class GALGAS_location & outArgument1,
+                                               class GALGAS_bool & outArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -10493,7 +10506,8 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_accessInAssignmentAST constructor_arrayAccess (const class GALGAS_expressionAST & inOperand0,
-                                                                              const class GALGAS_location & inOperand1
+                                                                              const class GALGAS_location & inOperand1,
+                                                                              const class GALGAS_bool & inOperand2
                                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_accessInAssignmentAST constructor_property (const class GALGAS_lstring & inOperand0
@@ -10510,6 +10524,7 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_arrayAccess (class GALGAS_expressionAST & outArgument0,
                                                      class GALGAS_location & outArgument1,
+                                                     class GALGAS_bool & outArgument2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
@@ -10560,10 +10575,12 @@ class cEnumAssociatedValues_accessInAssignmentAST_property : public cEnumAssocia
 class cEnumAssociatedValues_accessInAssignmentAST_arrayAccess : public cEnumAssociatedValues {
   public : const GALGAS_expressionAST mAssociatedValue0 ;
   public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_accessInAssignmentAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                    const GALGAS_location & inAssociatedValue1
+                                                                    const GALGAS_location & inAssociatedValue1,
+                                                                    const GALGAS_bool & inAssociatedValue2
                                                                     COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -11848,7 +11865,8 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_primaryInExpressionAccessAST constructor_arrayAccess (const class GALGAS_expressionAST & inOperand0,
-                                                                                     const class GALGAS_location & inOperand1
+                                                                                     const class GALGAS_location & inOperand1,
+                                                                                     const class GALGAS_bool & inOperand2
                                                                                      COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_primaryInExpressionAccessAST constructor_funcCall (const class GALGAS_lstring & inOperand0,
@@ -11874,6 +11892,7 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_arrayAccess (class GALGAS_expressionAST & outArgument0,
                                                      class GALGAS_location & outArgument1,
+                                                     class GALGAS_bool & outArgument2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
@@ -11957,10 +11976,12 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice : public c
 class cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess : public cEnumAssociatedValues {
   public : const GALGAS_expressionAST mAssociatedValue0 ;
   public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                           const GALGAS_location & inAssociatedValue1
+                                                                           const GALGAS_location & inAssociatedValue1,
+                                                                           const GALGAS_bool & inAssociatedValue2
                                                                            COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -12071,10 +12092,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentP
 class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociatedValues {
   public : const GALGAS_expressionAST mAssociatedValue0 ;
   public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_registerGroupIndexAST_index (const GALGAS_expressionAST & inAssociatedValue0,
-                                                              const GALGAS_location & inAssociatedValue1
+                                                              const GALGAS_location & inAssociatedValue1,
+                                                              const GALGAS_bool & inAssociatedValue2
                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -12093,10 +12116,12 @@ class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociated
 class cEnumAssociatedValues_registerIndexAST_index : public cEnumAssociatedValues {
   public : const GALGAS_expressionAST mAssociatedValue0 ;
   public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_registerIndexAST_index (const GALGAS_expressionAST & inAssociatedValue0,
-                                                         const GALGAS_location & inAssociatedValue1
+                                                         const GALGAS_location & inAssociatedValue1,
+                                                         const GALGAS_bool & inAssociatedValue2
                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

@@ -60,8 +60,8 @@ syntax extension plm_syntax {
       switch access
       case property (@lstring name) :
         expressionAccessList += !.property {!name:name}
-      case arrayAccess (@expressionAST index @location endOfIndex) :
-        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex}
+      case arrayAccess (@expressionAST index @location endOfIndex checkIndexExpression) :
+        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
       end
     end
     let leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !expressionAccessList}

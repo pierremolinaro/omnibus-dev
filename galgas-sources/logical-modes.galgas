@@ -83,6 +83,7 @@ getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGener
     result += !.serviceMode !inRoutineNameForGeneration
     result += !.guardMode !inRoutineNameForGeneration
   case safeSectionMode :
+    result += !.sectionMode !inRoutineNameForGeneration
     result += !.primitiveMode !inRoutineNameForGeneration
     result += !.serviceMode !inRoutineNameForGeneration
     result += !.guardMode !inRoutineNameForGeneration
@@ -119,6 +120,7 @@ getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGener
     result += !.primitiveMode !inRoutineNameForGeneration
     result += !.serviceMode !inRoutineNameForGeneration
     result += !.guardMode !inRoutineNameForGeneration
+    result += !.userMode !inRoutineNameForGeneration
   case userMode :
     result += !.anyMode !inRoutineNameForGeneration
   case bootMode, panicMode, primitiveMode, startupMode :

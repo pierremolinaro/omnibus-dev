@@ -4,14 +4,14 @@
 
 enum @registerGroupIndexAST {
   case noIndex
-  case index (@expressionAST index @location endOfIndex)
+  case index (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
 
 #·······················································································································
 
 enum @registerIndexAST {
   case noIndex
-  case index (@expressionAST index @location endOfIndex)
+  case index (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
 
 #·······················································································································
@@ -40,8 +40,15 @@ syntax extension plm_syntax {
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      $]$
-      groupIndex = .index {!index:expression !endOfIndex:endOfIndex}
+      @bool checkIndexExpression
+      select
+        $]$
+        checkIndexExpression = true
+      or
+        $]!$
+        checkIndexExpression = true
+      end
+      groupIndex = .index {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
     end
     $:$
     $identifier$ ?let registerName
@@ -52,8 +59,19 @@ syntax extension plm_syntax {
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      $]$
-      registerIndex = .index {!index:expression !endOfIndex:endOfIndex}
+      @bool checkIndexExpression
+      select
+        $]$
+        checkIndexExpression = true
+      or
+        $]!$
+        checkIndexExpression = false
+      end
+      registerIndex = .index {
+        !index:expression
+        !endOfIndex:endOfIndex
+        !checkIndexExpression:checkIndexExpression
+      }
     end
     outRegisterLValue = .new {!registerGroupName !groupIndex !registerName !registerIndex}
   }
@@ -71,12 +89,12 @@ method @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
 {
   switch mGroupIndex
   case noIndex :
-  case index (indexExpression *) :
+  case index (indexExpression * *) :
     [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
   switch mRegisterIndex
   case noIndex :
-  case index (indexExpression *) :
+  case index (indexExpression * *) :
     [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -92,12 +110,12 @@ method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
   [!?ioGraph addEdge !inConstantName !mRegisterGroupName]
   switch mGroupIndex
   case noIndex :
-  case index (@expressionAST indexExpression *) :
+  case index (@expressionAST indexExpression * *) :
     [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
   switch mRegisterIndex
   case noIndex :
-  case index (@expressionAST indexExpression *) :
+  case index (@expressionAST indexExpression * *) :
     [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
@@ -184,7 +202,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     switch mGroupIndex
     case noIndex :
       error mRegisterGroupName : "subscripting required, group is an array" : registerAddress
-    case index (indexExpression endOfIndex) :
+    case index (indexExpression endOfIndex checkIndexExpression) :
       handleArraySubscriptNew (
         !self: inSelfType
         !routineAttributes:inRoutineAttributes
@@ -196,6 +214,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !?alloca: ioAllocaList
         !indexExpression 
         !endOfIndex
+        !checkIndexExpression
         !arraySize:[baseAddresses length]
         !elementType:outRegisterType
         !?ioInstructionGenerationList
@@ -218,7 +237,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     else
       error mRegisterName : "the control register is an array" : outllvmRegisterAddressName
     end
-  case index (indexExpression endOfIndex) :
+  case index (indexExpression endOfIndex checkIndexExpression) :
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -230,6 +249,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       !?alloca: ioAllocaList
       !indexExpression 
       !endOfIndex
+      !checkIndexExpression
       !arraySize:registerArraySize
       !elementType:outRegisterType
       !?ioInstructionGenerationList

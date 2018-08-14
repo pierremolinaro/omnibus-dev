@@ -361,7 +361,7 @@ method @universalValuedObjectMap searchValuedObjectType
       case indexed  (type *) :
         outType = type
       end
-    case arrayAccess (* *) :
+    case arrayAccess (3*) :
       if [outType.kind isArrayType] then
         [outType.kind arrayType ?elementType:outType ?1*]
       end

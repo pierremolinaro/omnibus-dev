@@ -299,17 +299,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
         fixit { remove }
       end
     end
-  #--- 
-    ioRoutineListIR += !@systemUserRoutineIR.new {
-      !userRoutineMangledName
-      !false
-      !false
-      !implementationRoutineMangledName
-      !signature
-      !selfTypeProxy
-      !routineKind == .section # If false, service or primitive
-      !returnTypeProxy
-    }
     let @routineAttributes attributes = .mutating | .controlRegisterReadable
   #--- Enter in routine map
     let @routineLLVMNameDict routineLLVMNameDict = [system.mMode routineLLVMDictionaryForSystemRoutine
@@ -341,6 +330,17 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
       !returnTypeName: system.mReturnTypeName  # Empty string if no returned value
+  #--- 
+    ioRoutineListIR += !@systemUserRoutineIR.new {
+      !userRoutineMangledName
+      !false
+      !false
+      !implementationRoutineMangledName
+      !signature
+      !selfTypeProxy
+      !routineKind == .section # If false, service or primitive
+      !returnTypeProxy
+    }
   end
 }
 

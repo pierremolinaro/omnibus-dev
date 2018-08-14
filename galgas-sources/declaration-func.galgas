@@ -167,7 +167,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
     var warnIfUnused = true
     var exportedFunction = false
     var canMutateProperties = false
-#    var isSafe = false
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -184,12 +183,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
         end
         canMutateProperties = true
-#      elsif attribute.string == safeAttribute () then
-#        if isSafe then
-#          error attribute : "duplicated attribute" fixit { remove }
-#        else
-#          isSafe = true
-#        end
       else
         error attribute : "unknown attribute; available attributes are @"
           + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + " and @" + exportedAttribute ()
@@ -202,7 +195,8 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !function.mFunctionFormalArgumentList
     )
   #--- Enter in routine map
-    let @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
+    let routineLLVMNameDict = [function.mMode routineLLVMDictionaryForFunction !functionLLVMName]
+#    let @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
     let routineMangledName = [signature mangledName !function.mFunctionName]
     [!?ioContext.mRoutineMap insertKey
       !routineMangledName

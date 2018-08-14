@@ -11,6 +11,7 @@ proc handleArraySubscriptNew
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
+  ?let @bool inCheckIndexExpression
   ?arraySize:let @bigint inArraySize
   ?elementType:let @PLMType inElementType
   ?!@instructionListIR ioInstructionGenerationList
@@ -42,7 +43,7 @@ proc handleArraySubscriptNew
       outIndexIR = @objectIR.literalInteger {!type:inElementType !value:indexValue}
     end
   elsif [[indexResult type].kind isInteger] then
-    if not [option plm_options.noPanicGeneration value] then
+    if inCheckIndexExpression && not [option plm_options.noPanicGeneration value] then
       [!?ioInstructionGenerationList testArrayIndex
         !indexResult
         !inErrorLocation

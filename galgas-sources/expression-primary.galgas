@@ -5,7 +5,7 @@
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
   case integerSlice (@lbigint low @lbigint high)
-  case arrayAccess (@expressionAST index @location endOfIndex)
+  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression)
   case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location endOfArguments)
 }
 
@@ -65,8 +65,15 @@ syntax extension plm_syntax {
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      $]$
-      outAccessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+      @bool checkIndexExpression
+      select
+        $]$
+        checkIndexExpression = true
+      or
+        $]!$
+        checkIndexExpression = false
+      end
+      outAccessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
     while
       $.$
       $identifier$ ?let methodName
@@ -94,7 +101,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
     switch access
     case integerSlice (2*) :
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
       for () in arguments do
@@ -125,7 +132,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
         [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1G uint] !low.location]
       end
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
       for () in arguments do
@@ -357,11 +364,12 @@ proc procAnalyzeAccesListInExpression
         !?temporary:ioTemporaries
         !?instructionListIR:ioInstructionGenerationList
       )
-    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+    case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
       handleArrayAccessInExpression (
         !?ioResult
         !indexExpression
         !endOfIndex
+        !checkIndexExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
         !optionalTargetType:inOptionalTargetType
@@ -432,11 +440,12 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !?temporary:ioTemporaries
         !?instructionListIR:ioInstructionGenerationList
       )
-    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+    case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
       handleArrayAccessInExpression (
         !?outResult
         !indexExpression
         !endOfIndex
+        !checkIndexExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
         !optionalTargetType:inOptionalTargetType
@@ -530,6 +539,7 @@ private proc handleArrayAccessInExpression
   ?!@objectIR ioResult
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
+  ?let @bool inCheckIndexExpression
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
@@ -555,6 +565,7 @@ private proc handleArrayAccessInExpression
       !?alloca: ioAllocaList
       !inIndexExpression 
       !inEndOfIndex
+      !inCheckIndexExpression
       !arraySize:arraySize
       !elementType:elementType
       !?ioInstructionGenerationList

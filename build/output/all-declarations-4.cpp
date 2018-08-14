@@ -5807,11 +5807,13 @@ typeComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_integerS
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess::cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                                                                                const GALGAS_location & inAssociatedValue1
+                                                                                                                                const GALGAS_location & inAssociatedValue1,
+                                                                                                                                const GALGAS_bool & inAssociatedValue2
                                                                                                                                 COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -5821,6 +5823,7 @@ void cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess::description
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -5835,6 +5838,9 @@ typeComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAcc
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -5921,13 +5927,14 @@ GALGAS_primaryInExpressionAccessAST GALGAS_primaryInExpressionAccessAST::constru
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_primaryInExpressionAccessAST GALGAS_primaryInExpressionAccessAST::constructor_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                                                  const GALGAS_location & inAssociatedValue1
+                                                                                                  const GALGAS_location & inAssociatedValue1,
+                                                                                                  const GALGAS_bool & inAssociatedValue2
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_primaryInExpressionAccessAST result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_arrayAccess ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -5990,11 +5997,13 @@ void GALGAS_primaryInExpressionAccessAST::method_integerSlice (GALGAS_lbigint & 
 
 void GALGAS_primaryInExpressionAccessAST::method_arrayAccess (GALGAS_expressionAST & outAssociatedValue0,
                                                               GALGAS_location & outAssociatedValue1,
+                                                              GALGAS_bool & outAssociatedValue2,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_arrayAccess) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @primaryInExpressionAccessAST arrayAccess invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -6002,6 +6011,7 @@ void GALGAS_primaryInExpressionAccessAST::method_arrayAccess (GALGAS_expressionA
     const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * ptr = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 

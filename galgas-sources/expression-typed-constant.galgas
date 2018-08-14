@@ -49,7 +49,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
     switch access
     case integerSlice (2*) :
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
       for () in arguments do
@@ -80,7 +80,7 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
     switch access
     case integerSlice (2*) :
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
       for () in arguments do

@@ -413,7 +413,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         ]
         currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
       end
-    case arrayAccess (@expressionAST unused indexExpression @location endOfIndex) :
+    case arrayAccess (* @location endOfIndex *) :
       error endOfIndex : "not handled yet" : currentObject
     end
   end
@@ -452,7 +452,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !baseGuardMangledName:guardRoutineImplentationLLVMName.string
       !baseGuardEffectiveParameterList:effectiveParameterListIR
     }
-  case arrayAccess (* @location endOfIndex) :
+  case arrayAccess (* @location endOfIndex *) :
     error endOfIndex : "a property access is required here" : outConvenienceGuardGenerationIR
   end
 }

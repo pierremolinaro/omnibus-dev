@@ -3523,7 +3523,7 @@ const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "let EP0_RX_SIZE = 8\n"
   "\n"
-  "func BDT_DESC (\?count $uint32 \?data $uint1) -> $uint32 {\n"
+  "func BDT_DESC safe section (\?count $uint32 \?data $uint1) -> $uint32 {\n"
   "  result = BDT_OWN | BDT_DTS | (count << 16) | if data \xE2""\x89""\xA0"" 0 {BDT_DATA1} else {BDT_DATA0}\n"
   "}\n"
   "\n"
@@ -3534,7 +3534,7 @@ const char * gWrapperFileContent_28_embeddedSampleCode = "target \"teensy-3-6/xt
   "let DATA0 = 0\n"
   "let DATA1 = 1\n"
   "\n"
-  "func index (\? endpoint $uint32 \?tx $uint32 \?odd $uint32) -> $uint32 {\n"
+  "func index safe section (\? endpoint $uint32 \?tx $uint32 \?odd $uint32) -> $uint32 {\n"
   "  result = (endpoint << 2) | (tx << 1) | odd\n"
   "}\n"
   "\n"
@@ -3926,7 +3926,7 @@ const cRegularFileWrapper gWrapperFile_28_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20339, // Text length
+  20365, // Text length
   gWrapperFileContent_28_embeddedSampleCode
 ) ;
 

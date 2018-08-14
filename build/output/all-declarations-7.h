@@ -364,16 +364,17 @@ void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_prim
 void routine_handleArrayAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                             const class GALGAS_expressionAST constinArgument1,
                                             const class GALGAS_location constinArgument2,
-                                            const class GALGAS_PLMType constinArgument3,
-                                            const class GALGAS_routineAttributes constinArgument4,
-                                            const class GALGAS_PLMType constinArgument5,
-                                            const class GALGAS_semanticContext constinArgument6,
-                                            const class GALGAS_mode constinArgument7,
-                                            class GALGAS_semanticTemporariesStruct & ioArgument8,
-                                            class GALGAS_staticEntityMap & ioArgument9,
-                                            class GALGAS_universalValuedObjectMap & ioArgument10,
-                                            class GALGAS_allocaList & ioArgument11,
-                                            class GALGAS_instructionListIR & ioArgument12,
+                                            const class GALGAS_bool constinArgument3,
+                                            const class GALGAS_PLMType constinArgument4,
+                                            const class GALGAS_routineAttributes constinArgument5,
+                                            const class GALGAS_PLMType constinArgument6,
+                                            const class GALGAS_semanticContext constinArgument7,
+                                            const class GALGAS_mode constinArgument8,
+                                            class GALGAS_semanticTemporariesStruct & ioArgument9,
+                                            class GALGAS_staticEntityMap & ioArgument10,
+                                            class GALGAS_universalValuedObjectMap & ioArgument11,
+                                            class GALGAS_allocaList & ioArgument12,
+                                            class GALGAS_instructionListIR & ioArgument13,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
@@ -823,10 +824,11 @@ void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument
                                       class GALGAS_allocaList & ioArgument7,
                                       const class GALGAS_expressionAST constinArgument8,
                                       const class GALGAS_location constinArgument9,
-                                      const class GALGAS_bigint constinArgument10,
-                                      const class GALGAS_PLMType constinArgument11,
-                                      class GALGAS_instructionListIR & ioArgument12,
-                                      class GALGAS_objectIR & outArgument13,
+                                      const class GALGAS_bool constinArgument10,
+                                      const class GALGAS_bigint constinArgument11,
+                                      const class GALGAS_PLMType constinArgument12,
+                                      class GALGAS_instructionListIR & ioArgument13,
+                                      class GALGAS_objectIR & outArgument14,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
