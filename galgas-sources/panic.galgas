@@ -180,14 +180,14 @@ proc appendPanicRoutines
 {
   ioIntermediateCodeStruct.mRoutineListIR += !@universalModePanicRoutineIR.new {
     !["section.user.handle.panic" nowhere]
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
   }
 #--- Section panic routine
   ioIntermediateCodeStruct.mRoutineListIR += !@sectionModePanicRoutineIR.new {
     !["section.implementation.handle.panic" nowhere]
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
     !ioIntermediateCodeStruct.mPanicSetupListIR
     !ioIntermediateCodeStruct.mPanicLoopListIR
   }
@@ -195,15 +195,15 @@ proc appendPanicRoutines
   for (sourceFilePath) in inSourceFileAbsolutePathSet do
     ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR.new {
       ![panicRoutineNameForFilePath (!sourceFilePath) nowhere]
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !sourceFilePath
     }
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR.new {
     ![panicRoutineNameForFilePath (!"") nowhere]
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
     !""
   }
 }

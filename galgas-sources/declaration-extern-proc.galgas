@@ -149,8 +149,8 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
   ]  
   ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR.new {
     !mRoutineNameForGeneration
-    !false # Is not root
-    !false # inWarnIfUnused
+    !isRequired:false # Is not root
+    !warnsIfUnused:false
     !formalArguments
     !returnType
   }

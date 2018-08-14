@@ -8,9 +8,7 @@ enum @mode {
   case serviceMode
   case primitiveMode
   case guardMode
-  case panicMode
-  case bootMode
-  case startupMode
+
   case anyMode
   case anySafeMode
   case safeUserMode
@@ -18,6 +16,10 @@ enum @mode {
   case safeServiceMode
   case safePrimitiveMode
   case safeGuardMode
+
+  case panicMode
+  case bootMode
+  case startupMode
 }
 
 #·······················································································································

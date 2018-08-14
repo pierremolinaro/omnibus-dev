@@ -1930,8 +1930,6 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_routineAttributes constructor_all (LOCATION_ARGS) ;
 
-  public : static class GALGAS_routineAttributes constructor_controlRegisterReadable (LOCATION_ARGS) ;
-
   public : static class GALGAS_routineAttributes constructor_guard (LOCATION_ARGS) ;
 
   public : static class GALGAS_routineAttributes constructor_mutating (LOCATION_ARGS) ;
@@ -1971,8 +1969,6 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_controlRegisterReadable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_guard (LOCATION_ARGS) const ;
 

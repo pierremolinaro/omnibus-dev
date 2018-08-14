@@ -299,7 +299,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
         fixit { remove }
       end
     end
-    let @routineAttributes attributes = .mutating | .controlRegisterReadable
+    let @routineAttributes attributes = .mutating
   #--- Enter in routine map
     let @routineLLVMNameDict routineLLVMNameDict = [system.mMode routineLLVMDictionaryForSystemRoutine
       !userRoutineMangledName
@@ -333,8 +333,8 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
   #--- 
     ioRoutineListIR += !@systemUserRoutineIR.new {
       !userRoutineMangledName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !implementationRoutineMangledName
       !signature
       !selfTypeProxy

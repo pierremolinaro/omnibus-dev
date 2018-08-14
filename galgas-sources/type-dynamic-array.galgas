@@ -106,8 +106,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@dynArrayRemoveAllFunctionIR.new {
       !routineLLVMName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
     }
   #--- Method 'length()'
     [!?routineMap addFunctionWithoutArgument
@@ -119,8 +119,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@dynArrayLengthFunctionIR.new {
       !routineLLVMName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
     }
   #--- Method 'insert(?:?atIndex:)'
     [!?routineMap addFunctionWithTwoInputArguments
@@ -139,8 +139,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@dynArrayInsertFunctionIR.new {
       !insertFunctionMangledName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !elementTypeProxy
     }
   #--- Method 'append(?:)'
@@ -157,8 +157,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@dynArrayAppendFunctionIR.new {
       !routineLLVMName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !arrayTypeProxy
       !elementTypeProxy
       !insertFunctionMangledName

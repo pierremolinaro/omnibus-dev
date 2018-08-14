@@ -124,8 +124,8 @@ override method @integerDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@integerBuiltinFunctionIR.new {
       !routineLLVMName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !llvmTypeName
       !"bswap"
     }
@@ -140,8 +140,8 @@ override method @integerDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@uint1ToBoolFunctionIR.new {
       !routineLLVMName
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !llvmTypeName
     }
   end
@@ -154,8 +154,8 @@ override method @integerDeclarationAST enterInContext
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
     !llvmTypeName
     !"bitreverse"
   }
@@ -168,8 +168,8 @@ override method @integerDeclarationAST enterInContext
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
     !llvmTypeName
     !"ctlz"
   }
@@ -182,8 +182,8 @@ override method @integerDeclarationAST enterInContext
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
     !llvmTypeName
     !"cttz"
   }
@@ -196,8 +196,8 @@ override method @integerDeclarationAST enterInContext
   ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
-    !false
-    !false
+    !isRequired:false
+    !warnsIfUnused:false
     !llvmTypeName
     !"ctpop"
   }

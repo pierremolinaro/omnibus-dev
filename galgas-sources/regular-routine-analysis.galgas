@@ -93,8 +93,8 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !mRoutineMangledName
-    !isRequired
-    !warnIfUnused
+    !isRequired:isRequired
+    !warnsIfUnused:warnIfUnused
     !receiverType
     !formalArguments
     !allocaList

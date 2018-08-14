@@ -355,8 +355,8 @@ override method @staticListAST enterInContext
     #--- Generate glue function
       ioRoutineListIR += !@staticListIndirectRoutineIR.new {
         !routineLLVMName
-        !true
-        !true
+        !isRequired:true
+        !warnsIfUnused:true
         !elementTypeProxy
         !signature
         !returnTypeProxy # .void if no return value

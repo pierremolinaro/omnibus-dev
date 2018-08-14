@@ -275,8 +275,8 @@ method @taskListAST enterInContext
     let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
     ioRoutineListIR += !@taskActivateFunctionIR.new {
       !routineMangledNameFromAST (!task.mTaskName !["activate" nowhere] !{})
-      !false
-      !false
+      !isRequired:false
+      !warnsIfUnused:false
       !assemblerTaskName
       !activateTaskCallName
       !taskIndex

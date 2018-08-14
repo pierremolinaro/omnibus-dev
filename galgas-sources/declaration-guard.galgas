@@ -308,8 +308,8 @@ override method @decoratedGuardDeclaration semanticAnalysis
 #--- Code generation
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
     !guardUserLLVMName
-    !false # Is not root
-    !warnIfUnused
+    !isRequired:false # Is not root
+    !warnsIfUnused:warnIfUnused
     !guardImplementationLLVMName
     !formalArguments
     !receiverType
@@ -317,8 +317,8 @@ override method @decoratedGuardDeclaration semanticAnalysis
   }
   ioIntermediateCodeStruct.mRoutineListIR += !@guardImplementationRoutineIR.new {
     !guardImplementationLLVMName
-    !false # Is not root
-    !warnIfUnused
+    !isRequired:false # Is not root
+    !warnsIfUnused:warnIfUnused
     !formalArguments
     !receiverType
     !convenienceGuardGenerationIR

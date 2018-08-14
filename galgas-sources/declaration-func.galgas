@@ -255,7 +255,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     )
   #--- Prepare annalysis
     var warnIfUnused = true
-    var functionAttributes = @routineAttributes.controlRegisterReadable
+    var functionAttributes = @routineAttributes.none
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then

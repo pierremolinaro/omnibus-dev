@@ -11707,16 +11707,16 @@ class GALGAS_mode : public AC_GALGAS_root {
     kEnum_serviceMode,
     kEnum_primitiveMode,
     kEnum_guardMode,
-    kEnum_panicMode,
-    kEnum_bootMode,
-    kEnum_startupMode,
     kEnum_anyMode,
     kEnum_anySafeMode,
     kEnum_safeUserMode,
     kEnum_safeSectionMode,
     kEnum_safeServiceMode,
     kEnum_safePrimitiveMode,
-    kEnum_safeGuardMode
+    kEnum_safeGuardMode,
+    kEnum_panicMode,
+    kEnum_bootMode,
+    kEnum_startupMode
   } enumeration ;
   
 //--------------------------------- Private data member
