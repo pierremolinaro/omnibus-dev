@@ -57,8 +57,7 @@ override method @booleanDeclarationAST enterInContext
   [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:boolTypeName ()
     !methodName:["uint1" nowhere]
-    !mode:.anyMode
-    !safe:true
+    !mode:.anySafeMode
     !resultTypeProxy:uint1TypeProxy
     ?routineLLVMName:*
   ]

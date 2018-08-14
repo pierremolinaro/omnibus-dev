@@ -122,7 +122,7 @@ driver digital > root {
 
   //··············································································
 
-  public func set @noUnusedWarning @safe (?mode:mode $digitalMode
+  public func set safe @noUnusedWarning (?mode:mode $digitalMode
                                           ?toPort:port $digitalPort) {
   //--- Set config and dir to apply
    var config $uint32
@@ -322,7 +322,7 @@ driver digital > root {
   
   //··············································································
 
-  public func write @noUnusedWarning @safe (?value $bool
+  public func write safe @noUnusedWarning (?value $bool
                                             ?toPort:port $digitalPort) {
     switch port {
     case D0 : // PTB16
@@ -678,7 +678,7 @@ driver digital > root {
 
   //··············································································
   
-  public func read @noUnusedWarning @safe (?port:port $digitalPort) -> $bool {
+  public func read safe @noUnusedWarning (?port:port $digitalPort) -> $bool {
     switch port {
     case D0 : // PTB16
       result = (#GPIOB:PDIR & (1 << 16)) ≠ 0
@@ -801,7 +801,7 @@ driver digital > root {
   
   //··············································································
   
-  public func toggle @noUnusedWarning @safe (?port:port $digitalPort) {
+  public func toggle safe @noUnusedWarning (?port:port $digitalPort) {
     switch port {
     case D0 : // PTB16
       #GPIOB:PTOR = 1 << 16

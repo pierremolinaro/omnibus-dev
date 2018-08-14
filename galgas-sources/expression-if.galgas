@@ -88,8 +88,7 @@ override method @ifExpressionAST analyzeExpression
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -103,8 +102,7 @@ override method @ifExpressionAST analyzeExpression
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -126,8 +124,7 @@ override method @ifExpressionAST analyzeExpression
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -151,8 +148,7 @@ override method @ifExpressionAST analyzeExpression
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

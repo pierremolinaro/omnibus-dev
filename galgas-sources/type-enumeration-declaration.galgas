@@ -136,8 +136,7 @@ override method @enumerationDeclarationAST enterInContext
   [!?routineMap addFunctionWithoutArgument
     !llvmBaseTypeName:mEnumerationName
     !methodName:.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !mEnumerationName}
-    !mode:.anyMode
-    !safe:true
+    !mode:.anySafeMode
     !resultTypeProxy:integerTypeProxy
     ?routineLLVMName: *
   ]

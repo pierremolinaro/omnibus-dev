@@ -482,8 +482,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : static class GALGAS_typeKind constructor_function (const class GALGAS_mode & inOperand0,
                                                               const class GALGAS_routineTypedSignature & inOperand1,
-                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                              const class GALGAS_bool & inOperand3
+                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
@@ -532,7 +531,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_mode & outArgument0,
                                                   class GALGAS_routineTypedSignature & outArgument1,
                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                                  class GALGAS_bool & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -1015,8 +1013,7 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                       const class GALGAS_routineLLVMNameDict & inOperand4,
                                                       const class GALGAS_bool & inOperand5,
-                                                      const class GALGAS_bool & inOperand6,
-                                                      const class GALGAS_mode & inOperand7,
+                                                      const class GALGAS_mode & inOperand6,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1027,8 +1024,7 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
                                                    class GALGAS_routineLLVMNameDict constinArgument4,
                                                    class GALGAS_bool constinArgument5,
-                                                   class GALGAS_bool constinArgument6,
-                                                   class GALGAS_mode constinArgument7,
+                                                   class GALGAS_mode constinArgument6,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -1062,11 +1058,6 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setSafeForKey (class GALGAS_bool constinArgument0,
-                                                       class GALGAS_string constinArgument1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
@@ -1075,8 +1066,7 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
                                                    class GALGAS_routineLLVMNameDict & outArgument4,
                                                    class GALGAS_bool & outArgument5,
-                                                   class GALGAS_bool & outArgument6,
-                                                   class GALGAS_mode & outArgument7,
+                                                   class GALGAS_mode & outArgument6,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -1110,10 +1100,6 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapCTXT getter_overriddenMap (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_safeForKey (const class GALGAS_string & constinOperand0,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const ;
-
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -1141,7 +1127,6 @@ class cEnumerator_routineMapCTXT : public cGenericAbstractEnumerator {
   public : class GALGAS_routineTypedSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnTypeProxy (LOCATION_ARGS) const ;
   public : class GALGAS_routineLLVMNameDict current_mModeDictionary (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_safe (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsExported (LOCATION_ARGS) const ;
   public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
 //--- Current element access

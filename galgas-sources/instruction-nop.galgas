@@ -37,8 +37,7 @@ override method @letInstructionNOP instructionSemanticAnalysis
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inCurrentMode
-  ?safe:let @bool unused inIsSafe
+  ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap

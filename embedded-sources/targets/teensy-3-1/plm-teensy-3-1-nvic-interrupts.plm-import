@@ -1,6 +1,6 @@
 
-section enable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
-  let idx $uint32 = extend (inInterruptCode.uint7 () - 16)
+section enable safe @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
+  let idx $uint32 = extend (inInterruptCode.uint7 () -% 16)
   let bitIndex = idx & 0x1F
   let registerIndex = idx >> 5
   #NVIC:ISER [registerIndex] = 1 << bitIndex
@@ -8,8 +8,8 @@ section enable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-section disable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
-  let idx $uint32 = extend (inInterruptCode.uint7 () - 16)
+section disable safe @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
+  let idx $uint32 = extend (inInterruptCode.uint7 () -% 16)
   let bitIndex = idx & 0x1F
   let registerIndex = idx >> 5
   #NVIC:ICER [registerIndex] = 1 << bitIndex
@@ -19,7 +19,7 @@ section disable @noUnusedWarning (?interrupt: inInterruptCode $isrSlot) {
 
 // 0 = highest priority
 // Cortex-M4: 0,16,32,48,64,80,96,112,128,144,160,176,192,208,224,240
-section set @noUnusedWarning (?interrupt: inInterruptCode $isrSlot ?priority:inPriority $uint8) {
+section set safe @noUnusedWarning (?interrupt: inInterruptCode $isrSlot ?priority:inPriority $uint8) {
   #NVIC:IPR [inInterruptCode.uint7 ()] = inPriority
 }
 

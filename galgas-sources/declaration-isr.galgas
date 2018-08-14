@@ -62,7 +62,6 @@ method @isrDeclarationListAST enterInContext
     ioDecoratedRoutineList +=
       !receiverTypeName: typeNameForTypeMapForDriver (!isr.mDriverName)
       !mode:isr.mMode
-      !safe: false
       !isRequired:true
       !.function # {!executionMode: isr.mMode}
       !warnIfUnused: true

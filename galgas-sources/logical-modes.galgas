@@ -12,6 +12,12 @@ enum @mode {
   case bootMode
   case startupMode
   case anyMode
+  case anySafeMode
+  case safeUserMode
+  case safeSectionMode
+  case safeServiceMode
+  case safePrimitiveMode
+  case safeGuardMode
 }
 
 #·······················································································································
@@ -19,14 +25,42 @@ enum @mode {
 getter @mode string -> @string {
   switch self
   case userMode : result = "user"
+  case safeUserMode : result = "safe user"
   case sectionMode : result = "section"
+  case safeSectionMode : result = "safe section"
   case serviceMode : result = "service"
+  case safeServiceMode : result = "safe service"
   case primitiveMode : result = "primitive"
+  case safePrimitiveMode : result = "safe primitive"
   case guardMode : result = "guard"
+  case safeGuardMode : result = "safe guard"
   case panicMode : result = "panic"
   case bootMode : result = "boot"
   case startupMode : result = "startup"
   case anyMode : result = "any"
+  case anySafeMode : result = "any safe"
+  end
+}
+
+#·······················································································································
+
+getter @mode isSafe -> @bool {
+  switch self
+  case userMode : result = false
+  case safeUserMode : result = true
+  case sectionMode : result = false
+  case safeSectionMode : result = true
+  case serviceMode : result = false
+  case safeServiceMode : result = true
+  case primitiveMode : result = false
+  case safePrimitiveMode : result = true
+  case guardMode : result = false
+  case safeGuardMode : result = true
+  case panicMode : result = true
+  case bootMode : result = true
+  case startupMode : result = true
+  case anyMode : result = false
+  case anySafeMode : result = true
   end
 }
 
@@ -34,16 +68,60 @@ getter @mode string -> @string {
 
 getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
   result = {!self !inRoutineNameForGeneration}
-  if self == .serviceMode then
-    result += !.primitiveMode !inRoutineNameForGeneration
-    result += !.guardMode !inRoutineNameForGeneration
-  elsif self == .sectionMode then
+  switch self
+  case serviceMode : # If routine is in service mode ...
+    result += !.primitiveMode !inRoutineNameForGeneration # ... it may be called from primitive mode...
+    result += !.guardMode !inRoutineNameForGeneration     # ... and guard mode...
+  case safeServiceMode : # If routine is in safe service mode ...
+    result += !.primitiveMode !inRoutineNameForGeneration # ... it may be called from primitive mode...
+    result += !.guardMode !inRoutineNameForGeneration     # ... and guard mode
+    result += !.safePrimitiveMode !inRoutineNameForGeneration # ... and safe primitive mode...
+    result += !.safeGuardMode !inRoutineNameForGeneration  # ... and safe guard mode
+    result += !.serviceMode !inRoutineNameForGeneration  # ... and service mode
+  case sectionMode :
     result += !.primitiveMode !inRoutineNameForGeneration
     result += !.serviceMode !inRoutineNameForGeneration
     result += !.guardMode !inRoutineNameForGeneration
+  case safeSectionMode :
+    result += !.primitiveMode !inRoutineNameForGeneration
+    result += !.serviceMode !inRoutineNameForGeneration
+    result += !.guardMode !inRoutineNameForGeneration
+    result += !.safePrimitiveMode !inRoutineNameForGeneration
+    result += !.safeServiceMode !inRoutineNameForGeneration
+    result += !.safeGuardMode !inRoutineNameForGeneration
     result += !.startupMode !inRoutineNameForGeneration
-  elsif self == .guardMode then
+  case guardMode :
     result += !.serviceMode !inRoutineNameForGeneration
+  case safeGuardMode :
+    result += !.safeServiceMode !inRoutineNameForGeneration
+    result += !.guardMode !inRoutineNameForGeneration
+    result += !.safeServiceMode !inRoutineNameForGeneration
+  case safePrimitiveMode :
+    result += !.primitiveMode !inRoutineNameForGeneration
+  case safeUserMode :
+    result += !.userMode !inRoutineNameForGeneration
+  case anySafeMode :
+    result += !.anyMode !inRoutineNameForGeneration
+    result += !.sectionMode !inRoutineNameForGeneration
+    result += !.safeSectionMode !inRoutineNameForGeneration
+    result += !.primitiveMode !inRoutineNameForGeneration
+    result += !.safePrimitiveMode !inRoutineNameForGeneration
+    result += !.serviceMode !inRoutineNameForGeneration
+    result += !.safeServiceMode !inRoutineNameForGeneration
+    result += !.guardMode !inRoutineNameForGeneration
+    result += !.safeGuardMode !inRoutineNameForGeneration
+    result += !.panicMode !inRoutineNameForGeneration
+    result += !.startupMode !inRoutineNameForGeneration
+    result += !.safeUserMode !inRoutineNameForGeneration
+    result += !.userMode !inRoutineNameForGeneration
+  case anyMode :
+    result += !.sectionMode !inRoutineNameForGeneration
+    result += !.primitiveMode !inRoutineNameForGeneration
+    result += !.serviceMode !inRoutineNameForGeneration
+    result += !.guardMode !inRoutineNameForGeneration
+  case userMode :
+    result += !.anyMode !inRoutineNameForGeneration
+  case bootMode, panicMode, primitiveMode, startupMode :
   end
 }
 
@@ -56,28 +134,57 @@ getter @mode routineLLVMDictionaryForSystemRoutine
 {
   result = {!self !inImplementationRoutineNameForGeneration}
   result += !.userMode !inUserRoutineNameForGeneration
-  if self == .serviceMode then
+  switch self 
+  case serviceMode :
     result += !.primitiveMode !inImplementationRoutineNameForGeneration
     result += !.guardMode !inImplementationRoutineNameForGeneration
-  elsif self == .sectionMode then
+  case safeServiceMode :
+    result += !.serviceMode !inImplementationRoutineNameForGeneration
+    result += !.safePrimitiveMode !inImplementationRoutineNameForGeneration
+    result += !.safeGuardMode !inImplementationRoutineNameForGeneration
+    result += !.primitiveMode !inImplementationRoutineNameForGeneration
+    result += !.guardMode !inImplementationRoutineNameForGeneration
+  case sectionMode :
     result += !.primitiveMode !inImplementationRoutineNameForGeneration
     result += !.serviceMode !inImplementationRoutineNameForGeneration
     result += !.guardMode !inImplementationRoutineNameForGeneration
+  case safeSectionMode :
+    result += !.sectionMode !inImplementationRoutineNameForGeneration
+    result += !.primitiveMode !inImplementationRoutineNameForGeneration
+    result += !.serviceMode !inImplementationRoutineNameForGeneration
+    result += !.guardMode !inImplementationRoutineNameForGeneration
+    result += !.safePrimitiveMode !inImplementationRoutineNameForGeneration
+    result += !.safeServiceMode !inImplementationRoutineNameForGeneration
+    result += !.safeGuardMode !inImplementationRoutineNameForGeneration
     result += !.startupMode !inImplementationRoutineNameForGeneration
-  elsif self == .guardMode then
+  case guardMode :
+    result += !.safeServiceMode !inImplementationRoutineNameForGeneration
+  case safeGuardMode :
+    result += !.guardMode !inImplementationRoutineNameForGeneration
     result += !.serviceMode !inImplementationRoutineNameForGeneration
+    result += !.safeServiceMode !inImplementationRoutineNameForGeneration
+  case safePrimitiveMode :
+    result += !.primitiveMode !inImplementationRoutineNameForGeneration
+  case safeUserMode :
+    result += !.userMode !inUserRoutineNameForGeneration
+  case anyMode, anySafeMode, bootMode, panicMode, primitiveMode, startupMode, userMode :
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @mode controlRegisterAccess ?let @bool inIsAccessibleInUserMode -> @bool {
-  switch self
-  case userMode, anyMode :
-    result = inIsAccessibleInUserMode
-  case sectionMode, serviceMode, primitiveMode, panicMode, bootMode, startupMode :
-    result = true
-  case guardMode :
-    result = false
+func checkModeAndReturnsRoutineLLVMName ?let @routineLLVMNameDict inCalledRoutineDictionary
+               ?let @mode inCallerRoutineMode
+               ?let @lstring inRoutineName -> @string {
+  if [inCalledRoutineDictionary hasKey !inCallerRoutineMode] then
+    [inCalledRoutineDictionary searchKey !inCallerRoutineMode ?result]
+  else
+    var m = "the '" + inRoutineName + "' routine cannot be invoked from '" + inCallerRoutineMode + "' mode, but only from:"
+    for (key *) in inCalledRoutineDictionary do
+      m += "\n  - '" + key + "' mode"
+    end
+    error inRoutineName : m : result
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -4,7 +4,7 @@
 
 list @systemRoutineDeclarationListAST {
   @lstring mName
-  @routineKind mRoutineKind
+  @mode mMode
   @bool mPublic
   @lstringlist mAttributeList
   @routineFormalArgumentListAST mFormalArgumentList
@@ -31,6 +31,13 @@ syntax extension plm_syntax {
     end
     $section$
     $identifier$ ?let name
+    @mode mode
+    select
+      mode = .sectionMode
+    or
+      $safe$
+      mode = .safeSectionMode
+    end
     @lstringlist attributeList = {}
     repeat
     while
@@ -49,7 +56,7 @@ syntax extension plm_syntax {
     <instructionList> !?ioAST ?let instructionList
     ioSVCListAST +=
       !name
-      !.section
+      !mode
       !public
       !attributeList
       !formalArgumentList
@@ -71,15 +78,15 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    @routineKind routineKind
-    select
-      $primitive$
-      routineKind = .primitive
-    or
-      $service$
-      routineKind = .service
-    end
+    $primitive$
     $identifier$ ?let name
+    @mode mode
+    select
+      mode = .primitiveMode
+    or
+      $safe$
+      mode = .safePrimitiveMode
+    end
     @lstringlist attributeList = {}
     repeat
     while
@@ -92,7 +99,47 @@ syntax extension plm_syntax {
     $}$
     ioSVCListAST +=
       !name
-      !routineKind
+      !mode
+      !public
+      !attributeList
+      !formalArgumentList
+      !["" here]
+      !instructionList
+      !.here
+  }
+
+  #·····················································································································
+
+  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
+    $service$
+    $identifier$ ?let name
+    @mode mode
+    select
+      mode = .serviceMode
+    or
+      $safe$
+      mode = .safeServiceMode
+    end
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    <procedure_input_formal_arguments> !?ioAST ?let formalArgumentList
+    ${$
+    <instructionList> !?ioAST ?let instructionList
+    $}$
+    ioSVCListAST +=
+      !name
+      !mode
       !public
       !attributeList
       !formalArgumentList
@@ -203,18 +250,28 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
     for attribute in system.mAttributeList do
       attributeSet += !attribute.mValue.string
     end
-#    let exportedRoutine = [attributeSet hasKey !exportedAttribute ()]
-#    let canMutateProperties = [attributeSet hasKey !mutatingAttribute ()]
+  #---
+    @routineKind routineKind
+    switch system.mMode
+    case sectionMode, safeSectionMode :
+      routineKind = .section
+    case serviceMode, safeServiceMode :
+      routineKind = .service
+    case primitiveMode, safePrimitiveMode :
+      routineKind = .primitive
+    case userMode, safeUserMode, anyMode, anySafeMode, bootMode, guardMode, panicMode, safeGuardMode, startupMode :
+      error system.mName : "internal error" : routineKind
+    end
   #--- Routine mangled names
     let userRoutineMangledName = systemUserMangledNameFromAST (
       !inReceiverLLVMBaseTypeName
-      !system.mRoutineKind
+      !routineKind
       !system.mName
       !system.mFormalArgumentList
     )
     let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
       !inReceiverLLVMBaseTypeName
-      !system.mRoutineKind
+      !routineKind
       !system.mName
       !system.mFormalArgumentList
     )
@@ -225,7 +282,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
   #--- Attributes
     var mutating = false
     var noUnusedWarning = false
-    var isSafe = false
     for (attribute) in system.mAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if noUnusedWarning then
@@ -237,14 +293,9 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
           error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
         end
         mutating = true    
-      elsif attribute.string == safeAttribute () then
-        if isSafe then
-          error attribute : "duplicated @" + safeAttribute () + " attribute" fixit { remove }
-        end
-        isSafe = true    
       else
         error attribute 
-        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
+        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + noUnusedWarningAttribute ()
         fixit { remove }
       end
     end
@@ -256,24 +307,12 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !implementationRoutineMangledName
       !signature
       !selfTypeProxy
-      !system.mRoutineKind == .section # If false, service or primitive
+      !routineKind == .section # If false, service or primitive
       !returnTypeProxy
     }
-  #--- Set execution mode and routine name dictionary 
-    @mode mode
-    switch system.mRoutineKind
-    case section :
-      mode = .sectionMode
-    case primitive :
-      mode = .primitiveMode
-    case service :
-      mode = .serviceMode
-    case function :
-      error system.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
-    end
     let @routineAttributes attributes = .mutating | .controlRegisterReadable
   #--- Enter in routine map
-    let @routineLLVMNameDict routineLLVMNameDict = [mode routineLLVMDictionaryForSystemRoutine
+    let @routineLLVMNameDict routineLLVMNameDict = [system.mMode routineLLVMDictionaryForSystemRoutine
       !userRoutineMangledName
       !implementationRoutineMangledName
     ]
@@ -284,17 +323,15 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !safe:isSafe
       !true
-      !mode
+      !system.mMode
     ]
   #--- Prepare semantic analysis
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
-      !mode:mode
-      !safe: isSafe
+      !mode:system.mMode
       !isRequired:false
-      !system.mRoutineKind # .function {!executionMode: mode}
+      !routineKind
       !warnIfUnused: not noUnusedWarning
       !exportedRoutine: true
       !attributes

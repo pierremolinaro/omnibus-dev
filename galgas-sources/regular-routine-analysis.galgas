@@ -5,7 +5,6 @@
 list @decoratedRegularRoutineList {
   @lstring receiverTypeName %selector # Empty string if standalone function
   @mode mode %selector
-  @bool safe %selector
   @bool isRequired %selector
   @routineKind mRoutineKind
   @bool warnIfUnused %selector
@@ -76,7 +75,6 @@ method @decoratedRegularRoutineList-element semanticAnalysis
     !routineAttributes:mRoutineAttributes
     !context:inContext
     !mode:mode
-    !safe:if mode == .panicMode then true else safe end
     !?temporary:ioTemporaries
     !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
     !?variableMap:universalMap

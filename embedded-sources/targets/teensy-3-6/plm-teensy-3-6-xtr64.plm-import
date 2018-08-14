@@ -5,15 +5,15 @@ check target "teensy-3-6/xtr64"
 //   UTILITY ROUTINES                                                                                                   
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-extern func currentStackPointer user () -> $uint32 : "current.stack.pointer"
+extern func currentStackPointer safe user () -> $uint32 : "current.stack.pointer"
 
-extern func freeStackSize user () -> $uint32 : "freeStackSize"
+extern func freeStackSize safe user () -> $uint32 : "freeStackSize"
 
-extern func noteFreeStackSize user () : "noteFreeStackSize"
+extern func noteFreeStackSize safe user () : "noteFreeStackSize"
 
-extern func noteCurrentTaskFreeStackSize service () : "noteCurrentTaskFreeStackSize"
+extern func noteCurrentTaskFreeStackSize safe service () : "noteCurrentTaskFreeStackSize"
 
-extern func taskCount user () -> $uint32 : "taskCount"
+extern func taskCount safe user () -> $uint32 : "taskCount"
 
 enum $guardState {
   case evaluatingOrOutside
@@ -21,13 +21,13 @@ enum $guardState {
   case waitingForChange
 }
 
-extern func taskGuardState user (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
+extern func taskGuardState safe user (?taskIndex: inIndex $uint32) -> $guardState : "taskGuardState"
 
-extern func taskAllocatedStackSize user (?taskIndex: inIndex $uint32) -> $uint32 : "taskAllocatedStackSize"
+extern func taskAllocatedStackSize safe user (?taskIndex: inIndex $uint32) -> $uint32 : "taskAllocatedStackSize"
 
-extern func taskFreeStackSize user (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
+extern func taskFreeStackSize safe user (?taskIndex: inIndex $uint32) -> $uint32 : "taskFreeStackSize"
 
-extern func taskName user (?taskIndex: inIndex $uint32) -> $staticString : "taskName"
+extern func taskName safe user (?taskIndex: inIndex $uint32) -> $staticString : "taskName"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   SYNCHRONIZATION TOOLS ROUTINES                                                                                     
@@ -37,18 +37,18 @@ opaque $taskList @instantiable {64}
 
 //--- Block running task
 extern func
-block primitive (?!inList:ioWaitingList $taskList) : "blockInList"
+block safe primitive (?!inList:ioWaitingList $taskList) : "blockInList"
 
 extern func
-block primitive (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
+block safe primitive (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
 //--- Make task Ready
 extern func
-makeTaskReady service (?!fromList:ioWaitingList $taskList
+makeTaskReady safe service (?!fromList:ioWaitingList $taskList
                        !found: outFound $bool) : "makeTaskReady"
 
 extern func
-makeTasksReady service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
+makeTasksReady safe service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   GUARD                                                                                                              
@@ -57,24 +57,24 @@ makeTasksReady service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksRead
 opaque $guardList @instantiable {64}
 
 extern func
-handle guard (?!guard:ioGuard $guardList) : "handleGuardedCommand"
+handle safe guard (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
 extern func
-handle guard (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
+handle safe guard (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
 
 extern func
-notifyChange service (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
+notifyChange safe service (?!forGuard:ioGuard $guardList) : "notify.change.from.guard.list"
 
 extern func
-notifyChangeForGuardedWaitUntil service (?withCurrentDate:inCurrentDate $uint32)
+notifyChangeForGuardedWaitUntil safe service (?withCurrentDate:inCurrentDate $uint32)
 : "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                                                                       
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-required func activityLedOn safe section @safe @exported ()
+required func activityLedOn safe section @exported ()
 
-required func activityLedOff safe section @safe @exported ()
+required func activityLedOff safe section @exported ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

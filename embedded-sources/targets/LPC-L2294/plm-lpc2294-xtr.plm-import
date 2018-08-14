@@ -87,7 +87,7 @@ driver time {
 
   //············································································
 
-  public section now @safe @noUnusedWarning () -> $uint32 {
+  public section now safe @noUnusedWarning () -> $uint32 {
     result = self.mUptime
   }
 

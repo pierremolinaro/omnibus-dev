@@ -45,8 +45,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -60,8 +59,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -98,7 +96,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case syncTool (*) :
       error mOperatorLocation : "internal error" : leftOperand
-    case function (4*) :
+    case function (3*) :
       error mOperatorLocation : "internal error" : leftOperand
     case staticInteger :
       if [inOptionalTargetType.kind isInteger] then
@@ -124,7 +122,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     leftOperand = .literalInteger {!type:staticIntegerType () !value:0G}
   case minus :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
-    if inCurrentMode == .panicMode then
+    if inMode == .panicMode then
       error mOperatorLocation
         : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end

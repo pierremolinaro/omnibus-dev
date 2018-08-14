@@ -85,27 +85,10 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
 {
 #--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
-#---
-  var safe = false
-  for (attribute) in mAttributeList do
-    if attribute.string == safeAttribute () then
-      safe = true
-    end
-  end
 #--- Return type
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
 #--- Enter in context
   let @routineLLVMNameDict routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !mRoutineNameForGeneration]
-#  if mMode == .serviceMode then
-#    routineLLVMNameDict += !.primitiveMode !mRoutineNameForGeneration
-#    routineLLVMNameDict += !.guardMode !mRoutineNameForGeneration
-#  elsif mMode == .sectionMode then
-#    routineLLVMNameDict += !.primitiveMode !mRoutineNameForGeneration
-#    routineLLVMNameDict += !.serviceMode !mRoutineNameForGeneration
-#    routineLLVMNameDict += !.guardMode !mRoutineNameForGeneration
-#  elsif mMode == .guardMode then
-#    routineLLVMNameDict += !.serviceMode !mRoutineNameForGeneration
-#  end
   let routineMangledName = [signature mangledName !mExternProcedureName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName
@@ -113,7 +96,6 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
     !signature
     !returnTypeProxy
     !routineLLVMNameDict
-    !safe:safe
     !false
     !mMode
   ]

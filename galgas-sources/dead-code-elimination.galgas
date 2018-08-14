@@ -37,7 +37,7 @@ proc codeOptimization
     @stringset accessibleRoutineSet = {}
     [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?maxBranchOfOnInstructions]
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
-    if routine.mRoutine.mIsRequired then
+    if routine.mRoutine.isRequired then
       exploreRoutineSet += !routine.mRoutine.mRoutineMangledName
     end
   end
@@ -66,7 +66,7 @@ proc codeOptimization
   #--- Warn unused routines
     for routine in routineAccessibilityIR do
       let routineMangledName = routine.mRoutine.mRoutineMangledName
-      if routine.mRoutine.mWarnIfUnused & not [usefulRoutineSet hasKey !routineMangledName] then
+      if routine.mRoutine.warnsIfUnused & not [usefulRoutineSet hasKey !routineMangledName] then
         warning routineMangledName : "unused routine"
       end
     end
@@ -112,7 +112,7 @@ private proc displayInvocationGraph
     [routine enterAccessibleEntities !?accessibleRoutineSet !?*]
     allRoutines += accessibleRoutineSet
     s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"
-    if routine.mIsRequired then
+    if routine.isRequired then
       s += ", color=blue" # Required routines are blue
     end
     s += "] ;\n"

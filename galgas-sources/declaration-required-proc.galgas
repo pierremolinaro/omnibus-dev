@@ -6,7 +6,7 @@ list @requiredFunctionDeclarationListAST {
   @lstring mName
   @mode mExecutionMode
   @bool mIsExported
-  @bool mIsSafe
+#  @bool mIsSafe
   @routineFormalArgumentListAST mFormalArgumentList
   @location mEndOfProcLocation
 }
@@ -28,7 +28,7 @@ syntax extension plm_syntax {
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
     var isGlobal = false
-    var isSafe = false
+#    var isSafe = false
     for (attribute) in attributeList do
       if attribute.string == exportedAttribute () then
         if isGlobal then
@@ -36,21 +36,21 @@ syntax extension plm_syntax {
         else
           isGlobal = true
         end
-      elsif attribute.string == safeAttribute () then
-        if isSafe then
-          error attribute : "duplicated attribute" fixit { remove }
-        else
-          isSafe = true
-        end
+#      elsif attribute.string == safeAttribute () then
+#        if isSafe then
+#          error attribute : "duplicated attribute" fixit { remove }
+#        else
+#          isSafe = true
+#        end
       else
-        error attribute : "invalid attribute" fixit { replace "@" + exportedAttribute () replace "@" + safeAttribute () }
+        error attribute : "invalid attribute" fixit { replace "@" + exportedAttribute () }
       end
     end
     ioAST.mRequiredFunctionListAST +=
       !procName
       !mode
       !isGlobal
-      !isSafe
+#      !isSafe
       !procFormalArgumentList
       !.here
   }
@@ -78,7 +78,6 @@ proc checkRequiredProcedures
         ?let implementedSignature
         ?let implementedReturnTypeProxy # null if no returned value
         ?let unused implementedModeDictionary
-        ?safe:let implementedIsSafe
         ?let implementedIsExported
         ?let implementedMode
       ]
@@ -92,15 +91,15 @@ proc checkRequiredProcedures
     #--- Check return type
       if implementedReturnTypeProxy != .null then
         error errorLocation : "function should not return a value (as required by required function declaration)"    
-      elsif requiredFunction.mIsSafe && not implementedIsSafe then
-        error errorLocation : "function should be @safe (as required by required function declaration)"    
+#      elsif requiredFunction.mIsSafe && not implementedIsSafe then
+#        error errorLocation : "function should be @safe (as required by required function declaration)"    
       end
-    #--- Check safety
-      if implementedIsSafe && not requiredFunction.mIsSafe then
-        error errorLocation : "function should not be @safe (as required by required function declaration)"    
-      elsif requiredFunction.mIsSafe && not implementedIsSafe then
-        error errorLocation : "function should be @safe (as required by required function declaration)"    
-      end
+#    #--- Check safety
+#      if implementedIsSafe && not requiredFunction.mIsSafe then
+#        error errorLocation : "function should not be @safe (as required by required function declaration)"    
+#      elsif requiredFunction.mIsSafe && not implementedIsSafe then
+#        error errorLocation : "function should be @safe (as required by required function declaration)"    
+#      end
     #--- Check mode
       if implementedMode != requiredFunction.mExecutionMode then
         error errorLocation : "required mode is '" + requiredFunction.mExecutionMode + "'"    

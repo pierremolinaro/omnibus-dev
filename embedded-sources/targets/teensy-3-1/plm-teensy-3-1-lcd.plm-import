@@ -24,7 +24,7 @@ driver lcd > digital {
   
   //············································································
 
-  func configurePorts startup @noUnusedWarning @safe () {
+  func configurePorts startup @noUnusedWarning () {
     digital.set (!mode:.OUTPUT !toPort:self.DB4)
     digital.set (!mode:.OUTPUT !toPort:self.DB5)
     digital.set (!mode:.OUTPUT !toPort:self.DB6)
@@ -35,50 +35,50 @@ driver lcd > digital {
 
   //············································································
 
-  func driveHighE safe @noUnusedWarning @safe () {
+  func driveHighE safe @noUnusedWarning () {
     digital.write (!yes !toPort:self.ENABLE)
   }
 
   //············································································
 
-  func driveLowE safe @noUnusedWarning @safe () {
+  func driveLowE safe @noUnusedWarning () {
     digital.write (!no !toPort:self.ENABLE)
   }
 
   //············································································
 
 
-  func driveHighRS safe @noUnusedWarning @safe () {
+  func driveHighRS safe @noUnusedWarning () {
    digital.write (!yes !toPort:self.RS)
   }
 
   //············································································
 
-  func driveLowRS safe @noUnusedWarning @safe () {
+  func driveLowRS safe @noUnusedWarning () {
     digital.write (!no !toPort:self.RS)
   }
 
   //············································································
 
-  func setD4 safe @noUnusedWarning @safe (?inValue $bool) {
+  func setD4 safe @noUnusedWarning (?inValue $bool) {
     digital.write (!inValue !toPort:self.DB4)
   }
 
   //············································································
 
-  func setD5 safe @noUnusedWarning @safe (?inValue $bool) {
+  func setD5 safe @noUnusedWarning (?inValue $bool) {
     digital.write (!inValue !toPort:self.DB5)
   }
 
   //············································································
 
-  func setD6 safe @noUnusedWarning @safe (?inValue $bool) {
+  func setD6 safe @noUnusedWarning (?inValue $bool) {
     digital.write (!inValue !toPort:self.DB6)
   }
 
   //············································································
 
-  func setD7 safe @noUnusedWarning @safe (?inValue $bool) {
+  func setD7 safe @noUnusedWarning (?inValue $bool) {
     digital.write (!inValue !toPort:self.DB7)
   }
 
@@ -86,7 +86,7 @@ driver lcd > digital {
   //   UTILITY ROUTINES
   //············································································
 
-  func programLcd4BitDataBusOutput safe @noUnusedWarning @safe (?inValue $uint8) {
+  func programLcd4BitDataBusOutput safe @noUnusedWarning (?inValue $uint8) {
     self.setD4 (!(inValue & 0x01) ≠ 0)
     self.setD5 (!(inValue & 0x02) ≠ 0)
     self.setD6 (!(inValue & 0x04) ≠ 0)
@@ -95,7 +95,7 @@ driver lcd > digital {
 
   //············································································
 
-  func writeFirstNibbleOf8bitCommand safe @noUnusedWarning @safe (?inValue $uint8) {
+  func writeFirstNibbleOf8bitCommand safe @noUnusedWarning (?inValue $uint8) {
     self.driveLowRS ()
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE ()
@@ -103,7 +103,7 @@ driver lcd > digital {
 
   //············································································
 
-  func writeFirstNibbleOf8bitData safe @noUnusedWarning @safe (?inValue $uint8) {
+  func writeFirstNibbleOf8bitData safe @noUnusedWarning (?inValue $uint8) {
     self.driveHighRS ()
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE ()
@@ -111,14 +111,14 @@ driver lcd > digital {
 
    //············································································
 
-  func writeSecondNibble safe @noUnusedWarning @safe (?inValue $uint8) {
+  func writeSecondNibble safe @noUnusedWarning (?inValue $uint8) {
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE ()
   }
 
   //············································································
 
-  func write4BitCommand startup @noUnusedWarning @safe (?inValue $uint8) {
+  func write4BitCommand startup @noUnusedWarning (?inValue $uint8) {
     time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inValue)
     time.busyWaitingDuringMS (!1)
@@ -127,7 +127,7 @@ driver lcd > digital {
 
   //············································································
 
-  func write8bitCommand startup @noUnusedWarning @safe (?inCommand $uint8) {
+  func write8bitCommand startup @noUnusedWarning (?inCommand $uint8) {
     time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
     time.busyWaitingDuringMS (!1)

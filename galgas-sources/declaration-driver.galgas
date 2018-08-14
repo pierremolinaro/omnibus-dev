@@ -399,7 +399,6 @@ override method @implementedDriverAST enterInContext
   ioDecoratedRoutineList +=
     !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
     !mode:.bootMode
-    !safe: true
     !isRequired:true
     !.function
     !warnIfUnused: true
@@ -415,7 +414,6 @@ override method @implementedDriverAST enterInContext
   ioDecoratedRoutineList +=
     !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
     !mode:.startupMode
-    !safe: true
     !isRequired:true
     !.function
     !warnIfUnused: true

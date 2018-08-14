@@ -74,8 +74,8 @@ class cPtr_dynArrayRemoveAllFunctionIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_dynArrayRemoveAllFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                             const GALGAS_bool & in_mIsRequired,
-                                             const GALGAS_bool & in_mWarnIfUnused
+                                             const GALGAS_bool & in_isRequired,
+                                             const GALGAS_bool & in_warnsIfUnused
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -170,8 +170,8 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_dynArrayAppendFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                          const GALGAS_bool & in_mIsRequired,
-                                          const GALGAS_bool & in_mWarnIfUnused,
+                                          const GALGAS_bool & in_isRequired,
+                                          const GALGAS_bool & in_warnsIfUnused,
                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mArrayTypeProxy,
                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy,
                                           const GALGAS_string & in_mInsertFunctionMangledName
@@ -407,11 +407,10 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_routineAttributes constinArgument1,
                                                                               const class GALGAS_semanticContext constinArgument2,
                                                                               const class GALGAS_mode constinArgument3,
-                                                                              const class GALGAS_bool constinArgument4,
-                                                                              class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                              class GALGAS_staticEntityMap & ioArgument6,
-                                                                              class GALGAS_universalValuedObjectMap & ioArgument7,
-                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                                                              class GALGAS_staticEntityMap & ioArgument5,
+                                                                              class GALGAS_universalValuedObjectMap & ioArgument6,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument7,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -427,7 +426,6 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_routineAttributes constin_inRoutineAttributes,
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_mode constin_inMode,
-                                           const GALGAS_bool constin_inIsSafe,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                            GALGAS_universalValuedObjectMap & io_ioUniversalMap,

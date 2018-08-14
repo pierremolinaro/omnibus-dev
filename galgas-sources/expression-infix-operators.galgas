@@ -85,8 +85,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @PLMType inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -100,8 +99,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -119,8 +117,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:[leftOperand type]
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -133,7 +130,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?rightOperand
   ]  
 #------------------- Get operator map
-  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inCurrentMode !mOperatorLocation)
+  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inMode !mOperatorLocation)
 #------------------- Check operand types
   [operatorMap checkBinaryOperationWith
     !leftType:[leftOperand type]
@@ -159,7 +156,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 private func getInfixOperatorMap
   ?let @infixOperator inOp
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
+  ?mode:let @mode inMode
   ?let @location inOperatorLocation
   -> @infixOperatorMap outOperatorMap
 {
@@ -185,7 +182,7 @@ private func getInfixOperatorMap
   case booleanXorOp :
     outOperatorMap = inContext.mBooleanXorOperatorMap
   case addOp :
-    if inCurrentMode == .panicMode then
+    if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -196,7 +193,7 @@ private func getInfixOperatorMap
   case addOpNoOvf :
     outOperatorMap = inContext.mAddNoOvfOperatorMap
   case subOp :
-    if inCurrentMode == .panicMode then
+    if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -207,7 +204,7 @@ private func getInfixOperatorMap
   case subOpNoOvf :
     outOperatorMap = inContext.mSubNoOvfOperatorMap
   case mulOp :
-    if inCurrentMode == .panicMode then
+    if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -218,7 +215,7 @@ private func getInfixOperatorMap
   case mulOpNoOvf :
     outOperatorMap = inContext.mMulNoOvfOperatorMap
   case divOp :
-    if inCurrentMode == .panicMode then
+    if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -229,7 +226,7 @@ private func getInfixOperatorMap
   case divOpNoOvf :
     outOperatorMap = inContext.mDivNoOvfOperatorMap
   case modOp :
-    if inCurrentMode == .panicMode then
+    if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then

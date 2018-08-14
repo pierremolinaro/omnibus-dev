@@ -267,8 +267,7 @@ method @taskListAST enterInContext
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:task.mTaskName
       !methodName:.new {!"activate" !task.mTaskName}
-      !mode:.anyMode
-      !safe:true
+      !mode:.anySafeMode
       !resultTypeProxy:.null
       ?routineLLVMName:*
     ]
@@ -288,7 +287,6 @@ method @taskListAST enterInContext
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
         !mode:.userMode
-        !safe: false
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true
@@ -306,7 +304,6 @@ method @taskListAST enterInContext
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
         !mode:.userMode
-        !safe: false
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused:true
@@ -324,7 +321,6 @@ method @taskListAST enterInContext
       ioDecoratedRoutineList +=
         !receiverTypeName: task.mTaskName
         !mode:.userMode
-        !safe: false
         !isRequired:true
         !.function # {!executionMode:.userMode}
         !warnIfUnused: true
@@ -348,7 +344,6 @@ method @taskListAST enterInContext
     ioDecoratedRoutineList +=
       !receiverTypeName: task.mTaskName
       !mode:.userMode
-      !safe: false
       !isRequired:true
       !.function # {!executionMode:.userMode}
       !warnIfUnused: true

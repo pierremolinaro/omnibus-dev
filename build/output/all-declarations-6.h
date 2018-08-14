@@ -162,8 +162,8 @@ class cPtr_dynArrayLengthFunctionIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_dynArrayLengthFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                          const GALGAS_bool & in_mIsRequired,
-                                          const GALGAS_bool & in_mWarnIfUnused
+                                          const GALGAS_bool & in_isRequired,
+                                          const GALGAS_bool & in_warnsIfUnused
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -250,8 +250,8 @@ class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_dynArrayInsertFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                          const GALGAS_bool & in_mIsRequired,
-                                          const GALGAS_bool & in_mWarnIfUnused,
+                                          const GALGAS_bool & in_isRequired,
+                                          const GALGAS_bool & in_warnsIfUnused,
                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy
                                           COMMA_LOCATION_ARGS) ;
 
@@ -340,8 +340,8 @@ class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_enumToUintRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                     const GALGAS_bool & in_mIsRequired,
-                                     const GALGAS_bool & in_mWarnIfUnused,
+                                     const GALGAS_bool & in_isRequired,
+                                     const GALGAS_bool & in_warnsIfUnused,
                                      const GALGAS_string & in_mEnumerationLLVMTypeName
                                      COMMA_LOCATION_ARGS) ;
 
@@ -584,8 +584,8 @@ class cPtr_uint_31_ToBoolFunctionIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_uint_31_ToBoolFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                          const GALGAS_bool & in_mIsRequired,
-                                          const GALGAS_bool & in_mWarnIfUnused,
+                                          const GALGAS_bool & in_isRequired,
+                                          const GALGAS_bool & in_warnsIfUnused,
                                           const GALGAS_string & in_mLLVMTypeName
                                           COMMA_LOCATION_ARGS) ;
 
@@ -678,8 +678,8 @@ class cPtr_integerBuiltinFunctionIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_integerBuiltinFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                          const GALGAS_bool & in_mIsRequired,
-                                          const GALGAS_bool & in_mWarnIfUnused,
+                                          const GALGAS_bool & in_isRequired,
+                                          const GALGAS_bool & in_warnsIfUnused,
                                           const GALGAS_string & in_mLLVMTypeName,
                                           const GALGAS_string & in_mIntrinsicName
                                           COMMA_LOCATION_ARGS) ;
@@ -1387,8 +1387,8 @@ class cPtr_staticListIndirectRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_staticListIndirectRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                             const GALGAS_bool & in_mIsRequired,
-                                             const GALGAS_bool & in_mWarnIfUnused,
+                                             const GALGAS_bool & in_isRequired,
+                                             const GALGAS_bool & in_warnsIfUnused,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mStaticListElementType,
                                              const GALGAS_routineTypedSignature & in_mFormalArgumentListForGeneration,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
@@ -1487,8 +1487,8 @@ class cPtr_externRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_externRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                 const GALGAS_bool & in_mIsRequired,
-                                 const GALGAS_bool & in_mWarnIfUnused,
+                                 const GALGAS_bool & in_isRequired,
+                                 const GALGAS_bool & in_warnsIfUnused,
                                  const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
                                  COMMA_LOCATION_ARGS) ;
@@ -1602,8 +1602,8 @@ class cPtr_guardUserRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_guardUserRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                    const GALGAS_bool & in_mIsRequired,
-                                    const GALGAS_bool & in_mWarnIfUnused,
+                                    const GALGAS_bool & in_isRequired,
+                                    const GALGAS_bool & in_warnsIfUnused,
                                     const GALGAS_string & in_mMangledImplementationGuardName,
                                     const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                     const GALGAS_PLMType & in_mReceiverType,
@@ -1711,8 +1711,8 @@ class cPtr_guardImplementationRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_guardImplementationRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                              const GALGAS_bool & in_mIsRequired,
-                                              const GALGAS_bool & in_mWarnIfUnused,
+                                              const GALGAS_bool & in_isRequired,
+                                              const GALGAS_bool & in_warnsIfUnused,
                                               const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                               const GALGAS_PLMType & in_mReceiverType,
                                               const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
@@ -1845,8 +1845,8 @@ class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_regularRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                  const GALGAS_bool & in_mIsRequired,
-                                  const GALGAS_bool & in_mWarnIfUnused,
+                                  const GALGAS_bool & in_isRequired,
+                                  const GALGAS_bool & in_warnsIfUnused,
                                   const GALGAS_PLMType & in_mReceiverType,
                                   const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                   const GALGAS_allocaList & in_mAllocaList,
@@ -2446,8 +2446,8 @@ class cPtr_fileSpecificPanicRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_fileSpecificPanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                            const GALGAS_bool & in_mIsRequired,
-                                            const GALGAS_bool & in_mWarnIfUnused,
+                                            const GALGAS_bool & in_isRequired,
+                                            const GALGAS_bool & in_warnsIfUnused,
                                             const GALGAS_string & in_inFilePath
                                             COMMA_LOCATION_ARGS) ;
 
@@ -2532,8 +2532,8 @@ class cPtr_universalModePanicRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_universalModePanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                             const GALGAS_bool & in_mIsRequired,
-                                             const GALGAS_bool & in_mWarnIfUnused
+                                             const GALGAS_bool & in_isRequired,
+                                             const GALGAS_bool & in_warnsIfUnused
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2624,8 +2624,8 @@ class cPtr_sectionModePanicRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Constructor
   public : cPtr_sectionModePanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                           const GALGAS_bool & in_mIsRequired,
-                                           const GALGAS_bool & in_mWarnIfUnused,
+                                           const GALGAS_bool & in_isRequired,
+                                           const GALGAS_bool & in_warnsIfUnused,
                                            const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
                                            const GALGAS_panicSortedListIR & in_mPanicLoopListIR
                                            COMMA_LOCATION_ARGS) ;

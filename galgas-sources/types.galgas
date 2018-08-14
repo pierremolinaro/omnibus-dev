@@ -38,8 +38,7 @@ enum @typeKind {
   case dynamicArrayType (@PLMType elementType)
   case function (@mode mode
                  @routineTypedSignature signature
-                 @unifiedTypeMap-proxy returnTypeProxy
-                 @bool safe)
+                 @unifiedTypeMap-proxy returnTypeProxy)
   default void
 }
 
@@ -69,7 +68,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case dynamicArrayType (*) :
     result = "%ptrtype" # "i" + ptrSize
-  case function (* signature returnTypeProxy *) :
+  case function (* signature returnTypeProxy) :
     if returnTypeProxy == .null then
       result = "void"
     else
@@ -295,7 +294,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Static array"
   case dynamicArrayType (*) :
     result = "Dynamic array"
-  case function (4*) :
+  case function (3*) :
     result = "Function"
   end
 }
@@ -344,7 +343,7 @@ getter @PLMType defaultAlignment -> @uint{
     result = [elementType defaultAlignment]
   case dynamicArrayType (*) :
     result = 4
-  case function (4*) :
+  case function (3*) :
     result = 4
   end
 }
@@ -484,7 +483,7 @@ method @PLMType generateLLVMTypeDefinition
   case arrayType (elementType arraySize) :
     ioLLVMcode += [self llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
   case dynamicArrayType (*) :
-  case function (4*) :
+  case function (3*) :
   end
 }
 
@@ -562,7 +561,7 @@ proc declareLLVMTypes
         !?ioGenerationAdds
         !type
       )
-    case function (4*) :
+    case function (3*) :
     end
   end
 }

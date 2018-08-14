@@ -24,13 +24,13 @@ driver time > root {
   //   Functions callable in startup mode
   //····················································································································
 
-  public func oneMillisecondBusyWait startup @noUnusedWarning @safe () {
+  public func oneMillisecondBusyWait startup @noUnusedWarning () {
     while #SYST:CSR:COUNTFLAG == 0 {}
   }
 
   //····················································································································
 
-  public func busyWaitingDuringMS startup @noUnusedWarning @safe (?inDelay $uint32) {
+  public func busyWaitingDuringMS startup @noUnusedWarning (?inDelay $uint32) {
     for _ $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
@@ -96,7 +96,7 @@ driver time > root {
   //   Primitives callable in user mode
   //····················································································································
 
-  public section now @safe @noUnusedWarning () -> $uint32 {
+  public section now safe @noUnusedWarning () -> $uint32 {
     result = self.mUptime
   }
 

@@ -79,8 +79,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -107,7 +106,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     error mTypeName : "an integer type is required here"
   case syncTool (*) :
     error mTypeName : "an integer type is required here"
-  case function (4*) :
+  case function (3*) :
     error mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions
@@ -116,8 +115,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !routineAttributes:inRoutineAttributes
       !optionalTargetType:type
       !context:inContext
-      !mode:inCurrentMode
-      !safe: inIsSafe
+      !mode:inMode
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
@@ -134,8 +132,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !routineAttributes:inRoutineAttributes
       !optionalTargetType:type
       !context:inContext
-      !mode:inCurrentMode
-      !safe: inIsSafe
+      !mode:inMode
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
@@ -176,8 +173,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !routineAttributes:inRoutineAttributes
       !endOfInstructionList:mEndOf_do_instruction
       !context:inContext
-      !mode:inCurrentMode
-      !safe: inIsSafe
+      !mode:inMode
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap

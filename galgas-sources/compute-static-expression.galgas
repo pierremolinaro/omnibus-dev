@@ -24,7 +24,6 @@ proc computeStaticExpression
     !optionalTargetType:annotationType
     !context:ioContext
     !mode:.bootMode
-    !safe: true
     !?temporary:*
     !?staticEntityMap: ioStaticEntityMap
     !?variableMap:ioContext.mValuedObjectMap

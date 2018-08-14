@@ -43,8 +43,7 @@ override method @instanciationAST analyzeExpression
   ?self:let @PLMType inSelfType
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
@@ -65,8 +64,7 @@ override method @instanciationAST analyzeExpression
   ?inGuard:let @bool unused inGuard
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap

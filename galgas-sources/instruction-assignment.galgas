@@ -49,8 +49,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?safe:let @bool inIsSafe
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -64,8 +63,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:targetType
     !context:inContext
-    !mode:inCurrentMode
-    !safe: inIsSafe
+    !mode:inMode
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -79,8 +77,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !readAccess:false
     !routineAttributes:inRoutineAttributes
     !context: inContext
-    !mode: inCurrentMode
-    !safe: inIsSafe
+    !mode: inMode
     !?temporary: ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

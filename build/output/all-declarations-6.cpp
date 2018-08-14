@@ -1572,38 +1572,38 @@ GALGAS_lstring cPtr_abstractRoutineIR::getter_mRoutineMangledName (UNUSED_LOCATI
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_abstractRoutineIR::getter_mIsRequired (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_abstractRoutineIR::getter_isRequired (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_abstractRoutineIR * p = (const cPtr_abstractRoutineIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_abstractRoutineIR) ;
-    result = p->mProperty_mIsRequired ;
+    result = p->mProperty_isRequired ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool cPtr_abstractRoutineIR::getter_mIsRequired (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIsRequired ;
+GALGAS_bool cPtr_abstractRoutineIR::getter_isRequired (UNUSED_LOCATION_ARGS) const {
+  return mProperty_isRequired ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_abstractRoutineIR::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_abstractRoutineIR::getter_warnsIfUnused (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_abstractRoutineIR * p = (const cPtr_abstractRoutineIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_abstractRoutineIR) ;
-    result = p->mProperty_mWarnIfUnused ;
+    result = p->mProperty_warnsIfUnused ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool cPtr_abstractRoutineIR::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWarnIfUnused ;
+GALGAS_bool cPtr_abstractRoutineIR::getter_warnsIfUnused (UNUSED_LOCATION_ARGS) const {
+  return mProperty_warnsIfUnused ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1611,13 +1611,13 @@ GALGAS_bool cPtr_abstractRoutineIR::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_abstractRoutineIR::cPtr_abstractRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                const GALGAS_bool & in_mIsRequired,
-                                                const GALGAS_bool & in_mWarnIfUnused
+                                                const GALGAS_bool & in_isRequired,
+                                                const GALGAS_bool & in_warnsIfUnused
                                                 COMMA_LOCATION_ARGS) :
 acPtr_class (THERE),
 mProperty_mRoutineMangledName (in_mRoutineMangledName),
-mProperty_mIsRequired (in_mIsRequired),
-mProperty_mWarnIfUnused (in_mWarnIfUnused) {
+mProperty_isRequired (in_isRequired),
+mProperty_warnsIfUnused (in_warnsIfUnused) {
 }
 
 
@@ -1676,10 +1676,10 @@ typeComparisonResult cPtr_dynArrayLengthFunctionIR::dynamicObjectCompare (const 
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   return result ;
 }
@@ -1728,12 +1728,12 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_dynArrayLengthFunctionIR GALGAS_dynArrayLengthFunctionIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                  const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                  const GALGAS_bool & inAttribute_mWarnIfUnused
+                                                                                  const GALGAS_bool & inAttribute_isRequired,
+                                                                                  const GALGAS_bool & inAttribute_warnsIfUnused
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_dynArrayLengthFunctionIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_dynArrayLengthFunctionIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_dynArrayLengthFunctionIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused COMMA_THERE)) ;
   }
   return result ;
 }
@@ -1743,10 +1743,10 @@ GALGAS_dynArrayLengthFunctionIR GALGAS_dynArrayLengthFunctionIR::constructor_new
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_dynArrayLengthFunctionIR::cPtr_dynArrayLengthFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                              const GALGAS_bool & in_mIsRequired,
-                                                              const GALGAS_bool & in_mWarnIfUnused
+                                                              const GALGAS_bool & in_isRequired,
+                                                              const GALGAS_bool & in_warnsIfUnused
                                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE) {
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1760,9 +1760,9 @@ void cPtr_dynArrayLengthFunctionIR::description (C_String & ioString,
   ioString << "[@dynArrayLengthFunctionIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -1770,7 +1770,7 @@ void cPtr_dynArrayLengthFunctionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_dynArrayLengthFunctionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_dynArrayLengthFunctionIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_dynArrayLengthFunctionIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -1965,10 +1965,10 @@ typeComparisonResult cPtr_dynArrayInsertFunctionIR::dynamicObjectCompare (const 
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mElementTypeProxy.objectCompare (p->mProperty_mElementTypeProxy) ;
@@ -2021,13 +2021,13 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_dynArrayInsertFunctionIR GALGAS_dynArrayInsertFunctionIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                  const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                  const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                  const GALGAS_bool & inAttribute_isRequired,
+                                                                                  const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                   const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mElementTypeProxy
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_dynArrayInsertFunctionIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mElementTypeProxy.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_dynArrayInsertFunctionIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mElementTypeProxy COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mElementTypeProxy.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_dynArrayInsertFunctionIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mElementTypeProxy COMMA_THERE)) ;
   }
   return result ;
 }
@@ -2055,11 +2055,11 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_dynArrayInsertFunctionIR::getter_mElementTyp
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_dynArrayInsertFunctionIR::cPtr_dynArrayInsertFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                              const GALGAS_bool & in_mIsRequired,
-                                                              const GALGAS_bool & in_mWarnIfUnused,
+                                                              const GALGAS_bool & in_isRequired,
+                                                              const GALGAS_bool & in_warnsIfUnused,
                                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy
                                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mElementTypeProxy (in_mElementTypeProxy) {
 }
 
@@ -2074,9 +2074,9 @@ void cPtr_dynArrayInsertFunctionIR::description (C_String & ioString,
   ioString << "[@dynArrayInsertFunctionIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mElementTypeProxy.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -2086,7 +2086,7 @@ void cPtr_dynArrayInsertFunctionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_dynArrayInsertFunctionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_dynArrayInsertFunctionIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mElementTypeProxy COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_dynArrayInsertFunctionIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mElementTypeProxy COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -2330,10 +2330,10 @@ typeComparisonResult cPtr_enumToUintRoutineIR::dynamicObjectCompare (const acPtr
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mEnumerationLLVMTypeName.objectCompare (p->mProperty_mEnumerationLLVMTypeName) ;
@@ -2386,13 +2386,13 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_enumToUintRoutineIR GALGAS_enumToUintRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                        const GALGAS_bool & inAttribute_mIsRequired,
-                                                                        const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                        const GALGAS_bool & inAttribute_isRequired,
+                                                                        const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                         const GALGAS_string & inAttribute_mEnumerationLLVMTypeName
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_enumToUintRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mEnumerationLLVMTypeName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_enumToUintRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mEnumerationLLVMTypeName COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mEnumerationLLVMTypeName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_enumToUintRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mEnumerationLLVMTypeName COMMA_THERE)) ;
   }
   return result ;
 }
@@ -2420,11 +2420,11 @@ GALGAS_string cPtr_enumToUintRoutineIR::getter_mEnumerationLLVMTypeName (UNUSED_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_enumToUintRoutineIR::cPtr_enumToUintRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                    const GALGAS_bool & in_mIsRequired,
-                                                    const GALGAS_bool & in_mWarnIfUnused,
+                                                    const GALGAS_bool & in_isRequired,
+                                                    const GALGAS_bool & in_warnsIfUnused,
                                                     const GALGAS_string & in_mEnumerationLLVMTypeName
                                                     COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mEnumerationLLVMTypeName (in_mEnumerationLLVMTypeName) {
 }
 
@@ -2439,9 +2439,9 @@ void cPtr_enumToUintRoutineIR::description (C_String & ioString,
   ioString << "[@enumToUintRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mEnumerationLLVMTypeName.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -2451,7 +2451,7 @@ void cPtr_enumToUintRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_enumToUintRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_enumToUintRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mEnumerationLLVMTypeName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_enumToUintRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mEnumerationLLVMTypeName COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -4011,10 +4011,10 @@ typeComparisonResult cPtr_uint_31_ToBoolFunctionIR::dynamicObjectCompare (const 
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mLLVMTypeName.objectCompare (p->mProperty_mLLVMTypeName) ;
@@ -4067,13 +4067,13 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_uint_31_ToBoolFunctionIR GALGAS_uint_31_ToBoolFunctionIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                  const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                  const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                  const GALGAS_bool & inAttribute_isRequired,
+                                                                                  const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                   const GALGAS_string & inAttribute_mLLVMTypeName
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_uint_31_ToBoolFunctionIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mLLVMTypeName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_uint_31_ToBoolFunctionIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mLLVMTypeName COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mLLVMTypeName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_uint_31_ToBoolFunctionIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mLLVMTypeName COMMA_THERE)) ;
   }
   return result ;
 }
@@ -4101,11 +4101,11 @@ GALGAS_string cPtr_uint_31_ToBoolFunctionIR::getter_mLLVMTypeName (UNUSED_LOCATI
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_uint_31_ToBoolFunctionIR::cPtr_uint_31_ToBoolFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                              const GALGAS_bool & in_mIsRequired,
-                                                              const GALGAS_bool & in_mWarnIfUnused,
+                                                              const GALGAS_bool & in_isRequired,
+                                                              const GALGAS_bool & in_warnsIfUnused,
                                                               const GALGAS_string & in_mLLVMTypeName
                                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mLLVMTypeName (in_mLLVMTypeName) {
 }
 
@@ -4120,9 +4120,9 @@ void cPtr_uint_31_ToBoolFunctionIR::description (C_String & ioString,
   ioString << "[@uint1ToBoolFunctionIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mLLVMTypeName.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -4132,7 +4132,7 @@ void cPtr_uint_31_ToBoolFunctionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_uint_31_ToBoolFunctionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_uint_31_ToBoolFunctionIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mLLVMTypeName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_uint_31_ToBoolFunctionIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mLLVMTypeName COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -4192,10 +4192,10 @@ typeComparisonResult cPtr_integerBuiltinFunctionIR::dynamicObjectCompare (const 
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mLLVMTypeName.objectCompare (p->mProperty_mLLVMTypeName) ;
@@ -4252,14 +4252,14 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_integerBuiltinFunctionIR GALGAS_integerBuiltinFunctionIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                  const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                  const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                  const GALGAS_bool & inAttribute_isRequired,
+                                                                                  const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                   const GALGAS_string & inAttribute_mLLVMTypeName,
                                                                                   const GALGAS_string & inAttribute_mIntrinsicName
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_integerBuiltinFunctionIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mLLVMTypeName.isValid () && inAttribute_mIntrinsicName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_integerBuiltinFunctionIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mLLVMTypeName, inAttribute_mIntrinsicName COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mLLVMTypeName.isValid () && inAttribute_mIntrinsicName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_integerBuiltinFunctionIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mLLVMTypeName, inAttribute_mIntrinsicName COMMA_THERE)) ;
   }
   return result ;
 }
@@ -4305,12 +4305,12 @@ GALGAS_string cPtr_integerBuiltinFunctionIR::getter_mIntrinsicName (UNUSED_LOCAT
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_integerBuiltinFunctionIR::cPtr_integerBuiltinFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                              const GALGAS_bool & in_mIsRequired,
-                                                              const GALGAS_bool & in_mWarnIfUnused,
+                                                              const GALGAS_bool & in_isRequired,
+                                                              const GALGAS_bool & in_warnsIfUnused,
                                                               const GALGAS_string & in_mLLVMTypeName,
                                                               const GALGAS_string & in_mIntrinsicName
                                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mLLVMTypeName (in_mLLVMTypeName),
 mProperty_mIntrinsicName (in_mIntrinsicName) {
 }
@@ -4326,9 +4326,9 @@ void cPtr_integerBuiltinFunctionIR::description (C_String & ioString,
   ioString << "[@integerBuiltinFunctionIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mLLVMTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -4340,7 +4340,7 @@ void cPtr_integerBuiltinFunctionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_integerBuiltinFunctionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_integerBuiltinFunctionIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mLLVMTypeName, mProperty_mIntrinsicName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_integerBuiltinFunctionIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mLLVMTypeName, mProperty_mIntrinsicName COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7359,10 +7359,10 @@ typeComparisonResult cPtr_staticListIndirectRoutineIR::dynamicObjectCompare (con
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mStaticListElementType.objectCompare (p->mProperty_mStaticListElementType) ;
@@ -7427,16 +7427,16 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_staticListIndirectRoutineIR GALGAS_staticListIndirectRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                        const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                        const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                        const GALGAS_bool & inAttribute_isRequired,
+                                                                                        const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                         const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mStaticListElementType,
                                                                                         const GALGAS_routineTypedSignature & inAttribute_mFormalArgumentListForGeneration,
                                                                                         const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReturnTypeProxy,
                                                                                         const GALGAS_uint & inAttribute_mPropertyIndex
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_staticListIndirectRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mStaticListElementType.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReturnTypeProxy.isValid () && inAttribute_mPropertyIndex.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_staticListIndirectRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mStaticListElementType, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReturnTypeProxy, inAttribute_mPropertyIndex COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mStaticListElementType.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReturnTypeProxy.isValid () && inAttribute_mPropertyIndex.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_staticListIndirectRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mStaticListElementType, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReturnTypeProxy, inAttribute_mPropertyIndex COMMA_THERE)) ;
   }
   return result ;
 }
@@ -7518,14 +7518,14 @@ GALGAS_uint cPtr_staticListIndirectRoutineIR::getter_mPropertyIndex (UNUSED_LOCA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_staticListIndirectRoutineIR::cPtr_staticListIndirectRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                    const GALGAS_bool & in_mIsRequired,
-                                                                    const GALGAS_bool & in_mWarnIfUnused,
+                                                                    const GALGAS_bool & in_isRequired,
+                                                                    const GALGAS_bool & in_warnsIfUnused,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mStaticListElementType,
                                                                     const GALGAS_routineTypedSignature & in_mFormalArgumentListForGeneration,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                                                     const GALGAS_uint & in_mPropertyIndex
                                                                     COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mStaticListElementType (in_mStaticListElementType),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mProperty_mReturnTypeProxy (in_mReturnTypeProxy),
@@ -7543,9 +7543,9 @@ void cPtr_staticListIndirectRoutineIR::description (C_String & ioString,
   ioString << "[@staticListIndirectRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mStaticListElementType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -7561,7 +7561,7 @@ void cPtr_staticListIndirectRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_staticListIndirectRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_staticListIndirectRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mStaticListElementType, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnTypeProxy, mProperty_mPropertyIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_staticListIndirectRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mStaticListElementType, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnTypeProxy, mProperty_mPropertyIndex COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7877,10 +7877,10 @@ typeComparisonResult cPtr_taskActivateFunctionIR::dynamicObjectCompare (const ac
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mAssemblerTaskName.objectCompare (p->mProperty_mAssemblerTaskName) ;
@@ -7941,15 +7941,15 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_taskActivateFunctionIR GALGAS_taskActivateFunctionIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                              const GALGAS_bool & inAttribute_mIsRequired,
-                                                                              const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                              const GALGAS_bool & inAttribute_isRequired,
+                                                                              const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                               const GALGAS_string & inAttribute_mAssemblerTaskName,
                                                                               const GALGAS_string & inAttribute_mActivateServiceInvocationName,
                                                                               const GALGAS_uint & inAttribute_mTaskIndex
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_taskActivateFunctionIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mAssemblerTaskName.isValid () && inAttribute_mActivateServiceInvocationName.isValid () && inAttribute_mTaskIndex.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_taskActivateFunctionIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mAssemblerTaskName, inAttribute_mActivateServiceInvocationName, inAttribute_mTaskIndex COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mAssemblerTaskName.isValid () && inAttribute_mActivateServiceInvocationName.isValid () && inAttribute_mTaskIndex.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_taskActivateFunctionIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mAssemblerTaskName, inAttribute_mActivateServiceInvocationName, inAttribute_mTaskIndex COMMA_THERE)) ;
   }
   return result ;
 }
@@ -8013,13 +8013,13 @@ GALGAS_uint cPtr_taskActivateFunctionIR::getter_mTaskIndex (UNUSED_LOCATION_ARGS
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_taskActivateFunctionIR::cPtr_taskActivateFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                          const GALGAS_bool & in_mIsRequired,
-                                                          const GALGAS_bool & in_mWarnIfUnused,
+                                                          const GALGAS_bool & in_isRequired,
+                                                          const GALGAS_bool & in_warnsIfUnused,
                                                           const GALGAS_string & in_mAssemblerTaskName,
                                                           const GALGAS_string & in_mActivateServiceInvocationName,
                                                           const GALGAS_uint & in_mTaskIndex
                                                           COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mAssemblerTaskName (in_mAssemblerTaskName),
 mProperty_mActivateServiceInvocationName (in_mActivateServiceInvocationName),
 mProperty_mTaskIndex (in_mTaskIndex) {
@@ -8036,9 +8036,9 @@ void cPtr_taskActivateFunctionIR::description (C_String & ioString,
   ioString << "[@taskActivateFunctionIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mAssemblerTaskName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -8052,7 +8052,7 @@ void cPtr_taskActivateFunctionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_taskActivateFunctionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_taskActivateFunctionIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mAssemblerTaskName, mProperty_mActivateServiceInvocationName, mProperty_mTaskIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_taskActivateFunctionIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mAssemblerTaskName, mProperty_mActivateServiceInvocationName, mProperty_mTaskIndex COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8112,10 +8112,10 @@ typeComparisonResult cPtr_systemUserRoutineIR::dynamicObjectCompare (const acPtr
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mMangledImplementationName.objectCompare (p->mProperty_mMangledImplementationName) ;
@@ -8184,8 +8184,8 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_systemUserRoutineIR GALGAS_systemUserRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                        const GALGAS_bool & inAttribute_mIsRequired,
-                                                                        const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                        const GALGAS_bool & inAttribute_isRequired,
+                                                                        const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                         const GALGAS_string & inAttribute_mMangledImplementationName,
                                                                         const GALGAS_routineTypedSignature & inAttribute_mFormalArgumentList,
                                                                         const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReceiverTypeProxy,
@@ -8193,8 +8193,8 @@ GALGAS_systemUserRoutineIR GALGAS_systemUserRoutineIR::constructor_new (const GA
                                                                         const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReturnTypeProxy
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_systemUserRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mMangledImplementationName.isValid () && inAttribute_mFormalArgumentList.isValid () && inAttribute_mReceiverTypeProxy.isValid () && inAttribute_mIsSection.isValid () && inAttribute_mReturnTypeProxy.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_systemUserRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mMangledImplementationName, inAttribute_mFormalArgumentList, inAttribute_mReceiverTypeProxy, inAttribute_mIsSection, inAttribute_mReturnTypeProxy COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mMangledImplementationName.isValid () && inAttribute_mFormalArgumentList.isValid () && inAttribute_mReceiverTypeProxy.isValid () && inAttribute_mIsSection.isValid () && inAttribute_mReturnTypeProxy.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_systemUserRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mMangledImplementationName, inAttribute_mFormalArgumentList, inAttribute_mReceiverTypeProxy, inAttribute_mIsSection, inAttribute_mReturnTypeProxy COMMA_THERE)) ;
   }
   return result ;
 }
@@ -8294,15 +8294,15 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_systemUserRoutineIR::getter_mReturnTypeProxy
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_systemUserRoutineIR::cPtr_systemUserRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                    const GALGAS_bool & in_mIsRequired,
-                                                    const GALGAS_bool & in_mWarnIfUnused,
+                                                    const GALGAS_bool & in_isRequired,
+                                                    const GALGAS_bool & in_warnsIfUnused,
                                                     const GALGAS_string & in_mMangledImplementationName,
                                                     const GALGAS_routineTypedSignature & in_mFormalArgumentList,
                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mReceiverTypeProxy,
                                                     const GALGAS_bool & in_mIsSection,
                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy
                                                     COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mMangledImplementationName (in_mMangledImplementationName),
 mProperty_mFormalArgumentList (in_mFormalArgumentList),
 mProperty_mReceiverTypeProxy (in_mReceiverTypeProxy),
@@ -8321,9 +8321,9 @@ void cPtr_systemUserRoutineIR::description (C_String & ioString,
   ioString << "[@systemUserRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mMangledImplementationName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -8341,7 +8341,7 @@ void cPtr_systemUserRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_systemUserRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_systemUserRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mMangledImplementationName, mProperty_mFormalArgumentList, mProperty_mReceiverTypeProxy, mProperty_mIsSection, mProperty_mReturnTypeProxy COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_systemUserRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mMangledImplementationName, mProperty_mFormalArgumentList, mProperty_mReceiverTypeProxy, mProperty_mIsSection, mProperty_mReturnTypeProxy COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8611,23 +8611,23 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
                                                       GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListIR var_formalArguments_5930 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 148)) ;
-  GALGAS_universalValuedObjectMap joker_6019 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 152)) ;
+  GALGAS_routineFormalArgumentListIR var_formalArguments_5247 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 130)) ;
+  GALGAS_universalValuedObjectMap joker_5336 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 134)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_6019, var_formalArguments_5930, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 149)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5336, var_formalArguments_5247, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 131)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 158)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 160)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_6126 = temp_0 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5443 = temp_0 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5930, var_returnType_6126, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 163)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5247, var_returnType_5443, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5930, var_returnType_6126  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 168))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 168)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5247, var_returnType_5443  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
 }
 
 
@@ -8643,10 +8643,10 @@ typeComparisonResult cPtr_externRoutineIR::dynamicObjectCompare (const acPtr_cla
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mFormalArgumentListForGeneration.objectCompare (p->mProperty_mFormalArgumentListForGeneration) ;
@@ -8703,14 +8703,14 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_externRoutineIR GALGAS_externRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                const GALGAS_bool & inAttribute_mIsRequired,
-                                                                const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                const GALGAS_bool & inAttribute_isRequired,
+                                                                const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                 const GALGAS_routineFormalArgumentListIR & inAttribute_mFormalArgumentListForGeneration,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReturnType
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_externRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReturnType.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_externRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReturnType COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReturnType.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_externRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReturnType COMMA_THERE)) ;
   }
   return result ;
 }
@@ -8756,12 +8756,12 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_externRoutineIR::getter_mReturnType (UNUSED_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_externRoutineIR::cPtr_externRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                            const GALGAS_bool & in_mIsRequired,
-                                            const GALGAS_bool & in_mWarnIfUnused,
+                                            const GALGAS_bool & in_isRequired,
+                                            const GALGAS_bool & in_warnsIfUnused,
                                             const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
                                             COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mProperty_mReturnType (in_mReturnType) {
 }
@@ -8777,9 +8777,9 @@ void cPtr_externRoutineIR::description (C_String & ioString,
   ioString << "[@externRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -8791,7 +8791,7 @@ void cPtr_externRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_externRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_externRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnType COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_externRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnType COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -9465,10 +9465,10 @@ typeComparisonResult cPtr_guardUserRoutineIR::dynamicObjectCompare (const acPtr_
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mMangledImplementationGuardName.objectCompare (p->mProperty_mMangledImplementationGuardName) ;
@@ -9520,16 +9520,16 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_guardUserRoutineIR GALGAS_guardUserRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                      const GALGAS_bool & inAttribute_mIsRequired,
-                                                                      const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                      const GALGAS_bool & inAttribute_isRequired,
+                                                                      const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                       const GALGAS_string & inAttribute_mMangledImplementationGuardName,
                                                                       const GALGAS_routineFormalArgumentListIR & inAttribute_mFormalArgumentListForGeneration,
                                                                       const GALGAS_PLMType & inAttribute_mReceiverType,
                                                                       const GALGAS_guardKindGenerationIR & inAttribute_mGuardKindGenerationIR
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_guardUserRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mMangledImplementationGuardName.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReceiverType.isValid () && inAttribute_mGuardKindGenerationIR.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_guardUserRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mMangledImplementationGuardName, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReceiverType, inAttribute_mGuardKindGenerationIR COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mMangledImplementationGuardName.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReceiverType.isValid () && inAttribute_mGuardKindGenerationIR.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_guardUserRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mMangledImplementationGuardName, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReceiverType, inAttribute_mGuardKindGenerationIR COMMA_THERE)) ;
   }
   return result ;
 }
@@ -9611,14 +9611,14 @@ GALGAS_guardKindGenerationIR cPtr_guardUserRoutineIR::getter_mGuardKindGeneratio
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_guardUserRoutineIR::cPtr_guardUserRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                  const GALGAS_bool & in_mIsRequired,
-                                                  const GALGAS_bool & in_mWarnIfUnused,
+                                                  const GALGAS_bool & in_isRequired,
+                                                  const GALGAS_bool & in_warnsIfUnused,
                                                   const GALGAS_string & in_mMangledImplementationGuardName,
                                                   const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                                   const GALGAS_PLMType & in_mReceiverType,
                                                   const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR
                                                   COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mMangledImplementationGuardName (in_mMangledImplementationGuardName),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mProperty_mReceiverType (in_mReceiverType),
@@ -9636,9 +9636,9 @@ void cPtr_guardUserRoutineIR::description (C_String & ioString,
   ioString << "[@guardUserRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mMangledImplementationGuardName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -9654,7 +9654,7 @@ void cPtr_guardUserRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_guardUserRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_guardUserRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mMangledImplementationGuardName, mProperty_mFormalArgumentListForGeneration, mProperty_mReceiverType, mProperty_mGuardKindGenerationIR COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_guardUserRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mMangledImplementationGuardName, mProperty_mFormalArgumentListForGeneration, mProperty_mReceiverType, mProperty_mGuardKindGenerationIR COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -9714,10 +9714,10 @@ typeComparisonResult cPtr_guardImplementationRoutineIR::dynamicObjectCompare (co
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mFormalArgumentListForGeneration.objectCompare (p->mProperty_mFormalArgumentListForGeneration) ;
@@ -9772,8 +9772,8 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_guardImplementationRoutineIR GALGAS_guardImplementationRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                          const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                          const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                          const GALGAS_bool & inAttribute_isRequired,
+                                                                                          const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                           const GALGAS_routineFormalArgumentListIR & inAttribute_mFormalArgumentListForGeneration,
                                                                                           const GALGAS_PLMType & inAttribute_mReceiverType,
                                                                                           const GALGAS_guardKindGenerationIR & inAttribute_mGuardKindGenerationIR,
@@ -9781,8 +9781,8 @@ GALGAS_guardImplementationRoutineIR GALGAS_guardImplementationRoutineIR::constru
                                                                                           const GALGAS_instructionListIR & inAttribute_mInstructionGenerationList
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_guardImplementationRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReceiverType.isValid () && inAttribute_mGuardKindGenerationIR.isValid () && inAttribute_mAllocaList.isValid () && inAttribute_mInstructionGenerationList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_guardImplementationRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReceiverType, inAttribute_mGuardKindGenerationIR, inAttribute_mAllocaList, inAttribute_mInstructionGenerationList COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReceiverType.isValid () && inAttribute_mGuardKindGenerationIR.isValid () && inAttribute_mAllocaList.isValid () && inAttribute_mInstructionGenerationList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_guardImplementationRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReceiverType, inAttribute_mGuardKindGenerationIR, inAttribute_mAllocaList, inAttribute_mInstructionGenerationList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -9882,15 +9882,15 @@ GALGAS_instructionListIR cPtr_guardImplementationRoutineIR::getter_mInstructionG
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_guardImplementationRoutineIR::cPtr_guardImplementationRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                      const GALGAS_bool & in_mIsRequired,
-                                                                      const GALGAS_bool & in_mWarnIfUnused,
+                                                                      const GALGAS_bool & in_isRequired,
+                                                                      const GALGAS_bool & in_warnsIfUnused,
                                                                       const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                                                       const GALGAS_PLMType & in_mReceiverType,
                                                                       const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                                                       const GALGAS_allocaList & in_mAllocaList,
                                                                       const GALGAS_instructionListIR & in_mInstructionGenerationList
                                                                       COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mProperty_mReceiverType (in_mReceiverType),
 mProperty_mGuardKindGenerationIR (in_mGuardKindGenerationIR),
@@ -9909,9 +9909,9 @@ void cPtr_guardImplementationRoutineIR::description (C_String & ioString,
   ioString << "[@guardImplementationRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -9929,7 +9929,7 @@ void cPtr_guardImplementationRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_guardImplementationRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_guardImplementationRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReceiverType, mProperty_mGuardKindGenerationIR, mProperty_mAllocaList, mProperty_mInstructionGenerationList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_guardImplementationRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReceiverType, mProperty_mGuardKindGenerationIR, mProperty_mAllocaList, mProperty_mInstructionGenerationList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -10009,7 +10009,6 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
 GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineList_2D_element (void) :
 mProperty_receiverTypeName (),
 mProperty_mode (),
-mProperty_safe (),
 mProperty_isRequired (),
 mProperty_mRoutineKind (),
 mProperty_warnIfUnused (),
@@ -10033,31 +10032,29 @@ GALGAS_decoratedRegularRoutineList_2D_element::~ GALGAS_decoratedRegularRoutineL
 GALGAS_decoratedRegularRoutineList_2D_element::GALGAS_decoratedRegularRoutineList_2D_element (const GALGAS_lstring & inOperand0,
                                                                                               const GALGAS_mode & inOperand1,
                                                                                               const GALGAS_bool & inOperand2,
-                                                                                              const GALGAS_bool & inOperand3,
-                                                                                              const GALGAS_routineKind & inOperand4,
+                                                                                              const GALGAS_routineKind & inOperand3,
+                                                                                              const GALGAS_bool & inOperand4,
                                                                                               const GALGAS_bool & inOperand5,
-                                                                                              const GALGAS_bool & inOperand6,
-                                                                                              const GALGAS_routineAttributes & inOperand7,
-                                                                                              const GALGAS_lstring & inOperand8,
-                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand9,
-                                                                                              const GALGAS_bool & inOperand10,
-                                                                                              const GALGAS_instructionListAST & inOperand11,
-                                                                                              const GALGAS_location & inOperand12,
-                                                                                              const GALGAS_lstring & inOperand13) :
+                                                                                              const GALGAS_routineAttributes & inOperand6,
+                                                                                              const GALGAS_lstring & inOperand7,
+                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand8,
+                                                                                              const GALGAS_bool & inOperand9,
+                                                                                              const GALGAS_instructionListAST & inOperand10,
+                                                                                              const GALGAS_location & inOperand11,
+                                                                                              const GALGAS_lstring & inOperand12) :
 mProperty_receiverTypeName (inOperand0),
 mProperty_mode (inOperand1),
-mProperty_safe (inOperand2),
-mProperty_isRequired (inOperand3),
-mProperty_mRoutineKind (inOperand4),
-mProperty_warnIfUnused (inOperand5),
-mProperty_exportedRoutine (inOperand6),
-mProperty_mRoutineAttributes (inOperand7),
-mProperty_mRoutineMangledName (inOperand8),
-mProperty_mRoutineFormalArgumentList (inOperand9),
-mProperty_warningOnUnusedArgs (inOperand10),
-mProperty_mRoutineInstructionList (inOperand11),
-mProperty_mEndOfRoutineDeclaration (inOperand12),
-mProperty_returnTypeName (inOperand13) {
+mProperty_isRequired (inOperand2),
+mProperty_mRoutineKind (inOperand3),
+mProperty_warnIfUnused (inOperand4),
+mProperty_exportedRoutine (inOperand5),
+mProperty_mRoutineAttributes (inOperand6),
+mProperty_mRoutineMangledName (inOperand7),
+mProperty_mRoutineFormalArgumentList (inOperand8),
+mProperty_warningOnUnusedArgs (inOperand9),
+mProperty_mRoutineInstructionList (inOperand10),
+mProperty_mEndOfRoutineDeclaration (inOperand11),
+mProperty_returnTypeName (inOperand12) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10065,21 +10062,20 @@ mProperty_returnTypeName (inOperand13) {
 GALGAS_decoratedRegularRoutineList_2D_element GALGAS_decoratedRegularRoutineList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                               const GALGAS_mode & inOperand1,
                                                                                                               const GALGAS_bool & inOperand2,
-                                                                                                              const GALGAS_bool & inOperand3,
-                                                                                                              const GALGAS_routineKind & inOperand4,
+                                                                                                              const GALGAS_routineKind & inOperand3,
+                                                                                                              const GALGAS_bool & inOperand4,
                                                                                                               const GALGAS_bool & inOperand5,
-                                                                                                              const GALGAS_bool & inOperand6,
-                                                                                                              const GALGAS_routineAttributes & inOperand7,
-                                                                                                              const GALGAS_lstring & inOperand8,
-                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand9,
-                                                                                                              const GALGAS_bool & inOperand10,
-                                                                                                              const GALGAS_instructionListAST & inOperand11,
-                                                                                                              const GALGAS_location & inOperand12,
-                                                                                                              const GALGAS_lstring & inOperand13 
+                                                                                                              const GALGAS_routineAttributes & inOperand6,
+                                                                                                              const GALGAS_lstring & inOperand7,
+                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand8,
+                                                                                                              const GALGAS_bool & inOperand9,
+                                                                                                              const GALGAS_instructionListAST & inOperand10,
+                                                                                                              const GALGAS_location & inOperand11,
+                                                                                                              const GALGAS_lstring & inOperand12 
                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedRegularRoutineList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid ()) {
-    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
+    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
   }
   return result ;
 }
@@ -10093,9 +10089,6 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
   }
   if (result == kOperandEqual) {
     result = mProperty_mode.objectCompare (inOperand.mProperty_mode) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_safe.objectCompare (inOperand.mProperty_safe) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_isRequired.objectCompare (inOperand.mProperty_isRequired) ;
@@ -10136,7 +10129,7 @@ typeComparisonResult GALGAS_decoratedRegularRoutineList_2D_element::objectCompar
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedRegularRoutineList_2D_element::isValid (void) const {
-  return mProperty_receiverTypeName.isValid () && mProperty_mode.isValid () && mProperty_safe.isValid () && mProperty_isRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_warnIfUnused.isValid () && mProperty_exportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_warningOnUnusedArgs.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_returnTypeName.isValid () ;
+  return mProperty_receiverTypeName.isValid () && mProperty_mode.isValid () && mProperty_isRequired.isValid () && mProperty_mRoutineKind.isValid () && mProperty_warnIfUnused.isValid () && mProperty_exportedRoutine.isValid () && mProperty_mRoutineAttributes.isValid () && mProperty_mRoutineMangledName.isValid () && mProperty_mRoutineFormalArgumentList.isValid () && mProperty_warningOnUnusedArgs.isValid () && mProperty_mRoutineInstructionList.isValid () && mProperty_mEndOfRoutineDeclaration.isValid () && mProperty_returnTypeName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10144,7 +10137,6 @@ bool GALGAS_decoratedRegularRoutineList_2D_element::isValid (void) const {
 void GALGAS_decoratedRegularRoutineList_2D_element::drop (void) {
   mProperty_receiverTypeName.drop () ;
   mProperty_mode.drop () ;
-  mProperty_safe.drop () ;
   mProperty_isRequired.drop () ;
   mProperty_mRoutineKind.drop () ;
   mProperty_warnIfUnused.drop () ;
@@ -10169,8 +10161,6 @@ void GALGAS_decoratedRegularRoutineList_2D_element::description (C_String & ioSt
     mProperty_receiverTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mode.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_safe.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_isRequired.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -10207,12 +10197,6 @@ GALGAS_lstring GALGAS_decoratedRegularRoutineList_2D_element::getter_receiverTyp
 
 GALGAS_mode GALGAS_decoratedRegularRoutineList_2D_element::getter_mode (UNUSED_LOCATION_ARGS) const {
   return mProperty_mode ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_decoratedRegularRoutineList_2D_element::getter_safe (UNUSED_LOCATION_ARGS) const {
-  return mProperty_safe ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10338,10 +10322,10 @@ typeComparisonResult cPtr_regularRoutineIR::dynamicObjectCompare (const acPtr_cl
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mReceiverType.objectCompare (p->mProperty_mReceiverType) ;
@@ -10405,8 +10389,8 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_regularRoutineIR GALGAS_regularRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                  const GALGAS_bool & inAttribute_mIsRequired,
-                                                                  const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                  const GALGAS_bool & inAttribute_isRequired,
+                                                                  const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                   const GALGAS_PLMType & inAttribute_mReceiverType,
                                                                   const GALGAS_routineFormalArgumentListIR & inAttribute_mFormalArgumentListForGeneration,
                                                                   const GALGAS_allocaList & inAttribute_mAllocaList,
@@ -10417,8 +10401,8 @@ GALGAS_regularRoutineIR GALGAS_regularRoutineIR::constructor_new (const GALGAS_l
                                                                   const GALGAS_bool & inAttribute_mAppendFileAndLineArgumentForPanicLocation
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_regularRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mReceiverType.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mAllocaList.isValid () && inAttribute_mInstructionGenerationList.isValid () && inAttribute_mExportedFunction.isValid () && inAttribute_mKind.isValid () && inAttribute_mReturnType.isValid () && inAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_regularRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mReceiverType, inAttribute_mFormalArgumentListForGeneration, inAttribute_mAllocaList, inAttribute_mInstructionGenerationList, inAttribute_mExportedFunction, inAttribute_mKind, inAttribute_mReturnType, inAttribute_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mReceiverType.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mAllocaList.isValid () && inAttribute_mInstructionGenerationList.isValid () && inAttribute_mExportedFunction.isValid () && inAttribute_mKind.isValid () && inAttribute_mReturnType.isValid () && inAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_regularRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mReceiverType, inAttribute_mFormalArgumentListForGeneration, inAttribute_mAllocaList, inAttribute_mInstructionGenerationList, inAttribute_mExportedFunction, inAttribute_mKind, inAttribute_mReturnType, inAttribute_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
   }
   return result ;
 }
@@ -10572,8 +10556,8 @@ GALGAS_bool cPtr_regularRoutineIR::getter_mAppendFileAndLineArgumentForPanicLoca
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_regularRoutineIR::cPtr_regularRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                              const GALGAS_bool & in_mIsRequired,
-                                              const GALGAS_bool & in_mWarnIfUnused,
+                                              const GALGAS_bool & in_isRequired,
+                                              const GALGAS_bool & in_warnsIfUnused,
                                               const GALGAS_PLMType & in_mReceiverType,
                                               const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                               const GALGAS_allocaList & in_mAllocaList,
@@ -10583,7 +10567,7 @@ cPtr_regularRoutineIR::cPtr_regularRoutineIR (const GALGAS_lstring & in_mRoutine
                                               const GALGAS_PLMType & in_mReturnType,
                                               const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mReceiverType (in_mReceiverType),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mProperty_mAllocaList (in_mAllocaList),
@@ -10605,9 +10589,9 @@ void cPtr_regularRoutineIR::description (C_String & ioString,
   ioString << "[@regularRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mReceiverType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -10631,7 +10615,7 @@ void cPtr_regularRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_regularRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_regularRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mReceiverType, mProperty_mFormalArgumentListForGeneration, mProperty_mAllocaList, mProperty_mInstructionGenerationList, mProperty_mExportedFunction, mProperty_mKind, mProperty_mReturnType, mProperty_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_regularRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mReceiverType, mProperty_mFormalArgumentListForGeneration, mProperty_mAllocaList, mProperty_mInstructionGenerationList, mProperty_mExportedFunction, mProperty_mKind, mProperty_mReturnType, mProperty_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -12236,28 +12220,28 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_enumeration:
     {
-      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_2464 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_2464->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 57)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 57)) ;
+      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_2436 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_2436->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 56)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_structure:
     {
       const GALGAS_PLMType temp_1 = inObject ;
-      result_result = GALGAS_string ("%").add_operation (temp_1.getter_llvmBaseTypeName (SOURCE_FILE ("types.galgas", 59)).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 59)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 59)) ;
+      result_result = GALGAS_string ("%").add_operation (temp_1.getter_llvmBaseTypeName (SOURCE_FILE ("types.galgas", 58)).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 58)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 58)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_syncTool:
     {
       const GALGAS_PLMType temp_2 = inObject ;
-      result_result = GALGAS_string ("%").add_operation (temp_2.getter_llvmBaseTypeName (SOURCE_FILE ("types.galgas", 61)).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 61)) ;
+      result_result = GALGAS_string ("%").add_operation (temp_2.getter_llvmBaseTypeName (SOURCE_FILE ("types.galgas", 60)).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 60)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_2715 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_2715->mAssociatedValue3 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 63)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 63)) ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_2687 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_2687->mAssociatedValue3 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 62)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 62)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
@@ -12267,15 +12251,15 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_2820 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_2820->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 67)) ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_2792 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_2792->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 66)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
     {
       const GALGAS_PLMType temp_3 = inObject ;
-      result_result = GALGAS_string ("%").add_operation (temp_3.getter_llvmBaseTypeName (SOURCE_FILE ("types.galgas", 69)).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 69)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 69)) ;
+      result_result = GALGAS_string ("%").add_operation (temp_3.getter_llvmBaseTypeName (SOURCE_FILE ("types.galgas", 68)).getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 68)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_dynamicArrayType:
@@ -12285,26 +12269,26 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_function:
     {
-      const cEnumAssociatedValues_typeKind_function * extractPtr_3432 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_routineTypedSignature extractedValue_signature = extractPtr_3432->mAssociatedValue1 ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_returnTypeProxy = extractPtr_3432->mAssociatedValue2 ;
-      const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, extractedValue_returnTypeProxy.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("types.galgas", 73)))).boolEnum () ;
+      const cEnumAssociatedValues_typeKind_function * extractPtr_3402 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_routineTypedSignature extractedValue_signature = extractPtr_3402->mAssociatedValue1 ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_returnTypeProxy = extractPtr_3402->mAssociatedValue2 ;
+      const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, extractedValue_returnTypeProxy.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("types.galgas", 72)))).boolEnum () ;
       if (kBoolTrue == test_4) {
         result_result = GALGAS_string ("void") ;
       }else if (kBoolFalse == test_4) {
-        result_result = extensionGetter_llvmTypeName (extractedValue_returnTypeProxy.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 76)) ;
+        result_result = extensionGetter_llvmTypeName (extractedValue_returnTypeProxy.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 75)) ;
       }
-      result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 78)) ;
-      cEnumerator_routineTypedSignature enumerator_3205 (extractedValue_signature, kENUMERATION_UP) ;
-      while (enumerator_3205.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3205.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 81)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 81)) ;
-        switch (enumerator_3205.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+      result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 77)) ;
+      cEnumerator_routineTypedSignature enumerator_3175 (extractedValue_signature, kENUMERATION_UP) ;
+      while (enumerator_3175.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3175.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 80)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 80)) ;
+        switch (enumerator_3175.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
         case GALGAS_procFormalArgumentPassingMode::kEnum_output:
           {
-            result_result.plusAssign_operation(GALGAS_string ("*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 83)) ;
+            result_result.plusAssign_operation(GALGAS_string ("*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 82)) ;
           }
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_input:
@@ -12312,12 +12296,12 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_PLMType & inObject,
           }
           break ;
         }
-        if (enumerator_3205.hasNextObject ()) {
-          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 86)) ;
+        if (enumerator_3175.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 85)) ;
         }
-        enumerator_3205.gotoNextObject () ;
+        enumerator_3175.gotoNextObject () ;
       }
-      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 88)) ;
+      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 87)) ;
     }
     break ;
   }
@@ -12338,7 +12322,7 @@ GALGAS_bool extensionGetter_equatable (const GALGAS_PLMType & inObject,
                                        C_Compiler * /* inCompiler */
                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_attributes.getter_equatable (SOURCE_FILE ("types.galgas", 143)) ;
+  result_result = inObject.mProperty_attributes.getter_equatable (SOURCE_FILE ("types.galgas", 142)) ;
 //---
   return result_result ;
 }
@@ -12357,7 +12341,7 @@ GALGAS_bool extensionGetter_instanciable (const GALGAS_unifiedTypeMap_2D_proxy &
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_instanciable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 149)) ;
+  result_result = extensionGetter_instanciable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 148)) ;
 //---
   return result_result ;
 }
@@ -12375,7 +12359,7 @@ GALGAS_bool extensionGetter_instanciable (const GALGAS_PLMType & inObject,
                                           C_Compiler * /* inCompiler */
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_attributes.getter_instanciable (SOURCE_FILE ("types.galgas", 155)) ;
+  result_result = inObject.mProperty_attributes.getter_instanciable (SOURCE_FILE ("types.galgas", 154)) ;
 //---
   return result_result ;
 }
@@ -12394,7 +12378,7 @@ GALGAS_bool extensionGetter_copyable (const GALGAS_unifiedTypeMap_2D_proxy & inO
                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
   const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = extensionGetter_copyable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 161)) ;
+  result_result = extensionGetter_copyable (temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 160)) ;
 //---
   return result_result ;
 }
@@ -12412,7 +12396,7 @@ GALGAS_bool extensionGetter_copyable (const GALGAS_PLMType & inObject,
                                       C_Compiler * /* inCompiler */
                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_attributes.getter_copyable (SOURCE_FILE ("types.galgas", 167)) ;
+  result_result = inObject.mProperty_attributes.getter_copyable (SOURCE_FILE ("types.galgas", 166)) ;
 //---
   return result_result ;
 }
@@ -12433,34 +12417,34 @@ void extensionMethod_generateRetain (const GALGAS_PLMType inObject,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_PLMType temp_0 = inObject ;
-  GALGAS_string var_llvmTypeName_6011 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)) ;
-  GALGAS_string var_LLVMVariable_6052 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 178)) ;
+  GALGAS_string var_llvmTypeName_5981 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 176)) ;
+  GALGAS_string var_LLVMVariable_6022 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 177)) ;
   const GALGAS_PLMType temp_1 = inObject ;
-  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 179)).boolEnum () ;
+  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 178)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_string var_tempLLVMVariable_6159 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 180)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 180)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 180)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 181)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_6159, inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (var_llvmTypeName_6011, inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (var_llvmTypeName_6011, inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (var_LLVMVariable_6052, inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 182)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_llvmTypeName_6011, inCompiler COMMA_SOURCE_FILE ("types.galgas", 183)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 183)).add_operation (var_tempLLVMVariable_6159, inCompiler COMMA_SOURCE_FILE ("types.galgas", 183)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 183)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 183)) ;
+    GALGAS_string var_tempLLVMVariable_6129 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 179)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 180)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_6129, inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (var_llvmTypeName_5981, inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (var_llvmTypeName_5981, inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (var_LLVMVariable_6022, inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 181)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 181)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_llvmTypeName_5981, inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (var_tempLLVMVariable_6129, inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 182)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 182)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_PLMType temp_3 = inObject ;
-    GALGAS_arcAssignmentList var_arcAssignmentList_6538 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 185)) ;
-    cEnumerator_arcAssignmentList enumerator_6626 (var_arcAssignmentList_6538, kENUMERATION_UP) ;
-    while (enumerator_6626.hasCurrentObject ()) {
-      GALGAS_string var_llvmVarName_6652 = GALGAS_string ("%arc.retain.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 187)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 188)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_6652, inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (var_llvmTypeName_6011, inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (var_llvmTypeName_6011, inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (var_LLVMVariable_6052, inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 189)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 189)) ;
-      cEnumerator_uintlist enumerator_6910 (enumerator_6626.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-      while (enumerator_6910.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_6910.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 191)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 191)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 191)) ;
-        enumerator_6910.gotoNextObject () ;
+    GALGAS_arcAssignmentList var_arcAssignmentList_6508 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 184)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 184)) ;
+    cEnumerator_arcAssignmentList enumerator_6596 (var_arcAssignmentList_6508, kENUMERATION_UP) ;
+    while (enumerator_6596.hasCurrentObject ()) {
+      GALGAS_string var_llvmVarName_6622 = GALGAS_string ("%arc.retain.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 186)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 187)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_6622, inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (var_llvmTypeName_5981, inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (var_llvmTypeName_5981, inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (var_LLVMVariable_6022, inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 188)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 188)) ;
+      cEnumerator_uintlist enumerator_6880 (enumerator_6596.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+      while (enumerator_6880.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_6880.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 190)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 190)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 190)) ;
+        enumerator_6880.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_6626.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 193)) ;
-      GALGAS_string var_propertyTypeLLVMName_7039 = extensionGetter_llvmTypeName (enumerator_6626.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)) ;
-      GALGAS_string var_llvmLoadedVarName_7097 = var_llvmVarName_6652.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_7097, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_propertyTypeLLVMName_7039, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_propertyTypeLLVMName_7039, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_llvmVarName_6652, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 196)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_7039, inCompiler COMMA_SOURCE_FILE ("types.galgas", 197)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 197)).add_operation (var_llvmLoadedVarName_7097, inCompiler COMMA_SOURCE_FILE ("types.galgas", 197)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 197)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 197)) ;
-      enumerator_6626.gotoNextObject () ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_6596.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 192)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 192)) ;
+      GALGAS_string var_propertyTypeLLVMName_7009 = extensionGetter_llvmTypeName (enumerator_6596.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 193)) ;
+      GALGAS_string var_llvmLoadedVarName_7067 = var_llvmVarName_6622.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 194)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_7067, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (var_propertyTypeLLVMName_7009, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (var_propertyTypeLLVMName_7009, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (var_llvmVarName_6622, inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 195)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 195)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_7009, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (var_llvmLoadedVarName_7067, inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 196)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 196)) ;
+      enumerator_6596.gotoNextObject () ;
     }
   }
 }
@@ -12479,39 +12463,39 @@ void extensionMethod_generateInsulate (const GALGAS_PLMType inObject,
                                        C_Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_PLMType temp_0 = inObject ;
-  GALGAS_string var_llvmTypeName_7647 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)) ;
-  GALGAS_string var_LLVMVariable_7688 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)) ;
+  GALGAS_string var_llvmTypeName_7617 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)) ;
+  GALGAS_string var_LLVMVariable_7658 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 209)) ;
   const GALGAS_PLMType temp_1 = inObject ;
-  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 211)).boolEnum () ;
+  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 210)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_string var_loadedVar_7788 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 212)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 212)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 212)) ;
-    GALGAS_string var_insulatedVar_7906 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 214)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_7788, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (var_LLVMVariable_7688, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 215)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_7906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (var_loadedVar_7788, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 216)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (var_insulatedVar_7906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (var_LLVMVariable_7688, inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 217)) ;
+    GALGAS_string var_loadedVar_7758 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)) ;
+    GALGAS_string var_insulatedVar_7876 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 212)).add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 212)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 212)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 213)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_7758, inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (var_LLVMVariable_7658, inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 214)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 214)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_7876, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (var_loadedVar_7758, inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 215)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 215)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (var_insulatedVar_7876, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (var_LLVMVariable_7658, inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 216)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 216)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_PLMType temp_3 = inObject ;
-    GALGAS_arcAssignmentList var_arcAssignmentList_8434 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 219)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 219)) ;
-    cEnumerator_arcAssignmentList enumerator_8522 (var_arcAssignmentList_8434, kENUMERATION_UP) ;
-    while (enumerator_8522.hasCurrentObject ()) {
-      GALGAS_string var_llvmVarName_8548 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 221)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 221)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 222)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_8548, inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (var_llvmTypeName_7647, inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (var_LLVMVariable_7688, inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 223)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 223)) ;
-      cEnumerator_uintlist enumerator_8807 (enumerator_8522.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-      while (enumerator_8807.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_8807.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 225)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 225)) ;
-        enumerator_8807.gotoNextObject () ;
+    GALGAS_arcAssignmentList var_arcAssignmentList_8404 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 218)) ;
+    cEnumerator_arcAssignmentList enumerator_8492 (var_arcAssignmentList_8404, kENUMERATION_UP) ;
+    while (enumerator_8492.hasCurrentObject ()) {
+      GALGAS_string var_llvmVarName_8518 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 220)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 220)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 221)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_8518, inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (var_llvmTypeName_7617, inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (var_LLVMVariable_7658, inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 222)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 222)) ;
+      cEnumerator_uintlist enumerator_8777 (enumerator_8492.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+      while (enumerator_8777.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_8777.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 224)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 224)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 224)) ;
+        enumerator_8777.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_8522.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 227)) ;
-      GALGAS_string var_propertyTypeLLVMName_8936 = extensionGetter_llvmTypeName (enumerator_8522.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)) ;
-      GALGAS_string var_loadedVar_8986 = var_llvmVarName_8548.add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)) ;
-      GALGAS_string var_insulatedVar_9069 = var_llvmVarName_8548.add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 230)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 230)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 230)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 231)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_8986, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (var_propertyTypeLLVMName_8936, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (var_propertyTypeLLVMName_8936, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (var_llvmVarName_8548, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 232)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_9069, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (var_propertyTypeLLVMName_8936, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (var_propertyTypeLLVMName_8936, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (var_loadedVar_8986, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 233)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_propertyTypeLLVMName_8936, inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (var_insulatedVar_9069, inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (var_propertyTypeLLVMName_8936, inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (var_llvmVarName_8548, inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 234)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 234)) ;
-      enumerator_8522.gotoNextObject () ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_8492.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 226)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 226)) ;
+      GALGAS_string var_propertyTypeLLVMName_8906 = extensionGetter_llvmTypeName (enumerator_8492.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 227)) ;
+      GALGAS_string var_loadedVar_8956 = var_llvmVarName_8518.add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 228)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 228)) ;
+      GALGAS_string var_insulatedVar_9039 = var_llvmVarName_8518.add_operation (GALGAS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 229)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 230)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_loadedVar_8956, inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (var_propertyTypeLLVMName_8906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (var_propertyTypeLLVMName_8906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (var_llvmVarName_8518, inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 231)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 231)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_insulatedVar_9039, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (var_propertyTypeLLVMName_8906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string (" @arc.insulate ("), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (var_propertyTypeLLVMName_8906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (var_loadedVar_8956, inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 232)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_propertyTypeLLVMName_8906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (var_insulatedVar_9039, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (var_propertyTypeLLVMName_8906, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (var_llvmVarName_8518, inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 233)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 233)) ;
+      enumerator_8492.gotoNextObject () ;
     }
   }
 }
@@ -12530,34 +12514,34 @@ void extensionMethod_generateRelease (const GALGAS_PLMType inObject,
                                       C_Compiler * inCompiler
                                       COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_PLMType temp_0 = inObject ;
-  GALGAS_string var_llvmTypeName_9860 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 246)) ;
-  GALGAS_string var_LLVMVariable_9901 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)) ;
+  GALGAS_string var_llvmTypeName_9830 = extensionGetter_llvmTypeName (temp_0, inCompiler COMMA_SOURCE_FILE ("types.galgas", 245)) ;
+  GALGAS_string var_LLVMVariable_9871 = function_llvmNameForLocalVariable (constinArgument_inPLMName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 246)) ;
   const GALGAS_PLMType temp_1 = inObject ;
-  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 248)).boolEnum () ;
+  const enumGalgasBool test_2 = temp_1.getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 247)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    GALGAS_string var_tempLLVMVariable_10008 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 249)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 249)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 249)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 249)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 249)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 250)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_10008, inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (var_llvmTypeName_9860, inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (var_llvmTypeName_9860, inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (var_LLVMVariable_9901, inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 251)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_llvmTypeName_9860, inCompiler COMMA_SOURCE_FILE ("types.galgas", 252)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 252)).add_operation (var_tempLLVMVariable_10008, inCompiler COMMA_SOURCE_FILE ("types.galgas", 252)).add_operation (GALGAS_string (") ; \xC2""\xA7""\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 252)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 252)) ;
+    GALGAS_string var_tempLLVMVariable_9978 = GALGAS_string ("%temp.").add_operation (constinArgument_inPLMName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 248)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 248)).add_operation (GALGAS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 248)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 248)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 248)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 249)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_tempLLVMVariable_9978, inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (var_llvmTypeName_9830, inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (var_llvmTypeName_9830, inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (var_LLVMVariable_9871, inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 250)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 250)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_llvmTypeName_9830, inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (var_tempLLVMVariable_9978, inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)).add_operation (GALGAS_string (") ; \xC2""\xA7""\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 251)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 251)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_PLMType temp_3 = inObject ;
-    GALGAS_arcAssignmentList var_arcAssignmentList_10395 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 254)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 254)) ;
-    cEnumerator_arcAssignmentList enumerator_10483 (var_arcAssignmentList_10395, kENUMERATION_UP) ;
-    while (enumerator_10483.hasCurrentObject ()) {
-      GALGAS_string var_llvmVarName_10509 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 256)) ;
-      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 257)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_10509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (var_llvmTypeName_9860, inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (var_llvmTypeName_9860, inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (var_LLVMVariable_9901, inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 258)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 258)) ;
-      cEnumerator_uintlist enumerator_10768 (enumerator_10483.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-      while (enumerator_10768.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_10768.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 260)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 260)) ;
-        enumerator_10768.gotoNextObject () ;
+    GALGAS_arcAssignmentList var_arcAssignmentList_10365 = extensionGetter_arcList (temp_3, GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 253)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 253)) ;
+    cEnumerator_arcAssignmentList enumerator_10453 (var_arcAssignmentList_10365, kENUMERATION_UP) ;
+    while (enumerator_10453.hasCurrentObject ()) {
+      GALGAS_string var_llvmVarName_10479 = GALGAS_string ("%arc.release.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("types.galgas", 255)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 255)) ;
+      ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 256)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_10479, inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (var_llvmTypeName_9830, inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (var_llvmTypeName_9830, inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (var_LLVMVariable_9871, inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)).add_operation (GALGAS_string (", i32 0"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 257)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 257)) ;
+      cEnumerator_uintlist enumerator_10738 (enumerator_10453.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+      while (enumerator_10738.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_10738.current_mValue (HERE).getter_string (SOURCE_FILE ("types.galgas", 259)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 259)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 259)) ;
+        enumerator_10738.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_10483.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 262)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 262)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 262)) ;
-      GALGAS_string var_propertyTypeLLVMName_10897 = extensionGetter_llvmTypeName (enumerator_10483.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)) ;
-      GALGAS_string var_llvmLoadedVarName_10955 = var_llvmVarName_10509.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_10955, inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (var_propertyTypeLLVMName_10897, inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (var_propertyTypeLLVMName_10897, inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (var_llvmVarName_10509, inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 265)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_10897, inCompiler COMMA_SOURCE_FILE ("types.galgas", 266)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 266)).add_operation (var_llvmLoadedVarName_10955, inCompiler COMMA_SOURCE_FILE ("types.galgas", 266)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 266)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 266)) ;
-      enumerator_10483.gotoNextObject () ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_10453.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 261)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 261)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 261)) ;
+      GALGAS_string var_propertyTypeLLVMName_10867 = extensionGetter_llvmTypeName (enumerator_10453.current_mPropertyType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 262)) ;
+      GALGAS_string var_llvmLoadedVarName_10925 = var_llvmVarName_10479.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 263)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_10925, inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (var_propertyTypeLLVMName_10867, inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (var_propertyTypeLLVMName_10867, inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (var_llvmVarName_10479, inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 264)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 264)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_10867, inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (var_llvmLoadedVarName_10925, inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 265)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 265)) ;
+      enumerator_10453.gotoNextObject () ;
     }
   }
 }
@@ -12609,9 +12593,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_11932 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_11932->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_11932->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_11902 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_11902->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_11902->mAssociatedValue3 ;
       GALGAS_string temp_1 ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
       if (kBoolTrue == test_2) {
@@ -12626,7 +12610,7 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
       }else if (kBoolFalse == test_4) {
         temp_3 = GALGAS_string ("signed") ;
       }
-      result_result = GALGAS_string ("Integer (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 288)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 288)).add_operation (GALGAS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 288)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 288)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 288)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 289)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 289)) ;
+      result_result = GALGAS_string ("Integer (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 287)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 287)).add_operation (GALGAS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 287)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 287)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 287)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 288)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 288)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
@@ -12636,9 +12620,9 @@ GALGAS_string extensionGetter_descriptionForHTMLFile (const GALGAS_PLMType & inO
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_12066 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_12066->mAssociatedValue0 ;
-      result_result = GALGAS_string ("Opaque (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 293)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 293)).add_operation (GALGAS_string (" bits)"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 293)) ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_12036 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_12036->mAssociatedValue0 ;
+      result_result = GALGAS_string ("Opaque (").add_operation (extractedValue_bitCount.getter_string (SOURCE_FILE ("types.galgas", 292)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)).add_operation (GALGAS_string (" bits)"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 292)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
@@ -12695,8 +12679,8 @@ GALGAS_uint extensionGetter_defaultAlignment (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_enumeration:
     {
-      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_12673 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_12673->mAssociatedValue0 ;
+      const cEnumAssociatedValues_typeKind_enumeration * extractPtr_12643 = (const cEnumAssociatedValues_typeKind_enumeration *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_12643->mAssociatedValue0 ;
       const enumGalgasBool test_1 = GALGAS_bool (kIsInfOrEqual, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 8U))).boolEnum () ;
       if (kBoolTrue == test_1) {
         result_result = GALGAS_uint ((uint32_t) 1U) ;
@@ -12722,8 +12706,8 @@ GALGAS_uint extensionGetter_defaultAlignment (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_12909 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_12909->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_12879 = (const cEnumAssociatedValues_typeKind_integer *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_12879->mAssociatedValue3 ;
       const enumGalgasBool test_3 = GALGAS_bool (kIsInfOrEqual, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 8U))).boolEnum () ;
       if (kBoolTrue == test_3) {
         result_result = GALGAS_uint ((uint32_t) 1U) ;
@@ -12744,13 +12728,13 @@ GALGAS_uint extensionGetter_defaultAlignment (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      const cEnumAssociatedValues_typeKind_opaque * extractPtr_13106 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_bitCount = extractPtr_13106->mAssociatedValue0 ;
-      const enumGalgasBool test_5 = GALGAS_bool (kIsInfOrEqual, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 8U).getter_bigint (SOURCE_FILE ("types.galgas", 336)))).boolEnum () ;
+      const cEnumAssociatedValues_typeKind_opaque * extractPtr_13076 = (const cEnumAssociatedValues_typeKind_opaque *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_bitCount = extractPtr_13076->mAssociatedValue0 ;
+      const enumGalgasBool test_5 = GALGAS_bool (kIsInfOrEqual, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 8U).getter_bigint (SOURCE_FILE ("types.galgas", 335)))).boolEnum () ;
       if (kBoolTrue == test_5) {
         result_result = GALGAS_uint ((uint32_t) 1U) ;
       }else if (kBoolFalse == test_5) {
-        const enumGalgasBool test_6 = GALGAS_bool (kIsInfOrEqual, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 16U).getter_bigint (SOURCE_FILE ("types.galgas", 338)))).boolEnum () ;
+        const enumGalgasBool test_6 = GALGAS_bool (kIsInfOrEqual, extractedValue_bitCount.objectCompare (GALGAS_uint ((uint32_t) 16U).getter_bigint (SOURCE_FILE ("types.galgas", 337)))).boolEnum () ;
         if (kBoolTrue == test_6) {
           result_result = GALGAS_uint ((uint32_t) 2U) ;
         }else if (kBoolFalse == test_6) {
@@ -12761,9 +12745,9 @@ GALGAS_uint extensionGetter_defaultAlignment (const GALGAS_PLMType & inObject,
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
     {
-      const cEnumAssociatedValues_typeKind_arrayType * extractPtr_13185 = (const cEnumAssociatedValues_typeKind_arrayType *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_elementType = extractPtr_13185->mAssociatedValue0 ;
-      result_result = extensionGetter_defaultAlignment (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("types.galgas", 344)) ;
+      const cEnumAssociatedValues_typeKind_arrayType * extractPtr_13155 = (const cEnumAssociatedValues_typeKind_arrayType *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_elementType = extractPtr_13155->mAssociatedValue0 ;
+      result_result = extensionGetter_defaultAlignment (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("types.galgas", 343)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_dynamicArrayType:
@@ -12795,25 +12779,25 @@ GALGAS_arcAssignmentList extensionGetter_arcList (const GALGAS_PLMType & inObjec
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_arcAssignmentList result_result ; // Returned variable
-  result_result = GALGAS_arcAssignmentList::constructor_emptyList (SOURCE_FILE ("types.galgas", 363)) ;
-  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 364)).boolEnum () ;
+  result_result = GALGAS_arcAssignmentList::constructor_emptyList (SOURCE_FILE ("types.galgas", 362)) ;
+  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 363)).boolEnum () ;
   if (kBoolTrue == test_0) {
     const GALGAS_PLMType temp_1 = inObject ;
-    result_result.addAssign_operation (GALGAS_string::makeEmptyString (), temp_1, constinArgument_inPropertyIndexPath  COMMA_SOURCE_FILE ("types.galgas", 365)) ;
+    result_result.addAssign_operation (GALGAS_string::makeEmptyString (), temp_1, constinArgument_inPropertyIndexPath  COMMA_SOURCE_FILE ("types.galgas", 364)) ;
   }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_2 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 366)).boolEnum () ;
+    const enumGalgasBool test_2 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 365)).boolEnum () ;
     if (kBoolTrue == test_2) {
-      GALGAS_propertyList var_propertyList_13905 ;
-      inObject.mProperty_kind.method_structure (var_propertyList_13905, inCompiler COMMA_SOURCE_FILE ("types.galgas", 367)) ;
-      cEnumerator_propertyList enumerator_13958 (var_propertyList_13905, kENUMERATION_UP) ;
-      GALGAS_uint index_13914 ((uint32_t) 0) ;
-      while (enumerator_13958.hasCurrentObject ()) {
-        GALGAS_uintlist temp_3 = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 369)) ;
-        temp_3.addAssign_operation (index_13914  COMMA_SOURCE_FILE ("types.galgas", 369)) ;
-        GALGAS_uintlist var_indexPath_13987 = constinArgument_inPropertyIndexPath.add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 369)) ;
-        result_result.plusAssign_operation(extensionGetter_arcList (enumerator_13958.current_mType (HERE), var_indexPath_13987, inCompiler COMMA_SOURCE_FILE ("types.galgas", 370)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 370)) ;
-        enumerator_13958.gotoNextObject () ;
-        index_13914.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 368)) ;
+      GALGAS_propertyList var_propertyList_13875 ;
+      inObject.mProperty_kind.method_structure (var_propertyList_13875, inCompiler COMMA_SOURCE_FILE ("types.galgas", 366)) ;
+      cEnumerator_propertyList enumerator_13928 (var_propertyList_13875, kENUMERATION_UP) ;
+      GALGAS_uint index_13884 ((uint32_t) 0) ;
+      while (enumerator_13928.hasCurrentObject ()) {
+        GALGAS_uintlist temp_3 = GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("types.galgas", 368)) ;
+        temp_3.addAssign_operation (index_13884  COMMA_SOURCE_FILE ("types.galgas", 368)) ;
+        GALGAS_uintlist var_indexPath_13957 = constinArgument_inPropertyIndexPath.add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 368)) ;
+        result_result.plusAssign_operation(extensionGetter_arcList (enumerator_13928.current_mType (HERE), var_indexPath_13957, inCompiler COMMA_SOURCE_FILE ("types.galgas", 369)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 369)) ;
+        enumerator_13928.gotoNextObject () ;
+        index_13884.increment_operation (inCompiler  COMMA_SOURCE_FILE ("types.galgas", 367)) ;
       }
     }
   }
@@ -12834,19 +12818,19 @@ GALGAS_bool extensionGetter_deinitNeeded (const GALGAS_PLMType & inObject,
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool result_result ; // Returned variable
-  result_result = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 378)) ;
-  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 379)).boolEnum () ;
+  result_result = inObject.mProperty_kind.getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 377)) ;
+  const enumGalgasBool test_0 = inObject.mProperty_kind.getter_isStructure (SOURCE_FILE ("types.galgas", 378)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_propertyList var_propertyList_14378 ;
-    inObject.mProperty_kind.method_structure (var_propertyList_14378, inCompiler COMMA_SOURCE_FILE ("types.galgas", 380)) ;
-    cEnumerator_propertyList enumerator_14431 (var_propertyList_14378, kENUMERATION_UP) ;
-    bool bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 381)).isValidAndTrue () ;
-    if (enumerator_14431.hasCurrentObject () && bool_1) {
-      while (enumerator_14431.hasCurrentObject () && bool_1) {
-        result_result = extensionGetter_deinitNeeded (enumerator_14431.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 382)) ;
-        enumerator_14431.gotoNextObject () ;
-        if (enumerator_14431.hasCurrentObject ()) {
-          bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 381)).isValidAndTrue () ;
+    GALGAS_propertyList var_propertyList_14348 ;
+    inObject.mProperty_kind.method_structure (var_propertyList_14348, inCompiler COMMA_SOURCE_FILE ("types.galgas", 379)) ;
+    cEnumerator_propertyList enumerator_14401 (var_propertyList_14348, kENUMERATION_UP) ;
+    bool bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 380)).isValidAndTrue () ;
+    if (enumerator_14401.hasCurrentObject () && bool_1) {
+      while (enumerator_14401.hasCurrentObject () && bool_1) {
+        result_result = extensionGetter_deinitNeeded (enumerator_14401.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 381)) ;
+        enumerator_14401.gotoNextObject () ;
+        if (enumerator_14401.hasCurrentObject ()) {
+          bool_1 = result_result.operator_not (SOURCE_FILE ("types.galgas", 380)).isValidAndTrue () ;
         }
       }
     }
@@ -12890,36 +12874,36 @@ void extensionMethod_generateLLVMTypeDefinition (const GALGAS_PLMType inObject,
     break ;
   case GALGAS_typeKind::kEnum_structure:
     {
-      const cEnumAssociatedValues_typeKind_structure * extractPtr_18127 = (const cEnumAssociatedValues_typeKind_structure *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_propertyList extractedValue_propertyList = extractPtr_18127->mAssociatedValue0 ;
+      const cEnumAssociatedValues_typeKind_structure * extractPtr_18097 = (const cEnumAssociatedValues_typeKind_structure *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_propertyList extractedValue_propertyList = extractPtr_18097->mAssociatedValue0 ;
       const GALGAS_PLMType temp_1 = inObject ;
-      ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 468)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 468)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 468)) ;
-      cEnumerator_propertyList enumerator_18018 (extractedValue_propertyList, kENUMERATION_UP) ;
-      while (enumerator_18018.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_18018.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 470)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 470)) ;
-        if (enumerator_18018.hasNextObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 471)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 467)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 467)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 467)) ;
+      cEnumerator_propertyList enumerator_17988 (extractedValue_propertyList, kENUMERATION_UP) ;
+      while (enumerator_17988.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_17988.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 469)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 469)) ;
+        if (enumerator_17988.hasNextObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 470)) ;
         }
-        enumerator_18018.gotoNextObject () ;
+        enumerator_17988.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 473)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 472)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_syncTool:
     {
-      const cEnumAssociatedValues_typeKind_syncTool * extractPtr_18348 = (const cEnumAssociatedValues_typeKind_syncTool *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_propertyList extractedValue_propertyList = extractPtr_18348->mAssociatedValue0 ;
+      const cEnumAssociatedValues_typeKind_syncTool * extractPtr_18318 = (const cEnumAssociatedValues_typeKind_syncTool *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_propertyList extractedValue_propertyList = extractPtr_18318->mAssociatedValue0 ;
       const GALGAS_PLMType temp_2 = inObject ;
-      ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (temp_2, inCompiler COMMA_SOURCE_FILE ("types.galgas", 475)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 475)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 475)) ;
-      cEnumerator_propertyList enumerator_18239 (extractedValue_propertyList, kENUMERATION_UP) ;
-      while (enumerator_18239.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_18239.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 477)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 477)) ;
-        if (enumerator_18239.hasNextObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 478)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (temp_2, inCompiler COMMA_SOURCE_FILE ("types.galgas", 474)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 474)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 474)) ;
+      cEnumerator_propertyList enumerator_18209 (extractedValue_propertyList, kENUMERATION_UP) ;
+      while (enumerator_18209.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_18209.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("types.galgas", 476)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 476)) ;
+        if (enumerator_18209.hasNextObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 477)) ;
         }
-        enumerator_18239.gotoNextObject () ;
+        enumerator_18209.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 480)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 479)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_literalString:
@@ -12936,11 +12920,11 @@ void extensionMethod_generateLLVMTypeDefinition (const GALGAS_PLMType inObject,
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
     {
-      const cEnumAssociatedValues_typeKind_arrayType * extractPtr_18568 = (const cEnumAssociatedValues_typeKind_arrayType *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
-      const GALGAS_PLMType extractedValue_elementType = extractPtr_18568->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_arraySize = extractPtr_18568->mAssociatedValue1 ;
+      const cEnumAssociatedValues_typeKind_arrayType * extractPtr_18538 = (const cEnumAssociatedValues_typeKind_arrayType *) (temp_0.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_PLMType extractedValue_elementType = extractPtr_18538->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_arraySize = extractPtr_18538->mAssociatedValue1 ;
       const GALGAS_PLMType temp_3 = inObject ;
-      ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("types.galgas", 485)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 485)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 485)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("types.galgas", 484)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)).add_operation (extensionGetter_llvmTypeName (extractedValue_elementType, inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 484)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_dynamicArrayType:
@@ -13464,10 +13448,10 @@ typeComparisonResult cPtr_fileSpecificPanicRoutineIR::dynamicObjectCompare (cons
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_inFilePath.objectCompare (p->mProperty_inFilePath) ;
@@ -13520,13 +13504,13 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_fileSpecificPanicRoutineIR GALGAS_fileSpecificPanicRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                      const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                      const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                      const GALGAS_bool & inAttribute_isRequired,
+                                                                                      const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                       const GALGAS_string & inAttribute_inFilePath
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_fileSpecificPanicRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_inFilePath.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_fileSpecificPanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_inFilePath COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_inFilePath.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_fileSpecificPanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_inFilePath COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13554,11 +13538,11 @@ GALGAS_string cPtr_fileSpecificPanicRoutineIR::getter_inFilePath (UNUSED_LOCATIO
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_fileSpecificPanicRoutineIR::cPtr_fileSpecificPanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                  const GALGAS_bool & in_mIsRequired,
-                                                                  const GALGAS_bool & in_mWarnIfUnused,
+                                                                  const GALGAS_bool & in_isRequired,
+                                                                  const GALGAS_bool & in_warnsIfUnused,
                                                                   const GALGAS_string & in_inFilePath
                                                                   COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_inFilePath (in_inFilePath) {
 }
 
@@ -13573,9 +13557,9 @@ void cPtr_fileSpecificPanicRoutineIR::description (C_String & ioString,
   ioString << "[@fileSpecificPanicRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_inFilePath.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -13585,7 +13569,7 @@ void cPtr_fileSpecificPanicRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_fileSpecificPanicRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_fileSpecificPanicRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_inFilePath COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_fileSpecificPanicRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_inFilePath COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -13645,10 +13629,10 @@ typeComparisonResult cPtr_universalModePanicRoutineIR::dynamicObjectCompare (con
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   return result ;
 }
@@ -13697,12 +13681,12 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_universalModePanicRoutineIR GALGAS_universalModePanicRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                        const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                        const GALGAS_bool & inAttribute_mWarnIfUnused
+                                                                                        const GALGAS_bool & inAttribute_isRequired,
+                                                                                        const GALGAS_bool & inAttribute_warnsIfUnused
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_universalModePanicRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_universalModePanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_universalModePanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13712,10 +13696,10 @@ GALGAS_universalModePanicRoutineIR GALGAS_universalModePanicRoutineIR::construct
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_universalModePanicRoutineIR::cPtr_universalModePanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                    const GALGAS_bool & in_mIsRequired,
-                                                                    const GALGAS_bool & in_mWarnIfUnused
+                                                                    const GALGAS_bool & in_isRequired,
+                                                                    const GALGAS_bool & in_warnsIfUnused
                                                                     COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE) {
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13729,9 +13713,9 @@ void cPtr_universalModePanicRoutineIR::description (C_String & ioString,
   ioString << "[@universalModePanicRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -13739,7 +13723,7 @@ void cPtr_universalModePanicRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_universalModePanicRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_universalModePanicRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_universalModePanicRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -13799,10 +13783,10 @@ typeComparisonResult cPtr_sectionModePanicRoutineIR::dynamicObjectCompare (const
     result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mIsRequired.objectCompare (p->mProperty_mIsRequired) ;
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mWarnIfUnused.objectCompare (p->mProperty_mWarnIfUnused) ;
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mPanicSetupListIR.objectCompare (p->mProperty_mPanicSetupListIR) ;
@@ -13859,14 +13843,14 @@ GALGAS_abstractRoutineIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_sectionModePanicRoutineIR GALGAS_sectionModePanicRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
-                                                                                    const GALGAS_bool & inAttribute_mIsRequired,
-                                                                                    const GALGAS_bool & inAttribute_mWarnIfUnused,
+                                                                                    const GALGAS_bool & inAttribute_isRequired,
+                                                                                    const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                                     const GALGAS_panicSortedListIR & inAttribute_mPanicSetupListIR,
                                                                                     const GALGAS_panicSortedListIR & inAttribute_mPanicLoopListIR
                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_sectionModePanicRoutineIR result ;
-  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_mIsRequired.isValid () && inAttribute_mWarnIfUnused.isValid () && inAttribute_mPanicSetupListIR.isValid () && inAttribute_mPanicLoopListIR.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_sectionModePanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_mIsRequired, inAttribute_mWarnIfUnused, inAttribute_mPanicSetupListIR, inAttribute_mPanicLoopListIR COMMA_THERE)) ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mPanicSetupListIR.isValid () && inAttribute_mPanicLoopListIR.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_sectionModePanicRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mPanicSetupListIR, inAttribute_mPanicLoopListIR COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13912,12 +13896,12 @@ GALGAS_panicSortedListIR cPtr_sectionModePanicRoutineIR::getter_mPanicLoopListIR
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_sectionModePanicRoutineIR::cPtr_sectionModePanicRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                const GALGAS_bool & in_mIsRequired,
-                                                                const GALGAS_bool & in_mWarnIfUnused,
+                                                                const GALGAS_bool & in_isRequired,
+                                                                const GALGAS_bool & in_warnsIfUnused,
                                                                 const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
                                                                 const GALGAS_panicSortedListIR & in_mPanicLoopListIR
                                                                 COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_mIsRequired, in_mWarnIfUnused COMMA_THERE),
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mPanicSetupListIR (in_mPanicSetupListIR),
 mProperty_mPanicLoopListIR (in_mPanicLoopListIR) {
 }
@@ -13933,9 +13917,9 @@ void cPtr_sectionModePanicRoutineIR::description (C_String & ioString,
   ioString << "[@sectionModePanicRoutineIR:" ;
   mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mIsRequired.description (ioString, inIndentation+1) ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mPanicSetupListIR.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -13947,7 +13931,7 @@ void cPtr_sectionModePanicRoutineIR::description (C_String & ioString,
 
 acPtr_class * cPtr_sectionModePanicRoutineIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_sectionModePanicRoutineIR (mProperty_mRoutineMangledName, mProperty_mIsRequired, mProperty_mWarnIfUnused, mProperty_mPanicSetupListIR, mProperty_mPanicLoopListIR COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_sectionModePanicRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mPanicSetupListIR, mProperty_mPanicLoopListIR COMMA_THERE)) ;
   return ptr ;
 }
 

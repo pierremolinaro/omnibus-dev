@@ -251,7 +251,6 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !routineAttributes:.mutating
       !context:inContext
       !mode:.guardMode
-      !safe: false
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
@@ -273,7 +272,6 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !routineAttributes:.mutating
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
-      !safe: false
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
@@ -285,7 +283,6 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !routineAttributes: .mutating
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
-      !safe: false
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
@@ -339,7 +336,6 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
-  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -352,7 +348,6 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode
-  ?safe:let @bool unused inIsSafe
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
@@ -368,7 +363,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
-  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -444,7 +438,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !errorLocation:methodName.location
       !context:inContext
       !requiredMode:inMode
-      !safe: inIsSafe
       !?temporary:ioTemporaries
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap

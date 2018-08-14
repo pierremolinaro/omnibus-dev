@@ -63,7 +63,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
-  ?safe:let @bool inIsSafe
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
@@ -84,7 +83,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !optionalTargetType:requiredSourceExpressionType
     !context:inContext
     !mode:inMode
-    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap
@@ -115,7 +113,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !routineAttributes: inRoutineAttributes
     !context: inContext
     !mode: inMode
-    !safe: inIsSafe
     !?temporary: ioTemporaries
     !?staticEntityMap: ioStaticEntityMap
     !?variableMap: ioUniversalMap
@@ -141,7 +138,6 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !optionalTargetType:requiredBitExpressionType
     !context:inContext
     !mode:inMode
-    !safe: inIsSafe
     !?temporary:ioTemporaries
     !?staticEntityMap:ioStaticEntityMap
     !?variableMap:ioUniversalMap

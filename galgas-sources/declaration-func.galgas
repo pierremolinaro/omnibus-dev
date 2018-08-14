@@ -89,31 +89,22 @@ syntax extension plm_syntax {
     or
       $safe$
       select
-        outMode = .anyMode
+        outMode = .anySafeMode
       or
         $user$
-        outMode = .userMode
-      or
-        $panic$
-        outMode = .panicMode
-      or
-        $boot$
-        outMode = .bootMode
-      or
-        $startup$
-        outMode = .startupMode
+        outMode = .safeUserMode
       or
         $section$
-        outMode = .sectionMode
+        outMode = .safeSectionMode
       or
         $service$
-        outMode = .serviceMode
+        outMode = .safeServiceMode
       or
         $primitive$
-        outMode = .primitiveMode
+        outMode = .safePrimitiveMode
       or
         $guard$
-        outMode = .guardMode
+        outMode = .safeGuardMode
       end
     end
   }
@@ -176,7 +167,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
     var warnIfUnused = true
     var exportedFunction = false
     var canMutateProperties = false
-    var isSafe = false
+#    var isSafe = false
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -193,15 +184,15 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
         end
         canMutateProperties = true
-      elsif attribute.string == safeAttribute () then
-        if isSafe then
-          error attribute : "duplicated attribute" fixit { remove }
-        else
-          isSafe = true
-        end
+#      elsif attribute.string == safeAttribute () then
+#        if isSafe then
+#          error attribute : "duplicated attribute" fixit { remove }
+#        else
+#          isSafe = true
+#        end
       else
         error attribute : "unknown attribute; available attributes are @"
-          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()+ ", @" + safeAttribute ()
+          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + " and @" + exportedAttribute ()
       end
     end
   #--- Routine mangled name
@@ -219,7 +210,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !safe:isSafe
       !exportedFunction
       !function.mMode
     ]
@@ -227,7 +217,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
     ioDecoratedRoutineList +=
       !receiverTypeName: ["" nowhere]
       !mode:function.mMode
-      !safe: isSafe
       !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
       !.function
       !warnIfUnused: warnIfUnused
@@ -272,7 +261,6 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
     )
   #--- Prepare annalysis
     var warnIfUnused = true
-    var safe = false
     var functionAttributes = @routineAttributes.controlRegisterReadable
     for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
@@ -280,11 +268,6 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
           error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
         end
         warnIfUnused = false    
-      elsif attribute.string == safeAttribute () then
-        if safe then
-          error attribute : "duplicated @" + safeAttribute () + " attribute"
-        end
-        safe = true   
       elsif attribute.string == mutatingAttribute () then
         if [functionAttributes mutating] then
           error attribute : "duplicated @" + mutatingAttribute () + " attribute"
@@ -296,21 +279,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       end
     end
   #--- Enter in routine map
-    @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
-    switch function.mMode
-    case anyMode :
-    case bootMode :
-    case guardMode :
-    case panicMode :
-    case primitiveMode :
-      routineLLVMNameDict += !.serviceMode !functionLLVMName
-      routineLLVMNameDict += !.sectionMode !functionLLVMName
-    case sectionMode :
-    case serviceMode :
-      routineLLVMNameDict += !.sectionMode !functionLLVMName
-    case startupMode :
-    case userMode :
-    end
+    let routineLLVMNameDict = [function.mMode routineLLVMDictionaryForFunction !functionLLVMName]
     let routineMangledName = [signature mangledName !function.mFunctionName]
     [!?ioRoutineMapCTXT insertKey
       !routineMangledName
@@ -318,14 +287,12 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !signature
       !returnTypeProxy
       !routineLLVMNameDict
-      !safe:if function.mMode == .panicMode then true else safe end
       !exportedFunction
       !function.mMode
     ]
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:function.mMode
-      !safe: safe
       !isRequired: false
       !.function
       !warnIfUnused: warnIfUnused
@@ -349,7 +316,6 @@ map @routineMapCTXT {
   @routineTypedSignature mSignature
   @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
   @routineLLVMNameDict mModeDictionary
-  @bool safe %selector
   @bool mIsExported
   @mode mMode
 
@@ -369,7 +335,6 @@ setter @routineMapCTXT addFunctionWithoutArgument
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
-  ?safe:let @bool inIsSafe
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
@@ -379,15 +344,15 @@ setter @routineMapCTXT addFunctionWithoutArgument
     !inMethodName
   }
   outRoutineLLVMName = routineMangledNameFromAST (!inLLVMBaseTypeName !inMethodName !formalArguments)
+  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?self insertKey
     !routineMangledName
     !true
     !{}
     !inResultType
-    !{!inMode !outRoutineLLVMName}
-    !safe:if inMode == .panicMode then true else inIsSafe end
+    !modeDictionary
     !false
-    !.anyMode
+    !inMode
   ]
 }
 
@@ -398,7 +363,6 @@ setter @routineMapCTXT addFunctionWithInputArgument
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
-  ?safe:let @bool inIsSafe
   ?inputArgumentSelector:let @string inInputSelector
   ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
   ?inputArgumentName: let @string inInputArgumentName
@@ -417,15 +381,15 @@ setter @routineMapCTXT addFunctionWithInputArgument
     !inMethodName
   }
   outRoutineLLVMName = routineMangledNameFromAST (!inLLVMBaseTypeName !inMethodName !argumentList)
+  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?self insertKey
     !routineMangledName
     !true
     !signature
     !inResultType
-    !{!inMode !outRoutineLLVMName}
-    !safe:if inMode == .panicMode then true else inIsSafe end
+    !modeDictionary
     !false
-    !.anyMode
+    !inMode
   ]
 }
 
@@ -436,7 +400,6 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
-  ?safe:let @bool inIsSafe
   ?inputArgumentSelector1:let @string inInputSelector1
   ?inputArgumentTypeProxy1:let @unifiedTypeMap-proxy inInputArgumentTypeProxy1
   ?inputArgumentName1: let @string inInputArgumentName1
@@ -467,15 +430,15 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
     !inMethodName.string + [argumentList routineSignature !inMethodName]
     !inMethodName
   }
+  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?self insertKey
     !routineMangledName
     !true
     !signature
     !inResultType
-    !{!inMode !outRoutineLLVMName}
-    !safe:if inMode == .panicMode then true else inIsSafe end
+    !modeDictionary
     !false
-    !.anyMode
+    !inMode
   ]
 }
 
