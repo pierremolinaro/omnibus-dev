@@ -477,7 +477,7 @@ override method @staticListAST enterInContext
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:plmNameForStaticListType (!mStaticListName)
-    !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
+    !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}
     !llvmBaseTypeName:llvmNameForStaticListType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType

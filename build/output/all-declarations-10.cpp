@@ -3860,7 +3860,7 @@ static void extensionMethod_integerSliceExpressionAST_analyzeExpression (const c
         switch (extensionGetter_type (var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 160)).getter_kind (HERE).enumValue ()) {
         case GALGAS_typeKind::kNotBuilt:
           break ;
-        case GALGAS_typeKind::kEnum_arrayType:
+        case GALGAS_typeKind::kEnum_staticArrayType:
           {
             TC_Array <C_FixItDescription> fixItArray13 ;
             inCompiler->emitSemanticError (enumerator_5411.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here"), fixItArray13  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 162)) ;
@@ -3905,26 +3905,26 @@ static void extensionMethod_integerSliceExpressionAST_analyzeExpression (const c
             }
             const enumGalgasBool test_21 = var_expressionResult_7223.getter_isLiteralInteger (SOURCE_FILE ("expression-integer-slice.galgas", 179)).boolEnum () ;
             if (kBoolTrue == test_21) {
-              GALGAS_bigint var_value_8639 ;
-              GALGAS_PLMType joker_8612_1 ; // Joker input parameter
-              var_expressionResult_7223.method_literalInteger (joker_8612_1, var_value_8639, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 180)) ;
-              var_accumulatedFieldStaticValues_5296 = var_accumulatedFieldStaticValues_5296.operator_or (var_value_8639.left_shift_operation (var_leftShiftAmount_5242 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 181)) COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 181)) ;
+              GALGAS_bigint var_value_8645 ;
+              GALGAS_PLMType joker_8618_1 ; // Joker input parameter
+              var_expressionResult_7223.method_literalInteger (joker_8618_1, var_value_8645, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 180)) ;
+              var_accumulatedFieldStaticValues_5296 = var_accumulatedFieldStaticValues_5296.operator_or (var_value_8645.left_shift_operation (var_leftShiftAmount_5242 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 181)) COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 181)) ;
             }else if (kBoolFalse == test_21) {
-              GALGAS_objectIR var_extendedResult_8898 ;
+              GALGAS_objectIR var_extendedResult_8904 ;
               {
-              routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_extendedResult_8898, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 184)) ;
+              routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_extendedResult_8904, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 184)) ;
               }
               {
-              extensionSetter_appendBoolToUInt (ioArgument_ioInstructionGenerationList, var_extendedResult_8898, var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 185)) ;
+              extensionSetter_appendBoolToUInt (ioArgument_ioInstructionGenerationList, var_extendedResult_8904, var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 185)) ;
               }
-              GALGAS_objectIR var_shiftedResult_9104 ;
+              GALGAS_objectIR var_shiftedResult_9110 ;
               {
-              routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_shiftedResult_9104, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 187)) ;
+              routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_shiftedResult_9110, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 187)) ;
               }
               {
-              extensionSetter_appendShiftLeft (ioArgument_ioInstructionGenerationList, var_shiftedResult_9104, var_extendedResult_8898, var_leftShiftAmount_5242, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 188)) ;
+              extensionSetter_appendShiftLeft (ioArgument_ioInstructionGenerationList, var_shiftedResult_9110, var_extendedResult_8904, var_leftShiftAmount_5242, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 188)) ;
               }
-              var_operandList_5334.addAssign_operation (var_shiftedResult_9104  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 190)) ;
+              var_operandList_5334.addAssign_operation (var_shiftedResult_9110  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 190)) ;
             }
           }
           break ;
@@ -3948,17 +3948,17 @@ static void extensionMethod_integerSliceExpressionAST_analyzeExpression (const c
           break ;
         case GALGAS_typeKind::kEnum_staticInteger:
           {
-            GALGAS_bigint var_value_9734 ;
-            GALGAS_PLMType joker_9707_1 ; // Joker input parameter
-            var_expressionResult_7223.method_literalInteger (joker_9707_1, var_value_9734, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 199)) ;
-            const enumGalgasBool test_25 = GALGAS_bool (kIsStrictInf, var_value_9734.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 200)))).boolEnum () ;
+            GALGAS_bigint var_value_9740 ;
+            GALGAS_PLMType joker_9713_1 ; // Joker input parameter
+            var_expressionResult_7223.method_literalInteger (joker_9713_1, var_value_9740, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 199)) ;
+            const enumGalgasBool test_25 = GALGAS_bool (kIsStrictInf, var_value_9740.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 200)))).boolEnum () ;
             if (kBoolTrue == test_25) {
               TC_Array <C_FixItDescription> fixItArray26 ;
               inCompiler->emitSemanticError (enumerator_5411.current_mExpressionLocation (HERE), GALGAS_string ("this integer expression should be positive"), fixItArray26  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 201)) ;
             }else if (kBoolFalse == test_25) {
-              const enumGalgasBool test_27 = GALGAS_bool (kIsStrictInf, var_value_9734.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 202)).left_shift_operation (var_sliceWidth_5439 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 202)))).boolEnum () ;
+              const enumGalgasBool test_27 = GALGAS_bool (kIsStrictInf, var_value_9740.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 202)).left_shift_operation (var_sliceWidth_5439 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 202)))).boolEnum () ;
               if (kBoolTrue == test_27) {
-                var_accumulatedFieldStaticValues_5296 = var_accumulatedFieldStaticValues_5296.operator_or (var_value_9734.left_shift_operation (var_leftShiftAmount_5242 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 203)) COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 203)) ;
+                var_accumulatedFieldStaticValues_5296 = var_accumulatedFieldStaticValues_5296.operator_or (var_value_9740.left_shift_operation (var_leftShiftAmount_5242 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 203)) COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 203)) ;
               }else if (kBoolFalse == test_27) {
                 TC_Array <C_FixItDescription> fixItArray28 ;
                 inCompiler->emitSemanticError (enumerator_5411.current_mExpressionLocation (HERE), GALGAS_string ("expression too large (should be < ").add_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 205)).left_shift_operation (var_sliceWidth_5439 COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 205)).getter_string (SOURCE_FILE ("expression-integer-slice.galgas", 205)), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 205)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 205)), fixItArray28  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 205)) ;
@@ -3968,11 +3968,11 @@ static void extensionMethod_integerSliceExpressionAST_analyzeExpression (const c
           break ;
         case GALGAS_typeKind::kEnum_integer:
           {
-            const cEnumAssociatedValues_typeKind_integer * extractPtr_11044 = (const cEnumAssociatedValues_typeKind_integer *) (extensionGetter_type (var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 160)).getter_kind (HERE).unsafePointer ()) ;
-            const GALGAS_bigint extractedValue_min = extractPtr_11044->mAssociatedValue0 ;
-            const GALGAS_bigint extractedValue_max = extractPtr_11044->mAssociatedValue1 ;
-            const GALGAS_bool extractedValue_unsigned = extractPtr_11044->mAssociatedValue2 ;
-            const GALGAS_uint extractedValue_expressionBitCount = extractPtr_11044->mAssociatedValue3 ;
+            const cEnumAssociatedValues_typeKind_integer * extractPtr_11050 = (const cEnumAssociatedValues_typeKind_integer *) (extensionGetter_type (var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 160)).getter_kind (HERE).unsafePointer ()) ;
+            const GALGAS_bigint extractedValue_min = extractPtr_11050->mAssociatedValue0 ;
+            const GALGAS_bigint extractedValue_max = extractPtr_11050->mAssociatedValue1 ;
+            const GALGAS_bool extractedValue_unsigned = extractPtr_11050->mAssociatedValue2 ;
+            const GALGAS_uint extractedValue_expressionBitCount = extractPtr_11050->mAssociatedValue3 ;
             const enumGalgasBool test_29 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-integer-slice.galgas", 208)).boolEnum () ;
             if (kBoolTrue == test_29) {
               TC_Array <C_FixItDescription> fixItArray30 ;
@@ -3983,21 +3983,21 @@ static void extensionMethod_integerSliceExpressionAST_analyzeExpression (const c
                 TC_Array <C_FixItDescription> fixItArray32 ;
                 inCompiler->emitSemanticError (enumerator_5411.current_mExpressionLocation (HERE), GALGAS_string ("an $uint").add_operation (var_sliceWidth_5439.getter_string (SOURCE_FILE ("expression-integer-slice.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 211)).add_operation (GALGAS_string (" expression is required here"), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 211)), fixItArray32  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 211)) ;
               }else if (kBoolFalse == test_31) {
-                GALGAS_objectIR var_extendedResult_10649 ;
+                GALGAS_objectIR var_extendedResult_10655 ;
                 {
-                routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_extendedResult_10649, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 214)) ;
+                routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_extendedResult_10655, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 214)) ;
                 }
                 {
-                extensionSetter_appendExtend (ioArgument_ioInstructionGenerationList, var_extendedResult_10649, var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 215)) ;
+                extensionSetter_appendExtend (ioArgument_ioInstructionGenerationList, var_extendedResult_10655, var_expressionResult_7223, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 215)) ;
                 }
-                GALGAS_objectIR var_shiftedResult_10851 ;
+                GALGAS_objectIR var_shiftedResult_10857 ;
                 {
-                routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_shiftedResult_10851, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 217)) ;
+                routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_shiftedResult_10857, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 217)) ;
                 }
                 {
-                extensionSetter_appendShiftLeft (ioArgument_ioInstructionGenerationList, var_shiftedResult_10851, var_extendedResult_10649, var_leftShiftAmount_5242, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 218)) ;
+                extensionSetter_appendShiftLeft (ioArgument_ioInstructionGenerationList, var_shiftedResult_10857, var_extendedResult_10655, var_leftShiftAmount_5242, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 218)) ;
                 }
-                var_operandList_5334.addAssign_operation (var_shiftedResult_10851  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 220)) ;
+                var_operandList_5334.addAssign_operation (var_shiftedResult_10857  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 220)) ;
               }
             }
           }
@@ -4011,17 +4011,17 @@ static void extensionMethod_integerSliceExpressionAST_analyzeExpression (const c
         inCompiler->emitSemanticError (object->mProperty_mLocation, var_bitCount_5024.getter_string (SOURCE_FILE ("expression-integer-slice.galgas", 225)).add_operation (GALGAS_string (" bits required, "), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 225)).add_operation (var_bitCount_5024.substract_operation (var_leftShiftAmount_5242, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 225)).getter_string (SOURCE_FILE ("expression-integer-slice.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 225)).add_operation (GALGAS_string (" bits defined"), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 225)), fixItArray34  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 225)) ;
       }
       outArgument_outResult = GALGAS_objectIR::constructor_literalInteger (var_resultType_4699, var_accumulatedFieldStaticValues_5296  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 228)) ;
-      cEnumerator_operandIRList enumerator_11416 (var_operandList_5334, kENUMERATION_UP) ;
-      while (enumerator_11416.hasCurrentObject ()) {
-        GALGAS_objectIR var_newResult_11487 ;
+      cEnumerator_operandIRList enumerator_11422 (var_operandList_5334, kENUMERATION_UP) ;
+      while (enumerator_11422.hasCurrentObject ()) {
+        GALGAS_objectIR var_newResult_11493 ;
         {
-        routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_newResult_11487, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 230)) ;
+        routine_getNewTempValue (var_resultType_4699, ioArgument_ioTemporaries, var_newResult_11493, inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 230)) ;
         }
         {
-        extensionSetter_appendBinaryOperation (ioArgument_ioInstructionGenerationList, var_newResult_11487, extensionGetter_type (var_newResult_11487, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 233)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 234)), outArgument_outResult, GALGAS_llvmBinaryOperation::constructor_ior (SOURCE_FILE ("expression-integer-slice.galgas", 236)), enumerator_11416.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 231)) ;
+        extensionSetter_appendBinaryOperation (ioArgument_ioInstructionGenerationList, var_newResult_11493, extensionGetter_type (var_newResult_11493, inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 233)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 234)), outArgument_outResult, GALGAS_llvmBinaryOperation::constructor_ior (SOURCE_FILE ("expression-integer-slice.galgas", 236)), enumerator_11422.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 231)) ;
         }
-        outArgument_outResult = var_newResult_11487 ;
-        enumerator_11416.gotoNextObject () ;
+        outArgument_outResult = var_newResult_11493 ;
+        enumerator_11422.gotoNextObject () ;
       }
     }
   }
@@ -4131,7 +4131,7 @@ static void extensionMethod_prefixOperatorExpressionAST_analyzeExpression (const
       switch (extensionGetter_type (var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 82)).getter_kind (HERE).enumValue ()) {
       case GALGAS_typeKind::kNotBuilt:
         break ;
-      case GALGAS_typeKind::kEnum_arrayType:
+      case GALGAS_typeKind::kEnum_staticArrayType:
         {
           TC_Array <C_FixItDescription> fixItArray0 ;
           inCompiler->emitSemanticError (object->mProperty_mOperatorLocation, GALGAS_string ("internal error"), fixItArray0  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 84)) ;
@@ -4199,18 +4199,18 @@ static void extensionMethod_prefixOperatorExpressionAST_analyzeExpression (const
         {
           const enumGalgasBool test_9 = constinArgument_inOptionalTargetType.getter_kind (HERE).getter_isInteger (SOURCE_FILE ("expression-prefix-operators.galgas", 102)).boolEnum () ;
           if (kBoolTrue == test_9) {
-            GALGAS_bigint var_minTarget_4624 ;
-            GALGAS_bigint var_maxTarget_4643 ;
-            GALGAS_bool joker_4645_2 ; // Joker input parameter
-            GALGAS_uint joker_4645_1 ; // Joker input parameter
-            constinArgument_inOptionalTargetType.getter_kind (HERE).method_integer (var_minTarget_4624, var_maxTarget_4643, joker_4645_2, joker_4645_1, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 103)) ;
-            const enumGalgasBool test_10 = GALGAS_bool (kIsStrictInf, var_minTarget_4624.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 104)))).boolEnum () ;
+            GALGAS_bigint var_minTarget_4630 ;
+            GALGAS_bigint var_maxTarget_4649 ;
+            GALGAS_bool joker_4651_2 ; // Joker input parameter
+            GALGAS_uint joker_4651_1 ; // Joker input parameter
+            constinArgument_inOptionalTargetType.getter_kind (HERE).method_integer (var_minTarget_4630, var_maxTarget_4649, joker_4651_2, joker_4651_1, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 103)) ;
+            const enumGalgasBool test_10 = GALGAS_bool (kIsStrictInf, var_minTarget_4630.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 104)))).boolEnum () ;
             if (kBoolTrue == test_10) {
               TC_Array <C_FixItDescription> fixItArray11 ;
               inCompiler->emitSemanticError (object->mProperty_mOperatorLocation, GALGAS_string ("the ~ operator cannot be applied to an inferred signed integer type"), fixItArray11  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 105)) ;
               var_leftOperand_3517.drop () ; // Release error dropped variable
             }else if (kBoolFalse == test_10) {
-              var_leftOperand_3517 = GALGAS_objectIR::constructor_literalInteger (function_staticIntegerType (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 107)), var_maxTarget_4643  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 107)) ;
+              var_leftOperand_3517 = GALGAS_objectIR::constructor_literalInteger (function_staticIntegerType (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 107)), var_maxTarget_4649  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 107)) ;
             }
           }else if (kBoolFalse == test_9) {
             TC_Array <C_FixItDescription> fixItArray12 ;
@@ -4221,8 +4221,8 @@ static void extensionMethod_prefixOperatorExpressionAST_analyzeExpression (const
         break ;
       case GALGAS_typeKind::kEnum_integer:
         {
-          const cEnumAssociatedValues_typeKind_integer * extractPtr_5185 = (const cEnumAssociatedValues_typeKind_integer *) (extensionGetter_type (var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 82)).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_uint extractedValue_bitCount = extractPtr_5185->mAssociatedValue3 ;
+          const cEnumAssociatedValues_typeKind_integer * extractPtr_5191 = (const cEnumAssociatedValues_typeKind_integer *) (extensionGetter_type (var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 82)).getter_kind (HERE).unsafePointer ()) ;
+          const GALGAS_uint extractedValue_bitCount = extractPtr_5191->mAssociatedValue3 ;
           var_leftOperand_3517 = GALGAS_objectIR::constructor_literalInteger (function_staticIntegerType (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 113)), GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 113)).left_shift_operation (extractedValue_bitCount COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 113)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 113))  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 113)) ;
         }
         break ;
@@ -4263,60 +4263,60 @@ static void extensionMethod_prefixOperatorExpressionAST_analyzeExpression (const
     break ;
   }
   var_prefixOperatorMap_3455.method_searchKey (GALGAS_lstring::constructor_new (extensionGetter_plmTypeDescriptionName (var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 138)), object->mProperty_mOperatorLocation  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 138)) ;
-  GALGAS_PLMType var_resultType_6217 = extensionGetter_type (var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 139)) ;
+  GALGAS_PLMType var_resultType_6223 = extensionGetter_type (var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 139)) ;
   const enumGalgasBool test_16 = var_expressionResult_3255.getter_isLiteralInteger (SOURCE_FILE ("expression-prefix-operators.galgas", 141)).boolEnum () ;
   if (kBoolTrue == test_16) {
-    GALGAS_bigint var_value_6360 ;
-    GALGAS_PLMType joker_6333_1 ; // Joker input parameter
-    var_expressionResult_3255.method_literalInteger (joker_6333_1, var_value_6360, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 142)) ;
-    GALGAS_bigint var_result_6380 ;
+    GALGAS_bigint var_value_6366 ;
+    GALGAS_PLMType joker_6339_1 ; // Joker input parameter
+    var_expressionResult_3255.method_literalInteger (joker_6339_1, var_value_6366, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 142)) ;
+    GALGAS_bigint var_result_6386 ;
     switch (object->mProperty_mOp.enumValue ()) {
     case GALGAS_prefixOperator::kNotBuilt:
       break ;
     case GALGAS_prefixOperator::kEnum_minusNoOvf:
       {
-        var_result_6380 = var_value_6360.operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 146)) ;
+        var_result_6386 = var_value_6366.operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 146)) ;
       }
       break ;
     case GALGAS_prefixOperator::kEnum_unsignedComplement:
       {
         const enumGalgasBool test_17 = constinArgument_inOptionalTargetType.getter_kind (HERE).getter_isInteger (SOURCE_FILE ("expression-prefix-operators.galgas", 148)).boolEnum () ;
         if (kBoolTrue == test_17) {
-          GALGAS_bigint var_minTarget_6585 ;
-          GALGAS_bigint var_maxTarget_6604 ;
-          GALGAS_bool joker_6606_2 ; // Joker input parameter
-          GALGAS_uint joker_6606_1 ; // Joker input parameter
-          constinArgument_inOptionalTargetType.getter_kind (HERE).method_integer (var_minTarget_6585, var_maxTarget_6604, joker_6606_2, joker_6606_1, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 149)) ;
-          const enumGalgasBool test_18 = GALGAS_bool (kIsStrictInf, var_minTarget_6585.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 150)))).boolEnum () ;
+          GALGAS_bigint var_minTarget_6591 ;
+          GALGAS_bigint var_maxTarget_6610 ;
+          GALGAS_bool joker_6612_2 ; // Joker input parameter
+          GALGAS_uint joker_6612_1 ; // Joker input parameter
+          constinArgument_inOptionalTargetType.getter_kind (HERE).method_integer (var_minTarget_6591, var_maxTarget_6610, joker_6612_2, joker_6612_1, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 149)) ;
+          const enumGalgasBool test_18 = GALGAS_bool (kIsStrictInf, var_minTarget_6591.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 150)))).boolEnum () ;
           if (kBoolTrue == test_18) {
             TC_Array <C_FixItDescription> fixItArray19 ;
             inCompiler->emitSemanticError (object->mProperty_mOperatorLocation, GALGAS_string ("the ~ operator cannot be applied to an inferred signed integer type"), fixItArray19  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 151)) ;
-            var_result_6380.drop () ; // Release error dropped variable
+            var_result_6386.drop () ; // Release error dropped variable
           }else if (kBoolFalse == test_18) {
-            var_result_6380 = var_value_6360.operator_xor (var_maxTarget_6604 COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 153)) ;
+            var_result_6386 = var_value_6366.operator_xor (var_maxTarget_6610 COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 153)) ;
           }
         }else if (kBoolFalse == test_17) {
           TC_Array <C_FixItDescription> fixItArray20 ;
           inCompiler->emitSemanticError (object->mProperty_mOperatorLocation, GALGAS_string ("for the ~ operator, the inferred type should be an unsigned integer"), fixItArray20  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 156)) ;
-          var_result_6380.drop () ; // Release error dropped variable
+          var_result_6386.drop () ; // Release error dropped variable
         }
       }
       break ;
     case GALGAS_prefixOperator::kEnum_minus:
       {
-        var_result_6380 = var_value_6360.operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 159)) ;
+        var_result_6386 = var_value_6366.operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 159)) ;
       }
       break ;
     case GALGAS_prefixOperator::kEnum_notOperator:
       {
-        var_result_6380 = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 161)).operator_xor (var_value_6360 COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 161)) ;
+        var_result_6386 = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 161)).operator_xor (var_value_6366 COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 161)) ;
       }
       break ;
     }
-    outArgument_outResult = GALGAS_objectIR::constructor_literalInteger (var_resultType_6217, var_result_6380  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 163)) ;
+    outArgument_outResult = GALGAS_objectIR::constructor_literalInteger (var_resultType_6223, var_result_6386  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 163)) ;
   }else if (kBoolFalse == test_16) {
     {
-    routine_getNewTempValue (var_resultType_6217, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 166)) ;
+    routine_getNewTempValue (var_resultType_6223, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 166)) ;
     }
     {
     extensionSetter_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResult, extensionGetter_type (outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 170)), object->mProperty_mOperatorLocation, var_leftOperand_3517, var_binaryOperator_3493, var_expressionResult_3255, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 168)) ;

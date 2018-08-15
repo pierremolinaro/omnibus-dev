@@ -523,7 +523,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_integer,
     kEnum_staticInteger,
     kEnum_opaque,
-    kEnum_arrayType,
+    kEnum_staticArrayType,
     kEnum_dynamicArrayType,
     kEnum_function
   } enumeration ;
@@ -552,10 +552,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeKind constructor_arrayType (const class GALGAS_PLMType & inOperand0,
-                                                               const class GALGAS_bigint & inOperand1
-                                                               COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_typeKind constructor_boolean (LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_dynamicArrayType (const class GALGAS_PLMType & inOperand0
@@ -580,6 +576,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static class GALGAS_typeKind constructor_opaque (const class GALGAS_bigint & inOperand0
                                                             COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_typeKind constructor_staticArrayType (const class GALGAS_PLMType & inOperand0,
+                                                                     const class GALGAS_bigint & inOperand1
+                                                                     COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_structure (const class GALGAS_propertyList & inOperand0
@@ -598,11 +598,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_PLMType & outArgument0,
-                                                   class GALGAS_bigint & outArgument1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_dynamicArrayType (class GALGAS_PLMType & outArgument0,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
@@ -628,6 +623,11 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_staticArrayType (class GALGAS_PLMType & outArgument0,
+                                                         class GALGAS_bigint & outArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyList & outArgument0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
@@ -635,8 +635,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayType (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDynamicArrayType (LOCATION_ARGS) const ;
@@ -650,6 +648,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOpaque (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticArrayType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticInteger (LOCATION_ARGS) const ;
 

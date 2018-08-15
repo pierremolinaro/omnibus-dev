@@ -143,7 +143,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
         !plmTypeDescriptionName:plmTypeDescriptionName
-        !kind:.arrayType {!elementType:elementType !size:arraySize}
+        !kind:.staticArrayType {!elementType:elementType !size:arraySize}
         !llvmBaseTypeName:llvmBaseTypeName
       }
       [!?ioContext.mTypeMap insertType

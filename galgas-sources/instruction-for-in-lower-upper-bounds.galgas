@@ -91,7 +91,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   switch type.kind
   case boolean, void :
     error mTypeName : "an integer type is required here"
-  case arrayType (* *) :
+  case staticArrayType (* *) :
     error mTypeName : "an integer type is required here"
   case dynamicArrayType (*) :
     error mTypeName : "an integer type is required here"

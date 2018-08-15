@@ -45,7 +45,7 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
-  case arrayType (@PLMType elementType @bigint size)
+  case staticArrayType (@PLMType elementType @bigint size)
   case dynamicArrayType (@PLMType elementType)
   case function (@mode mode
                  @routineTypedSignature signature
@@ -75,7 +75,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i32"
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
-  case arrayType (* *) :
+  case staticArrayType (* *) :
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case dynamicArrayType (*) :
     result = "%ptrtype" # "i" + ptrSize
@@ -304,7 +304,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Static Integer"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
-  case arrayType (* *) :
+  case staticArrayType (* *) :
     result = "Static array"
   case dynamicArrayType (*) :
     result = "Dynamic array"
@@ -353,7 +353,7 @@ getter @PLMType defaultAlignment -> @uint{
     else
       result = 4
     end
-  case arrayType (elementType *) :
+  case staticArrayType (elementType *) :
     result = [elementType defaultAlignment]
   case dynamicArrayType (*) :
     result = 4
@@ -514,7 +514,7 @@ proc declareLLVMTypes
         generateStaticStringTypeLLVMCode (!?ioLLVMcode ![type llvmTypeName])
       case staticInteger : 
       case opaque (*) :
-      case arrayType (* arraySize) :
+      case staticArrayType (* arraySize) :
         generateLLVMCodeForStaticArrayType (
           !?ioLLVMcode
           !?ioGenerationAdds

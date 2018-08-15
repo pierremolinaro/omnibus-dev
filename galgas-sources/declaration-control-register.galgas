@@ -375,7 +375,7 @@ private proc controlRegisterType
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case arrayType (* *) :
+  case staticArrayType (* *) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case dynamicArrayType (*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

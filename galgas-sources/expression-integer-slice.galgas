@@ -158,7 +158,7 @@ override method @integerSliceExpressionAST analyzeExpression
         ]  
       #--- Check expression type
         switch [expressionResult type].kind
-        case arrayType (* *) :
+        case staticArrayType (* *) :
           error expressionLocation: "an unsigned integer expression is required here"
         case dynamicArrayType (*) :
           error expressionLocation: "an unsigned integer expression is required here"

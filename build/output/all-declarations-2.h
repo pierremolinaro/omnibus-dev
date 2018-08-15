@@ -2829,20 +2829,20 @@ class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
+class cEnumAssociatedValues_typeKind_staticArrayType : public cEnumAssociatedValues {
   public : const GALGAS_PLMType mAssociatedValue0 ;
   public : const GALGAS_bigint mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_PLMType & inAssociatedValue0,
-                                                     const GALGAS_bigint & inAssociatedValue1
-                                                     COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_typeKind_staticArrayType (const GALGAS_PLMType & inAssociatedValue0,
+                                                           const GALGAS_bigint & inAssociatedValue1
+                                                           COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_typeKind_arrayType (void) {}
+  public : virtual ~ cEnumAssociatedValues_typeKind_staticArrayType (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
