@@ -352,7 +352,7 @@ override method @configurationDeclarationAST enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:mPanicCodeTypeName
     ?type:let panicCodeType
-    ?2*
+    ?1*
   ]
   ioContext.mPanicCodeType = panicCodeType
   if [ioContext.mPanicCodeType.kind isInteger] then
@@ -367,7 +367,7 @@ override method @configurationDeclarationAST enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:mPanicLineTypeName
     ?type:let panicLineType
-    ?2*
+    ?1*
   ]
   ioContext.mPanicLineType = panicLineType
   if [ioContext.mPanicLineType.kind isInteger] then

@@ -140,7 +140,6 @@ override method @typeOpaqueDeclarationAST enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
       !type:opaqueType
-      !index:[ioContext.mTypeMap count]
       !generate:true
     ]
   end

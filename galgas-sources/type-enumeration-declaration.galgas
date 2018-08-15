@@ -157,7 +157,6 @@ override method @enumerationDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
     !type:enumerationType
-    !index:[ioContext.mTypeMap count]
     !generate:true
   ]
 #---------------- Infix operators

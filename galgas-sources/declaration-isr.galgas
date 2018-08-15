@@ -93,7 +93,7 @@ override method @decoratedISRDeclarations semanticAnalysis
 {
   for isr in mISRDeclarationList do
   #--- Self type
-    [inContext.mTypeMap searchKey !lkey:typeNameForTypeMapForDriver (!isr.mDriverName) ?type:let selfType ?2*]
+    [inContext.mTypeMap searchKey !lkey:typeNameForTypeMapForDriver (!isr.mDriverName) ?type:let selfType ?1*]
   #--- Code generation
     [inContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey

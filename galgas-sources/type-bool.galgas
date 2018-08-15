@@ -79,7 +79,6 @@ override method @booleanDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:[boolTypeName () nowhere]
     !type:booleanType
-    !index:[ioContext.mTypeMap count]
     !generate:true
   ]
 #---------- Enter boolean operators

@@ -93,7 +93,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
   if mSyncTypeName.string == "" then
     optionalSyncType = voidType ()
   else
-    [ioContext.mTypeMap searchKey !lkey:mSyncTypeName ?type:optionalSyncType ?2*]
+    [ioContext.mTypeMap searchKey !lkey:mSyncTypeName ?type:optionalSyncType ?1*]
   end
 #--- Analyze source expression
   computeStaticExpression (

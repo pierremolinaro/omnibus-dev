@@ -12295,26 +12295,24 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (co
 
 cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
                                                         const GALGAS_PLMType & in_type,
-                                                        const GALGAS_uint & in_index,
                                                         const GALGAS_bool & in_generate
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_type (in_type),
-mProperty_index (in_index),
 mProperty_generate (in_generate) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool cMapElement_unifiedTypeMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_type.isValid () && mProperty_index.isValid () && mProperty_generate.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_type.isValid () && mProperty_generate.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cMapElement * cMapElement_unifiedTypeMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_unifiedTypeMap (mProperty_lkey, mProperty_type, mProperty_index, mProperty_generate COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_unifiedTypeMap (mProperty_lkey, mProperty_type, mProperty_generate COMMA_HERE)) ;
   return result ;
 }
 
@@ -12325,10 +12323,6 @@ void cMapElement_unifiedTypeMap::description (C_String & ioString, const int32_t
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "type" ":" ;
   mProperty_type.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "index" ":" ;
-  mProperty_index.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "generate" ":" ;
@@ -12342,9 +12336,6 @@ typeComparisonResult cMapElement_unifiedTypeMap::compare (const cCollectionEleme
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
   if (kOperandEqual == result) {
     result = mProperty_type.objectCompare (operand->mProperty_type) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_index.objectCompare (operand->mProperty_index) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_generate.objectCompare (operand->mProperty_generate) ;
@@ -12408,12 +12399,11 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS
 
 void GALGAS_unifiedTypeMap::setter_insertType (GALGAS_lstring inKey,
                                                GALGAS_PLMType inArgument0,
-                                               GALGAS_uint inArgument1,
-                                               GALGAS_bool inArgument2,
+                                               GALGAS_bool inArgument1,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
   cMapElement_unifiedTypeMap * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -12434,8 +12424,7 @@ const char * kSearchErrorMessage_unifiedTypeMap_searchKey = "there is no '%K' ty
 
 void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
                                               GALGAS_PLMType & outArgument0,
-                                              GALGAS_uint & outArgument1,
-                                              GALGAS_bool & outArgument2,
+                                              GALGAS_bool & outArgument1,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) performSearch (inKey,
@@ -12445,12 +12434,10 @@ void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
-    outArgument2.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
     outArgument0 = p->mProperty_type ;
-    outArgument1 = p->mProperty_index ;
-    outArgument2 = p->mProperty_generate ;
+    outArgument1 = p->mProperty_generate ;
   }
 }
 
@@ -12465,21 +12452,6 @@ GALGAS_PLMType GALGAS_unifiedTypeMap::getter_typeForKey (const GALGAS_string & i
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
     result = p->mProperty_type ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_uint GALGAS_unifiedTypeMap::getter_indexForKey (const GALGAS_string & inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_uint result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mProperty_index ;
   }
   return result ;
 }
@@ -12510,20 +12482,6 @@ void GALGAS_unifiedTypeMap::setter_setTypeForKey (GALGAS_PLMType inAttributeValu
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
     p->mProperty_type = inAttributeValue ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_unifiedTypeMap::setter_setIndexForKey (GALGAS_uint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mProperty_index = inAttributeValue ;
   }
 }
 
@@ -12573,14 +12531,6 @@ GALGAS_PLMType cEnumerator_unifiedTypeMap::current_type (LOCATION_ARGS) const {
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
   return p->mProperty_type ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_uint cEnumerator_unifiedTypeMap::current_index (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mProperty_index ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

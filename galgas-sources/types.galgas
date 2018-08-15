@@ -401,7 +401,7 @@ getter @PLMType deinitNeeded -> @bool {
 
 shared map @unifiedTypeMap %selectors {
   @PLMType type
-  @uint index # This index allows to sort type for ensuring no forward LLVM type reference on generation
+#  @uint index # This index allows to sort type for ensuring no forward LLVM type reference on generation
   @bool generate # Boolean value for ordering LLVM code generation for this type
 
   insert insertType error message "the '%K' type is already declared in %L"
@@ -484,7 +484,7 @@ proc declareLLVMTypes
   end
   ioLLVMcode += "\n"
 #--- Generate LLVM type specific code
-  for (* type * generate) in inTypeMap do
+  for (* type generate) in inTypeMap do
     if generate then
       switch type.kind
       case void :

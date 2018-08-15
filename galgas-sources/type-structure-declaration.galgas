@@ -377,7 +377,6 @@ override method @structureDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mReceiverTypeName
     !type:structureType
-    !index:[ioContext.mTypeMap count]
     !generate:true
   ]
 #-------------------------------------------- GenerateLLVM type definition

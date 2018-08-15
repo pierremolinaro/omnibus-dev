@@ -391,7 +391,7 @@ override method @implementedDriverAST enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:typeNameForTypeMapForDriver (!mDriverName)
     ?type:let driverType
-    ?2*
+    ?1*
   ]
   [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
 #---------------- Add decorated declaration
@@ -446,7 +446,7 @@ override method @decoratedRequiredDriver semanticAnalysis
   [inContext.mTypeMap searchKey
     !lkey:typeNameForTypeMapForDriver (!mDriverName)
     ?type:let driverType
-    ?2*
+    ?1*
   ]
   let constructorMap = driverType.constructorMap
   [constructorMap searchKey !.new {!"()" !mDriverName.location} ?* ?let constructorValue]

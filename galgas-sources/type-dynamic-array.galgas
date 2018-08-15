@@ -72,7 +72,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   end
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mDynamicArrayTypeName ?let arrayTypeProxy]
 #-------------------------------------------- Get element type
-  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?2*]
+  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?1*]
   if not [elementType copyable] then
     error mElementTypeName : "an array element should be copyable"
   end
@@ -84,11 +84,10 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !mDynamicArrayTypeName}
 #-------------------------------------------- Original type name
   if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
-    [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?2*]
+    [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?1*]
     [!?ioContext.mTypeMap insertType
       !lkey:mDynamicArrayTypeName
       !type:type
-      !index:[ioContext.mTypeMap count]
       !generate:false
     ]
   else
@@ -185,7 +184,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:mDynamicArrayTypeName
       !type:dynamicArrayType
-      !index:[ioContext.mTypeMap count]
       !generate:true
     ]
   end

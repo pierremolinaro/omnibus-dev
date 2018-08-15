@@ -186,7 +186,6 @@ override method @syncDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mSyncToolName
     !type:structureType
-    !index:[ioContext.mTypeMap count]
     !generate:true
   ]
 #-------------------------------------------- GenerateLLVM type definitions

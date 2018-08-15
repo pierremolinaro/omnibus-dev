@@ -383,7 +383,6 @@ override method @staticListAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
     !type:elementType
-    !index:[ioContext.mTypeMap count]
     !generate:true
   ]
 #-------------------------------------------------------------------- Enter static list values
@@ -484,7 +483,6 @@ override method @staticListAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)
     !type:arrayType
-    !index:[ioContext.mTypeMap count]
     !generate:true
   ]
 #-------------------------------------------------------------------- Enter list in constant map

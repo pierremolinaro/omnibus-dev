@@ -79,7 +79,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #--- Get element type
-  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?2*]
+  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?1*]
   if not [elementType copyable] then
     error mElementTypeName : "an array element should be copyable"
   end
@@ -103,11 +103,10 @@ override method @staticArrayTypeDeclarationAST enterInContext
     let plmTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.plmTypeDescriptionName + "]" !mArrayTypeName}
     let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !mArrayTypeName}
     if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
-      [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?2*]
+      [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type ?1*]
       [!?ioContext.mTypeMap insertType
         !lkey:mArrayTypeName
         !type:type
-        !index:[ioContext.mTypeMap count]
         !generate:false
       ]
     else
@@ -150,13 +149,11 @@ override method @staticArrayTypeDeclarationAST enterInContext
       [!?ioContext.mTypeMap insertType
         !lkey:mArrayTypeName
         !type:arrayType
-        !index:[ioContext.mTypeMap count]
         !generate:false
       ]
       [!?ioContext.mTypeMap insertType
         !lkey:plmTypeDescriptionName
         !type:arrayType
-        !index:[ioContext.mTypeMap count]
         !generate:true
       ]
     #-------------------------------------------- GenerateLLVM type definition

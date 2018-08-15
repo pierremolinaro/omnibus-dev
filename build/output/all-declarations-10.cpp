@@ -1379,9 +1379,8 @@ void routine_computeStaticExpression (GALGAS_semanticContext & ioArgument_ioCont
   if (kBoolTrue == test_0) {
     var_annotationType_744 = function_voidType (inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 16)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_uint joker_908_2 ; // Joker input parameter
     GALGAS_bool joker_908_1 ; // Joker input parameter
-    ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (constinArgument_inOptionalTypeName, var_annotationType_744, joker_908_2, joker_908_1, inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 18)) ;
+    ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (constinArgument_inOptionalTypeName, var_annotationType_744, joker_908_1, inCompiler COMMA_SOURCE_FILE ("compute-static-expression.galgas", 18)) ;
   }
   GALGAS_semanticTemporariesStruct joker_1106 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("compute-static-expression.galgas", 27)) ;
   GALGAS_allocaList joker_1207 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("compute-static-expression.galgas", 30)) ;
@@ -4836,9 +4835,8 @@ static void extensionMethod_registerConstantExpressionAST_analyzeExpression (con
       var_registerFieldMap_4478.method_searchKey (enumerator_4802.current_mFieldName (HERE), var_fieldBitIndex_5011, var_fieldBitCount_5044, inCompiler COMMA_SOURCE_FILE ("expression-register-value-from-slices.galgas", 111)) ;
       GALGAS_lstring var_inferredTypeName_5079 = GALGAS_lstring::constructor_new (GALGAS_string ("$uint").add_operation (var_fieldBitCount_5044.getter_string (SOURCE_FILE ("expression-register-value-from-slices.galgas", 116)), inCompiler COMMA_SOURCE_FILE ("expression-register-value-from-slices.galgas", 116)), enumerator_4802.current_mFieldName (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("expression-register-value-from-slices.galgas", 116)) ;
       GALGAS_PLMType var_inferredType_5223 ;
-      GALGAS_uint joker_5225_2 ; // Joker input parameter
       GALGAS_bool joker_5225_1 ; // Joker input parameter
-      constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (var_inferredTypeName_5079, var_inferredType_5223, joker_5225_2, joker_5225_1, inCompiler COMMA_SOURCE_FILE ("expression-register-value-from-slices.galgas", 117)) ;
+      constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (var_inferredTypeName_5079, var_inferredType_5223, joker_5225_1, inCompiler COMMA_SOURCE_FILE ("expression-register-value-from-slices.galgas", 117)) ;
       GALGAS_objectIR var_expressionResult_5697 ;
       callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_4802.current_mExpression (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_inferredType_5223, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_5697, inCompiler COMMA_SOURCE_FILE ("expression-register-value-from-slices.galgas", 119)) ;
       {
@@ -5306,9 +5304,8 @@ void routine_handleSliceInExpression (const GALGAS_semanticContext constinArgume
       }
       GALGAS_lstring var_resultIntegerName_18954 = GALGAS_lstring::constructor_new (GALGAS_string ("$uint").add_operation (constinArgument_inHigh.getter_bigint (HERE).substract_operation (constinArgument_inLow.getter_bigint (HERE), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 501)).add_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 501)).getter_string (SOURCE_FILE ("expression-primary.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 501)), constinArgument_inLow.getter_location (HERE)  COMMA_SOURCE_FILE ("expression-primary.galgas", 501)) ;
       GALGAS_PLMType var_sliceType_19112 ;
-      GALGAS_uint joker_19114_2 ; // Joker input parameter
       GALGAS_bool joker_19114_1 ; // Joker input parameter
-      constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (var_resultIntegerName_18954, var_sliceType_19112, joker_19114_2, joker_19114_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 502)) ;
+      constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (var_resultIntegerName_18954, var_sliceType_19112, joker_19114_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 502)) ;
       {
       extensionSetter_appendTrunc (ioArgument_ioInstructionGenerationList, var_sliceType_19112, ioArgument_ioResult, ioArgument_ioTemporaries, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 503)) ;
       }
@@ -6408,9 +6405,8 @@ static void extensionMethod_bitbandInstructionAST_instructionSemanticAnalysis (c
   const cPtr_bitbandInstructionAST * object = (const cPtr_bitbandInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_bitbandInstructionAST) ;
   GALGAS_PLMType var_requiredSourceExpressionType_3727 ;
-  GALGAS_uint joker_3733_2 ; // Joker input parameter
   GALGAS_bool joker_3733_1 ; // Joker input parameter
-  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("uint1"), object->mProperty_mSourceExpressionLocation  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 75)), var_requiredSourceExpressionType_3727, joker_3733_2, joker_3733_1, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 74)) ;
+  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("uint1"), object->mProperty_mSourceExpressionLocation  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 75)), var_requiredSourceExpressionType_3727, joker_3733_1, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 74)) ;
   GALGAS_objectIR var_sourceExpressionOperand_4193 ;
   callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_requiredSourceExpressionType_3727, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceExpressionOperand_4193, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 80)) ;
   {
@@ -6449,9 +6445,8 @@ static void extensionMethod_bitbandInstructionAST_instructionSemanticAnalysis (c
   GALGAS_sliceMap joker_5647 ; // Joker input parameter
   extensionMethod_controlRegisterLValueSemanticAnalysis (object->mProperty_mControlRegisterLValue, GALGAS_bool (false), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, joker_5588, var_registerBitCount_5632, joker_5647, var_llvmRegisterAddressName_5705, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 110)) ;
   GALGAS_PLMType var_requiredBitExpressionType_5947 ;
-  GALGAS_uint joker_5953_2 ; // Joker input parameter
   GALGAS_bool joker_5953_1 ; // Joker input parameter
-  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("$uint").add_operation (var_registerBitCount_5632.substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_uint (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_significantBitCount (SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), object->mProperty_mBitExpressionLocation  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), var_requiredBitExpressionType_5947, joker_5953_2, joker_5953_1, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)) ;
+  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("$uint").add_operation (var_registerBitCount_5632.substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_uint (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_significantBitCount (SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), object->mProperty_mBitExpressionLocation  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), var_requiredBitExpressionType_5947, joker_5953_1, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)) ;
   GALGAS_objectIR var_bitExpressionOperand_6401 ;
   callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mBitExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_requiredBitExpressionType_5947, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_bitExpressionOperand_6401, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 135)) ;
   {
