@@ -178,6 +178,7 @@ override method @syncDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:guardMap
     !subscript:.noSubscript
+    !assignmentSources: {}
     !attributes:.instanciable
     !plmTypeDescriptionName:mSyncToolName # "sync " + mSyncToolName
     !kind:.syncTool

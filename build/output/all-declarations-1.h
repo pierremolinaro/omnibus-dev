@@ -1236,6 +1236,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : GALGAS_subscript mProperty_subscript ;
 
+  public : GALGAS_stringset mProperty_assignmentSources ;
+
   public : GALGAS_PLMTypeAttributes mProperty_attributes ;
 
   public : GALGAS_string mProperty_plmTypeDescriptionName ;
@@ -1264,6 +1266,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                            const GALGAS_constructorMap & in_constructorMap,
                            const GALGAS_guardMapCTXT & in_guardMap,
                            const GALGAS_subscript & in_subscript,
+                           const GALGAS_stringset & in_assignmentSources,
                            const GALGAS_PLMTypeAttributes & in_attributes,
                            const GALGAS_string & in_plmTypeDescriptionName,
                            const GALGAS_typeKind & in_kind,
@@ -1286,10 +1289,11 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                         const class GALGAS_constructorMap & inOperand3,
                                                         const class GALGAS_guardMapCTXT & inOperand4,
                                                         const class GALGAS_subscript & inOperand5,
-                                                        const class GALGAS_PLMTypeAttributes & inOperand6,
-                                                        const class GALGAS_string & inOperand7,
-                                                        const class GALGAS_typeKind & inOperand8,
-                                                        const class GALGAS_string & inOperand9
+                                                        const class GALGAS_stringset & inOperand6,
+                                                        const class GALGAS_PLMTypeAttributes & inOperand7,
+                                                        const class GALGAS_string & inOperand8,
+                                                        const class GALGAS_typeKind & inOperand9,
+                                                        const class GALGAS_string & inOperand10
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1304,6 +1308,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_assignmentSources (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_PLMTypeAttributes getter_attributes (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_classConstantMap getter_classConstantMap (LOCATION_ARGS) const ;

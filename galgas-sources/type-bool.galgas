@@ -43,7 +43,7 @@ override method @booleanDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
@@ -70,6 +70,7 @@ override method @booleanDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !subscript:.noSubscript
+    !assignmentSources: {!boolTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:boolTypeName ()
     !kind:.boolean
@@ -82,14 +83,6 @@ override method @booleanDeclarationAST enterInContext
     !generate:true
   ]
 #---------- Enter boolean operators
-  enterBooleanOperators (!?context:ioContext)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-private proc enterBooleanOperators
-  ?!context:@semanticContext ioContext
-{
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap ![boolTypeName () nowhere]} type]
   let boolBoolOp = combineTypeNamesForInfixOperator (!boolTypeName () !boolTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
@@ -140,6 +133,13 @@ private proc enterBooleanOperators
   [!?ioContext.mNotOperatorMap insertKey
     ![boolTypeName () nowhere]
   ]
+#---------- Enter boolean assignment function
+  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
+    !["assign." + boolTypeName () + "." + boolTypeName () nowhere]
+    !isRequired:false
+    !warnsIfUnused:false
+    !"i1"
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -162,6 +162,29 @@ proc generateBoolTypeLLVMCode ?!@string ioLLVMcode {
   ioLLVMcode += "define internal void @plm.assign." + boolTypeName () + "." + boolTypeName () + " (i1* %target, i1*%source) {\n"
   ioLLVMcode += "  %value = load i1, i1* %source\n"
   ioLLVMcode += "  store i1 %value, i1* %target\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: INTEGER ASSIGN FROM SAME TYPE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @basicIntegerAssignFunctionIR : @abstractRoutineIR {
+  @string mLLVMTypeName
+}
+
+#·······················································································································
+
+override method @basicIntegerAssignFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "define internal void @" +[mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + mLLVMTypeName + "* %target, " + mLLVMTypeName + "* %source) alwaysinline {\n"
+  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %source\n"
+  ioLLVMcode += "  store " + mLLVMTypeName + " %value, " + mLLVMTypeName + "* %target\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

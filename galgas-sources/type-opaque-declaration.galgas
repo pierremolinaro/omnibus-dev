@@ -89,6 +89,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   @PLMTypeAttributes opaqueTypeAttributes = .none
+  var copyable = false
   for (attribute) in mAttributeList do
     if attribute.string == instantiableAttribute () then
       if [opaqueTypeAttributes instanciable] then
@@ -97,9 +98,10 @@ override method @typeOpaqueDeclarationAST enterInContext
         opaqueTypeAttributes = opaqueTypeAttributes | .instanciable
       end
     elsif attribute.string == copyableAttribute () then
-      if [opaqueTypeAttributes copyable] then
+      if copyable then
         error attribute : "duplicated attribute"
       else
+        copyable = true
         opaqueTypeAttributes = opaqueTypeAttributes | .copyable
       end
     else
@@ -132,6 +134,7 @@ override method @typeOpaqueDeclarationAST enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !subscript:.noSubscript
+      !assignmentSources: if copyable then {!mOpaqueTypeName} else {} end
       !attributes:opaqueTypeAttributes
       !plmTypeDescriptionName:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}

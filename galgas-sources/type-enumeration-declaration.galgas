@@ -149,6 +149,7 @@ override method @enumerationDeclarationAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !subscript:.noSubscript
+    !assignmentSources: {!mEnumerationName}
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
@@ -170,6 +171,13 @@ override method @enumerationDeclarationAST enterInContext
   )
   ioRoutineListIR += !@enumToUintRoutineIR.new {
     !conversionToUIntN
+    !isRequired:false
+    !warnsIfUnused:false
+    ![enumerationType llvmTypeName]
+  }
+#---------- Enter boolean assignment function
+  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
+    !["assign." + mEnumerationName + "." + mEnumerationName nowhere]
     !isRequired:false
     !warnsIfUnused:false
     ![enumerationType llvmTypeName]
@@ -251,7 +259,7 @@ override method @enumToUintRoutineIR llvmCodeGeneration
 {
   let routineLLVMName = llvmNameForFunction (!mRoutineMangledName.string)
   ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
-  ioLLVMcode += "define internal " + mEnumerationLLVMTypeName + "  @" + routineLLVMName
+  ioLLVMcode += "define internal " + mEnumerationLLVMTypeName + " @" + routineLLVMName
   ioLLVMcode += " (" + mEnumerationLLVMTypeName + "* %inValue) nounwind {\n"
   ioLLVMcode += "  %r = load " + mEnumerationLLVMTypeName + ", " + mEnumerationLLVMTypeName + "* %inValue\n"
   ioLLVMcode += "  ret " + mEnumerationLLVMTypeName + " %r\n"

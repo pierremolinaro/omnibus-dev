@@ -217,6 +217,7 @@ override method @integerDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:{}
     !subscript:.noSubscript
+    !assignmentSources: {!integerTypeName}
     !attributes:.instanciable | .equatable | .copyable | .comparable
     !plmTypeDescriptionName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
@@ -245,6 +246,13 @@ override method @integerDeclarationAST enterInContext
     !signed:mIsSigned
     !?context:ioContext
   )
+#---------- Enter integer assignment function
+  ioRoutineListIR += !@integerTypeAssignFunctionIR.new {
+    !["assign." + integerTypeName + "." + integerTypeName nowhere]
+    !isRequired:false
+    !warnsIfUnused:false
+    !llvmTypeName
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -866,6 +874,44 @@ override method @integerBuiltinFunctionIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet +=
     !mLLVMTypeName + " @llvm." + mIntrinsicName + "." + mLLVMTypeName + " (" + mLLVMTypeName + ")"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: INTEGER ASSIGNMENT
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @integerTypeAssignFunctionIR : @abstractRoutineIR {
+  @string mLLVMTypeName
+}
+
+#·······················································································································
+
+override method @integerTypeAssignFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + mLLVMTypeName + "* %outTarget, " + mLLVMTypeName + "* %inSource) alwaysinline {\n"
+  ioLLVMcode += ";--- Compute type size\n"
+  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + mLLVMTypeName + ", " + mLLVMTypeName + "* null, i32 1\n"
+  ioLLVMcode += "  %byteCount = ptrtoint " + mLLVMTypeName + "* %sizeAsPtr to i32\n"
+  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
+  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyWords\n"
+  ioLLVMcode += ";--- Copy using load/store\n"
+  ioLLVMcode += "loadStore:\n"
+  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %inSource\n"
+  ioLLVMcode += "  store " + mLLVMTypeName + " %value, " + mLLVMTypeName + "* %outTarget\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += ";--- Copy using copy function\n"
+  ioLLVMcode += "copyWords:\n"
+  ioLLVMcode += "  %target32 = bitcast " + mLLVMTypeName + "* %outTarget to i32*\n"
+  ioLLVMcode += "  %source32 = bitcast " + mLLVMTypeName + "* %inSource to i32*\n"
+  ioLLVMcode += "  %temp = add nsw nuw i32 %byteCount, 3\n"
+  ioLLVMcode += "  %wordCount = udiv i32 %temp, 4\n"
+  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

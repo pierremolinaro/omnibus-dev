@@ -329,6 +329,7 @@ override method @staticListAST enterInContext
         !constructorMap:{}
         !guardMap:{}
         !subscript:.noSubscript
+        !assignmentSources: {}
         !attributes:.none
         !plmTypeDescriptionName:""
         !kind:.function {
@@ -375,6 +376,7 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !subscript:.noSubscript
+    !assignmentSources: {}
     !attributes:.none
     !plmTypeDescriptionName:plmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
@@ -475,6 +477,7 @@ override method @staticListAST enterInContext
     !constructorMap:{}
     !guardMap:{}
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
+    !assignmentSources: {}
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:plmNameForStaticListType (!mStaticListName)
     !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}

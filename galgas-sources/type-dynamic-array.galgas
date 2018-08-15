@@ -176,6 +176,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !constructorMap:constructorMap
       !guardMap:{}
       !subscript:.noSubscript
+      !assignmentSources: {!llvmBaseTypeName}
       !attributes:typeAttributes
       !plmTypeDescriptionName:plmTypeDescriptionName
       !kind:.dynamicArrayType {!elementType:elementType}
@@ -186,6 +187,12 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !type:dynamicArrayType
       !generate:true
     ]
+  #---------- Enter static array assignment function
+    ioRoutineListIR += !@dynamicArrayTypeAssignFunctionIR.new {
+      !["assign." + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
+      !isRequired:false
+      !warnsIfUnused:false
+    }
   end
 }
 
@@ -213,7 +220,6 @@ proc generateLLVMcodeForDynamicArray
   ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -363,6 +369,33 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ioLLVMcode += ";--- Store new buffer pointer\n"
   ioLLVMcode += "  store %ptrtype %new.buffer.pointer, %ptrtype* %ioArray\n"
   ioLLVMcode += ";--- Return\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: DYNAMIC ARRAY ASSIGNMENT
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @dynamicArrayTypeAssignFunctionIR : @abstractRoutineIR {
+}
+
+#·······················································································································
+
+override method @dynamicArrayTypeAssignFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
+#--- Assignment
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
+  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
+  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
+  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
+  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
+  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

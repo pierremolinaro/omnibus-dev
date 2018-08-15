@@ -10,6 +10,38 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                             Routine 'analyzeGuardCall'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
+                               const class GALGAS_routineAttributes constinArgument1,
+                               const class GALGAS_objectIR constinArgument2,
+                               const class GALGAS_lstring constinArgument3,
+                               const class GALGAS_effectiveArgumentListAST constinArgument4,
+                               const class GALGAS_semanticContext constinArgument5,
+                               const class GALGAS_mode constinArgument6,
+                               class GALGAS_semanticTemporariesStruct & ioArgument7,
+                               class GALGAS_staticEntityMap & ioArgument8,
+                               class GALGAS_universalValuedObjectMap & ioArgument9,
+                               class GALGAS_allocaList & ioArgument10,
+                               class GALGAS_instructionListIR & ioArgument11,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument12,
+                               class GALGAS_lstring & outArgument13,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                      Function 'waitForGuardChangeFunctionName'                                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                          Function 'memoryAllocSectionName'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
