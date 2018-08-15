@@ -552,8 +552,13 @@ private proc handleArrayAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Check current object is an array
-  if [[ioResult type].kind isArrayType] then
-    [[ioResult type].kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+  switch [ioResult type].subscript
+  case noSubscript :
+    error inEndOfIndex : "the receiver type is " + [[ioResult type] plmTypeDescriptionName] + " and does not accept subscripting"
+  case dynamicSubscript (@PLMType unused elementType) :
+    error inEndOfIndex
+    : "the receiver type is " + [[ioResult type] plmTypeDescriptionName] + " (dynamic array) and does not accept subscripting"
+  case staticSubscript (@PLMType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -578,8 +583,6 @@ private proc handleArrayAccessInExpression
       ?elementPtr:let result
     ]
     ioResult = result      
-  else
-    error inEndOfIndex : "the receiver is not an array and does not accept subscripting"
   end
 }
 

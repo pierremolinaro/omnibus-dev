@@ -220,8 +220,14 @@ private proc analyzeVariableInLValue
           currentLLVMName = newLLVMvariable
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
-        if [currentType.kind isArrayType] then
-          [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+        switch currentType.subscript
+        case noSubscript :
+          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
+        case dynamicSubscript (@PLMType unused elementType) :
+          error endOfIndex
+          : "the receiver type is " + [currentType plmTypeDescriptionName] + " (dynamic array) and does not accept subscripting"
+          : currentType, currentLLVMName
+        case staticSubscript (@PLMType elementType @bigint arraySize) :
           handleArraySubscriptNew (
             !self: inSelfType
             !routineAttributes:inRoutineAttributes
@@ -249,8 +255,6 @@ private proc analyzeVariableInLValue
          ]
          currentType = elementType
          currentLLVMName = newLLVMvariable
-        else
-          error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
         end
       end
     end
@@ -303,8 +307,14 @@ private proc analyzeSelfAssignmentTarget
           currentLLVMName = newLLVMvariable
         end
       case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
-        if [currentType.kind isArrayType] then
-          [currentType.kind arrayType ?elementType:let elementType ?size:let @bigint arraySize]
+        switch currentType.subscript
+        case noSubscript :
+          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
+        case dynamicSubscript (@PLMType unused elementType) :
+          error endOfIndex
+          : "the receiver type is " + [currentType plmTypeDescriptionName] + " (dynamic array) and does not accept subscripting"
+          : currentType, currentLLVMName
+        case staticSubscript (@PLMType elementType @bigint arraySize) :
           handleArraySubscriptNew (
             !self: inSelfType
             !routineAttributes:inRoutineAttributes
@@ -332,8 +342,6 @@ private proc analyzeSelfAssignmentTarget
          ]
          currentType = elementType
          currentLLVMName = newLLVMvariable
-        else
-          error endOfIndex : "cannot subscript, not an array" : currentType, currentLLVMName
         end
       end
     end

@@ -371,6 +371,7 @@ method @taskListAST enterInContext
       !classConstantMap:{}
       !constructorMap:{}
       !guardMap:{}
+      !subscript:.noSubscript
       !attributes:.none
       !plmTypeDescriptionName:task.mTaskName
       !kind:.structure {!propertyList:propertyList}

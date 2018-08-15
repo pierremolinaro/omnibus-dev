@@ -175,6 +175,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}
+      !subscript:.dynamicSubscript {!elementType:elementType}
       !attributes:typeAttributes
       !plmTypeDescriptionName:plmTypeDescriptionName
       !kind:.dynamicArrayType {!elementType:elementType}

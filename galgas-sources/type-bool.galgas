@@ -68,6 +68,7 @@ override method @booleanDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
+    !subscript:.noSubscript
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:boolTypeName ()
     !kind:.boolean

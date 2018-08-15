@@ -130,6 +130,7 @@ override method @typeOpaqueDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !guardMap:{}
+      !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
       !plmTypeDescriptionName:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}

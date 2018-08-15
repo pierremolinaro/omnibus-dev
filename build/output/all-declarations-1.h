@@ -419,6 +419,95 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_PLMTypeAttributes ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                                   @subscript enum                                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_subscript : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_subscript (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_noSubscript,
+    kEnum_staticSubscript,
+    kEnum_dynamicSubscript
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_subscript extractObject (const GALGAS_object & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_subscript constructor_dynamicSubscript (const class GALGAS_PLMType & inOperand0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_subscript constructor_noSubscript (LOCATION_ARGS) ;
+
+  public : static class GALGAS_subscript constructor_staticSubscript (const class GALGAS_PLMType & inOperand0,
+                                                                      const class GALGAS_bigint & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_subscript & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_dynamicSubscript (class GALGAS_PLMType & outArgument0,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_staticSubscript (class GALGAS_PLMType & outArgument0,
+                                                         class GALGAS_bigint & outArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDynamicSubscript (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoSubscript (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticSubscript (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_subscript class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_subscript ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                                   @typeKind enum                                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1155,6 +1244,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
 
   public : GALGAS_guardMapCTXT mProperty_guardMap ;
 
+  public : GALGAS_subscript mProperty_subscript ;
+
   public : GALGAS_PLMTypeAttributes mProperty_attributes ;
 
   public : GALGAS_string mProperty_plmTypeDescriptionName ;
@@ -1182,6 +1273,7 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                            const GALGAS_classConstantMap & in_classConstantMap,
                            const GALGAS_constructorMap & in_constructorMap,
                            const GALGAS_guardMapCTXT & in_guardMap,
+                           const GALGAS_subscript & in_subscript,
                            const GALGAS_PLMTypeAttributes & in_attributes,
                            const GALGAS_string & in_plmTypeDescriptionName,
                            const GALGAS_typeKind & in_kind,
@@ -1203,10 +1295,11 @@ class GALGAS_PLMType : public AC_GALGAS_root {
                                                         const class GALGAS_classConstantMap & inOperand2,
                                                         const class GALGAS_constructorMap & inOperand3,
                                                         const class GALGAS_guardMapCTXT & inOperand4,
-                                                        const class GALGAS_PLMTypeAttributes & inOperand5,
-                                                        const class GALGAS_string & inOperand6,
-                                                        const class GALGAS_typeKind & inOperand7,
-                                                        const class GALGAS_string & inOperand8
+                                                        const class GALGAS_subscript & inOperand5,
+                                                        const class GALGAS_PLMTypeAttributes & inOperand6,
+                                                        const class GALGAS_string & inOperand7,
+                                                        const class GALGAS_typeKind & inOperand8,
+                                                        const class GALGAS_string & inOperand9
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1238,6 +1331,8 @@ class GALGAS_PLMType : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_propertyMap getter_propertyMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapCTXT getter_routineMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_subscript getter_subscript (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

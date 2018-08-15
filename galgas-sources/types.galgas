@@ -16,10 +16,21 @@ struct @PLMType {
   @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
   @constructorMap constructorMap %selector # $type (!... !...)
   @guardMapCTXT guardMap %selector
+  @subscript subscript %selector
   @PLMTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string plmTypeDescriptionName %selector # used for type checking and type display
   @typeKind kind %selector
   @string llvmBaseTypeName %selector # used for type implementation
+}
+
+#·······················································································································
+
+enum @subscript {
+  case noSubscript
+  case staticSubscript (@PLMType elementType @bigint size)
+  case dynamicSubscript (@PLMType elementType)
+  
+  default noSubscript
 }
 
 #·······················································································································
@@ -97,6 +108,7 @@ func staticIntegerType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
+    !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !plmTypeDescriptionName:staticIntegerTypeName ()
     !kind:.staticInteger
@@ -113,6 +125,7 @@ func literalStringType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
+    !subscript:.noSubscript
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString
@@ -129,6 +142,7 @@ func voidType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
+    !subscript:.noSubscript
     !attributes:.none
     !plmTypeDescriptionName:""
     !kind:.void

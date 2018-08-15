@@ -367,6 +367,7 @@ override method @structureDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap
+    !subscript:.noSubscript
     !attributes:typeAttributes
     !plmTypeDescriptionName:mPLMTypeSpecificName
     !kind:.structure {!propertyList:propertyList}

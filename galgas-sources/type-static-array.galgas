@@ -140,6 +140,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !classConstantMap:classConstantMap
         !constructorMap:constructorMap
         !guardMap:{}
+        !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
         !plmTypeDescriptionName:plmTypeDescriptionName
         !kind:.arrayType {!elementType:elementType !size:arraySize}

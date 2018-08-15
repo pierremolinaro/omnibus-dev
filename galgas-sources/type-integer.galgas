@@ -215,6 +215,7 @@ override method @integerDeclarationAST enterInContext
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !guardMap:{}
+    !subscript:.noSubscript
     !attributes:.instanciable | .equatable | .copyable | .comparable
     !plmTypeDescriptionName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
