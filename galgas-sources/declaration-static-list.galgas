@@ -283,6 +283,7 @@ override method @staticListAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
   @routineMapCTXT routineMap = {}
   @propertyList propertyList = {}
@@ -433,27 +434,6 @@ override method @staticListAST enterInContext
             ]
           #--- Check mode
             let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !mode !functionName)
-#               ?let @mode inCallerRoutineMode
-#               ?let @lstring inRoutineName -> @string {
-#            if mode != candidateMode then
-#              error functionName : "invalid function mode: '" + mode + "' required"
-#            end
-#          #--- Check accessibility
-##            if not candidateIsPublic then
-##              let declarationFile = [functionDefinitionLocation file]
-##              let invocationFile = [functionName.location file]
-##              if invocationFile != declarationFile then
-##                error functionName : "this function is not public"
-##              end
-##            end
-#            @string routineLLVMName
-#            if [implementedModeDictionary hasKey !.userMode] then
-#              [implementedModeDictionary searchKey !.userMode ?routineLLVMName]
-#            elsif [implementedModeDictionary hasKey !.anyMode] then
-#              [implementedModeDictionary searchKey !.anyMode ?routineLLVMName]
-#            else
-#              error functionName : "the function should be callable from user mode" :routineLLVMName
-#            end
             if (functionReturnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
             elsif (functionReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
@@ -519,6 +499,16 @@ override method @staticListAST enterInContext
   ]
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStaticList.new {!mStaticListName !mValueList}
+#-------------------------------------------- GenerateLLVM type definitions
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+    ![elementType llvmTypeName]
+    !propertyList
+  }
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR.new {
+    ![arrayType llvmTypeName]
+    !elementType
+    ![stringValueList length]
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

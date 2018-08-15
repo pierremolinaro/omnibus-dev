@@ -585,8 +585,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static class GALGAS_typeKind constructor_structure (const class GALGAS_propertyList & inOperand0
                                                                COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_syncTool (const class GALGAS_propertyList & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_typeKind constructor_syncTool (LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_void (LOCATION_ARGS) ;
 
@@ -632,10 +631,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyList & outArgument0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_syncTool (class GALGAS_propertyList & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 

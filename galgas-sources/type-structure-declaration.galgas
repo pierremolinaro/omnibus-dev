@@ -285,6 +285,7 @@ override method @structureDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
@@ -379,6 +380,11 @@ override method @structureDeclarationAST enterInContext
     !index:[ioContext.mTypeMap count]
     !generate:true
   ]
+#-------------------------------------------- GenerateLLVM type definition
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+    ![structureType llvmTypeName]
+    !propertyList
+  }
 }
 
 #·······················································································································
@@ -489,6 +495,25 @@ method @structurePropertyListAST-element enterPropertyInContext
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! USER LLVM TYPE DEFINITION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
+  @propertyList mPropertyList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
+  ioLLVMcode += mLLVMDefinedTypeName + " = type {"
+  for () in mPropertyList
+    do ioLLVMcode += [mType llvmTypeName]
+    between ioLLVMcode += ", "
+  end
+  ioLLVMcode += "}\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -43,6 +43,7 @@ override method @literalStringDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType

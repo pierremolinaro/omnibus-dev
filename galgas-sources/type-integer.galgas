@@ -103,6 +103,7 @@ override method @integerDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   let integerTypeName = [[self typeName] nowhere]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]

@@ -169,6 +169,7 @@ private proc compileProject
   @decoratedRegularRoutineList decoratedRoutineList = {}
   @globalVariableIRList globalVariableIRList = {}
   @routineListIR routineListIR = {}
+  @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = {}
   if @uint.errorCount == 0 then
     let @timer t = .start 
     buildSemanticContext (
@@ -181,6 +182,7 @@ private proc compileProject
       ?decoratedRoutineList
       ?routineListIR
       ?globalVariableIRList
+      ?userLLVMTypeDefinitionListIR
     )
     if [option plm_options.printPasses value] then
       message "** Context: " + [t string] + "\n" 
@@ -222,6 +224,7 @@ private proc compileProject
       !eof:inEndOfSourceFile
       !intermediateCode:intermediateCodeStruct
       !typeMap:semanticContext.mTypeMap
+      !userDefinedTypes: userLLVMTypeDefinitionListIR
       !target:inTargetName
       !panicCodeType:semanticContext.mPanicCodeType
       !panicLineType:semanticContext.mPanicLineType

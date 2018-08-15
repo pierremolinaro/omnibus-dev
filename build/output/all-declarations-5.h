@@ -2764,6 +2764,7 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
 void extensionSetter_appendGetArrayElementReference (class GALGAS_instructionListIR & ioObject,
                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                      const class GALGAS_objectIR constin_inArrayIR,
+                                                     const class GALGAS_PLMType constin_inElementType,
                                                      const class GALGAS_objectIR constin_inIndexIR,
                                                      class GALGAS_objectIR & out_outElementPtr,
                                                      class C_Compiler * inCompiler

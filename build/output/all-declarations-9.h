@@ -520,6 +520,7 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
                                    class GALGAS_decoratedRegularRoutineList & outArgument6,
                                    class GALGAS_routineListIR & outArgument7,
                                    class GALGAS_globalVariableIRList & outArgument8,
+                                   class GALGAS_userLLVMTypeDefinitionListIR & outArgument9,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -583,9 +584,10 @@ class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & con
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void routine_declareLLVMTypes (const class GALGAS_unifiedTypeMap constinArgument0,
-                               const class GALGAS_uint constinArgument1,
-                               class GALGAS_generationAdds & ioArgument2,
-                               class GALGAS_string & ioArgument3,
+                               const class GALGAS_userLLVMTypeDefinitionListIR constinArgument1,
+                               const class GALGAS_uint constinArgument2,
+                               class GALGAS_generationAdds & ioArgument3,
+                               class GALGAS_string & ioArgument4,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -680,14 +682,4 @@ class GALGAS_string function_llvmNameForSectionImplementation (const class GALGA
 
 class GALGAS_string function_panicRoutineName (class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'llvmNameForSectionCall'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
 

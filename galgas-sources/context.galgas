@@ -164,6 +164,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 
 #·······················································································································
 
@@ -177,11 +178,14 @@ proc buildSemanticContext
   !@decoratedRegularRoutineList outDecoratedRoutineList
   !@routineListIR outRoutineListIR
   !@globalVariableIRList outGlobalVariableIRList
+  !@userLLVMTypeDefinitionListIR outUserLLVMTypeDefinitionListIR
+
 {
   outSemanticContext = .default
   outDecoratedDeclarationList = {}
   outDecoratedRoutineList = {}
   outRoutineListIR = {}
+  outUserLLVMTypeDefinitionListIR = {}
 #--- Enter required routines
   for requiredProc in inAST.mRequiredFunctionListAST do
     let procedureMangledName = routineMangledNameFromAST (
@@ -228,6 +232,7 @@ proc buildSemanticContext
       !?staticEntityMap:ioStaticEntityMap
       !?globalVariables:outGlobalVariableIRList
       !?registerUserAccess:controlRegisterUserAccesMapAST
+      !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
     ]
   end
 #--- Check all registers declared as @user are actually defined
@@ -258,6 +263,7 @@ proc buildSemanticContext
      !?outRoutineListIR
      !?staticEntityMap:ioStaticEntityMap
      !?globalVariables:outGlobalVariableIRList
+     !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
    ]
 }
 

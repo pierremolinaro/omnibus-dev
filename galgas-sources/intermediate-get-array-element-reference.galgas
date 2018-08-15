@@ -2,12 +2,13 @@
 setter @instructionListIR appendGetArrayElementReference
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?arrayReference:let @objectIR inArrayIR
+  ?elementType:let @PLMType inElementType
   ?index:let @objectIR inIndexIR
   !elementPtr:@objectIR outElementPtr
 {
   [!?ioTemporaries newTempLLVMVar ?let llvmName]
-  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
-  outElementPtr = @objectIR.reference {!type:elementType !llvmName:llvmName}
+#  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
+  outElementPtr = @objectIR.reference {!type:inElementType !llvmName:llvmName}
   self += !@getArrayElementReferenceIR.new {!outElementPtr !inArrayIR !inIndexIR}
 }
 

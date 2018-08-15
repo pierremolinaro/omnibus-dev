@@ -112,6 +112,7 @@ override method @syncDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
@@ -179,7 +180,7 @@ override method @syncDeclarationAST enterInContext
     !subscript:.noSubscript
     !attributes:.instanciable
     !plmTypeDescriptionName:mSyncToolName # "sync " + mSyncToolName
-    !kind:.syncTool {!propertyList:propertyList}
+    !kind:.syncTool
     !llvmBaseTypeName:mSyncToolName
   }
   [!?ioContext.mTypeMap insertType
@@ -188,6 +189,11 @@ override method @syncDeclarationAST enterInContext
     !index:[ioContext.mTypeMap count]
     !generate:true
   ]
+#-------------------------------------------- GenerateLLVM type definitions
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+    ![structureType llvmTypeName]
+    !propertyList
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -93,6 +93,7 @@ proc codeGeneration
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
+  ?userDefinedTypes:let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?target:let @lstring inTargetName
   ?panicCodeType:let @PLMType inPanicCodeType
   ?panicLineType:let @PLMType inPanicLineType
@@ -122,6 +123,7 @@ proc codeGeneration
     !productDir:productDirectory
     !intermediateCode:inIntermediateCodeStruct
     !typeMap:inTypeMap
+    !userDefinedTypes: inUserLLVMTypeDefinitionListIR
     !target:inTargetName
     !panicCodeType:inPanicCodeType
     !panicLineType:inPanicLineType
@@ -165,6 +167,7 @@ private proc generateCodeFiles
   ?productDir:let @string inProductDirectory
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
+  ?userDefinedTypes:let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?target:let @lstring inTargetName
   ?panicCodeType:let @PLMType inPanicCodeType
   ?panicLineType:let @PLMType inPanicLineType
@@ -217,7 +220,7 @@ private proc generateCodeFiles
   llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   llvmCode += "\n"
 #----------------------------------------- Type declarations
-  declareLLVMTypes (!inTypeMap !inTargetParameters.mPointerSize !?generationAdds !?llvmCode)
+  declareLLVMTypes (!inTypeMap !inUserLLVMTypeDefinitionListIR !inTargetParameters.mPointerSize !?generationAdds !?llvmCode)
 #----------------------------------------- Global Variables
   llvmCode += llvmTitleComment (!"Global variables")
   for (llvmName expression alignment) in inGlobalVariableIRList do

@@ -190,6 +190,7 @@ method @taskListAST enterInContext
   ?!@routineListIR ioRoutineListIR
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #------------- Sort tasks following their relative priority
   @taskListAST taskList = self
@@ -400,6 +401,11 @@ method @taskListAST enterInContext
       !task.mTaskDeactivateListAST
       !task.mEndOfTaskDeclaration
       !task.mActivate
+  #-------------------------------------------- GenerateLLVM type definition
+    ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+      ![taskType llvmTypeName]
+      !propertyList
+    }
   end
 #---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedTaskListDeclaration.new {!decoratedTaskList}

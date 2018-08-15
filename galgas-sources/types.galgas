@@ -41,7 +41,7 @@ enum @typeKind {
   case literalString
   case enumeration (@uint bitCount)
   case structure (@propertyList propertyList)
-  case syncTool (@propertyList propertyList)
+  case syncTool
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
@@ -67,7 +67,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i" + bitCount
   case structure (*) :
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
-  case syncTool (*) :
+  case syncTool :
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
@@ -295,7 +295,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Enumeration"
   case structure (*) :
     result = "Structure"
-  case syncTool (*) :
+  case syncTool :
     result = "Synchronization tool"
   case integer (* * @bool unsigned @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
@@ -333,7 +333,7 @@ getter @PLMType defaultAlignment -> @uint{
     end
   case structure (*) :
     result = 4
-  case syncTool (*) :
+  case syncTool :
     result = 4
   case integer (3* @uint bitCount) :
     if bitCount <= 8 then
@@ -469,115 +469,86 @@ func linkForHTMLTypeMap ?let @string inTypeName -> @string {
 #!  LLVM TYPE GENERATION                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @PLMType generateLLVMTypeDefinition
-  ?!@string ioLLVMcode
-{
-  switch self.kind
-  case void :
-  case boolean :
-  case enumeration (*) :
-  case integer (4*) :
-  case structure (propertyList) :
-    ioLLVMcode += [self llvmTypeName] + " = type {"
-    for () in propertyList
-      do ioLLVMcode += [mType llvmTypeName]
-      between ioLLVMcode += ", "
-    end
-    ioLLVMcode += "}\n"
-  case syncTool (propertyList) :
-    ioLLVMcode += [self llvmTypeName] + " = type {"
-    for () in propertyList
-      do ioLLVMcode += [mType llvmTypeName]
-      between ioLLVMcode += ", "
-    end
-    ioLLVMcode += "}\n"
-  case literalString : 
-  case staticInteger : 
-  case opaque (*) :
-  case arrayType (elementType arraySize) :
-    ioLLVMcode += [self llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
-  case dynamicArrayType (*) :
-  case function (3*) :
-  end
-}
-
-#·······················································································································
-
-sortedlist @orderedTypeList {
-  @PLMType mType
-  @uint mIndex
-}{
-  mIndex <
-}
-
-#·······················································································································
-
 proc declareLLVMTypes
   ?let @unifiedTypeMap inTypeMap
+  ?let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?let @uint inPointerSize
   ?!@generationAdds ioGenerationAdds
   ?!@string ioLLVMcode
 {
-#--- Build ordered list
-  @orderedTypeList orderedTypeList = {}
-  for (* type index generate) in inTypeMap do
-    if generate then
-      orderedTypeList += !type !index
-    end
-  end
 #--- Generate LLVM type definition (using forward type is allowed for pointers)
   ioLLVMcode += llvmTitleComment (!"User Defined Types")
   ioLLVMcode += "%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"
-  for (type *) in orderedTypeList do
-    [type generateLLVMTypeDefinition !?ioLLVMcode]
+  for (type) in inUserLLVMTypeDefinitionListIR do
+    [type generateLLVMType !?ioLLVMcode]
   end
   ioLLVMcode += "\n"
 #--- Generate LLVM type specific code
-  for (type *) in orderedTypeList do
-    switch type.kind
-    case void :
-    case boolean :
-      generateBoolTypeLLVMCode (!?ioLLVMcode)
-    case enumeration (*) :
-      generateLLVMcodeForEnumeration (
-        !?ioLLVMcode
-        !type
-      )
-    case integer (* * unsigned size) :
-      generateLLVMCodeForIntegerType (
-        !?ioLLVMcode
-        !?ioGenerationAdds
-        !size
-        !not unsigned
-      )
-    case structure (*) :
-      generateLLVMcodeForStructure (
-        !?ioLLVMcode
-        !?ioGenerationAdds
-        !type
-        !inPointerSize
-      )
-    case syncTool (*) :
-    case literalString : 
-      generateStaticStringTypeLLVMCode (!?ioLLVMcode ![type llvmTypeName])
-    case staticInteger : 
-    case opaque (*) :
-    case arrayType (* arraySize) :
-      generateLLVMCodeForStaticArrayType (
-        !?ioLLVMcode
-        !?ioGenerationAdds
-        !type
-        !arraySize
-      )
-    case dynamicArrayType (*) :
-      generateLLVMcodeForDynamicArray (
-        !?ioLLVMcode
-        !?ioGenerationAdds
-        !type
-      )
-    case function (3*) :
+  for (* type * generate) in inTypeMap do
+    if generate then
+      switch type.kind
+      case void :
+      case boolean :
+        generateBoolTypeLLVMCode (!?ioLLVMcode)
+      case enumeration (*) :
+        generateLLVMcodeForEnumeration (
+          !?ioLLVMcode
+          !type
+        )
+      case integer (* * unsigned size) :
+        generateLLVMCodeForIntegerType (
+          !?ioLLVMcode
+          !?ioGenerationAdds
+          !size
+          !not unsigned
+        )
+      case structure (*) :
+        generateLLVMcodeForStructure (
+          !?ioLLVMcode
+          !?ioGenerationAdds
+          !type
+          !inPointerSize
+        )
+      case syncTool :
+      case literalString : 
+        generateStaticStringTypeLLVMCode (!?ioLLVMcode ![type llvmTypeName])
+      case staticInteger : 
+      case opaque (*) :
+      case arrayType (* arraySize) :
+        generateLLVMCodeForStaticArrayType (
+          !?ioLLVMcode
+          !?ioGenerationAdds
+          !type
+          !arraySize
+        )
+      case dynamicArrayType (*) :
+        generateLLVMcodeForDynamicArray (
+          !?ioLLVMcode
+          !?ioGenerationAdds
+          !type
+        )
+      case function (3*) :
+      end
     end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! USER LLVM TYPE DEFINITION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract class @userLLVMTypeDefinitionIR {
+  @string mLLVMDefinedTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract method @userLLVMTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @userLLVMTypeDefinitionListIR {
+  @userLLVMTypeDefinitionIR mType
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

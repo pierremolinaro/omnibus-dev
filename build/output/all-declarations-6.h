@@ -2254,14 +2254,26 @@ class GALGAS_bool extensionGetter_deinitNeeded (const class GALGAS_PLMType & inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Extension method '@PLMType generateLLVMTypeDefinition'                                *
+//                       Abstract extension method '@userLLVMTypeDefinitionIR generateLLVMType'                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_generateLLVMTypeDefinition (const class GALGAS_PLMType inObject,
-                                                 class GALGAS_string & io_ioLLVMcode,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_userLLVMTypeDefinitionIR_generateLLVMType) (const class cPtr_userLLVMTypeDefinitionIR * inObject,
+                                                                                    class GALGAS_string & ioArgument0,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateLLVMType (const int32_t inClassIndex,
+                                            extensionMethodSignature_userLLVMTypeDefinitionIR_generateLLVMType inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateLLVMType (const class cPtr_userLLVMTypeDefinitionIR * inObject,
+                                           GALGAS_string & io_ioLLVMcode,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

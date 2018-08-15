@@ -579,6 +579,7 @@ private proc handleArrayAccessInExpression
     [!?ioInstructionGenerationList appendGetArrayElementReference
       !?temporary: ioTemporaries
       !arrayReference:ioResult
+      !elementType: elementType
       !index:indexIR
       ?elementPtr:let result
     ]

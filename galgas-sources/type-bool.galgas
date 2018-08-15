@@ -48,6 +48,7 @@ override method @booleanDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------- Self type proxy
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]

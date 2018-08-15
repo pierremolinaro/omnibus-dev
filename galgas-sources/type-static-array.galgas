@@ -76,6 +76,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #--- Get element type
   [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType ?2*]
@@ -158,8 +159,29 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !index:[ioContext.mTypeMap count]
         !generate:true
       ]
+    #-------------------------------------------- GenerateLLVM type definition
+      ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR.new {
+        ![arrayType llvmTypeName]
+        !elementType
+        !arraySize
+      }
     end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! USER LLVM TYPE DEFINITION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
+  @PLMType mElementType
+  @bigint mSize
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
+  ioLLVMcode += mLLVMDefinedTypeName + " = type [" + mSize + " x " + [mElementType llvmTypeName] + "]\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
