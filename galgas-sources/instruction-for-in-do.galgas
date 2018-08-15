@@ -91,15 +91,16 @@ override method @forInstructionAST instructionSemanticAnalysis
 #--- Analyze iterated expression
   [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?let @objectIR iteratedObjectPointer]
 #--- Type kind
-  let iteratedTypeKind = [iteratedObjectPointer type]
+  let iteratedType = [iteratedObjectPointer type]
 #--- Get iterated element type
   @PLMType iteratedElementType
-  if iteratedTypeKind.kind == .literalString then
-    iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["$uint8" nowhere]} type]
-  elsif [iteratedTypeKind.kind isArrayType] then
-    [iteratedTypeKind.kind arrayType ?elementType:iteratedElementType ?1*]
-  else
+  switch iteratedType.subscript
+  case noSubscript :
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
+  case literalString :
+    iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["$uint8" nowhere]} type]
+  case staticSubscript (elementType *) :
+    iteratedElementType = elementType
   end
 #---
   let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
@@ -108,7 +109,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [!?ioUniversalMap insertLocalConstant !mVarName !false !iteratedElementType !plmName]
-#--- Analyze while expression
+#------------------------------------ Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
   [mWhileExpression analyzeExpression
     !self:inSelfType
@@ -131,7 +132,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
     warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
   end
-#---
+#------------------------------------ "DO" instruction list
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -146,20 +147,22 @@ override method @forInstructionAST instructionSemanticAnalysis
     !?instructionListIR:doInstructionList_GenerationList
   ]
   [!?ioUniversalMap closeOverride !mEndOf_for_instruction]
-#--- Code generation
-  if iteratedTypeKind.kind == .literalString then
-    ioInstructionGenerationList += !@forInstructionOnStringIR.new {
+#------------------------------------ Code generation
+  switch iteratedType.subscript
+  case noSubscript :
+  case literalString :
+    ioInstructionGenerationList += !@forInstructionOnLiteralStringIR.new {
       !plmName
       !mIteratedObject.location
       !iteratedObjectPointer
+      !iteratedType
       !whileExpression_GenerationList
       !whileExpressionResult
       !doInstructionList_GenerationList
     }
-  elsif [iteratedTypeKind.kind isArrayType] then
-    [iteratedTypeKind.kind arrayType ?elementType:let elementType ?size:let size]
-    @stringset invokedFunctionSet = {}
+  case staticSubscript (elementType size) :
   #--- Static array map ? If yes, enter invoked function set
+    @stringset invokedFunctionSet = {}
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !mIteratedObject] then
       [ioTemporaries.mStaticArrayMapForTemporaries searchKey !mIteratedObject ?invokedFunctionSet]
     end
@@ -308,17 +311,17 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
   [mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   [mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   ioInvokedRoutineSet += mInvokedFunctionSet
-#  ioAccessibleEntities.mGlobalVariableSet += !mIteratedObjectName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION (ON STRING)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionOnStringIR : @abstractInstructionIR {
+class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
   @string mVarName
   @location mLocation
-  @objectIR mIteratedObject
+  @objectIR mStringElementIteratedObject
+  @PLMType mLiteralStringType
   @instructionListIR mWhileInstructionList
   @objectIR mWhileExpressionResult
   @instructionListIR mDoInstructionList
@@ -326,7 +329,7 @@ class @forInstructionOnStringIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionOnStringIR llvmInstructionCode
+override method @forInstructionOnLiteralStringIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -339,12 +342,12 @@ override method @forInstructionOnStringIR llvmInstructionCode
   let endLabel  = "for.label.end." + [mLocation locationIndex]
   let ptrVar    = "for.ptr." + [mLocation locationIndex]
   let currentVar = "for.current." + [mLocation locationIndex]
-  let stringLLVMTypeName = [literalStringType () llvmTypeName]
+  let stringLLVMTypeName = [mLiteralStringType llvmTypeName]
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 
   ioLLVMcode += startLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + [mIteratedObject llvmName] + "\n"
+  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + [mStringElementIteratedObject llvmName] + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
 #------------ Test
@@ -381,7 +384,7 @@ override method @forInstructionOnStringIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionOnStringIR enterAccessibleEntities
+override method @forInstructionOnLiteralStringIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {

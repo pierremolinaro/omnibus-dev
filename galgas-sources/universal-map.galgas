@@ -364,8 +364,7 @@ method @universalValuedObjectMap searchValuedObjectType
     case arrayAccess (3*) :
       switch outType.subscript
       case noSubscript :
-      case dynamicSubscript (@PLMType elementType) :
-        outType = elementType
+      case literalString :
       case staticSubscript (@PLMType elementType *) :
         outType = elementType
       end

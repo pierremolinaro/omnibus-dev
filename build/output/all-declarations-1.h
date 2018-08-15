@@ -432,7 +432,7 @@ class GALGAS_subscript : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_noSubscript,
     kEnum_staticSubscript,
-    kEnum_dynamicSubscript
+    kEnum_literalString
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -459,8 +459,7 @@ class GALGAS_subscript : public AC_GALGAS_root {
                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_subscript constructor_dynamicSubscript (const class GALGAS_PLMType & inOperand0
-                                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_subscript constructor_literalString (LOCATION_ARGS) ;
 
   public : static class GALGAS_subscript constructor_noSubscript (LOCATION_ARGS) ;
 
@@ -477,10 +476,6 @@ class GALGAS_subscript : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_dynamicSubscript (class GALGAS_PLMType & outArgument0,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_staticSubscript (class GALGAS_PLMType & outArgument0,
                                                          class GALGAS_bigint & outArgument1,
                                                          C_Compiler * inCompiler
@@ -489,7 +484,7 @@ class GALGAS_subscript : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDynamicSubscript (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoSubscript (LOCATION_ARGS) const ;
 

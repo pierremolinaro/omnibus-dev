@@ -9,6 +9,204 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//               Overriding extension method '@forInstructionOnLiteralStringIR enterAccessibleEntities'                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_forInstructionOnLiteralStringIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                                     GALGAS_stringset & ioArgument_ioInvokedRoutineSet,
+                                                                                     GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_forInstructionOnLiteralStringIR * object = (const cPtr_forInstructionOnLiteralStringIR *) inObject ;
+  macroValidSharedObject (object, cPtr_forInstructionOnLiteralStringIR) ;
+  extensionMethod_enterAccessibleEntities (object->mProperty_mWhileInstructionList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 391)) ;
+  extensionMethod_enterAccessibleEntities (object->mProperty_mDoInstructionList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 392)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_forInstructionOnLiteralStringIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_forInstructionOnLiteralStringIR.mSlotID,
+                                                extensionMethod_forInstructionOnLiteralStringIR_enterAccessibleEntities) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_forInstructionOnLiteralStringIR_enterAccessibleEntities (defineExtensionMethod_forInstructionOnLiteralStringIR_enterAccessibleEntities, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//        Overriding extension method '@forLowerUpperBoundInstructionAST noteInstructionTypesInPrecedenceGraph'        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_forLowerUpperBoundInstructionAST_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                                                                    GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                                    C_Compiler * inCompiler
+                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_forLowerUpperBoundInstructionAST * object = (const cPtr_forLowerUpperBoundInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_forLowerUpperBoundInstructionAST) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, object->mProperty_mTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    {
+    ioArgument_ioGraph.setter_noteNode (object->mProperty_mTypeName COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 67)) ;
+    }
+  }
+  extensionMethod_noteInstructionListTypesInPrecedenceGraph (object->mProperty_mDoInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 69)) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mLowerBoundExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 70)) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mProperty_mUpperBoundExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 71)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_forLowerUpperBoundInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST.mSlotID,
+                                                              extensionMethod_forLowerUpperBoundInstructionAST_noteInstructionTypesInPrecedenceGraph) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_forLowerUpperBoundInstructionAST_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_forLowerUpperBoundInstructionAST_noteInstructionTypesInPrecedenceGraph, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//             Overriding extension method '@forLowerUpperBoundInstructionAST instructionSemanticAnalysis'             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_forLowerUpperBoundInstructionAST_instructionSemanticAnalysis (const cPtr_instructionAST * inObject,
+                                                                                          const GALGAS_PLMType constinArgument_inSelfType,
+                                                                                          const GALGAS_routineAttributes constinArgument_inRoutineAttributes,
+                                                                                          const GALGAS_semanticContext constinArgument_inContext,
+                                                                                          const GALGAS_mode constinArgument_inMode,
+                                                                                          GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                                          GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
+                                                                                          GALGAS_universalValuedObjectMap & ioArgument_ioUniversalMap,
+                                                                                          GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                                          GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_forLowerUpperBoundInstructionAST * object = (const cPtr_forLowerUpperBoundInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_forLowerUpperBoundInstructionAST) ;
+  GALGAS_PLMType var_type_4038 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), object->mProperty_mTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)) ;
+  switch (var_type_4038.getter_kind (HERE).enumValue ()) {
+  case GALGAS_typeKind::kNotBuilt:
+    break ;
+  case GALGAS_typeKind::kEnum_boolean:
+  case GALGAS_typeKind::kEnum_void:
+    {
+      TC_Array <C_FixItDescription> fixItArray0 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 93)), GALGAS_string ("an integer type is required here"), fixItArray0  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 93)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_arrayType:
+    {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 95)), GALGAS_string ("an integer type is required here"), fixItArray1  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 95)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_dynamicArrayType:
+    {
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 97)), GALGAS_string ("an integer type is required here"), fixItArray2  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 97)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_enumeration:
+    {
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_literalString:
+    {
+      TC_Array <C_FixItDescription> fixItArray3 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 100)), GALGAS_string ("an integer type is required here"), fixItArray3  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 100)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_opaque:
+    {
+      TC_Array <C_FixItDescription> fixItArray4 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 102)), GALGAS_string ("an integer type is required here"), fixItArray4  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 102)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_staticInteger:
+    {
+      TC_Array <C_FixItDescription> fixItArray5 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 104)), GALGAS_string ("an integer type is required here"), fixItArray5  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 104)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_structure:
+    {
+      TC_Array <C_FixItDescription> fixItArray6 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 106)), GALGAS_string ("an integer type is required here"), fixItArray6  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 106)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_syncTool:
+    {
+      TC_Array <C_FixItDescription> fixItArray7 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 108)), GALGAS_string ("an integer type is required here"), fixItArray7  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 108)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_function:
+    {
+      TC_Array <C_FixItDescription> fixItArray8 ;
+      inCompiler->emitSemanticError (object->mProperty_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 110)), GALGAS_string ("an integer type is required here"), fixItArray8  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 110)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_integer:
+    {
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_7858 = (const cEnumAssociatedValues_typeKind_integer *) (var_type_4038.getter_kind (HERE).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_min = extractPtr_7858->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_max = extractPtr_7858->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_7858->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_7858->mAssociatedValue3 ;
+      GALGAS_objectIR var_lowerBoundExpressionResult_5432 ;
+      callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mLowerBoundExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_type_4038, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lowerBoundExpressionResult_5432, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 113)) ;
+      {
+      extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_lowerBoundExpressionResult_5432, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 126)) ;
+      }
+      GALGAS_objectIR var_upperBoundExpressionResult_5992 ;
+      callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mUpperBoundExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_type_4038, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_upperBoundExpressionResult_5992, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 130)) ;
+      {
+      extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_upperBoundExpressionResult_5992, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 143)) ;
+      }
+      GALGAS_objectIR var_lowerBound_6171 = function_checkAssignmentCompatibility (var_lowerBoundExpressionResult_5432, var_type_4038, object->mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 148)) ;
+      GALGAS_objectIR var_upperBound_6395 = function_checkAssignmentCompatibility (var_upperBoundExpressionResult_5992, var_type_4038, object->mProperty_mEndOf_5F_upperBoundExpression_5F_instruction, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 154)) ;
+      {
+      extensionSetter_openOverrideForRepeatBlock (ioArgument_ioUniversalMap, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 161)) ;
+      }
+      GALGAS_lstring var_enumeratedVarName_6720 = GALGAS_lstring::constructor_new (object->mProperty_mVarName.getter_string (HERE).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 163)).add_operation (ioArgument_ioTemporaries.getter_mTemporaryIndex (HERE).getter_string (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 163)), object->mProperty_mVarName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 163))  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 163)) ;
+      ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 164)) ;
+      ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (var_enumeratedVarName_6720.getter_string (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 165)), var_type_4038, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 165)) ;
+      const enumGalgasBool test_9 = GALGAS_bool (kIsNotEqual, object->mProperty_mVarName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+      if (kBoolTrue == test_9) {
+        {
+        extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, object->mProperty_mVarName, GALGAS_bool (false), var_type_4038, var_enumeratedVarName_6720, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 167)) ;
+        }
+      }
+      GALGAS_instructionListIR var_instructionGenerationList_7128 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 170)) ;
+      extensionMethod_analyzeBranchInstructionList (object->mProperty_mDoInstructionList, constinArgument_inSelfType, constinArgument_inRoutineAttributes, object->mProperty_mEndOf_5F_do_5F_instruction, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_instructionGenerationList_7128, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 171)) ;
+      {
+      extensionSetter_closeOverride (ioArgument_ioUniversalMap, object->mProperty_mEndOf_5F_do_5F_instruction, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 183)) ;
+      }
+      ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_forLowerUpperBoundInstructionIR::constructor_new (var_enumeratedVarName_6720.getter_string (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 186)), var_type_4038, extractedValue_unsigned, object->mProperty_mEndOf_5F_do_5F_instruction, var_lowerBound_6171, var_upperBound_6395, var_instructionGenerationList_7128  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 185))  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 185)) ;
+    }
+    break ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_forLowerUpperBoundInstructionAST_instructionSemanticAnalysis (void) {
+  enterExtensionMethod_instructionSemanticAnalysis (kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST.mSlotID,
+                                                    extensionMethod_forLowerUpperBoundInstructionAST_instructionSemanticAnalysis) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_forLowerUpperBoundInstructionAST_instructionSemanticAnalysis (defineExtensionMethod_forLowerUpperBoundInstructionAST_instructionSemanticAnalysis, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                 Overriding extension method '@forLowerUpperBoundInstructionIR llvmInstructionCode'                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -925,10 +1123,10 @@ void routine_analyzeVariableInLValue (const GALGAS_PLMType constinArgument_inSel
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_10521 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_7991.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_10521->mAssociatedValue0 ;
-          const GALGAS_location extractedValue_endOfIndex = extractPtr_10521->mAssociatedValue1 ;
-          const GALGAS_bool extractedValue_checkIndexExpression = extractPtr_10521->mAssociatedValue2 ;
+          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_10442 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_7991.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_10442->mAssociatedValue0 ;
+          const GALGAS_location extractedValue_endOfIndex = extractPtr_10442->mAssociatedValue1 ;
+          const GALGAS_bool extractedValue_checkIndexExpression = extractPtr_10442->mAssociatedValue2 ;
           switch (var_currentType_7464.getter_subscript (HERE).enumValue ()) {
           case GALGAS_subscript::kNotBuilt:
             break ;
@@ -938,34 +1136,32 @@ void routine_analyzeVariableInLValue (const GALGAS_PLMType constinArgument_inSel
               inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is ").add_operation (var_currentType_7464.getter_plmTypeDescriptionName (SOURCE_FILE ("lvalue.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 225)).add_operation (GALGAS_string (" and does not accept subscripting"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 225)), fixItArray4  COMMA_SOURCE_FILE ("lvalue.galgas", 225)) ;
             }
             break ;
-          case GALGAS_subscript::kEnum_dynamicSubscript:
+          case GALGAS_subscript::kEnum_literalString:
             {
-              const cEnumAssociatedValues_subscript_dynamicSubscript * extractPtr_9497 = (const cEnumAssociatedValues_subscript_dynamicSubscript *) (var_currentType_7464.getter_subscript (HERE).unsafePointer ()) ;
-              const GALGAS_PLMType extractedValue_elementType = extractPtr_9497->mAssociatedValue0 ;
               TC_Array <C_FixItDescription> fixItArray5 ;
-              inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is ").add_operation (var_currentType_7464.getter_plmTypeDescriptionName (SOURCE_FILE ("lvalue.galgas", 228)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 228)).add_operation (GALGAS_string (" (dynamic array) and does not accept subscripting"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 228)), fixItArray5  COMMA_SOURCE_FILE ("lvalue.galgas", 227)) ;
+              inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is literal string and does not accept subscripting"), fixItArray5  COMMA_SOURCE_FILE ("lvalue.galgas", 227)) ;
               var_currentType_7464.drop () ; // Release error dropped variable
               var_currentLLVMName_7503.drop () ; // Release error dropped variable
             }
             break ;
           case GALGAS_subscript::kEnum_staticSubscript:
             {
-              const cEnumAssociatedValues_subscript_staticSubscript * extractPtr_10509 = (const cEnumAssociatedValues_subscript_staticSubscript *) (var_currentType_7464.getter_subscript (HERE).unsafePointer ()) ;
-              const GALGAS_PLMType extractedValue_elementType = extractPtr_10509->mAssociatedValue0 ;
-              const GALGAS_bigint extractedValue_arraySize = extractPtr_10509->mAssociatedValue1 ;
-              GALGAS_objectIR var_indexIR_10142 ;
+              const cEnumAssociatedValues_subscript_staticSubscript * extractPtr_10430 = (const cEnumAssociatedValues_subscript_staticSubscript *) (var_currentType_7464.getter_subscript (HERE).unsafePointer ()) ;
+              const GALGAS_PLMType extractedValue_elementType = extractPtr_10430->mAssociatedValue0 ;
+              const GALGAS_bigint extractedValue_arraySize = extractPtr_10430->mAssociatedValue1 ;
+              GALGAS_objectIR var_indexIR_10063 ;
               {
-              routine_handleArraySubscriptNew (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, extractedValue_checkIndexExpression, extractedValue_arraySize, extractedValue_elementType, ioArgument_ioInstructionGenerationList, var_indexIR_10142, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 231)) ;
+              routine_handleArraySubscriptNew (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, extractedValue_checkIndexExpression, extractedValue_arraySize, extractedValue_elementType, ioArgument_ioInstructionGenerationList, var_indexIR_10063, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 231)) ;
               }
-              GALGAS_string var_newLLVMvariable_10215 ;
+              GALGAS_string var_newLLVMvariable_10136 ;
               {
-              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_newLLVMvariable_10215, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 248)) ;
+              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_newLLVMvariable_10136, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 248)) ;
               }
               {
-              extensionSetter_appendGetUniversalArrayElementReference (ioArgument_ioInstructionGenerationList, var_currentType_7464, var_currentLLVMName_7503, extractedValue_elementType, var_newLLVMvariable_10215, var_indexIR_10142, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 249)) ;
+              extensionSetter_appendGetUniversalArrayElementReference (ioArgument_ioInstructionGenerationList, var_currentType_7464, var_currentLLVMName_7503, extractedValue_elementType, var_newLLVMvariable_10136, var_indexIR_10063, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 249)) ;
               }
               var_currentType_7464 = extractedValue_elementType ;
-              var_currentLLVMName_7503 = var_newLLVMvariable_10215 ;
+              var_currentLLVMName_7503 = var_newLLVMvariable_10136 ;
             }
             break ;
           }
@@ -1010,54 +1206,54 @@ void routine_analyzeSelfAssignmentTarget (const GALGAS_PLMType constinArgument_i
     inCompiler->emitSemanticError (constinArgument_inSelfLocation, GALGAS_string ("'self' is not available in this context"), fixItArray2  COMMA_SOURCE_FILE ("lvalue.galgas", 282)) ;
     outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
   }else if (kBoolFalse == test_1) {
-    GALGAS_PLMType var_currentType_11548 = constinArgument_inSelfType ;
-    GALGAS_string var_currentLLVMName_11585 = function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 285)) ;
-    cEnumerator_accessInAssignmentListAST enumerator_11639 (constinArgument_inAccessList, kENUMERATION_UP) ;
-    while (enumerator_11639.hasCurrentObject ()) {
-      switch (enumerator_11639.current_mAccess (HERE).enumValue ()) {
+    GALGAS_PLMType var_currentType_11469 = constinArgument_inSelfType ;
+    GALGAS_string var_currentLLVMName_11506 = function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 285)) ;
+    cEnumerator_accessInAssignmentListAST enumerator_11560 (constinArgument_inAccessList, kENUMERATION_UP) ;
+    while (enumerator_11560.hasCurrentObject ()) {
+      switch (enumerator_11560.current_mAccess (HERE).enumValue ()) {
       case GALGAS_accessInAssignmentAST::kNotBuilt:
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_property:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_12592 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_11639.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_lstring extractedValue_propertyName = extractPtr_12592->mAssociatedValue0 ;
-          GALGAS_propertyMap var_propertyMap_11745 = var_currentType_11548.getter_propertyMap (HERE) ;
-          GALGAS_propertyAccessKind var_propertyAccess_11859 ;
-          GALGAS_bool joker_11818 ; // Joker input parameter
-          var_propertyMap_11745.method_searchKey (extractedValue_propertyName, joker_11818, var_propertyAccess_11859, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 290)) ;
-          switch (var_propertyAccess_11859.enumValue ()) {
+          const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_12513 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_11560.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_lstring extractedValue_propertyName = extractPtr_12513->mAssociatedValue0 ;
+          GALGAS_propertyMap var_propertyMap_11666 = var_currentType_11469.getter_propertyMap (HERE) ;
+          GALGAS_propertyAccessKind var_propertyAccess_11780 ;
+          GALGAS_bool joker_11739 ; // Joker input parameter
+          var_propertyMap_11666.method_searchKey (extractedValue_propertyName, joker_11739, var_propertyAccess_11780, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 290)) ;
+          switch (var_propertyAccess_11780.enumValue ()) {
           case GALGAS_propertyAccessKind::kNotBuilt:
             break ;
           case GALGAS_propertyAccessKind::kEnum_constantProperty:
             {
               TC_Array <C_FixItDescription> fixItArray3 ;
               inCompiler->emitSemanticError (extractedValue_propertyName.getter_location (SOURCE_FILE ("lvalue.galgas", 293)), GALGAS_string ("a constant property cannot be written"), fixItArray3  COMMA_SOURCE_FILE ("lvalue.galgas", 293)) ;
-              var_currentType_11548.drop () ; // Release error dropped variable
-              var_currentLLVMName_11585.drop () ; // Release error dropped variable
+              var_currentType_11469.drop () ; // Release error dropped variable
+              var_currentLLVMName_11506.drop () ; // Release error dropped variable
             }
             break ;
           case GALGAS_propertyAccessKind::kEnum_singleton:
             {
-              const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_12159 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_11859.unsafePointer ()) ;
-              const GALGAS_objectIR extractedValue_object = extractPtr_12159->mAssociatedValue0 ;
-              var_currentType_11548 = extensionGetter_type (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 295)) ;
-              var_currentLLVMName_11585 = extensionGetter_llvmName (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 296)) ;
+              const cEnumAssociatedValues_propertyAccessKind_singleton * extractPtr_12080 = (const cEnumAssociatedValues_propertyAccessKind_singleton *) (var_propertyAccess_11780.unsafePointer ()) ;
+              const GALGAS_objectIR extractedValue_object = extractPtr_12080->mAssociatedValue0 ;
+              var_currentType_11469 = extensionGetter_type (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 295)) ;
+              var_currentLLVMName_11506 = extensionGetter_llvmName (extractedValue_object, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 296)) ;
             }
             break ;
           case GALGAS_propertyAccessKind::kEnum_indexed:
             {
-              const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_12580 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_11859.unsafePointer ()) ;
-              const GALGAS_PLMType extractedValue_propertyType = extractPtr_12580->mAssociatedValue0 ;
-              const GALGAS_uint extractedValue_index = extractPtr_12580->mAssociatedValue1 ;
-              GALGAS_string var_newLLVMvariable_12281 ;
+              const cEnumAssociatedValues_propertyAccessKind_indexed * extractPtr_12501 = (const cEnumAssociatedValues_propertyAccessKind_indexed *) (var_propertyAccess_11780.unsafePointer ()) ;
+              const GALGAS_PLMType extractedValue_propertyType = extractPtr_12501->mAssociatedValue0 ;
+              const GALGAS_uint extractedValue_index = extractPtr_12501->mAssociatedValue1 ;
+              GALGAS_string var_newLLVMvariable_12202 ;
               {
-              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_newLLVMvariable_12281, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 298)) ;
+              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_newLLVMvariable_12202, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 298)) ;
               }
               {
-              extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, var_currentType_11548, var_currentLLVMName_11585, var_newLLVMvariable_12281, extractedValue_index, extractedValue_propertyName.getter_string (SOURCE_FILE ("lvalue.galgas", 304)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 299)) ;
+              extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, var_currentType_11469, var_currentLLVMName_11506, var_newLLVMvariable_12202, extractedValue_index, extractedValue_propertyName.getter_string (SOURCE_FILE ("lvalue.galgas", 304)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 299)) ;
               }
-              var_currentType_11548 = extractedValue_propertyType ;
-              var_currentLLVMName_11585 = var_newLLVMvariable_12281 ;
+              var_currentType_11469 = extractedValue_propertyType ;
+              var_currentLLVMName_11506 = var_newLLVMvariable_12202 ;
             }
             break ;
           }
@@ -1065,56 +1261,54 @@ void routine_analyzeSelfAssignmentTarget (const GALGAS_PLMType constinArgument_i
         break ;
       case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
         {
-          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_14169 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_11639.current_mAccess (HERE).unsafePointer ()) ;
-          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_14169->mAssociatedValue0 ;
-          const GALGAS_location extractedValue_endOfIndex = extractPtr_14169->mAssociatedValue1 ;
-          const GALGAS_bool extractedValue_checkIndexExpression = extractPtr_14169->mAssociatedValue2 ;
-          switch (var_currentType_11548.getter_subscript (HERE).enumValue ()) {
+          const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_14013 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_11560.current_mAccess (HERE).unsafePointer ()) ;
+          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_14013->mAssociatedValue0 ;
+          const GALGAS_location extractedValue_endOfIndex = extractPtr_14013->mAssociatedValue1 ;
+          const GALGAS_bool extractedValue_checkIndexExpression = extractPtr_14013->mAssociatedValue2 ;
+          switch (var_currentType_11469.getter_subscript (HERE).enumValue ()) {
           case GALGAS_subscript::kNotBuilt:
             break ;
           case GALGAS_subscript::kEnum_noSubscript:
             {
               TC_Array <C_FixItDescription> fixItArray4 ;
-              inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is ").add_operation (var_currentType_11548.getter_plmTypeDescriptionName (SOURCE_FILE ("lvalue.galgas", 312)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 312)).add_operation (GALGAS_string (" and does not accept subscripting"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 312)), fixItArray4  COMMA_SOURCE_FILE ("lvalue.galgas", 312)) ;
+              inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is ").add_operation (var_currentType_11469.getter_plmTypeDescriptionName (SOURCE_FILE ("lvalue.galgas", 312)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 312)).add_operation (GALGAS_string (" and does not accept subscripting"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 312)), fixItArray4  COMMA_SOURCE_FILE ("lvalue.galgas", 312)) ;
             }
             break ;
-          case GALGAS_subscript::kEnum_dynamicSubscript:
+          case GALGAS_subscript::kEnum_literalString:
             {
-              const cEnumAssociatedValues_subscript_dynamicSubscript * extractPtr_13145 = (const cEnumAssociatedValues_subscript_dynamicSubscript *) (var_currentType_11548.getter_subscript (HERE).unsafePointer ()) ;
-              const GALGAS_PLMType extractedValue_elementType = extractPtr_13145->mAssociatedValue0 ;
               TC_Array <C_FixItDescription> fixItArray5 ;
-              inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is ").add_operation (var_currentType_11548.getter_plmTypeDescriptionName (SOURCE_FILE ("lvalue.galgas", 315)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 315)).add_operation (GALGAS_string (" (dynamic array) and does not accept subscripting"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 315)), fixItArray5  COMMA_SOURCE_FILE ("lvalue.galgas", 314)) ;
-              var_currentType_11548.drop () ; // Release error dropped variable
-              var_currentLLVMName_11585.drop () ; // Release error dropped variable
+              inCompiler->emitSemanticError (extractedValue_endOfIndex, GALGAS_string ("the receiver type is a literal string and does not accept subscripting"), fixItArray5  COMMA_SOURCE_FILE ("lvalue.galgas", 314)) ;
+              var_currentType_11469.drop () ; // Release error dropped variable
+              var_currentLLVMName_11506.drop () ; // Release error dropped variable
             }
             break ;
           case GALGAS_subscript::kEnum_staticSubscript:
             {
-              const cEnumAssociatedValues_subscript_staticSubscript * extractPtr_14157 = (const cEnumAssociatedValues_subscript_staticSubscript *) (var_currentType_11548.getter_subscript (HERE).unsafePointer ()) ;
-              const GALGAS_PLMType extractedValue_elementType = extractPtr_14157->mAssociatedValue0 ;
-              const GALGAS_bigint extractedValue_arraySize = extractPtr_14157->mAssociatedValue1 ;
-              GALGAS_objectIR var_indexIR_13790 ;
+              const cEnumAssociatedValues_subscript_staticSubscript * extractPtr_14001 = (const cEnumAssociatedValues_subscript_staticSubscript *) (var_currentType_11469.getter_subscript (HERE).unsafePointer ()) ;
+              const GALGAS_PLMType extractedValue_elementType = extractPtr_14001->mAssociatedValue0 ;
+              const GALGAS_bigint extractedValue_arraySize = extractPtr_14001->mAssociatedValue1 ;
+              GALGAS_objectIR var_indexIR_13634 ;
               {
-              routine_handleArraySubscriptNew (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, extractedValue_checkIndexExpression, extractedValue_arraySize, extractedValue_elementType, ioArgument_ioInstructionGenerationList, var_indexIR_13790, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 318)) ;
+              routine_handleArraySubscriptNew (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, extractedValue_checkIndexExpression, extractedValue_arraySize, extractedValue_elementType, ioArgument_ioInstructionGenerationList, var_indexIR_13634, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 318)) ;
               }
-              GALGAS_string var_newLLVMvariable_13863 ;
+              GALGAS_string var_newLLVMvariable_13707 ;
               {
-              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_newLLVMvariable_13863, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 335)) ;
+              extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_newLLVMvariable_13707, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 335)) ;
               }
               {
-              extensionSetter_appendGetUniversalArrayElementReference (ioArgument_ioInstructionGenerationList, var_currentType_11548, var_currentLLVMName_11585, extractedValue_elementType, var_newLLVMvariable_13863, var_indexIR_13790, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 336)) ;
+              extensionSetter_appendGetUniversalArrayElementReference (ioArgument_ioInstructionGenerationList, var_currentType_11469, var_currentLLVMName_11506, extractedValue_elementType, var_newLLVMvariable_13707, var_indexIR_13634, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 336)) ;
               }
-              var_currentType_11548 = extractedValue_elementType ;
-              var_currentLLVMName_11585 = var_newLLVMvariable_13863 ;
+              var_currentType_11469 = extractedValue_elementType ;
+              var_currentLLVMName_11506 = var_newLLVMvariable_13707 ;
             }
             break ;
           }
         }
         break ;
       }
-      enumerator_11639.gotoNextObject () ;
+      enumerator_11560.gotoNextObject () ;
     }
-    outArgument_outInternalRepresentation = GALGAS_LValueRepresentation::constructor_new (var_currentType_11548, var_currentLLVMName_11585  COMMA_SOURCE_FILE ("lvalue.galgas", 348)) ;
+    outArgument_outInternalRepresentation = GALGAS_LValueRepresentation::constructor_new (var_currentType_11469, var_currentLLVMName_11506  COMMA_SOURCE_FILE ("lvalue.galgas", 348)) ;
   }
 }
 

@@ -28,7 +28,7 @@ struct @PLMType {
 enum @subscript {
   case noSubscript
   case staticSubscript (@PLMType elementType @bigint size)
-  case dynamicSubscript (@PLMType elementType)
+  case literalString
   
   default noSubscript
 }
@@ -125,7 +125,7 @@ func literalStringType -> @PLMType {
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
-    !subscript:.noSubscript
+    !subscript:.literalString
     !attributes:.instanciable | .equatable | .copyable
     !plmTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString

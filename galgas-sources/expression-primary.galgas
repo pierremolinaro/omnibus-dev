@@ -555,9 +555,9 @@ private proc handleArrayAccessInExpression
   switch [ioResult type].subscript
   case noSubscript :
     error inEndOfIndex : "the receiver type is " + [[ioResult type] plmTypeDescriptionName] + " and does not accept subscripting"
-  case dynamicSubscript (@PLMType unused elementType) :
+  case literalString  :
     error inEndOfIndex
-    : "the receiver type is " + [[ioResult type] plmTypeDescriptionName] + " (dynamic array) and does not accept subscripting"
+    : "the receiver type is literal string (dynamic array) and does not accept subscripting"
   case staticSubscript (@PLMType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType

@@ -223,9 +223,9 @@ private proc analyzeVariableInLValue
         switch currentType.subscript
         case noSubscript :
           error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
-        case dynamicSubscript (@PLMType unused elementType) :
+        case literalString :
           error endOfIndex
-          : "the receiver type is " + [currentType plmTypeDescriptionName] + " (dynamic array) and does not accept subscripting"
+          : "the receiver type is literal string and does not accept subscripting"
           : currentType, currentLLVMName
         case staticSubscript (@PLMType elementType @bigint arraySize) :
           handleArraySubscriptNew (
@@ -310,9 +310,9 @@ private proc analyzeSelfAssignmentTarget
         switch currentType.subscript
         case noSubscript :
           error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
-        case dynamicSubscript (@PLMType unused elementType) :
+        case literalString :
           error endOfIndex
-          : "the receiver type is " + [currentType plmTypeDescriptionName] + " (dynamic array) and does not accept subscripting"
+          : "the receiver type is a literal string and does not accept subscripting"
           : currentType, currentLLVMName
         case staticSubscript (@PLMType elementType @bigint arraySize) :
           handleArraySubscriptNew (

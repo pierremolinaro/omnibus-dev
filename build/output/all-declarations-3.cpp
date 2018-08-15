@@ -13620,35 +13620,6 @@ typeComparisonResult cEnumAssociatedValues_subscript_staticSubscript::compare (c
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_subscript_dynamicSubscript::cEnumAssociatedValues_subscript_dynamicSubscript (const GALGAS_PLMType & inAssociatedValue0
-                                                                                                    COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_subscript_dynamicSubscript::description (C_String & ioString,
-                                                                    const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_subscript_dynamicSubscript::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_subscript_dynamicSubscript * ptr = dynamic_cast<const cEnumAssociatedValues_subscript_dynamicSubscript *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_subscript::GALGAS_subscript (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -13680,16 +13651,9 @@ GALGAS_subscript GALGAS_subscript::constructor_staticSubscript (const GALGAS_PLM
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_subscript GALGAS_subscript::constructor_dynamicSubscript (const GALGAS_PLMType & inAssociatedValue0
-                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_subscript GALGAS_subscript::constructor_literalString (UNUSED_LOCATION_ARGS) {
   GALGAS_subscript result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_dynamicSubscript ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_subscript_dynamicSubscript (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
+  result.mEnum = kEnum_literalString ;
   return result ;
 }
 
@@ -13714,27 +13678,11 @@ void GALGAS_subscript::method_staticSubscript (GALGAS_PLMType & outAssociatedVal
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_subscript::method_dynamicSubscript (GALGAS_PLMType & outAssociatedValue0,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_dynamicSubscript) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @subscript dynamicSubscript invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_subscript_dynamicSubscript * ptr = (const cEnumAssociatedValues_subscript_dynamicSubscript *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 static const char * gEnumNameArrayFor_subscript [4] = {
   "(not built)",
   "noSubscript",
   "staticSubscript",
-  "dynamicSubscript"
+  "literalString"
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13751,8 +13699,8 @@ GALGAS_bool GALGAS_subscript::getter_isStaticSubscript (UNUSED_LOCATION_ARGS) co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_subscript::getter_isDynamicSubscript (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_dynamicSubscript == mEnum) ;
+GALGAS_bool GALGAS_subscript::getter_isLiteralString (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalString == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
