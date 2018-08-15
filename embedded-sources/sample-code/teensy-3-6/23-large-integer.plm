@@ -7,6 +7,13 @@ let largeConstant = 123_456_789_123_456_789_123_456_789_123_456_789
 
 typealias $largeInt = $uint128
 
+func getLargeConstant @exported () -> $largeInt {
+  result = largeConstant
+}
+
+func getLargeAddition @exported (? inA $largeInt ?inB $largeInt) -> $largeInt {
+  result = inA + inB
+}
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @activate {
@@ -17,7 +24,7 @@ task Tâche0 @stacksize 512 @activate {
   on time.wait (!until: self.tick) {
     self.otherLargeInteger += self.largeInteger
     self.tick += 500
-    self.largeInteger += largeConstant
+    self.largeInteger = getLargeAddition (!self.largeInteger !getLargeConstant ())
   }
 }
   
