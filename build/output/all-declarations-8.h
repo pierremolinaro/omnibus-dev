@@ -715,15 +715,3 @@ void routine_generateLLVMCodeForStaticArrayType (class GALGAS_string & ioArgumen
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Routine 'generateLLVMcodeForDynamicArray'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_generateLLVMcodeForDynamicArray (class GALGAS_string & ioArgument0,
-                                              class GALGAS_generationAdds & ioArgument1,
-                                              const class GALGAS_PLMType constinArgument2,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-

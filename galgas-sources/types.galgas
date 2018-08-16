@@ -493,19 +493,8 @@ proc declareLLVMTypes
       switch type.kind
       case void :
       case boolean :
-        generateBoolTypeLLVMCode (!?ioLLVMcode)
       case enumeration (*) :
-        generateLLVMcodeForEnumeration (
-          !?ioLLVMcode
-          !type
-        )
-      case integer (* * unsigned size) :
-        generateLLVMCodeForIntegerType (
-          !?ioLLVMcode
-          !?ioGenerationAdds
-          !size
-          !not unsigned
-        )
+      case integer (4*) :
       case structure (*) :
         generateLLVMcodeForStructure (
           !?ioLLVMcode
@@ -515,7 +504,6 @@ proc declareLLVMTypes
         )
       case syncTool :
       case literalString : 
-        generateStaticStringTypeLLVMCode (!?ioLLVMcode ![type llvmTypeName])
       case staticInteger : 
       case opaque (*) :
       case staticArrayType (* arraySize) :
@@ -526,11 +514,6 @@ proc declareLLVMTypes
           !arraySize
         )
       case dynamicArrayType (*) :
-        generateLLVMcodeForDynamicArray (
-          !?ioLLVMcode
-          !?ioGenerationAdds
-          !type
-        )
       case function (3*) :
       end
     end

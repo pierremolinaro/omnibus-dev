@@ -143,30 +143,6 @@ override method @booleanDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc generateBoolTypeLLVMCode ?!@string ioLLVMcode {
-  ioLLVMcode += llvmTitleComment (!"GENERATED FUNCTIONS FOR $bool TYPE")
-  let routineMangledName = routineMangledNameFromAST (
-    !boolTypeName ()
-    !["$uint1" nowhere]
-    !{}
-  )
-  let functionName = llvmNameForFunction (!routineMangledName)
-  ioLLVMcode += "define internal i1 @" + functionName + " (i1* %inValue) {\n"
-  ioLLVMcode += "  %value = load i1, i1* %inValue\n"
-  ioLLVMcode += "  ret i1 %value\n"
-  ioLLVMcode += "}\n\n"
-  ioLLVMcode += llvmSeparatorLine () + "\n"
-  ioLLVMcode += "define internal void @plm.assign." + boolTypeName () + "." + boolTypeName () + " (i1* %target, i1*%source) {\n"
-  ioLLVMcode += "  %value = load i1, i1* %source\n"
-  ioLLVMcode += "  store i1 %value, i1* %target\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: INTEGER ASSIGN FROM SAME TYPE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

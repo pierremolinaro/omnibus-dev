@@ -228,24 +228,6 @@ proc enterEnumerationComparisonOperators
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc generateLLVMcodeForEnumeration
-  ?!@string ioLLVMcode
-  ?let @PLMType inType
-{
-  let llvmTypeName = [inType llvmTypeName]
-  let llvmBaseTypeName = inType.llvmBaseTypeName
-  ioLLVMcode += llvmTitleComment (!"@plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName)
-#--- Assignment
-  ioLLVMcode += "define internal void @plm.assign." + llvmBaseTypeName + "." + llvmBaseTypeName
-  ioLLVMcode += " (" + llvmTypeName + "* %target, " + llvmTypeName + "*%source) {\n"
-  ioLLVMcode += "  %value = load " + llvmTypeName + ", " + llvmTypeName + "* %source\n"
-  ioLLVMcode += "  store " + llvmTypeName + " %value, " + llvmTypeName + "* %target\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#·······················································································································
-
 class @enumToUintRoutineIR : @abstractRoutineIR {
   @string mEnumerationLLVMTypeName
 }

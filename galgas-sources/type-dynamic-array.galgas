@@ -197,32 +197,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc generateLLVMcodeForDynamicArray
-  ?!@string ioLLVMcode
-  ?!@generationAdds ioGenerationAdds
-  ?let @PLMType inArrayType
-{
-  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-#--- Assignment
-  ioLLVMcode += llvmSeparatorLine () + "\n"
-  ioLLVMcode += "define internal void @plm.assign."
-  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
-  ioLLVMcode += "."
-  ioLLVMcode += [inArrayType.llvmBaseTypeName assemblerRepresentation]
-  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
-  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
-  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
-  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
-  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: removeAll
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
