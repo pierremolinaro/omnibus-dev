@@ -223,7 +223,6 @@ private proc compileProject
       !outputFile:inSourceFile.string
       !eof:inEndOfSourceFile
       !intermediateCode:intermediateCodeStruct
-      !typeMap:semanticContext.mTypeMap
       !userDefinedTypes: userLLVMTypeDefinitionListIR
       !target:inTargetName
       !panicCodeType:semanticContext.mPanicCodeType

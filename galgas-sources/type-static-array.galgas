@@ -114,6 +114,21 @@ override method @staticArrayTypeDeclarationAST enterInContext
       @classConstantMap classConstantMap = {}
      [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
     #-------------------------------------------- Property map
+#      @routineMapCTXT routineMap = {}
+#      [!?routineMap addFunctionWithoutArgument
+#        !llvmBaseTypeName:integerTypeName
+#        !methodName:[countTrainingZerosMethodName () nowhere]
+#        !mode:.anySafeMode
+#        !resultTypeProxy:selfTypeProxy
+#        ?routineLLVMName: routineLLVMName
+#      ]
+#      ioRoutineListIR += !@integerBuiltinFunctionIR.new {
+#        !routineLLVMName
+#        !isRequired:false
+#        !warnsIfUnused:false
+#        !llvmTypeName
+#        !"cttz"
+#      }
       @propertyMap arrayTypePropertyMap = {}
       [!?arrayTypePropertyMap insertKey # "count" property
         !.new {!"count" !plmTypeDescriptionName.location}
@@ -165,7 +180,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
       }
     #---------- Enter static array assignment function
       ioRoutineListIR += !@staticArrayTypeAssignFunctionIR.new {
-        !["assign." + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
+        ![assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
         !isRequired:false
         !warnsIfUnused:false
         !arrayType
@@ -187,30 +202,6 @@ class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
 
 override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += mLLVMDefinedTypeName + " = type [" + mSize + " x " + [mElementType llvmTypeName] + "]\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc generateLLVMCodeForStaticArrayType
-  ?!@string ioLLVMcode
-  ?!@generationAdds unused ioGenerationAdds
-  ?let @PLMType inStaticArrayTypeName
-  ?let @bigint inSize
-{
-  let llvmBaseTypeName = [[inStaticArrayTypeName llvmBaseTypeName] assemblerRepresentation]
-  let routineMangledName = routineMangledNameFromAST (
-    !llvmBaseTypeName
-    !["count" nowhere]
-    !{}
-  )
-  let routineLLVMName = llvmNameForFunction (!routineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!routineMangledName)
-  ioLLVMcode += "define internal i32  @" + routineLLVMName + " (%"
-  ioLLVMcode += llvmBaseTypeName + "* %inUnusedValue) nounwind {\n"
-  ioLLVMcode += "  ret i32 " + inSize + "\n"
-  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -14,11 +14,8 @@
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_declareLLVMTypes (const class GALGAS_unifiedTypeMap constinArgument0,
-                               const class GALGAS_userLLVMTypeDefinitionListIR constinArgument1,
-                               const class GALGAS_uint constinArgument2,
-                               class GALGAS_generationAdds & ioArgument3,
-                               class GALGAS_string & ioArgument4,
+void routine_declareLLVMTypes (const class GALGAS_userLLVMTypeDefinitionListIR constinArgument0,
+                               class GALGAS_string & ioArgument1,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

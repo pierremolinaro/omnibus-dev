@@ -189,7 +189,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
   #---------- Enter static array assignment function
     ioRoutineListIR += !@dynamicArrayTypeAssignFunctionIR.new {
-      !["assign." + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
+      ![assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
       !isRequired:false
       !warnsIfUnused:false
     }
@@ -314,7 +314,7 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
   let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
-  let assignRoutineLLVMName = "assign." + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
+  let assignRoutineLLVMName = assignmentPrefix () + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
   ioInvokedRoutineSet += !assignRoutineLLVMName
 }
 
@@ -346,7 +346,7 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ioLLVMcode += "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
-  let assignRoutineLLVMName = "assign." + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
+  let assignRoutineLLVMName = assignmentPrefix () + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
   ioLLVMcode += "  call void @" + [assignRoutineLLVMName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"

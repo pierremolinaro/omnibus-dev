@@ -686,6 +686,15 @@ class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                             Function 'assignmentPrefix'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_assignmentPrefix (class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                            Function 'staticIntegerType'                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -704,14 +713,11 @@ class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Routine 'generateLLVMCodeForStaticArrayType'                                     *
+//                                         Function 'integerEnumAccessorName'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_generateLLVMCodeForStaticArrayType (class GALGAS_string & ioArgument0,
-                                                 class GALGAS_generationAdds & ioArgument1,
-                                                 const class GALGAS_PLMType constinArgument2,
-                                                 const class GALGAS_bigint constinArgument3,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_integerEnumAccessorName (const class GALGAS_uint & constinArgument0,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 

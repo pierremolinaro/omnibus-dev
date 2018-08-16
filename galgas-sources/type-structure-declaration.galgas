@@ -387,7 +387,7 @@ override method @structureDeclarationAST enterInContext
   }
 #---------- Enter structure assignment function
   ioRoutineListIR += !@structureTypeAssignFunctionIR.new {
-    !["assign." + mPLMTypeSpecificName + "." + mPLMTypeSpecificName nowhere]
+    ![assignmentPrefix () + mPLMTypeSpecificName + "." + mPLMTypeSpecificName nowhere]
     !isRequired:false
     !warnsIfUnused:false
     !structureType
@@ -521,30 +521,6 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
     between ioLLVMcode += ", "
   end
   ioLLVMcode += "}\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                   
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc generateLLVMcodeForStructure
-  ?!@string ioLLVMcode
-  ?!@generationAdds ioGenerationAdds
-  ?let @PLMType inStructureType
-  ?let @uint inPointerSize
-{
-  let llvmTypeName = [inStructureType llvmTypeName]
-  let llvmBaseTypeName = [[inStructureType llvmBaseTypeName] assemblerRepresentation]
-  if [inStructureType deinitNeeded] then
-    ioLLVMcode += llvmTitleComment (!"CODE FOR STRUCTURE TYPE " + inStructureType.plmTypeDescriptionName)
-    ioLLVMcode += "define internal void @deinit." + llvmBaseTypeName
-    ioLLVMcode += " (i" + inPointerSize + " %inPointer) nounwind {\n"
-    let arg = "ptr"
-    ioLLVMcode += "  " + llvmNameForLocalVariable (!arg) + " = inttoptr i" + inPointerSize + " %inPointer to " + llvmTypeName + "*\n"
-    [inStructureType generateRelease !arg !?ioLLVMcode !?ioGenerationAdds]
-    ioLLVMcode += "  ret void\n"
-    ioLLVMcode += "}\n\n"
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

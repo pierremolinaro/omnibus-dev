@@ -474,10 +474,7 @@ func linkForHTMLTypeMap ?let @string inTypeName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc declareLLVMTypes
-  ?let @unifiedTypeMap inTypeMap
   ?let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
-  ?let @uint inPointerSize
-  ?!@generationAdds ioGenerationAdds
   ?!@string ioLLVMcode
 {
 #--- Generate LLVM type definition (using forward type is allowed for pointers)
@@ -487,37 +484,6 @@ proc declareLLVMTypes
     [type generateLLVMType !?ioLLVMcode]
   end
   ioLLVMcode += "\n"
-#--- Generate LLVM type specific code
-  for (* type generate) in inTypeMap do
-    if generate then
-      switch type.kind
-      case void :
-      case boolean :
-      case enumeration (*) :
-      case integer (4*) :
-      case structure (*) :
-        generateLLVMcodeForStructure (
-          !?ioLLVMcode
-          !?ioGenerationAdds
-          !type
-          !inPointerSize
-        )
-      case syncTool :
-      case literalString : 
-      case staticInteger : 
-      case opaque (*) :
-      case staticArrayType (* arraySize) :
-        generateLLVMCodeForStaticArrayType (
-          !?ioLLVMcode
-          !?ioGenerationAdds
-          !type
-          !arraySize
-        )
-      case dynamicArrayType (*) :
-      case function (3*) :
-      end
-    end
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

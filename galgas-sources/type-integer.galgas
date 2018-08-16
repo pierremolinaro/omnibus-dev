@@ -248,7 +248,7 @@ override method @integerDeclarationAST enterInContext
   )
 #---------- Enter integer assignment function
   ioRoutineListIR += !@integerTypeAssignFunctionIR.new {
-    !["assign." + integerTypeName + "." + integerTypeName nowhere]
+    ![assignmentPrefix () + integerTypeName + "." + integerTypeName nowhere]
     !isRequired:false
     !warnsIfUnused:false
     !llvmTypeName

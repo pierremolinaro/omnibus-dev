@@ -7,11 +7,11 @@ let largeConstant = 123_456_789_123_456_789_123_456_789_123_456_789
 
 typealias $largeInt = $uint128
 
-func getLargeConstant @exported () -> $largeInt {
+func getLargeConstant () -> $largeInt {
   result = largeConstant
 }
 
-func getLargeAddition @exported (? inA $largeInt ?inB $largeInt) -> $largeInt {
+func getLargeAddition (? inA $largeInt ?inB $largeInt) -> $largeInt {
   result = inA + inB
 }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

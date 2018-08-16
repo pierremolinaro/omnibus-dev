@@ -100,7 +100,6 @@ proc codeGeneration
   ?outputFile:let @string inSourceFileName
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
-  ?typeMap:let @unifiedTypeMap inTypeMap
   ?userDefinedTypes:let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?target:let @lstring inTargetName
   ?panicCodeType:let @PLMType inPanicCodeType
@@ -130,7 +129,6 @@ proc codeGeneration
     !currentDir:inCurrentDirectory
     !productDir:productDirectory
     !intermediateCode:inIntermediateCodeStruct
-    !typeMap:inTypeMap
     !userDefinedTypes: inUserLLVMTypeDefinitionListIR
     !target:inTargetName
     !panicCodeType:inPanicCodeType
@@ -174,7 +172,6 @@ private proc generateCodeFiles
   ?currentDir:let @string inCurrentDirectory
   ?productDir:let @string inProductDirectory
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
-  ?typeMap:let @unifiedTypeMap inTypeMap
   ?userDefinedTypes:let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?target:let @lstring inTargetName
   ?panicCodeType:let @PLMType inPanicCodeType
@@ -228,7 +225,7 @@ private proc generateCodeFiles
   llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   llvmCode += "\n"
 #----------------------------------------- Type declarations
-  declareLLVMTypes (!inTypeMap !inUserLLVMTypeDefinitionListIR !inTargetParameters.mPointerSize !?generationAdds !?llvmCode)
+  declareLLVMTypes (!inUserLLVMTypeDefinitionListIR !?llvmCode)
 #----------------------------------------- Global Variables
   llvmCode += llvmTitleComment (!"Global variables")
   for (llvmName expression alignment) in inGlobalVariableIRList do

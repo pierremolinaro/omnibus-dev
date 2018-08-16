@@ -177,7 +177,7 @@ override method @enumerationDeclarationAST enterInContext
   }
 #---------- Enter boolean assignment function
   ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-    !["assign." + mEnumerationName + "." + mEnumerationName nowhere]
+    ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
     !isRequired:false
     !warnsIfUnused:false
     ![enumerationType llvmTypeName]

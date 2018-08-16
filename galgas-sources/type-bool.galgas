@@ -135,7 +135,7 @@ override method @booleanDeclarationAST enterInContext
   ]
 #---------- Enter boolean assignment function
   ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-    !["assign." + boolTypeName () + "." + boolTypeName () nowhere]
+    ![assignmentPrefix () + boolTypeName () + "." + boolTypeName () nowhere]
     !isRequired:false
     !warnsIfUnused:false
     !"i1"

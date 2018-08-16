@@ -60,88 +60,18 @@ C_galgas_function_descriptor functionDescriptor_linkForHTMLTypeMap ("linkForHTML
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTypeMap,
-                               const GALGAS_userLLVMTypeDefinitionListIR constinArgument_inUserLLVMTypeDefinitionListIR,
-                               const GALGAS_uint constinArgument_inPointerSize,
-                               GALGAS_generationAdds & ioArgument_ioGenerationAdds,
+void routine_declareLLVMTypes (const GALGAS_userLLVMTypeDefinitionListIR constinArgument_inUserLLVMTypeDefinitionListIR,
                                GALGAS_string & ioArgument_ioLLVMcode,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("User Defined Types"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 484)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 485)) ;
-  cEnumerator_userLLVMTypeDefinitionListIR enumerator_18730 (constinArgument_inUserLLVMTypeDefinitionListIR, kENUMERATION_UP) ;
-  while (enumerator_18730.hasCurrentObject ()) {
-    callExtensionMethod_generateLLVMType ((const cPtr_userLLVMTypeDefinitionIR *) enumerator_18730.current_mType (HERE).ptr (), ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("types.galgas", 487)) ;
-    enumerator_18730.gotoNextObject () ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("User Defined Types"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 481)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 481)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 482)) ;
+  cEnumerator_userLLVMTypeDefinitionListIR enumerator_18633 (constinArgument_inUserLLVMTypeDefinitionListIR, kENUMERATION_UP) ;
+  while (enumerator_18633.hasCurrentObject ()) {
+    callExtensionMethod_generateLLVMType ((const cPtr_userLLVMTypeDefinitionIR *) enumerator_18633.current_mType (HERE).ptr (), ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("types.galgas", 484)) ;
+    enumerator_18633.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 489)) ;
-  cEnumerator_unifiedTypeMap enumerator_18876 (constinArgument_inTypeMap, kENUMERATION_UP) ;
-  while (enumerator_18876.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = enumerator_18876.current_generate (HERE).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      switch (enumerator_18876.current_type (HERE).getter_kind (HERE).enumValue ()) {
-      case GALGAS_typeKind::kNotBuilt:
-        break ;
-      case GALGAS_typeKind::kEnum_void:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_boolean:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_enumeration:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_integer:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_structure:
-        {
-          {
-          routine_generateLLVMcodeForStructure (ioArgument_ioLLVMcode, ioArgument_ioGenerationAdds, enumerator_18876.current_type (HERE), constinArgument_inPointerSize, inCompiler  COMMA_SOURCE_FILE ("types.galgas", 499)) ;
-          }
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_syncTool:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_literalString:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_staticInteger:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_opaque:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_staticArrayType:
-        {
-          const cEnumAssociatedValues_typeKind_staticArrayType * extractPtr_19475 = (const cEnumAssociatedValues_typeKind_staticArrayType *) (enumerator_18876.current_type (HERE).getter_kind (HERE).unsafePointer ()) ;
-          const GALGAS_bigint extractedValue_arraySize = extractPtr_19475->mAssociatedValue1 ;
-          {
-          routine_generateLLVMCodeForStaticArrayType (ioArgument_ioLLVMcode, ioArgument_ioGenerationAdds, enumerator_18876.current_type (HERE), extractedValue_arraySize, inCompiler  COMMA_SOURCE_FILE ("types.galgas", 510)) ;
-          }
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_dynamicArrayType:
-        {
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_function:
-        {
-        }
-        break ;
-      }
-    }
-    enumerator_18876.gotoNextObject () ;
-  }
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 486)) ;
 }
 
 
