@@ -6036,67 +6036,6 @@ GALGAS_sourceLocationIR GALGAS_sourceLocationIR::extractObject (const GALGAS_obj
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static TC_UniqueArray <extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities> gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) {
-  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities (void) {
-  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.free () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_abstractInstructionIR_enterAccessibleEntities (NULL,
-                                                                          freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                  GALGAS_stringset & io_ioInvokedRoutineSet,
-                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities f = NULL ;
-    if (classIndex < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
-      f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-      while ((NULL == f) && (NULL != p)) {
-        if (p->mSlotID < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
-          f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
-        }
-        p = p->mSuperclassDescriptor ;
-      }
-      gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, io_ioInvokedRoutineSet, io_ioMaxBranchOfOnInstructions, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                            Extension method '@instructionListIR enterAccessibleEntities'                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6107,10 +6046,10 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_instructionListIR inO
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_1012 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_1012.hasCurrentObject ()) {
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1012.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 15)) ;
-    enumerator_1012.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_753 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_753.hasCurrentObject ()) {
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_753.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 9)) ;
+    enumerator_753.gotoNextObject () ;
   }
 }
 
@@ -6608,6 +6547,80 @@ void callExtensionMethod_llvmInstructionCode (const cPtr_abstractInstructionIR *
     }
   }
 }
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                          Extension method '@abstractInstructionIR enterAccessibleEntities'                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static TC_UniqueArray <extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities> gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
+                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) {
+  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                  GALGAS_stringset & io_ioInvokedRoutineSet,
+                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities f = NULL ;
+    if (classIndex < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
+      f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
+           f = gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioInvokedRoutineSet, io_ioMaxBranchOfOnInstructions, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_abstractInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
+                                                                           GALGAS_stringset & /* ioArgument_ioInvokedRoutineSet */,
+                                                                           GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
+                                                                           C_Compiler * /* inCompiler */
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+}
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_abstractInstructionIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_abstractInstructionIR.mSlotID,
+                                                extensionMethod_abstractInstructionIR_enterAccessibleEntities) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities (void) {
+  gExtensionMethodTable_abstractInstructionIR_enterAccessibleEntities.free () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_abstractInstructionIR_enterAccessibleEntities (defineExtensionMethod_abstractInstructionIR_enterAccessibleEntities,
+                                                                          freeExtensionMethod_abstractInstructionIR_enterAccessibleEntities) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Object comparison                                                                                                 *

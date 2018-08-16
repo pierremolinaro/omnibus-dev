@@ -4,12 +4,6 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
-  ?!@uint ioMaxBranchOfOnInstructions
-
-#·······················································································································
-
 method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet ?!@uint ioMaxBranchOfOnInstructions {
   for (instruction) in self do
     [instruction enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]

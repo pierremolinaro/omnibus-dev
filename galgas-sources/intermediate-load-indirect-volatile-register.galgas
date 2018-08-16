@@ -29,11 +29,3 @@ override method @loadIndirectVolatileIR llvmInstructionCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @loadIndirectVolatileIR enterAccessibleEntities 
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

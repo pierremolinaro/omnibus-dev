@@ -35,11 +35,3 @@ override method @logicalRightShiftIR llvmInstructionCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @logicalRightShiftIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

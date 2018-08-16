@@ -143,14 +143,6 @@ class @truncateInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncateInstructionIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @truncateInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext

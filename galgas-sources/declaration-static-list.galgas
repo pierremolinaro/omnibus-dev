@@ -599,14 +599,6 @@ class @staticListIndirectRoutineIR : @abstractRoutineIR {
 
 #·······················································································································
 
-override method @staticListIndirectRoutineIR enterAccessibleEntities
-   ?!@stringset unused ioInvokedRoutineSet
-   ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#·······················································································································
-
 override method @staticListIndirectRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext

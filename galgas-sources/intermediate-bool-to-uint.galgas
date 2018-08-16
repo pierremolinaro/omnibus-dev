@@ -26,11 +26,3 @@ override method @boolToUIntIR llvmInstructionCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @boolToUIntIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

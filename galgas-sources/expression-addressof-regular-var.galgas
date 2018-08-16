@@ -113,12 +113,4 @@ override method @addressofInstructionIR llvmInstructionCode
              + " to " + [mTarget llvmTypeName] + " ; addressof\n"
 }
 
-#·······················································································································
-
-override method @addressofInstructionIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -32,11 +32,3 @@ override method @getUniversalArrayElementReferenceIR llvmInstructionCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @getUniversalArrayElementReferenceIR enterAccessibleEntities 
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

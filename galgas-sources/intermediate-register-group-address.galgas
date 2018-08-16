@@ -34,11 +34,3 @@ override method @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @enterRegisterGroupSubscriptedAddressIR enterAccessibleEntities 
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

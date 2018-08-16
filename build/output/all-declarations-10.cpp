@@ -9,78 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Function 'routineMangledNameFromAST'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring function_routineMangledNameFromAST (const GALGAS_string & constinArgument_inReceiverTypeName,
-                                                   const GALGAS_lstring & constinArgument_inRoutineName,
-                                                   const GALGAS_routineFormalArgumentListAST & constinArgument_inFormalArgumentList,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_s_583 = GALGAS_string ("func.") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverTypeName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    var_s_583.plusAssign_operation(constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 18)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 18)) ;
-  }
-  var_s_583.plusAssign_operation(constinArgument_inRoutineName.getter_string (HERE), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 20)) ;
-  var_s_583.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 21)) ;
-  cEnumerator_routineFormalArgumentListAST enumerator_799 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
-  while (enumerator_799.hasCurrentObject ()) {
-    var_s_583.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_799.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 23)).add_operation (enumerator_799.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 23)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 23)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 23)) ;
-    enumerator_799.gotoNextObject () ;
-  }
-  var_s_583.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 25)) ;
-  result_result = GALGAS_lstring::constructor_new (var_s_583, constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("context-routines.galgas", 26)) ;
-//---
-  return result_result ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//  Function introspection                                                                                             *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static const C_galgas_type_descriptor * functionArgs_routineMangledNameFromAST [4] = {
-  & kTypeDescriptor_GALGAS_string,
-  & kTypeDescriptor_GALGAS_lstring,
-  & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
-  NULL
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static GALGAS_object functionWithGenericHeader_routineMangledNameFromAST (C_Compiler * inCompiler,
-                                                                          const cObjectArray & inEffectiveParameterArray,
-                                                                          const GALGAS_location & /* inErrorLocation */
-                                                                          COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                 inCompiler
-                                                                 COMMA_THERE) ;
-  const GALGAS_routineFormalArgumentListAST operand2 = GALGAS_routineFormalArgumentListAST::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
-                                                                                                           inCompiler
-                                                                                                           COMMA_THERE) ;
-  return function_routineMangledNameFromAST (operand0,
-                                             operand1,
-                                             operand2,
-                                             inCompiler
-                                             COMMA_THERE).getter_object (THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_galgas_function_descriptor functionDescriptor_routineMangledNameFromAST ("routineMangledNameFromAST",
-                                                                           functionWithGenericHeader_routineMangledNameFromAST,
-                                                                           & kTypeDescriptor_GALGAS_lstring,
-                                                                           3,
-                                                                           functionArgs_routineMangledNameFromAST) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3689,30 +3617,6 @@ C_PrologueEpilogue gMethod_truncateExpressionAST_analyzeExpression (defineExtens
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                    Overriding extension method '@truncateInstructionIR enterAccessibleEntities'                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_truncateInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
-                                                                           GALGAS_stringset & /* ioArgument_ioInvokedRoutineSet */,
-                                                                           GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
-                                                                           C_Compiler * /* inCompiler */
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_truncateInstructionIR_enterAccessibleEntities (void) {
-  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_truncateInstructionIR.mSlotID,
-                                                extensionMethod_truncateInstructionIR_enterAccessibleEntities) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_truncateInstructionIR_enterAccessibleEntities (defineExtensionMethod_truncateInstructionIR_enterAccessibleEntities, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                      Overriding extension method '@truncateInstructionIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3725,8 +3629,8 @@ static void extensionMethod_truncateInstructionIR_llvmInstructionCode (const cPt
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_truncateInstructionIR * object = (const cPtr_truncateInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_truncateInstructionIR) ;
-  GALGAS_string var_operandType_6806 = extensionGetter_llvmTypeName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 159)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)).add_operation (GALGAS_string (" = trunc "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)).add_operation (var_operandType_6806, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)).add_operation (extensionGetter_llvmName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 161)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 161)), inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 160)) ;
+  GALGAS_string var_operandType_6529 = extensionGetter_llvmTypeName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 151)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (GALGAS_string (" = trunc "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (var_operandType_6529, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (extensionGetter_llvmName (object->mProperty_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)).add_operation (extensionGetter_llvmTypeName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 152)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3962,30 +3866,6 @@ C_PrologueEpilogue gMethod_addressofInstructionIR_llvmInstructionCode (defineExt
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                    Overriding extension method '@addressofInstructionIR enterAccessibleEntities'                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_addressofInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
-                                                                            GALGAS_stringset & /* ioArgument_ioInvokedRoutineSet */,
-                                                                            GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
-                                                                            C_Compiler * /* inCompiler */
-                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_addressofInstructionIR_enterAccessibleEntities (void) {
-  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_addressofInstructionIR.mSlotID,
-                                                extensionMethod_addressofInstructionIR_enterAccessibleEntities) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_addressofInstructionIR_enterAccessibleEntities (defineExtensionMethod_addressofInstructionIR_enterAccessibleEntities, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //               Overriding extension method '@sizeofExpressionAST addDependenceEdgeForStaticExpression'               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4184,30 +4064,6 @@ C_PrologueEpilogue gMethod_sizeofTypeAST_analyzeExpression (defineExtensionMetho
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                     Overriding extension method '@sizeofInstructionIR enterAccessibleEntities'                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_sizeofInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
-                                                                         GALGAS_stringset & /* ioArgument_ioInvokedRoutineSet */,
-                                                                         GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
-                                                                         C_Compiler * /* inCompiler */
-                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_sizeofInstructionIR_enterAccessibleEntities (void) {
-  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_sizeofInstructionIR.mSlotID,
-                                                extensionMethod_sizeofInstructionIR_enterAccessibleEntities) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_sizeofInstructionIR_enterAccessibleEntities (defineExtensionMethod_sizeofInstructionIR_enterAccessibleEntities, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                       Overriding extension method '@sizeofInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4220,9 +4076,9 @@ static void extensionMethod_sizeofInstructionIR_llvmInstructionCode (const cPtr_
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_sizeofInstructionIR * object = (const cPtr_sizeofInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_sizeofInstructionIR) ;
-  GALGAS_string var_typeName_7677 = extensionGetter_llvmTypeName (object->mProperty_mSourceType, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 174)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)).add_operation (GALGAS_string (".asPtr = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)).add_operation (var_typeName_7677, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)).add_operation (var_typeName_7677, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)).add_operation (GALGAS_string ("* null, i32 1\n"), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)), inCompiler  COMMA_SOURCE_FILE ("expression-sizeof.galgas", 175)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)).add_operation (GALGAS_string (" = ptrtoint "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)).add_operation (var_typeName_7677, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)).add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)).add_operation (GALGAS_string (".asPtr to i32\n"), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)), inCompiler  COMMA_SOURCE_FILE ("expression-sizeof.galgas", 176)) ;
+  GALGAS_string var_typeName_7402 = extensionGetter_llvmTypeName (object->mProperty_mSourceType, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 166)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)).add_operation (GALGAS_string (".asPtr = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)).add_operation (var_typeName_7402, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)).add_operation (var_typeName_7402, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)).add_operation (GALGAS_string ("* null, i32 1\n"), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)), inCompiler  COMMA_SOURCE_FILE ("expression-sizeof.galgas", 167)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)).add_operation (GALGAS_string (" = ptrtoint "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)).add_operation (var_typeName_7402, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)).add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)).add_operation (GALGAS_string (".asPtr to i32\n"), inCompiler COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)), inCompiler  COMMA_SOURCE_FILE ("expression-sizeof.galgas", 168)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8212,30 +8068,6 @@ C_PrologueEpilogue gMethod_bitbandInstructionIR_llvmInstructionCode (defineExten
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                     Overriding extension method '@bitbandInstructionIR enterAccessibleEntities'                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_bitbandInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
-                                                                          GALGAS_stringset & /* ioArgument_ioInvokedRoutineSet */,
-                                                                          GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
-                                                                          C_Compiler * /* inCompiler */
-                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_bitbandInstructionIR_enterAccessibleEntities (void) {
-  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_bitbandInstructionIR.mSlotID,
-                                                extensionMethod_bitbandInstructionIR_enterAccessibleEntities) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_bitbandInstructionIR_enterAccessibleEntities (defineExtensionMethod_bitbandInstructionIR_enterAccessibleEntities, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //        Overriding extension method '@varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8807,4 +8639,297 @@ static void defineExtensionMethod_ifInstructionAST_instructionSemanticAnalysis (
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_PrologueEpilogue gMethod_ifInstructionAST_instructionSemanticAnalysis (defineExtensionMethod_ifInstructionAST_instructionSemanticAnalysis, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                         Overriding extension method '@ifInstructionIR llvmInstructionCode'                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_ifInstructionIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                 GALGAS_string & ioArgument_ioLLVMcode,
+                                                                 const GALGAS_generationContext constinArgument_inGenerationContext,
+                                                                 GALGAS_generationAdds & ioArgument_ioGenerationAdds,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_ifInstructionIR * object = (const cPtr_ifInstructionIR *) inObject ;
+  macroValidSharedObject (object, cPtr_ifInstructionIR) ;
+  GALGAS_string var_labelTrue_7781 = GALGAS_string ("if.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("instruction-if.galgas", 193)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)).add_operation (GALGAS_string (".true"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)) ;
+  GALGAS_string var_labelFalse_7848 = GALGAS_string ("if.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("instruction-if.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)).add_operation (GALGAS_string (".false"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)) ;
+  GALGAS_string var_labelEnd_7914 = GALGAS_string ("if.").add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("instruction-if.galgas", 195)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)).add_operation (GALGAS_string (".end"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)) ;
+  ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 196)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mProperty_mTestVariable, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)).add_operation (GALGAS_string (", label %"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)).add_operation (var_labelTrue_7781, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)).add_operation (GALGAS_string (", label %"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)).add_operation (var_labelFalse_7848, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)).add_operation (GALGAS_string ("\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 197)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 197)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelTrue_7781.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 199)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 199)) ;
+  extensionMethod_instructionListLLVMCode (object->mProperty_mThenInstructionGenerationList, ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 200)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %").add_operation (var_labelEnd_7914, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 201)).add_operation (GALGAS_string ("\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 201)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 201)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelFalse_7848.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 203)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 203)) ;
+  extensionMethod_instructionListLLVMCode (object->mProperty_mElseInstructionGenerationList, ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 204)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %").add_operation (var_labelEnd_7914, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 205)).add_operation (GALGAS_string ("\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 205)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 205)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelEnd_7914.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 207)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 207)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_ifInstructionIR_llvmInstructionCode (void) {
+  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_ifInstructionIR.mSlotID,
+                                            extensionMethod_ifInstructionIR_llvmInstructionCode) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_ifInstructionIR_llvmInstructionCode (defineExtensionMethod_ifInstructionIR_llvmInstructionCode, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Overriding extension method '@ifInstructionIR enterAccessibleEntities'                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_ifInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                     GALGAS_stringset & ioArgument_ioInvokedRoutineSet,
+                                                                     GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_ifInstructionIR * object = (const cPtr_ifInstructionIR *) inObject ;
+  macroValidSharedObject (object, cPtr_ifInstructionIR) ;
+  extensionMethod_enterAccessibleEntities (object->mProperty_mThenInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 216)) ;
+  extensionMethod_enterAccessibleEntities (object->mProperty_mElseInstructionGenerationList, ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 217)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_ifInstructionIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_ifInstructionIR.mSlotID,
+                                                extensionMethod_ifInstructionIR_enterAccessibleEntities) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_ifInstructionIR_enterAccessibleEntities (defineExtensionMethod_ifInstructionIR_enterAccessibleEntities, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//               Overriding extension method '@syncInstructionAST noteInstructionTypesInPrecedenceGraph'               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_syncInstructionAST_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                                                      GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_syncInstructionAST * object = (const cPtr_syncInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_syncInstructionAST) ;
+  cEnumerator_syncInstructionBranchListAST enumerator_5027 (object->mProperty_mBranchList, kENUMERATION_UP) ;
+  while (enumerator_5027.hasCurrentObject ()) {
+    extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_5027.current_mInstructionList (HERE), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 142)) ;
+    enumerator_5027.gotoNextObject () ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_syncInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_syncInstructionAST.mSlotID,
+                                                              extensionMethod_syncInstructionAST_noteInstructionTypesInPrecedenceGraph) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_syncInstructionAST_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_syncInstructionAST_noteInstructionTypesInPrecedenceGraph, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                    Overriding extension method '@syncInstructionAST instructionSemanticAnalysis'                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_syncInstructionAST_instructionSemanticAnalysis (const cPtr_instructionAST * inObject,
+                                                                            const GALGAS_PLMType constinArgument_inSelfType,
+                                                                            const GALGAS_routineAttributes constinArgument_inRoutineAttributes,
+                                                                            const GALGAS_semanticContext constinArgument_inContext,
+                                                                            const GALGAS_mode constinArgument_inMode,
+                                                                            GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                            GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
+                                                                            GALGAS_universalValuedObjectMap & ioArgument_ioUniversalMap,
+                                                                            GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                            GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_syncInstructionAST * object = (const cPtr_syncInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_syncInstructionAST) ;
+  GALGAS_guardedCommandIRList var_guardedCommandIRList_6052 = GALGAS_guardedCommandIRList::constructor_emptyList (SOURCE_FILE ("instruction-sync.galgas", 162)) ;
+  cEnumerator_syncInstructionBranchListAST enumerator_6123 (object->mProperty_mBranchList, kENUMERATION_UP) ;
+  while (enumerator_6123.hasCurrentObject ()) {
+    switch (enumerator_6123.current_mGuardedCommand (HERE).enumValue ()) {
+    case GALGAS_guardedCommandAST::kNotBuilt:
+      break ;
+    case GALGAS_guardedCommandAST::kEnum_boolean:
+      {
+        const cEnumAssociatedValues_guardedCommandAST_boolean * extractPtr_7295 = (const cEnumAssociatedValues_guardedCommandAST_boolean *) (enumerator_6123.current_mGuardedCommand (HERE).unsafePointer ()) ;
+        const GALGAS_bool extractedValue_isContinue = extractPtr_7295->mAssociatedValue0 ;
+        const GALGAS_expressionAST extractedValue_expression = extractPtr_7295->mAssociatedValue1 ;
+        const GALGAS_location extractedValue_endOfExpression = extractPtr_7295->mAssociatedValue2 ;
+        GALGAS_instructionListIR var_guardInstructionGenerationList_6267 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-sync.galgas", 166)) ;
+        GALGAS_objectIR var_sourceOperand_6722 ;
+        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes.operator_or (GALGAS_routineAttributes::constructor_guard (SOURCE_FILE ("instruction-sync.galgas", 169)) COMMA_SOURCE_FILE ("instruction-sync.galgas", 169)), function_voidType (inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 170)), constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_guardInstructionGenerationList_6267, var_sourceOperand_6722, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 167)) ;
+        const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, extensionGetter_plmTypeDescriptionName (var_sourceOperand_6722, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 180)).objectCompare (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 180)))).boolEnum () ;
+        if (kBoolTrue == test_0) {
+          TC_Array <C_FixItDescription> fixItArray1 ;
+          inCompiler->emitSemanticError (extractedValue_endOfExpression, GALGAS_string ("guarded expression should be boolean"), fixItArray1  COMMA_SOURCE_FILE ("instruction-sync.galgas", 181)) ;
+        }else if (kBoolFalse == test_0) {
+          const enumGalgasBool test_2 = extensionGetter_isStatic (var_sourceOperand_6722, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 182)).boolEnum () ;
+          if (kBoolTrue == test_2) {
+            TC_Array <C_FixItDescription> fixItArray3 ;
+            inCompiler->emitSemanticWarning (extractedValue_endOfExpression, GALGAS_string ("guarded expression is static"), fixItArray3  COMMA_SOURCE_FILE ("instruction-sync.galgas", 183)) ;
+          }
+        }
+        {
+        extensionSetter_appendLoadWhenReference (var_guardInstructionGenerationList_6267, ioArgument_ioTemporaries, var_sourceOperand_6722, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 185)) ;
+        }
+        var_guardedCommandIRList_6052.addAssign_operation (GALGAS_guardedCommandIR::constructor_booleanGuard (extractedValue_isContinue, var_guardInstructionGenerationList_6267, var_sourceOperand_6722  COMMA_SOURCE_FILE ("instruction-sync.galgas", 189))  COMMA_SOURCE_FILE ("instruction-sync.galgas", 189)) ;
+      }
+      break ;
+    case GALGAS_guardedCommandAST::kEnum_boolAndSync:
+      {
+        const cEnumAssociatedValues_guardedCommandAST_boolAndSync * extractPtr_12302 = (const cEnumAssociatedValues_guardedCommandAST_boolAndSync *) (enumerator_6123.current_mGuardedCommand (HERE).unsafePointer ()) ;
+        const GALGAS_bool extractedValue_isContinue = extractPtr_12302->mAssociatedValue0 ;
+        const GALGAS_expressionAST extractedValue_exp = extractPtr_12302->mAssociatedValue1 ;
+        const GALGAS_bool extractedValue_warnsOnStaticExpression = extractPtr_12302->mAssociatedValue2 ;
+        const GALGAS_location extractedValue_endOfExp = extractPtr_12302->mAssociatedValue3 ;
+        const GALGAS_lbool extractedValue_usesSelf = extractPtr_12302->mAssociatedValue4 ;
+        const GALGAS_lstringlist extractedValue_nameList = extractPtr_12302->mAssociatedValue5 ;
+        const GALGAS_effectiveArgumentListAST extractedValue_parameterList = extractPtr_12302->mAssociatedValue6 ;
+        GALGAS_instructionListIR var_boolExpInstructionGenerationList_7458 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-sync.galgas", 195)) ;
+        GALGAS_objectIR var_boolExpressionResult_7934 ;
+        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_exp.ptr (), constinArgument_inSelfType, GALGAS_routineAttributes::constructor_guard (SOURCE_FILE ("instruction-sync.galgas", 199)), function_voidType (inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 200)), constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_boolExpInstructionGenerationList_7458, var_boolExpressionResult_7934, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 197)) ;
+        const enumGalgasBool test_4 = GALGAS_bool (kIsNotEqual, extensionGetter_plmTypeDescriptionName (var_boolExpressionResult_7934, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 210)).objectCompare (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 210)))).boolEnum () ;
+        if (kBoolTrue == test_4) {
+          TC_Array <C_FixItDescription> fixItArray5 ;
+          inCompiler->emitSemanticError (extractedValue_endOfExp, GALGAS_string ("guarded expression should be boolean"), fixItArray5  COMMA_SOURCE_FILE ("instruction-sync.galgas", 211)) ;
+        }else if (kBoolFalse == test_4) {
+          GALGAS_bool test_6 = extractedValue_warnsOnStaticExpression ;
+          if (kBoolTrue == test_6.boolEnum ()) {
+            test_6 = extensionGetter_isStatic (var_boolExpressionResult_7934, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 212)) ;
+          }
+          const enumGalgasBool test_7 = test_6.boolEnum () ;
+          if (kBoolTrue == test_7) {
+            TC_Array <C_FixItDescription> fixItArray8 ;
+            inCompiler->emitSemanticWarning (extractedValue_endOfExp, GALGAS_string ("guarded expression is static"), fixItArray8  COMMA_SOURCE_FILE ("instruction-sync.galgas", 213)) ;
+          }
+        }
+        {
+        extensionSetter_appendLoadWhenReference (var_boolExpInstructionGenerationList_7458, ioArgument_ioTemporaries, var_boolExpressionResult_7934, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 215)) ;
+        }
+        GALGAS_instructionListIR var_guardInstructionGenerationList_8447 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-sync.galgas", 220)) ;
+        GALGAS_procCallEffectiveParameterListIR var_guardEffectiveParameterListIR_8522 ;
+        GALGAS_lstring var_guardMangledName_8554 ;
+        const enumGalgasBool test_9 = extractedValue_usesSelf.getter_bool (HERE).boolEnum () ;
+        if (kBoolTrue == test_9) {
+          const enumGalgasBool test_10 = constinArgument_inSelfType.getter_kind (HERE).getter_isVoid (SOURCE_FILE ("instruction-sync.galgas", 224)).boolEnum () ;
+          if (kBoolTrue == test_10) {
+            TC_Array <C_FixItDescription> fixItArray11 ;
+            inCompiler->emitSemanticError (extractedValue_usesSelf.getter_location (SOURCE_FILE ("instruction-sync.galgas", 225)), GALGAS_string ("'self' is not available in this context"), fixItArray11  COMMA_SOURCE_FILE ("instruction-sync.galgas", 225)) ;
+            var_guardEffectiveParameterListIR_8522.drop () ; // Release error dropped variable
+            var_guardMangledName_8554.drop () ; // Release error dropped variable
+          }else if (kBoolFalse == test_10) {
+            GALGAS_lstringlist var_propertyList_8802 = extractedValue_nameList ;
+            GALGAS_lstring var_guardName_8862 ;
+            {
+            var_propertyList_8802.setter_popLast (var_guardName_8862, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 228)) ;
+            }
+            GALGAS_objectIR var_currentObject_8897 = GALGAS_objectIR::constructor_reference (constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 229))  COMMA_SOURCE_FILE ("instruction-sync.galgas", 229)) ;
+            cEnumerator_lstringlist enumerator_9003 (var_propertyList_8802, kENUMERATION_UP) ;
+            while (enumerator_9003.hasCurrentObject ()) {
+              {
+              routine_handlePropertyAccessInExpression (var_currentObject_8897, enumerator_9003.current_mValue (HERE), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-sync.galgas", 231)) ;
+              }
+              enumerator_9003.gotoNextObject () ;
+            }
+            {
+            routine_analyzeGuardCall (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_currentObject_8897, var_guardName_8862, extractedValue_parameterList, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_guardInstructionGenerationList_8447, var_guardEffectiveParameterListIR_8522, var_guardMangledName_8554, inCompiler  COMMA_SOURCE_FILE ("instruction-sync.galgas", 238)) ;
+            }
+          }
+        }else if (kBoolFalse == test_9) {
+          const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, extractedValue_nameList.getter_length (SOURCE_FILE ("instruction-sync.galgas", 255)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+          if (kBoolTrue == test_12) {
+            TC_Array <C_FixItDescription> fixItArray13 ;
+            inCompiler->emitSemanticError (extractedValue_nameList.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 256)).getter_location (SOURCE_FILE ("instruction-sync.galgas", 256)), GALGAS_string ("Standalone guard are not handled"), fixItArray13  COMMA_SOURCE_FILE ("instruction-sync.galgas", 256)) ;
+            var_guardMangledName_8554.drop () ; // Release error dropped variable
+            var_guardEffectiveParameterListIR_8522.drop () ; // Release error dropped variable
+          }else if (kBoolFalse == test_12) {
+            GALGAS_lstringlist var_propertyList_10173 = extractedValue_nameList ;
+            GALGAS_lstring var_globalReceiverName_10241 ;
+            {
+            var_propertyList_10173.setter_popFirst (var_globalReceiverName_10241, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 261)) ;
+            }
+            GALGAS_lstring var_guardName_10289 ;
+            {
+            var_propertyList_10173.setter_popLast (var_guardName_10289, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 262)) ;
+            }
+            GALGAS_objectIR var_currentObjectIR_10459 ;
+            extensionMethod_searchValuedObject (ioArgument_ioUniversalMap, var_globalReceiverName_10241, constinArgument_inMode, ioArgument_ioTemporaries.getter_mInitializedDriverSet (HERE), var_currentObjectIR_10459, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 263)) ;
+            cEnumerator_lstringlist enumerator_10512 (var_propertyList_10173, kENUMERATION_UP) ;
+            while (enumerator_10512.hasCurrentObject ()) {
+              {
+              routine_handlePropertyAccessInExpression (var_currentObjectIR_10459, enumerator_10512.current_mValue (HERE), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-sync.galgas", 270)) ;
+              }
+              enumerator_10512.gotoNextObject () ;
+            }
+            {
+            routine_analyzeGuardCall (constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_currentObjectIR_10459, var_guardName_10289, extractedValue_parameterList, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_guardInstructionGenerationList_8447, var_guardEffectiveParameterListIR_8522, var_guardMangledName_8554, inCompiler  COMMA_SOURCE_FILE ("instruction-sync.galgas", 277)) ;
+            }
+          }
+        }
+        const enumGalgasBool test_14 = var_boolExpressionResult_7934.getter_isLiteralInteger (SOURCE_FILE ("instruction-sync.galgas", 294)).boolEnum () ;
+        if (kBoolTrue == test_14) {
+          GALGAS_bigint var_value_11464 ;
+          GALGAS_PLMType joker_11437_1 ; // Joker input parameter
+          var_boolExpressionResult_7934.method_literalInteger (joker_11437_1, var_value_11464, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 295)) ;
+          const enumGalgasBool test_15 = GALGAS_bool (kIsEqual, var_value_11464.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-sync.galgas", 296)))).boolEnum () ;
+          if (kBoolTrue == test_15) {
+            var_guardedCommandIRList_6052.addAssign_operation (GALGAS_guardedCommandIR::constructor_sync (extractedValue_isContinue, var_guardMangledName_8554.getter_string (HERE), var_guardInstructionGenerationList_8447, var_guardEffectiveParameterListIR_8522  COMMA_SOURCE_FILE ("instruction-sync.galgas", 297))  COMMA_SOURCE_FILE ("instruction-sync.galgas", 297)) ;
+          }else if (kBoolFalse == test_15) {
+            TC_Array <C_FixItDescription> fixItArray16 ;
+            inCompiler->emitSemanticError (var_guardMangledName_8554.getter_location (SOURCE_FILE ("instruction-sync.galgas", 304)), GALGAS_string ("false guard not handled yet"), fixItArray16  COMMA_SOURCE_FILE ("instruction-sync.galgas", 304)) ;
+          }
+        }else if (kBoolFalse == test_14) {
+          var_guardedCommandIRList_6052.addAssign_operation (GALGAS_guardedCommandIR::constructor_boolAndSync (extractedValue_isContinue, var_boolExpInstructionGenerationList_7458, var_boolExpressionResult_7934, var_guardMangledName_8554.getter_string (HERE), var_guardInstructionGenerationList_8447, var_guardEffectiveParameterListIR_8522  COMMA_SOURCE_FILE ("instruction-sync.galgas", 307))  COMMA_SOURCE_FILE ("instruction-sync.galgas", 307)) ;
+        }
+      }
+      break ;
+    }
+    enumerator_6123.gotoNextObject () ;
+  }
+  {
+  extensionSetter_openOverrideForSelectBlock (ioArgument_ioUniversalMap, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 319)) ;
+  }
+  GALGAS_syncInstructionBranchListIR var_syncInstructionBranchListIR_12463 = GALGAS_syncInstructionBranchListIR::constructor_emptyList (SOURCE_FILE ("instruction-sync.galgas", 320)) ;
+  cEnumerator_syncInstructionBranchListAST enumerator_12521 (object->mProperty_mBranchList, kENUMERATION_UP) ;
+  cEnumerator_guardedCommandIRList enumerator_12565 (var_guardedCommandIRList_6052, kENUMERATION_UP) ;
+  while (enumerator_12521.hasCurrentObject () && enumerator_12565.hasCurrentObject ()) {
+    GALGAS_instructionListIR var_branchInstructionGenerationList_12623 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-sync.galgas", 322)) ;
+    extensionMethod_analyzeBranchInstructionList (enumerator_12521.current_mInstructionList (HERE), constinArgument_inSelfType, constinArgument_inRoutineAttributes, enumerator_12521.current_mEndOfBranch (HERE), constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, var_branchInstructionGenerationList_12623, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 323)) ;
+    var_syncInstructionBranchListIR_12463.addAssign_operation (enumerator_12565.current_mGuardedCommand (HERE), var_branchInstructionGenerationList_12623  COMMA_SOURCE_FILE ("instruction-sync.galgas", 335)) ;
+    enumerator_12521.gotoNextObject () ;
+    enumerator_12565.gotoNextObject () ;
+  }
+  {
+  extensionSetter_closeOverride (ioArgument_ioUniversalMap, object->mProperty_mEndOf_5F_on_5F_instruction, inCompiler COMMA_SOURCE_FILE ("instruction-sync.galgas", 337)) ;
+  }
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_syncInstructionIR::constructor_new (object->mProperty_mInstructionLocation, var_syncInstructionBranchListIR_12463  COMMA_SOURCE_FILE ("instruction-sync.galgas", 339))  COMMA_SOURCE_FILE ("instruction-sync.galgas", 339)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_syncInstructionAST_instructionSemanticAnalysis (void) {
+  enterExtensionMethod_instructionSemanticAnalysis (kTypeDescriptor_GALGAS_syncInstructionAST.mSlotID,
+                                                    extensionMethod_syncInstructionAST_instructionSemanticAnalysis) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_syncInstructionAST_instructionSemanticAnalysis (defineExtensionMethod_syncInstructionAST_instructionSemanticAnalysis, NULL) ;
 

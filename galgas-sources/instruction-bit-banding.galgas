@@ -217,12 +217,4 @@ override method @bitbandInstructionIR llvmInstructionCode
   ioLLVMcode += "  store i32 %value." + idx + ", i32* %ptr." + idx + "\n"
 }
 
-#·······················································································································
-
-override method @bitbandInstructionIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

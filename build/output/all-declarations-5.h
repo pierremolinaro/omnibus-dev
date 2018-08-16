@@ -3163,7 +3163,19 @@ class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
+//                            Extension method '@instructionListIR enterAccessibleEntities'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
+                                              class GALGAS_stringset & io_ioInvokedRoutineSet,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                          Extension method '@abstractInstructionIR enterAccessibleEntities'                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3185,18 +3197,6 @@ void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractInstr
                                                   GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Extension method '@instructionListIR enterAccessibleEntities'                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
-                                              class GALGAS_stringset & io_ioInvokedRoutineSet,
-                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

@@ -17,7 +17,37 @@ class @storeToUniversalReferenceIR : @abstractInstructionIR {
   @objectIR mSourceValue
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
+
+override method @storeToUniversalReferenceIR enterAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  switch mSourceValue
+  case void :
+  case null (*) :
+  case reference (* *) :
+  case llvmValue (* *) :
+  case literalInteger  (* *) :
+  case llvmStructureValue (* *) :
+  case llvmArrayRepeatedDynamicValue (* * value) :
+    let llvmAssignRoutineName = "assign." + [value type].llvmBaseTypeName + "." + [value type].llvmBaseTypeName
+    ioInvokedRoutineSet += !llvmAssignRoutineName
+   case llvmArrayRepeatedStaticValue (4*) :
+  case llvmArrayStaticValues (3*) :
+  case llvmArrayDynamicValues (* @operandIRList operands) :
+    for (value) in operands do
+      if not [value isStatic] then
+        let llvmAssignRoutineName = "assign." + [value type].llvmBaseTypeName + "." + [value type].llvmBaseTypeName
+        ioInvokedRoutineSet += !llvmAssignRoutineName
+      end
+    end
+  case literalString  (* *) :
+  case zero (*) :
+  end
+}
+
+#·······················································································································
 
 override method @storeToUniversalReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -61,10 +91,8 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  " + indexVarName + " = phi i32 [0, %" + startLabel + "], [" + nextIndexVarName + ", %" + loopLabel + "]\n"
     ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + [type llvmTypeName] + ", "
                + [type llvmTypeName] + " * " + mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
-    ioLLVMcode += "  call void @plm.assign."
-    ioLLVMcode += [[value type].llvmBaseTypeName assemblerRepresentation]
-    ioLLVMcode += "."
-    ioLLVMcode += [[value type].llvmBaseTypeName assemblerRepresentation]
+    let llvmAssignRoutineName = "assign." + [value type].llvmBaseTypeName + "." + [value type].llvmBaseTypeName
+    ioLLVMcode += "  call void @" +[llvmAssignRoutineName assemblerRepresentation]
     ioLLVMcode += " (" + [value llvmTypeName] + "* " + ptrVarName + ", " + [value llvmTypeName] + "* " + [value llvmName] + ")\n"
     ioLLVMcode += "  " + nextIndexVarName + " = add i32 " + indexVarName + ", 1\n"
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
@@ -112,10 +140,8 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       if [value isStatic] then
         ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
       else
-        ioLLVMcode += "  call void @plm.assign."
-        ioLLVMcode += [[value type].llvmBaseTypeName assemblerRepresentation]
-        ioLLVMcode += "."
-        ioLLVMcode += [[value type].llvmBaseTypeName assemblerRepresentation]
+       let llvmAssignRoutineName = "assign." + [value type].llvmBaseTypeName + "." + [value type].llvmBaseTypeName
+        ioLLVMcode += "  call void @" + [llvmAssignRoutineName assemblerRepresentation]
         ioLLVMcode += " (" + valueType + "* " + tempVar + ", " + valueType + "* " + [value llvmName] + ")\n"
       end
     end
@@ -123,14 +149,6 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   case zero (*) :
     ioLLVMcode += "  store " +  llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @storeToUniversalReferenceIR enterAccessibleEntities 
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

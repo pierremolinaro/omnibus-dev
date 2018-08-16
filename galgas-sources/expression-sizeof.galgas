@@ -158,14 +158,6 @@ class @sizeofInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sizeofInstructionIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @sizeofInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext

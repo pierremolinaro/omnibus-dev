@@ -28,6 +28,14 @@ abstract method @abstractInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 
+#·······················································································································
+
+method @abstractInstructionIR enterAccessibleEntities
+  ?!@stringset unused ioInvokedRoutineSet
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @abstractGenerationIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -27,12 +27,3 @@ override method @extendIR llvmInstructionCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @extendIR enterAccessibleEntities
-  ?!@stringset unused ioInvokedRoutineSet
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
