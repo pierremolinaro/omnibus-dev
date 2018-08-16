@@ -382,7 +382,6 @@ method @taskListAST enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
       !type:taskType
-      !generate:true
     ]
     [!?ioContext.mTaskMap insertKey !task.mTaskName !taskType]
     [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]
@@ -513,7 +512,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inContext.mTypeMap searchKey !lkey:mTaskName ?type:let taskType ?1*]
+  [inContext.mTypeMap searchKey !lkey:mTaskName ?type:let taskType]
 #------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = mStackSize.bigint
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then

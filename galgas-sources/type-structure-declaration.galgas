@@ -378,7 +378,6 @@ override method @structureDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mReceiverTypeName
     !type:structureType
-    !generate:true
   ]
 #-------------------------------------------- GenerateLLVM type definition
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {

@@ -73,12 +73,11 @@ override method @typeAliasDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type ?1*]
+  [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type]
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mAliasTypeName
     !type:type
-    !generate:false
   ]
 }
 

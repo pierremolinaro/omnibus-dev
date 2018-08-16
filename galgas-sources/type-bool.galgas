@@ -80,7 +80,6 @@ override method @booleanDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:[boolTypeName () nowhere]
     !type:booleanType
-    !generate:true
   ]
 #---------- Enter boolean operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap ![boolTypeName () nowhere]} type]

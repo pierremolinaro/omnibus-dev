@@ -49,7 +49,6 @@ override method @literalStringDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:[staticStringTypeName () nowhere]
     !type:literalStringType ()
-    !generate:true
   ]
 }
 

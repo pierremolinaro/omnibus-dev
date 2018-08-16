@@ -405,8 +405,6 @@ getter @PLMType deinitNeeded -> @bool {
 
 shared map @unifiedTypeMap %selectors {
   @PLMType type
-#  @uint index # This index allows to sort type for ensuring no forward LLVM type reference on generation
-  @bool generate # Boolean value for ordering LLVM code generation for this type
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"

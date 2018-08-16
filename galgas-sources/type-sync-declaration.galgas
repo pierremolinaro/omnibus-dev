@@ -187,7 +187,6 @@ override method @syncDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mSyncToolName
     !type:structureType
-    !generate:true
   ]
 #-------------------------------------------- GenerateLLVM type definitions
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {

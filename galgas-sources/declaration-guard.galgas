@@ -227,7 +227,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   case baseGuard :
   #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariablePLMName() !mGuardName.location}
-    [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType ?1*]
+    [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
       !resultVarName

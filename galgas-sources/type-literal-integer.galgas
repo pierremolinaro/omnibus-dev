@@ -50,7 +50,6 @@ override method @literalIntegerDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !type:staticIntegerType ()
-    !generate:false
   ]
 #--- Enter integer operators
   enterLiteralIntegerOperators (

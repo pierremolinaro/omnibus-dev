@@ -226,7 +226,6 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !type:integerType
-    !generate:true
   ]
 #--------------------------------------- Enter integer <-> integer operators
   enter_integer_integer_operators (

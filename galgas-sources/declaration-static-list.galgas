@@ -385,7 +385,6 @@ override method @staticListAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmElementTypeName
     !type:elementType
-    !generate:true
   ]
 #-------------------------------------------------------------------- Enter static list values
   @stringlist stringValueList = {}
@@ -486,7 +485,6 @@ override method @staticListAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmNameForStaticListType (!mStaticListName)
     !type:arrayType
-    !generate:true
   ]
 #-------------------------------------------------------------------- Enter list in constant map
   let staticListType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmNameForStaticListType (!mStaticListName)}

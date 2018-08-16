@@ -357,7 +357,7 @@ private proc controlRegisterType
   !type:@PLMType outRegisterType
   !bitCount:@uint outRegisterBitCount
 {
-  [ioContext.mTypeMap searchKey !lkey:inRegisterTypeName ?type:outRegisterType ?1*]
+  [ioContext.mTypeMap searchKey !lkey:inRegisterTypeName ?type:outRegisterType]
   switch outRegisterType.kind
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount
