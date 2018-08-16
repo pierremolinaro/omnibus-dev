@@ -3917,7 +3917,7 @@ void extensionSetter_appendStoreToUniversalReference (GALGAS_instructionListIR &
                                                       const GALGAS_objectIR constinArgument_inSourceValue,
                                                       C_Compiler * /* inCompiler */
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_storeToUniversalReferenceIR::constructor_new (constinArgument_inLLVMVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 7)) ;
+  ioObject.addAssign_operation (GALGAS_storeToUniversalReferenceIR::constructor_new (constinArgument_inLLVMVarName, constinArgument_inTargetVarType, constinArgument_inSourceValue  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-store-to-universal-reference.galgas", 9)) ;
 }
 
 
@@ -5031,7 +5031,7 @@ void extensionSetter_appendCopyFromReferences (GALGAS_instructionListIR & ioObje
       TC_Array <C_FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetReference.getter_type (HERE).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 27)).add_operation (var_sourceType_975.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 26)) ;
     }
-    ioObject.addAssign_operation (GALGAS_copyFromReferencesIR::constructor_new (var_sourceType_975, constinArgument_inTargetReference.getter_llvmName (HERE), var_sourceLLVMName_1004  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30))  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)) ;
+    ioObject.addAssign_operation (GALGAS_copyFromReferencesIR::constructor_new (constinArgument_inTargetReference, var_sourceLLVMName_1004  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30))  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)) ;
   }
 }
 

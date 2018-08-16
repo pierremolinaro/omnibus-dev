@@ -27,15 +27,14 @@ setter @instructionListIR appendCopyFromReferences
       : "object of type $" + inTargetReference.type.plmTypeDescriptionName
         + " cannot be assigned from expression of type $" + sourceType.plmTypeDescriptionName
     end
-     self += !@copyFromReferencesIR.new {!sourceType !inTargetReference.llvmName !sourceLLVMName}
+    self += !@copyFromReferencesIR.new {!inTargetReference !sourceLLVMName}
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @copyFromReferencesIR : @abstractInstructionIR {
-  @PLMType mType
-  @string mTargetLLVMName
+  @LValueRepresentation mTarget
   @string mSourceLLVMName
 }
 
@@ -46,12 +45,10 @@ override method @copyFromReferencesIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mType llvmTypeName]
-  ioLLVMcode += "  call void @plm.assign."
-  ioLLVMcode += [mType.llvmBaseTypeName assemblerRepresentation]
-  ioLLVMcode += "."
-  ioLLVMcode += [mType.llvmBaseTypeName assemblerRepresentation]
-  ioLLVMcode += " (" + llvmType + "* " + mTargetLLVMName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
+  let assignmentFunctionLLVMName = "plm.assign." + [mTarget type].llvmBaseTypeName + "." + [mTarget type].llvmBaseTypeName
+  let llvmType = [[mTarget type] llvmTypeName]
+  ioLLVMcode += "  call void @" + [assignmentFunctionLLVMName assemblerRepresentation]
+  ioLLVMcode += " (" + llvmType + "* " + mTarget.llvmName + ", " + llvmType + "* " + mSourceLLVMName + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -60,6 +57,8 @@ override method @copyFromReferencesIR enterAccessibleEntities
   ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
+#  let assignmentFunctionLLVMName = "assign." + [mTarget type].llvmBaseTypeName + "." + [mTarget type].llvmBaseTypeName
+#  ioInvokedRoutineSet += !assignmentFunctionLLVMName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

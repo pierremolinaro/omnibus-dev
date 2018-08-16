@@ -10008,7 +10008,7 @@ typeComparisonResult cPtr_storeFromTemporaryReferenceIR::dynamicObjectCompare (c
     result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
+    result = mProperty_mLLVMTargetVarName.objectCompare (p->mProperty_mLLVMTargetVarName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
@@ -10051,12 +10051,12 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_storeFromTemporaryReferenceIR GALGAS_storeFromTemporaryReferenceIR::constructor_new (const GALGAS_PLMType & inAttribute_mTargetVarType,
-                                                                                            const GALGAS_string & inAttribute_mLLVMName,
+                                                                                            const GALGAS_string & inAttribute_mLLVMTargetVarName,
                                                                                             const GALGAS_objectIR & inAttribute_mSourceValue
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_storeFromTemporaryReferenceIR result ;
-  if (inAttribute_mTargetVarType.isValid () && inAttribute_mLLVMName.isValid () && inAttribute_mSourceValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_storeFromTemporaryReferenceIR (inAttribute_mTargetVarType, inAttribute_mLLVMName, inAttribute_mSourceValue COMMA_THERE)) ;
+  if (inAttribute_mTargetVarType.isValid () && inAttribute_mLLVMTargetVarName.isValid () && inAttribute_mSourceValue.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_storeFromTemporaryReferenceIR (inAttribute_mTargetVarType, inAttribute_mLLVMTargetVarName, inAttribute_mSourceValue COMMA_THERE)) ;
   }
   return result ;
 }
@@ -10081,20 +10081,20 @@ GALGAS_PLMType cPtr_storeFromTemporaryReferenceIR::getter_mTargetVarType (UNUSED
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_string GALGAS_storeFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_storeFromTemporaryReferenceIR::getter_mLLVMTargetVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeFromTemporaryReferenceIR * p = (const cPtr_storeFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeFromTemporaryReferenceIR) ;
-    result = p->mProperty_mLLVMName ;
+    result = p->mProperty_mLLVMTargetVarName ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_string cPtr_storeFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mLLVMName ;
+GALGAS_string cPtr_storeFromTemporaryReferenceIR::getter_mLLVMTargetVarName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMTargetVarName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10120,12 +10120,12 @@ GALGAS_objectIR cPtr_storeFromTemporaryReferenceIR::getter_mSourceValue (UNUSED_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_storeFromTemporaryReferenceIR::cPtr_storeFromTemporaryReferenceIR (const GALGAS_PLMType & in_mTargetVarType,
-                                                                        const GALGAS_string & in_mLLVMName,
+                                                                        const GALGAS_string & in_mLLVMTargetVarName,
                                                                         const GALGAS_objectIR & in_mSourceValue
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mTargetVarType (in_mTargetVarType),
-mProperty_mLLVMName (in_mLLVMName),
+mProperty_mLLVMTargetVarName (in_mLLVMTargetVarName),
 mProperty_mSourceValue (in_mSourceValue) {
 }
 
@@ -10140,7 +10140,7 @@ void cPtr_storeFromTemporaryReferenceIR::description (C_String & ioString,
   ioString << "[@storeFromTemporaryReferenceIR:" ;
   mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mLLVMName.description (ioString, inIndentation+1) ;
+  mProperty_mLLVMTargetVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mSourceValue.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -10150,7 +10150,7 @@ void cPtr_storeFromTemporaryReferenceIR::description (C_String & ioString,
 
 acPtr_class * cPtr_storeFromTemporaryReferenceIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeFromTemporaryReferenceIR (mProperty_mTargetVarType, mProperty_mLLVMName, mProperty_mSourceValue COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeFromTemporaryReferenceIR (mProperty_mTargetVarType, mProperty_mLLVMTargetVarName, mProperty_mSourceValue COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -10821,10 +10821,7 @@ typeComparisonResult cPtr_copyFromReferencesIR::dynamicObjectCompare (const acPt
   const cPtr_copyFromReferencesIR * p = (const cPtr_copyFromReferencesIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_copyFromReferencesIR) ;
   if (kOperandEqual == result) {
-    result = mProperty_mType.objectCompare (p->mProperty_mType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mTargetLLVMName.objectCompare (p->mProperty_mTargetLLVMName) ;
+    result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mSourceLLVMName.objectCompare (p->mProperty_mSourceLLVMName) ;
@@ -10860,8 +10857,7 @@ GALGAS_abstractInstructionIR () {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_copyFromReferencesIR GALGAS_copyFromReferencesIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_copyFromReferencesIR::constructor_new (GALGAS_PLMType::constructor_default (HERE),
-                                                       GALGAS_string::constructor_default (HERE),
+  return GALGAS_copyFromReferencesIR::constructor_new (GALGAS_LValueRepresentation::constructor_default (HERE),
                                                        GALGAS_string::constructor_default (HERE)
                                                        COMMA_THERE) ;
 }
@@ -10875,51 +10871,32 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_copyFromReferencesIR GALGAS_copyFromReferencesIR::constructor_new (const GALGAS_PLMType & inAttribute_mType,
-                                                                          const GALGAS_string & inAttribute_mTargetLLVMName,
+GALGAS_copyFromReferencesIR GALGAS_copyFromReferencesIR::constructor_new (const GALGAS_LValueRepresentation & inAttribute_mTarget,
                                                                           const GALGAS_string & inAttribute_mSourceLLVMName
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_copyFromReferencesIR result ;
-  if (inAttribute_mType.isValid () && inAttribute_mTargetLLVMName.isValid () && inAttribute_mSourceLLVMName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_copyFromReferencesIR (inAttribute_mType, inAttribute_mTargetLLVMName, inAttribute_mSourceLLVMName COMMA_THERE)) ;
+  if (inAttribute_mTarget.isValid () && inAttribute_mSourceLLVMName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_copyFromReferencesIR (inAttribute_mTarget, inAttribute_mSourceLLVMName COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType GALGAS_copyFromReferencesIR::getter_mType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_PLMType result ;
+GALGAS_LValueRepresentation GALGAS_copyFromReferencesIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+  GALGAS_LValueRepresentation result ;
   if (NULL != mObjectPtr) {
     const cPtr_copyFromReferencesIR * p = (const cPtr_copyFromReferencesIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_copyFromReferencesIR) ;
-    result = p->mProperty_mType ;
+    result = p->mProperty_mTarget ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType cPtr_copyFromReferencesIR::getter_mType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mType ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string GALGAS_copyFromReferencesIR::getter_mTargetLLVMName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_copyFromReferencesIR * p = (const cPtr_copyFromReferencesIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_copyFromReferencesIR) ;
-    result = p->mProperty_mTargetLLVMName ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string cPtr_copyFromReferencesIR::getter_mTargetLLVMName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mTargetLLVMName ;
+GALGAS_LValueRepresentation cPtr_copyFromReferencesIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTarget ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10944,13 +10921,11 @@ GALGAS_string cPtr_copyFromReferencesIR::getter_mSourceLLVMName (UNUSED_LOCATION
 //                                    Pointer class for @copyFromReferencesIR class                                    *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_copyFromReferencesIR::cPtr_copyFromReferencesIR (const GALGAS_PLMType & in_mType,
-                                                      const GALGAS_string & in_mTargetLLVMName,
+cPtr_copyFromReferencesIR::cPtr_copyFromReferencesIR (const GALGAS_LValueRepresentation & in_mTarget,
                                                       const GALGAS_string & in_mSourceLLVMName
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mProperty_mType (in_mType),
-mProperty_mTargetLLVMName (in_mTargetLLVMName),
+mProperty_mTarget (in_mTarget),
 mProperty_mSourceLLVMName (in_mSourceLLVMName) {
 }
 
@@ -10963,9 +10938,7 @@ const C_galgas_type_descriptor * cPtr_copyFromReferencesIR::classDescriptor (voi
 void cPtr_copyFromReferencesIR::description (C_String & ioString,
                                              const int32_t inIndentation) const {
   ioString << "[@copyFromReferencesIR:" ;
-  mProperty_mType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mTargetLLVMName.description (ioString, inIndentation+1) ;
+  mProperty_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mSourceLLVMName.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -10975,7 +10948,7 @@ void cPtr_copyFromReferencesIR::description (C_String & ioString,
 
 acPtr_class * cPtr_copyFromReferencesIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_copyFromReferencesIR (mProperty_mType, mProperty_mTargetLLVMName, mProperty_mSourceLLVMName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_copyFromReferencesIR (mProperty_mTarget, mProperty_mSourceLLVMName COMMA_THERE)) ;
   return ptr ;
 }
 

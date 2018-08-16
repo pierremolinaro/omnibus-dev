@@ -86,49 +86,29 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     ?let @LValueRepresentation lvalueIR
   ]
 #--- If source is a value, transform it to a reference
-  if not [sourceOperandPossibleReference isReference] then
-    var loadedResultValue = sourceOperandPossibleReference
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
-      !?loadedResultValue
-    ]
+  if not [sourceOperandPossibleReference isReference] then # Assignment from value
     let result = checkAssignmentCompatibility (
-      !source:loadedResultValue
+      !source:sourceOperandPossibleReference # loadedResultValue
       !targetAnnotationType:targetType
       !errorLocation:mTargetAST.mIdentifier
       !staticTypeAllowed:false
     )
     [!?ioInstructionGenerationList appendStoreToUniversalReference !lvalueIR.llvmName !targetType !result]
-    sourceOperandPossibleReference = result
-  end
-#--- Check assignment is defined
-  let sourceOperand_llvmBaseTypeName = [sourceOperandPossibleReference type].llvmBaseTypeName
-  if [targetType.assignmentSources hasKey !sourceOperand_llvmBaseTypeName] then
-  
-  else
-    var m = "no valid assignment to " + targetType.plmTypeDescriptionName
-    m += " from " + [sourceOperandPossibleReference type].plmTypeDescriptionName
-  
-    error mTargetAST.mIdentifier : m
-  end
-  
- 
- 
- 
- 
- 
-  
-  
-  let t = [sourceOperandPossibleReference type]
-  if not [t copyable] then
-    error mTargetAST.mIdentifier : "source expression is not copyable"
-  else
-    [!?ioInstructionGenerationList appendCopyFromReferences
-      !?ioTemporaries
-      !errorLocation:mTargetAST.mIdentifier
-      !source:sourceOperandPossibleReference
-      !target:lvalueIR
-    ]
+  else # Assignment from reference
+  #--- Check assignment is defined
+    let sourceOperand_llvmBaseTypeName = [sourceOperandPossibleReference type].llvmBaseTypeName
+    if [targetType.assignmentSources hasKey !sourceOperand_llvmBaseTypeName] then
+      [!?ioInstructionGenerationList appendCopyFromReferences
+        !?ioTemporaries
+        !errorLocation:mTargetAST.mIdentifier
+        !source:sourceOperandPossibleReference
+        !target:lvalueIR
+      ]
+    else
+      var m = "no valid assignment to " + targetType.plmTypeDescriptionName
+      m += " from " + [sourceOperandPossibleReference type].plmTypeDescriptionName
+      error mTargetAST.mIdentifier : m
+    end
   end
 }
 

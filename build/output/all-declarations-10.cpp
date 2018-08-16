@@ -7638,33 +7638,22 @@ static void extensionMethod_assignmentInstructionAST_instructionSemanticAnalysis
   extensionMethod_analyzeLValue (object->mProperty_mTargetAST, constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lvalueIR_3931, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 75)) ;
   const enumGalgasBool test_0 = var_sourceOperandPossibleReference_3526.getter_isReference (SOURCE_FILE ("instruction-assignment.galgas", 89)).operator_not (SOURCE_FILE ("instruction-assignment.galgas", 89)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_objectIR var_loadedResultValue_4075 = var_sourceOperandPossibleReference_3526 ;
+    GALGAS_objectIR var_result_4088 = function_checkAssignmentCompatibility (var_sourceOperandPossibleReference_3526, var_targetType_3082, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 93)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 90)) ;
     {
-    extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_loadedResultValue_4075, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 91)) ;
+    extensionSetter_appendStoreToUniversalReference (ioArgument_ioInstructionGenerationList, var_lvalueIR_3931.getter_llvmName (HERE), var_targetType_3082, var_result_4088, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 96)) ;
     }
-    GALGAS_objectIR var_result_4236 = function_checkAssignmentCompatibility (var_loadedResultValue_4075, var_targetType_3082, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 98)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 95)) ;
-    {
-    extensionSetter_appendStoreToUniversalReference (ioArgument_ioInstructionGenerationList, var_lvalueIR_3931.getter_llvmName (HERE), var_targetType_3082, var_result_4236, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 101)) ;
-    }
-    var_sourceOperandPossibleReference_3526 = var_result_4236 ;
-  }
-  GALGAS_string var_sourceOperand_5F_llvmBaseTypeName_4648 = extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 105)).getter_llvmBaseTypeName (HERE) ;
-  const enumGalgasBool test_1 = var_targetType_3082.getter_assignmentSources (HERE).getter_hasKey (var_sourceOperand_5F_llvmBaseTypeName_4648 COMMA_SOURCE_FILE ("instruction-assignment.galgas", 106)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-  }else if (kBoolFalse == test_1) {
-    GALGAS_string var_m_4805 = GALGAS_string ("no valid assignment to ").add_operation (var_targetType_3082.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)) ;
-    var_m_4805.plusAssign_operation(GALGAS_string (" from ").add_operation (extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 110)).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 110)), inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 110)) ;
-    TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 112)), var_m_4805, fixItArray2  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 112)) ;
-  }
-  GALGAS_PLMType var_t_5023 = extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 122)) ;
-  const enumGalgasBool test_3 = extensionGetter_copyable (var_t_5023, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 123)).operator_not (SOURCE_FILE ("instruction-assignment.galgas", 123)).boolEnum () ;
-  if (kBoolTrue == test_3) {
-    TC_Array <C_FixItDescription> fixItArray4 ;
-    inCompiler->emitSemanticError (object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 124)), GALGAS_string ("source expression is not copyable"), fixItArray4  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 124)) ;
-  }else if (kBoolFalse == test_3) {
-    {
-    extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 128)), var_sourceOperandPossibleReference_3526, var_lvalueIR_3931, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 126)) ;
+  }else if (kBoolFalse == test_0) {
+    GALGAS_string var_sourceOperand_5F_llvmBaseTypeName_4522 = extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 99)).getter_llvmBaseTypeName (HERE) ;
+    const enumGalgasBool test_1 = var_targetType_3082.getter_assignmentSources (HERE).getter_hasKey (var_sourceOperand_5F_llvmBaseTypeName_4522 COMMA_SOURCE_FILE ("instruction-assignment.galgas", 100)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      {
+      extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 103)), var_sourceOperandPossibleReference_3526, var_lvalueIR_3931, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 101)) ;
+      }
+    }else if (kBoolFalse == test_1) {
+      GALGAS_string var_m_4894 = GALGAS_string ("no valid assignment to ").add_operation (var_targetType_3082.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 108)) ;
+      var_m_4894.plusAssign_operation(GALGAS_string (" from ").add_operation (extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)) ;
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 110)), var_m_4894, fixItArray2  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 110)) ;
     }
   }
 }

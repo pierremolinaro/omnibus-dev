@@ -1591,7 +1591,7 @@ class GALGAS_storeFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMTargetVarName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
@@ -1617,12 +1617,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeFromTemporaryR
 class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_PLMType mProperty_mTargetVarType ;
-  public : GALGAS_string mProperty_mLLVMName ;
+  public : GALGAS_string mProperty_mLLVMTargetVarName ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeFromTemporaryReferenceIR (const GALGAS_PLMType & in_mTargetVarType,
-                                               const GALGAS_string & in_mLLVMName,
+                                               const GALGAS_string & in_mLLVMTargetVarName,
                                                const GALGAS_objectIR & in_mSourceValue
                                                COMMA_LOCATION_ARGS) ;
 
@@ -1631,7 +1631,7 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMTargetVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2339,9 +2339,8 @@ class GALGAS_copyFromReferencesIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_copyFromReferencesIR constructor_new (const class GALGAS_PLMType & inOperand0,
-                                                                     const class GALGAS_string & inOperand1,
-                                                                     const class GALGAS_string & inOperand2
+  public : static class GALGAS_copyFromReferencesIR constructor_new (const class GALGAS_LValueRepresentation & inOperand0,
+                                                                     const class GALGAS_string & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2355,9 +2354,7 @@ class GALGAS_copyFromReferencesIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSourceLLVMName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mTargetLLVMName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_LValueRepresentation getter_mTarget (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2369,54 +2366,6 @@ class GALGAS_copyFromReferencesIR : public GALGAS_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_copyFromReferencesIR ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Pointer class for @copyFromReferencesIR class                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_PLMType mProperty_mType ;
-  public : GALGAS_string mProperty_mTargetLLVMName ;
-  public : GALGAS_string mProperty_mSourceLLVMName ;
-
-//--- Constructor
-  public : cPtr_copyFromReferencesIR (const GALGAS_PLMType & in_mType,
-                                      const GALGAS_string & in_mTargetLLVMName,
-                                      const GALGAS_string & in_mSourceLLVMName
-                                      COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mTargetLLVMName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mSourceLLVMName (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'checkAssignmentCompatibility'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_objectIR & constinArgument0,
-                                                             const class GALGAS_PLMType & constinArgument1,
-                                                             const class GALGAS_location & constinArgument2,
-                                                             const class GALGAS_bool & constinArgument3,
-                                                             class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -2488,6 +2437,51 @@ class GALGAS_LValueRepresentation : public AC_GALGAS_root {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueRepresentation ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Pointer class for @copyFromReferencesIR class                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_LValueRepresentation mProperty_mTarget ;
+  public : GALGAS_string mProperty_mSourceLLVMName ;
+
+//--- Constructor
+  public : cPtr_copyFromReferencesIR (const GALGAS_LValueRepresentation & in_mTarget,
+                                      const GALGAS_string & in_mSourceLLVMName
+                                      COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_LValueRepresentation getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mSourceLLVMName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'checkAssignmentCompatibility'                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_objectIR & constinArgument0,
+                                                             const class GALGAS_PLMType & constinArgument1,
+                                                             const class GALGAS_location & constinArgument2,
+                                                             const class GALGAS_bool & constinArgument3,
+                                                             class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

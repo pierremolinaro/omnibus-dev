@@ -369,7 +369,7 @@ override method @structureDeclarationAST enterInContext
     !constructorMap:constructorMap
     !guardMap:guardMap
     !subscript:.noSubscript
-    !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mPLMTypeSpecificName} else {} end
+    !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mLLVMBaseTypeName} else {} end
     !attributes:typeAttributes
     !plmTypeDescriptionName:mPLMTypeSpecificName
     !kind:.structure {!propertyList:propertyList}
