@@ -4006,19 +4006,19 @@ class cMapElement_guardMapCTXT : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @propertyAccessKind enum                                               *
+//                                              @propertyGetterKind enum                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_propertyAccessKind : public AC_GALGAS_root {
+class GALGAS_propertyGetterKind : public AC_GALGAS_root {
 //--------------------------------- Default constructor
-  public : GALGAS_propertyAccessKind (void) ;
+  public : GALGAS_propertyGetterKind (void) ;
 
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
     kEnum_constantProperty,
-    kEnum_indexed
+    kEnum_storedProperty
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -4040,23 +4040,23 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_propertyAccessKind extractObject (const GALGAS_object & inObject,
+  public : static GALGAS_propertyGetterKind extractObject (const GALGAS_object & inObject,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_propertyAccessKind constructor_constantProperty (const class GALGAS_objectIR & inOperand0
+  public : static class GALGAS_propertyGetterKind constructor_constantProperty (const class GALGAS_objectIR & inOperand0
                                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_propertyAccessKind constructor_indexed (const class GALGAS_PLMType & inOperand0,
-                                                                       const class GALGAS_uint & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_propertyGetterKind constructor_storedProperty (const class GALGAS_PLMType & inOperand0,
+                                                                              const class GALGAS_uint & inOperand1
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_propertyAccessKind & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_propertyGetterKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4065,45 +4065,45 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_indexed (class GALGAS_PLMType & outArgument0,
-                                                 class GALGAS_uint & outArgument1,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_storedProperty (class GALGAS_PLMType & outArgument0,
+                                                        class GALGAS_uint & outArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstantProperty (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndexed (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStoredProperty (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_propertyAccessKind class
+} ; // End of GALGAS_propertyGetterKind class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyAccessKind ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyGetterKind ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Class for element of '@propertyMap' map                                       *
+//                                    Class for element of '@propertyGetterMap' map                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_propertyMap : public cMapElement {
+class cMapElement_propertyGetterMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_bool mProperty_mIsPublic ;
-  public : GALGAS_propertyAccessKind mProperty_mAccess ;
+  public : GALGAS_propertyGetterKind mProperty_mAccess ;
 
 //--- Constructor
-  public : cMapElement_propertyMap (const GALGAS_lstring & inKey,
-                                    const GALGAS_bool & in_mIsPublic,
-                                    const GALGAS_propertyAccessKind & in_mAccess
-                                    COMMA_LOCATION_ARGS) ;
+  public : cMapElement_propertyGetterMap (const GALGAS_lstring & inKey,
+                                          const GALGAS_bool & in_mIsPublic,
+                                          const GALGAS_propertyGetterKind & in_mAccess
+                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -4300,7 +4300,7 @@ void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropert
                                              class GALGAS_semanticContext & io_ioContext,
                                              class GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                              class GALGAS_propertyList & io_ioPropertyList,
-                                             class GALGAS_propertyMap & io_ioPropertyMap,
+                                             class GALGAS_propertyGetterMap & io_ioPropertyMap,
                                              class GALGAS_sortedOperandIRList & io_sortedOperandIRList,
                                              class GALGAS_constructorSignature & io_constructorSignature,
                                              class GALGAS_string & io_ioConstructorKey,

@@ -112,7 +112,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
       @classConstantMap classConstantMap = {}
      [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
     #-------------------------------------------- Property map
-      @propertyMap arrayTypePropertyMap = {}
+      @propertyGetterMap arrayTypePropertyMap = {}
       [!?arrayTypePropertyMap insertKey # "count" property
         !.new {!"count" !plmTypeDescriptionName.location}
         !true # public
@@ -133,7 +133,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
       @PLMTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
       let arrayType = @PLMType.new {
-        !propertyMap:arrayTypePropertyMap
+        !propertyGetterMap:arrayTypePropertyMap
         !routineMap: {}
         !classConstantMap:classConstantMap
         !constructorMap:constructorMap

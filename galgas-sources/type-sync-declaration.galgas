@@ -115,7 +115,7 @@ override method @syncDeclarationAST enterInContext
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
-  @propertyMap propertyMap = {}
+  @propertyGetterMap propertyGetterMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
@@ -124,7 +124,7 @@ override method @syncDeclarationAST enterInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
       !?propertyList
-      !?propertyMap
+      !?propertyGetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -169,7 +169,7 @@ override method @syncDeclarationAST enterInContext
   ]
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
-    !propertyMap:propertyMap
+    !propertyGetterMap:propertyGetterMap
     !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap

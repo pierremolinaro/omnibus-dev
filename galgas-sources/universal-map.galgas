@@ -351,12 +351,12 @@ method @universalValuedObjectMap searchValuedObjectType
   for (access) in accessList do
     switch access
     case property (@lstring propertyName) :
-      let @propertyMap propertyMap = outType.propertyMap
-      [propertyMap searchKey !propertyName ?* ?let accessKind]
+      let @propertyGetterMap propertyGetterMap = outType.propertyGetterMap
+      [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
       switch accessKind
       case constantProperty (value) :
         outType = [value type]
-      case indexed  (type *) :
+      case storedProperty  (type *) :
         outType = type
       end
     case arrayAccess (3*) :

@@ -113,7 +113,7 @@ override method @integerDeclarationAST enterInContext
 #--------------------------------------- Property map
   let llvmTypeName = "i" + mSize
   @routineMapCTXT routineMap = {}
-  @propertyMap propertyMap = {}
+  @propertyGetterMap propertyGetterMap = {}
   if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:integerTypeName
@@ -210,7 +210,7 @@ override method @integerDeclarationAST enterInContext
   [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
-    !propertyMap:propertyMap
+    !propertyGetterMap:propertyGetterMap
     !routineMap: routineMap
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap

@@ -513,12 +513,12 @@ proc handlePropertyAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
-  let @propertyMap propertyMap = type.propertyMap
-  [propertyMap searchKey !inPropertyName ?* ?let @propertyAccessKind accessKind]
+  let @propertyGetterMap propertyGetterMap = type.propertyGetterMap
+  [propertyGetterMap searchKey !inPropertyName ?* ?let @propertyGetterKind accessKind]
   switch accessKind
   case constantProperty (@objectIR value) :
     ioResult = value
-  case indexed (@PLMType propertyType @uint propertyIndex) :
+  case storedProperty (@PLMType propertyType @uint propertyIndex) :
     [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
       ![ioResult type]

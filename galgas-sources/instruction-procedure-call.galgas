@@ -263,7 +263,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
     end
   end
 #--- Get current object property map
-  @propertyMap currentObjectPropertyMap = currentType.propertyMap
+  @propertyGetterMap currentObjectPropertyMap = currentType.propertyGetterMap
 #--- Insulate last access (should be a "property", used as routine name
   var accessList = mAccessList
   [!?accessList popLast ?let lastAccess]
@@ -274,14 +274,14 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       [currentObjectPropertyMap searchKey
         !propertyName
         ?let @bool unused isPublic
-        ?let @propertyAccessKind propertyAccess
+        ?let @propertyGetterKind propertyAccess
       ]
       switch propertyAccess
       case constantProperty (*) :
         error propertyName
           : "a context property cannot be used in this context"
           : currentType, currentLLVMAddressVar
-      case indexed (@PLMType propertyType @uint propertyIndex) :
+      case storedProperty (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !currentType
@@ -292,7 +292,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         ]
         currentType = propertyType
         currentLLVMAddressVar = llvmPropertyName
-        currentObjectPropertyMap = currentType.propertyMap # ????
+        currentObjectPropertyMap = currentType.propertyGetterMap # ????
       end
     case arrayAccess (* @location endOfIndex *) :
       error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar

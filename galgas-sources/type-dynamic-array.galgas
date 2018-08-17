@@ -93,7 +93,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
     @routineMapCTXT routineMap = {}
-    @propertyMap propertyMap = {}
+    @propertyGetterMap propertyGetterMap = {}
   #--- Method 'removeAll()'
     [!?routineMap addFunctionWithoutArgument
       !llvmBaseTypeName:llvmBaseTypeName
@@ -168,7 +168,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     let @PLMTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @PLMType.new {
-      !propertyMap:propertyMap
+      !propertyGetterMap:propertyGetterMap
       !routineMap: routineMap
       !classConstantMap:{}
       !constructorMap:constructorMap

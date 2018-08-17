@@ -128,7 +128,7 @@ override method @enumerationDeclarationAST enterInContext
   end
 #---------------- Property map: add uintN() accessor
   @routineMapCTXT routineMap = {}
-  @propertyMap propertyMap = {}
+  @propertyGetterMap propertyGetterMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
     !.new {!"$uint" + representationBitCount !mEnumerationName}
@@ -142,7 +142,7 @@ override method @enumerationDeclarationAST enterInContext
   ]
 #---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
-    !propertyMap:propertyMap
+    !propertyGetterMap:propertyGetterMap
     !routineMap: routineMap
     !classConstantMap:enumConstantMap
     !constructorMap:{}

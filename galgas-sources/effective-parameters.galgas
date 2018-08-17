@@ -191,11 +191,11 @@ proc analyzeEffectiveParameters
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
-      [inSelfType.propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
+      [inSelfType.propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
         error inErrorLocation : "a constant property cannot be used here"
-      case indexed (@PLMType propertyType @uint propertyIndex) :
+      case storedProperty (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !inSelfType

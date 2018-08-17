@@ -275,7 +275,7 @@ override method @structureDeclarationAST enterInContext
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
-  @propertyMap propertyMap = {}
+  @propertyGetterMap propertyGetterMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
@@ -285,7 +285,7 @@ override method @structureDeclarationAST enterInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
       !?propertyList
-      !?propertyMap
+      !?propertyGetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -347,7 +347,7 @@ override method @structureDeclarationAST enterInContext
   ]
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
-    !propertyMap: propertyMap
+    !propertyGetterMap: propertyGetterMap
     !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap
@@ -383,7 +383,7 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!@propertyList ioPropertyList
-  ?!@propertyMap ioPropertyMap
+  ?!@propertyGetterMap ioPropertyMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
   ?!@string ioConstructorKey
@@ -447,7 +447,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       [!?ioPropertyMap insertKey
         !mPropertyName
         !mIsPublic
-        !.indexed{!type:actualPropertyType !index:propertyIndex}
+        !.storedProperty{!type:actualPropertyType !index:propertyIndex}
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     end
@@ -460,7 +460,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     [!?ioPropertyMap insertKey
       !mPropertyName
       !mIsPublic
-      !.indexed{!type: optionalPropertyType!index:propertyIndex}
+      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName

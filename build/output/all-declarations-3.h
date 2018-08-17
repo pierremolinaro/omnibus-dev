@@ -4708,32 +4708,32 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @propertyMap_2D_element struct                                            *
+//                                        @propertyGetterMap_2D_element struct                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_propertyMap_2D_element : public AC_GALGAS_root {
+class GALGAS_propertyGetterMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
 
   public : GALGAS_bool mProperty_mIsPublic ;
 
-  public : GALGAS_propertyAccessKind mProperty_mAccess ;
+  public : GALGAS_propertyGetterKind mProperty_mAccess ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_propertyMap_2D_element (void) ;
+  public : GALGAS_propertyGetterMap_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_propertyMap_2D_element (void) ;
+  public : virtual ~ GALGAS_propertyGetterMap_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_propertyMap_2D_element (const GALGAS_lstring & in_lkey,
-                                          const GALGAS_bool & in_mIsPublic,
-                                          const GALGAS_propertyAccessKind & in_mAccess) ;
+  public : GALGAS_propertyGetterMap_2D_element (const GALGAS_lstring & in_lkey,
+                                                const GALGAS_bool & in_mIsPublic,
+                                                const GALGAS_propertyGetterKind & in_mAccess) ;
 
 //-- Start of generic part --*
 
@@ -4741,21 +4741,21 @@ class GALGAS_propertyMap_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_propertyMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_propertyGetterMap_2D_element extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_propertyMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                       const class GALGAS_bool & inOperand1,
-                                                                       const class GALGAS_propertyAccessKind & inOperand2
-                                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_propertyGetterMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                             const class GALGAS_bool & inOperand1,
+                                                                             const class GALGAS_propertyGetterKind & inOperand2
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_propertyMap_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_propertyGetterMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4765,7 +4765,7 @@ class GALGAS_propertyMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_propertyAccessKind getter_mAccess (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_propertyGetterKind getter_mAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
@@ -4773,12 +4773,12 @@ class GALGAS_propertyMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_propertyMap_2D_element class
+} ; // End of GALGAS_propertyGetterMap_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyMap_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyGetterMap_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -4853,6 +4853,44 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorMap_2D_element ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                     @propertyGetterKind enum, associated values                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumAssociatedValues_propertyGetterKind_constantProperty : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyGetterKind_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyGetterKind_constantProperty (void) {}
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumAssociatedValues_propertyGetterKind_storedProperty : public cEnumAssociatedValues {
+  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyGetterKind_storedProperty (const GALGAS_PLMType & inAssociatedValue0,
+                                                                    const GALGAS_uint & inAssociatedValue1
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyGetterKind_storedProperty (void) {}
+} ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

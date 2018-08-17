@@ -247,14 +247,14 @@ method @taskListAST enterInContext
   #--- task variables
     @routineMapCTXT routineMap = {}
     @propertyList propertyList = {}
-    @propertyMap propertyMap = {}
+    @propertyGetterMap propertyGetterMap = {}
     @sortedOperandIRList initialValueList = {}
     for property in task.mVarList do
       [property enterPropertyInContext
         !?context:ioContext
         !?staticEntityMap:ioStaticEntityMap
         !?propertyList
-        !?propertyMap
+        !?propertyGetterMap
         !?initialValueList
         !?*
         !?*
@@ -364,7 +364,7 @@ method @taskListAST enterInContext
     ]
   #---------------- Enter task variable map as structure type in type map
     let taskType = @PLMType.new {
-      !propertyMap:propertyMap
+      !propertyGetterMap:propertyGetterMap
       !routineMap: routineMap
       !classConstantMap:{}
       !constructorMap:{}

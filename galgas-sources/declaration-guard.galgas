@@ -395,12 +395,12 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     let currentType = [currentObject type]
     switch access
     case property (@lstring propertyName) :
-      let @propertyMap propertyMap = currentType.propertyMap
-      [propertyMap searchKey !propertyName ?* ?let propertyAccess]
+      let @propertyGetterMap propertyGetterMap = currentType.propertyGetterMap
+      [propertyGetterMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
         error propertyName: "a constant property not available in this context" : currentObject
-      case indexed (@PLMType propertyType @uint propertyIndex) :
+      case storedProperty (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
           !currentType

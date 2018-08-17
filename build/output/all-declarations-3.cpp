@@ -12606,10 +12606,10 @@ void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cMapElement_propertyMap::cMapElement_propertyMap (const GALGAS_lstring & inKey,
-                                                  const GALGAS_bool & in_mIsPublic,
-                                                  const GALGAS_propertyAccessKind & in_mAccess
-                                                  COMMA_LOCATION_ARGS) :
+cMapElement_propertyGetterMap::cMapElement_propertyGetterMap (const GALGAS_lstring & inKey,
+                                                              const GALGAS_bool & in_mIsPublic,
+                                                              const GALGAS_propertyGetterKind & in_mAccess
+                                                              COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mIsPublic (in_mIsPublic),
 mProperty_mAccess (in_mAccess) {
@@ -12617,21 +12617,21 @@ mProperty_mAccess (in_mAccess) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-bool cMapElement_propertyMap::isValid (void) const {
+bool cMapElement_propertyGetterMap::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mIsPublic.isValid () && mProperty_mAccess.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cMapElement * cMapElement_propertyMap::copy (void) {
+cMapElement * cMapElement_propertyGetterMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_propertyMap (mProperty_lkey, mProperty_mIsPublic, mProperty_mAccess COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_propertyGetterMap (mProperty_lkey, mProperty_mIsPublic, mProperty_mAccess COMMA_HERE)) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void cMapElement_propertyMap::description (C_String & ioString, const int32_t inIndentation) const {
+void cMapElement_propertyGetterMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mIsPublic" ":" ;
@@ -12644,8 +12644,8 @@ void cMapElement_propertyMap::description (C_String & ioString, const int32_t in
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cMapElement_propertyMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_propertyMap * operand = (cMapElement_propertyMap *) inOperand ;
+typeComparisonResult cMapElement_propertyGetterMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_propertyGetterMap * operand = (cMapElement_propertyGetterMap *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
   if (kOperandEqual == result) {
     result = mProperty_mIsPublic.objectCompare (operand->mProperty_mIsPublic) ;
@@ -12658,75 +12658,75 @@ typeComparisonResult cMapElement_propertyMap::compare (const cCollectionElement 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap::GALGAS_propertyMap (void) :
+GALGAS_propertyGetterMap::GALGAS_propertyGetterMap (void) :
 AC_GALGAS_map () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap::GALGAS_propertyMap (const GALGAS_propertyMap & inSource) :
+GALGAS_propertyGetterMap::GALGAS_propertyGetterMap (const GALGAS_propertyGetterMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap & GALGAS_propertyMap::operator = (const GALGAS_propertyMap & inSource) {
+GALGAS_propertyGetterMap & GALGAS_propertyGetterMap::operator = (const GALGAS_propertyGetterMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap GALGAS_propertyMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_propertyMap result ;
+GALGAS_propertyGetterMap GALGAS_propertyGetterMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_propertyGetterMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap GALGAS_propertyMap::constructor_mapWithMapToOverride (const GALGAS_propertyMap & inMapToOverride
-                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_propertyMap result ;
+GALGAS_propertyGetterMap GALGAS_propertyGetterMap::constructor_mapWithMapToOverride (const GALGAS_propertyGetterMap & inMapToOverride
+                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_propertyGetterMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap GALGAS_propertyMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_propertyMap result ;
+GALGAS_propertyGetterMap GALGAS_propertyGetterMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_propertyGetterMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_propertyMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                              const GALGAS_bool & inArgument0,
-                                              const GALGAS_propertyAccessKind & inArgument1,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_propertyMap * p = NULL ;
-  macroMyNew (p, cMapElement_propertyMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+void GALGAS_propertyGetterMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                    const GALGAS_bool & inArgument0,
+                                                    const GALGAS_propertyGetterKind & inArgument1,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  cMapElement_propertyGetterMap * p = NULL ;
+  macroMyNew (p, cMapElement_propertyGetterMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@propertyMap insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@propertyGetterMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_propertyMap::setter_insertKey (GALGAS_lstring inKey,
-                                           GALGAS_bool inArgument0,
-                                           GALGAS_propertyAccessKind inArgument1,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
-  cMapElement_propertyMap * p = NULL ;
-  macroMyNew (p, cMapElement_propertyMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+void GALGAS_propertyGetterMap::setter_insertKey (GALGAS_lstring inKey,
+                                                 GALGAS_bool inArgument0,
+                                                 GALGAS_propertyGetterKind inArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_propertyGetterMap * p = NULL ;
+  macroMyNew (p, cMapElement_propertyGetterMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -12737,24 +12737,24 @@ void GALGAS_propertyMap::setter_insertKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const char * kSearchErrorMessage_propertyMap_searchKey = "there is no '%K' property" ;
+const char * kSearchErrorMessage_propertyGetterMap_searchKey = "there is no '%K' property" ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_propertyMap::method_searchKey (GALGAS_lstring inKey,
-                                           GALGAS_bool & outArgument0,
-                                           GALGAS_propertyAccessKind & outArgument1,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
-  const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) performSearch (inKey,
-                                                                                       inCompiler,
-                                                                                       kSearchErrorMessage_propertyMap_searchKey
-                                                                                       COMMA_THERE) ;
+void GALGAS_propertyGetterMap::method_searchKey (GALGAS_lstring inKey,
+                                                 GALGAS_bool & outArgument0,
+                                                 GALGAS_propertyGetterKind & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  const cMapElement_propertyGetterMap * p = (const cMapElement_propertyGetterMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kSearchErrorMessage_propertyGetterMap_searchKey
+                                                                                                   COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_propertyMap) ;
+    macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
     outArgument0 = p->mProperty_mIsPublic ;
     outArgument1 = p->mProperty_mAccess ;
   }
@@ -12762,14 +12762,14 @@ void GALGAS_propertyMap::method_searchKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_propertyMap::getter_mIsPublicForKey (const GALGAS_string & inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_propertyGetterMap::getter_mIsPublicForKey (const GALGAS_string & inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) attributes ;
+  const cMapElement_propertyGetterMap * p = (const cMapElement_propertyGetterMap *) attributes ;
   GALGAS_bool result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_propertyMap) ;
+    macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
     result = p->mProperty_mIsPublic ;
   }
   return result ;
@@ -12777,14 +12777,14 @@ GALGAS_bool GALGAS_propertyMap::getter_mIsPublicForKey (const GALGAS_string & in
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyAccessKind GALGAS_propertyMap::getter_mAccessForKey (const GALGAS_string & inKey,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
+GALGAS_propertyGetterKind GALGAS_propertyGetterMap::getter_mAccessForKey (const GALGAS_string & inKey,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) attributes ;
-  GALGAS_propertyAccessKind result ;
+  const cMapElement_propertyGetterMap * p = (const cMapElement_propertyGetterMap *) attributes ;
+  GALGAS_propertyGetterKind result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_propertyMap) ;
+    macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
     result = p->mProperty_mAccess ;
   }
   return result ;
@@ -12792,61 +12792,61 @@ GALGAS_propertyAccessKind GALGAS_propertyMap::getter_mAccessForKey (const GALGAS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_propertyMap::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
-                                                    GALGAS_string inKey,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_propertyGetterMap::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_propertyMap * p = (cMapElement_propertyMap *) attributes ;
+  cMapElement_propertyGetterMap * p = (cMapElement_propertyGetterMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_propertyMap) ;
+    macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
     p->mProperty_mIsPublic = inAttributeValue ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_propertyMap::setter_setMAccessForKey (GALGAS_propertyAccessKind inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_propertyGetterMap::setter_setMAccessForKey (GALGAS_propertyGetterKind inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_propertyMap * p = (cMapElement_propertyMap *) attributes ;
+  cMapElement_propertyGetterMap * p = (cMapElement_propertyGetterMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_propertyMap) ;
+    macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
     p->mProperty_mAccess = inAttributeValue ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cMapElement_propertyMap * GALGAS_propertyMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                 const GALGAS_string & inKey
-                                                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_propertyMap * result = (cMapElement_propertyMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_propertyMap) ;
+cMapElement_propertyGetterMap * GALGAS_propertyGetterMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                             const GALGAS_string & inKey
+                                                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_propertyGetterMap * result = (cMapElement_propertyGetterMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_propertyGetterMap) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumerator_propertyMap::cEnumerator_propertyMap (const GALGAS_propertyMap & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) :
+cEnumerator_propertyGetterMap::cEnumerator_propertyGetterMap (const GALGAS_propertyGetterMap & inEnumeratedObject,
+                                                              const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap_2D_element cEnumerator_propertyMap::current (LOCATION_ARGS) const {
-  const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_propertyMap) ;
-  return GALGAS_propertyMap_2D_element (p->mProperty_lkey, p->mProperty_mIsPublic, p->mProperty_mAccess) ;
+GALGAS_propertyGetterMap_2D_element cEnumerator_propertyGetterMap::current (LOCATION_ARGS) const {
+  const cMapElement_propertyGetterMap * p = (const cMapElement_propertyGetterMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
+  return GALGAS_propertyGetterMap_2D_element (p->mProperty_lkey, p->mProperty_mIsPublic, p->mProperty_mAccess) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cEnumerator_propertyMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_propertyGetterMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -12854,17 +12854,17 @@ GALGAS_lstring cEnumerator_propertyMap::current_lkey (LOCATION_ARGS) const {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool cEnumerator_propertyMap::current_mIsPublic (LOCATION_ARGS) const {
-  const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_propertyMap) ;
+GALGAS_bool cEnumerator_propertyGetterMap::current_mIsPublic (LOCATION_ARGS) const {
+  const cMapElement_propertyGetterMap * p = (const cMapElement_propertyGetterMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
   return p->mProperty_mIsPublic ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyAccessKind cEnumerator_propertyMap::current_mAccess (LOCATION_ARGS) const {
-  const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_propertyMap) ;
+GALGAS_propertyGetterKind cEnumerator_propertyGetterMap::current_mAccess (LOCATION_ARGS) const {
+  const cMapElement_propertyGetterMap * p = (const cMapElement_propertyGetterMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_propertyGetterMap) ;
   return p->mProperty_mAccess ;
 }
 
@@ -12872,42 +12872,42 @@ GALGAS_propertyAccessKind cEnumerator_propertyMap::current_mAccess (LOCATION_ARG
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                  @propertyMap type                                                  *
+//                                               @propertyGetterMap type                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_propertyMap ("propertyMap",
-                                    NULL) ;
+kTypeDescriptor_GALGAS_propertyGetterMap ("propertyGetterMap",
+                                          NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_propertyMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_propertyMap ;
+const C_galgas_type_descriptor * GALGAS_propertyGetterMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyGetterMap ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_propertyMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_propertyGetterMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_propertyMap (*this)) ;
+    macroMyNew (result, GALGAS_propertyGetterMap (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_propertyMap GALGAS_propertyMap::extractObject (const GALGAS_object & inObject,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_propertyMap result ;
-  const GALGAS_propertyMap * p = (const GALGAS_propertyMap *) inObject.embeddedObject () ;
+GALGAS_propertyGetterMap GALGAS_propertyGetterMap::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_propertyGetterMap result ;
+  const GALGAS_propertyGetterMap * p = (const GALGAS_propertyGetterMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_propertyMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_propertyGetterMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("propertyMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("propertyGetterMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -14351,6 +14351,231 @@ GALGAS_typeKind GALGAS_typeKind::extractObject (const GALGAS_object & inObject,
       result = *p ;
     }else{
       inCompiler->castError ("typeKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumAssociatedValues_propertyGetterKind_constantProperty::cEnumAssociatedValues_propertyGetterKind_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyGetterKind_constantProperty::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyGetterKind_constantProperty::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyGetterKind_constantProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyGetterKind_constantProperty *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cEnumAssociatedValues_propertyGetterKind_storedProperty::cEnumAssociatedValues_propertyGetterKind_storedProperty (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                                                  const GALGAS_uint & inAssociatedValue1
+                                                                                                                  COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyGetterKind_storedProperty::description (C_String & ioString,
+                                                                           const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyGetterKind_storedProperty::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyGetterKind_storedProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyGetterKind_storedProperty *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyGetterKind::GALGAS_propertyGetterKind (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyGetterKind GALGAS_propertyGetterKind::constructor_constantProperty (const GALGAS_objectIR & inAssociatedValue0
+                                                                                   COMMA_LOCATION_ARGS) {
+  GALGAS_propertyGetterKind result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_constantProperty ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyGetterKind_constantProperty (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyGetterKind GALGAS_propertyGetterKind::constructor_storedProperty (const GALGAS_PLMType & inAssociatedValue0,
+                                                                                 const GALGAS_uint & inAssociatedValue1
+                                                                                 COMMA_LOCATION_ARGS) {
+  GALGAS_propertyGetterKind result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_storedProperty ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyGetterKind_storedProperty (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyGetterKind::method_constantProperty (GALGAS_objectIR & outAssociatedValue0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_constantProperty) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @propertyGetterKind constantProperty invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyGetterKind_constantProperty * ptr = (const cEnumAssociatedValues_propertyGetterKind_constantProperty *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyGetterKind::method_storedProperty (GALGAS_PLMType & outAssociatedValue0,
+                                                       GALGAS_uint & outAssociatedValue1,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_storedProperty) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @propertyGetterKind storedProperty invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyGetterKind_storedProperty * ptr = (const cEnumAssociatedValues_propertyGetterKind_storedProperty *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static const char * gEnumNameArrayFor_propertyGetterKind [3] = {
+  "(not built)",
+  "constantProperty",
+  "storedProperty"
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyGetterKind::getter_isConstantProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_constantProperty == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyGetterKind::getter_isStoredProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_storedProperty == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_propertyGetterKind::description (C_String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString << "<enum @propertyGetterKind: " << gEnumNameArrayFor_propertyGetterKind [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_propertyGetterKind::objectCompare (const GALGAS_propertyGetterKind & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              @propertyGetterKind type                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_propertyGetterKind ("propertyGetterKind",
+                                           NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_propertyGetterKind::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyGetterKind ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_propertyGetterKind::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyGetterKind (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_propertyGetterKind GALGAS_propertyGetterKind::extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_propertyGetterKind result ;
+  const GALGAS_propertyGetterKind * p = (const GALGAS_propertyGetterKind *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_propertyGetterKind *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyGetterKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

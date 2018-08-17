@@ -72,44 +72,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMTypeDefinit
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @propertyAccessKind enum, associated values                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_propertyAccessKind_constantProperty : public cEnumAssociatedValues {
-  public : const GALGAS_objectIR mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_propertyAccessKind_constantProperty (const GALGAS_objectIR & inAssociatedValue0
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_constantProperty (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_propertyAccessKind_indexed : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
-  public : const GALGAS_uint mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_propertyAccessKind_indexed (const GALGAS_PLMType & inAssociatedValue0,
-                                                             const GALGAS_uint & inAssociatedValue1
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_propertyAccessKind_indexed (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                      @constructorValue enum, associated values                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
