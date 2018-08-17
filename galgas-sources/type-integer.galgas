@@ -211,6 +211,7 @@ override method @integerDeclarationAST enterInContext
 #--------------------------------------- Enter in type map
   let integerType = @PLMType.new {
     !propertyGetterMap:propertyGetterMap
+    !propertySetterMap: {}
     !routineMap: routineMap
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap

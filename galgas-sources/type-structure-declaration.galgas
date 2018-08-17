@@ -315,6 +315,7 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyGetterMap propertyGetterMap = {}
+  @propertySetterMap propertySetterMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
@@ -325,6 +326,7 @@ override method @structureDeclarationAST enterInContext
       !?staticEntityMap:ioStaticEntityMap
       !?propertyList
       !?propertyGetterMap
+      !?propertySetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -387,6 +389,7 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @PLMType.new {
     !propertyGetterMap: propertyGetterMap
+    !propertySetterMap: propertySetterMap
     !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap
@@ -422,7 +425,8 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!@propertyList ioPropertyList
-  ?!@propertyGetterMap ioPropertyMap
+  ?!@propertyGetterMap ioPropertyGetterMap
+  ?!@propertySetterMap ioPropertySetterMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
   ?!@string ioConstructorKey
@@ -474,7 +478,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
-   [!?ioPropertyMap insertKey
+   [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
       !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
@@ -502,7 +506,12 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !actualPropertyType
-    [!?ioPropertyMap insertKey
+    [!?ioPropertyGetterMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
+    ]
+    [!?ioPropertySetterMap insertKey
       !mPropertyName
       !mIsPublic
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
@@ -514,10 +523,15 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
-    [!?ioPropertyMap insertKey
+    [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
+    ]
+    [!?ioPropertySetterMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
@@ -527,7 +541,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
-    [!?ioPropertyMap insertKey
+    [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}

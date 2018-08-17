@@ -143,6 +143,7 @@ override method @enumerationDeclarationAST enterInContext
 #---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
     !propertyGetterMap:propertyGetterMap
+    !propertySetterMap: {}
     !routineMap: routineMap
     !classConstantMap:enumConstantMap
     !constructorMap:{}

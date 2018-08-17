@@ -199,10 +199,10 @@ private proc analyzeVariableInLValue
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
-        let @propertyGetterMap propertyGetterMap = currentType.propertyGetterMap
-        [propertyGetterMap searchKey !propertyName ?* ?let @propertyGetterKind propertyAccess]
+        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
+        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
         switch propertyAccess
-        case constantProperty (*) :
+        case other :
           error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
         case storedProperty (@PLMType propertyType @uint index) :
           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
@@ -283,10 +283,10 @@ private proc analyzeSelfAssignmentTarget
     for (access) in inAccessList do
       switch access
       case property (@lstring propertyName) :
-        let @propertyGetterMap propertyGetterMap = currentType.propertyGetterMap
-        [propertyGetterMap searchKey !propertyName ?* ?let @propertyGetterKind propertyAccess]
+        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
+        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
         switch propertyAccess
-        case constantProperty (*) :
+        case other :
           error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
         case storedProperty (@PLMType propertyType @uint index) :
           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]

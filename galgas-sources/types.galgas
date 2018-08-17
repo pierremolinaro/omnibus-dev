@@ -5,7 +5,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @PLMType {
-  @propertyGetterMap propertyGetterMap %selector # Properties
+  @propertyGetterMap propertyGetterMap %selector
+  @propertySetterMap propertySetterMap %selector
   @routineMapCTXT routineMap %selector
   @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
   @constructorMap constructorMap %selector # $type (!... !...)
@@ -31,8 +32,8 @@ enum @subscript {
 #·······················································································································
 
 enum @propertyGetterKind {
-  case constantProperty (@objectIR value)
   case storedProperty (@PLMType type @uint index)
+  case constantProperty (@objectIR value)
 }
 
 #·······················································································································
@@ -42,6 +43,22 @@ map @propertyGetterMap {
   @propertyGetterKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
+}
+
+#·······················································································································
+
+map @propertySetterMap {
+  @bool mIsPublic
+  @propertySetterKind mAccess
+  insert insertKey error message "the '%K' property is already declared"
+  search searchKey error message "there is no '%K' property"
+}
+
+#·······················································································································
+
+enum @propertySetterKind {
+  case storedProperty (@PLMType type @uint index)
+  case other
 }
 
 #·······················································································································
@@ -121,6 +138,7 @@ getter @PLMType llvmTypeName -> @string {
 func staticIntegerType -> @PLMType {
   result = .new {
     !propertyGetterMap:{}
+    !propertySetterMap: {}
     !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
@@ -139,6 +157,7 @@ func staticIntegerType -> @PLMType {
 func literalStringType -> @PLMType {
   result = .new {
     !propertyGetterMap:{}
+    !propertySetterMap: {}
     !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
@@ -157,6 +176,7 @@ func literalStringType -> @PLMType {
 func voidType -> @PLMType {
   result = .new {
     !propertyGetterMap:{}
+    !propertySetterMap: {}
     !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
