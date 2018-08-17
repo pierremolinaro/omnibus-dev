@@ -2,20 +2,21 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @driverPropertyListAST {
-  @lstring mPropertyName
-  @propertyAttributeList mPropertyAttributeList
-  @bool mIsConstant # true if declared with "let"
-  @lstring mTypeName # Empty string if no type annotation
-  @structurePropertyInitOptionalExpressionAST mOptionalExpression
-}
+#list @driverPropertyListAST {
+#  @lstring mPropertyName
+#  @propertyAttributeList mPropertyAttributeList
+#  @bool mIsConstant # true if declared with "let"
+#  @lstring mTypeName # Empty string if no type annotation
+#  @structurePropertyInitOptionalExpressionAST mOptionalExpression
+#}
 
 #·······················································································································
 
 struct @driverDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
-  @driverPropertyListAST mDriverPropertyListAST
+  @structurePropertyListAST mPropertyListAST
+#  @driverPropertyListAST mDriverPropertyListAST
   @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
@@ -73,38 +74,38 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <driver_property> ?!@ast ioAST ?!@driverPropertyListAST ioPropertyList {
-    @bool constant
-    select
-      $var$
-      constant = false
-    or
-      $let$
-      constant = true
-    end
-    $identifier$ ?let fieldName
-    @propertyAttributeList propertyAttributeList = {}
-    repeat
-    while
-      $@attribute$ ?let attribute
-      $integer$ ?let value
-      propertyAttributeList += !attribute !value
-    end
-    select
-      <type_definition> !?ioAST ?let typeName
-      select
-        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.noExpression
-      or
-        $=$
-        <expression> !?ioAST ?let initExpression
-        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.expression {!initExpression:initExpression}
-      end
-    or
-      $=$
-      <expression> !?ioAST ?let initExpression
-      ioPropertyList += !fieldName !propertyAttributeList !constant !["" nowhere] !.expression {!initExpression:initExpression}
-    end
-  }
+#  rule <driver_property> ?!@ast ioAST ?!@driverPropertyListAST ioPropertyList {
+#    @bool constant
+#    select
+#      $var$
+#      constant = false
+#    or
+#      $let$
+#      constant = true
+#    end
+#    $identifier$ ?let fieldName
+#    @propertyAttributeList propertyAttributeList = {}
+#    repeat
+#    while
+#      $@attribute$ ?let attribute
+#      $integer$ ?let value
+#      propertyAttributeList += !attribute !value
+#    end
+#    select
+#      <type_definition> !?ioAST ?let typeName
+#      select
+#        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.noExpression
+#      or
+#        $=$
+#        <expression> !?ioAST ?let initExpression
+#        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.expression {!initExpression:initExpression}
+#      end
+#    or
+#      $=$
+#      <expression> !?ioAST ?let initExpression
+#      ioPropertyList += !fieldName !propertyAttributeList !constant !["" nowhere] !.expression {!initExpression:initExpression}
+#    end
+#  }
   
   #·····················································································································
 
@@ -124,7 +125,8 @@ syntax extension plm_syntax {
     end
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
-    @driverPropertyListAST driverPropertyListAST = {}
+#    @driverPropertyListAST driverPropertyListAST = {}
+    @structurePropertyListAST propertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
     var bootHandled = false
@@ -161,7 +163,7 @@ syntax extension plm_syntax {
     while
       <isr> !?ioAST !driverName
     while
-      <driver_property>!?ioAST !?driverPropertyListAST
+      <struct_property_declaration> !?ioAST !false !?propertyListAST
     while
       <function> !?ioAST !?functionDeclarationListAST
     while
@@ -174,7 +176,7 @@ syntax extension plm_syntax {
     ioAST.mDriverDeclarationListAST += !@driverDeclarationAST.new {
       !driverName
       !driverDependenceList
-      !driverPropertyListAST
+      !propertyListAST
       !functionDeclarationListAST
       !svcListAST
       !guardListAST
@@ -317,23 +319,28 @@ proc retainRequiredDrivers ?!@ast ioAST {
       [instanciedDriverMap searchKey !declaration.mDriverName ?let driverInstanciationArgumentMap]
     #--- Build driver property list, adding init expression
       @stringset validArgumentSet = {}
-      for (propertyName propertyAttributeList constant optionalPropertyTypeName optionalInitExpression) in declaration.mDriverPropertyListAST do
-        @expressionAST initExpression
-        switch optionalInitExpression 
-        case noExpression :
-          [driverInstanciationArgumentMap searchKey !propertyName ?initExpression]
+      for (propertyName propertyAttributeList * optionalPropertyTypeName propertyKind) in declaration.mPropertyListAST do
+        @propertyKindAST driverPropertyKind
+        switch propertyKind 
+        case uninitializedStoredProperty :
+          [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]
           validArgumentSet += !propertyName.string
-        case expression (expression) :
-          initExpression = expression
+          driverPropertyKind = .initializedStoredProperty {!initExpression:initExpression}
+        case uninitializedConstantProperty :
+          [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]
+          validArgumentSet += !propertyName.string
+          driverPropertyKind = .initializedConstantProperty {!initExpression:initExpression}
+        case initializedStoredProperty (*) :
+          driverPropertyKind = propertyKind
+        case initializedConstantProperty (*) :
+          driverPropertyKind = propertyKind
         end
         driverPropertyListAST += 
          !propertyName
          !propertyAttributeList
-         !constant
          !false
          !optionalPropertyTypeName
-         !.expression{!initExpression:initExpression}
-#         !true # Variable is singleton
+         !driverPropertyKind
       end
     #--- Check all arguments of driver instanciation have been used
       for (unusedSelector) in [driverInstanciationArgumentMap keySet] - validArgumentSet do
@@ -419,8 +426,8 @@ override method @implementedDriverAST enterInContext
     !exportedRoutine: false
     !.none
     !llvmStartupRoutineNameFromDriver (!mDriverName)
-    !{} # @routineFormalArgumentListAST mFunctionFormalArgumentList
-    !true # warningOnUnusedArgs
+    !{}
+    !true
     !mStartupInstructionList
     !mStartupEndLocation
     !returnTypeName: .new {!"" !mStartupLocation}  # Empty string if no returned value

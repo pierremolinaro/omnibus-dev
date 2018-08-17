@@ -17,13 +17,6 @@ class @structureDeclarationAST : @abstractDeclarationAST {
 
 #·······················································································································
 
-enum @structurePropertyInitOptionalExpressionAST {
-  case expression (@expressionAST initExpression)
-  case noExpression
-}
-
-#·······················································································································
-
 list @propertyAttributeList {
   @lstring mAttributeName
   @lbigint mAttributeValue
@@ -31,14 +24,21 @@ list @propertyAttributeList {
 
 #·······················································································································
 
+enum @propertyKindAST {
+  case initializedStoredProperty (@expressionAST initExpression) # declared by "var = ···"
+  case uninitializedStoredProperty # declared by "var", no initialization
+  case initializedConstantProperty (@expressionAST initExpression) # declared by "let"
+  case uninitializedConstantProperty # declared by "let", no initialization
+}
+
+#·······················································································································
+
 list @structurePropertyListAST {
   @lstring mPropertyName
   @propertyAttributeList mPropertyAttributeList
-  @bool mIsConstant # declared by "let" --> true, declared by "var" --> false
   @bool mIsPublic
   @lstring mPropertyTypeName
-  @structurePropertyInitOptionalExpressionAST mInitialisation
-#  @bool mIsSingletonObject # true, this property is an automomous variable (reserved to driver)
+  @propertyKindAST mPropertyKind
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -52,7 +52,6 @@ syntax extension plm_syntax {
   rule <private_or_public_struct_property_declaration>
     ?!@ast ioAST
     ?!@structurePropertyListAST ioFieldListAST
-#    ?singletonObject:let @bool isSingletonObject
   {
     @bool public
     select
@@ -61,7 +60,7 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    <struct_property_declaration> !?ioAST !public !?ioFieldListAST #!isSingletonObject
+    <struct_property_declaration> !?ioAST !public !?ioFieldListAST
   }
   
   #·····················································································································
@@ -79,42 +78,80 @@ syntax extension plm_syntax {
     ?!@ast ioAST
     ?let @bool isPublic
     ?!@structurePropertyListAST ioFieldListAST
-{
-    @bool constant
-    select
-      $var$
-      constant = false
-    or
-      $let$
-      constant = true
-    end
+  {
+    $let$
     $identifier$ ?let fieldName
+#    @propertyAttributeList propertyAttributeList = {}
+#    repeat
+#    while
+#      $@attribute$ ?let attribute
+#      $integer$ ?let value
+#      propertyAttributeList += !attribute !value
+#    end
+    @lstring typeName
+    select
+      <type_definition> !?ioAST ?typeName
+    or
+      typeName = ["" nowhere]
+    end
+    select
+      $=$
+      <expression> !?ioAST ?let initExpression
+      ioFieldListAST +=
+        !fieldName
+        !{}
+        !isPublic
+        !typeName 
+        !.initializedConstantProperty{!initExpression:initExpression}
+    or
+      ioFieldListAST +=
+        !fieldName
+        !{}
+        !isPublic
+        !typeName 
+        !.uninitializedConstantProperty
+    end
+  }
+
+  #·····················································································································
+
+  rule <struct_property_declaration>
+    ?!@ast ioAST
+    ?let @bool isPublic
+    ?!@structurePropertyListAST ioFieldListAST
+  {
+    $var$
+    $identifier$ ?let fieldName
+    @propertyAttributeList propertyAttributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      $integer$ ?let value
+      propertyAttributeList += !attribute !value
+    end
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioFieldListAST += !fieldName !{} !constant !isPublic !typeName !.noExpression
+        ioFieldListAST += !fieldName !{} !isPublic !typeName !.uninitializedStoredProperty
       or
         $=$
         <expression> !?ioAST ?let initExpression
         ioFieldListAST +=
           !fieldName
-          !{}
-          !constant
+          !propertyAttributeList
           !isPublic
           !typeName 
-          !.expression{!initExpression:initExpression}
+          !.initializedStoredProperty{!initExpression:initExpression}
       end
     or
       $=$
       <expression> !?ioAST ?let initExpression
       ioFieldListAST +=
         !fieldName
-        !{}
-        !constant
+        !propertyAttributeList
         !isPublic
         !["" nowhere]
-        !.expression{!initExpression:initExpression}
-#        !isSingletonObject
+        !.initializedStoredProperty{!initExpression:initExpression}
     end
   }
 
@@ -205,13 +242,15 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #--- Add structure type name as node
   [!?ioGraph addNode !mReceiverTypeName !self]
 #--- Add property types
-  for (4* fieldTypeName initExpression) in mStructurePropertyListAST do
+  for (3* fieldTypeName propertyKind) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       [!?ioGraph addEdge !mReceiverTypeName !fieldTypeName]
     end
-    switch initExpression
-    case noExpression :
-    case expression (initExpression) :
+    switch propertyKind
+    case uninitializedStoredProperty, uninitializedConstantProperty :
+    case initializedStoredProperty (initExpression) :
+      [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
+    case initializedConstantProperty (initExpression) :
       [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
     end
   end
@@ -413,8 +452,8 @@ method @structurePropertyListAST-element enterPropertyInContext
     else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
   end
 #---------- Init expression
-  switch mInitialisation
-  case expression (initExpression) :
+  switch mPropertyKind
+  case initializedConstantProperty (initExpression) :
     computeStaticExpression (
       !?context: ioContext
       !?staticEntityMap:ioStaticEntityMap
@@ -435,23 +474,54 @@ method @structurePropertyListAST-element enterPropertyInContext
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
-    if mIsConstant then
-     [!?ioPropertyMap insertKey
-        !mPropertyName
-        !mIsPublic
-        !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
-      ]
+   [!?ioPropertyMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
+    ]
+  case initializedStoredProperty (initExpression) :
+    computeStaticExpression (
+      !?context: ioContext
+      !?staticEntityMap:ioStaticEntityMap
+      !expression: initExpression
+      !errorLocation: mPropertyName.location
+      !optionalContextualTypeName: mPropertyTypeName
+      ?result:let @objectIR expressionIR
+    )
+    @PLMType actualPropertyType
+    if optionalPropertyType.kind != .void then
+      actualPropertyType = optionalPropertyType
     else
-      let propertyIndex = [ioPropertyList length]
-      ioPropertyList += !mPropertyName.string !actualPropertyType
-      [!?ioPropertyMap insertKey
-        !mPropertyName
-        !mIsPublic
-        !.storedProperty{!type:actualPropertyType !index:propertyIndex}
-      ]
-      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
+      actualPropertyType = [expressionIR type]
     end
-  case noExpression :
+    if not [actualPropertyType instanciable] then
+      error mPropertyName : actualPropertyType.plmTypeDescriptionName + " type is not instanciable"
+    end
+    if not [actualPropertyType copyable] then
+      canBeCopied = false
+    end
+    let propertyIndex = [ioPropertyList length]
+    ioPropertyList += !mPropertyName.string !actualPropertyType
+    [!?ioPropertyMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
+    ]
+    sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
+  case uninitializedStoredProperty :
+    if not [optionalPropertyType instanciable] then
+      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+    end
+    let propertyIndex = [ioPropertyList length]
+    ioPropertyList += !mPropertyName.string !optionalPropertyType
+    [!?ioPropertyMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
+    ]
+    constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
+    ioConstructorKey += "!" + mPropertyName
+  case uninitializedConstantProperty :
     if not [optionalPropertyType instanciable] then
       error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end

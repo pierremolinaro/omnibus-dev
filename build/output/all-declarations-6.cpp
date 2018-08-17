@@ -3764,10 +3764,9 @@ GALGAS_structureDeclarationAST GALGAS_structureDeclarationAST::extractObject (co
 GALGAS_structurePropertyListAST_2D_element::GALGAS_structurePropertyListAST_2D_element (void) :
 mProperty_mPropertyName (),
 mProperty_mPropertyAttributeList (),
-mProperty_mIsConstant (),
 mProperty_mIsPublic (),
 mProperty_mPropertyTypeName (),
-mProperty_mInitialisation () {
+mProperty_mPropertyKind () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3780,15 +3779,13 @@ GALGAS_structurePropertyListAST_2D_element::~ GALGAS_structurePropertyListAST_2D
 GALGAS_structurePropertyListAST_2D_element::GALGAS_structurePropertyListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                         const GALGAS_propertyAttributeList & inOperand1,
                                                                                         const GALGAS_bool & inOperand2,
-                                                                                        const GALGAS_bool & inOperand3,
-                                                                                        const GALGAS_lstring & inOperand4,
-                                                                                        const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5) :
+                                                                                        const GALGAS_lstring & inOperand3,
+                                                                                        const GALGAS_propertyKindAST & inOperand4) :
 mProperty_mPropertyName (inOperand0),
 mProperty_mPropertyAttributeList (inOperand1),
-mProperty_mIsConstant (inOperand2),
-mProperty_mIsPublic (inOperand3),
-mProperty_mPropertyTypeName (inOperand4),
-mProperty_mInitialisation (inOperand5) {
+mProperty_mIsPublic (inOperand2),
+mProperty_mPropertyTypeName (inOperand3),
+mProperty_mPropertyKind (inOperand4) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3796,13 +3793,12 @@ mProperty_mInitialisation (inOperand5) {
 GALGAS_structurePropertyListAST_2D_element GALGAS_structurePropertyListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                         const GALGAS_propertyAttributeList & inOperand1,
                                                                                                         const GALGAS_bool & inOperand2,
-                                                                                                        const GALGAS_bool & inOperand3,
-                                                                                                        const GALGAS_lstring & inOperand4,
-                                                                                                        const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5 
+                                                                                                        const GALGAS_lstring & inOperand3,
+                                                                                                        const GALGAS_propertyKindAST & inOperand4 
                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_structurePropertyListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_structurePropertyListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_structurePropertyListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -3818,16 +3814,13 @@ typeComparisonResult GALGAS_structurePropertyListAST_2D_element::objectCompare (
     result = mProperty_mPropertyAttributeList.objectCompare (inOperand.mProperty_mPropertyAttributeList) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mIsConstant.objectCompare (inOperand.mProperty_mIsConstant) ;
-  }
-  if (result == kOperandEqual) {
     result = mProperty_mIsPublic.objectCompare (inOperand.mProperty_mIsPublic) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mPropertyTypeName.objectCompare (inOperand.mProperty_mPropertyTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mInitialisation.objectCompare (inOperand.mProperty_mInitialisation) ;
+    result = mProperty_mPropertyKind.objectCompare (inOperand.mProperty_mPropertyKind) ;
   }
   return result ;
 }
@@ -3835,7 +3828,7 @@ typeComparisonResult GALGAS_structurePropertyListAST_2D_element::objectCompare (
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_structurePropertyListAST_2D_element::isValid (void) const {
-  return mProperty_mPropertyName.isValid () && mProperty_mPropertyAttributeList.isValid () && mProperty_mIsConstant.isValid () && mProperty_mIsPublic.isValid () && mProperty_mPropertyTypeName.isValid () && mProperty_mInitialisation.isValid () ;
+  return mProperty_mPropertyName.isValid () && mProperty_mPropertyAttributeList.isValid () && mProperty_mIsPublic.isValid () && mProperty_mPropertyTypeName.isValid () && mProperty_mPropertyKind.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3843,10 +3836,9 @@ bool GALGAS_structurePropertyListAST_2D_element::isValid (void) const {
 void GALGAS_structurePropertyListAST_2D_element::drop (void) {
   mProperty_mPropertyName.drop () ;
   mProperty_mPropertyAttributeList.drop () ;
-  mProperty_mIsConstant.drop () ;
   mProperty_mIsPublic.drop () ;
   mProperty_mPropertyTypeName.drop () ;
-  mProperty_mInitialisation.drop () ;
+  mProperty_mPropertyKind.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3861,13 +3853,11 @@ void GALGAS_structurePropertyListAST_2D_element::description (C_String & ioStrin
     ioString << ", " ;
     mProperty_mPropertyAttributeList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mIsConstant.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
     mProperty_mIsPublic.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mPropertyTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mInitialisation.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyKind.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -3886,12 +3876,6 @@ GALGAS_propertyAttributeList GALGAS_structurePropertyListAST_2D_element::getter_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_structurePropertyListAST_2D_element::getter_mIsConstant (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIsConstant ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_bool GALGAS_structurePropertyListAST_2D_element::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
   return mProperty_mIsPublic ;
 }
@@ -3904,8 +3888,8 @@ GALGAS_lstring GALGAS_structurePropertyListAST_2D_element::getter_mPropertyTypeN
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyListAST_2D_element::getter_mInitialisation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInitialisation ;
+GALGAS_propertyKindAST GALGAS_structurePropertyListAST_2D_element::getter_mPropertyKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyKind ;
 }
 
 
@@ -7081,7 +7065,7 @@ GALGAS_globalSyncInstanceMapIR_2D_element GALGAS_globalSyncInstanceMapIR_2D_elem
 GALGAS_driverDeclarationAST::GALGAS_driverDeclarationAST (void) :
 mProperty_mDriverName (),
 mProperty_mDriverDependanceList (),
-mProperty_mDriverPropertyListAST (),
+mProperty_mPropertyListAST (),
 mProperty_mDriverFunctionDeclarationListAST (),
 mProperty_mDriverSystemRoutineListAST (),
 mProperty_mDriverGuardListAST (),
@@ -7102,7 +7086,7 @@ GALGAS_driverDeclarationAST::~ GALGAS_driverDeclarationAST (void) {
 
 GALGAS_driverDeclarationAST::GALGAS_driverDeclarationAST (const GALGAS_lstring & inOperand0,
                                                           const GALGAS_lstringlist & inOperand1,
-                                                          const GALGAS_driverPropertyListAST & inOperand2,
+                                                          const GALGAS_structurePropertyListAST & inOperand2,
                                                           const GALGAS_functionDeclarationListAST & inOperand3,
                                                           const GALGAS_systemRoutineDeclarationListAST & inOperand4,
                                                           const GALGAS_guardDeclarationListAST & inOperand5,
@@ -7114,7 +7098,7 @@ GALGAS_driverDeclarationAST::GALGAS_driverDeclarationAST (const GALGAS_lstring &
                                                           const GALGAS_location & inOperand11) :
 mProperty_mDriverName (inOperand0),
 mProperty_mDriverDependanceList (inOperand1),
-mProperty_mDriverPropertyListAST (inOperand2),
+mProperty_mPropertyListAST (inOperand2),
 mProperty_mDriverFunctionDeclarationListAST (inOperand3),
 mProperty_mDriverSystemRoutineListAST (inOperand4),
 mProperty_mDriverGuardListAST (inOperand5),
@@ -7131,7 +7115,7 @@ mProperty_mStartupEndLocation (inOperand11) {
 GALGAS_driverDeclarationAST GALGAS_driverDeclarationAST::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_driverDeclarationAST (GALGAS_lstring::constructor_default (HERE),
                                       GALGAS_lstringlist::constructor_emptyList (HERE),
-                                      GALGAS_driverPropertyListAST::constructor_emptyList (HERE),
+                                      GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
                                       GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                                       GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
                                       GALGAS_guardDeclarationListAST::constructor_emptyList (HERE),
@@ -7147,7 +7131,7 @@ GALGAS_driverDeclarationAST GALGAS_driverDeclarationAST::constructor_default (UN
 
 GALGAS_driverDeclarationAST GALGAS_driverDeclarationAST::constructor_new (const GALGAS_lstring & inOperand0,
                                                                           const GALGAS_lstringlist & inOperand1,
-                                                                          const GALGAS_driverPropertyListAST & inOperand2,
+                                                                          const GALGAS_structurePropertyListAST & inOperand2,
                                                                           const GALGAS_functionDeclarationListAST & inOperand3,
                                                                           const GALGAS_systemRoutineDeclarationListAST & inOperand4,
                                                                           const GALGAS_guardDeclarationListAST & inOperand5,
@@ -7176,7 +7160,7 @@ typeComparisonResult GALGAS_driverDeclarationAST::objectCompare (const GALGAS_dr
     result = mProperty_mDriverDependanceList.objectCompare (inOperand.mProperty_mDriverDependanceList) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mDriverPropertyListAST.objectCompare (inOperand.mProperty_mDriverPropertyListAST) ;
+    result = mProperty_mPropertyListAST.objectCompare (inOperand.mProperty_mPropertyListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mDriverFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mDriverFunctionDeclarationListAST) ;
@@ -7211,7 +7195,7 @@ typeComparisonResult GALGAS_driverDeclarationAST::objectCompare (const GALGAS_dr
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_driverDeclarationAST::isValid (void) const {
-  return mProperty_mDriverName.isValid () && mProperty_mDriverDependanceList.isValid () && mProperty_mDriverPropertyListAST.isValid () && mProperty_mDriverFunctionDeclarationListAST.isValid () && mProperty_mDriverSystemRoutineListAST.isValid () && mProperty_mDriverGuardListAST.isValid () && mProperty_mBootLocation.isValid () && mProperty_mBootInstructionList.isValid () && mProperty_mBootEndLocation.isValid () && mProperty_mStartupLocation.isValid () && mProperty_mStartupInstructionList.isValid () && mProperty_mStartupEndLocation.isValid () ;
+  return mProperty_mDriverName.isValid () && mProperty_mDriverDependanceList.isValid () && mProperty_mPropertyListAST.isValid () && mProperty_mDriverFunctionDeclarationListAST.isValid () && mProperty_mDriverSystemRoutineListAST.isValid () && mProperty_mDriverGuardListAST.isValid () && mProperty_mBootLocation.isValid () && mProperty_mBootInstructionList.isValid () && mProperty_mBootEndLocation.isValid () && mProperty_mStartupLocation.isValid () && mProperty_mStartupInstructionList.isValid () && mProperty_mStartupEndLocation.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7219,7 +7203,7 @@ bool GALGAS_driverDeclarationAST::isValid (void) const {
 void GALGAS_driverDeclarationAST::drop (void) {
   mProperty_mDriverName.drop () ;
   mProperty_mDriverDependanceList.drop () ;
-  mProperty_mDriverPropertyListAST.drop () ;
+  mProperty_mPropertyListAST.drop () ;
   mProperty_mDriverFunctionDeclarationListAST.drop () ;
   mProperty_mDriverSystemRoutineListAST.drop () ;
   mProperty_mDriverGuardListAST.drop () ;
@@ -7243,7 +7227,7 @@ void GALGAS_driverDeclarationAST::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mDriverDependanceList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mDriverPropertyListAST.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mDriverFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -7280,8 +7264,8 @@ GALGAS_lstringlist GALGAS_driverDeclarationAST::getter_mDriverDependanceList (UN
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_driverPropertyListAST GALGAS_driverDeclarationAST::getter_mDriverPropertyListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mDriverPropertyListAST ;
+GALGAS_structurePropertyListAST GALGAS_driverDeclarationAST::getter_mPropertyListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
