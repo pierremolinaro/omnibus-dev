@@ -518,8 +518,6 @@ proc handlePropertyAccessInExpression
   switch accessKind
   case constantProperty (@objectIR value) :
     ioResult = value
-  case singleton  (object *) :
-    ioResult = object
   case indexed (@PLMType propertyType @uint propertyIndex) :
     [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference

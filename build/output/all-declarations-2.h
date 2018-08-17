@@ -4081,8 +4081,7 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_constantProperty,
-    kEnum_indexed,
-    kEnum_singleton
+    kEnum_indexed
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -4116,10 +4115,6 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                                        const class GALGAS_uint & inOperand1
                                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_propertyAccessKind constructor_singleton (const class GALGAS_objectIR & inOperand0,
-                                                                         const class GALGAS_location & inOperand1
-                                                                         COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -4138,19 +4133,12 @@ class GALGAS_propertyAccessKind : public AC_GALGAS_root {
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_singleton (class GALGAS_objectIR & outArgument0,
-                                                   class GALGAS_location & outArgument1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstantProperty (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndexed (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSingleton (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4372,7 +4360,6 @@ void extensionMethod_enterFunctionsInPropertyMap (const class GALGAS_functionDec
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropertyListAST_2D_element inObject,
-                                             const class GALGAS_lstring constin_inStructureName,
                                              class GALGAS_semanticContext & io_ioContext,
                                              class GALGAS_staticEntityMap & io_ioStaticEntityMap,
                                              class GALGAS_propertyList & io_ioPropertyList,
@@ -4381,7 +4368,6 @@ void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropert
                                              class GALGAS_constructorSignature & io_constructorSignature,
                                              class GALGAS_string & io_ioConstructorKey,
                                              class GALGAS_bool & io_canBeCopied,
-                                             class GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 

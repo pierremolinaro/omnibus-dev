@@ -4,12 +4,6 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-boolset @PLMTypeAttributes {
-  instanciable, equatable, copyable, comparable
-}
-
-#·······················································································································
-
 struct @PLMType {
   @propertyMap propertyMap %selector # Properties and methods
   @routineMapCTXT routineMap %selector
@@ -32,6 +26,12 @@ enum @subscript {
   case literalString
   
   default noSubscript
+}
+
+#·······················································································································
+
+boolset @PLMTypeAttributes {
+  instanciable, equatable, copyable, comparable
 }
 
 #·······················································································································

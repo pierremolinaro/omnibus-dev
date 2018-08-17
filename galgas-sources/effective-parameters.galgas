@@ -184,12 +184,6 @@ proc analyzeEffectiveParameters
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
-#      if not canBeUsedAsInputParameter then
-#        error name : "this variable cannot be used as output/input parameter"
-#      end
-#      if not accessIsAllowed then
-#        error name : "routine has no access right on the this variable"
-#      end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
       let argumentIR = @objectIR.reference {
         !type:[objectIR type]
@@ -199,9 +193,6 @@ proc analyzeEffectiveParameters
     case outputInputSelfVariable (@lstring name) :
       [inSelfType.propertyMap searchKey !name ?* ?let @propertyAccessKind propertyAccess]
       switch propertyAccess
-      case singleton  (@objectIR object *) :
-        parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![object type]
-        ioEffectiveParameterListIR += !.outputInput !object
       case constantProperty (*) :
         error inErrorLocation : "a constant property cannot be used here"
       case indexed (@PLMType propertyType @uint propertyIndex) :

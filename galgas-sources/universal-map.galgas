@@ -356,8 +356,6 @@ method @universalValuedObjectMap searchValuedObjectType
       switch accessKind
       case constantProperty (value) :
         outType = [value type]
-      case singleton  (object *) :
-        outType = [object type]
       case indexed  (type *) :
         outType = type
       end

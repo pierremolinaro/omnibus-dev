@@ -421,14 +421,12 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
                                                                                              class GALGAS_structurePropertyListAST & ioArgument1,
-                                                                                             const class GALGAS_bool constinArgument2,
                                                                                              class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_private_5F_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
                                                                              class GALGAS_structurePropertyListAST & ioArgument1,
-                                                                             const class GALGAS_bool constinArgument2,
                                                                              class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -479,7 +477,6 @@ class cParser_plm_5F_syntax {
   protected : virtual void nt_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
                                                                   const class GALGAS_bool constinArgument1,
                                                                   class GALGAS_structurePropertyListAST & ioArgument2,
-                                                                  const class GALGAS_bool constinArgument3,
                                                                   class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_struct_5F_property_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -546,14 +543,12 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_ (GALGAS_ast & ioArgument0,
                                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
-                                                                                                        const GALGAS_bool constinArgument2,
                                                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_ (GALGAS_ast & ioArgument0,
                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
-                                                                                        const GALGAS_bool constinArgument2,
                                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_parse (C_Lexique_plm_5F_lexique * inLexique) ;
@@ -561,7 +556,6 @@ class cParser_plm_5F_syntax {
   protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument0,
                                                                              const GALGAS_bool constinArgument1,
                                                                              GALGAS_structurePropertyListAST & ioArgument2,
-                                                                             const GALGAS_bool constinArgument3,
                                                                              C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_parse (C_Lexique_plm_5F_lexique * inLexique) ;
@@ -8428,8 +8422,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                   const class GALGAS_bool & in_mIsConstant,
                                                   const class GALGAS_bool & in_mIsPublic,
                                                   const class GALGAS_lstring & in_mPropertyTypeName,
-                                                  const class GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation,
-                                                  const class GALGAS_bool & in_mIsSingletonObject
+                                                  const class GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -8450,8 +8443,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                                                    const class GALGAS_bool & inOperand2,
                                                                                    const class GALGAS_bool & inOperand3,
                                                                                    const class GALGAS_lstring & inOperand4,
-                                                                                   const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5,
-                                                                                   const class GALGAS_bool & inOperand6
+                                                                                   const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -8465,8 +8457,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                       const class GALGAS_bool & inOperand2,
                                                       const class GALGAS_bool & inOperand3,
                                                       const class GALGAS_lstring & inOperand4,
-                                                      const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5,
-                                                      const class GALGAS_bool & inOperand6
+                                                      const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST add_operation (const GALGAS_structurePropertyListAST & inOperand,
@@ -8485,8 +8476,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                        class GALGAS_bool constinArgument3,
                                                        class GALGAS_lstring constinArgument4,
                                                        class GALGAS_structurePropertyInitOptionalExpressionAST constinArgument5,
-                                                       class GALGAS_bool constinArgument6,
-                                                       class GALGAS_uint constinArgument7,
+                                                       class GALGAS_uint constinArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8496,7 +8486,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                   class GALGAS_bool & outArgument3,
                                                   class GALGAS_lstring & outArgument4,
                                                   class GALGAS_structurePropertyInitOptionalExpressionAST & outArgument5,
-                                                  class GALGAS_bool & outArgument6,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -8506,7 +8495,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                  class GALGAS_bool & outArgument3,
                                                  class GALGAS_lstring & outArgument4,
                                                  class GALGAS_structurePropertyInitOptionalExpressionAST & outArgument5,
-                                                 class GALGAS_bool & outArgument6,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -8516,8 +8504,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                        class GALGAS_bool & outArgument3,
                                                        class GALGAS_lstring & outArgument4,
                                                        class GALGAS_structurePropertyInitOptionalExpressionAST & outArgument5,
-                                                       class GALGAS_bool & outArgument6,
-                                                       class GALGAS_uint constinArgument7,
+                                                       class GALGAS_uint constinArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -8529,7 +8516,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                class GALGAS_bool & outArgument3,
                                                class GALGAS_lstring & outArgument4,
                                                class GALGAS_structurePropertyInitOptionalExpressionAST & outArgument5,
-                                               class GALGAS_bool & outArgument6,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -8539,7 +8525,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                               class GALGAS_bool & outArgument3,
                                               class GALGAS_lstring & outArgument4,
                                               class GALGAS_structurePropertyInitOptionalExpressionAST & outArgument5,
-                                              class GALGAS_bool & outArgument6,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -8557,10 +8542,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublicAtIndex (const class GALGAS_uint & constinOperand0,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSingletonObjectAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_propertyAttributeList getter_mPropertyAttributeListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                      C_Compiler * inCompiler
@@ -8610,7 +8591,6 @@ class cEnumerator_structurePropertyListAST : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mIsPublic (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mPropertyTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_structurePropertyInitOptionalExpressionAST current_mInitialisation (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mIsSingletonObject (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_structurePropertyListAST_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -16520,8 +16500,6 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_structurePropertyInitOptionalExpressionAST mProperty_mInitialisation ;
 
-  public : GALGAS_bool mProperty_mIsSingletonObject ;
-
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -16538,8 +16516,7 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
                                                        const GALGAS_bool & in_mIsConstant,
                                                        const GALGAS_bool & in_mIsPublic,
                                                        const GALGAS_lstring & in_mPropertyTypeName,
-                                                       const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation,
-                                                       const GALGAS_bool & in_mIsSingletonObject) ;
+                                                       const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation) ;
 
 //-- Start of generic part --*
 
@@ -16557,8 +16534,7 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
                                                                                     const class GALGAS_bool & inOperand2,
                                                                                     const class GALGAS_bool & inOperand3,
                                                                                     const class GALGAS_lstring & inOperand4,
-                                                                                    const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5,
-                                                                                    const class GALGAS_bool & inOperand6
+                                                                                    const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand5
                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -16578,8 +16554,6 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSingletonObject (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_propertyAttributeList getter_mPropertyAttributeList (LOCATION_ARGS) const ;
 

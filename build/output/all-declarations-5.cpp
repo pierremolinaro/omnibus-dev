@@ -31198,11 +31198,10 @@ void cGrammar_plm_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5
 
 void cGrammar_plm_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_ast &  parameter_1,
                                 GALGAS_structurePropertyListAST &  parameter_2,
-                                const GALGAS_bool  parameter_3,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 7 :
-      rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_(parameter_1, parameter_2, parameter_3, inLexique) ;
+      rule_plm_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -31228,11 +31227,10 @@ void cGrammar_plm_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_pa
 
 void cGrammar_plm_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_ast &  parameter_1,
                                 GALGAS_structurePropertyListAST &  parameter_2,
-                                const GALGAS_bool  parameter_3,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 8 :
-      rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_(parameter_1, parameter_2, parameter_3, inLexique) ;
+      rule_plm_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -31259,11 +31257,10 @@ void cGrammar_plm_5F_grammar::nt_struct_5F_property_5F_declaration_parse (C_Lexi
 void cGrammar_plm_5F_grammar::nt_struct_5F_property_5F_declaration_ (GALGAS_ast &  parameter_1,
                                 const GALGAS_bool  parameter_2,
                                 GALGAS_structurePropertyListAST &  parameter_3,
-                                const GALGAS_bool  parameter_4,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 9 :
-      rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_(parameter_1, parameter_2, parameter_3, parameter_4, inLexique) ;
+      rule_plm_5F_syntax_struct_5F_property_5F_declaration_i9_(parameter_1, parameter_2, parameter_3, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

@@ -202,9 +202,6 @@ private proc analyzeVariableInLValue
         let @propertyMap propertyMap = currentType.propertyMap
         [propertyMap searchKey !propertyName ?* ?let @propertyAccessKind propertyAccess]
         switch propertyAccess
-        case singleton  (@objectIR object *) :
-          currentType = [object type]
-          currentLLVMName = [object llvmName]
         case constantProperty (*) :
           error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
         case indexed (@PLMType propertyType @uint index) :
@@ -291,9 +288,6 @@ private proc analyzeSelfAssignmentTarget
         switch propertyAccess
         case constantProperty (*) :
           error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
-        case singleton  (@objectIR object *) :
-          currentType = [object type]
-          currentLLVMName = [object llvmName]
         case indexed (@PLMType propertyType @uint index) :
           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference

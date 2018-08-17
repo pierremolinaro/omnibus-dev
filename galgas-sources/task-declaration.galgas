@@ -71,7 +71,7 @@ syntax extension plm_syntax {
     @syncInstructionBranchListAST branchList = {}
     repeat
     while
-      <private_struct_property_declaration> !?ioAST !?taskVarList !true
+      <private_struct_property_declaration> !?ioAST !?taskVarList
     while
       $func$
       $identifier$ ?let procName
@@ -189,7 +189,7 @@ method @taskListAST enterInContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR ioRoutineListIR
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
+  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #------------- Sort tasks following their relative priority
@@ -252,7 +252,6 @@ method @taskListAST enterInContext
     @sortedOperandIRList initialValueList = {}
     for property in task.mVarList do
       [property enterPropertyInContext
-        !task.mTaskName
         !?context:ioContext
         !?staticEntityMap:ioStaticEntityMap
         !?propertyList
@@ -261,7 +260,6 @@ method @taskListAST enterInContext
         !?*
         !?*
         !?*
-        !?ioGlobalVariableIRList
       ]
     end
   #---- Add activate function

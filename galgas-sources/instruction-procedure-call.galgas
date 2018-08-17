@@ -281,10 +281,6 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         error propertyName
           : "a context property cannot be used in this context"
           : currentType, currentLLVMAddressVar
-      case singleton  (@objectIR object *) :
-        currentType = [object type]
-        currentLLVMAddressVar = [object llvmName]
-        currentObjectPropertyMap = [object type].propertyMap # ????
       case indexed (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference

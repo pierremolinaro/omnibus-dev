@@ -400,8 +400,6 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       switch propertyAccess
       case constantProperty (*) :
         error propertyName: "a constant property not available in this context" : currentObject
-      case singleton  (object *) :
-        currentObject = object
       case indexed (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
