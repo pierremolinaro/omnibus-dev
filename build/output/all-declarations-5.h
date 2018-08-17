@@ -10,6 +10,76 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//              Extension getter '@effectiveArgumentPassingModeAST matchingFormalArgument' (as function)               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_effectiveArgumentPassingModeAST & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Extension getter '@effectiveArgumentListAST mangledName' (as function)                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring extensionGetter_mangledName (const class GALGAS_effectiveArgumentListAST & inObject,
+                                                  const class GALGAS_lstring & constinArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Extension getter '@objectIR llvmName' (as function)                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                        Function 'literalCharacterArrayName'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint & constinArgument0,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               Extension getter '@objectIR llvmTypeName' (as function)                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_objectIR & inObject,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Extension getter '@objectIR type' (as function)                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_PLMType extensionGetter_type (const class GALGAS_objectIR & inObject,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'literalStringType'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_PLMType function_literalStringType (class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                          Extension getter '@objectIR plmTypeDescriptionName' (as function)                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2669,6 +2739,114 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
   public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mElementLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexIR (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                        Extension setter '@instructionListIR appendGetComputedPropertyValue'                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_appendGetComputedPropertyValue (class GALGAS_instructionListIR & ioObject,
+                                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                     const class GALGAS_objectIR constin_inReceiverIR,
+                                                     const class GALGAS_string constin_inProperyName,
+                                                     const class GALGAS_PLMType constin_inResultType,
+                                                     class GALGAS_objectIR & out_outResultValueIR,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          @getComputedPropertyValueIR class                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_getComputedPropertyValueIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_getComputedPropertyValueIR (void) ;
+
+//---
+  public : inline const class cPtr_getComputedPropertyValueIR * ptr (void) const { return (const cPtr_getComputedPropertyValueIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_getComputedPropertyValueIR (const cPtr_getComputedPropertyValueIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_getComputedPropertyValueIR extractObject (const GALGAS_object & inObject,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_getComputedPropertyValueIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                           const class GALGAS_string & inOperand1,
+                                                                           const class GALGAS_objectIR & inOperand2
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_getComputedPropertyValueIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mReceiverIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mResultValueIR (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_getComputedPropertyValueIR class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getComputedPropertyValueIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Pointer class for @getComputedPropertyValueIR class                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_objectIR mProperty_mReceiverIR ;
+  public : GALGAS_string mProperty_mPropertyName ;
+  public : GALGAS_objectIR mProperty_mResultValueIR ;
+
+//--- Constructor
+  public : cPtr_getComputedPropertyValueIR (const GALGAS_objectIR & in_mReceiverIR,
+                                            const GALGAS_string & in_mPropertyName,
+                                            const GALGAS_objectIR & in_mResultValueIR
+                                            COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mReceiverIR (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResultValueIR (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

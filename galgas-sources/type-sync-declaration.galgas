@@ -71,6 +71,8 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
       [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
     case initializedConstantProperty (initExpression) :
       [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
+    case computedProperty (instructionList *) :
+      [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
 #    switch initExpression
 #    case noExpression :
@@ -131,6 +133,9 @@ override method @syncDeclarationAST enterInContext
     [property enterPropertyInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
+      !receiverTypeName:mSyncToolName
+      !receiverLLVMBaseTypeName: mSyncToolName
+      !?ioDecoratedRoutineList
       !?propertyList
       !?propertyGetterMap
       !?propertySetterMap

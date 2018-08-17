@@ -146,6 +146,7 @@ project (1:0:0) -> "plm" {
 
   "galgas-sources/intermediate-get-universal-property-reference.galgas"
   "galgas-sources/intermediate-get-universal-array-element-reference.galgas"
+  "galgas-sources/intermediate-get-computed-property-value.galgas"
   "galgas-sources/intermediate-get-array-element-reference.galgas"
   "galgas-sources/intermediate-select-instruction.galgas"
 

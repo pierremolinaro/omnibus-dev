@@ -172,7 +172,6 @@ override method @externRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "declare"
   if mReturnType == .null then
     ioLLVMcode += " void"

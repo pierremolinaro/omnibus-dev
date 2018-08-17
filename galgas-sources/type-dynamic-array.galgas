@@ -283,7 +283,6 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
     !argumentList
   )
   let insertRoutineLLVMName = llvmNameForFunction (!insertRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
              + " (%ptrtype* %ioArray, " + [elementType llvmTypeName] + " %inValue)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Get buffer length\n"
@@ -325,7 +324,6 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
 {
   let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
   let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"
   ioLLVMcode += ", i32 %inIndex"

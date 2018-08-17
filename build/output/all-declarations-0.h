@@ -12056,7 +12056,8 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
     kEnum_initializedStoredProperty,
     kEnum_uninitializedStoredProperty,
     kEnum_initializedConstantProperty,
-    kEnum_uninitializedConstantProperty
+    kEnum_uninitializedConstantProperty,
+    kEnum_computedProperty
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -12083,6 +12084,10 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_propertyKindAST constructor_computedProperty (const class GALGAS_instructionListAST & inOperand0,
+                                                                             const class GALGAS_location & inOperand1
+                                                                             COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_propertyKindAST constructor_initializedConstantProperty (const class GALGAS_expressionAST & inOperand0
                                                                                         COMMA_LOCATION_ARGS) ;
 
@@ -12102,6 +12107,11 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_computedProperty (class GALGAS_instructionListAST & outArgument0,
+                                                          class GALGAS_location & outArgument1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_initializedConstantProperty (class GALGAS_expressionAST & outArgument0,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
@@ -12113,6 +12123,8 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isComputedProperty (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInitializedConstantProperty (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInitializedStoredProperty (LOCATION_ARGS) const ;
@@ -12166,6 +12178,24 @@ class cEnumAssociatedValues_propertyKindAST_initializedConstantProperty : public
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (void) {}
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumAssociatedValues_propertyKindAST_computedProperty : public cEnumAssociatedValues {
+  public : const GALGAS_instructionListAST mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_propertyKindAST_computedProperty (const GALGAS_instructionListAST & inAssociatedValue0,
+                                                                   const GALGAS_location & inAssociatedValue1
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_propertyKindAST_computedProperty (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -293,6 +293,17 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         currentType = propertyType
         currentLLVMAddressVar = llvmPropertyName
         currentObjectPropertyMap = currentType.propertyGetterMap # ????
+      case computedProperty (@PLMType propertyType) :
+        [!?ioInstructionGenerationList appendGetComputedPropertyValue
+          !?ioTemporaries
+          !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
+          !propertyName
+          !propertyType
+          ?let resultValueIR
+        ]
+        currentType = [resultValueIR type]
+        currentLLVMAddressVar = [resultValueIR llvmName]
+        currentObjectPropertyMap = currentType.propertyGetterMap # ????
       end
     case arrayAccess (* @location endOfIndex *) :
       error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar

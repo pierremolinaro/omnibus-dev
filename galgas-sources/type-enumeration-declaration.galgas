@@ -239,7 +239,6 @@ override method @enumToUintRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   let routineLLVMName = llvmNameForFunction (!mRoutineMangledName.string)
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define internal " + mEnumerationLLVMTypeName + " @" + routineLLVMName
   ioLLVMcode += " (" + mEnumerationLLVMTypeName + "* %inValue) nounwind {\n"
   ioLLVMcode += "  %r = load " + mEnumerationLLVMTypeName + ", " + mEnumerationLLVMTypeName + "* %inValue\n"

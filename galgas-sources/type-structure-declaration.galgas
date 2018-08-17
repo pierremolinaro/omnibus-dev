@@ -29,6 +29,7 @@ enum @propertyKindAST {
   case uninitializedStoredProperty # declared by "var", no initialization
   case initializedConstantProperty (@expressionAST initExpression) # declared by "let"
   case uninitializedConstantProperty # declared by "let", no initialization
+  case computedProperty (@instructionListAST instructionList @location endOfInstructionList)
 }
 
 #·······················································································································
@@ -133,6 +134,16 @@ syntax extension plm_syntax {
       <type_definition> !?ioAST  ?let typeName
       select
         ioFieldListAST += !fieldName !{} !isPublic !typeName !.uninitializedStoredProperty
+      or
+        ${$
+        <instructionList> !?ioAST ?let instructionList
+        ioFieldListAST +=
+          !fieldName
+          !propertyAttributeList
+          !isPublic
+          !typeName 
+          !.computedProperty{!instructionList:instructionList !endOfInstructionList:.here}
+        $}$
       or
         $=$
         <expression> !?ioAST ?let initExpression
@@ -252,6 +263,8 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
       [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
     case initializedConstantProperty (initExpression) :
       [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
+    case computedProperty (instructionList *) :
+      [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
   end
 #--- Add structure functions
@@ -324,6 +337,9 @@ override method @structureDeclarationAST enterInContext
     [property enterPropertyInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
+      !receiverTypeName:mReceiverTypeName
+      !receiverLLVMBaseTypeName: mLLVMBaseTypeName
+      !?ioDecoratedRoutineList
       !?propertyList
       !?propertyGetterMap
       !?propertySetterMap
@@ -424,6 +440,9 @@ override method @structureDeclarationAST enterInContext
 method @structurePropertyListAST-element enterPropertyInContext
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?receiverTypeName:let @lstring inReceiverTypeName
+  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@propertyList ioPropertyList
   ?!@propertyGetterMap ioPropertyGetterMap
   ?!@propertySetterMap ioPropertySetterMap
@@ -548,6 +567,33 @@ method @structurePropertyListAST-element enterPropertyInContext
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
+  case computedProperty (instructionList endOfInstructionList) :
+    if not [optionalPropertyType instanciable] then
+      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+    end
+    [!?ioPropertyGetterMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.computedProperty{!type: optionalPropertyType}
+    ]
+    let functionLLVMName = @lstring.new {
+      !"get." + inReceiverLLVMBaseTypeName + "." + mPropertyName
+      !mPropertyName.location
+    }
+    ioDecoratedRoutineList +=
+      !receiverTypeName: inReceiverTypeName
+      !mode:.userMode
+      !isRequired: false
+      !.function
+      !warnIfUnused: false
+      !exportedRoutine: false
+      !.none
+      !functionLLVMName
+      !{}
+      !false 
+      !instructionList
+      !endOfInstructionList
+      !returnTypeName: mPropertyTypeName
   end
 }
 

@@ -356,7 +356,9 @@ method @universalValuedObjectMap searchValuedObjectType
       switch accessKind
       case constantProperty (value) :
         outType = [value type]
-      case storedProperty  (type *) :
+      case storedProperty (type *) :
+        outType = type
+      case computedProperty (type) :
         outType = type
       end
     case arrayAccess (3*) :

@@ -499,6 +499,41 @@ typeComparisonResult cEnumAssociatedValues_propertyKindAST_initializedConstantPr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+cEnumAssociatedValues_propertyKindAST_computedProperty::cEnumAssociatedValues_propertyKindAST_computedProperty (const GALGAS_instructionListAST & inAssociatedValue0,
+                                                                                                                const GALGAS_location & inAssociatedValue1
+                                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_propertyKindAST_computedProperty::description (C_String & ioString,
+                                                                          const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_propertyKindAST_computedProperty::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_propertyKindAST_computedProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyKindAST_computedProperty *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_propertyKindAST::GALGAS_propertyKindAST (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -552,6 +587,22 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::constructor_uninitializedConstant
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_propertyKindAST GALGAS_propertyKindAST::constructor_computedProperty (const GALGAS_instructionListAST & inAssociatedValue0,
+                                                                             const GALGAS_location & inAssociatedValue1
+                                                                             COMMA_LOCATION_ARGS) {
+  GALGAS_propertyKindAST result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_computedProperty ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertyKindAST_computedProperty (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 void GALGAS_propertyKindAST::method_initializedStoredProperty (GALGAS_expressionAST & outAssociatedValue0,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const {
@@ -584,12 +635,32 @@ void GALGAS_propertyKindAST::method_initializedConstantProperty (GALGAS_expressi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const char * gEnumNameArrayFor_propertyKindAST [5] = {
+void GALGAS_propertyKindAST::method_computedProperty (GALGAS_instructionListAST & outAssociatedValue0,
+                                                      GALGAS_location & outAssociatedValue1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_computedProperty) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @propertyKindAST computedProperty invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_propertyKindAST_computedProperty * ptr = (const cEnumAssociatedValues_propertyKindAST_computedProperty *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static const char * gEnumNameArrayFor_propertyKindAST [6] = {
   "(not built)",
   "initializedStoredProperty",
   "uninitializedStoredProperty",
   "initializedConstantProperty",
-  "uninitializedConstantProperty"
+  "uninitializedConstantProperty",
+  "computedProperty"
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -614,6 +685,12 @@ GALGAS_bool GALGAS_propertyKindAST::getter_isInitializedConstantProperty (UNUSED
 
 GALGAS_bool GALGAS_propertyKindAST::getter_isUninitializedConstantProperty (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_uninitializedConstantProperty == mEnum) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isComputedProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_computedProperty == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13604,32 +13681,32 @@ void extensionMethod_generateLLVMDriverCode (const GALGAS_driverListIR inObject,
                                              GALGAS_string & ioArgument_ioLLVMcode,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 496)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 496)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 497)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 497)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 497)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 497)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 498)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 498)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)) ;
   const GALGAS_driverListIR temp_0 = inObject ;
-  cEnumerator_driverListIR enumerator_20148 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_20148.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmBootRoutineNameFromDriver (enumerator_20148.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 499)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 499)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20148.current (HERE).getter_mType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)).add_operation (function_llvmNameForGlobalVariable (enumerator_20148.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 500)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 500)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)) ;
-    enumerator_20148.gotoNextObject () ;
+  cEnumerator_driverListIR enumerator_20229 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_20229.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmBootRoutineNameFromDriver (enumerator_20229.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 501)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 501)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20229.current (HERE).getter_mType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)).add_operation (function_llvmNameForGlobalVariable (enumerator_20229.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 502)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 502)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 503)) ;
+    enumerator_20229.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 503)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 505)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 504)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Startup"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 506)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 506)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @startup ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 507)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 507)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 507)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 507)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 506)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Startup"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 508)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 508)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @startup ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)) ;
   const GALGAS_driverListIR temp_1 = inObject ;
-  cEnumerator_driverListIR enumerator_20621 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_20621.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmStartupRoutineNameFromDriver (enumerator_20621.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 509)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20621.current (HERE).getter_mType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)).add_operation (function_llvmNameForGlobalVariable (enumerator_20621.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 510)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 510)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)) ;
-    enumerator_20621.gotoNextObject () ;
+  cEnumerator_driverListIR enumerator_20702 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_20702.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmStartupRoutineNameFromDriver (enumerator_20702.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 511)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 511)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_20702.current (HERE).getter_mType (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 512)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 512)).add_operation (function_llvmNameForGlobalVariable (enumerator_20702.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 512)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 512)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 512)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 513)) ;
+    enumerator_20702.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 513)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 515)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 514)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 516)) ;
 }
 
 
@@ -14727,438 +14804,6 @@ GALGAS_staticListValueListAST GALGAS_staticListValueListAST::extractObject (cons
       result = *p ;
     }else{
       inCompiler->castError ("staticListValueListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Class for element of '@extendStaticListElementAST' list                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cCollectionElement_extendStaticListElementAST : public cCollectionElement {
-  public : GALGAS_extendStaticListElementAST_2D_element mObject ;
-
-//--- Constructors
-  public : cCollectionElement_extendStaticListElementAST (const GALGAS_extendStaticListExpressionAST & in_mExpression,
-                                                          const GALGAS_location & in_mEndOfExpression
-                                                          COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_extendStaticListElementAST (const GALGAS_extendStaticListElementAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
-
-//--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cCollectionElement_extendStaticListElementAST::cCollectionElement_extendStaticListElementAST (const GALGAS_extendStaticListExpressionAST & in_mExpression,
-                                                                                              const GALGAS_location & in_mEndOfExpression
-                                                                                              COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mExpression, in_mEndOfExpression) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cCollectionElement_extendStaticListElementAST::cCollectionElement_extendStaticListElementAST (const GALGAS_extendStaticListElementAST_2D_element & inElement COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (inElement.mProperty_mExpression, inElement.mProperty_mEndOfExpression) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool cCollectionElement_extendStaticListElementAST::isValid (void) const {
-  return mObject.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cCollectionElement * cCollectionElement_extendStaticListElementAST::copy (void) {
-  cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_extendStaticListElementAST (mObject.mProperty_mExpression, mObject.mProperty_mEndOfExpression COMMA_HERE)) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cCollectionElement_extendStaticListElementAST::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExpression" ":" ;
-  mObject.mProperty_mExpression.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mEndOfExpression" ":" ;
-  mObject.mProperty_mEndOfExpression.description (ioString, inIndentation) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cCollectionElement_extendStaticListElementAST::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_extendStaticListElementAST * operand = (cCollectionElement_extendStaticListElementAST *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_extendStaticListElementAST) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST::GALGAS_extendStaticListElementAST (void) :
-AC_GALGAS_list () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST::GALGAS_extendStaticListElementAST (const capCollectionElementArray & inSharedArray) :
-AC_GALGAS_list (inSharedArray) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_extendStaticListElementAST  (capCollectionElementArray ()) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::constructor_listWithValue (const GALGAS_extendStaticListExpressionAST & inOperand0,
-                                                                                                const GALGAS_location & inOperand1
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_extendStaticListElementAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_extendStaticListElementAST (capCollectionElementArray ()) ;
-    capCollectionElement attributes ;
-    GALGAS_extendStaticListElementAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
-    result.appendObject (attributes) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                                   const GALGAS_extendStaticListExpressionAST & in_mExpression,
-                                                                   const GALGAS_location & in_mEndOfExpression
-                                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement_extendStaticListElementAST * p = NULL ;
-  macroMyNew (p, cCollectionElement_extendStaticListElementAST (in_mExpression,
-                                                                in_mEndOfExpression COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::addAssign_operation (const GALGAS_extendStaticListExpressionAST & inOperand0,
-                                                             const GALGAS_location & inOperand1
-                                                             COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extendStaticListElementAST (inOperand0, inOperand1 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    appendObject (attributes) ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::setter_append (GALGAS_extendStaticListElementAST_2D_element inElement,
-                                                       C_Compiler * /* inCompiler */
-                                                       COMMA_LOCATION_ARGS) {
-  if (isValid () && inElement.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extendStaticListElementAST (inElement COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    appendObject (attributes) ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::setter_insertAtIndex (const GALGAS_extendStaticListExpressionAST inOperand0,
-                                                              const GALGAS_location inOperand1,
-                                                              const GALGAS_uint inInsertionIndex,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extendStaticListElementAST (inOperand0, inOperand1 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::setter_removeAtIndex (GALGAS_extendStaticListExpressionAST & outOperand0,
-                                                              GALGAS_location & outOperand1,
-                                                              const GALGAS_uint inRemoveIndex,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  if (isValid () && inRemoveIndex.isValid ()) {
-    capCollectionElement attributes ;
-    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-    if (NULL == p) {
-      outOperand0.drop () ;
-      outOperand1.drop () ;
-    }else{
-      macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-      outOperand0 = p->mObject.mProperty_mExpression ;
-      outOperand1 = p->mObject.mProperty_mEndOfExpression ;
-    }
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::setter_popFirst (GALGAS_extendStaticListExpressionAST & outOperand0,
-                                                         GALGAS_location & outOperand1,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-    outOperand0 = p->mObject.mProperty_mExpression ;
-    outOperand1 = p->mObject.mProperty_mEndOfExpression ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::setter_popLast (GALGAS_extendStaticListExpressionAST & outOperand0,
-                                                        GALGAS_location & outOperand1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-    outOperand0 = p->mObject.mProperty_mExpression ;
-    outOperand1 = p->mObject.mProperty_mEndOfExpression ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::method_first (GALGAS_extendStaticListExpressionAST & outOperand0,
-                                                      GALGAS_location & outOperand1,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-    outOperand0 = p->mObject.mProperty_mExpression ;
-    outOperand1 = p->mObject.mProperty_mEndOfExpression ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::method_last (GALGAS_extendStaticListExpressionAST & outOperand0,
-                                                     GALGAS_location & outOperand1,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-    outOperand0 = p->mObject.mProperty_mExpression ;
-    outOperand1 = p->mObject.mProperty_mEndOfExpression ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::add_operation (const GALGAS_extendStaticListElementAST & inOperand,
-                                                                                    C_Compiler * /* inCompiler */
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_extendStaticListElementAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_extendStaticListElementAST result = GALGAS_extendStaticListElementAST::constructor_emptyList (THERE) ;
-  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_extendStaticListElementAST result = GALGAS_extendStaticListElementAST::constructor_emptyList (THERE) ;
-  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_extendStaticListElementAST result = GALGAS_extendStaticListElementAST::constructor_emptyList (THERE) ;
-  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_extendStaticListElementAST::plusAssign_operation (const GALGAS_extendStaticListElementAST inOperand,
-                                                              C_Compiler * /* inCompiler */
-                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  appendList (inOperand) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListExpressionAST GALGAS_extendStaticListElementAST::getter_mExpressionAtIndex (const GALGAS_uint & inIndex,
-                                                                                                   C_Compiler * inCompiler
-                                                                                                   COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-  GALGAS_extendStaticListExpressionAST result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-    result = p->mObject.mProperty_mExpression ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location GALGAS_extendStaticListElementAST::getter_mEndOfExpressionAtIndex (const GALGAS_uint & inIndex,
-                                                                                   C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_extendStaticListElementAST * p = (cCollectionElement_extendStaticListElementAST *) attributes.ptr () ;
-  GALGAS_location result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-    result = p->mObject.mProperty_mEndOfExpression ;
-  }
-  return result ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumerator_extendStaticListElementAST::cEnumerator_extendStaticListElementAST (const GALGAS_extendStaticListElementAST & inEnumeratedObject,
-                                                                                const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST_2D_element cEnumerator_extendStaticListElementAST::current (LOCATION_ARGS) const {
-  const cCollectionElement_extendStaticListElementAST * p = (const cCollectionElement_extendStaticListElementAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-  return p->mObject ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListExpressionAST cEnumerator_extendStaticListElementAST::current_mExpression (LOCATION_ARGS) const {
-  const cCollectionElement_extendStaticListElementAST * p = (const cCollectionElement_extendStaticListElementAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-  return p->mObject.mProperty_mExpression ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_location cEnumerator_extendStaticListElementAST::current_mEndOfExpression (LOCATION_ARGS) const {
-  const cCollectionElement_extendStaticListElementAST * p = (const cCollectionElement_extendStaticListElementAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_extendStaticListElementAST) ;
-  return p->mObject.mProperty_mEndOfExpression ;
-}
-
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          @extendStaticListElementAST type                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_extendStaticListElementAST ("extendStaticListElementAST",
-                                                   NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_extendStaticListElementAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_extendStaticListElementAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_extendStaticListElementAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_extendStaticListElementAST (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_extendStaticListElementAST GALGAS_extendStaticListElementAST::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_extendStaticListElementAST result ;
-  const GALGAS_extendStaticListElementAST * p = (const GALGAS_extendStaticListElementAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_extendStaticListElementAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("extendStaticListElementAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

@@ -33,6 +33,7 @@ enum @subscript {
 
 enum @propertyGetterKind {
   case storedProperty (@PLMType type @uint index)
+  case computedProperty (@PLMType type)
   case constantProperty (@objectIR value)
 }
 

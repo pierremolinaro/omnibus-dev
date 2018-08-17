@@ -410,6 +410,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !propertyName
         ]
         currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
+      case computedProperty (*) :
+        error propertyName : "a computed property cannot be named in guard" : currentObject
       end
     case arrayAccess (* @location endOfIndex *) :
       error endOfIndex : "not handled yet" : currentObject
@@ -512,7 +514,6 @@ override method @guardUserRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   let prototype = llvmFunctionPrototype (
     !"i1" # Boolean
     ![mRoutineMangledName assemblerRepresentation]
@@ -540,7 +541,6 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   let guardRoutineName = [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
   let receiverLLVMTypeName = if mReceiverType.kind == .void then
     ""

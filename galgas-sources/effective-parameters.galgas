@@ -194,7 +194,7 @@ proc analyzeEffectiveParameters
       [inSelfType.propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
-        error inErrorLocation : "a constant property cannot be used here"
+        error inErrorLocation : "a constant property cannot be used as output / input parameter"
       case storedProperty (@PLMType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -206,6 +206,8 @@ proc analyzeEffectiveParameters
         ]
         parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
         ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
+      case computedProperty (*) :
+        error inErrorLocation : "a computed property cannot be used as output / input parameter"
       end    
     end
   end

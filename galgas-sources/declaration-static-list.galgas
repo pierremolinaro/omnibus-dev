@@ -604,7 +604,6 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define internal "
   if mReturnTypeProxy == .null then
     ioLLVMcode += "void"

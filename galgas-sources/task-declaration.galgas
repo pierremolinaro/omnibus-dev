@@ -159,6 +159,8 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
         [exp noteExpressionTypesInPrecedenceGraph !?ioGraph]
       case initializedConstantProperty (exp) :
         [exp noteExpressionTypesInPrecedenceGraph !?ioGraph]
+      case computedProperty (instructionList *) :
+        [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
       end
     end
     for setup in mTaskSetupListAST do
@@ -256,6 +258,9 @@ method @taskListAST enterInContext
       [property enterPropertyInContext
         !?context:ioContext
         !?staticEntityMap:ioStaticEntityMap
+        !receiverTypeName:task.mTaskName
+        !receiverLLVMBaseTypeName: task.mTaskName
+        !?ioDecoratedRoutineList
         !?propertyList
         !?propertyGetterMap
         !?propertySetterMap
@@ -324,7 +329,7 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.safeUserMode
         !isRequired:true
-        !.function # {!executionMode:.userMode}
+        !.function
         !warnIfUnused: true
         !exportedRoutine: false
         !.mutating
@@ -347,16 +352,16 @@ method @taskListAST enterInContext
       !receiverTypeName: task.mTaskName
       !mode:.userMode
       !isRequired:true
-      !.function # {!executionMode:.userMode}
+      !.function
       !warnIfUnused: true
       !exportedRoutine: false
       !.mutating
-      !routineMangledName # .new {!llvmNameForTaskLoopFunction () !task.mTaskName.location} # @lstring mRoutineMangledName
-      !{} #@routineFormalArgumentListAST mRoutineFormalArgumentList
-      !true # warningOnUnusedArgs
-      !taskListInstructionList # @instructionListAST mRoutineInstructionList
-      !task.mTaskName.location # @location mEndOfRoutineDeclaration
-      !returnTypeName: ["" nowhere] # @lstring mReturnTypeName  # Empty string if no returned value
+      !routineMangledName
+      !{}
+      !true
+      !taskListInstructionList
+      !task.mTaskName.location
+      !returnTypeName: ["" nowhere]
   #---------------- Enter task functions in property map
     [task.mTaskFunctionList enterFunctionsInPropertyMap
       !receiverTypeName: task.mTaskName

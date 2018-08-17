@@ -165,7 +165,6 @@ override method @regularRoutineIR llvmCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += llvmTitleComment (!mRoutineMangledName)
   ioLLVMcode += "define"
   if not mExportedFunction then
     ioLLVMcode += " internal"

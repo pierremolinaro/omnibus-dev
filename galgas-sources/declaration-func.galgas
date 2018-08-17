@@ -196,7 +196,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
     )
   #--- Enter in routine map
     let routineLLVMNameDict = [function.mMode routineLLVMDictionaryForFunction !functionLLVMName]
-#    let @routineLLVMNameDict routineLLVMNameDict = {!function.mMode !functionLLVMName}
     let routineMangledName = [signature mangledName !function.mFunctionName]
     [!?ioContext.mRoutineMap insertKey
       !routineMangledName

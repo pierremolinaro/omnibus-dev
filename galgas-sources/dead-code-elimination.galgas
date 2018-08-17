@@ -25,12 +25,16 @@ proc codeOptimization
 {
   @uint maxBranchOfOnInstructions = 0
   @routineAccessibilityIR routineAccessibilityIR = {}
-#--- Compute accessiblity graph
+#----------------------------------------------- Compute accessiblity graph
   @stringset exploreRoutineSet = {}
+  @stringset allRoutineSet = {}
+  @stringset definedRoutineSet = {}
   for routine in ioIntermediateCodeStruct.mRoutineListIR do
     @stringset accessibleRoutineSet = {}
     [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?maxBranchOfOnInstructions]
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
+    allRoutineSet += accessibleRoutineSet
+    definedRoutineSet += !routine.mRoutine.mRoutineMangledName
     if routine.mRoutine.isRequired then
       exploreRoutineSet += !routine.mRoutine.mRoutineMangledName
     end
@@ -41,7 +45,16 @@ proc codeOptimization
     m += [[exploreRoutineSet count] string] + " root routines.\n"
     message m
   end
-#--- Compute useful routines
+#----------------------------------------------- Check all invoked routines are defined
+  let undefinedRoutineSet = allRoutineSet - definedRoutineSet
+  if [undefinedRoutineSet count] > 0 then
+    var m = "undefined routine(s):"
+    for (routine) in undefinedRoutineSet do
+      m += "\n    - " + routine + "\n"
+    end
+    error .nowhere : m
+  end
+#----------------------------------------------- Compute useful routines
   if [option plm_options.noDeadCodeElimination value] then
     message "    No dead code elimination (option --" + [option plm_options.noDeadCodeElimination string] + ")\n"
   else
@@ -57,14 +70,14 @@ proc codeOptimization
         end
       end
     end
-  #--- Warn unused routines
+  #----------------------------------------------- Warn unused routines
     for routine in routineAccessibilityIR do
       let routineMangledName = routine.mRoutine.mRoutineMangledName
       if routine.mRoutine.warnsIfUnused & not [usefulRoutineSet hasKey !routineMangledName] then
         warning routineMangledName : "unused routine"
       end
     end
-  #---
+  #-----------------------------------------------
     if [option plm_options.printPasses value] then
       var m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
   #    for (r) in usefulRoutineSet do
@@ -72,7 +85,7 @@ proc codeOptimization
   #    end
       message m
     end
-  #--- Eliminate useless routines
+  #----------------------------------------------- Eliminate useless routines
     ioIntermediateCodeStruct.mRoutineListIR = {}
     for (routine *) in routineAccessibilityIR do
       if [usefulRoutineSet hasKey !routine.mRoutineMangledName] then
