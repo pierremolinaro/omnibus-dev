@@ -504,8 +504,7 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
                                    class GALGAS_declarationDecorationList & outArgument5,
                                    class GALGAS_decoratedRegularRoutineList & outArgument6,
                                    class GALGAS_routineListIR & outArgument7,
-                                   class GALGAS_globalVariableIRList & outArgument8,
-                                   class GALGAS_userLLVMTypeDefinitionListIR & outArgument9,
+                                   class GALGAS_userLLVMTypeDefinitionListIR & outArgument8,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 

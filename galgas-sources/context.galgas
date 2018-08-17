@@ -162,7 +162,6 @@ abstract method @abstractDeclarationAST enterInContext
   ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!globalVariables:@globalVariableIRList ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 
@@ -177,7 +176,6 @@ proc buildSemanticContext
   !@declarationDecorationList outDecoratedDeclarationList
   !@decoratedRegularRoutineList outDecoratedRoutineList
   !@routineListIR outRoutineListIR
-  !@globalVariableIRList outGlobalVariableIRList
   !@userLLVMTypeDefinitionListIR outUserLLVMTypeDefinitionListIR
 
 {
@@ -219,7 +217,6 @@ proc buildSemanticContext
     !?outDecoratedRoutineList
   ]
 #---
-  outGlobalVariableIRList = {}
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
@@ -230,7 +227,6 @@ proc buildSemanticContext
       !?outRoutineListIR
       !?staticlistValues:ioStaticListValueMap
       !?staticEntityMap:ioStaticEntityMap
-      !?globalVariables:outGlobalVariableIRList
       !?registerUserAccess:controlRegisterUserAccesMapAST
       !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
     ]
@@ -262,7 +258,6 @@ proc buildSemanticContext
      !?outDecoratedRoutineList
      !?outRoutineListIR
      !?staticEntityMap:ioStaticEntityMap
-     !?globalVariables:outGlobalVariableIRList
      !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
    ]
 }

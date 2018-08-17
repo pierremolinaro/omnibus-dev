@@ -107,7 +107,6 @@ proc codeGeneration
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
-  ?globalVariables:let @globalVariableIRList inGlobalVariableIRList
 {
   let @timer generationTime = .start 
   let homeDir = @string.homeDirectory + "/plm-products/"
@@ -136,7 +135,6 @@ proc codeGeneration
     !interrupts:inAvailableInterruptMap
     !staticlistValues:inStaticListValueMap
     !targetParameters:inTargetParameters
-    !globalVariables:inGlobalVariableIRList
   )
   if [option plm_options.printPasses value] then
     message "** Code generation: " + [generationTime string] + "\n" 
@@ -179,7 +177,6 @@ private proc generateCodeFiles
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
-  ?globalVariables:let @globalVariableIRList inGlobalVariableIRList
 {
   @generationAdds generationAdds = .default
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
@@ -226,14 +223,6 @@ private proc generateCodeFiles
   llvmCode += "\n"
 #----------------------------------------- Type declarations
   declareLLVMTypes (!inUserLLVMTypeDefinitionListIR !?llvmCode)
-#----------------------------------------- Global Variables
-  llvmCode += llvmTitleComment (!"Global variables")
-  for (llvmName expression alignment) in inGlobalVariableIRList do
-    llvmCode += llvmName + " = internal global "
-             + [expression llvmTypeName] + " " + [expression llvmValue]
-             + ", align " + alignment + "\n"
-  end
-  llvmCode += "\n"
 #----------------------------------------- Drivers
   for driver in inIntermediateCodeStruct.mDriverList
     before llvmCode += llvmTitleComment (!"Driver variable definitions")

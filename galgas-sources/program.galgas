@@ -167,7 +167,6 @@ private proc compileProject
   ast.mDeclarationListAST = orderedDeclarationListAST
   @declarationDecorationList decoratedDeclarationList = {}
   @decoratedRegularRoutineList decoratedRoutineList = {}
-  @globalVariableIRList globalVariableIRList = {}
   @routineListIR routineListIR = {}
   @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = {}
   if @uint.errorCount == 0 then
@@ -181,7 +180,6 @@ private proc compileProject
       ?decoratedDeclarationList
       ?decoratedRoutineList
       ?routineListIR
-      ?globalVariableIRList
       ?userLLVMTypeDefinitionListIR
     )
     if [option plm_options.printPasses value] then
@@ -230,7 +228,6 @@ private proc compileProject
       !interrupts:semanticContext.mAvailableInterruptMap
       !staticlistValues:staticListValueMap
       !targetParameters:semanticContext.mTargetParameters
-      !globalVariables:globalVariableIRList
     )
   end
 }

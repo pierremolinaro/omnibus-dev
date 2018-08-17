@@ -4681,9 +4681,8 @@ typedef void (*extensionMethodSignature_abstractDeclarationAST_enterInContext) (
                                                                                 class GALGAS_routineListIR & ioArgument4,
                                                                                 class GALGAS_staticListInitializationMap & ioArgument5,
                                                                                 class GALGAS_staticEntityMap & ioArgument6,
-                                                                                class GALGAS_globalVariableIRList & ioArgument7,
-                                                                                class GALGAS_controlRegisterUserAccesMapAST & ioArgument8,
-                                                                                class GALGAS_userLLVMTypeDefinitionListIR & ioArgument9,
+                                                                                class GALGAS_controlRegisterUserAccesMapAST & ioArgument7,
+                                                                                class GALGAS_userLLVMTypeDefinitionListIR & ioArgument8,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -4702,7 +4701,6 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST
                                          GALGAS_routineListIR & io_ioRoutineListIR,
                                          GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
                                          GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                         GALGAS_globalVariableIRList & io_ioGlobalVariableIRList,
                                          GALGAS_controlRegisterUserAccesMapAST & io_ioControlRegisterUserAccesMapAST,
                                          GALGAS_userLLVMTypeDefinitionListIR & io_ioUserLLVMTypeDefinitionListIR,
                                          C_Compiler * inCompiler

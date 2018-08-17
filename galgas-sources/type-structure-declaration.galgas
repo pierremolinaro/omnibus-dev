@@ -262,16 +262,6 @@ sortedlist @sortedOperandIRList {
 
 #·······················································································································
 
-sortedlist @globalVariableIRList {
-  @string mLLVMVariable
-  @objectIR mExpression
-  @uint mAlignment
-}{
-  mAlignment >
-}
-
-#·······················································································································
-
 override method @structureDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -280,7 +270,6 @@ override method @structureDeclarationAST enterInContext
   ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {

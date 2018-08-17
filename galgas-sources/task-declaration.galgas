@@ -189,7 +189,6 @@ method @taskListAST enterInContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR ioRoutineListIR
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!globalVariables:@globalVariableIRList unused ioGlobalVariableIRList
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #------------- Sort tasks following their relative priority
