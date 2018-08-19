@@ -37,10 +37,10 @@ task T @stacksize 512 @activate {
     self.acc.c.a = n
     let x $uint32 = 0x1234_5678
     lcd.goto (!line:0 !column:0)
-    lcd.print (!hex8:x.byteSwapped ())
+    lcd.print (!hex8:x.byteSwapped)
     lcd.goto (!line:1 !column:0)
     let y $uint15 = 0x1234
-    lcd.print (!hex4:extend (y.bitReversed ()))
+    lcd.print (!hex4:extend (y.bitReversed))
   }
 }
 

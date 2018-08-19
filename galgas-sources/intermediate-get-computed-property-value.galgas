@@ -26,7 +26,7 @@ override method @getComputedPropertyValueIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmRoutineName = "get." + [[mReceiverIR type] llvmBaseTypeName] + "." + mPropertyName
+  let llvmRoutineName = getterLLVMName (![[mReceiverIR type] llvmBaseTypeName] !mPropertyName)
   ioLLVMcode += "  " + [mResultValueIR llvmName] + " = call " + [[mResultValueIR type] llvmTypeName]
   ioLLVMcode += " @" + [llvmRoutineName assemblerRepresentation] 
   ioLLVMcode += " (" + [[mReceiverIR type] llvmTypeName] + "* " + [mReceiverIR llvmName] + ")\n"
@@ -38,7 +38,7 @@ override method @getComputedPropertyValueIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  let llvmRoutineName = "get." + [[mReceiverIR type] llvmBaseTypeName] + "." + mPropertyName
+  let llvmRoutineName = getterLLVMName (![[mReceiverIR type] llvmBaseTypeName] !mPropertyName)
   ioInvokedRoutineSet += !llvmRoutineName
 }
 

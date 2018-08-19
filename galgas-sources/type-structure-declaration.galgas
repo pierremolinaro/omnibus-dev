@@ -574,15 +574,15 @@ method @structurePropertyListAST-element enterPropertyInContext
     [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
-      !.computedProperty{!type: optionalPropertyType}
+      !.computedProperty{!typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}}
     ]
     let functionLLVMName = @lstring.new {
-      !"get." + inReceiverLLVMBaseTypeName + "." + mPropertyName
+      !getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
       !mPropertyName.location
     }
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
-      !mode:.userMode
+      !mode:.anyMode
       !isRequired: false
       !.function
       !warnIfUnused: false

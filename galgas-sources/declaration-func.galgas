@@ -324,6 +324,24 @@ dict @routineLLVMNameDict : @mode {
 
 #·······················································································································
 
+setter @propertyGetterMap addPropertyGetter
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
+  ?propertyName:let @lstring inPropertyName
+  ?mode:let @mode inMode
+  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultTypeProxy
+  !routineLLVMName:@lstring outRoutineLLVMName
+{
+  outRoutineLLVMName = .new {!getterLLVMName (!inLLVMBaseTypeName !inPropertyName) !inPropertyName}
+#  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
+  [!?self insertKey
+    !inPropertyName
+    !true
+    !.computedProperty {!typeProxy:inResultTypeProxy}
+  ]
+}
+
+#·······················································································································
+
 setter @routineMapCTXT addFunctionWithoutArgument
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName

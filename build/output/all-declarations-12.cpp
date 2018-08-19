@@ -781,10 +781,10 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unp
   "    self.acc.c.a = n\n"
   "    let x $uint32 = 0x1234_5678\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.print (!hex8:x.byteSwapped ())\n"
+  "    lcd.print (!hex8:x.byteSwapped)\n"
   "    lcd.goto (!line:1 !column:0)\n"
   "    let y $uint15 = 0x1234\n"
-  "    lcd.print (!hex4:extend (y.bitReversed ()))\n"
+  "    lcd.print (!hex4:extend (y.bitReversed))\n"
   "  }\n"
   "}\n"
   "\n"
@@ -794,7 +794,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1023, // Text length
+  1017, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 

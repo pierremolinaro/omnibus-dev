@@ -528,12 +528,12 @@ proc handlePropertyAccessInExpression
       !inPropertyName
     ]
     ioResult = .reference {!type:propertyType !llvmName:property_llvmName}
-  case computedProperty (@PLMType propertyType) :
+  case computedProperty (propertyTypeProxy) :
     [!?ioInstructionGenerationList appendGetComputedPropertyValue
       !?ioTemporaries
       !ioResult
       !inPropertyName
-      !propertyType
+      ![propertyTypeProxy type]
       ?let resultValueIR
     ]
     ioResult = resultValueIR

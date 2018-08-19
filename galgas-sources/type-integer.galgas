@@ -59,36 +59,6 @@ func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
   end
 }
 
-#·······················································································································
-
-func %once byteSwappedMethodName -> @string {
-  result = "byteSwapped"
-}
-
-#·······················································································································
-
-func %once bitReversedMethodName -> @string {
-  result = "bitReversed"
-}
-
-#·······················································································································
-
-func %once countLeadingZerosMethodName -> @string {
-  result = "leadingZeroCount"
-}
-
-#·······················································································································
-
-func %once countTrainingZerosMethodName -> @string {
-  result = "trainingZeroCount"
-}
-
-#·······················································································································
-
-func %once setBitCountMethodName -> @string {
-  result = "setBitCount"
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -114,10 +84,11 @@ override method @integerDeclarationAST enterInContext
   let llvmTypeName = "i" + mSize
   @routineMapCTXT routineMap = {}
   @propertyGetterMap propertyGetterMap = {}
-  if (mSize mod 16) == 0 then # Add "byteSwapped" intrinsic function
-    [!?routineMap addFunctionWithoutArgument
+#--------------------------------------- byteSwapped
+  if (mSize mod 16) == 0 then
+    [!?propertyGetterMap addPropertyGetter
       !llvmBaseTypeName:integerTypeName
-      !methodName:[byteSwappedMethodName () nowhere]
+      !propertyName:["byteSwapped" nowhere]
       !mode:.anySafeMode
       !resultTypeProxy:selfTypeProxy
       ?routineLLVMName: let routineLLVMName
@@ -130,10 +101,11 @@ override method @integerDeclarationAST enterInContext
       !"bswap"
     }
   end
+#--------------------------------------- bool for $uint1
   if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
-    [!?routineMap addFunctionWithoutArgument
+    [!?propertyGetterMap addPropertyGetter
       !llvmBaseTypeName:integerTypeName
-      !methodName:[boolTypeName () nowhere]
+      !propertyName:[boolTypeName () nowhere]
       !mode:.anySafeMode
       !resultTypeProxy:boolTypeProxy
       ?routineLLVMName: let routineLLVMName
@@ -145,9 +117,10 @@ override method @integerDeclarationAST enterInContext
       !llvmTypeName
     }
   end
-  [!?routineMap addFunctionWithoutArgument
+#--------------------------------------- bitreverse
+  [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:integerTypeName
-    !methodName:[bitReversedMethodName () nowhere]
+    !propertyName:["bitReversed" nowhere]
     !mode:.anySafeMode
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: var routineLLVMName
@@ -159,9 +132,10 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"bitreverse"
   }
-  [!?routineMap addFunctionWithoutArgument
+#--------------------------------------- leadingZeroCount
+  [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:integerTypeName
-    !methodName:[countLeadingZerosMethodName () nowhere]
+    !propertyName:["leadingZeroCount" nowhere]
     !mode:.anySafeMode
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
@@ -173,9 +147,10 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"ctlz"
   }
-  [!?routineMap addFunctionWithoutArgument
+#--------------------------------------- trainingZeroCount
+  [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:integerTypeName
-    !methodName:[countTrainingZerosMethodName () nowhere]
+    !propertyName:["trainingZeroCount" nowhere]
     !mode:.anySafeMode
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
@@ -187,9 +162,10 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"cttz"
   }
-  [!?routineMap addFunctionWithoutArgument
+#--------------------------------------- setBitCountMethodName
+  [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:integerTypeName
-    !methodName:[setBitCountMethodName () nowhere]
+    !propertyName:["setBitCount" nowhere]
     !mode:.anySafeMode
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
