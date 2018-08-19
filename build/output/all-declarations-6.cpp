@@ -9226,15 +9226,16 @@ void extensionSetter_addPropertyGetter (GALGAS_propertyGetterMap & ioObject,
                                         const GALGAS_string constinArgument_inLLVMBaseTypeName,
                                         const GALGAS_lstring constinArgument_inPropertyName,
                                         const GALGAS_mode constinArgument_inMode,
+                                        const GALGAS_bool constinArgument_inPublic,
                                         const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultTypeProxy,
                                         GALGAS_lstring & outArgument_outRoutineLLVMName,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
-  outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func.galgas", 334)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 334)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func.galgas", 334))  COMMA_SOURCE_FILE ("declaration-func.galgas", 334)) ;
-  GALGAS_routineLLVMNameDict var_modeDictionary_11927 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func.galgas", 335)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 335)) ;
+  outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func.galgas", 335)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 335)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func.galgas", 335))  COMMA_SOURCE_FILE ("declaration-func.galgas", 335)) ;
+  GALGAS_routineLLVMNameDict var_modeDictionary_11956 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func.galgas", 336)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 336)) ;
   {
-  ioObject.setter_insertKey (constinArgument_inPropertyName, GALGAS_bool (true), GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_11927  COMMA_SOURCE_FILE ("declaration-func.galgas", 339)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 336)) ;
+  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_11956  COMMA_SOURCE_FILE ("declaration-func.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 337)) ;
   }
 }
 

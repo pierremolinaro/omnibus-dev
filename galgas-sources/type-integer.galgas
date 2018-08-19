@@ -90,6 +90,7 @@ override method @integerDeclarationAST enterInContext
       !llvmBaseTypeName:integerTypeName
       !propertyName:["byteSwapped" nowhere]
       !mode:.anySafeMode
+      !public: true
       !resultTypeProxy:selfTypeProxy
       ?routineLLVMName: let routineLLVMName
     ]
@@ -107,6 +108,7 @@ override method @integerDeclarationAST enterInContext
       !llvmBaseTypeName:integerTypeName
       !propertyName:[boolTypeName () nowhere]
       !mode:.anySafeMode
+      !public: true
       !resultTypeProxy:boolTypeProxy
       ?routineLLVMName: let routineLLVMName
     ]
@@ -122,6 +124,7 @@ override method @integerDeclarationAST enterInContext
     !llvmBaseTypeName:integerTypeName
     !propertyName:["bitReversed" nowhere]
     !mode:.anySafeMode
+    !public: true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: var routineLLVMName
   ]
@@ -137,6 +140,7 @@ override method @integerDeclarationAST enterInContext
     !llvmBaseTypeName:integerTypeName
     !propertyName:["leadingZeroCount" nowhere]
     !mode:.anySafeMode
+    !public: true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
@@ -152,6 +156,7 @@ override method @integerDeclarationAST enterInContext
     !llvmBaseTypeName:integerTypeName
     !propertyName:["trainingZeroCount" nowhere]
     !mode:.anySafeMode
+    !public: true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
@@ -167,6 +172,7 @@ override method @integerDeclarationAST enterInContext
     !llvmBaseTypeName:integerTypeName
     !propertyName:["setBitCount" nowhere]
     !mode:.anySafeMode
+    !public: true
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]

@@ -1861,6 +1861,7 @@ void extensionSetter_addPropertyGetter (class GALGAS_propertyGetterMap & ioObjec
                                         const class GALGAS_string constin_inLLVMBaseTypeName,
                                         const class GALGAS_lstring constin_inPropertyName,
                                         const class GALGAS_mode constin_inMode,
+                                        const class GALGAS_bool constin_inPublic,
                                         const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultTypeProxy,
                                         class GALGAS_lstring & out_outRoutineLLVMName,
                                         class C_Compiler * inCompiler

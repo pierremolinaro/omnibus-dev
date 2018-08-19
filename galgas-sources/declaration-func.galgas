@@ -328,6 +328,7 @@ setter @propertyGetterMap addPropertyGetter
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?propertyName:let @lstring inPropertyName
   ?mode:let @mode inMode
+  ?public:let @bool inPublic
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultTypeProxy
   !routineLLVMName:@lstring outRoutineLLVMName
 {
@@ -335,7 +336,7 @@ setter @propertyGetterMap addPropertyGetter
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?self insertKey
     !inPropertyName
-    !true
+    !inPublic
     !.computedProperty {!typeProxy:inResultTypeProxy !modeDictionary:modeDictionary}
   ]
 }
