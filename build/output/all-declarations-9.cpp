@@ -9,40 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                        Overriding extension method '@enumToUintRoutineIR llvmCodeGeneration'                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_enumToUintRoutineIR_llvmCodeGeneration (const cPtr_abstractRoutineIR * inObject,
-                                                                    GALGAS_string & ioArgument_ioLLVMcode,
-                                                                    const GALGAS_generationContext /* constinArgument_inGenerationContext */,
-                                                                    GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_enumToUintRoutineIR * object = (const cPtr_enumToUintRoutineIR *) inObject ;
-  macroValidSharedObject (object, cPtr_enumToUintRoutineIR) ;
-  GALGAS_string var_routineLLVMName_9534 = function_llvmNameForFunction (object->mProperty_mRoutineMangledName.getter_string (HERE), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 241)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (object->mProperty_mEnumerationLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 242)).add_operation (GALGAS_string (" @"), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 242)).add_operation (var_routineLLVMName_9534, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 242)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 242)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (object->mProperty_mEnumerationLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 243)).add_operation (GALGAS_string ("* %inValue) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 243)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 243)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %r = load ").add_operation (object->mProperty_mEnumerationLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 244)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 244)).add_operation (object->mProperty_mEnumerationLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 244)).add_operation (GALGAS_string ("* %inValue\n"), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 244)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 244)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (object->mProperty_mEnumerationLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 245)).add_operation (GALGAS_string (" %r\n"), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 245)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 245)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 246)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_enumToUintRoutineIR_llvmCodeGeneration (void) {
-  enterExtensionMethod_llvmCodeGeneration (kTypeDescriptor_GALGAS_enumToUintRoutineIR.mSlotID,
-                                           extensionMethod_enumToUintRoutineIR_llvmCodeGeneration) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_enumToUintRoutineIR_llvmCodeGeneration (defineExtensionMethod_enumToUintRoutineIR_llvmCodeGeneration, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                    Overriding extension method '@structureDeclarationAST enterInPrecedenceGraph'                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8033,8 +7999,178 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
       }
       result << "\n"
         "  " ;
-      const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, enumerator_1163.current_type (HERE).getter_guardMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 92)).getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 92)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, enumerator_1163.current_type (HERE).getter_propertyGetterMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 92)).getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 92)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
       if (kBoolTrue == test_3) {
+        result << "\n"
+          "    <table class=\"result\">\n"
+          "      <tr>\n"
+          "        <td class=\"result_title\">Getter Name</td>\n"
+          "        <td class=\"result_title\">Visibility</td>\n"
+          "        <td class=\"result_title\">Kind</td>\n"
+          "      </tr>\n"
+          "    " ;
+        GALGAS_uint index_2528_ (0) ;
+        if (enumerator_1163.current_type (HERE).getter_propertyGetterMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 99)).isValid ()) {
+          cEnumerator_propertyGetterMap enumerator_2528 (enumerator_1163.current_type (HERE).getter_propertyGetterMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 99)), kENUMERATION_UP) ;
+          while (enumerator_2528.hasCurrentObject ()) {
+            result << "\n"
+              "      <tr class=\"result_line\">\n"
+              "        <td>" ;
+            result << enumerator_2528.current_lkey (HERE).getter_string (HERE).stringValue () ;
+            result << "</td>\n"
+              "        <td>" ;
+            const enumGalgasBool test_4 = enumerator_2528.current_mIsPublic (HERE).boolEnum () ;
+            if (kBoolTrue == test_4) {
+              result << GALGAS_string ("public").stringValue () ;
+            }else if (kBoolFalse == test_4) {
+              result << GALGAS_string ("private").stringValue () ;
+            }
+            result << "</td>\n"
+              "        <td>" ;
+            switch (enumerator_2528.current_mAccess (HERE).enumValue ()) {
+            case GALGAS_propertyGetterKind::kNotBuilt :
+              break ;
+            case GALGAS_propertyGetterKind::kEnum_storedProperty :
+              {
+                const cEnumAssociatedValues_propertyGetterKind_storedProperty * extractPtr_2872 = (const cEnumAssociatedValues_propertyGetterKind_storedProperty *) (enumerator_2528.current_mAccess (HERE).unsafePointer ()) ;
+                const GALGAS_PLMType extractedValue_propertyType = extractPtr_2872->mAssociatedValue0 ;
+                const GALGAS_uint extractedValue_propertyIndex = extractPtr_2872->mAssociatedValue1 ;
+                result << "Stored property, index " ;
+                result << extractedValue_propertyIndex.getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 106)).stringValue () ;
+                result << ", type " ;
+                result << extensionGetter_llvmTypeName (extractedValue_propertyType, inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 106)).stringValue () ;
+              }
+              break ;
+            case GALGAS_propertyGetterKind::kEnum_computedProperty :
+              {
+                const cEnumAssociatedValues_propertyGetterKind_computedProperty * extractPtr_3126 = (const cEnumAssociatedValues_propertyGetterKind_computedProperty *) (enumerator_2528.current_mAccess (HERE).unsafePointer ()) ;
+                const GALGAS_unifiedTypeMap_2D_proxy extractedValue_propertyTypeProxy = extractPtr_3126->mAssociatedValue0 ;
+                const GALGAS_routineLLVMNameDict extractedValue_modeDictionary = extractPtr_3126->mAssociatedValue1 ;
+                result << "Computed property, type " ;
+                result << extractedValue_propertyTypeProxy.getter_key (inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 108)).stringValue () ;
+                result << ", routine LLVM name:" ;
+                GALGAS_uint index_3068_ (0) ;
+                if (extractedValue_modeDictionary.isValid ()) {
+                  cEnumerator_routineLLVMNameDict enumerator_3068 (extractedValue_modeDictionary, kENUMERATION_UP) ;
+                  while (enumerator_3068.hasCurrentObject ()) {
+                    result << "<br>" ;
+                    result << extensionGetter_string (enumerator_3068.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 109)).stringValue () ;
+                    result << " : " ;
+                    result << enumerator_3068.current_mRoutineLLVMName (HERE).stringValue () ;
+                    index_3068_.increment () ;
+                    enumerator_3068.gotoNextObject () ;
+                  }
+                }
+              }
+              break ;
+            case GALGAS_propertyGetterKind::kEnum_constantProperty :
+              {
+                const cEnumAssociatedValues_propertyGetterKind_constantProperty * extractPtr_3282 = (const cEnumAssociatedValues_propertyGetterKind_constantProperty *) (enumerator_2528.current_mAccess (HERE).unsafePointer ()) ;
+                const GALGAS_objectIR extractedValue_propertyValue = extractPtr_3282->mAssociatedValue0 ;
+                result << "Constant property, type " ;
+                result << extensionGetter_llvmTypeName (extensionGetter_type (extractedValue_propertyValue, inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 111)), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 111)).stringValue () ;
+                result << ", value " ;
+                result << extensionGetter_llvmName (extractedValue_propertyValue, inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 111)).stringValue () ;
+              }
+              break ;
+            }
+            result << "</td>\n"
+              "      </tr>\n"
+              "    " ;
+            index_2528_.increment () ;
+            enumerator_2528.gotoNextObject () ;
+          }
+        }
+        result << "\n"
+          "    </table>\n"
+          "    <br>\n"
+          "  " ;
+      }else if (kBoolFalse == test_3) {
+      }
+      result << "\n"
+        "  " ;
+      const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, enumerator_1163.current_type (HERE).getter_propertySetterMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 119)).getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 119)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      if (kBoolTrue == test_5) {
+        result << "\n"
+          "    <table class=\"result\">\n"
+          "      <tr>\n"
+          "        <td class=\"result_title\">Setter Name</td>\n"
+          "        <td class=\"result_title\">Visibility</td>\n"
+          "        <td class=\"result_title\">Kind</td>\n"
+          "      </tr>\n"
+          "    " ;
+        GALGAS_uint index_3655_ (0) ;
+        if (enumerator_1163.current_type (HERE).getter_propertySetterMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 126)).isValid ()) {
+          cEnumerator_propertySetterMap enumerator_3655 (enumerator_1163.current_type (HERE).getter_propertySetterMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 126)), kENUMERATION_UP) ;
+          while (enumerator_3655.hasCurrentObject ()) {
+            result << "\n"
+              "      <tr class=\"result_line\">\n"
+              "        <td>" ;
+            result << enumerator_3655.current_lkey (HERE).getter_string (HERE).stringValue () ;
+            result << "</td>\n"
+              "        <td>" ;
+            const enumGalgasBool test_6 = enumerator_3655.current_mIsPublic (HERE).boolEnum () ;
+            if (kBoolTrue == test_6) {
+              result << GALGAS_string ("public").stringValue () ;
+            }else if (kBoolFalse == test_6) {
+              result << GALGAS_string ("private").stringValue () ;
+            }
+            result << "</td>\n"
+              "        <td>" ;
+            switch (enumerator_3655.current_mAccess (HERE).enumValue ()) {
+            case GALGAS_propertySetterKind::kNotBuilt :
+              break ;
+            case GALGAS_propertySetterKind::kEnum_storedProperty :
+              {
+                const cEnumAssociatedValues_propertySetterKind_storedProperty * extractPtr_3999 = (const cEnumAssociatedValues_propertySetterKind_storedProperty *) (enumerator_3655.current_mAccess (HERE).unsafePointer ()) ;
+                const GALGAS_PLMType extractedValue_propertyType = extractPtr_3999->mAssociatedValue0 ;
+                const GALGAS_uint extractedValue_propertyIndex = extractPtr_3999->mAssociatedValue1 ;
+                result << "Stored property, index " ;
+                result << extractedValue_propertyIndex.getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 133)).stringValue () ;
+                result << ", type " ;
+                result << extensionGetter_llvmTypeName (extractedValue_propertyType, inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 133)).stringValue () ;
+              }
+              break ;
+            case GALGAS_propertySetterKind::kEnum_computedProperty :
+              {
+                const cEnumAssociatedValues_propertySetterKind_computedProperty * extractPtr_4253 = (const cEnumAssociatedValues_propertySetterKind_computedProperty *) (enumerator_3655.current_mAccess (HERE).unsafePointer ()) ;
+                const GALGAS_unifiedTypeMap_2D_proxy extractedValue_propertyTypeProxy = extractPtr_4253->mAssociatedValue0 ;
+                const GALGAS_routineLLVMNameDict extractedValue_modeDictionary = extractPtr_4253->mAssociatedValue1 ;
+                result << "Computed property, type " ;
+                result << extractedValue_propertyTypeProxy.getter_key (inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 135)).stringValue () ;
+                result << ", routine LLVM name:" ;
+                GALGAS_uint index_4195_ (0) ;
+                if (extractedValue_modeDictionary.isValid ()) {
+                  cEnumerator_routineLLVMNameDict enumerator_4195 (extractedValue_modeDictionary, kENUMERATION_UP) ;
+                  while (enumerator_4195.hasCurrentObject ()) {
+                    result << "<br>" ;
+                    result << extensionGetter_string (enumerator_4195.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 136)).stringValue () ;
+                    result << " : " ;
+                    result << enumerator_4195.current_mRoutineLLVMName (HERE).stringValue () ;
+                    index_4195_.increment () ;
+                    enumerator_4195.gotoNextObject () ;
+                  }
+                }
+              }
+              break ;
+            }
+            result << "</td>\n"
+              "      </tr>\n"
+              "    " ;
+            index_3655_.increment () ;
+            enumerator_3655.gotoNextObject () ;
+          }
+        }
+        result << "\n"
+          "    </table>\n"
+          "    <br>\n"
+          "  " ;
+      }else if (kBoolFalse == test_5) {
+      }
+      result << "\n"
+        "  " ;
+      const enumGalgasBool test_7 = GALGAS_bool (kIsStrictSup, enumerator_1163.current_type (HERE).getter_guardMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 144)).getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 144)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      if (kBoolTrue == test_7) {
         result << "\n"
           "    <table class=\"result\">\n"
           "      <tr>\n"
@@ -8045,43 +8181,43 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
           "        <td class=\"result_title\">Implementation routine LLVM Name</td>\n"
           "      </tr>\n"
           "    " ;
-        GALGAS_uint index_2651_ (0) ;
-        if (enumerator_1163.current_type (HERE).getter_guardMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 101)).isValid ()) {
-          cEnumerator_guardMapCTXT enumerator_2651 (enumerator_1163.current_type (HERE).getter_guardMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 101)), kENUMERATION_UP) ;
-          while (enumerator_2651.hasCurrentObject ()) {
+        GALGAS_uint index_4749_ (0) ;
+        if (enumerator_1163.current_type (HERE).getter_guardMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 153)).isValid ()) {
+          cEnumerator_guardMapCTXT enumerator_4749 (enumerator_1163.current_type (HERE).getter_guardMap (SOURCE_FILE ("typeDump.html.galgasTemplate", 153)), kENUMERATION_UP) ;
+          while (enumerator_4749.hasCurrentObject ()) {
             result << "\n"
               "      <tr class=\"result_line\">\n"
               "        <td>" ;
-            result << enumerator_2651.current_lkey (HERE).getter_string (HERE).stringValue () ;
+            result << enumerator_4749.current_lkey (HERE).getter_string (HERE).stringValue () ;
             result << "</td>\n"
               "        <td>" ;
-            const enumGalgasBool test_4 = enumerator_2651.current_mIsPublic (HERE).boolEnum () ;
-            if (kBoolTrue == test_4) {
+            const enumGalgasBool test_8 = enumerator_4749.current_mIsPublic (HERE).boolEnum () ;
+            if (kBoolTrue == test_8) {
               result << GALGAS_string ("public").stringValue () ;
-            }else if (kBoolFalse == test_4) {
+            }else if (kBoolFalse == test_8) {
               result << GALGAS_string ("private").stringValue () ;
             }
             result << "</td>\n"
               "        <td>" ;
-            result << extensionGetter_typedString (enumerator_2651.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 105)).stringValue () ;
+            result << extensionGetter_typedString (enumerator_4749.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 157)).stringValue () ;
             result << "</td>\n"
               "        <td>" ;
-            result << enumerator_2651.current_mUserRoutineLLVMName (HERE).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 106)).stringValue () ;
+            result << enumerator_4749.current_mUserRoutineLLVMName (HERE).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 158)).stringValue () ;
             result << "</td>\n"
               "        <td>" ;
-            result << enumerator_2651.current_mImplementationRoutineLLVMName (HERE).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 107)).stringValue () ;
+            result << enumerator_4749.current_mImplementationRoutineLLVMName (HERE).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 159)).stringValue () ;
             result << "</td>\n"
               "      </tr>\n"
               "    " ;
-            index_2651_.increment () ;
-            enumerator_2651.gotoNextObject () ;
+            index_4749_.increment () ;
+            enumerator_4749.gotoNextObject () ;
           }
         }
         result << "\n"
           "    </table>\n"
           "    <br>\n"
           "  " ;
-      }else if (kBoolFalse == test_3) {
+      }else if (kBoolFalse == test_7) {
       }
       result << "\n" ;
       index_1163_.increment () ;
@@ -8101,52 +8237,52 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
     "      <td class=\"result_title\">Routine LLVM Name, by mode</td>\n"
     "    </tr>\n"
     "  " ;
-  GALGAS_uint index_3377_ (0) ;
+  GALGAS_uint index_5475_ (0) ;
   if (in_STANDALONE_5F_ROUTINE_5F_MAP.isValid ()) {
-    cEnumerator_routineMapCTXT enumerator_3377 (in_STANDALONE_5F_ROUTINE_5F_MAP, kENUMERATION_UP) ;
-    while (enumerator_3377.hasCurrentObject ()) {
+    cEnumerator_routineMapCTXT enumerator_5475 (in_STANDALONE_5F_ROUTINE_5F_MAP, kENUMERATION_UP) ;
+    while (enumerator_5475.hasCurrentObject ()) {
       result << "\n"
         "    <tr class=\"result_line\">\n"
         "      <td>" ;
-      result << enumerator_3377.current_lkey (HERE).getter_string (HERE).stringValue () ;
+      result << enumerator_5475.current_lkey (HERE).getter_string (HERE).stringValue () ;
       result << "</td>\n"
         "      <td>" ;
-      const enumGalgasBool test_5 = enumerator_3377.current_mIsPublic (HERE).boolEnum () ;
-      if (kBoolTrue == test_5) {
+      const enumGalgasBool test_9 = enumerator_5475.current_mIsPublic (HERE).boolEnum () ;
+      if (kBoolTrue == test_9) {
         result << GALGAS_string ("public").stringValue () ;
-      }else if (kBoolFalse == test_5) {
+      }else if (kBoolFalse == test_9) {
         result << GALGAS_string ("private").stringValue () ;
       }
       result << "</td>\n"
         "      <td>" ;
-      result << extensionGetter_typedString (enumerator_3377.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 129)).stringValue () ;
-      const enumGalgasBool test_6 = enumerator_3377.current_mReturnTypeProxy (HERE).getter_isNull (SOURCE_FILE ("typeDump.html.galgasTemplate", 129)).boolEnum () ;
-      if (kBoolTrue == test_6) {
-      }else if (kBoolFalse == test_6) {
+      result << extensionGetter_typedString (enumerator_5475.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 181)).stringValue () ;
+      const enumGalgasBool test_10 = enumerator_5475.current_mReturnTypeProxy (HERE).getter_isNull (SOURCE_FILE ("typeDump.html.galgasTemplate", 181)).boolEnum () ;
+      if (kBoolTrue == test_10) {
+      }else if (kBoolFalse == test_10) {
         result << " -> " ;
-        result << enumerator_3377.current_mReturnTypeProxy (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 129)).stringValue () ;
+        result << enumerator_5475.current_mReturnTypeProxy (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 181)).stringValue () ;
       }
       result << "</td>\n"
         "      <td>" ;
-      GALGAS_uint index_3714_ (0) ;
-      if (enumerator_3377.current_mModeDictionary (HERE).isValid ()) {
-        cEnumerator_routineLLVMNameDict enumerator_3714 (enumerator_3377.current_mModeDictionary (HERE), kENUMERATION_UP) ;
-        while (enumerator_3714.hasCurrentObject ()) {
-          result << extensionGetter_string (enumerator_3714.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 130)).stringValue () ;
+      GALGAS_uint index_5812_ (0) ;
+      if (enumerator_5475.current_mModeDictionary (HERE).isValid ()) {
+        cEnumerator_routineLLVMNameDict enumerator_5812 (enumerator_5475.current_mModeDictionary (HERE), kENUMERATION_UP) ;
+        while (enumerator_5812.hasCurrentObject ()) {
+          result << extensionGetter_string (enumerator_5812.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 182)).stringValue () ;
           result << " : " ;
-          result << enumerator_3714.current_mRoutineLLVMName (HERE).stringValue () ;
-          if (enumerator_3714.hasNextObject ()) {
+          result << enumerator_5812.current_mRoutineLLVMName (HERE).stringValue () ;
+          if (enumerator_5812.hasNextObject ()) {
             result << "<br>" ;
           }
-          index_3714_.increment () ;
-          enumerator_3714.gotoNextObject () ;
+          index_5812_.increment () ;
+          enumerator_5812.gotoNextObject () ;
         }
       }
       result << "</td>\n"
         "    </tr>\n"
         "  " ;
-      index_3377_.increment () ;
-      enumerator_3377.gotoNextObject () ;
+      index_5475_.increment () ;
+      enumerator_5475.gotoNextObject () ;
     }
   }
   result << "\n"
@@ -8507,85 +8643,4 @@ static void defineExtensionGetter_panicAST_keyRepresentationForErrorSignaling (v
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_PrologueEpilogue gGetter_panicAST_keyRepresentationForErrorSignaling (defineExtensionGetter_panicAST_keyRepresentationForErrorSignaling, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Overriding extension getter '@panicAST locationForErrorSignaling'                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static GALGAS_location extensionGetter_panicAST_locationForErrorSignaling (const cPtr_abstractDeclarationAST * inObject,
-                                                                           C_Compiler * /* inCompiler */
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_location result_outLocation ; // Returned variable
-  const cPtr_panicAST * object = (const cPtr_panicAST *) inObject ;
-  macroValidSharedObject (object, cPtr_panicAST) ;
-  result_outLocation = object->mProperty_mPriority.getter_location (HERE) ;
-//---
-  return result_outLocation ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionGetter_panicAST_locationForErrorSignaling (void) {
-  enterExtensionGetter_locationForErrorSignaling (kTypeDescriptor_GALGAS_panicAST.mSlotID,
-                                                  extensionGetter_panicAST_locationForErrorSignaling) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gGetter_panicAST_locationForErrorSignaling (defineExtensionGetter_panicAST_locationForErrorSignaling, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Function 'panicRoutineNameForLocationFile'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string function_panicRoutineNameForLocationFile (const GALGAS_location & constinArgument_inLocation,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  const enumGalgasBool test_0 = constinArgument_inLocation.getter_isNowhere (SOURCE_FILE ("panic.galgas", 85)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    result_result = GALGAS_string ("raise.panic.nofile") ;
-  }else if (kBoolFalse == test_0) {
-    result_result = GALGAS_string ("raise.panic.file.").add_operation (constinArgument_inLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 88)).getter_lastPathComponent (SOURCE_FILE ("panic.galgas", 88)).getter_stringByDeletingPathExtension (SOURCE_FILE ("panic.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 88)) ;
-  }
-//---
-  return result_result ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//  Function introspection                                                                                             *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static const C_galgas_type_descriptor * functionArgs_panicRoutineNameForLocationFile [2] = {
-  & kTypeDescriptor_GALGAS_location,
-  NULL
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static GALGAS_object functionWithGenericHeader_panicRoutineNameForLocationFile (C_Compiler * inCompiler,
-                                                                                const cObjectArray & inEffectiveParameterArray,
-                                                                                const GALGAS_location & /* inErrorLocation */
-                                                                                COMMA_LOCATION_ARGS) {
-  const GALGAS_location operand0 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                                   inCompiler
-                                                                   COMMA_THERE) ;
-  return function_panicRoutineNameForLocationFile (operand0,
-                                                   inCompiler
-                                                   COMMA_THERE).getter_object (THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_galgas_function_descriptor functionDescriptor_panicRoutineNameForLocationFile ("panicRoutineNameForLocationFile",
-                                                                                 functionWithGenericHeader_panicRoutineNameForLocationFile,
-                                                                                 & kTypeDescriptor_GALGAS_string,
-                                                                                 1,
-                                                                                 functionArgs_panicRoutineNameForLocationFile) ;
 

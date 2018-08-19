@@ -89,6 +89,58 @@ LLVM Name: %![type llvmTypeName]%
     </table>
     <br>
   %end%
+  %if [[type propertyGetterMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    %for () in [type propertyGetterMap] : getter_ do%
+      <tr class="result_line">
+        <td>%!getter_lkey.string%</td>
+        <td>%if getter_mIsPublic then !"public" else !"private" end%</td>
+        <td>%
+        switch getter_mAccess
+        case storedProperty (propertyType propertyIndex) :
+          %Stored property, index %![propertyIndex string]%, type %![propertyType llvmTypeName]
+        case computedProperty (propertyTypeProxy modeDictionary) :
+          %Computed property, type %![propertyTypeProxy key]%, routine LLVM name:%
+          for () in modeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
+        case constantProperty (propertyValue) :
+          %Constant property, type %![[propertyValue type] llvmTypeName]%, value %![propertyValue llvmName]
+        end
+        %</td>
+      </tr>
+    %end%
+    </table>
+    <br>
+  %end%
+  %if [[type propertySetterMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Setter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    %for () in [type propertySetterMap] : setter_ do%
+      <tr class="result_line">
+        <td>%!setter_lkey.string%</td>
+        <td>%if setter_mIsPublic then !"public" else !"private" end%</td>
+        <td>%
+        switch setter_mAccess
+        case storedProperty (propertyType propertyIndex) :
+          %Stored property, index %![propertyIndex string]%, type %![propertyType llvmTypeName]
+        case computedProperty (propertyTypeProxy modeDictionary) :
+          %Computed property, type %![propertyTypeProxy key]%, routine LLVM name:%
+          for () in modeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
+        end
+        %</td>
+      </tr>
+    %end%
+    </table>
+    <br>
+  %end%
   %if [[type guardMap] count] > 0 then%
     <table class="result">
       <tr>

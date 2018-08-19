@@ -80,14 +80,6 @@ override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling ->
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  UTILITIES                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func integerEnumAccessorName ?forBitCount:let @uint inBitCount -> @string {
-  result = "uint" + inBitCount # No leading '$' !!!
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -133,13 +125,42 @@ override method @enumerationDeclarationAST enterInContext
     !ioContext.mTypeMap
     !.new {!"$uint" + representationBitCount !mEnumerationName}
   }
-  [!?routineMap addFunctionWithoutArgument
+  [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:mEnumerationName
-    !methodName:.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !mEnumerationName}
+    !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
     !mode:.anySafeMode
+    !public: true
     !resultTypeProxy:integerTypeProxy
-    ?routineLLVMName: *
+    ?routineLLVMName: let conversionToUIntN
   ]
+  ioRoutineListIR += !@enumToUintRoutineIR.new {
+    !conversionToUIntN
+    !isRequired:false
+    !warnsIfUnused:false
+    !"i" + representationBitCount # enumerationType llvmTypeName]
+  }
+#---------------- Infix operators
+  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
+#---------------- Enumeration functions
+#--- Conversion to uintN
+#  let conversionToUIntN = routineMangledNameFromAST (
+#    !mEnumerationName
+#    !.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !.nowhere}
+#    !{}
+#  )
+#  ioRoutineListIR += !@enumToUintRoutineIR.new {
+#    !conversionToUIntN
+#    !isRequired:false
+#    !warnsIfUnused:false
+#    ![enumerationType llvmTypeName]
+#  }
+#---------- Enter boolean assignment function
+  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
+    ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
+    !isRequired:false
+    !warnsIfUnused:false
+    !mEnumerationName # [enumerationType llvmTypeName]
+  }
 #---------------- Insert enumeration in type map
   let enumerationType = @PLMType.new {
     !propertyGetterMap:propertyGetterMap
@@ -159,28 +180,6 @@ override method @enumerationDeclarationAST enterInContext
     !lkey:mEnumerationName
     !type:enumerationType
   ]
-#---------------- Infix operators
-  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
-#---------------- Enumeration functions
-#--- Conversion to uintN
-  let conversionToUIntN = routineMangledNameFromAST (
-    !mEnumerationName
-    !.new {!integerEnumAccessorName (!forBitCount:representationBitCount) !.nowhere}
-    !{}
-  )
-  ioRoutineListIR += !@enumToUintRoutineIR.new {
-    !conversionToUIntN
-    !isRequired:false
-    !warnsIfUnused:false
-    ![enumerationType llvmTypeName]
-  }
-#---------- Enter boolean assignment function
-  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-    ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
-    !isRequired:false
-    !warnsIfUnused:false
-    ![enumerationType llvmTypeName]
-  }
 }
 
 #·······················································································································

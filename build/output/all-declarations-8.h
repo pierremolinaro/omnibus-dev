@@ -724,16 +724,6 @@ class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         Function 'integerEnumAccessorName'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_integerEnumAccessorName (const class GALGAS_uint & constinArgument0,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                    Routine 'enterEnumerationComparisonOperators'                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
