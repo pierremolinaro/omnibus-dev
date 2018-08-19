@@ -37,23 +37,6 @@ method @abstractInstructionIR enterAccessibleEntities
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @abstractGenerationIR
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-abstract class @abstractGenerationIR {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-abstract method @abstractGenerationIR generateLLVMcode ?!@string ioLLVMcode  ?!@generationAdds ioGenerationAdds
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @generationListIR {
-  @abstractGenerationIR mGeneration
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @instructionListIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -239,10 +222,6 @@ private proc generateCodeFiles
   end
 #----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
-#----------------------------------------- Enumeration uint() methods
-  for (generation) in inIntermediateCodeStruct.mGenerationListIR do
-    [generation generateLLVMcode !?llvmCode !?generationAdds]
-  end
 #----------------------------------------- Driver Code
   [inIntermediateCodeStruct.mDriverList generateLLVMDriverCode !?llvmCode]
 #----------------------------------------- Routines

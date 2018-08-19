@@ -6,7 +6,6 @@
 
 struct @intermediateCodeStruct {
   @staticEntityMap mStaticEntityMap
-  @globalConstantMapIR mGlobalConstantMap
   @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @panicSortedListIR mPanicSetupListIR
@@ -17,10 +16,8 @@ struct @intermediateCodeStruct {
   @targetParameters mTargetParameters
   @driverListIR mDriverList
   @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
-  @generationListIR mGenerationListIR
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
-#--- Routines
   @routineListIR mRoutineListIR
 }
 
@@ -29,15 +26,6 @@ struct @intermediateCodeStruct {
 list @controlRegisterGroupArrayList {
   @lstring mGroupName
   @lbigintlist mBaseAddresses
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @globalConstantMapIR {
-  @unifiedTypeMap-proxy mType
-  @objectIR mSourceExpression
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

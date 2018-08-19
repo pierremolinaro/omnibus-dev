@@ -6643,152 +6643,6 @@ GALGAS_controlRegisterGroupArrayList_2D_element GALGAS_controlRegisterGroupArray
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_globalConstantMapIR_2D_element::GALGAS_globalConstantMapIR_2D_element (void) :
-mProperty_lkey (),
-mProperty_mType (),
-mProperty_mSourceExpression () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_globalConstantMapIR_2D_element::~ GALGAS_globalConstantMapIR_2D_element (void) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_globalConstantMapIR_2D_element::GALGAS_globalConstantMapIR_2D_element (const GALGAS_lstring & inOperand0,
-                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                              const GALGAS_objectIR & inOperand2) :
-mProperty_lkey (inOperand0),
-mProperty_mType (inOperand1),
-mProperty_mSourceExpression (inOperand2) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_globalConstantMapIR_2D_element GALGAS_globalConstantMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                                              const GALGAS_objectIR & inOperand2 
-                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_globalConstantMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_globalConstantMapIR_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_globalConstantMapIR_2D_element::objectCompare (const GALGAS_globalConstantMapIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mSourceExpression.objectCompare (inOperand.mProperty_mSourceExpression) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool GALGAS_globalConstantMapIR_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mSourceExpression.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_globalConstantMapIR_2D_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mType.drop () ;
-  mProperty_mSourceExpression.drop () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_globalConstantMapIR_2D_element::description (C_String & ioString,
-                                                         const int32_t inIndentation) const {
-  ioString << "<struct @globalConstantMapIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mSourceExpression.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring GALGAS_globalConstantMapIR_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mProperty_lkey ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_globalConstantMapIR_2D_element::getter_mType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mType ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_objectIR GALGAS_globalConstantMapIR_2D_element::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSourceExpression ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          @globalConstantMapIR-element type                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_globalConstantMapIR_2D_element ("globalConstantMapIR-element",
-                                                       NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_globalConstantMapIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_globalConstantMapIR_2D_element ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_globalConstantMapIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_globalConstantMapIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_globalConstantMapIR_2D_element GALGAS_globalConstantMapIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_globalConstantMapIR_2D_element result ;
-  const GALGAS_globalConstantMapIR_2D_element * p = (const GALGAS_globalConstantMapIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_globalConstantMapIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("globalConstantMapIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_routineListIR_2D_element::GALGAS_routineListIR_2D_element (void) :
 mProperty_mRoutine () {
 }
@@ -10557,7 +10411,6 @@ GALGAS_addressofInstructionIR GALGAS_addressofInstructionIR::extractObject (cons
 
 GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (void) :
 mProperty_mStaticEntityMap (),
-mProperty_mGlobalConstantMap (),
 mProperty_mInterruptMapIR (),
 mProperty_mExternProcedureMapIR (),
 mProperty_mPanicSetupListIR (),
@@ -10568,7 +10421,6 @@ mProperty_mMaxBranchOfOnInstructions (),
 mProperty_mTargetParameters (),
 mProperty_mDriverList (),
 mProperty_mStaticArrayMapForIntermediate (),
-mProperty_mGenerationListIR (),
 mProperty_mGlobalSyncInstanceMap (),
 mProperty_mControlRegisterGroupArrayList (),
 mProperty_mRoutineListIR () {
@@ -10582,44 +10434,39 @@ GALGAS_intermediateCodeStruct::~ GALGAS_intermediateCodeStruct (void) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_staticEntityMap & inOperand0,
-                                                              const GALGAS_globalConstantMapIR & inOperand1,
-                                                              const GALGAS_interruptMapIR & inOperand2,
-                                                              const GALGAS_externProcedureMapIR & inOperand3,
+                                                              const GALGAS_interruptMapIR & inOperand1,
+                                                              const GALGAS_externProcedureMapIR & inOperand2,
+                                                              const GALGAS_panicSortedListIR & inOperand3,
                                                               const GALGAS_panicSortedListIR & inOperand4,
-                                                              const GALGAS_panicSortedListIR & inOperand5,
-                                                              const GALGAS_taskMapIR & inOperand6,
-                                                              const GALGAS_globalTaskVariableList & inOperand7,
-                                                              const GALGAS_uint & inOperand8,
-                                                              const GALGAS_targetParameters & inOperand9,
-                                                              const GALGAS_driverListIR & inOperand10,
-                                                              const GALGAS_staticListInvokedFunctionSetMap & inOperand11,
-                                                              const GALGAS_generationListIR & inOperand12,
-                                                              const GALGAS_globalSyncInstanceMapIR & inOperand13,
-                                                              const GALGAS_controlRegisterGroupArrayList & inOperand14,
-                                                              const GALGAS_routineListIR & inOperand15) :
+                                                              const GALGAS_taskMapIR & inOperand5,
+                                                              const GALGAS_globalTaskVariableList & inOperand6,
+                                                              const GALGAS_uint & inOperand7,
+                                                              const GALGAS_targetParameters & inOperand8,
+                                                              const GALGAS_driverListIR & inOperand9,
+                                                              const GALGAS_staticListInvokedFunctionSetMap & inOperand10,
+                                                              const GALGAS_globalSyncInstanceMapIR & inOperand11,
+                                                              const GALGAS_controlRegisterGroupArrayList & inOperand12,
+                                                              const GALGAS_routineListIR & inOperand13) :
 mProperty_mStaticEntityMap (inOperand0),
-mProperty_mGlobalConstantMap (inOperand1),
-mProperty_mInterruptMapIR (inOperand2),
-mProperty_mExternProcedureMapIR (inOperand3),
-mProperty_mPanicSetupListIR (inOperand4),
-mProperty_mPanicLoopListIR (inOperand5),
-mProperty_mTaskMapIR (inOperand6),
-mProperty_mGlobalTaskVariableList (inOperand7),
-mProperty_mMaxBranchOfOnInstructions (inOperand8),
-mProperty_mTargetParameters (inOperand9),
-mProperty_mDriverList (inOperand10),
-mProperty_mStaticArrayMapForIntermediate (inOperand11),
-mProperty_mGenerationListIR (inOperand12),
-mProperty_mGlobalSyncInstanceMap (inOperand13),
-mProperty_mControlRegisterGroupArrayList (inOperand14),
-mProperty_mRoutineListIR (inOperand15) {
+mProperty_mInterruptMapIR (inOperand1),
+mProperty_mExternProcedureMapIR (inOperand2),
+mProperty_mPanicSetupListIR (inOperand3),
+mProperty_mPanicLoopListIR (inOperand4),
+mProperty_mTaskMapIR (inOperand5),
+mProperty_mGlobalTaskVariableList (inOperand6),
+mProperty_mMaxBranchOfOnInstructions (inOperand7),
+mProperty_mTargetParameters (inOperand8),
+mProperty_mDriverList (inOperand9),
+mProperty_mStaticArrayMapForIntermediate (inOperand10),
+mProperty_mGlobalSyncInstanceMap (inOperand11),
+mProperty_mControlRegisterGroupArrayList (inOperand12),
+mProperty_mRoutineListIR (inOperand13) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_intermediateCodeStruct (GALGAS_staticEntityMap::constructor_default (HERE),
-                                        GALGAS_globalConstantMapIR::constructor_emptyMap (HERE),
                                         GALGAS_interruptMapIR::constructor_emptyMap (HERE),
                                         GALGAS_externProcedureMapIR::constructor_emptyMap (HERE),
                                         GALGAS_panicSortedListIR::constructor_emptySortedList (HERE),
@@ -10630,7 +10477,6 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
                                         GALGAS_targetParameters::constructor_default (HERE),
                                         GALGAS_driverListIR::constructor_emptyList (HERE),
                                         GALGAS_staticListInvokedFunctionSetMap::constructor_emptyMap (HERE),
-                                        GALGAS_generationListIR::constructor_emptyList (HERE),
                                         GALGAS_globalSyncInstanceMapIR::constructor_emptyMap (HERE),
                                         GALGAS_controlRegisterGroupArrayList::constructor_emptyList (HERE),
                                         GALGAS_routineListIR::constructor_emptyList (HERE)) ;
@@ -10639,25 +10485,23 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (const GALGAS_staticEntityMap & inOperand0,
-                                                                              const GALGAS_globalConstantMapIR & inOperand1,
-                                                                              const GALGAS_interruptMapIR & inOperand2,
-                                                                              const GALGAS_externProcedureMapIR & inOperand3,
+                                                                              const GALGAS_interruptMapIR & inOperand1,
+                                                                              const GALGAS_externProcedureMapIR & inOperand2,
+                                                                              const GALGAS_panicSortedListIR & inOperand3,
                                                                               const GALGAS_panicSortedListIR & inOperand4,
-                                                                              const GALGAS_panicSortedListIR & inOperand5,
-                                                                              const GALGAS_taskMapIR & inOperand6,
-                                                                              const GALGAS_globalTaskVariableList & inOperand7,
-                                                                              const GALGAS_uint & inOperand8,
-                                                                              const GALGAS_targetParameters & inOperand9,
-                                                                              const GALGAS_driverListIR & inOperand10,
-                                                                              const GALGAS_staticListInvokedFunctionSetMap & inOperand11,
-                                                                              const GALGAS_generationListIR & inOperand12,
-                                                                              const GALGAS_globalSyncInstanceMapIR & inOperand13,
-                                                                              const GALGAS_controlRegisterGroupArrayList & inOperand14,
-                                                                              const GALGAS_routineListIR & inOperand15 
+                                                                              const GALGAS_taskMapIR & inOperand5,
+                                                                              const GALGAS_globalTaskVariableList & inOperand6,
+                                                                              const GALGAS_uint & inOperand7,
+                                                                              const GALGAS_targetParameters & inOperand8,
+                                                                              const GALGAS_driverListIR & inOperand9,
+                                                                              const GALGAS_staticListInvokedFunctionSetMap & inOperand10,
+                                                                              const GALGAS_globalSyncInstanceMapIR & inOperand11,
+                                                                              const GALGAS_controlRegisterGroupArrayList & inOperand12,
+                                                                              const GALGAS_routineListIR & inOperand13 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13) ;
   }
   return result ;
 }
@@ -10668,9 +10512,6 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mProperty_mStaticEntityMap.objectCompare (inOperand.mProperty_mStaticEntityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mGlobalConstantMap.objectCompare (inOperand.mProperty_mGlobalConstantMap) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mInterruptMapIR.objectCompare (inOperand.mProperty_mInterruptMapIR) ;
@@ -10703,9 +10544,6 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
     result = mProperty_mStaticArrayMapForIntermediate.objectCompare (inOperand.mProperty_mStaticArrayMapForIntermediate) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mGenerationListIR.objectCompare (inOperand.mProperty_mGenerationListIR) ;
-  }
-  if (result == kOperandEqual) {
     result = mProperty_mGlobalSyncInstanceMap.objectCompare (inOperand.mProperty_mGlobalSyncInstanceMap) ;
   }
   if (result == kOperandEqual) {
@@ -10720,14 +10558,13 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mProperty_mStaticEntityMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mPanicSetupListIR.isValid () && mProperty_mPanicLoopListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mDriverList.isValid () && mProperty_mStaticArrayMapForIntermediate.isValid () && mProperty_mGenerationListIR.isValid () && mProperty_mGlobalSyncInstanceMap.isValid () && mProperty_mControlRegisterGroupArrayList.isValid () && mProperty_mRoutineListIR.isValid () ;
+  return mProperty_mStaticEntityMap.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mPanicSetupListIR.isValid () && mProperty_mPanicLoopListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mDriverList.isValid () && mProperty_mStaticArrayMapForIntermediate.isValid () && mProperty_mGlobalSyncInstanceMap.isValid () && mProperty_mControlRegisterGroupArrayList.isValid () && mProperty_mRoutineListIR.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_intermediateCodeStruct::drop (void) {
   mProperty_mStaticEntityMap.drop () ;
-  mProperty_mGlobalConstantMap.drop () ;
   mProperty_mInterruptMapIR.drop () ;
   mProperty_mExternProcedureMapIR.drop () ;
   mProperty_mPanicSetupListIR.drop () ;
@@ -10738,7 +10575,6 @@ void GALGAS_intermediateCodeStruct::drop (void) {
   mProperty_mTargetParameters.drop () ;
   mProperty_mDriverList.drop () ;
   mProperty_mStaticArrayMapForIntermediate.drop () ;
-  mProperty_mGenerationListIR.drop () ;
   mProperty_mGlobalSyncInstanceMap.drop () ;
   mProperty_mControlRegisterGroupArrayList.drop () ;
   mProperty_mRoutineListIR.drop () ;
@@ -10753,8 +10589,6 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mProperty_mStaticEntityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mGlobalConstantMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mInterruptMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -10776,8 +10610,6 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mStaticArrayMapForIntermediate.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mGenerationListIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
     mProperty_mGlobalSyncInstanceMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mControlRegisterGroupArrayList.description (ioString, inIndentation+1) ;
@@ -10791,12 +10623,6 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
 
 GALGAS_staticEntityMap GALGAS_intermediateCodeStruct::getter_mStaticEntityMap (UNUSED_LOCATION_ARGS) const {
   return mProperty_mStaticEntityMap ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_globalConstantMapIR GALGAS_intermediateCodeStruct::getter_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mGlobalConstantMap ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10857,12 +10683,6 @@ GALGAS_driverListIR GALGAS_intermediateCodeStruct::getter_mDriverList (UNUSED_LO
 
 GALGAS_staticListInvokedFunctionSetMap GALGAS_intermediateCodeStruct::getter_mStaticArrayMapForIntermediate (UNUSED_LOCATION_ARGS) const {
   return mProperty_mStaticArrayMapForIntermediate ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_generationListIR GALGAS_intermediateCodeStruct::getter_mGenerationListIR (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mGenerationListIR ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -12813,4 +12633,89 @@ C_galgas_function_descriptor functionDescriptor_integerEnumAccessorName ("intege
                                                                          & kTypeDescriptor_GALGAS_string,
                                                                          1,
                                                                          functionArgs_integerEnumAccessorName) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Overriding extension method '@enumerationDeclarationAST enterInContext'                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_enumerationDeclarationAST_enterInContext (const cPtr_abstractDeclarationAST * inObject,
+                                                                      const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
+                                                                      GALGAS_semanticContext & ioArgument_ioContext,
+                                                                      GALGAS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
+                                                                      GALGAS_decoratedRegularRoutineList & /* ioArgument_ioDecoratedRoutineList */,
+                                                                      GALGAS_routineListIR & ioArgument_ioRoutineListIR,
+                                                                      GALGAS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
+                                                                      GALGAS_staticEntityMap & /* ioArgument_ioStaticEntityMap */,
+                                                                      GALGAS_controlRegisterUserAccesMapAST & /* ioArgument_ioControlRegisterUserAccesMapAST */,
+                                                                      GALGAS_userLLVMTypeDefinitionListIR & /* ioArgument_ioUserLLVMTypeDefinitionListIR */,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_enumerationDeclarationAST * object = (const cPtr_enumerationDeclarationAST *) inObject ;
+  macroValidSharedObject (object, cPtr_enumerationDeclarationAST) ;
+  GALGAS_classConstantMap var_enumConstantMap_5210 = GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 115)) ;
+  GALGAS_bigint var_maxValue_5234 = GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 116)) ;
+  cEnumerator_enumerationConstantList enumerator_5275 (object->mProperty_mCaseNameList, kENUMERATION_UP) ;
+  while (enumerator_5275.hasCurrentObject ()) {
+    {
+    var_enumConstantMap_5210.setter_insertKey (enumerator_5275.current_mConstantName (HERE), enumerator_5275.current_mConstantValue (HERE), object->mProperty_mEnumerationName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 118)) ;
+    }
+    const enumGalgasBool test_0 = GALGAS_bool (kIsStrictInf, var_maxValue_5234.objectCompare (enumerator_5275.current_mConstantValue (HERE))).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      var_maxValue_5234 = enumerator_5275.current_mConstantValue (HERE) ;
+    }
+    enumerator_5275.gotoNextObject () ;
+  }
+  GALGAS_uint var_representationBitCount_5491 = GALGAS_uint ((uint32_t) 0U) ;
+  if (GALGAS_uint::constructor_max (SOURCE_FILE ("type-enumeration-declaration.galgas", 125)).isValid ()) {
+    uint32_t variant_5502 = GALGAS_uint::constructor_max (SOURCE_FILE ("type-enumeration-declaration.galgas", 125)).uintValue () ;
+    bool loop_5502 = true ;
+    while (loop_5502) {
+      loop_5502 = GALGAS_bool (kIsStrictSup, var_maxValue_5234.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 125)))).isValid () ;
+      if (loop_5502) {
+        loop_5502 = GALGAS_bool (kIsStrictSup, var_maxValue_5234.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 125)))).boolValue () ;
+      }
+      if (loop_5502 && (0 == variant_5502)) {
+        loop_5502 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("type-enumeration-declaration.galgas", 125)) ;
+      }
+      if (loop_5502) {
+        variant_5502 -- ;
+        var_representationBitCount_5491.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 126)) ;
+        var_maxValue_5234 = var_maxValue_5234.divide_operation (GALGAS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 127)) ;
+      }
+    }
+  }
+  GALGAS_routineMapCTXT var_routineMap_5686 = GALGAS_routineMapCTXT::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 130)) ;
+  GALGAS_propertyGetterMap var_propertyGetterMap_5730 = GALGAS_propertyGetterMap::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 131)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_integerTypeProxy_5758 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), GALGAS_lstring::constructor_new (GALGAS_string ("$uint").add_operation (var_representationBitCount_5491.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 134)), object->mProperty_mEnumerationName.getter_location (SOURCE_FILE ("type-enumeration-declaration.galgas", 134))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 134)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 132)) ;
+  {
+  GALGAS_lstring joker_6155 ; // Joker input parameter
+  extensionSetter_addFunctionWithoutArgument (var_routineMap_5686, object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 137)), GALGAS_lstring::constructor_new (function_integerEnumAccessorName (var_representationBitCount_5491, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 138)), object->mProperty_mEnumerationName.getter_location (SOURCE_FILE ("type-enumeration-declaration.galgas", 138))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 138)), GALGAS_mode::constructor_anySafeMode (SOURCE_FILE ("type-enumeration-declaration.galgas", 139)), var_integerTypeProxy_5758, joker_6155, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 136)) ;
+  }
+  GALGAS_stringset temp_1 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-enumeration-declaration.galgas", 152)) ;
+  temp_1.addAssign_operation (object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 152))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 152)) ;
+  GALGAS_PLMType var_enumerationType_6232 = GALGAS_PLMType::constructor_new (var_propertyGetterMap_5730, GALGAS_propertySetterMap::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 146)), var_routineMap_5686, var_enumConstantMap_5210, GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 149)), GALGAS_guardMapCTXT::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 150)), GALGAS_subscript::constructor_noSubscript (SOURCE_FILE ("type-enumeration-declaration.galgas", 151)), temp_1, GALGAS_PLMTypeAttributes::constructor_instanciable (SOURCE_FILE ("type-enumeration-declaration.galgas", 153)).operator_or (GALGAS_PLMTypeAttributes::constructor_equatable (SOURCE_FILE ("type-enumeration-declaration.galgas", 153)) COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 153)).operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("type-enumeration-declaration.galgas", 153)) COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 153)), object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 154)), GALGAS_typeKind::constructor_enumeration (var_representationBitCount_5491  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 155)), object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 156))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 144)) ;
+  {
+  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mEnumerationName, var_enumerationType_6232, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 158)) ;
+  }
+  {
+  routine_enterEnumerationComparisonOperators (object->mProperty_mEnumerationName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 163)) ;
+  }
+  GALGAS_lstring var_conversionToUIntN_6998 = function_routineMangledNameFromAST (object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 167)), GALGAS_lstring::constructor_new (function_integerEnumAccessorName (var_representationBitCount_5491, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 168)), GALGAS_location::constructor_nowhere (SOURCE_FILE ("type-enumeration-declaration.galgas", 168))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 168)), GALGAS_routineFormalArgumentListAST::constructor_emptyList (SOURCE_FILE ("type-enumeration-declaration.galgas", 169)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 166)) ;
+  ioArgument_ioRoutineListIR.addAssign_operation (GALGAS_enumToUintRoutineIR::constructor_new (var_conversionToUIntN_6998, GALGAS_bool (false), GALGAS_bool (false), extensionGetter_llvmTypeName (var_enumerationType_6232, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 175))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 171))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 171)) ;
+  ioArgument_ioRoutineListIR.addAssign_operation (GALGAS_basicIntegerAssignFunctionIR::constructor_new (function_assignmentPrefix (inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 179)).add_operation (object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 179)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 179)).add_operation (object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 179)).getter_nowhere (SOURCE_FILE ("type-enumeration-declaration.galgas", 179)), GALGAS_bool (false), GALGAS_bool (false), extensionGetter_llvmTypeName (var_enumerationType_6232, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 182))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 178))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 178)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_enumerationDeclarationAST_enterInContext (void) {
+  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_enumerationDeclarationAST.mSlotID,
+                                       extensionMethod_enumerationDeclarationAST_enterInContext) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_enumerationDeclarationAST_enterInContext (defineExtensionMethod_enumerationDeclarationAST_enterInContext, NULL) ;
 
