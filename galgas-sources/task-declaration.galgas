@@ -159,8 +159,10 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
         [exp noteExpressionTypesInPrecedenceGraph !?ioGraph]
       case initializedConstantProperty (exp) :
         [exp noteExpressionTypesInPrecedenceGraph !?ioGraph]
-      case computedProperty (instructionList *) :
+      case readOnlyComputedProperty (instructionList *) :
         [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+      case writeComputedProperty (writeInstructionList *) :
+        [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
       end
     end
     for setup in mTaskSetupListAST do

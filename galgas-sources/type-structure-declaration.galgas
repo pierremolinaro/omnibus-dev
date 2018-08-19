@@ -29,7 +29,8 @@ enum @propertyKindAST {
   case uninitializedStoredProperty # declared by "var", no initialization
   case initializedConstantProperty (@expressionAST initExpression) # declared by "let"
   case uninitializedConstantProperty # declared by "let", no initialization
-  case computedProperty (@instructionListAST instructionList @location endOfInstructionList)
+  case readOnlyComputedProperty (@instructionListAST instructionList @location endOfInstructionList)
+  case writeComputedProperty (@instructionListAST instructionList @location endOfInstructionList)
 }
 
 #·······················································································································
@@ -52,7 +53,7 @@ syntax extension plm_syntax {
 
   rule <private_or_public_struct_property_declaration>
     ?!@ast ioAST
-    ?!@structurePropertyListAST ioFieldListAST
+    ?!@structurePropertyListAST ioPropertyListAST
   {
     @bool public
     select
@@ -61,16 +62,16 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    <struct_property_declaration> !?ioAST !public !?ioFieldListAST
+    <struct_property_declaration> !?ioAST !public !?ioPropertyListAST
   }
   
   #·····················································································································
 
   rule <private_struct_property_declaration>
     ?!@ast ioAST
-    ?!@structurePropertyListAST ioFieldListAST
+    ?!@structurePropertyListAST ioPropertyListAST
   {
-    <struct_property_declaration> !?ioAST !false !?ioFieldListAST
+    <struct_property_declaration> !?ioAST !false !?ioPropertyListAST
   }
 
   #·····················································································································
@@ -78,10 +79,10 @@ syntax extension plm_syntax {
   rule <struct_property_declaration>
     ?!@ast ioAST
     ?let @bool isPublic
-    ?!@structurePropertyListAST ioFieldListAST
+    ?!@structurePropertyListAST ioPropertyListAST
   {
     $let$
-    $identifier$ ?let fieldName
+    $identifier$ ?let propertyName
 #    @propertyAttributeList propertyAttributeList = {}
 #    repeat
 #    while
@@ -98,15 +99,15 @@ syntax extension plm_syntax {
     select
       $=$
       <expression> !?ioAST ?let initExpression
-      ioFieldListAST +=
-        !fieldName
+      ioPropertyListAST +=
+        !propertyName
         !{}
         !isPublic
         !typeName 
         !.initializedConstantProperty{!initExpression:initExpression}
     or
-      ioFieldListAST +=
-        !fieldName
+      ioPropertyListAST +=
+        !propertyName
         !{}
         !isPublic
         !typeName 
@@ -119,10 +120,10 @@ syntax extension plm_syntax {
   rule <struct_property_declaration>
     ?!@ast ioAST
     ?let @bool isPublic
-    ?!@structurePropertyListAST ioFieldListAST
+    ?!@structurePropertyListAST ioPropertyListAST
   {
     $var$
-    $identifier$ ?let fieldName
+    $identifier$ ?let propertyName
     @propertyAttributeList propertyAttributeList = {}
     repeat
     while
@@ -133,23 +134,20 @@ syntax extension plm_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioFieldListAST += !fieldName !{} !isPublic !typeName !.uninitializedStoredProperty
+        ioPropertyListAST += !propertyName !{} !isPublic !typeName !.uninitializedStoredProperty
       or
-#        <mode> ?let mode
-        ${$
-        <instructionList> !?ioAST ?let instructionList
-        ioFieldListAST +=
-          !fieldName
-          !propertyAttributeList
-          !isPublic
-          !typeName 
-          !.computedProperty{!instructionList:instructionList !endOfInstructionList:.here}
-        $}$
+       <propertyGetterSetter>
+         !?ioAST
+         !isPublic
+         !propertyName
+         !propertyAttributeList
+         !typeName 
+         !?ioPropertyListAST
       or
         $=$
         <expression> !?ioAST ?let initExpression
-        ioFieldListAST +=
-          !fieldName
+        ioPropertyListAST +=
+          !propertyName
           !propertyAttributeList
           !isPublic
           !typeName 
@@ -158,8 +156,8 @@ syntax extension plm_syntax {
     or
       $=$
       <expression> !?ioAST ?let initExpression
-      ioFieldListAST +=
-        !fieldName
+      ioPropertyListAST +=
+        !propertyName
         !propertyAttributeList
         !isPublic
         !["" nowhere]
@@ -167,7 +165,82 @@ syntax extension plm_syntax {
     end
   }
 
- #·····················································································································
+  #·····················································································································
+
+  rule <propertyGetterSetter>
+    ?!@ast ioAST
+    ?let @bool inIsPublic
+    ?let @lstring inPropertyName
+    ?let @propertyAttributeList inPropertyAttributeList
+    ?let @lstring inTypeName
+    ?!@structurePropertyListAST ioPropertyListAST
+  {
+#    <mode> ?let mode
+    ${$  
+    select
+      var getterDefined = false
+      var setterDefined = false
+      repeat
+        $identifier$ ?let getterOrSetter
+        ${$
+        <instructionList> !?ioAST ?let instructionList
+        let endOfInstructionList = @location.here
+        $}$
+        if getterOrSetter.string == "get" then
+          ioPropertyListAST +=
+            !inPropertyName
+            !inPropertyAttributeList
+            !inIsPublic
+            !inTypeName 
+            !.readOnlyComputedProperty{
+              !instructionList: instructionList
+              !endOfInstructionList: endOfInstructionList
+            }
+          if getterDefined then
+            error getterOrSetter : "duplicate getter definition"
+          end
+          getterDefined = true
+        elsif getterOrSetter.string == "set" then
+          ioPropertyListAST +=
+            !inPropertyName
+            !inPropertyAttributeList
+            !inIsPublic
+            !inTypeName 
+            !.writeComputedProperty{
+              !instructionList: instructionList
+              !endOfInstructionList: endOfInstructionList
+            }
+          if setterDefined then
+            error getterOrSetter : "duplicate setter definition"
+          end
+          setterDefined = true
+        else
+          error getterOrSetter : "invalid identifier" fixit { remove replace "set" replace "get" }
+        end
+      while
+      end
+      if setterDefined && not getterDefined then
+        error .here : "a getter should be defined"
+      elsif not setterDefined && not getterDefined then
+        error .here : "a getter should be defined, and optionaly a setter"
+      end
+    or
+      <instructionList> !?ioAST ?let readInstructionList
+      let endOfReadInstructionList = @location.here
+      ioPropertyListAST +=
+        !inPropertyName
+        !inPropertyAttributeList
+        !inIsPublic
+        !inTypeName 
+        !.readOnlyComputedProperty{
+          !instructionList: readInstructionList
+          !endOfInstructionList: endOfReadInstructionList
+        }
+    end
+    $}$
+  }
+  
+  #·····················································································································
 
   rule <structure_function> ?!@ast ioAST ?!@functionDeclarationListAST ioProcListAST {
     @bool public
@@ -264,8 +337,10 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
       [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
     case initializedConstantProperty (initExpression) :
       [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
-    case computedProperty (instructionList *) :
+    case readOnlyComputedProperty (instructionList *) :
       [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    case writeComputedProperty (writeInstructionList *) :
+      [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
   end
 #--- Add structure functions
@@ -568,7 +643,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
-  case computedProperty (instructionList endOfInstructionList) :
+  case readOnlyComputedProperty (instructionList endOfInstructionList) :
     if not [optionalPropertyType instanciable] then
       error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end
@@ -583,7 +658,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       }
     ]
     let functionLLVMName = @lstring.new {
-      !getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+      !llvmRoutineName
       !mPropertyName.location
     }
     ioDecoratedRoutineList +=
@@ -600,6 +675,44 @@ method @structurePropertyListAST-element enterPropertyInContext
       !instructionList
       !endOfInstructionList
       !returnTypeName: mPropertyTypeName
+  case writeComputedProperty (writeInstructionList endOfWriteInstructionList) :
+    if not [optionalPropertyType instanciable] then
+      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+    end
+    let llvmRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+    let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
+    [!?ioPropertySetterMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.computedProperty {
+        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
+        !modeDictionary:modeDictionary
+      }
+    ]
+    let functionLLVMName = @lstring.new {
+      !llvmRoutineName
+      !mPropertyName.location
+    }
+    let @routineFormalArgumentListAST formalArgumentList = {
+      !.input
+      !["" nowhere]
+      !mPropertyTypeName
+      !.new {!"newValue" !endOfWriteInstructionList}
+    }
+    ioDecoratedRoutineList +=
+      !receiverTypeName: inReceiverTypeName
+      !mode:.anyMode
+      !isRequired: false
+      !.function
+      !warnIfUnused: false
+      !exportedRoutine: false
+      !.mutating
+      !functionLLVMName
+      !formalArgumentList
+      !false 
+      !writeInstructionList
+      !endOfWriteInstructionList
+      !returnTypeName: ["" nowhere]
   end
 }
 

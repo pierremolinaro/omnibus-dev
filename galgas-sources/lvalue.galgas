@@ -200,8 +200,8 @@ private proc analyzeVariableInLValue
         let @propertySetterMap propertySetterMap = currentType.propertySetterMap
         [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
         switch propertyAccess
-        case other :
-          error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+        case computedProperty (2*) :
+          error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
         case storedProperty (@PLMType propertyType @uint index) :
           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -284,8 +284,8 @@ private proc analyzeSelfAssignmentTarget
         let @propertySetterMap propertySetterMap = currentType.propertySetterMap
         [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
         switch propertyAccess
-        case other :
-          error propertyName : "a constant property cannot be written" : currentType, currentLLVMName
+        case computedProperty (2*) :
+          error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
         case storedProperty (@PLMType propertyType @uint index) :
           [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
           [!?ioInstructionGenerationList appendGetUniversalPropertyReference

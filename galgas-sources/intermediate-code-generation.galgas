@@ -80,14 +80,15 @@ list @routineListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineListIR llvmCodeGeneration
+method @routineListIR llvmRoutineGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  for procedure in self do
+  for routine in self do
+    ioLLVMcode += llvmTitleComment (!"Routine " + routine.mRoutine.mRoutineMangledName)
     ioGenerationAdds.mUniqueIndex = 0
-    [procedure.mRoutine llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    [routine.mRoutine llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
 }
 

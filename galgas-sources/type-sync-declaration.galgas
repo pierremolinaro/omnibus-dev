@@ -71,14 +71,11 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
       [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
     case initializedConstantProperty (initExpression) :
       [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
-    case computedProperty (instructionList *) :
+    case readOnlyComputedProperty (instructionList *) :
       [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    case writeComputedProperty (writeInstructionList *) :
+      [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
-#    switch initExpression
-#    case noExpression :
-#    case expression (initExpression) :
-#      [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
-#    end
   end
 #--- Add structure functions
   for () in mFunctionDeclarationListAST do

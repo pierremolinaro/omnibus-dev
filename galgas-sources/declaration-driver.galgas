@@ -334,7 +334,9 @@ proc retainRequiredDrivers ?!@ast ioAST {
           driverPropertyKind = propertyKind
         case initializedConstantProperty (*) :
           driverPropertyKind = propertyKind
-        case computedProperty (2*) :
+        case readOnlyComputedProperty (2*) :
+          driverPropertyKind = propertyKind
+        case writeComputedProperty (2*) :
           driverPropertyKind = propertyKind
         end
         driverPropertyListAST += 

@@ -246,7 +246,7 @@ private proc generateCodeFiles
 #----------------------------------------- Driver Code
   [inIntermediateCodeStruct.mDriverList generateLLVMDriverCode !?llvmCode]
 #----------------------------------------- Routines
-  [inIntermediateCodeStruct.mRoutineListIR llvmCodeGeneration
+  [inIntermediateCodeStruct.mRoutineListIR llvmRoutineGeneration
     !?llvmCode
     !generationContext
     !?generationAdds
@@ -284,7 +284,6 @@ private proc generateCodeFiles
 #----------------------------------------- Routine list
   @sectionIRlist sectionIRlist = {}
   for routine in inIntermediateCodeStruct.mRoutineListIR do
-    llvmCode += llvmTitleComment (!"Routine " + routine.mRoutine.mRoutineMangledName)
     [routine.mRoutine svcDeclarationGeneration
       !?primitiveAndServiceList
       !?sectionIRlist

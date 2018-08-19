@@ -59,7 +59,7 @@ map @propertySetterMap {
 
 enum @propertySetterKind {
   case storedProperty (@PLMType type @uint index)
-  case other
+  case computedProperty (@unifiedTypeMap-proxy typeProxy @routineLLVMNameDict modeDictionary)
 }
 
 #·······················································································································
