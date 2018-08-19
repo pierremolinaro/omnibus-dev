@@ -292,12 +292,13 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         ]
         currentType = propertyType
         currentLLVMAddressVar = llvmPropertyName
-        currentObjectPropertyMap = currentType.propertyGetterMap # ????
-      case computedProperty (propertyTypeProxy) :
+        currentObjectPropertyMap = currentType.propertyGetterMap
+      case computedProperty (propertyTypeProxy modeDictionary) :
+        let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!modeDictionary !inMode !propertyName)
         [!?ioInstructionGenerationList appendGetComputedPropertyValue
           !?ioTemporaries
           !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-          !propertyName
+          !routineLLVMName
           ![propertyTypeProxy type]
           ?let resultValueIR
         ]

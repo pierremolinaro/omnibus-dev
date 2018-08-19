@@ -332,11 +332,11 @@ setter @propertyGetterMap addPropertyGetter
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   outRoutineLLVMName = .new {!getterLLVMName (!inLLVMBaseTypeName !inPropertyName) !inPropertyName}
-#  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
+  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?self insertKey
     !inPropertyName
     !true
-    !.computedProperty {!typeProxy:inResultTypeProxy}
+    !.computedProperty {!typeProxy:inResultTypeProxy !modeDictionary:modeDictionary}
   ]
 }
 

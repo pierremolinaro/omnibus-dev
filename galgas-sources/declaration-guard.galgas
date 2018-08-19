@@ -410,7 +410,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
           !propertyName
         ]
         currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
-      case computedProperty (*) :
+      case computedProperty (2*) :
         error propertyName : "a computed property cannot be named in guard" : currentObject
       end
     case arrayAccess (* @location endOfIndex *) :

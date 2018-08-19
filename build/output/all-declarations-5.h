@@ -2707,7 +2707,7 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
 void extensionSetter_appendGetComputedPropertyValue (class GALGAS_instructionListIR & ioObject,
                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                      const class GALGAS_objectIR constin_inReceiverIR,
-                                                     const class GALGAS_string constin_inProperyName,
+                                                     const class GALGAS_string constin_inLLVMGetterName,
                                                      const class GALGAS_PLMType constin_inResultType,
                                                      class GALGAS_objectIR & out_outResultValueIR,
                                                      class C_Compiler * inCompiler
@@ -2754,7 +2754,7 @@ class GALGAS_getComputedPropertyValueIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMGetterName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mReceiverIR (LOCATION_ARGS) const ;
 
@@ -2780,12 +2780,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getComputedProperty
 class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mReceiverIR ;
-  public : GALGAS_string mProperty_mPropertyName ;
+  public : GALGAS_string mProperty_mLLVMGetterName ;
   public : GALGAS_objectIR mProperty_mResultValueIR ;
 
 //--- Constructor
   public : cPtr_getComputedPropertyValueIR (const GALGAS_objectIR & in_mReceiverIR,
-                                            const GALGAS_string & in_mPropertyName,
+                                            const GALGAS_string & in_mLLVMGetterName,
                                             const GALGAS_objectIR & in_mResultValueIR
                                             COMMA_LOCATION_ARGS) ;
 
@@ -2794,7 +2794,7 @@ class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mReceiverIR (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMGetterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResultValueIR (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

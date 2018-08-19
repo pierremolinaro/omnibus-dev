@@ -358,7 +358,7 @@ method @universalValuedObjectMap searchValuedObjectType
         outType = [value type]
       case storedProperty (type *) :
         outType = type
-      case computedProperty (propertyTypeProxy) :
+      case computedProperty (propertyTypeProxy *) :
         outType = [propertyTypeProxy type]
       end
     case arrayAccess (3*) :

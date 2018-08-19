@@ -3837,7 +3837,8 @@ class GALGAS_propertyGetterKind : public AC_GALGAS_root {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_propertyGetterKind constructor_computedProperty (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
+  public : static class GALGAS_propertyGetterKind constructor_computedProperty (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                                const class GALGAS_routineLLVMNameDict & inOperand1
                                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_propertyGetterKind constructor_constantProperty (const class GALGAS_objectIR & inOperand0
@@ -3857,6 +3858,7 @@ class GALGAS_propertyGetterKind : public AC_GALGAS_root {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                          class GALGAS_routineLLVMNameDict & outArgument1,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
 

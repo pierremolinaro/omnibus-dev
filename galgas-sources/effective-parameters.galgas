@@ -206,7 +206,7 @@ proc analyzeEffectiveParameters
         ]
         parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
         ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
-      case computedProperty (*) :
+      case computedProperty (2*) :
         error inErrorLocation : "a computed property cannot be used as output / input parameter"
       end    
     end

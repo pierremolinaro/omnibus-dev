@@ -3687,9 +3687,11 @@ class cEnumAssociatedValues_propertyGetterKind_storedProperty : public cEnumAsso
 
 class cEnumAssociatedValues_propertyGetterKind_computedProperty : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_routineLLVMNameDict mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0
+  public : cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

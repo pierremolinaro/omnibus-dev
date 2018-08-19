@@ -4484,18 +4484,18 @@ void extensionSetter_appendGetUniversalArrayElementReference (GALGAS_instruction
 void extensionSetter_appendGetComputedPropertyValue (GALGAS_instructionListIR & ioObject,
                                                      GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                                      const GALGAS_objectIR constinArgument_inReceiverIR,
-                                                     const GALGAS_string constinArgument_inProperyName,
+                                                     const GALGAS_string constinArgument_inLLVMGetterName,
                                                      const GALGAS_PLMType constinArgument_inResultType,
                                                      GALGAS_objectIR & outArgument_outResultValueIR,
                                                      C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultValueIR.drop () ; // Release 'out' argument
-  GALGAS_string var_result_5F_llvmName_275 ;
+  GALGAS_string var_result_5F_llvmName_278 ;
   {
-  extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_result_5F_llvmName_275, inCompiler COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 9)) ;
+  extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_result_5F_llvmName_278, inCompiler COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 9)) ;
   }
-  outArgument_outResultValueIR = GALGAS_objectIR::constructor_llvmValue (constinArgument_inResultType, var_result_5F_llvmName_275  COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 10)) ;
-  ioObject.addAssign_operation (GALGAS_getComputedPropertyValueIR::constructor_new (constinArgument_inReceiverIR, constinArgument_inProperyName, outArgument_outResultValueIR  COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 11))  COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 11)) ;
+  outArgument_outResultValueIR = GALGAS_objectIR::constructor_llvmValue (constinArgument_inResultType, var_result_5F_llvmName_278  COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 10)) ;
+  ioObject.addAssign_operation (GALGAS_getComputedPropertyValueIR::constructor_new (constinArgument_inReceiverIR, constinArgument_inLLVMGetterName, outArgument_outResultValueIR  COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 11))  COMMA_SOURCE_FILE ("intermediate-get-computed-property-value.galgas", 11)) ;
 }
 
 
@@ -4511,7 +4511,7 @@ typeComparisonResult cPtr_getComputedPropertyValueIR::dynamicObjectCompare (cons
     result = mProperty_mReceiverIR.objectCompare (p->mProperty_mReceiverIR) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mPropertyName.objectCompare (p->mProperty_mPropertyName) ;
+    result = mProperty_mLLVMGetterName.objectCompare (p->mProperty_mLLVMGetterName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mResultValueIR.objectCompare (p->mProperty_mResultValueIR) ;
@@ -4554,12 +4554,12 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_getComputedPropertyValueIR GALGAS_getComputedPropertyValueIR::constructor_new (const GALGAS_objectIR & inAttribute_mReceiverIR,
-                                                                                      const GALGAS_string & inAttribute_mPropertyName,
+                                                                                      const GALGAS_string & inAttribute_mLLVMGetterName,
                                                                                       const GALGAS_objectIR & inAttribute_mResultValueIR
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_getComputedPropertyValueIR result ;
-  if (inAttribute_mReceiverIR.isValid () && inAttribute_mPropertyName.isValid () && inAttribute_mResultValueIR.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_getComputedPropertyValueIR (inAttribute_mReceiverIR, inAttribute_mPropertyName, inAttribute_mResultValueIR COMMA_THERE)) ;
+  if (inAttribute_mReceiverIR.isValid () && inAttribute_mLLVMGetterName.isValid () && inAttribute_mResultValueIR.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_getComputedPropertyValueIR (inAttribute_mReceiverIR, inAttribute_mLLVMGetterName, inAttribute_mResultValueIR COMMA_THERE)) ;
   }
   return result ;
 }
@@ -4584,20 +4584,20 @@ GALGAS_objectIR cPtr_getComputedPropertyValueIR::getter_mReceiverIR (UNUSED_LOCA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_string GALGAS_getComputedPropertyValueIR::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_getComputedPropertyValueIR::getter_mLLVMGetterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_getComputedPropertyValueIR * p = (const cPtr_getComputedPropertyValueIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getComputedPropertyValueIR) ;
-    result = p->mProperty_mPropertyName ;
+    result = p->mProperty_mLLVMGetterName ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_string cPtr_getComputedPropertyValueIR::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mPropertyName ;
+GALGAS_string cPtr_getComputedPropertyValueIR::getter_mLLVMGetterName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMGetterName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4623,12 +4623,12 @@ GALGAS_objectIR cPtr_getComputedPropertyValueIR::getter_mResultValueIR (UNUSED_L
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cPtr_getComputedPropertyValueIR::cPtr_getComputedPropertyValueIR (const GALGAS_objectIR & in_mReceiverIR,
-                                                                  const GALGAS_string & in_mPropertyName,
+                                                                  const GALGAS_string & in_mLLVMGetterName,
                                                                   const GALGAS_objectIR & in_mResultValueIR
                                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mReceiverIR (in_mReceiverIR),
-mProperty_mPropertyName (in_mPropertyName),
+mProperty_mLLVMGetterName (in_mLLVMGetterName),
 mProperty_mResultValueIR (in_mResultValueIR) {
 }
 
@@ -4643,7 +4643,7 @@ void cPtr_getComputedPropertyValueIR::description (C_String & ioString,
   ioString << "[@getComputedPropertyValueIR:" ;
   mProperty_mReceiverIR.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mPropertyName.description (ioString, inIndentation+1) ;
+  mProperty_mLLVMGetterName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mResultValueIR.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -4653,7 +4653,7 @@ void cPtr_getComputedPropertyValueIR::description (C_String & ioString,
 
 acPtr_class * cPtr_getComputedPropertyValueIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_getComputedPropertyValueIR (mProperty_mReceiverIR, mProperty_mPropertyName, mProperty_mResultValueIR COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getComputedPropertyValueIR (mProperty_mReceiverIR, mProperty_mLLVMGetterName, mProperty_mResultValueIR COMMA_THERE)) ;
   return ptr ;
 }
 

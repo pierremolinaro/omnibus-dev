@@ -33,7 +33,7 @@ enum @subscript {
 
 enum @propertyGetterKind {
   case storedProperty (@PLMType type @uint index)
-  case computedProperty (@unifiedTypeMap-proxy typeProxy)
+  case computedProperty (@unifiedTypeMap-proxy typeProxy @routineLLVMNameDict modeDictionary)
   case constantProperty (@objectIR value)
 }
 

@@ -2,20 +2,20 @@
 setter @instructionListIR appendGetComputedPropertyValue
   ?!@semanticTemporariesStruct ioTemporaries
   ?let @objectIR inReceiverIR
-  ?let @string inProperyName
+  ?let @string inLLVMGetterName
   ?let @PLMType inResultType
   !@objectIR outResultValueIR
 {
  [!?ioTemporaries newTempLLVMVar ?let result_llvmName]
  outResultValueIR = .llvmValue {!type:inResultType !llvmName:result_llvmName}
-  self += !@getComputedPropertyValueIR.new {!inReceiverIR !inProperyName !outResultValueIR}
+  self += !@getComputedPropertyValueIR.new {!inReceiverIR !inLLVMGetterName !outResultValueIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getComputedPropertyValueIR : @abstractInstructionIR {
   @objectIR mReceiverIR
-  @string mPropertyName
+  @string mLLVMGetterName
   @objectIR mResultValueIR
 }
 
@@ -26,9 +26,8 @@ override method @getComputedPropertyValueIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmRoutineName = getterLLVMName (![[mReceiverIR type] llvmBaseTypeName] !mPropertyName)
   ioLLVMcode += "  " + [mResultValueIR llvmName] + " = call " + [[mResultValueIR type] llvmTypeName]
-  ioLLVMcode += " @" + [llvmRoutineName assemblerRepresentation] 
+  ioLLVMcode += " @" + [mLLVMGetterName assemblerRepresentation] 
   ioLLVMcode += " (" + [[mReceiverIR type] llvmTypeName] + "* " + [mReceiverIR llvmName] + ")\n"
 }
 
@@ -38,8 +37,7 @@ override method @getComputedPropertyValueIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  let llvmRoutineName = getterLLVMName (![[mReceiverIR type] llvmBaseTypeName] !mPropertyName)
-  ioInvokedRoutineSet += !llvmRoutineName
+  ioInvokedRoutineSet += !mLLVMGetterName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

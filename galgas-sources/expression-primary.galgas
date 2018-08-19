@@ -361,6 +361,7 @@ proc procAnalyzeAccesListInExpression
       handlePropertyAccessInExpression (
         !?ioResult
         !propertyName
+        !inMode
         !?temporary:ioTemporaries
         !?instructionListIR:ioInstructionGenerationList
       )
@@ -437,6 +438,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       handlePropertyAccessInExpression (
         !?outResult
         !propertyName
+        !inMode
         !?temporary:ioTemporaries
         !?instructionListIR:ioInstructionGenerationList
       )
@@ -509,6 +511,7 @@ proc handleSliceInExpression
 proc handlePropertyAccessInExpression
   ?!@objectIR ioResult
   ?let @lstring inPropertyName
+  ?let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -528,11 +531,12 @@ proc handlePropertyAccessInExpression
       !inPropertyName
     ]
     ioResult = .reference {!type:propertyType !llvmName:property_llvmName}
-  case computedProperty (propertyTypeProxy) :
+  case computedProperty (propertyTypeProxy modeDictionary) :
+    let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!modeDictionary !inMode !inPropertyName)
     [!?ioInstructionGenerationList appendGetComputedPropertyValue
       !?ioTemporaries
       !ioResult
-      !inPropertyName
+      !routineLLVMName
       ![propertyTypeProxy type]
       ?let resultValueIR
     ]
