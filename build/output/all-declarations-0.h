@@ -402,6 +402,12 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_lvalue_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_lvalue_5F_operand_ (class GALGAS_ast & ioArgument0,
+                                                  class GALGAS_LValueOperandAST & outArgument1,
+                                                  class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_lvalue_5F_operand_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
   protected : virtual void nt_mode_ (class GALGAS_mode & outArgument0,
                                      class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
@@ -1130,28 +1136,46 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_lvalue_i105_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i106_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i106_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_LValueOperandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i106_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i107_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_LValueOperandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i107_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i108_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_LValueOperandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i108_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i109_ (GALGAS_ast & ioArgument0,
                                                                            GALGAS_controlRegisterLValueAST & outArgument1,
                                                                            C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i106_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i109_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i107_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i110_ (GALGAS_ast & ioArgument0,
                                                                      GALGAS_effectiveArgumentListAST & outArgument1,
                                                                      GALGAS_location & outArgument2,
                                                                      C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i107_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i110_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i108_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i111_ (GALGAS_ast & ioArgument0,
                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i108_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i111_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i109_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i112_ (GALGAS_ast & ioArgument0,
                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i109_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i112_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -1415,8 +1439,6 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_128 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_129 (C_Lexique_plm_5F_lexique *) = 0 ;
-
-  protected : virtual int32_t select_plm_5F_syntax_130 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
@@ -1823,9 +1845,6 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
 //--- Constructor
   public : GALGAS_addressofExpressionAST (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_addressofExpressionAST constructor_default (LOCATION_ARGS) ;
-
 //---
   public : inline const class cPtr_addressofExpressionAST * ptr (void) const { return (const cPtr_addressofExpressionAST *) mObjectPtr ; }
 
@@ -1870,21 +1889,34 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofExpression
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @accessInAssignmentListAST list                                           *
+//                                               @LValueOperandAST enum                                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
+class GALGAS_LValueOperandAST : public AC_GALGAS_root {
 //--------------------------------- Default constructor
-  public : GALGAS_accessInAssignmentListAST (void) ;
+  public : GALGAS_LValueOperandAST (void) ;
 
-//--------------------------------- List constructor used by listmap
-  public : GALGAS_accessInAssignmentListAST (const capCollectionElementArray & inSharedArray) ;
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_noOperand,
+    kEnum_property,
+    kEnum_arrayAccess
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
 
-//--------------------------------- Element constructor
-  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_accessInAssignmentAST & in_mAccess
-                                                  COMMA_LOCATION_ARGS) ;
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of generic part --*
 
@@ -1892,108 +1924,63 @@ class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_accessInAssignmentListAST extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_LValueOperandAST extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_accessInAssignmentListAST constructor_emptyList (LOCATION_ARGS) ;
+  public : static class GALGAS_LValueOperandAST constructor_arrayAccess (const class GALGAS_expressionAST & inOperand0,
+                                                                         const class GALGAS_location & inOperand1,
+                                                                         const class GALGAS_bool & inOperand2,
+                                                                         const class GALGAS_LValueOperandAST & inOperand3
+                                                                         COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_accessInAssignmentListAST constructor_listWithValue (const class GALGAS_accessInAssignmentAST & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_LValueOperandAST constructor_noOperand (LOCATION_ARGS) ;
 
-//--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_accessInAssignmentListAST inOperand,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_LValueOperandAST constructor_property (const class GALGAS_lstring & inOperand0,
+                                                                      const class GALGAS_LValueOperandAST & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_accessInAssignmentAST & inOperand0
-                                                      COMMA_LOCATION_ARGS) ;
-//--------------------------------- + operator
-  public : VIRTUAL_IN_DEBUG GALGAS_accessInAssignmentListAST add_operation (const GALGAS_accessInAssignmentListAST & inOperand,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const ;
-
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_LValueOperandAST & inOperand) const ;
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_append (class GALGAS_accessInAssignmentListAST_2D_element inArgument0,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_accessInAssignmentAST constinArgument0,
-                                                       class GALGAS_uint constinArgument1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_accessInAssignmentAST & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_accessInAssignmentAST & outArgument0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_accessInAssignmentAST & outArgument0,
-                                                       class GALGAS_uint constinArgument1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_accessInAssignmentAST & outArgument0,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_arrayAccess (class GALGAS_expressionAST & outArgument0,
+                                                     class GALGAS_location & outArgument1,
+                                                     class GALGAS_bool & outArgument2,
+                                                     class GALGAS_LValueOperandAST & outArgument3,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_accessInAssignmentAST & outArgument0,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_LValueOperandAST & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentAST getter_mAccessAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_subListToIndex (const class GALGAS_uint & constinOperand0,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_subListWithRange (const class GALGAS_range & constinOperand0,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-//--------------------------------- Friend
-
-  friend class cEnumerator_accessInAssignmentListAST ;
  
-} ; // End of GALGAS_accessInAssignmentListAST class
+} ; // End of GALGAS_LValueOperandAST class
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Enumerator declaration                                                                                            *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumerator_accessInAssignmentListAST : public cGenericAbstractEnumerator {
-  public : cEnumerator_accessInAssignmentListAST (const GALGAS_accessInAssignmentListAST & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_accessInAssignmentAST current_mAccess (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_accessInAssignmentListAST_2D_element current (LOCATION_ARGS) const ;
-} ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentListAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueOperandAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -2005,14 +1992,11 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_mIdentifier ;
 
-  public : GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
+  public : GALGAS_LValueOperandAST mProperty_mOperand ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_LValueAST constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_LValueAST (void) ;
@@ -2022,7 +2006,7 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_LValueAST (const GALGAS_lstring & in_mIdentifier,
-                             const GALGAS_accessInAssignmentListAST & in_mAccessList) ;
+                             const GALGAS_LValueOperandAST & in_mOperand) ;
 
 //-- Start of generic part --*
 
@@ -2036,7 +2020,7 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_LValueAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                          const class GALGAS_accessInAssignmentListAST & inOperand1
+                                                          const class GALGAS_LValueOperandAST & inOperand1
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2051,9 +2035,9 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_LValueOperandAST getter_mOperand (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -6455,6 +6439,133 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procedureCallInstru
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                           @accessInAssignmentListAST list                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_accessInAssignmentListAST (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_accessInAssignmentListAST (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_accessInAssignmentAST & in_mAccess
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_accessInAssignmentListAST extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_accessInAssignmentListAST constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_accessInAssignmentListAST constructor_listWithValue (const class GALGAS_accessInAssignmentAST & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_accessInAssignmentListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_accessInAssignmentAST & inOperand0
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_accessInAssignmentListAST add_operation (const GALGAS_accessInAssignmentListAST & inOperand,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_append (class GALGAS_accessInAssignmentListAST_2D_element inArgument0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_accessInAssignmentAST constinArgument0,
+                                                       class GALGAS_uint constinArgument1,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_accessInAssignmentAST & outArgument0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_accessInAssignmentAST & outArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_accessInAssignmentAST & outArgument0,
+                                                       class GALGAS_uint constinArgument1,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_accessInAssignmentAST & outArgument0,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_accessInAssignmentAST & outArgument0,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentAST getter_mAccessAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                            C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                            C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_accessInAssignmentListAST ;
+ 
+} ; // End of GALGAS_accessInAssignmentListAST class
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Enumerator declaration                                                                                            *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumerator_accessInAssignmentListAST : public cGenericAbstractEnumerator {
+  public : cEnumerator_accessInAssignmentListAST (const GALGAS_accessInAssignmentListAST & inEnumeratedObject,
+                                                  const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_accessInAssignmentAST current_mAccess (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_accessInAssignmentListAST_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentListAST ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                Pointer class for @procedureCallInstructionAST class                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6835,9 +6946,6 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
 //--- Constructor
   public : GALGAS_sizeofExpressionAST (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_sizeofExpressionAST constructor_default (LOCATION_ARGS) ;
 
 //---
   public : inline const class cPtr_sizeofExpressionAST * ptr (void) const { return (const cPtr_sizeofExpressionAST *) mObjectPtr ; }
@@ -10447,128 +10555,46 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticArrayDe
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @accessInAssignmentAST enum                                             *
+//                                      @LValueOperandAST enum, associated values                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_accessInAssignmentAST (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_property,
-    kEnum_arrayAccess
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
-
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_accessInAssignmentAST extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_accessInAssignmentAST constructor_arrayAccess (const class GALGAS_expressionAST & inOperand0,
-                                                                              const class GALGAS_location & inOperand1,
-                                                                              const class GALGAS_bool & inOperand2
-                                                                              COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_accessInAssignmentAST constructor_property (const class GALGAS_lstring & inOperand0
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_accessInAssignmentAST & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_arrayAccess (class GALGAS_expressionAST & outArgument0,
-                                                     class GALGAS_location & outArgument1,
-                                                     class GALGAS_bool & outArgument2,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_lstring & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_accessInAssignmentAST class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentAST ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   @accessInAssignmentAST enum, associated values                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_accessInAssignmentAST_property : public cEnumAssociatedValues {
+class cEnumAssociatedValues_LValueOperandAST_property : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_LValueOperandAST mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_accessInAssignmentAST_property (const GALGAS_lstring & inAssociatedValue0
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_LValueOperandAST_property (const GALGAS_lstring & inAssociatedValue0,
+                                                            const GALGAS_LValueOperandAST & inAssociatedValue1
+                                                            COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_accessInAssignmentAST_property (void) {}
+  public : virtual ~ cEnumAssociatedValues_LValueOperandAST_property (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumAssociatedValues_accessInAssignmentAST_arrayAccess : public cEnumAssociatedValues {
+class cEnumAssociatedValues_LValueOperandAST_arrayAccess : public cEnumAssociatedValues {
   public : const GALGAS_expressionAST mAssociatedValue0 ;
   public : const GALGAS_location mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
+  public : const GALGAS_LValueOperandAST mAssociatedValue3 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_accessInAssignmentAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                    const GALGAS_location & inAssociatedValue1,
-                                                                    const GALGAS_bool & inAssociatedValue2
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_LValueOperandAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
+                                                               const GALGAS_location & inAssociatedValue1,
+                                                               const GALGAS_bool & inAssociatedValue2,
+                                                               const GALGAS_LValueOperandAST & inAssociatedValue3
+                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_accessInAssignmentAST_arrayAccess (void) {}
+  public : virtual ~ cEnumAssociatedValues_LValueOperandAST_arrayAccess (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -14996,6 +15022,28 @@ class cMapElement_controlRegisterUserAccesMapAST : public cMapElement {
 //--- Description
  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                           Extension method '@LValueOperandAST buildExpressionAccessList'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_buildExpressionAccessList (const class GALGAS_LValueOperandAST inObject,
+                                                class GALGAS_primaryInExpressionAccessListAST & io_ioExpressionAccessList,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                          Extension method '@LValueOperandAST buildProcedureCallAccessList'                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_buildProcedureCallAccessList (const class GALGAS_LValueOperandAST inObject,
+                                                   class GALGAS_accessInAssignmentListAST & io_ioAccessList,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

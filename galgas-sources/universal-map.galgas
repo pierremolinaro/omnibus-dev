@@ -301,7 +301,7 @@ method @universalValuedObjectMap searchValuedObjectType
   ?let @LValueAST inLValue
   !@PLMType outType
 {
-  var accessList = inLValue.mAccessList
+#  var accessList = inLValue.mAccessList
   if inLValue.mIdentifier.string == "" then # Receiver is self
     outType = inSelfType
   else
@@ -321,29 +321,59 @@ method @universalValuedObjectMap searchValuedObjectType
       outType = type
     end
   end
-  for (access) in accessList do
-    switch access
-    case property (@lstring propertyName) :
-      let @propertyGetterMap propertyGetterMap = outType.propertyGetterMap
-      [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
-      switch accessKind
-      case constantProperty (value) :
-        outType = [value type]
-      case storedProperty (type *) :
-        outType = type
-      case computedProperty (propertyTypeProxy *) :
-        outType = [propertyTypeProxy type]
-      end
-    case arrayAccess (3*) :
-      switch outType.subscript
-      case noSubscript :
-      case literalString :
-      case staticSubscript (@PLMType elementType *) :
-        outType = elementType
-      end
+  [inLValue.mOperand getValuedObjectType !?outType]
+#  for (access) in accessList do
+#    switch access
+#    case property (@lstring propertyName) :
+#      let @propertyGetterMap propertyGetterMap = outType.propertyGetterMap
+#      [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
+#      switch accessKind
+#      case constantProperty (value) :
+#        outType = [value type]
+#      case storedProperty (type *) :
+#        outType = type
+#      case computedProperty (propertyTypeProxy *) :
+#        outType = [propertyTypeProxy type]
+#      end
+#    case arrayAccess (3*) :
+#      switch outType.subscript
+#      case noSubscript :
+#      case literalString :
+#      case staticSubscript (@PLMType elementType *) :
+#        outType = elementType
+#      end
+#    end
+#  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @LValueOperandAST getValuedObjectType ?!@PLMType ioType {
+  switch self
+  case noOperand :
+  case property (@lstring propertyName @LValueOperandAST next) :
+    let @propertyGetterMap propertyGetterMap = ioType.propertyGetterMap
+    [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
+    switch accessKind
+    case constantProperty (value) :
+      ioType = [value type]
+    case storedProperty (type *) :
+      ioType = type
+    case computedProperty (propertyTypeProxy *) :
+      ioType = [propertyTypeProxy type]
     end
+    [next getValuedObjectType !?ioType]
+  case arrayAccess (3* @LValueOperandAST next) :
+    switch ioType.subscript
+    case noSubscript :
+    case literalString :
+    case staticSubscript (@PLMType elementType *) :
+      ioType = elementType
+    end
+    [next getValuedObjectType !?ioType]
   end
 }
+
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! STATE HANDLING

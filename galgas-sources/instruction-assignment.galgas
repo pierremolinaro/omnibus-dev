@@ -56,6 +56,8 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+
+
   [ioUniversalMap searchValuedObjectType !selfType:inSelfType !mTargetAST ?let targetType]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -111,5 +113,81 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     end
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#method @assignmentInstructionAST decomposeAssignmentFromWriteComputedProperties
+#  ?self:let @PLMType inSelfType
+#  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+#{
+##--- Decompose LValue if it contains computed properties
+#  if mTargetAST.mIdentifier.string == "" then # Receiver is "self"
+#    var currentType = inSelfType
+#    for (access) in mTargetAST.mAccessList do
+#      switch access
+#      case property (@lstring propertyName) :
+#        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
+#        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
+#        switch propertyAccess
+#        case computedProperty (2*) :
+#          error propertyName : "a computed property cannot be used here" : currentType
+#        case storedProperty (@PLMType propertyType *) :
+#          currentType = propertyType
+#        end
+#      case arrayAccess (* endOfIndex *) :
+#        switch currentType.subscript
+#        case noSubscript :
+#          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
+#        case literalString :
+#          error endOfIndex
+#          : "the receiver type is a literal string and does not accept subscripting"
+#          : currentType
+#        case staticSubscript (@PLMType elementType *) :
+#          currentType = elementType
+#        end
+#      end
+#    end
+#  else # Receiver is not self
+#    [ioUniversalMap searchEntity !mTargetAST.mIdentifier ?let @valuedObject entity]
+#    switch entity
+#    case task (*) :
+#    case driver (* *) :
+#    case globalConstant (*) :
+#    case localConstant (3*) :
+#    case globalSyncInstance (2*) :
+#    case localVariable (@PLMType variableType *) :
+#      var currentType = variableType
+#      if [mTargetAST.mAccessList length] == 0 then
+#
+#      else
+#        for (access) in mTargetAST.mAccessList do
+#          switch access
+#          case property (@lstring propertyName) :
+#            let @propertySetterMap propertySetterMap = currentType.propertySetterMap
+#            [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
+#            switch propertyAccess
+#            case computedProperty (2*) :
+#              error propertyName : "a computed property cannot be used here" : currentType
+#            case storedProperty (@PLMType propertyType *) :
+#              currentType = propertyType
+#            end
+#          case arrayAccess (* endOfIndex *) :
+#            switch currentType.subscript
+#            case noSubscript :
+#              error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
+#            case literalString :
+#              error endOfIndex
+#              : "the receiver type is literal string and does not accept subscripting"
+#              : currentType
+#            case staticSubscript (@PLMType elementType *) :
+#             currentType = elementType
+#            end
+#          end
+#        end
+#      end
+#    end  
+#  
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

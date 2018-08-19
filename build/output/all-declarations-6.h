@@ -2522,6 +2522,17 @@ void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                              Extension method '@LValueOperandAST getValuedObjectType'                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_getValuedObjectType (const class GALGAS_LValueOperandAST inObject,
+                                          class GALGAS_PLMType & io_ioType,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                      Extension method '@universalValuedObjectMap checkLocalVariableFinalState'                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

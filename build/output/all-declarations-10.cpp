@@ -9,58 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Function 'panicRoutineNameForLocationFile'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string function_panicRoutineNameForLocationFile (const GALGAS_location & constinArgument_inLocation,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  const enumGalgasBool test_0 = constinArgument_inLocation.getter_isNowhere (SOURCE_FILE ("panic.galgas", 85)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    result_result = GALGAS_string ("raise.panic.nofile") ;
-  }else if (kBoolFalse == test_0) {
-    result_result = GALGAS_string ("raise.panic.file.").add_operation (constinArgument_inLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 88)).getter_lastPathComponent (SOURCE_FILE ("panic.galgas", 88)).getter_stringByDeletingPathExtension (SOURCE_FILE ("panic.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 88)) ;
-  }
-//---
-  return result_result ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//  Function introspection                                                                                             *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static const C_galgas_type_descriptor * functionArgs_panicRoutineNameForLocationFile [2] = {
-  & kTypeDescriptor_GALGAS_location,
-  NULL
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static GALGAS_object functionWithGenericHeader_panicRoutineNameForLocationFile (C_Compiler * inCompiler,
-                                                                                const cObjectArray & inEffectiveParameterArray,
-                                                                                const GALGAS_location & /* inErrorLocation */
-                                                                                COMMA_LOCATION_ARGS) {
-  const GALGAS_location operand0 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                                   inCompiler
-                                                                   COMMA_THERE) ;
-  return function_panicRoutineNameForLocationFile (operand0,
-                                                   inCompiler
-                                                   COMMA_THERE).getter_object (THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_galgas_function_descriptor functionDescriptor_panicRoutineNameForLocationFile ("panicRoutineNameForLocationFile",
-                                                                                 functionWithGenericHeader_panicRoutineNameForLocationFile,
-                                                                                 & kTypeDescriptor_GALGAS_string,
-                                                                                 1,
-                                                                                 functionArgs_panicRoutineNameForLocationFile) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                       Function 'panicRoutineNameForFilePath'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6213,30 +6161,30 @@ static void extensionMethod_assignmentInstructionAST_instructionSemanticAnalysis
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_assignmentInstructionAST * object = (const cPtr_assignmentInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_assignmentInstructionAST) ;
-  GALGAS_PLMType var_targetType_3082 ;
-  extensionMethod_searchValuedObjectType (ioArgument_ioUniversalMap, constinArgument_inSelfType, object->mProperty_mTargetAST, var_targetType_3082, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 59)) ;
-  GALGAS_objectIR var_sourceOperandPossibleReference_3526 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_targetType_3082, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 61)) ;
-  GALGAS_LValueRepresentation var_lvalueIR_3934 ;
-  extensionMethod_analyzeLValue (object->mProperty_mTargetAST, constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lvalueIR_3934, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 75)) ;
-  const enumGalgasBool test_0 = var_sourceOperandPossibleReference_3526.getter_isReference (SOURCE_FILE ("instruction-assignment.galgas", 89)).operator_not (SOURCE_FILE ("instruction-assignment.galgas", 89)).boolEnum () ;
+  GALGAS_PLMType var_targetType_3084 ;
+  extensionMethod_searchValuedObjectType (ioArgument_ioUniversalMap, constinArgument_inSelfType, object->mProperty_mTargetAST, var_targetType_3084, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 61)) ;
+  GALGAS_objectIR var_sourceOperandPossibleReference_3528 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_targetType_3084, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperandPossibleReference_3528, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 63)) ;
+  GALGAS_LValueRepresentation var_lvalueIR_3936 ;
+  extensionMethod_analyzeLValue (object->mProperty_mTargetAST, constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lvalueIR_3936, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 77)) ;
+  const enumGalgasBool test_0 = var_sourceOperandPossibleReference_3528.getter_isReference (SOURCE_FILE ("instruction-assignment.galgas", 91)).operator_not (SOURCE_FILE ("instruction-assignment.galgas", 91)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_objectIR var_result_4091 = function_checkAssignmentCompatibility (var_sourceOperandPossibleReference_3526, var_targetType_3082, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 93)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 90)) ;
+    GALGAS_objectIR var_result_4093 = function_checkAssignmentCompatibility (var_sourceOperandPossibleReference_3528, var_targetType_3084, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 95)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 92)) ;
     {
-    extensionSetter_appendStoreToUniversalReference (ioArgument_ioInstructionGenerationList, var_lvalueIR_3934.getter_llvmName (HERE), var_targetType_3082, var_result_4091, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 96)) ;
+    extensionSetter_appendStoreToUniversalReference (ioArgument_ioInstructionGenerationList, var_lvalueIR_3936.getter_llvmName (HERE), var_targetType_3084, var_result_4093, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 98)) ;
     }
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_sourceOperand_5F_llvmBaseTypeName_4525 = extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 99)).getter_llvmBaseTypeName (HERE) ;
-    const enumGalgasBool test_1 = var_targetType_3082.getter_assignmentSources (HERE).getter_hasKey (var_sourceOperand_5F_llvmBaseTypeName_4525 COMMA_SOURCE_FILE ("instruction-assignment.galgas", 100)).boolEnum () ;
+    GALGAS_string var_sourceOperand_5F_llvmBaseTypeName_4527 = extensionGetter_type (var_sourceOperandPossibleReference_3528, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 101)).getter_llvmBaseTypeName (HERE) ;
+    const enumGalgasBool test_1 = var_targetType_3084.getter_assignmentSources (HERE).getter_hasKey (var_sourceOperand_5F_llvmBaseTypeName_4527 COMMA_SOURCE_FILE ("instruction-assignment.galgas", 102)).boolEnum () ;
     if (kBoolTrue == test_1) {
       {
-      extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 103)), var_sourceOperandPossibleReference_3526, var_lvalueIR_3934, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 101)) ;
+      extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 105)), var_sourceOperandPossibleReference_3528, var_lvalueIR_3936, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 103)) ;
       }
     }else if (kBoolFalse == test_1) {
-      GALGAS_string var_m_4897 = GALGAS_string ("no valid assignment to ").add_operation (var_targetType_3082.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 108)) ;
-      var_m_4897.plusAssign_operation(GALGAS_string (" from ").add_operation (extensionGetter_type (var_sourceOperandPossibleReference_3526, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 109)) ;
+      GALGAS_string var_m_4899 = GALGAS_string ("no valid assignment to ").add_operation (var_targetType_3084.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 110)) ;
+      var_m_4899.plusAssign_operation(GALGAS_string (" from ").add_operation (extensionGetter_type (var_sourceOperandPossibleReference_3528, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 111)).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 111)), inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 111)) ;
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 110)), var_m_4897, fixItArray2  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 110)) ;
+      inCompiler->emitSemanticError (object->mProperty_mTargetAST.getter_mIdentifier (HERE).getter_location (SOURCE_FILE ("instruction-assignment.galgas", 112)), var_m_4899, fixItArray2  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 112)) ;
     }
   }
 }

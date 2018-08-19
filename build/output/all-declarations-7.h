@@ -1232,9 +1232,8 @@ void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgu
                                           class GALGAS_universalValuedObjectMap & ioArgument6,
                                           class GALGAS_allocaList & ioArgument7,
                                           class GALGAS_instructionListIR & ioArgument8,
-                                          const class GALGAS_location constinArgument9,
-                                          const class GALGAS_accessInAssignmentListAST constinArgument10,
-                                          class GALGAS_LValueRepresentation & outArgument11,
+                                          const class GALGAS_LValueOperandAST constinArgument9,
+                                          class GALGAS_LValueRepresentation & outArgument10,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -1257,7 +1256,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_lstring constinArgument10,
                                       const class GALGAS_string constinArgument11,
                                       const class GALGAS_PLMType constinArgument12,
-                                      const class GALGAS_accessInAssignmentListAST constinArgument13,
+                                      const class GALGAS_LValueOperandAST constinArgument13,
                                       class GALGAS_LValueRepresentation & outArgument14,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;

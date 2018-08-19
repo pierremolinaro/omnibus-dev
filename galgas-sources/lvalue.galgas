@@ -13,11 +13,20 @@ list @accessInAssignmentListAST {
   @accessInAssignmentAST mAccess
 }
 
+
+#·······················································································································
+
+enum @LValueOperandAST {
+  case noOperand
+  case property (@lstring name @LValueOperandAST next)
+  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next)
+}
+
 #·······················································································································
 
 struct @LValueAST {
-  @lstring mIdentifier
-  @accessInAssignmentListAST mAccessList
+  @lstring mIdentifier # self is represented by an empty string, with actual "self" location
+  @LValueOperandAST mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -30,35 +39,47 @@ syntax extension plm_syntax {
 
   rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
     @lstring receiver
-  #--- Receiver
     select
       $identifier$ ?receiver
     or
       $self$
       receiver = ["" here]
     end
-  #--- Properties and subscript
-    @accessInAssignmentListAST accessList = {}
-    repeat
-    while
-      $.$
-      $identifier$ ?let propertyName
-      accessList += !.property {!name:propertyName}
-    while
-      $[$
-      <expression> !?ioAST ?let expression
-      let endOfIndex = @location.here
-      @bool checkIndexExpression
-      select
-        $]$
-        checkIndexExpression = true
-      or
-        $]!$
-        checkIndexExpression = false
-      end
-      accessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
+    <lvalue_operand> !?ioAST ?let operand
+    outAssignmentTargetAST = .new {!receiver !operand}
+  }
+  
+  #·····················································································································
+
+  rule <lvalue_operand> ?!@ast unused ioAST !@LValueOperandAST outOperand {
+    outOperand = .noOperand
+  }
+
+  #·····················································································································
+
+  rule <lvalue_operand> ?!@ast ioAST !@LValueOperandAST outOperand {
+    $.$
+    $identifier$ ?let propertyName
+    <lvalue_operand> !?ioAST ?let operand
+    outOperand = .property {!name:propertyName !next:operand}
+  }
+  
+  #·····················································································································
+
+  rule <lvalue_operand> ?!@ast ioAST !@LValueOperandAST outOperand {
+    $[$
+    <expression> !?ioAST ?let expression
+    let endOfIndex = @location.here
+    @bool checkIndexExpression
+    select
+      $]$
+      checkIndexExpression = true
+    or
+      $]!$
+      checkIndexExpression = false
     end
-    outAssignmentTargetAST = .new {!receiver !accessList}
+    <lvalue_operand> !?ioAST ?let operand
+    outOperand = .arrayAccess {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression !next:operand}
   }
 
   #·····················································································································
@@ -70,12 +91,19 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (access) in mAccessList do
-    switch access
-    case property (*) :
-    case arrayAccess (@expressionAST indexExpression 2*) :
-      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    end
+  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#·······················································································································
+
+method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  switch self
+  case noOperand :
+  case property (* @LValueOperandAST next) :
+    [next noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  case arrayAccess (@expressionAST indexExpression 2* @LValueOperandAST next) :
+    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    [next noteInstructionTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -121,8 +149,7 @@ method @LValueAST analyzeLValue
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
-        !mIdentifier.location
-        !mAccessList
+        !mOperand
         ?outInternalRepresentation
       )
     end
@@ -154,7 +181,7 @@ method @LValueAST analyzeLValue
         !variableName: mIdentifier
         !llvmName:llvmNameForLocalVariable (!plmName)
         !type: variableType
-        !mAccessList
+        !mOperand
         ?outInternalRepresentation
       )
     end
@@ -177,85 +204,264 @@ private proc analyzeVariableInLValue
   ?variableName:let @lstring inVariableName
   ?llvmName:let @string inLLVMName
   ?type:let @PLMType inVariableType
-  ?let @accessInAssignmentListAST inAccessList
+  ?let @LValueOperandAST inOperand
   !@LValueRepresentation outInternalRepresentation
 {
   var currentType = inVariableType
   var currentLLVMName = inLLVMName
-  if [inAccessList length] == 0 then
+  switch inOperand
+  case noOperand :
     if inIsReadAccess then
       [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
     else
       [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
     end
-  else
+  case property (@lstring name @LValueOperandAST next) :
     if inIsReadAccess then
       [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
     else
       [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
     end
-    for (access) in inAccessList do
-      switch access
-      case property (@lstring propertyName) :
-        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
-        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
-        switch propertyAccess
-        case computedProperty (2*) :
-          error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
-        case storedProperty (@PLMType propertyType @uint index) :
-          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-            !currentType
-            !currentLLVMName
-            !newLLVMvariable
-            !index
-            !propertyName
-          ]
-          currentType = propertyType
-          currentLLVMName = newLLVMvariable
-        end
-      case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
-        switch currentType.subscript
-        case noSubscript :
-          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
-        case literalString :
-          error endOfIndex
-          : "the receiver type is literal string and does not accept subscripting"
-          : currentType, currentLLVMName
-        case staticSubscript (@PLMType elementType @bigint arraySize) :
-          handleArraySubscriptNew (
-            !self: inSelfType
-            !routineAttributes:inRoutineAttributes
-            !context: inContext
-            !mode: inMode
-            !?temporary: ioTemporaries
-            !?staticEntityMap:ioStaticEntityMap
-            !?variableMap:ioUniversalMap
-            !?alloca: ioAllocaList
-            !indexExpression 
-            !endOfIndex
-            !checkIndexExpression
-            !arraySize:arraySize
-            !elementType:elementType
-            !?ioInstructionGenerationList
-            ?let @objectIR indexIR
-         )
-         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-           !currentType
-           !currentLLVMName
-           !elementType
-           !newLLVMvariable
-           !indexIR
-         ]
-         currentType = elementType
-         currentLLVMName = newLLVMvariable
-        end
-      end
+    handlePropertyAccess (
+      !self: inSelfType
+      !?currentType
+      !?currentLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !name
+      !next
+    )
+  case arrayAccess (@expressionAST indexExpression @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+    if inIsReadAccess then
+      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
+    else
+      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
     end
+    handleArrayAccess (
+      !self: inSelfType
+      !?currentType
+      !?currentLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !indexExpression
+      !endOfIndex
+      !checkIndexExpression
+      !next
+    )
   end
+
+
+
+
+
+
+#  if [inAccessList length] == 0 then
+#    if inIsReadAccess then
+#      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
+#    else
+#      [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
+#    end
+#  else
+#    if inIsReadAccess then
+#      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
+#    else
+#      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
+#    end
+#    for (access) in inAccessList do
+#      switch access
+#      case property (@lstring propertyName) :
+#        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
+#        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
+#        switch propertyAccess
+#        case computedProperty (2*) :
+#          error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
+#        case storedProperty (@PLMType propertyType @uint index) :
+#          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+#          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+#            !currentType
+#            !currentLLVMName
+#            !newLLVMvariable
+#            !index
+#            !propertyName
+#          ]
+#          currentType = propertyType
+#          currentLLVMName = newLLVMvariable
+#        end
+#      case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
+#        switch currentType.subscript
+#        case noSubscript :
+#          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
+#        case literalString :
+#          error endOfIndex
+#          : "the receiver type is literal string and does not accept subscripting"
+#          : currentType, currentLLVMName
+#        case staticSubscript (@PLMType elementType @bigint arraySize) :
+#          handleArraySubscriptNew (
+#            !self: inSelfType
+#            !routineAttributes:inRoutineAttributes
+#            !context: inContext
+#            !mode: inMode
+#            !?temporary: ioTemporaries
+#            !?staticEntityMap:ioStaticEntityMap
+#            !?variableMap:ioUniversalMap
+#            !?alloca: ioAllocaList
+#            !indexExpression 
+#            !endOfIndex
+#            !checkIndexExpression
+#            !arraySize:arraySize
+#            !elementType:elementType
+#            !?ioInstructionGenerationList
+#            ?let @objectIR indexIR
+#         )
+#         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+#         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
+#           !currentType
+#           !currentLLVMName
+#           !elementType
+#           !newLLVMvariable
+#           !indexIR
+#         ]
+#         currentType = elementType
+#         currentLLVMName = newLLVMvariable
+#        end
+#      end
+#    end
+#  end
   outInternalRepresentation = .new {!currentType !currentLLVMName}
  }
+
+#·······················································································································
+
+private proc handlePropertyAccess
+  ?self:let @PLMType inSelfType
+  ?!@PLMType ioCurrentType
+  ?!@string ioCurrentLLVMName
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?let @lstring inPropertyName
+  ?let @LValueOperandAST inNextOperand
+{
+  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap
+  [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
+  switch propertyAccess
+  case computedProperty (2*) :
+    error inPropertyName : "a computed property cannot be used here" : ioCurrentType, ioCurrentLLVMName
+  case storedProperty (@PLMType propertyType @uint index) :
+    [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+    [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+      !ioCurrentType
+      !ioCurrentLLVMName
+      !newLLVMvariable
+      !index
+      !inPropertyName
+    ]
+    ioCurrentType = propertyType
+    ioCurrentLLVMName = newLLVMvariable
+    handleNextOperand (
+      !self: inSelfType
+      !?ioCurrentType
+      !?ioCurrentLLVMName
+      !inNextOperand
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+    )
+  end
+}
+
+#·······················································································································
+
+private proc handleArrayAccess
+  ?self:let @PLMType inSelfType
+  ?!@PLMType ioCurrentType
+  ?!@string ioCurrentLLVMName
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?let @expressionAST inIndexExpression
+  ?let @location inEndOfIndex
+  ?let @bool inCheckIndexExpression
+  ?let @LValueOperandAST inNextOperand
+{
+  switch ioCurrentType.subscript
+  case noSubscript :
+    error inEndOfIndex : "the receiver type is " + [ioCurrentType plmTypeDescriptionName] + " and does not accept subscripting"
+  case literalString :
+    error inEndOfIndex
+    : "the receiver type is literal string and does not accept subscripting"
+    : ioCurrentType, ioCurrentLLVMName
+  case staticSubscript (@PLMType elementType @bigint arraySize) :
+    handleArraySubscriptNew (
+      !self: inSelfType
+      !routineAttributes:inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap:ioStaticEntityMap
+      !?variableMap:ioUniversalMap
+      !?alloca: ioAllocaList
+      !inIndexExpression 
+      !inEndOfIndex
+      !inCheckIndexExpression
+      !arraySize:arraySize
+      !elementType:elementType
+      !?ioInstructionGenerationList
+      ?let @objectIR indexIR
+    )
+    [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+    [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
+      !ioCurrentType
+      !ioCurrentLLVMName
+      !elementType
+      !newLLVMvariable
+      !indexIR
+    ]
+    ioCurrentType = elementType
+    ioCurrentLLVMName = newLLVMvariable
+    handleNextOperand (
+      !self: inSelfType
+      !?ioCurrentType
+      !?ioCurrentLLVMName
+      !inNextOperand
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+    )
+  end
+}
 
 #·······················································································································
 
@@ -269,75 +475,169 @@ private proc analyzeSelfAssignmentTarget
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?let @location inSelfLocation
-  ?let @accessInAssignmentListAST inAccessList
+  ?let @LValueOperandAST inOperand
   !@LValueRepresentation outInternalRepresentation
 {
-  if not ([inSelfType.kind isStructure] || [inSelfType.kind isSyncTool]) then
-    error inSelfLocation : "'self' is not available in this context" : outInternalRepresentation
-  else
-    var currentType = inSelfType
-    var currentLLVMName = llvmNameForSelf ()
-    for (access) in inAccessList do
-      switch access
-      case property (@lstring propertyName) :
-        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
-        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
-        switch propertyAccess
-        case computedProperty (2*) :
-          error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
-        case storedProperty (@PLMType propertyType @uint index) :
-          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-            !currentType
-            !currentLLVMName
-            !newLLVMvariable
-            !index
-            !propertyName
-          ]
-          currentType = propertyType
-          currentLLVMName = newLLVMvariable
-        end
-      case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
-        switch currentType.subscript
-        case noSubscript :
-          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
-        case literalString :
-          error endOfIndex
-          : "the receiver type is a literal string and does not accept subscripting"
-          : currentType, currentLLVMName
-        case staticSubscript (@PLMType elementType @bigint arraySize) :
-          handleArraySubscriptNew (
-            !self: inSelfType
-            !routineAttributes:inRoutineAttributes
-            !context: inContext
-            !mode: inMode
-            !?temporary: ioTemporaries
-            !?staticEntityMap:ioStaticEntityMap
-            !?variableMap:ioUniversalMap
-            !?alloca: ioAllocaList
-            !indexExpression 
-            !endOfIndex
-            !checkIndexExpression
-            !arraySize:arraySize
-            !elementType:elementType
-            !?ioInstructionGenerationList
-            ?let @objectIR indexIR
-         )
-         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-           !currentType
-           !currentLLVMName
-           !elementType
-           !newLLVMvariable
-           !indexIR
-         ]
-         currentType = elementType
-         currentLLVMName = newLLVMvariable
-        end
-      end
-    end
-    outInternalRepresentation = .new {!currentType !currentLLVMName}
+  var currentType = inSelfType
+  var currentLLVMName = llvmNameForSelf ()
+  switch inOperand
+  case noOperand :
+  case property (@lstring name @LValueOperandAST next) :
+    handlePropertyAccess (
+      !self: inSelfType
+      !?currentType
+      !?currentLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !name
+      !next
+    )
+  case arrayAccess (@expressionAST indexExpression @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+    handleArrayAccess (
+      !self: inSelfType
+      !?currentType
+      !?currentLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !indexExpression
+      !endOfIndex
+      !checkIndexExpression
+      !next
+    )
+  end
+
+
+
+
+
+
+
+#  for (access) in inAccessList do
+#    switch access
+#    case property (@lstring propertyName) :
+#      let @propertySetterMap propertySetterMap = currentType.propertySetterMap
+#      [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
+#      switch propertyAccess
+#      case computedProperty (2*) :
+#        error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
+#      case storedProperty (@PLMType propertyType @uint index) :
+#        [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+#        [!?ioInstructionGenerationList appendGetUniversalPropertyReference
+#          !currentType
+#          !currentLLVMName
+#          !newLLVMvariable
+#          !index
+#          !propertyName
+#        ]
+#        currentType = propertyType
+#        currentLLVMName = newLLVMvariable
+#      end
+#    case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
+#      switch currentType.subscript
+#      case noSubscript :
+#        error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
+#      case literalString :
+#        error endOfIndex
+#        : "the receiver type is a literal string and does not accept subscripting"
+#        : currentType, currentLLVMName
+#      case staticSubscript (@PLMType elementType @bigint arraySize) :
+#        handleArraySubscriptNew (
+#          !self: inSelfType
+#          !routineAttributes:inRoutineAttributes
+#          !context: inContext
+#          !mode: inMode
+#          !?temporary: ioTemporaries
+#          !?staticEntityMap:ioStaticEntityMap
+#          !?variableMap:ioUniversalMap
+#          !?alloca: ioAllocaList
+#          !indexExpression 
+#          !endOfIndex
+#          !checkIndexExpression
+#          !arraySize:arraySize
+#          !elementType:elementType
+#          !?ioInstructionGenerationList
+#          ?let @objectIR indexIR
+#       )
+#       [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
+#       [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
+#         !currentType
+#         !currentLLVMName
+#         !elementType
+#         !newLLVMvariable
+#         !indexIR
+#       ]
+#       currentType = elementType
+#       currentLLVMName = newLLVMvariable
+#      end
+#    end
+#  end
+  outInternalRepresentation = .new {!currentType !currentLLVMName}
+}
+
+#·······················································································································
+
+private proc handleNextOperand
+  ?self:let @PLMType inSelfType
+  ?!@PLMType ioCurrentType
+  ?!@string ioCurrentLLVMName
+  ?let @LValueOperandAST inOperand
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  switch inOperand
+  case noOperand :
+  case property (@lstring name @LValueOperandAST next) :
+    handlePropertyAccess (
+      !self: inSelfType
+      !?ioCurrentType
+      !?ioCurrentLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !name
+      !next
+    )
+  case arrayAccess (@expressionAST indexExpression @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+    handleArrayAccess (
+      !self: inSelfType
+      !?ioCurrentType
+      !?ioCurrentLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !indexExpression
+      !endOfIndex
+      !checkIndexExpression
+      !next
+    )
   end
 }
 

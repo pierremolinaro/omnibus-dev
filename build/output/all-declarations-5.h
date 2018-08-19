@@ -3530,6 +3530,15 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                     GALGAS_LValueAST & outArgument1,
                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'lvalue_operand' non terminal
+//--- 'parse' label
+  public : virtual void nt_lvalue_5F_operand_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_lvalue_5F_operand_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_LValueOperandAST & outArgument1,
+                                               C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'mode' non terminal
 //--- 'parse' label
   public : virtual void nt_mode_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -3966,8 +3975,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_128 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_129 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_130 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -39,7 +39,7 @@ syntax extension plm_syntax {
     let instructionLocation = @location.here
     <lvalue> !?ioAST ?let assignmentTargetAST
     <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-    if ([assignmentTargetAST.mAccessList length] == 0) & (assignmentTargetAST.mIdentifier.string != "") then
+    if (assignmentTargetAST.mOperand == .noOperand) & (assignmentTargetAST.mIdentifier.string != "") then
       outInstruction = @standAloneProcedureCallInstructionAST.new {
         !instructionLocation
         !arguments
@@ -47,12 +47,14 @@ syntax extension plm_syntax {
         !assignmentTargetAST.mIdentifier
       }
     else
+      @accessInAssignmentListAST accessList = {}
+      [assignmentTargetAST.mOperand buildProcedureCallAccessList !?accessList]
       outInstruction = @procedureCallInstructionAST.new {
         !instructionLocation
         !arguments
         !endOfArguments
         !assignmentTargetAST.mIdentifier
-        !assignmentTargetAST.mAccessList
+        !accessList
       }
     end
   }
@@ -62,12 +64,27 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListAST ioAccessList {
+  switch self
+  case noOperand :
+  case property (@lstring name @LValueOperandAST next) :
+    ioAccessList += !.property {!name:name}
+    [next buildProcedureCallAccessList !?ioAccessList]
+  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+    ioAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
+    [next buildProcedureCallAccessList !?ioAccessList]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
+#  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for (access) in mAccessList do
     switch access
     case property (*) :

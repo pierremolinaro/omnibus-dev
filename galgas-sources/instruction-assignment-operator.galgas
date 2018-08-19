@@ -56,14 +56,15 @@ syntax extension plm_syntax {
     <expression> !?ioAST ?let @expressionAST rightExpression
   #--- Build source expression
     @primaryInExpressionAccessListAST expressionAccessList = {}
-    for (access) in lvalue.mAccessList do
-      switch access
-      case property (@lstring name) :
-        expressionAccessList += !.property {!name:name}
-      case arrayAccess (@expressionAST index @location endOfIndex checkIndexExpression) :
-        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
-      end
-    end
+    [lvalue.mOperand buildExpressionAccessList !?expressionAccessList]
+#    for (access) in lvalue.mAccessList do
+#      switch access
+#      case property (@lstring name) :
+#        expressionAccessList += !.property {!name:name}
+#      case arrayAccess (@expressionAST index @location endOfIndex checkIndexExpression) :
+#        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
+#      end
+#    end
     let leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !expressionAccessList}
     let expression = @infixOperatorExpressionAST.new {
       !leftExpression
@@ -84,3 +85,18 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @LValueOperandAST buildExpressionAccessList ?!@primaryInExpressionAccessListAST ioExpressionAccessList {
+  switch self
+  case noOperand :
+  case property (@lstring name @LValueOperandAST next) :
+    ioExpressionAccessList += !.property {!name:name}
+    [next buildExpressionAccessList !?ioExpressionAccessList]
+  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+    ioExpressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
+    [next buildExpressionAccessList !?ioExpressionAccessList]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
