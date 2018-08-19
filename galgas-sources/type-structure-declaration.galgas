@@ -135,6 +135,7 @@ syntax extension plm_syntax {
       select
         ioFieldListAST += !fieldName !{} !isPublic !typeName !.uninitializedStoredProperty
       or
+#        <mode> ?let mode
         ${$
         <instructionList> !?ioAST ?let instructionList
         ioFieldListAST +=

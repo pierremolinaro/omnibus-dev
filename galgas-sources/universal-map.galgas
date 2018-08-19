@@ -44,22 +44,6 @@ setter @universalValuedObjectMap insertDriver
 
 #·······················································································································
 
-setter @universalValuedObjectMap insertRegisterGroup
-  ?let @lstring inRegisterGroupName
-  ?let @registerGroupKind inGroupKind
-  ?let @controlRegisterMap inControlRegisterMap
-{
-  let newValue = @valuedObject.registerGroup {!registerMap:inControlRegisterMap !groupKind:inGroupKind}
-  [!?mInternalPropertyAndRoutineMap insertKey
-    !inRegisterGroupName
-    !.noValue
-    !false
-    !newValue
-  ]
-}
-
-#·······················································································································
-
 setter @universalValuedObjectMap insertGlobalConstant
   ?let @lstring inConstantName
   ?let @objectIR inConstantObjectIR
@@ -175,8 +159,6 @@ method @universalValuedObjectMap searchValuedObject
     else
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     end
-  case registerGroup (2*) :
-    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName *) :
@@ -197,7 +179,6 @@ setter @universalValuedObjectMap readAccess
   switch property
   case task (*) :
   case driver (* *) :
-  case registerGroup (2*) :
   case globalConstant (*) :
   case globalSyncInstance (2*) :
   case localConstant (3*) :
@@ -231,8 +212,6 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
     else
       error inValuedObjectName : "the driver should be instancied" : outObjectIR
     end
-  case registerGroup (2*) :
-    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
   case localConstant (@PLMType type @lstring plmName *) :
@@ -267,8 +246,6 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
     error inValuedObjectName : "a task has no value" : outObjectIR
   case driver (* *) :
     error inValuedObjectName : "a driver has no value" : outObjectIR
-  case registerGroup (2*) :
-    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case globalSyncInstance (2*) :
@@ -298,8 +275,6 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
     error inValuedObjectName : "a task has no value" : outObjectIR
   case driver (* *) :
     error inValuedObjectName : "a driver has no value" : outObjectIR
-  case registerGroup (2*) :
-    error inValuedObjectName : "control register ?" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case localConstant (3*) :
@@ -335,8 +310,6 @@ method @universalValuedObjectMap searchValuedObjectType
     case task (*) :
       error inLValue.mIdentifier : "undefined in this context" : outType
     case driver (* *) :
-      error inLValue.mIdentifier : "undefined in this context" : outType
-    case registerGroup (2*) :
       error inLValue.mIdentifier : "undefined in this context" : outType
     case globalConstant (*) :
       error inLValue.mIdentifier : "undefined in this context" : outType
@@ -381,7 +354,6 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
     switch entry.mValuedObject
     case task (*) :
     case driver (* *) :
-    case registerGroup (2*) :
     case globalSyncInstance (2*) :
     case globalConstant (*) :
     case localConstant (@PLMType type @lstring plmName @bool isFormalInputArg) :
@@ -409,7 +381,6 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
     case task (*) :
     case driver (* *) :
     case globalSyncInstance (2*) :
-    case registerGroup (2*) :
     case globalConstant (*) :
     case localConstant (3*) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -430,7 +401,6 @@ setter @universalValuedObjectMap openOverrideForRepeatBlock {
     case task (*) :
     case driver (* *) :
     case globalSyncInstance (2*) :
-    case registerGroup (2*) :
     case globalConstant (*) :
     case localConstant (3*) :
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
@@ -461,7 +431,6 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
       switch entry.mValuedObject
       case task (*) :
       case driver (* *) :
-      case registerGroup (2*) :
       case globalConstant (*) :
       case globalSyncInstance (2*) :
       case localConstant (3*) :
@@ -518,7 +487,6 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
     switch possibleValuedObject
     case task (*) :
     case driver (* *) :
-    case registerGroup (2*) :
     case globalSyncInstance (2*) :
     case globalConstant (*) :
     case localConstant (3*) :
@@ -585,7 +553,6 @@ map @referenceStateMap {
 enum @valuedObject {
   case driver (@PLMType type @bool instancied)
   case task (@PLMType type)
-  case registerGroup (@controlRegisterMap registerMap @registerGroupKind groupKind)
   case globalConstant (@objectIR objectIR)
   case localConstant (@PLMType type @lstring plmName @bool isFormalInputArgument)
   case localVariable (@PLMType type @lstring plmName)

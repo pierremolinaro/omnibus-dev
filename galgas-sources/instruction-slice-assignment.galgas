@@ -235,7 +235,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     case lValue (@LValueAST target) :
       [target analyzeLValue
         !self: inSelfType
-        !readAccess:false
+        !forAddressOf: false
         !routineAttributes:inRoutineAttributes
         !context: inContext
         !mode: inMode

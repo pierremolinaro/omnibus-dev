@@ -1204,7 +1204,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 
 void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
                                     const class GALGAS_PLMType constin_inSelfType,
-                                    const class GALGAS_bool constin_inIsReadAccess,
+                                    const class GALGAS_bool constin_inIsAddressOf,
                                     const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                     const class GALGAS_semanticContext constin_inContext,
                                     const class GALGAS_mode constin_inMode,

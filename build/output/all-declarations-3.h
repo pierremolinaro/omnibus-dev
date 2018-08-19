@@ -1884,7 +1884,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_driver,
     kEnum_task,
-    kEnum_registerGroup,
     kEnum_globalConstant,
     kEnum_localConstant,
     kEnum_localVariable,
@@ -1935,10 +1934,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                                        const class GALGAS_lstring & inOperand1
                                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valuedObject constructor_registerGroup (const class GALGAS_controlRegisterMap & inOperand0,
-                                                                       const class GALGAS_registerGroupKind & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_valuedObject constructor_task (const class GALGAS_PLMType & inOperand0
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -1976,11 +1971,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_registerGroup (class GALGAS_controlRegisterMap & outArgument0,
-                                                       class GALGAS_registerGroupKind & outArgument1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_task (class GALGAS_PLMType & outArgument0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
@@ -1997,8 +1987,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterGroup (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isTask (LOCATION_ARGS) const ;
 
@@ -2518,24 +2506,6 @@ class cEnumAssociatedValues_valuedObject_task : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_valuedObject_task (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_valuedObject_registerGroup : public cEnumAssociatedValues {
-  public : const GALGAS_controlRegisterMap mAssociatedValue0 ;
-  public : const GALGAS_registerGroupKind mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valuedObject_registerGroup (const GALGAS_controlRegisterMap & inAssociatedValue0,
-                                                             const GALGAS_registerGroupKind & inAssociatedValue1
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valuedObject_registerGroup (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

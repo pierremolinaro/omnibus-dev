@@ -141,28 +141,9 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   !llvmRegisterAddressName:@string outllvmRegisterAddressName
 {
 #-------------------- Search register group name in entity map
-  [ioUniversalMap searchEntity !mRegisterGroupName ?let entity]
-#-------------------- Search register name in register group map
-  @controlRegisterMap registerMap
-  @registerGroupKind groupKind
-  switch entity
-  case task (*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
-  case driver (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
-  case globalConstant (*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
-  case localConstant (3*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
-  case globalSyncInstance (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
-  case localVariable (2*) :
-    error mRegisterGroupName : "the \":\" access is reserved to control register" : registerMap, groupKind
-  case registerGroup (theRegisterMap theGroupKind) :
-    registerMap = theRegisterMap
-    groupKind = theGroupKind
-  end
-  [registerMap searchKey
+  [inContext.mControlRegisterGroupMap searchKey !mRegisterGroupName ?let groupKind ?let controlRegisterMap]
+#-------------------- Search register name
+  [controlRegisterMap searchKey
     !mRegisterName
     ?outRegisterType
     ?let @bool readOnly

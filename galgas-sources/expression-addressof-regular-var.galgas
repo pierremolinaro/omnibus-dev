@@ -69,7 +69,7 @@ override method @addressofExpressionAST analyzeExpression
   #--- Analyze LValue
     [mLValue analyzeLValue
       !self: inSelfType
-      !readAccess:true
+      !forAddressOf:true
       !routineAttributes:inRoutineAttributes
       !context: inContext
       !mode: inMode

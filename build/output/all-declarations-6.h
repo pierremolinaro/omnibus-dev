@@ -2359,19 +2359,6 @@ void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObj
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension setter '@universalValuedObjectMap insertRegisterGroup'                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionSetter_insertRegisterGroup (class GALGAS_universalValuedObjectMap & ioObject,
-                                          const class GALGAS_lstring constin_inRegisterGroupName,
-                                          const class GALGAS_registerGroupKind constin_inGroupKind,
-                                          const class GALGAS_controlRegisterMap constin_inControlRegisterMap,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                          Extension setter '@universalValuedObjectMap insertGlobalConstant'                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

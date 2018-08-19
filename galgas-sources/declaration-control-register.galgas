@@ -582,14 +582,14 @@ override method @controlRegisterGroupDeclarationAST enterInContext
     case single (baseAddress) :
       let groupKind = @registerGroupKind.single {!baseAddress:baseAddress}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
-      [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !groupKind !registerMap]
+#      [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !groupKind !registerMap]
     case groupArray (size baseAddresses) :
       if [size.bigint uint] != [baseAddresses length] then
         error size : "the group size is " + size.bigint + ", but " + [baseAddresses length] + " base addresses are defined"
       end
       let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
-      [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !groupKind !registerMap]
+#      [!?ioContext.mValuedObjectMap insertRegisterGroup !group.mRegisterGroupName !groupKind !registerMap]
       ioDecoratedDeclarationList += !@decoratedControlRegisterArrayGroupDeclaration.new {
         !group.mRegisterGroupName
         !baseAddresses

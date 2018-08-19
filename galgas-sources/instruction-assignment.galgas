@@ -74,7 +74,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
 #--- Analyze LValue
   [mTargetAST analyzeLValue
     !self: inSelfType
-    !readAccess:false
+    !forAddressOf: false
     !routineAttributes:inRoutineAttributes
     !context: inContext
     !mode: inMode
