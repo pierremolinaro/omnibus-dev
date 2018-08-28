@@ -1,9 +1,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! UNIVERSAL VARIABLE MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-# Cette table contient les variables.
-
-#·······················································································································
 
 struct @universalValuedObjectMap {
   @flatValuedObjectMap mInternalPropertyAndRoutineMap
@@ -301,7 +298,6 @@ method @universalValuedObjectMap searchValuedObjectType
   ?let @LValueAST inLValue
   !@PLMType outType
 {
-#  var accessList = inLValue.mAccessList
   if inLValue.mIdentifier.string == "" then # Receiver is self
     outType = inSelfType
   else
@@ -322,28 +318,6 @@ method @universalValuedObjectMap searchValuedObjectType
     end
   end
   [inLValue.mOperand getValuedObjectType !?outType]
-#  for (access) in accessList do
-#    switch access
-#    case property (@lstring propertyName) :
-#      let @propertyGetterMap propertyGetterMap = outType.propertyGetterMap
-#      [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
-#      switch accessKind
-#      case constantProperty (value) :
-#        outType = [value type]
-#      case storedProperty (type *) :
-#        outType = type
-#      case computedProperty (propertyTypeProxy *) :
-#        outType = [propertyTypeProxy type]
-#      end
-#    case arrayAccess (3*) :
-#      switch outType.subscript
-#      case noSubscript :
-#      case literalString :
-#      case staticSubscript (@PLMType elementType *) :
-#        outType = elementType
-#      end
-#    end
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

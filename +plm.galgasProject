@@ -4,8 +4,8 @@ project (1:0:0) -> "plm" {
   %codeblocks-mac
   %SierraElCapitan
   %applicationBundleBase : "pierre.molinaro.name"
+  %quietOutputByDefault
 
-  %quietOutputByDefault 
 #--- Source files
   "galgas-sources/lexique.galgas"
   "galgas-sources/options.galgas"
