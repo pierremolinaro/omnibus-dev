@@ -9679,7 +9679,7 @@ const char * gWrapperFileContent_32_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-6.0.1-binutils-2.31.1-openocd-0.10.0-libusb-1.0.22\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-7.0.0-binutils-2.31.1-openocd-0.10.0-libusb-1.0.22\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
