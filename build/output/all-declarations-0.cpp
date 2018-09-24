@@ -3239,10 +3239,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_import_5F_file_i0_ (GALGAS_lstrin
   GALGAS_lstring var_importedFile_622 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("syntax-grammar.galgas", 11)) ;
   ioArgument_ioImportedFileList.addAssign_operation (var_importedFile_622  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 12)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_622.getter_string (HERE).getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 13)).objectCompare (GALGAS_string ("plm-import"))).boolEnum () ;
+  enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (var_importedFile_622.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 14)), GALGAS_string ("the pah extension should be .plm-import"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 14)) ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_622.getter_string (HERE).getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 13)).objectCompare (GALGAS_string ("plm-import"))).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      inCompiler->emitSemanticError (var_importedFile_622.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 14)), GALGAS_string ("the pah extension should be .plm-import"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 14)) ;
+    }
   }
 }
 
@@ -3274,10 +3277,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_ (GALGAS_ast &
       } break ;
       case 2: {
         GALGAS_string var_s_1205 = GALGAS_string::constructor_separatorString (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 33)) ;
-        const enumGalgasBool test_1 = var_s_1205.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 34)).operator_not (SOURCE_FILE ("syntax-grammar.galgas", 34)).boolEnum () ;
+        enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          TC_Array <C_FixItDescription> fixItArray2 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 35)), GALGAS_string ("declaration should be terminated by an end of line or a ';'"), fixItArray2  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 35)) ;
+          test_1 = var_s_1205.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 34)).operator_not (SOURCE_FILE ("syntax-grammar.galgas", 34)).boolEnum () ;
+          if (kBoolTrue == test_1) {
+            TC_Array <C_FixItDescription> fixItArray2 ;
+            inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 35)), GALGAS_string ("declaration should be terminated by an end of line or a ';'"), fixItArray2  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 35)) ;
+          }
         }
       } break ;
       default:
@@ -3294,10 +3300,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_ (GALGAS_ast &
       } break ;
       case 2: {
         GALGAS_string var_s_1663 = GALGAS_string::constructor_separatorString (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 45)) ;
-        const enumGalgasBool test_3 = var_s_1663.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 46)).operator_not (SOURCE_FILE ("syntax-grammar.galgas", 46)).boolEnum () ;
+        enumGalgasBool test_3 = kBoolTrue ;
         if (kBoolTrue == test_3) {
-          TC_Array <C_FixItDescription> fixItArray4 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 47)), GALGAS_string ("declaration should be terminated by an end of line or a ';'"), fixItArray4  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 47)) ;
+          test_3 = var_s_1663.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 46)).operator_not (SOURCE_FILE ("syntax-grammar.galgas", 46)).boolEnum () ;
+          if (kBoolTrue == test_3) {
+            TC_Array <C_FixItDescription> fixItArray4 ;
+            inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 47)), GALGAS_string ("declaration should be terminated by an end of line or a ';'"), fixItArray4  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 47)) ;
+          }
         }
       } break ;
       default:
@@ -3312,10 +3321,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_start_5F_symbol_i1_ (GALGAS_ast &
       } break ;
       case 2: {
         GALGAS_string var_s_1946 = GALGAS_string::constructor_separatorString (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 55)) ;
-        const enumGalgasBool test_5 = var_s_1946.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 56)).operator_not (SOURCE_FILE ("syntax-grammar.galgas", 56)).boolEnum () ;
+        enumGalgasBool test_5 = kBoolTrue ;
         if (kBoolTrue == test_5) {
-          TC_Array <C_FixItDescription> fixItArray6 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 57)), GALGAS_string ("declaration should be terminated by an end of line or a ';'"), fixItArray6  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 57)) ;
+          test_5 = var_s_1946.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 56)).operator_not (SOURCE_FILE ("syntax-grammar.galgas", 56)).boolEnum () ;
+          if (kBoolTrue == test_5) {
+            TC_Array <C_FixItDescription> fixItArray6 ;
+            inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 57)), GALGAS_string ("declaration should be terminated by an end of line or a ';'"), fixItArray6  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 57)) ;
+          }
         }
       } break ;
       default:
@@ -3762,26 +3774,40 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_propertyGetterSetter_i11_ (GALGAS
       nt_instructionList_ (ioArgument_ioAST, var_instructionList_6137, inCompiler) ;
       GALGAS_location var_endOfInstructionList_6170 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 187)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 188)) ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_getterOrSetter_6070.getter_string (HERE).objectCompare (GALGAS_string ("get"))).boolEnum () ;
+      enumGalgasBool test_1 = kBoolTrue ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_readOnlyComputedProperty (var_instructionList_6137, var_endOfInstructionList_6170  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 195))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 190)) ;
-        const enumGalgasBool test_2 = var_getterDefined_5976.boolEnum () ;
-        if (kBoolTrue == test_2) {
-          TC_Array <C_FixItDescription> fixItArray3 ;
-          inCompiler->emitSemanticError (var_getterOrSetter_6070.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 200)), GALGAS_string ("duplicate getter definition"), fixItArray3  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 200)) ;
-        }
-        var_getterDefined_5976 = GALGAS_bool (true) ;
-      }else if (kBoolFalse == test_1) {
-        const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_getterOrSetter_6070.getter_string (HERE).objectCompare (GALGAS_string ("set"))).boolEnum () ;
-        if (kBoolTrue == test_4) {
-          ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_writeComputedProperty (var_instructionList_6137, var_endOfInstructionList_6170  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 209))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 204)) ;
-          const enumGalgasBool test_5 = var_setterDefined_6008.boolEnum () ;
-          if (kBoolTrue == test_5) {
-            TC_Array <C_FixItDescription> fixItArray6 ;
-            inCompiler->emitSemanticError (var_getterOrSetter_6070.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 214)), GALGAS_string ("duplicate setter definition"), fixItArray6  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 214)) ;
+        test_1 = GALGAS_bool (kIsEqual, var_getterOrSetter_6070.getter_string (HERE).objectCompare (GALGAS_string ("get"))).boolEnum () ;
+        if (kBoolTrue == test_1) {
+          ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_readOnlyComputedProperty (var_instructionList_6137, var_endOfInstructionList_6170  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 195))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 190)) ;
+          enumGalgasBool test_2 = kBoolTrue ;
+          if (kBoolTrue == test_2) {
+            test_2 = var_getterDefined_5976.boolEnum () ;
+            if (kBoolTrue == test_2) {
+              TC_Array <C_FixItDescription> fixItArray3 ;
+              inCompiler->emitSemanticError (var_getterOrSetter_6070.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 200)), GALGAS_string ("duplicate getter definition"), fixItArray3  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 200)) ;
+            }
           }
-          var_setterDefined_6008 = GALGAS_bool (true) ;
-        }else if (kBoolFalse == test_4) {
+          var_getterDefined_5976 = GALGAS_bool (true) ;
+        }
+      }
+      if (kBoolFalse == test_1) {
+        enumGalgasBool test_4 = kBoolTrue ;
+        if (kBoolTrue == test_4) {
+          test_4 = GALGAS_bool (kIsEqual, var_getterOrSetter_6070.getter_string (HERE).objectCompare (GALGAS_string ("set"))).boolEnum () ;
+          if (kBoolTrue == test_4) {
+            ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_writeComputedProperty (var_instructionList_6137, var_endOfInstructionList_6170  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 209))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 204)) ;
+            enumGalgasBool test_5 = kBoolTrue ;
+            if (kBoolTrue == test_5) {
+              test_5 = var_setterDefined_6008.boolEnum () ;
+              if (kBoolTrue == test_5) {
+                TC_Array <C_FixItDescription> fixItArray6 ;
+                inCompiler->emitSemanticError (var_getterOrSetter_6070.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 214)), GALGAS_string ("duplicate setter definition"), fixItArray6  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 214)) ;
+              }
+            }
+            var_setterDefined_6008 = GALGAS_bool (true) ;
+          }
+        }
+        if (kBoolFalse == test_4) {
           TC_Array <C_FixItDescription> fixItArray7 ;
           fixItArray7.appendObject (C_FixItDescription (kFixItRemove, "")) ;
           appendFixItActions (fixItArray7, kFixItReplace, GALGAS_string ("set")) ;
@@ -3797,23 +3823,30 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_propertyGetterSetter_i11_ (GALGAS
         break ;
       }
     }
-    GALGAS_bool test_8 = var_setterDefined_6008 ;
-    if (kBoolTrue == test_8.boolEnum ()) {
-      test_8 = var_getterDefined_5976.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 222)) ;
-    }
-    const enumGalgasBool test_9 = test_8.boolEnum () ;
-    if (kBoolTrue == test_9) {
-      TC_Array <C_FixItDescription> fixItArray10 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 223)), GALGAS_string ("a getter should be defined"), fixItArray10  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 223)) ;
-    }else if (kBoolFalse == test_9) {
-      GALGAS_bool test_11 = var_setterDefined_6008.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 224)) ;
-      if (kBoolTrue == test_11.boolEnum ()) {
-        test_11 = var_getterDefined_5976.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 224)) ;
+    enumGalgasBool test_8 = kBoolTrue ;
+    if (kBoolTrue == test_8) {
+      GALGAS_bool test_9 = var_setterDefined_6008 ;
+      if (kBoolTrue == test_9.boolEnum ()) {
+        test_9 = var_getterDefined_5976.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 222)) ;
       }
-      const enumGalgasBool test_12 = test_11.boolEnum () ;
-      if (kBoolTrue == test_12) {
-        TC_Array <C_FixItDescription> fixItArray13 ;
-        inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 225)), GALGAS_string ("a getter should be defined, and optionaly a setter"), fixItArray13  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 225)) ;
+      test_8 = test_9.boolEnum () ;
+      if (kBoolTrue == test_8) {
+        TC_Array <C_FixItDescription> fixItArray10 ;
+        inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 223)), GALGAS_string ("a getter should be defined"), fixItArray10  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 223)) ;
+      }
+    }
+    if (kBoolFalse == test_8) {
+      enumGalgasBool test_11 = kBoolTrue ;
+      if (kBoolTrue == test_11) {
+        GALGAS_bool test_12 = var_setterDefined_6008.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 224)) ;
+        if (kBoolTrue == test_12.boolEnum ()) {
+          test_12 = var_getterDefined_5976.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 224)) ;
+        }
+        test_11 = test_12.boolEnum () ;
+        if (kBoolTrue == test_11) {
+          TC_Array <C_FixItDescription> fixItArray13 ;
+          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 225)), GALGAS_string ("a getter should be defined, and optionaly a setter"), fixItArray13  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 225)) ;
+        }
       }
     }
   } break ;
@@ -4437,11 +4470,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_registerDeclaration_i17_ (GALGAS_
     GALGAS_location var_baseAddressExpressionLocation_6480 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 179)) ;
     GALGAS_lstring var_attribute_6531 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 180)) ;
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_attribute_6531.getter_string (HERE).objectCompare (GALGAS_string ("inc"))).boolEnum () ;
+    enumGalgasBool test_1 = kBoolTrue ;
     if (kBoolTrue == test_1) {
-      TC_Array <C_FixItDescription> fixItArray2 ;
-      appendFixItActions (fixItArray2, kFixItReplace, GALGAS_string ("@inc")) ;
-      inCompiler->emitSemanticError (var_attribute_6531.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 182)), GALGAS_string ("attribute should be @inc"), fixItArray2  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 182)) ;
+      test_1 = GALGAS_bool (kIsNotEqual, var_attribute_6531.getter_string (HERE).objectCompare (GALGAS_string ("inc"))).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        TC_Array <C_FixItDescription> fixItArray2 ;
+        appendFixItActions (fixItArray2, kFixItReplace, GALGAS_string ("@inc")) ;
+        inCompiler->emitSemanticError (var_attribute_6531.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 182)), GALGAS_string ("attribute should be @inc"), fixItArray2  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 182)) ;
+      }
     }
     GALGAS_expressionAST var_arrayElementSizeExpression_6718 ;
     nt_expression_ (ioArgument_ioAST, var_arrayElementSizeExpression_6718, inCompiler) ;
@@ -4493,10 +4529,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i18_ (GALGAS_ast & io
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_registers COMMA_SOURCE_FILE ("declaration-control-register.galgas", 203)) ;
   GALGAS_lstring var_attribute_7405 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 204)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_attribute_7405.getter_string (HERE).objectCompare (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 205)))).boolEnum () ;
+  enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (var_attribute_7405.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 206)), GALGAS_string ("this attribute should be @").add_operation (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)) ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_attribute_7405.getter_string (HERE).objectCompare (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 205)))).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      inCompiler->emitSemanticError (var_attribute_7405.getter_location (SOURCE_FILE ("declaration-control-register.galgas", 206)), GALGAS_string ("this attribute should be @").add_operation (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)) ;
+    }
   }
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
@@ -4707,10 +4746,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i21_ (GALGAS_ast & io
       nt_instructionList_ (ioArgument_ioAST, var_bootInstructionList_4874, inCompiler) ;
       var_bootEndLocation_4903 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 146)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("declaration-driver.galgas", 147)) ;
-      const enumGalgasBool test_2 = var_bootHandled_4784.boolEnum () ;
+      enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        TC_Array <C_FixItDescription> fixItArray3 ;
-        inCompiler->emitSemanticError (var_bootLocation_4813, GALGAS_string ("a driver supports at most one boot routine"), fixItArray3  COMMA_SOURCE_FILE ("declaration-driver.galgas", 149)) ;
+        test_2 = var_bootHandled_4784.boolEnum () ;
+        if (kBoolTrue == test_2) {
+          TC_Array <C_FixItDescription> fixItArray3 ;
+          inCompiler->emitSemanticError (var_bootLocation_4813, GALGAS_string ("a driver supports at most one boot routine"), fixItArray3  COMMA_SOURCE_FILE ("declaration-driver.galgas", 149)) ;
+        }
       }
       var_bootHandled_4784 = GALGAS_bool (true) ;
     } break ;
@@ -4721,10 +4763,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i21_ (GALGAS_ast & io
       nt_instructionList_ (ioArgument_ioAST, var_startupInstructionList_5039, inCompiler) ;
       var_startupEndLocation_5071 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 157)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("declaration-driver.galgas", 158)) ;
-      const enumGalgasBool test_4 = var_startupHandled_4943.boolEnum () ;
+      enumGalgasBool test_4 = kBoolTrue ;
       if (kBoolTrue == test_4) {
-        TC_Array <C_FixItDescription> fixItArray5 ;
-        inCompiler->emitSemanticError (var_startupLocation_4975, GALGAS_string ("a driver supports at most one startup routine"), fixItArray5  COMMA_SOURCE_FILE ("declaration-driver.galgas", 160)) ;
+        test_4 = var_startupHandled_4943.boolEnum () ;
+        if (kBoolTrue == test_4) {
+          TC_Array <C_FixItDescription> fixItArray5 ;
+          inCompiler->emitSemanticError (var_startupLocation_4975, GALGAS_string ("a driver supports at most one startup routine"), fixItArray5  COMMA_SOURCE_FILE ("declaration-driver.galgas", 160)) ;
+        }
       }
       var_startupHandled_4943 = GALGAS_bool (true) ;
     } break ;
@@ -5048,9 +5093,12 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i26_ (GALGAS_ast & io
       }
     }
     GALGAS_staticListValueListAST var_expressionList_4733 = GALGAS_staticListValueListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 130)) ;
-    const enumGalgasBool test_2 = ioArgument_ioAST.getter_mExtendStaticArrayDeclarationAST (HERE).getter_hasKey (var_staticListName_4523.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 131)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 131)).boolEnum () ;
+    enumGalgasBool test_2 = kBoolTrue ;
     if (kBoolTrue == test_2) {
-      ioArgument_ioAST.getter_mExtendStaticArrayDeclarationAST (HERE).method_searchKey (var_staticListName_4523.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 132)), var_expressionList_4733, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 132)) ;
+      test_2 = ioArgument_ioAST.getter_mExtendStaticArrayDeclarationAST (HERE).getter_hasKey (var_staticListName_4523.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 131)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 131)).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        ioArgument_ioAST.getter_mExtendStaticArrayDeclarationAST (HERE).method_searchKey (var_staticListName_4523.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 132)), var_expressionList_4733, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 132)) ;
+      }
     }
     var_expressionList_4733.addAssign_operation (var_expressions_4588, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 134))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 134)) ;
     ioArgument_ioAST.mProperty_mExtendStaticArrayDeclarationAST.addAssign_operation (var_staticListName_4523.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 135)), var_expressionList_4733, inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 135)) ;
@@ -5158,10 +5206,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i28_ (GALGAS_ast & /*
       GALGAS_string var_invocationString_772 = GALGAS_application::constructor_boolOptionInvocationString (enumerator_726.current_mValue_30_ (HERE), enumerator_726.current_mValue_31_ (HERE)  COMMA_SOURCE_FILE ("declaration-option.galgas", 15)) ;
       var_suggestionList_636.addAssign_operation (GALGAS_string ("\"").add_operation (var_invocationString_772, inCompiler COMMA_SOURCE_FILE ("declaration-option.galgas", 16)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("declaration-option.galgas", 16))  COMMA_SOURCE_FILE ("declaration-option.galgas", 16)) ;
       var_found_655 = GALGAS_bool (kIsEqual, var_invocationString_772.objectCompare (var_constantName_605.getter_string (HERE))) ;
-      const enumGalgasBool test_1 = var_found_655.boolEnum () ;
+      enumGalgasBool test_1 = kBoolTrue ;
       if (kBoolTrue == test_1) {
-        {
-        GALGAS_application::class_method_setBoolOptionValue (enumerator_726.current_mValue_30_ (HERE), enumerator_726.current_mValue_31_ (HERE), GALGAS_bool (true) COMMA_SOURCE_FILE ("declaration-option.galgas", 19)) ;
+        test_1 = var_found_655.boolEnum () ;
+        if (kBoolTrue == test_1) {
+          {
+          GALGAS_application::class_method_setBoolOptionValue (enumerator_726.current_mValue_30_ (HERE), enumerator_726.current_mValue_31_ (HERE), GALGAS_bool (true) COMMA_SOURCE_FILE ("declaration-option.galgas", 19)) ;
+          }
         }
       }
       enumerator_726.gotoNextObject () ;
@@ -5170,11 +5221,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i28_ (GALGAS_ast & /*
       }
     }
   }
-  const enumGalgasBool test_2 = var_found_655.operator_not (SOURCE_FILE ("declaration-option.galgas", 22)).boolEnum () ;
+  enumGalgasBool test_2 = kBoolTrue ;
   if (kBoolTrue == test_2) {
-    TC_Array <C_FixItDescription> fixItArray3 ;
-    appendFixItActions (fixItArray3, kFixItReplace, var_suggestionList_636) ;
-    inCompiler->emitSemanticError (var_constantName_605.getter_location (SOURCE_FILE ("declaration-option.galgas", 23)), GALGAS_string ("unknown command line option"), fixItArray3  COMMA_SOURCE_FILE ("declaration-option.galgas", 23)) ;
+    test_2 = var_found_655.operator_not (SOURCE_FILE ("declaration-option.galgas", 22)).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      TC_Array <C_FixItDescription> fixItArray3 ;
+      appendFixItActions (fixItArray3, kFixItReplace, var_suggestionList_636) ;
+      inCompiler->emitSemanticError (var_constantName_605.getter_location (SOURCE_FILE ("declaration-option.galgas", 23)), GALGAS_string ("unknown command line option"), fixItArray3  COMMA_SOURCE_FILE ("declaration-option.galgas", 23)) ;
+    }
   }
 }
 
@@ -5219,10 +5273,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i29_ (GALGAS_ast & io
   }
   GALGAS_lstring var_stackSizeAttribute_1909 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("task-declaration.galgas", 50)) ;
-  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_stackSizeAttribute_1909.getter_string (HERE).objectCompare (GALGAS_string ("stacksize"))).boolEnum () ;
+  enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
-    TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (var_stackSizeAttribute_1909.getter_location (SOURCE_FILE ("task-declaration.galgas", 52)), GALGAS_string ("this attribute should be @stacksize"), fixItArray2  COMMA_SOURCE_FILE ("task-declaration.galgas", 52)) ;
+    test_1 = GALGAS_bool (kIsNotEqual, var_stackSizeAttribute_1909.getter_string (HERE).objectCompare (GALGAS_string ("stacksize"))).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (var_stackSizeAttribute_1909.getter_location (SOURCE_FILE ("task-declaration.galgas", 52)), GALGAS_string ("this attribute should be @stacksize"), fixItArray2  COMMA_SOURCE_FILE ("task-declaration.galgas", 52)) ;
+    }
   }
   GALGAS_lbigint var_stackSize_2079 = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("task-declaration.galgas", 54)) ;
@@ -5233,10 +5290,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i29_ (GALGAS_ast & io
   case 2: {
     GALGAS_lstring var_activateAttribute_2191 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("task-declaration.galgas", 59)) ;
-    const enumGalgasBool test_3 = GALGAS_bool (kIsNotEqual, var_activateAttribute_2191.getter_string (HERE).objectCompare (GALGAS_string ("activate"))).boolEnum () ;
+    enumGalgasBool test_3 = kBoolTrue ;
     if (kBoolTrue == test_3) {
-      TC_Array <C_FixItDescription> fixItArray4 ;
-      inCompiler->emitSemanticError (var_activateAttribute_2191.getter_location (SOURCE_FILE ("task-declaration.galgas", 61)), GALGAS_string ("this attribute should be @activate"), fixItArray4  COMMA_SOURCE_FILE ("task-declaration.galgas", 61)) ;
+      test_3 = GALGAS_bool (kIsNotEqual, var_activateAttribute_2191.getter_string (HERE).objectCompare (GALGAS_string ("activate"))).boolEnum () ;
+      if (kBoolTrue == test_3) {
+        TC_Array <C_FixItDescription> fixItArray4 ;
+        inCompiler->emitSemanticError (var_activateAttribute_2191.getter_location (SOURCE_FILE ("task-declaration.galgas", 61)), GALGAS_string ("this attribute should be @activate"), fixItArray4  COMMA_SOURCE_FILE ("task-declaration.galgas", 61)) ;
+      }
     }
     var_activate_2123 = GALGAS_bool (true) ;
   } break ;
@@ -5315,18 +5375,30 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i29_ (GALGAS_ast & io
       nt_instructionList_ (ioArgument_ioAST, var_instructionList_3609, inCompiler) ;
       GALGAS_location var_endOfInit_3629 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 107)) ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("task-declaration.galgas", 108)) ;
-      const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, var_attribute_3292.getter_string (HERE).objectCompare (GALGAS_string ("setup"))).boolEnum () ;
+      enumGalgasBool test_7 = kBoolTrue ;
       if (kBoolTrue == test_7) {
-        var_taskSetupListAST_2499.addAssign_operation (var_name_3321, var_dependenceList_3355, var_instructionList_3609, var_endOfInit_3629  COMMA_SOURCE_FILE ("task-declaration.galgas", 110)) ;
-      }else if (kBoolFalse == test_7) {
-        const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_attribute_3292.getter_string (HERE).objectCompare (GALGAS_string ("activate"))).boolEnum () ;
+        test_7 = GALGAS_bool (kIsEqual, var_attribute_3292.getter_string (HERE).objectCompare (GALGAS_string ("setup"))).boolEnum () ;
+        if (kBoolTrue == test_7) {
+          var_taskSetupListAST_2499.addAssign_operation (var_name_3321, var_dependenceList_3355, var_instructionList_3609, var_endOfInit_3629  COMMA_SOURCE_FILE ("task-declaration.galgas", 110)) ;
+        }
+      }
+      if (kBoolFalse == test_7) {
+        enumGalgasBool test_8 = kBoolTrue ;
         if (kBoolTrue == test_8) {
-          var_taskActivateListAST_2546.addAssign_operation (var_name_3321, var_dependenceList_3355, var_instructionList_3609, var_endOfInit_3629  COMMA_SOURCE_FILE ("task-declaration.galgas", 112)) ;
-        }else if (kBoolFalse == test_8) {
-          const enumGalgasBool test_9 = GALGAS_bool (kIsEqual, var_attribute_3292.getter_string (HERE).objectCompare (GALGAS_string ("deactivate"))).boolEnum () ;
+          test_8 = GALGAS_bool (kIsEqual, var_attribute_3292.getter_string (HERE).objectCompare (GALGAS_string ("activate"))).boolEnum () ;
+          if (kBoolTrue == test_8) {
+            var_taskActivateListAST_2546.addAssign_operation (var_name_3321, var_dependenceList_3355, var_instructionList_3609, var_endOfInit_3629  COMMA_SOURCE_FILE ("task-declaration.galgas", 112)) ;
+          }
+        }
+        if (kBoolFalse == test_8) {
+          enumGalgasBool test_9 = kBoolTrue ;
           if (kBoolTrue == test_9) {
-            var_taskDeactivateListAST_2595.addAssign_operation (var_name_3321, var_dependenceList_3355, var_instructionList_3609, var_endOfInit_3629  COMMA_SOURCE_FILE ("task-declaration.galgas", 114)) ;
-          }else if (kBoolFalse == test_9) {
+            test_9 = GALGAS_bool (kIsEqual, var_attribute_3292.getter_string (HERE).objectCompare (GALGAS_string ("deactivate"))).boolEnum () ;
+            if (kBoolTrue == test_9) {
+              var_taskDeactivateListAST_2595.addAssign_operation (var_name_3321, var_dependenceList_3355, var_instructionList_3609, var_endOfInit_3629  COMMA_SOURCE_FILE ("task-declaration.galgas", 114)) ;
+            }
+          }
+          if (kBoolFalse == test_9) {
             TC_Array <C_FixItDescription> fixItArray10 ;
             inCompiler->emitSemanticError (var_attribute_3292.getter_location (SOURCE_FILE ("task-declaration.galgas", 116)), GALGAS_string ("attribute should be @setup, @activate or @deactivate"), fixItArray10  COMMA_SOURCE_FILE ("task-declaration.galgas", 116)) ;
           }
@@ -6042,17 +6114,25 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i36_ (GALGAS_ast & io
   GALGAS_bool var_isGlobal_1310 = GALGAS_bool (false) ;
   cEnumerator_lstringlist enumerator_1355 (var_attributeList_1243, kENUMERATION_UP) ;
   while (enumerator_1355.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_1355.current_mValue (HERE).getter_string (HERE).objectCompare (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 31)))).boolEnum () ;
+    enumGalgasBool test_0 = kBoolTrue ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = var_isGlobal_1310.boolEnum () ;
-      if (kBoolTrue == test_1) {
-        TC_Array <C_FixItDescription> fixItArray2 ;
-        fixItArray2.appendObject (C_FixItDescription (kFixItRemove, "")) ;
-        inCompiler->emitSemanticError (enumerator_1355.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 33)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 33)) ;
-      }else if (kBoolFalse == test_1) {
-        var_isGlobal_1310 = GALGAS_bool (true) ;
+      test_0 = GALGAS_bool (kIsEqual, enumerator_1355.current_mValue (HERE).getter_string (HERE).objectCompare (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 31)))).boolEnum () ;
+      if (kBoolTrue == test_0) {
+        enumGalgasBool test_1 = kBoolTrue ;
+        if (kBoolTrue == test_1) {
+          test_1 = var_isGlobal_1310.boolEnum () ;
+          if (kBoolTrue == test_1) {
+            TC_Array <C_FixItDescription> fixItArray2 ;
+            fixItArray2.appendObject (C_FixItDescription (kFixItRemove, "")) ;
+            inCompiler->emitSemanticError (enumerator_1355.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 33)), GALGAS_string ("duplicated attribute"), fixItArray2  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 33)) ;
+          }
+        }
+        if (kBoolFalse == test_1) {
+          var_isGlobal_1310 = GALGAS_bool (true) ;
+        }
       }
-    }else if (kBoolFalse == test_0) {
+    }
+    if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray3 ;
       fixItArray3.appendObject (C_FixItDescription (kFixItRemove, "")) ;
       appendFixItActions (fixItArray3, kFixItReplace, GALGAS_string ("@").add_operation (function_exportedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 38))) ;
@@ -6401,14 +6481,22 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i42_ (GALGAS_ast & io
   GALGAS_lstring var_attribute_1151 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("panic.galgas", 22)) ;
   GALGAS_bool var_isSetup_1169 ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_attribute_1151.getter_string (HERE).objectCompare (GALGAS_string ("setup"))).boolEnum () ;
+  enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    var_isSetup_1169 = GALGAS_bool (true) ;
-  }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_attribute_1151.getter_string (HERE).objectCompare (GALGAS_string ("loop"))).boolEnum () ;
+    test_0 = GALGAS_bool (kIsEqual, var_attribute_1151.getter_string (HERE).objectCompare (GALGAS_string ("setup"))).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      var_isSetup_1169 = GALGAS_bool (true) ;
+    }
+  }
+  if (kBoolFalse == test_0) {
+    enumGalgasBool test_1 = kBoolTrue ;
     if (kBoolTrue == test_1) {
-      var_isSetup_1169 = GALGAS_bool (false) ;
-    }else if (kBoolFalse == test_1) {
+      test_1 = GALGAS_bool (kIsEqual, var_attribute_1151.getter_string (HERE).objectCompare (GALGAS_string ("loop"))).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        var_isSetup_1169 = GALGAS_bool (false) ;
+      }
+    }
+    if (kBoolFalse == test_1) {
       TC_Array <C_FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (var_attribute_1151.getter_location (SOURCE_FILE ("panic.galgas", 29)), GALGAS_string ("attribute should be @setup or @loop"), fixItArray2  COMMA_SOURCE_FILE ("panic.galgas", 29)) ;
       var_isSetup_1169.drop () ; // Release error dropped variable
@@ -7573,12 +7661,16 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i70_ (GALGAS_ast & ioArgu
       break ;
     }
   }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsStrictInf, var_integerFieldValues_1406.getter_length (SOURCE_FILE ("expression-integer-slice.galgas", 37)).objectCompare (GALGAS_uint ((uint32_t) 2U))).boolEnum () ;
+  enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
-    TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 38)), GALGAS_string ("this expression should contain two bit slices or more"), fixItArray2  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 38)) ;
-    outArgument_outExpression.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_1) {
+    test_1 = GALGAS_bool (kIsStrictInf, var_integerFieldValues_1406.getter_length (SOURCE_FILE ("expression-integer-slice.galgas", 37)).objectCompare (GALGAS_uint ((uint32_t) 2U))).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      TC_Array <C_FixItDescription> fixItArray2 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 38)), GALGAS_string ("this expression should contain two bit slices or more"), fixItArray2  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 38)) ;
+      outArgument_outExpression.drop () ; // Release error dropped variable
+    }
+  }
+  if (kBoolFalse == test_1) {
     outArgument_outExpression = GALGAS_integerSliceExpressionAST::constructor_new (var_typeName_1357, var_integerFieldValues_1406, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 40))  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 40)) ;
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 42)) ;
@@ -7958,10 +8050,13 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instructionList_i80_ (GALGAS_ast 
       } break ;
       case 2: {
         GALGAS_string var_s_1359 = GALGAS_string::constructor_separatorString (inCompiler  COMMA_SOURCE_FILE ("instructionList.galgas", 31)) ;
-        const enumGalgasBool test_1 = var_s_1359.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("instructionList.galgas", 32)).operator_not (SOURCE_FILE ("instructionList.galgas", 32)).boolEnum () ;
+        enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          TC_Array <C_FixItDescription> fixItArray2 ;
-          inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instructionList.galgas", 33)), GALGAS_string ("instruction should be terminated by an end of line or a ';'"), fixItArray2  COMMA_SOURCE_FILE ("instructionList.galgas", 33)) ;
+          test_1 = var_s_1359.getter_containsCharacter (GALGAS_char (TO_UNICODE (10)) COMMA_SOURCE_FILE ("instructionList.galgas", 32)).operator_not (SOURCE_FILE ("instructionList.galgas", 32)).boolEnum () ;
+          if (kBoolTrue == test_1) {
+            TC_Array <C_FixItDescription> fixItArray2 ;
+            inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instructionList.galgas", 33)), GALGAS_string ("instruction should be terminated by an end of line or a ';'"), fixItArray2  COMMA_SOURCE_FILE ("instructionList.galgas", 33)) ;
+          }
         }
       } break ;
       default:
@@ -8236,11 +8331,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i86_ (GALGAS_ast & io
   nt_control_5F_register_5F_lvalue_ (ioArgument_ioAST, var_registerLValue_1256, inCompiler) ;
   GALGAS_lstring var_attribute_1288 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 23)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_attribute_1288.getter_string (HERE).objectCompare (GALGAS_string ("bit"))).boolEnum () ;
+  enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    appendFixItActions (fixItArray1, kFixItReplace, GALGAS_string ("@bit")) ;
-    inCompiler->emitSemanticError (var_attribute_1288.getter_location (SOURCE_FILE ("instruction-bit-banding.galgas", 25)), GALGAS_string ("attribute should be @bit"), fixItArray1  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 25)) ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_attribute_1288.getter_string (HERE).objectCompare (GALGAS_string ("bit"))).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      appendFixItActions (fixItArray1, kFixItReplace, GALGAS_string ("@bit")) ;
+      inCompiler->emitSemanticError (var_attribute_1288.getter_location (SOURCE_FILE ("instruction-bit-banding.galgas", 25)), GALGAS_string ("attribute should be @bit"), fixItArray1  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 25)) ;
+    }
   }
   GALGAS_expressionAST var_bitExpression_1454 ;
   nt_expression_ (ioArgument_ioAST, var_bitExpression_1454, inCompiler) ;
@@ -8568,10 +8666,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_if_5F_instruction_i95_ (GALGAS_as
   case 1: {
     GALGAS_lstring var_attributeValue_1724 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("instruction-if.galgas", 36)) ;
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_attributeValue_1724.getter_string (HERE).objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 37)))).boolEnum () ;
+    enumGalgasBool test_0 = kBoolTrue ;
     if (kBoolTrue == test_0) {
-      var_staticIfExpression_1673 = GALGAS_bool (true) ;
-    }else if (kBoolFalse == test_0) {
+      test_0 = GALGAS_bool (kIsEqual, var_attributeValue_1724.getter_string (HERE).objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 37)))).boolEnum () ;
+      if (kBoolTrue == test_0) {
+        var_staticIfExpression_1673 = GALGAS_bool (true) ;
+      }
+    }
+    if (kBoolFalse == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
       appendFixItActions (fixItArray1, kFixItReplace, GALGAS_string ("@").add_operation (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 42)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 42))) ;
       inCompiler->emitSemanticError (var_attributeValue_1724.getter_location (SOURCE_FILE ("instruction-if.galgas", 40)), GALGAS_string ("the attribute should be \"@").add_operation (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 40)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 40)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 40)), fixItArray1  COMMA_SOURCE_FILE ("instruction-if.galgas", 40)) ;
@@ -8927,10 +9029,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i100_ (GALGAS_ast & i
     case 1: {
       GALGAS_lstring var_attributeValue_1574 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 36)) ;
-      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_attributeValue_1574.getter_string (HERE).objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 37)))).boolEnum () ;
+      enumGalgasBool test_0 = kBoolTrue ;
       if (kBoolTrue == test_0) {
-        var_staticWhileExpression_1342 = GALGAS_bool (true) ;
-      }else if (kBoolFalse == test_0) {
+        test_0 = GALGAS_bool (kIsEqual, var_attributeValue_1574.getter_string (HERE).objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 37)))).boolEnum () ;
+        if (kBoolTrue == test_0) {
+          var_staticWhileExpression_1342 = GALGAS_bool (true) ;
+        }
+      }
+      if (kBoolFalse == test_0) {
         TC_Array <C_FixItDescription> fixItArray1 ;
         appendFixItActions (fixItArray1, kFixItReplace, GALGAS_string ("@").add_operation (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 41)), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 41))) ;
         inCompiler->emitSemanticError (var_attributeValue_1574.getter_location (SOURCE_FILE ("instruction-for-in-do.galgas", 40)), GALGAS_string ("the attribute should be \"@").add_operation (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 40)), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 40)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 40)), fixItArray1  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 40)) ;
@@ -9078,10 +9184,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_call_i103_ (GALGAS_a
   GALGAS_effectiveArgumentListAST var_arguments_2006 ;
   GALGAS_location var_endOfArguments_2026 ;
   nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_2006, var_endOfArguments_2026, inCompiler) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_assignmentTargetAST_1956.getter_mOperand (HERE).objectCompare (GALGAS_LValueOperandAST::constructor_noOperand (SOURCE_FILE ("instruction-procedure-call.galgas", 42)))).operator_and (GALGAS_bool (kIsNotEqual, var_assignmentTargetAST_1956.getter_mIdentifier (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())) COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 42)).boolEnum () ;
+  enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    outArgument_outInstruction = GALGAS_standAloneProcedureCallInstructionAST::constructor_new (var_instructionLocation_1893, var_arguments_2006, var_endOfArguments_2026, var_assignmentTargetAST_1956.getter_mIdentifier (HERE)  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 43)) ;
-  }else if (kBoolFalse == test_0) {
+    test_0 = GALGAS_bool (kIsEqual, var_assignmentTargetAST_1956.getter_mOperand (HERE).objectCompare (GALGAS_LValueOperandAST::constructor_noOperand (SOURCE_FILE ("instruction-procedure-call.galgas", 42)))).operator_and (GALGAS_bool (kIsNotEqual, var_assignmentTargetAST_1956.getter_mIdentifier (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())) COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 42)).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      outArgument_outInstruction = GALGAS_standAloneProcedureCallInstructionAST::constructor_new (var_instructionLocation_1893, var_arguments_2006, var_endOfArguments_2026, var_assignmentTargetAST_1956.getter_mIdentifier (HERE)  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 43)) ;
+    }
+  }
+  if (kBoolFalse == test_0) {
     GALGAS_accessInAssignmentListAST var_accessList_2374 = GALGAS_accessInAssignmentListAST::constructor_emptyList (SOURCE_FILE ("instruction-procedure-call.galgas", 50)) ;
     extensionMethod_buildProcedureCallAccessList (var_assignmentTargetAST_1956.getter_mOperand (HERE), var_accessList_2374, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 51)) ;
     outArgument_outInstruction = GALGAS_procedureCallInstructionAST::constructor_new (var_instructionLocation_1893, var_arguments_2006, var_endOfArguments_2026, var_assignmentTargetAST_1956.getter_mIdentifier (HERE), var_accessList_2374  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 52)) ;
@@ -9634,11 +9744,14 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
                                                                                                                      C_Lexique_plm_5F_lexique * inCompiler) {
   GALGAS_lstring var_key_2947 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_key_2947.getter_string (HERE).objectCompare (constinArgument_inKey)).boolEnum () ;
+  enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    appendFixItActions (fixItArray1, kFixItReplace, constinArgument_inKey) ;
-    inCompiler->emitSemanticError (var_key_2947.getter_location (SOURCE_FILE ("configuration.galgas", 84)), GALGAS_string ("invalid key (found '").add_operation (var_key_2947.getter_string (SOURCE_FILE ("configuration.galgas", 84)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GALGAS_string ("', required '"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (constinArgument_inKey, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 84)) ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_key_2947.getter_string (HERE).objectCompare (constinArgument_inKey)).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      appendFixItActions (fixItArray1, kFixItReplace, constinArgument_inKey) ;
+      inCompiler->emitSemanticError (var_key_2947.getter_location (SOURCE_FILE ("configuration.galgas", 84)), GALGAS_string ("invalid key (found '").add_operation (var_key_2947.getter_string (SOURCE_FILE ("configuration.galgas", 84)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GALGAS_string ("', required '"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (constinArgument_inKey, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 84)) ;
+    }
   }
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
 }
@@ -9881,12 +9994,16 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   GALGAS_enumerationConstantList var_interruptConstantList_7777 ;
   nt_interruptConfigList_ (var_interruptionConfigurationList_7750, var_interruptConstantList_7777, inCompiler) ;
   GALGAS_uint var_ptrSize_7795 ;
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_pointerSize_4328.getter_bigint (HERE).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 215)))).boolEnum () ;
+  enumGalgasBool test_4 = kBoolTrue ;
   if (kBoolTrue == test_4) {
-    TC_Array <C_FixItDescription> fixItArray5 ;
-    inCompiler->emitSemanticError (var_pointerSize_4328.getter_location (SOURCE_FILE ("configuration.galgas", 216)), GALGAS_string ("zero size pointer is invalid"), fixItArray5  COMMA_SOURCE_FILE ("configuration.galgas", 216)) ;
-    var_ptrSize_7795.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_4) {
+    test_4 = GALGAS_bool (kIsEqual, var_pointerSize_4328.getter_bigint (HERE).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 215)))).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      TC_Array <C_FixItDescription> fixItArray5 ;
+      inCompiler->emitSemanticError (var_pointerSize_4328.getter_location (SOURCE_FILE ("configuration.galgas", 216)), GALGAS_string ("zero size pointer is invalid"), fixItArray5  COMMA_SOURCE_FILE ("configuration.galgas", 216)) ;
+      var_ptrSize_7795.drop () ; // Release error dropped variable
+    }
+  }
+  if (kBoolFalse == test_4) {
     var_ptrSize_7795 = var_pointerSize_4328.getter_bigint (HERE).getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 218)) ;
   }
   GALGAS_targetParameters var_parameters_7977 = GALGAS_targetParameters::constructor_new (var_loc_3860, var_python_5F_utilityToolList_3936, var_python_5F_build_4009, var_linkerScript_4083, var_ptrSize_7795, var_handleDynamicArray_4398, var_systemStackSize_4592, var_stackedUserRegisterOnInterruptByteSize_6849, var_nopInstructionStringInLLVM_4670, var_bitbandRegisterBaseAddress_4746, var_bitbandRegisterEndAddress_4785, var_bitbandRegisterRelocationAddress_4831, var_bitbandRegisterOffsetMultiplier_4876, var_bitbandRegisterBitMultiplier_4918, var_sectionHandler_6125, var_sectionPushedRegisterByteSize_6227, var_sectionDispatcherHeader_6324, var_sectionDispatcherEntry_6419, var_sectionDispatcherInvocationFromAnyMode_6537, var_sectionDispatcherInvocationFromUserMode_6653, var_C_5F_definitionFiles_7011, var_S_5F_definitionFiles_7199, var_LL_5F_definitionFiles_7389, var_xtrInterruptHandler_6738, var_undefinedInterruptHandler_6939, var_serviceHandler_5541, var_servicePushedRegisterByteSize_5643, var_serviceDispatcherEntry_5835, var_serviceDispatcherHeader_5740, var_serviceEntryNoReturnedValue_5942, var_serviceEntryReturnValue_6047  COMMA_SOURCE_FILE ("configuration.galgas", 220)) ;
