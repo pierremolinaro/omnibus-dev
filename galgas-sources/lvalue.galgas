@@ -79,7 +79,12 @@ syntax extension plm_syntax {
       checkIndexExpression = false
     end
     <lvalue_operand> !?ioAST ?let operand
-    outOperand = .arrayAccess {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression !next:operand}
+    outOperand = .arrayAccess {
+      !index:expression
+      !endOfIndex:endOfIndex
+      !checkIndexExpression:checkIndexExpression
+      !next:operand
+    }
   }
 
   #·····················································································································
@@ -216,7 +221,7 @@ private proc analyzeVariableInLValue
     else
       [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
     end
-  case property (@lstring name @LValueOperandAST next) :
+  case property (@lstring name @LValueOperandAST nextOperand) :
     if inIsReadAccess then
       [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
     else
@@ -235,9 +240,9 @@ private proc analyzeVariableInLValue
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
       !name
-      !next
+      !nextOperand
     )
-  case arrayAccess (@expressionAST indexExpression @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+  case arrayAccess (indexExpression endOfIndex checkIndexExpression nextOperand) :
     if inIsReadAccess then
       [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
     else
@@ -258,89 +263,11 @@ private proc analyzeVariableInLValue
       !indexExpression
       !endOfIndex
       !checkIndexExpression
-      !next
+      !nextOperand
     )
   end
-
-
-
-
-
-
-#  if [inAccessList length] == 0 then
-#    if inIsReadAccess then
-#      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
-#    else
-#      [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
-#    end
-#  else
-#    if inIsReadAccess then
-#      [!?ioUniversalMap searchValuedObjectForReadAccess !inVariableName ?*]
-#    else
-#      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
-#    end
-#    for (access) in inAccessList do
-#      switch access
-#      case property (@lstring propertyName) :
-#        let @propertySetterMap propertySetterMap = currentType.propertySetterMap
-#        [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
-#        switch propertyAccess
-#        case computedProperty (2*) :
-#          error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
-#        case storedProperty (@PLMType propertyType @uint index) :
-#          [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-#          [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-#            !currentType
-#            !currentLLVMName
-#            !newLLVMvariable
-#            !index
-#            !propertyName
-#          ]
-#          currentType = propertyType
-#          currentLLVMName = newLLVMvariable
-#        end
-#      case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
-#        switch currentType.subscript
-#        case noSubscript :
-#          error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
-#        case literalString :
-#          error endOfIndex
-#          : "the receiver type is literal string and does not accept subscripting"
-#          : currentType, currentLLVMName
-#        case staticSubscript (@PLMType elementType @bigint arraySize) :
-#          handleArraySubscriptNew (
-#            !self: inSelfType
-#            !routineAttributes:inRoutineAttributes
-#            !context: inContext
-#            !mode: inMode
-#            !?temporary: ioTemporaries
-#            !?staticEntityMap:ioStaticEntityMap
-#            !?variableMap:ioUniversalMap
-#            !?alloca: ioAllocaList
-#            !indexExpression 
-#            !endOfIndex
-#            !checkIndexExpression
-#            !arraySize:arraySize
-#            !elementType:elementType
-#            !?ioInstructionGenerationList
-#            ?let @objectIR indexIR
-#         )
-#         [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-#         [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-#           !currentType
-#           !currentLLVMName
-#           !elementType
-#           !newLLVMvariable
-#           !indexIR
-#         ]
-#         currentType = elementType
-#         currentLLVMName = newLLVMvariable
-#        end
-#      end
-#    end
-#  end
   outInternalRepresentation = .new {!currentType !currentLLVMName}
- }
+}
 
 #·······················································································································
 
@@ -362,7 +289,7 @@ private proc handlePropertyAccess
   let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
-  case computedProperty (2*) :
+  case computedProperty (2*) : # @unifiedTypeMap-proxy typeProxy @routineLLVMNameDict modeDictionary) :
     error inPropertyName : "a computed property cannot be used here" : ioCurrentType, ioCurrentLLVMName
   case storedProperty (@PLMType propertyType @uint index) :
     [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
@@ -413,7 +340,8 @@ private proc handleArrayAccess
 {
   switch ioCurrentType.subscript
   case noSubscript :
-    error inEndOfIndex : "the receiver type is " + [ioCurrentType plmTypeDescriptionName] + " and does not accept subscripting"
+    error inEndOfIndex
+    : "the receiver type is " + [ioCurrentType plmTypeDescriptionName] + " and does not accept subscripting"
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
@@ -498,7 +426,7 @@ private proc analyzeSelfAssignmentTarget
       !name
       !next
     )
-  case arrayAccess (@expressionAST indexExpression @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+  case arrayAccess (indexExpression endOfIndex checkIndexExpression nextOperand) :
     handleArrayAccess (
       !self: inSelfType
       !?currentType
@@ -514,75 +442,9 @@ private proc analyzeSelfAssignmentTarget
       !indexExpression
       !endOfIndex
       !checkIndexExpression
-      !next
+      !nextOperand
     )
   end
-
-
-
-
-
-
-
-#  for (access) in inAccessList do
-#    switch access
-#    case property (@lstring propertyName) :
-#      let @propertySetterMap propertySetterMap = currentType.propertySetterMap
-#      [propertySetterMap searchKey !propertyName ?* ?let @propertySetterKind propertyAccess]
-#      switch propertyAccess
-#      case computedProperty (2*) :
-#        error propertyName : "a computed property cannot be used here" : currentType, currentLLVMName
-#      case storedProperty (@PLMType propertyType @uint index) :
-#        [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-#        [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-#          !currentType
-#          !currentLLVMName
-#          !newLLVMvariable
-#          !index
-#          !propertyName
-#        ]
-#        currentType = propertyType
-#        currentLLVMName = newLLVMvariable
-#      end
-#    case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
-#      switch currentType.subscript
-#      case noSubscript :
-#        error endOfIndex : "the receiver type is " + [currentType plmTypeDescriptionName] + " and does not accept subscripting"
-#      case literalString :
-#        error endOfIndex
-#        : "the receiver type is a literal string and does not accept subscripting"
-#        : currentType, currentLLVMName
-#      case staticSubscript (@PLMType elementType @bigint arraySize) :
-#        handleArraySubscriptNew (
-#          !self: inSelfType
-#          !routineAttributes:inRoutineAttributes
-#          !context: inContext
-#          !mode: inMode
-#          !?temporary: ioTemporaries
-#          !?staticEntityMap:ioStaticEntityMap
-#          !?variableMap:ioUniversalMap
-#          !?alloca: ioAllocaList
-#          !indexExpression 
-#          !endOfIndex
-#          !checkIndexExpression
-#          !arraySize:arraySize
-#          !elementType:elementType
-#          !?ioInstructionGenerationList
-#          ?let @objectIR indexIR
-#       )
-#       [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-#       [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-#         !currentType
-#         !currentLLVMName
-#         !elementType
-#         !newLLVMvariable
-#         !indexIR
-#       ]
-#       currentType = elementType
-#       currentLLVMName = newLLVMvariable
-#      end
-#    end
-#  end
   outInternalRepresentation = .new {!currentType !currentLLVMName}
 }
 
@@ -620,7 +482,7 @@ private proc handleNextOperand
       !name
       !next
     )
-  case arrayAccess (@expressionAST indexExpression @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
+  case arrayAccess (indexExpression endOfIndex checkIndexExpression nextOperand) :
     handleArrayAccess (
       !self: inSelfType
       !?ioCurrentType
@@ -636,7 +498,7 @@ private proc handleNextOperand
       !indexExpression
       !endOfIndex
       !checkIndexExpression
-      !next
+      !nextOperand
     )
   end
 }

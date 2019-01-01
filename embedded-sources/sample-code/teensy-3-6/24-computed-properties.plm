@@ -16,8 +16,8 @@ task Tâche0 @stacksize 512 @activate {
   }
 
   on time.wait (!until: self.tick) {
- //   self.readWriteComputedProperty += 500
-    self.tick += 500
+    self.readWriteComputedProperty += 500
+ //   self.tick += 500
     digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:self.readComputedProperty)

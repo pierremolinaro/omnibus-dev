@@ -165,7 +165,7 @@ override method @enumerationDeclarationAST enterInContext
     ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
     !isRequired:false
     !warnsIfUnused:false
-    ![enumerationType llvmTypeName] # mEnumerationName
+    ![enumerationType llvmTypeName]
   }
 }
 
