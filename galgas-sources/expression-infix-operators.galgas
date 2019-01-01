@@ -304,7 +304,6 @@ getter @infixOperatorDescription performStaticOperation
   case icmp_sle : result = [inLeft <= inRight bigint]
 #  case icmp_sgt : result = [inLeft > inRight bigint]
 #  case icmp_sge : result = [inLeft >= inRight bigint]
-
   end
 }
 

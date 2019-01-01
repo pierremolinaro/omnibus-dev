@@ -503,12 +503,14 @@ override method @structureDeclarationAST enterInContext
     !propertyList
   }
 #---------- Enter structure assignment function
-  ioRoutineListIR += !@structureTypeAssignFunctionIR.new {
-    ![assignmentPrefix () + mPLMTypeSpecificName + "." + mPLMTypeSpecificName nowhere]
-    !isRequired:false
-    !warnsIfUnused:false
-    !structureType
-  }
+  if mGenerateAssignmentRoutine & canBeCopied then
+    ioRoutineListIR += !@structureTypeAssignFunctionIR.new {
+      ![assignmentPrefix () + mPLMTypeSpecificName + "." + mPLMTypeSpecificName nowhere]
+      !isRequired:false
+      !warnsIfUnused:false
+      !structureType
+    }
+  end
 }
 
 #·······················································································································
