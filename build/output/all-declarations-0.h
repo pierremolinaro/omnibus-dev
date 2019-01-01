@@ -3224,7 +3224,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_equal,
-    kEnum_nonEqual,
     kEnum_strictInf,
     kEnum_strictSup,
     kEnum_infEqual,
@@ -3292,8 +3291,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : static class GALGAS_infixOperator constructor_mulOpNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_nonEqual (LOCATION_ARGS) ;
-
   public : static class GALGAS_infixOperator constructor_orOp (LOCATION_ARGS) ;
 
   public : static class GALGAS_infixOperator constructor_rightShiftOp (LOCATION_ARGS) ;
@@ -3347,8 +3344,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOpNoOvf (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNonEqual (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOrOp (LOCATION_ARGS) const ;
 

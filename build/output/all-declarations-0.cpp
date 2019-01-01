@@ -6805,7 +6805,8 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_equality_i49_ (GALG
     GALGAS_location var_operatorLocation_5008 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 143)) ;
     GALGAS_expressionAST var_rightExpression_5084 ;
     nt_expression_5F_comparison_ (ioArgument_ioAST, var_rightExpression_5084, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5008, GALGAS_infixOperator::constructor_nonEqual (SOURCE_FILE ("expression-operator-priority.galgas", 148)), var_rightExpression_5084  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 145)) ;
+    GALGAS_infixOperatorExpressionAST var_expression_5268 = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5008, GALGAS_infixOperator::constructor_equal (SOURCE_FILE ("expression-operator-priority.galgas", 154)), var_rightExpression_5084  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 151)) ;
+    outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_5008, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("expression-operator-priority.galgas", 159)), var_expression_5268  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 157)) ;
   } break ;
   default:
     break ;
@@ -6844,32 +6845,32 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_comparison_i50_ (GA
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2264_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 160)) ;
-    GALGAS_location var_operatorLocation_5553 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 161)) ;
-    GALGAS_expressionAST var_rightExpression_5624 ;
-    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_5624, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5553, GALGAS_infixOperator::constructor_infEqual (SOURCE_FILE ("expression-operator-priority.galgas", 166)), var_rightExpression_5624  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 163)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2264_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 171)) ;
+    GALGAS_location var_operatorLocation_5847 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 172)) ;
+    GALGAS_expressionAST var_rightExpression_5918 ;
+    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_5918, inCompiler) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5847, GALGAS_infixOperator::constructor_infEqual (SOURCE_FILE ("expression-operator-priority.galgas", 177)), var_rightExpression_5918  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 174)) ;
   } break ;
   case 3: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2265_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 170)) ;
-    GALGAS_location var_operatorLocation_5825 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 171)) ;
-    GALGAS_expressionAST var_rightExpression_5896 ;
-    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_5896, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5825, GALGAS_infixOperator::constructor_supEqual (SOURCE_FILE ("expression-operator-priority.galgas", 176)), var_rightExpression_5896  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 173)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2265_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 181)) ;
+    GALGAS_location var_operatorLocation_6119 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 182)) ;
+    GALGAS_expressionAST var_rightExpression_6190 ;
+    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_6190, inCompiler) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6119, GALGAS_infixOperator::constructor_supEqual (SOURCE_FILE ("expression-operator-priority.galgas", 187)), var_rightExpression_6190  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 184)) ;
   } break ;
   case 4: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 180)) ;
-    GALGAS_location var_operatorLocation_6097 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 181)) ;
-    GALGAS_expressionAST var_rightExpression_6168 ;
-    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_6168, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6097, GALGAS_infixOperator::constructor_strictInf (SOURCE_FILE ("expression-operator-priority.galgas", 186)), var_rightExpression_6168  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 183)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 191)) ;
+    GALGAS_location var_operatorLocation_6391 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 192)) ;
+    GALGAS_expressionAST var_rightExpression_6462 ;
+    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_6462, inCompiler) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6391, GALGAS_infixOperator::constructor_strictInf (SOURCE_FILE ("expression-operator-priority.galgas", 197)), var_rightExpression_6462  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 194)) ;
   } break ;
   case 5: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 190)) ;
-    GALGAS_location var_operatorLocation_6370 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 191)) ;
-    GALGAS_expressionAST var_rightExpression_6441 ;
-    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_6441, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6370, GALGAS_infixOperator::constructor_strictSup (SOURCE_FILE ("expression-operator-priority.galgas", 196)), var_rightExpression_6441  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 193)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 201)) ;
+    GALGAS_location var_operatorLocation_6664 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 202)) ;
+    GALGAS_expressionAST var_rightExpression_6735 ;
+    nt_expression_5F_shift_ (ioArgument_ioAST, var_rightExpression_6735, inCompiler) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6664, GALGAS_infixOperator::constructor_strictSup (SOURCE_FILE ("expression-operator-priority.galgas", 207)), var_rightExpression_6735  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 204)) ;
   } break ;
   default:
     break ;
@@ -6884,19 +6885,19 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_comparison_i50_pars
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2264_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 160)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2264_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 171)) ;
     nt_expression_5F_shift_parse (inCompiler) ;
   } break ;
   case 3: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2265_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 170)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2265_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 181)) ;
     nt_expression_5F_shift_parse (inCompiler) ;
   } break ;
   case 4: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 180)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 191)) ;
     nt_expression_5F_shift_parse (inCompiler) ;
   } break ;
   case 5: {
-    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 190)) ;
+    inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 201)) ;
     nt_expression_5F_shift_parse (inCompiler) ;
   } break ;
   default:
@@ -6916,18 +6917,18 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_shift_i51_ (GALGAS_
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_83 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 208)) ;
-      GALGAS_location var_operatorLocation_6913 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 209)) ;
-      GALGAS_expressionAST var_rightExpression_6987 ;
-      nt_expression_5F_addition_ (ioArgument_ioAST, var_rightExpression_6987, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6913, GALGAS_infixOperator::constructor_leftShiftOp (SOURCE_FILE ("expression-operator-priority.galgas", 214)), var_rightExpression_6987  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 211)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 219)) ;
+      GALGAS_location var_operatorLocation_7207 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 220)) ;
+      GALGAS_expressionAST var_rightExpression_7281 ;
+      nt_expression_5F_addition_ (ioArgument_ioAST, var_rightExpression_7281, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7207, GALGAS_infixOperator::constructor_leftShiftOp (SOURCE_FILE ("expression-operator-priority.galgas", 225)), var_rightExpression_7281  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 222)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 218)) ;
-      GALGAS_location var_operatorLocation_7195 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 219)) ;
-      GALGAS_expressionAST var_rightExpression_7269 ;
-      nt_expression_5F_addition_ (ioArgument_ioAST, var_rightExpression_7269, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7195, GALGAS_infixOperator::constructor_rightShiftOp (SOURCE_FILE ("expression-operator-priority.galgas", 224)), var_rightExpression_7269  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 221)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 229)) ;
+      GALGAS_location var_operatorLocation_7489 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 230)) ;
+      GALGAS_expressionAST var_rightExpression_7563 ;
+      nt_expression_5F_addition_ (ioArgument_ioAST, var_rightExpression_7563, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7489, GALGAS_infixOperator::constructor_rightShiftOp (SOURCE_FILE ("expression-operator-priority.galgas", 235)), var_rightExpression_7563  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 232)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -6944,11 +6945,11 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_shift_i51_parse (C_
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_83 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 208)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 219)) ;
       nt_expression_5F_addition_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 218)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 229)) ;
       nt_expression_5F_addition_parse (inCompiler) ;
     } break ;
     default:
@@ -6970,32 +6971,32 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_addition_i52_ (GALG
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_84 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 236)) ;
-      GALGAS_location var_operatorLocation_7745 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 237)) ;
-      GALGAS_expressionAST var_rightExpression_7818 ;
-      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_7818, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7745, GALGAS_infixOperator::constructor_addOp (SOURCE_FILE ("expression-operator-priority.galgas", 242)), var_rightExpression_7818  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 239)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 247)) ;
+      GALGAS_location var_operatorLocation_8039 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 248)) ;
+      GALGAS_expressionAST var_rightExpression_8112 ;
+      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8112, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8039, GALGAS_infixOperator::constructor_addOp (SOURCE_FILE ("expression-operator-priority.galgas", 253)), var_rightExpression_8112  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 250)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 246)) ;
-      GALGAS_location var_operatorLocation_8020 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 247)) ;
-      GALGAS_expressionAST var_rightExpression_8093 ;
-      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8093, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8020, GALGAS_infixOperator::constructor_addOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 252)), var_rightExpression_8093  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 249)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 257)) ;
+      GALGAS_location var_operatorLocation_8314 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 258)) ;
+      GALGAS_expressionAST var_rightExpression_8387 ;
+      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8387, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8314, GALGAS_infixOperator::constructor_addOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 263)), var_rightExpression_8387  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 260)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 256)) ;
-      GALGAS_location var_operatorLocation_8299 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 257)) ;
-      GALGAS_expressionAST var_rightExpression_8372 ;
-      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8372, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8299, GALGAS_infixOperator::constructor_subOp (SOURCE_FILE ("expression-operator-priority.galgas", 262)), var_rightExpression_8372  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 259)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 267)) ;
+      GALGAS_location var_operatorLocation_8593 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 268)) ;
+      GALGAS_expressionAST var_rightExpression_8666 ;
+      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8666, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8593, GALGAS_infixOperator::constructor_subOp (SOURCE_FILE ("expression-operator-priority.galgas", 273)), var_rightExpression_8666  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 270)) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 266)) ;
-      GALGAS_location var_operatorLocation_8574 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 267)) ;
-      GALGAS_expressionAST var_rightExpression_8647 ;
-      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8647, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8574, GALGAS_infixOperator::constructor_subOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 272)), var_rightExpression_8647  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 269)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 277)) ;
+      GALGAS_location var_operatorLocation_8868 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 278)) ;
+      GALGAS_expressionAST var_rightExpression_8941 ;
+      nt_expression_5F_product_ (ioArgument_ioAST, var_rightExpression_8941, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8868, GALGAS_infixOperator::constructor_subOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 283)), var_rightExpression_8941  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 280)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -7012,19 +7013,19 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_addition_i52_parse 
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_84 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 236)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 247)) ;
       nt_expression_5F_product_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 246)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2B__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 257)) ;
       nt_expression_5F_product_parse (inCompiler) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 256)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 267)) ;
       nt_expression_5F_product_parse (inCompiler) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 266)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 277)) ;
       nt_expression_5F_product_parse (inCompiler) ;
     } break ;
     default:
@@ -7046,46 +7047,46 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_product_i53_ (GALGA
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_85 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 284)) ;
-      GALGAS_location var_operatorLocation_9109 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 285)) ;
-      GALGAS_expressionAST var_rightExpression_9171 ;
-      nt_primary_ (ioArgument_ioAST, var_rightExpression_9171, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9109, GALGAS_infixOperator::constructor_mulOp (SOURCE_FILE ("expression-operator-priority.galgas", 290)), var_rightExpression_9171  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 287)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 295)) ;
+      GALGAS_location var_operatorLocation_9403 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 296)) ;
+      GALGAS_expressionAST var_rightExpression_9465 ;
+      nt_primary_ (ioArgument_ioAST, var_rightExpression_9465, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9403, GALGAS_infixOperator::constructor_mulOp (SOURCE_FILE ("expression-operator-priority.galgas", 301)), var_rightExpression_9465  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 298)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 294)) ;
-      GALGAS_location var_operatorLocation_9373 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 295)) ;
-      GALGAS_expressionAST var_rightExpression_9435 ;
-      nt_primary_ (ioArgument_ioAST, var_rightExpression_9435, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9373, GALGAS_infixOperator::constructor_mulOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 300)), var_rightExpression_9435  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 297)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 305)) ;
+      GALGAS_location var_operatorLocation_9667 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 306)) ;
+      GALGAS_expressionAST var_rightExpression_9729 ;
+      nt_primary_ (ioArgument_ioAST, var_rightExpression_9729, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9667, GALGAS_infixOperator::constructor_mulOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 311)), var_rightExpression_9729  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 308)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 304)) ;
-      GALGAS_location var_operatorLocation_9641 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 305)) ;
-      GALGAS_expressionAST var_rightExpression_9703 ;
-      nt_primary_ (ioArgument_ioAST, var_rightExpression_9703, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9641, GALGAS_infixOperator::constructor_modOp (SOURCE_FILE ("expression-operator-priority.galgas", 310)), var_rightExpression_9703  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 307)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 315)) ;
+      GALGAS_location var_operatorLocation_9935 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 316)) ;
+      GALGAS_expressionAST var_rightExpression_9997 ;
+      nt_primary_ (ioArgument_ioAST, var_rightExpression_9997, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9935, GALGAS_infixOperator::constructor_modOp (SOURCE_FILE ("expression-operator-priority.galgas", 321)), var_rightExpression_9997  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 318)) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 314)) ;
-      GALGAS_location var_operatorLocation_9905 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 315)) ;
-      GALGAS_expressionAST var_rightExpression_9967 ;
-      nt_primary_ (ioArgument_ioAST, var_rightExpression_9967, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9905, GALGAS_infixOperator::constructor_modOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 320)), var_rightExpression_9967  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 317)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 325)) ;
+      GALGAS_location var_operatorLocation_10199 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 326)) ;
+      GALGAS_expressionAST var_rightExpression_10261 ;
+      nt_primary_ (ioArgument_ioAST, var_rightExpression_10261, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10199, GALGAS_infixOperator::constructor_modOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 331)), var_rightExpression_10261  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 328)) ;
     } break ;
     case 6: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 324)) ;
-      GALGAS_location var_operatorLocation_10173 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 325)) ;
-      GALGAS_expressionAST var_rightExpression_10235 ;
-      nt_primary_ (ioArgument_ioAST, var_rightExpression_10235, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10173, GALGAS_infixOperator::constructor_divOp (SOURCE_FILE ("expression-operator-priority.galgas", 330)), var_rightExpression_10235  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 327)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 335)) ;
+      GALGAS_location var_operatorLocation_10467 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 336)) ;
+      GALGAS_expressionAST var_rightExpression_10529 ;
+      nt_primary_ (ioArgument_ioAST, var_rightExpression_10529, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10467, GALGAS_infixOperator::constructor_divOp (SOURCE_FILE ("expression-operator-priority.galgas", 341)), var_rightExpression_10529  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 338)) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 334)) ;
-      GALGAS_location var_operatorLocation_10437 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 335)) ;
-      GALGAS_expressionAST var_rightExpression_10499 ;
-      nt_primary_ (ioArgument_ioAST, var_rightExpression_10499, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10437, GALGAS_infixOperator::constructor_divOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 340)), var_rightExpression_10499  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 337)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 345)) ;
+      GALGAS_location var_operatorLocation_10731 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 346)) ;
+      GALGAS_expressionAST var_rightExpression_10793 ;
+      nt_primary_ (ioArgument_ioAST, var_rightExpression_10793, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10731, GALGAS_infixOperator::constructor_divOpNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 351)), var_rightExpression_10793  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 348)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -7102,27 +7103,27 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_expression_5F_product_i53_parse (
   while (repeatFlag_0) {
     switch (select_plm_5F_syntax_85 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 284)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 295)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 294)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2A__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 305)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 304)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 315)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 314)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 325)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 6: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 324)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 335)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 334)) ;
+      inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 345)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     default:
@@ -7139,17 +7140,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i54_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 349)) ;
-  GALGAS_location var_operatorLocation_10888 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 350)) ;
-  GALGAS_expressionAST var_expression_10943 ;
-  nt_primary_ (ioArgument_ioAST, var_expression_10943, inCompiler) ;
-  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_10888, GALGAS_prefixOperator::constructor_unsignedComplement (SOURCE_FILE ("expression-operator-priority.galgas", 354)), var_expression_10943  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 352)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 360)) ;
+  GALGAS_location var_operatorLocation_11182 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 361)) ;
+  GALGAS_expressionAST var_expression_11237 ;
+  nt_primary_ (ioArgument_ioAST, var_expression_11237, inCompiler) ;
+  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_11182, GALGAS_prefixOperator::constructor_unsignedComplement (SOURCE_FILE ("expression-operator-priority.galgas", 365)), var_expression_11237  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 363)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i54_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 349)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 360)) ;
   nt_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -7160,17 +7161,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i55_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_not COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 362)) ;
-  GALGAS_location var_operatorLocation_11297 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 363)) ;
-  GALGAS_expressionAST var_expression_11352 ;
-  nt_primary_ (ioArgument_ioAST, var_expression_11352, inCompiler) ;
-  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_11297, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("expression-operator-priority.galgas", 367)), var_expression_11352  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 365)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_not COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 373)) ;
+  GALGAS_location var_operatorLocation_11591 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 374)) ;
+  GALGAS_expressionAST var_expression_11646 ;
+  nt_primary_ (ioArgument_ioAST, var_expression_11646, inCompiler) ;
+  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_11591, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("expression-operator-priority.galgas", 378)), var_expression_11646  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 376)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i55_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_not COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 362)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_not COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 373)) ;
   nt_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -7181,17 +7182,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i56_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 375)) ;
-  GALGAS_location var_operatorLocation_11697 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 376)) ;
-  GALGAS_expressionAST var_expression_11752 ;
-  nt_primary_ (ioArgument_ioAST, var_expression_11752, inCompiler) ;
-  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_11697, GALGAS_prefixOperator::constructor_minus (SOURCE_FILE ("expression-operator-priority.galgas", 380)), var_expression_11752  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 378)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 386)) ;
+  GALGAS_location var_operatorLocation_11991 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 387)) ;
+  GALGAS_expressionAST var_expression_12046 ;
+  nt_primary_ (ioArgument_ioAST, var_expression_12046, inCompiler) ;
+  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_11991, GALGAS_prefixOperator::constructor_minus (SOURCE_FILE ("expression-operator-priority.galgas", 391)), var_expression_12046  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 389)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i56_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 375)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 386)) ;
   nt_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -7202,17 +7203,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i57_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 388)) ;
-  GALGAS_location var_operatorLocation_12092 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 389)) ;
-  GALGAS_expressionAST var_expression_12147 ;
-  nt_primary_ (ioArgument_ioAST, var_expression_12147, inCompiler) ;
-  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_12092, GALGAS_prefixOperator::constructor_minusNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 393)), var_expression_12147  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 391)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 399)) ;
+  GALGAS_location var_operatorLocation_12386 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 400)) ;
+  GALGAS_expressionAST var_expression_12441 ;
+  nt_primary_ (ioArgument_ioAST, var_expression_12441, inCompiler) ;
+  outArgument_outExpression = GALGAS_prefixOperatorExpressionAST::constructor_new (var_operatorLocation_12386, GALGAS_prefixOperator::constructor_minusNoOvf (SOURCE_FILE ("expression-operator-priority.galgas", 404)), var_expression_12441  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 402)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i57_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 388)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 399)) ;
   nt_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -7223,17 +7224,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i58_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 401)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 412)) ;
   nt_expression_ (ioArgument_ioAST, outArgument_outExpression, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 403)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 414)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i58_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 401)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 412)) ;
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 403)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 414)) ;
   inCompiler->resetTemplateString () ;
 }
 

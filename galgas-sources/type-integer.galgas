@@ -254,11 +254,11 @@ private proc enter_integer_integer_operators
     !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !intIntOp
-    !booleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-  ]
+#  [!?ioContext.mNonEqualOperatorMap insertKey
+#    !intIntOp
+#    !booleanType
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
+#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !booleanType
@@ -424,11 +424,11 @@ private proc enter_integer_literal_operators
     !booleanType
     !@integerObject_literal_infixOperator.new {!.icmp_eq}
   ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !intLiteralOp
-    !booleanType
-    !@integerObject_literal_infixOperator.new {!.icmp_ne}
-  ]
+#  [!?ioContext.mNonEqualOperatorMap insertKey
+#    !intLiteralOp
+#    !booleanType
+#    !@integerObject_literal_infixOperator.new {!.icmp_ne}
+#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
     !booleanType
@@ -548,12 +548,16 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   !@objectIR outResult
 {
 #--- Check right literal integer can be extented to left integer type, ans is not zero
-  [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
+  [inRightOperand literalInteger ?1* ?value:let @bigint rightLiteralValue]
   [[inLeftOperand type].kind integer ?min:let @bigint min ?max:let @bigint max ?2*]
-  if literalValue < min then
+  if rightLiteralValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
-  elsif literalValue > max then
+  elsif rightLiteralValue > max then
     error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
+  elsif [inLeftOperand isLiteralInteger] then
+    [inLeftOperand literalInteger ?1* ?value:let @bigint leftLiteralValue]
+    let resultValue = [self performStaticOperation !leftLiteralValue !rightLiteralValue]
+    outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
     getNewTempValue (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
@@ -586,11 +590,11 @@ private proc enter_literal_integer_operators
     !booleanType
     !@literal_integerObject_infixOperator.new {!.icmp_eq}
   ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !intLiteralOp
-    !booleanType
-    !@literal_integerObject_infixOperator.new {!.icmp_ne}
-  ]
+#  [!?ioContext.mNonEqualOperatorMap insertKey
+#    !intLiteralOp
+#    !booleanType
+#    !@literal_integerObject_infixOperator.new {!.icmp_ne}
+#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
     !booleanType
@@ -709,13 +713,17 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
   ?let @PLMType inResultType
   !@objectIR outResult
 {
-#--- Check left literal integer can be extented to right integer type
-  [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
+#--- Check left literal integer can be extended to right integer type
+  [inLeftOperand literalInteger ?1* ?value:let @bigint leftLiteralValue]
   [[inRightOperand type].kind integer ?min:let @bigint min ?max:let @bigint max ?2*]
-  if literalValue < min then
+  if leftLiteralValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
-  elsif literalValue > max then
+  elsif leftLiteralValue > max then
     error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
+  elsif [inRightOperand isLiteralInteger] then
+    [inRightOperand literalInteger ?1* ?value:let @bigint rightLiteralValue]
+    let resultValue = [self performStaticOperation !leftLiteralValue !rightLiteralValue]
+    outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
     getNewTempValue (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation

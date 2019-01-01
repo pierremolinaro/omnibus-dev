@@ -9,35 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              Routine 'getNewTempValue'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_getNewTempValue (const GALGAS_PLMType constinArgument_inType,
-                              GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                              GALGAS_objectIR & outArgument_outTempVariable,
-                              C_Compiler * inCompiler
-                              COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outTempVariable.drop () ; // Release 'out' argument
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
-    test_0 = GALGAS_bool (kIsEqual, constinArgument_inType.getter_kind (HERE).objectCompare (GALGAS_typeKind::constructor_void (SOURCE_FILE ("semantic-analysis.galgas", 71)))).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      outArgument_outTempVariable = GALGAS_objectIR::constructor_void (SOURCE_FILE ("semantic-analysis.galgas", 72)) ;
-    }
-  }
-  if (kBoolFalse == test_0) {
-    GALGAS_string var_llvmName_3402 ;
-    {
-    extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_llvmName_3402, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 74)) ;
-    }
-    outArgument_outTempVariable = GALGAS_objectIR::constructor_llvmValue (constinArgument_inType, var_llvmName_3402  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 75)) ;
-  }
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            Routine 'getNewTempReference'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3927,21 +3898,21 @@ static void extensionMethod_infixOperatorExpressionAST_analyzeExpression (const 
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_infixOperatorExpressionAST * object = (const cPtr_infixOperatorExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_infixOperatorExpressionAST) ;
-  GALGAS_objectIR var_leftOperand_4553 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mLeftExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_leftOperand_4553, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 97)) ;
+  GALGAS_objectIR var_leftOperand_4554 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mLeftExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_leftOperand_4554, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 97)) ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_leftOperand_4553, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 110)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_leftOperand_4554, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 110)) ;
   }
-  GALGAS_objectIR var_rightOperand_5105 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mRightExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, extensionGetter_type (var_leftOperand_4553, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 118)), constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_rightOperand_5105, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 115)) ;
+  GALGAS_objectIR var_rightOperand_5106 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mRightExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, extensionGetter_type (var_leftOperand_4554, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 118)), constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_rightOperand_5106, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 115)) ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_rightOperand_5105, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 128)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_rightOperand_5106, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 128)) ;
   }
-  GALGAS_infixOperatorMap var_operatorMap_5267 = function_getInfixOperatorMap (object->mProperty_mOp, constinArgument_inContext, constinArgument_inMode, object->mProperty_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
-  GALGAS_PLMType var_resultType_5567 ;
-  GALGAS_infixOperatorDescription var_binaryOperator_5620 ;
-  extensionMethod_checkBinaryOperationWith (var_operatorMap_5267, extensionGetter_type (var_leftOperand_4553, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 136)), extensionGetter_type (var_rightOperand_5105, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 137)), object->mProperty_mOperatorLocation, var_resultType_5567, var_binaryOperator_5620, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 135)) ;
-  callExtensionMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator_5620.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_leftOperand_4553, object->mProperty_mOperatorLocation, var_rightOperand_5105, var_resultType_5567, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 143)) ;
+  GALGAS_infixOperatorMap var_operatorMap_5268 = function_getInfixOperatorMap (object->mProperty_mOp, constinArgument_inContext, constinArgument_inMode, object->mProperty_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
+  GALGAS_PLMType var_resultType_5568 ;
+  GALGAS_infixOperatorDescription var_binaryOperator_5621 ;
+  extensionMethod_checkBinaryOperationWith (var_operatorMap_5268, extensionGetter_type (var_leftOperand_4554, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 136)), extensionGetter_type (var_rightOperand_5106, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 137)), object->mProperty_mOperatorLocation, var_resultType_5568, var_binaryOperator_5621, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 135)) ;
+  callExtensionMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator_5621.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_leftOperand_4554, object->mProperty_mOperatorLocation, var_rightOperand_5106, var_resultType_5568, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 143)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3974,11 +3945,6 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
   case GALGAS_infixOperator::kEnum_equal:
     {
       result_outOperatorMap = constinArgument_inContext.getter_mEqualOperatorMap (HERE) ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_nonEqual:
-    {
-      result_outOperatorMap = constinArgument_inContext.getter_mNonEqualOperatorMap (HERE) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_strictInf:

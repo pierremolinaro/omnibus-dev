@@ -4,7 +4,7 @@
 
 enum @infixOperator {
   case equal
-  case nonEqual
+#  case nonEqual
   case strictInf
   case strictSup
   case infEqual
@@ -163,8 +163,8 @@ private func getInfixOperatorMap
   switch inOp 
   case equal :
     outOperatorMap = inContext.mEqualOperatorMap
-  case nonEqual :
-    outOperatorMap = inContext.mNonEqualOperatorMap
+#  case nonEqual :
+#    outOperatorMap = inContext.mNonEqualOperatorMap
   case strictInf :
     outOperatorMap = inContext.mStrictInfOperatorMap
   case infEqual :
