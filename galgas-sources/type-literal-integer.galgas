@@ -92,11 +92,11 @@ private proc enterLiteralIntegerOperators
 #    !booleanType
 #    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
 #  ]
-  [!?ioContext.mSupEqualOperatorMap insertKey
-    !intIntOp
-    !booleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_sge}
-  ]
+#  [!?ioContext.mSupEqualOperatorMap insertKey
+#    !intIntOp
+#    !booleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_sge}
+#  ]
 #--- Bit Wise operators (for unsigned integers)
   [!?ioContext.mAndOperatorMap insertKey
     !intIntOp

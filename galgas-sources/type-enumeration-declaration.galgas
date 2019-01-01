@@ -215,11 +215,11 @@ proc enterEnumerationComparisonOperators
 #    !booleanType
 #    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
 #  ]
-  [!?ioContext.mSupEqualOperatorMap insertKey
-    !key
-    !booleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
-  ]
+#  [!?ioContext.mSupEqualOperatorMap insertKey
+#    !key
+#    !booleanType
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

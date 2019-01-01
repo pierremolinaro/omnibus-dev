@@ -8,7 +8,7 @@ enum @infixOperator {
   case strictInf
 #  case strictSup
   case infEqual
-  case supEqual
+#  case supEqual
   case andOp
   case orOp
   case xorOp
@@ -171,8 +171,8 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mInfEqualOperatorMap
 #  case strictSup :
 #    outOperatorMap = inContext.mStrictSupOperatorMap
-  case supEqual :
-    outOperatorMap = inContext.mSupEqualOperatorMap
+#  case supEqual :
+#    outOperatorMap = inContext.mSupEqualOperatorMap
   case andOp :
     outOperatorMap = inContext.mAndOperatorMap
   case orOp :
@@ -299,11 +299,11 @@ getter @infixOperatorDescription performStaticOperation
   case icmp_ult : result = [inLeft < inRight bigint]
   case icmp_ule : result = [inLeft <= inRight bigint]
 #  case icmp_ugt : result = [inLeft > inRight bigint]
-  case icmp_uge : result = [inLeft >= inRight bigint]
+#  case icmp_uge : result = [inLeft >= inRight bigint]
   case icmp_slt : result = [inLeft < inRight bigint]
   case icmp_sle : result = [inLeft <= inRight bigint]
 #  case icmp_sgt : result = [inLeft > inRight bigint]
-  case icmp_sge : result = [inLeft >= inRight bigint]
+#  case icmp_sge : result = [inLeft >= inRight bigint]
 
   end
 }

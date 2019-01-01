@@ -3466,10 +3466,8 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
     kEnum_icmp_5F_eq,
     kEnum_icmp_5F_ult,
     kEnum_icmp_5F_ule,
-    kEnum_icmp_5F_uge,
     kEnum_icmp_5F_slt,
-    kEnum_icmp_5F_sle,
-    kEnum_icmp_5F_sge
+    kEnum_icmp_5F_sle
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -3499,13 +3497,9 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
 
   public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_eq (LOCATION_ARGS) ;
 
-  public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_sge (LOCATION_ARGS) ;
-
   public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_sle (LOCATION_ARGS) ;
 
   public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_slt (LOCATION_ARGS) ;
-
-  public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_uge (LOCATION_ARGS) ;
 
   public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_ule (LOCATION_ARGS) ;
 
@@ -3571,13 +3565,9 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_eq (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_sge (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_sle (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_slt (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_uge (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_ule (LOCATION_ARGS) const ;
 

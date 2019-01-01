@@ -3226,7 +3226,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
     kEnum_equal,
     kEnum_strictInf,
     kEnum_infEqual,
-    kEnum_supEqual,
     kEnum_andOp,
     kEnum_orOp,
     kEnum_xorOp,
@@ -3300,8 +3299,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : static class GALGAS_infixOperator constructor_subOpNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_supEqual (LOCATION_ARGS) ;
-
   public : static class GALGAS_infixOperator constructor_xorOp (LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -3351,8 +3348,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOpNoOvf (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSupEqual (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isXorOp (LOCATION_ARGS) const ;
 

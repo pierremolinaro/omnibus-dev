@@ -117,7 +117,7 @@ struct @semanticContext {
   @infixOperatorMap mStrictInfOperatorMap       # <
   @infixOperatorMap mInfEqualOperatorMap        # <=
 #  @infixOperatorMap mStrictSupOperatorMap       # >
-  @infixOperatorMap mSupEqualOperatorMap        # >=
+#  @infixOperatorMap mSupEqualOperatorMap        # >=
   @infixOperatorMap mAndOperatorMap             # &
   @infixOperatorMap mOrOperatorMap              # |
   @infixOperatorMap mXorOperatorMap             # ^

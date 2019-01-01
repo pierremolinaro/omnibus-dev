@@ -181,11 +181,22 @@ syntax extension plm_syntax {
       $≥$
       let operatorLocation = @location.here
       <expression_shift> !?ioAST ?let rightExpression
-      outExpression = @infixOperatorExpressionAST.new {
+#      outExpression = @infixOperatorExpressionAST.new {
+#        !outExpression
+#        !operatorLocation
+#        !.supEqual
+#        !rightExpression
+#      }
+      let expression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.supEqual
+        !.strictInf
         !rightExpression
+      }
+      outExpression = @prefixOperatorExpressionAST.new {
+        !operatorLocation
+        !.notOperator
+        !expression
       }
     or
       $<$

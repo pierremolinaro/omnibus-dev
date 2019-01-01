@@ -31,11 +31,11 @@ enum @llvmBinaryOperation {
   case icmp_ult
   case icmp_ule
 #  case icmp_ugt
-  case icmp_uge
+#  case icmp_uge
   case icmp_slt
   case icmp_sle
 #  case icmp_sgt
-  case icmp_sge
+#  case icmp_sge
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -248,16 +248,16 @@ override method @binaryOperationIR llvmInstructionCode
     ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ule " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
 #  case icmp_ugt :
 #    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ugt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-  case icmp_uge :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp uge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+#  case icmp_uge :
+#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp uge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_slt :
     ioLLVMcode += "  " + [mTarget llvmName] + " = icmp slt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_sle :
     ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sle " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
 #  case icmp_sgt :
 #    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sgt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-  case icmp_sge :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+#  case icmp_sge :
+#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   end
 }
 
