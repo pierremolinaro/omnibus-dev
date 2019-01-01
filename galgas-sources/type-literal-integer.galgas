@@ -87,11 +87,11 @@ private proc enterLiteralIntegerOperators
     !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_sle}
   ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !intIntOp
-    !booleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
-  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !intIntOp
+#    !booleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
+#  ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
     !booleanType

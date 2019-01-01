@@ -3222,14 +3222,6 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_strictInf (UNUSED_LOCATIO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_infixOperator GALGAS_infixOperator::constructor_strictSup (UNUSED_LOCATION_ARGS) {
-  GALGAS_infixOperator result ;
-  result.mEnum = kEnum_strictSup ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_infixOperator GALGAS_infixOperator::constructor_infEqual (UNUSED_LOCATION_ARGS) {
   GALGAS_infixOperator result ;
   result.mEnum = kEnum_infEqual ;
@@ -3374,11 +3366,10 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_rightShiftOp (UNUSED_LOCA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const char * gEnumNameArrayFor_infixOperator [22] = {
+static const char * gEnumNameArrayFor_infixOperator [21] = {
   "(not built)",
   "equal",
   "strictInf",
-  "strictSup",
   "infEqual",
   "supEqual",
   "andOp",
@@ -3409,12 +3400,6 @@ GALGAS_bool GALGAS_infixOperator::getter_isEqual (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_infixOperator::getter_isStrictInf (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_strictInf == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_infixOperator::getter_isStrictSup (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_strictSup == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -3836,14 +3821,14 @@ void extensionMethod_checkBinaryOperationWith (const GALGAS_infixOperatorMap inO
                                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultType.drop () ; // Release 'out' argument
   outArgument_outOperation.drop () ; // Release 'out' argument
-  GALGAS_lstring var_lkey_2981 = function_combineTypeNamesForInfixOperator (constinArgument_inLeftType.getter_plmTypeDescriptionName (HERE), constinArgument_inRightType.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 71)) ;
+  GALGAS_lstring var_lkey_2982 = function_combineTypeNamesForInfixOperator (constinArgument_inLeftType.getter_plmTypeDescriptionName (HERE), constinArgument_inRightType.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 71)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     const GALGAS_infixOperatorMap temp_1 = inObject ;
-    test_0 = temp_1.getter_hasKey (var_lkey_2981.getter_string (HERE) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 72)).boolEnum () ;
+    test_0 = temp_1.getter_hasKey (var_lkey_2982.getter_string (HERE) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 72)).boolEnum () ;
     if (kBoolTrue == test_0) {
       const GALGAS_infixOperatorMap temp_2 = inObject ;
-      temp_2.method_searchKey (var_lkey_2981, outArgument_outResultType, outArgument_outOperation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 73)) ;
+      temp_2.method_searchKey (var_lkey_2982, outArgument_outResultType, outArgument_outOperation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 73)) ;
     }
   }
   if (kBoolFalse == test_0) {

@@ -104,11 +104,11 @@ override method @booleanDeclarationAST enterInContext
     !selfType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !boolBoolOp
-    !selfType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
-  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !boolBoolOp
+#    !selfType
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
+#  ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !boolBoolOp
     !selfType

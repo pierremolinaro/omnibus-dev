@@ -3225,7 +3225,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_equal,
     kEnum_strictInf,
-    kEnum_strictSup,
     kEnum_infEqual,
     kEnum_supEqual,
     kEnum_andOp,
@@ -3297,8 +3296,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : static class GALGAS_infixOperator constructor_strictInf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_strictSup (LOCATION_ARGS) ;
-
   public : static class GALGAS_infixOperator constructor_subOp (LOCATION_ARGS) ;
 
   public : static class GALGAS_infixOperator constructor_subOpNoOvf (LOCATION_ARGS) ;
@@ -3350,8 +3347,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRightShiftOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStrictInf (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStrictSup (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOp (LOCATION_ARGS) const ;
 

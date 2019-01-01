@@ -269,11 +269,11 @@ private proc enter_integer_integer_operators
     !booleanType
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !intIntOp
-    !booleanType
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !intIntOp
+#    !booleanType
+#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+#  ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
     !booleanType
@@ -439,11 +439,11 @@ private proc enter_integer_literal_operators
     !booleanType
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !intLiteralOp
-    !booleanType
-    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !intLiteralOp
+#    !booleanType
+#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+#  ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
     !booleanType
@@ -605,11 +605,11 @@ private proc enter_literal_integer_operators
     !booleanType
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !intLiteralOp
-    !booleanType
-    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !intLiteralOp
+#    !booleanType
+#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+#  ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
     !booleanType
