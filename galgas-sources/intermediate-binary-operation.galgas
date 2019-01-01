@@ -27,7 +27,7 @@ enum @llvmBinaryOperation {
   case lshr
   
   case icmp_eq
-  case icmp_ne
+#  case icmp_ne
   case icmp_ult
   case icmp_ule
   case icmp_ugt
@@ -240,8 +240,8 @@ override method @binaryOperationIR llvmInstructionCode
     ioLLVMcode += "  " + [mTarget llvmName] + " = lshr " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_eq :
     ioLLVMcode += "  " + [mTarget llvmName] + " = icmp eq " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-  case icmp_ne :
-    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ne " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+#  case icmp_ne :
+#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ne " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_ult :
     ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ult " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_ule :

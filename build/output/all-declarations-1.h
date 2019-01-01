@@ -3464,7 +3464,6 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
     kEnum_ashr,
     kEnum_lshr,
     kEnum_icmp_5F_eq,
-    kEnum_icmp_5F_ne,
     kEnum_icmp_5F_ult,
     kEnum_icmp_5F_ule,
     kEnum_icmp_5F_ugt,
@@ -3501,8 +3500,6 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
   public : static class GALGAS_llvmBinaryOperation constructor_ashr (LOCATION_ARGS) ;
 
   public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_eq (LOCATION_ARGS) ;
-
-  public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_ne (LOCATION_ARGS) ;
 
   public : static class GALGAS_llvmBinaryOperation constructor_icmp_5F_sge (LOCATION_ARGS) ;
 
@@ -3579,8 +3576,6 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAshr (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_eq (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_ne (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_sge (LOCATION_ARGS) const ;
 

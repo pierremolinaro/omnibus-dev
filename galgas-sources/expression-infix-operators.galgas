@@ -295,7 +295,7 @@ getter @infixOperatorDescription performStaticOperation
   case lshr : result = inLeft >> [inRight uint]
   
   case icmp_eq : result = [inLeft == inRight bigint]
-  case icmp_ne : result = [inLeft != inRight bigint]
+#  case icmp_ne : result = [inLeft != inRight bigint]
   case icmp_ult : result = [inLeft < inRight bigint]
   case icmp_ule : result = [inLeft <= inRight bigint]
   case icmp_ugt : result = [inLeft > inRight bigint]
