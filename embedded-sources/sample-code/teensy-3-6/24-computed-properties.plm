@@ -10,14 +10,14 @@ task Tâche0 @stacksize 512 @activate {
   
   var readComputedProperty $uint32 { result = self.tick ; }
 
-  var readWriteComputedProperty $uint32 {
-    set { self.tick = newValue ; }
-    get { result = self.tick ; }
-  }
+//  var readWriteComputedProperty $uint32 {
+//    set { self.tick = newValue ; }
+//    get { result = self.tick ; }
+//  }
 
   on time.wait (!until: self.tick) {
-    self.readWriteComputedProperty += 500
- //   self.tick += 500
+//    self.readWriteComputedProperty += 500
+    self.tick += 500
     digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:self.readComputedProperty)

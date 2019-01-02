@@ -54,6 +54,9 @@ func f (v : inout Int) {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 var s = Second ()
-//s.propriétéCalculée.propriétéCalculée = 8
-f (v: &s.propriétéCalculée.propriétéCalculée)
+s.propriétéCalculée.propriétéCalculée = 8
+//f (v: &s.propriétéCalculée.propriétéCalculée)
 
+//var array = [Int] (repeating: 12, count: 5)
+//f (v: &array [3])
+//Swift.print ("\(array)")

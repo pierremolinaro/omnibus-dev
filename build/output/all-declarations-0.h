@@ -1436,10 +1436,6 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_127 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_plm_5F_syntax_128 (C_Lexique_plm_5F_lexique *) = 0 ;
-
-  protected : virtual int32_t select_plm_5F_syntax_129 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 

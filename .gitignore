@@ -11,6 +11,10 @@
 -projets-auxiliaires/computed-property-sample-code/computed-property-sample-code.xcodeproj/xcuserdata/*
 -projets-auxiliaires/computed-property-sample-code/computed-property-sample-code.xcodeproj/project.xcworkspace/*
 
+-projets-auxiliaires/didset-sample-code/build/*
+-projets-auxiliaires/didset-sample-code/didset-sample-code.xcodeproj/xcuserdata/*
+-projets-auxiliaires/didset-sample-code/didset-sample-code.xcodeproj/project.xcworkspace/*
+
 build/*
 
 xcode-project/build/*

@@ -1,11 +1,42 @@
+//
+//  main.swift
+//  didset-sample-code
+//
+//  Created by Pierre Molinaro on 02/01/2019.
+//  Copyright © 2019 Pierre Molinaro. All rights reserved.
+//
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-typedef struct { unsigned mList ; } TaskList ;
+import Foundation
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#if TASK_COUNT > 32
-  #error "This type of list supports at most 32 tasks"
-#endif
+struct First {
+  var x = 99 {
+    didSet {
+      Swift.print ("Set First.x \(self.x)")
+    }
+  }
+
+  var a = 7 {
+    didSet {
+      Swift.print ("Set First.a \(self.a)")
+    }
+  }
+
+}
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct Second {
+  var b = First () {
+    didSet {
+      Swift.print ("Set Second.b \(self.b)")
+    }
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+var s = Second ()
+s.b.a = 8
