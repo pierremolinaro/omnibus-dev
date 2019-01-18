@@ -9812,7 +9812,7 @@ GALGAS_PLMType extensionGetter_booleanType (const GALGAS_semanticContext & inObj
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_PLMType result_result ; // Returned variable
-  inObject.mProperty_mTypeMap.method_searchKey (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("context.galgas", 152)).getter_nowhere (SOURCE_FILE ("context.galgas", 152)), result_result, inCompiler COMMA_SOURCE_FILE ("context.galgas", 152)) ;
+  inObject.mProperty_mTypeMap.method_searchKey (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("context.galgas", 149)).getter_nowhere (SOURCE_FILE ("context.galgas", 149)), result_result, inCompiler COMMA_SOURCE_FILE ("context.galgas", 149)) ;
 //---
   return result_result ;
 }

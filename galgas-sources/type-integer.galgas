@@ -234,7 +234,29 @@ override method @integerDeclarationAST enterInContext
     !warnsIfUnused:false
     !llvmTypeName
   }
+#---------- Enter Cpp Type Generation
+#  ioDecoratedDeclarationList += !@integerDecoratedDeclarationAST.new {!integerTypeName !mSize !mIsSigned}
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#class @integerDecoratedDeclarationAST : @abstractDecoratedDeclaration {
+#  @string mPLMTypeName
+#  @uint mSize
+#  @bool mIsSigned
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @integerDecoratedDeclarationAST semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  ioIntermediateCodeStruct.mTypeCppGenerationList += !@IntegerTypeCppGeneration.new {!mPLMTypeName !mSize !mIsSigned}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! INFIX OPERATION BETWEEN INTEGERS object <-> object
@@ -254,11 +276,6 @@ private proc enter_integer_integer_operators
     !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intIntOp
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !booleanType
@@ -269,16 +286,6 @@ private proc enter_integer_integer_operators
     !booleanType
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intIntOp
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intIntOp
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
-#  ]
 #--- Bit Wise operators (for unsigned integers)
   if not inIsSigned then
     [!?ioContext.mAndOperatorMap insertKey
@@ -424,11 +431,6 @@ private proc enter_integer_literal_operators
     !booleanType
     !@integerObject_literal_infixOperator.new {!.icmp_eq}
   ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !booleanType
-#    !@integerObject_literal_infixOperator.new {!.icmp_ne}
-#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
     !booleanType
@@ -439,16 +441,6 @@ private proc enter_integer_literal_operators
     !booleanType
     !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intLiteralOp
-#    !booleanType
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !booleanType
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
-#  ]
 #--- Bit Wise operators (for unsigned integers)
   if not inIsSigned then
     [!?ioContext.mAndOperatorMap insertKey
@@ -590,11 +582,6 @@ private proc enter_literal_integer_operators
     !booleanType
     !@literal_integerObject_infixOperator.new {!.icmp_eq}
   ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !booleanType
-#    !@literal_integerObject_infixOperator.new {!.icmp_ne}
-#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
     !booleanType
@@ -605,16 +592,6 @@ private proc enter_literal_integer_operators
     !booleanType
     !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intLiteralOp
-#    !booleanType
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !booleanType
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
-#  ]
 #--- Bit Wise operators (for unsigned integers)
   if not inIsSigned then
     [!?ioContext.mAndOperatorMap insertKey
@@ -823,5 +800,91 @@ override method @integerTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! C++ CODE GENERATION: INTEGER TYPE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#class @IntegerTypeCppGeneration : @typeCppGeneration {
+#  @uint mSize
+#  @bool mIsSigned
+#}
+
+#·······················································································································
+
+#private func generateIntegerArithmeticOperation
+#  ?let @string inPrefix
+#  ?let @string inOperator
+#  ?let @string inCppTypeName
+#  ?let @bool inIsSigned
+#  ?let @uint inSize -> @string
+#{
+#  result  = cppSeparatorLine () + "\n"
+#  result += "static " + inCppTypeName + " " + inPrefix + inCppTypeName + " (const " + inCppTypeName + " inA, const " + inCppTypeName + " inB) __attribute__ ((used)) ;\n"
+#  result += "static " + inCppTypeName + " " + inPrefix + inCppTypeName + " (const " + inCppTypeName + " inA, const " + inCppTypeName + " inB) {\n"
+#  result += "  " + inCppTypeName + " r = inA " + inOperator + " inB ;\n"
+#  if (inSize != 8) & (inSize != 16) & (inSize != 32) & (inSize != 64) then
+#    if not inIsSigned then
+#      result += "  r &= " + [(1G << inSize) - 1G string] + " ;\n"
+#    elsif inSize < 8 then
+#      result += "  r <<= " + [8 - inSize string] + " ;\n"
+#      result += "  r >>= " + [8 - inSize string] + " ;\n"
+#    elsif inSize < 16 then
+#      result += "  r <<= " + [16 - inSize string] + " ;\n"
+#      result += "  r >>= " + [16 - inSize string] + " ;\n"
+#    elsif inSize < 32 then
+#      result += "  r <<= " + [32 - inSize string] + " ;\n"
+#      result += "  r >>= " + [32 - inSize string] + " ;\n"
+#    elsif inSize < 64 then
+#      result += "  r <<= " + [64 - inSize string] + " ;\n"
+#      result += "  r >>= " + [64 - inSize string] + " ;\n"
+#    end
+#  end
+#  result += "  return r ;\n"
+#  result += "}\n\n"
+#}
+
+#·······················································································································
+
+#private func generateIntegerLogicalOperation
+#  ?let @string inPrefix
+#  ?let @string inOperator
+#  ?let @string inCppTypeName -> @string
+#{
+#  result  = cppSeparatorLine () + "\n"
+#  result += "static " + inCppTypeName + " " + inPrefix + inCppTypeName + " (const " + inCppTypeName + " inA, const " + inCppTypeName + " inB) __attribute__ ((used)) ;\n"
+#  result += "static " + inCppTypeName + " " + inPrefix + inCppTypeName + " (const " + inCppTypeName + " inA, const " + inCppTypeName + " inB) {\n"
+#  result += "  return inA " + inOperator + " inB ;\n"
+#  result += "}\n\n"
+#}
+
+#·······················································································································
+
+#override method @IntegerTypeCppGeneration generateTypeCppCode ?!@string ioCppCode {
+#  ioCppCode += cppSeparatorLine ()
+#  ioCppCode += "// Integer Type: " + mPLMTypeName + "\n"
+#  ioCppCode += cppSeparatorLine () + "\n"
+#  let cppTypeName = "$" + if mIsSigned then "s" else "u" end + "int" + mSize
+#  var cppSupportType = if mIsSigned then "int" else "uint" end
+#  if mSize <= 8 then
+#    cppSupportType += "8"
+#  elsif mSize <= 16 then
+#    cppSupportType += "16"
+#  elsif mSize <= 32 then
+#    cppSupportType += "32"
+#  else
+#    cppSupportType += "64"
+#  end
+#  cppSupportType += "_t"
+#  ioCppCode += "typedef " + cppSupportType + " " + cppTypeName + " ;\n\n"
+#  ioCppCode += generateIntegerArithmeticOperation (!"add" !"+" !cppTypeName !mIsSigned !mSize)
+#  ioCppCode += generateIntegerArithmeticOperation (!"sub" !"-" !cppTypeName !mIsSigned !mSize)
+#  ioCppCode += generateIntegerArithmeticOperation (!"mul" !"*" !cppTypeName !mIsSigned !mSize)
+#  ioCppCode += generateIntegerArithmeticOperation (!"div" !"/" !cppTypeName !mIsSigned !mSize)
+#  ioCppCode += generateIntegerArithmeticOperation (!"mod" !"%" !cppTypeName !mIsSigned !mSize)
+#  ioCppCode += generateIntegerLogicalOperation (!"or" !"|" !cppTypeName)
+#  ioCppCode += generateIntegerLogicalOperation (!"and" !"&" !cppTypeName)
+#  ioCppCode += generateIntegerLogicalOperation (!"xor" !"^" !cppTypeName)
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

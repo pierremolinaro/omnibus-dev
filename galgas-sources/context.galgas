@@ -113,11 +113,8 @@ struct @semanticContext {
 
 #--- Operators
   @infixOperatorMap mEqualOperatorMap           # ==
-#  @infixOperatorMap mNonEqualOperatorMap        # !=
   @infixOperatorMap mStrictInfOperatorMap       # <
   @infixOperatorMap mInfEqualOperatorMap        # <=
-#  @infixOperatorMap mStrictSupOperatorMap       # >
-#  @infixOperatorMap mSupEqualOperatorMap        # >=
   @infixOperatorMap mAndOperatorMap             # &
   @infixOperatorMap mOrOperatorMap              # |
   @infixOperatorMap mXorOperatorMap             # ^

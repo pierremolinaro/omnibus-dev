@@ -45,7 +45,11 @@ list @instructionListIR {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! codeGeneration
+
+#func %once cppSeparatorLine -> @string {
+#  result = "//" + @string.stringByRepeatingString {!"—" !118} + "\n"
+#}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once llvmSeparatorLine -> @string {
@@ -106,7 +110,7 @@ proc codeGeneration
     !targetName:inTargetName
     !targetParameters:inIntermediateCodeStruct.mTargetParameters
   )
-#--- Generate code files (LLVM, assembly)
+#--- Generate code files (LLVM, C++, assembly)
   generateCodeFiles (
     !currentDir:inCurrentDirectory
     !productDir:productDirectory
@@ -348,22 +352,27 @@ private proc generateCodeFiles
 #----------------------------------------- Write assembler file
   asCode += asSeparatorLine ()
   [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
-#----------------------------------------- Write C file
-  var cCode = ""
+#----------------------------------------- Build builtin C++ code (by performing substitutions)
+  var s0 = ""
   for (relativePath) in inTargetParameters.m_C_definitionFiles do
-    cCode += getTargetTextFile (
+    s0 += getTargetTextFile (
       !currentDir:inCurrentDirectory
       !from:inTargetName.string + "/" + relativePath
     )
   end
-  let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
+  let s1 = [s0 stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
   let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
   let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
   let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
   let s6 = [s5 stringByReplacingStringByString !"!SECTIONIMPLEMENTATION!" !llvmNameForSectionImplementation (!"")]
-  let s7 = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
-  [s7 writeToFileWhenDifferentContents !sourceDirectory + "/src.cpp" ?*]
+  var cppCode = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
+#----------------------------------------- Add user type declarations
+#  for (userType) in inIntermediateCodeStruct.mTypeCppGenerationList do
+#    [userType generateTypeCppCode !?cppCode]
+#  end
+#----------------------------------------- Write C++ file
+  [cppCode writeToFileWhenDifferentContents !sourceDirectory + "/src.cpp" ?*]
 #----------------------------------------- Write JSON file with stack features
   var json = "{\n"
 #--- System stack size

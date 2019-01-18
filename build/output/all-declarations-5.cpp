@@ -1336,12 +1336,12 @@ void extensionMethod_llvmRoutineGeneration (const GALGAS_routineListIR inObject,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineListIR temp_0 = inObject ;
-  cEnumerator_routineListIR enumerator_3037 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_3037.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Routine ").add_operation (enumerator_3037.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("intermediate-code-generation.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 77)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 77)) ;
+  cEnumerator_routineListIR enumerator_3671 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_3671.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Routine ").add_operation (enumerator_3671.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("intermediate-code-generation.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 94)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 94)) ;
     ioArgument_ioGenerationAdds.mProperty_mUniqueIndex = GALGAS_uint ((uint32_t) 0U) ;
-    callExtensionMethod_llvmCodeGeneration ((const cPtr_abstractRoutineIR *) enumerator_3037.current (HERE).getter_mRoutine (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 79)) ;
-    enumerator_3037.gotoNextObject () ;
+    callExtensionMethod_llvmCodeGeneration ((const cPtr_abstractRoutineIR *) enumerator_3671.current (HERE).getter_mRoutine (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 96)) ;
+    enumerator_3671.gotoNextObject () ;
   }
 }
 

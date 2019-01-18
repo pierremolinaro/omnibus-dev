@@ -3,9 +3,9 @@ let F_CPU_MHZ = 240
 
 import "carte-tp-teensy-3-6.plm-import"
 
-let largeConstant = 123_456_789_123_456_789_123_456_789_123_456_789
+let largeConstant = 123_456_789_123_456_789_123_456_789_123
 
-typealias $largeInt = $uint128
+typealias $largeInt = $uint97
 
 func getLargeConstant () -> $largeInt {
   result = largeConstant

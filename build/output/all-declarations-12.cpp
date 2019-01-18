@@ -5646,9 +5646,9 @@ const char * gWrapperFileContent_39_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "\n"
-  "let largeConstant = 123_456_789_123_456_789_123_456_789_123_456_789\n"
+  "let largeConstant = 123_456_789_123_456_789_123_456_789_123\n"
   "\n"
-  "typealias $largeInt = $uint128\n"
+  "typealias $largeInt = $uint97\n"
   "\n"
   "func getLargeConstant () -> $largeInt {\n"
   "  result = largeConstant\n"
@@ -5677,7 +5677,7 @@ const cRegularFileWrapper gWrapperFile_39_embeddedSampleCode (
   "23-large-integer.plm",
   "plm",
   true, // Text file
-  930, // Text length
+  921, // Text length
   gWrapperFileContent_39_embeddedSampleCode
 ) ;
 
