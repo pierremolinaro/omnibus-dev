@@ -116,7 +116,7 @@ syntax extension plm_syntax {
       while
         $,$
       end
-      $\$type$ ?let registerTypeName
+      $identifier$ ?let registerTypeName
       @controlRegisterBitSliceList registerBitSliceList = {}
       select
       or

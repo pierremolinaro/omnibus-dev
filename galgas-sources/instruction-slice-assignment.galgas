@@ -35,7 +35,7 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     ${$
-    $\$type$ ?let typeName
+    $identifier$ ?let typeName
     @sliceAssignmentListAST sliceAssignmentListAST = {}
     repeat
       $?selector:$ ?let sliceWidth

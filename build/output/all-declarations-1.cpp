@@ -8334,12 +8334,12 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_9590 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_9590.hasCurrentObject ()) {
+  cEnumerator_controlRegisterDeclarationList enumerator_9594 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_9594.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_9590.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 257)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_9594.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 257)) ;
     }
-    enumerator_9590.gotoNextObject () ;
+    enumerator_9594.gotoNextObject () ;
   }
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
