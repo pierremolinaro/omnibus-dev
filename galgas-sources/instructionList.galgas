@@ -25,7 +25,8 @@ syntax extension plm_syntax {
     repeat
     while
       <instruction> !?ioAST !?outInstructionList
-      select
+#      $;$
+     select
         $;$
       or
         let s = @string.separatorString 

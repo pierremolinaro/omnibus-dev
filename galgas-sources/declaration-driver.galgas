@@ -74,41 +74,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-#  rule <driver_property> ?!@ast ioAST ?!@driverPropertyListAST ioPropertyList {
-#    @bool constant
-#    select
-#      $var$
-#      constant = false
-#    or
-#      $let$
-#      constant = true
-#    end
-#    $identifier$ ?let fieldName
-#    @propertyAttributeList propertyAttributeList = {}
-#    repeat
-#    while
-#      $@attribute$ ?let attribute
-#      $integer$ ?let value
-#      propertyAttributeList += !attribute !value
-#    end
-#    select
-#      <type_definition> !?ioAST ?let typeName
-#      select
-#        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.noExpression
-#      or
-#        $=$
-#        <expression> !?ioAST ?let initExpression
-#        ioPropertyList += !fieldName !propertyAttributeList !constant !typeName !.expression {!initExpression:initExpression}
-#      end
-#    or
-#      $=$
-#      <expression> !?ioAST ?let initExpression
-#      ioPropertyList += !fieldName !propertyAttributeList !constant !["" nowhere] !.expression {!initExpression:initExpression}
-#    end
-#  }
-  
-  #·····················································································································
-
   rule <declaration> ?!@ast ioAST {
     $driver$
     $identifier$ ?let driverName
