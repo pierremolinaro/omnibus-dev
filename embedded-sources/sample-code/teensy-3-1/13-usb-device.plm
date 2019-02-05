@@ -172,12 +172,12 @@ driver usb_device > digital {
       #USB0:CTL |= {#USB0:CTL !ODDRST:1}
       self.ep0_tx_bdt_bank = 0
    //--- Set up buffers to receive Setup and OUT packets
-      self.descriptorTable [call index(!0 !RX !EVEN)].desc = call BDT_DESC (!EP0_SIZE  !0)
-      self.descriptorTable [call index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)
-      self.descriptorTable [call index(!0 !RX !ODD) ].desc = call BDT_DESC (!EP0_SIZE !0)
-      self.descriptorTable [call index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)
-      self.descriptorTable [call index(!0 !TX !EVEN)].desc = 0
-      self.descriptorTable [call index(!0 !TX !ODD) ].desc = 0
+      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_SIZE  !0)
+      self.descriptorTable [index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)
+      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_SIZE !0)
+      self.descriptorTable [index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)
+      self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
+      self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
     //--- Activate endpoint 0
       #USB0:ENDPT [0] = {#USB0:ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1}
     //--- Clear all ending interrupts

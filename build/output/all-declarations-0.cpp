@@ -114,9 +114,6 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_assert = "the 'assert' ke
 //--- Syntax error message for terminal '$boot$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_boot = "the 'boot' keyword" ;
 
-//--- Syntax error message for terminal '$call$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_call = "the 'call' keyword" ;
-
 //--- Syntax error message for terminal '$case$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_case = "the 'case' keyword" ;
 
@@ -435,8 +432,8 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__3B_ = "the ';' delimitor
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
   C_String result = "<unknown>" ;
-  if ((inTerminalIndex >= 0) && (inTerminalIndex < 121)) {
-    static const char * syntaxErrorMessageArray [121] = {kEndOfSourceLexicalErrorMessage,
+  if ((inTerminalIndex >= 0) && (inTerminalIndex < 120)) {
+    static const char * syntaxErrorMessageArray [120] = {kEndOfSourceLexicalErrorMessage,
         gSyntaxErrorMessage_plm_5F_lexique_identifier,
         gSyntaxErrorMessage_plm_5F_lexique__23_groupName,
         gSyntaxErrorMessage_plm_5F_lexique__40_attribute,
@@ -452,7 +449,6 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
         gSyntaxErrorMessage_plm_5F_lexique_and,
         gSyntaxErrorMessage_plm_5F_lexique_assert,
         gSyntaxErrorMessage_plm_5F_lexique_boot,
-        gSyntaxErrorMessage_plm_5F_lexique_call,
         gSyntaxErrorMessage_plm_5F_lexique_case,
         gSyntaxErrorMessage_plm_5F_lexique_check,
         gSyntaxErrorMessage_plm_5F_lexique_convert,
@@ -954,15 +950,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_boot [] = {
   TO_UNICODE ('o'),
   TO_UNICODE ('o'),
   TO_UNICODE ('t'),
-  TO_UNICODE (0)
-} ;
-
-//--- Unicode string for '$call$'
-static const utf32 kUnicodeString_plm_5F_lexique_call [] = {
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('l'),
   TO_UNICODE (0)
 } ;
 
@@ -1589,7 +1576,7 @@ int16_t C_Lexique_plm_5F_lexique::search_into_delimitorsList (const C_String & i
 //             Key words table 'keyWordList'                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const int32_t ktable_size_plm_5F_lexique_keyWordList = 54 ;
+static const int32_t ktable_size_plm_5F_lexique_keyWordList = 53 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [ktable_size_plm_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_if, 2, C_Lexique_plm_5F_lexique::kToken_if),
@@ -1607,7 +1594,6 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_xor, 3, C_Lexique_plm_5F_lexique::kToken_xor),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_yes, 3, C_Lexique_plm_5F_lexique::kToken_yes),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_boot, 4, C_Lexique_plm_5F_lexique::kToken_boot),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_call, 4, C_Lexique_plm_5F_lexique::kToken_call),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_case, 4, C_Lexique_plm_5F_lexique::kToken_case),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_else, 4, C_Lexique_plm_5F_lexique::kToken_else),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_enum, 4, C_Lexique_plm_5F_lexique::kToken_enum),
@@ -1758,11 +1744,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_boot:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("boot") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken_call:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("call") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_case:
@@ -2842,7 +2823,6 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("and") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("assert") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("boot") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("call") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("case") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("check") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("convert") COMMA_THERE) ;
@@ -3038,7 +3018,6 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.appendObject ("xor") ;
     ioList.appendObject ("yes") ;
     ioList.appendObject ("boot") ;
-    ioList.appendObject ("call") ;
     ioList.appendObject ("case") ;
     ioList.appendObject ("else") ;
     ioList.appendObject ("enum") ;
@@ -3092,7 +3071,7 @@ __attribute__ ((unused)) (getKeywordLists_plm_5F_lexique, getKeywordsForIdentifi
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [121] = {0,
+  static const uint32_t kTerminalSymbolStyles [120] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1__23_groupName */,
     3 /* plm_lexique_1__40_attribute */,
@@ -3108,7 +3087,6 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_and */,
     1 /* plm_lexique_1_assert */,
     1 /* plm_lexique_1_boot */,
-    1 /* plm_lexique_1_call */,
     1 /* plm_lexique_1_case */,
     1 /* plm_lexique_1_check */,
     1 /* plm_lexique_1_convert */,
@@ -7930,20 +7908,18 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i80_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_call COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 20)) ;
-  GALGAS_lstring var_standaloneFunctionName_1166 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 21)) ;
-  GALGAS_effectiveArgumentListAST var_arguments_1216 ;
-  GALGAS_location var_endOfArguments_1236 ;
-  nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_1216, var_endOfArguments_1236, inCompiler) ;
-  outArgument_outExpression = GALGAS_standaloneFunctionInExpressionAST::constructor_new (var_standaloneFunctionName_1166, var_arguments_1216, var_endOfArguments_1236  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 23)) ;
+  GALGAS_lstring var_standaloneFunctionName_1151 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 20)) ;
+  GALGAS_effectiveArgumentListAST var_arguments_1201 ;
+  GALGAS_location var_endOfArguments_1221 ;
+  nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_1201, var_endOfArguments_1221, inCompiler) ;
+  outArgument_outExpression = GALGAS_standaloneFunctionInExpressionAST::constructor_new (var_standaloneFunctionName_1151, var_arguments_1201, var_endOfArguments_1221  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 22)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i80_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_call COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 20)) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 21)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 20)) ;
   nt_effective_5F_parameters_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }

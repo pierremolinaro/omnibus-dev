@@ -34,8 +34,8 @@ task T @stacksize 512 @activate {
   //--- Compute getSysTick duration
     for _ UInt32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
-      let t0 = call getSysTick ()
-      let t1 = call getSysTick ()
+      let t0 = getSysTick ()
+      let t1 = getSysTick ()
       cumul += t0 - t1
       lcd.print (!u32:t0 - t1)
       lcd.print (!spaces:1)
@@ -45,9 +45,9 @@ task T @stacksize 512 @activate {
     lcd.goto (!line:1 !column:0)
     for _ UInt32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
-      let t0 = call getSysTick ()
+      let t0 = getSysTick ()
       emptySection ()
-      let t1 = call getSysTick ()
+      let t1 = getSysTick ()
       lcd.print (!u32:t0 - t1 - systickDuration)
       lcd.print (!spaces:1)
     }
@@ -55,9 +55,9 @@ task T @stacksize 512 @activate {
     lcd.goto (!line:2 !column:0)
     for _ UInt32 in 0 ..< 4 {
       time.wait (!during:1)
-      let t0 = call getSysTick ()
+      let t0 = getSysTick ()
       emptyService ()
-      let t1 = call getSysTick ()
+      let t1 = getSysTick ()
       lcd.print (!u32:t0 - t1 - systickDuration)
       lcd.print (!spaces:1)
     }

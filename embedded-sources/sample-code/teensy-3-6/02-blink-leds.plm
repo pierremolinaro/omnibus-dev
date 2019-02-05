@@ -26,7 +26,7 @@ task T1 @stacksize 512 @activate {
     lcd.goto (!line:1 !column:0)
     lcd.print (!u32:time.now ())
     lcd.goto (!line:2 !column:0)
-    lcd.print (!u32:call freeStackSize ())
+    lcd.print (!u32:freeStackSize ())
   }
 }
 

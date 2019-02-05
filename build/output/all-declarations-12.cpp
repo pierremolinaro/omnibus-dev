@@ -1190,8 +1190,8 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "  //--- Compute getSysTick duration\n"
   "    for _ UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
-  "      let t0 = call getSysTick ()\n"
-  "      let t1 = call getSysTick ()\n"
+  "      let t0 = getSysTick ()\n"
+  "      let t1 = getSysTick ()\n"
   "      cumul += t0 - t1\n"
   "      lcd.print (!u32:t0 - t1)\n"
   "      lcd.print (!spaces:1)\n"
@@ -1201,9 +1201,9 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "    lcd.goto (!line:1 !column:0)\n"
   "    for _ UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
-  "      let t0 = call getSysTick ()\n"
+  "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
-  "      let t1 = call getSysTick ()\n"
+  "      let t1 = getSysTick ()\n"
   "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
@@ -1211,9 +1211,9 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "    lcd.goto (!line:2 !column:0)\n"
   "    for _ UInt32 in 0 ..< 4 {\n"
   "      time.wait (!during:1)\n"
-  "      let t0 = call getSysTick ()\n"
+  "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
-  "      let t1 = call getSysTick ()\n"
+  "      let t1 = getSysTick ()\n"
   "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
@@ -1230,7 +1230,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  1917, // Text length
+  1887, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -2040,12 +2040,12 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "      #USB0:CTL |= {#USB0:CTL !ODDRST:1}\n"
   "      self.ep0_tx_bdt_bank = 0\n"
   "   //--- Set up buffers to receive Setup and OUT packets\n"
-  "      self.descriptorTable [call index(!0 !RX !EVEN)].desc = call BDT_DESC (!EP0_SIZE  !0)\n"
-  "      self.descriptorTable [call index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)\n"
-  "      self.descriptorTable [call index(!0 !RX !ODD) ].desc = call BDT_DESC (!EP0_SIZE !0)\n"
-  "      self.descriptorTable [call index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)\n"
-  "      self.descriptorTable [call index(!0 !TX !EVEN)].desc = 0\n"
-  "      self.descriptorTable [call index(!0 !TX !ODD) ].desc = 0\n"
+  "      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_SIZE  !0)\n"
+  "      self.descriptorTable [index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)\n"
+  "      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_SIZE !0)\n"
+  "      self.descriptorTable [index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)\n"
+  "      self.descriptorTable [index(!0 !TX !EVEN)].desc = 0\n"
+  "      self.descriptorTable [index(!0 !TX !ODD) ].desc = 0\n"
   "    //--- Activate endpoint 0\n"
   "      #USB0:ENDPT [0] = {#USB0:ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1}\n"
   "    //--- Clear all ending interrupts\n"
@@ -2261,7 +2261,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  15237, // Text length
+  15197, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -2485,7 +2485,7 @@ const char * gWrapperFileContent_18_embeddedSampleCode = "target \"teensy-3-6/xt
   "    lcd.goto (!line:1 !column:0)\n"
   "    lcd.print (!u32:time.now ())\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    lcd.print (!u32:call freeStackSize ())\n"
+  "    lcd.print (!u32:freeStackSize ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -2551,7 +2551,7 @@ const cRegularFileWrapper gWrapperFile_18_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2398, // Text length
+  2393, // Text length
   gWrapperFileContent_18_embeddedSampleCode
 ) ;
 
@@ -3376,19 +3376,19 @@ const char * gWrapperFileContent_37_embeddedSampleCode = "target \"teensy-3-6/xt
   "  on time.wait (!until:self.\xC3""\xA9""ch\xC3""\xA9""ance) {\n"
   "    self.\xC3""\xA9""ch\xC3""\xA9""ance +%= 1_000\n"
   "    digital.toggle (!port:LED_L3)\n"
-  "    let freeRam = call freeByteCount ()\n"
+  "    let freeRam = freeByteCount ()\n"
   "    if self.freeRam \xE2""\x89""\xA0"" freeRam {\n"
   "      self.freeRam = freeRam\n"
   "      lcd.goto (!line:0 !column:6)\n"
   "      lcd.print (!u32:freeRam !width:6)\n"
   "    }\n"
-  "    let start = call heapStartAddress ()\n"
+  "    let start = heapStartAddress ()\n"
   "    if self.start \xE2""\x89""\xA0"" start {\n"
   "      self.start = start\n"
   "      lcd.goto (!line:1 !column:6)\n"
   "      lcd.print (!hex8:start)\n"
   "    }\n"
-  "    let alloc = call totalAllocationObjectCount ()\n"
+  "    let alloc = totalAllocationObjectCount ()\n"
   "    let allocationParSecondes = alloc - self.alloc\n"
   "    if allocationParSecondes > self.maxAllocationParSeconde {\n"
   "      self.maxAllocationParSeconde = allocationParSecondes\n"
@@ -3400,7 +3400,7 @@ const char * gWrapperFileContent_37_embeddedSampleCode = "target \"teensy-3-6/xt
   "      lcd.goto (!line:3 !column:0)\n"
   "      lcd.print (!u32:alloc !width:10)\n"
   "    }\n"
-  "    let current = call currentlyAllocatedObjectCount ()\n"
+  "    let current = currentlyAllocatedObjectCount ()\n"
   "    if self.current \xE2""\x89""\xA0"" current {\n"
   "      self.current = current\n"
   "      lcd.goto (!line:3 !column:17)\n"
@@ -3496,7 +3496,7 @@ const cRegularFileWrapper gWrapperFile_37_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5028, // Text length
+  5008, // Text length
   gWrapperFileContent_37_embeddedSampleCode
 ) ;
 
@@ -3538,8 +3538,8 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "  //--- Compute getSysTick duration\n"
   "    for _ UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
-  "      let t0 = call getSysTick ()\n"
-  "      let t1 = call getSysTick ()\n"
+  "      let t0 = getSysTick ()\n"
+  "      let t1 = getSysTick ()\n"
   "      cumul += t0 - t1\n"
   "      lcd.print (!u32:t0 - t1)\n"
   "      lcd.print (!spaces:1)\n"
@@ -3549,9 +3549,9 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "    lcd.goto (!line:1 !column:0)\n"
   "    for _ UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
-  "      let t0 = call getSysTick ()\n"
+  "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
-  "      let t1 = call getSysTick ()\n"
+  "      let t1 = getSysTick ()\n"
   "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
@@ -3559,9 +3559,9 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "    lcd.goto (!line:2 !column:0)\n"
   "    for _ UInt32 in 0 ..< 4 {\n"
   "      time.wait (!during:1)\n"
-  "      let t0 = call getSysTick ()\n"
+  "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
-  "      let t1 = call getSysTick ()\n"
+  "      let t1 = getSysTick ()\n"
   "      lcd.print (!u32:t0 - t1 - systickDuration)\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
@@ -3578,7 +3578,7 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
   "12-section-service-duration.plm",
   "plm",
   true, // Text file
-  1885, // Text length
+  1855, // Text length
   gWrapperFileContent_22_embeddedSampleCode
 ) ;
 
@@ -3837,12 +3837,12 @@ const char * gWrapperFileContent_38_embeddedSampleCode = "target \"teensy-3-6/xt
   "      #USB0:CTL |= {#USB0:CTL !ODDRST:1}\n"
   "      self.ep0_tx_bdt_bank = 0\n"
   "   //--- Set up buffers to receive Setup and OUT packets\n"
-  "      self.descriptorTable [call index(!0 !RX !EVEN)].desc = call BDT_DESC (!EP0_RX_SIZE  !0)\n"
-  "      self.descriptorTable [call index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)\n"
-  "      self.descriptorTable [call index(!0 !RX !ODD) ].desc = call BDT_DESC (!EP0_RX_SIZE !0)\n"
-  "      self.descriptorTable [call index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)\n"
-  "      self.descriptorTable [call index(!0 !TX !EVEN)].desc = 0\n"
-  "      self.descriptorTable [call index(!0 !TX !ODD) ].desc = 0\n"
+  "      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_RX_SIZE  !0)\n"
+  "      self.descriptorTable [index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)\n"
+  "      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_RX_SIZE !0)\n"
+  "      self.descriptorTable [index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)\n"
+  "      self.descriptorTable [index(!0 !TX !EVEN)].desc = 0\n"
+  "      self.descriptorTable [index(!0 !TX !ODD) ].desc = 0\n"
   "    //--- Activate endpoint 0\n"
   "      #USB0:ENDPT [0] = {#USB0:ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1}\n"
   "    //--- Clear all ending interrupts\n"
@@ -3883,7 +3883,7 @@ const char * gWrapperFileContent_38_embeddedSampleCode = "target \"teensy-3-6/xt
   "    let endPoint UInt4 = transactionStatus [4...7]\n"
   "    let TX_transitionStatus = transactionStatus [3...3]\n"
   "    let ODD_transitionStatus = transactionStatus [2...2]\n"
-  "    let index = call index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))\n"
+  "    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))\n"
   "   //--- Get TOK_PID\n"
   "     let TOK_PID = self.descriptorTable [index].desc [2...5]\n"
   "//     let TOK_PID = self.ep0_rx0_buf [0] [2...5]\n"
@@ -4093,7 +4093,7 @@ const cRegularFileWrapper gWrapperFile_38_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20407, // Text length
+  20362, // Text length
   gWrapperFileContent_38_embeddedSampleCode
 ) ;
 
@@ -4216,7 +4216,7 @@ const char * gWrapperFileContent_40_embeddedSampleCode = "target \"teensy-3-6/xt
   "    let duration = myDriver.getDuration ()\n"
   "    lcd.print (!u32:duration)\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    lcd.print (!hex8:call currentStackPointer ())\n"
+  "    lcd.print (!hex8: currentStackPointer ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -4236,7 +4236,7 @@ const cRegularFileWrapper gWrapperFile_40_embeddedSampleCode (
   "15-task-activation-duration-systick.plm",
   "plm",
   true, // Text file
-  1304, // Text length
+  1300, // Text length
   gWrapperFileContent_40_embeddedSampleCode
 ) ;
 
@@ -5667,7 +5667,7 @@ const char * gWrapperFileContent_39_embeddedSampleCode = "target \"teensy-3-6/xt
   "  on time.wait (!until: self.tick) {\n"
   "    self.otherLargeInteger += self.largeInteger\n"
   "    self.tick += 500\n"
-  "    self.largeInteger = call getLargeAddition (!self.largeInteger !call getLargeConstant ())\n"
+  "    self.largeInteger = getLargeAddition (!self.largeInteger !call getLargeConstant ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -5677,7 +5677,7 @@ const cRegularFileWrapper gWrapperFile_39_embeddedSampleCode (
   "23-large-integer.plm",
   "plm",
   true, // Text file
-  930, // Text length
+  925, // Text length
   gWrapperFileContent_39_embeddedSampleCode
 ) ;
 

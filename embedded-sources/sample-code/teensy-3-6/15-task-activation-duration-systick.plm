@@ -32,7 +32,7 @@ task TâcheA > TâcheB @stacksize 512 @activate {
     let duration = myDriver.getDuration ()
     lcd.print (!u32:duration)
     lcd.goto (!line:1 !column:0)
-    lcd.print (!hex8:call currentStackPointer ())
+    lcd.print (!hex8: currentStackPointer ())
   }
 }
 

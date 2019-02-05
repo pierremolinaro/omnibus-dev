@@ -24,7 +24,7 @@ task Tâche0 @stacksize 512 @activate {
   on time.wait (!until: self.tick) {
     self.otherLargeInteger += self.largeInteger
     self.tick += 500
-    self.largeInteger = call getLargeAddition (!self.largeInteger !call getLargeConstant ())
+    self.largeInteger = getLargeAddition (!self.largeInteger !getLargeConstant ())
   }
 }
 

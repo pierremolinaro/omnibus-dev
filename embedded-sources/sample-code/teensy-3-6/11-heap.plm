@@ -58,19 +58,19 @@ task T1 > T2 @stacksize 512 @activate {
   on time.wait (!until:self.échéance) {
     self.échéance +%= 1_000
     digital.toggle (!port:LED_L3)
-    let freeRam = call freeByteCount ()
+    let freeRam = freeByteCount ()
     if self.freeRam ≠ freeRam {
       self.freeRam = freeRam
       lcd.goto (!line:0 !column:6)
       lcd.print (!u32:freeRam !width:6)
     }
-    let start = call heapStartAddress ()
+    let start = heapStartAddress ()
     if self.start ≠ start {
       self.start = start
       lcd.goto (!line:1 !column:6)
       lcd.print (!hex8:start)
     }
-    let alloc = call totalAllocationObjectCount ()
+    let alloc = totalAllocationObjectCount ()
     let allocationParSecondes = alloc - self.alloc
     if allocationParSecondes > self.maxAllocationParSeconde {
       self.maxAllocationParSeconde = allocationParSecondes
@@ -82,7 +82,7 @@ task T1 > T2 @stacksize 512 @activate {
       lcd.goto (!line:3 !column:0)
       lcd.print (!u32:alloc !width:10)
     }
-    let current = call currentlyAllocatedObjectCount ()
+    let current = currentlyAllocatedObjectCount ()
     if self.current ≠ current {
       self.current = current
       lcd.goto (!line:3 !column:17)
