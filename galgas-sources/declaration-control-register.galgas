@@ -116,6 +116,7 @@ syntax extension plm_syntax {
       while
         $,$
       end
+#      $:$ # §
       $identifier$ ?let registerTypeName
       @controlRegisterBitSliceList registerBitSliceList = {}
       select
