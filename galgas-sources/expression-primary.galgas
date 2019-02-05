@@ -30,20 +30,20 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    @lstring receiver
-  #--- Self or identifier ?
-    select
-      $identifier$ ?receiver
-    or
-      $self$
-      receiver = ["" here]
-    end
-  #--- Properties and access
-    <expression_access_list> !?ioAST ?let accessList
-  #--- AST
-    outExpression = @primaryInExpressionAST.new {!receiver !accessList}
-  }
+#  rule <primary> ?!@ast ioAST !@expressionAST outExpression { # §
+#    @lstring receiver 
+#  #--- Self or identifier ?
+#    select
+#      $identifier$ ?receiver
+#    or
+#      $self$
+#      receiver = ["" here]
+#    end
+#  #--- Properties and access
+#    <expression_access_list> !?ioAST ?let accessList
+#  #--- AST
+#    outExpression = @primaryInExpressionAST.new {!receiver !accessList}
+#  }
 
   #·····················································································································
 

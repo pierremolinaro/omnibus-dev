@@ -9,8 +9,8 @@ class @typeAliasDeclarationAST : @abstractDeclarationAST {
 
 #·······················································································································
 
-override getter @typeAliasDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mAliasTypeName.location
+override getter @typeAliasDeclarationAST locationForErrorSignaling -> @location {
+  result = mAliasTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -32,7 +32,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <type_definition> ?!@ast unused ioAST !@lstring outTypeName {
-    $:$
+#    $:$ # §
     $identifier$ ?outTypeName # Simple redéfinition de type
   }
   
@@ -53,8 +53,8 @@ override method @typeAliasDeclarationAST enterInPrecedenceGraph
 
 #·······················································································································
 
-override getter @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "typealias $" + mAliasTypeName 
+override getter @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string {
+  result = "typealias " + mAliasTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
