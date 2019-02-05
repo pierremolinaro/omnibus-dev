@@ -4,17 +4,17 @@ import "carte-tp-teensy-3-1.plm-import"
 
 //-----------------------------------------------------------------------------*
 
-struct $B {
-  var a $uint32 = 0
-  var b $uint32 = 0
+struct B {
+  var a UInt32 = 0
+  var b UInt32 = 0
 }
 
-struct $C {
-  var c = $B ()
+struct C {
+  var c = new B ()
 }
 
-struct $toto {
-  var a $uint16 = 0
+struct Toto {
+  var a UInt16 = 0
   var c = no
   var b = no
 }
@@ -22,24 +22,24 @@ struct $toto {
 //-----------------------------------------------------------------------------*
 
 task T @stacksize 512 @activate {
-  var deadline $uint32 = 0
-  var acc = $C ()
+  var deadline UInt32 = 0
+  var acc = new C ()
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   }
-  
+
   on time.wait (!until:self.deadline) {
     self.deadline +%= 1000
     digital.toggle (!port:LED_L1)
     let n = self.acc.c.a +% self.deadline
     self.acc.c.a = n
-    let x $uint32 = 0x1234_5678
+    let x UInt32 = 0x1234_5678
     lcd.goto (!line:0 !column:0)
     lcd.print (!hex8:x.byteSwapped)
     lcd.goto (!line:1 !column:0)
-    let y $uint15 = 0x1234
+    let y UInt15 = 0x1234
     lcd.print (!hex4:extend (y.bitReversed))
   }
 }

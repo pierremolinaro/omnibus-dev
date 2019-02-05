@@ -7,16 +7,16 @@ import "carte-tp-teensy-3-6.plm-import"
 
 let SIZE = 10
 
-sync $synchronizationBuffer {
-  var data = [SIZE • $uint32] (!repeated:$uint32 ())
-  var readIndex $uint32 = 0
-  var writeIndex $uint32 = 0
-  var readSemaphore = $semaphore (!value:0)
-  var writeSemaphore = $semaphore (!value:SIZE)
+sync SynchronizationBuffer {
+  var data = new [• SIZE • UInt32] (!repeated:new UInt32 ())
+  var readIndex UInt32 = 0
+  var writeIndex UInt32 = 0
+  var readSemaphore = new Semaphore (!value:0)
+  var writeSemaphore = new Semaphore (!value:SIZE)
 
   //············································································
-  
-  public func write user @mutating @noUnusedWarning (? value $uint32) {
+
+  public func write user @mutating @noUnusedWarning (? value UInt32) {
     self.writeSemaphore.wait ()
     self.data [self.writeIndex] = value
     self.writeIndex += 1
@@ -25,10 +25,10 @@ sync $synchronizationBuffer {
     }
     self.readSemaphore.signal ()
   }
-  
+
   //············································································
-  
-  public func read user @mutating @noUnusedWarning (! value $uint32) {
+
+  public func read user @mutating @noUnusedWarning (! value UInt32) {
     self.readSemaphore.wait ()
     value = self.data [self.readIndex]
     self.readIndex += 1
@@ -39,8 +39,8 @@ sync $synchronizationBuffer {
   }
 
   //············································································
-  
-  public guard read @noUnusedWarning (! value $uint32) : self.readSemaphore.wait () {
+
+  public guard read @noUnusedWarning (! value UInt32) : self.readSemaphore.wait () {
     value = self.data [self.readIndex]
     self.readIndex += 1
     if self.readIndex == SIZE {
@@ -55,20 +55,20 @@ sync $synchronizationBuffer {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync buffer = $synchronizationBuffer ()
+sync buffer = new SynchronizationBuffer ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 {
-  var compteur $uint32 = 0
-  var index $uint32 = 0
+  var compteur UInt32 = 0
+  var index UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
   }
-   
+
   on time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
@@ -78,8 +78,8 @@ task Tâche1 @stacksize 512 {
 }
 
 task Tâche2 @stacksize 512 @activate {
-   
-  on buffer.read (?var value $uint32) {
+
+  on buffer.read (?var value UInt32) {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:value)
   }

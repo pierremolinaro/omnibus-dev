@@ -20,7 +20,7 @@ override method @literalStringDeclarationAST enterInPrecedenceGraph
 {
   let literalStringTypeName = [staticStringTypeName () nowhere]
   [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !literalStringTypeName !["$uint8" nowhere]]
+  [!?ioGraph addEdge !literalStringTypeName !["UInt8" nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

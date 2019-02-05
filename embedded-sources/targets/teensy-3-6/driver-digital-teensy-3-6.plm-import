@@ -16,7 +16,7 @@ registers @user #GPIOA:PDDR, #GPIOB:PDDR, #GPIOC:PDDR, #GPIOD:PDDR, #GPIOE:PDDR
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum $digitalPort {
+enum DigitalPort {
 //--- Common with Teensy 3.1 / 3.2
   case D0  // PTB16
   case D1  // PTB17
@@ -81,7 +81,7 @@ enum $digitalPort {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum $digitalMode {
+enum DigitalMode {
   case OUTPUT
   case OUTPUT_OPEN_COLLECTOR
   case INPUT
@@ -110,7 +110,7 @@ driver digital > root {
   // Their adresses : 0x4004_C000 --> 0x4004_C07C
   // This corresponds to AIPS slot 76 (§4.5.1)
   //··············································································
-  
+
   boot { // See §19.2.2 page 351
   // Slot 73 is accessible in user mode by resetting bits 27:24 of AIPS0.PACRJ
   // Slot 74 is accessible in user mode by resetting bits 23:20 of AIPS0.PACRJ
@@ -122,11 +122,11 @@ driver digital > root {
 
   //··············································································
 
-  public func set safe @noUnusedWarning (?mode:mode $digitalMode
-                                          ?toPort:port $digitalPort) {
+  public func set safe @noUnusedWarning (?mode:mode DigitalMode
+                                          ?toPort:port DigitalPort) {
   //--- Set config and dir to apply
-   var config $uint32
-    var dir $uint1
+   var config UInt32
+    var dir UInt1
     switch mode {
     case OUTPUT :
       config = {#PORTC:PCR !MUX:1}
@@ -319,11 +319,11 @@ driver digital > root {
       #GPIOE:PDDR @bit 11 = dir
     }
   }
-  
+
   //··············································································
 
-  public func write safe @noUnusedWarning (?value $bool
-                                            ?toPort:port $digitalPort) {
+  public func write safe @noUnusedWarning (?value Bool
+                                            ?toPort:port DigitalPort) {
     switch port {
     case D0 : // PTB16
       if value {
@@ -677,8 +677,8 @@ driver digital > root {
   }
 
   //··············································································
-  
-  public func read safe @noUnusedWarning (?port:port $digitalPort) -> $bool {
+
+  public func read safe @noUnusedWarning (?port:port DigitalPort) -> Bool {
     switch port {
     case D0 : // PTB16
       result = (#GPIOB:PDIR & (1 << 16)) ≠ 0
@@ -798,10 +798,10 @@ driver digital > root {
       result = (#GPIOE:PDIR & (1 << 11)) ≠ 0
     }
   }
-  
+
   //··············································································
-  
-  public func toggle safe @noUnusedWarning (?port:port $digitalPort) {
+
+  public func toggle safe @noUnusedWarning (?port:port DigitalPort) {
     switch port {
     case D0 : // PTB16
       #GPIOB:PTOR = 1 << 16

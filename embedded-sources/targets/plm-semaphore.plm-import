@@ -1,12 +1,12 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync $semaphore {
-  var value $uint32
-  var list = $taskList ()
-  var guardList = $guardList ()
+sync Semaphore {
+  var value UInt32
+  var list = new TaskList ()
+  var guardList = new GuardList ()
 
   //····················································································································
-  
+
   public service signal @noUnusedWarning @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
@@ -27,7 +27,7 @@ sync $semaphore {
 
   //····················································································································
 
-  public func wait @noUnusedWarning @mutating (?until: inDeadline $uint32) -> $bool {
+  public func wait @noUnusedWarning @mutating (?until: inDeadline UInt32) -> Bool {
      sync{
      on self.wait () exit : result = yes
      on time.wait (!until: inDeadline) exit : result = no

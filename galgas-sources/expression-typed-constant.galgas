@@ -21,6 +21,7 @@ syntax extension plm_syntax {
     select
       optionalTypeName = .new {!"" !.here}
     or
+      $:$ # §
       <type_definition> !?ioAST ?optionalTypeName
     end
     $.$

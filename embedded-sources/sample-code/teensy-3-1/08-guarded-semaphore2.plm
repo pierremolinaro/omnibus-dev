@@ -4,13 +4,13 @@ import "carte-tp-teensy-3-1.plm-import"
 
 //-----------------------------------------------------------------------------*
 
-sync s0 = $semaphore (!value:0)
-sync s1 = $semaphore (!value:0)
+sync s0 = new Semaphore (!value:0)
+sync s1 = new Semaphore (!value:0)
 
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @activate {
-  var top $uint32 = 0
+  var top UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
@@ -35,7 +35,7 @@ task T0 @stacksize 512 @activate {
 //-----------------------------------------------------------------------------*
 
 task T1 @stacksize 512 @activate {
-  var top $uint32 = 0
+  var top UInt32 = 0
 
   on time.wait (!until:self.top) {
     s1.signal ()
@@ -51,22 +51,22 @@ task T1 @stacksize 512 @activate {
 //-----------------------------------------------------------------------------*
 
 task T2 @stacksize 512 @activate {
-  var deadline $uint32 = 0
+  var deadline UInt32 = 0
   var toggleD3 = no
- 
+
   on s0.wait () {
     self.toggleD3 = yes // Just for having a boolean guard
   }
-  
+
   on (self.toggleD3) {
     digital.toggle (!port:LED_L1)
     self.toggleD3 = no
   }
-  
+
   on s1.wait () {
     digital.toggle (!port:LED_L3)
   }
-  
+
   on time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L2)

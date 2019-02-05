@@ -5,27 +5,27 @@ import "carte-tp-teensy-3-6.plm-import"
 
 let largeConstant = 123_456_789_123_456_789_123_456_789_123
 
-typealias $largeInt = $uint97
+typealias LargeInt = UInt97
 
-func getLargeConstant () -> $largeInt {
+func getLargeConstant () -> LargeInt {
   result = largeConstant
 }
 
-func getLargeAddition (? inA $largeInt ?inB $largeInt) -> $largeInt {
+func getLargeAddition (? inA LargeInt ?inB LargeInt) -> LargeInt {
   result = inA + inB
 }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @activate {
-  var tick = $uint32 ()
-  var largeInteger = $largeInt ()
-  var otherLargeInteger = $largeInt ()
-  
+  var tick = new UInt32 ()
+  var largeInteger = new LargeInt ()
+  var otherLargeInteger = new LargeInt ()
+
   on time.wait (!until: self.tick) {
     self.otherLargeInteger += self.largeInteger
     self.tick += 500
-    self.largeInteger = getLargeAddition (!self.largeInteger !getLargeConstant ())
+    self.largeInteger = call getLargeAddition (!self.largeInteger !call getLargeConstant ())
   }
 }
-  
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

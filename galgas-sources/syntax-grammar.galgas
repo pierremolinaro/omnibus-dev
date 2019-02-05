@@ -15,7 +15,6 @@ syntax plm_syntax (plm_lexique) {
     end
   }
 
-
   #·····················································································································
 
   rule <start_symbol>
@@ -30,6 +29,7 @@ syntax plm_syntax (plm_lexique) {
       select
         $;$
       or
+      
         let s = @string.separatorString 
         if not [s containsCharacter !'\n'] then
           error .here : "declaration should be terminated by an end of line or a ';'"

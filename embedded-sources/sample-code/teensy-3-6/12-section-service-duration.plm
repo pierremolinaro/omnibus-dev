@@ -15,7 +15,7 @@ service emptyService () {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-section getSysTick () -> $uint32 {
+section getSysTick () -> UInt32 {
   result = #SYST:CVR
 }
 
@@ -30,12 +30,12 @@ task T @stacksize 512 @activate {
   //············································································
 
   on @setup first {
-    var cumul $uint32 = 0
+    var cumul UInt32 = 0
   //--- Compute getSysTick duration
-    for _ $uint32 in 0 ..< ITERATIONS {
+    for _ UInt32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
-      let t0 = getSysTick ()
-      let t1 = getSysTick ()
+      let t0 = call getSysTick ()
+      let t1 = call getSysTick ()
       cumul += t0 - t1
       lcd.print (!u32:t0 - t1)
       lcd.print (!spaces:1)
@@ -43,26 +43,26 @@ task T @stacksize 512 @activate {
     let systickDuration = cumul / ITERATIONS
   //--- Compute emptySection duration
     lcd.goto (!line:1 !column:0)
-    for _ $uint32 in 0 ..< ITERATIONS {
+    for _ UInt32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
-      let t0 = getSysTick ()
+      let t0 = call getSysTick ()
       emptySection ()
-      let t1 = getSysTick ()
+      let t1 = call getSysTick ()
       lcd.print (!u32:t0 - t1 - systickDuration)
       lcd.print (!spaces:1)
     }
   //--- Compute emptyService duration
     lcd.goto (!line:2 !column:0)
-    for _ $uint32 in 0 ..< 4 {
+    for _ UInt32 in 0 ..< 4 {
       time.wait (!during:1)
-      let t0 = getSysTick ()
+      let t0 = call getSysTick ()
       emptyService ()
-      let t1 = getSysTick ()
+      let t1 = call getSysTick ()
       lcd.print (!u32:t0 - t1 - systickDuration)
       lcd.print (!spaces:1)
     }
   }
-  
+
 
   //············································································
 

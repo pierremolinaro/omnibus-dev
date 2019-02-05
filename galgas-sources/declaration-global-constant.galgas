@@ -76,7 +76,7 @@ override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semantic
 #·······················································································································
 
 override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "global.constant." + mConstantName 
+  outRepresentation = "global constant " + mConstantName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

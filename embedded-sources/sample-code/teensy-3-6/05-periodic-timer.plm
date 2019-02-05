@@ -5,13 +5,13 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync $periodicTimer {
-  var deadline $uint32 = 0
-  let period $uint32
-  var guardList = $guardList ()
+sync PeriodicTimer {
+  var deadline UInt32 = 0
+  let period UInt32
+  var guardList = new GuardList ()
 
   //············································································
-  
+
   public primitive wait @noUnusedWarning @mutating () {
     if self.deadline ≤ time.now () {
       block (!onDeadline:self.deadline)
@@ -29,8 +29,8 @@ sync $periodicTimer {
       handle (!?guard:self.guardList)
     }
   }
-  
-  public section deadline @noUnusedWarning () -> $uint32 {
+
+  public section deadline @noUnusedWarning () -> UInt32 {
     result = self.deadline
   }
 }
@@ -38,14 +38,14 @@ sync $periodicTimer {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur $uint32 = 0
-  var deadline = $periodicTimer (!period:500)
+  var compteur UInt32 = 0
+  var deadline = new PeriodicTimer (!period:500)
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   }
-   
+
   on time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500

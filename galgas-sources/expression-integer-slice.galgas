@@ -125,7 +125,7 @@ override method @integerSliceExpressionAST analyzeExpression
           error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-          expressionTypeName = .new {!"$uint" + sliceWidth !mTypeName.location}
+          expressionTypeName = .new {!"UInt" + sliceWidth !mTypeName.location}
           if sliceWidth == 0 then
             error sliceWidthStr : "the bit slice width should be > 0"
           end
@@ -206,9 +206,9 @@ override method @integerSliceExpressionAST analyzeExpression
           end
         case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
           if not unsigned then
-            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
+            error expressionLocation: "an UInt" + sliceWidth + " expression is required here"
           elsif expressionBitCount != sliceWidth then
-            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
+            error expressionLocation: "an UInt" + sliceWidth + " expression is required here"
           else
           #--- Perform an bit extend to result type
             getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)

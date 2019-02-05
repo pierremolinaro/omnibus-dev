@@ -5,19 +5,19 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync $synchronizationGate {
-  var isOpen $bool
-  var taskList = $taskList ()
-  var guardList = $guardList ()
+sync SynchronizationGate {
+  var isOpen Bool
+  var taskList = new TaskList ()
+  var guardList = new GuardList ()
 
   //············································································
-  
+
   public service close @noUnusedWarning @mutating () {
     self.isOpen = no
   }
 
   //············································································
-  
+
   public service open @noUnusedWarning @mutating () {
     if not self.isOpen {
       var continue = yes
@@ -30,7 +30,7 @@ sync $synchronizationGate {
   }
 
   //············································································
-  
+
   public primitive wait @noUnusedWarning @mutating () {
     if not self.isOpen {
       block (!?inList:self.taskList)
@@ -49,14 +49,14 @@ sync $synchronizationGate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync s1 = $semaphore (!value:0)
-sync s2 = $semaphore (!value:0)
-sync gate = $synchronizationGate (!isOpen:no)
+sync s1 = new Semaphore (!value:0)
+sync s2 = new Semaphore (!value:0)
+sync gate = new SynchronizationGate (!isOpen:no)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 @activate {
-  var compteur $uint32 = 0
+  var compteur UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
@@ -64,7 +64,7 @@ task Tâche1 @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
   }
-   
+
   on time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
@@ -80,7 +80,7 @@ task Tâche1 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche2 @stacksize 512 @activate {
- 
+
   on gate.wait () {
     digital.toggle (!port:LED_L1)
     s1.signal ()
@@ -91,7 +91,7 @@ task Tâche2 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche3 @stacksize 512 @activate {
-   
+
   on gate.wait () {
     digital.toggle (!port:LED_L2)
     s1.signal ()

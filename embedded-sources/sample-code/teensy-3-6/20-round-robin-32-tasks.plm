@@ -20,13 +20,13 @@ driver myDriver > digital {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
 
-  var tick = $uint32 ()
+  var tick = new UInt32 ()
 
   public section noteTick () {
     self.tick = #SYST:CVR
   }
 
-  public section getDuration () -> $uint32 {
+  public section getDuration () -> UInt32 {
     result = self.tick - #SYST:CVR
   }
 
@@ -40,42 +40,42 @@ driver myDriver ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync sémaphore0 = $semaphore (!value:0)
-sync sémaphore1 = $semaphore (!value:0)
-sync sémaphore2 = $semaphore (!value:0)
-sync sémaphore3 = $semaphore (!value:0)
-sync sémaphore4 = $semaphore (!value:0)
-sync sémaphore5 = $semaphore (!value:0)
-sync sémaphore6 = $semaphore (!value:0)
-sync sémaphore7 = $semaphore (!value:0)
-sync sémaphore8 = $semaphore (!value:0)
-sync sémaphore9 = $semaphore (!value:0)
-sync sémaphore10 = $semaphore (!value:0)
-sync sémaphore11 = $semaphore (!value:0)
-sync sémaphore12 = $semaphore (!value:0)
-sync sémaphore13 = $semaphore (!value:0)
-sync sémaphore14 = $semaphore (!value:0)
-sync sémaphore15 = $semaphore (!value:0)
-sync sémaphore16 = $semaphore (!value:0)
-sync sémaphore17 = $semaphore (!value:0)
-sync sémaphore18 = $semaphore (!value:0)
-sync sémaphore19 = $semaphore (!value:0)
-sync sémaphore20 = $semaphore (!value:0)
-sync sémaphore21 = $semaphore (!value:0)
-sync sémaphore22 = $semaphore (!value:0)
-sync sémaphore23 = $semaphore (!value:0)
-sync sémaphore24 = $semaphore (!value:0)
-sync sémaphore25 = $semaphore (!value:0)
-sync sémaphore26 = $semaphore (!value:0)
-sync sémaphore27 = $semaphore (!value:0)
-sync sémaphore28 = $semaphore (!value:0)
-sync sémaphore29 = $semaphore (!value:0)
-sync sémaphore30 = $semaphore (!value:0)
+sync sémaphore0 = new Semaphore (!value:0)
+sync sémaphore1 = new Semaphore (!value:0)
+sync sémaphore2 = new Semaphore (!value:0)
+sync sémaphore3 = new Semaphore (!value:0)
+sync sémaphore4 = new Semaphore (!value:0)
+sync sémaphore5 = new Semaphore (!value:0)
+sync sémaphore6 = new Semaphore (!value:0)
+sync sémaphore7 = new Semaphore (!value:0)
+sync sémaphore8 = new Semaphore (!value:0)
+sync sémaphore9 = new Semaphore (!value:0)
+sync sémaphore10 = new Semaphore (!value:0)
+sync sémaphore11 = new Semaphore (!value:0)
+sync sémaphore12 = new Semaphore (!value:0)
+sync sémaphore13 = new Semaphore (!value:0)
+sync sémaphore14 = new Semaphore (!value:0)
+sync sémaphore15 = new Semaphore (!value:0)
+sync sémaphore16 = new Semaphore (!value:0)
+sync sémaphore17 = new Semaphore (!value:0)
+sync sémaphore18 = new Semaphore (!value:0)
+sync sémaphore19 = new Semaphore (!value:0)
+sync sémaphore20 = new Semaphore (!value:0)
+sync sémaphore21 = new Semaphore (!value:0)
+sync sémaphore22 = new Semaphore (!value:0)
+sync sémaphore23 = new Semaphore (!value:0)
+sync sémaphore24 = new Semaphore (!value:0)
+sync sémaphore25 = new Semaphore (!value:0)
+sync sémaphore26 = new Semaphore (!value:0)
+sync sémaphore27 = new Semaphore (!value:0)
+sync sémaphore28 = new Semaphore (!value:0)
+sync sémaphore29 = new Semaphore (!value:0)
+sync sémaphore30 = new Semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T0 @stacksize 512 @activate {
-  var échéance $uint32 = 0
+  var échéance UInt32 = 0
 
   on time.wait (!until:self.échéance) {
     self.échéance +%= 500

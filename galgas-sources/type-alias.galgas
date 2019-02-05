@@ -32,7 +32,6 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <type_definition> ?!@ast unused ioAST !@lstring outTypeName {
-#    $:$ # §
     $identifier$ ?outTypeName # Simple redéfinition de type
   }
   

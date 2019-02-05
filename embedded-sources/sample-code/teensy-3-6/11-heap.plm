@@ -20,32 +20,32 @@ driver project > digital {
 
 driver project ()
 
-typealias $dArray = [$uint8]
+typealias Array8 = [UInt8]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct $structWithARC {
-  public var unEntierQuelconque $uint32 = 0
-  public var donnée = $dArray ()
+struct StructWithARC {
+  public var unEntierQuelconque UInt32 = 0
+  public var donnée = new Array8 ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct $autreStructWithARC {
-  public var autreEntierQuelconque $uint32 = 0
-  public var structure = $structWithARC ()
-  public var autreDonnée = $dArray ()
+struct AutreStructWithARC {
+  public var autreEntierQuelconque UInt32 = 0
+  public var structure = new StructWithARC ()
+  public var autreDonnée = new Array8 ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T1 > T2 @stacksize 512 @activate {
-  var échéance $uint32 = 0
-  var freeRam $uint32 = 0
-  var start $uint32 = 0
-  var maxAllocationParSeconde $uint32 = 0
-  var alloc $uint32 = 0
-  var current $uint32 = 0
+  var échéance UInt32 = 0
+  var freeRam UInt32 = 0
+  var start UInt32 = 0
+  var maxAllocationParSeconde UInt32 = 0
+  var alloc UInt32 = 0
+  var current UInt32 = 0
 
   on @setup first {
     lcd.print (!string:"Free:")
@@ -58,19 +58,19 @@ task T1 > T2 @stacksize 512 @activate {
   on time.wait (!until:self.échéance) {
     self.échéance +%= 1_000
     digital.toggle (!port:LED_L3)
-    let freeRam = freeByteCount ()
+    let freeRam = call freeByteCount ()
     if self.freeRam ≠ freeRam {
       self.freeRam = freeRam
       lcd.goto (!line:0 !column:6)
       lcd.print (!u32:freeRam !width:6)
     }
-    let start = heapStartAddress ()
+    let start = call heapStartAddress ()
     if self.start ≠ start {
       self.start = start
       lcd.goto (!line:1 !column:6)
       lcd.print (!hex8:start)
     }
-    let alloc = totalAllocationObjectCount ()
+    let alloc = call totalAllocationObjectCount ()
     let allocationParSecondes = alloc - self.alloc
     if allocationParSecondes > self.maxAllocationParSeconde {
       self.maxAllocationParSeconde = allocationParSecondes
@@ -82,7 +82,7 @@ task T1 > T2 @stacksize 512 @activate {
       lcd.goto (!line:3 !column:0)
       lcd.print (!u32:alloc !width:10)
     }
-    let current = currentlyAllocatedObjectCount ()
+    let current = call currentlyAllocatedObjectCount ()
     if self.current ≠ current {
       self.current = current
       lcd.goto (!line:3 !column:17)
@@ -94,13 +94,13 @@ task T1 > T2 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T2 > backgroundTask @stacksize 512 @activate {
-  var échéance1 $uint32 = 2001
-  var échéance2 $uint32 = 2001
-  var échéance3 $uint32 = 2001
-  var data1 = $dArray ()
-  var data2 = $dArray ()
-  var structure = $autreStructWithARC ()
-  var b $uint8 = 0
+  var échéance1 UInt32 = 2001
+  var échéance2 UInt32 = 2001
+  var échéance3 UInt32 = 2001
+  var data1 = new Array8 ()
+  var data2 = new Array8 ()
+  var structure = new AutreStructWithARC ()
+  var b UInt8 = 0
 
   on time.wait (!until:self.échéance1) {
     self.échéance1 +%= 71
@@ -129,8 +129,8 @@ task T2 > backgroundTask @stacksize 512 @activate {
     self.testReleaseLocalVar (!in:self.structure.structure.donnée)
   }
 
-  func testReleaseLocalVar (?in: inData $dArray) {
-    var d = $structWithARC ()
+  func testReleaseLocalVar (?in: inData Array8) {
+    var d = new StructWithARC ()
     d.donnée = inData
   }
 }
@@ -138,7 +138,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task backgroundTask @stacksize 512 @activate {
-  var data = $dArray ()
+  var data = new Array8 ()
 
   on time.wait (!until:0) {
     digital.toggle (!port:LED_L0)
@@ -154,20 +154,20 @@ task backgroundTask @stacksize 512 @activate {
     }
   }
 
-  func testReleaseLocalVar (?in: inData $dArray) {
+  func testReleaseLocalVar (?in: inData Array8) {
     externalSection (!in:inData)
-    var d $uint32 = 143
-    var x $uint3 = d [3 ... 5]
+    var d UInt32 = 143
+    var x UInt3 = d [3 ... 5]
   }
 
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-section externalSection (?in: inData $dArray) {
+section externalSection (?in: inData Array8) {
   var d = inData
   d.append (!0)
-  var xxxx = [$bool] ()
+  var xxxx = new [Bool] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
 }

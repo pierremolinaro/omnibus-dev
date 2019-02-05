@@ -5,7 +5,7 @@ check target "teensy-3-1/unprivileged"
 driver lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   ACTIVITY LED                                                                                                       
+//   ACTIVITY LED
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver ActivityLed > digital {
@@ -28,19 +28,19 @@ public func activityLedOff safe section @exported () {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let LED_L0 = $digitalPort.D3
-let LED_L1 = $digitalPort.D4
-let LED_L2 = $digitalPort.D5
-let LED_L3 = $digitalPort.D6
-let LED_L4 = $digitalPort.D7
+let LED_L0 = :DigitalPort.D3
+let LED_L1 = :DigitalPort.D4
+let LED_L2 = :DigitalPort.D5
+let LED_L3 = :DigitalPort.D6
+let LED_L4 = :DigitalPort.D7
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let BUTTON_P0 = $digitalPort.D8
-let BUTTON_P1 = $digitalPort.D9
-let BUTTON_P2 = $digitalPort.D10
-let BUTTON_P3 = $digitalPort.D11
-let BUTTON_P4 = $digitalPort.D12
+let BUTTON_P0 = :DigitalPort.D8
+let BUTTON_P1 = :DigitalPort.D9
+let BUTTON_P2 = :DigitalPort.D10
+let BUTTON_P3 = :DigitalPort.D11
+let BUTTON_P4 = :DigitalPort.D12
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -53,7 +53,7 @@ panic @setup 0 {
   lcd.clearScreenInPanicMode ()
   lcd.gotoInPanicMode (!line:0 !column:0)
   if LINE == 0 { // ISR Panic
-    lcd.printStringInPanicMode (!"ISR PANIC")  
+    lcd.printStringInPanicMode (!"ISR PANIC")
   }else{
     lcd.printStringInPanicMode (!FILE)
     lcd.gotoInPanicMode (!line:2 !column:0)

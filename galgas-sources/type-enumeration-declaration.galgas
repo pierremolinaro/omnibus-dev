@@ -52,7 +52,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
 {
   [!?ioGraph addNode !mEnumerationName !self]
   [!?ioGraph addEdge !mEnumerationName ![boolTypeName () nowhere]]
-#--- Mark dependance from $uintN used for value property
+#--- Mark dependance from UIntN used for value property
   @bigint maxValue = 0G
   for (* value) in mCaseNameList do
     if maxValue < value then
@@ -64,7 +64,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-  [!?ioGraph addEdge !mEnumerationName !["$uint" + representationBitCount nowhere]]
+  [!?ioGraph addEdge !mEnumerationName !["UInt" + representationBitCount nowhere]]
 }
 
 #·······················································································································
@@ -76,7 +76,7 @@ override getter @enumerationDeclarationAST locationForErrorSignaling -> @locatio
 #·······················································································································
 
 override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "enum $" + mEnumerationName 
+  outRepresentation = "enum " + mEnumerationName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -123,7 +123,7 @@ override method @enumerationDeclarationAST enterInContext
   @propertyGetterMap propertyGetterMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
-    !.new {!"$uint" + representationBitCount !mEnumerationName}
+    !.new {!"UInt" + representationBitCount !mEnumerationName}
   }
   [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:mEnumerationName

@@ -4,11 +4,11 @@ import "carte-tp-teensy-3-1.plm-import"
 
 //-----------------------------------------------------------------------------*
 
-sync $rendezVous {
-  var inputWaitList = $taskList ()
-  var outputWaitList = $taskList ()
-  var inputGuardList = $guardList ()
-  var outputGuardList = $guardList ()
+sync RendezVous {
+  var inputWaitList = new TaskList ()
+  var outputWaitList = new TaskList ()
+  var inputGuardList = new GuardList ()
+  var outputGuardList = new GuardList ()
 
   public primitive input @mutating () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
@@ -44,12 +44,12 @@ sync $rendezVous {
 
 //-----------------------------------------------------------------------------*
 
-sync rdvs = $rendezVous ()
+sync rdvs = new RendezVous ()
 
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @activate {
-  var top $uint32 = 0
+  var top UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
@@ -75,7 +75,7 @@ task T0 @stacksize 512 @activate {
 //-----------------------------------------------------------------------------*
 
 task T1 @stacksize 512 @activate {
- 
+
   on rdvs.input () {
     digital.write (!yes !toPort:LED_L1)
     rdvs.input ()

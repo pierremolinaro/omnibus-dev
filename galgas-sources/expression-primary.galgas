@@ -30,20 +30,24 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-#  rule <primary> ?!@ast ioAST !@expressionAST outExpression { # §
-#    @lstring receiver 
-#  #--- Self or identifier ?
-#    select
-#      $identifier$ ?receiver
-#    or
-#      $self$
-#      receiver = ["" here]
-#    end
-#  #--- Properties and access
-#    <expression_access_list> !?ioAST ?let accessList
-#  #--- AST
-#    outExpression = @primaryInExpressionAST.new {!receiver !accessList}
-#  }
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression { # §
+    $identifier$ ?let receiver
+  #--- Properties and access
+    <expression_access_list> !?ioAST ?let accessList
+  #--- AST
+    outExpression = @primaryInExpressionAST.new {!receiver !accessList}
+  }
+
+  #·····················································································································
+
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    $self$
+    let receiver = ["" here]
+  #--- Properties and access
+    <expression_access_list> !?ioAST ?let accessList
+  #--- AST
+    outExpression = @primaryInExpressionAST.new {!receiver !accessList}
+  }
 
   #·····················································································································
 
@@ -53,7 +57,12 @@ syntax extension plm_syntax {
     while
       $.$
       $identifier$ ?let propertyName
-      outAccessList += !.property {!name:propertyName}
+      select
+        outAccessList += !.property {!name:propertyName}
+      or
+        <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
+        outAccessList += !.funcCall {!methodName:propertyName !arguments:arguments !endOfArguments:endOfArguments}
+      end
     while
       $[$
       $integer$ ?let low
@@ -73,12 +82,16 @@ syntax extension plm_syntax {
         $]!$
         checkIndexExpression = false
       end
-      outAccessList += !.arrayAccess {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
-    while
-      $.$
-      $identifier$ ?let methodName
-      <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-      outAccessList += !.funcCall {!methodName:methodName !arguments:arguments !endOfArguments:endOfArguments}
+      outAccessList += !.arrayAccess {
+        !index:expression
+        !endOfIndex:endOfIndex
+        !checkIndexExpression:checkIndexExpression
+       }
+#    while
+#      $.$
+#      $identifier$ ?let methodName
+#      <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
+#      outAccessList += !.funcCall {!methodName:methodName !arguments:arguments !endOfArguments:endOfArguments}
     end
   }
 
@@ -498,7 +511,7 @@ proc handleSliceInExpression
   #--- Shift source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
   #--- Truncate source value
-    let resultIntegerName = @lstring.new {!"$uint" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
+    let resultIntegerName = @lstring.new {!"UInt" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
     [inContext.mTypeMap searchKey !lkey:resultIntegerName ?type:let sliceType]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end

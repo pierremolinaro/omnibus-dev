@@ -8,7 +8,7 @@ driver timer ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver timer > root {
-  var tick = $uint64 ()
+  var tick = new UInt64 ()
 
   startup {
   //--- Power on PIT
@@ -19,8 +19,8 @@ driver timer > root {
     #PIT:TCTRL [0] = 0
     #PIT:TCTRL [1] = 0
   //--- PIT0 clock frequency is BUS_MHZ (in MHz)
-    #PIT:LDVAL [0] = $uint32.max
-    #PIT:LDVAL [1] = $uint32.max
+    #PIT:LDVAL [0] = :UInt32.max
+    #PIT:LDVAL [1] = :UInt32.max
   //--- Enable PIT0 and PIT1 : start counting, no interrupt
     #PIT:TCTRL [1] = {#PIT:TCTRL !CHN:1 !TEN:1}
     #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}
@@ -30,11 +30,11 @@ driver timer > root {
     self.tick = self.now ()
   }
 
-  public section getTick () -> $uint64 {
+  public section getTick () -> UInt64 {
     result = self.tick
   }
 
-  public section now () -> $uint64 {
+  public section now () -> UInt64 {
     result = extend (#PIT:LTMR64H)
     result <<= 32
     result |= extend (#PIT:LTMR64L)
@@ -45,12 +45,12 @@ driver timer > root {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync s = $semaphore (!value:0)
+sync s = new Semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @activate {
-  var compteur $uint32 = 0
+  var compteur UInt32 = 0
 
   on @setup first {
     s.wait ()

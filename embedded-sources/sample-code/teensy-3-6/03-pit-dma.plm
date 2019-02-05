@@ -8,7 +8,7 @@
 // It has not been tested on Teensy 3.5
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // IT DOES NOT WORK ON TEENSY 3.1, THE MICRO-CONTROLLER IS BUGGY
-//    The symptom is D4 blinks at 150 kHz, independantly from PATTERN_FREQUENCY 
+//    The symptom is D4 blinks at 150 kHz, independantly from PATTERN_FREQUENCY
 //    See Mask Set Errata for Mask 1N36B: https://www.nxp.com/docs/en/errata/KINETIS_K_1N36B.pdf
 //    Erratum ID e4588: Instead of sending a single DMA request every time the PIT expires, the first
 //    time the PIT triggers a DMA transfer the “always enabled” source will not negate its request.
@@ -26,7 +26,7 @@ let PATTERN_FREQUENCY = 5 // In Hertz
 // So LED_L3 frequency is PATTERN_FREQUENCY / 2
 // So D4 frequency is PATTERN_FREQUENCY / 2 / PATTERN_LENGTH
 
-staticArray kPATTERN { let x $bool }
+staticArray kPATTERN { let x Bool }
 
 extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
   yes :: no :: yes :: no :: yes :: // 3 dots : letter S
@@ -52,7 +52,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 
 let PATTERN_LENGTH = kPATTERN.count
 
-typealias $patternArray = [PATTERN_LENGTH • $uint32]
+typealias PatternArray = [•PATTERN_LENGTH • UInt32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -63,7 +63,7 @@ driver pit > root {
   //--- Toggle LED_L3
     digital.toggle (!port:LED_L3)
   }
-  
+
   interrupt section DMAChannel0TransferComplete {
   //--- Acquitter l'interruption
     #DMA:CINT = 0
@@ -76,10 +76,10 @@ driver pit ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-section initializeDMA (?!pattern $patternArray) {
+section initializeDMA (?!pattern PatternArray) {
 //--- Transform pattern for encoding level changes
   var current = no
-  var index $uint32 = 0
+  var index UInt32 = 0
   for élément in kPATTERN {
     let b = élément.x
     pattern [index] = if current ≠ b { 0 } else { 1 << 2 }
@@ -142,7 +142,7 @@ section initializeDMA (?!pattern $patternArray) {
     !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit
     !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit
   }
- 
+
 //--- Number of bytes to transfer per request: 4
   #DMA:TCD_NBYTES_MLNO [3] = 4
 
@@ -170,16 +170,16 @@ section initializeDMA (?!pattern $patternArray) {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur $uint32 = 0
-  var pattern = $patternArray (!repeated:0)
- 
+  var compteur UInt32 = 0
+  var pattern = new PatternArray (!repeated:0)
+
   on @setup first {
     initializeDMA (!?self.pattern)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
   }
-  
+
   on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
@@ -189,7 +189,7 @@ task Tâche @stacksize 512 @activate {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:self.pattern.count)
     lcd.print (!string:" ")
-    let cc = $isrSlot.PITChannel3.uint7
+    let cc = :ISRSlot.PITChannel3.uint7
     lcd.print (!u32:extend (cc))
   }
 }

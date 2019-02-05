@@ -16,7 +16,7 @@ override getter @integerDeclarationAST locationForErrorSignaling -> @location ou
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
-  outName = if mIsSigned then "$int" else "$uint" end + mSize
+  outName = if mIsSigned then "Int" else "UInt" end + mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -102,7 +102,7 @@ override method @integerDeclarationAST enterInContext
       !"bswap"
     }
   end
-#--------------------------------------- bool for $uint1
+#--------------------------------------- bool for UInt1
   if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
     [!?propertyGetterMap addPropertyGetter
       !llvmBaseTypeName:integerTypeName
