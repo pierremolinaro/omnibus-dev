@@ -125,8 +125,8 @@ driver digital > root {
   public func set safe @noUnusedWarning (?mode:mode DigitalMode
                                           ?toPort:port DigitalPort) {
   //--- Set config and dir to apply
-   var config UInt32
-    var dir UInt1
+   var config : UInt32
+    var dir : UInt1
     switch mode {
     case OUTPUT :
       config = {#PORTC:PCR !MUX:1}

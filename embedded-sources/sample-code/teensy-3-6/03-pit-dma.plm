@@ -79,7 +79,7 @@ driver pit ()
 section initializeDMA (?!pattern PatternArray) {
 //--- Transform pattern for encoding level changes
   var current = no
-  var index UInt32 = 0
+  var index : UInt32 = 0
   for élément in kPATTERN {
     let b = élément.x
     pattern [index] = if current ≠ b { 0 } else { 1 << 2 }
@@ -170,7 +170,7 @@ section initializeDMA (?!pattern PatternArray) {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
   var pattern = new PatternArray (!repeated:0)
 
   on @setup first {

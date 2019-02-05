@@ -5,7 +5,7 @@ import "carte-tp-teensy-3-1.plm-import"
 //——————————————————————————————————————————————————————————————————————————————
 
 task T @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)

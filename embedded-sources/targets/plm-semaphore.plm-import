@@ -1,7 +1,7 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sync Semaphore {
-  var value UInt32
+  var value : UInt32
   var list = new TaskList ()
   var guardList = new GuardList ()
 

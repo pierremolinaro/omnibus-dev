@@ -5,7 +5,7 @@ import "carte-tp-teensy-3-1.plm-import"
 //——————————————————————————————————————————————————————————————————————————————
 
 task T1 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
@@ -30,7 +30,7 @@ task T1 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————
 
 task T2 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L1)
@@ -44,7 +44,7 @@ task T2 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————
 
 task T3 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L2)
@@ -58,7 +58,7 @@ task T3 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————
 
 task T4 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L3)
@@ -72,7 +72,7 @@ task T4 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————
 
 task T5 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L4)

@@ -75,7 +75,7 @@ sync sémaphore30 = new Semaphore (!value:0)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T0 @stacksize 512 @activate {
-  var échéance UInt32 = 0
+  var échéance : UInt32 = 0
 
   on time.wait (!until:self.échéance) {
     self.échéance +%= 500

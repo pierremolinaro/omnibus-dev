@@ -30,6 +30,7 @@ syntax extension plm_syntax {
     select
       optionalTypeName = ["" nowhere]
     or
+      $:$
       <type_definition> !?ioAST ?optionalTypeName
     end
     $=$
@@ -47,6 +48,7 @@ syntax extension plm_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
+    $:$
     <type_definition> !?ioAST ?let typeName
     ioInstructionList += !@varInstructionAST.new {
       !varName.location

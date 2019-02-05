@@ -5,8 +5,8 @@ import "carte-tp-teensy-3-1.plm-import"
 //-----------------------------------------------------------------------------*
 
 struct B {
-  var a UInt32 = 0
-  var b UInt32 = 0
+  var a : UInt32 = 0
+  var b : UInt32 = 0
 }
 
 struct C {
@@ -14,7 +14,7 @@ struct C {
 }
 
 struct Toto {
-  var a UInt16 = 0
+  var a : UInt16 = 0
   var c = no
   var b = no
 }
@@ -22,7 +22,7 @@ struct Toto {
 //-----------------------------------------------------------------------------*
 
 task T @stacksize 512 @activate {
-  var deadline UInt32 = 0
+  var deadline : UInt32 = 0
   var acc = new C ()
 
   on @setup first {
@@ -35,11 +35,11 @@ task T @stacksize 512 @activate {
     digital.toggle (!port:LED_L1)
     let n = self.acc.c.a +% self.deadline
     self.acc.c.a = n
-    let x UInt32 = 0x1234_5678
+    let x : UInt32 = 0x1234_5678
     lcd.goto (!line:0 !column:0)
     lcd.print (!hex8:x.byteSwapped)
     lcd.goto (!line:1 !column:0)
-    let y UInt15 = 0x1234
+    let y : UInt15 = 0x1234
     lcd.print (!hex4:extend (y.bitReversed))
   }
 }

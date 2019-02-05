@@ -6,14 +6,14 @@ import "carte-tp-teensy-3-6.plm-import"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
   var test = yes
 
   on @setup first {
     let b = {UInt8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))
     lcd.print (!spaces:1)
-    var b7 Bool
+    var b7 : Bool
     {UInt8 ?b:b7 ?2:let b2 ?5:let b3} = 0xAC
     let bb = {UInt8 !b:b7 !2:b2 !5:b3}
     lcd.print (!hex2:extend (bb))

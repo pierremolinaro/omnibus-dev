@@ -9,8 +9,8 @@ let SIZE = 3
 typealias A = [•SIZE • UInt32]
 
 struct B {
-  var a UInt32 = 0
-  var b UInt32 = 0
+  var a : UInt32 = 0
+  var b : UInt32 = 0
 }
 
 struct C {
@@ -22,10 +22,10 @@ let array = new A (!1 !2 !3)
 //------------------------------------------------*
 
 task T @stacksize 512 @activate {
-  var deadline UInt32 = 0
+  var deadline : UInt32 = 0
   var array = new A (!repeated:0)
   var array2 = new A (!repeated:1)
-  var index Int32 = 0
+  var index : Int32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
@@ -53,14 +53,14 @@ task T @stacksize 512 @activate {
   //--- Init from a repeated static value
     var a = new A (!repeated:5)
   //--- Init from a repeated dynamic value
-    var e UInt32 = 5
+    var e : UInt32 = 5
     var b = new A (!repeated:e)
   //--- Init from a static values
     var c = new A (!0 !1 !2)
   //--- Init from a dynamic values
     var d = new A (!0 !e !2)
   //---
-    var x UInt32 = 0
+    var x : UInt32 = 0
     for i UInt32 in 0 ..< :A.count {
       a [i] = 9
       a [i] += 9

@@ -37,7 +37,7 @@ extend staticArray maListeStatique (
 //-----------------------------------------------------------------------------*
 
 task T @stacksize 512 @activate {
-  var deadline UInt32 = 0
+  var deadline : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
@@ -49,7 +49,7 @@ task T @stacksize 512 @activate {
   on time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.toggle (!port:LED_L1)
-    var total UInt32 = 0
+    var total : UInt32 = 0
     for élément in maListeStatique {
       total = total + élément.a
       total += élément.a

@@ -9,8 +9,8 @@ let SIZE = 10
 
 sync SynchronizationBuffer {
   var data = new [• SIZE • UInt32] (!repeated:new UInt32 ())
-  var readIndex UInt32 = 0
-  var writeIndex UInt32 = 0
+  var readIndex : UInt32 = 0
+  var writeIndex : UInt32 = 0
   var readSemaphore = new Semaphore (!value:0)
   var writeSemaphore = new Semaphore (!value:SIZE)
 
@@ -60,8 +60,8 @@ sync buffer = new SynchronizationBuffer ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 {
-  var compteur UInt32 = 0
-  var index UInt32 = 0
+  var compteur : UInt32 = 0
+  var index : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
@@ -79,7 +79,7 @@ task Tâche1 @stacksize 512 {
 
 task Tâche2 @stacksize 512 @activate {
 
-  on buffer.read (?var value UInt32) {
+  on buffer.read (?var value : UInt32) {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:value)
   }

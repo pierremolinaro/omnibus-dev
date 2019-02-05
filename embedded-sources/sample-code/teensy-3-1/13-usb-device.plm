@@ -17,8 +17,8 @@ let NUM_ENDPOINTS = 4
 //······················································································································
 
 struct BDT @copyable {
- var desc UInt32 = 0
- var addr UInt32 = 0
+ var desc : UInt32 = 0
+ var addr : UInt32 = 0
 }
 
 
@@ -56,16 +56,16 @@ driver usb_device > digital {
 
   var ep0_rx0_buf @align 4 = new [•EP0_SIZE • UInt8] (!repeated:0)
   var ep0_rx1_buf @align 4 = new [•EP0_SIZE • UInt8] (!repeated:0)
-  var ep0_tx_bdt_bank UInt32 = 0
+  var ep0_tx_bdt_bank : UInt32 = 0
 
   var état = new [•TRACE_SIZE • UInt4] (!repeated:0)
-  var indexÉtat UInt32 = 0
+  var indexÉtat : UInt32 = 0
 
   public section lireÉtat (?index UInt32) -> UInt32 {
     result = extend (self.état [index])
   }
 
-  var trace UInt32 = 0
+  var trace : UInt32 = 0
 
   public section lireAddresseUSB () -> UInt32 {
     result = extend (#USB0:ADDR)
@@ -215,7 +215,7 @@ driver usb_device > digital {
 
   func tokenCompleted section @mutating () {
     let transactionStatus = #USB0:STAT
-    let endPoint UInt4 = transactionStatus [4...7]
+    let endPoint : UInt4 = transactionStatus [4...7]
 //    let TX_transitionStatus = transactionStatus [3...3]
 //    let ODD_transitionStatus = transactionStatus [2...2]
 //    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
@@ -358,8 +358,8 @@ driver usb_device ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T @stacksize 512 @activate {
-  var tick UInt32 = 0
-  var état UInt32 = 0
+  var tick : UInt32 = 0
+  var état : UInt32 = 0
 
   //····················································································································
 

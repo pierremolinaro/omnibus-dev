@@ -12,7 +12,7 @@ typealias PatternArray = [• PATTERN_LENGTH • UInt32]
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 5512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
   var x = new PatternArray (!repeated:0)
   var y = new PatternArray (!repeated:0)
 

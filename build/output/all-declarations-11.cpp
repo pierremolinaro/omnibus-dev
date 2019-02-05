@@ -1605,163 +1605,163 @@ void routine_analyzeEffectiveParameters (const GALGAS_PLMType constinArgument_in
                                          GALGAS_procCallEffectiveParameterListIR & ioArgument_ioEffectiveParameterListIR,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_procEffectiveParameterList var_parameterList_5026 = GALGAS_procEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("effective-parameters.galgas", 122)) ;
-  cEnumerator_routineTypedSignature enumerator_5069 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
-  cEnumerator_effectiveArgumentListAST enumerator_5112 (constinArgument_inEffectiveParameterList, kENUMERATION_UP) ;
-  while (enumerator_5069.hasCurrentObject () && enumerator_5112.hasCurrentObject ()) {
-    switch (enumerator_5112.current_mEffectiveParameterKind (HERE).enumValue ()) {
+  GALGAS_procEffectiveParameterList var_parameterList_5038 = GALGAS_procEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("effective-parameters.galgas", 123)) ;
+  cEnumerator_routineTypedSignature enumerator_5081 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
+  cEnumerator_effectiveArgumentListAST enumerator_5124 (constinArgument_inEffectiveParameterList, kENUMERATION_UP) ;
+  while (enumerator_5081.hasCurrentObject () && enumerator_5124.hasCurrentObject ()) {
+    switch (enumerator_5124.current_mEffectiveParameterKind (HERE).enumValue ()) {
     case GALGAS_effectiveArgumentPassingModeAST::kNotBuilt:
       break ;
     case GALGAS_effectiveArgumentPassingModeAST::kEnum_inputWithType:
       {
-        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType * extractPtr_5901 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType *) (enumerator_5112.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_bool extractedValue_constant = extractPtr_5901->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_typeName = extractPtr_5901->mAssociatedValue1 ;
-        const GALGAS_lstring extractedValue_name = extractPtr_5901->mAssociatedValue2 ;
+        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType * extractPtr_5913 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType *) (enumerator_5124.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_bool extractedValue_constant = extractPtr_5913->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_typeName = extractPtr_5913->mAssociatedValue1 ;
+        const GALGAS_lstring extractedValue_name = extractPtr_5913->mAssociatedValue2 ;
         GALGAS_PLMType temp_0 ;
         const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, extractedValue_typeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
         if (kBoolTrue == test_1) {
-          temp_0 = enumerator_5069.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 127)) ;
+          temp_0 = enumerator_5081.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 128)) ;
         }else if (kBoolFalse == test_1) {
-          temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), extractedValue_typeName, inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 129)).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 129)) ;
+          temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), extractedValue_typeName, inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 130)).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 130)) ;
         }
-        GALGAS_PLMType var_type_5250 = temp_0 ;
+        GALGAS_PLMType var_type_5262 = temp_0 ;
         enumGalgasBool test_2 = kBoolTrue ;
         if (kBoolTrue == test_2) {
           test_2 = extractedValue_constant.boolEnum () ;
           if (kBoolTrue == test_2) {
             {
-            extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, extractedValue_name, GALGAS_bool (false), var_type_5250, extractedValue_name, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 132)) ;
+            extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, extractedValue_name, GALGAS_bool (false), var_type_5262, extractedValue_name, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 133)) ;
             }
           }
         }
         if (kBoolFalse == test_2) {
           {
-          extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, extractedValue_name, var_type_5250, extractedValue_name, GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("effective-parameters.galgas", 134)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 134)) ;
+          extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, extractedValue_name, var_type_5262, extractedValue_name, GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("effective-parameters.galgas", 135)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 135)) ;
           }
         }
-        ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (extractedValue_name.getter_string (SOURCE_FILE ("effective-parameters.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 136)), var_type_5250, GALGAS_bool (true)  COMMA_SOURCE_FILE ("effective-parameters.galgas", 136)) ;
-        var_parameterList_5026.addAssign_operation (enumerator_5112.current_mEffectiveParameterKind (HERE), enumerator_5112.current_mSelector (HERE), var_type_5250  COMMA_SOURCE_FILE ("effective-parameters.galgas", 137)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("effective-parameters.galgas", 139)), GALGAS_objectIR::constructor_reference (var_type_5250, function_llvmNameForLocalVariable (extractedValue_name.getter_string (SOURCE_FILE ("effective-parameters.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 140))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 140))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 138)) ;
+        ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (extractedValue_name.getter_string (SOURCE_FILE ("effective-parameters.galgas", 137)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 137)), var_type_5262, GALGAS_bool (true)  COMMA_SOURCE_FILE ("effective-parameters.galgas", 137)) ;
+        var_parameterList_5038.addAssign_operation (enumerator_5124.current_mEffectiveParameterKind (HERE), enumerator_5124.current_mSelector (HERE), var_type_5262  COMMA_SOURCE_FILE ("effective-parameters.galgas", 138)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("effective-parameters.galgas", 140)), GALGAS_objectIR::constructor_reference (var_type_5262, function_llvmNameForLocalVariable (extractedValue_name.getter_string (SOURCE_FILE ("effective-parameters.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 141))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 141))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 139)) ;
       }
       break ;
     case GALGAS_effectiveArgumentPassingModeAST::kEnum_input:
       {
-        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_input * extractPtr_6634 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_input *) (enumerator_5112.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_6634->mAssociatedValue0 ;
-        GALGAS_objectIR var_objectIR_6011 ;
+        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_input * extractPtr_6646 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_input *) (enumerator_5124.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_6646->mAssociatedValue0 ;
+        GALGAS_objectIR var_objectIR_6023 ;
         {
-        extensionSetter_searchValuedObjectForWriteAccess (ioArgument_ioUniversalMap, extractedValue_name, var_objectIR_6011, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 142)) ;
+        extensionSetter_searchValuedObjectForWriteAccess (ioArgument_ioUniversalMap, extractedValue_name, var_objectIR_6023, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 143)) ;
         }
-        var_parameterList_5026.addAssign_operation (enumerator_5112.current_mEffectiveParameterKind (HERE), enumerator_5112.current_mSelector (HERE), extensionGetter_type (var_objectIR_6011, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 152))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 152)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("effective-parameters.galgas", 154)), GALGAS_objectIR::constructor_reference (extensionGetter_type (var_objectIR_6011, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 156)), extensionGetter_llvmName (var_objectIR_6011, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 157)).getter_nowhere (SOURCE_FILE ("effective-parameters.galgas", 157)).getter_string (SOURCE_FILE ("effective-parameters.galgas", 157))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 155))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 153)) ;
+        var_parameterList_5038.addAssign_operation (enumerator_5124.current_mEffectiveParameterKind (HERE), enumerator_5124.current_mSelector (HERE), extensionGetter_type (var_objectIR_6023, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 153))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 153)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("effective-parameters.galgas", 155)), GALGAS_objectIR::constructor_reference (extensionGetter_type (var_objectIR_6023, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 157)), extensionGetter_llvmName (var_objectIR_6023, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 158)).getter_nowhere (SOURCE_FILE ("effective-parameters.galgas", 158)).getter_string (SOURCE_FILE ("effective-parameters.galgas", 158))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 156))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 154)) ;
       }
       break ;
     case GALGAS_effectiveArgumentPassingModeAST::kEnum_output:
       {
-        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_output * extractPtr_7659 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_output *) (enumerator_5112.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_expression = extractPtr_7659->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfExp = extractPtr_7659->mAssociatedValue1 ;
-        GALGAS_objectIR var_expressionResult_7160 ;
-        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, enumerator_5069.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 163)), constinArgument_inContext, constinArgument_inRequiredMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_7160, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 160)) ;
+        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_output * extractPtr_7671 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_output *) (enumerator_5124.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_expression = extractPtr_7671->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExp = extractPtr_7671->mAssociatedValue1 ;
+        GALGAS_objectIR var_expressionResult_7172 ;
+        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, enumerator_5081.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 164)), constinArgument_inContext, constinArgument_inRequiredMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_7172, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 161)) ;
         {
-        extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_expressionResult_7160, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 173)) ;
+        extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_expressionResult_7172, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 174)) ;
         }
-        GALGAS_objectIR var_result_7307 = function_checkAssignmentCompatibility (var_expressionResult_7160, enumerator_5069.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 179)), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 177)) ;
-        var_parameterList_5026.addAssign_operation (enumerator_5112.current_mEffectiveParameterKind (HERE), enumerator_5112.current_mSelector (HERE), enumerator_5069.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 183))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 183)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("effective-parameters.galgas", 184)), var_result_7307  COMMA_SOURCE_FILE ("effective-parameters.galgas", 184)) ;
+        GALGAS_objectIR var_result_7319 = function_checkAssignmentCompatibility (var_expressionResult_7172, enumerator_5081.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 180)), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 178)) ;
+        var_parameterList_5038.addAssign_operation (enumerator_5124.current_mEffectiveParameterKind (HERE), enumerator_5124.current_mSelector (HERE), enumerator_5081.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 184))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 184)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("effective-parameters.galgas", 185)), var_result_7319  COMMA_SOURCE_FILE ("effective-parameters.galgas", 185)) ;
       }
       break ;
     case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInput:
       {
-        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput * extractPtr_8059 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput *) (enumerator_5112.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_8059->mAssociatedValue0 ;
-        GALGAS_objectIR var_objectIR_7779 ;
+        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput * extractPtr_8071 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput *) (enumerator_5124.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_8071->mAssociatedValue0 ;
+        GALGAS_objectIR var_objectIR_7791 ;
         {
-        extensionSetter_searchValuedObjectForReadWriteAccess (ioArgument_ioUniversalMap, extractedValue_name, var_objectIR_7779, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 186)) ;
+        extensionSetter_searchValuedObjectForReadWriteAccess (ioArgument_ioUniversalMap, extractedValue_name, var_objectIR_7791, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 187)) ;
         }
-        var_parameterList_5026.addAssign_operation (enumerator_5112.current_mEffectiveParameterKind (HERE), enumerator_5112.current_mSelector (HERE), extensionGetter_type (var_objectIR_7779, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 187))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 187)) ;
-        GALGAS_objectIR var_argumentIR_7897 = GALGAS_objectIR::constructor_reference (extensionGetter_type (var_objectIR_7779, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 189)), extensionGetter_llvmName (var_objectIR_7779, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 190))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 188)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("effective-parameters.galgas", 192)), var_argumentIR_7897  COMMA_SOURCE_FILE ("effective-parameters.galgas", 192)) ;
+        var_parameterList_5038.addAssign_operation (enumerator_5124.current_mEffectiveParameterKind (HERE), enumerator_5124.current_mSelector (HERE), extensionGetter_type (var_objectIR_7791, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 188))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 188)) ;
+        GALGAS_objectIR var_argumentIR_7909 = GALGAS_objectIR::constructor_reference (extensionGetter_type (var_objectIR_7791, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 190)), extensionGetter_llvmName (var_objectIR_7791, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 191))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 189)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("effective-parameters.galgas", 193)), var_argumentIR_7909  COMMA_SOURCE_FILE ("effective-parameters.galgas", 193)) ;
       }
       break ;
     case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInputSelfVariable:
       {
-        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable * extractPtr_9058 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable *) (enumerator_5112.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_9058->mAssociatedValue0 ;
-        GALGAS_propertyGetterKind var_propertyAccess_8205 ;
-        GALGAS_bool joker_8164 ; // Joker input parameter
-        constinArgument_inSelfType.getter_propertyGetterMap (HERE).method_searchKey (extractedValue_name, joker_8164, var_propertyAccess_8205, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 194)) ;
-        switch (var_propertyAccess_8205.enumValue ()) {
+        const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable * extractPtr_9070 = (const cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable *) (enumerator_5124.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_9070->mAssociatedValue0 ;
+        GALGAS_propertyGetterKind var_propertyAccess_8217 ;
+        GALGAS_bool joker_8176 ; // Joker input parameter
+        constinArgument_inSelfType.getter_propertyGetterMap (HERE).method_searchKey (extractedValue_name, joker_8176, var_propertyAccess_8217, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 195)) ;
+        switch (var_propertyAccess_8217.enumValue ()) {
         case GALGAS_propertyGetterKind::kNotBuilt:
           break ;
         case GALGAS_propertyGetterKind::kEnum_constantProperty:
           {
             TC_Array <C_FixItDescription> fixItArray3 ;
-            inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a constant property cannot be used as output / input parameter"), fixItArray3  COMMA_SOURCE_FILE ("effective-parameters.galgas", 197)) ;
+            inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a constant property cannot be used as output / input parameter"), fixItArray3  COMMA_SOURCE_FILE ("effective-parameters.galgas", 198)) ;
           }
           break ;
         case GALGAS_propertyGetterKind::kEnum_storedProperty:
           {
-            const cEnumAssociatedValues_propertyGetterKind_storedProperty * extractPtr_8916 = (const cEnumAssociatedValues_propertyGetterKind_storedProperty *) (var_propertyAccess_8205.unsafePointer ()) ;
-            const GALGAS_PLMType extractedValue_propertyType = extractPtr_8916->mAssociatedValue0 ;
-            const GALGAS_uint extractedValue_propertyIndex = extractPtr_8916->mAssociatedValue1 ;
-            GALGAS_string var_property_5F_llvmName_8500 ;
+            const cEnumAssociatedValues_propertyGetterKind_storedProperty * extractPtr_8928 = (const cEnumAssociatedValues_propertyGetterKind_storedProperty *) (var_propertyAccess_8217.unsafePointer ()) ;
+            const GALGAS_PLMType extractedValue_propertyType = extractPtr_8928->mAssociatedValue0 ;
+            const GALGAS_uint extractedValue_propertyIndex = extractPtr_8928->mAssociatedValue1 ;
+            GALGAS_string var_property_5F_llvmName_8512 ;
             {
-            extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_property_5F_llvmName_8500, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 199)) ;
+            extensionSetter_newTempLLVMVar (ioArgument_ioTemporaries, var_property_5F_llvmName_8512, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 200)) ;
             }
             {
-            extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 202)), var_property_5F_llvmName_8500, extractedValue_propertyIndex, extractedValue_name.getter_string (SOURCE_FILE ("effective-parameters.galgas", 205)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 200)) ;
+            extensionSetter_appendGetUniversalPropertyReference (ioArgument_ioInstructionGenerationList, constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 203)), var_property_5F_llvmName_8512, extractedValue_propertyIndex, extractedValue_name.getter_string (SOURCE_FILE ("effective-parameters.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 201)) ;
             }
-            var_parameterList_5026.addAssign_operation (enumerator_5112.current_mEffectiveParameterKind (HERE), enumerator_5112.current_mSelector (HERE), extractedValue_propertyType  COMMA_SOURCE_FILE ("effective-parameters.galgas", 207)) ;
-            ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("effective-parameters.galgas", 208)), GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_8500  COMMA_SOURCE_FILE ("effective-parameters.galgas", 208))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 208)) ;
+            var_parameterList_5038.addAssign_operation (enumerator_5124.current_mEffectiveParameterKind (HERE), enumerator_5124.current_mSelector (HERE), extractedValue_propertyType  COMMA_SOURCE_FILE ("effective-parameters.galgas", 208)) ;
+            ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("effective-parameters.galgas", 209)), GALGAS_objectIR::constructor_reference (extractedValue_propertyType, var_property_5F_llvmName_8512  COMMA_SOURCE_FILE ("effective-parameters.galgas", 209))  COMMA_SOURCE_FILE ("effective-parameters.galgas", 209)) ;
           }
           break ;
         case GALGAS_propertyGetterKind::kEnum_computedProperty:
           {
             TC_Array <C_FixItDescription> fixItArray4 ;
-            inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a computed property cannot be used as output / input parameter"), fixItArray4  COMMA_SOURCE_FILE ("effective-parameters.galgas", 210)) ;
+            inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a computed property cannot be used as output / input parameter"), fixItArray4  COMMA_SOURCE_FILE ("effective-parameters.galgas", 211)) ;
           }
           break ;
         }
       }
       break ;
     }
-    enumerator_5069.gotoNextObject () ;
-    enumerator_5112.gotoNextObject () ;
+    enumerator_5081.gotoNextObject () ;
+    enumerator_5124.gotoNextObject () ;
   }
   enumGalgasBool test_5 = kBoolTrue ;
   if (kBoolTrue == test_5) {
-    test_5 = GALGAS_bool (kIsNotEqual, constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("effective-parameters.galgas", 215)).objectCompare (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("effective-parameters.galgas", 215)))).boolEnum () ;
+    test_5 = GALGAS_bool (kIsNotEqual, constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("effective-parameters.galgas", 216)).objectCompare (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("effective-parameters.galgas", 216)))).boolEnum () ;
     if (kBoolTrue == test_5) {
       TC_Array <C_FixItDescription> fixItArray6 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this routine requires ").add_operation (constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("effective-parameters.galgas", 216)).getter_string (SOURCE_FILE ("effective-parameters.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 216)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 216)).add_operation (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("effective-parameters.galgas", 217)).getter_string (SOURCE_FILE ("effective-parameters.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 216)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 217)), fixItArray6  COMMA_SOURCE_FILE ("effective-parameters.galgas", 216)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this routine requires ").add_operation (constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("effective-parameters.galgas", 217)).getter_string (SOURCE_FILE ("effective-parameters.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 217)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 217)).add_operation (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("effective-parameters.galgas", 218)).getter_string (SOURCE_FILE ("effective-parameters.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 217)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 218)), fixItArray6  COMMA_SOURCE_FILE ("effective-parameters.galgas", 217)) ;
     }
   }
   if (kBoolFalse == test_5) {
-    cEnumerator_routineTypedSignature enumerator_9394 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
-    cEnumerator_procEffectiveParameterList enumerator_9423 (var_parameterList_5026, kENUMERATION_UP) ;
-    while (enumerator_9394.hasCurrentObject () && enumerator_9423.hasCurrentObject ()) {
+    cEnumerator_routineTypedSignature enumerator_9406 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
+    cEnumerator_procEffectiveParameterList enumerator_9435 (var_parameterList_5038, kENUMERATION_UP) ;
+    while (enumerator_9406.hasCurrentObject () && enumerator_9435.hasCurrentObject ()) {
       enumGalgasBool test_7 = kBoolTrue ;
       if (kBoolTrue == test_7) {
-        test_7 = GALGAS_bool (kIsNotEqual, enumerator_9394.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 220)).getter_plmTypeDescriptionName (HERE).objectCompare (enumerator_9423.current_mParameterType (HERE).getter_plmTypeDescriptionName (HERE))).boolEnum () ;
+        test_7 = GALGAS_bool (kIsNotEqual, enumerator_9406.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 221)).getter_plmTypeDescriptionName (HERE).objectCompare (enumerator_9435.current_mParameterType (HERE).getter_plmTypeDescriptionName (HERE))).boolEnum () ;
         if (kBoolTrue == test_7) {
           TC_Array <C_FixItDescription> fixItArray8 ;
-          inCompiler->emitSemanticError (enumerator_9423.current_mSelector (HERE).getter_location (SOURCE_FILE ("effective-parameters.galgas", 221)), GALGAS_string ("the actual parameter type is $").add_operation (enumerator_9423.current_mParameterType (HERE).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 221)).add_operation (GALGAS_string (", and is incompatible with the formal type $"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 221)).add_operation (enumerator_9394.current_mTypeProxy (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 222)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 222)), fixItArray8  COMMA_SOURCE_FILE ("effective-parameters.galgas", 221)) ;
+          inCompiler->emitSemanticError (enumerator_9435.current_mSelector (HERE).getter_location (SOURCE_FILE ("effective-parameters.galgas", 222)), GALGAS_string ("the actual parameter type is $").add_operation (enumerator_9435.current_mParameterType (HERE).getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 222)).add_operation (GALGAS_string (", and is incompatible with the formal type $"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 222)).add_operation (enumerator_9406.current_mTypeProxy (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 223)), fixItArray8  COMMA_SOURCE_FILE ("effective-parameters.galgas", 222)) ;
         }
       }
-      GALGAS_string var_requiredPassingMode_9775 = extensionGetter_requiredActualPassingModeForSelector (enumerator_9394.current_mFormalArgumentPassingMode (HERE), enumerator_9394.current_mSelector (HERE).getter_string (SOURCE_FILE ("effective-parameters.galgas", 224)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 224)) ;
-      GALGAS_string var_testedPassingMode_9896 = extensionGetter_passingModeForActualSelector (enumerator_9423.current_mEffectiveParameterPassingMode (HERE), enumerator_9423.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 225)) ;
+      GALGAS_string var_requiredPassingMode_9787 = extensionGetter_requiredActualPassingModeForSelector (enumerator_9406.current_mFormalArgumentPassingMode (HERE), enumerator_9406.current_mSelector (HERE).getter_string (SOURCE_FILE ("effective-parameters.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 225)) ;
+      GALGAS_string var_testedPassingMode_9908 = extensionGetter_passingModeForActualSelector (enumerator_9435.current_mEffectiveParameterPassingMode (HERE), enumerator_9435.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 226)) ;
       enumGalgasBool test_9 = kBoolTrue ;
       if (kBoolTrue == test_9) {
-        test_9 = GALGAS_bool (kIsNotEqual, var_requiredPassingMode_9775.objectCompare (var_testedPassingMode_9896)).boolEnum () ;
+        test_9 = GALGAS_bool (kIsNotEqual, var_requiredPassingMode_9787.objectCompare (var_testedPassingMode_9908)).boolEnum () ;
         if (kBoolTrue == test_9) {
           TC_Array <C_FixItDescription> fixItArray10 ;
-          inCompiler->emitSemanticError (enumerator_9423.current_mSelector (HERE).getter_location (SOURCE_FILE ("effective-parameters.galgas", 227)), GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode_9775, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 227)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 227)), fixItArray10  COMMA_SOURCE_FILE ("effective-parameters.galgas", 227)) ;
+          inCompiler->emitSemanticError (enumerator_9435.current_mSelector (HERE).getter_location (SOURCE_FILE ("effective-parameters.galgas", 228)), GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode_9787, inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 228)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 228)), fixItArray10  COMMA_SOURCE_FILE ("effective-parameters.galgas", 228)) ;
         }
       }
-      enumerator_9394.gotoNextObject () ;
-      enumerator_9423.gotoNextObject () ;
+      enumerator_9406.gotoNextObject () ;
+      enumerator_9435.gotoNextObject () ;
     }
   }
 }
@@ -8210,7 +8210,7 @@ const cRegularFileWrapper gWrapperFile_31_targetTemplates (
 const char * gWrapperFileContent_25_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "sync Semaphore {\n"
-  "  var value UInt32\n"
+  "  var value : UInt32\n"
   "  var list = new TaskList ()\n"
   "  var guardList = new GuardList ()\n"
   "\n"
@@ -8265,7 +8265,7 @@ const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "plm-semaphore.plm-import",
   "plm-import",
   true, // Text file
-  1703, // Text length
+  1705, // Text length
   gWrapperFileContent_25_targetTemplates
 ) ;
 
@@ -10625,7 +10625,7 @@ const char * gWrapperFileContent_54_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "  var mUptime UInt32 = 0\n"
+  "  var mUptime : UInt32 = 0\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
@@ -10676,7 +10676,7 @@ const cRegularFileWrapper gWrapperFile_54_targetTemplates (
   "plm-lpc2294-xtr.plm-import",
   "plm-import",
   true, // Text file
-  4556, // Text length
+  4558, // Text length
   gWrapperFileContent_54_targetTemplates
 ) ;
 
@@ -12324,8 +12324,8 @@ const char * gWrapperFileContent_67_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  public func set safe @noUnusedWarning (\?mode:mode DigitalMode\n"
   "                                         \?toPort:port DigitalPort) {\n"
   "  //--- Set config and dir to apply\n"
-  "   var config UInt32\n"
-  "    var dir UInt1\n"
+  "   var config : UInt32\n"
+  "    var dir : UInt1\n"
   "    switch mode {\n"
   "    case OUTPUT :\n"
   "      config = {#PORTC:PCR !MUX:1}\n"
@@ -12420,7 +12420,7 @@ const char * gWrapperFileContent_67_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func write safe @noUnusedWarning (\?value Bool\n"
-  "                                            \?toPort:port DigitalPort) {\n"
+  "                                           \?toPort:port DigitalPort) {\n"
   "    switch port {\n"
   "    case D0 : // PTB16\n"
   "      if value {\n"
@@ -12688,7 +12688,7 @@ const cRegularFileWrapper gWrapperFile_67_targetTemplates (
   "driver-digital-teensy-3-1.plm-import",
   "plm-import",
   true, // Text file
-  12428, // Text length
+  12431, // Text length
   gWrapperFileContent_67_targetTemplates
 ) ;
 
@@ -12947,9 +12947,9 @@ const cRegularFileWrapper gWrapperFile_66_targetTemplates (
 //--- File 'teensy-3-1/plm-registers-mk20dx256.plm-import'
 
 const char * gWrapperFileContent_62_targetTemplates = "\n"
-  "let f_cpu UInt32 = 96_000_000\n"
-  "let f_bus UInt32 = 48_000_000\n"
-  "let f_mem UInt32 = 24_000_000\n"
+  "let f_cpu : UInt32 = 96_000_000\n"
+  "let f_bus : UInt32 = 48_000_000\n"
+  "let f_mem : UInt32 = 24_000_000\n"
   "\n"
   "// chapter 11: Port control and interrupts (PORT) Pin Control registers n\n"
   "registers #PORTA 0x4004_9000 {\n"
@@ -12990,54 +12990,54 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Chapter 12: System Integration Module (SIM)\n"
-  "let SIM_SOPT2_USBSRC      UInt32 = 0x40000  // 0=USB_CLKIN, 1=FFL/PLL\n"
-  "let SIM_SOPT2_PLLFLLSEL   UInt32 = 0x10000 // 0=FLL, 1=PLL\n"
-  "let SIM_SOPT2_TRACECLKSEL UInt32 = 0x1000  // 0=MCGOUTCLK, 1=CPU\n"
-  "let SIM_SOPT2_PTD7PAD     UInt32 = 0x800  // 0=normal, 1=double drive PTD7\n"
-  "let SIM_SOPT2_RTCCLKOUTSEL UInt32 = 0x00000010  // RTC clock out select\n"
+  "let SIM_SOPT2_USBSRC      : UInt32 = 0x40000  // 0=USB_CLKIN, 1=FFL/PLL\n"
+  "let SIM_SOPT2_PLLFLLSEL   : UInt32 = 0x10000 // 0=FLL, 1=PLL\n"
+  "let SIM_SOPT2_TRACECLKSEL : UInt32 = 0x1000  // 0=MCGOUTCLK, 1=CPU\n"
+  "let SIM_SOPT2_PTD7PAD     : UInt32 = 0x800  // 0=normal, 1=double drive PTD7\n"
+  "let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select\n"
   "\n"
-  "let SIM_SCGC2_DAC0  UInt32 =  0x00001000 // DAC0 Clock Gate Control\n"
+  "let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control\n"
   "\n"
-  "let SIM_SCGC3_ADC1 UInt32 =  0x08000000 // ADC1 Clock Gate Control\n"
-  "let SIM_SCGC3_FTM2 UInt32 =  0x01000000 // FTM2 Clock Gate Control\n"
+  "let SIM_SCGC3_ADC1 : UInt32 =  0x08000000 // ADC1 Clock Gate Control\n"
+  "let SIM_SCGC3_FTM2 : UInt32 =  0x01000000 // FTM2 Clock Gate Control\n"
   "\n"
-  "let SIM_SCGC4_VREF  UInt32 =  0x00100000  // VREF Clock Gate Control\n"
-  "let SIM_SCGC4_CMP   UInt32 = 0x00080000  // Comparator Clock Gate Control\n"
-  "let SIM_SCGC4_USBOTG  UInt32 = 0x00040000  // USB Clock Gate Control\n"
-  "let SIM_SCGC4_UART2  UInt32 =  0x00001000  // UART2 Clock Gate Control\n"
-  "let SIM_SCGC4_UART1  UInt32 =  0x00000800  // UART1 Clock Gate Control\n"
-  "let SIM_SCGC4_UART0  UInt32 =  0x00000400  // UART0 Clock Gate Control\n"
-  "let SIM_SCGC4_I2C1  UInt32 =  0x00000080  // I2C1 Clock Gate Control\n"
-  "let SIM_SCGC4_I2C0  UInt32 =  0x00000040  // I2C0 Clock Gate Control\n"
-  "let SIM_SCGC4_CMT  UInt32 =  0x00000004  // CMT Clock Gate Control\n"
-  "let SIM_SCGC4_EWM  UInt32 =  0x00000002  // EWM Clock Gate Control\n"
+  "let SIM_SCGC4_VREF  : UInt32 =  0x00100000  // VREF Clock Gate Control\n"
+  "let SIM_SCGC4_CMP   : UInt32 = 0x00080000  // Comparator Clock Gate Control\n"
+  "let SIM_SCGC4_USBOTG  : UInt32 = 0x00040000  // USB Clock Gate Control\n"
+  "let SIM_SCGC4_UART2  : UInt32 =  0x00001000  // UART2 Clock Gate Control\n"
+  "let SIM_SCGC4_UART1  : UInt32 =  0x00000800  // UART1 Clock Gate Control\n"
+  "let SIM_SCGC4_UART0  : UInt32 =  0x00000400  // UART0 Clock Gate Control\n"
+  "let SIM_SCGC4_I2C1  : UInt32 =  0x00000080  // I2C1 Clock Gate Control\n"
+  "let SIM_SCGC4_I2C0  : UInt32 =  0x00000040  // I2C0 Clock Gate Control\n"
+  "let SIM_SCGC4_CMT  : UInt32 =  0x00000004  // CMT Clock Gate Control\n"
+  "let SIM_SCGC4_EWM  : UInt32 =  0x00000002  // EWM Clock Gate Control\n"
   "\n"
-  "let SIM_SCGC5_PORTE  UInt32 =  0x00002000  // Port E Clock Gate Control\n"
-  "let SIM_SCGC5_PORTD  UInt32 =  0x00001000  // Port D Clock Gate Control\n"
-  "let SIM_SCGC5_PORTC  UInt32 =  0x00000800  // Port C Clock Gate Control\n"
-  "let SIM_SCGC5_PORTB  UInt32 =  0x00000400  // Port B Clock Gate Control\n"
-  "let SIM_SCGC5_PORTA  UInt32 =  0x00000200  // Port A Clock Gate Control\n"
-  "let SIM_SCGC5_TSI  UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control\n"
-  "let SIM_SCGC5_LPTIMER  UInt32 =  0x00000001  // Low Power Timer Access Control\n"
+  "let SIM_SCGC5_PORTE  : UInt32 =  0x00002000  // Port E Clock Gate Control\n"
+  "let SIM_SCGC5_PORTD  : UInt32 =  0x00001000  // Port D Clock Gate Control\n"
+  "let SIM_SCGC5_PORTC  : UInt32 =  0x00000800  // Port C Clock Gate Control\n"
+  "let SIM_SCGC5_PORTB  : UInt32 =  0x00000400  // Port B Clock Gate Control\n"
+  "let SIM_SCGC5_PORTA  : UInt32 =  0x00000200  // Port A Clock Gate Control\n"
+  "let SIM_SCGC5_TSI  : UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control\n"
+  "let SIM_SCGC5_LPTIMER  : UInt32 =  0x00000001  // Low Power Timer Access Control\n"
   "\n"
-  "let SIM_SCGC6_RTC   UInt32 = 0x20000000  // RTC Access\n"
-  "let SIM_SCGC6_ADC0  UInt32 =   0x08000000  // ADC0 Clock Gate Control\n"
-  "let SIM_SCGC6_FTM1  UInt32 =   0x02000000  // FTM1 Clock Gate Control\n"
-  "let SIM_SCGC6_FTM0  UInt32 =   0x01000000  // FTM0 Clock Gate Control\n"
-  "let SIM_SCGC6_PIT  UInt32 =  0x00800000  // PIT Clock Gate Control\n"
-  "let SIM_SCGC6_PDB  UInt32 =  0x00400000  // PDB Clock Gate Control\n"
-  "let SIM_SCGC6_USBDCD  UInt32=  0x00200000  // USB DCD Clock Gate Control\n"
-  "let SIM_SCGC6_CRC  UInt32 =  0x00040000  // CRC Clock Gate Control\n"
-  "let SIM_SCGC6_I2S  UInt32 =  0x00008000  // I2S Clock Gate Control\n"
-  "let SIM_SCGC6_SPI1  UInt32=   0x00002000  // SPI1 Clock Gate Control\n"
-  "let SIM_SCGC6_SPI0  UInt32=   0x00001000  // SPI0 Clock Gate Control\n"
-  "let SIM_SCGC6_FLEXCAN0  UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control\n"
-  "let SIM_SCGC6_DMAMUX UInt32 =  0x00000002  // DMA Mux Clock Gate Control\n"
-  "let SIM_SCGC6_FTFL  UInt32 =  0x00000001  // Flash Memory Clock Gate Control\n"
+  "let SIM_SCGC6_RTC  : UInt32 = 0x20000000  // RTC Access\n"
+  "let SIM_SCGC6_ADC0 : UInt32 =   0x08000000  // ADC0 Clock Gate Control\n"
+  "let SIM_SCGC6_FTM1 : UInt32 =   0x02000000  // FTM1 Clock Gate Control\n"
+  "let SIM_SCGC6_FTM0 : UInt32 =   0x01000000  // FTM0 Clock Gate Control\n"
+  "let SIM_SCGC6_PIT : UInt32 =  0x00800000  // PIT Clock Gate Control\n"
+  "let SIM_SCGC6_PDB : UInt32 =  0x00400000  // PDB Clock Gate Control\n"
+  "let SIM_SCGC6_USBDCD : UInt32 =  0x00200000  // USB DCD Clock Gate Control\n"
+  "let SIM_SCGC6_CRC : UInt32 =  0x00040000  // CRC Clock Gate Control\n"
+  "let SIM_SCGC6_I2S : UInt32 =  0x00008000  // I2S Clock Gate Control\n"
+  "let SIM_SCGC6_SPI1 : UInt32 =   0x00002000  // SPI1 Clock Gate Control\n"
+  "let SIM_SCGC6_SPI0 : UInt32 =   0x00001000  // SPI0 Clock Gate Control\n"
+  "let SIM_SCGC6_FLEXCAN0 : UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control\n"
+  "let SIM_SCGC6_DMAMUX: UInt32 =  0x00000002  // DMA Mux Clock Gate Control\n"
+  "let SIM_SCGC6_FTFL : UInt32 =  0x00000001  // Flash Memory Clock Gate Control\n"
   "\n"
-  "let SIM_SCGC7_DMA  UInt32 =  0x00000002  // DMA Clock Gate Control\n"
+  "let SIM_SCGC7_DMA : UInt32 =  0x00000002  // DMA Clock Gate Control\n"
   "\n"
-  "let SIM_CLKDIV2_USBFRAC  UInt32 =  0x01\n"
+  "let SIM_CLKDIV2_USBFRAC : UInt32 =  0x01\n"
   "\n"
   "registers #SIM 0x4004_7000 {\n"
   "  SOPT1    0x00 UInt32 // System Options registers 1\n"
@@ -13121,22 +13121,22 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Chapter 14: System Mode Controller\n"
-  "let SMC_PMPROT_AVLP  UInt8 = 0x20   // Allow very low power modes\n"
-  "let SMC_PMPROT_ALLS UInt8  = 0x08   // Allow low leakage stop mode\n"
-  "let SMC_PMPROT_AVLLS UInt8 = 0x02   // Allow very low leakage stop mode\n"
+  "let SMC_PMPROT_AVLP  : UInt8 = 0x20   // Allow very low power modes\n"
+  "let SMC_PMPROT_ALLS : UInt8 = 0x08   // Allow low leakage stop mode\n"
+  "let SMC_PMPROT_AVLLS : UInt8 = 0x02   // Allow very low leakage stop mode\n"
   "\n"
-  "let SMC_PMCTRL_LPWUI UInt8  = 0x80   // Low Power Wake Up on Interrupt\n"
-  "let SMC_PMCTRL_STOPA UInt8  = 0x08   // Stop Aborted\n"
+  "let SMC_PMCTRL_LPWUI : UInt8  = 0x80   // Low Power Wake Up on Interrupt\n"
+  "let SMC_PMCTRL_STOPA : UInt8  = 0x08   // Stop Aborted\n"
   "\n"
-  "let SMC_VLLSCTRL_PORPO UInt8 = 0x20   // POR Power Option\n"
+  "let SMC_VLLSCTRL_PORPO : UInt8 = 0x20   // POR Power Option\n"
   "\n"
-  "let SMC_PMSTAT_RUN  UInt8 = 0x01   // Current power mode is RUN\n"
-  "let SMC_PMSTAT_STOP UInt8 = 0x02   // Current power mode is STOP\n"
-  "let SMC_PMSTAT_VLPR UInt8 = 0x04   // Current power mode is VLPR\n"
-  "let SMC_PMSTAT_VLPW UInt8 = 0x08   // Current power mode is VLPW\n"
-  "let SMC_PMSTAT_VLPS UInt8 = 0x10   // Current power mode is VLPS\n"
-  "let SMC_PMSTAT_LLS  UInt8 = 0x20   // Current power mode is LLS\n"
-  "let SMC_PMSTAT_VLLS UInt8 = 0x40   // Current power mode is VLLS\n"
+  "let SMC_PMSTAT_RUN  : UInt8 = 0x01   // Current power mode is RUN\n"
+  "let SMC_PMSTAT_STOP : UInt8 = 0x02   // Current power mode is STOP\n"
+  "let SMC_PMSTAT_VLPR : UInt8 = 0x04   // Current power mode is VLPR\n"
+  "let SMC_PMSTAT_VLPW : UInt8 = 0x08   // Current power mode is VLPW\n"
+  "let SMC_PMSTAT_VLPS : UInt8 = 0x10   // Current power mode is VLPS\n"
+  "let SMC_PMSTAT_LLS  : UInt8 = 0x20   // Current power mode is LLS\n"
+  "let SMC_PMSTAT_VLLS : UInt8 = 0x40   // Current power mode is VLLS\n"
   "\n"
   "registers #SMC 0x4007_E000 {\n"
   "  PMPROT  0x00 UInt8 // Power Mode Protection Register\n"
@@ -13146,14 +13146,14 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Chapter 15: Power Management Controller\n"
-  "let PMC_LVDSC1_LVDF UInt8 = 0x80   // Low-Voltage Detect Flag\n"
-  "let PMC_LVDSC1_LVDACK UInt8 = 0x40   // Low-Voltage Detect Acknowledge\n"
-  "let PMC_LVDSC1_LVDIE UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable\n"
-  "let PMC_LVDSC1_LVDRE UInt8 = 0x10   // Low-Voltage Detect Reset Enable\n"
+  "let PMC_LVDSC1_LVDF : UInt8 = 0x80   // Low-Voltage Detect Flag\n"
+  "let PMC_LVDSC1_LVDACK : UInt8 = 0x40   // Low-Voltage Detect Acknowledge\n"
+  "let PMC_LVDSC1_LVDIE : UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable\n"
+  "let PMC_LVDSC1_LVDRE : UInt8 = 0x10   // Low-Voltage Detect Reset Enable\n"
   "\n"
-  "let PMC_LVDSC2_LVWF UInt8  = 0x80   // Low-Voltage Warning Flag\n"
-  "let PMC_LVDSC2_LVWACK UInt8 = 0x40   // Low-Voltage Warning Acknowledge\n"
-  "let PMC_LVDSC2_LVWIE UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
+  "let PMC_LVDSC2_LVWF : UInt8 = 0x80   // Low-Voltage Warning Flag\n"
+  "let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge\n"
+  "let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
   "\n"
   "registers #PMC 0x4007_D000 {\n"
   "  LVDSC1 0x00 UInt8 // Low Voltage Detect Status And Control 1 register\n"
@@ -13179,10 +13179,10 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Chapter 17: Miscellaneous Control Module (MCM)\n"
-  "let MCM_PLACR_ARG   UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin\n"
-  "let MCM_CR_SRAMLWP  UInt32 =  0x4000_0000  // SRAM_L write protect\n"
+  "let MCM_PLACR_ARG  : UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin\n"
+  "let MCM_CR_SRAMLWP : UInt32 =  0x4000_0000  // SRAM_L write protect\n"
   "//let UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
-  "let MCM_CR_SRAMUWP  UInt32 =  0x0400_0000  // SRAM_U write protect\n"
+  "let MCM_CR_SRAMUWP : UInt32 =  0x0400_0000  // SRAM_U write protect\n"
   "//let UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
   "\n"
   "registers #MCM 0xE008_0000 {\n"
@@ -13192,13 +13192,13 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Crossbar Switch (AXBS) - only programmable on MK20DX256\n"
-  "let AXBS_CRS_READONLY  UInt32=  0x80000000\n"
-  "let AXBS_CRS_HALTLOWPRIORITY  UInt32 = 0x40000000\n"
-  "let AXBS_CRS_ARB_FIXED  UInt32 = 0x00000000\n"
-  "let AXBS_CRS_ARB_ROUNDROBIN  UInt32 = 0x00010000\n"
-  "let AXBS_CRS_PARK_FIXED  UInt32 =  0x00000000\n"
-  "let AXBS_CRS_PARK_PREVIOUS  UInt32 =  0x00000010\n"
-  "let AXBS_CRS_PARK_NONE  UInt32 =  0x00000020\n"
+  "let AXBS_CRS_READONLY  : UInt32 =  0x80000000\n"
+  "let AXBS_CRS_HALTLOWPRIORITY : UInt32 = 0x40000000\n"
+  "let AXBS_CRS_ARB_FIXED : UInt32 = 0x00000000\n"
+  "let AXBS_CRS_ARB_ROUNDROBIN : UInt32 = 0x00010000\n"
+  "let AXBS_CRS_PARK_FIXED : UInt32 =  0x00000000\n"
+  "let AXBS_CRS_PARK_PREVIOUS : UInt32 =  0x00000010\n"
+  "let AXBS_CRS_PARK_NONE : UInt32 =  0x00000020\n"
   "\n"
   "registers #AXBS 0x4000_4000 {\n"
   "  PRS0   0x000 UInt32 // Priority Registers Slave 0\n"
@@ -13237,62 +13237,62 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "  }\n"
   "}\n"
   "\n"
-  "let DMAMUX_SOURCE_UART0_RX UInt6 =  2\n"
-  "let DMAMUX_SOURCE_UART0_TX UInt6 =  3\n"
-  "let DMAMUX_SOURCE_UART1_RX UInt6 =  4\n"
-  "let DMAMUX_SOURCE_UART1_TX UInt6 =  5\n"
-  "let DMAMUX_SOURCE_UART2_RX UInt6 =  6\n"
-  "let DMAMUX_SOURCE_UART2_TX UInt6 =  7\n"
-  "let DMAMUX_SOURCE_I2S0_RX  UInt6 = 14\n"
-  "let DMAMUX_SOURCE_I2S0_TX  UInt6 = 15\n"
-  "let DMAMUX_SOURCE_SPI0_RX  UInt6 = 16\n"
-  "let DMAMUX_SOURCE_SPI0_TX  UInt6 = 17\n"
-  "let DMAMUX_SOURCE_I2C0     UInt6 = 22\n"
-  "let DMAMUX_SOURCE_I2C1     UInt6 = 23\n"
-  "let DMAMUX_SOURCE_FTM0_CH0 UInt6 = 24\n"
-  "let DMAMUX_SOURCE_FTM0_CH1 UInt6 = 25\n"
-  "let DMAMUX_SOURCE_FTM0_CH2 UInt6 = 26\n"
-  "let DMAMUX_SOURCE_FTM0_CH3 UInt6 = 27\n"
-  "let DMAMUX_SOURCE_FTM0_CH4 UInt6 = 28\n"
-  "let DMAMUX_SOURCE_FTM0_CH5 UInt6 = 29\n"
-  "let DMAMUX_SOURCE_FTM0_CH6 UInt6 = 30\n"
-  "let DMAMUX_SOURCE_FTM0_CH7 UInt6 = 31\n"
-  "let DMAMUX_SOURCE_FTM1_CH0 UInt6 = 32\n"
-  "let DMAMUX_SOURCE_FTM1_CH1 UInt6 = 33\n"
-  "let DMAMUX_SOURCE_FTM2_CH0 UInt6 = 34\n"
-  "let DMAMUX_SOURCE_FTM2_CH1 UInt6 = 35\n"
-  "let DMAMUX_SOURCE_ADC0     UInt6 = 40\n"
-  "let DMAMUX_SOURCE_ADC1     UInt6 = 41\n"
-  "let DMAMUX_SOURCE_CMP0     UInt6 = 42\n"
-  "let DMAMUX_SOURCE_CMP1     UInt6 = 43\n"
-  "let DMAMUX_SOURCE_CMP2     UInt6 = 44\n"
-  "let DMAMUX_SOURCE_DAC0     UInt6 = 45\n"
-  "let DMAMUX_SOURCE_CMT      UInt6 = 47\n"
-  "let DMAMUX_SOURCE_PDB      UInt6 = 48\n"
-  "let DMAMUX_SOURCE_PORTA    UInt6 = 49\n"
-  "let DMAMUX_SOURCE_PORTB    UInt6 = 50\n"
-  "let DMAMUX_SOURCE_PORTC    UInt6 = 51\n"
-  "let DMAMUX_SOURCE_PORTD    UInt6 = 52\n"
-  "let DMAMUX_SOURCE_PORTE    UInt6 = 53\n"
-  "let DMAMUX_SOURCE_ALWAYS0  UInt6 = 54\n"
-  "let DMAMUX_SOURCE_ALWAYS1  UInt6 = 55\n"
-  "let DMAMUX_SOURCE_ALWAYS2  UInt6 = 56\n"
-  "let DMAMUX_SOURCE_ALWAYS3  UInt6 = 57\n"
-  "let DMAMUX_SOURCE_ALWAYS4  UInt6 = 58\n"
-  "let DMAMUX_SOURCE_ALWAYS5  UInt6 = 59\n"
-  "let DMAMUX_SOURCE_ALWAYS6  UInt6 = 60\n"
-  "let DMAMUX_SOURCE_ALWAYS7  UInt6 = 61\n"
-  "let DMAMUX_SOURCE_ALWAYS8  UInt6 = 62\n"
-  "let DMAMUX_SOURCE_ALWAYS9  UInt6 = 63\n"
+  "let DMAMUX_SOURCE_UART0_RX : UInt6 =  2\n"
+  "let DMAMUX_SOURCE_UART0_TX : UInt6 =  3\n"
+  "let DMAMUX_SOURCE_UART1_RX : UInt6 =  4\n"
+  "let DMAMUX_SOURCE_UART1_TX : UInt6 =  5\n"
+  "let DMAMUX_SOURCE_UART2_RX : UInt6 =  6\n"
+  "let DMAMUX_SOURCE_UART2_TX : UInt6 =  7\n"
+  "let DMAMUX_SOURCE_I2S0_RX  : UInt6 = 14\n"
+  "let DMAMUX_SOURCE_I2S0_TX  : UInt6 = 15\n"
+  "let DMAMUX_SOURCE_SPI0_RX  : UInt6 = 16\n"
+  "let DMAMUX_SOURCE_SPI0_TX  : UInt6 = 17\n"
+  "let DMAMUX_SOURCE_I2C0     : UInt6 = 22\n"
+  "let DMAMUX_SOURCE_I2C1     : UInt6 = 23\n"
+  "let DMAMUX_SOURCE_FTM0_CH0 : UInt6 = 24\n"
+  "let DMAMUX_SOURCE_FTM0_CH1 : UInt6 = 25\n"
+  "let DMAMUX_SOURCE_FTM0_CH2 : UInt6 = 26\n"
+  "let DMAMUX_SOURCE_FTM0_CH3 : UInt6 = 27\n"
+  "let DMAMUX_SOURCE_FTM0_CH4 : UInt6 = 28\n"
+  "let DMAMUX_SOURCE_FTM0_CH5 : UInt6 = 29\n"
+  "let DMAMUX_SOURCE_FTM0_CH6 : UInt6 = 30\n"
+  "let DMAMUX_SOURCE_FTM0_CH7 : UInt6 = 31\n"
+  "let DMAMUX_SOURCE_FTM1_CH0 : UInt6 = 32\n"
+  "let DMAMUX_SOURCE_FTM1_CH1 : UInt6 = 33\n"
+  "let DMAMUX_SOURCE_FTM2_CH0 : UInt6 = 34\n"
+  "let DMAMUX_SOURCE_FTM2_CH1 : UInt6 = 35\n"
+  "let DMAMUX_SOURCE_ADC0     : UInt6 = 40\n"
+  "let DMAMUX_SOURCE_ADC1     : UInt6 = 41\n"
+  "let DMAMUX_SOURCE_CMP0     : UInt6 = 42\n"
+  "let DMAMUX_SOURCE_CMP1     : UInt6 = 43\n"
+  "let DMAMUX_SOURCE_CMP2     : UInt6 = 44\n"
+  "let DMAMUX_SOURCE_DAC0     : UInt6 = 45\n"
+  "let DMAMUX_SOURCE_CMT      : UInt6 = 47\n"
+  "let DMAMUX_SOURCE_PDB      : UInt6 = 48\n"
+  "let DMAMUX_SOURCE_PORTA    : UInt6 = 49\n"
+  "let DMAMUX_SOURCE_PORTB    : UInt6 = 50\n"
+  "let DMAMUX_SOURCE_PORTC    : UInt6 = 51\n"
+  "let DMAMUX_SOURCE_PORTD    : UInt6 = 52\n"
+  "let DMAMUX_SOURCE_PORTE    : UInt6 = 53\n"
+  "let DMAMUX_SOURCE_ALWAYS0  : UInt6 = 54\n"
+  "let DMAMUX_SOURCE_ALWAYS1  : UInt6 = 55\n"
+  "let DMAMUX_SOURCE_ALWAYS2  : UInt6 = 56\n"
+  "let DMAMUX_SOURCE_ALWAYS3  : UInt6 = 57\n"
+  "let DMAMUX_SOURCE_ALWAYS4  : UInt6 = 58\n"
+  "let DMAMUX_SOURCE_ALWAYS5  : UInt6 = 59\n"
+  "let DMAMUX_SOURCE_ALWAYS6  : UInt6 = 60\n"
+  "let DMAMUX_SOURCE_ALWAYS7  : UInt6 = 61\n"
+  "let DMAMUX_SOURCE_ALWAYS8  : UInt6 = 62\n"
+  "let DMAMUX_SOURCE_ALWAYS9  : UInt6 = 63\n"
   "\n"
   "// Chapter 21: Direct Memory Access Controller (eDMA)\n"
   "\n"
   "// Control Register\n"
-  "let DMA_TCD_ATTR_SIZE_8BIT   UInt4 = 0\n"
-  "let DMA_TCD_ATTR_SIZE_16BIT  UInt4 = 1\n"
-  "let DMA_TCD_ATTR_SIZE_32BIT  UInt4 = 2\n"
-  "let DMA_TCD_ATTR_SIZE_16BYTE UInt4 = 4\n"
-  "let DMA_TCD_ATTR_SIZE_32BYTE UInt4 = 5\n"
+  "let DMA_TCD_ATTR_SIZE_8BIT   : UInt4 = 0\n"
+  "let DMA_TCD_ATTR_SIZE_16BIT  : UInt4 = 1\n"
+  "let DMA_TCD_ATTR_SIZE_32BIT  : UInt4 = 2\n"
+  "let DMA_TCD_ATTR_SIZE_16BYTE : UInt4 = 4\n"
+  "let DMA_TCD_ATTR_SIZE_32BYTE : UInt4 = 5\n"
   "\n"
   "registers #DMA 0x4000_8000 {\n"
   "  CR 0x00 UInt32 {\n"
@@ -13431,21 +13431,21 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "//registers EWM_CMPH  *(volatile UInt8_t  *)0x40061003 // Compare High Register\n"
   "//\n"
   "//// Chapter 23: Watchdog Timer (WDOG)\n"
-  "let WDOG_STCTRLH_DISTESTWDOG UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.\n"
+  "let WDOG_STCTRLH_DISTESTWDOG : UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.\n"
   "\n"
-  "let WDOG_STCTRLH_TESTSEL  UInt16 = 0x0800\n"
-  "let WDOG_STCTRLH_TESTWDOG UInt16 = 0x0400\n"
-  "let WDOG_STCTRLH_WAITEN UInt16 = 0x0080\n"
-  "let WDOG_STCTRLH_STOPEN UInt16 = 0x0040\n"
-  "let WDOG_STCTRLH_DBGEN  UInt16 = 0x0020\n"
-  "let WDOG_STCTRLH_ALLOWUPDATE UInt16 = 0x0010\n"
-  "let WDOG_STCTRLH_WINEN UInt16 = 0x0008\n"
-  "let WDOG_STCTRLH_IRQRSTEN UInt16 = 0x0004\n"
-  "let WDOG_STCTRLH_CLKSRC UInt16 = 0x0002\n"
-  "let WDOG_STCTRLH_WDOGEN UInt16 = 0x0001\n"
+  "let WDOG_STCTRLH_TESTSEL  : UInt16 = 0x0800\n"
+  "let WDOG_STCTRLH_TESTWDOG : UInt16 = 0x0400\n"
+  "let WDOG_STCTRLH_WAITEN : UInt16 = 0x0080\n"
+  "let WDOG_STCTRLH_STOPEN : UInt16 = 0x0040\n"
+  "let WDOG_STCTRLH_DBGEN  : UInt16 = 0x0020\n"
+  "let WDOG_STCTRLH_ALLOWUPDATE : UInt16 = 0x0010\n"
+  "let WDOG_STCTRLH_WINEN : UInt16 = 0x0008\n"
+  "let WDOG_STCTRLH_IRQRSTEN : UInt16 = 0x0004\n"
+  "let WDOG_STCTRLH_CLKSRC : UInt16 = 0x0002\n"
+  "let WDOG_STCTRLH_WDOGEN : UInt16 = 0x0001\n"
   "\n"
-  "let WDOG_UNLOCK_SEQ1 UInt16   = 0xC520\n"
-  "let WDOG_UNLOCK_SEQ2 UInt16   = 0xD928\n"
+  "let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520\n"
+  "let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928\n"
   "\n"
   "registers #WDOG 0x4005_2000 {\n"
   "  STCTRLH  0x00 UInt16 // Watchdog Status and Control registers High\n"
@@ -13463,14 +13463,14 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
-  "let MCG_C4_SCFTRIM UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
-  "let MCG_C4_DMX32 UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
-  "let MCG_SC_LOCS0 UInt8 = 0x01   // OSC0 Loss of Clock Status\n"
+  "let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
+  "let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
+  "let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status\n"
   "//SC_FCRDIV(n)  (UInt8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider\n"
-  "let MCG_SC_FLTPRSRV UInt8 = 0x10   // FLL Filter Preserve Enable\n"
-  "let MCG_SC_ATMF UInt8 = 0x20   // Automatic Trim Machine Fail Flag\n"
-  "let MCG_SC_ATMS UInt8 = 0x40   // Automatic Trim Machine Select\n"
-  "let MCG_SC_ATME UInt8 = 0x80   // Automatic Trim Machine Enable\n"
+  "let MCG_SC_FLTPRSRV : UInt8 = 0x10   // FLL Filter Preserve Enable\n"
+  "let MCG_SC_ATMF : UInt8 = 0x20   // Automatic Trim Machine Fail Flag\n"
+  "let MCG_SC_ATMS : UInt8 = 0x40   // Automatic Trim Machine Select\n"
+  "let MCG_SC_ATME : UInt8 = 0x80   // Automatic Trim Machine Enable\n"
   "\n"
   "registers #MCG 0x4006_4000 {\n"
   "  C1 0x00 UInt8 { // MCG Control 1 Register\n"
@@ -13532,7 +13532,7 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "//// Chapter 25: Oscillator (OSC)\n"
-  "let OSC_SC16P  UInt8 = 0x01\n"
+  "let OSC_SC16P  : UInt8 = 0x01\n"
   "\n"
   "registers #OSC 0x4006_5000 {\n"
   "  CR 0x00 UInt8 {// OSC Control Register\n"
@@ -13616,31 +13616,31 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "}\n"
   "\n"
   "// Chapter 31: Analog-to-Digital Converter (ADC)\n"
-  "let ADC_SC1_COCO  UInt32 = 0x80   // Conversion complete flag\n"
-  "let ADC_SC1_AIEN  UInt32 = 0x40   // Interrupt enable\n"
-  "let ADC_SC1_DIFF  UInt32 = 0x20   // Differential mode enable\n"
+  "let ADC_SC1_COCO : UInt32 = 0x80   // Conversion complete flag\n"
+  "let ADC_SC1_AIEN : UInt32 = 0x40   // Interrupt enable\n"
+  "let ADC_SC1_DIFF : UInt32 = 0x20   // Differential mode enable\n"
   "\n"
-  "let ADC_CFG1_ADLPC  UInt32 = 0x80   // Low-power configuration\n"
-  "let ADC_CFG1_ADLSMP  UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long\n"
+  "let ADC_CFG1_ADLPC : UInt32 = 0x80   // Low-power configuration\n"
+  "let ADC_CFG1_ADLSMP : UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long\n"
   "\n"
-  "let ADC_CFG2_MUXSEL  UInt32 = 0x10   // 0=a channels, 1=b channels\n"
-  "let ADC_CFG2_ADACKEN  UInt32 = 0x08   // async clock enable\n"
-  "let ADC_CFG2_ADHSC   UInt32 = 0x04   // High speed configuration\n"
+  "let ADC_CFG2_MUXSEL : UInt32 = 0x10   // 0=a channels, 1=b channels\n"
+  "let ADC_CFG2_ADACKEN : UInt32 = 0x08   // async clock enable\n"
+  "let ADC_CFG2_ADHSC  : UInt32 = 0x04   // High speed configuration\n"
   "\n"
-  "let ADC_SC2_ADACT  UInt32 = 0x80   // Conversion active\n"
-  "let ADC_SC2_ADTRG  UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware\n"
-  "let ADC_SC2_ACFE   UInt32 = 0x20   // Compare function enable\n"
-  "let ADC_SC2_ACFGT  UInt32 = 0x10   // Compare function greater than enable\n"
-  "let ADC_SC2_ACREN  UInt32 = 0x08   // Compare function range enable\n"
-  "let ADC_SC2_DMAEN  UInt32= 0x04   // DMA enable\n"
+  "let ADC_SC2_ADACT : UInt32 = 0x80   // Conversion active\n"
+  "let ADC_SC2_ADTRG : UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware\n"
+  "let ADC_SC2_ACFE  : UInt32 = 0x20   // Compare function enable\n"
+  "let ADC_SC2_ACFGT : UInt32 = 0x10   // Compare function greater than enable\n"
+  "let ADC_SC2_ACREN : UInt32 = 0x08   // Compare function range enable\n"
+  "let ADC_SC2_DMAEN : UInt32 = 0x04   // DMA enable\n"
   "\n"
-  "let ADC_SC3_CAL  UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress\n"
-  "let ADC_SC3_CALF  UInt32= 0x40   // Calibration failed flag\n"
-  "let ADC_SC3_ADCO  UInt32= 0x08   // Continuous conversion enable\n"
-  "let ADC_SC3_AVGE  UInt32= 0x04   // Hardware average enable\n"
+  "let ADC_SC3_CAL : UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress\n"
+  "let ADC_SC3_CALF : UInt32 = 0x40   // Calibration failed flag\n"
+  "let ADC_SC3_ADCO : UInt32 = 0x08   // Continuous conversion enable\n"
+  "let ADC_SC3_AVGE : UInt32 = 0x04   // Hardware average enable\n"
   "\n"
-  "let ADC0_PGA_PGAEN  UInt32 = 0x00800000  // Enable\n"
-  "let ADC0_PGA_PGALPB  UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal\n"
+  "let ADC0_PGA_PGAEN : UInt32 = 0x00800000  // Enable\n"
+  "let ADC0_PGA_PGALPB : UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal\n"
   "\n"
   "registers #ADC0 0x4003_B000 {\n"
   "  SC1A   0x00 UInt32 // ADC status and control registers 1\n"
@@ -13704,17 +13704,17 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "  CLM0   0x6C UInt32 // ADC minus-side general calibration value register\n"
   "}\n"
   "\n"
-  "let DAC_C1_DMAEN UInt8 = 0x80    // DMA Enable Select\n"
-  "let DAC_C1_DACBFEN UInt8 = 0x00    // DAC Buffer Enable\n"
+  "let DAC_C1_DMAEN : UInt8 = 0x80    // DMA Enable Select\n"
+  "let DAC_C1_DACBFEN : UInt8 = 0x00    // DAC Buffer Enable\n"
   "\n"
-  "let DAC_C0_DACEN  UInt8 = 0x80    // DAC Enable\n"
-  "let DAC_C0_DACRFS UInt8 = 0x40    // DAC Reference Select\n"
-  "let DAC_C0_DACTRGSEL UInt8 = 0x20    // DAC Trigger Select\n"
-  "let DAC_C0_DACSWTRG  UInt8 = 0x10    // DAC Software Trigger\n"
-  "let DAC_C0_LPEN  UInt8 = 0x08    // DAC Low Power Control\n"
-  "let DAC_C0_DACBWIEN  UInt8 = 0x04    // DAC Buffer Watermark Interrupt Enable\n"
-  "let DAC_C0_DACBTIEN UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable\n"
-  "let DAC_C0_DACBBIEN UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable\n"
+  "let DAC_C0_DACEN  : UInt8 = 0x80    // DAC Enable\n"
+  "let DAC_C0_DACRFS : UInt8 = 0x40    // DAC Reference Select\n"
+  "let DAC_C0_DACTRGSEL : UInt8 = 0x20    // DAC Trigger Select\n"
+  "let DAC_C0_DACSWTRG  : UInt8 = 0x10    // DAC Software Trigger\n"
+  "let DAC_C0_LPEN  : UInt8 = 0x08    // DAC Low Power Control\n"
+  "let DAC_C0_DACBWIEN  : UInt8 = 0x04    // DAC Buffer Watermark Interrupt Enable\n"
+  "let DAC_C0_DACBTIEN : UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable\n"
+  "let DAC_C0_DACBBIEN : UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable\n"
   "\n"
   "registers #DAC0 0x400C_C000 {\n"
   "  DAT0L 0x00 UInt8 // DAC Data Low registers\n"
@@ -13954,10 +13954,10 @@ const char * gWrapperFileContent_62_targetTemplates = "\n"
   "//registers CMT_DMA   *(volatile UInt8_t  *)0x4006200B // CMT Direct Memory Access Register\n"
   "//\n"
   "//// Chapter 39: Real Time Clock (RTC)\n"
-  "let RTC_SR_TCE UInt32 = 0x00000010\n"
-  "let RTC_SR_TAF UInt32 = 0x00000004  //\n"
-  "let RTC_SR_TOF UInt32 = 0x00000002  //\n"
-  "let RTC_SR_TIF UInt32 = 0x00000001  //\n"
+  "let RTC_SR_TCE: UInt32 = 0x00000010\n"
+  "let RTC_SR_TAF: UInt32 = 0x00000004  //\n"
+  "let RTC_SR_TOF: UInt32 = 0x00000002  //\n"
+  "let RTC_SR_TIF: UInt32 = 0x00000001  //\n"
   "\n"
   "registers #RTC 0x4003_D000 {\n"
   "  TSR  0x000 UInt32 // RTC Time Seconds Register\n"
@@ -14245,7 +14245,7 @@ const cRegularFileWrapper gWrapperFile_62_targetTemplates (
   "plm-registers-mk20dx256.plm-import",
   "plm-import",
   true, // Text file
-  55612, // Text length
+  55931, // Text length
   gWrapperFileContent_62_targetTemplates
 ) ;
 
@@ -14263,13 +14263,13 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "driver lcd > digital {\n"
-  "  let DB4 DigitalPort\n"
-  "  let DB5 DigitalPort\n"
-  "  let DB6 DigitalPort\n"
-  "  let DB7 DigitalPort\n"
+  "  let DB4 : DigitalPort\n"
+  "  let DB5 : DigitalPort\n"
+  "  let DB6 : DigitalPort\n"
+  "  let DB7 : DigitalPort\n"
   "\n"
-  "  let RS DigitalPort\n"
-  "  let ENABLE DigitalPort\n"
+  "  let RS : DigitalPort\n"
+  "  let ENABLE : DigitalPort\n"
   "\n"
   "  var buffer = new [\xE2""\x80""\xA2"" LCD_BUFFER_SIZE \xE2""\x80""\xA2"" UInt8] (!repeated:0)\n"
   "  var sEntree = new Semaphore (!value:0)\n"
@@ -14505,7 +14505,7 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func print user @noUnusedWarning (\?u32:inValue UInt32) {\n"
-  "    var divisor UInt32 = 1_000_000_000\n"
+  "    var divisor : UInt32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
   "    while divisor > 0 {\n"
@@ -14526,10 +14526,10 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func print user @noUnusedWarning (\?u32:inValue UInt32 \?width: inWidth UInt32) {\n"
-  "    var divisor UInt32 = 1_000_000_000\n"
+  "    var divisor : UInt32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
-  "    var count UInt32 = 0\n"
+  "    var count : UInt32 = 0\n"
   "    while divisor > 0 {\n"
   "      if isPrinting or (value \xE2""\x89""\xA5"" divisor) {\n"
   "        let quotient = value / divisor\n"
@@ -14553,7 +14553,7 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func print user @noUnusedWarning (\?u64:inValue UInt64) {\n"
-  "    var divisor UInt64 = 1_0000__00000__00000__00000\n"
+  "    var divisor : UInt64 = 1_0000__00000__00000__00000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
   "    while divisor > 0 {\n"
@@ -14639,7 +14639,7 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func printUnsignedInPanicMode panic @noUnusedWarning (\?inValue UInt32) {\n"
-  "    var divisor UInt32 = 1_000_000_000\n"
+  "    var divisor : UInt32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
   "    while divisor > 0 {\n"
@@ -14725,7 +14725,7 @@ const cRegularFileWrapper gWrapperFile_58_targetTemplates (
   "plm-teensy-3-1-lcd.plm-import",
   "plm-import",
   true, // Text file
-  15366, // Text length
+  15388, // Text length
   gWrapperFileContent_58_targetTemplates
 ) ;
 
@@ -14733,7 +14733,7 @@ const cRegularFileWrapper gWrapperFile_58_targetTemplates (
 
 const char * gWrapperFileContent_61_targetTemplates = "\n"
   "section enable safe @noUnusedWarning (\?interrupt: inInterruptCode ISRSlot) {\n"
-  "  let idx UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
+  "  let idx : UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
   "  let bitIndex = idx & 0x1F\n"
   "  let registerIndex = idx >> 5\n"
   "  #NVIC:ISER [registerIndex]! = 1 << bitIndex\n"
@@ -14742,7 +14742,7 @@ const char * gWrapperFileContent_61_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "section disable safe @noUnusedWarning (\?interrupt: inInterruptCode ISRSlot) {\n"
-  "  let idx UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
+  "  let idx : UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
   "  let bitIndex = idx & 0x1F\n"
   "  let registerIndex = idx >> 5\n"
   "  #NVIC:ICER [registerIndex]! = 1 << bitIndex\n"
@@ -14768,7 +14768,7 @@ const cRegularFileWrapper gWrapperFile_61_targetTemplates (
   "plm-teensy-3-1-nvic-interrupts.plm-import",
   "plm-import",
   true, // Text file
-  1356, // Text length
+  1360, // Text length
   gWrapperFileContent_61_targetTemplates
 ) ;
 
@@ -14785,7 +14785,7 @@ const char * gWrapperFileContent_69_targetTemplates = "check target \"teensy-3-1
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "driver time > root {\n"
-  "  var mUptime UInt32 = 0\n"
+  "  var mUptime : UInt32 = 0\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
@@ -14873,7 +14873,7 @@ const cRegularFileWrapper gWrapperFile_69_targetTemplates (
   "plm-teensy-3-1-time.plm-import",
   "plm-import",
   true, // Text file
-  2895, // Text length
+  2897, // Text length
   gWrapperFileContent_69_targetTemplates
 ) ;
 
@@ -16501,8 +16501,8 @@ const char * gWrapperFileContent_111_targetTemplates = "\n"
   "  public func set safe @noUnusedWarning (\?mode:mode DigitalMode\n"
   "                                          \?toPort:port DigitalPort) {\n"
   "  //--- Set config and dir to apply\n"
-  "   var config UInt32\n"
-  "    var dir UInt1\n"
+  "   var config : UInt32\n"
+  "    var dir : UInt1\n"
   "    switch mode {\n"
   "    case OUTPUT :\n"
   "      config = {#PORTC:PCR !MUX:1}\n"
@@ -17307,7 +17307,7 @@ const cRegularFileWrapper gWrapperFile_111_targetTemplates (
   "driver-digital-teensy-3-6.plm-import",
   "plm-import",
   true, // Text file
-  24362, // Text length
+  24366, // Text length
   gWrapperFileContent_111_targetTemplates
 ) ;
 
@@ -18393,89 +18393,89 @@ const char * gWrapperFileContent_104_targetTemplates = "check target \"teensy-3-
   "  }\n"
   "}\n"
   "\n"
-  "let DMAMUX_SOURCE_TSI      UInt6 = 1\n"
-  "let DMAMUX_SOURCE_UART0_RX UInt6 = 2\n"
-  "let DMAMUX_SOURCE_UART0_TX UInt6 = 3\n"
-  "let DMAMUX_SOURCE_UART1_RX UInt6 = 4\n"
-  "let DMAMUX_SOURCE_UART1_TX UInt6 = 5\n"
-  "let DMAMUX_SOURCE_UART2_RX UInt6 = 6\n"
-  "let DMAMUX_SOURCE_UART2_TX UInt6 = 7\n"
-  "let DMAMUX_SOURCE_UART3_RX UInt6 = 8\n"
-  "let DMAMUX_SOURCE_UART3_TX UInt6 = 9\n"
-  "let DMAMUX_SOURCE_UART4_RXTX UInt6 = 10\n"
-  "let DMAMUX_SOURCE_I2S0_RX UInt6 = 12\n"
-  "let DMAMUX_SOURCE_I2S0_TX UInt6 = 13\n"
-  "let DMAMUX_SOURCE_SPI0_RX UInt6 = 14\n"
-  "let DMAMUX_SOURCE_SPI0_TX UInt6 = 15\n"
-  "let DMAMUX_SOURCE_SPI1_RX UInt6 = 16\n"
-  "let DMAMUX_SOURCE_SPI1_TX UInt6 = 17\n"
-  "let DMAMUX_SOURCE_I2C0 UInt6 = 18\n"
-  "let DMAMUX_SOURCE_I2C3 UInt6 = 18\n"
-  "let DMAMUX_SOURCE_I2C1 UInt6 = 19\n"
-  "let DMAMUX_SOURCE_I2C2 UInt6 = 19\n"
-  "let DMAMUX_SOURCE_FTM0_CH0 UInt6 = 20\n"
-  "let DMAMUX_SOURCE_FTM0_CH1 UInt6 = 21\n"
-  "let DMAMUX_SOURCE_FTM0_CH2 UInt6 = 22\n"
-  "let DMAMUX_SOURCE_FTM0_CH3 UInt6 = 23\n"
-  "let DMAMUX_SOURCE_FTM0_CH4 UInt6 = 24\n"
-  "let DMAMUX_SOURCE_FTM0_CH5 UInt6 = 25\n"
-  "let DMAMUX_SOURCE_FTM0_CH6 UInt6 = 26\n"
-  "let DMAMUX_SOURCE_FTM0_CH7 UInt6 = 27\n"
-  "let DMAMUX_SOURCE_FTM1_CH0 UInt6 = 28\n"
-  "let DMAMUX_SOURCE_TPM1_CH0 UInt6 = 28\n"
-  "let DMAMUX_SOURCE_FTM1_CH1 UInt6 = 29\n"
-  "let DMAMUX_SOURCE_TPM1_CH1 UInt6 = 29\n"
-  "let DMAMUX_SOURCE_FTM2_CH0 UInt6 = 30\n"
-  "let DMAMUX_SOURCE_TPM2_CH0 UInt6 = 30\n"
-  "let DMAMUX_SOURCE_FTM2_CH1 UInt6 = 31\n"
-  "let DMAMUX_SOURCE_TPM2_CH1 UInt6 = 31\n"
-  "let DMAMUX_SOURCE_FTM3_CH0 UInt6 = 32\n"
-  "let DMAMUX_SOURCE_FTM3_CH1 UInt6 = 33\n"
-  "let DMAMUX_SOURCE_FTM3_CH2 UInt6 = 34\n"
-  "let DMAMUX_SOURCE_FTM3_CH3 UInt6 = 35\n"
-  "let DMAMUX_SOURCE_FTM3_CH4 UInt6 = 36\n"
-  "let DMAMUX_SOURCE_FTM3_CH5 UInt6 = 37\n"
-  "let DMAMUX_SOURCE_FTM3_CH6 UInt6 = 38\n"
-  "let DMAMUX_SOURCE_SPI2_RX UInt6 = 38\n"
-  "let DMAMUX_SOURCE_FTM3_CH7 UInt6 = 39\n"
-  "let DMAMUX_SOURCE_SPI2_TX UInt6 = 39\n"
-  "let DMAMUX_SOURCE_ADC0 UInt6 = 40\n"
-  "let DMAMUX_SOURCE_ADC1 UInt6 = 41\n"
-  "let DMAMUX_SOURCE_CMP0 UInt6 = 42\n"
-  "let DMAMUX_SOURCE_CMP1 UInt6 = 43\n"
-  "let DMAMUX_SOURCE_CMP2 UInt6 = 44\n"
-  "let DMAMUX_SOURCE_CMP3 UInt6 = 44\n"
-  "let DMAMUX_SOURCE_DAC0 UInt6 = 45\n"
-  "let DMAMUX_SOURCE_DAC1 UInt6 = 46\n"
-  "let DMAMUX_SOURCE_CMT UInt6 = 47\n"
-  "let DMAMUX_SOURCE_PDB UInt6 = 48\n"
-  "let DMAMUX_SOURCE_PORTA UInt6 = 49\n"
-  "let DMAMUX_SOURCE_PORTB UInt6 = 50\n"
-  "let DMAMUX_SOURCE_PORTC UInt6 = 51\n"
-  "let DMAMUX_SOURCE_PORTD UInt6 = 52\n"
-  "let DMAMUX_SOURCE_PORTE UInt6 = 53\n"
-  "let DMAMUX_SOURCE_IEEE1588_T0 UInt6 = 54\n"
-  "let DMAMUX_SOURCE_IEEE1588_T1 UInt6 = 55\n"
-  "let DMAMUX_SOURCE_FTM1_OV UInt6 = 55\n"
-  "let DMAMUX_SOURCE_IEEE1588_T2 UInt6 = 56\n"
-  "let DMAMUX_SOURCE_FTM2_OV UInt6 = 56\n"
-  "let DMAMUX_SOURCE_IEEE1588_T3 UInt6 = 57\n"
-  "let DMAMUX_SOURCE_LPUART0_RX UInt6 = 58\n"
-  "let DMAMUX_SOURCE_LPUART0_TX UInt6 = 59\n"
-  "let DMAMUX_SOURCE_ALWAYS0 UInt6 = 60\n"
-  "let DMAMUX_SOURCE_ALWAYS1 UInt6 = 61\n"
-  "let DMAMUX_SOURCE_ALWAYS2 UInt6 = 62\n"
-  "let DMAMUX_SOURCE_ALWAYS3 UInt6 = 63\n"
+  "let DMAMUX_SOURCE_TSI      : UInt6 = 1\n"
+  "let DMAMUX_SOURCE_UART0_RX : UInt6 = 2\n"
+  "let DMAMUX_SOURCE_UART0_TX : UInt6 = 3\n"
+  "let DMAMUX_SOURCE_UART1_RX : UInt6 = 4\n"
+  "let DMAMUX_SOURCE_UART1_TX : UInt6 = 5\n"
+  "let DMAMUX_SOURCE_UART2_RX : UInt6 = 6\n"
+  "let DMAMUX_SOURCE_UART2_TX : UInt6 = 7\n"
+  "let DMAMUX_SOURCE_UART3_RX : UInt6 = 8\n"
+  "let DMAMUX_SOURCE_UART3_TX : UInt6 = 9\n"
+  "let DMAMUX_SOURCE_UART4_RXTX : UInt6 = 10\n"
+  "let DMAMUX_SOURCE_I2S0_RX : UInt6 = 12\n"
+  "let DMAMUX_SOURCE_I2S0_TX : UInt6 = 13\n"
+  "let DMAMUX_SOURCE_SPI0_RX : UInt6 = 14\n"
+  "let DMAMUX_SOURCE_SPI0_TX : UInt6 = 15\n"
+  "let DMAMUX_SOURCE_SPI1_RX : UInt6 = 16\n"
+  "let DMAMUX_SOURCE_SPI1_TX : UInt6 = 17\n"
+  "let DMAMUX_SOURCE_I2C0 : UInt6 = 18\n"
+  "let DMAMUX_SOURCE_I2C3 : UInt6 = 18\n"
+  "let DMAMUX_SOURCE_I2C1 : UInt6 = 19\n"
+  "let DMAMUX_SOURCE_I2C2 : UInt6 = 19\n"
+  "let DMAMUX_SOURCE_FTM0_CH0 : UInt6 = 20\n"
+  "let DMAMUX_SOURCE_FTM0_CH1 : UInt6 = 21\n"
+  "let DMAMUX_SOURCE_FTM0_CH2 : UInt6 = 22\n"
+  "let DMAMUX_SOURCE_FTM0_CH3 : UInt6 = 23\n"
+  "let DMAMUX_SOURCE_FTM0_CH4 : UInt6 = 24\n"
+  "let DMAMUX_SOURCE_FTM0_CH5 : UInt6 = 25\n"
+  "let DMAMUX_SOURCE_FTM0_CH6 : UInt6 = 26\n"
+  "let DMAMUX_SOURCE_FTM0_CH7 : UInt6 = 27\n"
+  "let DMAMUX_SOURCE_FTM1_CH0 : UInt6 = 28\n"
+  "let DMAMUX_SOURCE_TPM1_CH0 : UInt6 = 28\n"
+  "let DMAMUX_SOURCE_FTM1_CH1 : UInt6 = 29\n"
+  "let DMAMUX_SOURCE_TPM1_CH1 : UInt6 = 29\n"
+  "let DMAMUX_SOURCE_FTM2_CH0 : UInt6 = 30\n"
+  "let DMAMUX_SOURCE_TPM2_CH0 : UInt6 = 30\n"
+  "let DMAMUX_SOURCE_FTM2_CH1 : UInt6 = 31\n"
+  "let DMAMUX_SOURCE_TPM2_CH1 : UInt6 = 31\n"
+  "let DMAMUX_SOURCE_FTM3_CH0 : UInt6 = 32\n"
+  "let DMAMUX_SOURCE_FTM3_CH1 : UInt6 = 33\n"
+  "let DMAMUX_SOURCE_FTM3_CH2 : UInt6 = 34\n"
+  "let DMAMUX_SOURCE_FTM3_CH3 : UInt6 = 35\n"
+  "let DMAMUX_SOURCE_FTM3_CH4 : UInt6 = 36\n"
+  "let DMAMUX_SOURCE_FTM3_CH5 : UInt6 = 37\n"
+  "let DMAMUX_SOURCE_FTM3_CH6 : UInt6 = 38\n"
+  "let DMAMUX_SOURCE_SPI2_RX : UInt6 = 38\n"
+  "let DMAMUX_SOURCE_FTM3_CH7 : UInt6 = 39\n"
+  "let DMAMUX_SOURCE_SPI2_TX : UInt6 = 39\n"
+  "let DMAMUX_SOURCE_ADC0 : UInt6 = 40\n"
+  "let DMAMUX_SOURCE_ADC1 : UInt6 = 41\n"
+  "let DMAMUX_SOURCE_CMP0 : UInt6 = 42\n"
+  "let DMAMUX_SOURCE_CMP1 : UInt6 = 43\n"
+  "let DMAMUX_SOURCE_CMP2 : UInt6 = 44\n"
+  "let DMAMUX_SOURCE_CMP3 : UInt6 = 44\n"
+  "let DMAMUX_SOURCE_DAC0 : UInt6 = 45\n"
+  "let DMAMUX_SOURCE_DAC1 : UInt6 = 46\n"
+  "let DMAMUX_SOURCE_CMT : UInt6 = 47\n"
+  "let DMAMUX_SOURCE_PDB : UInt6 = 48\n"
+  "let DMAMUX_SOURCE_PORTA : UInt6 = 49\n"
+  "let DMAMUX_SOURCE_PORTB : UInt6 = 50\n"
+  "let DMAMUX_SOURCE_PORTC : UInt6 = 51\n"
+  "let DMAMUX_SOURCE_PORTD : UInt6 = 52\n"
+  "let DMAMUX_SOURCE_PORTE : UInt6 = 53\n"
+  "let DMAMUX_SOURCE_IEEE1588_T0 : UInt6 = 54\n"
+  "let DMAMUX_SOURCE_IEEE1588_T1 : UInt6 = 55\n"
+  "let DMAMUX_SOURCE_FTM1_OV : UInt6 = 55\n"
+  "let DMAMUX_SOURCE_IEEE1588_T2 : UInt6 = 56\n"
+  "let DMAMUX_SOURCE_FTM2_OV : UInt6 = 56\n"
+  "let DMAMUX_SOURCE_IEEE1588_T3 : UInt6 = 57\n"
+  "let DMAMUX_SOURCE_LPUART0_RX : UInt6 = 58\n"
+  "let DMAMUX_SOURCE_LPUART0_TX : UInt6 = 59\n"
+  "let DMAMUX_SOURCE_ALWAYS0 : UInt6 = 60\n"
+  "let DMAMUX_SOURCE_ALWAYS1 : UInt6 = 61\n"
+  "let DMAMUX_SOURCE_ALWAYS2 : UInt6 = 62\n"
+  "let DMAMUX_SOURCE_ALWAYS3 : UInt6 = 63\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//! Chapter 24: Direct Memory Access Controller (eDMA)\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "let DMA_TCD_ATTR_SIZE_8BIT   UInt4 = 0\n"
-  "let DMA_TCD_ATTR_SIZE_16BIT  UInt4 = 1\n"
-  "let DMA_TCD_ATTR_SIZE_32BIT  UInt4 = 2\n"
-  "let DMA_TCD_ATTR_SIZE_16BYTE UInt4 = 4\n"
-  "let DMA_TCD_ATTR_SIZE_32BYTE UInt4 = 5\n"
+  "let DMA_TCD_ATTR_SIZE_8BIT   : UInt4 = 0\n"
+  "let DMA_TCD_ATTR_SIZE_16BIT  : UInt4 = 1\n"
+  "let DMA_TCD_ATTR_SIZE_32BIT  : UInt4 = 2\n"
+  "let DMA_TCD_ATTR_SIZE_16BYTE : UInt4 = 4\n"
+  "let DMA_TCD_ATTR_SIZE_32BYTE : UInt4 = 5\n"
   "\n"
   "registers #DMA 0x4000_8000 {\n"
   "  CR 0x00 UInt32 {\n"
@@ -18668,8 +18668,8 @@ const char * gWrapperFileContent_104_targetTemplates = "check target \"teensy-3-
   "  PRESC    0x16 UInt16 // Watchdog Prescaler register\n"
   "}\n"
   "\n"
-  "let WDOG_UNLOCK_SEQ1 UInt16   = 0xC520\n"
-  "let WDOG_UNLOCK_SEQ2 UInt16   = 0xD928\n"
+  "let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520\n"
+  "let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "//! Chapter 27: Multipurpose Clock Generator (MCG)\n"
@@ -20269,7 +20269,7 @@ const cRegularFileWrapper gWrapperFile_104_targetTemplates (
   "plm-registers-mk66fx1m0.plm-import",
   "plm-import",
   true, // Text file
-  97518, // Text length
+  97678, // Text length
   gWrapperFileContent_104_targetTemplates
 ) ;
 
@@ -20287,13 +20287,13 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "driver lcd > digital {\n"
-  "  let DB4 DigitalPort\n"
-  "  let DB5 DigitalPort\n"
-  "  let DB6 DigitalPort\n"
-  "  let DB7 DigitalPort\n"
+  "  let DB4 : DigitalPort\n"
+  "  let DB5 : DigitalPort\n"
+  "  let DB6 : DigitalPort\n"
+  "  let DB7 : DigitalPort\n"
   "\n"
-  "  let RS DigitalPort\n"
-  "  let ENABLE DigitalPort\n"
+  "  let RS : DigitalPort\n"
+  "  let ENABLE : DigitalPort\n"
   "\n"
   "  var buffer = new [\xE2""\x80""\xA2"" LCD_BUFFER_SIZE \xE2""\x80""\xA2"" UInt8] (!repeated:0)\n"
   "  var sEntree = new Semaphore (!value:0)\n"
@@ -20529,7 +20529,7 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func print user @noUnusedWarning (\?u32:inValue UInt32) {\n"
-  "    var divisor UInt32 = 1_000_000_000\n"
+  "    var divisor : UInt32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
   "    while divisor > 0 {\n"
@@ -20548,10 +20548,10 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "  }\n"
   "\n"
   "  public func print user @noUnusedWarning (\?u32:inValue UInt32 \?width: inWidth UInt32) {\n"
-  "    var divisor UInt32 = 1_000_000_000\n"
+  "    var divisor : UInt32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
-  "    var count UInt32 = 0\n"
+  "    var count : UInt32 = 0\n"
   "    while divisor > 0 {\n"
   "      if isPrinting or (value \xE2""\x89""\xA5"" divisor) {\n"
   "        let quotient = value / divisor\n"
@@ -20575,7 +20575,7 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func print user @noUnusedWarning (\?u64:inValue UInt64) {\n"
-  "    var divisor UInt64 = 1_0000__00000__00000__00000\n"
+  "    var divisor : UInt64 = 1_0000__00000__00000__00000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
   "    while divisor > 0 {\n"
@@ -20662,7 +20662,7 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "\n"
   "  public func printUnsignedInPanicMode panic @noUnusedWarning (\?inValue UInt32) {\n"
   "    time.panicOneMillisecondBusyWait ()\n"
-  "    var divisor UInt32 = 1_000_000_000\n"
+  "    var divisor : UInt32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = no\n"
   "    while divisor > 0 {\n"
@@ -20752,7 +20752,7 @@ const cRegularFileWrapper gWrapperFile_89_targetTemplates (
   "plm-teensy-3-6-lcd.plm-import",
   "plm-import",
   true, // Text file
-  17135, // Text length
+  17157, // Text length
   gWrapperFileContent_89_targetTemplates
 ) ;
 
@@ -20764,7 +20764,7 @@ const char * gWrapperFileContent_102_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "section enable safe @noUnusedWarning (\?interrupt: inInterruptCode ISRSlot) {\n"
-  "  let idx UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
+  "  let idx : UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
   "  let bitIndex = idx & 0x1F\n"
   "  let registerIndex = idx >> 5\n"
   "  #NVIC:ISER [registerIndex]! = 1 << bitIndex\n"
@@ -20773,7 +20773,7 @@ const char * gWrapperFileContent_102_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "section disable safe @noUnusedWarning (\?interrupt: inInterruptCode ISRSlot) {\n"
-  "  let idx UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
+  "  let idx : UInt32 = extend (inInterruptCode.uint7 -% 16)\n"
   "  let bitIndex = idx & 0x1F\n"
   "  let registerIndex = idx >> 5\n"
   "  #NVIC:ICER [registerIndex]! = 1 << bitIndex\n"
@@ -20799,7 +20799,7 @@ const cRegularFileWrapper gWrapperFile_102_targetTemplates (
   "plm-teensy-3-6-nvic-interrupts.plm-import",
   "plm-import",
   true, // Text file
-  1536, // Text length
+  1540, // Text length
   gWrapperFileContent_102_targetTemplates
 ) ;
 
@@ -20817,7 +20817,7 @@ const char * gWrapperFileContent_110_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "driver time > root {\n"
-  "  var mUptime UInt32 = 0\n"
+  "  var mUptime : UInt32 = 0\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
@@ -20917,7 +20917,7 @@ const cRegularFileWrapper gWrapperFile_110_targetTemplates (
   "plm-teensy-3-6-time.plm-import",
   "plm-import",
   true, // Text file
-  4363, // Text length
+  4365, // Text length
   gWrapperFileContent_110_targetTemplates
 ) ;
 

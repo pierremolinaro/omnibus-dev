@@ -10,13 +10,13 @@ let LCD_BUFFER_SIZE = 20
 //——————————————————————————————————————————————————————————————————————————————
 
 driver lcd > digital {
-  let DB4 DigitalPort
-  let DB5 DigitalPort
-  let DB6 DigitalPort
-  let DB7 DigitalPort
+  let DB4 : DigitalPort
+  let DB5 : DigitalPort
+  let DB6 : DigitalPort
+  let DB7 : DigitalPort
 
-  let RS DigitalPort
-  let ENABLE DigitalPort
+  let RS : DigitalPort
+  let ENABLE : DigitalPort
 
   var buffer = new [• LCD_BUFFER_SIZE • UInt8] (!repeated:0)
   var sEntree = new Semaphore (!value:0)
@@ -252,7 +252,7 @@ driver lcd > digital {
   //····················································································································
 
   public func print user @noUnusedWarning (?u32:inValue UInt32) {
-    var divisor UInt32 = 1_000_000_000
+    var divisor : UInt32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
     while divisor > 0 {
@@ -271,10 +271,10 @@ driver lcd > digital {
   }
 
   public func print user @noUnusedWarning (?u32:inValue UInt32 ?width: inWidth UInt32) {
-    var divisor UInt32 = 1_000_000_000
+    var divisor : UInt32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
-    var count UInt32 = 0
+    var count : UInt32 = 0
     while divisor > 0 {
       if isPrinting or (value ≥ divisor) {
         let quotient = value / divisor
@@ -298,7 +298,7 @@ driver lcd > digital {
   //····················································································································
 
   public func print user @noUnusedWarning (?u64:inValue UInt64) {
-    var divisor UInt64 = 1_0000__00000__00000__00000
+    var divisor : UInt64 = 1_0000__00000__00000__00000
     var value = inValue
     var isPrinting = no
     while divisor > 0 {
@@ -385,7 +385,7 @@ driver lcd > digital {
 
   public func printUnsignedInPanicMode panic @noUnusedWarning (?inValue UInt32) {
     time.panicOneMillisecondBusyWait ()
-    var divisor UInt32 = 1_000_000_000
+    var divisor : UInt32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
     while divisor > 0 {

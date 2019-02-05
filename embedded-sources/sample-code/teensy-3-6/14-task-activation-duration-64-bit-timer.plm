@@ -50,7 +50,7 @@ sync s = new Semaphore (!value:0)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on @setup first {
     s.wait ()

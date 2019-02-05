@@ -49,7 +49,7 @@ sync rdvs = new RendezVous ()
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @activate {
-  var top UInt32 = 0
+  var top : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)

@@ -23,6 +23,7 @@ syntax extension plm_syntax {
     select
       optionalTypeName = ["" nowhere]
     or
+      $:$
       <type_definition> !?ioAST ?optionalTypeName
     end
     $=$

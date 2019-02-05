@@ -92,6 +92,7 @@ syntax extension plm_syntax {
 #    end
     @lstring typeName
     select
+      $:$
       <type_definition> !?ioAST ?typeName
     or
       typeName = ["" nowhere]
@@ -132,6 +133,7 @@ syntax extension plm_syntax {
       propertyAttributeList += !attribute !value
     end
     select
+      $:$
       <type_definition> !?ioAST  ?let typeName
       select
         ioPropertyListAST += !propertyName !{} !isPublic !typeName !.uninitializedStoredProperty

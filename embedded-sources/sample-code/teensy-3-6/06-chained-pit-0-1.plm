@@ -25,7 +25,7 @@ driver chronomètre > root {
   }
 
   public section now @noUnusedWarning () -> Uptime {
-    var r UInt64 = extend (#PIT:LTMR64H)
+    var r : UInt64 = extend (#PIT:LTMR64H)
     r <<= 32
     r |= extend (#PIT:LTMR64L)
     r = ~ r
@@ -37,7 +37,7 @@ driver chronomètre > root {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct Uptime @copyable {
-  let rawValue UInt64
+  let rawValue : UInt64
 
   public func raw @noUnusedWarning () -> UInt64 {
     result = self.rawValue
@@ -62,7 +62,7 @@ struct Uptime @copyable {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)

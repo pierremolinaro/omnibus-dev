@@ -6,8 +6,8 @@ import "carte-tp-teensy-3-6.plm-import"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sync PeriodicTimer {
-  var deadline UInt32 = 0
-  let period UInt32
+  var deadline : UInt32 = 0
+  let period : UInt32
   var guardList = new GuardList ()
 
   //············································································
@@ -38,7 +38,7 @@ sync PeriodicTimer {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
   var deadline = new PeriodicTimer (!period:500)
 
   on @setup first {

@@ -863,7 +863,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "//------------------------------------------------*\n"
   "\n"
   "task T1 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on time.wait (!until:self.compteur) {\n"
   "    ledOn ()\n"
@@ -880,7 +880,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  566, // Text length
+  568, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -916,8 +916,8 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "struct B {\n"
-  "  var a UInt32 = 0\n"
-  "  var b UInt32 = 0\n"
+  "  var a : UInt32 = 0\n"
+  "  var b : UInt32 = 0\n"
   "}\n"
   "\n"
   "struct C {\n"
@@ -925,7 +925,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "}\n"
   "\n"
   "struct Toto {\n"
-  "  var a UInt16 = 0\n"
+  "  var a : UInt16 = 0\n"
   "  var c = no\n"
   "  var b = no\n"
   "}\n"
@@ -933,7 +933,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T @stacksize 512 @activate {\n"
-  "  var deadline UInt32 = 0\n"
+  "  var deadline : UInt32 = 0\n"
   "  var acc = new C ()\n"
   "\n"
   "  on @setup first {\n"
@@ -946,11 +946,11 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "    digital.toggle (!port:LED_L1)\n"
   "    let n = self.acc.c.a +% self.deadline\n"
   "    self.acc.c.a = n\n"
-  "    let x UInt32 = 0x1234_5678\n"
+  "    let x : UInt32 = 0x1234_5678\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.print (!hex8:x.byteSwapped)\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    let y UInt15 = 0x1234\n"
+  "    let y : UInt15 = 0x1234\n"
   "    lcd.print (!hex4:extend (y.bitReversed))\n"
   "  }\n"
   "}\n"
@@ -961,7 +961,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1012, // Text length
+  1024, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
@@ -974,7 +974,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1/un
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T\xC3""\xA2""che @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "  var continue = yes\n"
   "\n"
   "  on @setup first {\n"
@@ -1000,7 +1000,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  794, // Text length
+  796, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1013,7 +1013,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T1 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L0)\n"
@@ -1038,7 +1038,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T2 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on time.wait (!until:self.compteur) {\n"
   "    digital.write (!yes !toPort:LED_L1)\n"
@@ -1052,7 +1052,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T3 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on time.wait (!until:self.compteur) {\n"
   "    digital.write (!yes !toPort:LED_L2)\n"
@@ -1066,7 +1066,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T4 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on time.wait (!until:self.compteur) {\n"
   "    digital.write (!yes !toPort:LED_L3)\n"
@@ -1080,7 +1080,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T5 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on time.wait (!until:self.compteur) {\n"
   "    digital.write (!yes !toPort:LED_L4)\n"
@@ -1097,7 +1097,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2322, // Text length
+  2332, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -1110,7 +1110,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L0)\n"
@@ -1148,7 +1148,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "03-push-buttons.plm",
   "plm",
   true, // Text file
-  1477, // Text length
+  1479, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1186,7 +1186,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
-  "    var cumul UInt32 = 0\n"
+  "    var cumul : UInt32 = 0\n"
   "  //--- Compute getSysTick duration\n"
   "    for _ UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
@@ -1230,7 +1230,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  1887, // Text length
+  1889, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1249,7 +1249,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1/unp
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T1 @stacksize 512 @activate {\n"
-  "  var top UInt32 = 0\n"
+  "  var top : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1286,7 +1286,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "05-semaphore.plm",
   "plm",
   true, // Text file
-  1157, // Text length
+  1159, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -1304,7 +1304,7 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1/un
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T\xC3""\xA2""che1 @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "  var test = yes\n"
   "\n"
   "  on @setup first {\n"
@@ -1329,7 +1329,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "06-integer-slices.plm",
   "plm",
   true, // Text file
-  975, // Text length
+  977, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
@@ -1374,7 +1374,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unp
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T @stacksize 512 @activate {\n"
-  "  var deadline UInt32 = 0\n"
+  "  var deadline : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1386,7 +1386,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unp
   "  on time.wait (!until:self.deadline) {\n"
   "    self.deadline +%= 250\n"
   "    digital.toggle (!port:LED_L1)\n"
-  "    var total UInt32 = 0\n"
+  "    var total : UInt32 = 0\n"
   "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
   "      total = total + \xC3""\xA9""l\xC3""\xA9""ment.a\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
@@ -1405,7 +1405,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "07-static-list-example.plm",
   "plm",
   true, // Text file
-  1559, // Text length
+  1563, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1423,7 +1423,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T0 @stacksize 512 @activate {\n"
-  "  var top UInt32 = 0\n"
+  "  var top : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1448,7 +1448,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T1 @stacksize 512 @activate {\n"
-  "  var top UInt32 = 0\n"
+  "  var top : UInt32 = 0\n"
   "\n"
   "  on time.wait (!until:self.top) {\n"
   "    s1.signal ()\n"
@@ -1464,7 +1464,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1/un
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T2 @stacksize 512 @activate {\n"
-  "  var deadline UInt32 = 0\n"
+  "  var deadline : UInt32 = 0\n"
   "  var toggleD3 = no\n"
   "\n"
   "  on s0.wait () {\n"
@@ -1492,7 +1492,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "08-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1840, // Text length
+  1846, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -1549,7 +1549,7 @@ const char * gWrapperFileContent_14_embeddedSampleCode = "target \"teensy-3-1/un
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T0 @stacksize 512 @activate {\n"
-  "  var top UInt32 = 0\n"
+  "  var top : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1589,7 +1589,7 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  2274, // Text length
+  2276, // Text length
   gWrapperFileContent_14_embeddedSampleCode
 ) ;
 
@@ -1604,7 +1604,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "sync RendezVousData {\n"
   "  var readBarrier  = new Semaphore (!value:0)\n"
   "  var writeBarrier = new Semaphore (!value:1)\n"
-  "  var data UInt32 = 0\n"
+  "  var data : UInt32 = 0\n"
   "\n"
   "  public func output user @mutating @noUnusedWarning (\?data:inData UInt32) {\n"
   "    self.writeBarrier.wait ()\n"
@@ -1639,7 +1639,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T0 @stacksize 512 @activate {\n"
-  "  var top UInt32 = 0\n"
+  "  var top : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1672,8 +1672,8 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T2 @stacksize 1024 @activate {\n"
-  "  var deadline UInt32 = 0\n"
-  "  var n UInt32 = 0\n"
+  "  var deadline : UInt32 = 0\n"
+  "  var n : UInt32 = 0\n"
   "\n"
   "  on rdvs2.output (!data:self.n) {\n"
   "    digital.toggle (!port:LED_L2)\n"
@@ -1696,7 +1696,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2483, // Text length
+  2491, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -1718,7 +1718,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/unp
   "//------------------------------------------------*\n"
   "\n"
   "driver pit > digital {\n"
-  "  var gPITValue UInt32 = 0\n"
+  "  var gPITValue : UInt32 = 0\n"
   "\n"
   "  startup {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1743,7 +1743,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/unp
   "//------------------------------------------------*\n"
   "\n"
   "task T @stacksize 512 @activate {\n"
-  "  var deadline UInt32 = 0\n"
+  "  var deadline : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    setupPIT ()\n"
@@ -1758,7 +1758,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1/unp
   "    lcd.goto (!line:1 !column:0)\n"
   "    lcd.print (!spaces:10)\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    var value UInt32\n"
+  "    var value : UInt32\n"
   "    pit.getPITValue (\?value)\n"
   "    lcd.print (!u32:value)\n"
   "  }\n"
@@ -1770,7 +1770,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1464, // Text length
+  1470, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1787,8 +1787,8 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "typealias A = [\xE2""\x80""\xA2""SIZE \xE2""\x80""\xA2"" UInt32]\n"
   "\n"
   "struct B {\n"
-  "  var a UInt32 = 0\n"
-  "  var b UInt32 = 0\n"
+  "  var a : UInt32 = 0\n"
+  "  var b : UInt32 = 0\n"
   "}\n"
   "\n"
   "struct C {\n"
@@ -1800,10 +1800,10 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "//------------------------------------------------*\n"
   "\n"
   "task T @stacksize 512 @activate {\n"
-  "  var deadline UInt32 = 0\n"
+  "  var deadline : UInt32 = 0\n"
   "  var array = new A (!repeated:0)\n"
   "  var array2 = new A (!repeated:1)\n"
-  "  var index Int32 = 0\n"
+  "  var index : Int32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
@@ -1831,14 +1831,14 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "  //--- Init from a repeated static value\n"
   "    var a = new A (!repeated:5)\n"
   "  //--- Init from a repeated dynamic value\n"
-  "    var e UInt32 = 5\n"
+  "    var e : UInt32 = 5\n"
   "    var b = new A (!repeated:e)\n"
   "  //--- Init from a static values\n"
   "    var c = new A (!0 !1 !2)\n"
   "  //--- Init from a dynamic values\n"
   "    var d = new A (!0 !e !2)\n"
   "  //---\n"
-  "    var x UInt32 = 0\n"
+  "    var x : UInt32 = 0\n"
   "    for i UInt32 in 0 ..< :A.count {\n"
   "      a [i] = 9\n"
   "      a [i] += 9\n"
@@ -1860,7 +1860,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1679, // Text length
+  1691, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1885,8 +1885,8 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "struct BDT @copyable {\n"
-  " var desc UInt32 = 0\n"
-  " var addr UInt32 = 0\n"
+  " var desc : UInt32 = 0\n"
+  " var addr : UInt32 = 0\n"
   "}\n"
   "\n"
   "\n"
@@ -1924,16 +1924,16 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "  var ep0_rx0_buf @align 4 = new [\xE2""\x80""\xA2""EP0_SIZE \xE2""\x80""\xA2"" UInt8] (!repeated:0)\n"
   "  var ep0_rx1_buf @align 4 = new [\xE2""\x80""\xA2""EP0_SIZE \xE2""\x80""\xA2"" UInt8] (!repeated:0)\n"
-  "  var ep0_tx_bdt_bank UInt32 = 0\n"
+  "  var ep0_tx_bdt_bank : UInt32 = 0\n"
   "\n"
   "  var \xC3""\xA9""tat = new [\xE2""\x80""\xA2""TRACE_SIZE \xE2""\x80""\xA2"" UInt4] (!repeated:0)\n"
-  "  var index\xC3""\x89""tat UInt32 = 0\n"
+  "  var index\xC3""\x89""tat : UInt32 = 0\n"
   "\n"
   "  public section lire\xC3""\x89""tat (\?index UInt32) -> UInt32 {\n"
   "    result = extend (self.\xC3""\xA9""tat [index])\n"
   "  }\n"
   "\n"
-  "  var trace UInt32 = 0\n"
+  "  var trace : UInt32 = 0\n"
   "\n"
   "  public section lireAddresseUSB () -> UInt32 {\n"
   "    result = extend (#USB0:ADDR)\n"
@@ -2083,7 +2083,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "  func tokenCompleted section @mutating () {\n"
   "    let transactionStatus = #USB0:STAT\n"
-  "    let endPoint UInt4 = transactionStatus [4...7]\n"
+  "    let endPoint : UInt4 = transactionStatus [4...7]\n"
   "//    let TX_transitionStatus = transactionStatus [3...3]\n"
   "//    let ODD_transitionStatus = transactionStatus [2...2]\n"
   "//    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))\n"
@@ -2226,8 +2226,8 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T @stacksize 512 @activate {\n"
-  "  var tick UInt32 = 0\n"
-  "  var \xC3""\xA9""tat UInt32 = 0\n"
+  "  var tick : UInt32 = 0\n"
+  "  var \xC3""\xA9""tat : UInt32 = 0\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
@@ -2261,7 +2261,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  15197, // Text length
+  15213, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -2421,7 +2421,7 @@ const char * gWrapperFileContent_31_embeddedSampleCode = "target \"teensy-3-6/xt
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T\xC3""\xA2""che @stacksize 512 @activate {\n"
-  "  var compteur UInt32 = 0\n"
+  "  var compteur : UInt32 = 0\n"
   "\n"
   "  on @setup first {\n"
   "    digital.set (!mode:.OUTPUT !toPort:LED_L0)\n"
@@ -2451,7 +2451,7 @@ const cRegularFileWrapper gWrapperFile_31_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1439, // Text length
+  1441, // Text length
   gWrapperFileContent_31_embeddedSampleCode
 ) ;
 
@@ -5667,7 +5667,7 @@ const char * gWrapperFileContent_39_embeddedSampleCode = "target \"teensy-3-6/xt
   "  on time.wait (!until: self.tick) {\n"
   "    self.otherLargeInteger += self.largeInteger\n"
   "    self.tick += 500\n"
-  "    self.largeInteger = getLargeAddition (!self.largeInteger !call getLargeConstant ())\n"
+  "    self.largeInteger = getLargeAddition (!self.largeInteger !getLargeConstant ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -5677,7 +5677,7 @@ const cRegularFileWrapper gWrapperFile_39_embeddedSampleCode (
   "23-large-integer.plm",
   "plm",
   true, // Text file
-  925, // Text length
+  920, // Text length
   gWrapperFileContent_39_embeddedSampleCode
 ) ;
 

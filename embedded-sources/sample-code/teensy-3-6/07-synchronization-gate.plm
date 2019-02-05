@@ -6,7 +6,7 @@ import "carte-tp-teensy-3-6.plm-import"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sync SynchronizationGate {
-  var isOpen Bool
+  var isOpen : Bool
   var taskList = new TaskList ()
   var guardList = new GuardList ()
 
@@ -56,7 +56,7 @@ sync gate = new SynchronizationGate (!isOpen:no)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 @activate {
-  var compteur UInt32 = 0
+  var compteur : UInt32 = 0
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy

@@ -30,7 +30,7 @@ task T @stacksize 512 @activate {
   //············································································
 
   on @setup first {
-    var cumul UInt32 = 0
+    var cumul : UInt32 = 0
   //--- Compute getSysTick duration
     for _ UInt32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
