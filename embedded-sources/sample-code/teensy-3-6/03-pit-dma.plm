@@ -76,7 +76,7 @@ driver pit ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-section initializeDMA (?!pattern PatternArray) {
+section initializeDMA (?!pattern : PatternArray) {
 //--- Transform pattern for encoding level changes
   var current = no
   var index : UInt32 = 0

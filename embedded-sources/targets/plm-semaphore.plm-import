@@ -27,7 +27,7 @@ sync Semaphore {
 
   //····················································································································
 
-  public func wait @noUnusedWarning @mutating (?until: inDeadline UInt32) -> Bool {
+  public func wait @noUnusedWarning @mutating (?until: inDeadline : UInt32) -> Bool {
      sync{
      on self.wait () exit : result = yes
      on time.wait (!until: inDeadline) exit : result = no

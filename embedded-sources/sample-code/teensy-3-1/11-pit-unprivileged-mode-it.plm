@@ -22,7 +22,7 @@ driver pit > digital {
     #SIM:SCGC6 |= SIM_SCGC6_PIT
   }
 
-  section getPITValue (!outValue UInt32) {
+  section getPITValue (!outValue : UInt32) {
     outValue = self.gPITValue
   }
 

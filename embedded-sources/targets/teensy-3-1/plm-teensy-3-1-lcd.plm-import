@@ -60,25 +60,25 @@ driver lcd > digital {
 
   //············································································
 
-  func setD4 safe @noUnusedWarning (?inValue Bool) {
+  func setD4 safe @noUnusedWarning (?inValue : Bool) {
     digital.write (!inValue !toPort:self.DB4)
   }
 
   //············································································
 
-  func setD5 safe @noUnusedWarning (?inValue Bool) {
+  func setD5 safe @noUnusedWarning (?inValue : Bool) {
     digital.write (!inValue !toPort:self.DB5)
   }
 
   //············································································
 
-  func setD6 safe @noUnusedWarning (?inValue Bool) {
+  func setD6 safe @noUnusedWarning (?inValue : Bool) {
     digital.write (!inValue !toPort:self.DB6)
   }
 
   //············································································
 
-  func setD7 safe @noUnusedWarning (?inValue Bool) {
+  func setD7 safe @noUnusedWarning (?inValue : Bool) {
     digital.write (!inValue !toPort:self.DB7)
   }
 
@@ -86,7 +86,7 @@ driver lcd > digital {
   //   UTILITY ROUTINES
   //············································································
 
-  func programLcd4BitDataBusOutput safe @noUnusedWarning (?inValue UInt8) {
+  func programLcd4BitDataBusOutput safe @noUnusedWarning (?inValue : UInt8) {
     self.setD4 (!(inValue & 0x01) ≠ 0)
     self.setD5 (!(inValue & 0x02) ≠ 0)
     self.setD6 (!(inValue & 0x04) ≠ 0)
@@ -95,7 +95,7 @@ driver lcd > digital {
 
   //············································································
 
-  func writeFirstNibbleOf8bitCommand safe @noUnusedWarning (?inValue UInt8) {
+  func writeFirstNibbleOf8bitCommand safe @noUnusedWarning (?inValue : UInt8) {
     self.driveLowRS ()
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE ()
@@ -103,7 +103,7 @@ driver lcd > digital {
 
   //············································································
 
-  func writeFirstNibbleOf8bitData safe @noUnusedWarning (?inValue UInt8) {
+  func writeFirstNibbleOf8bitData safe @noUnusedWarning (?inValue : UInt8) {
     self.driveHighRS ()
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE ()
@@ -111,14 +111,14 @@ driver lcd > digital {
 
    //············································································
 
-  func writeSecondNibble safe @noUnusedWarning (?inValue UInt8) {
+  func writeSecondNibble safe @noUnusedWarning (?inValue : UInt8) {
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE ()
   }
 
   //············································································
 
-  func write4BitCommand startup @noUnusedWarning (?inValue UInt8) {
+  func write4BitCommand startup @noUnusedWarning (?inValue : UInt8) {
     time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inValue)
     time.busyWaitingDuringMS (!1)
@@ -127,7 +127,7 @@ driver lcd > digital {
 
   //············································································
 
-  func write8bitCommand startup @noUnusedWarning (?inCommand UInt8) {
+  func write8bitCommand startup @noUnusedWarning (?inCommand : UInt8) {
     time.busyWaitingDuringMS (!1)
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
     time.busyWaitingDuringMS (!1)
@@ -188,7 +188,7 @@ driver lcd > digital {
   //   PRINT ROUTINES IN USER MODE
   //············································································
 
-  func write8bitCommand_inUserMode user @noUnusedWarning (?inCommand UInt8) {
+  func write8bitCommand_inUserMode user @noUnusedWarning (?inCommand : UInt8) {
     time.wait (!during:1)
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
     time.wait (!during:1)
@@ -201,7 +201,7 @@ driver lcd > digital {
 
   //············································································
 
-  func writeData_inUserMode user @noUnusedWarning (?inData UInt8) {
+  func writeData_inUserMode user @noUnusedWarning (?inData : UInt8) {
     time.wait (!during:1)
     self.writeFirstNibbleOf8bitData (!inData >> 4)
     time.wait (!during:1)
@@ -225,7 +225,7 @@ driver lcd > digital {
   // Line 2 : 20 -> 39
   // Line 3 : 84 -> 103
 
-  public func goto user @noUnusedWarning (?line:inLine UInt2 ?column:inColumn UInt8) {
+  public func goto user @noUnusedWarning (?line:inLine : UInt2 ?column:inColumn : UInt8) {
     if inColumn < 20 {
       if inLine == 0 {
         self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn)
@@ -241,7 +241,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?spaces:inCount UInt32) {
+  public func print user @noUnusedWarning (?spaces:inCount : UInt32) {
     var count = inCount
     while (count > 0) {
       self.writeData_inUserMode (!0x20)
@@ -251,7 +251,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?u32:inValue UInt32) {
+  public func print user @noUnusedWarning (?u32:inValue : UInt32) {
     var divisor : UInt32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
@@ -272,7 +272,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?u32:inValue UInt32 ?width: inWidth UInt32) {
+  public func print user @noUnusedWarning (?u32:inValue : UInt32 ?width: inWidth : UInt32) {
     var divisor : UInt32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
@@ -299,7 +299,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?u64:inValue UInt64) {
+  public func print user @noUnusedWarning (?u64:inValue : UInt64) {
     var divisor : UInt64 = 1_0000__00000__00000__00000
     var value = inValue
     var isPrinting = no
@@ -320,7 +320,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?string:inValue LiteralString) {
+  public func print user @noUnusedWarning (?string:inValue : LiteralString) {
     for c in inValue {
       self.writeData_inUserMode (!c)
     }
@@ -328,7 +328,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?hex1:inValue UInt32) {
+  public func print user @noUnusedWarning (?hex1:inValue : UInt32) {
     let v = truncate UInt8 (inValue & 0xF)
     if v < 10 {
       self.writeData_inUserMode (!v + 0x30)
@@ -339,28 +339,28 @@ driver lcd > digital {
 
   //············································································
 
-  public func print user @noUnusedWarning (?hex2:inValue UInt32) {
+  public func print user @noUnusedWarning (?hex2:inValue : UInt32) {
     self.print (!hex1:inValue >> 4)
     self.print (!hex1:inValue)
   }
 
   //············································································
 
-  public func print user @noUnusedWarning (?hex4:inValue UInt32) {
+  public func print user @noUnusedWarning (?hex4:inValue : UInt32) {
     self.print (!hex2:inValue >> 8)
     self.print (!hex2:inValue)
   }
 
   //············································································
 
-  public func print user @noUnusedWarning (?hex8:inValue UInt32) {
+  public func print user @noUnusedWarning (?hex8:inValue : UInt32) {
     self.print (!hex4:inValue >> 16)
     self.print (!hex4:inValue)
   }
 
   //············································································
 
-  public func print user @noUnusedWarning (?hex16:inValue UInt64) {
+  public func print user @noUnusedWarning (?hex16:inValue : UInt64) {
     self.print (!hex8:truncate (inValue >> 32))
     self.print (!hex8:truncate (inValue))
   }
@@ -369,7 +369,7 @@ driver lcd > digital {
   //   PANIC
   //············································································
 
-  func writeDataInPanicMode panic @noUnusedWarning (?inData UInt8) {
+  func writeDataInPanicMode panic @noUnusedWarning (?inData : UInt8) {
     time.panicOneMillisecondBusyWait ()
     self.driveHighRS ()
     self.programLcd4BitDataBusOutput (!inData >> 4)
@@ -385,7 +385,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func printUnsignedInPanicMode panic @noUnusedWarning (?inValue UInt32) {
+  public func printUnsignedInPanicMode panic @noUnusedWarning (?inValue : UInt32) {
     var divisor : UInt32 = 1_000_000_000
     var value = inValue
     var isPrinting = no
@@ -406,7 +406,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func printSignedInPanicMode panic @noUnusedWarning (?inValue Int32) {
+  public func printSignedInPanicMode panic @noUnusedWarning (?inValue : Int32) {
     if inValue ≥ 0 {
       self.printUnsignedInPanicMode (!truncate (inValue))
     }else{
@@ -417,7 +417,7 @@ driver lcd > digital {
 
   //············································································
 
-  func write8bitCommandInPanicMode panic @noUnusedWarning (?inCommand UInt8) {
+  func write8bitCommandInPanicMode panic @noUnusedWarning (?inCommand : UInt8) {
     time.panicOneMillisecondBusyWait ()
     self.driveLowRS ()
     self.programLcd4BitDataBusOutput (!inCommand >> 4)
@@ -433,7 +433,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func gotoInPanicMode panic @noUnusedWarning (?line:inLine UInt32 ?column:inColumn UInt8) {
+  public func gotoInPanicMode panic @noUnusedWarning (?line:inLine : UInt32 ?column:inColumn : UInt8) {
     if inColumn < 20 {
       if inLine == 0 {
         self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn)
@@ -456,7 +456,7 @@ driver lcd > digital {
 
   //············································································
 
-  public func printStringInPanicMode panic @noUnusedWarning (?inString LiteralString) {
+  public func printStringInPanicMode panic @noUnusedWarning (?inString : LiteralString) {
     for c in inString {
       self.writeDataInPanicMode (!c)
     }

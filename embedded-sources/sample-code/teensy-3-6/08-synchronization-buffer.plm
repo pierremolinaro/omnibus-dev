@@ -16,7 +16,7 @@ sync SynchronizationBuffer {
 
   //············································································
 
-  public func write user @mutating @noUnusedWarning (? value UInt32) {
+  public func write user @mutating @noUnusedWarning (? value : UInt32) {
     self.writeSemaphore.wait ()
     self.data [self.writeIndex] = value
     self.writeIndex += 1
@@ -28,7 +28,7 @@ sync SynchronizationBuffer {
 
   //············································································
 
-  public func read user @mutating @noUnusedWarning (! value UInt32) {
+  public func read user @mutating @noUnusedWarning (! value : UInt32) {
     self.readSemaphore.wait ()
     value = self.data [self.readIndex]
     self.readIndex += 1
@@ -40,7 +40,7 @@ sync SynchronizationBuffer {
 
   //············································································
 
-  public guard read @noUnusedWarning (! value UInt32) : self.readSemaphore.wait () {
+  public guard read @noUnusedWarning (! value : UInt32) : self.readSemaphore.wait () {
     value = self.data [self.readIndex]
     self.readIndex += 1
     if self.readIndex == SIZE {

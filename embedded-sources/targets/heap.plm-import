@@ -12,6 +12,6 @@ extern func currentlyAllocatedObjectCount () -> UInt32 : "heap.currently.allocat
 extern func totalAllocationObjectCount () -> UInt32 : "heap.total.allocation.object.count"
 
 extern func freeListCount () -> UInt32 : "heap.free.list.count"
-extern func freeObjectCount (?ForFreeList: inFreeListIndex UInt32) -> UInt32 : "heap.free.object.count.for.free.list"
+extern func freeObjectCount (?ForFreeList: inFreeListIndex : UInt32) -> UInt32 : "heap.free.object.count.for.free.list"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

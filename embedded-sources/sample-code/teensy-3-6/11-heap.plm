@@ -129,7 +129,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
     self.testReleaseLocalVar (!in:self.structure.structure.donnée)
   }
 
-  func testReleaseLocalVar (?in: inData Array8) {
+  func testReleaseLocalVar (?in: inData : Array8) {
     var d = new StructWithARC ()
     d.donnée = inData
   }
@@ -154,7 +154,7 @@ task backgroundTask @stacksize 512 @activate {
     }
   }
 
-  func testReleaseLocalVar (?in: inData Array8) {
+  func testReleaseLocalVar (?in: inData : Array8) {
     externalSection (!in:inData)
     var d : UInt32 = 143
     var x : UInt3 = d [3 ... 5]
@@ -164,7 +164,7 @@ task backgroundTask @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-section externalSection (?in: inData Array8) {
+section externalSection (?in: inData : Array8) {
   var d = inData
   d.append (!0)
   var xxxx = new [Bool] ()

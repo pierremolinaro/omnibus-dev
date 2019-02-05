@@ -11130,15 +11130,15 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_8096 = GALGAS_string ("(") ;
+  GALGAS_string var_key_8136 = GALGAS_string ("(") ;
   const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_8139 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_8139.hasCurrentObject ()) {
-    var_key_8096.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8139.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 198)).add_operation (enumerator_8139.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 198)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 198)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 198)) ;
-    enumerator_8139.gotoNextObject () ;
+  cEnumerator_effectiveArgumentListAST enumerator_8179 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_8179.hasCurrentObject ()) {
+    var_key_8136.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8179.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 202)).add_operation (enumerator_8179.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 202)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 202)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 202)) ;
+    enumerator_8179.gotoNextObject () ;
   }
-  var_key_8096.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 200)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_8096, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 201)) ;
+  var_key_8136.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 204)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_8136, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 205)) ;
 //---
   return result_result ;
 }

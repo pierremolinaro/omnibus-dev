@@ -21,13 +21,13 @@ enum GuardState {
   case waitingForChange
 }
 
-extern func taskGuardState safe user (?taskIndex: inIndex UInt32) -> GuardState : "taskGuardState"
+extern func taskGuardState safe user (?taskIndex: inIndex : UInt32) -> GuardState : "taskGuardState"
 
-extern func taskAllocatedStackSize safe user (?taskIndex: inIndex UInt32) -> UInt32 : "taskAllocatedStackSize"
+extern func taskAllocatedStackSize safe user (?taskIndex: inIndex : UInt32) -> UInt32 : "taskAllocatedStackSize"
 
-extern func taskFreeStackSize safe user (?taskIndex: inIndex UInt32) -> UInt32 : "taskFreeStackSize"
+extern func taskFreeStackSize safe user (?taskIndex: inIndex : UInt32) -> UInt32 : "taskFreeStackSize"
 
-extern func taskName safe user (?taskIndex: inIndex UInt32) -> LiteralString : "taskName"
+extern func taskName safe user (?taskIndex: inIndex : UInt32) -> LiteralString : "taskName"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   SYNCHRONIZATION TOOLS ROUTINES
@@ -37,18 +37,18 @@ opaque TaskList @instantiable {64}
 
 //--- Block running task
 extern func
-block safe primitive (?!inList:ioWaitingList TaskList) : "blockInList"
+block safe primitive (?!inList:ioWaitingList : TaskList) : "blockInList"
 
 extern func
-block safe primitive (?onDeadline:inDeadline UInt32) : "blockOnDeadline"
+block safe primitive (?onDeadline:inDeadline : UInt32) : "blockOnDeadline"
 
 //--- Make task Ready
 extern func
-makeTaskReady safe service (?!fromList:ioWaitingList TaskList
-                       !found: outFound Bool) : "makeTaskReady"
+makeTaskReady safe service (?!fromList:ioWaitingList : TaskList
+                            !found: outFound : Bool) : "makeTaskReady"
 
 extern func
-makeTasksReady safe service (?fromCurrentDate:inCurrentDate UInt32) : "makeTasksReadyFromCurrentDate"
+makeTasksReady safe service (?fromCurrentDate:inCurrentDate : UInt32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   GUARD
@@ -57,16 +57,16 @@ makeTasksReady safe service (?fromCurrentDate:inCurrentDate UInt32) : "makeTasks
 opaque GuardList @instantiable {64}
 
 extern func
-handle safe guard (?!guard:ioGuard GuardList) : "handleGuardedCommand"
+handle safe guard (?!guard:ioGuard : GuardList) : "handleGuardedCommand"
 
 extern func
-handle safe guard (?guardedDeadline:inDeadlineMS UInt32) : "guard.handle.wait.until"
+handle safe guard (?guardedDeadline:inDeadlineMS : UInt32) : "guard.handle.wait.until"
 
 extern func
-notifyChange safe service (?!forGuard:ioGuard GuardList) : "notify.change.from.guard.list"
+notifyChange safe service (?!forGuard:ioGuard : GuardList) : "notify.change.from.guard.list"
 
 extern func
-notifyChangeForGuardedWaitUntil safe service (?withCurrentDate:inCurrentDate UInt32)
+notifyChangeForGuardedWaitUntil safe service (?withCurrentDate:inCurrentDate : UInt32)
 : "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
