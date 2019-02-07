@@ -74,7 +74,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-addressof-control-register.galgas"
   "galgas-sources/expression-addressof-regular-var.galgas"
   "galgas-sources/expression-sizeof.galgas"
-  "galgas-sources/expression-constructor-call.galgas"
+#  "galgas-sources/expression-constructor-call.galgas"
   "galgas-sources/expression-typed-constant.galgas"
   "galgas-sources/expression-if.galgas"
   "galgas-sources/expression-infix-operators.galgas"

@@ -20,7 +20,7 @@ driver project > digital {
 
 driver project ()
 
-typealias Array8 = [UInt8]
+typealias Array8 = [[UInt8]]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -167,7 +167,7 @@ task backgroundTask @stacksize 512 @activate {
 section externalSection (?in: inData : Array8) {
   var d = inData
   d.append (!0)
-  var xxxx = [Bool] ()
+  var xxxx = [[Bool]] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
 }

@@ -95,7 +95,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_in,
    kToken_interrupt,
    kToken_let,
-   kToken_new,
    kToken_no,
    kToken_nop,
    kToken_not,
@@ -214,7 +213,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 119 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 118 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
