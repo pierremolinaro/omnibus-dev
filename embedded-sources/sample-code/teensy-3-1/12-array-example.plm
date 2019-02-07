@@ -14,17 +14,17 @@ struct B {
 }
 
 struct C {
-  var c = new B ()
+  var c = B ()
 }
 
-let array = new A (!1 !2 !3)
+let array = A (!1 !2 !3)
 
 //------------------------------------------------*
 
 task T @stacksize 512 @activate {
   var deadline : UInt32 = 0
-  var array = new A (!repeated:0)
-  var array2 = new A (!repeated:1)
+  var array = A (!repeated:0)
+  var array2 = A (!repeated:1)
   var index : Int32 = 0
 
   on @setup first {
@@ -51,14 +51,14 @@ task T @stacksize 512 @activate {
     }
 
   //--- Init from a repeated static value
-    var a = new A (!repeated:5)
+    var a = A (!repeated:5)
   //--- Init from a repeated dynamic value
     var e : UInt32 = 5
-    var b = new A (!repeated:e)
+    var b = A (!repeated:e)
   //--- Init from a static values
-    var c = new A (!0 !1 !2)
+    var c = A (!0 !1 !2)
   //--- Init from a dynamic values
-    var d = new A (!0 !e !2)
+    var d = A (!0 !e !2)
   //---
     var x : UInt32 = 0
     for i : UInt32 in 0 ..< A.count {
@@ -67,11 +67,11 @@ task T @stacksize 512 @activate {
       x += a [i]
     }
 
-    var s = new B ()
+    var s = B ()
     var aa = s.a
     var bb = s.b
     s.a = aa
-    var s2 = new C ()
+    var s2 = C ()
     s2.c.a = aa
   }
 }

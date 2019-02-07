@@ -2583,7 +2583,7 @@ mProperty_mSignature (),
 mProperty_mReturnTypeProxy (),
 mProperty_mModeDictionary (),
 mProperty_mIsExported (),
-mProperty_mMode () {
+mProperty_mFunctionMode () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2606,7 +2606,7 @@ mProperty_mSignature (inOperand2),
 mProperty_mReturnTypeProxy (inOperand3),
 mProperty_mModeDictionary (inOperand4),
 mProperty_mIsExported (inOperand5),
-mProperty_mMode (inOperand6) {
+mProperty_mFunctionMode (inOperand6) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2649,7 +2649,7 @@ typeComparisonResult GALGAS_routineMapCTXT_2D_element::objectCompare (const GALG
     result = mProperty_mIsExported.objectCompare (inOperand.mProperty_mIsExported) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
+    result = mProperty_mFunctionMode.objectCompare (inOperand.mProperty_mFunctionMode) ;
   }
   return result ;
 }
@@ -2657,7 +2657,7 @@ typeComparisonResult GALGAS_routineMapCTXT_2D_element::objectCompare (const GALG
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_routineMapCTXT_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mIsPublic.isValid () && mProperty_mSignature.isValid () && mProperty_mReturnTypeProxy.isValid () && mProperty_mModeDictionary.isValid () && mProperty_mIsExported.isValid () && mProperty_mMode.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mIsPublic.isValid () && mProperty_mSignature.isValid () && mProperty_mReturnTypeProxy.isValid () && mProperty_mModeDictionary.isValid () && mProperty_mIsExported.isValid () && mProperty_mFunctionMode.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2669,7 +2669,7 @@ void GALGAS_routineMapCTXT_2D_element::drop (void) {
   mProperty_mReturnTypeProxy.drop () ;
   mProperty_mModeDictionary.drop () ;
   mProperty_mIsExported.drop () ;
-  mProperty_mMode.drop () ;
+  mProperty_mFunctionMode.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2692,7 +2692,7 @@ void GALGAS_routineMapCTXT_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mIsExported.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mMode.description (ioString, inIndentation+1) ;
+    mProperty_mFunctionMode.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -2735,8 +2735,8 @@ GALGAS_bool GALGAS_routineMapCTXT_2D_element::getter_mIsExported (UNUSED_LOCATIO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_mode GALGAS_routineMapCTXT_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mMode ;
+GALGAS_mode GALGAS_routineMapCTXT_2D_element::getter_mFunctionMode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFunctionMode ;
 }
 
 

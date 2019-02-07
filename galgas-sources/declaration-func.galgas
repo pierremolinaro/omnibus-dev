@@ -205,6 +205,7 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !routineLLVMNameDict
       !exportedFunction
       !function.mMode
+#      !.regular
     ]
   #---------------- Add decorated declaration
     ioDecoratedRoutineList +=
@@ -282,6 +283,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
       !routineLLVMNameDict
       !exportedFunction
       !function.mMode
+#      !.regular
     ]
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
@@ -310,11 +312,18 @@ map @routineMapCTXT {
   @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
   @routineLLVMNameDict mModeDictionary
   @bool mIsExported
-  @mode mMode
+  @mode mFunctionMode
 
   insert insertKey error message "the '%K' function is already declared in %L"
   search searchKey error message "there is no '%K' function"
 }
+
+#·······················································································································
+
+#enum @routineStyle {
+#case regular
+#case typeConstructor
+#}
 
 #·······················································································································
 

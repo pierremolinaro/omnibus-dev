@@ -8,11 +8,11 @@ import "carte-tp-teensy-3-6.plm-import"
 let SIZE = 10
 
 sync SynchronizationBuffer {
-  var data = new [• SIZE • UInt32] (!repeated:new UInt32 ())
+  var data = [• SIZE • UInt32] (!repeated:UInt32 ())
   var readIndex : UInt32 = 0
   var writeIndex : UInt32 = 0
-  var readSemaphore = new Semaphore (!value:0)
-  var writeSemaphore = new Semaphore (!value:SIZE)
+  var readSemaphore = Semaphore (!value:0)
+  var writeSemaphore = Semaphore (!value:SIZE)
 
   //············································································
 
@@ -55,7 +55,7 @@ sync SynchronizationBuffer {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync buffer = new SynchronizationBuffer ()
+sync buffer = SynchronizationBuffer ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

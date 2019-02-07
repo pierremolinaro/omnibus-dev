@@ -171,7 +171,7 @@ section initializeDMA (?!pattern : PatternArray) {
 
 task Tâche @stacksize 512 @activate {
   var compteur : UInt32 = 0
-  var pattern = new PatternArray (!repeated:0)
+  var pattern = PatternArray (!repeated:0)
 
   on @setup first {
     initializeDMA (!?self.pattern)

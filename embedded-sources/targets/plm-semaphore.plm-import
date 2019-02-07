@@ -2,8 +2,8 @@
 
 sync Semaphore {
   var value : UInt32
-  var list = new TaskList ()
-  var guardList = new GuardList ()
+  var list = TaskList ()
+  var guardList = GuardList ()
 
   //····················································································································
 

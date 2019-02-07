@@ -5,10 +5,10 @@ import "carte-tp-teensy-3-1.plm-import"
 //-----------------------------------------------------------------------------*
 
 sync RendezVous {
-  var inputWaitList = new TaskList ()
-  var outputWaitList = new TaskList ()
-  var inputGuardList = new GuardList ()
-  var outputGuardList = new GuardList ()
+  var inputWaitList = TaskList ()
+  var outputWaitList = TaskList ()
+  var inputGuardList = GuardList ()
+  var outputGuardList = GuardList ()
 
   public primitive input @mutating () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
@@ -44,7 +44,7 @@ sync RendezVous {
 
 //-----------------------------------------------------------------------------*
 
-sync rdvs = new RendezVous ()
+sync rdvs = RendezVous ()
 
 //-----------------------------------------------------------------------------*
 

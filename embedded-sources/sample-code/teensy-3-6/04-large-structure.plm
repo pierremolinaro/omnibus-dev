@@ -13,8 +13,8 @@ typealias PatternArray = [• PATTERN_LENGTH • UInt32]
 
 task Tâche @stacksize 5512 @activate {
   var compteur : UInt32 = 0
-  var x = new PatternArray (!repeated:0)
-  var y = new PatternArray (!repeated:0)
+  var x = PatternArray (!repeated:0)
+  var y = PatternArray (!repeated:0)
 
   on @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)

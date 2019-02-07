@@ -2373,6 +2373,11 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionModeForKey (class GALGAS_mode constinArgument0,
+                                                                class GALGAS_string constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setMIsExportedForKey (class GALGAS_bool constinArgument0,
                                                               class GALGAS_string constinArgument1,
                                                               C_Compiler * inCompiler
@@ -2387,11 +2392,6 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
                                                                   class GALGAS_string constinArgument1,
                                                                   C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMModeForKey (class GALGAS_mode constinArgument0,
-                                                        class GALGAS_string constinArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxyForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                                    class GALGAS_string constinArgument1,
@@ -2418,6 +2418,10 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mFunctionModeForKey (const class GALGAS_string & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsExportedForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
@@ -2429,10 +2433,6 @@ class GALGAS_routineMapCTXT : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineLLVMNameDict getter_mModeDictionaryForKey (const class GALGAS_string & constinOperand0,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeForKey (const class GALGAS_string & constinOperand0,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxyForKey (const class GALGAS_string & constinOperand0,
                                                                                                 C_Compiler * inCompiler
@@ -2473,7 +2473,7 @@ class cEnumerator_routineMapCTXT : public cGenericAbstractEnumerator {
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnTypeProxy (LOCATION_ARGS) const ;
   public : class GALGAS_routineLLVMNameDict current_mModeDictionary (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsExported (LOCATION_ARGS) const ;
-  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mFunctionMode (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_routineMapCTXT_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2495,7 +2495,7 @@ class cMapElement_routineMapCTXT : public cMapElement {
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
   public : GALGAS_routineLLVMNameDict mProperty_mModeDictionary ;
   public : GALGAS_bool mProperty_mIsExported ;
-  public : GALGAS_mode mProperty_mMode ;
+  public : GALGAS_mode mProperty_mFunctionMode ;
 
 //--- Constructor
   public : cMapElement_routineMapCTXT (const GALGAS_lstring & inKey,
@@ -2504,7 +2504,7 @@ class cMapElement_routineMapCTXT : public cMapElement {
                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                        const GALGAS_routineLLVMNameDict & in_mModeDictionary,
                                        const GALGAS_bool & in_mIsExported,
-                                       const GALGAS_mode & in_mMode
+                                       const GALGAS_mode & in_mFunctionMode
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements

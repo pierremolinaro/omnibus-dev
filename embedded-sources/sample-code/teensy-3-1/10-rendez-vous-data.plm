@@ -5,8 +5,8 @@ import "carte-tp-teensy-3-1.plm-import"
 //-----------------------------------------------------------------------------*
 
 sync RendezVousData {
-  var readBarrier  = new Semaphore (!value:0)
-  var writeBarrier = new Semaphore (!value:1)
+  var readBarrier  = Semaphore (!value:0)
+  var writeBarrier = Semaphore (!value:1)
   var data : UInt32 = 0
 
   public func output user @mutating @noUnusedWarning (?data:inData : UInt32) {
@@ -35,9 +35,9 @@ sync RendezVousData {
 
 //-----------------------------------------------------------------------------*
 
-sync s = new Semaphore (!value:1)
-sync rdvs = new RendezVousData ()
-sync rdvs2 = new RendezVousData ()
+sync s = Semaphore (!value:1)
+sync rdvs = RendezVousData ()
+sync rdvs2 = RendezVousData ()
 
 //-----------------------------------------------------------------------------*
 

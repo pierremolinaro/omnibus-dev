@@ -6375,7 +6375,7 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_bool mProperty_mIsExported ;
 
-  public : GALGAS_mode mProperty_mMode ;
+  public : GALGAS_mode mProperty_mFunctionMode ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -6394,7 +6394,7 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
                                              const GALGAS_routineLLVMNameDict & in_mModeDictionary,
                                              const GALGAS_bool & in_mIsExported,
-                                             const GALGAS_mode & in_mMode) ;
+                                             const GALGAS_mode & in_mFunctionMode) ;
 
 //-- Start of generic part --*
 
@@ -6430,11 +6430,11 @@ class GALGAS_routineMapCTXT_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mFunctionMode (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsExported (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineLLVMNameDict getter_mModeDictionary (LOCATION_ARGS) const ;
 

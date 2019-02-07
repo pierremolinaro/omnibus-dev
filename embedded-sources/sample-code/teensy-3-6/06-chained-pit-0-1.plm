@@ -30,7 +30,7 @@ driver chronomètre > root {
     r |= extend (#PIT:LTMR64L)
     r = ~ r
     r +%= 1
-    result = new Uptime (!rawValue: r)
+    result = Uptime (!rawValue: r)
   }
 }
 

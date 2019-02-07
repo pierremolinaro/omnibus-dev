@@ -17,10 +17,6 @@ setter @universalValuedObjectMap insertType
   ?type: let @PLMType inType
   ?typeMap: let @unifiedTypeMap inTypeMap
 {
-#  let typeProxy = @unifiedTypeMap-proxy.searchKey {
-#    !inTypeMap
-#    !inTypeName
-#  }
   @propertyGetterMap propertyGetterMap = {}
   for (name value propertyTypeName) in [inType classConstantMap] do
    let propertyType = [@unifiedTypeMap-proxy.searchKey {!inTypeMap !propertyTypeName} type]

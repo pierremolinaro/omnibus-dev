@@ -21,21 +21,21 @@ class @constructorCallAST : @expressionAST {
 
 syntax extension plm_syntax {
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    $new$
-    <type_definition> !?ioAST ?let typeName
-    $($
-    @functionCallEffectiveParameterListAST parameterList = {}
-    repeat
-    while
-      $!selector:$ ?let selector
-      <expression> !?ioAST ?let expression
-      parameterList += !selector !expression
-    end
-    let errorLocation = @location.here
-    $)$
-    outExpression = @constructorCallAST.new {!typeName !parameterList !errorLocation}
-  }
+#  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+#    $new$
+#    <type_definition> !?ioAST ?let typeName
+#    $($
+#    @functionCallEffectiveParameterListAST parameterList = {}
+#    repeat
+#    while
+#      $!selector:$ ?let selector
+#      <expression> !?ioAST ?let expression
+#      parameterList += !selector !expression
+#    end
+#    let errorLocation = @location.here
+#    $)$
+#    outExpression = @constructorCallAST.new {!typeName !parameterList !errorLocation}
+#  }
 
 }
 

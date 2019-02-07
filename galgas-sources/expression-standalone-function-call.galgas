@@ -96,38 +96,86 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
 #--- Get called function signature
   let signature = [mArguments routineSignature !mStandaloneFunctionName.location]
 #--- Search function in map
-  let requiredFunctionMangledName = mStandaloneFunctionName.string + signature
+  let requiredFunctionMangledName = @lstring.new {!mStandaloneFunctionName.string + signature !mStandaloneFunctionName}
+  if [inContext.mRoutineMap hasKey !requiredFunctionMangledName.string] then
+    analyzeRegularFunctionCall (
+      !self: inSelfType
+      !mangledFunctionName: requiredFunctionMangledName
+      !arguments: mArguments
+      !routineLLVMName: routineLLVMName
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      ?result: outFunctionCallReturnedValue
+    )
+  elsif [inContext.mTypeMap hasKey !mStandaloneFunctionName.string] then
+    analyzeConstructorCall (
+      !self: inSelfType
+      !typeName: mStandaloneFunctionName
+      !arguments: mArguments
+      !routineAttributes: inRoutineAttributes
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap: ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      ?result: outFunctionCallReturnedValue
+    )
+  else
+    error requiredFunctionMangledName
+    : "Undefined " + requiredFunctionMangledName + " function"
+    : outFunctionCallReturnedValue
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc analyzeRegularFunctionCall
+  ?self:let @PLMType inSelfType
+  ?mangledFunctionName: let @lstring inRequiredFunctionMangledName
+  ?arguments: let   @effectiveArgumentListAST inArguments
+  ?routineLLVMName: let @lstring inRoutineLLVMName
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outFunctionCallReturnedValue
+{
+#--- Cannot call a function in guard
   [inContext.mRoutineMap searchKey
-    !.new {!requiredFunctionMangledName !mStandaloneFunctionName}
+    !inRequiredFunctionMangledName
     ?let unused implementedPublic
     ?let formalSignature
     ?let formalReturnTypeProxy # null if no returned value
     ?let implementedModeDictionary
-    ?let unused implementedIsExported
+    ?let unused isExported
     ?let unused implementedMode
   ]
 #--- Check routine is actually a function
   if formalReturnTypeProxy == .null then
-    error mStandaloneFunctionName : "this function does not return any value" : outFunctionCallReturnedValue
+    error inRequiredFunctionMangledName : "this function does not return any value" : outFunctionCallReturnedValue
   else
   #--- Check modes
-    let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !mStandaloneFunctionName)
-#    @string functionLLVMName
-#    if [implementedModeDictionary hasKey !inMode] then
-#      [implementedModeDictionary searchKey !inMode ?functionLLVMName]
-#    elsif [implementedModeDictionary hasKey !.anyMode] then
-#      [implementedModeDictionary searchKey !.anyMode ?functionLLVMName]
-#    else
-#      error mStandaloneFunctionName : "this function cannot be invoked in " + inMode + " mode" : functionLLVMName
-#    end
+    let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !inRequiredFunctionMangledName)
   #--- Analyze effective parameters
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !formal:formalSignature
-      !effective:mArguments
-      !errorLocation:mStandaloneFunctionName.location
+      !effective: inArguments
+      !errorLocation:inRequiredFunctionMangledName.location
       !context:inContext
       !requiredMode:inMode
       !?temporary:ioTemporaries
@@ -142,10 +190,177 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   #--- Code generation
     ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
       !outFunctionCallReturnedValue
-      !routineLLVMName
+      !inRoutineLLVMName
       !functionLLVMName
       !effectiveParameterListIR
     }
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc analyzeConstructorCall
+  ?self:let @PLMType inSelfType
+  ?typeName: let @lstring inTypeName
+  ?arguments: let @effectiveArgumentListAST inEffectiveArguments
+  ?routineAttributes:let @routineAttributes inRoutineAttributes
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- A constructor accepts only input arguments
+  @functionCallEffectiveParameterListAST parameterList = {}
+  for (parameter selector) in inEffectiveArguments do
+    switch parameter 
+    case input (name) :
+      error name : "a constructor call accpts only output effective parameter"
+    case inputWithType (2* name) :
+      error name : "a constructor call accpts only output effective parameter"
+    case output (exp @location unused endOfExp) :
+      parameterList += !selector !exp
+    case outputInput (name) :
+      error name : "a constructor call accpts only output effective parameter"
+    case outputInputSelfVariable (name) :
+      error name : "a constructor call accpts only output effective parameter"
+    end
+  end
+#--- Analyze effective argument list
+  var constructorKey = "("
+  for (selector *) in parameterList do
+    constructorKey += "!" + selector
+  end
+  constructorKey += ")"
+#--- Analyze constructor signature and init value
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inTypeName} type]
+  let constructorMap = resultType.constructorMap
+  [constructorMap searchKey !.new {!constructorKey !inTypeName} ?let constructorSignature ?let initValue]
+#--- Examine init value
+  switch initValue
+  case arrayValue (elementType size) :
+    if constructorKey == "(!repeated)" then
+      let expression = [parameterList mExpressionAtIndex !0]
+      [expression analyzeExpression
+        !self:inSelfType
+        !routineAttributes:inRoutineAttributes
+        !optionalTargetType:elementType
+        !context:inContext
+        !mode:inMode
+        !?temporary:ioTemporaries
+        !?staticEntityMap:ioStaticEntityMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+        ?result:let @objectIR expressionResult
+      ]
+      let result = checkAssignmentCompatibility (
+        !source:expressionResult
+        !targetAnnotationType:elementType
+        !errorLocation:[parameterList mSelectorAtIndex !0].location
+        !staticTypeAllowed:false
+      )
+      if [result isStatic] then
+        let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+        outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
+        @operandIRList operandIRList = {}
+        for i in 0 ..< size do
+          operandIRList += !result
+        end
+        ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
+      else
+        outResult = .llvmArrayRepeatedDynamicValue {!type:resultType !arraySize:size !value:result}
+      end
+    else
+      var individualConstructor = "("
+      for i in 0 ..< size do
+        individualConstructor += "!"
+      end
+      individualConstructor += ")"
+      if constructorKey == individualConstructor then
+        @operandIRList operandIRList = {}
+        var resultIsStatic = true
+        for () in parameterList do
+          [mExpression analyzeExpression
+            !self:inSelfType
+            !routineAttributes:inRoutineAttributes
+            !optionalTargetType:elementType
+            !context:inContext
+            !mode:inMode
+            !?temporary:ioTemporaries
+            !?staticEntityMap:ioStaticEntityMap
+            !?variableMap:ioUniversalMap
+            !?alloca:ioAllocaList
+            !?instructionListIR:ioInstructionGenerationList
+            ?result:let @objectIR expressionResult
+          ]
+          let result = checkAssignmentCompatibility (
+            !source:expressionResult
+            !targetAnnotationType:elementType
+            !errorLocation:mSelector.location
+            !staticTypeAllowed:false
+          )
+          operandIRList += !result
+          resultIsStatic = resultIsStatic && [result isStatic]
+        end
+        if resultIsStatic then
+          let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+          outResult = .llvmArrayStaticValues {!type:resultType !values:operandIRList !index:idx}
+          ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
+        else
+          outResult = .llvmArrayDynamicValues {!type:resultType !values:operandIRList}
+        end
+      else
+        error inTypeName : "invalid constructor" : outResult
+      end
+    end
+  case null :
+    outResult = .null {!type: resultType}
+  case simple (value) :
+    if [parameterList length] != 0 then
+      error inTypeName : resultType.plmTypeDescriptionName + " constructor should have no parameter" : outResult
+    else
+      outResult = .literalInteger {!type: resultType !value:value}
+    end
+  case structure (sortedOperandList) :
+    var sortedOperandIRList = sortedOperandList
+    if [parameterList length] != [constructorSignature length] then
+      error inTypeName : "this constructor call should name " + [constructorSignature length] + " parameter"
+        + if [constructorSignature length] > 1 then "s" else "" end
+        + " instead of " + [parameterList length]
+      : outResult
+    else
+      for () formal_ in constructorSignature, () effective_ in parameterList do
+        if effective_mSelector.string != formal_mSelector  then
+          error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
+        end
+        [effective_mExpression analyzeExpression
+          !self:inSelfType
+          !routineAttributes:inRoutineAttributes
+          !optionalTargetType:formal_mType
+          !context:inContext
+          !mode:inMode
+          !?temporary:ioTemporaries
+          !?staticEntityMap:ioStaticEntityMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !?instructionListIR:ioInstructionGenerationList
+          ?result:let @objectIR expressionResult
+        ]
+        var result = checkAssignmentCompatibility (
+          !source:expressionResult
+          !targetAnnotationType:formal_mType
+          !errorLocation:effective_mSelector.location
+          !staticTypeAllowed:false
+        )
+        [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?result]
+        sortedOperandIRList += !result !formal_mFieldIndex
+      end
+      outResult = .llvmStructureValue {!type:resultType !values:sortedOperandIRList}
+    end
   end
 }
 

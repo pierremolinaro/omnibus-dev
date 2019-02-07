@@ -26,15 +26,15 @@ typealias Array8 = [UInt8]
 
 struct StructWithARC {
   public var unEntierQuelconque : UInt32 = 0
-  public var donnée = new Array8 ()
+  public var donnée = Array8 ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct AutreStructWithARC {
   public var autreEntierQuelconque : UInt32 = 0
-  public var structure = new StructWithARC ()
-  public var autreDonnée = new Array8 ()
+  public var structure = StructWithARC ()
+  public var autreDonnée = Array8 ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -97,9 +97,9 @@ task T2 > backgroundTask @stacksize 512 @activate {
   var échéance1 : UInt32 = 2001
   var échéance2 : UInt32 = 2001
   var échéance3 : UInt32 = 2001
-  var data1 = new Array8 ()
-  var data2 = new Array8 ()
-  var structure = new AutreStructWithARC ()
+  var data1 = Array8 ()
+  var data2 = Array8 ()
+  var structure = AutreStructWithARC ()
   var b : UInt8 = 0
 
   on time.wait (!until:self.échéance1) {
@@ -130,7 +130,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
   }
 
   func testReleaseLocalVar (?in: inData : Array8) {
-    var d = new StructWithARC ()
+    var d = StructWithARC ()
     d.donnée = inData
   }
 }
@@ -138,7 +138,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task backgroundTask @stacksize 512 @activate {
-  var data = new Array8 ()
+  var data = Array8 ()
 
   on time.wait (!until:0) {
     digital.toggle (!port:LED_L0)
@@ -167,7 +167,7 @@ task backgroundTask @stacksize 512 @activate {
 section externalSection (?in: inData : Array8) {
   var d = inData
   d.append (!0)
-  var xxxx = new [Bool] ()
+  var xxxx = [Bool] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
 }

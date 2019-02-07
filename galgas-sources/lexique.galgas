@@ -33,7 +33,7 @@ lexique plm_lexique {
 #    "init",
     "interrupt",
     "let",
-    "new",
+ "new",
     "no",
     "nop",
     "not",
