@@ -31,7 +31,7 @@ task Tâche @stacksize 5512 @activate {
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!u32::PatternArray.count)
+    lcd.print (!u32: PatternArray.count)
   }
 }
 

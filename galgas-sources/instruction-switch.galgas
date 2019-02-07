@@ -124,7 +124,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   for (caseIdentifiers instructionList) in mSwitchCaseList do
     @uintlist caseIdentifierIndexList = {}
     for (caseIdf) in caseIdentifiers do
-      [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?*]
+      [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?1*]
       caseIdentifierIndexList += !constantIdx
       if [usedEnumerationValues hasKey !caseIdf] then
         error caseIdf : "duplicated enumeration constant" fixit { remove }
@@ -148,7 +148,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   end  
   [!?ioUniversalMap closeOverride !mEndOf_switch_instruction]
 #--- Check all enumeration values are named in switch instructions
-  for (lkey * *) in enumConstantMap do
+  for (lkey 2*) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then
       error mEndOf_test_expression : "missing '" + lkey + "' enumeration constant"
     end  

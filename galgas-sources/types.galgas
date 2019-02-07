@@ -4,12 +4,12 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @PLMType {
+shared class @PLMType {
   @propertyGetterMap propertyGetterMap %selector
   @propertySetterMap propertySetterMap %selector
   @routineMapCTXT routineMap %selector
-  @classConstantMap classConstantMap %selector # $type.cst, as enumeration values
-  @constructorMap constructorMap %selector # $type (!... !...)
+  @classConstantMap classConstantMap %selector # type.cst, as enumeration values
+  @constructorMap constructorMap %selector # type (!... !...)
   @guardMapCTXT guardMap %selector
   @subscript subscript %selector
   @stringset assignmentSources %selector

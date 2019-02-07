@@ -25,6 +25,7 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
 {
   switch mSourceValue
   case void :
+  case type (*) :
   case null (*) :
   case reference (* *) :
   case llvmValue (* *) :
@@ -56,6 +57,8 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   switch mSourceValue
+  case type (*) :
+    ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode type >>\n"
   case void :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode void >>\n"
   case null (*) :

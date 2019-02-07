@@ -250,6 +250,10 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
+    case type (*) :
+      error mIdentifier
+      : "<<@procedureCallInstructionAST instructionSemanticAnalysis type>>"
+      : currentType, currentLLVMAddressVar
     case task (@PLMType type) :
       currentType = type
       currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)

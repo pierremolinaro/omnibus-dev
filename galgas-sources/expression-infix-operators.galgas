@@ -4,11 +4,8 @@
 
 enum @infixOperator {
   case equal
-#  case nonEqual
   case strictInf
-#  case strictSup
   case infEqual
-#  case supEqual
   case andOp
   case orOp
   case xorOp

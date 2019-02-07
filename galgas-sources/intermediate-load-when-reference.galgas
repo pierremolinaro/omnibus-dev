@@ -7,6 +7,8 @@ setter @instructionListIR appendLoadWhenReference
   switch ioObject
   case void :
     error .nowhere : "<<@instructionListIR appendLoadWhenReference void>>" : ioObject
+  case type (*) :
+    error .nowhere : "<<@instructionListIR appendLoadWhenReference type>>" : ioObject
   case reference (@PLMType type llvmName) :
     getNewTempValue (!type !?ioTemporaries ?let resultingValue)
     [!?self appendLoadFromReference !resultingValue !llvmName]

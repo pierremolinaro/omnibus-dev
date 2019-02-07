@@ -57,12 +57,7 @@ syntax extension plm_syntax {
     while
       $.$
       $identifier$ ?let propertyName
-      select
-        outAccessList += !.property {!name:propertyName}
-      or
-        <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-        outAccessList += !.funcCall {!methodName:propertyName !arguments:arguments !endOfArguments:endOfArguments}
-      end
+      outAccessList += !.property {!name:propertyName}
     while
       $[$
       $integer$ ?let low
@@ -87,11 +82,11 @@ syntax extension plm_syntax {
         !endOfIndex:endOfIndex
         !checkIndexExpression:checkIndexExpression
        }
-#    while
-#      $.$
-#      $identifier$ ?let methodName
-#      <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-#      outAccessList += !.funcCall {!methodName:methodName !arguments:arguments !endOfArguments:endOfArguments}
+    while
+      $.$
+      $identifier$ ?let methodName
+      <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
+      outAccessList += !.funcCall {!methodName:methodName !arguments:arguments !endOfArguments:endOfArguments}
     end
   }
 
@@ -236,6 +231,22 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 {
   [ioUniversalMap searchEntity !mReceiverName ?let entity]
   switch entity
+  case type (type) :
+    outResult = .type {!type: type}
+    procAnalyzeAccesListInExpression (
+      !self: inSelfType
+      !routineAttributes:inRoutineAttributes
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !mode: inMode
+      !?temporary: ioTemporaries
+      !?staticEntityMap:ioStaticEntityMap
+      !?variableMap: ioUniversalMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !mAccessList
+      !?result: outResult
+    )
   case task (type) :
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (
@@ -374,6 +385,7 @@ proc procAnalyzeAccesListInExpression
         !propertyName
         !inMode
         !?temporary:ioTemporaries
+        !?alloca: ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
@@ -451,6 +463,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !propertyName
         !inMode
         !?temporary:ioTemporaries
+        !?alloca: ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex checkIndexExpression) :
@@ -524,6 +537,7 @@ proc handlePropertyAccessInExpression
   ?let @lstring inPropertyName
   ?let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
@@ -533,7 +547,7 @@ proc handlePropertyAccessInExpression
   case constantProperty (@objectIR value) :
     ioResult = value
   case storedProperty (@PLMType propertyType @uint propertyIndex) :
-    [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
+   [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
       ![ioResult type]
       ![ioResult llvmName]
@@ -543,6 +557,7 @@ proc handlePropertyAccessInExpression
     ]
     ioResult = .reference {!type:propertyType !llvmName:property_llvmName}
   case computedProperty (propertyTypeProxy modeDictionary) :
+    [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioResult]
     let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!modeDictionary !inMode !inPropertyName)
     [!?ioInstructionGenerationList appendGetComputedPropertyValue
       !?ioTemporaries

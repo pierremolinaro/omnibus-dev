@@ -7,6 +7,8 @@ enum @objectIR {
   case void
 #--- Reference
   case reference (@PLMType type @string llvmName)
+#--- Type
+  case type (@PLMType type)
 #--- Values
   case null (@PLMType type)
   case llvmValue (@PLMType type @string llvmName)
@@ -26,7 +28,8 @@ enum @objectIR {
 
 getter @objectIR llvmName -> @string {
   switch self
-  case void : error .nowhere : "<<@objectIR llvmName null>>" : result
+  case void : error .nowhere : "<<@objectIR llvmName void>>" : result
+  case type (*) : error .nowhere : "<<@objectIR llvmName type>>" : result
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = [value string]
@@ -58,7 +61,8 @@ getter @objectIR llvmName -> @string {
 
 getter @objectIR llvmValue -> @string {
   switch self
-  case void : error .nowhere : "<<@objectIR llvmName null>>" : result
+  case void : error .nowhere : "<<@objectIR llvmName void>>" : result
+  case type (*) : error .nowhere : "<<@objectIR llvmName type>>" : result
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = [value string]
@@ -100,8 +104,8 @@ getter @objectIR llvmValue -> @string {
 
 getter @objectIR type -> @PLMType {
   switch self
-  case void :
-    error .nowhere : "<<@objectIR type null>>" : result
+  case void : error .nowhere : "<<@objectIR type void>>" : result
+  case type (type) : result = type
   case reference (type *) : result = type
   case null (type) : result = type
   case zero (type) : result = type
@@ -132,7 +136,10 @@ getter @objectIR plmTypeDescriptionName -> @string {
 
 getter @objectIR withType ?let @PLMType inType -> @objectIR {
   switch self
-  case void : error .nowhere : "<<@objectIR withType null>>" : result
+  case void :
+    error .nowhere : "<<@objectIR withType void>>" : result
+  case type (*) :
+    error .nowhere : "<<@objectIR withType type>>" : result
   case reference (* llvmName) :
     result = .reference {!type:inType !llvmName:llvmName}
   case null (*) :
@@ -163,6 +170,7 @@ getter @objectIR withType ?let @PLMType inType -> @objectIR {
 getter @objectIR name -> @string {
   switch self
   case void : error .nowhere : "<<@objectIR name void>>" : result
+  case type (*) : error .nowhere : "<<@objectIR name type>>" : result
   case reference (* llvmName) : result = llvmName
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
@@ -185,6 +193,7 @@ getter @objectIR name -> @string {
 getter @objectIR isStatic -> @bool {
   switch self
   case void : error .nowhere : "<<@objectIR isStatic void>>" : result
+  case type (*) : error .nowhere : "<<@objectIR isStatic type>>" : result
   case reference (**) : result = false
   case zero (*) : result = true
   case null (*) : result = true

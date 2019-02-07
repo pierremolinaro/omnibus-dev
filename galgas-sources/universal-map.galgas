@@ -12,6 +12,49 @@ struct @universalValuedObjectMap {
 #! INSERT SETTERS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+setter @universalValuedObjectMap insertType
+  ?typeName: let @lstring inTypeName
+  ?type: let @PLMType inType
+  ?typeMap: let @unifiedTypeMap inTypeMap
+{
+#  let typeProxy = @unifiedTypeMap-proxy.searchKey {
+#    !inTypeMap
+#    !inTypeName
+#  }
+  @propertyGetterMap propertyGetterMap = {}
+  for (name value propertyTypeName) in [inType classConstantMap] do
+   let propertyType = [@unifiedTypeMap-proxy.searchKey {!inTypeMap !propertyTypeName} type]
+   let @objectIR valueIR = .literalInteger {!type: propertyType !value: value}
+    [!?propertyGetterMap insertKey
+      !name
+      !true
+      !.constantProperty {!value:valueIR}
+    ]
+  end
+  let type = @PLMType.new {
+    !propertyGetterMap: propertyGetterMap
+    !propertySetterMap: {}
+    !routineMap: {}
+    !classConstantMap: {}
+    !constructorMap:{}
+    !guardMap:{}
+    !subscript:.noSubscript
+    !assignmentSources: {}
+    !attributes:.none
+    !plmTypeDescriptionName: ""
+    !kind: .void
+    !llvmBaseTypeName: ""
+  }
+  [!?mInternalPropertyAndRoutineMap insertKey
+    !inTypeName
+    !.noValue
+    !false
+    !.type {!type: type}
+  ]
+}
+
+#·······················································································································
+
 setter @universalValuedObjectMap insertTask
   ?let @lstring inTaskName
   ?let @PLMType inTaskType
@@ -140,6 +183,8 @@ method @universalValuedObjectMap searchValuedObject
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
+  case type (@PLMType type) :
+    outObjectIR = .type {!type:type}
   case task (@PLMType type) :
     if inMode == .bootMode then
       error inValuedObjectName : "cannot call a task entry in a boot routine" : outObjectIR
@@ -174,6 +219,7 @@ setter @universalValuedObjectMap readAccess
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case type (*) :
   case task (*) :
   case driver (* *) :
   case globalConstant (*) :
@@ -201,6 +247,8 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case type (*) :
+    error inValuedObjectName : "a type cannot be read" : outObjectIR
   case task (@PLMType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
   case driver (@PLMType type instancied) :
@@ -239,10 +287,12 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case type (*) :
+    error inValuedObjectName : "a type cannot be written" : outObjectIR
   case task (*) :
-    error inValuedObjectName : "a task has no value" : outObjectIR
+    error inValuedObjectName : "a task cannot be written" : outObjectIR
   case driver (* *) :
-    error inValuedObjectName : "a driver has no value" : outObjectIR
+    error inValuedObjectName : "a driver cannot be written" : outObjectIR
   case globalConstant (*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case globalSyncInstance (2*) :
@@ -268,6 +318,8 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
+  case type (*) :
+    error inValuedObjectName : "a type has no value" : outObjectIR
   case task (*) :
     error inValuedObjectName : "a task has no value" : outObjectIR
   case driver (* *) :
@@ -303,6 +355,8 @@ method @universalValuedObjectMap searchValuedObjectType
   else
     [mInternalPropertyAndRoutineMap searchKey !inLValue.mIdentifier ?2* ?let property]
     switch property
+    case type (*) :
+      error inLValue.mIdentifier : "undefined in this context" : outType
     case task (*) :
       error inLValue.mIdentifier : "undefined in this context" : outType
     case driver (* *) :
@@ -356,6 +410,7 @@ method @LValueOperandAST getValuedObjectType ?!@PLMType ioType {
 method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionListIR ioInstructionGenerationList {
   for entry in mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
+    case type (*) :
     case task (*) :
     case driver (* *) :
     case globalSyncInstance (2*) :
@@ -382,6 +437,7 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
+    case type (*) :
     case task (*) :
     case driver (* *) :
     case globalSyncInstance (2*) :
@@ -402,6 +458,7 @@ setter @universalValuedObjectMap openOverrideForRepeatBlock {
   @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
+    case type (*) :
     case task (*) :
     case driver (* *) :
     case globalSyncInstance (2*) :
@@ -433,6 +490,7 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
     @referenceStateMap newReferenceStateMap = {}
     for entry in mInternalPropertyAndRoutineMap do
       switch entry.mValuedObject
+      case type (*) :
       case task (*) :
       case driver (* *) :
       case globalConstant (*) :
@@ -490,6 +548,7 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
     ]
     switch possibleValuedObject
     case task (*) :
+    case type (*) :
     case driver (* *) :
     case globalSyncInstance (2*) :
     case globalConstant (*) :
@@ -561,6 +620,7 @@ enum @valuedObject {
   case localConstant (@PLMType type @lstring plmName @bool isFormalInputArgument)
   case localVariable (@PLMType type @lstring plmName)
   case globalSyncInstance (@PLMType type @lstring plmName)
+  case type (@PLMType type)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

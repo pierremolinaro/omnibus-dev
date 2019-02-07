@@ -26,8 +26,8 @@ task T @stacksize 512 @activate {
   var acc = new C ()
 
   on @setup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode: DigitalMode.OUTPUT !toPort:.D13)
+    digital.set (!mode: DigitalMode.OUTPUT !toPort: LED_L1)
   }
 
   on time.wait (!until:self.deadline) {

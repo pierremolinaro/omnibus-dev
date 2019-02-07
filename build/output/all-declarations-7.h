@@ -10,6 +10,119 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                     Extension method '@PLMType generateRelease'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_PLMType_generateRelease) (const class cPtr_PLMType * inObject,
+                                                                  const class GALGAS_string constinArgument0,
+                                                                  class GALGAS_string & ioArgument1,
+                                                                  class GALGAS_generationAdds & ioArgument2,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateRelease (const int32_t inClassIndex,
+                                           extensionMethodSignature_PLMType_generateRelease inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateRelease (const class cPtr_PLMType * inObject,
+                                          const GALGAS_string constin_inPLMName,
+                                          GALGAS_string & io_ioLLVMcode,
+                                          GALGAS_generationAdds & io_ioGenerationAdds,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Extension getter '@PLMType descriptionForHTMLFile'                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef class GALGAS_string (*enterExtensionGetter_PLMType_descriptionForHTMLFile) (const class cPtr_PLMType * inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionGetter_descriptionForHTMLFile (const int32_t inClassIndex,
+                                                  enterExtensionGetter_PLMType_descriptionForHTMLFile inGetter) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string callExtensionGetter_descriptionForHTMLFile (const cPtr_PLMType * inObject,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Extension getter '@PLMType defaultAlignment'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef class GALGAS_uint (*enterExtensionGetter_PLMType_defaultAlignment) (const class cPtr_PLMType * inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionGetter_defaultAlignment (const int32_t inClassIndex,
+                                            enterExtensionGetter_PLMType_defaultAlignment inGetter) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_uint callExtensionGetter_defaultAlignment (const cPtr_PLMType * inObject,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                      Extension getter '@PLMType deinitNeeded'                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef class GALGAS_bool (*enterExtensionGetter_PLMType_deinitNeeded) (const class cPtr_PLMType * inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionGetter_deinitNeeded (const int32_t inClassIndex,
+                                        enterExtensionGetter_PLMType_deinitNeeded inGetter) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_bool callExtensionGetter_deinitNeeded (const cPtr_PLMType * inObject,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Abstract extension method '@userLLVMTypeDefinitionIR generateLLVMType'                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_userLLVMTypeDefinitionIR_generateLLVMType) (const class cPtr_userLLVMTypeDefinitionIR * inObject,
+                                                                                    class GALGAS_string & ioArgument0,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateLLVMType (const int32_t inClassIndex,
+                                            extensionMethodSignature_userLLVMTypeDefinitionIR_generateLLVMType inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateLLVMType (const class cPtr_userLLVMTypeDefinitionIR * inObject,
+                                           GALGAS_string & io_ioLLVMcode,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                               Extension method '@panicAST noteTypesInPrecedenceGraph'                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -792,7 +905,8 @@ void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgumen
                                                const class GALGAS_lstring constinArgument1,
                                                const class GALGAS_mode constinArgument2,
                                                class GALGAS_semanticTemporariesStruct & ioArgument3,
-                                               class GALGAS_instructionListIR & ioArgument4,
+                                               class GALGAS_allocaList & ioArgument4,
+                                               class GALGAS_instructionListIR & ioArgument5,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 

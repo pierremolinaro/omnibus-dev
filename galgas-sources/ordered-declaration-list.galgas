@@ -74,7 +74,6 @@ proc buildOrderedDeclarationList
     for () in  [precedenceGraph undefinedNodeReferenceList] do
       error mValue : mValue.string + " is not defined in declaration dependency graph"
     end
-    log "" : [precedenceGraph keyList]
   else
     [precedenceGraph topologicalSort
       ?outDeclarationListAST

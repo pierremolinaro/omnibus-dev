@@ -1438,10 +1438,6 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_125 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_plm_5F_syntax_126 (C_Lexique_plm_5F_lexique *) = 0 ;
-
-  protected : virtual int32_t select_plm_5F_syntax_127 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 
@@ -10069,8 +10065,7 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_typedConstantCallAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                     const class GALGAS_lstring & inOperand1,
-                                                                     const class GALGAS_primaryInExpressionAccessListAST & inOperand2
+                                                                     const class GALGAS_primaryInExpressionAccessListAST & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -10085,8 +10080,6 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstructorName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10107,13 +10100,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typedConstantCallAS
 
 class cPtr_typedConstantCallAST : public cPtr_expressionAST {
 //--- Attributes
-  public : GALGAS_lstring mProperty_mOptionalTypeName ;
   public : GALGAS_lstring mProperty_mConstructorName ;
   public : GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
 
 //--- Constructor
-  public : cPtr_typedConstantCallAST (const GALGAS_lstring & in_mOptionalTypeName,
-                                      const GALGAS_lstring & in_mConstructorName,
+  public : cPtr_typedConstantCallAST (const GALGAS_lstring & in_mConstructorName,
                                       const GALGAS_primaryInExpressionAccessListAST & in_mAccessList
                                       COMMA_LOCATION_ARGS) ;
 
@@ -10121,7 +10112,6 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstructorName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
 //--- Description

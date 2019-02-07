@@ -19,8 +19,8 @@ driver timer > root {
     #PIT:TCTRL [0] = 0
     #PIT:TCTRL [1] = 0
   //--- PIT0 clock frequency is BUS_MHZ (in MHz)
-    #PIT:LDVAL [0] = :UInt32.max
-    #PIT:LDVAL [1] = :UInt32.max
+    #PIT:LDVAL [0] = UInt32.max
+    #PIT:LDVAL [1] = UInt32.max
   //--- Enable PIT0 and PIT1 : start counting, no interrupt
     #PIT:TCTRL [1] = {#PIT:TCTRL !CHN:1 !TEN:1}
     #PIT:TCTRL [0] = {#PIT:TCTRL !TEN:1}
