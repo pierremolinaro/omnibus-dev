@@ -40,12 +40,12 @@ task T @stacksize 512 @activate {
     if self.index == SIZE {
       self.index = 0
     }
-    for i UInt32 in 0 ..< A.count {
+    for i : UInt32 in 0 ..< A.count {
       self.array [i] +%= 1
     }
     self.array2 = self.array
     lcd.goto (!line:0 !column:0)
-    for i UInt32 in 0 ..< A.count {
+    for i : UInt32 in 0 ..< A.count {
       lcd.print (!u32:self.array2 [i])
       lcd.print (!spaces:1)
     }
@@ -61,7 +61,7 @@ task T @stacksize 512 @activate {
     var d = new A (!0 !e !2)
   //---
     var x : UInt32 = 0
-    for i UInt32 in 0 ..< A.count {
+    for i : UInt32 in 0 ..< A.count {
       a [i] = 9
       a [i] += 9
       x += a [i]

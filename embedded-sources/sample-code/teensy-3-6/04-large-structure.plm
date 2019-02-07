@@ -22,7 +22,7 @@ task Tâche @stacksize 5512 @activate {
 
   on time.wait (!until:self.compteur) {
     self.y = self.x
-    for i UInt32 in 0 ..< self.x.count {
+    for i : UInt32 in 0 ..< self.x.count {
       self.y [i] += self.compteur
     }
     digital.write (!yes !toPort:LED_L0)

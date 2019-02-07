@@ -290,7 +290,7 @@ driver lcd > digital {
       self.writeData_inUserMode (!0x30)
       count += 1
     }
-    for _ UInt32 in count ..< inWidth {
+    for _ : UInt32 in count ..< inWidth {
       self.writeData_inUserMode (!0x20)
     }
   }

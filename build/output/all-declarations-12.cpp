@@ -1188,7 +1188,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "    digital.set (!mode:.OUTPUT !toPort:.D13)\n"
   "    var cumul : UInt32 = 0\n"
   "  //--- Compute getSysTick duration\n"
-  "    for _ UInt32 in 0 ..< ITERATIONS {\n"
+  "    for _ : UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
   "      let t0 = getSysTick ()\n"
   "      let t1 = getSysTick ()\n"
@@ -1199,7 +1199,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "    let systickDuration = cumul / ITERATIONS\n"
   "  //--- Compute emptySection duration\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    for _ UInt32 in 0 ..< ITERATIONS {\n"
+  "    for _ : UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
   "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
@@ -1209,7 +1209,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1/unp
   "    }\n"
   "  //--- Compute emptyService duration\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    for _ UInt32 in 0 ..< 4 {\n"
+  "    for _ : UInt32 in 0 ..< 4 {\n"
   "      time.wait (!during:1)\n"
   "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
@@ -1230,7 +1230,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  1889, // Text length
+  1895, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1818,12 +1818,12 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "    if self.index == SIZE {\n"
   "      self.index = 0\n"
   "    }\n"
-  "    for i UInt32 in 0 ..< A.count {\n"
+  "    for i : UInt32 in 0 ..< A.count {\n"
   "      self.array [i] +%= 1\n"
   "    }\n"
   "    self.array2 = self.array\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    for i UInt32 in 0 ..< A.count {\n"
+  "    for i : UInt32 in 0 ..< A.count {\n"
   "      lcd.print (!u32:self.array2 [i])\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
@@ -1839,7 +1839,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "    var d = new A (!0 !e !2)\n"
   "  //---\n"
   "    var x : UInt32 = 0\n"
-  "    for i UInt32 in 0 ..< A.count {\n"
+  "    for i : UInt32 in 0 ..< A.count {\n"
   "      a [i] = 9\n"
   "      a [i] += 9\n"
   "      x += a [i]\n"
@@ -1860,7 +1860,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1688, // Text length
+  1694, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -2242,7 +2242,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "    digital.toggle (!port:LED_L0)\n"
   "    self.tick +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    for i UInt32 in 0 ..< TRACE_SIZE {\n"
+  "    for i : UInt32 in 0 ..< TRACE_SIZE {\n"
   "      let e = usb_device.lire\xC3""\x89""tat (!i)\n"
   "      lcd.print (!hex2:e)\n"
   "    }\n"
@@ -2261,7 +2261,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  15227, // Text length
+  15229, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -2789,7 +2789,7 @@ const char * gWrapperFileContent_33_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  on time.wait (!until:self.compteur) {\n"
   "    self.y = self.x\n"
-  "    for i UInt32 in 0 ..< self.x.count {\n"
+  "    for i : UInt32 in 0 ..< self.x.count {\n"
   "      self.y [i] += self.compteur\n"
   "    }\n"
   "    digital.write (!yes !toPort:LED_L0)\n"
@@ -2808,7 +2808,7 @@ const cRegularFileWrapper gWrapperFile_33_embeddedSampleCode (
   "04-large-structure.plm",
   "plm",
   true, // Text file
-  1147, // Text length
+  1149, // Text length
   gWrapperFileContent_33_embeddedSampleCode
 ) ;
 
@@ -3536,7 +3536,7 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "  on @setup first {\n"
   "    var cumul : UInt32 = 0\n"
   "  //--- Compute getSysTick duration\n"
-  "    for _ UInt32 in 0 ..< ITERATIONS {\n"
+  "    for _ : UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
   "      let t0 = getSysTick ()\n"
   "      let t1 = getSysTick ()\n"
@@ -3547,7 +3547,7 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "    let systickDuration = cumul / ITERATIONS\n"
   "  //--- Compute emptySection duration\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    for _ UInt32 in 0 ..< ITERATIONS {\n"
+  "    for _ : UInt32 in 0 ..< ITERATIONS {\n"
   "      time.wait (!during:1)\n"
   "      let t0 = getSysTick ()\n"
   "      emptySection ()\n"
@@ -3557,7 +3557,7 @@ const char * gWrapperFileContent_22_embeddedSampleCode = "target \"teensy-3-6/xt
   "    }\n"
   "  //--- Compute emptyService duration\n"
   "    lcd.goto (!line:2 !column:0)\n"
-  "    for _ UInt32 in 0 ..< 4 {\n"
+  "    for _ : UInt32 in 0 ..< 4 {\n"
   "      time.wait (!during:1)\n"
   "      let t0 = getSysTick ()\n"
   "      emptyService ()\n"
@@ -3578,7 +3578,7 @@ const cRegularFileWrapper gWrapperFile_22_embeddedSampleCode (
   "12-section-service-duration.plm",
   "plm",
   true, // Text file
-  1857, // Text length
+  1863, // Text length
   gWrapperFileContent_22_embeddedSampleCode
 ) ;
 
@@ -4073,7 +4073,7 @@ const char * gWrapperFileContent_38_embeddedSampleCode = "target \"teensy-3-6/xt
   "    digital.toggle (!port:LED_L0)\n"
   "    self.tick +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    for i UInt32 in 0 ..< TRACE_SIZE {\n"
+  "    for i : UInt32 in 0 ..< TRACE_SIZE {\n"
   "      let e = usb_device.lire\xC3""\x89""tat (!i)\n"
   "      lcd.print (!hex2:e)\n"
   "    }\n"
@@ -4093,7 +4093,7 @@ const cRegularFileWrapper gWrapperFile_38_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20392, // Text length
+  20394, // Text length
   gWrapperFileContent_38_embeddedSampleCode
 ) ;
 

@@ -374,7 +374,7 @@ task T @stacksize 512 @activate {
     digital.toggle (!port:LED_L0)
     self.tick +%= 500
     lcd.goto (!line:0 !column:0)
-    for i UInt32 in 0 ..< TRACE_SIZE {
+    for i : UInt32 in 0 ..< TRACE_SIZE {
       let e = usb_device.lireÉtat (!i)
       lcd.print (!hex2:e)
     }
