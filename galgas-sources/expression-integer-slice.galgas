@@ -24,23 +24,23 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-#  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-#    ${$
-#    $identifier$ ?let typeName
-#    @integerSliceFieldListAST integerFieldValues = {}
-#    repeat
-#      $!selector:$ ?let sliceWidth
-#      <expression> !?ioAST ?let expression
-#      integerFieldValues += !sliceWidth !expression !.here
-#    while
-#    end
-#    if [integerFieldValues length] < 2 then
-#      error .here : "this expression should contain two bit slices or more" : outExpression
-#    else
-#      outExpression = @integerSliceExpressionAST.new {!typeName !integerFieldValues !.here}
-#    end
-#    $}$
-#  }
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    ${$
+    $identifier$ ?let typeName
+    @integerSliceFieldListAST integerFieldValues = {}
+    repeat
+      $!selector:$ ?let sliceWidth
+      <expression> !?ioAST ?let expression
+      integerFieldValues += !sliceWidth !expression !.here
+    while
+    end
+    if [integerFieldValues length] < 2 then
+      error .here : "this expression should contain two bit slices or more" : outExpression
+    else
+      outExpression = @integerSliceExpressionAST.new {!typeName !integerFieldValues !.here}
+    end
+    $}$
+  }
 
   #·····················································································································
 

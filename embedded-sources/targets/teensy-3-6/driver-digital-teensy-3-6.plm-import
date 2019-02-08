@@ -3,15 +3,15 @@ check target "teensy-3-6/xtr32", "teensy-3-6/xtr64"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers @user #PORTA (PCR, GPCLR, GPCHR)
-registers @user #PORTB (PCR, GPCLR, GPCHR)
-registers @user #PORTC (PCR, GPCLR, GPCHR)
-registers @user #PORTD (PCR, GPCLR, GPCHR)
+registers @user PORTA (PCR, GPCLR, GPCHR)
+registers @user PORTB (PCR, GPCLR, GPCHR)
+registers @user PORTC (PCR, GPCLR, GPCHR)
+registers @user PORTD (PCR, GPCLR, GPCHR)
 
-registers @user #GPIOA (PDOR, PSOR, PCOR, PTOR, PDDR)
-registers @user #GPIOB (PDOR, PSOR, PCOR, PTOR, PDDR)
-registers @user #GPIOC (PDOR, PSOR, PCOR, PTOR, PDDR)
-registers @user #GPIOD (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user GPIOA (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user GPIOB (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user GPIOC (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user GPIOD (PDOR, PSOR, PCOR, PTOR, PDDR)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -96,16 +96,16 @@ driver digital ()
 driver digital > root {
 
   //··············································································
-  // By default, the 32 #PORTA:PCR registers are not accessible in user mode
+  // By default, the 32 PORTA:PCR registers are not accessible in user mode
   // Their adresses : 0x4004_9000 --> 0x4004_907C
   // This corresponds to AIPS slot 73 (§4.5.1)
-  // By default, the 32 #PORTB:PCR registers are not accessible in user mode
+  // By default, the 32 PORTB:PCR registers are not accessible in user mode
   // Their adresses : 0x4004_A000 --> 0x4004_A07C
   // This corresponds to AIPS slot 74 (§4.5.1)
-  // By default, the 32 #PORTC:PCR registers are not accessible in user mode
+  // By default, the 32 PORTC:PCR registers are not accessible in user mode
   // Their adresses : 0x4004_B000 --> 0x4004_B07C
   // This corresponds to AIPS slot 75 (§4.5.1)
-  // By default, the 32 #PORTD:PCR registers are not accessible in user mode
+  // By default, the 32 PORTD:PCR registers are not accessible in user mode
   // Their adresses : 0x4004_C000 --> 0x4004_C07C
   // This corresponds to AIPS slot 76 (§4.5.1)
   //··············································································
@@ -116,7 +116,7 @@ driver digital > root {
   // Slot 75 is accessible in user mode by resetting bits 19:16 of AIPS0.PACRJ
   // Slot 76 is accessible in user mode by resetting bits 15:12 of AIPS0.PACRJ
   // Simplification: all bits of AIPS0.PACRJ are reseted
-    #AIPS0:PACRJ = 0
+    $(AIPS0:PACRJ) = 0
   }
 
   //··············································································
@@ -128,194 +128,194 @@ driver digital > root {
     var dir : UInt1
     switch mode {
     case OUTPUT :
-      config = {#PORTC:PCR !MUX:1}
+      config = $(PORTC.PCR !MUX:1)
       dir = 1
     case OUTPUT_OPEN_COLLECTOR :
-      config = {#PORTC:PCR !MUX:1 !ODE:1}
+      config = $(PORTC.PCR !MUX:1 !ODE:1)
       dir = 1
     case INPUT :
-      config = {#PORTC:PCR !MUX:1}
+      config = $(PORTC.PCR !MUX:1)
       dir = 0
     case INPUT_PULLUP :
-      config = {#PORTC:PCR !MUX:1 !PE:1 !PS:1}
+      config = $(PORTC.PCR !MUX:1 !PE:1 !PS:1)
       dir = 0
     }
   //---Apply
     switch port {
     case D0 : // PTB16
-      #PORTB:PCR [16] = config
-      #GPIOB:PDDR @bit 16 = dir
+      $(PORTB:PCR [16]) = config
+      $(GPIOB:PDDR @bit 16) = dir
     case D1 : // PTB17
-      #PORTB:PCR [17] = config
-      #GPIOB:PDDR @bit 17 = dir
+      $(PORTB:PCR [17]) = config
+      $(GPIOB:PDDR @bit 17) = dir
     case D2 : // PTD0
-      #PORTD:PCR [0] = config
-      #GPIOD:PDDR @bit 0 = dir
+      $(PORTD:PCR [0]) = config
+      $(GPIOD:PDDR @bit 0) = dir
     case D3 : // PTA12
-      #PORTA:PCR [12] = config
-      #GPIOA:PDDR @bit 12 = dir
+      $(PORTA:PCR [12]) = config
+      $(GPIOA:PDDR @bit 12) = dir
     case D4 : // PTA13
-      #PORTA:PCR [13] = config
-      #GPIOA:PDDR @bit 13 = dir
+      $(PORTA:PCR [13]) = config
+      $(GPIOA:PDDR @bit 13) = dir
     case D5 : // PTD7
-      #PORTD:PCR [7] = config
-      #GPIOD:PDDR @bit 7 = dir
+      $(PORTD:PCR [7]) = config
+      $(GPIOD:PDDR @bit 7) = dir
     case D6 : // PTD4
-      #PORTD:PCR [4] = config
-      #GPIOD:PDDR @bit 4 = dir
+      $(PORTD:PCR [4]) = config
+      $(GPIOD:PDDR @bit 4) = dir
     case D7 : // PTD2
-      #PORTD:PCR [2] = config
-      #GPIOD:PDDR @bit 2 = dir
+      $(PORTD:PCR [2]) = config
+      $(GPIOD:PDDR @bit 2) = dir
     case D8 : // PTD3
-      #PORTD:PCR [3] = config
-      #GPIOD:PDDR @bit 3 = dir
+      $(PORTD:PCR [3]) = config
+      $(GPIOD:PDDR @bit 3) = dir
     case D9  : // PTC3
-      #PORTC:PCR [3] = config
-      #GPIOC:PDDR @bit 3 = dir
+      $(PORTC:PCR [3]) = config
+      $(GPIOC:PDDR @bit 3) = dir
     case D10 : // PTC4
-      #PORTC:PCR [4] = config
-      #GPIOC:PDDR @bit 4 = dir
+      $(PORTC:PCR [4]) = config
+      $(GPIOC:PDDR @bit 4) = dir
     case D11 : // PTC6
-      #PORTC:PCR [6] = config
-      #GPIOC:PDDR @bit 6 = dir
+      $(PORTC:PCR [6]) = config
+      $(GPIOC:PDDR @bit 6) = dir
     case D12 : // PTC7
-      #PORTC:PCR [7] = config
-      #GPIOC:PDDR @bit 7 = dir
+      $(PORTC:PCR [7]) = config
+      $(GPIOC:PDDR @bit 7) = dir
     case D13 : // PTC5
-      #PORTC:PCR [5] = config
-      #GPIOC:PDDR @bit 5 = dir
+      $(PORTC:PCR [5]) = config
+      $(GPIOC:PDDR @bit 5) = dir
     case D14 : // PTD1
-      #PORTD:PCR [1] = config
-      #GPIOD:PDDR @bit 1 = dir
+      $(PORTD:PCR [1]) = config
+      $(GPIOD:PDDR @bit 1) = dir
     case D15 : // PTC0
-      #PORTC:PCR [0] = config
-      #GPIOC:PDDR @bit 0 = dir
+      $(PORTC:PCR [0]) = config
+      $(GPIOC:PDDR @bit 0) = dir
     case D16 : // PTB0
-      #PORTB:PCR [0] = config
-      #GPIOB:PDDR @bit 0 = dir
+      $(PORTB:PCR [0]) = config
+      $(GPIOB:PDDR @bit 0) = dir
     case D17 : // PTB1
-      #PORTB:PCR [1] = config
-      #GPIOB:PDDR @bit 1 = dir
+      $(PORTB:PCR [1]) = config
+      $(GPIOB:PDDR @bit 1) = dir
     case D18 : // PTB3
-      #PORTB:PCR [3] = config
-      #GPIOB:PDDR @bit 3 = dir
+      $(PORTB:PCR [3]) = config
+      $(GPIOB:PDDR @bit 3) = dir
     case D19 : // PTB2
-      #PORTB:PCR [2] = config
-      #GPIOB:PDDR @bit 2 = dir
+      $(PORTB:PCR [2]) = config
+      $(GPIOB:PDDR @bit 2) = dir
     case D20 : // PTD5
-      #PORTD:PCR [5] = config
-      #GPIOD:PDDR @bit 5 = dir
+      $(PORTD:PCR [5]) = config
+      $(GPIOD:PDDR @bit 5) = dir
     case D21 : // PTD6
-      #PORTD:PCR [6] = config
-      #GPIOD:PDDR @bit 6 = dir
+      $(PORTD:PCR [6]) = config
+      $(GPIOD:PDDR @bit 6) = dir
     case D22 : // PTC1
-      #PORTC:PCR [1] = config
-      #GPIOC:PDDR @bit 1 = dir
+      $(PORTC:PCR [1]) = config
+      $(GPIOC:PDDR @bit 1) = dir
     case D23 : // PTC2
-      #PORTC:PCR [2] = config
-      #GPIOC:PDDR @bit 2 = dir
+      $(PORTC:PCR [2]) = config
+      $(GPIOC:PDDR @bit 2) = dir
     case D24 : // PTE26
-      #PORTE:PCR [26] = config
-      #GPIOE:PDDR @bit 26 = dir
+      $(PORTE:PCR [26]) = config
+      $(GPIOE:PDDR @bit 26) = dir
     case D25 : // PTA5
-      #PORTA:PCR [5] = config
-      #GPIOA:PDDR @bit 5 = dir
+      $(PORTA:PCR [5]) = config
+      $(GPIOA:PDDR @bit 5) = dir
     case D26 : // PTA14
-      #PORTA:PCR [14] = config
-      #GPIOA:PDDR @bit 14 = dir
+      $(PORTA:PCR [14]) = config
+      $(GPIOA:PDDR @bit 14) = dir
     case D27 : // PTA15
-      #PORTA:PCR [15] = config
-      #GPIOA:PDDR @bit 15 = dir
+      $(PORTA:PCR [15]) = config
+      $(GPIOA:PDDR @bit 15) = dir
     case D28 : // PTA16
-      #PORTA:PCR [16] = config
-      #GPIOA:PDDR @bit 16 = dir
+      $(PORTA:PCR [16]) = config
+      $(GPIOA:PDDR @bit 16) = dir
     case D29 : // PTB18
-      #PORTB:PCR [18] = config
-      #GPIOB:PDDR @bit 18 = dir
+      $(PORTB:PCR [18]) = config
+      $(GPIOB:PDDR @bit 18) = dir
     case D30 : // PTB19
-      #PORTB:PCR [19] = config
-      #GPIOB:PDDR @bit 19 = dir
+      $(PORTB:PCR [19]) = config
+      $(GPIOB:PDDR @bit 19) = dir
     case D31 : // PTB10
-      #PORTB:PCR [10] = config
-      #GPIOB:PDDR @bit 10 = dir
+      $(PORTB:PCR [10]) = config
+      $(GPIOB:PDDR @bit 10) = dir
     case D32 : // PTB11
-      #PORTB:PCR [11] = config
-      #GPIOB:PDDR @bit 11 = dir
+      $(PORTB:PCR [11]) = config
+      $(GPIOB:PDDR @bit 11) = dir
     case D33 : // PTE24
-      #PORTE:PCR [24] = config
-      #GPIOE:PDDR @bit 24 = dir
+      $(PORTE:PCR [24]) = config
+      $(GPIOE:PDDR @bit 24) = dir
     case D34 : // PTE25
-      #PORTE:PCR [25] = config
-      #GPIOE:PDDR @bit 25 = dir
+      $(PORTE:PCR [25]) = config
+      $(GPIOE:PDDR @bit 25) = dir
     case D35 : // PTC8
-      #PORTC:PCR [8] = config
-      #GPIOC:PDDR @bit 8 = dir
+      $(PORTC:PCR [8]) = config
+      $(GPIOC:PDDR @bit 8) = dir
     case D36 : // PTC9
-      #PORTC:PCR [9] = config
-      #GPIOC:PDDR @bit 9 = dir
+      $(PORTC:PCR [9]) = config
+      $(GPIOC:PDDR @bit 9) = dir
     case D37 : // PTC10
-      #PORTC:PCR [10] = config
-      #GPIOC:PDDR @bit 10 = dir
+      $(PORTC:PCR [10]) = config
+      $(GPIOC:PDDR @bit 10) = dir
     case D38 : // PTC11
-       #PORTC:PCR [11] = config
-      #GPIOC:PDDR @bit 11 = dir
+      $(PORTC:PCR [11]) = config
+      $(GPIOC:PDDR @bit 11) = dir
    case D39 : // PTA17
-      #PORTA:PCR [17] = config
-      #GPIOA:PDDR @bit 17 = dir
+      $(PORTA:PCR [17]) = config
+      $(GPIOA:PDDR @bit 17) = dir
     case D40 : // PTA28
-      #PORTA:PCR [28] = config
-      #GPIOA:PDDR @bit 28 = dir
+      $(PORTA:PCR [28]) = config
+      $(GPIOA:PDDR @bit 28) = dir
     case D41 : // PTA29
-      #PORTA:PCR [29] = config
-      #GPIOA:PDDR @bit 29 = dir
+      $(PORTA:PCR [29]) = config
+      $(GPIOA:PDDR @bit 29) = dir
     case D42 : // PTA26
-      #PORTA:PCR [26] = config
-      #GPIOA:PDDR @bit 26 = dir
+      $(PORTA:PCR [26]) = config
+      $(GPIOA:PDDR @bit 26) = dir
     case D43 : // PTB20
-      #PORTB:PCR [20] = config
-      #GPIOB:PDDR @bit 20 = dir
+      $(PORTB:PCR [20]) = config
+      $(GPIOB:PDDR @bit 20) = dir
     case D44 : // PTB22
-      #PORTB:PCR [22] = config
-      #GPIOB:PDDR @bit 22 = dir
+      $(PORTB:PCR [22]) = config
+      $(GPIOB:PDDR @bit 22) = dir
     case D45 : // PTB23
-      #PORTB:PCR [23] = config
-      #GPIOB:PDDR @bit 23 = dir
+      $(PORTB:PCR [23]) = config
+      $(GPIOB:PDDR @bit 23) = dir
     case D46 : // PTB21
-      #PORTB:PCR [21] = config
-      #GPIOB:PDDR @bit 21 = dir
+      $(PORTB:PCR [21]) = config
+      $(GPIOB:PDDR @bit 21) = dir
     case D47 : // PTD8
-      #PORTD:PCR [8] = config
-      #GPIOD:PDDR @bit 8 = dir
+      $(PORTD:PCR [8]) = config
+      $(GPIOD:PDDR @bit 8) = dir
     case D48 : // PTD9
-      #PORTD:PCR [9] = config
-      #GPIOD:PDDR @bit 9 = dir
+      $(PORTD:PCR [9]) = config
+      $(GPIOD:PDDR @bit 9) = dir
     case D49 : // PTB4
-      #PORTB:PCR [4] = config
-      #GPIOB:PDDR @bit 4 = dir
+      $(PORTB:PCR [4]) = config
+      $(GPIOB:PDDR @bit 4) = dir
     case D50 : // PTB5
-      #PORTB:PCR [5] = config
-      #GPIOB:PDDR @bit 5 = dir
+      $(PORTB:PCR [5]) = config
+      $(GPIOB:PDDR @bit 5) = dir
     case D51 : // PTD14
-      #PORTD:PCR [14] = config
-      #GPIOD:PDDR @bit 14 = dir
+      $(PORTD:PCR [14]) = config
+      $(GPIOD:PDDR @bit 14) = dir
     case D52 : // PTD13
-      #PORTD:PCR [13] = config
-      #GPIOD:PDDR @bit 13 = dir
+      $(PORTD:PCR [13]) = config
+      $(GPIOD:PDDR @bit 13) = dir
     case D53 : // PTD12
-      #PORTD:PCR [12] = config
-      #GPIOD:PDDR @bit 12 = dir
+      $(PORTD:PCR [12]) = config
+      $(GPIOD:PDDR @bit 12) = dir
     case D54 : // PTD15
-       #PORTD:PCR [15] = config
-      #GPIOD:PDDR @bit 15 = dir
+      $(PORTD:PCR [15]) = config
+      $(GPIOD:PDDR @bit 15) = dir
    case D55 : // PTD11
-      #PORTD:PCR [11] = config
-      #GPIOD:PDDR @bit 11 = dir
+      $(PORTD:PCR [11]) = config
+      $(GPIOD:PDDR @bit 11) = dir
     case D56 : // PTE10
-      #PORTE:PCR [10] = config
-      #GPIOE:PDDR @bit 10 = dir
+      $(PORTE:PCR [10]) = config
+      $(GPIOE:PDDR @bit 10) = dir
     case D57 : // PTE11
-      #PORTE:PCR [11] = config
-      #GPIOE:PDDR @bit 11 = dir
+      $(PORTE:PCR [11]) = config
+      $(GPIOE:PDDR @bit 11) = dir
     }
   }
 
@@ -326,351 +326,351 @@ driver digital > root {
     switch port {
     case D0 : // PTB16
       if value {
-        #GPIOB:PSOR = 1 << 16
+        $(GPIOB:PSOR) = 1 << 16
       }else{
-        #GPIOB:PCOR = 1 << 16
+        $(GPIOB:PCOR) = 1 << 16
       }
     case D1 : // PTB17
       if value {
-        #GPIOB:PSOR = 1 << 17
+        $(GPIOB:PSOR) = 1 << 17
       }else{
-        #GPIOB:PCOR = 1 << 17
+        $(GPIOB:PCOR) = 1 << 17
       }
     case D2 : // PTD0
       if value {
-        #GPIOD:PSOR = 1 << 0
+        $(GPIOD:PSOR) = 1 << 0
       }else{
-        #GPIOD:PCOR = 1 << 0
+        $(GPIOD:PCOR) = 1 << 0
       }
     case D3 : // PTA12
       if value {
-        #GPIOA:PSOR = 1 << 12
+        $(GPIOA:PSOR) = 1 << 12
       }else{
-        #GPIOA:PCOR = 1 << 12
+        $(GPIOA:PCOR) = 1 << 12
       }
     case D4 : // PTA13
       if value {
-        #GPIOA:PSOR = 1 << 13
+        $(GPIOA:PSOR) = 1 << 13
       }else{
-        #GPIOA:PCOR = 1 << 13
+        $(GPIOA:PCOR) = 1 << 13
       }
     case D5 : // PTD7
       if value {
-        #GPIOD:PSOR = 1 << 7
+        $(GPIOD:PSOR) = 1 << 7
       }else{
-        #GPIOD:PCOR = 1 << 7
+        $(GPIOD:PCOR) = 1 << 7
       }
     case D6 : // PTD4
       if value {
-        #GPIOD:PSOR = 1 << 4
+        $(GPIOD:PSOR) = 1 << 4
       }else{
-        #GPIOD:PCOR = 1 << 4
+        $(GPIOD:PCOR) = 1 << 4
       }
     case D7 : // PTD2
       if value {
-        #GPIOD:PSOR = 1 << 2
+        $(GPIOD:PSOR) = 1 << 2
       }else{
-        #GPIOD:PCOR = 1 << 2
+        $(GPIOD:PCOR) = 1 << 2
       }
     case D8 : // PTD3
       if value {
-        #GPIOD:PSOR = 1 << 3
+        $(GPIOD:PSOR) = 1 << 3
       }else{
-        #GPIOD:PCOR = 1 << 3
+        $(GPIOD:PCOR) = 1 << 3
       }
     case D9  : // PTC3
       if value {
-        #GPIOC:PSOR = 1 << 3
+        $(GPIOC:PSOR) = 1 << 3
       }else{
-        #GPIOC:PCOR = 1 << 3
+        $(GPIOC:PCOR) = 1 << 3
       }
     case D10 : // PTC4
       if value {
-        #GPIOC:PSOR = 1 << 4
+        $(GPIOC:PSOR) = 1 << 4
       }else{
-        #GPIOC:PCOR = 1 << 4
+        $(GPIOC:PCOR) = 1 << 4
       }
     case D11 : // PTC6
       if value {
-        #GPIOC:PSOR = 1 << 6
+        $(GPIOC:PSOR) = 1 << 6
       }else{
-        #GPIOC:PCOR = 1 << 6
+        $(GPIOC:PCOR) = 1 << 6
       }
     case D12 : // PTC7
       if value {
-        #GPIOC:PSOR = 1 << 7
+        $(GPIOC:PSOR) = 1 << 7
       }else{
-        #GPIOC:PCOR = 1 << 7
+        $(GPIOC:PCOR) = 1 << 7
       }
     case D13 : // PTC5
       if value {
-        #GPIOC:PSOR = 1 << 5
+        $(GPIOC:PSOR) = 1 << 5
       }else{
-        #GPIOC:PCOR = 1 << 5
+        $(GPIOC:PCOR) = 1 << 5
       }
     case D14 : // PTD1
       if value {
-        #GPIOD:PSOR = 1 << 1
+        $(GPIOD:PSOR) = 1 << 1
       }else{
-        #GPIOD:PCOR = 1 << 1
+        $(GPIOD:PCOR) = 1 << 1
       }
     case D15 : // PTC0
       if value {
-        #GPIOC:PSOR = 1 << 0
+        $(GPIOC:PSOR) = 1 << 0
       }else{
-        #GPIOC:PCOR = 1 << 0
+        $(GPIOC:PCOR) = 1 << 0
       }
     case D16 : // PTB0
       if value {
-        #GPIOB:PSOR = 1 << 0
+        $(GPIOB:PSOR) = 1 << 0
       }else{
-        #GPIOB:PCOR = 1 << 0
+        $(GPIOB:PCOR) = 1 << 0
       }
     case D17 : // PTB1
       if value {
-        #GPIOB:PSOR = 1 << 1
+        $(GPIOB:PSOR) = 1 << 1
       }else{
-        #GPIOB:PCOR = 1 << 1
+        $(GPIOB:PCOR) = 1 << 1
       }
     case D18 : // PTB3
       if value {
-        #GPIOB:PSOR = 1 << 3
+        $(GPIOB:PSOR) = 1 << 3
       }else{
-        #GPIOB:PCOR = 1 << 3
+        $(GPIOB:PCOR) = 1 << 3
       }
     case D19 : // PTB2
       if value {
-        #GPIOB:PSOR = 1 << 2
+        $(GPIOB:PSOR) = 1 << 2
       }else{
-        #GPIOB:PCOR = 1 << 2
+        $(GPIOB:PCOR) = 1 << 2
       }
     case D20 : // PTD5
       if value {
-        #GPIOD:PSOR = 1 << 5
+        $(GPIOD:PSOR) = 1 << 5
       }else{
-        #GPIOD:PCOR = 1 << 5
+        $(GPIOD:PCOR) = 1 << 5
       }
     case D21 : // PTD6
       if value {
-        #GPIOD:PSOR = 1 << 6
+        $(GPIOD:PSOR) = 1 << 6
       }else{
-        #GPIOD:PCOR = 1 << 6
+        $(GPIOD:PCOR) = 1 << 6
       }
     case D22 : // PTC1
       if value {
-        #GPIOC:PSOR = 1 << 1
+        $(GPIOC:PSOR) = 1 << 1
       }else{
-        #GPIOC:PCOR = 1 << 1
+        $(GPIOC:PCOR) = 1 << 1
       }
     case D23 : // PTC2
       if value {
-        #GPIOC:PSOR = 1 << 2
+        $(GPIOC:PSOR) = 1 << 2
       }else{
-        #GPIOC:PCOR = 1 << 2
+        $(GPIOC:PCOR) = 1 << 2
       }
     case D24 : // PTE26
       if value {
-        #GPIOE:PSOR = 1 << 26
+        $(GPIOE:PSOR) = 1 << 26
       }else{
-        #GPIOE:PCOR = 1 << 26
+        $(GPIOE:PCOR) = 1 << 26
       }
     case D25 : // PTA5
       if value {
-        #GPIOA:PSOR = 1 << 5
+        $(GPIOA:PSOR) = 1 << 5
       }else{
-        #GPIOA:PCOR = 1 << 5
+        $(GPIOA:PCOR) = 1 << 5
       }
     case D26 : // PTA14
       if value {
-        #GPIOA:PSOR = 1 << 14
+        $(GPIOA:PSOR) = 1 << 14
       }else{
-        #GPIOA:PCOR = 1 << 14
+        $(GPIOA:PCOR) = 1 << 14
       }
     case D27 : // PTA15
       if value {
-        #GPIOA:PSOR = 1 << 15
+        $(GPIOA:PSOR) = 1 << 15
       }else{
-        #GPIOA:PCOR = 1 << 15
+        $(GPIOA:PCOR) = 1 << 15
       }
     case D28 : // PTA16
       if value {
-        #GPIOA:PSOR = 1 << 16
+        $(GPIOA:PSOR) = 1 << 16
       }else{
-        #GPIOA:PCOR = 1 << 16
+        $(GPIOA:PCOR) = 1 << 16
       }
     case D29 : // PTB18
       if value {
-        #GPIOB:PSOR = 1 << 18
+        $(GPIOB:PSOR) = 1 << 18
       }else{
-        #GPIOB:PCOR = 1 << 18
+        $(GPIOB:PCOR) = 1 << 18
       }
     case D30 : // PTB19
       if value {
-        #GPIOB:PSOR = 1 << 19
+        $(GPIOB:PSOR) = 1 << 19
       }else{
-        #GPIOB:PCOR = 1 << 19
+        $(GPIOB:PCOR) = 1 << 19
       }
     case D31 : // PTB10
       if value {
-        #GPIOB:PSOR = 1 << 10
+        $(GPIOB:PSOR) = 1 << 10
       }else{
-        #GPIOB:PCOR = 1 << 10
+        $(GPIOB:PCOR) = 1 << 10
       }
     case D32 : // PTB11
       if value {
-        #GPIOB:PSOR = 1 << 11
+        $(GPIOB:PSOR) = 1 << 11
       }else{
-        #GPIOB:PCOR = 1 << 11
+        $(GPIOB:PCOR) = 1 << 11
       }
     case D33 : // PTE24
       if value {
-        #GPIOE:PSOR = 1 << 24
+        $(GPIOE:PSOR) = 1 << 24
       }else{
-        #GPIOE:PCOR = 1 << 24
+        $(GPIOE:PCOR) = 1 << 24
       }
     case D34 : // PTE25
       if value {
-        #GPIOE:PSOR = 1 << 25
+        $(GPIOE:PSOR) = 1 << 25
       }else{
-        #GPIOE:PCOR = 1 << 25
+        $(GPIOE:PCOR) = 1 << 25
       }
     case D35 : // PTC8
       if value {
-        #GPIOC:PSOR = 1 << 8
+        $(GPIOC:PSOR) = 1 << 8
       }else{
-        #GPIOC:PCOR = 1 << 8
+        $(GPIOC:PCOR) = 1 << 8
       }
     case D36 : // PTC9
       if value {
-        #GPIOC:PSOR = 1 << 9
+        $(GPIOC:PSOR) = 1 << 9
       }else{
-        #GPIOC:PCOR = 1 << 9
+        $(GPIOC:PCOR) = 1 << 9
       }
     case D37 : // PTC10
       if value {
-        #GPIOC:PSOR = 1 << 10
+        $(GPIOC:PSOR) = 1 << 10
       }else{
-        #GPIOC:PCOR = 1 << 10
+        $(GPIOC:PCOR) = 1 << 10
       }
     case D38 : // PTC11
       if value {
-        #GPIOC:PSOR = 1 << 11
+        $(GPIOC:PSOR) = 1 << 11
       }else{
-        #GPIOC:PCOR = 1 << 11
+        $(GPIOC:PCOR) = 1 << 11
       }
     case D39 : // PTA17
       if value {
-        #GPIOA:PSOR = 1 << 17
+        $(GPIOA:PSOR) = 1 << 17
       }else{
-        #GPIOA:PCOR = 1 << 17
+        $(GPIOA:PCOR) = 1 << 17
       }
     case D40 : // PTA28
       if value {
-        #GPIOA:PSOR = 1 << 28
+        $(GPIOA:PSOR) = 1 << 28
       }else{
-        #GPIOA:PCOR = 1 << 28
+        $(GPIOA:PCOR) = 1 << 28
       }
     case D41 : // PTA29
       if value {
-        #GPIOA:PSOR = 1 << 29
+        $(GPIOA:PSOR) = 1 << 29
       }else{
-        #GPIOA:PCOR = 1 << 29
+        $(GPIOA:PCOR) = 1 << 29
       }
     case D42 : // PTA26
       if value {
-        #GPIOA:PSOR = 1 << 26
+        $(GPIOA:PSOR) = 1 << 26
       }else{
-        #GPIOA:PCOR = 1 << 26
+        $(GPIOA:PCOR) = 1 << 26
       }
     case D43 : // PTB20
       if value {
-        #GPIOB:PSOR = 1 << 20
+        $(GPIOB:PSOR) = 1 << 20
       }else{
-        #GPIOB:PCOR = 1 << 20
+        $(GPIOB:PCOR) = 1 << 20
       }
     case D44 : // PTB22
       if value {
-        #GPIOB:PSOR = 1 << 22
+        $(GPIOB:PSOR) = 1 << 22
       }else{
-        #GPIOB:PCOR = 1 << 22
+        $(GPIOB:PCOR) = 1 << 22
       }
     case D45 : // PTB23
       if value {
-        #GPIOB:PSOR = 1 << 23
+        $(GPIOB:PSOR) = 1 << 23
       }else{
-        #GPIOB:PCOR = 1 << 23
+        $(GPIOB:PCOR) = 1 << 23
       }
     case D46 : // PTB21
       if value {
-        #GPIOB:PSOR = 1 << 21
+        $(GPIOB:PSOR) = 1 << 21
       }else{
-        #GPIOB:PCOR = 1 << 21
+        $(GPIOB:PCOR) = 1 << 21
       }
     case D47 : // PTD8
       if value {
-        #GPIOD:PSOR = 1 << 8
+        $(GPIOD:PSOR) = 1 << 8
       }else{
-        #GPIOD:PCOR = 1 << 8
+        $(GPIOD:PCOR) = 1 << 8
       }
     case D48 : // PTD9
       if value {
-        #GPIOD:PSOR = 1 << 9
+        $(GPIOD:PSOR) = 1 << 9
       }else{
-        #GPIOD:PCOR = 1 << 9
+        $(GPIOD:PCOR) = 1 << 9
       }
     case D49 : // PTB4
       if value {
-        #GPIOB:PSOR = 1 << 4
+        $(GPIOB:PSOR) = 1 << 4
       }else{
-        #GPIOB:PCOR = 1 << 4
+        $(GPIOB:PCOR) = 1 << 4
       }
     case D50 : // PTB5
       if value {
-        #GPIOB:PSOR = 1 << 5
+        $(GPIOB:PSOR) = 1 << 5
       }else{
-        #GPIOB:PCOR = 1 << 5
+        $(GPIOB:PCOR) = 1 << 5
       }
     case D51 : // PTD14
       if value {
-        #GPIOD:PSOR = 1 << 14
+        $(GPIOD:PSOR) = 1 << 14
       }else{
-        #GPIOD:PCOR = 1 << 14
+        $(GPIOD:PCOR) = 1 << 14
       }
     case D52 : // PTD13
       if value {
-        #GPIOD:PSOR = 1 << 13
+        $(GPIOD:PSOR) = 1 << 13
       }else{
-        #GPIOD:PCOR = 1 << 13
+        $(GPIOD:PCOR) = 1 << 13
       }
     case D53 : // PTD12
       if value {
-        #GPIOD:PSOR = 1 << 12
+        $(GPIOD:PSOR) = 1 << 12
       }else{
-        #GPIOD:PCOR = 1 << 12
+        $(GPIOD:PCOR) = 1 << 12
       }
     case D54 : // PTD15
       if value {
-        #GPIOD:PSOR = 1 << 15
+        $(GPIOD:PSOR) = 1 << 15
       }else{
-        #GPIOD:PCOR = 1 << 15
+        $(GPIOD:PCOR) = 1 << 15
       }
     case D55 : // PTD11
       if value {
-        #GPIOD:PSOR = 1 << 11
+        $(GPIOD:PSOR) = 1 << 11
       }else{
-        #GPIOD:PCOR = 1 << 11
+        $(GPIOD:PCOR) = 1 << 11
       }
     case D56 : // PTE10
       if value {
-        #GPIOE:PSOR = 1 << 10
+        $(GPIOE:PSOR) = 1 << 10
       }else{
-        #GPIOE:PCOR = 1 << 10
+        $(GPIOE:PCOR) = 1 << 10
       }
     case D57 : // PTE11
       if value {
-        #GPIOE:PSOR = 1 << 11
+        $(GPIOE:PSOR) = 1 << 11
       }else{
-        #GPIOE:PCOR = 1 << 11
+        $(GPIOE:PCOR) = 1 << 11
       }
     }
   }
@@ -680,121 +680,121 @@ driver digital > root {
   public func read safe @noUnusedWarning (?port:port : DigitalPort) -> Bool {
     switch port {
     case D0 : // PTB16
-      result = (#GPIOB:PDIR & (1 << 16)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 16)) ≠ 0
     case D1 : // PTB17
-      result = (#GPIOB:PDIR & (1 << 17)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 17)) ≠ 0
     case D2 : // PTD0
-      result = (#GPIOD:PDIR & (1 << 0)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 0)) ≠ 0
     case D3 : // PTA12
-      result = (#GPIOA:PDIR & (1 << 12)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 12)) ≠ 0
     case D4 : // PTA13
-      result = (#GPIOA:PDIR & (1 << 13)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 13)) ≠ 0
     case D5 : // PTD7
-      result = (#GPIOD:PDIR & (1 << 7)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 7)) ≠ 0
     case D6 : // PTD4
-      result = (#GPIOD:PDIR & (1 << 4)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 4)) ≠ 0
     case D7 : // PTD2
-      result = (#GPIOD:PDIR & (1 << 2)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 2)) ≠ 0
     case D8 : // PTD3
-      result = (#GPIOD:PDIR & (1 << 3)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 3)) ≠ 0
     case D9  : // PTC3
-      result = (#GPIOC:PDIR & (1 << 3)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 3)) ≠ 0
     case D10 : // PTC4
-      result = (#GPIOC:PDIR & (1 << 4)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 4)) ≠ 0
     case D11 : // PTC6
-      result = (#GPIOC:PDIR & (1 << 6)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 6)) ≠ 0
     case D12 : // PTC7
-      result = (#GPIOC:PDIR & (1 << 7)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 7)) ≠ 0
     case D13 : // PTC5
-      result = (#GPIOC:PDIR & (1 << 5)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 5)) ≠ 0
     case D14 : // PTD1
-      result = (#GPIOD:PDIR & (1 << 1)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 1)) ≠ 0
     case D15 : // PTC0
-      result = (#GPIOC:PDIR & (1 << 0)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 0)) ≠ 0
     case D16 : // PTB0
-      result = (#GPIOB:PDIR & (1 << 0)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 0)) ≠ 0
     case D17 : // PTB1
-      result = (#GPIOB:PDIR & (1 << 1)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 1)) ≠ 0
     case D18 : // PTB3
-      result = (#GPIOB:PDIR & (1 << 3)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 3)) ≠ 0
     case D19 : // PTB2
-      result = (#GPIOB:PDIR & (1 << 2)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 2)) ≠ 0
     case D20 : // PTD5
-      result = (#GPIOD:PDIR & (1 << 5)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 5)) ≠ 0
     case D21 : // PTD6
-      result = (#GPIOD:PDIR & (1 << 6)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 6)) ≠ 0
     case D22 : // PTC1
-      result = (#GPIOC:PDIR & (1 << 1)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 1)) ≠ 0
     case D23 : // PTC2
-      result = (#GPIOC:PDIR & (1 << 2)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 2)) ≠ 0
     case D24 : // PTE26
-      result = (#GPIOE:PDIR & (1 << 26)) ≠ 0
+      result = ($(GPIOE:PDIR) & (1 << 26)) ≠ 0
     case D25 : // PTA5
-      result = (#GPIOA:PDIR & (1 << 5)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 5)) ≠ 0
     case D26 : // PTA14
-      result = (#GPIOA:PDIR & (1 << 14)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 14)) ≠ 0
     case D27 : // PTA15
-      result = (#GPIOA:PDIR & (1 << 15)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 15)) ≠ 0
     case D28 : // PTA16
-      result = (#GPIOA:PDIR & (1 << 16)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 16)) ≠ 0
     case D29 : // PTB18
-      result = (#GPIOB:PDIR & (1 << 18)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 18)) ≠ 0
     case D30 : // PTB19
-      result = (#GPIOB:PDIR & (1 << 19)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 19)) ≠ 0
     case D31 : // PTB10
-      result = (#GPIOB:PDIR & (1 << 10)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 10)) ≠ 0
     case D32 : // PTB11
-      result = (#GPIOB:PDIR & (1 << 11)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 11)) ≠ 0
     case D33 : // PTE24
-      result = (#GPIOE:PDIR & (1 << 24)) ≠ 0
+      result = ($(GPIOE:PDIR) & (1 << 24)) ≠ 0
     case D34 : // PTE25
-      result = (#GPIOE:PDIR & (1 << 25)) ≠ 0
+      result = ($(GPIOE:PDIR) & (1 << 25)) ≠ 0
     case D35 : // PTC8
-      result = (#GPIOC:PDIR & (1 << 8)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 8)) ≠ 0
     case D36 : // PTC9
-      result = (#GPIOC:PDIR & (1 << 9)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 9)) ≠ 0
     case D37 : // PTC10
-      result = (#GPIOC:PDIR & (1 << 10)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 10)) ≠ 0
     case D38 : // PTC11
-      result = (#GPIOC:PDIR & (1 << 11)) ≠ 0
+      result = ($(GPIOC:PDIR) & (1 << 11)) ≠ 0
     case D39 : // PTA17
-      result = (#GPIOA:PDIR & (1 << 17)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 17)) ≠ 0
     case D40 : // PTA28
-      result = (#GPIOA:PDIR & (1 << 28)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 28)) ≠ 0
     case D41 : // PTA29
-      result = (#GPIOA:PDIR & (1 << 29)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 29)) ≠ 0
     case D42 : // PTA26
-      result = (#GPIOA:PDIR & (1 << 26)) ≠ 0
+      result = ($(GPIOA:PDIR) & (1 << 26)) ≠ 0
     case D43 : // PTB20
-      result = (#GPIOB:PDIR & (1 << 20)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 20)) ≠ 0
     case D44 : // PTB22
-      result = (#GPIOB:PDIR & (1 << 22)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 22)) ≠ 0
     case D45 : // PTB23
-      result = (#GPIOB:PDIR & (1 << 23)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 23)) ≠ 0
     case D46 : // PTB21
-      result = (#GPIOB:PDIR & (1 << 21)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 21)) ≠ 0
     case D47 : // PTD8
-      result = (#GPIOD:PDIR & (1 << 8)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 8)) ≠ 0
     case D48 : // PTD9
-      result = (#GPIOD:PDIR & (1 << 9)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 9)) ≠ 0
     case D49 : // PTB4
-      result = (#GPIOB:PDIR & (1 << 4)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 4)) ≠ 0
     case D50 : // PTB5
-      result = (#GPIOB:PDIR & (1 << 5)) ≠ 0
+      result = ($(GPIOB:PDIR) & (1 << 5)) ≠ 0
     case D51 : // PTD14
-      result = (#GPIOD:PDIR & (1 << 14)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 14)) ≠ 0
     case D52 : // PTD13
-      result = (#GPIOD:PDIR & (1 << 13)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 13)) ≠ 0
     case D53 : // PTD12
-      result = (#GPIOD:PDIR & (1 << 12)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 12)) ≠ 0
     case D54 : // PTD15
-      result = (#GPIOD:PDIR & (1 << 15)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 15)) ≠ 0
     case D55 : // PTD11
-      result = (#GPIOD:PDIR & (1 << 11)) ≠ 0
+      result = ($(GPIOD:PDIR) & (1 << 11)) ≠ 0
     case D56 : // PTE10
-      result = (#GPIOE:PDIR & (1 << 10)) ≠ 0
+      result = ($(GPIOE:PDIR) & (1 << 10)) ≠ 0
     case D57 : // PTE11
-      result = (#GPIOE:PDIR & (1 << 11)) ≠ 0
+      result = ($(GPIOE:PDIR) & (1 << 11)) ≠ 0
     }
   }
 
@@ -803,121 +803,121 @@ driver digital > root {
   public func toggle safe @noUnusedWarning (?port:port : DigitalPort) {
     switch port {
     case D0 : // PTB16
-      #GPIOB:PTOR = 1 << 16
+      $(GPIOB:PTOR) = 1 << 16
     case D1 : // PTB17
-      #GPIOB:PTOR = 1 << 17
+      $(GPIOB:PTOR) = 1 << 17
     case D2 : // PTD0
-      #GPIOD:PTOR = 1 << 0
+      $(GPIOD:PTOR) = 1 << 0
     case D3 : // PTA12
-      #GPIOA:PTOR = 1 << 12
+      $(GPIOA:PTOR) = 1 << 12
     case D4 : // PTA13
-      #GPIOA:PTOR = 1 << 13
+      $(GPIOA:PTOR) = 1 << 13
     case D5 : // PTD7
-      #GPIOD:PTOR = 1 << 7
+      $(GPIOD:PTOR) = 1 << 7
     case D6 : // PTD4
-      #GPIOD:PTOR = 1 << 4
+      $(GPIOD:PTOR) = 1 << 4
     case D7 : // PTD2
-      #GPIOD:PTOR = 1 << 2
+      $(GPIOD:PTOR) = 1 << 2
     case D8 : // PTD3
-      #GPIOD:PTOR = 1 << 3
+      $(GPIOD:PTOR) = 1 << 3
     case D9  : // PTC3
-      #GPIOC:PTOR = 1 << 3
+      $(GPIOC:PTOR) = 1 << 3
     case D10 : // PTC4
-      #GPIOC:PTOR = 1 << 4
+      $(GPIOC:PTOR) = 1 << 4
     case D11 : // PTC6
-      #GPIOC:PTOR = 1 << 6
+      $(GPIOC:PTOR) = 1 << 6
     case D12 : // PTC7
-      #GPIOC:PTOR = 1 << 7
+      $(GPIOC:PTOR) = 1 << 7
     case D13 : // PTC5
-      #GPIOC:PTOR = 1 << 5
+      $(GPIOC:PTOR) = 1 << 5
     case D14 : // PTD1
-      #GPIOD:PTOR = 1 << 1
+      $(GPIOD:PTOR) = 1 << 1
     case D15 : // PTC0
-      #GPIOC:PTOR = 1 << 0
+      $(GPIOC:PTOR) = 1 << 0
     case D16 : // PTB0
-      #GPIOB:PTOR = 1 << 0
+      $(GPIOB:PTOR) = 1 << 0
     case D17 : // PTB1
-      #GPIOB:PTOR = 1 << 1
+      $(GPIOB:PTOR) = 1 << 1
     case D18 : // PTB3
-      #GPIOB:PTOR = 1 << 3
+      $(GPIOB:PTOR) = 1 << 3
     case D19 : // PTB2
-      #GPIOB:PTOR = 1 << 2
+      $(GPIOB:PTOR) = 1 << 2
     case D20 : // PTD5
-      #GPIOD:PTOR = 1 << 5
+      $(GPIOD:PTOR) = 1 << 5
     case D21 : // PTD6
-      #GPIOD:PTOR = 1 << 6
+      $(GPIOD:PTOR) = 1 << 6
     case D22 : // PTC1
-      #GPIOC:PTOR = 1 << 1
+      $(GPIOC:PTOR) = 1 << 1
     case D23 : // PTC2
-      #GPIOC:PTOR = 1 << 2
+      $(GPIOC:PTOR) = 1 << 2
     case D24 : // PTE26
-      #GPIOE:PTOR = 1 << 26
+      $(GPIOE:PTOR) = 1 << 26
     case D25 : // PTA5
-      #GPIOA:PTOR = 1 << 5
+      $(GPIOA:PTOR) = 1 << 5
     case D26 : // PTA14
-      #GPIOA:PTOR = 1 << 14
+      $(GPIOA:PTOR) = 1 << 14
     case D27 : // PTA15
-      #GPIOA:PTOR = 1 << 15
+      $(GPIOA:PTOR) = 1 << 15
     case D28 : // PTA16
-      #GPIOA:PTOR = 1 << 16
+      $(GPIOA:PTOR) = 1 << 16
     case D29 : // PTB18
-      #GPIOB:PTOR = 1 << 18
+      $(GPIOB:PTOR) = 1 << 18
     case D30 : // PTB19
-      #GPIOB:PTOR = 1 << 19
+      $(GPIOB:PTOR) = 1 << 19
     case D31 : // PTB10
-      #GPIOB:PTOR = 1 << 10
+      $(GPIOB:PTOR) = 1 << 10
     case D32 : // PTB11
-      #GPIOB:PTOR = 1 << 11
+      $(GPIOB:PTOR) = 1 << 11
     case D33 : // PTE24
-      #GPIOE:PTOR = 1 << 24
+      $(GPIOE:PTOR) = 1 << 24
     case D34 : // PTE25
-      #GPIOE:PTOR = 1 << 25
+      $(GPIOE:PTOR) = 1 << 25
     case D35 : // PTC8
-      #GPIOC:PTOR = 1 << 8
+      $(GPIOC:PTOR) = 1 << 8
     case D36 : // PTC9
-      #GPIOC:PTOR = 1 << 9
+      $(GPIOC:PTOR) = 1 << 9
     case D37 : // PTC10
-      #GPIOC:PTOR = 1 << 10
+      $(GPIOC:PTOR) = 1 << 10
     case D38 : // PTC11
-      #GPIOC:PTOR = 1 << 11
+      $(GPIOC:PTOR) = 1 << 11
     case D39 : // PTA17
-      #GPIOA:PTOR = 1 << 17
+      $(GPIOA:PTOR) = 1 << 17
     case D40 : // PTA28
-      #GPIOA:PTOR = 1 << 28
+      $(GPIOA:PTOR) = 1 << 28
     case D41 : // PTA29
-      #GPIOA:PTOR = 1 << 29
+      $(GPIOA:PTOR) = 1 << 29
     case D42 : // PTA26
-      #GPIOA:PTOR = 1 << 26
+      $(GPIOA:PTOR) = 1 << 26
     case D43 : // PTB20
-      #GPIOB:PTOR = 1 << 20
+      $(GPIOB:PTOR) = 1 << 20
     case D44 : // PTB22
-      #GPIOB:PTOR = 1 << 22
+      $(GPIOB:PTOR) = 1 << 22
     case D45 : // PTB23
-      #GPIOB:PTOR = 1 << 23
+      $(GPIOB:PTOR) = 1 << 23
     case D46 : // PTB21
-      #GPIOB:PTOR = 1 << 21
+      $(GPIOB:PTOR) = 1 << 21
     case D47 : // PTD8
-      #GPIOD:PTOR = 1 << 8
+      $(GPIOD:PTOR) = 1 << 8
     case D48 : // PTD9
-      #GPIOD:PTOR = 1 << 9
+      $(GPIOD:PTOR) = 1 << 9
     case D49 : // PTB4
-      #GPIOB:PTOR = 1 << 4
+      $(GPIOB:PTOR) = 1 << 4
     case D50 : // PTB5
-      #GPIOB:PTOR = 1 << 5
+      $(GPIOB:PTOR) = 1 << 5
     case D51 : // PTD14
-      #GPIOD:PTOR = 1 << 14
+      $(GPIOD:PTOR) = 1 << 14
     case D52 : // PTD13
-      #GPIOD:PTOR = 1 << 13
+      $(GPIOD:PTOR) = 1 << 13
     case D53 : // PTD12
-      #GPIOD:PTOR = 1 << 12
+      $(GPIOD:PTOR) = 1 << 12
     case D54 : // PTD15
-      #GPIOD:PTOR = 1 << 15
+      $(GPIOD:PTOR) = 1 << 15
     case D55 : // PTD11
-      #GPIOD:PTOR = 1 << 11
+      $(GPIOD:PTOR) = 1 << 11
     case D56 : // PTE10
-      #GPIOE:PTOR = 1 << 10
+      $(GPIOE:PTOR) = 1 << 10
     case D57 : // PTE11
-      #GPIOE:PTOR = 1 << 11
+      $(GPIOE:PTOR) = 1 << 11
     }
   }
   //··············································································

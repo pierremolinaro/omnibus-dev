@@ -2,21 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @driverPropertyListAST {
-#  @lstring mPropertyName
-#  @propertyAttributeList mPropertyAttributeList
-#  @bool mIsConstant # true if declared with "let"
-#  @lstring mTypeName # Empty string if no type annotation
-#  @structurePropertyInitOptionalExpressionAST mOptionalExpression
-#}
-
-#·······················································································································
-
 struct @driverDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
   @structurePropertyListAST mPropertyListAST
-#  @driverPropertyListAST mDriverPropertyListAST
   @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST

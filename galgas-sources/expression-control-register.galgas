@@ -16,6 +16,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+    $\$($
     <control_register_lvalue> !?ioAST ?let registerLValue
     @lstring fieldName
     select
@@ -24,6 +25,7 @@ syntax extension plm_syntax {
       $:$
       $identifier$ ?fieldName
     end
+    $)$
   #--- AST
     outExpression = @registerInExpressionAST.new {!registerLValue !fieldName}
   }

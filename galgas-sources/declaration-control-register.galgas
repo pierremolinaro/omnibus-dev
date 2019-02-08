@@ -82,7 +82,7 @@ syntax extension plm_syntax {
     $registers$
     @registerGroupListAST registerGroupListAST = {}
     repeat
-      $#groupName$ ?let registerGroupName
+      $identifier$ ?let registerGroupName
       $@attribute$ ?let attribute
       if attribute.string != "at" then
         error attribute : "attribute should be @at"
@@ -121,7 +121,7 @@ syntax extension plm_syntax {
       @controlRegisterBitSliceList registerBitSliceList = {}
       select
       or
-        $($
+        ${$
         repeat
           @controlRegisterBitSlice registerBitSlice
           select
@@ -141,7 +141,7 @@ syntax extension plm_syntax {
         while
           $,$
         end
-        $)$
+        $}$
       end
       let endOfBitSlice = @location.here
       controlRegisterDeclarationList += !registerDeclarationList !registerTypeName !registerBitSliceList !endOfBitSlice
@@ -209,7 +209,7 @@ syntax extension plm_syntax {
     if attribute.string != userAttributeForRegister () then
       error attribute : "this attribute should be @" + userAttributeForRegister ()
     end
-    $#groupName$ ?let registerGroupName
+    $identifier$ ?let registerGroupName
     $($
     repeat
       $identifier$ ?let registerName
