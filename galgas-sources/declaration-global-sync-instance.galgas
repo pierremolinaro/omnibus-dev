@@ -23,6 +23,7 @@ syntax extension plm_syntax {
     select
       syncTypeName = ["" here]
     or
+      $:$
       <type_definition> !?ioAST ?syncTypeName
     end
     $=$

@@ -26,19 +26,12 @@ syntax extension plm_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
-    @lstring optionalTypeName
-    select
-      optionalTypeName = ["" nowhere]
-    or
-      $:$
-      <type_definition> !?ioAST ?optionalTypeName
-    end
     $=$
     <expression> !?ioAST ?let @expressionAST expression
     ioInstructionList += !@varInstructionWithAssignmentAST.new {
       !varName.location
       !varName
-      !optionalTypeName
+      !["" here]
       !expression
     }
   }
@@ -50,11 +43,22 @@ syntax extension plm_syntax {
     $identifier$ ?let varName
     $:$
     <type_definition> !?ioAST ?let typeName
-    ioInstructionList += !@varInstructionAST.new {
-      !varName.location
-      !varName
-      !typeName
-    }
+    select
+      ioInstructionList += !@varInstructionAST.new {
+        !varName.location
+        !varName
+        !typeName
+      }
+    or
+      $=$
+      <expression> !?ioAST ?let @expressionAST expression
+      ioInstructionList += !@varInstructionWithAssignmentAST.new {
+        !varName.location
+        !varName
+        !typeName
+        !expression
+      }
+   end
   }
 
   #·····················································································································

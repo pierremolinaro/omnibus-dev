@@ -31,11 +31,8 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    $sizeof$ # §
-    $($
-    $:$
+    $sizeof$
     <type_definition> !?ioAST ?let typeName
-    $)$
     outExpression = @sizeofTypeAST.new {!typeName}
   }
 

@@ -1342,10 +1342,10 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1/unp
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "staticArray maListeStatique {\n"
-  "  let a UInt32\n"
-  "  let b UInt32\n"
-  "  let p func user (\?!par: y : UInt32)\n"
-  "  let f func user (\?arg: x : UInt32) -> UInt32\n"
+  "  let a : UInt32\n"
+  "  let b : UInt32\n"
+  "  let p : func user (\?!par: y : UInt32)\n"
+  "  let f : func user (\?arg: x : UInt32) -> UInt32\n"
   "}\n"
   "\n"
   "func toggleL2 user (\?!par: y : UInt32) {\n"
@@ -1405,7 +1405,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "07-static-list-example.plm",
   "plm",
   true, // Text file
-  1583, // Text length
+  1591, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -2585,7 +2585,7 @@ const char * gWrapperFileContent_35_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "// So LED_L3 frequency is PATTERN_FREQUENCY / 2\n"
   "// So D4 frequency is PATTERN_FREQUENCY / 2 / PATTERN_LENGTH\n"
   "\n"
-  "staticArray kPATTERN { let x Bool }\n"
+  "staticArray kPATTERN { let x : Bool }\n"
   "\n"
   "extend staticArray kPATTERN ( // Morse code example: output \"S S S ...\"\n"
   "  yes :: no :: yes :: no :: yes :: // 3 dots : letter S\n"
@@ -2759,7 +2759,7 @@ const cRegularFileWrapper gWrapperFile_35_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7509, // Text length
+  7511, // Text length
   gWrapperFileContent_35_embeddedSampleCode
 ) ;
 
