@@ -110,7 +110,6 @@ syntax extension plm_syntax {
     ${$
     @controlRegisterDeclarationList controlRegisterDeclarationList = {}
     repeat
-    while
       @controlRegisterNameListAST registerDeclarationList = {}
       repeat
         <registerDeclaration> !?ioAST !?registerDeclarationList
@@ -122,7 +121,7 @@ syntax extension plm_syntax {
       @controlRegisterBitSliceList registerBitSliceList = {}
       select
       or
-        ${$
+        $($
         repeat
           @controlRegisterBitSlice registerBitSlice
           select
@@ -142,10 +141,11 @@ syntax extension plm_syntax {
         while
           $,$
         end
-        $}$
+        $)$
       end
       let endOfBitSlice = @location.here
       controlRegisterDeclarationList += !registerDeclarationList !registerTypeName !registerBitSliceList !endOfBitSlice
+    while
     end
     ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {
       !registerGroupListAST
@@ -165,12 +165,12 @@ syntax extension plm_syntax {
       attributeList += !attribute
     end
     select
-      <expression> !?ioAST ?let registerAddress
+      <expression> !?ioAST ?let registerOffset
       ioRegisterDeclarationList +=
         !registerName
         !.scalar
         !attributeList
-        !registerAddress 
+        !registerOffset 
         !.here
     or
       $[$
@@ -199,6 +199,8 @@ syntax extension plm_syntax {
     end
   }
 
+  #·····················································································································
+  #   registers @user #GROUP (register, ...)
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
