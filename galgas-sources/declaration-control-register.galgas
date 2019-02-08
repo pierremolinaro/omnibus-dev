@@ -207,15 +207,16 @@ syntax extension plm_syntax {
     if attribute.string != userAttributeForRegister () then
       error attribute : "this attribute should be @" + userAttributeForRegister ()
     end
+    $#groupName$ ?let registerGroupName
+    $($
     repeat
-      $#groupName$ ?let registerGroupName
-      $:$
       $identifier$ ?let registerName
       let key = @lstring.new {!"#" + registerGroupName + ":" + registerName !registerName.location}
       [!?ioAST.mControlRegisterUserAccesMapAST insertKey !key]
     while
       $,$
-    end      
+    end
+    $)$      
   }
   
   #·····················································································································

@@ -3,16 +3,15 @@ check target "teensy-3-6/xtr32", "teensy-3-6/xtr64"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers @user #PORTA:PCR, #PORTB:PCR, #PORTC:PCR, #PORTD:PCR, #PORTE:PCR
-registers @user #PORTA:GPCLR, #PORTB:GPCLR, #PORTC:GPCLR, #PORTD:GPCLR, #PORTE:GPCLR
-registers @user #PORTA:GPCHR, #PORTB:GPCHR, #PORTC:GPCHR, #PORTD:GPCHR, #PORTE:GPCHR
+registers @user #PORTA (PCR, GPCLR, GPCHR)
+registers @user #PORTB (PCR, GPCLR, GPCHR)
+registers @user #PORTC (PCR, GPCLR, GPCHR)
+registers @user #PORTD (PCR, GPCLR, GPCHR)
 
-registers @user #GPIOA:PDOR, #GPIOB:PDOR, #GPIOC:PDOR, #GPIOD:PDOR, #GPIOE:PDOR
-registers @user #GPIOA:PSOR, #GPIOB:PSOR, #GPIOC:PSOR, #GPIOD:PSOR, #GPIOE:PSOR
-registers @user #GPIOA:PCOR, #GPIOB:PCOR, #GPIOC:PCOR, #GPIOD:PCOR, #GPIOE:PCOR
-registers @user #GPIOA:PTOR, #GPIOB:PTOR, #GPIOC:PTOR, #GPIOD:PTOR, #GPIOE:PTOR
-registers @user #GPIOA:PDIR, #GPIOB:PDIR, #GPIOC:PDIR, #GPIOD:PDIR, #GPIOE:PDIR
-registers @user #GPIOA:PDDR, #GPIOB:PDDR, #GPIOC:PDDR, #GPIOD:PDDR, #GPIOE:PDDR
+registers @user #GPIOA (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user #GPIOB (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user #GPIOC (PDOR, PSOR, PCOR, PTOR, PDDR)
+registers @user #GPIOD (PDOR, PSOR, PCOR, PTOR, PDDR)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
