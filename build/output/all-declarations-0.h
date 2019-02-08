@@ -508,6 +508,12 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_type_5F_definition_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_ (class GALGAS_ast & ioArgument0,
+                                                                                            class GALGAS_lstring & outArgument1,
+                                                                                            class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
 
 //--- Rule declarations
   protected : void rule_plm_5F_syntax_import_5F_file_i0_ (GALGAS_lstringlist & ioArgument0,
@@ -533,17 +539,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_type_5F_definition_i3_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i4_ (GALGAS_ast & ioArgument0,
-                                                              GALGAS_lstring & outArgument1,
-                                                              C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_i4_ (GALGAS_ast & ioArgument0,
+                                                                                                       GALGAS_lstring & outArgument1,
+                                                                                                       C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i4_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_i4_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i5_ (GALGAS_ast & ioArgument0,
-                                                              GALGAS_lstring & outArgument1,
-                                                              C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_i5_ (GALGAS_ast & ioArgument0,
+                                                                                                       GALGAS_lstring & outArgument1,
+                                                                                                       C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_type_5F_definition_i5_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_i5_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i6_ (GALGAS_ast & ioArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
@@ -1428,6 +1434,8 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_123 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_124 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_125 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
@@ -10491,8 +10499,7 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_controlRegisterGroupKindAST constructor_groupArray (const class GALGAS_lbigint & inOperand0,
-                                                                                   const class GALGAS_lbigintlist & inOperand1
+  public : static class GALGAS_controlRegisterGroupKindAST constructor_groupArray (const class GALGAS_lbigintlist & inOperand0
                                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_controlRegisterGroupKindAST constructor_single (const class GALGAS_lbigint & inOperand0
@@ -10507,8 +10514,7 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_groupArray (class GALGAS_lbigint & outArgument0,
-                                                    class GALGAS_lbigintlist & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_groupArray (class GALGAS_lbigintlist & outArgument0,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 
@@ -10557,12 +10563,10 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAss
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnumAssociatedValues {
-  public : const GALGAS_lbigint mAssociatedValue0 ;
-  public : const GALGAS_lbigintlist mAssociatedValue1 ;
+  public : const GALGAS_lbigintlist mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_lbigint & inAssociatedValue0,
-                                                                         const GALGAS_lbigintlist & inAssociatedValue1
+  public : cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_lbigintlist & inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

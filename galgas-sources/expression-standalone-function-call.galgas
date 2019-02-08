@@ -18,7 +18,6 @@ syntax extension plm_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <type_definition> !?ioAST ?let standaloneFunctionName
-#    $identifier$ ?let standaloneFunctionName
     <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
     outExpression = @standaloneFunctionInExpressionAST.new {!standaloneFunctionName !arguments !endOfArguments}
   }

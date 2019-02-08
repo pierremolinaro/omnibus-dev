@@ -2592,38 +2592,38 @@ void extensionMethod_generateLLVMForStaticLists (const GALGAS_staticListInitiali
                                                  GALGAS_string & ioArgument_ioLLVMcode,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bool var_first_23356 = GALGAS_bool (true) ;
+  GALGAS_bool var_first_22959 = GALGAS_bool (true) ;
   const GALGAS_staticListInitializationMap temp_0 = inObject ;
-  cEnumerator_staticListInitializationMap enumerator_23392 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_23392.hasCurrentObject ()) {
+  cEnumerator_staticListInitializationMap enumerator_22995 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_22995.hasCurrentObject ()) {
     enumGalgasBool test_1 = kBoolTrue ;
     if (kBoolTrue == test_1) {
-      test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_23392.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 571)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 571)).boolEnum () ;
+      test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_22995.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 560)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 560)).boolEnum () ;
       if (kBoolTrue == test_1) {
         enumGalgasBool test_2 = kBoolTrue ;
         if (kBoolTrue == test_2) {
-          test_2 = var_first_23356.boolEnum () ;
+          test_2 = var_first_22959.boolEnum () ;
           if (kBoolTrue == test_2) {
-            var_first_23356 = GALGAS_bool (false) ;
-            ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Static Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 574)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 574)) ;
+            var_first_22959 = GALGAS_bool (false) ;
+            ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Static Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 563)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 563)) ;
           }
         }
-        ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (enumerator_23392.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 576)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 576)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 576)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 576)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_23392.current_mInitializationList (HERE).getter_length (SOURCE_FILE ("declaration-static-list.galgas", 577)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 577)).add_operation (GALGAS_string (" x %"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 577)).add_operation (function_llvmNameForStaticListElementType (enumerator_23392.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 577)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 577)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 577)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 577)).add_operation (GALGAS_string ("] [\n"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 577)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 577)) ;
-        cEnumerator_stringlist enumerator_23795 (enumerator_23392.current_mInitializationList (HERE), kENUMERATION_UP) ;
-        while (enumerator_23795.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %").add_operation (function_llvmNameForStaticListElementType (enumerator_23392.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 580)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 580)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 580)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 580)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 580)).add_operation (enumerator_23795.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 580)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 580)) ;
-          if (enumerator_23795.hasNextObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (",\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 582)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForGlobalVariable (enumerator_22995.current_lkey (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 565)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 565)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 565)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 565)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22995.current_mInitializationList (HERE).getter_length (SOURCE_FILE ("declaration-static-list.galgas", 566)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 566)).add_operation (GALGAS_string (" x %"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 566)).add_operation (function_llvmNameForStaticListElementType (enumerator_22995.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 566)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 566)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 566)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 566)).add_operation (GALGAS_string ("] [\n"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 566)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 566)) ;
+        cEnumerator_stringlist enumerator_23398 (enumerator_22995.current_mInitializationList (HERE), kENUMERATION_UP) ;
+        while (enumerator_23398.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %").add_operation (function_llvmNameForStaticListElementType (enumerator_22995.current_lkey (HERE).getter_string (HERE).getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas", 569)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 569)).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 569)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 569)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 569)).add_operation (enumerator_23398.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 569)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 569)) ;
+          if (enumerator_23398.hasNextObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (",\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 571)) ;
           }
-          enumerator_23795.gotoNextObject () ;
+          enumerator_23398.gotoNextObject () ;
         }
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"
           "]\n"
-          "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 584)) ;
+          "\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 573)) ;
       }
     }
-    enumerator_23392.gotoNextObject () ;
+    enumerator_22995.gotoNextObject () ;
   }
 }
 

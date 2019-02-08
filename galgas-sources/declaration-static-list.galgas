@@ -75,6 +75,7 @@ syntax extension plm_syntax {
   rule <staticArrayProperty> ?!@ast ioAST ?!@staticListPropertyListAST ioPropertyList {
     $let$
     $identifier$ ?let propertyName
+    $:$
     select
       <type_definition> !?ioAST ?let typeName
       ioPropertyList += !propertyName !.valueType{!type:typeName}
@@ -95,18 +96,6 @@ syntax extension plm_syntax {
         $->$
         <type_definition>!?ioAST ?returnType
       end
-#      var isSafe = false
-#      for (attribute) in attributeList do
-#        if attribute.string == safeAttribute () then
-#          if isSafe then
-#            error attribute : "duplicated attribute" fixit { remove }
-#          else
-#            isSafe = true
-#          end
-#        else
-#          error attribute : "invalid attribute" fixit {replace "@" + safeAttribute () }
-#        end
-#      end
       ioPropertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
     end
   }

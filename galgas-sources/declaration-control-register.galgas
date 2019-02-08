@@ -46,7 +46,7 @@ enum @controlRegisterBitSlice {
 
 enum @controlRegisterGroupKindAST {
   case single (@lbigint registerGroupBaseAddress)
-  case groupArray (@lbigint size @lbigintlist baseAddresses)
+  case groupArray (@lbigintlist baseAddresses)
 }
 
 #·······················································································································
@@ -83,24 +83,25 @@ syntax extension plm_syntax {
     @registerGroupListAST registerGroupListAST = {}
     repeat
       $#groupName$ ?let registerGroupName
+      $@attribute$ ?let attribute
+      if attribute.string != "at" then
+        error attribute : "attribute should be @at"
+      end
       select
         $integer$ ?let @lbigint registerGroupBaseAddress
         let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
         registerGroupListAST += !registerGroupName !groupKind
       or
-        $[$
-        $integer$ ?let @lbigint groupSize
-        $]$
         @lbigintlist groupBaseAddresses = {}
-        ${$
+        $[$
         repeat
           $integer$ ?let @lbigint baseAddress
           groupBaseAddresses += !baseAddress
         while
           $,$
         end
-        $}$
-        let groupKind = @controlRegisterGroupKindAST.groupArray {!size:groupSize !baseAddresses:groupBaseAddresses}
+        $]$
+        let groupKind = @controlRegisterGroupKindAST.groupArray {!baseAddresses:groupBaseAddresses}
         registerGroupListAST += !registerGroupName !groupKind
       end
     while
@@ -583,10 +584,10 @@ override method @controlRegisterGroupDeclarationAST enterInContext
     case single (baseAddress) :
       let groupKind = @registerGroupKind.single {!baseAddress:baseAddress}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
-    case groupArray (size baseAddresses) :
-      if [size.bigint uint] != [baseAddresses length] then
-        error size : "the group size is " + size.bigint + ", but " + [baseAddresses length] + " base addresses are defined"
-      end
+    case groupArray (baseAddresses) :
+#      if [size.bigint uint] != [baseAddresses length] then
+#        error size : "the group size is " + size.bigint + ", but " + [baseAddresses length] + " base addresses are defined"
+#      end
       let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
       ioDecoratedDeclarationList += !@decoratedControlRegisterArrayGroupDeclaration.new {

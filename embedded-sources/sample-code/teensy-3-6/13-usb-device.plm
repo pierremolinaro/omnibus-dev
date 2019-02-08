@@ -28,7 +28,7 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let DEVICE_DESCRIPTOR = [• 18 • UInt8] (
+let DEVICE_DESCRIPTOR = [18 • UInt8] (
   !18 // Descriptor size in bytes
   !1  // DEVICE constant
   !0x00 !0x02 // USB specification release (BCD): 0x0200
@@ -47,7 +47,7 @@ let DEVICE_DESCRIPTOR = [• 18 • UInt8] (
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let CONFIG_DESCRIPTOR = [• 32 • UInt8] (
+let CONFIG_DESCRIPTOR = [32 • UInt8] (
 //--- Configuration descriptor
   !9  // Configuration descriptor size in bytes
   !2  // CONFIGURATION constant
@@ -125,13 +125,13 @@ let TRACE_SIZE = 10
 
 driver usb_device > digital {
 // Descriptor table should be aligned on a 512 byte-boudary
-  var descriptorTable @align 512 = [• (NUM_ENDPOINTS+1)*4 • BDT] (!repeated:BDT ())
+  var descriptorTable @align 512 = [(NUM_ENDPOINTS+1)*4 • BDT] (!repeated:BDT ())
 
-  var ep0_rx0_buf @align 4 = [• EP0_RX_SIZE • UInt8] (!repeated:0)
-  var ep0_rx1_buf @align 4 = [• EP0_RX_SIZE • UInt8] (!repeated:0)
+  var ep0_rx0_buf @align 4 = [EP0_RX_SIZE • UInt8] (!repeated:0)
+  var ep0_rx1_buf @align 4 = [EP0_RX_SIZE • UInt8] (!repeated:0)
   var ep0_tx_bdt_bank : UInt32 = 0
 
-  var état = [• TRACE_SIZE • UInt4] (!repeated:0)
+  var état = [TRACE_SIZE • UInt4] (!repeated:0)
   var indexÉtat : UInt32 = 0
 
   public section lireÉtat (?index : UInt32) -> UInt32 {

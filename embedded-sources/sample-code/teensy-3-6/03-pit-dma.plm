@@ -26,7 +26,7 @@ let PATTERN_FREQUENCY = 5 // In Hertz
 // So LED_L3 frequency is PATTERN_FREQUENCY / 2
 // So D4 frequency is PATTERN_FREQUENCY / 2 / PATTERN_LENGTH
 
-staticArray kPATTERN { let x Bool }
+staticArray kPATTERN { let x : Bool }
 
 extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
   yes :: no :: yes :: no :: yes :: // 3 dots : letter S
@@ -52,7 +52,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 
 let PATTERN_LENGTH = kPATTERN.count
 
-typealias PatternArray = [•PATTERN_LENGTH • UInt32]
+typealias PatternArray = [PATTERN_LENGTH • UInt32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
