@@ -83,13 +83,6 @@ syntax extension plm_syntax {
   {
     $let$
     $identifier$ ?let propertyName
-#    @propertyAttributeList propertyAttributeList = {}
-#    repeat
-#    while
-#      $@attribute$ ?let attribute
-#      $integer$ ?let value
-#      propertyAttributeList += !attribute !value
-#    end
     @lstring typeName
     select
       $:$
