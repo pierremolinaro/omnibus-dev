@@ -3428,22 +3428,22 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F
                                                                                                                 GALGAS_lstring & outArgument_outTypeName,
                                                                                                                 C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outTypeName.drop () ; // Release 'out' argument
-  GALGAS_expressionAST var_sizeExpression_1215 ;
-  nt_expression_ (ioArgument_ioAST, var_sizeExpression_1215, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2022_ COMMA_SOURCE_FILE ("type-static-array.galgas", 23)) ;
-  GALGAS_lstring var_elementTypeName_1274 ;
-  nt_type_5F_definition_ (ioArgument_ioAST, var_elementTypeName_1274, inCompiler) ;
-  GALGAS_location var_sizeExpressionLocation_1305 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 25)) ;
-  outArgument_outTypeName = GALGAS_string ("anonymous.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 26)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 26)) ;
-  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 27)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_staticArrayTypeDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1274, var_sizeExpression_1215, var_sizeExpressionLocation_1305  COMMA_SOURCE_FILE ("type-static-array.galgas", 28))  COMMA_SOURCE_FILE ("type-static-array.galgas", 28)) ;
+  GALGAS_expressionAST var_sizeExpression_1206 ;
+  nt_expression_ (ioArgument_ioAST, var_sizeExpression_1206, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2022_ COMMA_SOURCE_FILE ("type-static-array.galgas", 22)) ;
+  GALGAS_lstring var_elementTypeName_1265 ;
+  nt_type_5F_definition_ (ioArgument_ioAST, var_elementTypeName_1265, inCompiler) ;
+  GALGAS_location var_sizeExpressionLocation_1296 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 24)) ;
+  outArgument_outTypeName = GALGAS_string ("anonymous.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 25)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 25)) ;
+  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 26)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_staticArrayTypeDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1265, var_sizeExpression_1206, var_sizeExpressionLocation_1296  COMMA_SOURCE_FILE ("type-static-array.galgas", 27))  COMMA_SOURCE_FILE ("type-static-array.galgas", 27)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_i4_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2022_ COMMA_SOURCE_FILE ("type-static-array.galgas", 23)) ;
+  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__2022_ COMMA_SOURCE_FILE ("type-static-array.galgas", 22)) ;
   nt_type_5F_definition_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }

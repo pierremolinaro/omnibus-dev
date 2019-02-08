@@ -18,7 +18,6 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <type_definition_enclosed_in_square_breackets> ?!@ast ioAST !@lstring outTypeName {
-#    $•$
     <expression> !?ioAST ?let sizeExpression
     $•$
     <type_definition> !?ioAST ?let elementTypeName
