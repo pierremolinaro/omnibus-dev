@@ -26,17 +26,17 @@ driver myDriver > digital {
     digital.set (!mode:.OUTPUT !toPort:.D3) // Led L0
     digital.set (!mode:.OUTPUT !toPort:.D8) // Led L0
   //--- Enable clock
-    $(SIM:SCGC6) |= $(SIM.SCGC6 !FTM0:1)
+    $(SIM:SCGC6) |= ${SIM:SCGC6 !FTM0:1}
   //--- Set counter min value
-    $(FTM[0]:CNTIN) = $(FTM.CNTIN !INIT:0)
+    $(FTM[0]:CNTIN) = ${FTM:CNTIN !INIT:0}
   //--- Set counter max value
-    $(FTM[0]:MOD) = $(FTM.MOD !MOD:0xFFFF)
+    $(FTM[0]:MOD) = ${FTM:MOD !MOD:0xFFFF}
   //--- Set prescaler
-    $(FTM[0]:SC) = $(FTM.SC !CLKS:1 !PS:4)
+    $(FTM[0]:SC) = ${FTM:SC !CLKS:1 !PS:4}
   //--- Enable NVIC interrupt
     enable (!interrupt:.FTM0)
   //--- Enable FTM interrupt
-    $(FTM[0]:SC) |= $(FTM.SC !TOIE:1)
+    $(FTM[0]:SC) |= ${FTM:SC !TOIE:1}
   }
 
   //····················································································································
@@ -44,7 +44,7 @@ driver myDriver > digital {
   interrupt section FTM0 {
   //--- Set by hardware when the FTM counter passes the value in the MOD register.
   //    The TOF bit is cleared by reading the SC register while TOF is set and then writing a 0 to TOF bit
-    $(FTM[0]:SC) &= ~ $(FTM.SC !TOF:1)
+    $(FTM[0]:SC) &= ~ ${FTM:SC !TOF:1}
     digital.toggle (!port:.D3)
     digital.toggle (!port:.D8)
   }

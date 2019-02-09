@@ -80,7 +80,7 @@ driver usb_device > digital {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   // This basically follows the flowchart in the Kinetis Quick Reference User Guide, Rev. 3, 05/2014, page 134
   //-- Assume 48 MHz clock already running
-    $(SIM:SCGC4) |= $(SIM.SCGC4 !USBOTG:1) // SIM - enable clock
+    $(SIM:SCGC4) |= ${SIM:SCGC4 !USBOTG:1} // SIM - enable clock
 //    MPU:RGDAAC [0] |= {MPU:RGDAAC !M4RE:1 !M4WE:1}
   //--- If using IRC48M, turn on the USB clock recovery hardware
 //    if @static (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) {
@@ -88,7 +88,7 @@ driver usb_device > digital {
 //      USB0:CLK_RECOVER_CTRL = {USB0:CLK_RECOVER_CTRL !CLOCK_RECOVER_EN:1 !RESTART_IFRTRIM_EN:1}
 //    }
   //--- Reset USB module (SB0:USBTRC0:USBRESET is always read as 0. Wait 2 USB clock cycles after setting this bit)
-    $(USB0:USBTRC0) |= $(USB0.USBTRC0 !USBRESET:1) // Page 1516
+    $(USB0:USBTRC0) |= ${USB0:USBTRC0 !USBRESET:1} // Page 1516
     while $(USB0:USBTRC0:USBRESET) ≠ 0 {} // wait for reset to end
   //-- Set descriptor table base address
     let descriptorTableBaseAddress = addressof (self.descriptorTable)
@@ -99,16 +99,16 @@ driver usb_device > digital {
     $(USB0:ISTAT) = 0xFF
     $(USB0:ERRSTAT) = 0xFF
     $(USB0:OTGISTAT) = 0xFF
-    $(USB0:INTEN) = $(USB0.INTEN !USBRSTEN:1) // | 0x40
+    $(USB0:INTEN) = ${USB0:INTEN !USBRSTEN:1} // | 0x40
   //-- Enable USB
-    $(USB0:CTL) = $(USB0.CTL !USBENOFEN:1)
+    $(USB0:CTL) = ${USB0:CTL !USBENOFEN:1}
     $(USB0:USBCTRL) = 0
   //-- Enable reset interrupt
-    $(USB0:INTEN) = $(USB0.INTEN !USBRSTEN:1)
+    $(USB0:INTEN) = ${USB0:INTEN !USBRSTEN:1}
   //-- Enable interrupt in NVIC
     enable (!interrupt: .USBOTG)
   //--- Enable d+ pullup
-    $(USB0:CONTROL) = $(USB0.CONTROL !DPPULLNONOTG:1) // Page 1515
+    $(USB0:CONTROL) = ${USB0:CONTROL !DPPULLNONOTG:1} // Page 1515
   }
 
   //····················································································································
@@ -117,49 +117,49 @@ driver usb_device > digital {
     let status = $(USB0:ISTAT)
 
   //-------------------- RESET: configure Endpoint 0
-    if (status & $(USB0.ISTAT !USBRST:1)) ≠ 0 {
+    if (status & ${USB0:ISTAT !USBRST:1}) ≠ 0 {
 //      self.état [self.indexÉtat] = 1
 //      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
       self.configureEndPoint0OnReset ()
   //    USB0:ISTAT = {USB0:ISTAT !USBRST:1} // Ack
     }else{
     //-------------------- START OF FRAME
-      if (status & $(USB0.ISTAT !SOFTOK:1)) ≠ 0 {
+      if (status & ${USB0:ISTAT !SOFTOK:1}) ≠ 0 {
   //        self.état [self.indexÉtat] = 2
   //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        $(USB0:ISTAT) = $(USB0.ISTAT !SOFTOK:1) // Ack
+        $(USB0:ISTAT) = ${USB0:ISTAT !SOFTOK:1} // Ack
       }
 
     //-------------------- TOKEN COMPLETED
-      if (status & $(USB0.ISTAT !TOKDNE:1)) ≠ 0 { // Page 1502
+      if (status & ${USB0:ISTAT !TOKDNE:1}) ≠ 0 { // Page 1502
   //        digital.write (!yes !toPort:LED_L2)
   //        self.état [self.indexÉtat] = 3
   //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
         self.tokenCompleted ()
-        $(USB0:ISTAT) = $(USB0.ISTAT !TOKDNE:1) // Ack
+        $(USB0:ISTAT) = ${USB0:ISTAT !TOKDNE:1} // Ack
       }
 
     //-------------------- STALL
-      if (status & $(USB0.ISTAT !STALL:1)) ≠ 0 {
+      if (status & ${USB0:ISTAT !STALL:1}) ≠ 0 {
         self.état [self.indexÉtat] = 4
         self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        $(USB0:ISTAT) = $(USB0.ISTAT !STALL:1) // Ack
+        $(USB0:ISTAT) = ${USB0:ISTAT !STALL:1} // Ack
       }
 
     //-------------------- ERROR
-      if (status & $(USB0.ISTAT !ERROR:1)) ≠ 0 {
+      if (status & ${USB0:ISTAT !ERROR:1}) ≠ 0 {
         self.état [self.indexÉtat] = 5
         self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
         let err = $(USB0:ERRSTAT)
         $(USB0:ERRSTAT) = err
-        $(USB0:ISTAT) = $(USB0.ISTAT !ERROR:1) // Ack
+        $(USB0:ISTAT) = ${USB0:ISTAT !ERROR:1} // Ack
       }
 
     //-------------------- SLEEP
-      if (status & $(USB0.ISTAT !SLEEP:1)) ≠ 0 {
+      if (status & ${USB0:ISTAT !SLEEP:1}) ≠ 0 {
         self.état [self.indexÉtat] = 6
         self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-        $(USB0:ISTAT) = $(USB0.ISTAT !SLEEP:1) // Ack
+        $(USB0:ISTAT) = ${USB0:ISTAT !SLEEP:1} // Ack
       }
     }
   }
@@ -169,7 +169,7 @@ driver usb_device > digital {
   func  configureEndPoint0OnReset section @mutating () {
 //      self.état [self.indexÉtat] = 1
 //      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
-      $(USB0:CTL) |= $(USB0.CTL !ODDRST:1)
+      $(USB0:CTL) |= ${USB0:CTL !ODDRST:1}
       self.ep0_tx_bdt_bank = 0
    //--- Set up buffers to receive Setup and OUT packets
       self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_SIZE  !0)
@@ -179,7 +179,7 @@ driver usb_device > digital {
       self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
       self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
     //--- Activate endpoint 0
-      $(USB0:ENDPT [0]) = $(USB0.ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1)
+      $(USB0:ENDPT [0]) = ${USB0:ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1}
     //--- Clear all ending interrupts
       $(USB0:ERRSTAT) = 0xFF
       $(USB0:ISTAT) = 0xFF
@@ -187,7 +187,7 @@ driver usb_device > digital {
       $(USB0:ADDR) = 0
     //--- Enable other interrupts
       $(USB0:ERREN) = 0xFF
-      $(USB0:INTEN) = $(USB0.INTEN !STALLEN:1 !SLEEPEN:1 !TOKDNEEN:1 !SOFTOKEN:1 !ERROREN:1 !USBRSTEN:1)
+      $(USB0:INTEN) = ${USB0:INTEN !STALLEN:1 !SLEEPEN:1 !TOKDNEEN:1 !SOFTOKEN:1 !ERROREN:1 !USBRSTEN:1}
     //--- is this necessary?
    //   USB0:CTL = {USB0:CTL !USBENOFEN:1} // Page 1507
   }

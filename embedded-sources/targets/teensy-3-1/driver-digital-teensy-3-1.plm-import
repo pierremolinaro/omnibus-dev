@@ -93,16 +93,16 @@ driver digital > root {
     var dir : UInt1
     switch mode {
     case OUTPUT :
-      config = $(PORTC.PCR !MUX:1)
+      config = ${PORTC:PCR !MUX:1}
       dir = 1
     case OUTPUT_OPEN_COLLECTOR :
-      config = $(PORTC.PCR !MUX:1 !ODE:1)
+      config = ${PORTC:PCR !MUX:1 !ODE:1}
       dir = 1
     case INPUT :
-      config = $(PORTC.PCR !MUX:1)
+      config = ${PORTC:PCR !MUX:1}
       dir = 0
     case INPUT_PULLUP :
-      config = $(PORTC.PCR !MUX:1 !PE:1 !PS:1)
+      config = ${PORTC:PCR !MUX:1 !PE:1 !PS:1}
       dir = 0
     }
   //---Apply
