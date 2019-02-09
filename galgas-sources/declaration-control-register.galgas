@@ -46,7 +46,7 @@ enum @controlRegisterBitSlice {
 
 enum @controlRegisterGroupKindAST {
   case single (@lbigint registerGroupBaseAddress)
-  case groupArray (@lbigintlist baseAddresses)
+  case groupArray (@expressionAST groupSizeExp @location groupSizeExpLocation @lbigintlist baseAddresses)
 }
 
 #·······················································································································
@@ -85,17 +85,23 @@ syntax extension plm_syntax {
     @registerGroupListAST registerGroupListAST = {}
     repeat
       $identifier$ ?let registerGroupName
-      $@attribute$ ?let attribute
-      if attribute.string != "at" then
-        error attribute : "attribute should be @at"
-      end
       select
+        $@attribute$ ?let attribute
+        if attribute.string != "at" then
+          error attribute : "attribute should be @at"
+        end
         $integer$ ?let @lbigint registerGroupBaseAddress
         let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
         registerGroupListAST += !registerGroupName !groupKind
       or
         @lbigintlist groupBaseAddresses = {}
         $[$
+        <expression> !?ioAST ?let groupSize
+        let groupSizeExpressionLocation = @location.here
+        $@attribute$ ?let attribute
+        if attribute.string != "at" then
+          error attribute : "attribute should be @at"
+        end
         repeat
           $integer$ ?let @lbigint baseAddress
           groupBaseAddresses += !baseAddress
@@ -103,7 +109,11 @@ syntax extension plm_syntax {
           $,$
         end
         $]$
-        let groupKind = @controlRegisterGroupKindAST.groupArray {!baseAddresses:groupBaseAddresses}
+        let groupKind = @controlRegisterGroupKindAST.groupArray {
+          !groupSizeExp: groupSize
+          !groupSizeExpLocation: groupSizeExpressionLocation
+          !baseAddresses:groupBaseAddresses
+         }
         registerGroupListAST += !registerGroupName !groupKind
       end
     while
@@ -600,10 +610,27 @@ override method @controlRegisterGroupDeclarationAST enterInContext
     case single (baseAddress) :
       let groupKind = @registerGroupKind.single {!baseAddress:baseAddress}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
-    case groupArray (baseAddresses) :
-#      if [size.bigint uint] != [baseAddresses length] then
-#        error size : "the group size is " + size.bigint + ", but " + [baseAddresses length] + " base addresses are defined"
-#      end
+    case groupArray (groupSizeExpression groupSizeExpressionLocation baseAddresses) :
+      computeStaticExpression (
+        !?context: ioContext
+        !?staticEntityMap:ioStaticEntityMap
+        !expression:groupSizeExpression
+        !errorLocation:groupSizeExpressionLocation
+        !optionalContextualTypeName:["" nowhere]
+        ?result:let @objectIR groupArraySizeExpressionResult
+      )
+      @bigint groupSize
+      if not [groupArraySizeExpressionResult isLiteralInteger] then
+        error groupSizeExpressionLocation
+          : "control register group size is not a static integer expression"
+          : groupSize
+      else
+        [groupArraySizeExpressionResult literalInteger ?1* ?value:groupSize]
+      end
+      if [groupSize uint] != [baseAddresses length] then
+        error groupSizeExpressionLocation
+        : "the group size is " + groupSize + ", but " + [baseAddresses length] + " base addresses are defined"
+      end
       let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
       ioDecoratedDeclarationList += !@decoratedControlRegisterArrayGroupDeclaration.new {

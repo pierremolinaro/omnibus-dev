@@ -5733,10 +5733,14 @@ typeComparisonResult cEnumAssociatedValues_controlRegisterGroupKindAST_single::c
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray::cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_lbigintlist & inAssociatedValue0
+cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray::cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                                                                            const GALGAS_location & inAssociatedValue1,
+                                                                                                                            const GALGAS_lbigintlist & inAssociatedValue2
                                                                                                                             COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -5745,6 +5749,8 @@ void cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray::description (
                                                                                 const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -5756,6 +5762,12 @@ typeComparisonResult cEnumAssociatedValues_controlRegisterGroupKindAST_groupArra
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -5784,13 +5796,15 @@ GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::construct
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::constructor_groupArray (const GALGAS_lbigintlist & inAssociatedValue0
+GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::constructor_groupArray (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                                               const GALGAS_location & inAssociatedValue1,
+                                                                                               const GALGAS_lbigintlist & inAssociatedValue2
                                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterGroupKindAST result ;
-  if (inAssociatedValue0.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_groupArray ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -5815,17 +5829,23 @@ void GALGAS_controlRegisterGroupKindAST::method_single (GALGAS_lbigint & outAsso
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_controlRegisterGroupKindAST::method_groupArray (GALGAS_lbigintlist & outAssociatedValue0,
+void GALGAS_controlRegisterGroupKindAST::method_groupArray (GALGAS_expressionAST & outAssociatedValue0,
+                                                            GALGAS_location & outAssociatedValue1,
+                                                            GALGAS_lbigintlist & outAssociatedValue2,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_groupArray) {
     outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @controlRegisterGroupKindAST groupArray invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray * ptr = (const cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 
@@ -8391,12 +8411,12 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_10901 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_10901.hasCurrentObject ()) {
+  cEnumerator_controlRegisterDeclarationList enumerator_11329 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_11329.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_10901.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 288)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_11329.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 298)) ;
     }
-    enumerator_10901.gotoNextObject () ;
+    enumerator_11329.gotoNextObject () ;
   }
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

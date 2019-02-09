@@ -10501,7 +10501,9 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_controlRegisterGroupKindAST constructor_groupArray (const class GALGAS_lbigintlist & inOperand0
+  public : static class GALGAS_controlRegisterGroupKindAST constructor_groupArray (const class GALGAS_expressionAST & inOperand0,
+                                                                                   const class GALGAS_location & inOperand1,
+                                                                                   const class GALGAS_lbigintlist & inOperand2
                                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_controlRegisterGroupKindAST constructor_single (const class GALGAS_lbigint & inOperand0
@@ -10516,7 +10518,9 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_groupArray (class GALGAS_lbigintlist & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_groupArray (class GALGAS_expressionAST & outArgument0,
+                                                    class GALGAS_location & outArgument1,
+                                                    class GALGAS_lbigintlist & outArgument2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 
@@ -10565,10 +10569,14 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAss
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnumAssociatedValues {
-  public : const GALGAS_lbigintlist mAssociatedValue0 ;
+  public : const GALGAS_expressionAST mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_lbigintlist mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_lbigintlist & inAssociatedValue0
+  public : cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                         const GALGAS_location & inAssociatedValue1,
+                                                                         const GALGAS_lbigintlist & inAssociatedValue2
                                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

@@ -1254,7 +1254,7 @@ registers TPM2 @at 0x400C_A000 {
 //  FTM2: 0x4003_A000
 //  FTM3: 0x400B_9000 <--- CAUTION
 
-registers FTM @at [0x4003_8000, 0x4003_9000, 0x4003_A000, 0x400B_9000] {
+registers FTM [4 @at 0x4003_8000, 0x4003_9000, 0x4003_A000, 0x400B_9000] {
   SC @offset 0x00 : UInt32 {24, TOF, TOIE, CPWMS, CLKS:2, PS:3}
 
   CNT @offset 0x04 : UInt32 {16, COUNT:16}
@@ -1803,7 +1803,7 @@ registers USBPHY @at 0x400A_2000 {
 //! Chapter 56: FlexCAN
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers CAN @at [0x4002_4000, 0x400A_4000] {
+registers CAN [2 @at 0x4002_4000, 0x400A_4000] {
   MCR @offset 0x00 : UInt32 {
     MDIS, FRZ, RFEN, HALT, NOTRDY, WAKMSK, SOFTRST, FRZACK,
     SUPV, SLFWAK, WRNEN, LPMACK, WAKSRC, 1, SFRXDIS, IRMQ,
@@ -1851,7 +1851,7 @@ registers CAN @at [0x4002_4000, 0x400A_4000] {
 //! Chapter 57: Serial Peripheral Interface (SPI)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-registers SPI @at [0x4002_C000, 0x4002_D000, 0x400A_C000] {
+registers SPI [3 @at 0x4002_C000, 0x4002_D000, 0x400A_C000] {
 
   MCR @offset 0x0 : UInt32 {
     MSTR, CONT_SCKE, DCONF:2, FRZ, MTFE, PCSSE, ROOE, 2, PCSIS:6,

@@ -335,12 +335,3 @@ void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Function 'waitForGuardChangeFunctionName'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
