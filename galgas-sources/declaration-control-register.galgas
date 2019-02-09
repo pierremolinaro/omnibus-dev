@@ -77,6 +77,8 @@ map @controlRegisterUserAccesMapAST {
 syntax extension plm_syntax {
 
   #·····················································································································
+  #   register group declaration
+  #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $registers$
@@ -116,7 +118,7 @@ syntax extension plm_syntax {
       while
         $,$
       end
-#      $:$ # §
+      $:$
       $identifier$ ?let registerTypeName
       @controlRegisterBitSliceList registerBitSliceList = {}
       select
@@ -154,6 +156,8 @@ syntax extension plm_syntax {
     $}$
   }
 
+  #·····················································································································
+  #   register declaration
   #·····················································································································
 
   rule <registerDeclaration> ?!@ast ioAST ?!@controlRegisterNameListAST ioRegisterDeclarationList {
