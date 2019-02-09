@@ -5,7 +5,7 @@ let f_mem : UInt32 = 24_000_000
 
 // chapter 11: Port control and interrupts (PORT) Pin Control registers n
 registers PORTA @at 0x4004_9000 {
-  PCR [32] 0x00 @inc 4 : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
 
@@ -15,7 +15,7 @@ registers PORTA @at 0x4004_9000 {
 }
 
 registers PORTB @at 0x4004_A000 {
-  PCR [32] 0x00 @inc 4 : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   GPCLR 0x80 : UInt32 // Global Pin Control Low Register
@@ -24,7 +24,7 @@ registers PORTB @at 0x4004_A000 {
 }
 
 registers PORTC @at 0x4004_B000 {
-  PCR [32] 0x00 @inc 4 : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   GPCLR 0x80 : UInt32 // Global Pin Control Low Register
@@ -33,7 +33,7 @@ registers PORTC @at 0x4004_B000 {
 }
 
 registers PORTD @at 0x4004_C000 {
-  PCR [32] 0x00 @inc 4 : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
   GPCLR 0x80 : UInt32 // Global Pin Control Low Register
@@ -284,7 +284,7 @@ registers AXBS @at 0x4000_4000 {
 let DMA_CHANNEL_COUNT = 16
 
 registers DMAMUX0 @at 0x4002_1000 {
-  CHCFG [DMA_CHANNEL_COUNT] 0x0 @inc 1 : UInt8 {
+  CHCFG [DMA_CHANNEL_COUNT @offset 0x0 @inc 1] : UInt8 {
     ENABLE, TRIG, SOURCE:6
   }
 }
@@ -432,46 +432,46 @@ registers DMA @at 0x4000_8000 {
    HRS7,  HRS6,  HRS5,  HRS4,  HRS3,  HRS2,  HRS1,  HRS0
   }
 
-  DCHPRI [DMA_CHANNEL_COUNT] 0x100 @inc 1 : UInt8 { // Channel n Priority Register
+  DCHPRI [DMA_CHANNEL_COUNT @offset 0x100 @inc 1] : UInt8 { // Channel n Priority Register
    ECP, DPA, 2, CHPRI:4
   }
 
-  TCD_SADDR [DMA_CHANNEL_COUNT] 0x1000 @inc 32 : UInt32 // TCD Source Address
+  TCD_SADDR [DMA_CHANNEL_COUNT @offset 0x1000 @inc 32] : UInt32 // TCD Source Address
 
-  TCD_SOFF [DMA_CHANNEL_COUNT] 0x1004 @inc 32 : Int16 // TCD Signed Source Address Offset
+  TCD_SOFF [DMA_CHANNEL_COUNT @offset 0x1004 @inc 32] : Int16 // TCD Signed Source Address Offset
 
-  TCD_ATTR [DMA_CHANNEL_COUNT] 0x1006 @inc 32 : UInt16 { // TCD Transfer Attributes
+  TCD_ATTR [DMA_CHANNEL_COUNT @offset 0x1006 @inc 32] : UInt16 { // TCD Transfer Attributes
     SMOD:4, SSIZE:4, DMOD:4, DSIZE:4
   }
 
   // TCD Minor Byte Count (Minor Loop Disabled)
-  TCD_NBYTES_MLNO [DMA_CHANNEL_COUNT] 0x1008 @inc 32 : UInt32
+  TCD_NBYTES_MLNO [DMA_CHANNEL_COUNT @offset 0x1008 @inc 32] : UInt32
 
   // TCD Last Source Address Adjustment
-  TCD_SLAST [DMA_CHANNEL_COUNT] 0x100C @inc 32 : Int32
+  TCD_SLAST [DMA_CHANNEL_COUNT @offset 0x100C @inc 32] : Int32
 
   // TCD Destination Address
-  TCD_DADDR [DMA_CHANNEL_COUNT] 0x1010 @inc 32 : UInt32
+  TCD_DADDR [DMA_CHANNEL_COUNT @offset 0x1010 @inc 32] : UInt32
 
   // TCD Signed Destination Address Offset
-  TCD_DOFF [DMA_CHANNEL_COUNT] 0x1014 @inc 32 : Int16
+  TCD_DOFF [DMA_CHANNEL_COUNT @offset 0x1014 @inc 32] : Int16
 
   // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)
-  TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT] 0x1016 @inc 32 : UInt16 {
+  TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT @offset 0x1016 @inc 32] : UInt16 {
     ELINK, CITER:15
   }
 
   // TCD Last Destination Address Adjustment/Scatter Gather Address
-  TCD_DLASTSGA [DMA_CHANNEL_COUNT] 0x1018 @inc 32 : Int32
+  TCD_DLASTSGA [DMA_CHANNEL_COUNT @offset 0x1018 @inc 32] : Int32
 
   // TCD Control and Status
-  TCD_CSR [DMA_CHANNEL_COUNT] 0x101C @inc 32 : UInt16 {
+  TCD_CSR [DMA_CHANNEL_COUNT @offset 0x101C @inc 32] : UInt16 {
     BWC:2, 2, MAJORLINKCH:4,
     DONE, ACTIVE, MAJORLINK, ESG, DREQ, INTHALF, INTMAJOR, START
   }
 
   // TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled)
-  TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT] 0x101E @inc 32 : UInt16 {
+  TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT @offset 0x101E @inc 32] : UInt16 {
     ELINK, BITER:15
   }
 }
@@ -968,18 +968,18 @@ registers PIT @at 0x4003_7000 {
   }
 
   // Timer Load Value Register
-  LDVAL [PIT_COUNT] 0x100 @inc 16 : UInt32
+  LDVAL [PIT_COUNT @offset 0x100 @inc 16] : UInt32
 
   // Current Timer Value Register
-  LCVAL [PIT_COUNT] 0x104 @inc 16 : UInt32
+  LCVAL [PIT_COUNT @offset 0x104 @inc 16] : UInt32
 
   // Timer Control Register
-  TCTRL [PIT_COUNT] 0x108 @inc 16 : UInt32 {
+  TCTRL [PIT_COUNT @offset 0x108 @inc 16] : UInt32 {
     29, CHN, TIE, TEN
   }
 
   // Timer Flag Register
-  TFLG [PIT_COUNT] 0x10C @inc 16 : UInt32 {
+  TFLG [PIT_COUNT @offset 0x10C @inc 16] : UInt32 {
     31, TIF
   }
 }
@@ -1098,7 +1098,7 @@ registers USB0 @at 0x4007_2000 {
   BDTPAGE3 0x0B4 : UInt8
 
 //--- Endpoint Control
-  ENDPT [16] 0x0C0 @inc 4 : UInt8 {HOSTWCHUB, RETRYDIS, 1, EPCTLDIS, EPRXEN, EPTXEN, EPSTALL, EPHSHK}
+  ENDPT [16 @offset 0x0C0 @inc 4] : UInt8 {HOSTWCHUB, RETRYDIS, 1, EPCTLDIS, EPRXEN, EPTXEN, EPSTALL, EPHSHK}
 
 //--- USB Control Register
   USBCTRL 0x100 : UInt8 {SUSP, PDE, 6}
@@ -1196,9 +1196,9 @@ registers GPIOD @at 0x400F_F0C0 {
 // Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
 
 registers NVIC @at 0xE000_E000 {
-  ISER [4]  0x100 @inc 4 : UInt32 // Interrupt Set-enable Registers
-  ICER [4]  0x180 @inc 4 : UInt32 //Interrupt Clear-enable Registers
-  IPR [128] 0x400 @inc 1 : UInt8 // Interrupt priority
+  ISER [4 @offset  0x100 @inc 4] : UInt32 // Interrupt Set-enable Registers
+  ICER [4 @offset  0x180 @inc 4] : UInt32 //Interrupt Clear-enable Registers
+  IPR [128 @offset 0x400 @inc 1] : UInt8 // Interrupt priority
 
   ICSR 0xD04 : UInt32 { // Interrupt Control and State
     NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,
