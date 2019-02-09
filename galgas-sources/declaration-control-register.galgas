@@ -15,7 +15,7 @@ enum @controlRegisterKind {
 list @controlRegisterNameListAST {
   @lstring mRegisterName
   @controlRegisterKind mControlRegisterKind
-  @lstringlist mAttributeList
+  @bool mIsReadOnly
   @expressionAST mRegisterOffset
   @location mRegisterOffsetLocation
 }
@@ -162,18 +162,26 @@ syntax extension plm_syntax {
 
   rule <registerDeclaration> ?!@ast ioAST ?!@controlRegisterNameListAST ioRegisterDeclarationList {
     $identifier$ ?let registerName
-    @lstringlist attributeList = {}
-    repeat
-    while
-      $@attribute$ ?let attribute
-      attributeList += !attribute
-    end
     select
+      $@attribute$ ?let attributeOffset
+      if attributeOffset.string != "offset" then
+        error attributeOffset : "attribute should be @offset" fixit { replace "@offset" }
+      end
       <expression> !?ioAST ?let registerOffset
+      @bool isReadOnly
+      select
+        isReadOnly = false
+      or
+        $@attribute$ ?let attribute
+        if attribute.string != "ro" then
+          error attribute : "attribute should be @ro" fixit { replace "@ro" }
+        end
+        isReadOnly = true
+      end
       ioRegisterDeclarationList +=
         !registerName
         !.scalar
-        !attributeList
+        !isReadOnly
         !registerOffset 
         !.here
     or
@@ -192,6 +200,16 @@ syntax extension plm_syntax {
       end
       <expression> !?ioAST ?let arrayElementSizeExpression
       $]$
+      @bool isReadOnly
+      select
+        isReadOnly = false
+      or
+        $@attribute$ ?let attribute
+        if attribute.string != "ro" then
+          error attribute : "attribute should be @ro" fixit { replace "@ro" }
+        end
+        isReadOnly = true
+      end
       let arrayElementSizeExpressionLocation = @location.here
       ioRegisterDeclarationList +=
         !registerName
@@ -201,7 +219,7 @@ syntax extension plm_syntax {
            !arrayElementSize:arrayElementSizeExpression
            !arrayElementSizeLocation:arrayElementSizeExpressionLocation
          }
-        !attributeList
+        !isReadOnly
         !baseAddressExpression 
         !baseAddressExpressionLocation
     end
@@ -468,19 +486,6 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
   )
 #---  
   for register in mRegisterArrayList do
-  #--- Analyze attributes
-    var isReadOnly = false
-    for (att) in register.mAttributeList do
-      if att.string == "ro" then
-        if isReadOnly then
-          error att : "duplicated attribute"
-        else
-          isReadOnly = true
-        end
-      else
-        error att : "only the @ro (read only) attribute is accepted here"
-      end
-    end
   #--- Analyse register address expression
     computeStaticExpression (
       !?context: ioContext
@@ -546,7 +551,7 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
     [!?ioControlRegisterMap insertKey
       !register.mRegisterName
       !registerType
-      !isReadOnly
+      !register.mIsReadOnly
       !false # user access is false by default
       !registerBitSliceMap
       !registerFieldMap

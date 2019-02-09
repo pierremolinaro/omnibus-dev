@@ -13267,7 +13267,7 @@ GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::extractObject (co
 GALGAS_controlRegisterNameListAST_2D_element::GALGAS_controlRegisterNameListAST_2D_element (void) :
 mProperty_mRegisterName (),
 mProperty_mControlRegisterKind (),
-mProperty_mAttributeList (),
+mProperty_mIsReadOnly (),
 mProperty_mRegisterOffset (),
 mProperty_mRegisterOffsetLocation () {
 }
@@ -13281,12 +13281,12 @@ GALGAS_controlRegisterNameListAST_2D_element::~ GALGAS_controlRegisterNameListAS
 
 GALGAS_controlRegisterNameListAST_2D_element::GALGAS_controlRegisterNameListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                             const GALGAS_controlRegisterKind & inOperand1,
-                                                                                            const GALGAS_lstringlist & inOperand2,
+                                                                                            const GALGAS_bool & inOperand2,
                                                                                             const GALGAS_expressionAST & inOperand3,
                                                                                             const GALGAS_location & inOperand4) :
 mProperty_mRegisterName (inOperand0),
 mProperty_mControlRegisterKind (inOperand1),
-mProperty_mAttributeList (inOperand2),
+mProperty_mIsReadOnly (inOperand2),
 mProperty_mRegisterOffset (inOperand3),
 mProperty_mRegisterOffsetLocation (inOperand4) {
 }
@@ -13295,7 +13295,7 @@ mProperty_mRegisterOffsetLocation (inOperand4) {
 
 GALGAS_controlRegisterNameListAST_2D_element GALGAS_controlRegisterNameListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                             const GALGAS_controlRegisterKind & inOperand1,
-                                                                                                            const GALGAS_lstringlist & inOperand2,
+                                                                                                            const GALGAS_bool & inOperand2,
                                                                                                             const GALGAS_expressionAST & inOperand3,
                                                                                                             const GALGAS_location & inOperand4 
                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
@@ -13317,7 +13317,7 @@ typeComparisonResult GALGAS_controlRegisterNameListAST_2D_element::objectCompare
     result = mProperty_mControlRegisterKind.objectCompare (inOperand.mProperty_mControlRegisterKind) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mAttributeList.objectCompare (inOperand.mProperty_mAttributeList) ;
+    result = mProperty_mIsReadOnly.objectCompare (inOperand.mProperty_mIsReadOnly) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRegisterOffset.objectCompare (inOperand.mProperty_mRegisterOffset) ;
@@ -13331,7 +13331,7 @@ typeComparisonResult GALGAS_controlRegisterNameListAST_2D_element::objectCompare
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_controlRegisterNameListAST_2D_element::isValid (void) const {
-  return mProperty_mRegisterName.isValid () && mProperty_mControlRegisterKind.isValid () && mProperty_mAttributeList.isValid () && mProperty_mRegisterOffset.isValid () && mProperty_mRegisterOffsetLocation.isValid () ;
+  return mProperty_mRegisterName.isValid () && mProperty_mControlRegisterKind.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mRegisterOffset.isValid () && mProperty_mRegisterOffsetLocation.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13339,7 +13339,7 @@ bool GALGAS_controlRegisterNameListAST_2D_element::isValid (void) const {
 void GALGAS_controlRegisterNameListAST_2D_element::drop (void) {
   mProperty_mRegisterName.drop () ;
   mProperty_mControlRegisterKind.drop () ;
-  mProperty_mAttributeList.drop () ;
+  mProperty_mIsReadOnly.drop () ;
   mProperty_mRegisterOffset.drop () ;
   mProperty_mRegisterOffsetLocation.drop () ;
 }
@@ -13356,7 +13356,7 @@ void GALGAS_controlRegisterNameListAST_2D_element::description (C_String & ioStr
     ioString << ", " ;
     mProperty_mControlRegisterKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mAttributeList.description (ioString, inIndentation+1) ;
+    mProperty_mIsReadOnly.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRegisterOffset.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -13379,8 +13379,8 @@ GALGAS_controlRegisterKind GALGAS_controlRegisterNameListAST_2D_element::getter_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstringlist GALGAS_controlRegisterNameListAST_2D_element::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAttributeList ;
+GALGAS_bool GALGAS_controlRegisterNameListAST_2D_element::getter_mIsReadOnly (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mIsReadOnly ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

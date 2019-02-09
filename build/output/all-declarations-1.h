@@ -3653,7 +3653,7 @@ class GALGAS_controlRegisterNameListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_controlRegisterKind mProperty_mControlRegisterKind ;
 
-  public : GALGAS_lstringlist mProperty_mAttributeList ;
+  public : GALGAS_bool mProperty_mIsReadOnly ;
 
   public : GALGAS_expressionAST mProperty_mRegisterOffset ;
 
@@ -3672,7 +3672,7 @@ class GALGAS_controlRegisterNameListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_controlRegisterNameListAST_2D_element (const GALGAS_lstring & in_mRegisterName,
                                                          const GALGAS_controlRegisterKind & in_mControlRegisterKind,
-                                                         const GALGAS_lstringlist & in_mAttributeList,
+                                                         const GALGAS_bool & in_mIsReadOnly,
                                                          const GALGAS_expressionAST & in_mRegisterOffset,
                                                          const GALGAS_location & in_mRegisterOffsetLocation) ;
 
@@ -3689,7 +3689,7 @@ class GALGAS_controlRegisterNameListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_controlRegisterNameListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                       const class GALGAS_controlRegisterKind & inOperand1,
-                                                                                      const class GALGAS_lstringlist & inOperand2,
+                                                                                      const class GALGAS_bool & inOperand2,
                                                                                       const class GALGAS_expressionAST & inOperand3,
                                                                                       const class GALGAS_location & inOperand4
                                                                                       COMMA_LOCATION_ARGS) ;
@@ -3706,9 +3706,9 @@ class GALGAS_controlRegisterNameListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterKind getter_mControlRegisterKind (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnly (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
 

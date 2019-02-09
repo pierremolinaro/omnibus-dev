@@ -3997,7 +3997,7 @@ class cCollectionElement_controlRegisterNameListAST : public cCollectionElement 
 //--- Constructors
   public : cCollectionElement_controlRegisterNameListAST (const GALGAS_lstring & in_mRegisterName,
                                                           const GALGAS_controlRegisterKind & in_mControlRegisterKind,
-                                                          const GALGAS_lstringlist & in_mAttributeList,
+                                                          const GALGAS_bool & in_mIsReadOnly,
                                                           const GALGAS_expressionAST & in_mRegisterOffset,
                                                           const GALGAS_location & in_mRegisterOffsetLocation
                                                           COMMA_LOCATION_ARGS) ;
@@ -4020,19 +4020,19 @@ class cCollectionElement_controlRegisterNameListAST : public cCollectionElement 
 
 cCollectionElement_controlRegisterNameListAST::cCollectionElement_controlRegisterNameListAST (const GALGAS_lstring & in_mRegisterName,
                                                                                               const GALGAS_controlRegisterKind & in_mControlRegisterKind,
-                                                                                              const GALGAS_lstringlist & in_mAttributeList,
+                                                                                              const GALGAS_bool & in_mIsReadOnly,
                                                                                               const GALGAS_expressionAST & in_mRegisterOffset,
                                                                                               const GALGAS_location & in_mRegisterOffsetLocation
                                                                                               COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mRegisterName, in_mControlRegisterKind, in_mAttributeList, in_mRegisterOffset, in_mRegisterOffsetLocation) {
+mObject (in_mRegisterName, in_mControlRegisterKind, in_mIsReadOnly, in_mRegisterOffset, in_mRegisterOffsetLocation) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_controlRegisterNameListAST::cCollectionElement_controlRegisterNameListAST (const GALGAS_controlRegisterNameListAST_2D_element & inElement COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (inElement.mProperty_mRegisterName, inElement.mProperty_mControlRegisterKind, inElement.mProperty_mAttributeList, inElement.mProperty_mRegisterOffset, inElement.mProperty_mRegisterOffsetLocation) {
+mObject (inElement.mProperty_mRegisterName, inElement.mProperty_mControlRegisterKind, inElement.mProperty_mIsReadOnly, inElement.mProperty_mRegisterOffset, inElement.mProperty_mRegisterOffsetLocation) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4045,7 +4045,7 @@ bool cCollectionElement_controlRegisterNameListAST::isValid (void) const {
 
 cCollectionElement * cCollectionElement_controlRegisterNameListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_controlRegisterNameListAST (mObject.mProperty_mRegisterName, mObject.mProperty_mControlRegisterKind, mObject.mProperty_mAttributeList, mObject.mProperty_mRegisterOffset, mObject.mProperty_mRegisterOffsetLocation COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_controlRegisterNameListAST (mObject.mProperty_mRegisterName, mObject.mProperty_mControlRegisterKind, mObject.mProperty_mIsReadOnly, mObject.mProperty_mRegisterOffset, mObject.mProperty_mRegisterOffsetLocation COMMA_HERE)) ;
   return result ;
 }
 
@@ -4062,8 +4062,8 @@ void cCollectionElement_controlRegisterNameListAST::description (C_String & ioSt
   mObject.mProperty_mControlRegisterKind.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAttributeList" ":" ;
-  mObject.mProperty_mAttributeList.description (ioString, inIndentation) ;
+  ioString << "mIsReadOnly" ":" ;
+  mObject.mProperty_mIsReadOnly.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRegisterOffset" ":" ;
@@ -4104,7 +4104,7 @@ GALGAS_controlRegisterNameListAST GALGAS_controlRegisterNameListAST::constructor
 
 GALGAS_controlRegisterNameListAST GALGAS_controlRegisterNameListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                                 const GALGAS_controlRegisterKind & inOperand1,
-                                                                                                const GALGAS_lstringlist & inOperand2,
+                                                                                                const GALGAS_bool & inOperand2,
                                                                                                 const GALGAS_expressionAST & inOperand3,
                                                                                                 const GALGAS_location & inOperand4
                                                                                                 COMMA_LOCATION_ARGS) {
@@ -4123,14 +4123,14 @@ GALGAS_controlRegisterNameListAST GALGAS_controlRegisterNameListAST::constructor
 void GALGAS_controlRegisterNameListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                    const GALGAS_lstring & in_mRegisterName,
                                                                    const GALGAS_controlRegisterKind & in_mControlRegisterKind,
-                                                                   const GALGAS_lstringlist & in_mAttributeList,
+                                                                   const GALGAS_bool & in_mIsReadOnly,
                                                                    const GALGAS_expressionAST & in_mRegisterOffset,
                                                                    const GALGAS_location & in_mRegisterOffsetLocation
                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_controlRegisterNameListAST (in_mRegisterName,
                                                                 in_mControlRegisterKind,
-                                                                in_mAttributeList,
+                                                                in_mIsReadOnly,
                                                                 in_mRegisterOffset,
                                                                 in_mRegisterOffsetLocation COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -4141,7 +4141,7 @@ void GALGAS_controlRegisterNameListAST::makeAttributesFromObjects (capCollection
 
 void GALGAS_controlRegisterNameListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                              const GALGAS_controlRegisterKind & inOperand1,
-                                                             const GALGAS_lstringlist & inOperand2,
+                                                             const GALGAS_bool & inOperand2,
                                                              const GALGAS_expressionAST & inOperand3,
                                                              const GALGAS_location & inOperand4
                                                              COMMA_LOCATION_ARGS) {
@@ -4174,7 +4174,7 @@ void GALGAS_controlRegisterNameListAST::setter_append (GALGAS_controlRegisterNam
 
 void GALGAS_controlRegisterNameListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                               const GALGAS_controlRegisterKind inOperand1,
-                                                              const GALGAS_lstringlist inOperand2,
+                                                              const GALGAS_bool inOperand2,
                                                               const GALGAS_expressionAST inOperand3,
                                                               const GALGAS_location inOperand4,
                                                               const GALGAS_uint inInsertionIndex,
@@ -4194,7 +4194,7 @@ void GALGAS_controlRegisterNameListAST::setter_insertAtIndex (const GALGAS_lstri
 
 void GALGAS_controlRegisterNameListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                               GALGAS_controlRegisterKind & outOperand1,
-                                                              GALGAS_lstringlist & outOperand2,
+                                                              GALGAS_bool & outOperand2,
                                                               GALGAS_expressionAST & outOperand3,
                                                               GALGAS_location & outOperand4,
                                                               const GALGAS_uint inRemoveIndex,
@@ -4214,7 +4214,7 @@ void GALGAS_controlRegisterNameListAST::setter_removeAtIndex (GALGAS_lstring & o
       macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
       outOperand0 = p->mObject.mProperty_mRegisterName ;
       outOperand1 = p->mObject.mProperty_mControlRegisterKind ;
-      outOperand2 = p->mObject.mProperty_mAttributeList ;
+      outOperand2 = p->mObject.mProperty_mIsReadOnly ;
       outOperand3 = p->mObject.mProperty_mRegisterOffset ;
       outOperand4 = p->mObject.mProperty_mRegisterOffsetLocation ;
     }
@@ -4225,7 +4225,7 @@ void GALGAS_controlRegisterNameListAST::setter_removeAtIndex (GALGAS_lstring & o
 
 void GALGAS_controlRegisterNameListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                          GALGAS_controlRegisterKind & outOperand1,
-                                                         GALGAS_lstringlist & outOperand2,
+                                                         GALGAS_bool & outOperand2,
                                                          GALGAS_expressionAST & outOperand3,
                                                          GALGAS_location & outOperand4,
                                                          C_Compiler * inCompiler
@@ -4243,7 +4243,7 @@ void GALGAS_controlRegisterNameListAST::setter_popFirst (GALGAS_lstring & outOpe
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     outOperand0 = p->mObject.mProperty_mRegisterName ;
     outOperand1 = p->mObject.mProperty_mControlRegisterKind ;
-    outOperand2 = p->mObject.mProperty_mAttributeList ;
+    outOperand2 = p->mObject.mProperty_mIsReadOnly ;
     outOperand3 = p->mObject.mProperty_mRegisterOffset ;
     outOperand4 = p->mObject.mProperty_mRegisterOffsetLocation ;
   }
@@ -4253,7 +4253,7 @@ void GALGAS_controlRegisterNameListAST::setter_popFirst (GALGAS_lstring & outOpe
 
 void GALGAS_controlRegisterNameListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                         GALGAS_controlRegisterKind & outOperand1,
-                                                        GALGAS_lstringlist & outOperand2,
+                                                        GALGAS_bool & outOperand2,
                                                         GALGAS_expressionAST & outOperand3,
                                                         GALGAS_location & outOperand4,
                                                         C_Compiler * inCompiler
@@ -4271,7 +4271,7 @@ void GALGAS_controlRegisterNameListAST::setter_popLast (GALGAS_lstring & outOper
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     outOperand0 = p->mObject.mProperty_mRegisterName ;
     outOperand1 = p->mObject.mProperty_mControlRegisterKind ;
-    outOperand2 = p->mObject.mProperty_mAttributeList ;
+    outOperand2 = p->mObject.mProperty_mIsReadOnly ;
     outOperand3 = p->mObject.mProperty_mRegisterOffset ;
     outOperand4 = p->mObject.mProperty_mRegisterOffsetLocation ;
   }
@@ -4281,7 +4281,7 @@ void GALGAS_controlRegisterNameListAST::setter_popLast (GALGAS_lstring & outOper
 
 void GALGAS_controlRegisterNameListAST::method_first (GALGAS_lstring & outOperand0,
                                                       GALGAS_controlRegisterKind & outOperand1,
-                                                      GALGAS_lstringlist & outOperand2,
+                                                      GALGAS_bool & outOperand2,
                                                       GALGAS_expressionAST & outOperand3,
                                                       GALGAS_location & outOperand4,
                                                       C_Compiler * inCompiler
@@ -4299,7 +4299,7 @@ void GALGAS_controlRegisterNameListAST::method_first (GALGAS_lstring & outOperan
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     outOperand0 = p->mObject.mProperty_mRegisterName ;
     outOperand1 = p->mObject.mProperty_mControlRegisterKind ;
-    outOperand2 = p->mObject.mProperty_mAttributeList ;
+    outOperand2 = p->mObject.mProperty_mIsReadOnly ;
     outOperand3 = p->mObject.mProperty_mRegisterOffset ;
     outOperand4 = p->mObject.mProperty_mRegisterOffsetLocation ;
   }
@@ -4309,7 +4309,7 @@ void GALGAS_controlRegisterNameListAST::method_first (GALGAS_lstring & outOperan
 
 void GALGAS_controlRegisterNameListAST::method_last (GALGAS_lstring & outOperand0,
                                                      GALGAS_controlRegisterKind & outOperand1,
-                                                     GALGAS_lstringlist & outOperand2,
+                                                     GALGAS_bool & outOperand2,
                                                      GALGAS_expressionAST & outOperand3,
                                                      GALGAS_location & outOperand4,
                                                      C_Compiler * inCompiler
@@ -4327,7 +4327,7 @@ void GALGAS_controlRegisterNameListAST::method_last (GALGAS_lstring & outOperand
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     outOperand0 = p->mObject.mProperty_mRegisterName ;
     outOperand1 = p->mObject.mProperty_mControlRegisterKind ;
-    outOperand2 = p->mObject.mProperty_mAttributeList ;
+    outOperand2 = p->mObject.mProperty_mIsReadOnly ;
     outOperand3 = p->mObject.mProperty_mRegisterOffset ;
     outOperand4 = p->mObject.mProperty_mRegisterOffsetLocation ;
   }
@@ -4416,15 +4416,15 @@ GALGAS_controlRegisterKind GALGAS_controlRegisterNameListAST::getter_mControlReg
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstringlist GALGAS_controlRegisterNameListAST::getter_mAttributeListAtIndex (const GALGAS_uint & inIndex,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_controlRegisterNameListAST::getter_mIsReadOnlyAtIndex (const GALGAS_uint & inIndex,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
-  GALGAS_lstringlist result ;
+  GALGAS_bool result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
-    result = p->mObject.mProperty_mAttributeList ;
+    result = p->mObject.mProperty_mIsReadOnly ;
   }
   return result ;
 }
@@ -4496,10 +4496,10 @@ GALGAS_controlRegisterKind cEnumerator_controlRegisterNameListAST::current_mCont
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstringlist cEnumerator_controlRegisterNameListAST::current_mAttributeList (LOCATION_ARGS) const {
+GALGAS_bool cEnumerator_controlRegisterNameListAST::current_mIsReadOnly (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterNameListAST * p = (const cCollectionElement_controlRegisterNameListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
-  return p->mObject.mProperty_mAttributeList ;
+  return p->mObject.mProperty_mIsReadOnly ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8391,12 +8391,12 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_10311 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_10311.hasCurrentObject ()) {
+  cEnumerator_controlRegisterDeclarationList enumerator_10901 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_10901.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_10311.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 270)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_10901.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 288)) ;
     }
-    enumerator_10311.gotoNextObject () ;
+    enumerator_10901.gotoNextObject () ;
   }
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
