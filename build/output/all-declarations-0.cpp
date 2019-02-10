@@ -3445,21 +3445,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F
                                                                                                                 GALGAS_lstring & outArgument_outTypeName,
                                                                                                                 C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outTypeName.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 19)) ;
-  GALGAS_lstring var_elementTypeName_1159 ;
-  nt_type_5F_definition_ (ioArgument_ioAST, var_elementTypeName_1159, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 21)) ;
-  outArgument_outTypeName = GALGAS_string ("anonymous.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-dynamic-array.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)) ;
-  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 23)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeDynamicArrayDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1159  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 24))  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 24)) ;
+  GALGAS_lstring var_elementTypeName_1151 ;
+  nt_type_5F_definition_ (ioArgument_ioAST, var_elementTypeName_1151, inCompiler) ;
+  outArgument_outTypeName = GALGAS_string ("anonymous.").add_operation (ioArgument_ioAST.getter_mTypeDeclarationIndex (HERE).getter_string (SOURCE_FILE ("type-dynamic-array.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 20)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 20)) ;
+  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 21)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeDynamicArrayDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1151  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22))  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_i5_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 19)) ;
   nt_type_5F_definition_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 21)) ;
   inCompiler->resetTemplateString () ;
 }
 

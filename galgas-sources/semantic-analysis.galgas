@@ -26,13 +26,13 @@ func checkAssignmentCompatibility
     end
   else
     error inErrorLocation
-    : "object of type $" + inOptionalTargetAnnotationType.plmTypeDescriptionName
-      + " cannot be assigned from expression of type $" + [inSourceValue plmTypeDescriptionName]
+    : "object of type " + inOptionalTargetAnnotationType.plmTypeDescriptionName
+      + " cannot be assigned from expression of type " + [inSourceValue plmTypeDescriptionName]
     : result
   end
   if not inStaticTypeAllowed then
     if [result plmTypeDescriptionName] == staticIntegerTypeName () then
-      error inErrorLocation : "the $" + staticIntegerTypeName () + " static type is not allowed here"
+      error inErrorLocation : "the " + staticIntegerTypeName () + " static type is not allowed here"
     end
   end
 }

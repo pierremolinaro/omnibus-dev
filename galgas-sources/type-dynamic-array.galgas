@@ -16,9 +16,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <type_definition_enclosed_in_square_breackets> ?!@ast ioAST !@lstring outTypeName {
-    $[$
     <type_definition> !?ioAST ?let elementTypeName
-    $]$
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++
     ioAST.mDeclarationListAST += !@typeDynamicArrayDeclarationAST.new {!outTypeName !elementTypeName}

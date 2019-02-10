@@ -24,8 +24,8 @@ setter @instructionListIR appendCopyFromReferences
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
     if sourceType.plmTypeDescriptionName != inTargetReference.type.plmTypeDescriptionName then
       error inErrorLocation
-      : "object of type $" + inTargetReference.type.plmTypeDescriptionName
-        + " cannot be assigned from expression of type $" + sourceType.plmTypeDescriptionName
+      : "object of type " + inTargetReference.type.plmTypeDescriptionName
+        + " cannot be assigned from expression of type " + sourceType.plmTypeDescriptionName
     end
     self += !@copyFromReferencesIR.new {!inTargetReference !sourceLLVMName}
   end
