@@ -52,13 +52,13 @@ let TRACE_SIZE = 10
 
 driver usb_device > digital {
 // Descriptor table should be aligned on a 512 byte-boudary
-  var descriptorTable @align 512 =  [(NUM_ENDPOINTS+1)*4 • BDT] (!repeated:BDT ())
+  var descriptorTable @align 512 =  [(NUM_ENDPOINTS+1)*4 @x BDT] (!repeated:BDT ())
 
-  var ep0_rx0_buf @align 4 = [EP0_SIZE • UInt8] (!repeated:0)
-  var ep0_rx1_buf @align 4 = [EP0_SIZE • UInt8] (!repeated:0)
+  var ep0_rx0_buf @align 4 = [EP0_SIZE @x UInt8] (!repeated:0)
+  var ep0_rx1_buf @align 4 = [EP0_SIZE @x UInt8] (!repeated:0)
   var ep0_tx_bdt_bank : UInt32 = 0
 
-  var état = [TRACE_SIZE • UInt4] (!repeated:0)
+  var état = [TRACE_SIZE @x UInt4] (!repeated:0)
   var indexÉtat : UInt32 = 0
 
   public section lireÉtat (?index : UInt32) -> UInt32 {

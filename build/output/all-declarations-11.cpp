@@ -14898,7 +14898,7 @@ const char * gWrapperFileContent_58_targetTemplates = "\n"
   "  let RS : DigitalPort\n"
   "  let ENABLE : DigitalPort\n"
   "\n"
-  "  var buffer = [LCD_BUFFER_SIZE \xE2""\x80""\xA2"" UInt8] (!repeated:0)\n"
+  "  var buffer = [LCD_BUFFER_SIZE @x UInt8] (!repeated:0)\n"
   "  var sEntree = Semaphore (!value:0)\n"
   "  var sSortie = Semaphore (!value:LCD_BUFFER_SIZE)\n"
   "\n"
@@ -15352,7 +15352,7 @@ const cRegularFileWrapper gWrapperFile_58_targetTemplates (
   "plm-teensy-3-1-lcd.plm-import",
   "plm-import",
   true, // Text file
-  15440, // Text length
+  15441, // Text length
   gWrapperFileContent_58_targetTemplates
 ) ;
 
@@ -20932,7 +20932,7 @@ const char * gWrapperFileContent_89_targetTemplates = "\n"
   "  let RS : DigitalPort\n"
   "  let ENABLE : DigitalPort\n"
   "\n"
-  "  var buffer = [LCD_BUFFER_SIZE \xE2""\x80""\xA2"" UInt8] (!repeated:0)\n"
+  "  var buffer = [LCD_BUFFER_SIZE @x UInt8] (!repeated:0)\n"
   "  var sEntree = Semaphore (!value:0)\n"
   "  var sSortie = Semaphore (!value:LCD_BUFFER_SIZE)\n"
   "\n"
@@ -21389,7 +21389,7 @@ const cRegularFileWrapper gWrapperFile_89_targetTemplates (
   "plm-teensy-3-6-lcd.plm-import",
   "plm-import",
   true, // Text file
-  17209, // Text length
+  17210, // Text length
   gWrapperFileContent_89_targetTemplates
 ) ;
 

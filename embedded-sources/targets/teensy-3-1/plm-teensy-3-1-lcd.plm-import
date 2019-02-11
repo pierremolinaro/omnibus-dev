@@ -18,7 +18,7 @@ driver lcd > digital {
   let RS : DigitalPort
   let ENABLE : DigitalPort
 
-  var buffer = [LCD_BUFFER_SIZE • UInt8] (!repeated:0)
+  var buffer = [LCD_BUFFER_SIZE @x UInt8] (!repeated:0)
   var sEntree = Semaphore (!value:0)
   var sSortie = Semaphore (!value:LCD_BUFFER_SIZE)
 
