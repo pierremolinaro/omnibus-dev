@@ -12131,10 +12131,10 @@ static void extensionMethod_typeAliasDeclarationAST_enterInPrecedenceGraph (cons
   macroValidSharedObject (object, cPtr_typeAliasDeclarationAST) ;
   {
   const GALGAS_typeAliasDeclarationAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (object->mProperty_mAliasTypeName, temp_0, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 55)) ;
+  ioArgument_ioGraph.setter_addNode (object->mProperty_mAliasTypeName, temp_0, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 77)) ;
   }
   {
-  ioArgument_ioGraph.setter_addEdge (object->mProperty_mAliasTypeName, object->mProperty_mOriginalTypeName COMMA_SOURCE_FILE ("type-alias.galgas", 56)) ;
+  ioArgument_ioGraph.setter_addEdge (object->mProperty_mAliasTypeName, object->mProperty_mOriginalTypeName COMMA_SOURCE_FILE ("type-alias.galgas", 78)) ;
   }
 }
 
@@ -12161,7 +12161,7 @@ static GALGAS_string extensionGetter_typeAliasDeclarationAST_keyRepresentationFo
   GALGAS_string result_result ; // Returned variable
   const cPtr_typeAliasDeclarationAST * object = (const cPtr_typeAliasDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_typeAliasDeclarationAST) ;
-  result_result = GALGAS_string ("typealias ").add_operation (object->mProperty_mAliasTypeName.getter_string (SOURCE_FILE ("type-alias.galgas", 62)), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 62)) ;
+  result_result = GALGAS_string ("typealias ").add_operation (object->mProperty_mAliasTypeName.getter_string (SOURCE_FILE ("type-alias.galgas", 84)), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 84)) ;
 //---
   return result_result ;
 }
@@ -12198,13 +12198,13 @@ static void extensionMethod_typeAliasDeclarationAST_enterInContext (const cPtr_a
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_typeAliasDeclarationAST * object = (const cPtr_typeAliasDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_typeAliasDeclarationAST) ;
-  GALGAS_PLMType var_type_3941 ;
-  ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (object->mProperty_mOriginalTypeName, var_type_3941, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 81)) ;
+  GALGAS_PLMType var_type_4538 ;
+  ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (object->mProperty_mOriginalTypeName, var_type_4538, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 103)) ;
   {
-  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mAliasTypeName, var_type_3941, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 83)) ;
+  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mAliasTypeName, var_type_4538, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 105)) ;
   }
   {
-  extensionSetter_insertType (ioArgument_ioContext.mProperty_mValuedObjectMap, object->mProperty_mAliasTypeName, var_type_3941, ioArgument_ioContext.getter_mTypeMap (HERE), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 87)) ;
+  extensionSetter_insertType (ioArgument_ioContext.mProperty_mValuedObjectMap, object->mProperty_mAliasTypeName, var_type_4538, ioArgument_ioContext.getter_mTypeMap (HERE), inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 109)) ;
   }
 }
 
@@ -12233,15 +12233,15 @@ static void extensionMethod_staticArrayTypeDeclarationAST_enterInPrecedenceGraph
   macroValidSharedObject (object, cPtr_staticArrayTypeDeclarationAST) ;
   {
   const GALGAS_staticArrayTypeDeclarationAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (object->mProperty_mArrayTypeName, temp_0, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 48)) ;
+  ioArgument_ioGraph.setter_addNode (object->mProperty_mArrayTypeName, temp_0, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 47)) ;
   }
   {
-  ioArgument_ioGraph.setter_addEdge (object->mProperty_mArrayTypeName, object->mProperty_mElementTypeName COMMA_SOURCE_FILE ("type-static-array.galgas", 49)) ;
+  ioArgument_ioGraph.setter_addEdge (object->mProperty_mArrayTypeName, object->mProperty_mElementTypeName COMMA_SOURCE_FILE ("type-static-array.galgas", 48)) ;
   }
-  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), object->mProperty_mArrayTypeName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 50)) ;
-  GALGAS_lstring var_rootNode_2516 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 51)), object->mProperty_mArrayTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("type-static-array.galgas", 51)) ;
+  callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mProperty_mSizeExpression.ptr (), object->mProperty_mArrayTypeName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 49)) ;
+  GALGAS_lstring var_rootNode_2507 = GALGAS_lstring::constructor_new (function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 50)), object->mProperty_mArrayTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("type-static-array.galgas", 50)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (object->mProperty_mArrayTypeName, var_rootNode_2516 COMMA_SOURCE_FILE ("type-static-array.galgas", 52)) ;
+  ioArgument_ioGraph.setter_addEdge (object->mProperty_mArrayTypeName, var_rootNode_2507 COMMA_SOURCE_FILE ("type-static-array.galgas", 51)) ;
   }
 }
 
@@ -12268,7 +12268,7 @@ static GALGAS_string extensionGetter_staticArrayTypeDeclarationAST_keyRepresenta
   GALGAS_string result_outRepresentation ; // Returned variable
   const cPtr_staticArrayTypeDeclarationAST * object = (const cPtr_staticArrayTypeDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_staticArrayTypeDeclarationAST) ;
-  result_outRepresentation = GALGAS_string ("anonymous $").add_operation (object->mProperty_mArrayTypeName.getter_string (SOURCE_FILE ("type-static-array.galgas", 58)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 58)) ;
+  result_outRepresentation = GALGAS_string ("anonymous $").add_operation (object->mProperty_mArrayTypeName.getter_string (SOURCE_FILE ("type-static-array.galgas", 57)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 57)) ;
 //---
   return result_outRepresentation ;
 }
@@ -12334,94 +12334,94 @@ static void extensionMethod_staticArrayTypeDeclarationAST_enterInContext (const 
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_staticArrayTypeDeclarationAST * object = (const cPtr_staticArrayTypeDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_staticArrayTypeDeclarationAST) ;
-  GALGAS_PLMType var_elementType_4335 ;
-  ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (object->mProperty_mElementTypeName, var_elementType_4335, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 83)) ;
+  GALGAS_PLMType var_elementType_4326 ;
+  ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (object->mProperty_mElementTypeName, var_elementType_4326, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 82)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    test_0 = callExtensionGetter_copyable ((const cPtr_PLMType *) var_elementType_4335.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 84)).operator_not (SOURCE_FILE ("type-static-array.galgas", 84)).boolEnum () ;
+    test_0 = callExtensionGetter_copyable ((const cPtr_PLMType *) var_elementType_4326.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 83)).operator_not (SOURCE_FILE ("type-static-array.galgas", 83)).boolEnum () ;
     if (kBoolTrue == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (object->mProperty_mElementTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 85)), GALGAS_string ("an array element should be copyable"), fixItArray1  COMMA_SOURCE_FILE ("type-static-array.galgas", 85)) ;
+      inCompiler->emitSemanticError (object->mProperty_mElementTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 84)), GALGAS_string ("an array element should be copyable"), fixItArray1  COMMA_SOURCE_FILE ("type-static-array.galgas", 84)) ;
     }
   }
   enumGalgasBool test_2 = kBoolTrue ;
   if (kBoolTrue == test_2) {
-    test_2 = callExtensionGetter_instanciable ((const cPtr_PLMType *) var_elementType_4335.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 87)).operator_not (SOURCE_FILE ("type-static-array.galgas", 87)).boolEnum () ;
+    test_2 = callExtensionGetter_instanciable ((const cPtr_PLMType *) var_elementType_4326.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 86)).operator_not (SOURCE_FILE ("type-static-array.galgas", 86)).boolEnum () ;
     if (kBoolTrue == test_2) {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (object->mProperty_mElementTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 88)), GALGAS_string ("an array element should be instanciable"), fixItArray3  COMMA_SOURCE_FILE ("type-static-array.galgas", 88)) ;
+      inCompiler->emitSemanticError (object->mProperty_mElementTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 87)), GALGAS_string ("an array element should be instanciable"), fixItArray3  COMMA_SOURCE_FILE ("type-static-array.galgas", 87)) ;
     }
   }
-  GALGAS_objectIR var_sizeExpressionIR_4844 ;
+  GALGAS_objectIR var_sizeExpressionIR_4835 ;
   {
-  routine_computeStaticExpression (ioArgument_ioContext, ioArgument_ioStaticEntityMap, object->mProperty_mSizeExpression, object->mProperty_mSizeExpressionLocation, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 96)), var_sizeExpressionIR_4844, inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 91)) ;
+  routine_computeStaticExpression (ioArgument_ioContext, ioArgument_ioStaticEntityMap, object->mProperty_mSizeExpression, object->mProperty_mSizeExpressionLocation, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 95)), var_sizeExpressionIR_4835, inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 90)) ;
   }
   enumGalgasBool test_4 = kBoolTrue ;
   if (kBoolTrue == test_4) {
-    test_4 = var_sizeExpressionIR_4844.getter_isLiteralInteger (SOURCE_FILE ("type-static-array.galgas", 99)).operator_not (SOURCE_FILE ("type-static-array.galgas", 99)).boolEnum () ;
+    test_4 = var_sizeExpressionIR_4835.getter_isLiteralInteger (SOURCE_FILE ("type-static-array.galgas", 98)).operator_not (SOURCE_FILE ("type-static-array.galgas", 98)).boolEnum () ;
     if (kBoolTrue == test_4) {
       TC_Array <C_FixItDescription> fixItArray5 ;
-      inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is a literal interger expression"), fixItArray5  COMMA_SOURCE_FILE ("type-static-array.galgas", 100)) ;
+      inCompiler->emitSemanticError (object->mProperty_mSizeExpressionLocation, GALGAS_string ("array size expression is a literal interger expression"), fixItArray5  COMMA_SOURCE_FILE ("type-static-array.galgas", 99)) ;
     }
   }
   if (kBoolFalse == test_4) {
-    GALGAS_bigint var_arraySize_5060 ;
-    GALGAS_PLMType joker_5037_1 ; // Joker input parameter
-    var_sizeExpressionIR_4844.method_literalInteger (joker_5037_1, var_arraySize_5060, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 102)) ;
-    GALGAS_lstring var_plmTypeDescriptionName_5159 = GALGAS_lstring::constructor_new (GALGAS_string ("[").add_operation (var_arraySize_5060.getter_string (SOURCE_FILE ("type-static-array.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 104)).add_operation (GALGAS_string (" \xE2""\x80""\xA2"" "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 104)).add_operation (var_elementType_4335.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 104)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 104)), object->mProperty_mArrayTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 104))  COMMA_SOURCE_FILE ("type-static-array.galgas", 104)) ;
-    GALGAS_lstring var_llvmBaseTypeName_5285 = GALGAS_lstring::constructor_new (var_elementType_4335.getter_llvmBaseTypeName (HERE).add_operation (GALGAS_string ("-"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 105)).add_operation (var_arraySize_5060.getter_string (SOURCE_FILE ("type-static-array.galgas", 105)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 105)), object->mProperty_mArrayTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 105))  COMMA_SOURCE_FILE ("type-static-array.galgas", 105)) ;
+    GALGAS_bigint var_arraySize_5051 ;
+    GALGAS_PLMType joker_5028_1 ; // Joker input parameter
+    var_sizeExpressionIR_4835.method_literalInteger (joker_5028_1, var_arraySize_5051, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 101)) ;
+    GALGAS_lstring var_plmTypeDescriptionName_5150 = GALGAS_lstring::constructor_new (GALGAS_string ("[").add_operation (var_arraySize_5051.getter_string (SOURCE_FILE ("type-static-array.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 103)).add_operation (GALGAS_string (" \xE2""\x80""\xA2"" "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 103)).add_operation (var_elementType_4326.getter_plmTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 103)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 103)), object->mProperty_mArrayTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 103))  COMMA_SOURCE_FILE ("type-static-array.galgas", 103)) ;
+    GALGAS_lstring var_llvmBaseTypeName_5276 = GALGAS_lstring::constructor_new (var_elementType_4326.getter_llvmBaseTypeName (HERE).add_operation (GALGAS_string ("-"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 104)).add_operation (var_arraySize_5051.getter_string (SOURCE_FILE ("type-static-array.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 104)), object->mProperty_mArrayTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 104))  COMMA_SOURCE_FILE ("type-static-array.galgas", 104)) ;
     enumGalgasBool test_6 = kBoolTrue ;
     if (kBoolTrue == test_6) {
-      test_6 = ioArgument_ioContext.getter_mTypeMap (HERE).getter_hasKey (var_plmTypeDescriptionName_5159.getter_string (SOURCE_FILE ("type-static-array.galgas", 106)) COMMA_SOURCE_FILE ("type-static-array.galgas", 106)).boolEnum () ;
+      test_6 = ioArgument_ioContext.getter_mTypeMap (HERE).getter_hasKey (var_plmTypeDescriptionName_5150.getter_string (SOURCE_FILE ("type-static-array.galgas", 105)) COMMA_SOURCE_FILE ("type-static-array.galgas", 105)).boolEnum () ;
       if (kBoolTrue == test_6) {
-        GALGAS_PLMType var_type_5510 ;
-        ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (var_plmTypeDescriptionName_5159, var_type_5510, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 107)) ;
+        GALGAS_PLMType var_type_5501 ;
+        ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (var_plmTypeDescriptionName_5150, var_type_5501, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 106)) ;
         {
-        ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mArrayTypeName, var_type_5510, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 108)) ;
+        ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mArrayTypeName, var_type_5501, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 107)) ;
         }
       }
     }
     if (kBoolFalse == test_6) {
-      GALGAS_classConstantMap var_classConstantMap_5749 = GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 114)) ;
+      GALGAS_classConstantMap var_classConstantMap_5740 = GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 113)) ;
       {
-      var_classConstantMap_5749.setter_insertKey (GALGAS_lstring::constructor_new (GALGAS_string ("count"), object->mProperty_mArrayTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 115))  COMMA_SOURCE_FILE ("type-static-array.galgas", 115)), var_arraySize_5060, function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 115)).getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 115)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 115)) ;
+      var_classConstantMap_5740.setter_insertKey (GALGAS_lstring::constructor_new (GALGAS_string ("count"), object->mProperty_mArrayTypeName.getter_location (SOURCE_FILE ("type-static-array.galgas", 114))  COMMA_SOURCE_FILE ("type-static-array.galgas", 114)), var_arraySize_5051, function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 114)).getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 114)) ;
       }
-      GALGAS_propertyGetterMap var_arrayTypePropertyMap_5979 = GALGAS_propertyGetterMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 117)) ;
+      GALGAS_propertyGetterMap var_arrayTypePropertyMap_5970 = GALGAS_propertyGetterMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 116)) ;
       {
-      var_arrayTypePropertyMap_5979.setter_insertKey (GALGAS_lstring::constructor_new (GALGAS_string ("count"), var_plmTypeDescriptionName_5159.getter_location (HERE)  COMMA_SOURCE_FILE ("type-static-array.galgas", 119)), GALGAS_bool (true), GALGAS_propertyGetterKind::constructor_constantProperty (GALGAS_objectIR::constructor_literalInteger (function_staticIntegerType (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 121)), var_arraySize_5060  COMMA_SOURCE_FILE ("type-static-array.galgas", 121))  COMMA_SOURCE_FILE ("type-static-array.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 118)) ;
+      var_arrayTypePropertyMap_5970.setter_insertKey (GALGAS_lstring::constructor_new (GALGAS_string ("count"), var_plmTypeDescriptionName_5150.getter_location (HERE)  COMMA_SOURCE_FILE ("type-static-array.galgas", 118)), GALGAS_bool (true), GALGAS_propertyGetterKind::constructor_constantProperty (GALGAS_objectIR::constructor_literalInteger (function_staticIntegerType (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 120)), var_arraySize_5051  COMMA_SOURCE_FILE ("type-static-array.galgas", 120))  COMMA_SOURCE_FILE ("type-static-array.galgas", 120)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 117)) ;
       }
-      GALGAS_constructorMap var_constructorMap_6333 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 124)) ;
+      GALGAS_constructorMap var_constructorMap_6324 = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 123)) ;
       {
-      var_constructorMap_6333.setter_insertKey (GALGAS_string ("(!repeated)").getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 126)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-static-array.galgas", 126)), GALGAS_constructorValue::constructor_arrayValue (var_elementType_4335, var_arraySize_5060.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 126))  COMMA_SOURCE_FILE ("type-static-array.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 126)) ;
+      var_constructorMap_6324.setter_insertKey (GALGAS_string ("(!repeated)").getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 125)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-static-array.galgas", 125)), GALGAS_constructorValue::constructor_arrayValue (var_elementType_4326, var_arraySize_5051.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 125))  COMMA_SOURCE_FILE ("type-static-array.galgas", 125)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 125)) ;
       }
-      GALGAS_string var_constructorName_6545 = GALGAS_string ("(") ;
-      cEnumerator_range enumerator_6589 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), var_arraySize_5060.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 129)).substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 129))), kENUMERATION_UP) ;
-      while (enumerator_6589.hasCurrentObject ()) {
-        var_constructorName_6545.plusAssign_operation(GALGAS_string ("!"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 130)) ;
-        enumerator_6589.gotoNextObject () ;
+      GALGAS_string var_constructorName_6536 = GALGAS_string ("(") ;
+      cEnumerator_range enumerator_6580 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), var_arraySize_5051.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 128)).substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 128))), kENUMERATION_UP) ;
+      while (enumerator_6580.hasCurrentObject ()) {
+        var_constructorName_6536.plusAssign_operation(GALGAS_string ("!"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 129)) ;
+        enumerator_6580.gotoNextObject () ;
       }
-      var_constructorName_6545.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 132)) ;
+      var_constructorName_6536.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 131)) ;
       {
-      var_constructorMap_6333.setter_insertKey (var_constructorName_6545.getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 133)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-static-array.galgas", 133)), GALGAS_constructorValue::constructor_arrayValue (var_elementType_4335, var_arraySize_5060.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 133))  COMMA_SOURCE_FILE ("type-static-array.galgas", 133)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 133)) ;
+      var_constructorMap_6324.setter_insertKey (var_constructorName_6536.getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 132)), GALGAS_constructorSignature::constructor_emptyList (SOURCE_FILE ("type-static-array.galgas", 132)), GALGAS_constructorValue::constructor_arrayValue (var_elementType_4326, var_arraySize_5051.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 132))  COMMA_SOURCE_FILE ("type-static-array.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 132)) ;
       }
-      GALGAS_PLMTypeAttributes var_typeAttributes_6890 = GALGAS_PLMTypeAttributes::constructor_instanciable (SOURCE_FILE ("type-static-array.galgas", 135)).operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("type-static-array.galgas", 135)) COMMA_SOURCE_FILE ("type-static-array.galgas", 135)) ;
-      GALGAS_stringset temp_7 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-static-array.galgas", 145)) ;
-      temp_7.addAssign_operation (var_llvmBaseTypeName_5285.getter_string (SOURCE_FILE ("type-static-array.galgas", 145))  COMMA_SOURCE_FILE ("type-static-array.galgas", 145)) ;
-      GALGAS_PLMType var_arrayType_7006 = GALGAS_PLMType::constructor_new (var_arrayTypePropertyMap_5979, GALGAS_propertySetterMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 139)), GALGAS_routineMapCTXT::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 140)), var_classConstantMap_5749, var_constructorMap_6333, GALGAS_guardMapCTXT::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 143)), GALGAS_subscript::constructor_staticSubscript (var_elementType_4335, var_arraySize_5060  COMMA_SOURCE_FILE ("type-static-array.galgas", 144)), temp_7, var_typeAttributes_6890, var_plmTypeDescriptionName_5159.getter_string (SOURCE_FILE ("type-static-array.galgas", 147)), GALGAS_typeKind::constructor_staticArrayType (var_elementType_4335, var_arraySize_5060  COMMA_SOURCE_FILE ("type-static-array.galgas", 148)), var_llvmBaseTypeName_5285.getter_string (SOURCE_FILE ("type-static-array.galgas", 149))  COMMA_SOURCE_FILE ("type-static-array.galgas", 137)) ;
+      GALGAS_PLMTypeAttributes var_typeAttributes_6881 = GALGAS_PLMTypeAttributes::constructor_instanciable (SOURCE_FILE ("type-static-array.galgas", 134)).operator_or (GALGAS_PLMTypeAttributes::constructor_copyable (SOURCE_FILE ("type-static-array.galgas", 134)) COMMA_SOURCE_FILE ("type-static-array.galgas", 134)) ;
+      GALGAS_stringset temp_7 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-static-array.galgas", 144)) ;
+      temp_7.addAssign_operation (var_llvmBaseTypeName_5276.getter_string (SOURCE_FILE ("type-static-array.galgas", 144))  COMMA_SOURCE_FILE ("type-static-array.galgas", 144)) ;
+      GALGAS_PLMType var_arrayType_6997 = GALGAS_PLMType::constructor_new (var_arrayTypePropertyMap_5970, GALGAS_propertySetterMap::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 138)), GALGAS_routineMapCTXT::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 139)), var_classConstantMap_5740, var_constructorMap_6324, GALGAS_guardMapCTXT::constructor_emptyMap (SOURCE_FILE ("type-static-array.galgas", 142)), GALGAS_subscript::constructor_staticSubscript (var_elementType_4326, var_arraySize_5051  COMMA_SOURCE_FILE ("type-static-array.galgas", 143)), temp_7, var_typeAttributes_6881, var_plmTypeDescriptionName_5150.getter_string (SOURCE_FILE ("type-static-array.galgas", 146)), GALGAS_typeKind::constructor_staticArrayType (var_elementType_4326, var_arraySize_5051  COMMA_SOURCE_FILE ("type-static-array.galgas", 147)), var_llvmBaseTypeName_5276.getter_string (SOURCE_FILE ("type-static-array.galgas", 148))  COMMA_SOURCE_FILE ("type-static-array.galgas", 136)) ;
       {
-      ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mArrayTypeName, var_arrayType_7006, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 151)) ;
-      }
-      {
-      extensionSetter_insertType (ioArgument_ioContext.mProperty_mValuedObjectMap, object->mProperty_mArrayTypeName, var_arrayType_7006, ioArgument_ioContext.getter_mTypeMap (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 155)) ;
+      ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mArrayTypeName, var_arrayType_6997, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 150)) ;
       }
       {
-      ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (var_plmTypeDescriptionName_5159, var_arrayType_7006, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 160)) ;
+      extensionSetter_insertType (ioArgument_ioContext.mProperty_mValuedObjectMap, object->mProperty_mArrayTypeName, var_arrayType_6997, ioArgument_ioContext.getter_mTypeMap (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 154)) ;
       }
       {
-      extensionSetter_insertType (ioArgument_ioContext.mProperty_mValuedObjectMap, var_plmTypeDescriptionName_5159, var_arrayType_7006, ioArgument_ioContext.getter_mTypeMap (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 164)) ;
+      ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (var_plmTypeDescriptionName_5150, var_arrayType_6997, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 159)) ;
       }
-      ioArgument_ioUserLLVMTypeDefinitionListIR.addAssign_operation (GALGAS_userLLVMStaticArrayTypeDefinitionIR::constructor_new (callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) var_arrayType_7006.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 171)), var_elementType_4335, var_arraySize_5060  COMMA_SOURCE_FILE ("type-static-array.galgas", 170))  COMMA_SOURCE_FILE ("type-static-array.galgas", 170)) ;
-      ioArgument_ioRoutineListIR.addAssign_operation (GALGAS_staticArrayTypeAssignFunctionIR::constructor_new (function_assignmentPrefix (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 177)).add_operation (var_llvmBaseTypeName_5285.getter_string (SOURCE_FILE ("type-static-array.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 177)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 177)).add_operation (var_llvmBaseTypeName_5285.getter_string (SOURCE_FILE ("type-static-array.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 177)).getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 177)), GALGAS_bool (false), GALGAS_bool (false), var_arrayType_7006  COMMA_SOURCE_FILE ("type-static-array.galgas", 176))  COMMA_SOURCE_FILE ("type-static-array.galgas", 176)) ;
+      {
+      extensionSetter_insertType (ioArgument_ioContext.mProperty_mValuedObjectMap, var_plmTypeDescriptionName_5150, var_arrayType_6997, ioArgument_ioContext.getter_mTypeMap (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 163)) ;
+      }
+      ioArgument_ioUserLLVMTypeDefinitionListIR.addAssign_operation (GALGAS_userLLVMStaticArrayTypeDefinitionIR::constructor_new (callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) var_arrayType_6997.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 170)), var_elementType_4326, var_arraySize_5051  COMMA_SOURCE_FILE ("type-static-array.galgas", 169))  COMMA_SOURCE_FILE ("type-static-array.galgas", 169)) ;
+      ioArgument_ioRoutineListIR.addAssign_operation (GALGAS_staticArrayTypeAssignFunctionIR::constructor_new (function_assignmentPrefix (inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 176)).add_operation (var_llvmBaseTypeName_5276.getter_string (SOURCE_FILE ("type-static-array.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 176)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 176)).add_operation (var_llvmBaseTypeName_5276.getter_string (SOURCE_FILE ("type-static-array.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 176)).getter_nowhere (SOURCE_FILE ("type-static-array.galgas", 176)), GALGAS_bool (false), GALGAS_bool (false), var_arrayType_6997  COMMA_SOURCE_FILE ("type-static-array.galgas", 175))  COMMA_SOURCE_FILE ("type-static-array.galgas", 175)) ;
     }
   }
 }
@@ -12449,7 +12449,7 @@ static void extensionMethod_userLLVMStaticArrayTypeDefinitionIR_generateLLVMType
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_userLLVMStaticArrayTypeDefinitionIR * object = (const cPtr_userLLVMStaticArrayTypeDefinitionIR *) inObject ;
   macroValidSharedObject (object, cPtr_userLLVMStaticArrayTypeDefinitionIR) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(object->mProperty_mLLVMDefinedTypeName.add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 198)).add_operation (object->mProperty_mSize.getter_string (SOURCE_FILE ("type-static-array.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 198)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 198)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) object->mProperty_mElementType.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 198)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 198)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 198)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(object->mProperty_mLLVMDefinedTypeName.add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 197)).add_operation (object->mProperty_mSize.getter_string (SOURCE_FILE ("type-static-array.galgas", 197)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 197)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 197)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) object->mProperty_mElementType.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 197)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 197)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 197)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 197)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -12477,86 +12477,86 @@ static void extensionMethod_staticArrayTypeAssignFunctionIR_llvmCodeGeneration (
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_staticArrayTypeAssignFunctionIR * object = (const cPtr_staticArrayTypeAssignFunctionIR *) inObject ;
   macroValidSharedObject (object, cPtr_staticArrayTypeAssignFunctionIR) ;
-  GALGAS_string var_llvmTypeName_10050 = callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) object->mProperty_mStaticArrayType.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 216)) ;
-  GALGAS_arcAssignmentList var_arcAssignmentList_10108 = callExtensionGetter_arcList ((const cPtr_PLMType *) object->mProperty_mStaticArrayType.ptr (), GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("type-static-array.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 217)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @").add_operation (object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("type-static-array.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 218)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 218)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 219)).add_operation (GALGAS_string (" * %inTarget, "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 219)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 219)).add_operation (GALGAS_string ("* %inSource) nounwind optsize {\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 219)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 219)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Handle ARC properties\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 220)) ;
-  cEnumerator_arcAssignmentList enumerator_10450 (var_arcAssignmentList_10108, kENUMERATION_UP) ;
-  while (enumerator_10450.hasCurrentObject ()) {
-    GALGAS_string var_propertyTypeLLVMName_10482 = callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) enumerator_10450.current_mPropertyType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 222)) ;
-    GALGAS_string var_llvmVarName_10532 = GALGAS_string ("%arc.retain.").add_operation (enumerator_10450.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("type-static-array.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 223)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 223)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 224)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_10532, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 225)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 225)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 225)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 225)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 225)).add_operation (GALGAS_string ("* %inSource, i32 0"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 225)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 225)) ;
-    cEnumerator_uintlist enumerator_10814 (enumerator_10450.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-    while (enumerator_10814.hasCurrentObject ()) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_10814.current_mValue (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 227)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 227)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 227)) ;
-      enumerator_10814.gotoNextObject () ;
+  GALGAS_string var_llvmTypeName_10041 = callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) object->mProperty_mStaticArrayType.ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 215)) ;
+  GALGAS_arcAssignmentList var_arcAssignmentList_10099 = callExtensionGetter_arcList ((const cPtr_PLMType *) object->mProperty_mStaticArrayType.ptr (), GALGAS_uintlist::constructor_emptyList (SOURCE_FILE ("type-static-array.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 216)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @").add_operation (object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("type-static-array.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 217)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 218)).add_operation (GALGAS_string (" * %inTarget, "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 218)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 218)).add_operation (GALGAS_string ("* %inSource) nounwind optsize {\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 218)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 218)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Handle ARC properties\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 219)) ;
+  cEnumerator_arcAssignmentList enumerator_10441 (var_arcAssignmentList_10099, kENUMERATION_UP) ;
+  while (enumerator_10441.hasCurrentObject ()) {
+    GALGAS_string var_propertyTypeLLVMName_10473 = callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) enumerator_10441.current_mPropertyType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 221)) ;
+    GALGAS_string var_llvmVarName_10523 = GALGAS_string ("%arc.retain.").add_operation (enumerator_10441.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("type-static-array.galgas", 222)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 222)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 222)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 222)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 223)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_10523, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 224)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 224)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 224)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 224)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 224)).add_operation (GALGAS_string ("* %inSource, i32 0"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 224)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 224)) ;
+    cEnumerator_uintlist enumerator_10805 (enumerator_10441.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+    while (enumerator_10805.hasCurrentObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_10805.current_mValue (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 226)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 226)) ;
+      enumerator_10805.gotoNextObject () ;
     }
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_10450.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 229)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 229)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 229)) ;
-    GALGAS_string var_llvmLoadedVarName_10932 = var_llvmVarName_10532.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_10932, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (var_propertyTypeLLVMName_10482, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (var_propertyTypeLLVMName_10482, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (var_llvmVarName_10532, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 231)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_10482, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 232)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 232)).add_operation (var_llvmLoadedVarName_10932, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 232)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 232)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 232)) ;
-    enumerator_10450.gotoNextObject () ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_10441.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 228)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 228)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 228)) ;
+    GALGAS_string var_llvmLoadedVarName_10923 = var_llvmVarName_10523.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 229)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_10923, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (var_propertyTypeLLVMName_10473, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (var_propertyTypeLLVMName_10473, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (var_llvmVarName_10523, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 230)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 230)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.retain (").add_operation (var_propertyTypeLLVMName_10473, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (var_llvmLoadedVarName_10923, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 231)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 231)) ;
+    enumerator_10441.gotoNextObject () ;
   }
-  cEnumerator_arcAssignmentList enumerator_11271 (var_arcAssignmentList_10108, kENUMERATION_UP) ;
-  while (enumerator_11271.hasCurrentObject ()) {
-    GALGAS_string var_llvmVarName_11294 = GALGAS_string ("%arc.release.").add_operation (enumerator_11271.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("type-static-array.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 235)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 235)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 236)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_11294, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 237)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 237)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 237)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 237)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 237)).add_operation (GALGAS_string ("* %inTarget, i32 0"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 237)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 237)) ;
-    cEnumerator_uintlist enumerator_11577 (enumerator_11271.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
-    while (enumerator_11577.hasCurrentObject ()) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_11577.current_mValue (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 239)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 239)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 239)) ;
-      enumerator_11577.gotoNextObject () ;
+  cEnumerator_arcAssignmentList enumerator_11262 (var_arcAssignmentList_10099, kENUMERATION_UP) ;
+  while (enumerator_11262.hasCurrentObject ()) {
+    GALGAS_string var_llvmVarName_11285 = GALGAS_string ("%arc.release.").add_operation (enumerator_11262.current_mPropertyName (HERE).getter_assemblerRepresentation (SOURCE_FILE ("type-static-array.galgas", 234)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 234)).add_operation (ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 234)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 234)) ;
+    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 235)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmVarName_11285, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 236)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 236)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 236)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 236)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 236)).add_operation (GALGAS_string ("* %inTarget, i32 0"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 236)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 236)) ;
+    cEnumerator_uintlist enumerator_11568 (enumerator_11262.current_mPropertyIndexPath (HERE), kENUMERATION_UP) ;
+    while (enumerator_11568.hasCurrentObject ()) {
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", i32 ").add_operation (enumerator_11568.current_mValue (HERE).getter_string (SOURCE_FILE ("type-static-array.galgas", 238)), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 238)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 238)) ;
+      enumerator_11568.gotoNextObject () ;
     }
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_11271.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 241)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 241)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 241)) ;
-    GALGAS_string var_propertyTypeLLVMName_11698 = callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) enumerator_11271.current_mPropertyType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 242)) ;
-    GALGAS_string var_llvmLoadedVarName_11754 = var_llvmVarName_11294.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_11754, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (var_propertyTypeLLVMName_11698, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (var_propertyTypeLLVMName_11698, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (var_llvmVarName_11294, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 244)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_11698, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 245)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 245)).add_operation (var_llvmLoadedVarName_11754, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 245)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 245)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 245)) ;
-    enumerator_11271.gotoNextObject () ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ; ").add_operation (enumerator_11262.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 240)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 240)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 240)) ;
+    GALGAS_string var_propertyTypeLLVMName_11689 = callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) enumerator_11262.current_mPropertyType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 241)) ;
+    GALGAS_string var_llvmLoadedVarName_11745 = var_llvmVarName_11285.add_operation (GALGAS_string (".loaded"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 242)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (var_llvmLoadedVarName_11745, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (var_propertyTypeLLVMName_11689, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (var_propertyTypeLLVMName_11689, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (var_llvmVarName_11285, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 243)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 243)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (").add_operation (var_propertyTypeLLVMName_11689, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (var_llvmLoadedVarName_11745, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 244)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 244)) ;
+    enumerator_11262.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Compute type size\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 247)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sizeAsPtr = getelementptr inbounds ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 248)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 248)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 248)).add_operation (GALGAS_string ("* null, i32 1\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 248)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 248)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byteCount = ptrtoint ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 249)).add_operation (GALGAS_string ("* %sizeAsPtr to i32\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 249)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 249)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %useLoadStore = icmp ule i32 %byteCount, 12\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 250)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 251)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Copy\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 252)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("loadStore:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 253)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %v = load ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)).add_operation (GALGAS_string ("* %inSource\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 254)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 255)).add_operation (GALGAS_string (" %v, "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 255)).add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 255)).add_operation (GALGAS_string ("* %inTarget\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 255)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 255)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 256)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyBytesOrCopyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 257)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byteCountAnd3 = and i32 %byteCount, 3\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 258)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 259)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 260)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("testTarget:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 261)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %targetAsUnsigned = ptrtoint ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 262)).add_operation (GALGAS_string ("* %inTarget to i32\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 262)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 262)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 263)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 264)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 265)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("testSource:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 266)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsigned = ptrtoint ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 267)).add_operation (GALGAS_string ("* %inSource to i32\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 267)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 267)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 268)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 269)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 270)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 271)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %target32 = bitcast ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 272)).add_operation (GALGAS_string ("* %inTarget to i32*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 272)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 272)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %source32 = bitcast ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 273)).add_operation (GALGAS_string ("* %inSource to i32*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 273)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 273)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %wordCount = udiv i32 %byteCount, 4\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 274)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copyWords.loop\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 275)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyWords.loop:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 276)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 277)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 278)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyBytes:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 279)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %target8 = bitcast ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 280)).add_operation (GALGAS_string ("* %inTarget to i8*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 280)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 280)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %source8 = bitcast ").add_operation (var_llvmTypeName_10050, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 281)).add_operation (GALGAS_string ("* %inSource to i8*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 281)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 281)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 282)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 283)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copy.end:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 284)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 285)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Compute type size\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 246)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sizeAsPtr = getelementptr inbounds ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 247)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 247)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 247)).add_operation (GALGAS_string ("* null, i32 1\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 247)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 247)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byteCount = ptrtoint ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 248)).add_operation (GALGAS_string ("* %sizeAsPtr to i32\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 248)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 248)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %useLoadStore = icmp ule i32 %byteCount, 12\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 249)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 250)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Copy\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 251)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("loadStore:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 252)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %v = load ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 253)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 253)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 253)).add_operation (GALGAS_string ("* %inSource\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 253)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 253)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)).add_operation (GALGAS_string (" %v, "), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)).add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)).add_operation (GALGAS_string ("* %inTarget\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 254)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 254)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 255)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyBytesOrCopyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 256)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byteCountAnd3 = and i32 %byteCount, 3\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 257)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 258)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 259)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("testTarget:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 260)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %targetAsUnsigned = ptrtoint ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 261)).add_operation (GALGAS_string ("* %inTarget to i32\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 261)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 261)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 262)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 263)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 264)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("testSource:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 265)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsigned = ptrtoint ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 266)).add_operation (GALGAS_string ("* %inSource to i32\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 266)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 266)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 267)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 268)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 269)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyWords:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 270)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %target32 = bitcast ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 271)).add_operation (GALGAS_string ("* %inTarget to i32*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 271)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 271)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %source32 = bitcast ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 272)).add_operation (GALGAS_string ("* %inSource to i32*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 272)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 272)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %wordCount = udiv i32 %byteCount, 4\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 273)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copyWords.loop\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 274)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyWords.loop:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 275)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 276)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 277)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copyBytes:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 278)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %target8 = bitcast ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 279)).add_operation (GALGAS_string ("* %inTarget to i8*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 279)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 279)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %source8 = bitcast ").add_operation (var_llvmTypeName_10041, inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 280)).add_operation (GALGAS_string ("* %inSource to i8*\n"), inCompiler COMMA_SOURCE_FILE ("type-static-array.galgas", 280)), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 280)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 281)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 282)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copy.end:\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 283)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 284)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 286)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-static-array.galgas", 285)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

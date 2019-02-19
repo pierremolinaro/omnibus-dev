@@ -57,7 +57,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> ?!@ast ioAST { # §
     $staticArray$
     $identifier$ ?let staticListName
     ${$

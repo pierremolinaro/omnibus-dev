@@ -95,7 +95,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_interrupt,
    kToken_let,
    kToken_no,
-   kToken_nop,
    kToken_not,
    kToken_on,
    kToken_opaque,
@@ -212,7 +211,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 117 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 116 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -1068,17 +1067,17 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i93_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i94_ (GALGAS_ast & ioArgument0,
-                                                        GALGAS_instructionListAST & ioArgument1,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i94_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i95_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i94_ (GALGAS_ast & ioArgument0,
                                                               GALGAS_ifInstructionAST & outArgument1,
                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i95_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i94_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i95_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_guardedCommandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i95_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_guarded_5F_command_i96_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_guardedCommandAST & outArgument1,
@@ -1086,11 +1085,11 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_guarded_5F_command_i96_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i97_ (GALGAS_ast & ioArgument0,
-                                                               GALGAS_guardedCommandAST & outArgument1,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i97_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_instructionListAST & ioArgument1,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i97_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i97_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i98_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_instructionListAST & ioArgument1,
@@ -1116,29 +1115,29 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i101_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i102_ (GALGAS_ast & ioArgument0,
-                                                         GALGAS_instructionListAST & ioArgument1,
-                                                         C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i102_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i103_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i102_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_callInstructionAST & outArgument1,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i103_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i102_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i104_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i103_ (GALGAS_ast & ioArgument0,
                                                          GALGAS_instructionListAST & ioArgument1,
                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i104_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i103_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_i105_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_lvalue_i104_ (GALGAS_ast & ioArgument0,
                                                     GALGAS_LValueAST & outArgument1,
                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_i105_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_lvalue_i104_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i105_ (GALGAS_ast & ioArgument0,
+                                                               GALGAS_LValueOperandAST & outArgument1,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i105_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_lvalue_5F_operand_i106_ (GALGAS_ast & ioArgument0,
                                                                GALGAS_LValueOperandAST & outArgument1,
@@ -1152,34 +1151,28 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_lvalue_5F_operand_i107_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i108_ (GALGAS_ast & ioArgument0,
-                                                               GALGAS_LValueOperandAST & outArgument1,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_lvalue_5F_operand_i108_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i109_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i108_ (GALGAS_ast & ioArgument0,
                                                                            GALGAS_controlRegisterLValueAST & outArgument1,
                                                                            C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i109_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_control_5F_register_5F_lvalue_i108_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i110_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i109_ (GALGAS_ast & ioArgument0,
                                                                      GALGAS_effectiveArgumentListAST & outArgument1,
                                                                      GALGAS_location & outArgument2,
                                                                      C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i110_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i109_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i110_ (GALGAS_ast & ioArgument0,
+                                                         C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i110_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i111_ (GALGAS_ast & ioArgument0,
                                                          C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i111_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i112_ (GALGAS_ast & ioArgument0,
-                                                         C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i112_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -5113,86 +5106,6 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_integerSliceFieldListAST getter_mSliceValues (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                              @letInstructionNOP class                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_letInstructionNOP : public GALGAS_instructionAST {
-//--- Constructor
-  public : GALGAS_letInstructionNOP (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_letInstructionNOP constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_letInstructionNOP * ptr (void) const { return (const cPtr_letInstructionNOP *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_letInstructionNOP (const cPtr_letInstructionNOP * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_letInstructionNOP extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_letInstructionNOP constructor_new (const class GALGAS_location & inOperand0
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_letInstructionNOP & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_letInstructionNOP class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionNOP ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Pointer class for @letInstructionNOP class                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_letInstructionNOP : public cPtr_instructionAST {
-//--- Attributes
-
-//--- Constructor
-  public : cPtr_letInstructionNOP (const GALGAS_location & in_mInstructionLocation
-                                   COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

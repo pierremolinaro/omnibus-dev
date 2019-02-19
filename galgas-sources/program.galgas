@@ -106,6 +106,8 @@ private proc compileProject
       error errorLocation : "'" + staticListName + "' static list is not defined"
     end
   end
+#------------------------------------------------------------ Add NOP function
+  enter_NOP_function (!?ast.mStandaloneFunctionDeclarationListAST)
 #------------------------------------------------------------ Add target specific files
   addTargetSpecificFiles (
     !forTarget:inTargetName

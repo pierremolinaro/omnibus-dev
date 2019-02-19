@@ -7841,10 +7841,10 @@ void extensionMethod_buildExpressionAccessList (const GALGAS_LValueOperandAST in
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cPtr_letInstructionNOP::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_instructionNOP::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_letInstructionNOP * p = (const cPtr_letInstructionNOP *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_letInstructionNOP) ;
+  const cPtr_instructionNOP * p = (const cPtr_instructionNOP *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_instructionNOP) ;
   if (kOperandEqual == result) {
     result = mProperty_mInstructionLocation.objectCompare (p->mProperty_mInstructionLocation) ;
   }
@@ -7854,7 +7854,7 @@ typeComparisonResult cPtr_letInstructionNOP::dynamicObjectCompare (const acPtr_c
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 
-typeComparisonResult GALGAS_letInstructionNOP::objectCompare (const GALGAS_letInstructionNOP & inOperand) const {
+typeComparisonResult GALGAS_instructionNOP::objectCompare (const GALGAS_instructionNOP & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -7872,104 +7872,104 @@ typeComparisonResult GALGAS_letInstructionNOP::objectCompare (const GALGAS_letIn
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_letInstructionNOP::GALGAS_letInstructionNOP (void) :
+GALGAS_instructionNOP::GALGAS_instructionNOP (void) :
 GALGAS_instructionAST () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_letInstructionNOP GALGAS_letInstructionNOP::constructor_default (LOCATION_ARGS) {
-  return GALGAS_letInstructionNOP::constructor_new (GALGAS_location::constructor_nowhere (HERE)
-                                                    COMMA_THERE) ;
+GALGAS_instructionNOP GALGAS_instructionNOP::constructor_default (LOCATION_ARGS) {
+  return GALGAS_instructionNOP::constructor_new (GALGAS_location::constructor_nowhere (HERE)
+                                                 COMMA_THERE) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_letInstructionNOP::GALGAS_letInstructionNOP (const cPtr_letInstructionNOP * inSourcePtr) :
+GALGAS_instructionNOP::GALGAS_instructionNOP (const cPtr_instructionNOP * inSourcePtr) :
 GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_letInstructionNOP) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_instructionNOP) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_letInstructionNOP GALGAS_letInstructionNOP::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_letInstructionNOP result ;
+GALGAS_instructionNOP GALGAS_instructionNOP::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_instructionNOP result ;
   if (inAttribute_mInstructionLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_letInstructionNOP (inAttribute_mInstructionLocation COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_instructionNOP (inAttribute_mInstructionLocation COMMA_THERE)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                     Pointer class for @letInstructionNOP class                                      *
+//                                       Pointer class for @instructionNOP class                                       *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_letInstructionNOP::cPtr_letInstructionNOP (const GALGAS_location & in_mInstructionLocation
-                                                COMMA_LOCATION_ARGS) :
+cPtr_instructionNOP::cPtr_instructionNOP (const GALGAS_location & in_mInstructionLocation
+                                          COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (in_mInstructionLocation COMMA_THERE) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * cPtr_letInstructionNOP::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionNOP ;
+const C_galgas_type_descriptor * cPtr_instructionNOP::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_instructionNOP ;
 }
 
-void cPtr_letInstructionNOP::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "[@letInstructionNOP:" ;
+void cPtr_instructionNOP::description (C_String & ioString,
+                                       const int32_t inIndentation) const {
+  ioString << "[@instructionNOP:" ;
   mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-acPtr_class * cPtr_letInstructionNOP::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_instructionNOP::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_letInstructionNOP (mProperty_mInstructionLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_instructionNOP (mProperty_mInstructionLocation COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @letInstructionNOP type                                               *
+//                                                @instructionNOP type                                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_letInstructionNOP ("letInstructionNOP",
-                                          & kTypeDescriptor_GALGAS_instructionAST) ;
+kTypeDescriptor_GALGAS_instructionNOP ("instructionNOP",
+                                       & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_letInstructionNOP::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionNOP ;
+const C_galgas_type_descriptor * GALGAS_instructionNOP::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_instructionNOP ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_letInstructionNOP::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_instructionNOP::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_letInstructionNOP (*this)) ;
+    macroMyNew (result, GALGAS_instructionNOP (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_letInstructionNOP GALGAS_letInstructionNOP::extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_letInstructionNOP result ;
-  const GALGAS_letInstructionNOP * p = (const GALGAS_letInstructionNOP *) inObject.embeddedObject () ;
+GALGAS_instructionNOP GALGAS_instructionNOP::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_instructionNOP result ;
+  const GALGAS_instructionNOP * p = (const GALGAS_instructionNOP *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_letInstructionNOP *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_instructionNOP *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("letInstructionNOP", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("instructionNOP", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

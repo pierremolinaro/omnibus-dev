@@ -43,6 +43,28 @@ syntax extension plm_syntax {
   
   #·····················································································································
 
+#  rule <type_definition> ?!@ast ioAST !@lstring outTypeName { # §
+#    $func$
+#    <mode> ?let mode
+#    @lstringlist attributeList = {}
+#    repeat
+#    while
+#      $@attribute$ ?let attribute
+#      attributeList += !attribute
+#    end
+#    <procedure_formal_arguments> !?ioAST ?let formalArgs
+#    @lstring returnType
+#    select
+#      returnType = ["" here]
+#    or
+#      $->$
+#      <type_definition>!?ioAST ?returnType
+#    end
+#    outTypeName = ["" here]
+#  }
+  
+  #·····················································································································
+
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

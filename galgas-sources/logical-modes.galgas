@@ -117,6 +117,7 @@ getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGener
     result += !.startupMode !inRoutineNameForGeneration
     result += !.safeUserMode !inRoutineNameForGeneration
     result += !.userMode !inRoutineNameForGeneration
+    result += !.bootMode !inRoutineNameForGeneration
   case anyMode :
     result += !.sectionMode !inRoutineNameForGeneration
     result += !.primitiveMode !inRoutineNameForGeneration

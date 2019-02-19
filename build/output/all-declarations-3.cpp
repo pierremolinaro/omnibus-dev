@@ -5576,20 +5576,21 @@ GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForFunction (con
       result_result.addAssign_operation (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("logical-modes.galgas", 117)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 117)) ;
       result_result.addAssign_operation (GALGAS_mode::constructor_safeUserMode (SOURCE_FILE ("logical-modes.galgas", 118)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 118)) ;
       result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 119)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 119)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_bootMode (SOURCE_FILE ("logical-modes.galgas", 120)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 120)) ;
     }
     break ;
   case GALGAS_mode::kEnum_anyMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 121)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 121)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 122)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 122)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 123)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 123)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 124)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 124)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 125)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 125)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 122)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 122)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 123)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 123)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 124)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 124)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 125)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 125)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 126)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 126)) ;
     }
     break ;
   case GALGAS_mode::kEnum_userMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("logical-modes.galgas", 127)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 127)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_anyMode (SOURCE_FILE ("logical-modes.galgas", 128)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 128)) ;
     }
     break ;
   case GALGAS_mode::kEnum_bootMode:
@@ -5619,69 +5620,69 @@ GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemRoutine
                                                                                   C_Compiler * inCompiler
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineLLVMNameDict result_result ; // Returned variable
-  GALGAS_routineLLVMNameDict temp_0 = GALGAS_routineLLVMNameDict::constructor_emptyDict (SOURCE_FILE ("logical-modes.galgas", 139)) ;
+  GALGAS_routineLLVMNameDict temp_0 = GALGAS_routineLLVMNameDict::constructor_emptyDict (SOURCE_FILE ("logical-modes.galgas", 140)) ;
   const GALGAS_mode temp_1 = inObject ;
-  temp_0.addAssign_operation (temp_1, constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 139)) ;
+  temp_0.addAssign_operation (temp_1, constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 140)) ;
   result_result = temp_0 ;
-  result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 140)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 140)) ;
+  result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 141)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 141)) ;
   const GALGAS_mode temp_2 = inObject ;
   switch (temp_2.enumValue ()) {
   case GALGAS_mode::kNotBuilt:
     break ;
   case GALGAS_mode::kEnum_serviceMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 143)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 143)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 144)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 144)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 144)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 144)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 145)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 145)) ;
     }
     break ;
   case GALGAS_mode::kEnum_safeServiceMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 146)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 146)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 147)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 147)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 148)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 148)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 149)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 149)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 150)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 150)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 147)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 147)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 148)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 148)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 149)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 149)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 150)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 150)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 151)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 151)) ;
     }
     break ;
   case GALGAS_mode::kEnum_sectionMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 152)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 152)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 153)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 153)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 154)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 154)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 153)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 153)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 154)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 154)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 155)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 155)) ;
     }
     break ;
   case GALGAS_mode::kEnum_safeSectionMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 156)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 156)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 157)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 157)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 158)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 158)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 159)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 159)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 160)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 160)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 161)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 161)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 162)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 162)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("logical-modes.galgas", 163)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 163)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 157)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 157)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 158)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 158)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 159)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 159)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 160)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 160)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 161)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 161)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 162)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 162)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 163)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 163)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_startupMode (SOURCE_FILE ("logical-modes.galgas", 164)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 164)) ;
     }
     break ;
   case GALGAS_mode::kEnum_guardMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 165)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 165)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 166)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 166)) ;
     }
     break ;
   case GALGAS_mode::kEnum_safeGuardMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 167)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 167)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 168)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 168)) ;
-      result_result.addAssign_operation (GALGAS_mode::constructor_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 169)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 169)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 168)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 168)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 169)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 169)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 170)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 170)) ;
     }
     break ;
   case GALGAS_mode::kEnum_safePrimitiveMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 171)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 171)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 172)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 172)) ;
     }
     break ;
   case GALGAS_mode::kEnum_safeUserMode:
     {
-      result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 173)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 173)) ;
+      result_result.addAssign_operation (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 174)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 174)) ;
     }
     break ;
   case GALGAS_mode::kEnum_anyMode:

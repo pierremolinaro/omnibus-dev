@@ -30,7 +30,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression { # §
+  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $identifier$ ?let receiver
   #--- Properties and access
     <expression_access_list> !?ioAST ?let accessList

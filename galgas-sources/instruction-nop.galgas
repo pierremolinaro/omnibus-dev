@@ -2,38 +2,41 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @letInstructionNOP : @instructionAST {
+class @instructionNOP : @instructionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
-
-  #·····················································································································
-
-  rule <instruction> ?!@ast unused ioAST ?!@instructionListAST ioInstructionList {
-    $nop$
-    ioInstructionList += !@letInstructionNOP.new {!.here}
-  }
-
-  #·····················································································································
-
+proc enter_NOP_function ?!@functionDeclarationListAST ioProcListAST {
+#--- NOP function parameters
+  let @lstringlist attributeList = {![noUnusedWarningAttribute () nowhere]}
+  let instructionList = @instructionListAST {!@instructionNOP.new {!.nowhere}}
+#--- Enter in AST
+    ioProcListAST +=
+      !.anySafeMode
+      !true # is public
+      !["nop" nowhere]
+      !attributeList
+      !{}
+      !["" nowhere] # returnTypeName
+      !instructionList
+      !.nowhere
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @letInstructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+override method @instructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @letInstructionNOP instructionSemanticAnalysis
+override method @instructionNOP instructionSemanticAnalysis
   ?self:let @PLMType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext

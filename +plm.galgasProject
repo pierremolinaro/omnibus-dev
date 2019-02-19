@@ -1,7 +1,6 @@
 project (1:0:0) -> "plm" {
 #--- Targets
   %makefile-macosx
-#  %codeblocks-mac
   %LatestMacOS
   %applicationBundleBase : "pierre.molinaro.name"
   %quietOutputByDefault

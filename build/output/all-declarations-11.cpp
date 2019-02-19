@@ -18323,8 +18323,8 @@ const char * gWrapperFileContent_106_targetTemplates = "\n"
   "    $(WDOG:UNLOCK) = WDOG_UNLOCK_SEQ2\n"
   "  //--- Disable watchdog timer\n"
   "    $(WDOG:STCTRLH) = 0\n"
-  "    nop\n"
-  "    nop\n"
+  "    nop ()\n"
+  "    nop ()\n"
   "  //--------------------------------------------------- Enable clocks to always-used peripherals\n"
   "    $(SIM:SCGC3) = ${SIM:SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}\n"
   "    $(SIM:SCGC5) = ${SIM:SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}   // clocks active to all GPIO\n"
@@ -18405,7 +18405,7 @@ const cRegularFileWrapper gWrapperFile_106_targetTemplates (
   "driver-root-teensy-3-6.plm-import",
   "plm-import",
   true, // Text file
-  21305, // Text length
+  21311, // Text length
   gWrapperFileContent_106_targetTemplates
 ) ;
 

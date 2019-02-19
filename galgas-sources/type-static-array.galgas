@@ -23,7 +23,6 @@ syntax extension plm_syntax {
     if attribute.string != "x" then
       error attribute : "attribute should be @x"
     end
-#    $•$
     <type_definition> !?ioAST ?let elementTypeName
     let sizeExpressionLocation = @location.here
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]

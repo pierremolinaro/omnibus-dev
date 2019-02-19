@@ -377,8 +377,8 @@ driver root {
     $(WDOG:UNLOCK) = WDOG_UNLOCK_SEQ2
   //--- Disable watchdog timer
     $(WDOG:STCTRLH) = 0
-    nop
-    nop
+    nop ()
+    nop ()
   //--------------------------------------------------- Enable clocks to always-used peripherals
     $(SIM:SCGC3) = ${SIM:SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}
     $(SIM:SCGC5) = ${SIM:SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}   // clocks active to all GPIO
