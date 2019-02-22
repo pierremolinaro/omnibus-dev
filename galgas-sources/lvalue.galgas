@@ -291,7 +291,7 @@ private proc handlePropertyAccess
   let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
-  case computedProperty (2*) : # @unifiedTypeMap-proxy typeProxy @routineLLVMNameDict modeDictionary) :
+  case computedProperty (@unifiedTypeMap-proxy unused typeProxy @routineLLVMNameDict unused modeDictionary) :
     error inPropertyName : "a computed property cannot be used here" : ioCurrentType, ioCurrentLLVMName
   case storedProperty (@PLMType propertyType @uint index) :
     [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]

@@ -15,7 +15,7 @@ struct First {
 
   private var a = 7
 
-  var propriétéCalculée : Int {
+  var premièrePropriétéCalculée : Int {
     get {
       Swift.print ("Lecture première propriété calculée \(self.a)")
       return self.a
@@ -32,7 +32,7 @@ struct First {
 struct Second {
   private var b = First ()
 
-  var propriétéCalculée : First {
+  var secondePropriétéCalculée : First {
     get {
       Swift.print ("Lecture seconde propriété calculée \(self.b)")
       return self.b
@@ -46,17 +46,6 @@ struct Second {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func f (v : inout Int) {
-  Swift.print ("Fonction f \(v)")
-  v = 77
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 var s = Second ()
-s.propriétéCalculée.propriétéCalculée = 8
-//f (v: &s.propriétéCalculée.propriétéCalculée)
+s.secondePropriétéCalculée.premièrePropriétéCalculée = 8
 
-//var array = [Int] (repeating: 12, count: 5)
-//f (v: &array [3])
-//Swift.print ("\(array)")

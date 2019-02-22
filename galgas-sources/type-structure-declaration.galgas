@@ -172,54 +172,54 @@ syntax extension plm_syntax {
   {
 #    <mode> ?let mode
     ${$  
-#    select
-#      var getterDefined = false
-#      var setterDefined = false
-#      repeat
-#        $identifier$ ?let getterOrSetter
-#        ${$
-#        <instructionList> !?ioAST ?let instructionList
-#        let endOfInstructionList = @location.here
-#        $}$
-#        if getterOrSetter.string == "get" then
-#          ioPropertyListAST +=
-#            !inPropertyName
-#            !inPropertyAttributeList
-#            !inIsPublic
-#            !inTypeName 
-#            !.readOnlyComputedProperty{
-#              !instructionList: instructionList
-#              !endOfInstructionList: endOfInstructionList
-#            }
-#          if getterDefined then
-#            error getterOrSetter : "duplicate getter definition"
-#          end
-#          getterDefined = true
-#        elsif getterOrSetter.string == "set" then
-#          ioPropertyListAST +=
-#            !inPropertyName
-#            !inPropertyAttributeList
-#            !inIsPublic
-#            !inTypeName 
-#            !.writeComputedProperty{
-#              !instructionList: instructionList
-#              !endOfInstructionList: endOfInstructionList
-#            }
-#          if setterDefined then
-#            error getterOrSetter : "duplicate setter definition"
-#          end
-#          setterDefined = true
-#        else
-#          error getterOrSetter : "invalid identifier" fixit { remove replace "set" replace "get" }
-#        end
-#      while
-#      end
-#      if setterDefined && not getterDefined then
-#        error .here : "a getter should be defined"
-#      elsif not setterDefined && not getterDefined then
-#        error .here : "a getter should be defined, and optionaly a setter"
-#      end
-#    or
+    select
+      var getterDefined = false
+      var setterDefined = false
+      repeat
+        $identifier$ ?let getterOrSetter
+        ${$
+        <instructionList> !?ioAST ?let instructionList
+        let endOfInstructionList = @location.here
+        $}$
+        if getterOrSetter.string == "get" then
+          ioPropertyListAST +=
+            !inPropertyName
+            !inPropertyAttributeList
+            !inIsPublic
+            !inTypeName 
+            !.readOnlyComputedProperty{
+              !instructionList: instructionList
+              !endOfInstructionList: endOfInstructionList
+            }
+          if getterDefined then
+            error getterOrSetter : "duplicate getter definition"
+          end
+          getterDefined = true
+        elsif getterOrSetter.string == "set" then
+          ioPropertyListAST +=
+            !inPropertyName
+            !inPropertyAttributeList
+            !inIsPublic
+            !inTypeName 
+            !.writeComputedProperty{
+              !instructionList: instructionList
+              !endOfInstructionList: endOfInstructionList
+            }
+          if setterDefined then
+            error getterOrSetter : "duplicate setter definition"
+          end
+          setterDefined = true
+        else
+          error getterOrSetter : "invalid identifier" fixit { remove replace "set" replace "get" }
+        end
+      while
+      end
+      if setterDefined && not getterDefined then
+        error .here : "a getter should be defined"
+      elsif not setterDefined && not getterDefined then
+        error .here : "a getter should be defined, and optionaly a setter"
+      end
+    or
       <instructionList> !?ioAST ?let readInstructionList
       let endOfReadInstructionList = @location.here
       ioPropertyListAST +=
@@ -231,7 +231,7 @@ syntax extension plm_syntax {
           !instructionList: readInstructionList
           !endOfInstructionList: endOfReadInstructionList
         }
-#    end
+    end
     $}$
   }
   

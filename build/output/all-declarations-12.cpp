@@ -5696,15 +5696,15 @@ const char * gWrapperFileContent_23_embeddedSampleCode = "target \"teensy-3-6/xt
   "task T\xC3""\xA2""che0 @stacksize 512 @activate {\n"
   "  var tick = UInt32 ()\n"
   "\n"
-  "  var readComputedProperty : UInt32 { result = self.tick ; }\n"
+  "  var readComputedProperty : UInt32 { result = self.tick }\n"
   "\n"
-  "//  var readWriteComputedProperty UInt32 {\n"
-  "//    set { self.tick = newValue ; }\n"
-  "//    get { result = self.tick ; }\n"
-  "//  }\n"
+  "  var readWriteComputedProperty : UInt32 {\n"
+  "    set { self.tick = newValue }\n"
+  "    get { result = self.tick }\n"
+  "  }\n"
   "\n"
   "  on time.wait (!until: self.tick) {\n"
-  "//    self.readWriteComputedProperty += 500\n"
+  "    self.readWriteComputedProperty += 500\n"
   "    self.tick += 500\n"
   "    digital.toggle (!port:LED_L0)\n"
   "    lcd.goto (!line:0 !column:0)\n"
@@ -5718,7 +5718,7 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
   "24-computed-properties.plm",
   "plm",
   true, // Text file
-  801, // Text length
+  787, // Text length
   gWrapperFileContent_23_embeddedSampleCode
 ) ;
 

@@ -26,37 +26,36 @@ syntax plm_syntax (plm_lexique) {
     repeat
     while
       <declaration> !?ioAST
-      select
-        $;$
-      or
-      
-        let s = @string.separatorString 
-        if not [s containsCharacter !'\n'] then
-          error .here : "declaration should be terminated by an end of line or a ';'"
-        end
-      end
+#      select
+#        $;$
+#      or
+#        let s = @string.separatorString 
+#        if not [s containsCharacter !'\n'] then
+#          error .here : "declaration should be terminated by an end of line or a ';'"
+#        end
+#      end
     while
       @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
       <system_routine> !?ioAST !?standAloneSystemRoutineListAST
       ioAST.mStandAloneSystemRoutineListAST += standAloneSystemRoutineListAST
-      select
-        $;$
-      or
-        let s = @string.separatorString 
-        if not [s containsCharacter !'\n'] then
-          error .here : "declaration should be terminated by an end of line or a ';'"
-        end
-      end
+#      select
+#        $;$
+#      or
+#        let s = @string.separatorString 
+#        if not [s containsCharacter !'\n'] then
+#          error .here : "declaration should be terminated by an end of line or a ';'"
+#        end
+#      end
     while
       <import_file> !?outImportedFileList
-      select
-        $;$
-      or
-        let s = @string.separatorString 
-        if not [s containsCharacter !'\n'] then
-          error .here : "declaration should be terminated by an end of line or a ';'"
-        end
-      end
+#      select
+#        $;$
+#      or
+#        let s = @string.separatorString 
+#        if not [s containsCharacter !'\n'] then
+#          error .here : "declaration should be terminated by an end of line or a ';'"
+#        end
+#      end
     end
     outEndOfSourceFile = .here
   }
