@@ -76,7 +76,7 @@ driver myDriver ()
 task T1 @stacksize 512 @activate {
   var échéance : UInt32 = 0
 
-  on time.wait (!until:self.échéance) {
+  event time.wait (!until:self.échéance) {
     self.échéance +%= 1_000
     digital.toggle (!port:LED_L0)
   }

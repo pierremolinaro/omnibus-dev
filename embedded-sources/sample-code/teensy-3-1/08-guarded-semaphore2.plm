@@ -12,7 +12,7 @@ sync s1 = Semaphore (!value:0)
 task T0 @stacksize 512 @activate {
   var top : UInt32 = 0
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
@@ -21,7 +21,7 @@ task T0 @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
 
-  on time.wait (!until:self.top) {
+  event time.wait (!until:self.top) {
     s0.signal ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
@@ -37,7 +37,7 @@ task T0 @stacksize 512 @activate {
 task T1 @stacksize 512 @activate {
   var top : UInt32 = 0
 
-  on time.wait (!until:self.top) {
+  event time.wait (!until:self.top) {
     s1.signal ()
     self.top += 249
     digital.write (!yes !toPort:LED_L4)
@@ -54,20 +54,20 @@ task T2 @stacksize 512 @activate {
   var deadline : UInt32 = 0
   var toggleD3 = no
 
-  on s0.wait () {
+  event s0.wait () {
     self.toggleD3 = yes // Just for having a boolean guard
   }
 
-  on (self.toggleD3) {
+  event (self.toggleD3) {
     digital.toggle (!port:LED_L1)
     self.toggleD3 = no
   }
 
-  on s1.wait () {
+  event s1.wait () {
     digital.toggle (!port:LED_L3)
   }
 
-  on time.wait (!until:self.deadline) {
+  event time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L2)
   }

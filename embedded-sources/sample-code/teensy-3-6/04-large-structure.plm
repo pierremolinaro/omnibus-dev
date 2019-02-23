@@ -16,11 +16,11 @@ task Tâche @stacksize 5512 @activate {
   var x = PatternArray (!repeated:0)
   var y = PatternArray (!repeated:0)
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
 
-  on time.wait (!until:self.compteur) {
+  event time.wait (!until:self.compteur) {
     self.y = self.x
     for i : UInt32 in 0 ..< self.x.count {
       self.y [i] += self.compteur

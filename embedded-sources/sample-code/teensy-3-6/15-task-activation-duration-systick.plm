@@ -27,7 +27,7 @@ sync s = Semaphore (!value:0)
 
 task TâcheA > TâcheB @stacksize 512 @activate {
 
-  on @setup first {
+  event @setup first {
     s.wait ()
     let duration = myDriver.getDuration ()
     lcd.print (!u32:duration)
@@ -40,7 +40,7 @@ task TâcheA > TâcheB @stacksize 512 @activate {
 
 task TâcheB @stacksize 512 @activate {
 
-  on @setup first {
+  event @setup first {
     myDriver.noteTick ()
     s.signal ()
   }

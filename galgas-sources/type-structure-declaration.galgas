@@ -219,7 +219,7 @@ syntax extension plm_syntax {
       elsif not setterDefined && not getterDefined then
         error .here : "a getter should be defined, and optionaly a setter"
       end
-    or
+    or # getter only
       <instructionList> !?ioAST ?let readInstructionList
       let endOfReadInstructionList = @location.here
       ioPropertyListAST +=

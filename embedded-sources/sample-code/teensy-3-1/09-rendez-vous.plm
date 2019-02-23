@@ -51,7 +51,7 @@ sync rdvs = RendezVous ()
 task T0 @stacksize 512 @activate {
   var top : UInt32 = 0
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
@@ -61,7 +61,7 @@ task T0 @stacksize 512 @activate {
   }
 
 
-  on time.wait (!until:self.top) {
+  event time.wait (!until:self.top) {
     rdvs.output ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
@@ -76,7 +76,7 @@ task T0 @stacksize 512 @activate {
 
 task T1 @stacksize 512 @activate {
 
-  on rdvs.input () {
+  event rdvs.input () {
     digital.write (!yes !toPort:LED_L1)
     rdvs.input ()
     digital.write (!no !toPort:LED_L1)

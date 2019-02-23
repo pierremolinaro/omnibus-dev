@@ -220,7 +220,7 @@ driver usb_device > digital {
 //    let ODD_transitionStatus = transactionStatus [2...2]
 //    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
     if endPoint == 0 {
-      self.endpoint_0_handler (!transactionStatus)
+      self.endpoint_0_handler (!transactionStatus: transactionStatus)
     }else{
 
     }
@@ -244,7 +244,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func endpoint_0_handler section @mutating (?transactionStatus : UInt8) {
+  func endpoint_0_handler section @mutating (?transactionStatus: _ : UInt8) {
   }
 
   //····················································································································
@@ -363,14 +363,14 @@ task T @stacksize 512 @activate {
 
   //····················································································································
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
 
   //····················································································································
 
-  on time.wait (!until:self.tick) {
+  event time.wait (!until:self.tick) {
     digital.toggle (!port:LED_L0)
     self.tick +%= 500
     lcd.goto (!line:0 !column:0)

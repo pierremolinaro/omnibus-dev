@@ -7,7 +7,7 @@ import "carte-tp-teensy-3-1.plm-import"
 task T @stacksize 512 @activate {
   var compteur : UInt32 = 0
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
@@ -23,7 +23,7 @@ task T @stacksize 512 @activate {
 
   //············································································
 
-  on time.wait (!until:self.compteur) {
+  event time.wait (!until:self.compteur) {
     self.compteur +%= 50
     digital.write (!not digital.read (!port:BUTTON_P0) !toPort:LED_L0)
     digital.write (!not digital.read (!port:BUTTON_P1) !toPort:LED_L1)

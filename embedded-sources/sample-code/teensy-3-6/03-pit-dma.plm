@@ -173,14 +173,14 @@ task Tâche @stacksize 512 @activate {
   var compteur : UInt32 = 0
   var pattern = PatternArray (!repeated:0)
 
-  on @setup first {
+  event @setup first {
     initializeDMA (!?self.pattern)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
   }
 
-  on time.wait (!until:self.compteur) {
+  event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
     time.wait (!until: self.compteur)

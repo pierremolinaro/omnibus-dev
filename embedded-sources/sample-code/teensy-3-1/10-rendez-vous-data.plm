@@ -44,7 +44,7 @@ sync rdvs2 = RendezVousData ()
 task T0 @stacksize 512 @activate {
   var top : UInt32 = 0
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
@@ -52,7 +52,7 @@ task T0 @stacksize 512 @activate {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
 
-  on time.wait (!until:self.top) {
+  event time.wait (!until:self.top) {
     rdvs2.input (?data:let n)
     rdvs.output (!data:n)
     digital.toggle (!port:LED_L0)
@@ -63,7 +63,7 @@ task T0 @stacksize 512 @activate {
 //-----------------------------------------------------------------------------*
 
 task T1 @stacksize 1024 @activate {
-  on rdvs.input (?data:let x) {
+  event rdvs.input (?data:let x) {
     digital.toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
@@ -78,7 +78,7 @@ task T2 @stacksize 1024 @activate {
   var deadline : UInt32 = 0
   var n : UInt32 = 0
 
-  on rdvs2.output (!data:self.n) {
+  event rdvs2.output (!data:self.n) {
     digital.toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
@@ -87,7 +87,7 @@ task T2 @stacksize 1024 @activate {
     self.n += 1
   }
 
-  on time.wait (!until:self.deadline) {
+  event time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L4)
   }

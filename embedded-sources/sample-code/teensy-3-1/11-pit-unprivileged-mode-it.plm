@@ -41,11 +41,11 @@ driver pit ()
 task T @stacksize 512 @activate {
   var deadline : UInt32 = 0
 
-  on @setup first {
+  event @setup first {
     setupPIT ()
   }
 
-  on time.wait (!until:self.deadline) {
+  event time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.write (!yes !toPort:LED_L1) // Allumer la led
     time.wait (!until:self.deadline)

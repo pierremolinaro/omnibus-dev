@@ -83,6 +83,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_driver,
    kToken_else,
    kToken_enum,
+   kToken_event,
    kToken_exit,
    kToken_extend,
    kToken_extern,
@@ -96,7 +97,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_let,
    kToken_no,
    kToken_not,
-   kToken_on,
    kToken_opaque,
    kToken_option,
    kToken_or,
@@ -1425,6 +1425,8 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_123 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_124 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_125 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;

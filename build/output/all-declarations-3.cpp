@@ -3403,12 +3403,12 @@ GALGAS_string extensionGetter_typedString (const GALGAS_routineTypedSignature & 
   GALGAS_string result_result ; // Returned variable
   result_result = GALGAS_string ("(") ;
   const GALGAS_routineTypedSignature temp_0 = inObject ;
-  cEnumerator_routineTypedSignature enumerator_4794 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_4794.hasCurrentObject ()) {
-    result_result.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_4794.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 130)).add_operation (enumerator_4794.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 130)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 130)).add_operation (enumerator_4794.current_mTypeProxy (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 130)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 130)) ;
-    enumerator_4794.gotoNextObject () ;
+  cEnumerator_routineTypedSignature enumerator_4912 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_4912.hasCurrentObject ()) {
+    result_result.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_4912.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 136)).add_operation (enumerator_4912.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 136)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 136)).add_operation (enumerator_4912.current_mTypeProxy (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 136)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 136)) ;
+    enumerator_4912.gotoNextObject () ;
   }
-  result_result.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 132)) ;
+  result_result.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)) ;
 //---
   return result_result ;
 }
@@ -3427,15 +3427,15 @@ GALGAS_lstring extensionGetter_mangledName (const GALGAS_routineTypedSignature &
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_s_5137 = constinArgument_inRoutineName.getter_string (HERE).add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)) ;
+  GALGAS_string var_s_5255 = constinArgument_inRoutineName.getter_string (HERE).add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 144)) ;
   const GALGAS_routineTypedSignature temp_0 = inObject ;
-  cEnumerator_routineTypedSignature enumerator_5229 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5229.hasCurrentObject ()) {
-    var_s_5137.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_5229.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 140)).add_operation (enumerator_5229.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 140)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 140)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 140)) ;
-    enumerator_5229.gotoNextObject () ;
+  cEnumerator_routineTypedSignature enumerator_5347 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_5347.hasCurrentObject ()) {
+    var_s_5255.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_5347.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 146)).add_operation (enumerator_5347.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 146)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 146)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 146)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 146)) ;
+    enumerator_5347.gotoNextObject () ;
   }
-  var_s_5137.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 142)) ;
-  result_result = GALGAS_lstring::constructor_new (var_s_5137, constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 143)) ;
+  var_s_5255.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 148)) ;
+  result_result = GALGAS_lstring::constructor_new (var_s_5255, constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 149)) ;
 //---
   return result_result ;
 }
@@ -3454,15 +3454,15 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_routineFormalArgum
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_7691 = GALGAS_string ("(") ;
+  GALGAS_string var_key_7809 = GALGAS_string ("(") ;
   const GALGAS_routineFormalArgumentListAST temp_0 = inObject ;
-  cEnumerator_routineFormalArgumentListAST enumerator_7752 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_7752.hasCurrentObject ()) {
-    var_key_7691.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_7752.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 191)).add_operation (enumerator_7752.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 191)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 191)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 191)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 191)) ;
-    enumerator_7752.gotoNextObject () ;
+  cEnumerator_routineFormalArgumentListAST enumerator_7870 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_7870.hasCurrentObject ()) {
+    var_key_7809.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_7870.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)).add_operation (enumerator_7870.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 197)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 197)) ;
+    enumerator_7870.gotoNextObject () ;
   }
-  var_key_7691.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 193)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_7691, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 194)) ;
+  var_key_7809.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 199)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_7809, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 200)) ;
 //---
   return result_result ;
 }

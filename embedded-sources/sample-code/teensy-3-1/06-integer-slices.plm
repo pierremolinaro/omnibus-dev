@@ -13,7 +13,7 @@ task Tâche1 @stacksize 512 @activate {
   var compteur : UInt32 = 0
   var test = yes
 
-  on @setup first {
+  event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     let b = {UInt8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))
@@ -23,7 +23,7 @@ task Tâche1 @stacksize 512 @activate {
     lcd.print (!hex2:extend (bb))
   }
 
-  on time.wait (!until:self.compteur) {
+  event time.wait (!until:self.compteur) {
     self.compteur +%= 500
     digital.toggle (!port:LED_L3)
   }

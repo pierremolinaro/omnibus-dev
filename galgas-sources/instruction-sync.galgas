@@ -40,7 +40,6 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <guarded_command> ?!@ast ioAST !@guardedCommandAST outGuardedCommand {
-    $on$
     @expressionAST expression
     @location endOfExp
     @bool warnsOnStaticExpression
@@ -92,7 +91,6 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <guarded_command> ?!@ast ioAST !@guardedCommandAST outGuardedCommand {
-    $on$
     $($
     <expression> !?ioAST ?let expression
     let endOfExp = @location.here
@@ -119,6 +117,7 @@ syntax extension plm_syntax {
     ${$
     @syncInstructionBranchListAST onInstructionBranchList = {}
     repeat
+      $event$
       <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
       $:$
       <instructionList> !?ioAST ?let instructionList

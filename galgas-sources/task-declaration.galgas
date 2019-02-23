@@ -88,7 +88,7 @@ syntax extension plm_syntax {
       taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !.here
       $}$
     while
-      $on$
+      $event$
       $@attribute$ ?let attribute
       $identifier$ ?let name
       @lstringlist dependenceList = {}
@@ -116,6 +116,7 @@ syntax extension plm_syntax {
         error attribute : "attribute should be @setup, @activate or @deactivate"
       end
     while
+      $event$
       <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
       ${$
       <instructionList> !?ioAST ?let instructionList

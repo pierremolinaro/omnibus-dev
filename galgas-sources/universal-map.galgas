@@ -412,9 +412,9 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
     case globalSyncInstance (2*) :
     case globalConstant (*) :
     case localConstant (@PLMType type @lstring plmName @bool isFormalInputArg) :
-      if entry.mObjectState == .hasUnreadValue then
-        warning entry.lkey : "'" + entry.lkey + "' is never read"
-      end
+#      if entry.mObjectState == .hasUnreadValue then
+#        warning entry.lkey : "'" + entry.lkey + "' is never read"
+#      end
       if not isFormalInputArg then
         [!?ioInstructionGenerationList generateRelease !type !plmName]
       end

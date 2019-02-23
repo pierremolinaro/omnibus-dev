@@ -52,7 +52,7 @@ sync s = Semaphore (!value:0)
 task Tâche0 @stacksize 512 @activate {
   var compteur : UInt32 = 0
 
-  on @setup first {
+  event @setup first {
     s.wait ()
     let duration = ((timer.now () - timer.getTick ()) * 1000) / BUS_MHZ
     lcd.print (!u64:duration)
@@ -63,7 +63,7 @@ task Tâche0 @stacksize 512 @activate {
 
 task Tâche1 @stacksize 512 @activate {
 
-  on @setup first {
+  event @setup first {
     timer.setTick ()
     s.signal ()
   }
