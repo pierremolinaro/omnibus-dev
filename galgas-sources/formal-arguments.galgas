@@ -64,7 +64,13 @@ syntax extension plm_syntax {
         !formalArgumentName
     while
       $?!selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
+      @lstring formalArgumentName
+      select
+        $_$
+        formalArgumentName = ["" nowhere]
+      or
+        $identifier$ ?formalArgumentName
+      end
       $:$
       <type_definition> !?ioAST ?let formalArgumentTypeName
       outProcFormalArgumentList +=
@@ -241,10 +247,12 @@ proc enterFormalArguments
         end
       end
     case inputOutput :
-      if inUnusedWarning then
-        [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
-      else
-        [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasReadValue !true]
+     if formalArgumentName.string != "" then
+       if inUnusedWarning then
+          [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
+        else
+          [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasReadValue !true]
+        end
       end
     case output :
       [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.noValue !true]

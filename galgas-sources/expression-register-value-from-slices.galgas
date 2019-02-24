@@ -25,9 +25,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-#    $\$($
-    $\$$
-    ${$
+    $\${$
     $identifier$ ?let registerGroupName
     $:$
     $identifier$ ?let registerName

@@ -7625,15 +7625,15 @@ void routine_routineTypedSignature (GALGAS_unifiedTypeMap & ioArgument_ioTypeMap
                                     C_Compiler * /* inCompiler */
                                     COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outSignature.drop () ; // Release 'out' argument
-  outArgument_outSignature = GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("formal-arguments.galgas", 158)) ;
-  cEnumerator_routineFormalArgumentListAST enumerator_5948 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
-  while (enumerator_5948.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_6039 ;
+  outArgument_outSignature = GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("formal-arguments.galgas", 164)) ;
+  cEnumerator_routineFormalArgumentListAST enumerator_6066 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
+  while (enumerator_6066.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_6157 ;
     {
-    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioTypeMap, enumerator_5948.current_mFormalArgumentTypeName (HERE), var_typeProxy_6039 COMMA_SOURCE_FILE ("formal-arguments.galgas", 160)) ;
+    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioTypeMap, enumerator_6066.current_mFormalArgumentTypeName (HERE), var_typeProxy_6157 COMMA_SOURCE_FILE ("formal-arguments.galgas", 166)) ;
     }
-    outArgument_outSignature.addAssign_operation (enumerator_5948.current_mFormalArgumentPassingMode (HERE), enumerator_5948.current_mSelector (HERE), var_typeProxy_6039, enumerator_5948.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 161)) ;
-    enumerator_5948.gotoNextObject () ;
+    outArgument_outSignature.addAssign_operation (enumerator_6066.current_mFormalArgumentPassingMode (HERE), enumerator_6066.current_mSelector (HERE), var_typeProxy_6157, enumerator_6066.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 167)) ;
+    enumerator_6066.gotoNextObject () ;
   }
 }
 
@@ -7650,12 +7650,12 @@ void routine_routineTypedSignature_32_ (GALGAS_unifiedTypeMap inArgument_inTypeM
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outSignature.drop () ; // Release 'out' argument
-  outArgument_outSignature = GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("formal-arguments.galgas", 171)) ;
-  cEnumerator_routineFormalArgumentListAST enumerator_6594 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
-  while (enumerator_6594.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_6615 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (inArgument_inTypeMap, enumerator_6594.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 173)) ;
-    outArgument_outSignature.addAssign_operation (enumerator_6594.current_mFormalArgumentPassingMode (HERE), enumerator_6594.current_mSelector (HERE), var_typeProxy_6615, enumerator_6594.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 174)) ;
-    enumerator_6594.gotoNextObject () ;
+  outArgument_outSignature = GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("formal-arguments.galgas", 177)) ;
+  cEnumerator_routineFormalArgumentListAST enumerator_6712 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
+  while (enumerator_6712.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_6733 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (inArgument_inTypeMap, enumerator_6712.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 179)) ;
+    outArgument_outSignature.addAssign_operation (enumerator_6712.current_mFormalArgumentPassingMode (HERE), enumerator_6712.current_mSelector (HERE), var_typeProxy_6733, enumerator_6712.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 180)) ;
+    enumerator_6712.gotoNextObject () ;
   }
 }
 
@@ -7673,31 +7673,31 @@ void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_
                                    const GALGAS_bool constinArgument_inUnusedWarning,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_routineFormalArgumentListAST enumerator_9199 (constinArgument_inFormalArgumentsAST, kENUMERATION_UP) ;
-  while (enumerator_9199.hasCurrentObject ()) {
-    GALGAS_PLMType var_typeProxy_9220 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), enumerator_9199.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 232)).getter_type (inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 232)) ;
-    ioArgument_ioFormalArguments.addAssign_operation (enumerator_9199.current_mFormalArgumentPassingMode (HERE), var_typeProxy_9220, enumerator_9199.current_mFormalArgumentName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 233)) ;
-    switch (enumerator_9199.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+  cEnumerator_routineFormalArgumentListAST enumerator_9317 (constinArgument_inFormalArgumentsAST, kENUMERATION_UP) ;
+  while (enumerator_9317.hasCurrentObject ()) {
+    GALGAS_PLMType var_typeProxy_9338 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), enumerator_9317.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 238)).getter_type (inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 238)) ;
+    ioArgument_ioFormalArguments.addAssign_operation (enumerator_9317.current_mFormalArgumentPassingMode (HERE), var_typeProxy_9338, enumerator_9317.current_mFormalArgumentName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 239)) ;
+    switch (enumerator_9317.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
         enumGalgasBool test_0 = kBoolTrue ;
         if (kBoolTrue == test_0) {
-          test_0 = GALGAS_bool (kIsNotEqual, enumerator_9199.current_mFormalArgumentName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+          test_0 = GALGAS_bool (kIsNotEqual, enumerator_9317.current_mFormalArgumentName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
           if (kBoolTrue == test_0) {
             enumGalgasBool test_1 = kBoolTrue ;
             if (kBoolTrue == test_1) {
               test_1 = constinArgument_inUnusedWarning.boolEnum () ;
               if (kBoolTrue == test_1) {
                 {
-                extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, enumerator_9199.current_mFormalArgumentName (HERE), GALGAS_bool (true), var_typeProxy_9220, enumerator_9199.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 238)) ;
+                extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, enumerator_9317.current_mFormalArgumentName (HERE), GALGAS_bool (true), var_typeProxy_9338, enumerator_9317.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 244)) ;
                 }
               }
             }
             if (kBoolFalse == test_1) {
               {
-              extensionSetter_insertUsedLocalConstant (ioArgument_ioUniversalMap, enumerator_9199.current_mFormalArgumentName (HERE), GALGAS_bool (true), var_typeProxy_9220, enumerator_9199.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 240)) ;
+              extensionSetter_insertUsedLocalConstant (ioArgument_ioUniversalMap, enumerator_9317.current_mFormalArgumentName (HERE), GALGAS_bool (true), var_typeProxy_9338, enumerator_9317.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 246)) ;
               }
             }
           }
@@ -7708,16 +7708,22 @@ void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_
       {
         enumGalgasBool test_2 = kBoolTrue ;
         if (kBoolTrue == test_2) {
-          test_2 = constinArgument_inUnusedWarning.boolEnum () ;
+          test_2 = GALGAS_bool (kIsNotEqual, enumerator_9317.current_mFormalArgumentName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
           if (kBoolTrue == test_2) {
-            {
-            extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, enumerator_9199.current_mFormalArgumentName (HERE), var_typeProxy_9220, enumerator_9199.current_mFormalArgumentName (HERE), GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("formal-arguments.galgas", 245)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 245)) ;
+            enumGalgasBool test_3 = kBoolTrue ;
+            if (kBoolTrue == test_3) {
+              test_3 = constinArgument_inUnusedWarning.boolEnum () ;
+              if (kBoolTrue == test_3) {
+                {
+                extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, enumerator_9317.current_mFormalArgumentName (HERE), var_typeProxy_9338, enumerator_9317.current_mFormalArgumentName (HERE), GALGAS_valuedObjectState::constructor_hasUnreadValue (SOURCE_FILE ("formal-arguments.galgas", 252)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 252)) ;
+                }
+              }
             }
-          }
-        }
-        if (kBoolFalse == test_2) {
-          {
-          extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, enumerator_9199.current_mFormalArgumentName (HERE), var_typeProxy_9220, enumerator_9199.current_mFormalArgumentName (HERE), GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("formal-arguments.galgas", 247)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 247)) ;
+            if (kBoolFalse == test_3) {
+              {
+              extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, enumerator_9317.current_mFormalArgumentName (HERE), var_typeProxy_9338, enumerator_9317.current_mFormalArgumentName (HERE), GALGAS_valuedObjectState::constructor_hasReadValue (SOURCE_FILE ("formal-arguments.galgas", 254)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 254)) ;
+              }
+            }
           }
         }
       }
@@ -7725,12 +7731,12 @@ void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
         {
-        extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, enumerator_9199.current_mFormalArgumentName (HERE), var_typeProxy_9220, enumerator_9199.current_mFormalArgumentName (HERE), GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("formal-arguments.galgas", 250)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 250)) ;
+        extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, enumerator_9317.current_mFormalArgumentName (HERE), var_typeProxy_9338, enumerator_9317.current_mFormalArgumentName (HERE), GALGAS_valuedObjectState::constructor_noValue (SOURCE_FILE ("formal-arguments.galgas", 258)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 258)) ;
         }
       }
       break ;
     }
-    enumerator_9199.gotoNextObject () ;
+    enumerator_9317.gotoNextObject () ;
   }
 }
 

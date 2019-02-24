@@ -16,9 +16,8 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
- #   $\$($
-    $\$$
-    $($
+    $\$($
+#    $($
     <control_register_lvalue> !?ioAST ?let registerLValue
     @lstring fieldName
     select
