@@ -37,24 +37,24 @@
 
 L'opérateur $\sim$ renvoie la complémentation bit-à-bit d'un entier non signé. Une erreur de compilation est déclenchée si l'opérateur est appliqué à un entier signé~:
 \begin{PLM}
-let x $int8 = 3
+let x Int8 = 3
 let y = ~ x // Erreur, x est signé
 \end{PLM}
 
 Le nombre de bits complémentés dépend du nombre de bits du type entier non signé~:
 \begin{PLM}
-let x $uint8 = 1
+let x UInt8 = 1
 let y = ~ x // y est égal à 0xFE
-let z $uint16 = 1
+let z UInt16 = 1
 let t = ~ z // t est égal à 0xFFFE
 \end{PLM}
 
 L'opérateur $\sim$ ne peut s'appliquer à une constante entière statique uniquement si le type du résultat peut être inféré, et que ce type est un entier non signé~:
 \begin{PLM}
 let x = ~ 1 // Erreur, le type du résultat ne peut pas être inféré
-let y $int8 = ~ 1 // Erreur, le type inféré est signé
-let z $uint8 = ~ 1 // Ok, z = 0xFE
-let t $uint16 = ~ 1 // Ok, z = 0xFFFE
+let y Int8 = ~ 1 // Erreur, le type inféré est signé
+let z UInt8 = ~ 1 // Ok, z = 0xFE
+let t UInt16 = ~ 1 // Ok, z = 0xFFFE
 \end{PLM}
 
 
@@ -92,13 +92,13 @@ let x =
 \section{Expression \texttt{addressof}}
 
 
-L'expression \plm=addressof= permet d'obtenir l'adresse de toute \emph{lvalue}. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \plm=$uint32=).
+L'expression \plm=addressof= permet d'obtenir l'adresse de toute \emph{lvalue}. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \plm=UInt32=).
 
 Par exemple~:
 \begin{PLM}
 var x = yes // x est booléen
-let adresse $uint32 = addressof (x)
-let adresse_registre_controle $uint32 = addressof (PORTA_PCR0)
+let adresse UInt32 = addressof (x)
+let adresse_registre_controle UInt32 = addressof (PORTA_PCR0)
 \end{PLM}
 
 
@@ -107,12 +107,12 @@ let adresse_registre_controle $uint32 = addressof (PORTA_PCR0)
 \section{Expression \texttt{sizeof}}
 
 
-L'expression \plm=sizeof= permet d'obtenir la taille (en nombre d'octets) de toute \emph{lvalue}, ou de tout type. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \plm=$uint32=).
+L'expression \plm=sizeof= permet d'obtenir la taille (en nombre d'octets) de toute \emph{lvalue}, ou de tout type. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \plm=UInt32=).
 
 Par exemple~:
 \begin{PLM}
 var x = yes // x est booléen
-let s1 $uint32 = sizeof (x) // 1
-let s2 $uint32 = sizeof ($bool) // 1
+let s1 UInt32 = sizeof (x) // 1
+let s2 UInt32 = sizeof (Bool) // 1
 \end{PLM}
 

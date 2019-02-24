@@ -276,20 +276,20 @@ La chaîne résultat est copiée dans le fichier \texttt{sources/linker.ld} situ
 
 \begin{PLM}
 PANIC:
-  $int32 ; $uint32 ; "../target-panic.ll"
+  Int32 ; UInt32 ; "../target-panic.ll"
 \end{PLM}
 
 Trois arguments (séparés par un point-virgule) sont définis ici~:
 \begin{itemize}
-  \item le premier (ici \plm=$int32=) est le type PLM utilisé pour le code de panique~;
-  \item le deuxième (ici \plm=$uint32=) est le type PLM utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique~;
+  \item le premier (ici \plm=Int32=) est le type PLM utilisé pour le code de panique~;
+  \item le deuxième (ici \plm=UInt32=) est le type PLM utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique~;
   \item le dernier (ici \plm="../target-panic.ll"=) désigne un fichier source LLVM par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
 \end{itemize}
 
 Deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{../target-panic.ll}~:
 \begin{itemize}
-  \item \texttt{!PANICCODE!} est remplacé par le type LLVM correspondant type PLM utilisé pour le code de panique (donc, ici \texttt{i32} qui est le type LLVM image de \plm=$int32=)~;
-  \item \texttt{!PANICLINE!} est remplacé par le type PLM utilisé pour coder le numéro de la ligne source  (donc, ici \texttt{i32} qui est aussi le type LLVM image de \plm=$uint32=).
+  \item \texttt{!PANICCODE!} est remplacé par le type LLVM correspondant type PLM utilisé pour le code de panique (donc, ici \texttt{i32} qui est le type LLVM image de \plm=Int32=)~;
+  \item \texttt{!PANICLINE!} est remplacé par le type PLM utilisé pour coder le numéro de la ligne source  (donc, ici \texttt{i32} qui est aussi le type LLVM image de \plm=UInt32=).
 \end{itemize}
 
 

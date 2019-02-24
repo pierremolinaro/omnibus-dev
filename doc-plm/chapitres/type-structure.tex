@@ -39,7 +39,7 @@ De plus, des attributs paramètrent le comportement de ses instances.
 La déclaration d'un type structure est introduite par le mot réservé \plm!struct!.
 
 \begin{PLM}
-struct $point {
+struct Point {
   // Déclaration de propriétés
   // Déclaration de fonctions
   // Déclaration de services
@@ -71,20 +71,20 @@ Les propriétés déclarées soit présente une valeur initiale par défaut, soi
 Voici un exemple qui déclare une structure contenant deux propriétés initialisées par défaut :
 
 \begin{PLM}
-struct $point {
-  var x $int32 = 0
-  var y $int32 = 0
+struct Point {
+  var x Int32 = 0
+  var y Int32 = 0
 }
 \end{PLM}
 
 Un type structure dont toutes les propriétés sont initialisées par défaut présente un initialiseur sans argument. On pourra donc écrire :
 \begin{PLM}
-var pt $point = $point ()
+var pt : Point = Point ()
 \end{PLM}
 
 Et l'annotation de type peut être omise :
 \begin{PLM}
-var pt = $point ()
+var pt = Point ()
 \end{PLM}
 
 \subsection{Propriétés non initialisées}
@@ -92,63 +92,63 @@ var pt = $point ()
 Pour chaque propriété non initialisée par défaut, l'initialiseur synthétisé présente un argument. Par exemple :
 
 \begin{PLM}
-struct $point {
-  var x $int32
-  var y $int32 = 0
+struct Point {
+  var x : Int32
+  var y : Int32 = 0
 }
 \end{PLM}
 
 La propriété \plm!x! n'étant pas initialisée par défaut, l'initialiseur synthétisé présente un argument dont la sélecteur porte le nom de la propriété non initialisée :
 \begin{PLM}
-var pt = $point (!x:4)
+var pt = Point (!x:4)
 \end{PLM}
 
 Si plusieurs propriétés ne sont pas initialisées par défaut, l'initialiseur synthétisé présente des arguments dans l'ordre de déclaration des propriétés non initialisées. Par exemple :
 
 \begin{PLM}
-struct $point {
-  var x $int32
-  var y $int32
+struct Point {
+  var x : Int32
+  var y : Int32
 }
 \end{PLM}
 
 Alors :
 \begin{PLM}
-var pt = $point (!x:4 !y:8)
+var pt = Point (!x:4 !y:8)
 \end{PLM}
 
 \subsection{Propriété d'un type structure}
 
-Tout type acceptable pour une propriété. Par exemple, le type \plm!$point3! a une propriété de type \plm!$point! :
+Tout type acceptable pour une propriété. Par exemple, le type \plm!Point3! a une propriété de type \plm!Point! :
 \begin{PLM}
-struct $point {
-  var x $int32 = 0
-  var y $int32 = 0
+struct Point {
+  var x : Int32 = 0
+  var y : Int32 = 0
 }
 
-struct $point3 {
-  var p $point = $point ()
-  var z $int32 = 0
+struct Point3 {
+  var p : Point = Point ()
+  var z Int32 = 0
 }
 \end{PLM}
 
-Toutes les propriétés du type \plm!$point3! étant initialisées par défaut, l'initialiseur est \plm!$point3 ()!. Si des propriétés ne ne sont pas initialisées par défaut, l'initialiseur synthétisé comporte des arguments en conséquences. Par exemple :
+Toutes les propriétés du type \plm!Point3! étant initialisées par défaut, l'initialiseur est \plm!Point3 ()!. Si des propriétés ne ne sont pas initialisées par défaut, l'initialiseur synthétisé comporte des arguments en conséquences. Par exemple :
 
 \begin{PLM}
-struct $point {
-  var x $int32
-  var y $int32
+struct Point {
+  var x : Int32
+  var y : Int32
 }
 
-struct $point3 {
-  var p $point
-  var z $int32
+struct Point3 {
+  var p : Point
+  var z : Int32
 }
 \end{PLM}
 
 L'initialisation s'effectue par : 
 \begin{PLM}
-var pt3 = $point3 (!p:$point (!x:4 !y:8) !z:6)
+var pt3 = Point3 (!p: Point (!x:4 !y:8) !z:6)
 \end{PLM}
 
 
@@ -182,34 +182,34 @@ Si l'on veut l'accès en écriture, ajouter l'attribut \plm=@mutating= est indis
 
 Voici un code d'exemple qui illustre les différentes possibilités :
 \begin{PLM}
-struct $exemple {
-  var x $int32
+struct Exemple {
+  var x : Int32
   
-  func user getNok () -> $int32 {
+  func user getNok () -> Int32 {
     result = self.x // Erreur : @userAccess est nécessaire
   }
   
-  func user getOk @userAccess () -> $int32 {
+  func user getOk @userAccess () -> Int32 {
     result = self.x // Ok : @userAccess autorise l'accès
   }
   
-  func user getNok2  () -> $int32 {
+  func user getNok2  () -> Int32 {
     result = self.getOk () // Erreur : @userAccess est nécessaire
   }
   
-  func user getOk2 @userAccess () -> $int32 {
+  func user getOk2 @userAccess () -> Int32 {
     result = self.getOk () // Ok : @userAccess autorise l'accès
   }
   
-  func section sGet () -> $int32 {
+  func section sGet () -> Int32 {
     result = self.x // Ok : @userAccess est inutile
   }
   
-  section sectionGet () -> $int32 {
+  section sectionGet () -> Int32 {
     result = self.x
   }
 
-  func user getOk3 () -> $int32 {
+  func user getOk3 () -> Int32 {
     result = self.sectionGet ()
   }
 }
@@ -235,30 +235,30 @@ L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{
 Voici un code d'exemple qui reprend le code d'exemple de la section précédente et illustre les différentes possibilités :
 
 \begin{PLM}
-struct $exemple {
-  var x $int32
+struct Exemple {
+  var x : Int32
   
-  func user setNok @userAccess (?inX $int32) {
+  func user setNok @userAccess (?inX Int32) {
     self.x = inX // Erreur : @mutating est nécessaire
   }
   
-  func user setOk @userAccess @mutating (?inX $int32) {
+  func user setOk @userAccess @mutating (?inX Int32) {
     self.x = inX // Ok : @mutating autorise l'écriture
   }
   
-  func user setNok2 @userAccess (?inX $int32) {
+  func user setNok2 @userAccess (?inX Int32) {
     self.setOk (!inX) // Erreur : @mutating est nécessaire
   }
   
-  func user setOk2 @userAccess @mutating (?inX $int32) {
+  func user setOk2 @userAccess @mutating (?inX Int32) {
     self.setOk (!inX) // Ok : @mutating autorise l'accès
   }
   
-  section sectionSet @mutating (?inX $int32) {
+  section sectionSet @mutating (?inX Int32) {
     self.x = inX
   }
 
-  func user setOk3 @userAccess @mutating (?inX $int32) {
+  func user setOk3 @userAccess @mutating (?inX Int32) {
     self.sectionSet (!inX)
   }
 
@@ -294,14 +294,14 @@ Une structure peut définir des \emph{sections}. Une section s'exécute en mode 
 Par défaut, une section définie dans une structure a accès aux propriétés en lecture ; pour pouvoir accéder en écriture, il faut ajouter l'attribut \plm=@mutating=\index{"@mutating}.
 
 \begin{PLM}
-struct $exemple {
-  var x $int32
+struct Exemple {
+  var x : Int32
   
-  section sectionGet () -> $int32 {
+  section sectionGet () -> Int32 {
     result = self.x // Ok, accès en lecture par défaut
   }
 
-  section sectionSet @mutating (?inX $int32) {
+  section sectionSet @mutating (?inX Int32) {
     self.x = inX // Ok, @mutating  autorise l'accès en écriture
   }
 
@@ -312,14 +312,14 @@ Par défaut, une section définie dans une structure est privée, c'est-à-dire 
 
 
 \begin{PLM}
-struct $exemple {
-  var x $int32
+struct Exemple {
+  var x : Int32
   
-  public section sectionGet () -> $int32 {
+  public section sectionGet () -> Int32 {
     result = self.x // Ok, accès en lecture par défaut
   }
 
-  public section sectionSet @mutating (?inX $int32) {
+  public section sectionSet @mutating (?inX Int32) {
     self.x = inX // Ok, @mutating  autorise l'accès en écriture
   }
 
@@ -384,28 +384,28 @@ Pour tout type de structure, un nombre quelconque d'extensions peut être défin
 Voici des exemples d'extension :
 
 \begin{PLM}
-struct $exemple {
-  var x $int32
+struct Exemple {
+  var x : Int32
 }
 
-extension $exemple {
-  func user setOk @userAccess @mutating (?inX $int32) {
+extension Exemple {
+  func user setOk @userAccess @mutating (?inX Int32) {
     self.x = inX
   }
 }
 
-extension $exemple {
-  func user setOk2 @userAccess @mutating (?inX $int32) {
+extension Exemple {
+  func user setOk2 @userAccess @mutating (?inX Int32) {
     self.setOk (!inX) 
   }
   
-  section sectionSet @mutating (?inX $int32) {
+  section sectionSet @mutating (?inX Int32) {
     self.x = inX
   }
 }
 
-extension $exemple {
-  func user setOk3 @userAccess @mutating (?inX $int32) {
+extension E xemple {
+  func user setOk3 @userAccess @mutating (?inX Int32) {
     self.sectionSet (!inX)
   }
 }

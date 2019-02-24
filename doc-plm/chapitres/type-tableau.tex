@@ -21,18 +21,18 @@ PLM implémente les tableaux de taille fixe. La déclaration d'un type tableau u
 La déclaration d'un type tableau est réalisée par la construction \plm=newtype=~:
 
 \begin{PLM}
-newtype $monTypeTableau : $uint32 [20]
+newtype MonTypeTableau : UInt32 [20]
 \end{PLM}
 
-Cette construction déclare le type \plm=$monTypeTableau= comme tableau de $20$ instances de \plm=$uint32=.
+Cette construction déclare le type \plm=MonTypeTableau= comme tableau de $20$ instances de \plm=UInt32=.
 
-Tout type est acceptable comme élément de tableau (ici \plm=$uint32=), du moment qu'il est instanciable et copiable. Essayer de définir un type tableau avec un type non instanciable et/ou non copiable entraîne une erreur de compilation.
+Tout type est acceptable comme élément de tableau (ici \plm=UInt32=), du moment qu'il est instanciable et copiable. Essayer de définir un type tableau avec un type non instanciable et/ou non copiable entraîne une erreur de compilation.
 
 La taille du tableau est une expression statique, de type entier. Il est donc possible de faire référence à des constantes globales, comme par exemple :
 
 \begin{PLM}
 let SIZE = 20
-newtype $monTypeTableau : $uint32 [SIZE]
+typealias MonTypeTableau = [SIZE @x UInt32]
 \end{PLM}
 
 
@@ -48,34 +48,34 @@ Un tableau statique implémente deux constructeurs~:
 
 
 \subsectionLabel{Constructeur \texttt{(!repeated)}}{constructeurTableauRepeated}
-L'expression \plm=$monTypeTableau (!repeated:exp)= est une instance du type \plm=$monTypeTableau=, dont tous les éléments sont initialisés avec la valeur de \plm=exp=. Par exemple~:
+L'expression \plm=MonTypeTableau (!repeated:exp)= est une instance du type \plm=MonTypeTableau=, dont tous les éléments sont initialisés avec la valeur de \plm=exp=. Par exemple~:
 \begin{PLM}
-let v $uint32 = 0
-var t $uint32 [10] = $uint32 [10] (!repeated:v)
+let v : UInt32 = 0
+var t : UInt32 [10] = UInt32 [10] (!repeated:v)
 \end{PLM}
 
 
 \subsectionLabel{Constructeur \texttt{(!!...)}}{constructeurTableauValeurParticuliere}
 Ce constructeur possède autant d'arguments que d'éléments dans le tableau. Le premier est affecté à l'élément d'indice 0, le deuxième à celui d'indice 1, ... Par exemple~:
 \begin{PLM}
-var t $uint32 [3] = $uint32 [3] (!0 !1 !2)
+var t UInt32 [3] = UInt32 [3] (!0 !1 !2)
 \end{PLM}
 
 
 
 \sectionLabel{Déclaration d'une instance de tableau}{DecInstanceTableau}
 
-La déclaration d'une instance de tableau s'effectue en nommant le type tableau et l'expression de construction de ce tableau, où \plm=v= est une valeur du type de l'élément de tableau (ici, \plm=$uint32=)~:
+La déclaration d'une instance de tableau s'effectue en nommant le type tableau et l'expression de construction de ce tableau, où \plm=v= est une valeur du type de l'élément de tableau (ici, \plm=UInt32=)~:
 
 \begin{PLM}
-let v $uint32 = 0
-var t $monTypeTableau = $monTypeTableau (!repeated:v)
+let v UInt32 = 0
+var t : MonTypeTableau = MonTypeTableau (!repeated:v)
 \end{PLM}
 
 Et on peut omettre l'annotation de type~:
 
 \begin{PLM}
-var t = $monTypeTableau (!repeated:v)
+var t = MonTypeTableau (!repeated:v)
 \end{PLM}
 
 
@@ -83,15 +83,15 @@ var t = $monTypeTableau (!repeated:v)
 
 \sectionLabel{Obtention de la taille d'un tableau}{ObtentionTailleTableau}
 
-L'expression \plm=$monTypeTableau.count= renvoie la taille du tableau, sous la forme d'un entier statique (c'est-à-dire de type \plm=$staticInt=, voir \refChapterPage{chapitreTypeEntierStatique}). Ou peut aussi appliquer \plm=count= à une instance de tableau.
+L'expression \plm=MonTypeTableau.count= renvoie la taille du tableau, sous la forme d'un entier statique (c'est-à-dire de type \plm=LiteralInt=, voir \refChapterPage{chapitreTypeEntierStatique}). Ou peut aussi appliquer \plm=count= à une instance de tableau.
 
 On peut donc utiliser les expressions \plm=$t.count= et \plm=$monTypeTableau.count= pour itérer sur tous les élements d'un tableau~:
 \begin{PLM}
-var t = $monTypeTableau (!repeated:0)
-for i $uint32 in 0 ..< t.count {
+var t = MonTypeTableau (!repeated:0)
+for i UInt32 in 0 ..< t.count {
   t [i] = i
 }
-for i $uint32 in 0 ..< $monTypeTableau.count {
+for i UInt32 in 0 ..< MonTypeTableau.count {
   t [i] = i
 }
 \end{PLM}
@@ -99,13 +99,13 @@ for i $uint32 in 0 ..< $monTypeTableau.count {
 
 Une erreur de compilation est déclenchée si on écrit~:
 \begin{PLM}
-var s = $monTypeTableau.count // ERREUR
+var s = MonTypeTableau.count // ERREUR
 \end{PLM}
 
-En effet, \plm=$monTypeTableau.count= est un entier statique et le type \emph{entier statique} ne peut pas être attribué à une variable. Il faut préciser obligatoirement un type d'entier~:
+En effet, \plm=MonTypeTableau.count= est un entier statique et le type \emph{entier statique} ne peut pas être attribué à une variable. Il faut préciser obligatoirement un type d'entier~:
 
 \begin{PLM}
-var s $uint32 = $monTypeTableau.count // Ok
+var s UInt32 = MonTypeTableau.count // Ok
 \end{PLM}
 
 Ce type peut être signé ou non signé, du moment que sa plage de valeur permet de représenter la valeur statique.
@@ -145,9 +145,9 @@ Comme la validité est effectuée à la compilation, aucune vérification de val
 
 Si l'\plm=expression_indice= est une instance d'un type entier non signé, il y a deux possibilités.
 
-Soit ce type entier non signé présente une valeur maximum supérieure ou égale à la taille du tableau~: alors le code engendré vérifie à l'exécution que l'\plm=expression_indice= a une valeur valide. Dans l'exemple ci-dessous, le tableau \plm=t= contient $20$ éléments, l'\plm=expression_indice= doit donc être inférieure ou égale à $19$ ; or la plage de valeurs de \plm=$uint32= dépasse cette borne, aussi la validité est vérifiée à l'exécution. En cas d'échec, la panique est déclenchée (\refTableauPage{tableauCodePanique}).
+Soit ce type entier non signé présente une valeur maximum supérieure ou égale à la taille du tableau~: alors le code engendré vérifie à l'exécution que l'\plm=expression_indice= a une valeur valide. Dans l'exemple ci-dessous, le tableau \plm=t= contient $20$ éléments, l'\plm=expression_indice= doit donc être inférieure ou égale à $19$ ; or la plage de valeurs de \plm=UInt32= dépasse cette borne, aussi la validité est vérifiée à l'exécution. En cas d'échec, la panique est déclenchée (\refTableauPage{tableauCodePanique}).
 \begin{PLM}
-var i $uint32 = ...
+var i UInt32 = ...
 var x = t [i] // Vérification à l'exécution que i < 20
 \end{PLM}
 
@@ -155,7 +155,7 @@ var x = t [i] // Vérification à l'exécution que i < 20
 
 La seconde possibilité est que ce type entier non signé présente une valeur maximum strictement inférieure à la taille du tableau~: la compilation garantit que l'indice sera toujours valide, aucune vérification n'est effectuée à l'exécution. Par exemple~:
 \begin{PLM}
-var i $uint4 = ... // Donc 0 ≤ i ≤ 15
+var i UInt4 = ... // Donc 0 ≤ i ≤ 15
 var x = t [i] // Aucune vérification à l'exécution car toujours i < 20
 \end{PLM}
 
@@ -172,13 +172,13 @@ Quand l'\plm=expression_indice= est une expression entière signée, il faut vé
 La première vérification est toujours réalisée à l'exécution ; la seconde dépend de la valeur maximum du type entier, de manière analogue à ce qui est fait pour un indice entier non signé. Donc, pour un tableau \plm=t= de $20$ éléments~:
 
 \begin{PLM}
-var i $int32 = ...
+var i Int32 = ...
 var x = t [i] // Vérification à l'exécution que 0 ≤ i < 20
 \end{PLM}
 
 
 \begin{PLM}
-var i $int4 = ... // Donc -16 ≤ i < 15
+var i Int4 = ... // Donc -16 ≤ i < 15
 var x = t [i] // Vérification à l'exécution que 0 ≤ i
 \end{PLM}
 

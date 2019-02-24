@@ -18,13 +18,13 @@ La déclaration d'une variable locale peut prendre plusieurs formes, suivant que
 \subsection{Déclaration d'une variable locale initialisée}
 
 \begin{PLM}
-var nom $type = expression
+var nom : Type = expression
 \end{PLM}
 
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la variable locale ;
-  \item \plm=$type= est le nom du type de la variable globale ;
+  \item \plm=Type= est le nom du type de la variable globale ;
   \item \plm=expression= est l'expression qui fournit la valeur initiale de cette variable ; cette expression peut être statique ou non.
 \end{itemize}
 
@@ -36,12 +36,12 @@ var nom = expression
 
 \subsection{Déclaration d'une variable locale non initialisée}
 \begin{PLM}
-var nom $type
+var nom : Type
 \end{PLM}
 Où~:
 \begin{itemize}
   \item \plm=nom= est le nom de la variable locale ;
-  \item \plm=$type= est le nom du type de la variable globale.
+  \item \plm=Type= est le nom du type de la variable globale.
 \end{itemize}
 
 Le compilateur garantit qu'aucune lecture n'est faite avant que la variable reçoive une valeur.
@@ -60,13 +60,13 @@ Le compilateur garantit qu'aucune lecture n'est faite avant que la variable reç
 La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante~:
 
 \begin{PLM}
-let nom $type = expression
+let nom : Type = expression
 \end{PLM}
 
 Où~:
 \begin{itemize}
   \item \plm=nom= est le nom de la constante globale ;
-  \item \plm=$type= est le nom du type de la constante globale ;
+  \item \plm=Type= est le nom du type de la constante globale ;
   \item \plm=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
 \end{itemize}
 
@@ -165,8 +165,8 @@ La forme générale de cette instruction est~:
 \~{registre_contrôle : numéro_bit} = expression_source
 \end{PLM}
 
-PLM limite le bit-banding à une zone de registres, aussi le premier argument \plm=registre_contrôle= doit nommer un registre de contrôle. L'argument \plm=numéro_bit= désigne le bit du registre par son numéro, c'est une expression du type \plm=$uint5= pour un registre 32-bits, \plm=$uint4= pour un registre 16-bits et \plm=$uint3= pour un registre 8-bits.
-L'\plm=expression_source= est de type \plm=$uint1=, et donne la valeur à affecter au bit du registre.
+PLM limite le bit-banding à une zone de registres, aussi le premier argument \plm=registre_contrôle= doit nommer un registre de contrôle. L'argument \plm=numéro_bit= désigne le bit du registre par son numéro, c'est une expression du type \plm=UInt5= pour un registre 32-bits, \plm=UInt4= pour un registre 16-bits et \plm=UInt3= pour un registre 8-bits.
+L'\plm=expression_source= est de type \plm=UInt1=, et donne la valeur à affecter au bit du registre.
 
 
 
@@ -177,7 +177,7 @@ L'\plm=expression_source= est de type \plm=$uint1=, et donne la valeur à affect
 
 Cette forme particulière d'affectation permet de décomposer une valeur entière non signée en tranches. Par exemple~:
 \begin{PLM}
-\~{$uint8 ?1:var b1 ?2:let b2 ?5:let b3} = 0xCC // b1 <- 1, b3 <- 2, b3 <- 12
+\~{UInt8 ?1:var b1 ?2:let b2 ?5:let b3} = 0xCC // b1 <- 1, b3 <- 2, b3 <- 12
 \end{PLM}
 
 \sectionLabel{Instruction \texttt{check}}{directiveCheck}\index{check@\plm=check=}
@@ -310,7 +310,7 @@ while condition {
 
 \subsection{Énumération entière}
 \begin{PLM}
-for nom $type in lower_bound ..< upper_bound {
+for nom : Type in lower_bound ..< upper_bound {
   instructions_for
 }
 \end{PLM}

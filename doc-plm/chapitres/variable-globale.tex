@@ -25,13 +25,13 @@ Une variable est dite \emph{globale} si elle est déclarée en dehors de toute r
 La déclaration d'une variable globale est la suivante~:
 
 \begin{PLM}
-var nom $type = expression_statique
+var nom : Type = expression_statique
 \end{PLM}
 
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la variable globale ;
-  \item \plm=$type= est le nom du type de la variable globale ;
+  \item \plm=Type= est le nom du type de la variable globale ;
   \item \plm=expression_statique= est l'expression qui fournit la valeur initiale de cette variable ; cette expression est calculée lors de la compilation.
 \end{itemize}
 
@@ -46,7 +46,7 @@ La portée d'une variable globale est le programme dans son intégralité~: peu 
 %Par exemple, voici comment on peut implémenter une variable globale \texttt{gCompteur}, incrémentée par la routine d'interruption \texttt{timerHandler}, et écrire un service d'attente de délai \texttt{wait} avec une boucle d'attente active~:
 %
 %\begin{PLM}
-%var gCompteur $uint32 = 0 {
+%var gCompteur UInt32 = 0 {
 %  @rw func timerHandler // Ne pas faire figurer
 %  func waitMS           // la liste des arguments
 %}
@@ -55,7 +55,7 @@ La portée d'une variable globale est le programme dans son intégralité~: peu 
 %  gCompteur +%= 1
 %}
 %
-%func wait user (?inDuration $uint32) {
+%func wait user (?inDuration UInt32) {
 %  let deadline = gCompteur + inDuration
 %  while gCompteur < deadline do
 %  end
@@ -68,7 +68,7 @@ La portée d'une variable globale est le programme dans son intégralité~: peu 
 %Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\plm=init=!Routine} et les routines de panique (\refSubsectionPage{routinesPanique})\index{Routine!panique \plm=panic=}
 % doivent de même être déclarées pour pouvoir accéder à une variable globale (et avec l'attribut \plm=@rw= si on veut l'accès en écriture). Par exemple~:
 %\begin{PLM}
-%var gCompteur $uint32 = 0 {
+%var gCompteur UInt32 = 0 {
 %  @rw init 112
 %  @rw func panic loop 179
 %}
@@ -106,8 +106,8 @@ La portée d'une variable globale est le programme dans son intégralité~: peu 
 %  \plm=func nom= & Fonction \plm!nom! & Jamais \\
 %  \plm=section nom= & Section \plm!nom! & Nécessite \plm!@rw! \\
 %  \plm=func panic nom prorite= & Routine de panique \plm!nom! de priorité \plm=priorite= & Nécessite \plm!@rw! \\
-%  \plm=func $type nom= & Procédure \plm!nom! du type \plm!$type! & Nécessite \plm!@rw! \\
-%  \plm=func $type nom= & Fonction \plm!nom! du type \plm!$type! & Jamais \\
+%  \plm=func Type nom= & Procédure \plm!nom! du type \plm!Type! & Nécessite \plm!@rw! \\
+%  \plm=func Type nom= & Fonction \plm!nom! du type \plm!Type! & Jamais \\
 %\end{tabular}
 %\caption{Déclaration des routines autorisées}
 %\labelTableau{DecRoutinesAutoriseesAccesVarGlobale}
@@ -128,14 +128,14 @@ La portée d'une variable globale est le programme dans son intégralité~: peu 
 
 \sectionLabel{Restrictions d'usage des variables globales}{restrictionUsageVariableGlobale}
 
-La concurrence impose des restrictions sur l'usage des variables globales. Pour les illustrer, nous prenons l'exemple d'une variable globale \plm+gVariable+, de type \plm=$s= :
+La concurrence impose des restrictions sur l'usage des variables globales. Pour les illustrer, nous prenons l'exemple d'une variable globale \plm+gVariable+, de type \plm=T= :
 
 \begin{PLM}
-var gVariable = $s ()
+var gVariable = T ()
 
-struct $s {
-  var mX $uint32 = 0 ;
-  var mY $uint32 = 0 ;
+struct T {
+  var mX : UInt32 = 0 ;
+  var mY : UInt32 = 0 ;
   
   func increment @mutating @access () {
     mX += 1

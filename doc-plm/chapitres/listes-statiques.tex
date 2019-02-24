@@ -30,8 +30,8 @@ La déclaration d'un tableau statique est réalisée par la construction \plm=st
 
 \begin{PLM}
 staticArray maListeStatique {
-  let a $uint32
-  let b $uint32
+  let a UInt32
+  let b UInt32
 }
 \end{PLM}
 
@@ -87,7 +87,7 @@ Le compilateur regroupe les constructions \plm=extend staticArray= d'un même fi
 L'instruction \plm=for= (\refSectionPage{instructionFor}) est la seule qui accède à un tableau statique. Elle permet de parcourir tous les éléments du tableau :
 
 \begin{PLM}
-var total $uint32 = 0
+var total UInt32 = 0
 for élément in maListeStatique {
   total += élément.a
   total += élément.b
@@ -109,15 +109,15 @@ Il est possible de définir des propriétés désignant une routine. Celle-ci pe
 
 \begin{PLM}
 staticArray maListeStatique {
-  let propriétéFonction func user () -> $uint32
+  let propriétéFonction func user () -> UInt32
   let propriétéProcédure func user ()
 }
 
-func user maFonction () -> $uint32 {
+func user maFonction () -> UInt32 {
   result = 10
 }
 
-func user maProcédure () -> $uint32 {
+func user maProcédure () -> UInt32 {
   ...
 }
 
@@ -127,7 +127,7 @@ extend staticArray maListeStatique (func maFonction (), func maProcédure ())
 
 Et l'appel de ces fonctions~:
 \begin{PLM}
-var total $uint32 = 0
+var total UInt32 = 0
 for élément in maListeStatique {
   total += élément.propriétéFonction ()
   élément.maProcédure ()

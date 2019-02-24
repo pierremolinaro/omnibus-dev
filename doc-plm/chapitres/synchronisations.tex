@@ -32,21 +32,21 @@ Ce chapitre présente~:
 
 PLM définit deux types opaques et neuf fonctions externes\footnote{Externes à PLM, car écrites en C.} qui permettent d'écrire outils de synchronisation et gardes.
 
-\subsection{Type opaque \texttt{\$taskList}}
+\subsection{Type opaque \texttt{TaskList}}
 
-Le type opaque \plm=$taskList= est utilisé pour maintenir la liste des tâches bloquées sur un outil de synchronisation.
+Le type opaque \plm=TaskList= est utilisé pour maintenir la liste des tâches bloquées sur un outil de synchronisation.
 
 
-\subsection{Type opaque \texttt{\$guardList}}
+\subsection{Type opaque \texttt{GuardList}}
 
-Le type opaque \plm=$guardList= est utilisé pour maintenir la liste des tâches qui ont invoqué une garde d'un outil de synchronisation.
+Le type opaque \plm=GuardList= est utilisé pour maintenir la liste des tâches qui ont invoqué une garde d'un outil de synchronisation.
 
 
 
 \subsection{Fonction \texttt{block(?!inList{}:)}}
 
 \begin{PLM}
-func primitive block (?!inList:ioWaitingList $taskList)
+func primitive block (?!inList:ioWaitingList : TaskList)
 \end{PLM}
 
 Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= passée en argument. Elle est appelable en mode \plm=primitive=.
@@ -57,7 +57,7 @@ Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= pass�
 \subsection{Fonction \texttt{block(?onDeadline{}:)}}
 
 \begin{PLM}
-func primitive block (?onDeadline:deadline $uint32) 
+func primitive block (?onDeadline:deadline UInt32) 
 \end{PLM}
 
 Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=primitive=.
@@ -71,9 +71,9 @@ Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle e
 \subsection{Fonction \texttt{block(?!inList{}:?onDeadline{}:)}}
 
 \begin{PLM}
-func primitive block (?!inList:waitingList $taskList 
-                      ?onDeadline:deadline $uint32
-                      !result: outResult $bool) 
+func primitive block (?!inList:waitingList : TaskList 
+                      ?onDeadline:deadline : UInt32
+                      !result: outResult : Bool) 
 \end{PLM}
 
 Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=primitive=. L'argument de retour \plm=outResult= vaut \plm=yes= si la tâche a été rendue prête via la liste \plm=waitingList=, et \plm=no= si si elle a été rendue prête parce que son échéance \plm=deadline= a été atteinte.
@@ -88,8 +88,8 @@ Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'�
 \subsection{Fonction \texttt{makeTaskReady(?!fromList{}:)}}
 
 \begin{PLM}
-func service makeTaskReady (?!fromList:ioWaitingList $taskList
-                            !found: outFound $bool)
+func service makeTaskReady (?!fromList:ioWaitingList TaskList
+                            !found: outFound Bool)
 \end{PLM}
 
 Si la liste \plm=waitingList= est vide, la fonction renvoie \plm=outFound= à \plm=no=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=outFound= à \plm=yes=.
@@ -108,7 +108,7 @@ Cette fonction est appelable en mode \plm=primitive=, c'est-à-dire par les prim
 \subsection{Fonction \texttt{makeTasksReady(?fromCurrentDate{}:)}}
 
 \begin{PLM}
-func service makeTasksReady (?fromCurrentDate:inCurrentDate $uint32)
+func service makeTasksReady (?fromCurrentDate:inCurrentDate UInt32)
 \end{PLM}
 
 Cette fonction rend prête toutes les tâches en attente d'échéance dont l'échéance est atteinte.
@@ -123,7 +123,7 @@ Cette fonction est appelable mode \plm=service=, c'est-à-dire par les routines 
 \subsection{Fonction \texttt{handleGuardedCommand}}
 
 \begin{PLM}
-func guard handle (?!guard:ioGuard $guardList)
+func guard handle (?!guard:ioGuard GuardList)
 \end{PLM}
 
 Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette fonction est appelable mode \plm=guard=, c'est-à-dire par les gardes.
@@ -138,7 +138,7 @@ Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette 
 \subsection{Fonction \texttt{handle (?guardedDeadline{}:)}}
 
 \begin{PLM}
-func guard handle (?guardedDeadline:deadline $uint32)
+func guard handle (?guardedDeadline:deadline UInt32)
 \end{PLM}
 
 Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à la date \plm=deadline=. Cette fonction est appelable mode \plm=guard=, c'est-à-dire par les gardes.
@@ -155,7 +155,7 @@ Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à 
 \subsection{Fonction \texttt{notifyChange}}
 
 \begin{PLM}
-func service notifyChange (?!forGuard:ioGuard $guardList)
+func service notifyChange (?!forGuard:ioGuard GuardList)
 \end{PLM}
 
 Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gardes doivent être re-évaluées. Cette fonction est appelable en mode \plm=primitive= et en mode \plm=service=.
@@ -174,7 +174,7 @@ Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gar
 
 \begin{PLM}
 func service
-notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
+notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate UInt32)
 \end{PLM}
 
 Cette fonction signifie aux tâches en attente d'échéance en garde que l'instant \plm=inCurrentDate= est atteint, et qu'elles doivent re-évaluer leur gardes. Cette fonction est appelable en mode \plm=service= (et aussi en mode \plm=primitive=, bien qu'en pratique c'est la routine d'interruption périodique qui l'appelle).
@@ -191,7 +191,7 @@ Le pilote \plm=time= décrit ici permet une gestion élémentaire du temps, c'es
   \item la définition d'une garde exprimant l'attente d'échéance en garde.
 \end{itemize}
 
-Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer très simplement des interruptions périodiques. La période choisie est $1~ms$. Le comptage du temps est initialisé à $0$ au démarrage du micro-contrôleur. Il est mémorisé dans une variable de type \plm=$uint32=, ce qui signifie qu'il retombe à $0$ au bout de $2^{32}~ms$, c'est-à-dire un peu de $49$ jours\footnote{Il n'y a pas d'impossiblité technique de passer à une variable plus large, par exemple un entier 64 bits. Il faut uniquement que les routines concernées de l'exécutif, écrites en C, prennent en charge ce type. Ces fonctions sont~: \texttt{makeTasksReady(?fromCurrentDate{}:)}, \texttt{handle (?guardedDeadline{}:)} et \texttt{notifyChangeForGuardedWaitUntil(?withCurrentDate{}:)}.}.
+Les Cortex-M4 implémentent le timer \emph{Systick} qui permet de programmer très simplement des interruptions périodiques. La période choisie est $1~ms$. Le comptage du temps est initialisé à $0$ au démarrage du micro-contrôleur. Il est mémorisé dans une variable de type \plm=UInt32=, ce qui signifie qu'il retombe à $0$ au bout de $2^{32}~ms$, c'est-à-dire un peu de $49$ jours\footnote{Il n'y a pas d'impossiblité technique de passer à une variable plus large, par exemple un entier 64 bits. Il faut uniquement que les routines concernées de l'exécutif, écrites en C, prennent en charge ce type. Ces fonctions sont~: \texttt{makeTasksReady(?fromCurrentDate{}:)}, \texttt{handle (?guardedDeadline{}:)} et \texttt{notifyChangeForGuardedWaitUntil(?withCurrentDate{}:)}.}.
 
 
 
@@ -201,7 +201,7 @@ L'en-tête du pilote \plm=time= déclare la variable privée \plm=mUptime= qui e
 
 \begin{PLM}
 driver time {
-  var mUptime $uint32 = 0
+  var mUptime UInt32 = 0
 \end{PLM}
 
 
@@ -241,7 +241,7 @@ isr service systick {
 L'appel système \plm=now= retourne la date courante.
 
 \begin{PLM}
-public system safe now @noUnusedWarning () -> $uint32 {
+public system safe now @noUnusedWarning () -> UInt32 {
   result = self.mUptime
 }
 \end{PLM}
@@ -262,7 +262,7 @@ Si la date fournie par la valeur \plm=inDate= est postérieure à la date couran
 
 \begin{PLM}
 public system primitive
-wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
+wait @noUnusedWarning (?untilDeadline: inDate UInt32) {
   if inDate > self.mUptime {
     block (!onDeadline:inDate)
   }
@@ -271,7 +271,7 @@ wait @noUnusedWarning (?untilDeadline: inDate $uint32) {
 
 L'appel de la primitive a pour syntaxe~:
 \begin{PLM}
-var échéance $uint32 = ...
+var échéance UInt32 = ...
 time.wait (!untilDeadline:échéance)
 \end{PLM}
 
@@ -284,7 +284,7 @@ L'implémentation de l'attente de délai est similaire à l'attente d'échéance
 
 \begin{PLM}
 public system primitive
-wait @noUnusedWarning (?duringDelay: inDelay $uint32) {
+wait @noUnusedWarning (?duringDelay: inDelay UInt32) {
   if inDelay > 0 {
     block (!onDeadline:self.mUptime +% inDelay)
   }
@@ -301,7 +301,7 @@ L'implémentation d'une commande gardée prédéfinit la variable booléenne \pl
 \end{itemize}
 
 \begin{PLM}
-public guard wait @noUnusedWarning (?untilDeadline:deadline $uint32) {
+public guard wait @noUnusedWarning (?untilDeadline:deadline UInt32) {
   noteCurrentTaskFreeStackSize ()
   accept = (deadline) ≤ self.mUptime
   if not accept {
@@ -325,8 +325,8 @@ public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
   while not SYST_CSR.COUNTFLAG.bool {}
 }
 
-public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
-  for _ $uint32 in 0 ..< inDelay {
+public func init busyWaitingDuringMS @noUnusedWarning (?inDelay UInt32) {
+  for _ UInt32 in 0 ..< inDelay {
     self.oneMillisecondBusyWait ()
   }
 }
@@ -340,8 +340,8 @@ En mode \plm=panic=, l'exécutif n'est plus actif, on ne peut qu'exécuter des a
 
 \begin{PLM}
 public func panic
-panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
-  for _ $uint32 in 0 ..< inDelay {
+panicBusyWaitingDuringMS @noUnusedWarning (?inDelay UInt32) {
+  for _ UInt32 in 0 ..< inDelay {
     self.panicOneMillisecondBusyWait ()
   }
 }
@@ -368,9 +368,9 @@ Le sémaphore de Dijkstra est implémenté comme une structure et la synchronisa
 
 
 \begin{PLM}
-struct $semaphore {
-  var value $uint32
-  var list = $taskList ()
+struct Semaphore {
+  var value UInt32
+  var list = TaskList ()
   
   public system service signal @noUnusedWarning @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
@@ -398,7 +398,7 @@ Un sémaphore est constitué de deux propriétés~:
 
 {\bf Instanciation.} L'instanciation d'un sémaphore doit fournir sa valeur initiale~; par exemple~:
 \begin{PLM}
-var s = $semaphore (!value:1)
+var s = Semaphore (!value:1)
 \end{PLM}
 
 {\bf Routine \texttt{signal}.} Elle est déclarée en mode \plm=service=, c'est-à-dire qu'elle peut être appelée à partir des tâches, et des routines d'interruption. Elle appelle la routine \plm=makeTaskReady(!?fromList:?found:)= qui fait l'opération suivante :
@@ -417,8 +417,8 @@ Ensuite, la valeur du sémaphore est incrémentée si la liste \plm=self.list= �
 
 \begin{PLM}
 public system primitive wait
-@noUnusedWarning @mutating (?untilDeadline: deadline $uint32
-                            !result: outResult $bool) {
+@noUnusedWarning @mutating (?untilDeadline: deadline UInt32
+                            !result: outResult Bool) {
   outResult = self.value > 0
   if outResult {
     self.value -= 1
@@ -458,10 +458,10 @@ Pour implémenter une primitive d'attente en garde, deux modifications de l'exis
 La déclaration des propriétés des sémaphores devient donc~:
 
 \begin{PLM}
-struct $semaphore {
-  var value $uint32
-  var list = $taskList ()
-  var guardList = $guardList ()
+struct Semaphore {
+  var value UInt32
+  var list = TaskList ()
+  var guardList = GuardList ()
   ...
 }
 \end{PLM}
@@ -478,7 +478,7 @@ Et la primitive \plm=signal()= appelle \plm=notifyChange(!?forGuard:)= si le sé
   }
 \end{PLM}
 
-On peut maintenant écrire la garde \plm=wait()=. D'une manière générale, la variable \plm=accept= est implicitement déclarée, de type \plm=$bool=, et doit être valuée par la liste d'instructions, à \plm=yes= si la condition d'acceptation de la garde est statisfaite, et \plm=no= s'il ne l'est pas.
+On peut maintenant écrire la garde \plm=wait()=. D'une manière générale, la variable \plm=accept= est implicitement déclarée, de type \plm=Bool=, et doit être valuée par la liste d'instructions, à \plm=yes= si la condition d'acceptation de la garde est statisfaite, et \plm=no= s'il ne l'est pas.
 
 Ici, la condition d'acceptation est que le sémaphore soit strictement positif. Si il l'est, il est décrémenté, sinon, le refus est noté par l'appel de \plm=handle(!?guard:)=.
 
@@ -515,9 +515,9 @@ Comme pour le sémaphore de Dijkstra, nous allons d'abord présenter une implém
 \subsection{Primitives de base}
 
 \begin{PLM}
-struct $rendezVous {
-  var inputWaitList = $taskList ()
-  var outputWaitList = $taskList ()
+struct RendezVous {
+  var inputWaitList = TaskList ()
+  var outputWaitList = TaskList ()
 
   public system primitive input @mutating () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
@@ -539,8 +539,8 @@ struct $rendezVous {
 
 \begin{PLM}
 public system primitive
-inputUntil @noUnusedWarning @mutating (?deadline:deadline $uint32
-                                       !result: result $bool) {
+inputUntil @noUnusedWarning @mutating (?deadline:deadline UInt32
+                                       !result: result Bool) {
   makeTaskReady (!?fromList:self.outputWaitList ?found:result)
   if (not result) and (deadline > time.now ()) { 
     block (!?inList:self.inputWaitList !onDeadline:deadline !?result:result)
@@ -548,8 +548,8 @@ inputUntil @noUnusedWarning @mutating (?deadline:deadline $uint32
 }
 
 public system primitive
-outputUntil @noUnusedWarning @mutating (?deadline:deadline $uint32
-                                        !result: result $bool) {
+outputUntil @noUnusedWarning @mutating (?deadline:deadline UInt32
+                                        !result: result Bool) {
   makeTaskReady (!?fromList:self.inputWaitList ?found:result)
   if (not result) and (deadline > time.now ()) { 
     block (!?inList:self.outputWaitList !onDeadline:deadline !?result:result)
@@ -560,11 +560,11 @@ outputUntil @noUnusedWarning @mutating (?deadline:deadline $uint32
 \subsection{Ajout des gardes}
 
 \begin{PLM}
-struct $rendezVous {
-  var inputWaitList = $taskList ()
-  var outputWaitList = $taskList ()
-  var inputGuardList = $guardList ()
-  var outputGuardList = $guardList ()
+struct RendezVous {
+  var inputWaitList = TaskList ()
+  var outputWaitList = TaskList ()
+  var inputGuardList = GuardList ()
+  var outputGuardList = GuardList ()
 
   public system primitive input @mutating () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
@@ -583,8 +583,8 @@ struct $rendezVous {
   }
 
   public system primitive
-  inputUntil @noUnusedWarning @mutating (?deadline:deadline $uint32
-                                         !result: result $bool) {
+  inputUntil @noUnusedWarning @mutating (?deadline:deadline UInt32
+                                         !result: result Bool) {
     makeTaskReady (!?fromList:self.outputWaitList ?found:result)
     if (not result) and (deadline > time.now ()) { 
       block (!?inList:self.inputWaitList !onDeadline:deadline !?result:result)
@@ -592,8 +592,8 @@ struct $rendezVous {
   }
 
   public system primitive
-  outputUntil @noUnusedWarning @mutating (?deadline:deadline $uint32
-                                          !result: result $bool) {
+  outputUntil @noUnusedWarning @mutating (?deadline:deadline UInt32
+                                          !result: result Bool) {
     makeTaskReady (!?fromList:self.inputWaitList ?found:result)
     if (not result) and (deadline > time.now ()) { 
       block (!?inList:self.outputWaitList !onDeadline:deadline !?result:result)
@@ -620,12 +620,12 @@ struct $rendezVous {
 
 \sectionLabel{Chronomètre périodique}{chronoPeriodique}
 
-La structure \plm=$periodicTimer= est un outil de synchronisation qui permet d'exprimer simplement des exécutions périodiques.
+La structure \plm=PeriodicTimer= est un outil de synchronisation qui permet d'exprimer simplement des exécutions périodiques.
 
 
 \subsection{Implémentation}
 
-La structure \plm=$periodicTimer= définit trois propriétés~:
+La structure \plm=PeriodicTimer= définit trois propriétés~:
 \begin{itemize}
   \item \plm=deadline=, qui détient la date de la prochaine échéance~;
   \item \plm=period=, la période du chronomètre, qui est une constante fixée lors de l'initialisation~;
@@ -637,10 +637,10 @@ La primitive \plm=wait= teste l'échéance avec la date courante, et effectue le
 
 De même, la garde \plm=wait= teste l'échéance avec la date courante. Si elle est atteinte (\plm=accept= est à \plm=yes=), l'échéance est incrémentée de la valeur de la période~; si elle n'est pas atteinte, l'appel de la fonction \plm=handle(!?guard:)= enregistre la garde.
 \begin{PLM}
-struct $periodicTimer {
-  var deadline $uint32 = 0
-  let period $uint32
-  var guardList = $guardList ()
+struct PeriodicTimer {
+  var deadline UInt32 = 0
+  let period UInt32
+  var guardList = GuardList ()
 
   public system primitive wait @noUnusedWarning @mutating () {
     if self.deadline ≤ time.now () {
@@ -658,7 +658,7 @@ struct $periodicTimer {
     }
   }
   
-  public system section deadline @noUnusedWarning () -> $uint32 {
+  public system section deadline @noUnusedWarning () -> UInt32 {
     result = self.deadline
   }
 }
@@ -669,7 +669,7 @@ struct $periodicTimer {
 
 \begin{PLM}
 task Tâche priority 1 stackSize 512 {
-  var deadline = $periodicTimer (!period:500)
+  var deadline = PeriodicTimer (!period:500)
    
 
   on self.deadline.wait () {
@@ -687,10 +687,10 @@ task Tâche priority 1 stackSize 512 {
 Une \emph{porte de synchronisation} est soit ouverte, soit fermée. Quand le porte est ouverte, la primitive \plm=wait= est non bloquante. Quand elle est fermée, la primitive \plm=wait= est systématiquement bloquante. Ouvrir la porte (service \plm=open=) libère toutes les tâches bloquées. Fermer la porte (service \plm=close=) ne provoque pas d'action sur la liste de tâches bloquées (celle-ci est forcément vide), ni sur la liste des gardes.
 
 \begin{PLM}
-struct $synchronizationGate {
-  var isOpen $bool
-  var taskList = $taskList ()
-  var guardList = $guardList ()
+struct SynchronizationGate {
+  var isOpen Bool
+  var taskList = TaskList ()
+  var guardList = GuardList ()
   
   public system service close @noUnusedWarning @mutating () {
     self.isOpen = no
@@ -714,8 +714,8 @@ struct $synchronizationGate {
   }
   
   public system primitive wait
-  @noUnusedWarning @mutating (?untilDeadline:deadline $uint32
-                              !result: result $bool) {
+  @noUnusedWarning @mutating (?untilDeadline:deadline UInt32
+                              !result: result Bool) {
     result = self.isOpen
     if result {
     }else if deadline > time.now () {

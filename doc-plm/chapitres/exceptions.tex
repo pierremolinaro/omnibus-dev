@@ -90,7 +90,7 @@ Le déclenchement d'une interruption pour laquelle aucune routine n'a été déf
 %
 %Par exemple, les numéros de code sont des entiers signés 32 bits, et les numéros de ligne des entiers non signés 32 bits~:
 %\begin{PLM}
-%panique : $int32 $uint32
+%panique : Int32 UInt32
 %\end{PLM}
 %
 %Cette construction doit apparaître exactement une fois. Normalement, c'est le fichier de définition de la cible qui la contient.
@@ -153,7 +153,7 @@ panic nom priorite {
 Trois constantes sont prédéfinies~:
 \begin{itemize}
   \item \plm=CODE=, qui contient le code de panique, et dont le type est défini par la construction \plm=panic:= (\refSubsectionPage{configurationPanic})~;
-  \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a déclenché la panique, et dont le type est \plm=$staticString=~;
+  \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a déclenché la panique, et dont le type est \plm=LiteralString=~;
   \item \plm=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a déclenché la panique, et dont le type est défini par la construction \plm=PANIC:= (\refSubsectionPage{configurationPanic}).
 \end{itemize}
 

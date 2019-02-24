@@ -98,7 +98,7 @@ Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blink-
 target "teensy-3-1-tp"
 
 task T1 priority 1 stackSize 512 {
-  var compteur $uint32 = 0
+  var compteur UInt32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L0)
@@ -127,10 +127,10 @@ task T1 priority 1 stackSize 512 {
 Cette ligne déclare une tâche nommée \plm+T1+, de priorité \plm=1=, avec une pile de \plm=512= octets. Ici, le nom de la tâche n'a pas d'importance, ni sa priorité (c'est la seule tâche). Les tâches sont démarrées automatiquement, après la phase d'initialisation.
 
 \begin{PLM}[4]
-  var compteur $uint32 = 0
+  var compteur UInt32 = 0
 \end{PLM}
 
-Déclaration d'une variable \plm=compteur=, de type \plm=$uint32= (entier non signé sur 32 bits), initialisée à 0. Les variables déclarées dans une tâche sont locales à la tâche, aucune autre tâche ne peut y accéder. PLM prédéfinit les types entiers de taille quelconque (jusqu'à 2048 bits), signés (\plm=$intXX=), et non signés (\plm=$uintXX=). Il est donc parfaitement légal d'utiliser des types comme par exemple \plm=$int8=, \plm=$int13=, ou encore \plm=$uint2000=.
+Déclaration d'une variable \plm=compteur=, de type \plm=UInt32= (entier non signé sur 32 bits), initialisée à 0. Les variables déclarées dans une tâche sont locales à la tâche, aucune autre tâche ne peut y accéder. PLM prédéfinit les types entiers de taille quelconque (jusqu'à 2048 bits), signés (\plm=IntXX=), et non signés (\plm=UIntXX=). Il est donc parfaitement légal d'utiliser des types comme par exemple \plm=Int8=, \plm=Int13=, ou encore \plm=UInt2000=.
 
 
 \begin{PLM}[6]
@@ -220,16 +220,16 @@ Cette ligne marque la fin de la commande gardée qui commence à la ligne $6$. C
 %  GPIOC_PDDR |= (1 << 5)
 %}
 %
-%var gUpTimeMS $uint32 = 0 {
+%var gUpTimeMS UInt32 = 0 {
 %  @rw proc systickHandler ()
-%  proc wait (?ms: inDuration $uint32)
+%  proc wait (?ms: inDuration UInt32)
 %}
 %
 %proc systickHandler `isr () {
 %  gUpTimeMS += 1
 %}
 %
-%proc wait `user (?ms: inDuration $uint32) {
+%proc wait `user (?ms: inDuration UInt32) {
 %  let deadline = gUpTimeMS + inDuration
 %  while deadline > gUpTimeMS do
 %  end
@@ -248,9 +248,9 @@ Cette ligne marque la fin de la commande gardée qui commence à la ligne $6$. C
 %La définition de la variable globale \plm+gUpTimeMS+ :
 %
 %\begin{PLM}[8]
-%var gUpTimeMS $uint32 = 0 {
+%var gUpTimeMS UInt32 = 0 {
 %  @rw proc systickHandler ()
-%  proc wait (?ms: inDuration $uint32)
+%  proc wait (?ms: inDuration UInt32)
 %}
 %\end{PLM}
 %
@@ -270,14 +270,14 @@ Cette ligne marque la fin de la commande gardée qui commence à la ligne $6$. C
 %
 %L'attente durant un certain délai est effectué par la routine \plm+wait+ :
 %\begin{PLM}[17]
-%proc wait `user (?ms: inDuration $uint32) {
+%proc wait `user (?ms: inDuration UInt32) {
 %  let deadline = gUpTimeMS + inDuration
 %  while deadline > gUpTimeMS do
 %  end
 %}
 %\end{PLM}
 %
-%Cette routine présente un paramètre formel : \plm+inDuration+, de type \plm+$uint32+. Le \emph{sélecteur} \plm+?ms:+ indique que \plm+inDuration+ est un paramètre en entrée (son sélecteur commence par « \texttt{?} »), et que le nom de ce sélecteur est « \texttt{ms} »\footnote{La liste de tous les arguments formels et des paramètres effectifs correspondants est présentée à la \refSectionPage{argumentFormel}.}.
+%Cette routine présente un paramètre formel : \plm+inDuration+, de type \plm+UInt32+. Le \emph{sélecteur} \plm+?ms:+ indique que \plm+inDuration+ est un paramètre en entrée (son sélecteur commence par « \texttt{?} »), et que le nom de ce sélecteur est « \texttt{ms} »\footnote{La liste de tous les arguments formels et des paramètres effectifs correspondants est présentée à la \refSectionPage{argumentFormel}.}.
 %
 %Le code de cette routine est simple : après avoir calculé la constante \plm+deadline+\footnote{Une constante locale à une routine est déclarée par le mot réservé \texttt{\bfseries let} (voir \refSectionPage{declarationConstanteLocale}).}, la boucle \plm+while+ attend le délai imparti.
 %

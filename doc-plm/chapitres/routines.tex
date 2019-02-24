@@ -207,7 +207,7 @@ Une fonction est appelable dans une expression et renvoie une valeur.
 
 La déclaration d'une fonction est la suivante~:
 \begin{PLM}
-func mode nom @attribut (arguments_formels) -> $type {
+func mode nom @attribut (arguments_formels) -> Type {
   liste_instructions
 }
 \end{PLM}
@@ -217,14 +217,14 @@ Où~:
   \item \plm=mode= est le mode associé à la fonction, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe=~;
   \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction~;
   \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels~;
-  \item \plm=$type= est le type de la valeur renvoyée.
+  \item \plm=Type= est le type de la valeur renvoyée.
 \end{itemize}
 
-Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=$type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
+Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=Type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
 Par exemple~:
 
 \begin{PLM}
-func user maFonction @noUnusedWarning () -> $uint32 {
+func user maFonction @noUnusedWarning () -> UInt32 {
   result = 6
 }
 \end{PLM}
@@ -232,7 +232,7 @@ func user maFonction @noUnusedWarning () -> $uint32 {
 Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=user=~; l'attribut \plm=@noUnusedWarning= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
 
 \begin{PLM}
-func user autreFonction (?arg:a $uint27 ?b $uint27) -> $uint27 {
+func user autreFonction (?arg:a UInt27 ?b UInt27) -> UInt27 {
   result = a +% b
 }
 \end{PLM}
@@ -275,7 +275,7 @@ La déclaration \plm+required func+ permet de signifier au compilateur qu'une pr
 
 Cette déclaration est la suivante~:
 \begin{PLM}
-required func mode nom @attribut (arguments_formels) -> $type
+required func mode nom @attribut (arguments_formels) -> Type
 \end{PLM}
 
 ou~:
@@ -299,7 +299,7 @@ Une fonction externe est une procédure définie en C ou en assembleur et appela
 La déclaration d'une fonction externe est la suivante~:
 
 \begin{PLM}
-extern func mode nom (arguments_formels) -> $type : "nom-assembleur"
+extern func mode nom (arguments_formels) -> Type : "nom-assembleur"
 \end{PLM}
 Où~:
 \begin{itemize}
@@ -321,7 +321,7 @@ Prenons l'exemple de cette fonction, qui implémente le blocage de la tâche app
 
 \begin{PLM}
 extern func
-primitive block (?!inList:ioWaitingList $taskList) : "blockInList"
+primitive block (?!inList:ioWaitingList : TaskList) : "blockInList"
 \end{PLM}
 
 La signature PLM de cette fonction est \plm=block(?!inList:)=.
@@ -337,7 +337,7 @@ asm ("!FUNC!blockInList") ;
 
 Le nom \texttt{block\_in\_list} est interne au code C.
 
-Le type C \texttt{TaskList} correspond au type PLM \plm=$taskList=~; ces deux types sont définis indépendemment, c'est au programmeur de s'assurer qu'ils ont des tailles identiques (ici, 32 bits).
+Le type C \texttt{TaskList} correspond au type PLM \plm=TaskList=~; ces deux types sont définis indépendemment, c'est au programmeur de s'assurer qu'ils ont des tailles identiques (ici, 32 bits).
 
 Le mode de passage de l'argument est spécifié par le sélecteur \plm=?!inList:=, c'est le mode \emph{entrée/sortie}, qui correspond au passage d'un pointeur en C. C'est au programmeur de s'assurer que les mode de passage spécifiés en PLM et C correspondent.
 
@@ -368,7 +368,7 @@ Les fonctions universelles peuvent être appelées à partir de n'importe quel m
 
 \begin{PLM}
 // Fonction universelle renvoyant un résultat
-func nom @attribut (arguments_formels) -> $type {
+func nom @attribut (arguments_formels) -> Type {
   liste_instructions
 }
 // Procédure universelle

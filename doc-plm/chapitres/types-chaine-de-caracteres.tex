@@ -7,22 +7,22 @@
 
 \chapter{Les types chaîne de caractères}
 
-La prise en charge des chaînes de caractères est très partielle : uniquement le type \plm+$staticString+ est défini.
+La prise en charge des chaînes de caractères est très partielle : uniquement le type \plm+LiteralString+ est défini.
 
 \section{Constante littérale chaîne de caractères}
 
 Une constante littérale chaîne de caractères est délimitée par des « " ». Comme les sources PLM sont des textes UTF-8, la constante chaîne de caractères accepte tout caractère UTF-8. Par Exemple : \plm+"Hello !"+. % , \plm+"// œuf"+.
 
-Une constante littérale chaîne de caractères a pour type \plm+$staticString+.
+Une constante littérale chaîne de caractères a pour type \plm+LiteralString+.
 
 
-\section{Le type \texttt{\$staticString}}
+\section{Le type \texttt{LiteralString}}
 
-\subsection{Déclaration d'un objet de type \texttt{\$staticString}}
+\subsection{Déclaration d'un objet de type \texttt{LiteralString}}
 
-Le type \plm+$staticString+ représente une référence vers une chaîne statique. La sémantique du langage garantit que cette référence toujours valide\footnote{On peut faire un parallèle avec le langage C, où un pointeur vers une chaîne littérale est du type «~\texttt{const char *}~» ; cependant, en C, ce pointeur peut recevoir la valeur \texttt{NULL}. En PLM, la sémantique interdit cette situation : une référence est toujours valide.}. Une utilisation typique est la déclaration d'une constante :
+Le type \plm+LiteralString+ représente une référence vers une chaîne statique. La sémantique du langage garantit que cette référence toujours valide\footnote{On peut faire un parallèle avec le langage C, où un pointeur vers une chaîne littérale est du type «~\texttt{const char *}~» ; cependant, en C, ce pointeur peut recevoir la valeur \texttt{NULL}. En PLM, la sémantique interdit cette situation : une référence est toujours valide.}. Une utilisation typique est la déclaration d'une constante :
 \begin{PLM}
-let x $staticString = "Hello !"
+let x LiteralString = "Hello !"
 \end{PLM}
 
 L'annotation de type peut être omise :
@@ -38,14 +38,14 @@ x = "Bonjour !"
  
 \subsection{Énumération d'une chaîne}
 
-L'instruction \plm!for! permet d'énumérer un objet de type \plm+$staticString+ :
+L'instruction \plm!for! permet d'énumérer un objet de type \plm+LiteralString+ :
 \begin{PLM}
 for c in x {
   ...
 }
 \end{PLM}
 
-\plm!c! est une constante locale à l'instruction \plm!for!, de type \plm!$uint8!. Pour le moment, la seule opération que l'on peut faire à l'intérieur de la boucle est d'afficher \plm!c! sous la forme d'un caractère sur l'afficheur LCD :
+\plm!c! est une constante locale à l'instruction \plm!for!, de type \plm!UInt8!. Pour le moment, la seule opération que l'on peut faire à l'intérieur de la boucle est d'afficher \plm!c! sous la forme d'un caractère sur l'afficheur LCD :
 \begin{PLM}
 for c in x {
   lcd.writeData_inUserMode (!c)
