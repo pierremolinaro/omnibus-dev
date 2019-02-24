@@ -14421,11 +14421,13 @@ typeComparisonResult cEnumAssociatedValues_propertySetterKind_storedProperty::co
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cEnumAssociatedValues_propertySetterKind_computedProperty::cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1
+                                                                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1,
+                                                                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue2
                                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -14435,6 +14437,7 @@ void cEnumAssociatedValues_propertySetterKind_computedProperty::description (C_S
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -14449,6 +14452,9 @@ typeComparisonResult cEnumAssociatedValues_propertySetterKind_computedProperty::
   }
   if (result == kOperandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
 }
@@ -14479,13 +14485,14 @@ GALGAS_propertySetterKind GALGAS_propertySetterKind::constructor_storedProperty 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_propertySetterKind GALGAS_propertySetterKind::constructor_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                   const GALGAS_routineLLVMNameDict & inAssociatedValue1
+                                                                                   const GALGAS_routineLLVMNameDict & inAssociatedValue1,
+                                                                                   const GALGAS_routineLLVMNameDict & inAssociatedValue2
                                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_propertySetterKind result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_computedProperty ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_propertySetterKind_computedProperty (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_propertySetterKind_computedProperty (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14515,11 +14522,13 @@ void GALGAS_propertySetterKind::method_storedProperty (GALGAS_PLMType & outAssoc
 
 void GALGAS_propertySetterKind::method_computedProperty (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
                                                          GALGAS_routineLLVMNameDict & outAssociatedValue1,
+                                                         GALGAS_routineLLVMNameDict & outAssociatedValue2,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_computedProperty) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
     C_String s ;
     s << "method @propertySetterKind computedProperty invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
@@ -14527,6 +14536,7 @@ void GALGAS_propertySetterKind::method_computedProperty (GALGAS_unifiedTypeMap_2
     const cEnumAssociatedValues_propertySetterKind_computedProperty * ptr = (const cEnumAssociatedValues_propertySetterKind_computedProperty *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
   }
 }
 

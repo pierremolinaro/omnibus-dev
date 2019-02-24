@@ -1,0 +1,39 @@
+
+setter @instructionListIR appendStoreComputedPropertyValue
+  ?let @objectIR inReceiverIR
+  ?let @string inLLVMSetterName
+  ?let @objectIR inValueIR
+{
+  self += !@storeComputedPropertyValueIR.new {!inReceiverIR !inLLVMSetterName !inValueIR}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @storeComputedPropertyValueIR : @abstractInstructionIR {
+  @objectIR mReceiverIR
+  @string mLLVMSetterName
+  @objectIR mValueIR
+}
+
+#·······················································································································
+
+override method @storeComputedPropertyValueIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  call void @" + [mLLVMSetterName assemblerRepresentation] 
+  ioLLVMcode += " (" + [[mReceiverIR type] llvmTypeName] + "* " + [mReceiverIR llvmName] + ", "
+  ioLLVMcode += [[mValueIR type] llvmTypeName] + " " + [mValueIR llvmName] + ")\n"
+}
+
+#·······················································································································
+
+override method @storeComputedPropertyValueIR enterAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioInvokedRoutineSet += !mLLVMSetterName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

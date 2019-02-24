@@ -676,18 +676,21 @@ method @structurePropertyListAST-element enterPropertyInContext
     if not [optionalPropertyType instanciable] then
       error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
     end
-    let llvmRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
-    let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
+    let llvmGetterRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+    let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
+    let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+    let setterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmSetterRoutineName]
     [!?ioPropertySetterMap insertKey
       !mPropertyName
       !mIsPublic
       !.computedProperty {
         !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
-        !modeDictionary:modeDictionary
+        !getterModeDictionary: getterModeDictionary
+        !setterModeDictionary: setterModeDictionary
       }
     ]
     let functionLLVMName = @lstring.new {
-      !llvmRoutineName
+      !llvmSetterRoutineName
       !mPropertyName.location
     }
     let @routineFormalArgumentListAST formalArgumentList = {

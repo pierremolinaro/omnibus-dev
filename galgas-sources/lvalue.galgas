@@ -144,7 +144,7 @@ method @LValueAST analyzeLValue
       : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       : outInternalRepresentation
     else
-      analyzeSelfAssignmentTarget (
+      analyzeSelfLValue (
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
         !context:inContext
@@ -291,7 +291,7 @@ private proc handlePropertyAccess
   let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
-  case computedProperty (@unifiedTypeMap-proxy unused typeProxy @routineLLVMNameDict unused modeDictionary) :
+  case computedProperty (3*) :
     error inPropertyName : "a computed property cannot be used here" : ioCurrentType, ioCurrentLLVMName
   case storedProperty (@PLMType propertyType @uint index) :
     [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
@@ -395,7 +395,7 @@ private proc handleArrayAccess
 
 #·······················································································································
 
-private proc analyzeSelfAssignmentTarget
+private proc analyzeSelfLValue
   ?self:let @PLMType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext

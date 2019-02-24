@@ -46,6 +46,12 @@ list @instructionListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @instructionListListIR {
+  @instructionListIR mInstructionList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 #func %once cppSeparatorLine -> @string {
 #  result = "//" + @string.stringByRepeatingString {!"—" !118} + "\n"
 #}

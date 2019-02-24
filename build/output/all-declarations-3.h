@@ -3847,10 +3847,12 @@ class cEnumAssociatedValues_propertySetterKind_storedProperty : public cEnumAsso
 class cEnumAssociatedValues_propertySetterKind_computedProperty : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_routineLLVMNameDict mAssociatedValue1 ;
+  public : const GALGAS_routineLLVMNameDict mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1
+                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1,
+                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue2
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

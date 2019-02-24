@@ -131,9 +131,9 @@ LLVM Name: %![type llvmTypeName]%
         switch setter_mAccess
         case storedProperty (propertyType propertyIndex) :
           %Stored property, index %![propertyIndex string]%, type %![propertyType llvmTypeName]
-        case computedProperty (propertyTypeProxy modeDictionary) :
+        case computedProperty (propertyTypeProxy getterModeDictionary setterModeDictionary) :
           %Computed property, type %![propertyTypeProxy key]%, routine LLVM name:%
-          for () in modeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
+          for () in setterModeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
         end
         %</td>
       </tr>

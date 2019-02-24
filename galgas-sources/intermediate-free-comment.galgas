@@ -1,0 +1,22 @@
+
+setter @instructionListIR appendFreeComment ?let @string inComment {
+  self += !@freeCommentIR.new {!inComment}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @freeCommentIR : @abstractInstructionIR {
+  @string mComment
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @freeCommentIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += ";--------- " + mComment + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -927,6 +927,72 @@ void routine_handleSliceInExpression (const class GALGAS_semanticContext constin
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                               Extension method '@LValueAST analyzeLValueInAssignment'                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_analyzeLValueInAssignment (const class GALGAS_LValueAST inObject,
+                                                const class GALGAS_PLMType constin_inSelfType,
+                                                const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                const class GALGAS_semanticContext constin_inContext,
+                                                const class GALGAS_mode constin_inMode,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                class GALGAS_allocaList & io_ioAllocaList,
+                                                class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                class GALGAS_instructionListListIR & io_ioPendingStoreComputedPropertyInstructionGenerationListList,
+                                                class GALGAS_LValueRepresentation & out_outInternalRepresentation,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Routine 'analyzeSelfLValueInAssignment'                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeSelfLValueInAssignment (const class GALGAS_PLMType constinArgument0,
+                                            const class GALGAS_routineAttributes constinArgument1,
+                                            const class GALGAS_semanticContext constinArgument2,
+                                            const class GALGAS_mode constinArgument3,
+                                            class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                            class GALGAS_staticEntityMap & ioArgument5,
+                                            class GALGAS_universalValuedObjectMap & ioArgument6,
+                                            class GALGAS_allocaList & ioArgument7,
+                                            class GALGAS_instructionListIR & ioArgument8,
+                                            class GALGAS_instructionListListIR & ioArgument9,
+                                            const class GALGAS_LValueOperandAST constinArgument10,
+                                            class GALGAS_LValueRepresentation & outArgument11,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Routine 'analyzeVariableInLValueInAssignment'                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeVariableInLValueInAssignment (const class GALGAS_PLMType constinArgument0,
+                                                  const class GALGAS_routineAttributes constinArgument1,
+                                                  const class GALGAS_semanticContext constinArgument2,
+                                                  const class GALGAS_mode constinArgument3,
+                                                  class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                                  class GALGAS_staticEntityMap & ioArgument5,
+                                                  class GALGAS_universalValuedObjectMap & ioArgument6,
+                                                  class GALGAS_allocaList & ioArgument7,
+                                                  class GALGAS_instructionListIR & ioArgument8,
+                                                  class GALGAS_instructionListListIR & ioArgument9,
+                                                  const class GALGAS_lstring constinArgument10,
+                                                  const class GALGAS_string constinArgument11,
+                                                  const class GALGAS_PLMType constinArgument12,
+                                                  const class GALGAS_LValueOperandAST constinArgument13,
+                                                  class GALGAS_LValueRepresentation & outArgument14,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                           @forInstructionOnArrayIR class                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1333,23 +1399,23 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Routine 'analyzeSelfAssignmentTarget'                                        *
+//                                             Routine 'analyzeSelfLValue'                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeSelfAssignmentTarget (const class GALGAS_PLMType constinArgument0,
-                                          const class GALGAS_routineAttributes constinArgument1,
-                                          const class GALGAS_semanticContext constinArgument2,
-                                          const class GALGAS_mode constinArgument3,
-                                          class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                          class GALGAS_staticEntityMap & ioArgument5,
-                                          class GALGAS_universalValuedObjectMap & ioArgument6,
-                                          class GALGAS_allocaList & ioArgument7,
-                                          class GALGAS_instructionListIR & ioArgument8,
-                                          const class GALGAS_LValueOperandAST constinArgument9,
-                                          class GALGAS_LValueRepresentation & outArgument10,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void routine_analyzeSelfLValue (const class GALGAS_PLMType constinArgument0,
+                                const class GALGAS_routineAttributes constinArgument1,
+                                const class GALGAS_semanticContext constinArgument2,
+                                const class GALGAS_mode constinArgument3,
+                                class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                class GALGAS_staticEntityMap & ioArgument5,
+                                class GALGAS_universalValuedObjectMap & ioArgument6,
+                                class GALGAS_allocaList & ioArgument7,
+                                class GALGAS_instructionListIR & ioArgument8,
+                                const class GALGAS_LValueOperandAST constinArgument9,
+                                class GALGAS_LValueRepresentation & outArgument10,
+                                class C_Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
