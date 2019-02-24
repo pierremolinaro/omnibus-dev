@@ -11,8 +11,8 @@ task Tâche0 @stacksize 512 @activate {
   var readComputedProperty : UInt32 { result = self.tick }
 
   var readWriteComputedProperty : UInt32 {
-    set { self.tick = newValue }
-    get { result = self.tick }
+    @set { self.tick = newValue }
+    @get { result = self.tick }
   }
 
   event time.wait (!until: self.tick) {

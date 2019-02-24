@@ -176,7 +176,7 @@ syntax extension plm_syntax {
       var getterDefined = false
       var setterDefined = false
       repeat
-        $identifier$ ?let getterOrSetter
+        $@attribute$ ?let getterOrSetter
         ${$
         <instructionList> !?ioAST ?let instructionList
         let endOfInstructionList = @location.here
@@ -210,7 +210,7 @@ syntax extension plm_syntax {
           end
           setterDefined = true
         else
-          error getterOrSetter : "invalid identifier" fixit { remove replace "set" replace "get" }
+          error getterOrSetter : "invalid attribute" fixit { remove replace "@set" replace "@get" }
         end
       while
       end
