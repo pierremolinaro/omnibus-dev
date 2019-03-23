@@ -120,30 +120,6 @@ lexique plm_lexique {
   }
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-  #! Type Name                                                                                                           
-  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-  
-#  style typeStyle -> "Types"
-#  
-#  $\$type$ ! tokenString  style typeStyle error message "a type $..."
-#  
-#  message typeError : "in a type name, a letter or a digit should follow the '$' character"
-#  
-#  rule '$' {
-#    enterCharacterIntoString (!?tokenString !'$')
-#    select
-#    case isUnicodeLetter :
-#      repeat
-#        enterCharacterIntoString (!?tokenString !*)
-#      while isUnicodeLetter | '0' -> '9' | '_' :
-#      end
-#    default
-#      error typeError
-#    end
-#    send $\$type$ 
-#  }
-  
-  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   #! Literal integer
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
@@ -364,6 +340,30 @@ lexique plm_lexique {
     default
       send $!selector:$
     end
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Type Name                                                                                                           
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style typeStyle -> "Types"
+  
+  $\$type$ ! tokenString  style typeStyle error message "a type $..."
+  
+  message typeError : "in a type name, a letter or a digit should follow the '$' character"
+  
+  rule '$' {
+#    enterCharacterIntoString (!?tokenString !'$')
+    select
+    case isUnicodeLetter :
+      repeat
+        enterCharacterIntoString (!?tokenString !*)
+      while isUnicodeLetter | '0' -> '9' | '_' :
+      end
+    default
+      error typeError
+    end
+    send $\$type$ 
   }
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

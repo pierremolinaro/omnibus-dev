@@ -15,7 +15,7 @@ extern func noteCurrentTaskFreeStackSize service () : "noteCurrentTaskFreeStackS
 
 extern func taskCount user () -> UInt32 : "taskCount"
 
-enum GuardState {
+enum $GuardState {
   case evaluatingOrOutside
   case didChange
   case waitingForChange
@@ -33,7 +33,7 @@ extern func taskName safe user (?taskIndex: inIndex : UInt32) -> LiteralString :
 //   SYNCHRONIZATION TOOLS ROUTINES
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-opaque TaskList @instantiable {32}
+opaque $TaskList @instantiable {32}
 
 //--- Block running task
 extern func
@@ -54,7 +54,7 @@ makeTasksReady safe service (?fromCurrentDate:inCurrentDate : UInt32) : "makeTas
 //   GUARD
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-opaque GuardList @instantiable {32}
+opaque $GuardList @instantiable {32}
 
 extern func
 handle safe guard (?!guard:ioGuard : GuardList) : "handleGuardedCommand"

@@ -19,7 +19,7 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $opaque$
-    $identifier$ ?let opaqueTypeName
+    $\$type$ ?let opaqueTypeName
     @lstringlist attributeList = {}
     repeat
     while

@@ -279,7 +279,7 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $struct$
-    $identifier$ ?let structureName
+    $\$type$ ?let structureName
     @lstringlist attributeList = {}
     repeat
     while

@@ -16,7 +16,7 @@ let NUM_ENDPOINTS = 4
 
 //······················································································································
 
-struct BDT @copyable {
+struct $BDT @copyable {
  var desc : UInt32 = 0
  var addr : UInt32 = 0
 }

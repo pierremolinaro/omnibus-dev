@@ -5,7 +5,7 @@ check target "teensy-3-1/unprivileged"
 //   SYNCHRONIZATION TOOLS ROUTINES
 //——————————————————————————————————————————————————————————————————————————————
 
-opaque TaskList @instantiable {32}
+opaque $TaskList @instantiable {32}
 
 //--- Block running task
 extern func
@@ -26,7 +26,7 @@ makeTasksReady safe service (?fromCurrentDate:inCurrentDate : UInt32) : "makeTas
 //   GUARD
 //——————————————————————————————————————————————————————————————————————————————
 
-opaque GuardList @instantiable {32}
+opaque $GuardList @instantiable {32}
 
 extern func
 handle safe guard (?!guard:ioGuard : GuardList) : "handleGuardedCommand"

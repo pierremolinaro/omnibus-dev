@@ -15,7 +15,7 @@ registers @user GPIOD (PDOR, PSOR, PCOR, PTOR, PDDR)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum DigitalPort {
+enum $DigitalPort {
 //--- Common with Teensy 3.1 / 3.2
   case D0  // PTB16
   case D1  // PTB17
@@ -80,7 +80,7 @@ enum DigitalPort {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum DigitalMode {
+enum $DigitalMode {
   case OUTPUT
   case OUTPUT_OPEN_COLLECTOR
   case INPUT

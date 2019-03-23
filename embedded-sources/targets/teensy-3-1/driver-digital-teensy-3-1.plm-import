@@ -16,7 +16,7 @@ registers @user GPIOD (PDOR, PSOR, PCOR, PTOR, PDDR)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum DigitalPort {
+enum $DigitalPort {
   case D0  // PTB16
   case D1  // PTB17
   case D2  // PTD0
@@ -45,7 +45,7 @@ enum DigitalPort {
 
 //··············································································
 
-enum DigitalMode {
+enum $DigitalMode {
   case OUTPUT
   case OUTPUT_OPEN_COLLECTOR
   case INPUT

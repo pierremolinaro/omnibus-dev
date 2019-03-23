@@ -4,16 +4,16 @@ import "carte-tp-teensy-3-1.plm-import"
 
 //-----------------------------------------------------------------------------*
 
-struct B {
+struct $B {
   var a : UInt32 = 0
   var b : UInt32 = 0
 }
 
-struct C {
+struct $C {
   var c = B ()
 }
 
-struct Toto {
+struct $Toto {
   var a : UInt16 = 0
   var c = no
   var b = no
