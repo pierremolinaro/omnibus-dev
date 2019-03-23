@@ -117,7 +117,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
       [!?arrayTypePropertyMap insertKey # "count" property
         !.new {!"count" !plmTypeDescriptionName.location}
         !true # public
-        !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:arraySize}}
+        !.constantProperty {!value:.literalInteger {!type:literalIntegerType () !value:arraySize}}
       ]
     #-------------------------------------------- Constructor map
       @constructorMap constructorMap = {}

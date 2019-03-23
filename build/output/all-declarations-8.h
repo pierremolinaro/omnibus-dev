@@ -706,12 +706,12 @@ class GALGAS_string function_assignmentPrefix (class C_Compiler * inCompiler
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            Function 'staticIntegerType'                                             *
+//                                            Function 'literalIntegerType'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_PLMType function_staticIntegerType (class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GALGAS_PLMType function_literalIntegerType (class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

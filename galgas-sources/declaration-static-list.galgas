@@ -57,7 +57,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST { # §
+  rule <declaration> ?!@ast ioAST {
     $staticArray$
     $identifier$ ?let staticListName
     ${$
@@ -456,7 +456,7 @@ override method @staticListAST enterInContext
   [!?listTypePropertyMap insertKey # "count" property
     !.new {!"count" !mStaticListName.location}
     !true # public
-    !.constantProperty {!value:.literalInteger {!type:staticIntegerType () !value:[mValueList length]}}
+    !.constantProperty {!value:.literalInteger {!type:literalIntegerType () !value:[mValueList length]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @PLMType.new {

@@ -5699,8 +5699,8 @@ const char * gWrapperFileContent_23_embeddedSampleCode = "target \"teensy-3-6/xt
   "  var readComputedProperty : UInt32 { result = self.tick }\n"
   "\n"
   "  var readWriteComputedProperty : UInt32 {\n"
-  "    set { self.tick = newValue }\n"
-  "    get { result = self.tick }\n"
+  "    @set { self.tick = newValue }\n"
+  "    @get { result = self.tick }\n"
   "  }\n"
   "\n"
   "  event time.wait (!until: self.tick) {\n"
@@ -5718,7 +5718,7 @@ const cRegularFileWrapper gWrapperFile_23_embeddedSampleCode (
   "24-computed-properties.plm",
   "plm",
   true, // Text file
-  792, // Text length
+  794, // Text length
   gWrapperFileContent_23_embeddedSampleCode
 ) ;
 

@@ -106,7 +106,7 @@ override method @registerInExpressionAST analyzeExpression
       !mFieldName.location
       !outResult
       !accessOperator
-      !.literalInteger {!type:staticIntegerType () !value:accessRightOperand}
+      !.literalInteger {!type: literalIntegerType () !value:accessRightOperand}
     ]
     outResult = resultIR
   end

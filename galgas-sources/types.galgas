@@ -138,7 +138,7 @@ getter @PLMType llvmTypeName -> @string {
 
 #·······················································································································
 
-func staticIntegerType -> @PLMType {
+func %once literalIntegerType -> @PLMType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
@@ -157,7 +157,7 @@ func staticIntegerType -> @PLMType {
 
 #·······················································································································
 
-func literalStringType -> @PLMType {
+func %once literalStringType -> @PLMType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
@@ -176,7 +176,7 @@ func literalStringType -> @PLMType {
 
 #·······················································································································
 
-func voidType -> @PLMType {
+func %once voidType -> @PLMType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
