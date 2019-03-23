@@ -10,13 +10,13 @@ let LCD_BUFFER_SIZE = 20
 //——————————————————————————————————————————————————————————————————————————————
 
 driver lcd > digital {
-  let DB4 : $DigitalPort
-  let DB5 : $DigitalPort
-  let DB6 : $DigitalPort
-  let DB7 : $DigitalPort
+  let DB4 $DigitalPort
+  let DB5 $DigitalPort
+  let DB6 $DigitalPort
+  let DB7 $DigitalPort
 
-  let RS : $DigitalPort
-  let ENABLE : $DigitalPort
+  let RS $DigitalPort
+  let ENABLE $DigitalPort
 
   var buffer = [LCD_BUFFER_SIZE @x $UInt8] (!repeated:0)
   var sEntree = $Semaphore (!value:0)

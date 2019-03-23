@@ -949,11 +949,11 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "    digital.toggle (!port:LED_L1)\n"
   "    let n = self.acc.c.a +% self.deadline\n"
   "    self.acc.c.a = n\n"
-  "    let $UInt32 x = 0x1234_5678\n"
+  "    let x $UInt32 = 0x1234_5678\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.print (!hex8:x.byteSwapped)\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    let $UInt15 y = 0x1234\n"
+  "    let y $UInt15 = 0x1234\n"
   "    lcd.print (!hex4:extend (y.bitReversed))\n"
   "  }\n"
   "}\n"
@@ -2086,7 +2086,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "  func tokenCompleted section @mutating () {\n"
   "    let transactionStatus = $(USB0:STAT)\n"
-  "    let $UInt4 endPoint = transactionStatus [4...7]\n"
+  "    let endPoint $UInt4 = transactionStatus [4...7]\n"
   "//    let TX_transitionStatus = transactionStatus [3...3]\n"
   "//    let ODD_transitionStatus = transactionStatus [2...2]\n"
   "//    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))\n"
@@ -2826,7 +2826,7 @@ const char * gWrapperFileContent_20_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "sync PeriodicTimer {\n"
   "  var deadline : $UInt32 = 0\n"
-  "  let period : $UInt32\n"
+  "  let period $UInt32\n"
   "  var guardList = $GuardList ()\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -2881,7 +2881,7 @@ const cRegularFileWrapper gWrapperFile_20_embeddedSampleCode (
   "05-periodic-timer.plm",
   "plm",
   true, // Text file
-  1603, // Text length
+  1601, // Text length
   gWrapperFileContent_20_embeddedSampleCode
 ) ;
 
@@ -2926,7 +2926,7 @@ const char * gWrapperFileContent_30_embeddedSampleCode = "target \"teensy-3-6/xt
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "struct $Uptime @copyable {\n"
-  "  let rawValue : $UInt64\n"
+  "  let rawValue $UInt64\n"
   "\n"
   "  public func raw @noUnusedWarning () -> $UInt64 {\n"
   "    result = self.rawValue\n"
@@ -2980,7 +2980,7 @@ const cRegularFileWrapper gWrapperFile_30_embeddedSampleCode (
   "06-chained-pit-0-1.plm",
   "plm",
   true, // Text file
-  2485, // Text length
+  2483, // Text length
   gWrapperFileContent_30_embeddedSampleCode
 ) ;
 
@@ -3883,7 +3883,7 @@ const char * gWrapperFileContent_38_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "  func tokenCompleted section @mutating () {\n"
   "    let transactionStatus = $(USB0:STAT)\n"
-  "    let endPoint : $UInt4 = transactionStatus [4...7]\n"
+  "    let endPoint $UInt4 = transactionStatus [4...7]\n"
   "    let TX_transitionStatus = transactionStatus [3...3]\n"
   "    let ODD_transitionStatus = transactionStatus [2...2]\n"
   "    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))\n"
@@ -4096,7 +4096,7 @@ const cRegularFileWrapper gWrapperFile_38_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  20506, // Text length
+  20504, // Text length
   gWrapperFileContent_38_embeddedSampleCode
 ) ;
 
@@ -4104,7 +4104,7 @@ const cRegularFileWrapper gWrapperFile_38_embeddedSampleCode (
 
 const char * gWrapperFileContent_29_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
   "let F_CPU_MHZ = 240\n"
-  "let BUS_MHZ2 @display = BUS_MHZ\n"
+  "let @display BUS_MHZ2 = BUS_MHZ\n"
   "\n"
   "import \"carte-tp-teensy-3-6.plm-import\"\n"
   "driver timer ()\n"

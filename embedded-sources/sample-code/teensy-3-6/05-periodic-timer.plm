@@ -7,7 +7,7 @@ import "carte-tp-teensy-3-6.plm-import"
 
 sync PeriodicTimer {
   var deadline : $UInt32 = 0
-  let period : $UInt32
+  let period $UInt32
   var guardList = $GuardList ()
 
   //············································································

@@ -85,7 +85,6 @@ syntax extension plm_syntax {
     $identifier$ ?let propertyName
     @lstring typeName
     select
-      $:$
       <type_definition> !?ioAST ?typeName
     or
       typeName = ["" nowhere]

@@ -37,7 +37,7 @@ driver chronomètre > root {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $Uptime @copyable {
-  let rawValue : $UInt64
+  let rawValue $UInt64
 
   public func raw @noUnusedWarning () -> $UInt64 {
     result = self.rawValue

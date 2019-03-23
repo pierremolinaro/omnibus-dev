@@ -18,13 +18,13 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $let$
+    $identifier$ ?let varName
     @lstring optionalTypeName
     select
       optionalTypeName = ["" nowhere]
     or
       <type_definition> !?ioAST ?optionalTypeName
     end
-    $identifier$ ?let varName
     $=$
     <expression> !?ioAST ?let @expressionAST expression
     ioInstructionList += !@letInstructionWithAssignmentAST.new {

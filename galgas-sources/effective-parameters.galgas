@@ -85,7 +85,6 @@ syntax extension plm_syntax {
       select
         typeName = ["" nowhere]
       or
-        $:$
         <type_definition> !?ioAST ?typeName
       end
       outEffectiveParameterList += 

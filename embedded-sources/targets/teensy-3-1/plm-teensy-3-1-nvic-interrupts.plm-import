@@ -1,6 +1,6 @@
 
 section enable safe @noUnusedWarning (?interrupt: inInterruptCode : $ISRSlot) {
-  let $UInt32 idx = extend (inInterruptCode.uint7 -% 16)
+  let idx $UInt32 = extend (inInterruptCode.uint7 -% 16)
   let bitIndex = idx & 0x1F
   let registerIndex = idx >> 5
   $(NVIC:ISER [registerIndex]!) = 1 << bitIndex
@@ -9,7 +9,7 @@ section enable safe @noUnusedWarning (?interrupt: inInterruptCode : $ISRSlot) {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 section disable safe @noUnusedWarning (?interrupt: inInterruptCode : $ISRSlot) {
-  let $UInt32 idx = extend (inInterruptCode.uint7 -% 16)
+  let idx $UInt32 = extend (inInterruptCode.uint7 -% 16)
   let bitIndex = idx & 0x1F
   let registerIndex = idx >> 5
   $(NVIC:ICER [registerIndex]!) = 1 << bitIndex

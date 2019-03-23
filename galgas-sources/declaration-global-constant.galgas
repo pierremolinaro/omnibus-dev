@@ -25,12 +25,6 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $let$
-    @lstring typeName
-    select
-      typeName = ["" nowhere]
-    or
-      <type_definition> !?ioAST ?typeName
-    end
     @lstringlist attributeList = {}
     repeat
     while
@@ -38,6 +32,12 @@ syntax extension plm_syntax {
       attributeList += !attribute
     end
     $identifier$ ?let constantName
+    @lstring typeName
+    select
+      typeName = ["" nowhere]
+    or
+      <type_definition> !?ioAST ?typeName
+    end
     $=$
     <expression> !?ioAST ?let @expressionAST expression
     ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.new {

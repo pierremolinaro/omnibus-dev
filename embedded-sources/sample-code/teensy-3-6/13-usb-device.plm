@@ -294,7 +294,7 @@ driver usb_device > digital {
 
   func tokenCompleted section @mutating () {
     let transactionStatus = $(USB0:STAT)
-    let $UInt4 endPoint = transactionStatus [4...7]
+    let endPoint $UInt4 = transactionStatus [4...7]
     let TX_transitionStatus = transactionStatus [3...3]
     let ODD_transitionStatus = transactionStatus [2...2]
     let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
