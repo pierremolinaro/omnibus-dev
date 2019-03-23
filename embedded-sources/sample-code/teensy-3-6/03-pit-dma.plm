@@ -59,7 +59,7 @@ typealias $PatternArray = [PATTERN_LENGTH : $uint32]
 driver pit > root {
   interrupt section PITChannel3 {
   //--- Acquitter l'interruption
-    ©PIT.TFLG [3] = ©{PIT.TFLG !TIF:1}
+    ©PIT.TFLG [3] = ©(PIT.TFLG !TIF:1)
   //--- Toggle LED_L3
     digital.toggle (!port:LED_L3)
   }
@@ -91,8 +91,8 @@ section initializeDMA (?!pattern $PatternArray) {
   digital.write (!no !toPort:LED_L4)
 
 //--- Power on DMA:MUX, PIT, DMA
-  ©SIM.SCGC6 |= ©{SIM.SCGC6 !DMAMUX:1 !PIT:1}
-  ©SIM.SCGC7 |= ©{SIM.SCGC7 !DMA:1}
+  ©SIM.SCGC6 |= ©(SIM.SCGC6 !DMAMUX:1 !PIT:1)
+  ©SIM.SCGC7 |= ©(SIM.SCGC7 !DMA:1)
 
 //--- Unmask PIT0 interrupt
   enable (!interrupt:.PITChannel3)
@@ -138,10 +138,10 @@ section initializeDMA (?!pattern $PatternArray) {
   ©DMA.TCD_BITER_ELINKNO [3] = PATTERN_LENGTH
 
 //--- Source and destination are 32-bit
-  ©DMA.TCD_ATTR [3] = ©{DMA.TCD_ATTR
+  ©DMA.TCD_ATTR [3] = ©(DMA.TCD_ATTR
     !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit
     !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit
-  }
+  )
 
 //--- Number of bytes to transfer per request: 4
   ©DMA.TCD_NBYTES_MLNO [3] = 4
@@ -149,22 +149,22 @@ section initializeDMA (?!pattern $PatternArray) {
 //--- Set repetition and DMA interrupt
 // if DREQ bit is set, the DMA performs PATTERN_LENGTH transfers and stops)
 // Otherwise, the DMA performs PATTERN_LENGTH transfers repetitively
-  ©DMA.TCD_CSR [3] = ©{DMA.TCD_CSR
+  ©DMA.TCD_CSR [3] = ©(DMA.TCD_CSR
     !INTMAJOR:1 // Generate an interrupt at the end of major loop count transfert (for toggling D4)
-  }
+  )
 
 //--- Configure DMA Channel
-  ©DMAMUX.CHCFG [3] = ©{DMAMUX.CHCFG
+  ©DMAMUX.CHCFG [3] = ©(DMAMUX.CHCFG
     !ENABLE:1 // DMA Channel 0 is enabled
     !TRIG:1   // DMA Channel 0 is triggered by #PIT 0
     !SOURCE:DMAMUX_SOURCE_ALWAYS0 // Trigger is always active
-  }
+  )
 
 //--- Start DMA Channel 0
   ©DMA.SERQ = 3
 
 //--- Enable #PIT 0 : it starts counting, enable interrupt
-  ©PIT.TCTRL [3] = ©{PIT.TCTRL !TEN:1 !TIE:1}
+  ©PIT.TCTRL [3] = ©(PIT.TCTRL !TEN:1 !TIE:1)
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

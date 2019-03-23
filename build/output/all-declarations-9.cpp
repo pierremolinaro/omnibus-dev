@@ -4227,7 +4227,7 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compile
       result << enumerator_1375.current_lkey (HERE).getter_string (HERE).stringValue () ;
       result << "\">" ;
       result << enumerator_1375.current_lkey (HERE).getter_string (HERE).stringValue () ;
-      result << "</a></td><td>$" ;
+      result << "</a></td><td>..<'$" ;
       result << extensionGetter_plmTypeDescriptionName (enumerator_1375.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
       result << "</td><td>" ;
       result << extensionGetter_llvmTypeName (enumerator_1375.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;

@@ -22,7 +22,7 @@ driver myDriver > digital {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
     digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P4)
   //--- Generate an interrupt on falling edge of port #3 (PTA12)
-    ©PORTA.PCR[12] |= ©{PORTA.PCR !IRQC:0xA}
+    ©PORTA.PCR[12] |= ©(PORTA.PCR !IRQC:0xA)
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortA)
   //--- Enable NVIC interrupt
@@ -34,7 +34,7 @@ driver myDriver > digital {
   //--- Enable digital filter ou PTC7
     ©PORTC.DFER = 1 << 7
   //--- Generate an interrupt on falling edge of port #12 (PTC7)
-    ©PORTC.PCR[7] |= ©{PORTC.PCR !IRQC:0xA}
+    ©PORTC.PCR[7] |= ©(PORTC.PCR !IRQC:0xA)
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortC)
   //--- Enable NVIC interrupt
