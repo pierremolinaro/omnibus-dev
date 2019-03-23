@@ -329,7 +329,6 @@ lexique plm_lexique {
   message typeError : "in a type name, a letter or a digit should follow the '$' character"
   
   rule '$' {
-#    enterCharacterIntoString (!?tokenString !'$')
     select
     case isUnicodeLetter :
       repeat

@@ -380,70 +380,70 @@ driver root {
     nop ()
     nop ()
   //--------------------------------------------------- Enable clocks to always-used peripherals
-    ©SIM.SCGC3 = ©(SIM.SCGC3 !ADC1:1 !FTM2:1 !FTM3:1)
-    ©SIM.SCGC5 = ©(SIM.SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1)   // clocks active to all GPIO
-    ©SIM.SCGC6 = ©(SIM.SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1)
+    ©SIM.SCGC3 = {©SIM.SCGC3 !ADC1:1 !FTM2:1 !FTM3:1}
+    ©SIM.SCGC5 = {©SIM.SCGC5 !PORTA:1 !PORTB:1 !PORTC:1 !PORTD:1 !PORTE:1}   // clocks active to all GPIO
+    ©SIM.SCGC6 = {©SIM.SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}
   //  ©SCB.CPACR = 0x00F0_0000; // Enable floating point unit
-    ©LMEM.PCCCR = ©(LMEM.PCCCR !GO:1 !INVW1:1 !INVW0:1 !ENWRBUF:1 !ENCACHE:1) // 0x8500_0003
+    ©LMEM.PCCCR = {©LMEM.PCCCR !GO:1 !INVW1:1 !INVW0:1 !ENWRBUF:1 !ENCACHE:1} // 0x8500_0003
   //--- If the RTC oscillator isn't enabled, get it started early
     if ©RTC.CR.OSCE == 0 {
       ©RTC.SR = 0
-      ©RTC.CR = ©(RTC.CR !SC16P:1 !SC4P:1 !OSCE:1)
+      ©RTC.CR = {©RTC.CR !SC16P:1 !SC4P:1 !OSCE:1}
     }
   //--- Release I/O pins hold, if we woke up from VLLS mode
     if ©PMC.REGSC.ACKISO ≠ 0 {
-      ©PMC.REGSC |= ©(PMC.REGSC !ACKISO:1)
+      ©PMC.REGSC |= {©PMC.REGSC !ACKISO:1}
     }
   //--- Since this is a write once register, make it visible to all F_CPU's
   //    so we can into other sleep modes in the future at any speed
-    ©SMC.PMPROT = ©(SMC.PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1)
+    ©SMC.PMPROT = {©SMC.PMPROT !AHSRUN:1 !AVLP:1 !ALLS:1 !AVLLS:1}
 
     ©SCB.VTOR = 0  // use vector table in flash
   //---------2- Initialisation de la PLL
   // start in FEI mode
   //--- Enable capacitors for crystal
-    ©OSC.CR = ©(OSC.CR !SC8P:1 !SC2P:1 !ERCLKEN:1)
+    ©OSC.CR = {©OSC.CR !SC8P:1 !SC2P:1 !ERCLKEN:1}
   //--- Enable osc, 8-32 MHz range, low power mode
-    ©MCG.C2 = ©(MCG.C2 !RANGE0:2 !EREFS:1)
+    ©MCG.C2 = {©MCG.C2 !RANGE0:2 !EREFS:1}
   //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
-    ©MCG.C1 = ©(MCG.C1 !CLKS:2 !FRDIV:4)
+    ©MCG.C1 = {©MCG.C1 !CLKS:2 !FRDIV:4}
   //--- Wait for crystal oscillator to begin
     while ©MCG.S.OSCINIT0 == 0 {}
   //--- Wait for FLL to use oscillator
     while ©MCG.S.IREFST ≠ 0 {}
   //--- Wait for MCGOUT to use oscillator
-    while ©MCG.S.CLKST ≠ ©(MCG.S !CLKST:2) {}
+    while ©MCG.S.CLKST ≠ {©MCG.S !CLKST:2} {}
   //--- Now we're in FBE mode
   //--- If we need faster than crystal, turn on the PLL
     if @static F_CPU_MHZ > 120 {
-      ©SMC.PMCTRL = ©(SMC.PMCTRL !RUNM:3) // enter HSRUN mode
-      while ©SMC.PMSTAT ≠ ©(SMC.PMSTAT !HSRUN:1) {}
+      ©SMC.PMCTRL = {©SMC.PMCTRL !RUNM:3} // enter HSRUN mode
+      while ©SMC.PMSTAT ≠ {©SMC.PMSTAT !HSRUN:1} {}
     }
   //--- Configure CPU clock
-    ©MCG.C5 = ©(MCG.C5 !PRDIV:MCG_C5_PRDIV)
-    ©MCG.C6 = ©(MCG.C6 !PLLS:1 !VDIV:MCG_C6_VDIV)
+    ©MCG.C5 = {©MCG.C5 !PRDIV:MCG_C5_PRDIV}
+    ©MCG.C6 = {©MCG.C6 !PLLS:1 !VDIV:MCG_C6_VDIV}
   //--- Wait for PLL to start using xtal as its input
     while ©MCG.S.PLLST == 0 {}
   //--- Wait for PLL to lock
     while ©MCG.S.LOCK0 == 0 {}
   //------------------------------------ Now we're in PBE mode : now program the clock dividers
-    ©SIM.CLKDIV1 = ©(SIM.CLKDIV1
+    ©SIM.CLKDIV1 = {©SIM.CLKDIV1
       !OUTDIV1:SIM_CLKDIV1_OUTDIV1 // Divisor for Core clock
       !OUTDIV2:SIM_CLKDIV1_OUTDIV2 // Divisor for Bus clock
       !OUTDIV3:SIM_CLKDIV1_OUTDIV3 // Divisor for Flexbus clock
       !OUTDIV4:SIM_CLKDIV1_OUTDIV4 // Divisor for Fash clock
-    )
-    ©SIM.CLKDIV2 = ©(SIM.CLKDIV2 !USBDIV:SIM_CLKDIV2_USBDIV !USBFRAC:SIM_CLKDIV2_USBFRAC)
+    }
+    ©SIM.CLKDIV2 = {©SIM.CLKDIV2 !USBDIV:SIM_CLKDIV2_USBDIV !USBFRAC:SIM_CLKDIV2_USBFRAC}
   //--- Switch to PLL as clock source
-    ©MCG.C1 = ©(MCG.C1 !CLKS:0 !FRDIV:4)
+    ©MCG.C1 = {©MCG.C1 !CLKS:0 !FRDIV:4}
   //--- Wait for PLL clock to be used
-    while ©MCG.S.CLKST ≠ ©(MCG.S !CLKST:3) {}
+    while ©MCG.S.CLKST ≠ {©MCG.S !CLKST:3} {}
   //--- USB clock
-    ©SIM.SOPT2 = ©(SIM.SOPT2
+    ©SIM.SOPT2 = {©SIM.SOPT2
       !USBSRC:1
       !PLLFLLSEL:SIM_SOPT2_PLLFLLSEL
       !TRACECLKSEL:1
-    )
+    }
   }
 
 }
