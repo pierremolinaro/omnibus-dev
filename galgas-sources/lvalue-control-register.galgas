@@ -50,7 +50,7 @@ syntax extension plm_syntax {
       end
       groupIndex = .index {!index:expression !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
     end
-    $:$
+    $.$
     $identifier$ ?let registerName
     @registerIndexAST registerIndex
     select

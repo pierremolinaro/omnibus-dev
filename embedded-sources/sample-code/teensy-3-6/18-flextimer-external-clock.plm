@@ -27,59 +27,59 @@ driver myDriver > digital {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   //--- Enable clock
-    ©(SIM:SCGC6) |= ©{SIM:SCGC6 !FTM0:1 !FTM1:1}
-    ©(SIM:SOPT4) = 0 // |= ©(SIM.SOPT4 !FTM1CLKSEL:1)
+    ©(SIM.SCGC6) |= ©{SIM.SCGC6 !FTM0:1 !FTM1:1}
+    ©(SIM.SOPT4) = 0 // |= ©(SIM.SOPT4 !FTM1CLKSEL:1)
   //-- Configure PTB16 as FTM_CLKIN0 (with pullup)
-//    ©(PORTB:PCR[16]) = ©(PORTB.PCR !MUX:4 !PE:1 !PS:1)
-    ©(PORTB:PCR[17]) = ©{PORTB:PCR !MUX:4 !PE:1 !PS:1}
+//    ©(PORTB.PCR[16]) = ©(PORTB.PCR !MUX:4 !PE:1 !PS:1)
+    ©(PORTB.PCR[17]) = ©{PORTB.PCR !MUX:4 !PE:1 !PS:1}
   //--- Set counter min value
-//    ©(FTM[1]:CONF) = ©(FTM.CONF !NUMTOF:31)
-    ©(FTM[0]:MODE) = 0x05
-    ©(FTM[0]:SC) = 0
-    ©(FTM[0]:CNTIN) = ©{FTM:CNTIN !INIT:0}
-    ©(FTM[0]:CNT) = ©{FTM:CNT !COUNT:0}
-    ©(FTM[0]:MOD) = ©{FTM:MOD !MOD:1}
-    ©(FTM[0]:C0SC) = 0x14
-    ©(PORTB:PCR[16]) = ©{PORTB:PCR !MUX:4 !PE:1 !PS:1}
-    ©(FTM[0]:C0V) = 0
-    ©(FTM[0]:SC) = 0x58
+//    ©(FTM[1].CONF) = ©(FTM.CONF !NUMTOF:31)
+    ©(FTM[0].MODE) = 0x05
+    ©(FTM[0].SC) = 0
+    ©(FTM[0].CNTIN) = ©{FTM.CNTIN !INIT:0}
+    ©(FTM[0].CNT) = ©{FTM.CNT !COUNT:0}
+    ©(FTM[0].MOD) = ©{FTM.MOD !MOD:1}
+    ©(FTM[0].C0SC) = 0x14
+    ©(PORTB.PCR[16]) = ©{PORTB.PCR !MUX:4 !PE:1 !PS:1}
+    ©(FTM[0].C0V) = 0
+    ©(FTM[0].SC) = 0x58
 
-//    ©(FTM[0]:CNTIN) = ©(FTM.CNTIN !INIT:0)
-    ©(FTM[1]:CNTIN) = ©{FTM:CNTIN !INIT:0}
+//    ©(FTM[0].CNTIN) = ©(FTM.CNTIN !INIT:0)
+    ©(FTM[1].CNTIN) = ©{FTM.CNTIN !INIT:0}
   //--- Set counter current value
-//    ©(FTM[0]:CNT) = ©(FTM.CNT !COUNT:0)
-    ©(FTM[1]:CNT) = ©{FTM:CNT !COUNT:0}
+//    ©(FTM[0].CNT) = ©(FTM.CNT !COUNT:0)
+    ©(FTM[1].CNT) = ©{FTM.CNT !COUNT:0}
   //--- Set counter max value
-//    ©(FTM[0]:MOD) = ©(FTM.MOD !MOD:1)
-    ©(FTM[1]:MOD) = ©{FTM:MOD !MOD:0xFFFF}
+//    ©(FTM[0].MOD) = ©(FTM.MOD !MOD:1)
+    ©(FTM[1].MOD) = ©{FTM.MOD !MOD:0xFFFF}
 
-//    ©(FTM[0]:CONF) = ©(FTM.CONF !BDMMODE:3)
-//    ©(FTM[1]:CONF) = ©(FTM.CONF !BDMMODE:3)
-//    ©(FTM[0]:MODE) = ©(FTM.MODE !FTMEN:1)
-//    ©(FTM[1]:MODE) = ©(FTM.MODE !FTMEN:1)
+//    ©(FTM[0].CONF) = ©(FTM.CONF !BDMMODE:3)
+//    ©(FTM[1].CONF) = ©(FTM.CONF !BDMMODE:3)
+//    ©(FTM[0].MODE) = ©(FTM.MODE !FTMEN:1)
+//    ©(FTM[1].MODE) = ©(FTM.MODE !FTMEN:1)
   //--- Set prescaler (0 -> divide by 1) and clock source (3 --> external source)
-//    ©(FTM[0]:C0V) = 0  //compare value = 0
-//    ©(FTM[0]:SC) = ©(FTM.SC !CLKS:3 !PS:0)
-    ©(FTM[1]:SC) = ©{FTM:SC !CLKS:1 !PS:6}
+//    ©(FTM[0].C0V) = 0  //compare value = 0
+//    ©(FTM[0].SC) = ©(FTM.SC !CLKS:3 !PS:0)
+    ©(FTM[1].SC) = ©{FTM.SC !CLKS:1 !PS:6}
   //--- Enable NVIC interrupt
     enable (!interrupt:.FTM0)
   //--- Enable FTM interrupt
-//    ©(FTM[0]:SC) |= ©(FTM.SC !TOIE:1)
+//    ©(FTM[0].SC) |= ©(FTM.SC !TOIE:1)
   //--- Enable NVIC interrupt
     enable (!interrupt:.FTM1)
   //--- Enable FTM interrupt
-    ©(FTM[1]:SC) |= ©{FTM:SC !TOIE:1}
+    ©(FTM[1].SC) |= ©{FTM.SC !TOIE:1}
   }
 
   //····················································································································
 
    section readCounter0 () -> $uint32 {
-    result = ©(FTM[0]:CNT)
+    result = ©(FTM[0].CNT)
   }
   //····················································································································
 
    section readCounter1 () -> $uint32 {
-    result = ©(FTM[1]:CNT)
+    result = ©(FTM[1].CNT)
   }
 
   //····················································································································
@@ -87,7 +87,7 @@ driver myDriver > digital {
   interrupt section FTM0 {
   //--- Set by hardware when the FTM counter passes the value in the MOD register.
   //    The TOF bit is cleared by reading the SC register while TOF is set and then writing a 0 to TOF bit
-    ©(FTM[0]:SC) &= ~ ©{FTM:SC !TOF:1}
+    ©(FTM[0].SC) &= ~ ©{FTM.SC !TOF:1}
     digital.toggle (!port:LED_L0)
   }
   //····················································································································
@@ -95,7 +95,7 @@ driver myDriver > digital {
   interrupt section FTM1 {
   //--- Set by hardware when the FTM counter passes the value in the MOD register.
   //    The TOF bit is cleared by reading the SC register while TOF is set and then writing a 0 to TOF bit
-    ©(FTM[1]:SC) &= ~ ©{FTM:SC !TOF:1}
+    ©(FTM[1].SC) &= ~ ©{FTM.SC !TOF:1}
     digital.toggle (!port:LED_L1)
   }
 }

@@ -8,15 +8,15 @@ import "carte-tp-teensy-3-6.plm-import"
 driver RegisterRead > root {
 
   public section SIM_CLKDIV1 () -> $uint32 {
-    result = ©(SIM:CLKDIV1)
+    result = ©(SIM.CLKDIV1)
   }
 
   public section MCG_C5 () -> $uint8 {
-    result = ©(MCG:C5)
+    result = ©(MCG.C5)
   }
 
   public section MCG_C6 () -> $uint8 {
-    result = ©(MCG:C6)
+    result = ©(MCG.C6)
   }
 }
 

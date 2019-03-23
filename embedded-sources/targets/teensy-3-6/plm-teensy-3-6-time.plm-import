@@ -15,9 +15,9 @@ driver time > root {
   //····················································································································
 
   startup { // Configure Systick interrupt every ms
-    ©(SYST:RVR) = F_CPU_MHZ * 1000 - 1 // $interrupt every ms
-    ©(SYST:CVR) = 0
-    ©(SYST:CSR) = ©{SYST:CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
+    ©(SYST.RVR) = F_CPU_MHZ * 1000 - 1 // $interrupt every ms
+    ©(SYST.CVR) = 0
+    ©(SYST.CSR) = ©{SYST.CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
   }
 
   //····················································································································
@@ -25,7 +25,7 @@ driver time > root {
   //····················································································································
 
   public func oneMillisecondBusyWait startup @noUnusedWarning () {
-    while ©(SYST:CSR:COUNTFLAG) == 0 {}
+    while ©(SYST.CSR.COUNTFLAG) == 0 {}
   }
 
   //····················································································································
@@ -41,7 +41,7 @@ driver time > root {
   //····················································································································
 
   public func panicOneMillisecondBusyWait panic @noUnusedWarning () {
-    while ©(SYST:CSR:COUNTFLAG) == 0 {}
+    while ©(SYST.CSR.COUNTFLAG) == 0 {}
   }
 
   //····················································································································

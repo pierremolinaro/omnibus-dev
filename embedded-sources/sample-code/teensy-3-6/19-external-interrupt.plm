@@ -22,19 +22,19 @@ driver myDriver > digital {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
     digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P4)
   //--- Generate an interrupt on falling edge of port #3 (PTA12)
-    ©(PORTA:PCR[12]) |= ©{PORTA:PCR !IRQC:0xA}
+    ©(PORTA.PCR[12]) |= ©{PORTA.PCR !IRQC:0xA}
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortA)
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortA)
   //--- Digital filters are clocked by the LPO clock
-    ©(PORTC:DFCR) = 1
+    ©(PORTC.DFCR) = 1
   //--- Setr digital filter length
-    ©(PORTC:DFWR) = 31
+    ©(PORTC.DFWR) = 31
   //--- Enable digital filter ou PTC7
-    ©(PORTC:DFER) = 1 << 7
+    ©(PORTC.DFER) = 1 << 7
   //--- Generate an interrupt on falling edge of port #12 (PTC7)
-    ©(PORTC:PCR[7]) |= ©{PORTC:PCR !IRQC:0xA}
+    ©(PORTC.PCR[7]) |= ©{PORTC.PCR !IRQC:0xA}
   //--- Enable NVIC interrupt
     enable (!interrupt:.pinDetectPortC)
   //--- Enable NVIC interrupt
@@ -46,8 +46,8 @@ driver myDriver > digital {
   interrupt section pinDetectPortA {
   //--- Acknowledge interrupt (several ways to do)
  //   #PORTA:PCR[12] |= ©(PORTA.PCR !ISF:1) // Setting bit ISF clears interrupt
-    ©(PORTA:PCR[12] @bit 24) = 1 // The same, using bit banding
- //   ©(PORTA:ISFR) = 1 << 12 // Setting bit 12 clears interrupt
+    ©(PORTA.PCR[12] @bit 24) = 1 // The same, using bit banding
+ //   ©(PORTA.ISFR) = 1 << 12 // Setting bit 12 clears interrupt
   //--- Toggle LED_L1
     digital.toggle (!port:LED_L1)
   }
@@ -56,9 +56,9 @@ driver myDriver > digital {
 
   interrupt section pinDetectPortC {
   //--- Acknowledge interrupt (several ways to do)
- //   ©(PORTC:PCR[7]) |= ©(PORTC.PCR !ISF:1) // Setting bit ISF clears interrupt
-    ©(PORTC:PCR[7] @bit 24) = 1 // The same, using bit banding
- //   ©(PORTC:ISFR) = 1 << 7 // Setting bit 7 clears interrupt
+ //   ©(PORTC.PCR[7]) |= ©(PORTC.PCR !ISF:1) // Setting bit ISF clears interrupt
+    ©(PORTC.PCR[7] @bit 24) = 1 // The same, using bit banding
+ //   ©(PORTC.ISFR) = 1 << 7 // Setting bit 7 clears interrupt
   //--- Toggle LED_L4
     digital.toggle (!port:LED_L4)
   }

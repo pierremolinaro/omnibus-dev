@@ -22,7 +22,7 @@ syntax extension plm_syntax {
     select
       fieldName = ["" nowhere]
     or
-      $:$
+      $.$
       $identifier$ ?fieldName
     end
     $)$
