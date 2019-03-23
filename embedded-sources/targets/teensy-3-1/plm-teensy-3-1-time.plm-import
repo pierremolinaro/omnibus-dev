@@ -14,21 +14,21 @@ driver time > root {
   //············································································
 
   startup { // Configure Systick interrupt every ms
-    $(SYST:RVR) = 96000 - 1 // $interrupt every 96000 core clocks, i.e. every ms
-    $(SYST:CVR) = 0
-    $(SYST:CSR) = ${SYST:CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
+    ©(SYST:RVR) = 96000 - 1 // $interrupt every 96000 core clocks, i.e. every ms
+    ©(SYST:CVR) = 0
+    ©(SYST:CSR) = ©{SYST:CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
   }
 
   //············································································
 
   public func oneMillisecondBusyWait startup @noUnusedWarning () {
-    while $(SYST:CSR:COUNTFLAG) == 0 {}
+    while ©(SYST:CSR:COUNTFLAG) == 0 {}
   }
 
   //············································································
 
   public func panicOneMillisecondBusyWait panic @noUnusedWarning () {
-    while $(SYST:CSR:COUNTFLAG) == 0 {}
+    while ©(SYST:CSR:COUNTFLAG) == 0 {}
   }
 
   //············································································

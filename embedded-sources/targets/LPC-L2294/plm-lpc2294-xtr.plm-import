@@ -47,18 +47,18 @@ driver time {
 
   startup {
   //--- Program pin P1.23 as an output (STAT led)
-    $(IO1:DIR) |= 1 << 23
-    $(IO1:CLR)  = 1 << 23 // Led On
+    ©(IO1:DIR) |= 1 << 23
+    ©(IO1:CLR)  = 1 << 23 // Led On
   //-------------------------------- Timer 1
   //--- 1. Set Prescaler
-    $(TIMER1:PR) = TIMER_PRESCALER - 1
+    ©(TIMER1:PR) = TIMER_PRESCALER - 1
   //--- 2. Set Match Register 0
   //    We want an interrupt every millisecond
-    $(TIMER1:MR0) = TICKS_PER_MILLISECONDS - 1
+    ©(TIMER1:MR0) = TICKS_PER_MILLISECONDS - 1
   //--- 2. Set Count control Register
   //    Bits 1-0: 00 (timer mode)
   //    Bits 3-2: XX (any value, because timer mode)
-    $(TIMER1:CCR) = 0
+    ©(TIMER1:CCR) = 0
   //--- 3. Match Control Register
   //    Bit 0: 1 (interrupt on MR0 match)
   //    Bit 1: 1 (reset on MR0 match)
@@ -66,7 +66,7 @@ driver time {
   //    Bit 5-3: 000 (MR1 not used)
   //    Bit 8-6: 000 (MR2 not used)
   //    Bit 11-9: 000 (MR3 not used)
-    $(TIMER1:MCR) = 3
+    ©(TIMER1:MCR) = 3
   //--- 4. Use vector 9 for TIMER1 interrupt
   //  sys_installInterruptServiceRoutine (MODE_ TIMER1InterruptServiceRoutine, 5) ;
   //  VICVectAddr9 = (uint32_t) TIMER1InterruptServiceRoutine ;
@@ -78,7 +78,7 @@ driver time {
   //--- 6. Start Counter 0 (Timer Control Register)
   // Bit 0 : 1 (Enables counting)
   // Bit 1 : 0 (No reset)
-    $(TIMER1:TCR) = 1
+    ©(TIMER1:TCR) = 1
   }
 
   //············································································
@@ -94,7 +94,7 @@ driver time {
   //············································································
 
   interrupt service TIMER1 {
-    $(TIMER1:IR) = 1 // Clears MR0 interrupt
+    ©(TIMER1:IR) = 1 // Clears MR0 interrupt
     let now = self.mUptime +% 1
     self.mUptime = now
     makeTasksReady (!fromCurrentDate:now)

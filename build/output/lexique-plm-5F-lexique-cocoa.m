@@ -296,6 +296,10 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__21__2F__3D_ ;
     }else if (scanningOk && [self testForInputString:@"!%=" advance:YES]) {
       mTokenCode = plm_lexique_1__21__25__3D_ ;
+    }else if (scanningOk && [self testForInputString:@"\xC2""\xA9""{" advance:YES]) {
+      mTokenCode = plm_lexique_1__A9__7B_ ;
+    }else if (scanningOk && [self testForInputString:@"\xC2""\xA9""(" advance:YES]) {
+      mTokenCode = plm_lexique_1__A9__28_ ;
     }else if (scanningOk && [self testForInputString:@"|=" advance:YES]) {
       mTokenCode = plm_lexique_1__7C__3D_ ;
     }else if (scanningOk && [self testForInputString:@"^=" advance:YES]) {
@@ -330,10 +334,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__26__3D_ ;
     }else if (scanningOk && [self testForInputString:@"%=" advance:YES]) {
       mTokenCode = plm_lexique_1__25__3D_ ;
-    }else if (scanningOk && [self testForInputString:@"${" advance:YES]) {
-      mTokenCode = plm_lexique_1__24__7B_ ;
-    }else if (scanningOk && [self testForInputString:@"$(" advance:YES]) {
-      mTokenCode = plm_lexique_1__24__28_ ;
     }else if (scanningOk && [self testForInputString:@"!/" advance:YES]) {
       mTokenCode = plm_lexique_1__21__2F_ ;
     }else if (scanningOk && [self testForInputString:@"!%" advance:YES]) {
@@ -625,8 +625,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     6 /* plm_lexique_1__3C__3C_ */,
     6 /* plm_lexique_1__3E__3E_ */,
     6 /* plm_lexique_1__7E_ */,
-    6 /* plm_lexique_1__24__28_ */,
-    6 /* plm_lexique_1__24__7B_ */,
+    6 /* plm_lexique_1__A9__28_ */,
+    6 /* plm_lexique_1__A9__7B_ */,
     6 /* plm_lexique_1__2D__3E_ */,
     6 /* plm_lexique_1__2E__2E__3C_ */,
     6 /* plm_lexique_1__2E__2E__2E_ */,
@@ -754,8 +754,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__3C__3C_ */,
     YES /* plm_lexique_1__3E__3E_ */,
     YES /* plm_lexique_1__7E_ */,
-    YES /* plm_lexique_1__24__28_ */,
-    YES /* plm_lexique_1__24__7B_ */,
+    YES /* plm_lexique_1__A9__28_ */,
+    YES /* plm_lexique_1__A9__7B_ */,
     YES /* plm_lexique_1__2D__3E_ */,
     YES /* plm_lexique_1__2E__2E__3C_ */,
     YES /* plm_lexique_1__2E__2E__2E_ */,

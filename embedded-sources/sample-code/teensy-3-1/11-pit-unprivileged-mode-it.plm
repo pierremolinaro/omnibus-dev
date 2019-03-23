@@ -5,9 +5,9 @@ import "carte-tp-teensy-3-1.plm-import"
 //-----------------------------------------------------------------------------*
 
 section setupPIT () {
-  $(PIT:MCR) = 0
-  $(PIT:LDVAL [0]) = 200000
-  $(PIT:TCTRL [0]) = ${PIT:TCTRL !TIE:1 !TEN:1} // $interrupt, enabled
+  ©(PIT:MCR) = 0
+  ©(PIT:LDVAL [0]) = 200000
+  ©(PIT:TCTRL [0]) = ©{PIT:TCTRL !TIE:1 !TEN:1} // $interrupt, enabled
   enable (!interrupt: .PITChannel0)
 }
 
@@ -19,7 +19,7 @@ driver pit > digital {
   startup {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    $(SIM:SCGC6) |= SIM_SCGC6_PIT
+    ©(SIM:SCGC6) |= SIM_SCGC6_PIT
   }
 
   section getPITValue (!outValue $uint32) {
@@ -28,7 +28,7 @@ driver pit > digital {
 
   interrupt section PITChannel0 {
   //--- Acquitter l'interruption
-    $(PIT:TFLG [0]) = ${PIT:TFLG !TIF:1}
+    ©(PIT:TFLG [0]) = ©{PIT:TFLG !TIF:1}
   //--- Incrémenter le compteur
     self.gPITValue += 1
   }
