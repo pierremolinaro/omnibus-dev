@@ -10,33 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Extension method '@PLMType generateRelease'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef void (*extensionMethodSignature_PLMType_generateRelease) (const class cPtr_PLMType * inObject,
-                                                                  const class GALGAS_string constinArgument0,
-                                                                  class GALGAS_string & ioArgument1,
-                                                                  class GALGAS_generationAdds & ioArgument2,
-                                                                  class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_generateRelease (const int32_t inClassIndex,
-                                           extensionMethodSignature_PLMType_generateRelease inMethod) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_generateRelease (const class cPtr_PLMType * inObject,
-                                          const GALGAS_string constin_inPLMName,
-                                          GALGAS_string & io_ioLLVMcode,
-                                          GALGAS_generationAdds & io_ioGenerationAdds,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                 Extension getter '@PLMType descriptionForHTMLFile'                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

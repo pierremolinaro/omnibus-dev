@@ -78,11 +78,6 @@ override method @typeAliasDeclarationAST enterInContext
     !lkey:mAliasTypeName
     !type:type
   ]
-  [!?ioContext.mValuedObjectMap insertType
-    !typeName: mAliasTypeName
-    !type: type
-    !typeMap: ioContext.mTypeMap
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

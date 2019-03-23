@@ -1821,12 +1821,12 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "    if self.index == SIZE {\n"
   "      self.index = 0\n"
   "    }\n"
-  "    for i $UInt32 in 0 ..< A.count {\n"
+  "    for i $UInt32 in 0 ..< $A.count {\n"
   "      self.array [i] +%= 1\n"
   "    }\n"
   "    self.array2 = self.array\n"
   "    lcd.goto (!line:0 !column:0)\n"
-  "    for i $UInt32 in 0 ..< A.count {\n"
+  "    for i $UInt32 in 0 ..< $A.count {\n"
   "      lcd.print (!u32:self.array2 [i])\n"
   "      lcd.print (!spaces:1)\n"
   "    }\n"
@@ -1842,7 +1842,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1/unp
   "    var d = A (!0 !e !2)\n"
   "  //---\n"
   "    var x $UInt32 = 0\n"
-  "    for i $UInt32 in 0 ..< A.count {\n"
+  "    for i $UInt32 in 0 ..< $A.count {\n"
   "      a [i] = 9\n"
   "      a [i] += 9\n"
   "      x += a [i]\n"
@@ -1863,7 +1863,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1654, // Text length
+  1657, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -2751,7 +2751,7 @@ const char * gWrapperFileContent_35_embeddedSampleCode = "//\xE2""\x80""\x94""\x
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.print (!u32:self.pattern.count)\n"
   "    lcd.print (!string:\" \")\n"
-  "    let cc = ISRSlot.PITChannel3.uint7\n"
+  "    let cc = $ISRSlot.PITChannel3.uint7\n"
   "    lcd.print (!u32:extend (cc))\n"
   "  }\n"
   "}\n"
@@ -2762,7 +2762,7 @@ const cRegularFileWrapper gWrapperFile_35_embeddedSampleCode (
   "03-pit-dma.plm",
   "plm",
   true, // Text file
-  7562, // Text length
+  7563, // Text length
   gWrapperFileContent_35_embeddedSampleCode
 ) ;
 

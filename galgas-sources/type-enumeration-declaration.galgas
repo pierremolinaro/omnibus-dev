@@ -160,11 +160,6 @@ override method @enumerationDeclarationAST enterInContext
     !lkey:mEnumerationName
     !type:enumerationType
   ]
-  [!?ioContext.mValuedObjectMap insertType
-    !typeName: mEnumerationName
-    !type:enumerationType
-    !typeMap: ioContext.mTypeMap
-  ]
 #---------- Enter boolean assignment function
   ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
     ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]

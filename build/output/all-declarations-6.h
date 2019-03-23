@@ -2346,19 +2346,6 @@ class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Extension setter '@universalValuedObjectMap insertType'                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionSetter_insertType (class GALGAS_universalValuedObjectMap & ioObject,
-                                 const class GALGAS_lstring constin_inTypeName,
-                                 const class GALGAS_PLMType constin_inType,
-                                 const class GALGAS_unifiedTypeMap constin_inTypeMap,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                              Extension setter '@universalValuedObjectMap insertDriver'                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2757,4 +2744,31 @@ void callExtensionMethod_generateInsulate (const class cPtr_PLMType * inObject,
                                            GALGAS_generationAdds & io_ioGenerationAdds,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                     Extension method '@PLMType generateRelease'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_PLMType_generateRelease) (const class cPtr_PLMType * inObject,
+                                                                  const class GALGAS_string constinArgument0,
+                                                                  class GALGAS_string & ioArgument1,
+                                                                  class GALGAS_generationAdds & ioArgument2,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateRelease (const int32_t inClassIndex,
+                                           extensionMethodSignature_PLMType_generateRelease inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateRelease (const class cPtr_PLMType * inObject,
+                                          const GALGAS_string constin_inPLMName,
+                                          GALGAS_string & io_ioLLVMcode,
+                                          GALGAS_generationAdds & io_ioGenerationAdds,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 

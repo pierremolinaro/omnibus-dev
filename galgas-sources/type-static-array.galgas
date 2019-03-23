@@ -150,19 +150,9 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !lkey:mArrayTypeName
         !type:arrayType
       ]
-      [!?ioContext.mValuedObjectMap insertType
-        !typeName: mArrayTypeName
-        !type:arrayType
-        !typeMap: ioContext.mTypeMap
-      ]
       [!?ioContext.mTypeMap insertType
         !lkey:plmTypeDescriptionName
         !type:arrayType
-      ]
-      [!?ioContext.mValuedObjectMap insertType
-        !typeName: plmTypeDescriptionName
-        !type:arrayType
-        !typeMap: ioContext.mTypeMap
       ]
     #-------------------------------------------- GenerateLLVM type definition
       ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR.new {

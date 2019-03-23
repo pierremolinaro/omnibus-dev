@@ -231,8 +231,6 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 {
   [ioUniversalMap searchEntity !mReceiverName ?let entity]
   switch entity
-  case type (*) : # §
-    error mReceiverName : "a type cannot be used here" : outResult
   case task (type) :
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
     procAnalyzeAccesListInExpression (

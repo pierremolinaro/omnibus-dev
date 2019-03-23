@@ -209,11 +209,6 @@ override method @integerDeclarationAST enterInContext
     !lkey:integerTypeName
     !type:integerType
   ]
-  [!?ioContext.mValuedObjectMap insertType
-    !typeName: integerTypeName
-    !type:integerType
-    !typeMap: ioContext.mTypeMap
-  ]
 #--------------------------------------- Enter integer <-> integer operators
   enter_integer_integer_operators (
     !integerTypeName:integerTypeName

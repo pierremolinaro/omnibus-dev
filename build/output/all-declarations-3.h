@@ -1994,8 +1994,7 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
     kEnum_globalConstant,
     kEnum_localConstant,
     kEnum_localVariable,
-    kEnum_globalSyncInstance,
-    kEnum_type
+    kEnum_globalSyncInstance
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -2045,9 +2044,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
   public : static class GALGAS_valuedObject constructor_task (const class GALGAS_PLMType & inOperand0
                                                               COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valuedObject constructor_type (const class GALGAS_PLMType & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -2086,10 +2082,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_type (class GALGAS_PLMType & outArgument0,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
@@ -2104,8 +2096,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isTask (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2695,22 +2685,6 @@ class cEnumAssociatedValues_valuedObject_globalSyncInstance : public cEnumAssoci
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_valuedObject_globalSyncInstance (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_valuedObject_type : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valuedObject_type (const GALGAS_PLMType & inAssociatedValue0
-                                                    COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valuedObject_type (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

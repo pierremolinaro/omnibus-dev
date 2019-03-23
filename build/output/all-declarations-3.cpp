@@ -8561,35 +8561,6 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_globalSyncInstance::comp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_valuedObject_type::cEnumAssociatedValues_valuedObject_type (const GALGAS_PLMType & inAssociatedValue0
-                                                                                  COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_valuedObject_type::description (C_String & ioString,
-                                                           const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_valuedObject_type::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_valuedObject_type * ptr = dynamic_cast<const cEnumAssociatedValues_valuedObject_type *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_valuedObject::GALGAS_valuedObject (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -8684,21 +8655,6 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_globalSyncInstance (const G
     result.mEnum = kEnum_globalSyncInstance ;
     cEnumAssociatedValues * ptr = NULL ;
     macroMyNew (ptr, cEnumAssociatedValues_valuedObject_globalSyncInstance (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_valuedObject GALGAS_valuedObject::constructor_type (const GALGAS_PLMType & inAssociatedValue0
-                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_valuedObject result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_type ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valuedObject_type (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -8818,31 +8774,14 @@ void GALGAS_valuedObject::method_globalSyncInstance (GALGAS_PLMType & outAssocia
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_valuedObject::method_type (GALGAS_PLMType & outAssociatedValue0,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_type) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @valuedObject type invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_valuedObject_type * ptr = (const cEnumAssociatedValues_valuedObject_type *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static const char * gEnumNameArrayFor_valuedObject [8] = {
+static const char * gEnumNameArrayFor_valuedObject [7] = {
   "(not built)",
   "driver",
   "task",
   "globalConstant",
   "localConstant",
   "localVariable",
-  "globalSyncInstance",
-  "type"
+  "globalSyncInstance"
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8879,12 +8818,6 @@ GALGAS_bool GALGAS_valuedObject::getter_isLocalVariable (UNUSED_LOCATION_ARGS) c
 
 GALGAS_bool GALGAS_valuedObject::getter_isGlobalSyncInstance (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalSyncInstance == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_valuedObject::getter_isType (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_type == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

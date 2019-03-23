@@ -161,8 +161,6 @@ method @LValueAST analyzeLValue
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
-    case type (*) :
-      error mIdentifier : "<<@LValueAST analyzeLValue type>>" : outInternalRepresentation
     case task (*) :
       error mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
