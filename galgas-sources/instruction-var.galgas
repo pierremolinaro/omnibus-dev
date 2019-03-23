@@ -41,7 +41,6 @@ syntax extension plm_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
-    $:$
     <type_definition> !?ioAST ?let typeName
     select
       ioInstructionList += !@varInstructionAST.new {

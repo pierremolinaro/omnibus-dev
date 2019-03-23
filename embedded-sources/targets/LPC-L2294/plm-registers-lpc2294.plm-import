@@ -2,328 +2,328 @@
 
 // Vectored $Interrupt Controller (VIC)
 registers VIC @at 0xFFFF_F000 {
-  IRQStatus   @offset 0x000 : $UInt32
-  FIQStatus   @offset 0x000 : $UInt32
-  RawIntr     @offset 0x008 : $UInt32
-  IntSelect   @offset 0x00C : $UInt32
-  IntEnable   @offset 0x010 : $UInt32
-  IntEnClr    @offset 0x014 : $UInt32
-  SoftInt     @offset 0x018 : $UInt32
-  SoftIntClr  @offset 0x01C : $UInt32
-  Protection  @offset 0x020 : $UInt32
-  VectAddr    @offset 0x030 : $UInt32
-  DefVectAddr @offset 0x034 : $UInt32
+  IRQStatus   @offset 0x000 $UInt32
+  FIQStatus   @offset 0x000 $UInt32
+  RawIntr     @offset 0x008 $UInt32
+  IntSelect   @offset 0x00C $UInt32
+  IntEnable   @offset 0x010 $UInt32
+  IntEnClr    @offset 0x014 $UInt32
+  SoftInt     @offset 0x018 $UInt32
+  SoftIntClr  @offset 0x01C $UInt32
+  Protection  @offset 0x020 $UInt32
+  VectAddr    @offset 0x030 $UInt32
+  DefVectAddr @offset 0x034 $UInt32
 
-  VectAddr0   @offset 0x100 : $UInt32
-  VectAddr1   @offset 0x104 : $UInt32
-  VectAddr2   @offset 0x108 : $UInt32
-  VectAddr3   @offset 0x10C : $UInt32
-  VectAddr4   @offset 0x110 : $UInt32
-  VectAddr5   @offset 0x114 : $UInt32
-  VectAddr6   @offset 0x118 : $UInt32
-  VectAddr7   @offset 0x11C : $UInt32
-  VectAddr8   @offset 0x120 : $UInt32
-  VectAddr9   @offset 0x124 : $UInt32
-  VectAddr10  @offset 0x128 : $UInt32
-  VectAddr11  @offset 0x12C : $UInt32
-  VectAddr12  @offset 0x130 : $UInt32
-  VectAddr13  @offset 0x134 : $UInt32
-  VectAddr14  @offset 0x138 : $UInt32
-  VectAddr15  @offset 0x13C : $UInt32
+  VectAddr0   @offset 0x100 $UInt32
+  VectAddr1   @offset 0x104 $UInt32
+  VectAddr2   @offset 0x108 $UInt32
+  VectAddr3   @offset 0x10C $UInt32
+  VectAddr4   @offset 0x110 $UInt32
+  VectAddr5   @offset 0x114 $UInt32
+  VectAddr6   @offset 0x118 $UInt32
+  VectAddr7   @offset 0x11C $UInt32
+  VectAddr8   @offset 0x120 $UInt32
+  VectAddr9   @offset 0x124 $UInt32
+  VectAddr10  @offset 0x128 $UInt32
+  VectAddr11  @offset 0x12C $UInt32
+  VectAddr12  @offset 0x130 $UInt32
+  VectAddr13  @offset 0x134 $UInt32
+  VectAddr14  @offset 0x138 $UInt32
+  VectAddr15  @offset 0x13C $UInt32
 
-  VectCntl0   @offset 0x200 : $UInt32
-  VectCntl1   @offset 0x204 : $UInt32
-  VectCntl2   @offset 0x208 : $UInt32
-  VectCntl3   @offset 0x20C : $UInt32
-  VectCntl4   @offset 0x210 : $UInt32
-  VectCntl5   @offset 0x214 : $UInt32
-  VectCntl6   @offset 0x218 : $UInt32
-  VectCntl7   @offset 0x21C : $UInt32
-  VectCntl8   @offset 0x220 : $UInt32
-  VectCntl9   @offset 0x224 : $UInt32
-  VectCntl10  @offset 0x228 : $UInt32
-  VectCntl11  @offset 0x22C : $UInt32
-  VectCntl12  @offset 0x230 : $UInt32
-  VectCntl13  @offset 0x234 : $UInt32
-  VectCntl14  @offset 0x238 : $UInt32
-  VectCntl15  @offset 0x23C : $UInt32
+  VectCntl0   @offset 0x200 $UInt32
+  VectCntl1   @offset 0x204 $UInt32
+  VectCntl2   @offset 0x208 $UInt32
+  VectCntl3   @offset 0x20C $UInt32
+  VectCntl4   @offset 0x210 $UInt32
+  VectCntl5   @offset 0x214 $UInt32
+  VectCntl6   @offset 0x218 $UInt32
+  VectCntl7   @offset 0x21C $UInt32
+  VectCntl8   @offset 0x220 $UInt32
+  VectCntl9   @offset 0x224 $UInt32
+  VectCntl10  @offset 0x228 $UInt32
+  VectCntl11  @offset 0x22C $UInt32
+  VectCntl12  @offset 0x230 $UInt32
+  VectCntl13  @offset 0x234 $UInt32
+  VectCntl14  @offset 0x238 $UInt32
+  VectCntl15  @offset 0x23C $UInt32
 }
 
 //------------------------------------------------------------------------------
 
 // Watchdog
 registers WD @at 0xE000_0000 {
-  MOD            @offset 0x00 : $UInt8
-  TC             @offset 0x04 : $UInt32
-  FEED           @offset 0x08 : $UInt8
-  TV             @offset 0x0C : $UInt32
+  MOD            @offset 0x00 $UInt8
+  TC             @offset 0x04 $UInt32
+  FEED           @offset 0x08 $UInt8
+  TV             @offset 0x0C $UInt32
 }
 
 // Pin Connect Block
 registers PIN @at 0xE002_C000 {
-  SEL0        @offset 0x00 : $UInt32
-  SEL1        @offset 0x04 : $UInt32
-  SEL2        @offset 0x14 : $UInt32
+  SEL0        @offset 0x00 $UInt32
+  SEL1        @offset 0x04 $UInt32
+  SEL2        @offset 0x14 $UInt32
 }
 
 // General Purpose Input/Output (GPIO)
 registers IO0 @at 0xE002_8000 {
-  PIN          @offset 0x00 : $UInt32
-  SET          @offset 0x04 : $UInt32
-  DIR          @offset 0x08 : $UInt32
-  CLR          @offset 0x0C : $UInt32
+  PIN          @offset 0x00 $UInt32
+  SET          @offset 0x04 $UInt32
+  DIR          @offset 0x08 $UInt32
+  CLR          @offset 0x0C $UInt32
 }
 
 registers IO1 @at 0xE002_8010 {
-  PIN          @offset 0x00 : $UInt32
-  SET          @offset 0x04 : $UInt32
-  DIR          @offset 0x08 : $UInt32
-  CLR          @offset 0x0C : $UInt32
+  PIN          @offset 0x00 $UInt32
+  SET          @offset 0x04 $UInt32
+  DIR          @offset 0x08 $UInt32
+  CLR          @offset 0x0C $UInt32
 }
 
 registers IO2 @at 0xE002_8020 {
-  PIN          @offset 0x00 : $UInt32
-  SET          @offset 0x04 : $UInt32
-  DIR          @offset 0x08 : $UInt32
-  CLR          @offset 0x0C : $UInt32
+  PIN          @offset 0x00 $UInt32
+  SET          @offset 0x04 $UInt32
+  DIR          @offset 0x08 $UInt32
+  CLR          @offset 0x0C $UInt32
 }
 
 registers IO3 @at 0xE002_8030 {
-  PIN          @offset 0x00 : $UInt32
-  SET          @offset 0x04 : $UInt32
-  DIR          @offset 0x08 : $UInt32
-  CLR          @offset 0x0C : $UInt32
+  PIN          @offset 0x00 $UInt32
+  SET          @offset 0x04 $UInt32
+  DIR          @offset 0x08 $UInt32
+  CLR          @offset 0x0C $UInt32
 }
 
 // Memory Accelerator Module (MAM)
 registers MAM @at 0xE01F_C000 {
-  CR            @offset 0x00 : $UInt8
-  TIM           @offset 0x04 : $UInt8
+  CR            @offset 0x00 $UInt8
+  TIM           @offset 0x04 $UInt8
 }
 
 registers MEM @at 0xE01F_C000 {
-  MAP           @offset 0x40 : $UInt8
+  MAP           @offset 0x40 $UInt8
 }
 
 // Phase Locked Loop (PLL)
 registers PLL @at 0xE01F_C000 {
-  CON           @offset 0x80 : $UInt8
-  CFG           @offset 0x84 : $UInt8
-  STAT          @offset 0x88 : $UInt16
-  FEED          @offset 0x8C : $UInt8
+  CON           @offset 0x80 $UInt8
+  CFG           @offset 0x84 $UInt8
+  STAT          @offset 0x88 $UInt16
+  FEED          @offset 0x8C $UInt8
 }
 
 // VPB Divider */
 registers VPB @at 0xE01F_C100 {
-  DIV           @offset 0x0 : $UInt8
+  DIV           @offset 0x0 $UInt8
 }
 
 // Power Control */
 registers PC @at 0xE01F_C0C0 {
-  ON             @offset 0x0 : $UInt8
-  ONP            @offset 0x4 : $UInt32
+  ON             @offset 0x0 $UInt8
+  ONP            @offset 0x4 $UInt32
 }
 
 // External $Interrupts
 registers EXT @at 0xE01F_C140 {
-  INT           @offset 0x0 : $UInt8
-  WAKE          @offset 0x4 : $UInt8
-  MODE          @offset 0x8 : $UInt8
-  POLAR         @offset 0xC : $UInt8
+  INT           @offset 0x0 $UInt8
+  WAKE          @offset 0x4 $UInt8
+  MODE          @offset 0x8 $UInt8
+  POLAR         @offset 0xC $UInt8
 }
 
 // Timer 0
 registers TIMER0 @at 0xE000_4000 {
-  IR      @offset 0x00 : $UInt32
-  TCR     @offset 0x04 : $UInt32
-  TC      @offset 0x08 : $UInt32
-  PR      @offset 0x0C : $UInt32
-  PC      @offset 0x10 : $UInt32
-  MCR     @offset 0x14 : $UInt32
-  MR0     @offset 0x18 : $UInt32
-  MR1     @offset 0x1C : $UInt32
-  MR2     @offset 0x20 : $UInt32
-  MR3     @offset 0x24 : $UInt32
-  CCR     @offset 0x28 : $UInt32
-  CR0     @offset 0x2C : $UInt32
-  CR1     @offset 0x30 : $UInt32
-  CR2     @offset 0x34 : $UInt32
-  CR3     @offset 0x38 : $UInt32
-  EMR     @offset 0x3C : $UInt32
+  IR      @offset 0x00 $UInt32
+  TCR     @offset 0x04 $UInt32
+  TC      @offset 0x08 $UInt32
+  PR      @offset 0x0C $UInt32
+  PC      @offset 0x10 $UInt32
+  MCR     @offset 0x14 $UInt32
+  MR0     @offset 0x18 $UInt32
+  MR1     @offset 0x1C $UInt32
+  MR2     @offset 0x20 $UInt32
+  MR3     @offset 0x24 $UInt32
+  CCR     @offset 0x28 $UInt32
+  CR0     @offset 0x2C $UInt32
+  CR1     @offset 0x30 $UInt32
+  CR2     @offset 0x34 $UInt32
+  CR3     @offset 0x38 $UInt32
+  EMR     @offset 0x3C $UInt32
 }
 
 // Timer 1
 registers TIMER1 @at 0xE000_8000 {
-  IR      @offset 0x00 : $UInt32
-  TCR     @offset 0x04 : $UInt32
-  TC      @offset 0x08 : $UInt32
-  PR      @offset 0x0C : $UInt32
-  PC      @offset 0x10 : $UInt32
-  MCR     @offset 0x14 : $UInt32
-  MR0     @offset 0x18 : $UInt32
-  MR1     @offset 0x1C : $UInt32
-  MR2     @offset 0x20 : $UInt32
-  MR3     @offset 0x24 : $UInt32
-  CCR     @offset 0x28 : $UInt32
-  CR0     @offset 0x2C : $UInt32
-  CR1     @offset 0x30 : $UInt32
-  CR2     @offset 0x34 : $UInt32
-  CR3     @offset 0x38 : $UInt32
-  EMR     @offset 0x3C : $UInt32
+  IR      @offset 0x00 $UInt32
+  TCR     @offset 0x04 $UInt32
+  TC      @offset 0x08 $UInt32
+  PR      @offset 0x0C $UInt32
+  PC      @offset 0x10 $UInt32
+  MCR     @offset 0x14 $UInt32
+  MR0     @offset 0x18 $UInt32
+  MR1     @offset 0x1C $UInt32
+  MR2     @offset 0x20 $UInt32
+  MR3     @offset 0x24 $UInt32
+  CCR     @offset 0x28 $UInt32
+  CR0     @offset 0x2C $UInt32
+  CR1     @offset 0x30 $UInt32
+  CR2     @offset 0x34 $UInt32
+  CR3     @offset 0x38 $UInt32
+  EMR     @offset 0x3C $UInt32
 }
 
 // Pulse Width Modulator (PWM)
 registers PWM @at 0xE001_4000 {
-  IR         @offset 0x00 : $UInt32
-  TCR        @offset 0x04 : $UInt32
-  TC         @offset 0x08 : $UInt32
-  PR         @offset 0x0C : $UInt32
-  PC         @offset 0x10 : $UInt32
-  MCR        @offset 0x14 : $UInt32
-  MR0        @offset 0x18 : $UInt32
-  MR1        @offset 0x1C : $UInt32
-  MR2        @offset 0x20 : $UInt32
-  MR3        @offset 0x24 : $UInt32
-  MR4        @offset 0x40 : $UInt32
-  MR5        @offset 0x44 : $UInt32
-  MR6        @offset 0x48 : $UInt32
-  CCR        @offset 0x28 : $UInt32
-  CR0        @offset 0x2C : $UInt32
-  CR1        @offset 0x30 : $UInt32
-  CR2        @offset 0x34 : $UInt32
-  CR3        @offset 0x38 : $UInt32
-  EMR        @offset 0x3C : $UInt32
-  PCR        @offset 0x4C : $UInt32
-  LER        @offset 0x50 : $UInt32
+  IR         @offset 0x00 $UInt32
+  TCR        @offset 0x04 $UInt32
+  TC         @offset 0x08 $UInt32
+  PR         @offset 0x0C $UInt32
+  PC         @offset 0x10 $UInt32
+  MCR        @offset 0x14 $UInt32
+  MR0        @offset 0x18 $UInt32
+  MR1        @offset 0x1C $UInt32
+  MR2        @offset 0x20 $UInt32
+  MR3        @offset 0x24 $UInt32
+  MR4        @offset 0x40 $UInt32
+  MR5        @offset 0x44 $UInt32
+  MR6        @offset 0x48 $UInt32
+  CCR        @offset 0x28 $UInt32
+  CR0        @offset 0x2C $UInt32
+  CR1        @offset 0x30 $UInt32
+  CR2        @offset 0x34 $UInt32
+  CR3        @offset 0x38 $UInt32
+  EMR        @offset 0x3C $UInt32
+  PCR        @offset 0x4C $UInt32
+  LER        @offset 0x50 $UInt32
 }
 
 // Universal Asynchronous Receiver Transmitter 0 (UART0)
 registers U0 @at 0xE000_C000 {
-  RBR        @offset 0x00 : $UInt8
-  THR        @offset 0x00 : $UInt8
-  DLL        @offset 0x00 : $UInt8
-  DLM        @offset 0x04 : $UInt8
-  IER        @offset 0x04 : $UInt32
-  IIR        @offset 0x08 : $UInt32
-  FCR        @offset 0x08 : $UInt8
-  LCR        @offset 0x0C : $UInt8
-  LSR        @offset 0x14 : $UInt8
-  SCR        @offset 0x1C : $UInt8
-  ACR        @offset 0x20 : $UInt32
-  FDR        @offset 0x28 : $UInt32
-  TER        @offset 0x30 : $UInt8
+  RBR        @offset 0x00 $UInt8
+  THR        @offset 0x00 $UInt8
+  DLL        @offset 0x00 $UInt8
+  DLM        @offset 0x04 $UInt8
+  IER        @offset 0x04 $UInt32
+  IIR        @offset 0x08 $UInt32
+  FCR        @offset 0x08 $UInt8
+  LCR        @offset 0x0C $UInt8
+  LSR        @offset 0x14 $UInt8
+  SCR        @offset 0x1C $UInt8
+  ACR        @offset 0x20 $UInt32
+  FDR        @offset 0x28 $UInt32
+  TER        @offset 0x30 $UInt8
 }
 
 // Universal Asynchronous Receiver Transmitter 1 (UART1)
 registers U1 @at 0xE001_0000 {
-  RBR        @offset 0x00 : $UInt8
-  THR        @offset 0x00 : $UInt8
-  DLL        @offset 0x00 : $UInt8
-  DLM        @offset 0x04 : $UInt8
-  IER        @offset 0x04 : $UInt32
-  IIR        @offset 0x08 : $UInt32
-  FCR        @offset 0x08 : $UInt8
-  LCR        @offset 0x0C : $UInt8
-  MCR        @offset 0x10 : $UInt8
-  LSR        @offset 0x14 : $UInt8
-  MSR        @offset 0x18 : $UInt8
-  SCR        @offset 0x1C : $UInt8
-  ACR        @offset 0x20 : $UInt32
-  FDR        @offset 0x28 : $UInt32
-  TER        @offset 0x30 : $UInt8
+  RBR        @offset 0x00 $UInt8
+  THR        @offset 0x00 $UInt8
+  DLL        @offset 0x00 $UInt8
+  DLM        @offset 0x04 $UInt8
+  IER        @offset 0x04 $UInt32
+  IIR        @offset 0x08 $UInt32
+  FCR        @offset 0x08 $UInt8
+  LCR        @offset 0x0C $UInt8
+  MCR        @offset 0x10 $UInt8
+  LSR        @offset 0x14 $UInt8
+  MSR        @offset 0x18 $UInt8
+  SCR        @offset 0x1C $UInt8
+  ACR        @offset 0x20 $UInt32
+  FDR        @offset 0x28 $UInt32
+  TER        @offset 0x30 $UInt8
 }
 
 // I2C $Interface
 registers I2C @at 0xE001_C000 {
-  I2CONSET     @offset 0x00 : $UInt8
-  I2STAT       @offset 0x04 : $UInt8
-  I2DAT        @offset 0x08 : $UInt8
-  I2ADR        @offset 0x0C : $UInt8
-  I2SCLH       @offset 0x10 : $UInt16
-  I2SCLL       @offset 0x14 : $UInt16
-  I2CONCLR     @offset 0x18 : $UInt8
+  I2CONSET     @offset 0x00 $UInt8
+  I2STAT       @offset 0x04 $UInt8
+  I2DAT        @offset 0x08 $UInt8
+  I2ADR        @offset 0x0C $UInt8
+  I2SCLH       @offset 0x10 $UInt16
+  I2SCLL       @offset 0x14 $UInt16
+  I2CONCLR     @offset 0x18 $UInt8
 }
 
 // SPI 0 (Serial Peripheral $Interface 0)
 registers SPI0 @at 0xE002_0000 {
-  SPCR          @offset 0x00 : $UInt16
-  SPSR          @offset 0x04 : $UInt8
-  SPDR          @offset 0x08 : $UInt16
-  SPCCR         @offset 0x0C : $UInt8
-  // SPTCR        @offset 0x10 : $UInt8
-  // SPTSR        @offset 0x14 : $UInt8
-  // SPTOR        @offset 0x18 : $UInt8
-  SPINT         @offset 0x1C : $UInt8
+  SPCR          @offset 0x00 $UInt16
+  SPSR          @offset 0x04 $UInt8
+  SPDR          @offset 0x08 $UInt16
+  SPCCR         @offset 0x0C $UInt8
+  // SPTCR        @offset 0x10 $UInt8
+  // SPTSR        @offset 0x14 $UInt8
+  // SPTOR        @offset 0x18 $UInt8
+  SPINT         @offset 0x1C $UInt8
 }
 
 // SPI 1 (Serial Peripheral $Interface 1)
 registers SPI1 @at 0xE003_0000 {
-  SPCR          @offset 0x00 : $UInt16
-  SPSR          @offset 0x04 : $UInt8
-  SPDR          @offset 0x08 : $UInt16
-  SPCCR         @offset 0x0C : $UInt8
-  // SPTCR        @offset 0x10 : $UInt8
-  // SPTSR        @offset 0x14 : $UInt8
-  // SPTOR        @offset 0x18 : $UInt8
-  SPINT         @offset 0x1C : $UInt8
+  SPCR          @offset 0x00 $UInt16
+  SPSR          @offset 0x04 $UInt8
+  SPDR          @offset 0x08 $UInt16
+  SPCCR         @offset 0x0C $UInt8
+  // SPTCR        @offset 0x10 $UInt8
+  // SPTSR        @offset 0x14 $UInt8
+  // SPTOR        @offset 0x18 $UInt8
+  SPINT         @offset 0x1C $UInt8
 }
 
 // Real Time Clock
 registers RTC @at 0xE002_4000 {
-  ILR          @offset 0x00 : $UInt8
-  CTC          @offset 0x04 : $UInt16
-  CCR          @offset 0x08 : $UInt8
-  CIIR         @offset 0x0C : $UInt8
-  AMR          @offset 0x10 : $UInt8
-  CTIME0       @offset 0x14 : $UInt32
-  CTIME1       @offset 0x18 : $UInt32
-  CTIME2       @offset 0x1C : $UInt32
-  SEC          @offset 0x20 : $UInt8
-  MIN          @offset 0x24 : $UInt8
-  HOUR         @offset 0x28 : $UInt8
-  DOM          @offset 0x2C : $UInt8
-  DOW          @offset 0x30 : $UInt8
-  DOY          @offset 0x34 : $UInt16
-  MONTH        @offset 0x38 : $UInt8
-  YEAR         @offset 0x3C : $UInt16
-  ALSEC        @offset 0x60 : $UInt8
-  ALMIN        @offset 0x64 : $UInt8
-  ALHOUR       @offset 0x68 : $UInt8
-  ALDOM        @offset 0x6C : $UInt8
-  ALDOW        @offset 0x70 : $UInt8
-  ALDOY        @offset 0x74 : $UInt16
-  ALMON        @offset 0x78 : $UInt8
-  ALYEAR       @offset 0x7C : $UInt16
-  PREINT       @offset 0x80 : $UInt16
-  PREFRAC      @offset 0x84 : $UInt16
+  ILR          @offset 0x00 $UInt8
+  CTC          @offset 0x04 $UInt16
+  CCR          @offset 0x08 $UInt8
+  CIIR         @offset 0x0C $UInt8
+  AMR          @offset 0x10 $UInt8
+  CTIME0       @offset 0x14 $UInt32
+  CTIME1       @offset 0x18 $UInt32
+  CTIME2       @offset 0x1C $UInt32
+  SEC          @offset 0x20 $UInt8
+  MIN          @offset 0x24 $UInt8
+  HOUR         @offset 0x28 $UInt8
+  DOM          @offset 0x2C $UInt8
+  DOW          @offset 0x30 $UInt8
+  DOY          @offset 0x34 $UInt16
+  MONTH        @offset 0x38 $UInt8
+  YEAR         @offset 0x3C $UInt16
+  ALSEC        @offset 0x60 $UInt8
+  ALMIN        @offset 0x64 $UInt8
+  ALHOUR       @offset 0x68 $UInt8
+  ALDOM        @offset 0x6C $UInt8
+  ALDOW        @offset 0x70 $UInt8
+  ALDOY        @offset 0x74 $UInt16
+  ALMON        @offset 0x78 $UInt8
+  ALYEAR       @offset 0x7C $UInt16
+  PREINT       @offset 0x80 $UInt16
+  PREFRAC      @offset 0x84 $UInt16
 }
 
 // Bank Configuration registers
 registers BCF @at 0xFFE0_0000 {
-  G0          @offset 0x00 : $UInt32
-  G1          @offset 0x04 : $UInt32
-  G2          @offset 0x08 : $UInt32
-  G3          @offset 0x0C : $UInt32
+  G0          @offset 0x00 $UInt32
+  G1          @offset 0x04 $UInt32
+  G2          @offset 0x08 $UInt32
+  G3          @offset 0x0C $UInt32
 }
 
 // CAN Controllers
 registers CAN @at 0xE004_4000 {
-  CMR [4 @offset 0x4 @inc 1 << 14] : $UInt8 {
+  CMR [4 @offset 0x4 @inc 1 << 14] $UInt8 {
     STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
   }
-//  AMFR          @offset 0xE003_C000 : $UInt32
-//  SFF_SA        @offset 0xE003_C004 : $UInt32
-//  SFF_GRP_SA    0xE003_C008 : $UInt32
-//  EFF_SA        0xE003_C00C : $UInt32
-//  EFF_GRP_SA    0xE003_C010 : $UInt32
-//  END_OF_TABLES 0xE003_C014 : $UInt32
+//  AMFR          @offset 0xE003_C000 $UInt32
+//  SFF_SA        @offset 0xE003_C004 $UInt32
+//  SFF_GRP_SA    0xE003_C008 $UInt32
+//  EFF_SA        0xE003_C00C $UInt32
+//  EFF_GRP_SA    0xE003_C010 $UInt32
+//  END_OF_TABLES 0xE003_C014 $UInt32
 }
 
 // Analog/Digital Converter (ADC)
 registers AD @at 0xE003_4000 {
-  CR           @offset 0x00 : $UInt32
-  GDR          @offset 0x04 : $UInt32
-  INTEN        @offset 0x0C : $UInt32
+  CR           @offset 0x00 $UInt32
+  GDR          @offset 0x04 $UInt32
+  INTEN        @offset 0x0C $UInt32
 }
 
 //------------------------------------------------------------------------------

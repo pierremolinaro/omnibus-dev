@@ -5,8 +5,8 @@ import "carte-tp-teensy-3-1.plm-import"
 //-----------------------------------------------------------------------------*
 
 struct $B {
-  var a : $UInt32 = 0
-  var b : $UInt32 = 0
+  var a $UInt32 = 0
+  var b $UInt32 = 0
 }
 
 struct $C {
@@ -14,7 +14,7 @@ struct $C {
 }
 
 struct $Toto {
-  var a : $UInt16 = 0
+  var a $UInt16 = 0
   var c = no
   var b = no
 }
@@ -22,7 +22,7 @@ struct $Toto {
 //-----------------------------------------------------------------------------*
 
 task T @stacksize 512 @activate {
-  var deadline : $UInt32 = 0
+  var deadline $UInt32 = 0
   var acc = C ()
 
   event @setup first {

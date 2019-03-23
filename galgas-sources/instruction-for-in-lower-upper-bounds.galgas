@@ -30,7 +30,6 @@ syntax extension plm_syntax {
     or
       $identifier$ ?varName
     end
-    $:$
     <type_definition> !?ioAST ?let typeName
     $in$
     <expression> !?ioAST  ?let @expressionAST lowerBoundExpression

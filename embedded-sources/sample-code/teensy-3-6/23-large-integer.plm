@@ -11,7 +11,7 @@ func getLargeConstant () -> $LargeInt {
   result = largeConstant
 }
 
-func getLargeAddition (? inA : $LargeInt ?inB : $LargeInt) -> $LargeInt {
+func getLargeAddition (? inA $LargeInt ?inB $LargeInt) -> $LargeInt {
   result = inA + inB
 }
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

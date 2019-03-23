@@ -6,11 +6,11 @@ import "carte-tp-teensy-3-1.plm-import"
 
 let SIZE = 3
 
-typealias $A = [SIZE @x $UInt32]
+typealias $A = [SIZE : $UInt32]
 
 struct $B {
-  var a : $UInt32 = 0
-  var b : $UInt32 = 0
+  var a $UInt32 = 0
+  var b $UInt32 = 0
 }
 
 struct $C {
@@ -22,10 +22,10 @@ let array = A (!1 !2 !3)
 //------------------------------------------------*
 
 task T @stacksize 512 @activate {
-  var deadline : $UInt32 = 0
+  var deadline $UInt32 = 0
   var array = A (!repeated:0)
   var array2 = A (!repeated:1)
-  var index : $Int32 = 0
+  var index $Int32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
@@ -40,12 +40,12 @@ task T @stacksize 512 @activate {
     if self.index == SIZE {
       self.index = 0
     }
-    for i : $UInt32 in 0 ..< A.count {
+    for i $UInt32 in 0 ..< A.count {
       self.array [i] +%= 1
     }
     self.array2 = self.array
     lcd.goto (!line:0 !column:0)
-    for i : $UInt32 in 0 ..< A.count {
+    for i $UInt32 in 0 ..< A.count {
       lcd.print (!u32:self.array2 [i])
       lcd.print (!spaces:1)
     }
@@ -53,15 +53,15 @@ task T @stacksize 512 @activate {
   //--- Init from a repeated static value
     var a = A (!repeated:5)
   //--- Init from a repeated dynamic value
-    var e : $UInt32 = 5
+    var e $UInt32 = 5
     var b = A (!repeated:e)
   //--- Init from a static values
     var c = A (!0 !1 !2)
   //--- Init from a dynamic values
     var d = A (!0 !e !2)
   //---
-    var x : $UInt32 = 0
-    for i : $UInt32 in 0 ..< A.count {
+    var x $UInt32 = 0
+    for i $UInt32 in 0 ..< A.count {
       a [i] = 9
       a [i] += 9
       x += a [i]

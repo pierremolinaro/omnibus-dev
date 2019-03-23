@@ -8,7 +8,7 @@ driver myDriver ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //
 driver myDriver > time {
-  var tick : $UInt32 = 0
+  var tick $UInt32 = 0
 
   public section noteTick () {
     self.tick = $(SYST:CVR)

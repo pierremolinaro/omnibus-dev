@@ -5,16 +5,16 @@
 opaque $TaskList @instantiable {32}
 
 //--- Block running task
-extern func block primitive (?!inList:ioWaitingList : $TaskList) : "blockInList"
+extern func block primitive (?!inList:ioWaitingList $TaskList) : "blockInList"
 
-extern func block primitive (?onDeadline:inDeadline : $UInt32) : "blockOnDeadline"
+extern func block primitive (?onDeadline:inDeadline $UInt32) : "blockOnDeadline"
 
 //--- Make task Ready
 extern func
-makeTaskReady service (?!fromList:ioWaitingList : $TaskList
-               !found: outFound : $Bool) : "makeTaskReady"
+makeTaskReady service (?!fromList:ioWaitingList $TaskList
+               !found: outFound $Bool) : "makeTaskReady"
 
-extern func makeTasksReady service (?fromCurrentDate:inCurrentDate : $UInt32) : "makeTasksReadyFromCurrentDate"
+extern func makeTasksReady service (?fromCurrentDate:inCurrentDate $UInt32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD
@@ -22,13 +22,13 @@ extern func makeTasksReady service (?fromCurrentDate:inCurrentDate : $UInt32) : 
 
 opaque $GuardList @instantiable {32}
 
-extern func handle guard (?!guard:ioGuard : $GuardList) : "handleGuardedCommand"
+extern func handle guard (?!guard:ioGuard $GuardList) : "handleGuardedCommand"
 
-extern func handle guard (?guardedDeadline:inDeadline : $UInt32) : "guard.handle.wait.until"
+extern func handle guard (?guardedDeadline:inDeadline $UInt32) : "guard.handle.wait.until"
 
-extern func notifyChange service (?!forGuard:ioGuard : $GuardList) : "notify.change.from.guard.list"
+extern func notifyChange service (?!forGuard:ioGuard $GuardList) : "notify.change.from.guard.list"
 
-extern func notifyChangeForGuardedWaitUntil service (?withCurrentDate:inCurrentDate : $UInt32) : "notify.change.for.guarded.wait.until"
+extern func notifyChangeForGuardedWaitUntil service (?withCurrentDate:inCurrentDate $UInt32) : "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————
 
@@ -83,7 +83,7 @@ driver time {
 
   //············································································
 
-  var mUptime : $UInt32 = 0
+  var mUptime $UInt32 = 0
 
   //············································································
 
@@ -103,7 +103,7 @@ driver time {
 
   //············································································
 
-  public primitive wait @noUnusedWarning (?until: inDate : $UInt32) {
+  public primitive wait @noUnusedWarning (?until: inDate $UInt32) {
     if inDate > self.now () {
       block (!onDeadline:inDate)
     }
@@ -111,13 +111,13 @@ driver time {
 
   //············································································
 
-  public func wait user @noUnusedWarning @mutating (?during: inDelay : $UInt32) {
+  public func wait user @noUnusedWarning @mutating (?during: inDelay $UInt32) {
     self.wait (!until:self.now () + inDelay)
   }
 
   //············································································
 
-  public guard wait @noUnusedWarning (?until:inDeadline : $UInt32) {
+  public guard wait @noUnusedWarning (?until:inDeadline $UInt32) {
     accept = inDeadline ≤ self.now ()
     if not accept {
       handle (!guardedDeadline:inDeadline)

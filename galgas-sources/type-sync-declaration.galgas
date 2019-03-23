@@ -20,7 +20,7 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $sync$
-    $identifier$ ?let structureName
+    $\$type$ ?let structureName
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}

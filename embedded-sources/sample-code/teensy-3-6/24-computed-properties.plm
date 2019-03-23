@@ -8,9 +8,9 @@ import "carte-tp-teensy-3-6.plm-import"
 task Tâche0 @stacksize 512 @activate {
   var tick = $UInt32 ()
 
-  var readComputedProperty : $UInt32 { result = self.tick }
+  var readComputedProperty $UInt32 { result = self.tick }
 
-  var readWriteComputedProperty : $UInt32 {
+  var readWriteComputedProperty $UInt32 {
     @set { self.tick = newValue }
     @get { result = self.tick }
   }

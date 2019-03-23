@@ -17,13 +17,12 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <type_definition_enclosed_in_square_breackets> ?!@ast ioAST !@lstring outTypeName {
+  rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
+    $[$
     <expression> !?ioAST ?let sizeExpression
-    $@attribute$ ?let attribute
-    if attribute.string != "x" then
-      error attribute : "attribute should be @x"
-    end
+    $:$
     <type_definition> !?ioAST ?let elementTypeName
+    $]$
     let sizeExpressionLocation = @location.here
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
     ioAST.mTypeDeclarationIndex ++

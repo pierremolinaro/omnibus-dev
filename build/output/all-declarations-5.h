@@ -4109,15 +4109,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                 GALGAS_lstring & outArgument1,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'type_definition_enclosed_in_square_breackets' non terminal
-//--- 'parse' label
-  public : virtual void nt_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_type_5F_definition_5F_enclosed_5F_in_5F_square_5F_breackets_ (GALGAS_ast & ioArgument0,
-                                                                                         GALGAS_lstring & outArgument1,
-                                                                                         C_Lexique_plm_5F_lexique * inCompiler) ;
-
   public : virtual int32_t select_plm_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
@@ -4373,8 +4364,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_126 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_127 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_128 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

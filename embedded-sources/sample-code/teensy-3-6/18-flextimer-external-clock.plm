@@ -107,9 +107,9 @@ driver myDriver ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T1 @stacksize 512 @activate {
-  var échéance : $UInt32 = 0
-  var counter0 : $UInt32 = 0
-  var counter1 : $UInt32 = 0
+  var échéance $UInt32 = 0
+  var counter0 $UInt32 = 0
+  var counter1 $UInt32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L3)

@@ -75,7 +75,6 @@ syntax extension plm_syntax {
   rule <staticArrayProperty> ?!@ast ioAST ?!@staticListPropertyListAST ioPropertyList {
     $let$
     $identifier$ ?let propertyName
-    $:$
     select
       <type_definition> !?ioAST ?let typeName
       ioPropertyList += !propertyName !.valueType{!type:typeName}

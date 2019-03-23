@@ -55,7 +55,6 @@ syntax extension plm_syntax {
     while
       $!selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      $:$
       <type_definition> !?ioAST  ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.output
@@ -71,7 +70,6 @@ syntax extension plm_syntax {
       or
         $identifier$ ?formalArgumentName
       end
-      $:$
       <type_definition> !?ioAST ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.inputOutput
@@ -87,7 +85,6 @@ syntax extension plm_syntax {
       or
         $identifier$ ?formalArgumentName
       end
-      $:$
       <type_definition> !?ioAST  ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input
@@ -107,7 +104,6 @@ syntax extension plm_syntax {
     while
       $?selector:$ ?let selector
       $identifier$ ?let formalArgumentName
-      $:$
       <type_definition> !?ioAST  ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input

@@ -28,7 +28,7 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let DEVICE_DESCRIPTOR = [18 @x $UInt8] (
+let DEVICE_DESCRIPTOR = [18 : $UInt8] (
   !18 // Descriptor size in bytes
   !1  // DEVICE constant
   !0x00 !0x02 // USB specification release (BCD): 0x0200
@@ -47,7 +47,7 @@ let DEVICE_DESCRIPTOR = [18 @x $UInt8] (
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let CONFIG_DESCRIPTOR = [32 @x $UInt8] (
+let CONFIG_DESCRIPTOR = [32 : $UInt8] (
 //--- Configuration descriptor
   !9  // Configuration descriptor size in bytes
   !2  // CONFIGURATION constant
@@ -90,8 +90,8 @@ let NUM_ENDPOINTS = 4
 //······················································································································
 
 struct $BDT @copyable {
- var desc : $UInt32 = 0
- var addr : $UInt32 = 0
+ var desc $UInt32 = 0
+ var addr $UInt32 = 0
 }
 
 
@@ -104,7 +104,7 @@ let BDT_STALL = 0x04
 
 let EP0_RX_SIZE = 8
 
-func BDT_DESC safe section (?count : $UInt32 ?data : $UInt1) -> $UInt32 {
+func BDT_DESC safe section (?count $UInt32 ?data $UInt1) -> $UInt32 {
   result = BDT_OWN | BDT_DTS | (count << 16) | if data ≠ 0 {BDT_DATA1} else {BDT_DATA0}
 }
 
@@ -115,7 +115,7 @@ let EVEN = 0
 let DATA0 = 0
 let DATA1 = 1
 
-func index safe section (? endpoint : $UInt32 ?tx : $UInt32 ?odd : $UInt32) -> $UInt32 {
+func index safe section (? endpoint $UInt32 ?tx $UInt32 ?odd $UInt32) -> $UInt32 {
   result = (endpoint << 2) | (tx << 1) | odd
 }
 
@@ -125,20 +125,20 @@ let TRACE_SIZE = 10
 
 driver usb_device > digital {
 // Descriptor table should be aligned on a 512 byte-boudary
-  var descriptorTable @align 512 = [(NUM_ENDPOINTS+1)*4 @x $BDT] (!repeated: $BDT ())
+  var descriptorTable @align 512 = [(NUM_ENDPOINTS+1)*4 : $BDT] (!repeated: $BDT ())
 
-  var ep0_rx0_buf @align 4 = [EP0_RX_SIZE @x $UInt8] (!repeated:0)
-  var ep0_rx1_buf @align 4 = [EP0_RX_SIZE @x $UInt8] (!repeated:0)
-  var ep0_tx_bdt_bank : $UInt32 = 0
+  var ep0_rx0_buf @align 4 = [EP0_RX_SIZE : $UInt8] (!repeated:0)
+  var ep0_rx1_buf @align 4 = [EP0_RX_SIZE : $UInt8] (!repeated:0)
+  var ep0_tx_bdt_bank $UInt32 = 0
 
-  var état = [TRACE_SIZE @x $UInt4] (!repeated:0)
-  var indexÉtat : $UInt32 = 0
+  var état = [TRACE_SIZE : $UInt4] (!repeated:0)
+  var indexÉtat $UInt32 = 0
 
-  public section lireÉtat (?index : $UInt32) -> $UInt32 {
+  public section lireÉtat (?index $UInt32) -> $UInt32 {
     result = extend (self.état [index])
   }
 
-  var trace : $UInt32 = 0
+  var trace $UInt32 = 0
 
   public section lireTrace () -> $UInt32 {
     result = self.trace
@@ -357,7 +357,7 @@ driver usb_device > digital {
 
   //····················································································································
 
-  func endpoint_0_handler section @mutating (?transactionStatus: _ : $UInt8) {
+  func endpoint_0_handler section @mutating (?transactionStatus: _ $UInt8) {
     self.trace |= 4
   }
 
@@ -472,8 +472,8 @@ driver usb_device ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T @stacksize 512 @activate {
-  var tick : $UInt32 = 0
-  var état : $UInt32 = 0
+  var tick $UInt32 = 0
+  var état $UInt32 = 0
 
   //····················································································································
 
@@ -487,7 +487,7 @@ task T @stacksize 512 @activate {
     digital.toggle (!port:LED_L0)
     self.tick +%= 500
     lcd.goto (!line:0 !column:0)
-    for i : $UInt32 in 0 ..< TRACE_SIZE {
+    for i $UInt32 in 0 ..< TRACE_SIZE {
       let e = usb_device.lireÉtat (!i)
       lcd.print (!hex2:e)
     }

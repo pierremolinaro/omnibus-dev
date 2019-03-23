@@ -9,7 +9,7 @@ driver time ()
 //——————————————————————————————————————————————————————————————————————————————
 
 driver time > root {
-  var mUptime : $UInt32 = 0
+  var mUptime $UInt32 = 0
 
   //············································································
 
@@ -39,16 +39,16 @@ driver time > root {
 
   //············································································
 
-  public func busyWaitingDuringMS startup @noUnusedWarning @mutating (?inDelay : $UInt32) {
-    for _ : $UInt32 in 0 ..< inDelay {
+  public func busyWaitingDuringMS startup @noUnusedWarning @mutating (?inDelay $UInt32) {
+    for _ $UInt32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
   }
 
   //············································································
 
-  public func panicBusyWaitingDuringMS panic @noUnusedWarning @mutating (?inDelay : $UInt32) {
-    for _ : $UInt32 in 0 ..< inDelay {
+  public func panicBusyWaitingDuringMS panic @noUnusedWarning @mutating (?inDelay $UInt32) {
+    for _ $UInt32 in 0 ..< inDelay {
       self.panicOneMillisecondBusyWait ()
     }
   }
@@ -64,7 +64,7 @@ driver time > root {
 
   //············································································
 
-  public primitive wait safe @noUnusedWarning (?until: inDate : $UInt32) {
+  public primitive wait safe @noUnusedWarning (?until: inDate $UInt32) {
     if inDate > self.mUptime {
       block (!onDeadline:inDate)
     }
@@ -72,7 +72,7 @@ driver time > root {
 
   //············································································
 
-  public primitive wait @noUnusedWarning (?during: inDelay : $UInt32) {
+  public primitive wait @noUnusedWarning (?during: inDelay $UInt32) {
     if inDelay > 0 {
       block (!onDeadline:self.mUptime +% inDelay)
     }
@@ -80,7 +80,7 @@ driver time > root {
 
   //············································································
 
-  public guard wait @noUnusedWarning (?until:inDeadline : $UInt32) {
+  public guard wait @noUnusedWarning (?until:inDeadline $UInt32) {
     accept = (inDeadline) ≤ self.mUptime
     if not accept {
       handle (!guardedDeadline:inDeadline)
