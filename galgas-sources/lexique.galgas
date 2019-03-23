@@ -215,7 +215,6 @@ lexique plm_lexique {
     "==", "≠", "<", "≤", ">", "≥",
     "[", "]", "]!", "<<", ">>",
     "~",
-    "©",
     "->", "..<", "...",
     "|", "|=",
     "&", "&=",
@@ -339,6 +338,29 @@ lexique plm_lexique {
       error typeError
     end
     send $\$type$ 
+  }
+  
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  #! Group Name                                                                                                           
+  #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  
+  style groupStyle -> "Control Register Groups"
+  
+  $©group$ ! tokenString  style groupStyle error message "a control register group ©..."
+  
+  message groupError : "in a register group name, a letter or a digit should follow the '©' character"
+  
+  rule '©' {
+    select
+    case isUnicodeLetter :
+      repeat
+        enterCharacterIntoString (!?tokenString !*)
+      while isUnicodeLetter | '0' -> '9' | '_' :
+      end
+    default
+      error groupError
+    end
+    send $©group$ 
   }
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

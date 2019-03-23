@@ -32,7 +32,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <control_register_lvalue> ?!@ast ioAST !@controlRegisterLValueAST outRegisterLValue {
-    $identifier$ ?let registerGroupName
+    $©group$ ?let registerGroupName
     @registerGroupIndexAST groupIndex
     select
       groupIndex = .noIndex

@@ -84,7 +84,7 @@ syntax extension plm_syntax {
     $registers$
     @registerGroupListAST registerGroupListAST = {}
     repeat
-      $identifier$ ?let registerGroupName
+      $©group$ ?let registerGroupName
       select
         $@attribute$ ?let attribute
         if attribute.string != "at" then
