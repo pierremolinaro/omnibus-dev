@@ -949,11 +949,11 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1/un
   "    digital.toggle (!port:LED_L1)\n"
   "    let n = self.acc.c.a +% self.deadline\n"
   "    self.acc.c.a = n\n"
-  "    let x : $UInt32 = 0x1234_5678\n"
+  "    let $UInt32 x = 0x1234_5678\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.print (!hex8:x.byteSwapped)\n"
   "    lcd.goto (!line:1 !column:0)\n"
-  "    let y : $UInt15 = 0x1234\n"
+  "    let $UInt15 y = 0x1234\n"
   "    lcd.print (!hex4:extend (y.bitReversed))\n"
   "  }\n"
   "}\n"
@@ -964,7 +964,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "00-structure-example.plm",
   "plm",
   true, // Text file
-  1058, // Text length
+  1054, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
@@ -2086,7 +2086,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1/un
   "\n"
   "  func tokenCompleted section @mutating () {\n"
   "    let transactionStatus = $(USB0:STAT)\n"
-  "    let endPoint : $UInt4 = transactionStatus [4...7]\n"
+  "    let $UInt4 endPoint = transactionStatus [4...7]\n"
   "//    let TX_transitionStatus = transactionStatus [3...3]\n"
   "//    let ODD_transitionStatus = transactionStatus [2...2]\n"
   "//    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))\n"
@@ -2264,7 +2264,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "13-usb-device.plm",
   "plm",
   true, // Text file
-  15333, // Text length
+  15331, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -3488,7 +3488,7 @@ const char * gWrapperFileContent_37_embeddedSampleCode = "target \"teensy-3-6/xt
   "section externalSection (\?in: inData : $Array8) {\n"
   "  var d = inData\n"
   "  d.append (!0)\n"
-  "  var xxxx = [Bool] ()\n"
+  "  var xxxx = [$Bool] ()\n"
   "  xxxx.append (!yes)\n"
   "  var lg = xxxx.length ()\n"
   "}\n"
@@ -3499,7 +3499,7 @@ const cRegularFileWrapper gWrapperFile_37_embeddedSampleCode (
   "11-heap.plm",
   "plm",
   true, // Text file
-  5050, // Text length
+  5051, // Text length
   gWrapperFileContent_37_embeddedSampleCode
 ) ;
 
@@ -5653,19 +5653,19 @@ const char * gWrapperFileContent_39_embeddedSampleCode = "target \"teensy-3-6/xt
   "\n"
   "typealias $LargeInt = $UInt97\n"
   "\n"
-  "func getLargeConstant () -> LargeInt {\n"
+  "func getLargeConstant () -> $LargeInt {\n"
   "  result = largeConstant\n"
   "}\n"
   "\n"
-  "func getLargeAddition (\? inA : LargeInt \?inB : LargeInt) -> LargeInt {\n"
+  "func getLargeAddition (\? inA : $LargeInt \?inB : $LargeInt) -> $LargeInt {\n"
   "  result = inA + inB\n"
   "}\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T\xC3""\xA2""che0 @stacksize 512 @activate {\n"
   "  var tick = $UInt32 ()\n"
-  "  var largeInteger = LargeInt ()\n"
-  "  var otherLargeInteger = LargeInt ()\n"
+  "  var largeInteger = $LargeInt ()\n"
+  "  var otherLargeInteger = $LargeInt ()\n"
   "\n"
   "  event time.wait (!until: self.tick) {\n"
   "    self.otherLargeInteger += self.largeInteger\n"
@@ -5680,7 +5680,7 @@ const cRegularFileWrapper gWrapperFile_39_embeddedSampleCode (
   "23-large-integer.plm",
   "plm",
   true, // Text file
-  918, // Text length
+  924, // Text length
   gWrapperFileContent_39_embeddedSampleCode
 ) ;
 

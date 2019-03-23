@@ -25,20 +25,19 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $let$
-    $identifier$ ?let constantName
+    @lstring typeName
+    select
+      typeName = ["" nowhere]
+    or
+      <type_definition> !?ioAST ?typeName
+    end
     @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    @lstring typeName
-    select
-      typeName = ["" nowhere]
-    or
-      $:$
-      <type_definition> !?ioAST ?typeName
-    end
+    $identifier$ ?let constantName
     $=$
     <expression> !?ioAST ?let @expressionAST expression
     ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.new {
