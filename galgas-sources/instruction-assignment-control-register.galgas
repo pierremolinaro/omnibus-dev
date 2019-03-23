@@ -24,9 +24,9 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    $©($
+    $©$
     <control_register_lvalue> !?ioAST ?let registerLValue
-    $)$
+#    $)$
   #--- Assignment or assignment operator
     @controlRegisterAssignmentOperatorKind assignmentKind
     select
