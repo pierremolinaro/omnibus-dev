@@ -10,12 +10,12 @@ driver time ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver time > root {
-  var mUptime : UInt32 = 0
+  var mUptime : $UInt32 = 0
 
   //····················································································································
 
   startup { // Configure Systick interrupt every ms
-    $(SYST:RVR) = F_CPU_MHZ * 1000 - 1 // Interrupt every ms
+    $(SYST:RVR) = F_CPU_MHZ * 1000 - 1 // $Interrupt every ms
     $(SYST:CVR) = 0
     $(SYST:CSR) = ${SYST:CSR !CLKSOURCE:1 !ENABLE:1 !TICKINT:1}
   }
@@ -30,8 +30,8 @@ driver time > root {
 
   //····················································································································
 
-  public func busyWaitingDuringMS startup @noUnusedWarning (?inDelay : UInt32) {
-    for _ : UInt32 in 0 ..< inDelay {
+  public func busyWaitingDuringMS startup @noUnusedWarning (?inDelay : $UInt32) {
+    for _ : $UInt32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
   }
@@ -46,8 +46,8 @@ driver time > root {
 
   //····················································································································
 
-  public func panicBusyWaitingDuringMS panic @noUnusedWarning (?inDelay : UInt32) {
-    for _ : UInt32 in 0 ..< inDelay {
+  public func panicBusyWaitingDuringMS panic @noUnusedWarning (?inDelay : $UInt32) {
+    for _ : $UInt32 in 0 ..< inDelay {
       self.panicOneMillisecondBusyWait ()
     }
   }
@@ -68,7 +68,7 @@ driver time > root {
   //   Primitives callable in user mode
   //····················································································································
 
-  public primitive wait @noUnusedWarning (?until: inDate : UInt32) {
+  public primitive wait @noUnusedWarning (?until: inDate : $UInt32) {
     if inDate > self.mUptime {
       block (!onDeadline:inDate)
     }
@@ -76,7 +76,7 @@ driver time > root {
 
   //····················································································································
 
-  public primitive wait @noUnusedWarning (?during: inDelay : UInt32) {
+  public primitive wait @noUnusedWarning (?during: inDelay : $UInt32) {
     if inDelay > 0 {
       block (!onDeadline:self.mUptime +% inDelay)
     }
@@ -84,7 +84,7 @@ driver time > root {
 
   //····················································································································
 
-  public guard wait @noUnusedWarning (?until:inDeadline : UInt32) {
+  public guard wait @noUnusedWarning (?until:inDeadline : $UInt32) {
 //    noteCurrentTaskFreeStackSize ()
     accept = inDeadline ≤ self.mUptime
     if not accept {
@@ -96,7 +96,7 @@ driver time > root {
   //   Primitives callable in user mode
   //····················································································································
 
-  public section now safe @noUnusedWarning () -> UInt32 {
+  public section now safe @noUnusedWarning () -> $UInt32 {
     result = self.mUptime
   }
 

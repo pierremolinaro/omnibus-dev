@@ -2,7 +2,7 @@ target "teensy-3-1/unprivileged"
 
 import "carte-tp-teensy-3-1.plm-import"
 
-typealias $Sémaphore = Semaphore
+typealias $Sémaphore = $Semaphore
 
 //——————————————————————————————————————————————————————————————————————————————
 
@@ -11,7 +11,7 @@ sync sémaphore = Sémaphore (!value:0)
 //——————————————————————————————————————————————————————————————————————————————
 
 task T1 @stacksize 512 @activate {
-  var top : UInt32 = 0
+  var top : $UInt32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)

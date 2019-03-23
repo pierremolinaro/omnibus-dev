@@ -114,9 +114,9 @@ syntax extension plm_target_specific_syntax {
     <configuration_key> !"LINKER_SCRIPT"
     $"string"$ ?let linkerScript
     <configuration_key> !"PANIC_CODE_TYPE_NAME"
-    $identifier$ ?let panicCodeTypeName 
+    $\$type$ ?let panicCodeTypeName 
     <configuration_key> !"PANIC_LINE_TYPE_NAME"
-    $identifier$ ?let panicLineTypeName
+    $\$type$ ?let panicLineTypeName
     <configuration_key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
     <configuration_key> !"DYNAMIC_ARRAY"

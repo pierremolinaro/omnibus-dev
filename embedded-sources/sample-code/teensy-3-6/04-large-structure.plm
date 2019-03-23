@@ -7,14 +7,14 @@ import "carte-tp-teensy-3-6.plm-import"
 
 let PATTERN_LENGTH = 1000
 
-typealias $PatternArray = [PATTERN_LENGTH @x UInt32]
+typealias $PatternArray = [PATTERN_LENGTH @x $UInt32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 5512 @activate {
-  var compteur : UInt32 = 0
-  var x = PatternArray (!repeated:0)
-  var y = PatternArray (!repeated:0)
+  var compteur : $UInt32 = 0
+  var x = $PatternArray (!repeated:0)
+  var y = $PatternArray (!repeated:0)
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
@@ -22,7 +22,7 @@ task Tâche @stacksize 5512 @activate {
 
   event time.wait (!until:self.compteur) {
     self.y = self.x
-    for i : UInt32 in 0 ..< self.x.count {
+    for i : $UInt32 in 0 ..< self.x.count {
       self.y [i] += self.compteur
     }
     digital.write (!yes !toPort:LED_L0)
@@ -31,7 +31,7 @@ task Tâche @stacksize 5512 @activate {
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!u32: PatternArray.count)
+    lcd.print (!u32: $PatternArray.count)
   }
 }
 

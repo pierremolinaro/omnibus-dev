@@ -24,7 +24,7 @@
 @----------------------------------------- R4 <- running task context
   ldr   r4, =gRunningTaskControlBlockPtr
   ldr   r4, [r4]
-@----------------------------------------- Call Interrupt handler
+@----------------------------------------- Call $Interrupt handler
   bl    "!HANDLER!"
 @----------------------------------------- Perform context switch, if needed
   b     handle.context.switch

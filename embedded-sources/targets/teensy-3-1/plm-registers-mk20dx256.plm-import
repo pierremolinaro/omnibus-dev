@@ -1,102 +1,102 @@
 
-let f_cpu : UInt32 = 96_000_000
-let f_bus : UInt32 = 48_000_000
-let f_mem : UInt32 = 24_000_000
+let f_cpu : $UInt32 = 96_000_000
+let f_bus : $UInt32 = 48_000_000
+let f_mem : $UInt32 = 24_000_000
 
 // chapter 11: Port control and interrupts (PORT) Pin Control registers n
 registers PORTA @at 0x4004_9000 {
-  PCR [32 @offset 0x00 @inc 4] : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : $UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
 
-  GPCLR @offset 0x80 : UInt32 // Global Pin Control Low Register
-  GPCHR @offset 0x84 : UInt32 // Global Pin Control High Register
-  ISFR  @offset 0xA0 : UInt32 // Interrupt Status Flag Register
+  GPCLR @offset 0x80 : $UInt32 // Global Pin Control Low Register
+  GPCHR @offset 0x84 : $UInt32 // Global Pin Control High Register
+  ISFR  @offset 0xA0 : $UInt32 // $Interrupt Status Flag Register
 }
 
 registers PORTB @at 0x4004_A000 {
-  PCR [32 @offset 0x00 @inc 4] : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : $UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
-  GPCLR @offset 0x80 : UInt32 // Global Pin Control Low Register
-  GPCHR @offset 0x84 : UInt32 // Global Pin Control High Register
-  ISFR  @offset 0xA0 : UInt32 // Interrupt Status Flag Register
+  GPCLR @offset 0x80 : $UInt32 // Global Pin Control Low Register
+  GPCHR @offset 0x84 : $UInt32 // Global Pin Control High Register
+  ISFR  @offset 0xA0 : $UInt32 // $Interrupt Status Flag Register
 }
 
 registers PORTC @at 0x4004_B000 {
-  PCR [32 @offset 0x00 @inc 4] : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : $UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
-  GPCLR @offset 0x80 : UInt32 // Global Pin Control Low Register
-  GPCHR @offset 0x84 : UInt32 // Global Pin Control High Register
-  ISFR  @offset 0xA0 : UInt32 // Interrupt Status Flag Register
+  GPCLR @offset 0x80 : $UInt32 // Global Pin Control Low Register
+  GPCHR @offset 0x84 : $UInt32 // Global Pin Control High Register
+  ISFR  @offset 0xA0 : $UInt32 // $Interrupt Status Flag Register
 }
 
 registers PORTD @at 0x4004_C000 {
-  PCR [32 @offset 0x00 @inc 4] : UInt32 {
+  PCR [32 @offset 0x00 @inc 4] : $UInt32 {
     7, ISF, 4, IRQC:4, LK, 4, MUX:3, 1, DSE, ODE, PFE, 1, SRE, PE, PS
   }
-  GPCLR @offset 0x80 : UInt32 // Global Pin Control Low Register
-  GPCHR @offset 0x84 : UInt32 // Global Pin Control High Register
-  ISFR  @offset 0xA0 : UInt32 // Interrupt Status Flag Register
+  GPCLR @offset 0x80 : $UInt32 // Global Pin Control Low Register
+  GPCHR @offset 0x84 : $UInt32 // Global Pin Control High Register
+  ISFR  @offset 0xA0 : $UInt32 // $Interrupt Status Flag Register
 }
 
-// Chapter 12: System Integration Module (SIM)
-let SIM_SOPT2_USBSRC      : UInt32 = 0x40000  // 0=USB_CLKIN, 1=FFL/PLL
-let SIM_SOPT2_PLLFLLSEL   : UInt32 = 0x10000 // 0=FLL, 1=PLL
-let SIM_SOPT2_TRACECLKSEL : UInt32 = 0x1000  // 0=MCGOUTCLK, 1=CPU
-let SIM_SOPT2_PTD7PAD     : UInt32 = 0x800  // 0=normal, 1=double drive PTD7
-let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select
+// Chapter 12: System $Integration Module (SIM)
+let SIM_SOPT2_USBSRC      : $UInt32 = 0x40000  // 0=USB_CLKIN, 1=FFL/PLL
+let SIM_SOPT2_PLLFLLSEL   : $UInt32 = 0x10000 // 0=FLL, 1=PLL
+let SIM_SOPT2_TRACECLKSEL : $UInt32 = 0x1000  // 0=MCGOUTCLK, 1=CPU
+let SIM_SOPT2_PTD7PAD     : $UInt32 = 0x800  // 0=normal, 1=double drive PTD7
+let SIM_SOPT2_RTCCLKOUTSEL : $UInt32 = 0x00000010  // RTC clock out select
 
-let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control
+let SIM_SCGC2_DAC0  : $UInt32 =  0x00001000 // DAC0 Clock Gate Control
 
-let SIM_SCGC3_ADC1 : UInt32 =  0x08000000 // ADC1 Clock Gate Control
-let SIM_SCGC3_FTM2 : UInt32 =  0x01000000 // FTM2 Clock Gate Control
+let SIM_SCGC3_ADC1 : $UInt32 =  0x08000000 // ADC1 Clock Gate Control
+let SIM_SCGC3_FTM2 : $UInt32 =  0x01000000 // FTM2 Clock Gate Control
 
-let SIM_SCGC4_VREF  : UInt32 =  0x00100000  // VREF Clock Gate Control
-let SIM_SCGC4_CMP   : UInt32 = 0x00080000  // Comparator Clock Gate Control
-let SIM_SCGC4_USBOTG  : UInt32 = 0x00040000  // USB Clock Gate Control
-let SIM_SCGC4_UART2  : UInt32 =  0x00001000  // UART2 Clock Gate Control
-let SIM_SCGC4_UART1  : UInt32 =  0x00000800  // UART1 Clock Gate Control
-let SIM_SCGC4_UART0  : UInt32 =  0x00000400  // UART0 Clock Gate Control
-let SIM_SCGC4_I2C1  : UInt32 =  0x00000080  // I2C1 Clock Gate Control
-let SIM_SCGC4_I2C0  : UInt32 =  0x00000040  // I2C0 Clock Gate Control
-let SIM_SCGC4_CMT  : UInt32 =  0x00000004  // CMT Clock Gate Control
-let SIM_SCGC4_EWM  : UInt32 =  0x00000002  // EWM Clock Gate Control
+let SIM_SCGC4_VREF  : $UInt32 =  0x00100000  // VREF Clock Gate Control
+let SIM_SCGC4_CMP   : $UInt32 = 0x00080000  // Comparator Clock Gate Control
+let SIM_SCGC4_USBOTG  : $UInt32 = 0x00040000  // USB Clock Gate Control
+let SIM_SCGC4_UART2  : $UInt32 =  0x00001000  // UART2 Clock Gate Control
+let SIM_SCGC4_UART1  : $UInt32 =  0x00000800  // UART1 Clock Gate Control
+let SIM_SCGC4_UART0  : $UInt32 =  0x00000400  // UART0 Clock Gate Control
+let SIM_SCGC4_I2C1  : $UInt32 =  0x00000080  // I2C1 Clock Gate Control
+let SIM_SCGC4_I2C0  : $UInt32 =  0x00000040  // I2C0 Clock Gate Control
+let SIM_SCGC4_CMT  : $UInt32 =  0x00000004  // CMT Clock Gate Control
+let SIM_SCGC4_EWM  : $UInt32 =  0x00000002  // EWM Clock Gate Control
 
-let SIM_SCGC5_PORTE  : UInt32 =  0x00002000  // Port E Clock Gate Control
-let SIM_SCGC5_PORTD  : UInt32 =  0x00001000  // Port D Clock Gate Control
-let SIM_SCGC5_PORTC  : UInt32 =  0x00000800  // Port C Clock Gate Control
-let SIM_SCGC5_PORTB  : UInt32 =  0x00000400  // Port B Clock Gate Control
-let SIM_SCGC5_PORTA  : UInt32 =  0x00000200  // Port A Clock Gate Control
-let SIM_SCGC5_TSI  : UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control
-let SIM_SCGC5_LPTIMER  : UInt32 =  0x00000001  // Low Power Timer Access Control
+let SIM_SCGC5_PORTE  : $UInt32 =  0x00002000  // Port E Clock Gate Control
+let SIM_SCGC5_PORTD  : $UInt32 =  0x00001000  // Port D Clock Gate Control
+let SIM_SCGC5_PORTC  : $UInt32 =  0x00000800  // Port C Clock Gate Control
+let SIM_SCGC5_PORTB  : $UInt32 =  0x00000400  // Port B Clock Gate Control
+let SIM_SCGC5_PORTA  : $UInt32 =  0x00000200  // Port A Clock Gate Control
+let SIM_SCGC5_TSI  : $UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control
+let SIM_SCGC5_LPTIMER  : $UInt32 =  0x00000001  // Low Power Timer Access Control
 
-let SIM_SCGC6_RTC  : UInt32 = 0x20000000  // RTC Access
-let SIM_SCGC6_ADC0 : UInt32 =   0x08000000  // ADC0 Clock Gate Control
-let SIM_SCGC6_FTM1 : UInt32 =   0x02000000  // FTM1 Clock Gate Control
-let SIM_SCGC6_FTM0 : UInt32 =   0x01000000  // FTM0 Clock Gate Control
-let SIM_SCGC6_PIT : UInt32 =  0x00800000  // PIT Clock Gate Control
-let SIM_SCGC6_PDB : UInt32 =  0x00400000  // PDB Clock Gate Control
-let SIM_SCGC6_USBDCD : UInt32 =  0x00200000  // USB DCD Clock Gate Control
-let SIM_SCGC6_CRC : UInt32 =  0x00040000  // CRC Clock Gate Control
-let SIM_SCGC6_I2S : UInt32 =  0x00008000  // I2S Clock Gate Control
-let SIM_SCGC6_SPI1 : UInt32 =   0x00002000  // SPI1 Clock Gate Control
-let SIM_SCGC6_SPI0 : UInt32 =   0x00001000  // SPI0 Clock Gate Control
-let SIM_SCGC6_FLEXCAN0 : UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control
-let SIM_SCGC6_DMAMUX: UInt32 =  0x00000002  // DMA Mux Clock Gate Control
-let SIM_SCGC6_FTFL : UInt32 =  0x00000001  // Flash Memory Clock Gate Control
+let SIM_SCGC6_RTC  : $UInt32 = 0x20000000  // RTC Access
+let SIM_SCGC6_ADC0 : $UInt32 =   0x08000000  // ADC0 Clock Gate Control
+let SIM_SCGC6_FTM1 : $UInt32 =   0x02000000  // FTM1 Clock Gate Control
+let SIM_SCGC6_FTM0 : $UInt32 =   0x01000000  // FTM0 Clock Gate Control
+let SIM_SCGC6_PIT : $UInt32 =  0x00800000  // PIT Clock Gate Control
+let SIM_SCGC6_PDB : $UInt32 =  0x00400000  // PDB Clock Gate Control
+let SIM_SCGC6_USBDCD : $UInt32 =  0x00200000  // USB DCD Clock Gate Control
+let SIM_SCGC6_CRC : $UInt32 =  0x00040000  // CRC Clock Gate Control
+let SIM_SCGC6_I2S : $UInt32 =  0x00008000  // I2S Clock Gate Control
+let SIM_SCGC6_SPI1 : $UInt32 =   0x00002000  // SPI1 Clock Gate Control
+let SIM_SCGC6_SPI0 : $UInt32 =   0x00001000  // SPI0 Clock Gate Control
+let SIM_SCGC6_FLEXCAN0 : $UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control
+let SIM_SCGC6_DMAMUX: $UInt32 =  0x00000002  // DMA Mux Clock Gate Control
+let SIM_SCGC6_FTFL : $UInt32 =  0x00000001  // Flash Memory Clock Gate Control
 
-let SIM_SCGC7_DMA : UInt32 =  0x00000002  // DMA Clock Gate Control
+let SIM_SCGC7_DMA : $UInt32 =  0x00000002  // DMA Clock Gate Control
 
-let SIM_CLKDIV2_USBFRAC : UInt32 =  0x01
+let SIM_CLKDIV2_USBFRAC : $UInt32 =  0x01
 
 registers SIM @at 0x4004_7000 {
-  SOPT1    @offset 0x00 : UInt32 // System Options registers 1
-  SOPT1CFG @offset 0x04 : UInt32 // SOPT1 Configuration Register
+  SOPT1    @offset 0x00 : $UInt32 // System Options registers 1
+  SOPT1CFG @offset 0x04 : $UInt32 // SOPT1 Configuration Register
 
 //--- System Options registers 2
-   SOPT2 @offset 0x1004 : UInt32 {
+   SOPT2 @offset 0x1004 : $UInt32 {
     13,
     USBSRC, // 0=USB_CLKIN, 1=FFL/PLL
     1,
@@ -110,15 +110,15 @@ registers SIM @at 0x4004_7000 {
     4
   }
 
-  SOPT4  @offset 0x100C : UInt32 // System Options registers 4
-  SOPT5  @offset 0x1010 : UInt32 // System Options registers 5
-  SOPT7  @offset 0x1018 : UInt32 // System Options registers 7
-  SDID   @offset 0x1024 @ro : UInt32 // System Device Identification Register
-  SCGC2  @offset 0x102C : UInt32 // System Clock Gating Control registers 2
-  SCGC3  @offset 0x1030 : UInt32 // System Clock Gating Control registers 3
+  SOPT4  @offset 0x100C : $UInt32 // System Options registers 4
+  SOPT5  @offset 0x1010 : $UInt32 // System Options registers 5
+  SOPT7  @offset 0x1018 : $UInt32 // System Options registers 7
+  SDID   @offset 0x1024 @ro : $UInt32 // System Device Identification Register
+  SCGC2  @offset 0x102C : $UInt32 // System Clock Gating Control registers 2
+  SCGC3  @offset 0x1030 : $UInt32 // System Clock Gating Control registers 3
 
 //--- System Clock Gating Control registers 4
-  SCGC4 @offset 0x1034 : UInt32 {
+  SCGC4 @offset 0x1034 : $UInt32 {
     11,
     VREF,
     CMP,
@@ -136,11 +136,11 @@ registers SIM @at 0x4004_7000 {
     1
   }
 
-  SCGC5 @offset 0x1038 : UInt32 // System Clock Gating Control registers 5
-  SCGC6 @offset 0x103C : UInt32 // System Clock Gating Control registers 6
-  SCGC7 @offset 0x1040 : UInt32 // System Clock Gating Control registers 7
+  SCGC5 @offset 0x1038 : $UInt32 // System Clock Gating Control registers 5
+  SCGC6 @offset 0x103C : $UInt32 // System Clock Gating Control registers 6
+  SCGC7 @offset 0x1040 : $UInt32 // System Clock Gating Control registers 7
 
-  CLKDIV1 @offset 0x1044 : UInt32 {// System Clock Divider registers 1
+  CLKDIV1 @offset 0x1044 : $UInt32 {// System Clock Divider registers 1
     OUTDIV1:4, // Divide value for the core/system clock
     OUTDIV2:4, // Divide value for the peripheral clock
     4,
@@ -149,134 +149,134 @@ registers SIM @at 0x4004_7000 {
   }
 
 //--- System Clock Divider registers 2
-   CLKDIV2 @offset 0x1048 : UInt32 {
+   CLKDIV2 @offset 0x1048 : $UInt32 {
     28,
     USBDIV:3,
     USBFRAC
   }
 
-  FCFG1 @offset 0x104C @ro : UInt32 // Flash Configuration registers 1
-  FCFG2 @offset 0x1050 @ro : UInt32 // Flash Configuration registers 2
-  UIDH  @offset 0x1054 @ro : UInt32 // Unique Identification registers High
-  UIDMH @offset 0x1058 @ro : UInt32 // Unique Identification registers Mid-High
-  UIDML @offset 0x105C @ro : UInt32 // Unique Identification registers Mid Low
-  UIDL  @offset 0x1060 @ro : UInt32 // Unique Identification registers Low
+  FCFG1 @offset 0x104C @ro : $UInt32 // Flash Configuration registers 1
+  FCFG2 @offset 0x1050 @ro : $UInt32 // Flash Configuration registers 2
+  UIDH  @offset 0x1054 @ro : $UInt32 // Unique Identification registers High
+  UIDMH @offset 0x1058 @ro : $UInt32 // Unique Identification registers Mid-High
+  UIDML @offset 0x105C @ro : $UInt32 // Unique Identification registers Mid Low
+  UIDL  @offset 0x1060 @ro : $UInt32 // Unique Identification registers Low
 }
 
 // Chapter 13: Reset Control Module (RCM)
 registers RCM @at 0x4007F000 {
-  SRS0 @offset 0x00 : UInt8 // System Reset Status registers 0
-  SRS1 @offset 0x01 : UInt8 // System Reset Status registers 1
-  RPFC @offset 0x04 : UInt8 // Reset Pin Filter Control Register
-  RPFW @offset 0x05 : UInt8 // Reset Pin Filter Width Register
-  MR   @offset 0x07 : UInt8 // Mode Register
+  SRS0 @offset 0x00 : $UInt8 // System Reset Status registers 0
+  SRS1 @offset 0x01 : $UInt8 // System Reset Status registers 1
+  RPFC @offset 0x04 : $UInt8 // Reset Pin Filter Control Register
+  RPFW @offset 0x05 : $UInt8 // Reset Pin Filter Width Register
+  MR   @offset 0x07 : $UInt8 // Mode Register
 }
 
 // Chapter 14: System Mode Controller
-let SMC_PMPROT_AVLP  : UInt8 = 0x20   // Allow very low power modes
-let SMC_PMPROT_ALLS : UInt8 = 0x08   // Allow low leakage stop mode
-let SMC_PMPROT_AVLLS : UInt8 = 0x02   // Allow very low leakage stop mode
+let SMC_PMPROT_AVLP  : $UInt8 = 0x20   // Allow very low power modes
+let SMC_PMPROT_ALLS : $UInt8 = 0x08   // Allow low leakage stop mode
+let SMC_PMPROT_AVLLS : $UInt8 = 0x02   // Allow very low leakage stop mode
 
-let SMC_PMCTRL_LPWUI : UInt8  = 0x80   // Low Power Wake Up on Interrupt
-let SMC_PMCTRL_STOPA : UInt8  = 0x08   // Stop Aborted
+let SMC_PMCTRL_LPWUI : $UInt8  = 0x80   // Low Power Wake Up on $Interrupt
+let SMC_PMCTRL_STOPA : $UInt8  = 0x08   // Stop Aborted
 
-let SMC_VLLSCTRL_PORPO : UInt8 = 0x20   // POR Power Option
+let SMC_VLLSCTRL_PORPO : $UInt8 = 0x20   // POR Power Option
 
-let SMC_PMSTAT_RUN  : UInt8 = 0x01   // Current power mode is RUN
-let SMC_PMSTAT_STOP : UInt8 = 0x02   // Current power mode is STOP
-let SMC_PMSTAT_VLPR : UInt8 = 0x04   // Current power mode is VLPR
-let SMC_PMSTAT_VLPW : UInt8 = 0x08   // Current power mode is VLPW
-let SMC_PMSTAT_VLPS : UInt8 = 0x10   // Current power mode is VLPS
-let SMC_PMSTAT_LLS  : UInt8 = 0x20   // Current power mode is LLS
-let SMC_PMSTAT_VLLS : UInt8 = 0x40   // Current power mode is VLLS
+let SMC_PMSTAT_RUN  : $UInt8 = 0x01   // Current power mode is RUN
+let SMC_PMSTAT_STOP : $UInt8 = 0x02   // Current power mode is STOP
+let SMC_PMSTAT_VLPR : $UInt8 = 0x04   // Current power mode is VLPR
+let SMC_PMSTAT_VLPW : $UInt8 = 0x08   // Current power mode is VLPW
+let SMC_PMSTAT_VLPS : $UInt8 = 0x10   // Current power mode is VLPS
+let SMC_PMSTAT_LLS  : $UInt8 = 0x20   // Current power mode is LLS
+let SMC_PMSTAT_VLLS : $UInt8 = 0x40   // Current power mode is VLLS
 
 registers SMC @at 0x4007_E000 {
-  PMPROT  @offset 0x00 : UInt8 // Power Mode Protection Register
-  PMCTRL  @offset 0x01 : UInt8 // Power Mode Control Register
-  VLLSCTRL @offset 0x02 : UInt8 // VLLS Control Register
-  PMST @offset 0x03 : UInt8 // Power Mode Status Register
+  PMPROT  @offset 0x00 : $UInt8 // Power Mode Protection Register
+  PMCTRL  @offset 0x01 : $UInt8 // Power Mode Control Register
+  VLLSCTRL @offset 0x02 : $UInt8 // VLLS Control Register
+  PMST @offset 0x03 : $UInt8 // Power Mode Status Register
 }
 
 // Chapter 15: Power Management Controller
-let PMC_LVDSC1_LVDF : UInt8 = 0x80   // Low-Voltage Detect Flag
-let PMC_LVDSC1_LVDACK : UInt8 = 0x40   // Low-Voltage Detect Acknowledge
-let PMC_LVDSC1_LVDIE : UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable
-let PMC_LVDSC1_LVDRE : UInt8 = 0x10   // Low-Voltage Detect Reset Enable
+let PMC_LVDSC1_LVDF : $UInt8 = 0x80   // Low-Voltage Detect Flag
+let PMC_LVDSC1_LVDACK : $UInt8 = 0x40   // Low-Voltage Detect Acknowledge
+let PMC_LVDSC1_LVDIE : $UInt8 = 0x20   // Low-Voltage Detect $Interrupt Enable
+let PMC_LVDSC1_LVDRE : $UInt8 = 0x10   // Low-Voltage Detect Reset Enable
 
-let PMC_LVDSC2_LVWF : UInt8 = 0x80   // Low-Voltage Warning Flag
-let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge
-let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable
+let PMC_LVDSC2_LVWF : $UInt8 = 0x80   // Low-Voltage Warning Flag
+let PMC_LVDSC2_LVWACK : $UInt8 = 0x40   // Low-Voltage Warning Acknowledge
+let PMC_LVDSC2_LVWIE : $UInt8 = 0x20   // Low-Voltage Warning $Interrupt Enable
 
 registers PMC @at 0x4007_D000 {
-  LVDSC1 @offset 0x00 : UInt8 // Low Voltage Detect Status And Control 1 register
-  LVDSC2 @offset 0x01 : UInt8 // Low Voltage Detect Status And Control 2 register
-  REGSC  @offset 0x02 : UInt8 { // Regulator Status And Control register
+  LVDSC1 @offset 0x00 : $UInt8 // Low Voltage Detect Status And Control 1 register
+  LVDSC2 @offset 0x01 : $UInt8 // Low Voltage Detect Status And Control 2 register
+  REGSC  @offset 0x02 : $UInt8 { // Regulator Status And Control register
     3, BGEN, ACKISO, REGONS, BGBE, 1
   }
 }
 
 // Chapter 16: Low-Leakage Wakeup Unit (LLWU)
 registers LLWU @at 0x4007_C000 {
-  PE1  @offset 0x00 : UInt8 // LLWU Pin Enable 1 register
-  PE2  @offset 0x01 : UInt8 // LLWU Pin Enable 2 register
-  PE3  @offset 0x02 : UInt8 // LLWU Pin Enable 3 register
-  PE4  @offset 0x03 : UInt8 // LLWU Pin Enable 4 register
-  ME   @offset 0x04 : UInt8 // LLWU Module Enable register
-  F1   @offset 0x05 : UInt8 // LLWU Flag 1 register
-  F2   @offset 0x06 : UInt8 // LLWU Flag 2 register
-  F3   @offset 0x07 : UInt8 // LLWU Flag 3 register
-  FILT1 @offset 0x08 : UInt8 // LLWU Pin Filter 1 register
-  FILT2 @offset 0x09 : UInt8 // LLWU Pin Filter 2 register
-  RST  @offset 0x0A : UInt8 // LLWU Reset Enable register
+  PE1  @offset 0x00 : $UInt8 // LLWU Pin Enable 1 register
+  PE2  @offset 0x01 : $UInt8 // LLWU Pin Enable 2 register
+  PE3  @offset 0x02 : $UInt8 // LLWU Pin Enable 3 register
+  PE4  @offset 0x03 : $UInt8 // LLWU Pin Enable 4 register
+  ME   @offset 0x04 : $UInt8 // LLWU Module Enable register
+  F1   @offset 0x05 : $UInt8 // LLWU Flag 1 register
+  F2   @offset 0x06 : $UInt8 // LLWU Flag 2 register
+  F3   @offset 0x07 : $UInt8 // LLWU Flag 3 register
+  FILT1 @offset 0x08 : $UInt8 // LLWU Pin Filter 1 register
+  FILT2 @offset 0x09 : $UInt8 // LLWU Pin Filter 2 register
+  RST  @offset 0x0A : $UInt8 // LLWU Reset Enable register
 }
 
 // Chapter 17: Miscellaneous Control Module (MCM)
-let MCM_PLACR_ARG  : UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin
-let MCM_CR_SRAMLWP : UInt32 =  0x4000_0000  // SRAM_L write protect
-//let UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
-let MCM_CR_SRAMUWP : UInt32 =  0x0400_0000  // SRAM_U write protect
-//let UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
+let MCM_PLACR_ARG  : $UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin
+let MCM_CR_SRAMLWP : $UInt32 =  0x4000_0000  // SRAM_L write protect
+//let $UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
+let MCM_CR_SRAMUWP : $UInt32 =  0x0400_0000  // SRAM_U write protect
+//let $UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
 
 registers MCM @at 0xE008_0000 {
-  PLASC @offset 0x08 @ro : UInt16 // Crossbar Switch (AXBS) Slave Configuration
-  PLAMC @offset 0x0A @ro : UInt16 // Crossbar Switch (AXBS) Master Configuration
-  CR @offset 0x0C : UInt32 // RAM arbitration control registers (MK20DX256)
+  PLASC @offset 0x08 @ro : $UInt16 // Crossbar Switch (AXBS) Slave Configuration
+  PLAMC @offset 0x0A @ro : $UInt16 // Crossbar Switch (AXBS) Master Configuration
+  CR @offset 0x0C : $UInt32 // RAM arbitration control registers (MK20DX256)
 }
 
 // Crossbar Switch (AXBS) - only programmable on MK20DX256
-let AXBS_CRS_READONLY  : UInt32 =  0x80000000
-let AXBS_CRS_HALTLOWPRIORITY : UInt32 = 0x40000000
-let AXBS_CRS_ARB_FIXED : UInt32 = 0x00000000
-let AXBS_CRS_ARB_ROUNDROBIN : UInt32 = 0x00010000
-let AXBS_CRS_PARK_FIXED : UInt32 =  0x00000000
-let AXBS_CRS_PARK_PREVIOUS : UInt32 =  0x00000010
-let AXBS_CRS_PARK_NONE : UInt32 =  0x00000020
+let AXBS_CRS_READONLY  : $UInt32 =  0x80000000
+let AXBS_CRS_HALTLOWPRIORITY : $UInt32 = 0x40000000
+let AXBS_CRS_ARB_FIXED : $UInt32 = 0x00000000
+let AXBS_CRS_ARB_ROUNDROBIN : $UInt32 = 0x00010000
+let AXBS_CRS_PARK_FIXED : $UInt32 =  0x00000000
+let AXBS_CRS_PARK_PREVIOUS : $UInt32 =  0x00000010
+let AXBS_CRS_PARK_NONE : $UInt32 =  0x00000020
 
 registers AXBS @at 0x4000_4000 {
-  PRS0   @offset 0x000 : UInt32 // Priority Registers Slave 0
-  CRS0   @offset 0x010 : UInt32 // Control registers 0
-  PRS1   @offset 0x100 : UInt32 // Priority Registers Slave 1
-  CRS1   @offset 0x110 : UInt32 // Control registers 1
-  PRS2   @offset 0x200 : UInt32 // Priority Registers Slave 2
-  CRS2   @offset 0x210 : UInt32 // Control registers 2
-  PRS3   @offset 0x300 : UInt32 // Priority Registers Slave 3
-  CRS3   @offset 0x310 : UInt32 // Control registers 3
-  PRS4   @offset 0x400 : UInt32 // Priority Registers Slave 4
-  CRS4   @offset 0x410 : UInt32 // Control registers 4
-  PRS5   @offset 0x500 : UInt32 // Priority Registers Slave 5
-  CRS5   @offset 0x510 : UInt32 // Control registers 5
-  PRS6   @offset 0x600 : UInt32 // Priority Registers Slave 6
-  CRS6   @offset 0x610 : UInt32 // Control registers 6
-  PRS7   @offset 0x700 : UInt32 // Priority Registers Slave 7
-  CRS7   @offset 0x710 : UInt32 // Control registers 7
-  MGPCR0 @offset 0x800 : UInt32 // Master 0 General Purpose Control Register
-  MGPCR1 @offset 0x900 : UInt32 // Master 1 General Purpose Control Register
-  MGPCR2 @offset 0xA00 : UInt32 // Master 2 General Purpose Control Register
-  MGPCR3 @offset 0xB00 : UInt32 // Master 3 General Purpose Control Register
-  MGPCR4 @offset 0xC00 : UInt32 // Master 4 General Purpose Control Register
-  MGPCR5 @offset 0xD00 : UInt32 // Master 5 General Purpose Control Register
-  MGPCR6 @offset 0xE00 : UInt32 // Master 6 General Purpose Control Register
-  MGPCR7 @offset 0xF00 : UInt32 // Master 7 General Purpose Control Register
+  PRS0   @offset 0x000 : $UInt32 // Priority Registers Slave 0
+  CRS0   @offset 0x010 : $UInt32 // Control registers 0
+  PRS1   @offset 0x100 : $UInt32 // Priority Registers Slave 1
+  CRS1   @offset 0x110 : $UInt32 // Control registers 1
+  PRS2   @offset 0x200 : $UInt32 // Priority Registers Slave 2
+  CRS2   @offset 0x210 : $UInt32 // Control registers 2
+  PRS3   @offset 0x300 : $UInt32 // Priority Registers Slave 3
+  CRS3   @offset 0x310 : $UInt32 // Control registers 3
+  PRS4   @offset 0x400 : $UInt32 // Priority Registers Slave 4
+  CRS4   @offset 0x410 : $UInt32 // Control registers 4
+  PRS5   @offset 0x500 : $UInt32 // Priority Registers Slave 5
+  CRS5   @offset 0x510 : $UInt32 // Control registers 5
+  PRS6   @offset 0x600 : $UInt32 // Priority Registers Slave 6
+  CRS6   @offset 0x610 : $UInt32 // Control registers 6
+  PRS7   @offset 0x700 : $UInt32 // Priority Registers Slave 7
+  CRS7   @offset 0x710 : $UInt32 // Control registers 7
+  MGPCR0 @offset 0x800 : $UInt32 // Master 0 General Purpose Control Register
+  MGPCR1 @offset 0x900 : $UInt32 // Master 1 General Purpose Control Register
+  MGPCR2 @offset 0xA00 : $UInt32 // Master 2 General Purpose Control Register
+  MGPCR3 @offset 0xB00 : $UInt32 // Master 3 General Purpose Control Register
+  MGPCR4 @offset 0xC00 : $UInt32 // Master 4 General Purpose Control Register
+  MGPCR5 @offset 0xD00 : $UInt32 // Master 5 General Purpose Control Register
+  MGPCR6 @offset 0xE00 : $UInt32 // Master 6 General Purpose Control Register
+  MGPCR7 @offset 0xF00 : $UInt32 // Master 7 General Purpose Control Register
 }
 
 
@@ -284,70 +284,70 @@ registers AXBS @at 0x4000_4000 {
 let DMA_CHANNEL_COUNT = 16
 
 registers DMAMUX0 @at 0x4002_1000 {
-  CHCFG [DMA_CHANNEL_COUNT @offset 0x0 @inc 1] : UInt8 {
+  CHCFG [DMA_CHANNEL_COUNT @offset 0x0 @inc 1] : $UInt8 {
     ENABLE, TRIG, SOURCE:6
   }
 }
 
-let DMAMUX_SOURCE_UART0_RX : UInt6 =  2
-let DMAMUX_SOURCE_UART0_TX : UInt6 =  3
-let DMAMUX_SOURCE_UART1_RX : UInt6 =  4
-let DMAMUX_SOURCE_UART1_TX : UInt6 =  5
-let DMAMUX_SOURCE_UART2_RX : UInt6 =  6
-let DMAMUX_SOURCE_UART2_TX : UInt6 =  7
-let DMAMUX_SOURCE_I2S0_RX  : UInt6 = 14
-let DMAMUX_SOURCE_I2S0_TX  : UInt6 = 15
-let DMAMUX_SOURCE_SPI0_RX  : UInt6 = 16
-let DMAMUX_SOURCE_SPI0_TX  : UInt6 = 17
-let DMAMUX_SOURCE_I2C0     : UInt6 = 22
-let DMAMUX_SOURCE_I2C1     : UInt6 = 23
-let DMAMUX_SOURCE_FTM0_CH0 : UInt6 = 24
-let DMAMUX_SOURCE_FTM0_CH1 : UInt6 = 25
-let DMAMUX_SOURCE_FTM0_CH2 : UInt6 = 26
-let DMAMUX_SOURCE_FTM0_CH3 : UInt6 = 27
-let DMAMUX_SOURCE_FTM0_CH4 : UInt6 = 28
-let DMAMUX_SOURCE_FTM0_CH5 : UInt6 = 29
-let DMAMUX_SOURCE_FTM0_CH6 : UInt6 = 30
-let DMAMUX_SOURCE_FTM0_CH7 : UInt6 = 31
-let DMAMUX_SOURCE_FTM1_CH0 : UInt6 = 32
-let DMAMUX_SOURCE_FTM1_CH1 : UInt6 = 33
-let DMAMUX_SOURCE_FTM2_CH0 : UInt6 = 34
-let DMAMUX_SOURCE_FTM2_CH1 : UInt6 = 35
-let DMAMUX_SOURCE_ADC0     : UInt6 = 40
-let DMAMUX_SOURCE_ADC1     : UInt6 = 41
-let DMAMUX_SOURCE_CMP0     : UInt6 = 42
-let DMAMUX_SOURCE_CMP1     : UInt6 = 43
-let DMAMUX_SOURCE_CMP2     : UInt6 = 44
-let DMAMUX_SOURCE_DAC0     : UInt6 = 45
-let DMAMUX_SOURCE_CMT      : UInt6 = 47
-let DMAMUX_SOURCE_PDB      : UInt6 = 48
-let DMAMUX_SOURCE_PORTA    : UInt6 = 49
-let DMAMUX_SOURCE_PORTB    : UInt6 = 50
-let DMAMUX_SOURCE_PORTC    : UInt6 = 51
-let DMAMUX_SOURCE_PORTD    : UInt6 = 52
-let DMAMUX_SOURCE_PORTE    : UInt6 = 53
-let DMAMUX_SOURCE_ALWAYS0  : UInt6 = 54
-let DMAMUX_SOURCE_ALWAYS1  : UInt6 = 55
-let DMAMUX_SOURCE_ALWAYS2  : UInt6 = 56
-let DMAMUX_SOURCE_ALWAYS3  : UInt6 = 57
-let DMAMUX_SOURCE_ALWAYS4  : UInt6 = 58
-let DMAMUX_SOURCE_ALWAYS5  : UInt6 = 59
-let DMAMUX_SOURCE_ALWAYS6  : UInt6 = 60
-let DMAMUX_SOURCE_ALWAYS7  : UInt6 = 61
-let DMAMUX_SOURCE_ALWAYS8  : UInt6 = 62
-let DMAMUX_SOURCE_ALWAYS9  : UInt6 = 63
+let DMAMUX_SOURCE_UART0_RX : $UInt6 =  2
+let DMAMUX_SOURCE_UART0_TX : $UInt6 =  3
+let DMAMUX_SOURCE_UART1_RX : $UInt6 =  4
+let DMAMUX_SOURCE_UART1_TX : $UInt6 =  5
+let DMAMUX_SOURCE_UART2_RX : $UInt6 =  6
+let DMAMUX_SOURCE_UART2_TX : $UInt6 =  7
+let DMAMUX_SOURCE_I2S0_RX  : $UInt6 = 14
+let DMAMUX_SOURCE_I2S0_TX  : $UInt6 = 15
+let DMAMUX_SOURCE_SPI0_RX  : $UInt6 = 16
+let DMAMUX_SOURCE_SPI0_TX  : $UInt6 = 17
+let DMAMUX_SOURCE_I2C0     : $UInt6 = 22
+let DMAMUX_SOURCE_I2C1     : $UInt6 = 23
+let DMAMUX_SOURCE_FTM0_CH0 : $UInt6 = 24
+let DMAMUX_SOURCE_FTM0_CH1 : $UInt6 = 25
+let DMAMUX_SOURCE_FTM0_CH2 : $UInt6 = 26
+let DMAMUX_SOURCE_FTM0_CH3 : $UInt6 = 27
+let DMAMUX_SOURCE_FTM0_CH4 : $UInt6 = 28
+let DMAMUX_SOURCE_FTM0_CH5 : $UInt6 = 29
+let DMAMUX_SOURCE_FTM0_CH6 : $UInt6 = 30
+let DMAMUX_SOURCE_FTM0_CH7 : $UInt6 = 31
+let DMAMUX_SOURCE_FTM1_CH0 : $UInt6 = 32
+let DMAMUX_SOURCE_FTM1_CH1 : $UInt6 = 33
+let DMAMUX_SOURCE_FTM2_CH0 : $UInt6 = 34
+let DMAMUX_SOURCE_FTM2_CH1 : $UInt6 = 35
+let DMAMUX_SOURCE_ADC0     : $UInt6 = 40
+let DMAMUX_SOURCE_ADC1     : $UInt6 = 41
+let DMAMUX_SOURCE_CMP0     : $UInt6 = 42
+let DMAMUX_SOURCE_CMP1     : $UInt6 = 43
+let DMAMUX_SOURCE_CMP2     : $UInt6 = 44
+let DMAMUX_SOURCE_DAC0     : $UInt6 = 45
+let DMAMUX_SOURCE_CMT      : $UInt6 = 47
+let DMAMUX_SOURCE_PDB      : $UInt6 = 48
+let DMAMUX_SOURCE_PORTA    : $UInt6 = 49
+let DMAMUX_SOURCE_PORTB    : $UInt6 = 50
+let DMAMUX_SOURCE_PORTC    : $UInt6 = 51
+let DMAMUX_SOURCE_PORTD    : $UInt6 = 52
+let DMAMUX_SOURCE_PORTE    : $UInt6 = 53
+let DMAMUX_SOURCE_ALWAYS0  : $UInt6 = 54
+let DMAMUX_SOURCE_ALWAYS1  : $UInt6 = 55
+let DMAMUX_SOURCE_ALWAYS2  : $UInt6 = 56
+let DMAMUX_SOURCE_ALWAYS3  : $UInt6 = 57
+let DMAMUX_SOURCE_ALWAYS4  : $UInt6 = 58
+let DMAMUX_SOURCE_ALWAYS5  : $UInt6 = 59
+let DMAMUX_SOURCE_ALWAYS6  : $UInt6 = 60
+let DMAMUX_SOURCE_ALWAYS7  : $UInt6 = 61
+let DMAMUX_SOURCE_ALWAYS8  : $UInt6 = 62
+let DMAMUX_SOURCE_ALWAYS9  : $UInt6 = 63
 
 // Chapter 21: Direct Memory Access Controller (eDMA)
 
 // Control Register
-let DMA_TCD_ATTR_SIZE_8BIT   : UInt4 = 0
-let DMA_TCD_ATTR_SIZE_16BIT  : UInt4 = 1
-let DMA_TCD_ATTR_SIZE_32BIT  : UInt4 = 2
-let DMA_TCD_ATTR_SIZE_16BYTE : UInt4 = 4
-let DMA_TCD_ATTR_SIZE_32BYTE : UInt4 = 5
+let DMA_TCD_ATTR_SIZE_8BIT   : $UInt4 = 0
+let DMA_TCD_ATTR_SIZE_16BIT  : $UInt4 = 1
+let DMA_TCD_ATTR_SIZE_32BIT  : $UInt4 = 2
+let DMA_TCD_ATTR_SIZE_16BYTE : $UInt4 = 4
+let DMA_TCD_ATTR_SIZE_32BYTE : $UInt4 = 5
 
 registers DMA @at 0x4000_8000 {
-  CR @offset 0x00 : UInt32 {
+  CR @offset 0x00 : $UInt32 {
     14,
     CX, // Cancel Transfer
     ECX, // Error Cancel Transfer
@@ -366,174 +366,174 @@ registers DMA @at 0x4000_8000 {
   }
 
   // Error Status Register
-  ES  @offset 0x04 : UInt32 {
+  ES  @offset 0x04 : $UInt32 {
     VLD, 14, ECX, 1, CPE, 2, ERRCHN :4, SAE, SOE, DAE, DOE, NCE, SGE, SBE, DBE
   }
 
-  ERQ @offset 0x0C : UInt32 { // Enable Request Register
+  ERQ @offset 0x0C : $UInt32 { // Enable Request Register
    16,
    ERQ15, ERQ14, ERQ13, ERQ12, ERQ11, ERQ10, ERQ9,  ERQ8,
    ERQ7,  ERQ6,  ERQ5,  ERQ4,  ERQ3,  ERQ2,  ERQ1,  ERQ0
   }
 
-  EEI @offset 0x14 : UInt32 { // Enable Error Interrupt Register
+  EEI @offset 0x14 : $UInt32 { // Enable Error $Interrupt Register
    16,
    EEI15, EEI14, EEI13, EEI12, EEI11, EEI10, EEI9,  EEI8,
    EEI7,  EEI6,  EEI5,  EEI4,  EEI3,  EEI2,  EEI1,  EEI0
   }
 
-  CEEI @offset 0x18 : UInt8 { // Clear Enable Error Interrupt Register
+  CEEI @offset 0x18 : $UInt8 { // Clear Enable Error $Interrupt Register
    NOP, CAAE, 2, CEEI:4
   }
 
-  SEEI @offset 0x19 : UInt8 { // Set Enable Error Interrupt Register
+  SEEI @offset 0x19 : $UInt8 { // Set Enable Error $Interrupt Register
    NOP, SAAE, 2, SEEI:4
   }
 
-  CERQ @offset 0x1A : UInt8 { // Clear Enable Request Register
+  CERQ @offset 0x1A : $UInt8 { // Clear Enable Request Register
    NOP, CAER, 2, CERQ:4
   }
 
-  SERQ @offset 0x1B : UInt8 { // Set Enable Request Register
+  SERQ @offset 0x1B : $UInt8 { // Set Enable Request Register
    NOP, SAER, 2, SERQ:4
   }
 
-  CDNE @offset 0x1C : UInt8 { // Clear DONE Status Bit Register
+  CDNE @offset 0x1C : $UInt8 { // Clear DONE Status Bit Register
    NOP, CADN, 2, CDNE:4
   }
 
-  SSRT @offset 0x1D : UInt8 { // Set START Bit Register
+  SSRT @offset 0x1D : $UInt8 { // Set START Bit Register
    NOP, SAST, 2, SSRT:4
   }
 
-  CERR @offset 0x1E : UInt8 { // Clear Error Register
+  CERR @offset 0x1E : $UInt8 { // Clear Error Register
    NOP, CAEI, 2, CERR:4
   }
 
-  CINT @offset 0x1F : UInt8 { // Clear Interrupt Request Register
+  CINT @offset 0x1F : $UInt8 { // Clear $Interrupt Request Register
    NOP, CAIR, 2, CINT:4
   }
 
-  INT @offset 0x24 : UInt32 { // Interrupt Request Register
+  INT @offset 0x24 : $UInt32 { // $Interrupt Request Register
    16,
    INT15, INT14, INT13, INT12, INT11, INT10, INT9,  INT8,
    INT7,  INT6,  INT5,  INT4,  INT3,  INT2,  INT1,  INT0
   }
 
-  ERR @offset 0x2C : UInt32 { // Error Register
+  ERR @offset 0x2C : $UInt32 { // Error Register
    16,
    ERR15, ERR14, ERR13, ERR12, ERR11, ERR10, ERR9,  ERR8,
    ERR7,  ERR6,  ERR5,  ERR4,  ERR3,  ERR2,  ERR1,  ERR0
   }
 
-  HRS @offset 0x34 : UInt32 { // Hardware Request Status Register
+  HRS @offset 0x34 : $UInt32 { // Hardware Request Status Register
    16,
    HRS15, HRS14, HRS13, HRS12, HRS11, HRS10, HRS9,  HRS8,
    HRS7,  HRS6,  HRS5,  HRS4,  HRS3,  HRS2,  HRS1,  HRS0
   }
 
-  DCHPRI [DMA_CHANNEL_COUNT @offset 0x100 @inc 1] : UInt8 { // Channel n Priority Register
+  DCHPRI [DMA_CHANNEL_COUNT @offset 0x100 @inc 1] : $UInt8 { // Channel n Priority Register
    ECP, DPA, 2, CHPRI:4
   }
 
-  TCD_SADDR [DMA_CHANNEL_COUNT @offset 0x1000 @inc 32] : UInt32 // TCD Source Address
+  TCD_SADDR [DMA_CHANNEL_COUNT @offset 0x1000 @inc 32] : $UInt32 // TCD Source Address
 
-  TCD_SOFF [DMA_CHANNEL_COUNT @offset 0x1004 @inc 32] : Int16 // TCD Signed Source Address Offset
+  TCD_SOFF [DMA_CHANNEL_COUNT @offset 0x1004 @inc 32] : $Int16 // TCD Signed Source Address Offset
 
-  TCD_ATTR [DMA_CHANNEL_COUNT @offset 0x1006 @inc 32] : UInt16 { // TCD Transfer Attributes
+  TCD_ATTR [DMA_CHANNEL_COUNT @offset 0x1006 @inc 32] : $UInt16 { // TCD Transfer Attributes
     SMOD:4, SSIZE:4, DMOD:4, DSIZE:4
   }
 
   // TCD Minor Byte Count (Minor Loop Disabled)
-  TCD_NBYTES_MLNO [DMA_CHANNEL_COUNT @offset 0x1008 @inc 32] : UInt32
+  TCD_NBYTES_MLNO [DMA_CHANNEL_COUNT @offset 0x1008 @inc 32] : $UInt32
 
   // TCD Last Source Address Adjustment
-  TCD_SLAST [DMA_CHANNEL_COUNT @offset 0x100C @inc 32] : Int32
+  TCD_SLAST [DMA_CHANNEL_COUNT @offset 0x100C @inc 32] : $Int32
 
   // TCD Destination Address
-  TCD_DADDR [DMA_CHANNEL_COUNT @offset 0x1010 @inc 32] : UInt32
+  TCD_DADDR [DMA_CHANNEL_COUNT @offset 0x1010 @inc 32] : $UInt32
 
   // TCD Signed Destination Address Offset
-  TCD_DOFF [DMA_CHANNEL_COUNT @offset 0x1014 @inc 32] : Int16
+  TCD_DOFF [DMA_CHANNEL_COUNT @offset 0x1014 @inc 32] : $Int16
 
   // TCD Current Minor Loop Link, Major Loop Count (Channel Linking Disabled)
-  TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT @offset 0x1016 @inc 32] : UInt16 {
+  TCD_CITER_ELINKNO [DMA_CHANNEL_COUNT @offset 0x1016 @inc 32] : $UInt16 {
     ELINK, CITER:15
   }
 
   // TCD Last Destination Address Adjustment/Scatter Gather Address
-  TCD_DLASTSGA [DMA_CHANNEL_COUNT @offset 0x1018 @inc 32] : Int32
+  TCD_DLASTSGA [DMA_CHANNEL_COUNT @offset 0x1018 @inc 32] : $Int32
 
   // TCD Control and Status
-  TCD_CSR [DMA_CHANNEL_COUNT @offset 0x101C @inc 32] : UInt16 {
+  TCD_CSR [DMA_CHANNEL_COUNT @offset 0x101C @inc 32] : $UInt16 {
     BWC:2, 2, MAJORLINKCH:4,
     DONE, ACTIVE, MAJORLINK, ESG, DREQ, INTHALF, INTMAJOR, START
   }
 
   // TCD Beginning Minor Loop Link, Major Loop Count (Channel Linking Disabled)
-  TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT @offset 0x101E @inc 32] : UInt16 {
+  TCD_BITER_ELINKNO [DMA_CHANNEL_COUNT @offset 0x101E @inc 32] : $UInt16 {
     ELINK, BITER:15
   }
 }
 
 //// Chapter 22: External Watchdog Monitor (EWM)
-//registers EWM_CTRL  *(volatile UInt8_t  *)0x40061000 // Control Register
-//registers EWM_SERV  *(volatile UInt8_t  *)0x40061001 // Service Register
-//registers EWM_CMPL  *(volatile UInt8_t  *)0x40061002 // Compare Low Register
-//registers EWM_CMPH  *(volatile UInt8_t  *)0x40061003 // Compare High Register
+//registers EWM_CTRL  *(volatile $UInt8_t  *)0x40061000 // Control Register
+//registers EWM_SERV  *(volatile $UInt8_t  *)0x40061001 // Service Register
+//registers EWM_CMPL  *(volatile $UInt8_t  *)0x40061002 // Compare Low Register
+//registers EWM_CMPH  *(volatile $UInt8_t  *)0x40061003 // Compare High Register
 //
 //// Chapter 23: Watchdog Timer (WDOG)
-let WDOG_STCTRLH_DISTESTWDOG : UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.
+let WDOG_STCTRLH_DISTESTWDOG : $UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.
 
-let WDOG_STCTRLH_TESTSEL  : UInt16 = 0x0800
-let WDOG_STCTRLH_TESTWDOG : UInt16 = 0x0400
-let WDOG_STCTRLH_WAITEN : UInt16 = 0x0080
-let WDOG_STCTRLH_STOPEN : UInt16 = 0x0040
-let WDOG_STCTRLH_DBGEN  : UInt16 = 0x0020
-let WDOG_STCTRLH_ALLOWUPDATE : UInt16 = 0x0010
-let WDOG_STCTRLH_WINEN : UInt16 = 0x0008
-let WDOG_STCTRLH_IRQRSTEN : UInt16 = 0x0004
-let WDOG_STCTRLH_CLKSRC : UInt16 = 0x0002
-let WDOG_STCTRLH_WDOGEN : UInt16 = 0x0001
+let WDOG_STCTRLH_TESTSEL  : $UInt16 = 0x0800
+let WDOG_STCTRLH_TESTWDOG : $UInt16 = 0x0400
+let WDOG_STCTRLH_WAITEN : $UInt16 = 0x0080
+let WDOG_STCTRLH_STOPEN : $UInt16 = 0x0040
+let WDOG_STCTRLH_DBGEN  : $UInt16 = 0x0020
+let WDOG_STCTRLH_ALLOWUPDATE : $UInt16 = 0x0010
+let WDOG_STCTRLH_WINEN : $UInt16 = 0x0008
+let WDOG_STCTRLH_IRQRSTEN : $UInt16 = 0x0004
+let WDOG_STCTRLH_CLKSRC : $UInt16 = 0x0002
+let WDOG_STCTRLH_WDOGEN : $UInt16 = 0x0001
 
-let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520
-let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928
+let WDOG_UNLOCK_SEQ1 : $UInt16   = 0xC520
+let WDOG_UNLOCK_SEQ2 : $UInt16   = 0xD928
 
 registers WDOG @at 0x4005_2000 {
-  STCTRLH  @offset 0x00 : UInt16 // Watchdog Status and Control registers High
-  STCTRLL  @offset 0x02 : UInt16 // Watchdog Status and Control registers Low
-  TOVALH   @offset 0x04 : UInt16 // Watchdog Time-out Value registers High
-  TOVALL   @offset 0x06 : UInt16 // Watchdog Time-out Value registers Low
-  WINH     @offset 0x08 : UInt16 // Watchdog Window registers High
-  WINL     @offset 0x0A : UInt16 // Watchdog Window registers Low
-  REFRESH  @offset 0x0C : UInt16 // Watchdog Refresh register
-  UNLOCK   @offset 0x0E : UInt16 // Watchdog Unlock register
-  TMROUTH  @offset 0x10 : UInt16 // Watchdog Timer Output registers High
-  TMROUTL  @offset 0x12 : UInt16 // Watchdog Timer Output registers Low
-  RSTCNT   @offset 0x14 : UInt16 // Watchdog Reset Count register
-  PRESC    @offset 0x16 : UInt16 // Watchdog Prescaler register
+  STCTRLH  @offset 0x00 : $UInt16 // Watchdog Status and Control registers High
+  STCTRLL  @offset 0x02 : $UInt16 // Watchdog Status and Control registers Low
+  TOVALH   @offset 0x04 : $UInt16 // Watchdog Time-out Value registers High
+  TOVALL   @offset 0x06 : $UInt16 // Watchdog Time-out Value registers Low
+  WINH     @offset 0x08 : $UInt16 // Watchdog Window registers High
+  WINL     @offset 0x0A : $UInt16 // Watchdog Window registers Low
+  REFRESH  @offset 0x0C : $UInt16 // Watchdog Refresh register
+  UNLOCK   @offset 0x0E : $UInt16 // Watchdog Unlock register
+  TMROUTH  @offset 0x10 : $UInt16 // Watchdog Timer Output registers High
+  TMROUTL  @offset 0x12 : $UInt16 // Watchdog Timer Output registers Low
+  RSTCNT   @offset 0x14 : $UInt16 // Watchdog Reset Count register
+  PRESC    @offset 0x16 : $UInt16 // Watchdog Prescaler register
 }
 
 // Chapter 24: Multipurpose Clock Generator (MCG)
-let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim
-let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed
-let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status
-//SC_FCRDIV(n)  (UInt8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider
-let MCG_SC_FLTPRSRV : UInt8 = 0x10   // FLL Filter Preserve Enable
-let MCG_SC_ATMF : UInt8 = 0x20   // Automatic Trim Machine Fail Flag
-let MCG_SC_ATMS : UInt8 = 0x40   // Automatic Trim Machine Select
-let MCG_SC_ATME : UInt8 = 0x80   // Automatic Trim Machine Enable
+let MCG_C4_SCFTRIM : $UInt8 = 0x01   // Slow $Internal Reference Clock Fine Trim
+let MCG_C4_DMX32 : $UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed
+let MCG_SC_LOCS0 : $UInt8 = 0x01   // OSC0 Loss of Clock Status
+//SC_FCRDIV(n)  (UInt8_t)(((n) & 0x07) << 1) // Fast Clock $Internal Reference Divider
+let MCG_SC_FLTPRSRV : $UInt8 = 0x10   // FLL Filter Preserve Enable
+let MCG_SC_ATMF : $UInt8 = 0x20   // Automatic Trim Machine Fail Flag
+let MCG_SC_ATMS : $UInt8 = 0x40   // Automatic Trim Machine Select
+let MCG_SC_ATME : $UInt8 = 0x80   // Automatic Trim Machine Enable
 
 registers MCG @at 0x4006_4000 {
-  C1 @offset 0x00 : UInt8 { // MCG Control 1 Register
+  C1 @offset 0x00 : $UInt8 { // MCG Control 1 Register
     CLKS:2, // Clock Source Select, Selects the clock source for MCGOUTCLK
     FRDIV:3, // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL
-    IREFS, // Internal Reference Select, Selects the reference clock source for the FLL
-    IRCLKEN, // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK
-    IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode
+    IREFS, // $Internal Reference Select, Selects the reference clock source for the FLL
+    IRCLKEN, // $Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK
+    IREFSTEN // $Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode
   }
 
-  C2 @offset 0x01 : UInt8 { // MCG Control 2 Register
+  C2 @offset 0x01 : $UInt8 { // MCG Control 2 Register
     LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt
             // or a reset request is made following a loss of OSC0
     1,
@@ -542,52 +542,52 @@ registers MCG @at 0x4006_4000 {
     HGO0, // High Gain Oscillator Select, Controls the crystal oscillator mode of operation
     EREFS, // External Reference Select, selects the source for the external reference clock
     LP, // Low Power Select, Controls whether the FLL or PLL is disabled in BLPI and BLPE modes.
-    IRCS // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.
+    IRCS // $Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.
   }
 
-  C3 @offset 0x02 : UInt8 // MCG Control 3 Register
-  //C3_SCTRIM(n)  (UInt8_t)(n)   // Slow Internal Reference Clock Trim Setting
-  C4 @offset 0x03 : UInt8 // MCG Control 4 Register
-  //C4_FCTRIM(n)  (UInt8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting
+  C3 @offset 0x02 : $UInt8 // MCG Control 3 Register
+  //C3_SCTRIM(n)  (UInt8_t)(n)   // Slow $Internal Reference Clock Trim Setting
+  C4 @offset 0x03 : $UInt8 // MCG Control 4 Register
+  //C4_FCTRIM(n)  (UInt8_t)(((n) & 0x0F) << 1) // Fast $Internal Reference Clock Trim Setting
   //C4_DRST_DRS(n)  (UInt8_t)(((n) & 0x03) << 5) // DCO Range Select
 
-  C5 @offset 0x04 : UInt8 { // MCG Control 5 Register
+  C5 @offset 0x04 : $UInt8 { // MCG Control 5 Register
    1,
    PLLCLKEN0, // PLL Clock Enable
    PLLSTEN0,  // PLL Stop Enable
    PRDIV0:5 // PLL External Reference Divider
   }
 
-  C6 @offset 0x05 : UInt8 { // MCG Control 6 Register
-   LOLIE0, // Loss of Lock Interrrupt Enable
+  C6 @offset 0x05 : $UInt8 { // MCG Control 6 Register
+   LOLIE0, // Loss of Lock $Interrrupt Enable
    PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00
    CME0,   // Clock Monitor Enable
    VDIV0:5 // VCO 0 Divider
   }
 
-  S @offset 0x06 @ro : UInt8 { // MCG Status Register
+  S @offset 0x06 @ro : $UInt8 { // MCG Status Register
    LOLS0, // Loss of Lock Status
    LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked
    PLLST, // PLL Select Status
-   IREFST, // Internal Reference Status
-   CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
+   IREFST, // $Internal Reference Status
+   CLKST:2, // Clock Mode Status, 0=FLL is selected, 1= $Internal ref, 2=External ref, 3=PLL
    OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator
-   IRCST   // Internal Reference Clock Status
+   IRCST   // $Internal Reference Clock Status
   }
 
-  SC @offset 0x08 : UInt8 // MCG Status and Control Register
+  SC @offset 0x08 : $UInt8 // MCG Status and Control Register
 
-  ATCVH @offset 0x0A : UInt8 // MCG Auto Trim Compare Value High Register
-  ATCVL @offset 0x0B : UInt8 // MCG Auto Trim Compare Value Low Register
-  C7    @offset 0x0C : UInt8 // MCG Control 7 Register
-  C8    @offset 0x0D : UInt8 // MCG Control 8 Register
+  ATCVH @offset 0x0A : $UInt8 // MCG Auto Trim Compare Value High Register
+  ATCVL @offset 0x0B : $UInt8 // MCG Auto Trim Compare Value Low Register
+  C7    @offset 0x0C : $UInt8 // MCG Control 7 Register
+  C8    @offset 0x0D : $UInt8 // MCG Control 8 Register
 }
 
 //// Chapter 25: Oscillator (OSC)
-let OSC_SC16P  : UInt8 = 0x01
+let OSC_SC16P  : $UInt8 = 0x01
 
 registers OSC @at 0x4006_5000 {
-  CR @offset 0x00 : UInt8 {// OSC Control Register
+  CR @offset 0x00 : $UInt8 {// OSC Control Register
     ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)
     1,
     EREFSTEN, // External Reference Stop Enable, Controls whether or not
@@ -603,236 +603,236 @@ registers OSC @at 0x4006_5000 {
 
 //// Chapter 27: Flash Memory Controller (FMC)
 registers FMC @at 0x4001_F000 {
-  PFAPR     @offset 0x000 : UInt32 // Flash Access Protection
-  PFB0CR    @offset 0x004 : UInt32 // Flash Control
-  TAGVDW0S0 @offset 0x100 : UInt32 // Cache Tag Storage
-  TAGVDW0S1 @offset 0x104 : UInt32 // Cache Tag Storage
-  TAGVDW1S0 @offset 0x108 : UInt32 // Cache Tag Storage
-  TAGVDW1S1 @offset 0x10C : UInt32 // Cache Tag Storage
-  TAGVDW2S0 @offset 0x110 : UInt32 // Cache Tag Storage
-  TAGVDW2S1 @offset 0x114 : UInt32 // Cache Tag Storage
-  TAGVDW3S0 @offset 0x118 : UInt32 // Cache Tag Storage
-  TAGVDW3S1 @offset 0x11C : UInt32 // Cache Tag Storage
-  DATAW0S0  @offset 0x200 : UInt32 // Cache Data Storage
-  DATAW0S1  @offset 0x204 : UInt32 // Cache Data Storage
-  DATAW1S0  @offset 0x208 : UInt32 // Cache Data Storage
-  DATAW1S1  @offset 0x20C : UInt32 // Cache Data Storage
-  DATAW2S0  @offset 0x210 : UInt32 // Cache Data Storage
-  DATAW2S1  @offset 0x214 : UInt32 // Cache Data Storage
-  DATAW3S0  @offset 0x218 : UInt32 // Cache Data Storage
-  DATAW3S1  @offset 0x21C : UInt32 // Cache Data Storage
+  PFAPR     @offset 0x000 : $UInt32 // Flash Access Protection
+  PFB0CR    @offset 0x004 : $UInt32 // Flash Control
+  TAGVDW0S0 @offset 0x100 : $UInt32 // Cache Tag Storage
+  TAGVDW0S1 @offset 0x104 : $UInt32 // Cache Tag Storage
+  TAGVDW1S0 @offset 0x108 : $UInt32 // Cache Tag Storage
+  TAGVDW1S1 @offset 0x10C : $UInt32 // Cache Tag Storage
+  TAGVDW2S0 @offset 0x110 : $UInt32 // Cache Tag Storage
+  TAGVDW2S1 @offset 0x114 : $UInt32 // Cache Tag Storage
+  TAGVDW3S0 @offset 0x118 : $UInt32 // Cache Tag Storage
+  TAGVDW3S1 @offset 0x11C : $UInt32 // Cache Tag Storage
+  DATAW0S0  @offset 0x200 : $UInt32 // Cache Data Storage
+  DATAW0S1  @offset 0x204 : $UInt32 // Cache Data Storage
+  DATAW1S0  @offset 0x208 : $UInt32 // Cache Data Storage
+  DATAW1S1  @offset 0x20C : $UInt32 // Cache Data Storage
+  DATAW2S0  @offset 0x210 : $UInt32 // Cache Data Storage
+  DATAW2S1  @offset 0x214 : $UInt32 // Cache Data Storage
+  DATAW3S0  @offset 0x218 : $UInt32 // Cache Data Storage
+  DATAW3S1  @offset 0x21C : $UInt32 // Cache Data Storage
 }
 
 
 //// Chapter 28: Flash Memory Module (FTFL)
-//registers FTFL_FST *(volatile UInt8_t  *)0x40020000      // Flash Status Register
-//registers FTFL_FSTAT_CCIF   (UInt8_t)0x80   // Command Complete Interrupt Flag
+//registers FTFL_FST *(volatile $UInt8_t  *)0x40020000      // Flash Status Register
+//registers FTFL_FSTAT_CCIF   (UInt8_t)0x80   // Command Complete $Interrupt Flag
 //registers FTFL_FSTAT_RDCOLERR  (UInt8_t)0x40   // Flash Read Collision Error Flag
 //registers FTFL_FSTAT_ACCERR  (UInt8_t)0x20   // Flash Access Error Flag
 //registers FTFL_FSTAT_FPVIOL  (UInt8_t)0x10   // Flash Protection Violation Flag
 //registers FTFL_FSTAT_MGSTAT0  (UInt8_t)0x01   // Memory Controller Command Completion Status Flag
-//registers FTFL_FCNFG  *(volatile UInt8_t  *)0x40020001      // Flash Configuration Register
-//registers FTFL_FCNFG_CCIE   (UInt8_t)0x80   // Command Complete Interrupt Enable
-//registers FTFL_FCNFG_RDCOLLIE  (UInt8_t)0x40   // Read Collision Error Interrupt Enable
+//registers FTFL_FCNFG  *(volatile $UInt8_t  *)0x40020001      // Flash Configuration Register
+//registers FTFL_FCNFG_CCIE   (UInt8_t)0x80   // Command Complete $Interrupt Enable
+//registers FTFL_FCNFG_RDCOLLIE  (UInt8_t)0x40   // Read Collision Error $Interrupt Enable
 //registers FTFL_FCNFG_ERSAREQ  (UInt8_t)0x20   // Erase All Request
 //registers FTFL_FCNFG_ERSSUSP  (UInt8_t)0x10   // Erase Suspend
 //registers FTFL_FCNFG_PFLSH  (UInt8_t)0x04   // Flash memory configuration
 //registers FTFL_FCNFG_RAMRDY  (UInt8_t)0x02   // RAM Ready
 //registers FTFL_FCNFG_EEERDY  (UInt8_t)0x01   // EEPROM Ready
-//registers FTFL_FSEC  *(const    UInt8_t  *)0x40020002      // Flash Security Register
-//registers FTFL_FOPT  *(const    UInt8_t  *)0x40020003      // Flash Option Register
-//registers FTFL_FCCOB3  *(volatile UInt8_t  *)0x40020004      // Flash Common Command Object Registers
-//registers FTFL_FCCOB2  *(volatile UInt8_t  *)0x40020005
-//registers FTFL_FCCOB1  *(volatile UInt8_t  *)0x40020006
-//registers FTFL_FCCOB0  *(volatile UInt8_t  *)0x40020007
-//registers FTFL_FCCOB7  *(volatile UInt8_t  *)0x40020008
-//registers FTFL_FCCOB6  *(volatile UInt8_t  *)0x40020009
-//registers FTFL_FCCOB5  *(volatile UInt8_t  *)0x4002000A
-//registers FTFL_FCCOB4  *(volatile UInt8_t  *)0x4002000B
-//registers FTFL_FCCOBB  *(volatile UInt8_t  *)0x4002000C
-//registers FTFL_FCCOBA  *(volatile UInt8_t  *)0x4002000D
-//registers FTFL_FCCOB9  *(volatile UInt8_t  *)0x4002000E
-//registers FTFL_FCCOB8  *(volatile UInt8_t  *)0x4002000F
-//registers FTFL_FPROT3  *(volatile UInt8_t  *)0x40020010      // Program Flash Protection Registers
-//registers FTFL_FPROT2  *(volatile UInt8_t  *)0x40020011      // Program Flash Protection Registers
-//registers FTFL_FPROT1  *(volatile UInt8_t  *)0x40020012      // Program Flash Protection Registers
-//registers FTFL_FPROT0  *(volatile UInt8_t  *)0x40020013      // Program Flash Protection Registers
-//registers FTFL_FEPROT  *(volatile UInt8_t  *)0x40020016      // EEPROM Protection Register
-//registers FTFL_FDPROT  *(volatile UInt8_t  *)0x40020017      // Data Flash Protection Register
+//registers FTFL_FSEC  *(const    $UInt8_t  *)0x40020002      // Flash Security Register
+//registers FTFL_FOPT  *(const    $UInt8_t  *)0x40020003      // Flash Option Register
+//registers FTFL_FCCOB3  *(volatile $UInt8_t  *)0x40020004      // Flash Common Command Object Registers
+//registers FTFL_FCCOB2  *(volatile $UInt8_t  *)0x40020005
+//registers FTFL_FCCOB1  *(volatile $UInt8_t  *)0x40020006
+//registers FTFL_FCCOB0  *(volatile $UInt8_t  *)0x40020007
+//registers FTFL_FCCOB7  *(volatile $UInt8_t  *)0x40020008
+//registers FTFL_FCCOB6  *(volatile $UInt8_t  *)0x40020009
+//registers FTFL_FCCOB5  *(volatile $UInt8_t  *)0x4002000A
+//registers FTFL_FCCOB4  *(volatile $UInt8_t  *)0x4002000B
+//registers FTFL_FCCOBB  *(volatile $UInt8_t  *)0x4002000C
+//registers FTFL_FCCOBA  *(volatile $UInt8_t  *)0x4002000D
+//registers FTFL_FCCOB9  *(volatile $UInt8_t  *)0x4002000E
+//registers FTFL_FCCOB8  *(volatile $UInt8_t  *)0x4002000F
+//registers FTFL_FPROT3  *(volatile $UInt8_t  *)0x40020010      // Program Flash Protection Registers
+//registers FTFL_FPROT2  *(volatile $UInt8_t  *)0x40020011      // Program Flash Protection Registers
+//registers FTFL_FPROT1  *(volatile $UInt8_t  *)0x40020012      // Program Flash Protection Registers
+//registers FTFL_FPROT0  *(volatile $UInt8_t  *)0x40020013      // Program Flash Protection Registers
+//registers FTFL_FEPROT  *(volatile $UInt8_t  *)0x40020016      // EEPROM Protection Register
+//registers FTFL_FDPROT  *(volatile $UInt8_t  *)0x40020017      // Data Flash Protection Register
 
 // Chapter 30: Cyclic Redundancy Check (CRC)
 registers CRC @at 0x4003_2000 {
-  CRC   @offset 0x00 : UInt32 // CRC Data register
-  GPOLY @offset 0x04 : UInt32 // CRC Polynomial register
-  CTRL  @offset 0x08 : UInt32 // CRC Control register
+  CRC   @offset 0x00 : $UInt32 // CRC Data register
+  GPOLY @offset 0x04 : $UInt32 // CRC Polynomial register
+  CTRL  @offset 0x08 : $UInt32 // CRC Control register
 }
 
 // Chapter 31: Analog-to-Digital Converter (ADC)
-let ADC_SC1_COCO : UInt32 = 0x80   // Conversion complete flag
-let ADC_SC1_AIEN : UInt32 = 0x40   // Interrupt enable
-let ADC_SC1_DIFF : UInt32 = 0x20   // Differential mode enable
+let ADC_SC1_COCO : $UInt32 = 0x80   // Conversion complete flag
+let ADC_SC1_AIEN : $UInt32 = 0x40   // $Interrupt enable
+let ADC_SC1_DIFF : $UInt32 = 0x20   // Differential mode enable
 
-let ADC_CFG1_ADLPC : UInt32 = 0x80   // Low-power configuration
-let ADC_CFG1_ADLSMP : UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long
+let ADC_CFG1_ADLPC : $UInt32 = 0x80   // Low-power configuration
+let ADC_CFG1_ADLSMP : $UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long
 
-let ADC_CFG2_MUXSEL : UInt32 = 0x10   // 0=a channels, 1=b channels
-let ADC_CFG2_ADACKEN : UInt32 = 0x08   // async clock enable
-let ADC_CFG2_ADHSC  : UInt32 = 0x04   // High speed configuration
+let ADC_CFG2_MUXSEL : $UInt32 = 0x10   // 0=a channels, 1=b channels
+let ADC_CFG2_ADACKEN : $UInt32 = 0x08   // async clock enable
+let ADC_CFG2_ADHSC  : $UInt32 = 0x04   // High speed configuration
 
-let ADC_SC2_ADACT : UInt32 = 0x80   // Conversion active
-let ADC_SC2_ADTRG : UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware
-let ADC_SC2_ACFE  : UInt32 = 0x20   // Compare function enable
-let ADC_SC2_ACFGT : UInt32 = 0x10   // Compare function greater than enable
-let ADC_SC2_ACREN : UInt32 = 0x08   // Compare function range enable
-let ADC_SC2_DMAEN : UInt32 = 0x04   // DMA enable
+let ADC_SC2_ADACT : $UInt32 = 0x80   // Conversion active
+let ADC_SC2_ADTRG : $UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware
+let ADC_SC2_ACFE  : $UInt32 = 0x20   // Compare function enable
+let ADC_SC2_ACFGT : $UInt32 = 0x10   // Compare function greater than enable
+let ADC_SC2_ACREN : $UInt32 = 0x08   // Compare function range enable
+let ADC_SC2_DMAEN : $UInt32 = 0x04   // DMA enable
 
-let ADC_SC3_CAL : UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress
-let ADC_SC3_CALF : UInt32 = 0x40   // Calibration failed flag
-let ADC_SC3_ADCO : UInt32 = 0x08   // Continuous conversion enable
-let ADC_SC3_AVGE : UInt32 = 0x04   // Hardware average enable
+let ADC_SC3_CAL : $UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress
+let ADC_SC3_CALF : $UInt32 = 0x40   // Calibration failed flag
+let ADC_SC3_ADCO : $UInt32 = 0x08   // Continuous conversion enable
+let ADC_SC3_AVGE : $UInt32 = 0x04   // Hardware average enable
 
-let ADC0_PGA_PGAEN : UInt32 = 0x00800000  // Enable
-let ADC0_PGA_PGALPB : UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal
+let ADC0_PGA_PGAEN : $UInt32 = 0x00800000  // Enable
+let ADC0_PGA_PGALPB : $UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal
 
 registers ADC0 @at 0x4003_B000 {
-  SC1A   @offset 0x00 : UInt32 // ADC status and control registers 1
-  SC1B   @offset 0x04 : UInt32 // ADC status and control registers 1
-  CFG1   @offset 0x08 : UInt32 // ADC configuration registers 1
-  CFG2  @offset 0x0C : UInt32 // Configuration registers 2
-  RA    @offset 0x10 : UInt32 // ADC data result register
-  RB    @offset 0x14 : UInt32 // ADC data result register
-  CV1   @offset 0x18 : UInt32 // Compare value registers
-  CV2   @offset 0x1C : UInt32 // Compare value registers
-  SC2   @offset 0x20 : UInt32 // Status and control registers 2
-  SC3   @offset 0x24 : UInt32 // Status and control registers 3
-  OFS   @offset 0x28 : UInt32 // ADC offset correction register
-  PG    @offset 0x2C : UInt32 // ADC plus-side gain register
-  MG    @offset 0x30 : UInt32 // ADC minus-side gain register
-  CLPD  @offset 0x34 : UInt32 // ADC plus-side general calibration value register
-  CLPS  @offset 0x38 : UInt32 // ADC plus-side general calibration value register
-  CLP4  @offset 0x3C : UInt32 // ADC plus-side general calibration value register
-  CLP3  @offset 0x40 : UInt32 // ADC plus-side general calibration value register
-  CLP2  @offset 0x44 : UInt32 // ADC plus-side general calibration value register
-  CLP1  @offset 0x48 : UInt32 // ADC plus-side general calibration value register
-  CLP0  @offset 0x4C : UInt32 // ADC plus-side general calibration value register
-  PGA   @offset 0x50 : UInt32 // ADC Programmable Gain Amplifier
-  CLMD   @offset 0x54 : UInt32 // ADC minus-side general calibration value register
-  CLMS   @offset 0x58 : UInt32 // ADC minus-side general calibration value register
-  CLM4   @offset 0x5C : UInt32 // ADC minus-side general calibration value register
-  CLM3   @offset 0x60 : UInt32 // ADC minus-side general calibration value register
-  CLM2   @offset 0x64 : UInt32 // ADC minus-side general calibration value register
-  CLM1   @offset 0x68 : UInt32 // ADC minus-side general calibration value register
-  CLM0   @offset 0x6C : UInt32 // ADC minus-side general calibration value register
+  SC1A   @offset 0x00 : $UInt32 // ADC status and control registers 1
+  SC1B   @offset 0x04 : $UInt32 // ADC status and control registers 1
+  CFG1   @offset 0x08 : $UInt32 // ADC configuration registers 1
+  CFG2  @offset 0x0C : $UInt32 // Configuration registers 2
+  RA    @offset 0x10 : $UInt32 // ADC data result register
+  RB    @offset 0x14 : $UInt32 // ADC data result register
+  CV1   @offset 0x18 : $UInt32 // Compare value registers
+  CV2   @offset 0x1C : $UInt32 // Compare value registers
+  SC2   @offset 0x20 : $UInt32 // Status and control registers 2
+  SC3   @offset 0x24 : $UInt32 // Status and control registers 3
+  OFS   @offset 0x28 : $UInt32 // ADC offset correction register
+  PG    @offset 0x2C : $UInt32 // ADC plus-side gain register
+  MG    @offset 0x30 : $UInt32 // ADC minus-side gain register
+  CLPD  @offset 0x34 : $UInt32 // ADC plus-side general calibration value register
+  CLPS  @offset 0x38 : $UInt32 // ADC plus-side general calibration value register
+  CLP4  @offset 0x3C : $UInt32 // ADC plus-side general calibration value register
+  CLP3  @offset 0x40 : $UInt32 // ADC plus-side general calibration value register
+  CLP2  @offset 0x44 : $UInt32 // ADC plus-side general calibration value register
+  CLP1  @offset 0x48 : $UInt32 // ADC plus-side general calibration value register
+  CLP0  @offset 0x4C : $UInt32 // ADC plus-side general calibration value register
+  PGA   @offset 0x50 : $UInt32 // ADC Programmable Gain Amplifier
+  CLMD   @offset 0x54 : $UInt32 // ADC minus-side general calibration value register
+  CLMS   @offset 0x58 : $UInt32 // ADC minus-side general calibration value register
+  CLM4   @offset 0x5C : $UInt32 // ADC minus-side general calibration value register
+  CLM3   @offset 0x60 : $UInt32 // ADC minus-side general calibration value register
+  CLM2   @offset 0x64 : $UInt32 // ADC minus-side general calibration value register
+  CLM1   @offset 0x68 : $UInt32 // ADC minus-side general calibration value register
+  CLM0   @offset 0x6C : $UInt32 // ADC minus-side general calibration value register
 }
 
 registers ADC1 @at 0x400B_B000 {
-  SC1A   @offset 0x00 : UInt32 // ADC status and control registers 1
-  SC1B   @offset 0x04 : UInt32 // ADC status and control registers 1
-  CFG1   @offset 0x08 : UInt32 // ADC configuration registers 1
-  CFG2   @offset 0x0C : UInt32 // Configuration registers 2
-  RA     @offset 0x10 : UInt32 // ADC data result register
-  RB     @offset 0x14 : UInt32 // ADC data result register
-  CV1    @offset 0x18 : UInt32 // Compare value registers
-  CV2    @offset 0x1C : UInt32 // Compare value registers
-  SC2    @offset 0x20 : UInt32 // Status and control registers 2
-  SC3    @offset 0x24 : UInt32 // Status and control registers 3
-  OFS    @offset 0x28 : UInt32 // ADC offset correction register
-  PG     @offset 0x2C : UInt32 // ADC plus-side gain register
-  MG     @offset 0x30 : UInt32 // ADC minus-side gain register
-  CLPD   @offset 0x34 : UInt32 // ADC plus-side general calibration value register
-  CLPS   @offset 0x38 : UInt32 // ADC plus-side general calibration value register
-  CLP4   @offset 0x3C : UInt32 // ADC plus-side general calibration value register
-  CLP3   @offset 0x40 : UInt32 // ADC plus-side general calibration value register
-  CLP2   @offset 0x44 : UInt32 // ADC plus-side general calibration value register
-  CLP1   @offset 0x48 : UInt32 // ADC plus-side general calibration value register
-  CLP0   @offset 0x4C : UInt32 // ADC plus-side general calibration value register
-  PGA    @offset 0x50 : UInt32 // ADC Programmable Gain Amplifier
-  CLMD   @offset 0x54 : UInt32 // ADC minus-side general calibration value register
-  CLMS   @offset 0x58 : UInt32 // ADC minus-side general calibration value register
-  CLM4   @offset 0x5C : UInt32 // ADC minus-side general calibration value register
-  CLM3   @offset 0x60 : UInt32 // ADC minus-side general calibration value register
-  CLM2   @offset 0x64 : UInt32 // ADC minus-side general calibration value register
-  CLM1   @offset 0x68 : UInt32 // ADC minus-side general calibration value register
-  CLM0   @offset 0x6C : UInt32 // ADC minus-side general calibration value register
+  SC1A   @offset 0x00 : $UInt32 // ADC status and control registers 1
+  SC1B   @offset 0x04 : $UInt32 // ADC status and control registers 1
+  CFG1   @offset 0x08 : $UInt32 // ADC configuration registers 1
+  CFG2   @offset 0x0C : $UInt32 // Configuration registers 2
+  RA     @offset 0x10 : $UInt32 // ADC data result register
+  RB     @offset 0x14 : $UInt32 // ADC data result register
+  CV1    @offset 0x18 : $UInt32 // Compare value registers
+  CV2    @offset 0x1C : $UInt32 // Compare value registers
+  SC2    @offset 0x20 : $UInt32 // Status and control registers 2
+  SC3    @offset 0x24 : $UInt32 // Status and control registers 3
+  OFS    @offset 0x28 : $UInt32 // ADC offset correction register
+  PG     @offset 0x2C : $UInt32 // ADC plus-side gain register
+  MG     @offset 0x30 : $UInt32 // ADC minus-side gain register
+  CLPD   @offset 0x34 : $UInt32 // ADC plus-side general calibration value register
+  CLPS   @offset 0x38 : $UInt32 // ADC plus-side general calibration value register
+  CLP4   @offset 0x3C : $UInt32 // ADC plus-side general calibration value register
+  CLP3   @offset 0x40 : $UInt32 // ADC plus-side general calibration value register
+  CLP2   @offset 0x44 : $UInt32 // ADC plus-side general calibration value register
+  CLP1   @offset 0x48 : $UInt32 // ADC plus-side general calibration value register
+  CLP0   @offset 0x4C : $UInt32 // ADC plus-side general calibration value register
+  PGA    @offset 0x50 : $UInt32 // ADC Programmable Gain Amplifier
+  CLMD   @offset 0x54 : $UInt32 // ADC minus-side general calibration value register
+  CLMS   @offset 0x58 : $UInt32 // ADC minus-side general calibration value register
+  CLM4   @offset 0x5C : $UInt32 // ADC minus-side general calibration value register
+  CLM3   @offset 0x60 : $UInt32 // ADC minus-side general calibration value register
+  CLM2   @offset 0x64 : $UInt32 // ADC minus-side general calibration value register
+  CLM1   @offset 0x68 : $UInt32 // ADC minus-side general calibration value register
+  CLM0   @offset 0x6C : $UInt32 // ADC minus-side general calibration value register
 }
 
-let DAC_C1_DMAEN : UInt8 = 0x80    // DMA Enable Select
-let DAC_C1_DACBFEN : UInt8 = 0x00    // DAC Buffer Enable
+let DAC_C1_DMAEN : $UInt8 = 0x80    // DMA Enable Select
+let DAC_C1_DACBFEN : $UInt8 = 0x00    // DAC Buffer Enable
 
-let DAC_C0_DACEN  : UInt8 = 0x80    // DAC Enable
-let DAC_C0_DACRFS : UInt8 = 0x40    // DAC Reference Select
-let DAC_C0_DACTRGSEL : UInt8 = 0x20    // DAC Trigger Select
-let DAC_C0_DACSWTRG  : UInt8 = 0x10    // DAC Software Trigger
-let DAC_C0_LPEN  : UInt8 = 0x08    // DAC Low Power Control
-let DAC_C0_DACBWIEN  : UInt8 = 0x04    // DAC Buffer Watermark Interrupt Enable
-let DAC_C0_DACBTIEN : UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable
-let DAC_C0_DACBBIEN : UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable
+let DAC_C0_DACEN  : $UInt8 = 0x80    // DAC Enable
+let DAC_C0_DACRFS : $UInt8 = 0x40    // DAC Reference Select
+let DAC_C0_DACTRGSEL : $UInt8 = 0x20    // DAC Trigger Select
+let DAC_C0_DACSWTRG  : $UInt8 = 0x10    // DAC Software Trigger
+let DAC_C0_LPEN  : $UInt8 = 0x08    // DAC Low Power Control
+let DAC_C0_DACBWIEN  : $UInt8 = 0x04    // DAC Buffer Watermark $Interrupt Enable
+let DAC_C0_DACBTIEN : $UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag $Interrupt Enable
+let DAC_C0_DACBBIEN : $UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag $Interrupt Enable
 
 registers DAC0 @at 0x400C_C000 {
-  DAT0L @offset 0x00 : UInt8 // DAC Data Low registers
-  DATH  @offset 0x01 : UInt8 // DAC Data High registers
-  DAT1L @offset 0x02 : UInt8 // DAC Data Low registers
-  DAT2L @offset 0x04 : UInt8 // DAC Data Low registers
-  DAT3L @offset 0x06 : UInt8 // DAC Data Low registers
-  DAT4L @offset 0x08 : UInt8 // DAC Data Low registers
-  DAT5L @offset 0x0A : UInt8 // DAC Data Low registers
-  DAT6L @offset 0x0C : UInt8 // DAC Data Low registers
-  DAT7L @offset 0x0E : UInt8 // DAC Data Low registers
-  DAT8L @offset 0x10 : UInt8 // DAC Data Low registers
-  DAT9L @offset 0x12 : UInt8 // DAC Data Low registers
-  DAT10L @offset 0x14 : UInt8 // DAC Data Low registers
-  DAT11L @offset 0x16 : UInt8 // DAC Data Low registers
-  DAT12L @offset 0x18 : UInt8 // DAC Data Low registers
-  DAT13L @offset 0x1A : UInt8 // DAC Data Low registers
-  DAT14L @offset 0x1C : UInt8 // DAC Data Low registers
-  DAT15L @offset 0x1E : UInt8 // DAC Data Low registers
-  SR     @offset 0x20 : UInt8 // DAC Status registers
-  C0     @offset 0x21 : UInt8 // DAC Control registers
-  C1  @offset 0x22 : UInt8 // DAC Control registers 1
-  C2  @offset 0x23 : UInt8 // DAC Control registers 2
+  DAT0L @offset 0x00 : $UInt8 // DAC Data Low registers
+  DATH  @offset 0x01 : $UInt8 // DAC Data High registers
+  DAT1L @offset 0x02 : $UInt8 // DAC Data Low registers
+  DAT2L @offset 0x04 : $UInt8 // DAC Data Low registers
+  DAT3L @offset 0x06 : $UInt8 // DAC Data Low registers
+  DAT4L @offset 0x08 : $UInt8 // DAC Data Low registers
+  DAT5L @offset 0x0A : $UInt8 // DAC Data Low registers
+  DAT6L @offset 0x0C : $UInt8 // DAC Data Low registers
+  DAT7L @offset 0x0E : $UInt8 // DAC Data Low registers
+  DAT8L @offset 0x10 : $UInt8 // DAC Data Low registers
+  DAT9L @offset 0x12 : $UInt8 // DAC Data Low registers
+  DAT10L @offset 0x14 : $UInt8 // DAC Data Low registers
+  DAT11L @offset 0x16 : $UInt8 // DAC Data Low registers
+  DAT12L @offset 0x18 : $UInt8 // DAC Data Low registers
+  DAT13L @offset 0x1A : $UInt8 // DAC Data Low registers
+  DAT14L @offset 0x1C : $UInt8 // DAC Data Low registers
+  DAT15L @offset 0x1E : $UInt8 // DAC Data Low registers
+  SR     @offset 0x20 : $UInt8 // DAC Status registers
+  C0     @offset 0x21 : $UInt8 // DAC Control registers
+  C1  @offset 0x22 : $UInt8 // DAC Control registers 1
+  C2  @offset 0x23 : $UInt8 // DAC Control registers 2
 }
 //// Chapter 32: Comparator (CMP)
 registers CMP0 @at 0x4007_3000 {
-  CR0   @offset 0x00 : UInt8 // CMP Control registers 0
-  CR1   @offset 0x01 : UInt8 // CMP Control registers 1
-  FPR   @offset 0x02 : UInt8 // CMP Filter Period Register
-  SCR   @offset 0x03 : UInt8 // CMP Status and Control Register
-  DACCR @offset 0x04 : UInt8 // DAC Control Register
-  MUXCR @offset 0x05 : UInt8 // MUX Control Register
+  CR0   @offset 0x00 : $UInt8 // CMP Control registers 0
+  CR1   @offset 0x01 : $UInt8 // CMP Control registers 1
+  FPR   @offset 0x02 : $UInt8 // CMP Filter Period Register
+  SCR   @offset 0x03 : $UInt8 // CMP Status and Control Register
+  DACCR @offset 0x04 : $UInt8 // DAC Control Register
+  MUXCR @offset 0x05 : $UInt8 // MUX Control Register
 }
 
 registers CMP1 @at 0x4007_3000 {
-  CR0   @offset 0x08 : UInt8 // CMP Control registers 0
-  CR1   @offset 0x09 : UInt8 // CMP Control registers 1
-  FPR   @offset 0x0A : UInt8 // CMP Filter Period Register
-  SCR   @offset 0x0B : UInt8 // CMP Status and Control Register
-  DACCR @offset 0x0C : UInt8 // DAC Control Register
-  MUXCR @offset 0x0D : UInt8 // MUX Control Register
+  CR0   @offset 0x08 : $UInt8 // CMP Control registers 0
+  CR1   @offset 0x09 : $UInt8 // CMP Control registers 1
+  FPR   @offset 0x0A : $UInt8 // CMP Filter Period Register
+  SCR   @offset 0x0B : $UInt8 // CMP Status and Control Register
+  DACCR @offset 0x0C : $UInt8 // DAC Control Register
+  MUXCR @offset 0x0D : $UInt8 // MUX Control Register
 }
 
 //// Chapter 33: Voltage Reference (VREFV1)
 registers VREF @at 0x4007_4000 {
-  TRM  @offset 0x00 : UInt8 // VREF Trim Register
-  SC   @offset 0x01 : UInt8 // VREF Status and Control Register
+  TRM  @offset 0x00 : $UInt8 // VREF Trim Register
+  SC   @offset 0x01 : $UInt8 // VREF Status and Control Register
 }
 
 // Chapter 34: Programmable Delay Block (PDB)
 //registers PDB0_SC    0x40036000 // Status and Control Register
 //registers PDB_SC_LDMOD(n)   (((n) & 3) << 18) // Load Mode Select
-//registers PDB_SC_PDBEIE   0x00020000  // Sequence Error Interrupt Enable
+//registers PDB_SC_PDBEIE   0x00020000  // Sequence Error $Interrupt Enable
 //registers PDB_SC_SWTRIG   0x00010000  // Software Trigger
 //registers PDB_SC_DMAEN   0x00008000  // DMA Enable
 //registers PDB_SC_PRESCALER(n)  (((n) & 7) << 12) // Prescaler Divider Select
 //registers PDB_SC_TRGSEL(n)  (((n) & 15) << 8) // Trigger Input Source Select
 //registers PDB_SC_PDBEN   0x00000080  // PDB Enable
-//registers PDB_SC_PDBIF   0x00000040  // PDB Interrupt Flag
-//registers PDB_SC_PDBIE   0x00000020  // PDB Interrupt Enable.
+//registers PDB_SC_PDBIF   0x00000040  // PDB $Interrupt Flag
+//registers PDB_SC_PDBIE   0x00000020  // PDB $Interrupt Enable.
 //registers PDB_SC_MULT(n)   (((n) & 3) << 2) // Multiplication Factor
 //registers PDB_SC_CONT   0x00000002  // Continuous Mode Enable
 //registers PDB_SC_LDOK   0x00000001  // Load OK
 //registers PDB0_MOD   0x40036004 // Modulus Register
 //registers PDB0_CNT   0x40036008 // Counter Register
-//registers PDB0_IDLY   0x4003600C // Interrupt Delay Register
+//registers PDB0_IDLY   0x4003600C // $Interrupt Delay Register
 //registers PDB0_CH0C1   0x40036010 // Channel n Control registers 1
 //registers PDB0_CH0S   0x40036014 // Channel n Status Register
 //registers PDB0_CH0DLY0   0x40036018 // Channel n Delay 0 Register
@@ -844,7 +844,7 @@ registers VREF @at 0x4007_4000 {
 //// Chapter 35: FlexTimer Module (FTM)
 //registers FTM0_SC    0x40038000 // Status And Control
 //registers FTM_SC_TOF   0x80    // Timer Overflow Flag
-//registers FTM_SC_TOIE   0x40    // Timer Overflow Interrupt Enable
+//registers FTM_SC_TOIE   0x40    // Timer Overflow $Interrupt Enable
 //registers FTM_SC_CPWMS   0x20    // Center-Aligned PWM Select
 //registers FTM_SC_CLKS(n)   (((n) & 3) << 3)  // Clock Source Selection
 //registers FTM_SC_PS(n)   (((n) & 7) << 0)  // Prescale Factor Selection
@@ -869,7 +869,7 @@ registers VREF @at 0x4007_4000 {
 //registers FTM0_CNTIN   0x4003804C // Counter Initial Value
 //registers FTM0_STATUS   0x40038050 // Capture And Compare Status
 //registers FTM0_MODE   0x40038054 // Features Mode Selection
-//registers FTM_MODE_FAULTIE  0x80    // Fault Interrupt Enable
+//registers FTM_MODE_FAULTIE  0x80    // Fault $Interrupt Enable
 //registers FTM_MODE_FAULTM(n)  (((n) & 3) << 5)  // Fault Control Mode
 //registers FTM_MODE_CAPTEST  0x10    // Capture Test Mode Enable
 //registers FTM_MODE_PWMSYNC  0x08    // PWM Synchronization Mode
@@ -957,29 +957,29 @@ registers VREF @at 0x4007_4000 {
 //registers FTM2_PWMLOAD   0x400B8098 // FTM PWM Load
 
 
-// Chapter 36: Periodic Interrupt Timer (PIT)
+// Chapter 36: Periodic $Interrupt Timer (PIT)
 
 // PIT Module Control Register
 let PIT_COUNT = 4
 
 registers PIT @at 0x4003_7000 {
-  MCR @offset 0x00 : UInt32 {
+  MCR @offset 0x00 : $UInt32 {
     30, MDIS, FRZ
   }
 
   // Timer Load Value Register
-  LDVAL [PIT_COUNT @offset 0x100 @inc 16] : UInt32
+  LDVAL [PIT_COUNT @offset 0x100 @inc 16] : $UInt32
 
   // Current Timer Value Register
-  LCVAL [PIT_COUNT @offset 0x104 @inc 16] : UInt32
+  LCVAL [PIT_COUNT @offset 0x104 @inc 16] : $UInt32
 
   // Timer Control Register
-  TCTRL [PIT_COUNT @offset 0x108 @inc 16] : UInt32 {
+  TCTRL [PIT_COUNT @offset 0x108 @inc 16] : $UInt32 {
     29, CHN, TIE, TEN
   }
 
   // Timer Flag Register
-  TFLG [PIT_COUNT @offset 0x10C @inc 16] : UInt32 {
+  TFLG [PIT_COUNT @offset 0x10C @inc 16] : $UInt32 {
     31, TIF
   }
 }
@@ -992,38 +992,38 @@ registers PIT @at 0x4003_7000 {
 //registers LPTMR0_CNR   0x4004000C // Low Power Timer Counter Register
 //
 //// Chapter 38: Carrier Modulator Transmitter (CMT)
-//registers CMT_CGH1  *(volatile UInt8_t  *)0x40062000 // CMT Carrier Generator High Data registers 1
-//registers CMT_CGL1  *(volatile UInt8_t  *)0x40062001 // CMT Carrier Generator Low Data registers 1
-//registers CMT_CGH2  *(volatile UInt8_t  *)0x40062002 // CMT Carrier Generator High Data registers 2
-//registers CMT_CGL2  *(volatile UInt8_t  *)0x40062003 // CMT Carrier Generator Low Data registers 2
-//registers CMT_OC   *(volatile UInt8_t  *)0x40062004 // CMT Output Control Register
-//registers CMT_MSC   *(volatile UInt8_t  *)0x40062005 // CMT Modulator Status and Control Register
-//registers CMT_CMD1  *(volatile UInt8_t  *)0x40062006 // CMT Modulator Data registers Mark High
-//registers CMT_CMD2  *(volatile UInt8_t  *)0x40062007 // CMT Modulator Data registers Mark Low
-//registers CMT_CMD3  *(volatile UInt8_t  *)0x40062008 // CMT Modulator Data registers Space High
-//registers CMT_CMD4  *(volatile UInt8_t  *)0x40062009 // CMT Modulator Data registers Space Low
-//registers CMT_PPS   *(volatile UInt8_t  *)0x4006200A // CMT Primary Prescaler Register
-//registers CMT_DMA   *(volatile UInt8_t  *)0x4006200B // CMT Direct Memory Access Register
+//registers CMT_CGH1  *(volatile $UInt8_t  *)0x40062000 // CMT Carrier Generator High Data registers 1
+//registers CMT_CGL1  *(volatile $UInt8_t  *)0x40062001 // CMT Carrier Generator Low Data registers 1
+//registers CMT_CGH2  *(volatile $UInt8_t  *)0x40062002 // CMT Carrier Generator High Data registers 2
+//registers CMT_CGL2  *(volatile $UInt8_t  *)0x40062003 // CMT Carrier Generator Low Data registers 2
+//registers CMT_OC   *(volatile $UInt8_t  *)0x40062004 // CMT Output Control Register
+//registers CMT_MSC   *(volatile $UInt8_t  *)0x40062005 // CMT Modulator Status and Control Register
+//registers CMT_CMD1  *(volatile $UInt8_t  *)0x40062006 // CMT Modulator Data registers Mark High
+//registers CMT_CMD2  *(volatile $UInt8_t  *)0x40062007 // CMT Modulator Data registers Mark Low
+//registers CMT_CMD3  *(volatile $UInt8_t  *)0x40062008 // CMT Modulator Data registers Space High
+//registers CMT_CMD4  *(volatile $UInt8_t  *)0x40062009 // CMT Modulator Data registers Space Low
+//registers CMT_PPS   *(volatile $UInt8_t  *)0x4006200A // CMT Primary Prescaler Register
+//registers CMT_DMA   *(volatile $UInt8_t  *)0x4006200B // CMT Direct Memory Access Register
 //
 //// Chapter 39: Real Time Clock (RTC)
-let RTC_SR_TCE: UInt32 = 0x00000010
-let RTC_SR_TAF: UInt32 = 0x00000004  //
-let RTC_SR_TOF: UInt32 = 0x00000002  //
-let RTC_SR_TIF: UInt32 = 0x00000001  //
+let RTC_SR_TCE: $UInt32 = 0x00000010
+let RTC_SR_TAF: $UInt32 = 0x00000004  //
+let RTC_SR_TOF: $UInt32 = 0x00000002  //
+let RTC_SR_TIF: $UInt32 = 0x00000001  //
 
 registers RTC @at 0x4003_D000 {
-  TSR  @offset 0x000 : UInt32 // RTC Time Seconds Register
-  TPR  @offset 0x004 : UInt32 // RTC Time Prescaler Register
-  TAR  @offset 0x008 : UInt32 // RTC Time Alarm Register
-  TCR  @offset 0x00C : UInt32 // RTC Time Compensation Register
-  CR   @offset 0x010 : UInt32 {// RTC Control Register
+  TSR  @offset 0x000 : $UInt32 // RTC Time Seconds Register
+  TPR  @offset 0x004 : $UInt32 // RTC Time Prescaler Register
+  TAR  @offset 0x008 : $UInt32 // RTC Time Alarm Register
+  TCR  @offset 0x00C : $UInt32 // RTC Time Compensation Register
+  CR   @offset 0x010 : $UInt32 {// RTC Control Register
     18, SC2P, SC4P, SC8P, SC16P,CKLO, OSCE, 4, UM, SUP, WPE, SWR
   }
-  SR  @offset 0x014 : UInt32 // RTC Status Register
-  LR  @offset 0x018 : UInt32 // RTC Lock Register
-  IER @offset 0x01C : UInt32 // RTC Interrupt Enable Register
-  WAR @offset 0x800 : UInt32 // RTC Write Access Register
-  RAR @offset 0x804 : UInt32 // RTC Read Access Register
+  SR  @offset 0x014 : $UInt32 // RTC Status Register
+  LR  @offset 0x018 : $UInt32 // RTC Lock Register
+  IER @offset 0x01C : $UInt32 // RTC $Interrupt Enable Register
+  WAR @offset 0x800 : $UInt32 // RTC Write Access Register
+  RAR @offset 0x804 : $UInt32 // RTC Read Access Register
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -1032,88 +1032,88 @@ registers RTC @at 0x4003_D000 {
 
 registers USB0 @at 0x4007_2000 {
 //--- Peripheral ID Register
-  PERID @offset 0x000 @ro : UInt8 {2, ID:6}
+  PERID @offset 0x000 @ro : $UInt8 {2, ID:6}
 
 //--- Peripheral ID Complement Register
-  IDCOMP @offset 0x004 @ro : UInt8 {2, NID:6}
+  IDCOMP @offset 0x004 @ro : $UInt8 {2, NID:6}
 
 //--- Peripheral Revision Register
-  REV @offset 0x008 @ro : UInt8
+  REV @offset 0x008 @ro : $UInt8
 
 //--- Peripheral Additional Info Register
-  ADDINFO @offset 0x00C @ro : UInt8 {IRQNUM:5, 2, IEHOST}
+  ADDINFO @offset 0x00C @ro : $UInt8 {IRQNUM:5, 2, IEHOST}
 
-//--- OTG Interrupt Status Register
-  OTGISTAT @offset 0x010 : UInt8 {IDCHG, ONEMSEC, LINE_STAT_CHG, 1, SESSVLDCHG, B_SESS_CHG, 1, AVBUSHG}
+//--- OTG $Interrupt Status Register
+  OTGISTAT @offset 0x010 : $UInt8 {IDCHG, ONEMSEC, LINE_STAT_CHG, 1, SESSVLDCHG, B_SESS_CHG, 1, AVBUSHG}
 
-//--- OTG Interrupt Control Register
-  OTGICR @offset 0x014 : UInt8 {IDEN, ONEMSECEN, LINESTATEEN, 1, SESSVLDEN, BSESSEN, 1, AVBUSEN}
+//--- OTG $Interrupt Control Register
+  OTGICR @offset 0x014 : $UInt8 {IDEN, ONEMSECEN, LINESTATEEN, 1, SESSVLDEN, BSESSEN, 1, AVBUSEN}
 
 //--- OTG Status Register
-  OTGSTAT @offset 0x018 : UInt8 {ID, ONEMSECEN, LINESTATESTABLE, 1, SESS_VLD, BSESSEND, 1, AVBUSVLD}
+  OTGSTAT @offset 0x018 : $UInt8 {ID, ONEMSECEN, LINESTATESTABLE, 1, SESS_VLD, BSESSEND, 1, AVBUSVLD}
 
 //--- OTG Control Register
-  OTGCTL @offset 0x01C : UInt8 {DPHIGH, 1, DPLOW, DMLOW, 1, OTGEN, 2}
+  OTGCTL @offset 0x01C : $UInt8 {DPHIGH, 1, DPLOW, DMLOW, 1, OTGEN, 2}
 
-//--- Interrupt Status Register
-  ISTAT @offset 0x080 : UInt8 {STALL, ATTACH, RESUME, SLEEP, TOKDNE, SOFTOK, ERROR, USBRST}
+//--- $Interrupt Status Register
+  ISTAT @offset 0x080 : $UInt8 {STALL, ATTACH, RESUME, SLEEP, TOKDNE, SOFTOK, ERROR, USBRST}
 
-//--- Interrupt Enable Register
-  INTEN @offset 0x084 : UInt8 {STALLEN, ATTACHEN, RESUMEEN, SLEEPEN, TOKDNEEN, SOFTOKEN, ERROREN, USBRSTEN}
+//--- $Interrupt Enable Register
+  INTEN @offset 0x084 : $UInt8 {STALLEN, ATTACHEN, RESUMEEN, SLEEPEN, TOKDNEEN, SOFTOKEN, ERROREN, USBRSTEN}
 
-//--- Interrupt Error Register
-  ERRSTAT @offset 0x088 : UInt8 {BSTERR, 1, DMAERR, BTOERR, DFN8, CRC16, CRC5EOF, PIDERR}
+//--- $Interrupt Error Register
+  ERRSTAT @offset 0x088 : $UInt8 {BSTERR, 1, DMAERR, BTOERR, DFN8, CRC16, CRC5EOF, PIDERR}
 
-//--- Error Interrupt Enable Register
-  ERREN @offset 0x08C : UInt8 {BSTERREN, 1, DMAERREN, BTOERREN, DFN8EN, CRC16EN, CRC5EOFEN, PIDERREN}
+//--- Error $Interrupt Enable Register
+  ERREN @offset 0x08C : $UInt8 {BSTERREN, 1, DMAERREN, BTOERREN, DFN8EN, CRC16EN, CRC5EOFEN, PIDERREN}
 
 //--- Status Register
-  STAT @offset 0x090 : UInt8 {ENDP:4, TX, ODD, 2}
+  STAT @offset 0x090 : $UInt8 {ENDP:4, TX, ODD, 2}
 
 //--- Control Register
-  CTL @offset 0x094 : UInt8 {JSTATE, SE0, TXSUSPENDTOKENBUSY, RESET, HOSTMODEEN, RESUME, ODDRST, USBENOFEN}
+  CTL @offset 0x094 : $UInt8 {JSTATE, SE0, TXSUSPENDTOKENBUSY, RESET, HOSTMODEEN, RESUME, ODDRST, USBENOFEN}
 
 //--- Address Register
-  ADDR @offset 0x098 : UInt8 {LSEN, ADDR:7}
+  ADDR @offset 0x098 : $UInt8 {LSEN, ADDR:7}
 
 //--- BDT Page Register 1
-  BDTPAGE1 @offset 0x09C : UInt8 {BDTBA:7, 1}
+  BDTPAGE1 @offset 0x09C : $UInt8 {BDTBA:7, 1}
 
 //--- Frame Number Register Low
-  FRMNUML @offset 0x0A0 : UInt8
+  FRMNUML @offset 0x0A0 : $UInt8
 
 //--- Frame Number Register High
-  FRMNUMH @offset 0x0A4 : UInt8 {5, FRM:3}
+  FRMNUMH @offset 0x0A4 : $UInt8 {5, FRM:3}
 
 //--- Token Register
-  TOKEN @offset 0x0A8 : UInt8 {TOKENPID:4, TOKENDPT:4}
+  TOKEN @offset 0x0A8 : $UInt8 {TOKENPID:4, TOKENDPT:4}
 
 //--- SOF Threshold Register
-  SOFTHLD @offset 0x0AC : UInt8
+  SOFTHLD @offset 0x0AC : $UInt8
 
 //--- BDT Page Register 2
-  BDTPAGE2 @offset 0x0B0 : UInt8
+  BDTPAGE2 @offset 0x0B0 : $UInt8
 
 //--- BDT Page Register 3
-  BDTPAGE3 @offset 0x0B4 : UInt8
+  BDTPAGE3 @offset 0x0B4 : $UInt8
 
 //--- Endpoint Control
-  ENDPT [16 @offset 0x0C0 @inc 4] : UInt8 {HOSTWCHUB, RETRYDIS, 1, EPCTLDIS, EPRXEN, EPTXEN, EPSTALL, EPHSHK}
+  ENDPT [16 @offset 0x0C0 @inc 4] : $UInt8 {HOSTWCHUB, RETRYDIS, 1, EPCTLDIS, EPRXEN, EPTXEN, EPSTALL, EPHSHK}
 
 //--- USB Control Register
-  USBCTRL @offset 0x100 : UInt8 {SUSP, PDE, 6}
+  USBCTRL @offset 0x100 : $UInt8 {SUSP, PDE, 6}
 
 //--- USB OTG Observe Register
-  OBSERVE @offset 0x104 @ro : UInt8 {DPPU, DPPD, 1, DMPD, 4}
+  OBSERVE @offset 0x104 @ro : $UInt8 {DPPU, DPPD, 1, DMPD, 4}
 
 //--- USB OTG Control Register
-  CONTROL @offset 0x108 : UInt8 {3, DPPULLNONOTG, 4}
+  CONTROL @offset 0x108 : $UInt8 {3, DPPULLNONOTG, 4}
 
 //--- USB Transceiver Control Register 0
-  USBTRC0 @offset 0x10C : UInt8 {USBRESET, 1, USBRESMEM, 3, SYNC_DET, USB_RESUME_INT}
+  USBTRC0 @offset 0x10C : $UInt8 {USBRESET, 1, USBRESMEM, 3, SYNC_DET, USB_RESUME_INT}
 
 //--- Frame Adjust Register
-  USBFRMADJUST @offset 0x114 : UInt8
+  USBFRMADJUST @offset 0x114 : $UInt8
 }
 
 
@@ -1122,39 +1122,39 @@ registers USB0 @at 0x4007_2000 {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 registers GPIOA @at 0x400F_F000 {
-  PDOR @offset 0x00 : UInt32 // Port Data Output Register
-  PSOR @offset 0x04 : UInt32 // Port Set Output Register
-  PCOR @offset 0x08 : UInt32 // Port Clear Output Register
-  PTOR @offset 0x0C : UInt32 // Port Toggle Output Register
-  PDIR @offset 0x10 : UInt32 // Port Data Input Register
-  PDDR @offset 0x14 : UInt32 // Port Data Direction Register
+  PDOR @offset 0x00 : $UInt32 // Port Data Output Register
+  PSOR @offset 0x04 : $UInt32 // Port Set Output Register
+  PCOR @offset 0x08 : $UInt32 // Port Clear Output Register
+  PTOR @offset 0x0C : $UInt32 // Port Toggle Output Register
+  PDIR @offset 0x10 : $UInt32 // Port Data Input Register
+  PDDR @offset 0x14 : $UInt32 // Port Data Direction Register
 }
 
 registers GPIOB @at 0x400F_F040 {
-  PDOR @offset 0x00 : UInt32 // Port Data Output Register
-  PSOR @offset 0x04 : UInt32 // Port Set Output Register
-  PCOR @offset 0x08 : UInt32 // Port Clear Output Register
-  PTOR @offset 0x0C : UInt32 // Port Toggle Output Register
-  PDIR @offset 0x10 : UInt32 // Port Data Input Register
-  PDDR @offset 0x14 : UInt32 // Port Data Direction Register
+  PDOR @offset 0x00 : $UInt32 // Port Data Output Register
+  PSOR @offset 0x04 : $UInt32 // Port Set Output Register
+  PCOR @offset 0x08 : $UInt32 // Port Clear Output Register
+  PTOR @offset 0x0C : $UInt32 // Port Toggle Output Register
+  PDIR @offset 0x10 : $UInt32 // Port Data Input Register
+  PDDR @offset 0x14 : $UInt32 // Port Data Direction Register
 }
 
 registers GPIOC @at 0x400F_F080 {
-  PDOR @offset 0x00 : UInt32 // Port Data Output Register
-  PSOR @offset 0x04 : UInt32 // Port Set Output Register
-  PCOR @offset 0x08 : UInt32 // Port Clear Output Register
-  PTOR @offset 0x0C : UInt32 // Port Toggle Output Register
-  PDIR @offset 0x10 : UInt32 // Port Data Input Register
-  PDDR @offset 0x14 : UInt32 // Port Data Direction Register
+  PDOR @offset 0x00 : $UInt32 // Port Data Output Register
+  PSOR @offset 0x04 : $UInt32 // Port Set Output Register
+  PCOR @offset 0x08 : $UInt32 // Port Clear Output Register
+  PTOR @offset 0x0C : $UInt32 // Port Toggle Output Register
+  PDIR @offset 0x10 : $UInt32 // Port Data Input Register
+  PDDR @offset 0x14 : $UInt32 // Port Data Direction Register
 }
 
 registers GPIOD @at 0x400F_F0C0 {
-  PDOR @offset 0x00 : UInt32 // Port Data Output Register
-  PSOR @offset 0x04 : UInt32 // Port Set Output Register
-  PCOR @offset 0x08 : UInt32 // Port Clear Output Register
-  PTOR @offset 0x0C : UInt32 // Port Toggle Output Register
-  PDIR @offset 0x10 : UInt32 // Port Data Input Register
-  PDDR @offset 0x14 : UInt32 // Port Data Direction Register
+  PDOR @offset 0x00 : $UInt32 // Port Data Output Register
+  PSOR @offset 0x04 : $UInt32 // Port Set Output Register
+  PCOR @offset 0x08 : $UInt32 // Port Clear Output Register
+  PTOR @offset 0x0C : $UInt32 // Port Toggle Output Register
+  PDIR @offset 0x10 : $UInt32 // Port Data Input Register
+  PDDR @offset 0x14 : $UInt32 // Port Data Direction Register
 }
 
 //// Chapter 48: Touch sense input (TSI)
@@ -1193,21 +1193,21 @@ registers GPIOD @at 0x400F_F0C0 {
 //registers TSI0_CNTR15   0x4004511C // Counter Register
 //registers TSI0_THRESHOLD   0x40045120 // Low Power Channel Threshold Register
 //
-// Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
+// Nested Vectored $Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)
 
 registers NVIC @at 0xE000_E000 {
-  ISER [4 @offset  0x100 @inc 4] : UInt32 // Interrupt Set-enable Registers
-  ICER [4 @offset  0x180 @inc 4] : UInt32 //Interrupt Clear-enable Registers
-  IPR [128 @offset 0x400 @inc 1] : UInt8 // Interrupt priority
+  ISER [4 @offset  0x100 @inc 4] : $UInt32 // $Interrupt Set-enable Registers
+  ICER [4 @offset  0x180 @inc 4] : $UInt32 //Interrupt Clear-enable Registers
+  IPR [128 @offset 0x400 @inc 1] : $UInt8 // $Interrupt priority
 
-  ICSR @offset 0xD04 : UInt32 { // Interrupt Control and State
+  ICSR @offset 0xD04 : $UInt32 { // $Interrupt Control and State
     NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,
     ISRPENDING, 1, VECTPENDING:9, RETTOBASE, 2, VECTACTIVE:9
   }
 
-  VTOR @offset 0xD08 : UInt32 // Vector Table Offset
+  VTOR @offset 0xD08 : $UInt32 // Vector Table Offset
 
-  AIRCR @offset 0xD0C : UInt32 { // Application Interrupt and Reset Control
+  AIRCR @offset 0xD0C : $UInt32 { // Application $Interrupt and Reset Control
     VECTKEY:16, ENDIANNESS, 4, PRIGROUP:3,
     5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET
   }
@@ -1226,7 +1226,7 @@ registers NVIC @at 0xE000_E000 {
 
 //--- SYSTICK
 registers SYST @at 0xE000_E000 {
-  CSR @offset 0x10 : UInt32 { // SysTick Control and Status
+  CSR @offset 0x10 : $UInt32 { // SysTick Control and Status
     15,
     COUNTFLAG,
     13,
@@ -1234,12 +1234,12 @@ registers SYST @at 0xE000_E000 {
     TICKINT,
     ENABLE
   }
-  RVR   @offset 0x14 : UInt32 // SysTick Reload Value Register
-  CVR   @offset 0x18 : UInt32 // SysTick Current Value Register
-  CALIB  @offset 0x1C @ro : UInt32 // SysTick Calibration Value
+  RVR   @offset 0x14 : $UInt32 // SysTick Reload Value Register
+  CVR   @offset 0x18 : $UInt32 // SysTick Current Value Register
+  CALIB  @offset 0x1C @ro : $UInt32 // SysTick Calibration Value
 }
 registers AIPS0 @at 0x_4000_0000 {
-  MPRA @offset 0x00 : UInt32
+  MPRA @offset 0x00 : $UInt32
 
   //--- AICS0_PACR (§4.5.1 and §19.2, §19.2.2)
   // SPx: Determines whether the peripheral requires supervisor privilege level
@@ -1270,7 +1270,7 @@ registers AIPS0 @at 0x_4000_0000 {
   PACRN @offset 0x64,
   PACRO @offset 0x68,
   PACRP @offset 0x6C
-  : UInt32 {
+  : $UInt32 {
    1, SP0, WP0, TP0,
    1, SP1, WP1, TP1,
    1, SP2, WP2, TP2,

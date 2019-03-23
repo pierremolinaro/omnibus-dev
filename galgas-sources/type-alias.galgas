@@ -37,31 +37,9 @@ syntax extension plm_syntax {
       <type_definition_enclosed_in_square_breackets> !?ioAST ?outTypeName
       $]$
     or
-      $identifier$ ?outTypeName # Simple redéfinition de type
+      $\$type$ ?outTypeName # Simple redéfinition de type
     end
   }
-  
-  #·····················································································································
-
-#  rule <type_definition> ?!@ast ioAST !@lstring outTypeName { # §
-#    $func$
-#    <mode> ?let mode
-#    @lstringlist attributeList = {}
-#    repeat
-#    while
-#      $@attribute$ ?let attribute
-#      attributeList += !attribute
-#    end
-#    <procedure_formal_arguments> !?ioAST ?let formalArgs
-#    @lstring returnType
-#    select
-#      returnType = ["" here]
-#    or
-#      $->$
-#      <type_definition>!?ioAST ?returnType
-#    end
-#    outTypeName = ["" here]
-#  }
   
   #·····················································································································
 

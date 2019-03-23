@@ -1,9 +1,9 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sync Semaphore {
-  var value : UInt32
-  var list = TaskList ()
-  var guardList = GuardList ()
+  var value : $UInt32
+  var list = $TaskList ()
+  var guardList = $GuardList ()
 
   //····················································································································
 
@@ -27,7 +27,7 @@ sync Semaphore {
 
   //····················································································································
 
-  public func wait @noUnusedWarning @mutating (?until: inDeadline : UInt32) -> Bool {
+  public func wait @noUnusedWarning @mutating (?until: inDeadline : $UInt32) -> $Bool {
      sync{
      event self.wait () exit : result = yes
      event time.wait (!until: inDeadline) exit : result = no

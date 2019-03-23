@@ -6,9 +6,9 @@ import "carte-tp-teensy-3-6.plm-import"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sync SynchronizationGate {
-  var isOpen : Bool
-  var taskList = TaskList ()
-  var guardList = GuardList ()
+  var isOpen : $Bool
+  var taskList = $TaskList ()
+  var guardList = $GuardList ()
 
   //············································································
 
@@ -49,14 +49,14 @@ sync SynchronizationGate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync s1 = Semaphore (!value:0)
-sync s2 = Semaphore (!value:0)
+sync s1 = $Semaphore (!value:0)
+sync s2 = $Semaphore (!value:0)
 sync gate = SynchronizationGate (!isOpen:no)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 @activate {
-  var compteur : UInt32 = 0
+  var compteur : $UInt32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy

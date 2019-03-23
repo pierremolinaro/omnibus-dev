@@ -129,7 +129,7 @@ syntax extension plm_syntax {
         $,$
       end
       $:$
-      $identifier$ ?let registerTypeName
+      $\$type$ ?let registerTypeName
       @controlRegisterBitSliceList registerBitSliceList = {}
       select
       or

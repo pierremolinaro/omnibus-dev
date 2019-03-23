@@ -86,6 +86,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-register-value-from-slices.galgas"
   "galgas-sources/expression-primary.galgas"
   "galgas-sources/expression-standalone-function-call.galgas"
+  "galgas-sources/expression-constructor-call.galgas"
 
 #--- Instructions
   "galgas-sources/instructionList.galgas"

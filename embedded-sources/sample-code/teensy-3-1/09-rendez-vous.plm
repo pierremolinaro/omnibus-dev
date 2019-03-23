@@ -5,10 +5,10 @@ import "carte-tp-teensy-3-1.plm-import"
 //-----------------------------------------------------------------------------*
 
 sync RendezVous {
-  var inputWaitList = TaskList ()
-  var outputWaitList = TaskList ()
-  var inputGuardList = GuardList ()
-  var outputGuardList = GuardList ()
+  var inputWaitList = $TaskList ()
+  var outputWaitList = $TaskList ()
+  var inputGuardList = $GuardList ()
+  var outputGuardList = $GuardList ()
 
   public primitive input @mutating () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
@@ -49,7 +49,7 @@ sync rdvs = RendezVous ()
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @activate {
-  var top : UInt32 = 0
+  var top : $UInt32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)

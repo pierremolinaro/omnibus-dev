@@ -74,7 +74,7 @@ syntax plm_target_specific_syntax (plm_lexique) {
 #  GRAMMARS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-grammar plm_grammar "LR1" {
+grammar plm_grammar "SLR" {
   syntax plm_syntax
   <start_symbol>
     ?!@ast outAst

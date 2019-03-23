@@ -423,13 +423,3 @@ void routine_handleNextOperandInAssignment (const class GALGAS_PLMType constinAr
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Routine 'enter_NOP_function'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_enter_5F_NOP_5F_function (class GALGAS_functionDeclarationListAST & ioArgument0,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-

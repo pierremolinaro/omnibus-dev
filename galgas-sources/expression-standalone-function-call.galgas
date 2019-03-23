@@ -17,7 +17,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    <type_definition> !?ioAST ?let standaloneFunctionNameOrTypeName
+    $identifier$ ?let standaloneFunctionNameOrTypeName # §
     <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
     outExpression = @standaloneFunctionInExpressionAST.new {!standaloneFunctionNameOrTypeName !arguments !endOfArguments}
   }
@@ -74,10 +74,10 @@ override method @standaloneFunctionInExpressionAST noteExpressionTypesInPreceden
 #! SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @functionCallEffectiveParameterListAST {
-  @lstring mSelector
-  @expressionAST mExpression
-}
+#list @functionCallEffectiveParameterListAST {
+#  @lstring mSelector
+#  @expressionAST mExpression
+#}
 
 #·······················································································································
 

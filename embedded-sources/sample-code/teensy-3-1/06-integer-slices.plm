@@ -10,7 +10,7 @@ let slice = N [1 ... 3]
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 @activate {
-  var compteur : UInt32 = 0
+  var compteur : $UInt32 = 0
   var test = yes
 
   event @setup first {

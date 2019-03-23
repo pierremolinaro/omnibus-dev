@@ -13,8 +13,8 @@ PYTHON_BUILD: "../py-build.txt"
 
 LINKER_SCRIPT: "../ld-linker.txt"
 
-PANIC_CODE_TYPE_NAME: UInt32
-PANIC_LINE_TYPE_NAME: UInt32
+PANIC_CODE_TYPE_NAME: $UInt32
+PANIC_LINE_TYPE_NAME: $UInt32
 
 POINTER_BIT_COUNT: 32
 
@@ -40,7 +40,7 @@ SECTION_DISPATCHER_ENTRY: "udfcoded-section-dispatcher-entry.s"
 SECTION_ENTRY_FROM_UNKNOWN_MODE: "udfcoded-section-invocation-from-unknown-mode.s"
 SECTION_ENTRY_FROM_USER_MODE: "udfcoded-section-invocation-from-user-mode.s"
 
-//--- Interrupt handler
+//--- $Interrupt handler
 INTERRUPT_HANDLER: "../xtr-interrupt-handler.s"
 INTERRUPT_USER_STACK_SIZE: 32 // Cortex M4 saves 8 regs in user stack on interrupt
 UNUSED_INTERRUPT: "../undefined-interrupt.s"

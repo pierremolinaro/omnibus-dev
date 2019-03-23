@@ -3,7 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typedConstantCallAST : @expressionAST {
-  @lstring mOptionalTypeName
   @lstring mConstructorName
   @primaryInExpressionAccessListAST mAccessList
 }
@@ -17,18 +16,12 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    @lstring optionalTypeName
-    select
-      optionalTypeName = .new {!"" !.here}
-    or
-      <type_definition> !?ioAST ?optionalTypeName
-    end
     $.$
     $identifier$ ?let constantName
   #--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
   #---
-    outExpression = @typedConstantCallAST.new {!optionalTypeName !constantName !accessList}
+    outExpression = @typedConstantCallAST.new {!constantName !accessList}
   }
 
   #·····················································································································
@@ -42,9 +35,6 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  if mOptionalTypeName.string != "" then
-    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]
-  end
   for (access) in mAccessList do
     switch access
     case integerSlice (2*) :
@@ -73,9 +63,6 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  if mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !mOptionalTypeName]
-  end
   for (access) in mAccessList do
     switch access
     case integerSlice (2*) :
@@ -116,17 +103,10 @@ override method @typedConstantCallAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze constructor source type
-  @PLMType inferredResultType
-  if mOptionalTypeName.string == "" then
-    inferredResultType = inOptionalTargetType
-  else
-    inferredResultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
-  end
-  if inferredResultType.kind == .void then
+  if inOptionalTargetType.kind == .void then
     error mConstructorName : "cannot infer type" : outResult
   else
-    let classConstantMap = inferredResultType.classConstantMap
+    let classConstantMap = inOptionalTargetType.classConstantMap
     [classConstantMap searchKey !mConstructorName ?let @bigint value ?let classTypeName]
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !classTypeName} type]
     outResult = .literalInteger {!type:resultType !value:value}

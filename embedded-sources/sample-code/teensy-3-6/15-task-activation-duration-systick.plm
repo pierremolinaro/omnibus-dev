@@ -8,20 +8,20 @@ driver myDriver ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //
 driver myDriver > time {
-  var tick : UInt32 = 0
+  var tick : $UInt32 = 0
 
   public section noteTick () {
     self.tick = $(SYST:CVR)
   }
 
-  public section getDuration () -> UInt32 {
+  public section getDuration () -> $UInt32 {
     result = self.tick - $(SYST:CVR)
   }
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sync s = Semaphore (!value:0)
+sync s = $Semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
