@@ -17,15 +17,15 @@ driver chronomètre > root {
     $(PIT:TCTRL [0]) = 0
     $(PIT:TCTRL [1]) = 0
   //--- #PIT0 clock frequency is F_BUS (in Hertz)
-    $(PIT:LDVAL [0]) = $UInt32.max
-    $(PIT:LDVAL [1]) = $UInt32.max
+    $(PIT:LDVAL [0]) = $uint32.max
+    $(PIT:LDVAL [1]) = $uint32.max
   //--- Enable #PIT0 and #PIT1 : start counting, no interrupt
     $(PIT:TCTRL [1]) = ${PIT:TCTRL !CHN:1 !TEN:1}
     $(PIT:TCTRL [0]) = ${PIT:TCTRL !TEN:1}
   }
 
   public section now @noUnusedWarning () -> $Uptime {
-    var r $UInt64 = extend ($(PIT:LTMR64H))
+    var r $uint64 = extend ($(PIT:LTMR64H))
     r <<= 32
     r |= extend ($(PIT:LTMR64L))
     r = ~ r
@@ -37,23 +37,23 @@ driver chronomètre > root {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $Uptime @copyable {
-  let rawValue $UInt64
+  let rawValue $uint64
 
-  public func raw @noUnusedWarning () -> $UInt64 {
+  public func raw @noUnusedWarning () -> $uint64 {
     result = self.rawValue
   }
 
-  public func µs @noUnusedWarning () -> $UInt32 {
+  public func µs @noUnusedWarning () -> $uint32 {
     let r = (self.rawValue / BUS_MHZ) % 1_000
     result = truncate (r)
   }
 
-  public func ms @noUnusedWarning () -> $UInt32 {
+  public func ms @noUnusedWarning () -> $uint32 {
     let r = (self.rawValue / (BUS_MHZ * 1_000)) % 1_000
     result = truncate (r)
   }
 
-  public func s @noUnusedWarning () -> $UInt32 {
+  public func s @noUnusedWarning () -> $uint32 {
     let r = self.rawValue / (BUS_MHZ * 1_000_000)
     result = truncate (r)
   }
@@ -62,7 +62,7 @@ struct $Uptime @copyable {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur $UInt32 = 0
+  var compteur $uint32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)

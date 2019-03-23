@@ -16,7 +16,7 @@ override getter @integerDeclarationAST locationForErrorSignaling -> @location ou
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
-  outName = if mIsSigned then "Int" else "UInt" end + mSize
+  outName = if mIsSigned then "int" else "uint" end + mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

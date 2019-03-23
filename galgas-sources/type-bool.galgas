@@ -19,7 +19,7 @@ override method @booleanDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode ![boolTypeName () nowhere] !self]
-  [!?ioGraph noteNode !["UInt1" nowhere]]
+  [!?ioGraph noteNode !["uint1" nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -33,7 +33,7 @@ override getter @booleanDeclarationAST keyRepresentationForErrorSignaling -> @st
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once boolTypeName -> @string {
-  result = "Bool"
+  result = "bool"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

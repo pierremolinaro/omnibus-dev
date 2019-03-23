@@ -101,7 +101,7 @@ override method @sizeofExpressionAST analyzeExpression
     [ioUniversalMap searchValuedObjectType !selfType:inSelfType !mLValue ?let type]
     let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
       !inContext.mTypeMap
-      !["UInt" + inContext.mTargetParameters.mPointerSize nowhere]
+      !["uint" + inContext.mTargetParameters.mPointerSize nowhere]
     }
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
@@ -135,7 +135,7 @@ override method @sizeofTypeAST analyzeExpression
     let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
     let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
       !inContext.mTypeMap
-      !["UInt" + inContext.mTargetParameters.mPointerSize nowhere]
+      !["uint" + inContext.mTargetParameters.mPointerSize nowhere]
     }
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)

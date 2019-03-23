@@ -5,7 +5,7 @@ import "carte-tp-teensy-3-1.plm-import"
 //——————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @activate {
-  var compteur $UInt32 = 0
+  var compteur $uint32 = 0
   var continue = yes
 
   event @setup first {

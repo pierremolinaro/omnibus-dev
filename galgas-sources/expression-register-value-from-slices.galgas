@@ -113,7 +113,7 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let @uint fieldBitIndex
         ?let @uint fieldBitCount
       ]
-      let inferredTypeName = @lstring.new {!"UInt" + fieldBitCount !fieldName.location}
+      let inferredTypeName = @lstring.new {!"uint" + fieldBitCount !fieldName.location}
       [inContext.mTypeMap searchKey !lkey:inferredTypeName ?type:let inferredType]
     #--- Analyze expression
       [expression analyzeExpression
@@ -148,7 +148,7 @@ override method @registerConstantExpressionAST analyzeExpression
         if not unsigned then
           error expressionLocation: "an unsigned integer expression is required here"
         elsif expressionBitCount != fieldBitCount then
-            error expressionLocation : "type error, UInt" + fieldBitCount + " type required"
+            error expressionLocation : "type error, $uint" + fieldBitCount + " type required"
         else
         #--- Perform an bit extend to register type or a trunc
           var partialResult = expressionResult

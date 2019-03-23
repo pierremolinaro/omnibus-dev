@@ -83,7 +83,7 @@ override method @addressofControlRegisterAST analyzeExpression
 #-------------------- Result
   let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !inContext.mTypeMap
-    !["UInt" + [inContext.mTargetParameters.mPointerSize string] nowhere]
+    !["uint" + [inContext.mTargetParameters.mPointerSize string] nowhere]
   }
   outResult = .llvmValue {!type:[resultTypeProxy type] !llvmName:llvmRegisterAddressName}
 }

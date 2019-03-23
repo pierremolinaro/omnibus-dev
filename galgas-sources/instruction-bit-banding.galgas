@@ -51,7 +51,7 @@ syntax extension plm_syntax {
 
 override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [!?ioGraph noteNode !["UInt1" nowhere]]
+  [!?ioGraph noteNode !["uint1" nowhere]]
   [mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -128,7 +128,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Bit Expression
 #--- Inferred bit expression type
   [inContext.mTypeMap searchKey
-    !lkey:.new {!"UInt" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
+    !lkey:.new {!"uint" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
 #--- Compute bit expression

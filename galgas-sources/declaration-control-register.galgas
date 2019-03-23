@@ -320,12 +320,12 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
   for reg in mRegisters do
   #--- Add dependency from type name
     [!?ioGraph addEdge !nodeName !reg.mRegisterTypeName]
-  #--- Add dependency from the number of integer type name (i.e. UInt32 --> UInt5)
-    let split = [reg.mRegisterTypeName componentsSeparatedByString !"UInt"]
+  #--- Add dependency from the number of integer type name (i.e. $uint32 --> $uint5)
+    let split = [reg.mRegisterTypeName componentsSeparatedByString !"uint"]
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
       if n > 0 then
-        let bitSizeTypeName = @lstring.new {!"UInt" + [n-1 significantBitCount] !reg.mRegisterTypeName}
+        let bitSizeTypeName = @lstring.new {!"uint" + [n-1 significantBitCount] !reg.mRegisterTypeName}
         [!?ioGraph addEdge !nodeName !bitSizeTypeName]
       end
     end
@@ -402,25 +402,25 @@ private proc controlRegisterType
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount
   case boolean, void :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case enumeration (*) :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case staticInteger :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case structure (*) :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case syncTool :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (*) :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case staticArrayType (* *) :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case dynamicArrayType (*) :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case function (3*) :
-    error inRegisterTypeName : "a register should be an IntXX or an UIntXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   end
 }
 

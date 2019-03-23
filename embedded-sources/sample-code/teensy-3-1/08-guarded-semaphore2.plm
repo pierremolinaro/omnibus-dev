@@ -10,7 +10,7 @@ sync s1 = $Semaphore (!value:0)
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @activate {
-  var top $UInt32 = 0
+  var top $uint32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
@@ -35,7 +35,7 @@ task T0 @stacksize 512 @activate {
 //-----------------------------------------------------------------------------*
 
 task T1 @stacksize 512 @activate {
-  var top $UInt32 = 0
+  var top $uint32 = 0
 
   event time.wait (!until:self.top) {
     s1.signal ()
@@ -51,7 +51,7 @@ task T1 @stacksize 512 @activate {
 //-----------------------------------------------------------------------------*
 
 task T2 @stacksize 512 @activate {
-  var deadline $UInt32 = 0
+  var deadline $uint32 = 0
   var toggleD3 = no
 
   event s0.wait () {

@@ -35,7 +35,7 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     ${$
-    $identifier$ ?let typeName
+    $\$type$ ?let typeName
     @sliceAssignmentListAST sliceAssignmentListAST = {}
     repeat
       $?selector:$ ?let sliceWidth
@@ -173,7 +173,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      sliceTypeName = .new {!"UInt" + sliceWidth !mTypeName.location}
+      sliceTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       end

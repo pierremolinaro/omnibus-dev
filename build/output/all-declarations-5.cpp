@@ -11892,7 +11892,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (71)
 , END
 // State S108 (index = 1420)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (200)
 , END
 // State S109 (index = 1423)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (344)
@@ -16063,7 +16063,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__40_attribute, SHIFT (422)
 , END
 // State S296 (index = 9198)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (424)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (424)
 , END
 // State S297 (index = 9201)
 , C_Lexique_plm_5F_lexique::kToken__3D_, REDUCE (407)

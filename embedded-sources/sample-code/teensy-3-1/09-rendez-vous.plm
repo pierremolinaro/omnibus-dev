@@ -49,7 +49,7 @@ sync rdvs = $RendezVous ()
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @activate {
-  var top $UInt32 = 0
+  var top $uint32 = 0
 
   event @setup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)

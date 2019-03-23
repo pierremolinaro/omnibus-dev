@@ -1255,7 +1255,7 @@ static void extensionMethod_forInstructionAST_instructionSemanticAnalysis (const
     break ;
   case GALGAS_subscript::kEnum_literalString:
     {
-      var_iteratedElementType_4159 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), GALGAS_string ("UInt8").getter_nowhere (SOURCE_FILE ("instruction-for-in-do.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)) ;
+      var_iteratedElementType_4159 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), GALGAS_string ("uint8").getter_nowhere (SOURCE_FILE ("instruction-for-in-do.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)) ;
     }
     break ;
   case GALGAS_subscript::kEnum_staticSubscript:
@@ -3481,7 +3481,7 @@ C_galgas_function_descriptor functionDescriptor_assignmentPrefix ("assignmentPre
 static GALGAS_string onceFunction_staticStringTypeName (C_Compiler * /* inCompiler */
                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("LiteralString") ;
+  result_result = GALGAS_string ("literalString") ;
 //---
   return result_result ;
 }
@@ -3551,7 +3551,7 @@ C_galgas_function_descriptor functionDescriptor_staticStringTypeName ("staticStr
 static GALGAS_string onceFunction_staticIntegerTypeName (C_Compiler * /* inCompiler */
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_result ; // Returned variable
-  result_result = GALGAS_string ("LiteralInt") ;
+  result_result = GALGAS_string ("literalInt") ;
 //---
   return result_result ;
 }

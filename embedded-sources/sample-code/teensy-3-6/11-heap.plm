@@ -20,19 +20,19 @@ driver project > digital {
 
 driver project ()
 
-typealias $Array8 = [$UInt8]
+typealias $Array8 = [$uint8]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $StructWithARC {
-  public var unEntierQuelconque $UInt32 = 0
+  public var unEntierQuelconque $uint32 = 0
   public var donnée = $Array8 ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $AutreStructWithARC {
-  public var autreEntierQuelconque $UInt32 = 0
+  public var autreEntierQuelconque $uint32 = 0
   public var structure = StructWithARC ()
   public var autreDonnée = $Array8 ()
 }
@@ -40,12 +40,12 @@ struct $AutreStructWithARC {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T1 > T2 @stacksize 512 @activate {
-  var échéance $UInt32 = 0
-  var freeRam $UInt32 = 0
-  var start $UInt32 = 0
-  var maxAllocationParSeconde $UInt32 = 0
-  var alloc $UInt32 = 0
-  var current $UInt32 = 0
+  var échéance $uint32 = 0
+  var freeRam $uint32 = 0
+  var start $uint32 = 0
+  var maxAllocationParSeconde $uint32 = 0
+  var alloc $uint32 = 0
+  var current $uint32 = 0
 
   event @setup first {
     lcd.print (!string:"Free:")
@@ -94,13 +94,13 @@ task T1 > T2 @stacksize 512 @activate {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T2 > backgroundTask @stacksize 512 @activate {
-  var échéance1 $UInt32 = 2001
-  var échéance2 $UInt32 = 2001
-  var échéance3 $UInt32 = 2001
+  var échéance1 $uint32 = 2001
+  var échéance2 $uint32 = 2001
+  var échéance3 $uint32 = 2001
   var data1 = $Array8 ()
   var data2 = $Array8 ()
   var structure = AutreStructWithARC ()
-  var b $UInt8 = 0
+  var b $uint8 = 0
 
   event time.wait (!until:self.échéance1) {
     self.échéance1 +%= 71
@@ -156,8 +156,8 @@ task backgroundTask @stacksize 512 @activate {
 
   func testReleaseLocalVar (?in: inData $Array8) {
     externalSection (!in:inData)
-    var d $UInt32 = 143
-    var x $UInt3 = d [3 ... 5]
+    var d $uint32 = 143
+    var x $uint3 = d [3 ... 5]
   }
 
 }
@@ -167,7 +167,7 @@ task backgroundTask @stacksize 512 @activate {
 section externalSection (?in: inData $Array8) {
   var d = inData
   d.append (!0)
-  var xxxx = [$Bool] ()
+  var xxxx = [$bool] ()
   xxxx.append (!yes)
   var lg = xxxx.length ()
 }
