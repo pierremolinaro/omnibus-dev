@@ -28,19 +28,19 @@ public func activityLedOff safe section @exported () {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let LED_L0 = DigitalPort.D3
-let LED_L1 = DigitalPort.D4
-let LED_L2 = DigitalPort.D5
-let LED_L3 = DigitalPort.D6
-let LED_L4 = DigitalPort.D7
+let LED_L0 = $DigitalPort.D3
+let LED_L1 = $DigitalPort.D4
+let LED_L2 = $DigitalPort.D5
+let LED_L3 = $DigitalPort.D6
+let LED_L4 = $DigitalPort.D7
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-let BUTTON_P0 = DigitalPort.D8
-let BUTTON_P1 = DigitalPort.D9
-let BUTTON_P2 = DigitalPort.D10
-let BUTTON_P3 = DigitalPort.D11
-let BUTTON_P4 = DigitalPort.D12
+let BUTTON_P0 = $DigitalPort.D8
+let BUTTON_P1 = $DigitalPort.D9
+let BUTTON_P2 = $DigitalPort.D10
+let BUTTON_P3 = $DigitalPort.D11
+let BUTTON_P4 = $DigitalPort.D12
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

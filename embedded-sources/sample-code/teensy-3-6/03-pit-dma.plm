@@ -189,7 +189,7 @@ task Tâche @stacksize 512 @activate {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:self.pattern.count)
     lcd.print (!string:" ")
-    let cc = ISRSlot.PITChannel3.uint7
+    let cc = $ISRSlot.PITChannel3.uint7
     lcd.print (!u32:extend (cc))
   }
 }

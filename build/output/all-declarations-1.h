@@ -2761,7 +2761,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_void,
     kEnum_reference,
-    kEnum_type,
     kEnum_null,
     kEnum_llvmValue,
     kEnum_literalInteger,
@@ -2841,9 +2840,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                const class GALGAS_string & inOperand1
                                                                COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_objectIR constructor_type (const class GALGAS_PLMType & inOperand0
-                                                          COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_objectIR constructor_void (LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_zero (const class GALGAS_PLMType & inOperand0
@@ -2911,10 +2907,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_type (class GALGAS_PLMType & outArgument0,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_zero (class GALGAS_PLMType & outArgument0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
@@ -2941,8 +2933,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNull (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isReference (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVoid (LOCATION_ARGS) const ;
 
@@ -3106,22 +3096,6 @@ class cEnumAssociatedValues_objectIR_reference : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_objectIR_reference (void) {}
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumAssociatedValues_objectIR_type : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectIR_type (const GALGAS_PLMType & inAssociatedValue0
-                                                COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectIR_type (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

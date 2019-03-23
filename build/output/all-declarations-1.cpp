@@ -2277,35 +2277,6 @@ typeComparisonResult cEnumAssociatedValues_objectIR_reference::compare (const cE
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_type::cEnumAssociatedValues_objectIR_type (const GALGAS_PLMType & inAssociatedValue0
-                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_objectIR_type::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_objectIR_type::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectIR_type * ptr = dynamic_cast<const cEnumAssociatedValues_objectIR_type *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 cEnumAssociatedValues_objectIR_null::cEnumAssociatedValues_objectIR_null (const GALGAS_PLMType & inAssociatedValue0
                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2699,21 +2670,6 @@ GALGAS_objectIR GALGAS_objectIR::constructor_reference (const GALGAS_PLMType & i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_type (const GALGAS_PLMType & inAssociatedValue0
-                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_objectIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_type ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectIR_type (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_objectIR GALGAS_objectIR::constructor_null (const GALGAS_PLMType & inAssociatedValue0
                                                    COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -2890,22 +2846,6 @@ void GALGAS_objectIR::method_reference (GALGAS_PLMType & outAssociatedValue0,
     const cEnumAssociatedValues_objectIR_reference * ptr = (const cEnumAssociatedValues_objectIR_reference *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_objectIR::method_type (GALGAS_PLMType & outAssociatedValue0,
-                                   C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_type) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @objectIR type invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectIR_type * ptr = (const cEnumAssociatedValues_objectIR_type *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -3107,11 +3047,10 @@ void GALGAS_objectIR::method_llvmArrayRepeatedDynamicValue (GALGAS_PLMType & out
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const char * gEnumNameArrayFor_objectIR [14] = {
+static const char * gEnumNameArrayFor_objectIR [13] = {
   "(not built)",
   "void",
   "reference",
-  "type",
   "null",
   "llvmValue",
   "literalInteger",
@@ -3134,12 +3073,6 @@ GALGAS_bool GALGAS_objectIR::getter_isVoid (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_objectIR::getter_isReference (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_reference == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_objectIR::getter_isType (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_type == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

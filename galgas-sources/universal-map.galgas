@@ -179,8 +179,8 @@ method @universalValuedObjectMap searchValuedObject
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
-  case type (@PLMType type) :
-    outObjectIR = .type {!type:type}
+  case type (@PLMType unused type) :
+      error inValuedObjectName : "a type has no value" : outObjectIR
   case task (@PLMType type) :
     if inMode == .bootMode then
       error inValuedObjectName : "cannot call a task entry in a boot routine" : outObjectIR

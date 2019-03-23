@@ -7964,12 +7964,12 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_primary_i79_ (GALGAS_ast & ioArgu
                                                              GALGAS_expressionAST & outArgument_outExpression,
                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lstring var_standaloneFunctionNameOrTypeName_1161 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_standaloneFunctionName_1151 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_plm_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 20)) ;
-  GALGAS_effectiveArgumentListAST var_arguments_1215 ;
-  GALGAS_location var_endOfArguments_1235 ;
-  nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_1215, var_endOfArguments_1235, inCompiler) ;
-  outArgument_outExpression = GALGAS_standaloneFunctionInExpressionAST::constructor_new (var_standaloneFunctionNameOrTypeName_1161, var_arguments_1215, var_endOfArguments_1235  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 22)) ;
+  GALGAS_effectiveArgumentListAST var_arguments_1201 ;
+  GALGAS_location var_endOfArguments_1221 ;
+  nt_effective_5F_parameters_ (ioArgument_ioAST, var_arguments_1201, var_endOfArguments_1221, inCompiler) ;
+  outArgument_outExpression = GALGAS_standaloneFunctionInExpressionAST::constructor_new (var_standaloneFunctionName_1151, var_arguments_1201, var_endOfArguments_1221  COMMA_SOURCE_FILE ("expression-standalone-function-call.galgas", 22)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

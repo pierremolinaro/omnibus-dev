@@ -9,8 +9,6 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
   switch ioObjectIR
   case void : # Do nothing
     performStore = false
-  case type (*) : # Do nothing
-    performStore = false
   case reference (* *) : # Already a reference: do nothing
     performStore = false
   case llvmValue (* *) :
