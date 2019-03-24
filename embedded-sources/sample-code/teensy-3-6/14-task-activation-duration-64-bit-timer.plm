@@ -49,10 +49,10 @@ sync s = $Semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche0 @stacksize 512 @activate {
+task Tâche0 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     s.wait ()
     let duration = ((timer.now () - timer.getTick ()) * 1000) / BUS_MHZ
     lcd.print (!u64:duration)
@@ -61,9 +61,9 @@ task Tâche0 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @stacksize 512 @activate {
+task Tâche1 @stacksize 512 @autostart {
 
-  event @setup first {
+  event @onSetup first {
     timer.setTick ()
     s.signal ()
   }

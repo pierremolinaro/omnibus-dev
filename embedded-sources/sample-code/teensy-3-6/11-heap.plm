@@ -39,7 +39,7 @@ struct $AutreStructWithARC {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T1 > T2 @stacksize 512 @activate {
+task T1 > T2 @stacksize 512 @autostart {
   var échéance $uint32 = 0
   var freeRam $uint32 = 0
   var start $uint32 = 0
@@ -47,7 +47,7 @@ task T1 > T2 @stacksize 512 @activate {
   var alloc $uint32 = 0
   var current $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     lcd.print (!string:"Free:")
     lcd.goto (!line:1 !column:0)
     lcd.print (!string:"Start:")
@@ -93,7 +93,7 @@ task T1 > T2 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T2 > backgroundTask @stacksize 512 @activate {
+task T2 > backgroundTask @stacksize 512 @autostart {
   var échéance1 $uint32 = 2001
   var échéance2 $uint32 = 2001
   var échéance3 $uint32 = 2001
@@ -137,7 +137,7 @@ task T2 > backgroundTask @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task backgroundTask @stacksize 512 @activate {
+task backgroundTask @stacksize 512 @autostart {
   var data = $Array8 ()
 
   event time.wait (!until:0) {

@@ -4,10 +4,10 @@ import "carte-tp-teensy-3-1.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T1 @stacksize 512 @activate {
+task T1 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
@@ -29,7 +29,7 @@ task T1 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T2 @stacksize 512 @activate {
+task T2 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
   event time.wait (!until:self.compteur) {
@@ -43,7 +43,7 @@ task T2 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T3 @stacksize 512 @activate {
+task T3 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
   event time.wait (!until:self.compteur) {
@@ -57,7 +57,7 @@ task T3 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T4 @stacksize 512 @activate {
+task T4 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
   event time.wait (!until:self.compteur) {
@@ -71,7 +71,7 @@ task T4 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T5 @stacksize 512 @activate {
+task T5 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
   event time.wait (!until:self.compteur) {

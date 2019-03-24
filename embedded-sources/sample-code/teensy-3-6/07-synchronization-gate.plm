@@ -55,10 +55,10 @@ sync gate = $SynchronizationGate (!isOpen:no)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @stacksize 512 @activate {
+task Tâche1 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
@@ -79,7 +79,7 @@ task Tâche1 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche2 @stacksize 512 @activate {
+task Tâche2 @stacksize 512 @autostart {
 
   event gate.wait () {
     digital.toggle (!port:LED_L1)
@@ -90,7 +90,7 @@ task Tâche2 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche3 @stacksize 512 @activate {
+task Tâche3 @stacksize 512 @autostart {
 
   event gate.wait () {
     digital.toggle (!port:LED_L2)

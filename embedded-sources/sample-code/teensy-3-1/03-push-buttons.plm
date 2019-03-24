@@ -4,10 +4,10 @@ import "carte-tp-teensy-3-1.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T @stacksize 512 @activate {
+task T @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)

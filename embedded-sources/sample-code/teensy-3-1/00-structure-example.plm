@@ -21,11 +21,11 @@ struct $Toto {
 
 //-----------------------------------------------------------------------------*
 
-task T @stacksize 512 @activate {
+task T @stacksize 512 @autostart {
   var deadline $uint32 = 0
   var acc = C ()
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode: $DigitalMode.OUTPUT !toPort:.D13)
     digital.set (!mode: $DigitalMode.OUTPUT !toPort: LED_L1)
   }

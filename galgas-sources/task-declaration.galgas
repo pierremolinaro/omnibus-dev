@@ -13,7 +13,7 @@ list @taskListAST {
   @taskSetupListAST mTaskDeactivateListAST
   @syncInstructionBranchListAST mGuardedCommandList
   @location mEndOfTaskDeclaration
-  @bool mActivate
+  @bool mAutoStart
 }
 
 #·······················································································································
@@ -52,15 +52,15 @@ syntax extension plm_syntax {
       error stackSizeAttribute : "this attribute should be @stacksize"
     end
     $integer$ ?let @lbigint stackSize
-  #--- @activate attribute
-    var activate = false
+  #--- @autostart attribute
+    var autoStart = false
     select
     or
       $@attribute$ ?let activateAttribute
-      if activateAttribute.string != "activate" then
-        error activateAttribute : "this attribute should be @activate"
+      if activateAttribute.string != "autostart" then
+        error activateAttribute : "this attribute should be @autostart"
       end
-      activate = true
+      autoStart = true
     end
     ${$
     @structurePropertyListAST taskVarList = {}
@@ -106,14 +106,14 @@ syntax extension plm_syntax {
       <instructionList> !?ioAST ?let instructionList
       let endOfInit = @location.here
       $}$
-      if attribute.string == "setup" then
+      if attribute.string == "onSetup" then
         taskSetupListAST += !name !dependenceList !instructionList !endOfInit
-      elsif attribute.string == "activate" then
+      elsif attribute.string == "onStart" then
         taskActivateListAST += !name !dependenceList !instructionList !endOfInit
-      elsif attribute.string == "deactivate" then
+      elsif attribute.string == "onTermination" then
         taskDeactivateListAST += !name !dependenceList !instructionList !endOfInit
       else
-        error attribute : "attribute should be @setup, @activate or @deactivate"
+        error attribute : "attribute should be @onSetup, @onStart or @onTermination"
       end
     while
       $event$
@@ -137,7 +137,7 @@ syntax extension plm_syntax {
       !taskDeactivateListAST
       !branchList
       !endOfTask
-      !activate
+      !autoStart
   }
 
   #·····················································································································
@@ -224,7 +224,7 @@ method @taskListAST enterInContext
           !task.mTaskDeactivateListAST
           !task.mGuardedCommandList
           !task.mEndOfTaskDeclaration
-          !task.mActivate
+          !task.mAutoStart
         continue = true
         [!?taskList removeAtIndex ?11* !idx]
       else
@@ -409,7 +409,7 @@ method @taskListAST enterInContext
       !task.mTaskActivateListAST
       !task.mTaskDeactivateListAST
       !task.mEndOfTaskDeclaration
-      !task.mActivate
+      !task.mAutoStart
   #-------------------------------------------- GenerateLLVM type definition
     ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
       ![taskType llvmTypeName]
@@ -433,7 +433,7 @@ list @decoratedTaskList {
   @taskSetupListAST mTaskActivateListAST
   @taskSetupListAST mTaskDeactivateListAST
   @location mEndOfTaskDeclaration
-  @bool mActivate
+  @bool mAutoStart
 }
 
 #·······················································································································
@@ -555,7 +555,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
     !activateOrderedList
     !deactivateOrderedList
     !taskNameStringIndex
-    !mActivate
+    !mAutoStart
   ]
 }
 

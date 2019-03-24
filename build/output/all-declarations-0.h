@@ -14400,7 +14400,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                   const class GALGAS_taskSetupListAST & in_mTaskDeactivateListAST,
                                                   const class GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
                                                   const class GALGAS_location & in_mEndOfTaskDeclaration,
-                                                  const class GALGAS_bool & in_mActivate
+                                                  const class GALGAS_bool & in_mAutoStart
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -14549,9 +14549,9 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mActivateAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAutoStartAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfTaskDeclarationAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                        C_Compiler * inCompiler
@@ -14633,7 +14633,7 @@ class cEnumerator_taskListAST : public cGenericAbstractEnumerator {
   public : class GALGAS_taskSetupListAST current_mTaskDeactivateListAST (LOCATION_ARGS) const ;
   public : class GALGAS_syncInstructionBranchListAST current_mGuardedCommandList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfTaskDeclaration (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mActivate (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mAutoStart (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_taskListAST_2D_element current (LOCATION_ARGS) const ;
 } ;

@@ -48,10 +48,10 @@ sync rdvs = $RendezVous ()
 
 //-----------------------------------------------------------------------------*
 
-task T0 @stacksize 512 @activate {
+task T0 @stacksize 512 @autostart {
   var top $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
@@ -74,7 +74,7 @@ task T0 @stacksize 512 @activate {
 
 //-----------------------------------------------------------------------------*
 
-task T1 @stacksize 512 @activate {
+task T1 @stacksize 512 @autostart {
 
   event rdvs.input () {
     digital.write (!yes !toPort:LED_L1)

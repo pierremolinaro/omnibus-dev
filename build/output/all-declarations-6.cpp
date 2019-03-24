@@ -8886,7 +8886,7 @@ mProperty_mTaskSetupListAST (),
 mProperty_mTaskActivateListAST (),
 mProperty_mTaskDeactivateListAST (),
 mProperty_mEndOfTaskDeclaration (),
-mProperty_mActivate () {
+mProperty_mAutoStart () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8913,7 +8913,7 @@ mProperty_mTaskSetupListAST (inOperand4),
 mProperty_mTaskActivateListAST (inOperand5),
 mProperty_mTaskDeactivateListAST (inOperand6),
 mProperty_mEndOfTaskDeclaration (inOperand7),
-mProperty_mActivate (inOperand8) {
+mProperty_mAutoStart (inOperand8) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8978,7 +8978,7 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
     result = mProperty_mEndOfTaskDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskDeclaration) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mActivate.objectCompare (inOperand.mProperty_mActivate) ;
+    result = mProperty_mAutoStart.objectCompare (inOperand.mProperty_mAutoStart) ;
   }
   return result ;
 }
@@ -8986,7 +8986,7 @@ typeComparisonResult GALGAS_decoratedTaskList_2D_element::objectCompare (const G
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_decoratedTaskList_2D_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mActivate.isValid () ;
+  return mProperty_mTaskName.isValid () && mProperty_mStackSize.isValid () && mProperty_mVarList.isValid () && mProperty_mTaskProcList.isValid () && mProperty_mTaskSetupListAST.isValid () && mProperty_mTaskActivateListAST.isValid () && mProperty_mTaskDeactivateListAST.isValid () && mProperty_mEndOfTaskDeclaration.isValid () && mProperty_mAutoStart.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9000,7 +9000,7 @@ void GALGAS_decoratedTaskList_2D_element::drop (void) {
   mProperty_mTaskActivateListAST.drop () ;
   mProperty_mTaskDeactivateListAST.drop () ;
   mProperty_mEndOfTaskDeclaration.drop () ;
-  mProperty_mActivate.drop () ;
+  mProperty_mAutoStart.drop () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9027,7 +9027,7 @@ void GALGAS_decoratedTaskList_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mEndOfTaskDeclaration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mActivate.description (ioString, inIndentation+1) ;
+    mProperty_mAutoStart.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -9082,8 +9082,8 @@ GALGAS_location GALGAS_decoratedTaskList_2D_element::getter_mEndOfTaskDeclaratio
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_decoratedTaskList_2D_element::getter_mActivate (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mActivate ;
+GALGAS_bool GALGAS_decoratedTaskList_2D_element::getter_mAutoStart (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mAutoStart ;
 }
 
 

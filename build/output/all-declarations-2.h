@@ -939,7 +939,7 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_location mProperty_mEndOfTaskDeclaration ;
 
-  public : GALGAS_bool mProperty_mActivate ;
+  public : GALGAS_bool mProperty_mAutoStart ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -965,7 +965,7 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
                                           const GALGAS_taskSetupListAST & in_mTaskDeactivateListAST,
                                           const GALGAS_syncInstructionBranchListAST & in_mGuardedCommandList,
                                           const GALGAS_location & in_mEndOfTaskDeclaration,
-                                          const GALGAS_bool & in_mActivate) ;
+                                          const GALGAS_bool & in_mAutoStart) ;
 
 //-- Start of generic part --*
 
@@ -1003,7 +1003,7 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mActivate (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAutoStart (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfTaskDeclaration (LOCATION_ARGS) const ;
 
@@ -1626,7 +1626,7 @@ class GALGAS_decoratedTaskList : public AC_GALGAS_list {
                                                   const class GALGAS_taskSetupListAST & in_mTaskActivateListAST,
                                                   const class GALGAS_taskSetupListAST & in_mTaskDeactivateListAST,
                                                   const class GALGAS_location & in_mEndOfTaskDeclaration,
-                                                  const class GALGAS_bool & in_mActivate
+                                                  const class GALGAS_bool & in_mAutoStart
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -1759,9 +1759,9 @@ class GALGAS_decoratedTaskList : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mActivateAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAutoStartAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfTaskDeclarationAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                        C_Compiler * inCompiler
@@ -1833,7 +1833,7 @@ class cEnumerator_decoratedTaskList : public cGenericAbstractEnumerator {
   public : class GALGAS_taskSetupListAST current_mTaskActivateListAST (LOCATION_ARGS) const ;
   public : class GALGAS_taskSetupListAST current_mTaskDeactivateListAST (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfTaskDeclaration (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mActivate (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mAutoStart (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_decoratedTaskList_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -4961,7 +4961,7 @@ class GALGAS_decoratedTaskList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_location mProperty_mEndOfTaskDeclaration ;
 
-  public : GALGAS_bool mProperty_mActivate ;
+  public : GALGAS_bool mProperty_mAutoStart ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4985,7 +4985,7 @@ class GALGAS_decoratedTaskList_2D_element : public AC_GALGAS_root {
                                                 const GALGAS_taskSetupListAST & in_mTaskActivateListAST,
                                                 const GALGAS_taskSetupListAST & in_mTaskDeactivateListAST,
                                                 const GALGAS_location & in_mEndOfTaskDeclaration,
-                                                const GALGAS_bool & in_mActivate) ;
+                                                const GALGAS_bool & in_mAutoStart) ;
 
 //-- Start of generic part --*
 
@@ -5021,7 +5021,7 @@ class GALGAS_decoratedTaskList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mActivate (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAutoStart (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfTaskDeclaration (LOCATION_ARGS) const ;
 

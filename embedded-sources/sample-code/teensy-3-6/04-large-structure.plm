@@ -11,12 +11,12 @@ typealias $PatternArray = [PATTERN_LENGTH : $uint32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @stacksize 5512 @activate {
+task Tâche @stacksize 5512 @autostart {
   var compteur $uint32 = 0
   var x = $PatternArray (!repeated:0)
   var y = $PatternArray (!repeated:0)
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
 

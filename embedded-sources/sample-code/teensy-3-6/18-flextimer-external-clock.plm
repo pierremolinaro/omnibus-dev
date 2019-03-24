@@ -106,12 +106,12 @@ driver myDriver ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T1 @stacksize 512 @activate {
+task T1 @stacksize 512 @autostart {
   var échéance $uint32 = 0
   var counter0 $uint32 = 0
   var counter1 $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
     lcd.print (!string:"FTM0:")
     lcd.goto (!line:1 !column:0)

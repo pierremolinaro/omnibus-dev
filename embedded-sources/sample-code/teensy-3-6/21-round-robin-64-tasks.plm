@@ -106,7 +106,7 @@ sync sémaphore62 = $Semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T0 @stacksize 512 @activate {
+task T0 @stacksize 512 @autostart {
   var échéance $uint32 = 0
 
   event time.wait (!until:self.échéance) {
@@ -119,7 +119,7 @@ task T0 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T1 @stacksize 512 @activate {
+task T1 @stacksize 512 @autostart {
   event sémaphore0.wait () {
     sémaphore1.signal ()
   }
@@ -127,7 +127,7 @@ task T1 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T2 @stacksize 512 @activate {
+task T2 @stacksize 512 @autostart {
   event sémaphore1.wait () {
     sémaphore2.signal ()
   }
@@ -135,7 +135,7 @@ task T2 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T3 @stacksize 512 @activate {
+task T3 @stacksize 512 @autostart {
   event sémaphore2.wait () {
     sémaphore3.signal ()
   }
@@ -143,7 +143,7 @@ task T3 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T4 @stacksize 512 @activate {
+task T4 @stacksize 512 @autostart {
   event sémaphore3.wait () {
     sémaphore4.signal ()
   }
@@ -151,7 +151,7 @@ task T4 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T5 @stacksize 512 @activate {
+task T5 @stacksize 512 @autostart {
   event sémaphore4.wait () {
     sémaphore5.signal ()
   }
@@ -159,7 +159,7 @@ task T5 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T6 @stacksize 512 @activate {
+task T6 @stacksize 512 @autostart {
   event sémaphore5.wait () {
     sémaphore6.signal ()
   }
@@ -167,7 +167,7 @@ task T6 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T7 @stacksize 512 @activate {
+task T7 @stacksize 512 @autostart {
   event sémaphore6.wait () {
     sémaphore7.signal ()
   }
@@ -175,7 +175,7 @@ task T7 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T8 @stacksize 512 @activate {
+task T8 @stacksize 512 @autostart {
   event sémaphore7.wait () {
     sémaphore8.signal ()
   }
@@ -183,7 +183,7 @@ task T8 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T9 @stacksize 512 @activate {
+task T9 @stacksize 512 @autostart {
   event sémaphore8.wait () {
     sémaphore10.signal ()
   }
@@ -191,7 +191,7 @@ task T9 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T10 @stacksize 512 @activate {
+task T10 @stacksize 512 @autostart {
   event sémaphore9.wait () {
     sémaphore10.signal ()
   }
@@ -199,7 +199,7 @@ task T10 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T11 @stacksize 512 @activate {
+task T11 @stacksize 512 @autostart {
   event sémaphore10.wait () {
     sémaphore11.signal ()
   }
@@ -207,7 +207,7 @@ task T11 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T12 @stacksize 512 @activate {
+task T12 @stacksize 512 @autostart {
   event sémaphore11.wait () {
     sémaphore12.signal ()
   }
@@ -215,7 +215,7 @@ task T12 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T13 @stacksize 512 @activate {
+task T13 @stacksize 512 @autostart {
   event sémaphore12.wait () {
     sémaphore13.signal ()
   }
@@ -223,7 +223,7 @@ task T13 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T14 @stacksize 512 @activate {
+task T14 @stacksize 512 @autostart {
   event sémaphore13.wait () {
     sémaphore14.signal ()
   }
@@ -231,7 +231,7 @@ task T14 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T15 @stacksize 512 @activate {
+task T15 @stacksize 512 @autostart {
   event sémaphore14.wait () {
     sémaphore15.signal ()
   }
@@ -239,7 +239,7 @@ task T15 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T16 @stacksize 512 @activate {
+task T16 @stacksize 512 @autostart {
   event sémaphore15.wait () {
     sémaphore16.signal ()
   }
@@ -247,7 +247,7 @@ task T16 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T17 @stacksize 512 @activate {
+task T17 @stacksize 512 @autostart {
   event sémaphore16.wait () {
     sémaphore17.signal ()
   }
@@ -255,7 +255,7 @@ task T17 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T18 @stacksize 512 @activate {
+task T18 @stacksize 512 @autostart {
   event sémaphore17.wait () {
     sémaphore18.signal ()
   }
@@ -263,7 +263,7 @@ task T18 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T19 @stacksize 512 @activate {
+task T19 @stacksize 512 @autostart {
   event sémaphore18.wait () {
     sémaphore19.signal ()
   }
@@ -279,7 +279,7 @@ task T20 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T21 @stacksize 512 @activate {
+task T21 @stacksize 512 @autostart {
   event sémaphore20.wait () {
     sémaphore21.signal ()
   }
@@ -287,7 +287,7 @@ task T21 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T22 @stacksize 512 @activate {
+task T22 @stacksize 512 @autostart {
   event sémaphore21.wait () {
     sémaphore22.signal ()
   }
@@ -303,7 +303,7 @@ task T23 @stacksize 512 {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T24 @stacksize 512 @activate {
+task T24 @stacksize 512 @autostart {
   event sémaphore23.wait () {
     sémaphore24.signal ()
   }
@@ -311,7 +311,7 @@ task T24 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T25 @stacksize 512 @activate {
+task T25 @stacksize 512 @autostart {
   event sémaphore24.wait () {
     sémaphore25.signal ()
   }
@@ -319,7 +319,7 @@ task T25 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T26 @stacksize 512 @activate {
+task T26 @stacksize 512 @autostart {
   event sémaphore25.wait () {
     sémaphore26.signal ()
   }
@@ -327,7 +327,7 @@ task T26 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T27 @stacksize 512 @activate {
+task T27 @stacksize 512 @autostart {
   event sémaphore26.wait () {
     sémaphore27.signal ()
   }
@@ -335,7 +335,7 @@ task T27 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T28 @stacksize 512 @activate {
+task T28 @stacksize 512 @autostart {
   event sémaphore27.wait () {
     sémaphore28.signal ()
   }
@@ -343,7 +343,7 @@ task T28 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T29 @stacksize 512 @activate {
+task T29 @stacksize 512 @autostart {
   event sémaphore28.wait () {
     sémaphore29.signal ()
   }
@@ -351,7 +351,7 @@ task T29 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T30 @stacksize 512 @activate {
+task T30 @stacksize 512 @autostart {
   event sémaphore29.wait () {
     sémaphore30.signal ()
   }
@@ -359,7 +359,7 @@ task T30 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T31 @stacksize 512 @activate {
+task T31 @stacksize 512 @autostart {
   event sémaphore30.wait () {
     sémaphore31.signal ()
   }
@@ -367,7 +367,7 @@ task T31 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T32 @stacksize 512 @activate {
+task T32 @stacksize 512 @autostart {
   event sémaphore31.wait () {
     sémaphore32.signal ()
   }
@@ -375,7 +375,7 @@ task T32 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T33 @stacksize 512 @activate {
+task T33 @stacksize 512 @autostart {
   event sémaphore32.wait () {
     sémaphore33.signal ()
   }
@@ -383,7 +383,7 @@ task T33 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T34 @stacksize 512 @activate {
+task T34 @stacksize 512 @autostart {
   event sémaphore33.wait () {
     sémaphore34.signal ()
   }
@@ -391,7 +391,7 @@ task T34 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T35 @stacksize 512 @activate {
+task T35 @stacksize 512 @autostart {
   event sémaphore34.wait () {
     sémaphore35.signal ()
   }
@@ -399,7 +399,7 @@ task T35 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T36 @stacksize 512 @activate {
+task T36 @stacksize 512 @autostart {
   event sémaphore35.wait () {
     sémaphore36.signal ()
   }
@@ -407,7 +407,7 @@ task T36 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T37 @stacksize 512 @activate {
+task T37 @stacksize 512 @autostart {
   event sémaphore36.wait () {
     sémaphore37.signal ()
   }
@@ -415,7 +415,7 @@ task T37 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T38 @stacksize 512 @activate {
+task T38 @stacksize 512 @autostart {
   event sémaphore37.wait () {
     sémaphore38.signal ()
   }
@@ -423,7 +423,7 @@ task T38 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T39 @stacksize 512 @activate {
+task T39 @stacksize 512 @autostart {
   event sémaphore38.wait () {
     sémaphore39.signal ()
   }
@@ -431,7 +431,7 @@ task T39 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T40 @stacksize 512 @activate {
+task T40 @stacksize 512 @autostart {
   event sémaphore39.wait () {
     sémaphore40.signal ()
   }
@@ -439,7 +439,7 @@ task T40 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T41 @stacksize 512 @activate {
+task T41 @stacksize 512 @autostart {
   event sémaphore40.wait () {
     sémaphore41.signal ()
   }
@@ -447,7 +447,7 @@ task T41 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T42 @stacksize 512 @activate {
+task T42 @stacksize 512 @autostart {
   event sémaphore41.wait () {
     sémaphore42.signal ()
   }
@@ -455,7 +455,7 @@ task T42 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T43 @stacksize 512 @activate {
+task T43 @stacksize 512 @autostart {
   event sémaphore42.wait () {
     sémaphore43.signal ()
   }
@@ -463,7 +463,7 @@ task T43 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T44 @stacksize 512 @activate {
+task T44 @stacksize 512 @autostart {
   event sémaphore43.wait () {
     sémaphore44.signal ()
   }
@@ -471,7 +471,7 @@ task T44 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T45 @stacksize 512 @activate {
+task T45 @stacksize 512 @autostart {
   event sémaphore44.wait () {
     sémaphore45.signal ()
   }
@@ -479,7 +479,7 @@ task T45 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T46 @stacksize 512 @activate {
+task T46 @stacksize 512 @autostart {
   event sémaphore45.wait () {
     sémaphore46.signal ()
   }
@@ -487,7 +487,7 @@ task T46 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T47 @stacksize 512 @activate {
+task T47 @stacksize 512 @autostart {
   event sémaphore46.wait () {
     sémaphore47.signal ()
   }
@@ -495,7 +495,7 @@ task T47 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T48 @stacksize 512 @activate {
+task T48 @stacksize 512 @autostart {
   event sémaphore47.wait () {
     sémaphore48.signal ()
   }
@@ -503,7 +503,7 @@ task T48 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T49 @stacksize 512 @activate {
+task T49 @stacksize 512 @autostart {
   event sémaphore48.wait () {
     sémaphore49.signal ()
   }
@@ -511,7 +511,7 @@ task T49 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T50 @stacksize 512 @activate {
+task T50 @stacksize 512 @autostart {
   event sémaphore49.wait () {
     sémaphore50.signal ()
   }
@@ -519,7 +519,7 @@ task T50 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T51 @stacksize 512 @activate {
+task T51 @stacksize 512 @autostart {
   event sémaphore50.wait () {
     sémaphore51.signal ()
   }
@@ -527,7 +527,7 @@ task T51 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T52 @stacksize 512 @activate {
+task T52 @stacksize 512 @autostart {
   event sémaphore51.wait () {
     sémaphore52.signal ()
   }
@@ -535,7 +535,7 @@ task T52 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T53 @stacksize 512 @activate {
+task T53 @stacksize 512 @autostart {
   event sémaphore52.wait () {
     sémaphore53.signal ()
   }
@@ -543,7 +543,7 @@ task T53 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T54 @stacksize 512 @activate {
+task T54 @stacksize 512 @autostart {
   event sémaphore53.wait () {
     sémaphore54.signal ()
   }
@@ -551,7 +551,7 @@ task T54 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T55 @stacksize 512 @activate {
+task T55 @stacksize 512 @autostart {
   event sémaphore54.wait () {
     sémaphore55.signal ()
   }
@@ -559,7 +559,7 @@ task T55 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T56 @stacksize 512 @activate {
+task T56 @stacksize 512 @autostart {
   event sémaphore55.wait () {
     sémaphore56.signal ()
   }
@@ -567,7 +567,7 @@ task T56 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T57 @stacksize 512 @activate {
+task T57 @stacksize 512 @autostart {
   event sémaphore56.wait () {
     sémaphore57.signal ()
   }
@@ -575,7 +575,7 @@ task T57 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T58 @stacksize 512 @activate {
+task T58 @stacksize 512 @autostart {
   event sémaphore57.wait () {
     sémaphore58.signal ()
   }
@@ -583,7 +583,7 @@ task T58 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T59 @stacksize 512 @activate {
+task T59 @stacksize 512 @autostart {
   event sémaphore58.wait () {
     sémaphore59.signal ()
   }
@@ -591,7 +591,7 @@ task T59 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T60 @stacksize 512 @activate {
+task T60 @stacksize 512 @autostart {
   event sémaphore59.wait () {
     sémaphore60.signal ()
   }
@@ -599,7 +599,7 @@ task T60 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T61 @stacksize 512 @activate {
+task T61 @stacksize 512 @autostart {
   event sémaphore60.wait () {
     sémaphore61.signal ()
   }
@@ -607,7 +607,7 @@ task T61 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T62 @stacksize 512 @activate {
+task T62 @stacksize 512 @autostart {
   event sémaphore61.wait () {
     sémaphore62.signal ()
   }
@@ -615,7 +615,7 @@ task T62 @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T63 @stacksize 512 @activate {
+task T63 @stacksize 512 @autostart {
   event sémaphore62.wait () {
     let duration = myDriver.getDuration ()
     lcd.goto (!line:0 !column:0)

@@ -24,10 +24,10 @@ driver RegisterRead ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @stacksize 512 @activate {
+task Tâche @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!string:"OUTDIV: ")

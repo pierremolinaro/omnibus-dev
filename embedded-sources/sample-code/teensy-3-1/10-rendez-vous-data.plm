@@ -41,10 +41,10 @@ sync rdvs2 = $RendezVousData ()
 
 //-----------------------------------------------------------------------------*
 
-task T0 @stacksize 512 @activate {
+task T0 @stacksize 512 @autostart {
   var top $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
@@ -62,7 +62,7 @@ task T0 @stacksize 512 @activate {
 
 //-----------------------------------------------------------------------------*
 
-task T1 @stacksize 1024 @activate {
+task T1 @stacksize 1024 @autostart {
   event rdvs.input (?data:let x) {
     digital.toggle (!port:LED_L1)
     s.wait ()
@@ -74,7 +74,7 @@ task T1 @stacksize 1024 @activate {
 
 //-----------------------------------------------------------------------------*
 
-task T2 @stacksize 1024 @activate {
+task T2 @stacksize 1024 @autostart {
   var deadline $uint32 = 0
   var n $uint32 = 0
 

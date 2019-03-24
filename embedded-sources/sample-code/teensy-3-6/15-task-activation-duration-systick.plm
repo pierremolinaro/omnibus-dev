@@ -25,9 +25,9 @@ sync s = $Semaphore (!value:0)
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task TâcheA > TâcheB @stacksize 512 @activate {
+task TâcheA > TâcheB @stacksize 512 @autostart {
 
-  event @setup first {
+  event @onSetup first {
     s.wait ()
     let duration = myDriver.getDuration ()
     lcd.print (!u32:duration)
@@ -38,9 +38,9 @@ task TâcheA > TâcheB @stacksize 512 @activate {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task TâcheB @stacksize 512 @activate {
+task TâcheB @stacksize 512 @autostart {
 
-  event @setup first {
+  event @onSetup first {
     myDriver.noteTick ()
     s.signal ()
   }

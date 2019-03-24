@@ -5,7 +5,7 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche0 @stacksize 512 @activate {
+task Tâche0 @stacksize 512 @autostart {
   var tick $uint32 = 0
 
   event time.wait (!until: self.tick) {
@@ -18,11 +18,11 @@ task Tâche0 @stacksize 512 @activate {
 
 task Tâche1 @stacksize 512 { // Do not activate
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
   }
 
-  event @activate first {
+  event @onStart first {
     digital.toggle (!port:LED_L0)
   }
 }

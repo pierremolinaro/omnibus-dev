@@ -73,7 +73,7 @@ driver myDriver ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T1 @stacksize 512 @activate {
+task T1 @stacksize 512 @autostart {
   var échéance $uint32 = 0
 
   event time.wait (!until:self.échéance) {

@@ -9,11 +9,11 @@ let slice = N [1 ... 3]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @stacksize 512 @activate {
+task Tâche1 @stacksize 512 @autostart {
   var compteur $uint32 = 0
   var test = yes
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
     let b = {$uint8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))

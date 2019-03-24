@@ -57,6 +57,102 @@ typealias $PatternArray = [PATTERN_LENGTH : $uint32]
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver pit > root {
+
+  //····················································································································
+
+  section initializeDMA (?!pattern $PatternArray) {
+  //--- Transform pattern for encoding level changes
+    var current = no
+    var index $uint32 = 0
+    for élément in kPATTERN {
+      let b = élément.x
+      pattern [index] = if current ≠ b { 0 } else { 1 << 2 }
+      index += 1
+      current = b
+    }
+  //--- Set up LED_BUILTIN digital output at LOW level
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.write (!no !toPort:LED_L4)
+  
+  //--- Power on DMA:MUX, PIT, DMA
+    ©SIM.SCGC6 |= {©SIM.SCGC6 !DMAMUX:1 !PIT:1}
+    ©SIM.SCGC7 |= {©SIM.SCGC7 !DMA:1}
+  
+  //--- Unmask PIT0 interrupt
+    enable (!interrupt:.PITChannel3)
+  
+  //--- Unmask DMAChannel0TransferComplete interrupt
+    enable (!interrupt:.DMAChannel0TransferComplete)
+  
+  //--- Enable PIT module
+    ©PIT.MCR = 0
+  
+  //--- Disable #PIT3
+    ©PIT.TCTRL [3] = 0
+  
+  //--- #PIT0 clock frequency is BUS (in Hertz): #PIT:LDVAL3 sets the request period of DMA 0
+    ©PIT.LDVAL [3] = ((BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
+  
+  //--- Clear #PIT3 interrupt flag
+    ©PIT.TFLG [3] = 1
+  
+  //--- Disable DMA Channel 0: it is required for configuring it
+    ©DMAMUX.CHCFG [3] = 0
+  
+  //--- Initial source address: the pattern array address
+    ©DMA.TCD_SADDR [3] = addressof (pattern)
+  
+  //--- After every request, source address is incremented by 4
+    ©DMA.TCD_SOFF [3] = 4
+  
+  //--- At the end of a major loop, source address is decremented to pattern array address
+    ©DMA.TCD_SLAST [3] = - 4 * PATTERN_LENGTH // - transfert_size * major_loop_count
+  
+  //--- Destination address: the address of the GPIOC_PTOR control register
+    ©DMA.TCD_DADDR [3] = addressof ©GPIOD.PTOR
+  
+  //--- After every request, destination address is not modified
+    ©DMA.TCD_DOFF [3] = 0
+  
+  //--- At the end of a major loop, destination address is not modified
+    ©DMA.TCD_DLASTSGA [3] = 0
+  
+  //--- Set major loop count
+    ©DMA.TCD_CITER_ELINKNO [3] = PATTERN_LENGTH
+    ©DMA.TCD_BITER_ELINKNO [3] = PATTERN_LENGTH
+  
+  //--- Source and destination are 32-bit
+    ©DMA.TCD_ATTR [3] = {©DMA.TCD_ATTR
+      !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit
+      !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit
+    }
+  
+  //--- Number of bytes to transfer per request: 4
+    ©DMA.TCD_NBYTES_MLNO [3] = 4
+  
+  //--- Set repetition and DMA interrupt
+  // if DREQ bit is set, the DMA performs PATTERN_LENGTH transfers and stops)
+  // Otherwise, the DMA performs PATTERN_LENGTH transfers repetitively
+    ©DMA.TCD_CSR [3] = {©DMA.TCD_CSR
+      !INTMAJOR:1 // Generate an interrupt at the end of major loop count transfert (for toggling D4)
+    }
+  
+  //--- Configure DMA Channel
+    ©DMAMUX.CHCFG [3] = {©DMAMUX.CHCFG
+      !ENABLE:1 // DMA Channel 0 is enabled
+      !TRIG:1   // DMA Channel 0 is triggered by #PIT 0
+      !SOURCE:DMAMUX_SOURCE_ALWAYS0 // Trigger is always active
+    }
+  
+  //--- Start DMA Channel 0
+    ©DMA.SERQ = 3
+  
+  //--- Enable #PIT 0 : it starts counting, enable interrupt
+    ©PIT.TCTRL [3] = {©PIT.TCTRL !TEN:1 !TIE:1}
+  }
+
+  //····················································································································
+
   interrupt section PITChannel3 {
   //--- Acquitter l'interruption
     ©PIT.TFLG [3] = {©PIT.TFLG !TIF:1}
@@ -64,117 +160,30 @@ driver pit > root {
     digital.toggle (!port:LED_L3)
   }
 
+  //····················································································································
+
   interrupt section DMAChannel0TransferComplete {
   //--- Acquitter l'interruption
     ©DMA.CINT = 0
   //--- Toggle LED_L2
     digital.toggle (!port:LED_L2)
   }
+  
+  //····················································································································
 }
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver pit ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-section initializeDMA (?!pattern $PatternArray) {
-//--- Transform pattern for encoding level changes
-  var current = no
-  var index $uint32 = 0
-  for élément in kPATTERN {
-    let b = élément.x
-    pattern [index] = if current ≠ b { 0 } else { 1 << 2 }
-    index += 1
-    current = b
-  }
-//--- Set up LED_BUILTIN digital output at LOW level
-  digital.set (!mode:.OUTPUT !toPort:LED_L4)
-  digital.write (!no !toPort:LED_L4)
-
-//--- Power on DMA:MUX, PIT, DMA
-  ©SIM.SCGC6 |= {©SIM.SCGC6 !DMAMUX:1 !PIT:1}
-  ©SIM.SCGC7 |= {©SIM.SCGC7 !DMA:1}
-
-//--- Unmask PIT0 interrupt
-  enable (!interrupt:.PITChannel3)
-
-//--- Unmask DMAChannel0TransferComplete interrupt
-  enable (!interrupt:.DMAChannel0TransferComplete)
-
-//--- Enable PIT module
-  ©PIT.MCR = 0
-
-//--- Disable #PIT3
-  ©PIT.TCTRL [3] = 0
-
-//--- #PIT0 clock frequency is BUS (in Hertz): #PIT:LDVAL3 sets the request period of DMA 0
-  ©PIT.LDVAL [3] = ((BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
-
-//--- Clear #PIT3 interrupt flag
-  ©PIT.TFLG [3] = 1
-
-//--- Disable DMA Channel 0: it is required for configuring it
-  ©DMAMUX.CHCFG [3] = 0
-
-//--- Initial source address: the pattern array address
-  ©DMA.TCD_SADDR [3] = addressof (pattern)
-
-//--- After every request, source address is incremented by 4
-  ©DMA.TCD_SOFF [3] = 4
-
-//--- At the end of a major loop, source address is decremented to pattern array address
-  ©DMA.TCD_SLAST [3] = - 4 * PATTERN_LENGTH // - transfert_size * major_loop_count
-
-//--- Destination address: the address of the GPIOC_PTOR control register
-  ©DMA.TCD_DADDR [3] = addressof ©GPIOD.PTOR
-
-//--- After every request, destination address is not modified
-  ©DMA.TCD_DOFF [3] = 0
-
-//--- At the end of a major loop, destination address is not modified
-  ©DMA.TCD_DLASTSGA [3] = 0
-
-//--- Set major loop count
-  ©DMA.TCD_CITER_ELINKNO [3] = PATTERN_LENGTH
-  ©DMA.TCD_BITER_ELINKNO [3] = PATTERN_LENGTH
-
-//--- Source and destination are 32-bit
-  ©DMA.TCD_ATTR [3] = {©DMA.TCD_ATTR
-    !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit
-    !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit
-  }
-
-//--- Number of bytes to transfer per request: 4
-  ©DMA.TCD_NBYTES_MLNO [3] = 4
-
-//--- Set repetition and DMA interrupt
-// if DREQ bit is set, the DMA performs PATTERN_LENGTH transfers and stops)
-// Otherwise, the DMA performs PATTERN_LENGTH transfers repetitively
-  ©DMA.TCD_CSR [3] = {©DMA.TCD_CSR
-    !INTMAJOR:1 // Generate an interrupt at the end of major loop count transfert (for toggling D4)
-  }
-
-//--- Configure DMA Channel
-  ©DMAMUX.CHCFG [3] = {©DMAMUX.CHCFG
-    !ENABLE:1 // DMA Channel 0 is enabled
-    !TRIG:1   // DMA Channel 0 is triggered by #PIT 0
-    !SOURCE:DMAMUX_SOURCE_ALWAYS0 // Trigger is always active
-  }
-
-//--- Start DMA Channel 0
-  ©DMA.SERQ = 3
-
-//--- Enable #PIT 0 : it starts counting, enable interrupt
-  ©PIT.TCTRL [3] = {©PIT.TCTRL !TEN:1 !TIE:1}
-}
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-task Tâche @stacksize 512 @activate {
+task Tâche @stacksize 512 @autostart {
   var compteur $uint32 = 0
   var pattern = $PatternArray (!repeated:0)
 
-  event @setup first {
-    initializeDMA (!?self.pattern)
+  event @onSetup first {
+    pit.initializeDMA (!?self.pattern)
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L3)
     digital.set (!mode:.OUTPUT !toPort:LED_L2)
@@ -187,10 +196,10 @@ task Tâche @stacksize 512 @activate {
     digital.write (!no !toPort:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.print (!u32:self.pattern.count)
+    lcd.print (!u32: self.pattern.count)
     lcd.print (!string:" ")
     let cc = $ISRSlot.PITChannel3.uint7
-    lcd.print (!u32:extend (cc))
+    lcd.print (!u32: extend (cc))
   }
 }
 

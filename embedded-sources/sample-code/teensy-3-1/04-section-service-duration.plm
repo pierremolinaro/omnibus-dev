@@ -24,11 +24,11 @@ let ITERATIONS = 7
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T @stacksize 512 @activate {
+task T @stacksize 512 @autostart {
 
   //············································································
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:.D13)
     var cumul $uint32 = 0
   //--- Compute getSysTick duration

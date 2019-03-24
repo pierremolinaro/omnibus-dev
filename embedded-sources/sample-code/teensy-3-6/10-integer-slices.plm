@@ -5,11 +5,11 @@ import "carte-tp-teensy-3-6.plm-import"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @stacksize 512 @activate {
+task Tâche1 @stacksize 512 @autostart {
   var compteur $uint32 = 0
   var test = yes
 
-  event @setup first {
+  event @onSetup first {
     let b = {$uint8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))
     lcd.print (!spaces:1)

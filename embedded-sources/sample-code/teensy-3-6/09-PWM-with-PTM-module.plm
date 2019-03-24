@@ -55,10 +55,10 @@ driver PWMOutput ()
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche1 @stacksize 512 @activate {
+task Tâche1 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L4)
   }
 

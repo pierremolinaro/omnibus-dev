@@ -37,11 +37,11 @@ sync $PeriodicTimer {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task Tâche @stacksize 512 @activate {
+task Tâche @stacksize 512 @autostart {
   var compteur $uint32 = 0
   var deadline = PeriodicTimer (!period:500)
 
-  event @setup first {
+  event @onSetup first {
     digital.set (!mode:.OUTPUT !toPort:LED_L0)
     digital.set (!mode:.OUTPUT !toPort:LED_L1)
   }

@@ -38,10 +38,10 @@ driver pit ()
 
 //------------------------------------------------*
 
-task T @stacksize 512 @activate {
+task T @stacksize 512 @autostart {
   var deadline $uint32 = 0
 
-  event @setup first {
+  event @onSetup first {
     setupPIT ()
   }
 
