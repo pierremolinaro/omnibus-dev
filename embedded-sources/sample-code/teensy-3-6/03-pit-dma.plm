@@ -29,8 +29,8 @@ let PATTERN_FREQUENCY = 5 // In Hertz
 staticArray kPATTERN { let x $bool }
 
 extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
-  yes :: no :: yes :: no :: yes :: // 3 dots : letter S
-  no :: no :: no :: no :: no :: no :: no // Medium gap betwween words
+  !yes, !no, !yes, !no, !yes, // 3 dots : letter S
+  !no, !no, !no, !no, !no, !no, !no // Medium gap betwween words
 )
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————

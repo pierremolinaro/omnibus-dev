@@ -111,9 +111,12 @@ syntax extension plm_syntax {
     repeat
       @extendStaticListElementAST expressions = {}
       repeat
+        $!selector:$ ?let selector
+        if selector.string != "" then
+          error selector : "selector should be empty"
+        end
         <staticArray_exp> !?ioAST !?expressions
       while
-        $,$
       end
       @staticListValueListAST expressionList = {}
       if [ioAST.mExtendStaticArrayDeclarationAST hasKey !staticListName] then
@@ -122,7 +125,7 @@ syntax extension plm_syntax {
       expressionList += !expressions !.here
       ioAST.mExtendStaticArrayDeclarationAST += !staticListName !expressionList
     while
-      $::$
+      $,$
     end
     $)$
   }
