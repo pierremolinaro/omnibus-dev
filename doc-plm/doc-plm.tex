@@ -35,7 +35,7 @@
 \usepackage{fontspec}
 %\setmainfont[Ligatures=TeX, Scale=1.1]{Gill Sans} % {Palatino} % {Optima} % {Hoefler Text}
 \setmainfont[Ligatures=TeX]{Titillium}
-\setsansfont[Ligatures={NoCommon}]{Courier}
+\setsansfont[Ligatures=NoCommon]{Courier}
 \setmonofont[Ligatures=NoCommon, Scale=0.9]{Menlo}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
@@ -44,7 +44,7 @@
 
 % http://forum.mathematex.net/latex-f6/supprimer-les-espaces-devant-la-ponctuation-t15951.html
 \makeatletter
-\newcommand{\nospace}[1]{\nofrench@punctuation\texttt{#1}}
+\newcommand{\zeroEspaceAvantPonctuation}[1]{\nofrench@punctuation{#1}\french@punctuation}
 \makeatother
 
 %-----------------------------------------------------------------------------------------------------------------------*
@@ -490,7 +490,7 @@
 \newcommand\commentStyleplm[1]{\textcolor{red}{#1}}
 \newcommand\selectorStyleplm[1]{\textcolor{PineGreen}{#1}}
 \newcommand\typeStyleplm[1]{\textcolor{violet}{#1}}
-\newcommand\groupNameStyleplm[1]{\textcolor{ProcessBlue}{#1}}
+\newcommand\groupStyleplm[1]{\textcolor{ProcessBlue}{#1}}
 
 \newcommand\characterStyleplm[1]{\textcolor{orange}{#1}}
 \newcommand\stringStyleplm[1]{\textcolor{gray}{#1}}
@@ -530,9 +530,9 @@
   \immediate\write18{plm --mode=latex:plm temp.plm}
   \setstretch{1.2}
   \ifthenelse{\equal{\ParametrePLM}{0}}{
-    {\begin{siderules}\ttfamily\input{temp.plm.tex}\end{siderules}}
+    {\begin{siderules}\zeroEspaceAvantPonctuation{\ttfamily\input{temp.plm.tex}}\end{siderules}}
   }{
-    {\begin{linenumbers}\resetlinenumber[\ParametrePLM]\ttfamily\input{temp.plm.tex}\end{linenumbers}}
+    {\begin{linenumbers}\resetlinenumber[\ParametrePLM]\zeroEspaceAvantPonctuation{\ttfamily\input{temp.plm.tex}}\end{linenumbers}}
   }
 }
 \makeatother
@@ -575,7 +575,7 @@
       \immediate\write\tempfile{##1}%
       \immediate\closeout\tempfile%
       \immediate\write18{plm --mode=latex:plm temp.plm}%
-      \colorbox{gray!6}{\ttfamily\input{temp.plm.tex}\unskip}%
+      \colorbox{gray!6}{\zeroEspaceAvantPonctuation{\ttfamily\input{temp.plm.tex}}\unskip}%
     }%
   }%
   \ifnum`#2=`\~\else\@makeother\~\fi%

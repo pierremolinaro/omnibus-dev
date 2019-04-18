@@ -682,9 +682,9 @@ Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{ud
 
 Trois séquences sont remplacées par le compilateur PLM~:
 \begin{itemize}
-\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
-\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma)~;
-\item \nospace{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \nospace{!IDX!}.}.
+\item \zeroEspaceAvantPonctuation{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
+\item \zeroEspaceAvantPonctuation{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma)~;
+\item \zeroEspaceAvantPonctuation{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \zeroEspaceAvantPonctuation{!IDX!}.}.
 \end{itemize}
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
@@ -740,7 +740,7 @@ Ensuite, PLM va utiliser le fichier \texttt{udfcoded-section-dispatcher-entry.s}
 
 \end{SHELL}
 
-PLM effectue pour chaque section les substitutions de \nospace{!IMPLEMENTATION\_ROUTINE!}, de \nospace{!USER\_ROUTINE!} et de \nospace{!IDX!}, par ordre croissant de l'indice, en ajoutant le texte produit à la fin du fichier assembleur \texttt{src.s}.
+PLM effectue pour chaque section les substitutions de \zeroEspaceAvantPonctuation{!IMPLEMENTATION\_ROUTINE!}, de \zeroEspaceAvantPonctuation{!USER\_ROUTINE!} et de \zeroEspaceAvantPonctuation{!IDX!}, par ordre croissant de l'indice, en ajoutant le texte produit à la fin du fichier assembleur \texttt{src.s}.
 
 
 
@@ -778,9 +778,9 @@ Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r1
 
 Trois séquences sont remplacées par le compilateur PLM~:
 \begin{itemize}
-\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
-\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma)~;
-\item \nospace{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \nospace{!IDX!}.}.
+\item \zeroEspaceAvantPonctuation{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
+\item \zeroEspaceAvantPonctuation{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma)~;
+\item \zeroEspaceAvantPonctuation{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \zeroEspaceAvantPonctuation{!IDX!}.}.
 \end{itemize}
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
@@ -832,7 +832,7 @@ Ensuite, PLM va utiliser le fichier \texttt{r12idx-section-dispatcher-entry.s} p
 
 \end{SHELL}
 
-PLM effectue pour chaque section les substitutions de \nospace{!IMPLEMENTATION\_ROUTINE!}, de \nospace{!USER\_ROUTINE!} et de \nospace{!IDX!}, par ordre croissant de l'indice, en ajoutant le texte produit à la fin du fichier assembleur \texttt{src.s}.
+PLM effectue pour chaque section les substitutions de \zeroEspaceAvantPonctuation{!IMPLEMENTATION\_ROUTINE!}, de \zeroEspaceAvantPonctuation{!USER\_ROUTINE!} et de \zeroEspaceAvantPonctuation{!IDX!}, par ordre croissant de l'indice, en ajoutant le texte produit à la fin du fichier assembleur \texttt{src.s}.
 
 
 
@@ -872,9 +872,9 @@ Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r1
 
 Trois séquences sont remplacées par le compilateur PLM~:
 \begin{itemize}
-\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
-\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section~;
-\item \nospace{!IDX!}, par l'indice de la section (inutilisé dans ce shéma).
+\item \zeroEspaceAvantPonctuation{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
+\item \zeroEspaceAvantPonctuation{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section~;
+\item \zeroEspaceAvantPonctuation{!IDX!}, par l'indice de la section (inutilisé dans ce shéma).
 \end{itemize}
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
