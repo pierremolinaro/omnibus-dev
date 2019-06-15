@@ -17,7 +17,7 @@ block safe primitive (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 //--- Make task Ready
 extern func
 makeTaskReady safe service (?!fromList:ioWaitingList $TaskList
-               !found: outFound $bool) : "makeTaskReady"
+                            !found: outFound $bool) : "makeTaskReady"
 
 extern func
 makeTasksReady safe service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
