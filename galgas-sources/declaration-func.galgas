@@ -205,7 +205,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
       !routineLLVMNameDict
       !exportedFunction
       !function.mMode
-#      !.regular
     ]
   #---------------- Add decorated declaration
     ioDecoratedRoutineList +=

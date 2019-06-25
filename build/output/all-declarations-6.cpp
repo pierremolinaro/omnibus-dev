@@ -9382,10 +9382,10 @@ void extensionSetter_addPropertyGetter (GALGAS_propertyGetterMap & ioObject,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
-  outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func.galgas", 344)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 344)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func.galgas", 344))  COMMA_SOURCE_FILE ("declaration-func.galgas", 344)) ;
-  GALGAS_routineLLVMNameDict var_modeDictionary_12182 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 345)) ;
+  outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func.galgas", 343)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 343)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func.galgas", 343))  COMMA_SOURCE_FILE ("declaration-func.galgas", 343)) ;
+  GALGAS_routineLLVMNameDict var_modeDictionary_12165 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func.galgas", 344)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 344)) ;
   {
-  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_12182  COMMA_SOURCE_FILE ("declaration-func.galgas", 349)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 346)) ;
+  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_12165  COMMA_SOURCE_FILE ("declaration-func.galgas", 348)), inCompiler COMMA_SOURCE_FILE ("declaration-func.galgas", 345)) ;
   }
 }
 
