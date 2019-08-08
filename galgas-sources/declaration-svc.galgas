@@ -169,11 +169,12 @@ method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTy
 #!   UTILITIES                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
-                                  ?let @routineKind inKind
-                                  ?let @lstring inGuardName
-                                  ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
-{
+private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
+                                          ?let @routineKind inKind
+                                          ?let @lstring inGuardName
+                                          ?let @routineFormalArgumentListAST inFormalArgumentList
+#                                          ?let @unifiedTypeMap inTypeMap
+-> @lstring {
   @string s
   switch inKind 
   case section :
@@ -193,6 +194,7 @@ func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
   s += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+#    [inTypeMap searchKey !lkey:formalArgumentTypeName ?1*]
   end
   s += ")"
   result = .new {!s !inGuardName.location}
@@ -268,6 +270,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !routineKind
       !system.mName
       !system.mFormalArgumentList
+#      !ioContext.mTypeMap
     )
     let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
       !inReceiverLLVMBaseTypeName

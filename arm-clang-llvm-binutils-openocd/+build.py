@@ -8,7 +8,7 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "8.0.0"
+LLVM_VERSION = "7.0.1"
 LLVM_SUFFIX = ""
 
 BINUTILS_VERSION = "2.32"
@@ -189,16 +189,18 @@ CLANG_ARCHIVE_PATH = ARCHIVE_DIR + "/" + CLANG + ".tar.xz"
 # LLD_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LLD + ".tar.xz"
 # COMPILER_RT = "compiler-rt-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
 # COMPILER_RT_ARCHIVE_PATH = ARCHIVE_DIR + "/" + COMPILER_RT + ".tar.xz"
-if LLVM_SUFFIX == "" :
-  LLVM_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + LLVM + ".tar.xz"
-  CLANG_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + CLANG + ".tar.xz"
-#   LLD_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + LLD + ".tar.xz"
-#   COMPILER_RT_URL = "http://llvm.org/releases/" + LLVM_VERSION + "/" + COMPILER_RT + ".tar.xz"
+#--- Téléchargement : la base des URL des archives LLVM change régulièrement !
+if (LLVM_VERSION == "8.0.1") or (LLVM_VERSION == "7.1.0") :
+  BASE_URL = "https://github.com/llvm/llvm-project/releases/download/llvmorg-"
+elif (LLVM_VERSION == "8.0.0") or (LLVM_VERSION == "7.0.1") or (LLVM_VERSION == "7.0.0") :
+  BASE_URL = "http://releases.llvm.org/"
 else:
-  LLVM_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + LLVM + ".tar.xz"
-  CLANG_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + CLANG + ".tar.xz"
-#   LLD_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + LLD + ".tar.xz"
-#   COMPILER_RT_URL = "http://llvm.org/pre-releases/" + LLVM_VERSION + "/" + LLVM_SUFFIX + "/" + COMPILER_RT + ".tar.xz"
+  print (bcolors.BOLD_RED + "Verion " + LLVM_VERSION + " non prise en charge" + bcolors.ENDC)
+  sys.exit (1)
+LLVM_URL = BASE_URL + LLVM_VERSION + "/" + LLVM + ".tar.xz"
+CLANG_URL = BASE_URL + LLVM_VERSION + "/" + CLANG + ".tar.xz"
+#   LLD_URL = BASE_URL + LLVM_VERSION + "/" + LLD + ".tar.xz"
+#   COMPILER_RT_URL = BASE_URL + LLVM_VERSION + "/" + COMPILER_RT + ".tar.xz"
 print  bcolors.BOLD_GREEN + "-------------- Download archives" + bcolors.ENDC
 downloadArchive (LLVM_URL, LLVM_ARCHIVE_PATH, startTime)
 downloadArchive (CLANG_URL, CLANG_ARCHIVE_PATH, startTime)

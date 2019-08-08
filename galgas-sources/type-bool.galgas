@@ -15,9 +15,7 @@ override getter @booleanDeclarationAST locationForErrorSignaling -> @location ou
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override method @booleanDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode ![boolTypeName () nowhere] !self]
   [!?ioGraph noteNode !["uint1" nowhere]]
 }

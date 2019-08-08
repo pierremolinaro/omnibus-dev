@@ -112,20 +112,20 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    $sync$
+    $event$
     let startLocation = @location.here
-    ${$
-    @syncInstructionBranchListAST onInstructionBranchList = {}
+    @syncInstructionBranchListAST instructionBranchList = {}
     repeat
-      $event$
       <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
-      $:$
+      ${$
       <instructionList> !?ioAST ?let instructionList
-      onInstructionBranchList += !guardedCommand !instructionList !.here
+      instructionBranchList += !guardedCommand !instructionList !.here
+      $}$
     while
+      $else$
+      $event$
     end
-    ioInstructionList += !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
-    $}$
+    ioInstructionList += !@syncInstructionAST.new {!startLocation !instructionBranchList !.here}
   }
   
   #·····················································································································

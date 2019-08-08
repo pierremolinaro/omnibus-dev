@@ -3674,6 +3674,27 @@ class GALGAS_instructionListListIR_2D_element : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListListIR_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              Extension method '@abstractDeclarationAST typeInventory'                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_abstractDeclarationAST_typeInventory) (const class cPtr_abstractDeclarationAST * inObject,
+                                                                               class C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_typeInventory (const int32_t inClassIndex,
+                                         extensionMethodSignature_abstractDeclarationAST_typeInventory inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_typeInventory (const class cPtr_abstractDeclarationAST * inObject,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //  GRAMMAR plm_grammar
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

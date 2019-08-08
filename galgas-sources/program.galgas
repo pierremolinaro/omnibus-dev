@@ -28,8 +28,7 @@ grammar plm_grammar
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
-{
+proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
   @ast ast = .default
   grammar plm_grammar in inSourceFile
@@ -150,6 +149,8 @@ private proc compileProject
       message "    Duration: " + [t string] + "\n" 
     end
   end
+#------------------------------------------------------------ Type inventory
+  typeInventory (!orderedDeclarationListAST)
 #------------------------------------------------------------ Check "check target" declarations
   if @uint.errorCount == 0 then
     for (targetLocation acceptedTargetList) in ast.mCheckTargetListAST do

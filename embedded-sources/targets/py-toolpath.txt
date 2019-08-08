@@ -13,8 +13,8 @@ def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-8.0.0-binutils-2.32-openocd-0.10.0-libusb-1.0.22")
- # return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-7.0.1-binutils-2.31.1-openocd-0.10.0-libusb-1.0.22")
- # return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-6.0.1-binutils-2.31.1-openocd-0.10.0-libusb-1.0.22")
+  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-8.0.1-binutils-2.32-openocd-0.10.0-libusb-1.0.22")
+ # return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-8.0.0-binutils-2.32-openocd-0.10.0-libusb-1.0.22")
+ # return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-7.0.1-binutils-2.32-openocd-0.10.0-libusb-1.0.22")
 
 #----------------------------------------------------------------------------------------------------------------------*

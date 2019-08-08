@@ -102,7 +102,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-nop.galgas"
   "galgas-sources/instruction-panic.galgas"
   "galgas-sources/instruction-if.galgas"
-  "galgas-sources/instruction-sync.galgas"
+  "galgas-sources/instruction-event.galgas"
   "galgas-sources/instruction-while.galgas"
   "galgas-sources/instruction-for-in-do.galgas"
   "galgas-sources/instruction-for-in-lower-upper-bounds.galgas"
@@ -162,6 +162,7 @@ project (1:0:0) -> "plm" {
 
 #--- Program
   "galgas-sources/program.galgas"
+  "galgas-sources/type-inventory.galgas"
   "galgas-sources/embedded-sample-code.galgas"
 }
 

@@ -1689,9 +1689,10 @@ const char * gWrapperFileContent_25_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  public func wait @noUnusedWarning @mutating (\?until: inDeadline $uint32) -> $bool {\n"
-  "     sync{\n"
-  "     event self.wait () exit : result = yes\n"
-  "     event time.wait (!until: inDeadline) exit : result = no\n"
+  "     event self.wait () exit {\n"
+  "       result = yes\n"
+  "     }else event time.wait (!until: inDeadline) exit {\n"
+  "       result = no\n"
   "     }\n"
   "   }\n"
   "\n"
@@ -1717,7 +1718,7 @@ const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "plm-semaphore.plm-import",
   "plm-import",
   true, // Text file
-  1707, // Text length
+  1716, // Text length
   gWrapperFileContent_25_targetTemplates
 ) ;
 
@@ -3299,9 +3300,9 @@ const char * gWrapperFileContent_26_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-8.0.0-binutils-2.32-openocd-0.10.0-libusb-1.0.22\")\n"
-  " # return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-7.0.1-binutils-2.31.1-openocd-0.10.0-libusb-1.0.22\")\n"
-  " # return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-6.0.1-binutils-2.31.1-openocd-0.10.0-libusb-1.0.22\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-8.0.1-binutils-2.32-openocd-0.10.0-libusb-1.0.22\")\n"
+  " # return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-8.0.0-binutils-2.32-openocd-0.10.0-libusb-1.0.22\")\n"
+  " # return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-7.0.1-binutils-2.32-openocd-0.10.0-libusb-1.0.22\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -3309,7 +3310,7 @@ const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "py-toolpath.txt",
   "txt",
   true, // Text file
-  1222, // Text length
+  1218, // Text length
   gWrapperFileContent_26_targetTemplates
 ) ;
 
@@ -4486,7 +4487,8 @@ const char * gWrapperFileContent_47_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def archiveBaseURL ():\n"
-  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
+  "  return \"http://www.pcmolinaro.name/plm-tools/\"\n"
+  "#  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -4701,7 +4703,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15588, // Text length
+  15638, // Text length
   gWrapperFileContent_47_targetTemplates
 ) ;
 
@@ -8400,7 +8402,8 @@ const char * gWrapperFileContent_64_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def archiveBaseURL ():\n"
-  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
+  "  # return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
+  "  return \"http://www.pcmolinaro.name/plm-tools/\"\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -8615,7 +8618,7 @@ const cRegularFileWrapper gWrapperFile_64_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15570, // Text length
+  15621, // Text length
   gWrapperFileContent_64_targetTemplates
 ) ;
 
@@ -14566,7 +14569,8 @@ const char * gWrapperFileContent_105_targetTemplates = "#! /usr/bin/env python\n
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def archiveBaseURL ():\n"
-  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
+  "  return \"http://www.pcmolinaro.name/plm-tools/\"\n"
+  "#  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -14781,7 +14785,7 @@ const cRegularFileWrapper gWrapperFile_105_targetTemplates (
   "py-build.txt",
   "txt",
   true, // Text file
-  15540, // Text length
+  15590, // Text length
   gWrapperFileContent_105_targetTemplates
 ) ;
 

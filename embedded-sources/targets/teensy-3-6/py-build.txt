@@ -14,7 +14,8 @@ import toolpath
 #----------------------------------------------------------------------------------------------------------------------*
 
 def archiveBaseURL ():
-  return "http://crossgcc.rts-software.org/downloads/plm-tools/"
+  return "http://www.pcmolinaro.name/plm-tools/"
+#  return "http://crossgcc.rts-software.org/downloads/plm-tools/"
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
