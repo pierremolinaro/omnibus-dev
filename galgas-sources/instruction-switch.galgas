@@ -76,7 +76,7 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @switchInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -111,7 +111,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
 #    [[switchValueIR type].kind enumeration ?constantMap:enumConstantMap ?2*]
 #  else
     error mEndOf_test_expression
-      : "test expression type is '" + [switchValueIR plmTypeDescriptionName] + "', it should be boolean"
+      : "test expression type is '" + [switchValueIR omnibusTypeDescriptionName] + "', it should be boolean"
 #      : enumConstantMap
   end
   if [switchValueIR isStatic] then

@@ -117,14 +117,14 @@ method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePr
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @LValueRepresentation {
-  @PLMType type
+  @omnibusType type
   @string llvmName
 }
 
 #·······················································································································
 
 method @LValueAST analyzeLValue
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?forAddressOf:let @bool inIsAddressOf
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -171,7 +171,7 @@ method @LValueAST analyzeLValue
       error mIdentifier : "a local constant cannot be written" : outInternalRepresentation
     case globalSyncInstance (2*) :
       error mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation
-    case localVariable (@PLMType variableType @lstring plmName) :
+    case localVariable (@omnibusType variableType @lstring omnibusName) :
       analyzeVariableInLValue (
         !self: inSelfType
         !readAccess:inIsAddressOf
@@ -184,7 +184,7 @@ method @LValueAST analyzeLValue
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
         !variableName: mIdentifier
-        !llvmName:llvmNameForLocalVariable (!plmName)
+        !llvmName:llvmNameForLocalVariable (!omnibusName)
         !type: variableType
         !mOperand
         ?outInternalRepresentation
@@ -196,7 +196,7 @@ method @LValueAST analyzeLValue
 #·······················································································································
 
 private proc analyzeVariableInLValue
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?readAccess:let @bool inIsReadAccess # If false, write access
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -208,7 +208,7 @@ private proc analyzeVariableInLValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableName:let @lstring inVariableName
   ?llvmName:let @string inLLVMName
-  ?type:let @PLMType inVariableType
+  ?type:let @omnibusType inVariableType
   ?let @LValueOperandAST inOperand
   !@LValueRepresentation outInternalRepresentation
 {
@@ -272,8 +272,8 @@ private proc analyzeVariableInLValue
 #·······················································································································
 
 private proc handlePropertyAccess
-  ?self:let @PLMType inSelfType
-  ?!@PLMType ioCurrentType
+  ?self:let @omnibusType inSelfType
+  ?!@omnibusType ioCurrentType
   ?!@string ioCurrentLLVMName
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -291,7 +291,7 @@ private proc handlePropertyAccess
   switch propertyAccess
   case computedProperty (3*) :
     error inPropertyName : "a computed property cannot be used here" : ioCurrentType, ioCurrentLLVMName
-  case storedProperty (@PLMType propertyType @uint index) :
+  case storedProperty (@omnibusType propertyType @uint index) :
     [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
       !ioCurrentType
@@ -322,8 +322,8 @@ private proc handlePropertyAccess
 #·······················································································································
 
 private proc handleArrayAccess
-  ?self:let @PLMType inSelfType
-  ?!@PLMType ioCurrentType
+  ?self:let @omnibusType inSelfType
+  ?!@omnibusType ioCurrentType
   ?!@string ioCurrentLLVMName
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -341,12 +341,12 @@ private proc handleArrayAccess
   switch ioCurrentType.subscript
   case noSubscript :
     error inEndOfIndex
-    : "the receiver type is " + [ioCurrentType plmTypeDescriptionName] + " and does not accept subscripting"
+    : "the receiver type is " + [ioCurrentType omnibusTypeDescriptionName] + " and does not accept subscripting"
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
     : ioCurrentType, ioCurrentLLVMName
-  case staticSubscript (@PLMType elementType @bigint arraySize) :
+  case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -394,7 +394,7 @@ private proc handleArrayAccess
 #·······················································································································
 
 private proc analyzeSelfLValue
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -451,8 +451,8 @@ private proc analyzeSelfLValue
 #·······················································································································
 
 private proc handleNextOperand
-  ?self:let @PLMType inSelfType
-  ?!@PLMType ioCurrentType
+  ?self:let @omnibusType inSelfType
+  ?!@omnibusType ioCurrentType
   ?!@string ioCurrentLLVMName
   ?let @LValueOperandAST inOperand
   ?routineAttributes:let @routineAttributes inRoutineAttributes

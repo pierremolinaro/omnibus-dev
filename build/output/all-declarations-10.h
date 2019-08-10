@@ -66,7 +66,7 @@ void routine_declareLLVMTypes (const class GALGAS_userLLVMTypeDefinitionListIR c
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_getNewTempReference (const class GALGAS_PLMType constinArgument0,
+void routine_getNewTempReference (const class GALGAS_omnibusType constinArgument0,
                                   class GALGAS_semanticTemporariesStruct & ioArgument1,
                                   class GALGAS_objectIR & outArgument2,
                                   class C_Compiler * inCompiler
@@ -316,7 +316,7 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeConstructorCall (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeConstructorCall (const class GALGAS_omnibusType constinArgument0,
                                      const class GALGAS_lstring constinArgument1,
                                      const class GALGAS_effectiveArgumentListAST constinArgument2,
                                      const class GALGAS_routineAttributes constinArgument3,
@@ -337,7 +337,7 @@ void routine_analyzeConstructorCall (const class GALGAS_PLMType constinArgument0
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeRegularFunctionCall (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeRegularFunctionCall (const class GALGAS_omnibusType constinArgument0,
                                          const class GALGAS_lstring constinArgument1,
                                          const class GALGAS_effectiveArgumentListAST constinArgument2,
                                          const class GALGAS_lstring constinArgument3,
@@ -359,8 +359,8 @@ void routine_analyzeRegularFunctionCall (const class GALGAS_PLMType constinArgum
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handleArrayAccessInAssignment (const class GALGAS_PLMType constinArgument0,
-                                            class GALGAS_PLMType & ioArgument1,
+void routine_handleArrayAccessInAssignment (const class GALGAS_omnibusType constinArgument0,
+                                            class GALGAS_omnibusType & ioArgument1,
                                             class GALGAS_string & ioArgument2,
                                             const class GALGAS_routineAttributes constinArgument3,
                                             const class GALGAS_semanticContext constinArgument4,
@@ -384,8 +384,8 @@ void routine_handleArrayAccessInAssignment (const class GALGAS_PLMType constinAr
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handlePropertyAccessInAssignment (const class GALGAS_PLMType constinArgument0,
-                                               class GALGAS_PLMType & ioArgument1,
+void routine_handlePropertyAccessInAssignment (const class GALGAS_omnibusType constinArgument0,
+                                               class GALGAS_omnibusType & ioArgument1,
                                                class GALGAS_string & ioArgument2,
                                                const class GALGAS_routineAttributes constinArgument3,
                                                const class GALGAS_semanticContext constinArgument4,
@@ -407,8 +407,8 @@ void routine_handlePropertyAccessInAssignment (const class GALGAS_PLMType consti
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handleNextOperandInAssignment (const class GALGAS_PLMType constinArgument0,
-                                            class GALGAS_PLMType & ioArgument1,
+void routine_handleNextOperandInAssignment (const class GALGAS_omnibusType constinArgument0,
+                                            class GALGAS_omnibusType & ioArgument1,
                                             class GALGAS_string & ioArgument2,
                                             const class GALGAS_LValueOperandAST constinArgument3,
                                             const class GALGAS_routineAttributes constinArgument4,

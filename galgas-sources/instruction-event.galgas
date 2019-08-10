@@ -147,7 +147,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -176,7 +176,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?instructionListIR:guardInstructionGenerationList
         ?result:@objectIR sourceOperand
       ]
-      if [sourceOperand plmTypeDescriptionName] != boolTypeName () then
+      if [sourceOperand omnibusTypeDescriptionName] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
       elsif [sourceOperand isStatic] then
         warning endOfExpression : "guarded expression is static"
@@ -206,7 +206,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:@objectIR boolExpressionResult
       ]
-      if [boolExpressionResult plmTypeDescriptionName] != boolTypeName () then
+      if [boolExpressionResult omnibusTypeDescriptionName] != boolTypeName () then
         error endOfExp : "guarded expression should be boolean"
       elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
         warning endOfExp : "guarded expression is static"
@@ -345,7 +345,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc analyzeGuardCall
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?receiver:let @objectIR inReceiver
   ?guardName:let @lstring inGuardName

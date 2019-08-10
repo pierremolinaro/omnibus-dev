@@ -22,10 +22,10 @@ setter @instructionListIR appendCopyFromReferences
     [!?self appendStoreToUniversalReference !inTargetReference.llvmName !inTargetReference.type !result]
   else # Call a copy routine
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
-    if sourceType.plmTypeDescriptionName != inTargetReference.type.plmTypeDescriptionName then
+    if sourceType.omnibusTypeDescriptionName != inTargetReference.type.omnibusTypeDescriptionName then
       error inErrorLocation
-      : "object of type " + inTargetReference.type.plmTypeDescriptionName
-        + " cannot be assigned from expression of type " + sourceType.plmTypeDescriptionName
+      : "object of type " + inTargetReference.type.omnibusTypeDescriptionName
+        + " cannot be assigned from expression of type " + sourceType.omnibusTypeDescriptionName
     end
     self += !@copyFromReferencesIR.new {!inTargetReference !sourceLLVMName}
   end

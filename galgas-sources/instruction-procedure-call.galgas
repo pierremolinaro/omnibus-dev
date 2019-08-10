@@ -147,13 +147,13 @@ getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstri
 list @procEffectiveParameterList {
   @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
   @lstring mSelector
-  @PLMType mParameterType
+  @omnibusType mParameterType
 }
 
 #·······················································································································
 
 override method @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -226,7 +226,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 #·······················································································································
 
 override method @procedureCallInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -238,7 +238,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
 {
 #--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
 #    If identifier is empty string, the receiver is "self"
-  @PLMType currentType
+  @omnibusType currentType
   @string currentLLVMAddressVar
   if mIdentifier.string == "" then # Receiver is self
     if inSelfType.kind == .void then
@@ -250,10 +250,10 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   else
     [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
     switch entity
-    case task (@PLMType type) :
+    case task (@omnibusType type) :
       currentType = type
       currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
-    case driver (@PLMType type instancied) :
+    case driver (@omnibusType type instancied) :
       if instancied then
         currentType = type
         currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
@@ -264,15 +264,15 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       error mIdentifier
         : "a global constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
-    case localConstant (@PLMType type @lstring plmName *) :
+    case localConstant (@omnibusType type @lstring omnibusName *) :
       currentType = type
-      currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
-    case localVariable (@PLMType type @lstring plmName) :
+      currentLLVMAddressVar = llvmNameForLocalVariable (!omnibusName)
+    case localVariable (@omnibusType type @lstring omnibusName) :
       currentType = type
-      currentLLVMAddressVar = llvmNameForLocalVariable (!plmName)
-    case globalSyncInstance (@PLMType type @lstring plmName) :
+      currentLLVMAddressVar = llvmNameForLocalVariable (!omnibusName)
+    case globalSyncInstance (@omnibusType type @lstring omnibusName) :
       currentType = type
-      currentLLVMAddressVar = llvmNameForGlobalSyncInstance (!plmName)
+      currentLLVMAddressVar = llvmNameForGlobalSyncInstance (!omnibusName)
     end
   end
 #--- Get current object property map
@@ -294,7 +294,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         error propertyName
           : "a context property cannot be used in this context"
           : currentType, currentLLVMAddressVar
-      case storedProperty (@PLMType propertyType @uint propertyIndex) :
+      case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !currentType

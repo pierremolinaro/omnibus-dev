@@ -34,9 +34,9 @@ override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries

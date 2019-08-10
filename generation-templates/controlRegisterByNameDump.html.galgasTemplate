@@ -77,7 +77,7 @@ tr.result_line {
 <h1>Control Registers of %!PROJECT_NAME%, sorted by name</h1>
 <p>This document lists all %![CONTROL_REGISTER_COUNT string]% defined control registers, sorted by name.</p>
 <table class="result">
-<tr><td class="result_title">Control Register Name</td><td class="result_title">PLM Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
+<tr><td class="result_title">Control Register Name</td><td class="result_title">OMNIBUS Type</td><td class="result_title">Address</td><td class="result_title">Value</td></tr>\n%
 for () in CONTROL_REGISTER_SORTED_BY_NAME do
   !mHTML
 end%

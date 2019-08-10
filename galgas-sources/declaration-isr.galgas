@@ -110,7 +110,7 @@ override method @decoratedISRDeclarations semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @interruptMapIR {
-  @PLMType mSelfType
+  @omnibusType mSelfType
   @string mDriverName 
   @mode mMode
 
@@ -141,7 +141,7 @@ method @interruptMapIR interruptCodeGeneration
   #--- Define self
     let varName = llvmNameForGlobalVariable (!interrupt.mDriverName)
     let llvmTypeName = [interrupt.mSelfType llvmTypeName]
-  #--- Call PLM function
+  #--- Call Omnibus function
     let driverLLVMBaseTypeName = interrupt.mSelfType.llvmBaseTypeName
     let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !interrupt.lkey !{})
     let isrRoutineLLVMName = llvmNameForFunction (!isrRoutineMangledName)

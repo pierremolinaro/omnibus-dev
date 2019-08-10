@@ -47,9 +47,9 @@ override method @literalStringInExpressionAST noteExpressionTypesInPrecedenceGra
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST analyzeExpression
-  ?self:let @PLMType unused inSelfType
+  ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex

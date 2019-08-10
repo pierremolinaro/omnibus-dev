@@ -1,7 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendStoreTemporaryReference
-  ?let @PLMType inTargetVarType
+  ?let @omnibusType inTargetVarType
   ?let @string inLLVMName
   ?let @objectIR inSourceValue
 {
@@ -11,7 +11,7 @@ setter @instructionListIR appendStoreTemporaryReference
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
-  @PLMType mTargetVarType
+  @omnibusType mTargetVarType
   @string mLLVMTargetVarName
   @objectIR mSourceValue
 }

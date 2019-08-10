@@ -65,9 +65,9 @@ class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_objectIR & 
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_PLMType extensionGetter_type (const class GALGAS_objectIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+class GALGAS_omnibusType extensionGetter_type (const class GALGAS_objectIR & inObject,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -75,18 +75,18 @@ class GALGAS_PLMType extensionGetter_type (const class GALGAS_objectIR & inObjec
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_PLMType function_literalStringType (class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GALGAS_omnibusType function_literalStringType (class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Extension getter '@objectIR plmTypeDescriptionName' (as function)                          *
+//                        Extension getter '@objectIR omnibusTypeDescriptionName' (as function)                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string extensionGetter_plmTypeDescriptionName (const class GALGAS_objectIR & inObject,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_string extensionGetter_omnibusTypeDescriptionName (const class GALGAS_objectIR & inObject,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -95,7 +95,7 @@ class GALGAS_string extensionGetter_plmTypeDescriptionName (const class GALGAS_o
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_objectIR extensionGetter_withType (const class GALGAS_objectIR & inObject,
-                                                const class GALGAS_PLMType & constinArgument0,
+                                                const class GALGAS_omnibusType & constinArgument0,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
@@ -415,7 +415,7 @@ class cPtr_extendIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_appendTrunc (class GALGAS_instructionListIR & ioObject,
-                                  const class GALGAS_PLMType constin_inResultType,
+                                  const class GALGAS_omnibusType constin_inResultType,
                                   class GALGAS_objectIR & io_ioObject,
                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                   class C_Compiler * inCompiler
@@ -514,7 +514,7 @@ class cPtr_truncIR : public cPtr_abstractInstructionIR {
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_getNewTempValue (const class GALGAS_PLMType constinArgument0,
+void routine_getNewTempValue (const class GALGAS_omnibusType constinArgument0,
                               class GALGAS_semanticTemporariesStruct & ioArgument1,
                               class GALGAS_objectIR & outArgument2,
                               class C_Compiler * inCompiler
@@ -851,7 +851,7 @@ void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & i
 
 void extensionSetter_appendBinaryOperation (class GALGAS_instructionListIR & ioObject,
                                             const class GALGAS_objectIR constin_inTarget,
-                                            const class GALGAS_PLMType constin_inOperandType,
+                                            const class GALGAS_omnibusType constin_inOperandType,
                                             const class GALGAS_location constin_inLocation,
                                             const class GALGAS_objectIR constin_inLeft,
                                             const class GALGAS_llvmBinaryOperation constin_inOperation,
@@ -887,7 +887,7 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_binaryOperationIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                  const class GALGAS_PLMType & inOperand1,
+                                                                  const class GALGAS_omnibusType & inOperand1,
                                                                   const class GALGAS_objectIR & inOperand2,
                                                                   const class GALGAS_llvmBinaryOperation & inOperand3,
                                                                   const class GALGAS_objectIR & inOperand4,
@@ -907,7 +907,7 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mOperandType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mOperandType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation getter_mOperation (LOCATION_ARGS) const ;
 
@@ -935,7 +935,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR ;
 class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTarget ;
-  public : GALGAS_PLMType mProperty_mOperandType ;
+  public : GALGAS_omnibusType mProperty_mOperandType ;
   public : GALGAS_objectIR mProperty_mLeft ;
   public : GALGAS_llvmBinaryOperation mProperty_mOperation ;
   public : GALGAS_objectIR mProperty_mRight ;
@@ -943,7 +943,7 @@ class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
 
 //--- Constructor
   public : cPtr_binaryOperationIR (const GALGAS_objectIR & in_mTarget,
-                                   const GALGAS_PLMType & in_mOperandType,
+                                   const GALGAS_omnibusType & in_mOperandType,
                                    const GALGAS_objectIR & in_mLeft,
                                    const GALGAS_llvmBinaryOperation & in_mOperation,
                                    const GALGAS_objectIR & in_mRight,
@@ -955,7 +955,7 @@ class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mOperandType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mOperandType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mLeft (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation getter_mOperation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mRight (LOCATION_ARGS) const ;
@@ -1204,7 +1204,7 @@ class cPtr_loadFromReferenceIR : public cPtr_abstractInstructionIR {
 
 void extensionSetter_appendStoreToUniversalReference (class GALGAS_instructionListIR & ioObject,
                                                       const class GALGAS_string constin_inLLVMVarName,
-                                                      const class GALGAS_PLMType constin_inTargetVarType,
+                                                      const class GALGAS_omnibusType constin_inTargetVarType,
                                                       const class GALGAS_objectIR constin_inSourceValue,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
@@ -1237,7 +1237,7 @@ class GALGAS_storeToUniversalReferenceIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeToUniversalReferenceIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                            const class GALGAS_PLMType & inOperand1,
+                                                                            const class GALGAS_omnibusType & inOperand1,
                                                                             const class GALGAS_objectIR & inOperand2
                                                                             COMMA_LOCATION_ARGS) ;
 
@@ -1254,7 +1254,7 @@ class GALGAS_storeToUniversalReferenceIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mTargetVarType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1276,12 +1276,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeToUniversalRef
 class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mProperty_mLLVMTargetVarName ;
-  public : GALGAS_PLMType mProperty_mTargetVarType ;
+  public : GALGAS_omnibusType mProperty_mTargetVarType ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeToUniversalReferenceIR (const GALGAS_string & in_mLLVMTargetVarName,
-                                             const GALGAS_PLMType & in_mTargetVarType,
+                                             const GALGAS_omnibusType & in_mTargetVarType,
                                              const GALGAS_objectIR & in_mSourceValue
                                              COMMA_LOCATION_ARGS) ;
 
@@ -1290,7 +1290,7 @@ class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMTargetVarName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1309,7 +1309,7 @@ class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_appendStoreTemporaryReference (class GALGAS_instructionListIR & ioObject,
-                                                    const class GALGAS_PLMType constin_inTargetVarType,
+                                                    const class GALGAS_omnibusType constin_inTargetVarType,
                                                     const class GALGAS_string constin_inLLVMName,
                                                     const class GALGAS_objectIR constin_inSourceValue,
                                                     class C_Compiler * inCompiler
@@ -1342,7 +1342,7 @@ class GALGAS_storeFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_storeFromTemporaryReferenceIR constructor_new (const class GALGAS_PLMType & inOperand0,
+  public : static class GALGAS_storeFromTemporaryReferenceIR constructor_new (const class GALGAS_omnibusType & inOperand0,
                                                                               const class GALGAS_string & inOperand1,
                                                                               const class GALGAS_objectIR & inOperand2
                                                                               COMMA_LOCATION_ARGS) ;
@@ -1360,7 +1360,7 @@ class GALGAS_storeFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mTargetVarType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1381,12 +1381,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeFromTemporaryR
 
 class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mTargetVarType ;
+  public : GALGAS_omnibusType mProperty_mTargetVarType ;
   public : GALGAS_string mProperty_mLLVMTargetVarName ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
-  public : cPtr_storeFromTemporaryReferenceIR (const GALGAS_PLMType & in_mTargetVarType,
+  public : cPtr_storeFromTemporaryReferenceIR (const GALGAS_omnibusType & in_mTargetVarType,
                                                const GALGAS_string & in_mLLVMTargetVarName,
                                                const GALGAS_objectIR & in_mSourceValue
                                                COMMA_LOCATION_ARGS) ;
@@ -1395,7 +1395,7 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMTargetVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
@@ -1415,8 +1415,8 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_generateRelease (class GALGAS_instructionListIR & ioObject,
-                                      const class GALGAS_PLMType constin_inType,
-                                      const class GALGAS_lstring constin_in_5F_plmName,
+                                      const class GALGAS_omnibusType constin_inType,
+                                      const class GALGAS_lstring constin_in_5F_omnibusName,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
@@ -1450,7 +1450,7 @@ class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_releaseIR constructor_new (const class GALGAS_PLMType & inOperand0,
+  public : static class GALGAS_releaseIR constructor_new (const class GALGAS_omnibusType & inOperand0,
                                                           const class GALGAS_lstring & inOperand1
                                                           COMMA_LOCATION_ARGS) ;
 
@@ -1463,9 +1463,9 @@ class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPLMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOmnibusName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1486,20 +1486,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_releaseIR ;
 
 class cPtr_releaseIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mType ;
-  public : GALGAS_lstring mProperty_mPLMName ;
+  public : GALGAS_omnibusType mProperty_mType ;
+  public : GALGAS_lstring mProperty_mOmnibusName ;
 
 //--- Constructor
-  public : cPtr_releaseIR (const GALGAS_PLMType & in_mType,
-                           const GALGAS_lstring & in_mPLMName
+  public : cPtr_releaseIR (const GALGAS_omnibusType & in_mType,
+                           const GALGAS_lstring & in_mOmnibusName
                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPLMName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOmnibusName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1961,7 +1961,7 @@ class cPtr_loadIndirectVolatileIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_appendStoreIndirectVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                          const class GALGAS_PLMType constin_inTargetVarType,
+                                                          const class GALGAS_omnibusType constin_inTargetVarType,
                                                           const class GALGAS_string constin_inLLVMName,
                                                           const class GALGAS_objectIR constin_inSourceValue,
                                                           class C_Compiler * inCompiler
@@ -1994,7 +1994,7 @@ class GALGAS_storeIndirectVolatileIR : public GALGAS_abstractInstructionIR {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_storeIndirectVolatileIR constructor_new (const class GALGAS_PLMType & inOperand0,
+  public : static class GALGAS_storeIndirectVolatileIR constructor_new (const class GALGAS_omnibusType & inOperand0,
                                                                         const class GALGAS_string & inOperand1,
                                                                         const class GALGAS_objectIR & inOperand2
                                                                         COMMA_LOCATION_ARGS) ;
@@ -2012,7 +2012,7 @@ class GALGAS_storeIndirectVolatileIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mTargetVarType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2033,12 +2033,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeIndirectVolati
 
 class cPtr_storeIndirectVolatileIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mTargetVarType ;
+  public : GALGAS_omnibusType mProperty_mTargetVarType ;
   public : GALGAS_string mProperty_mLLVMName ;
   public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
-  public : cPtr_storeIndirectVolatileIR (const GALGAS_PLMType & in_mTargetVarType,
+  public : cPtr_storeIndirectVolatileIR (const GALGAS_omnibusType & in_mTargetVarType,
                                          const GALGAS_string & in_mLLVMName,
                                          const GALGAS_objectIR & in_mSourceValue
                                          COMMA_LOCATION_ARGS) ;
@@ -2047,7 +2047,7 @@ class cPtr_storeIndirectVolatileIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mTargetVarType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
@@ -2140,7 +2140,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_copyFromReferencesI
 
 class GALGAS_LValueRepresentation : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_PLMType mProperty_type ;
+  public : GALGAS_omnibusType mProperty_type ;
 
   public : GALGAS_string mProperty_llvmName ;
 
@@ -2158,7 +2158,7 @@ class GALGAS_LValueRepresentation : public AC_GALGAS_root {
   public : virtual ~ GALGAS_LValueRepresentation (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_LValueRepresentation (const GALGAS_PLMType & in_type,
+  public : GALGAS_LValueRepresentation (const GALGAS_omnibusType & in_type,
                                         const GALGAS_string & in_llvmName) ;
 
 //-- Start of generic part --*
@@ -2172,7 +2172,7 @@ class GALGAS_LValueRepresentation : public AC_GALGAS_root {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_LValueRepresentation constructor_new (const class GALGAS_PLMType & inOperand0,
+  public : static class GALGAS_LValueRepresentation constructor_new (const class GALGAS_omnibusType & inOperand0,
                                                                      const class GALGAS_string & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -2190,7 +2190,7 @@ class GALGAS_LValueRepresentation : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_llvmName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_type (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_type (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2242,7 +2242,7 @@ class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_objectIR & constinArgument0,
-                                                             const class GALGAS_PLMType & constinArgument1,
+                                                             const class GALGAS_omnibusType & constinArgument1,
                                                              const class GALGAS_location & constinArgument2,
                                                              const class GALGAS_bool & constinArgument3,
                                                              class C_Compiler * inCompiler
@@ -2278,7 +2278,7 @@ class GALGAS_string function_llvmNameForLocalVariable (const class GALGAS_string
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_appendGetUniversalPropertyReference (class GALGAS_instructionListIR & ioObject,
-                                                          const class GALGAS_PLMType constin_inType,
+                                                          const class GALGAS_omnibusType constin_inType,
                                                           const class GALGAS_string constin_inLLVMName,
                                                           const class GALGAS_string constin_inElementLLVMName,
                                                           const class GALGAS_uint constin_inPropertyIndex,
@@ -2316,7 +2316,7 @@ class GALGAS_getUniversalPropertyReferenceIR : public GALGAS_abstractInstruction
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_getUniversalPropertyReferenceIR constructor_new (const class GALGAS_PLMType & inOperand0,
+  public : static class GALGAS_getUniversalPropertyReferenceIR constructor_new (const class GALGAS_omnibusType & inOperand0,
                                                                                 const class GALGAS_string & inOperand1,
                                                                                 const class GALGAS_string & inOperand2,
                                                                                 const class GALGAS_uint & inOperand3,
@@ -2340,7 +2340,7 @@ class GALGAS_getUniversalPropertyReferenceIR : public GALGAS_abstractInstruction
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2361,14 +2361,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getUniversalPropert
 
 class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_omnibusType mProperty_mType ;
   public : GALGAS_string mProperty_mLLVMName ;
   public : GALGAS_string mProperty_mElementLLVMName ;
   public : GALGAS_uint mProperty_mPropertyIndex ;
   public : GALGAS_string mProperty_mPropertyName ;
 
 //--- Constructor
-  public : cPtr_getUniversalPropertyReferenceIR (const GALGAS_PLMType & in_mType,
+  public : cPtr_getUniversalPropertyReferenceIR (const GALGAS_omnibusType & in_mType,
                                                  const GALGAS_string & in_mLLVMName,
                                                  const GALGAS_string & in_mElementLLVMName,
                                                  const GALGAS_uint & in_mPropertyIndex,
@@ -2379,7 +2379,7 @@ class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mElementLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
@@ -2401,9 +2401,9 @@ class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_appendGetUniversalArrayElementReference (class GALGAS_instructionListIR & ioObject,
-                                                              const class GALGAS_PLMType constin_inType,
+                                                              const class GALGAS_omnibusType constin_inType,
                                                               const class GALGAS_string constin_inLLVMName,
-                                                              const class GALGAS_PLMType constin_inElementType,
+                                                              const class GALGAS_omnibusType constin_inElementType,
                                                               const class GALGAS_string constin_inElementLLVMName,
                                                               const class GALGAS_objectIR constin_inIndexIR,
                                                               class C_Compiler * inCompiler
@@ -2436,9 +2436,9 @@ class GALGAS_getUniversalArrayElementReferenceIR : public GALGAS_abstractInstruc
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_getUniversalArrayElementReferenceIR constructor_new (const class GALGAS_PLMType & inOperand0,
+  public : static class GALGAS_getUniversalArrayElementReferenceIR constructor_new (const class GALGAS_omnibusType & inOperand0,
                                                                                     const class GALGAS_string & inOperand1,
-                                                                                    const class GALGAS_PLMType & inOperand2,
+                                                                                    const class GALGAS_omnibusType & inOperand2,
                                                                                     const class GALGAS_string & inOperand3,
                                                                                     const class GALGAS_objectIR & inOperand4
                                                                                     COMMA_LOCATION_ARGS) ;
@@ -2454,13 +2454,13 @@ class GALGAS_getUniversalArrayElementReferenceIR : public GALGAS_abstractInstruc
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mElementLLVMName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndexIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2481,16 +2481,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getUniversalArrayEl
 
 class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_omnibusType mProperty_mType ;
   public : GALGAS_string mProperty_mLLVMName ;
-  public : GALGAS_PLMType mProperty_mElementType ;
+  public : GALGAS_omnibusType mProperty_mElementType ;
   public : GALGAS_string mProperty_mElementLLVMName ;
   public : GALGAS_objectIR mProperty_mIndexIR ;
 
 //--- Constructor
-  public : cPtr_getUniversalArrayElementReferenceIR (const GALGAS_PLMType & in_mType,
+  public : cPtr_getUniversalArrayElementReferenceIR (const GALGAS_omnibusType & in_mType,
                                                      const GALGAS_string & in_mLLVMName,
-                                                     const GALGAS_PLMType & in_mElementType,
+                                                     const GALGAS_omnibusType & in_mElementType,
                                                      const GALGAS_string & in_mElementLLVMName,
                                                      const GALGAS_objectIR & in_mIndexIR
                                                      COMMA_LOCATION_ARGS) ;
@@ -2499,9 +2499,9 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mElementLLVMName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexIR (LOCATION_ARGS) const ;
 //--- Description
@@ -2524,7 +2524,7 @@ void extensionSetter_appendGetComputedPropertyValue (class GALGAS_instructionLis
                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                      const class GALGAS_objectIR constin_inReceiverIR,
                                                      const class GALGAS_string constin_inLLVMGetterName,
-                                                     const class GALGAS_PLMType constin_inResultType,
+                                                     const class GALGAS_omnibusType constin_inResultType,
                                                      class GALGAS_objectIR & out_outResultValueIR,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
@@ -2737,7 +2737,7 @@ class cPtr_storeComputedPropertyValueIR : public cPtr_abstractInstructionIR {
 void extensionSetter_appendGetArrayElementReference (class GALGAS_instructionListIR & ioObject,
                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                      const class GALGAS_objectIR constin_inArrayIR,
-                                                     const class GALGAS_PLMType constin_inElementType,
+                                                     const class GALGAS_omnibusType constin_inElementType,
                                                      const class GALGAS_objectIR constin_inIndexIR,
                                                      class GALGAS_objectIR & out_outElementPtr,
                                                      class C_Compiler * inCompiler

@@ -109,11 +109,11 @@ class cEnumAssociatedValues_constructorValue_structure : public cEnumAssociatedV
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cEnumAssociatedValues_constructorValue_arrayValue : public cEnumAssociatedValues {
-  public : const GALGAS_PLMType mAssociatedValue0 ;
+  public : const GALGAS_omnibusType mAssociatedValue0 ;
   public : const GALGAS_uint mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_PLMType & inAssociatedValue0,
+  public : cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                               const GALGAS_uint & inAssociatedValue1
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -134,7 +134,7 @@ class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_string mProperty_mSelector ;
 
-  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_omnibusType mProperty_mType ;
 
   public : GALGAS_uint mProperty_mFieldIndex ;
 
@@ -153,7 +153,7 @@ class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_constructorSignature_2D_element (const GALGAS_string & in_mSelector,
-                                                   const GALGAS_PLMType & in_mType,
+                                                   const GALGAS_omnibusType & in_mType,
                                                    const GALGAS_uint & in_mFieldIndex) ;
 
 //-- Start of generic part --*
@@ -168,7 +168,7 @@ class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_constructorSignature_2D_element constructor_new (const class GALGAS_string & inOperand0,
-                                                                                const class GALGAS_PLMType & inOperand1,
+                                                                                const class GALGAS_omnibusType & inOperand1,
                                                                                 const class GALGAS_uint & inOperand2
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -188,7 +188,7 @@ class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSelector (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -311,9 +311,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicSortedListIR_2
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
-                                                                          const class GALGAS_PLMType constinArgument0,
+                                                                          const class GALGAS_omnibusType constinArgument0,
                                                                           const class GALGAS_routineAttributes constinArgument1,
-                                                                          const class GALGAS_PLMType constinArgument2,
+                                                                          const class GALGAS_omnibusType constinArgument2,
                                                                           const class GALGAS_semanticContext constinArgument3,
                                                                           const class GALGAS_mode constinArgument4,
                                                                           class GALGAS_semanticTemporariesStruct & ioArgument5,
@@ -333,9 +333,9 @@ void enterExtensionMethod_analyzeExpression (const int32_t inClassIndex,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
-                                            const GALGAS_PLMType constin_inSelfType,
+                                            const GALGAS_omnibusType constin_inSelfType,
                                             const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                            const GALGAS_PLMType constin_inTargetType,
+                                            const GALGAS_omnibusType constin_inTargetType,
                                             const GALGAS_semanticContext constin_inContext,
                                             const GALGAS_mode constin_inMode,
                                             GALGAS_semanticTemporariesStruct & io_ioTemporaries,
@@ -503,10 +503,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpression
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorMap inObject,
-                                               const class GALGAS_PLMType constin_inLeftType,
-                                               const class GALGAS_PLMType constin_inRightType,
+                                               const class GALGAS_omnibusType constin_inLeftType,
+                                               const class GALGAS_omnibusType constin_inRightType,
                                                const class GALGAS_location constin_inOperatorLocation,
-                                               class GALGAS_PLMType & out_outResultType,
+                                               class GALGAS_omnibusType & out_outResultType,
                                                class GALGAS_infixOperatorDescription & out_outOperation,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
@@ -794,7 +794,7 @@ void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_instructionAST_instructionSemanticAnalysis) (const class cPtr_instructionAST * inObject,
-                                                                                     const class GALGAS_PLMType constinArgument0,
+                                                                                     const class GALGAS_omnibusType constinArgument0,
                                                                                      const class GALGAS_routineAttributes constinArgument1,
                                                                                      const class GALGAS_semanticContext constinArgument2,
                                                                                      const class GALGAS_mode constinArgument3,
@@ -814,7 +814,7 @@ void enterExtensionMethod_instructionSemanticAnalysis (const int32_t inClassInde
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_instructionSemanticAnalysis (const class cPtr_instructionAST * inObject,
-                                                      const GALGAS_PLMType constin_inSelfType,
+                                                      const GALGAS_omnibusType constin_inSelfType,
                                                       const GALGAS_routineAttributes constin_inRoutineAttributes,
                                                       const GALGAS_semanticContext constin_inContext,
                                                       const GALGAS_mode constin_inMode,
@@ -833,7 +833,7 @@ void callExtensionMethod_instructionSemanticAnalysis (const class cPtr_instructi
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
-                                                   const class GALGAS_PLMType constin_inSelfType,
+                                                   const class GALGAS_omnibusType constin_inSelfType,
                                                    const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                                    class GALGAS_location in_inEndOfInstructionList,
                                                    const class GALGAS_semanticContext constin_inContext,
@@ -885,7 +885,7 @@ void extensionSetter_openBranch (class GALGAS_universalValuedObjectMap & ioObjec
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
-                                                    const class GALGAS_PLMType constin_inSelfType,
+                                                    const class GALGAS_omnibusType constin_inSelfType,
                                                     const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                                     const class GALGAS_semanticContext constin_inContext,
                                                     const class GALGAS_mode constin_inMode,
@@ -2460,7 +2460,7 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterPassingMode,
                                                   const class GALGAS_lstring & in_mSelector,
-                                                  const class GALGAS_PLMType & in_mParameterType
+                                                  const class GALGAS_omnibusType & in_mParameterType
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -2478,7 +2478,7 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
 
   public : static class GALGAS_procEffectiveParameterList constructor_listWithValue (const class GALGAS_effectiveArgumentPassingModeAST & inOperand0,
                                                                                      const class GALGAS_lstring & inOperand1,
-                                                                                     const class GALGAS_PLMType & inOperand2
+                                                                                     const class GALGAS_omnibusType & inOperand2
                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -2489,7 +2489,7 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_effectiveArgumentPassingModeAST & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
-                                                      const class GALGAS_PLMType & inOperand2
+                                                      const class GALGAS_omnibusType & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_procEffectiveParameterList add_operation (const GALGAS_procEffectiveParameterList & inOperand,
@@ -2504,26 +2504,26 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
 
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_effectiveArgumentPassingModeAST constinArgument0,
                                                        class GALGAS_lstring constinArgument1,
-                                                       class GALGAS_PLMType constinArgument2,
+                                                       class GALGAS_omnibusType constinArgument2,
                                                        class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_effectiveArgumentPassingModeAST & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
-                                                  class GALGAS_PLMType & outArgument2,
+                                                  class GALGAS_omnibusType & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_effectiveArgumentPassingModeAST & outArgument0,
                                                  class GALGAS_lstring & outArgument1,
-                                                 class GALGAS_PLMType & outArgument2,
+                                                 class GALGAS_omnibusType & outArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_effectiveArgumentPassingModeAST & outArgument0,
                                                        class GALGAS_lstring & outArgument1,
-                                                       class GALGAS_PLMType & outArgument2,
+                                                       class GALGAS_omnibusType & outArgument2,
                                                        class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -2532,13 +2532,13 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_effectiveArgumentPassingModeAST & outArgument0,
                                                class GALGAS_lstring & outArgument1,
-                                               class GALGAS_PLMType & outArgument2,
+                                               class GALGAS_omnibusType & outArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_effectiveArgumentPassingModeAST & outArgument0,
                                               class GALGAS_lstring & outArgument1,
-                                              class GALGAS_PLMType & outArgument2,
+                                              class GALGAS_omnibusType & outArgument2,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -2549,9 +2549,9 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
                                                                                                                        C_Compiler * inCompiler
                                                                                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mParameterTypeAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mParameterTypeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSelectorAtIndex (const class GALGAS_uint & constinOperand0,
                                                                           C_Compiler * inCompiler
@@ -2589,7 +2589,7 @@ class cEnumerator_procEffectiveParameterList : public cGenericAbstractEnumerator
 //--- Current element access
   public : class GALGAS_effectiveArgumentPassingModeAST current_mEffectiveParameterPassingMode (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mSelector (LOCATION_ARGS) const ;
-  public : class GALGAS_PLMType current_mParameterType (LOCATION_ARGS) const ;
+  public : class GALGAS_omnibusType current_mParameterType (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procEffectiveParameterList_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2610,7 +2610,7 @@ class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_lstring mProperty_mSelector ;
 
-  public : GALGAS_PLMType mProperty_mParameterType ;
+  public : GALGAS_omnibusType mProperty_mParameterType ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2625,7 +2625,7 @@ class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_procEffectiveParameterList_2D_element (const GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterPassingMode,
                                                          const GALGAS_lstring & in_mSelector,
-                                                         const GALGAS_PLMType & in_mParameterType) ;
+                                                         const GALGAS_omnibusType & in_mParameterType) ;
 
 //-- Start of generic part --*
 
@@ -2640,7 +2640,7 @@ class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_procEffectiveParameterList_2D_element constructor_new (const class GALGAS_effectiveArgumentPassingModeAST & inOperand0,
                                                                                       const class GALGAS_lstring & inOperand1,
-                                                                                      const class GALGAS_PLMType & inOperand2
+                                                                                      const class GALGAS_omnibusType & inOperand2
                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2657,7 +2657,7 @@ class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentPassingModeAST getter_mEffectiveParameterPassingMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mParameterType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mParameterType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSelector (LOCATION_ARGS) const ;
 

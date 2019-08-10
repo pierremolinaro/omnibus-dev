@@ -82,9 +82,9 @@ override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sizeofExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -117,9 +117,9 @@ override method @sizeofExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sizeofTypeAST analyzeExpression
-  ?self:let @PLMType unused inSelfType
+  ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -151,7 +151,7 @@ override method @sizeofTypeAST analyzeExpression
 
 class @sizeofInstructionIR : @abstractInstructionIR {
   @objectIR mTarget
-  @PLMType mSourceType
+  @omnibusType mSourceType
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

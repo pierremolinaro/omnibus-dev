@@ -68,7 +68,7 @@ boolset @routineAttributes {
 #·······················································································································
 
 abstract method @instructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -81,7 +81,7 @@ abstract method @instructionAST instructionSemanticAnalysis
 #·······················································································································
 
 method @instructionListAST analyzeBranchInstructionList
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
@@ -115,7 +115,7 @@ method @instructionListAST analyzeBranchInstructionList
 #·······················································································································
 
 method @instructionListAST analyzeRoutineInstructionList
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode

@@ -76,7 +76,7 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -200,7 +200,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
 
 class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
   @string mVarName
-  @PLMType mType
+  @omnibusType mType
   @bool mUnsigned
   @location mLocation
   @objectIR mLowerExpressionResult

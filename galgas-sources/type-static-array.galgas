@@ -99,10 +99,10 @@ override method @staticArrayTypeDeclarationAST enterInContext
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name
-    let plmTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.plmTypeDescriptionName + "]" !mArrayTypeName}
+    let omnibusTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !mArrayTypeName}
     let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !mArrayTypeName}
-    if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
-      [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type]
+    if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
+      [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type:var type]
       [!?ioContext.mTypeMap insertType
         !lkey:mArrayTypeName
         !type:type
@@ -114,7 +114,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
     #-------------------------------------------- Property map
       @propertyGetterMap arrayTypePropertyMap = {}
       [!?arrayTypePropertyMap insertKey # "count" property
-        !.new {!"count" !plmTypeDescriptionName.location}
+        !.new {!"count" !omnibusTypeDescriptionName.location}
         !true # public
         !.constantProperty {!value:.literalInteger {!type:literalIntegerType () !value:arraySize}}
       ]
@@ -130,9 +130,9 @@ override method @staticArrayTypeDeclarationAST enterInContext
       constructorName += ")"
       [!?constructorMap insertKey ![constructorName nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
     #-------------------------------------------- Type attributes
-      @PLMTypeAttributes typeAttributes = .instanciable | .copyable
+      @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
-      let arrayType = @PLMType.new {
+      let arrayType = @omnibusType.new {
         !propertyGetterMap:arrayTypePropertyMap
         !propertySetterMap: {}
         !routineMap: {}
@@ -142,7 +142,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !assignmentSources: {!llvmBaseTypeName}
         !attributes:typeAttributes
-        !plmTypeDescriptionName:plmTypeDescriptionName
+        !omnibusTypeDescriptionName:omnibusTypeDescriptionName
         !kind:.staticArrayType {!elementType:elementType !size:arraySize}
         !llvmBaseTypeName:llvmBaseTypeName
       }
@@ -151,7 +151,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !type:arrayType
       ]
       [!?ioContext.mTypeMap insertType
-        !lkey:plmTypeDescriptionName
+        !lkey:omnibusTypeDescriptionName
         !type:arrayType
       ]
     #-------------------------------------------- GenerateLLVM type definition
@@ -176,7 +176,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
-  @PLMType mElementType
+  @omnibusType mElementType
   @bigint mSize
 }
 
@@ -191,7 +191,7 @@ override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
-  @PLMType mStaticArrayType
+  @omnibusType mStaticArrayType
 }
 
 #·······················································································································

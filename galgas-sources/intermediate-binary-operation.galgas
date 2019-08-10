@@ -42,7 +42,7 @@ enum @llvmBinaryOperation {
 
 setter @instructionListIR appendBinaryOperation
   ?let @objectIR inTarget
-  ?let @PLMType inOperandType
+  ?let @omnibusType inOperandType
   ?let @location inLocation
   ?let @objectIR inLeft
   ?let @llvmBinaryOperation inOperation
@@ -55,7 +55,7 @@ setter @instructionListIR appendBinaryOperation
 
 class @binaryOperationIR : @abstractInstructionIR {
   @objectIR mTarget
-  @PLMType mOperandType
+  @omnibusType mOperandType
   @objectIR mLeft
   @llvmBinaryOperation mOperation
   @objectIR mRight

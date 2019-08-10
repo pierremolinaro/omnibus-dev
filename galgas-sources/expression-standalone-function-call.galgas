@@ -75,9 +75,9 @@ override method @standaloneFunctionInExpressionAST noteExpressionTypesInPreceden
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneFunctionInExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -138,7 +138,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc analyzeRegularFunctionCall
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?mangledFunctionName: let @lstring inRequiredFunctionMangledName
   ?arguments: let   @effectiveArgumentListAST inArguments
   ?routineLLVMName: let @lstring inRoutineLLVMName
@@ -200,7 +200,7 @@ private proc analyzeRegularFunctionCall
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc analyzeConstructorCall
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?typeName: let @lstring inTypeName
   ?arguments: let @effectiveArgumentListAST inEffectiveArguments
   ?routineAttributes:let @routineAttributes inRoutineAttributes
@@ -321,7 +321,7 @@ private proc analyzeConstructorCall
     outResult = .null {!type: resultType}
   case simple (value) :
     if [parameterList length] != 0 then
-      error inTypeName : resultType.plmTypeDescriptionName + " constructor should have no parameter" : outResult
+      error inTypeName : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end

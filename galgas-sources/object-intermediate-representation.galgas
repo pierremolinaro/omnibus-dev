@@ -6,20 +6,20 @@ enum @objectIR {
 #--- No object (for example, no return value for a procedure)
   case void
 #--- Reference
-  case reference (@PLMType type @string llvmName)
+  case reference (@omnibusType type @string llvmName)
 #--- Values
-  case null (@PLMType type)
-  case llvmValue (@PLMType type @string llvmName)
-  case literalInteger  (@PLMType type @bigint value)
-  case llvmStructureValue (@PLMType type @sortedOperandIRList values)
+  case null (@omnibusType type)
+  case llvmValue (@omnibusType type @string llvmName)
+  case literalInteger  (@omnibusType type @bigint value)
+  case llvmStructureValue (@omnibusType type @sortedOperandIRList values)
   case literalString  (@uint utf8Size @uint index)
-  case zero (@PLMType type)
+  case zero (@omnibusType type)
 
 #--- Array values
-  case llvmArrayStaticValues (@PLMType type @operandIRList values @uint index)
-  case llvmArrayDynamicValues (@PLMType type @operandIRList values)
-  case llvmArrayRepeatedStaticValue (@PLMType type @uint arraySize @objectIR value @uint index)
-  case llvmArrayRepeatedDynamicValue (@PLMType type @uint arraySize @objectIR value)
+  case llvmArrayStaticValues (@omnibusType type @operandIRList values @uint index)
+  case llvmArrayDynamicValues (@omnibusType type @operandIRList values)
+  case llvmArrayRepeatedStaticValue (@omnibusType type @uint arraySize @objectIR value @uint index)
+  case llvmArrayRepeatedDynamicValue (@omnibusType type @uint arraySize @objectIR value)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -98,7 +98,7 @@ getter @objectIR llvmValue -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectIR type -> @PLMType {
+getter @objectIR type -> @omnibusType {
   switch self
   case void : error .nowhere : "<<@objectIR type void>>" : result
   case reference (type *) : result = type
@@ -123,13 +123,13 @@ getter @objectIR llvmTypeName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectIR plmTypeDescriptionName -> @string {
-  result = [self type].plmTypeDescriptionName
+getter @objectIR omnibusTypeDescriptionName -> @string {
+  result = [self type].omnibusTypeDescriptionName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectIR withType ?let @PLMType inType -> @objectIR {
+getter @objectIR withType ?let @omnibusType inType -> @objectIR {
   switch self
   case void :
     error .nowhere : "<<@objectIR withType void>>" : result

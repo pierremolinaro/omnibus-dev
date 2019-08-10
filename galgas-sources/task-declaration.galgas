@@ -183,7 +183,7 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskMap {
-  @PLMType mTaskType
+  @omnibusType mTaskType
   insert insertKey error message "the '%K' task is already declared in %L"
   search searchKey error message "there is no '%K' task"
 }
@@ -375,7 +375,7 @@ method @taskListAST enterInContext
       !?ioRoutineListIR
     ]
   #---------------- Enter task variable map as structure type in type map
-    let taskType = @PLMType.new {
+    let taskType = @omnibusType.new {
       !propertyGetterMap:propertyGetterMap
       !propertySetterMap: propertySetterMap
       !routineMap: routineMap
@@ -385,7 +385,7 @@ method @taskListAST enterInContext
       !subscript:.noSubscript
       !assignmentSources: {}
       !attributes:.none
-      !plmTypeDescriptionName:task.mTaskName
+      !omnibusTypeDescriptionName:task.mTaskName
       !kind:.structure {!propertyList:propertyList}
       !llvmBaseTypeName:task.mTaskName
     }
@@ -564,7 +564,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskMapIR {
-  @PLMType mTaskType
+  @omnibusType mTaskType
   @uint mPriority
   @bigint mStackSize
   @stringlist mSetupOrderedList

@@ -369,7 +369,7 @@ list @primitiveAndServiceIRlist {
 
 func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
                            ?let @string inFunctionName
-                           ?let @PLMType inReceiverType
+                           ?let @omnibusType inReceiverType
                            ?let @routineFormalArgumentListIR inFormalArgumentListForGeneration
                            -> @string {
   result = inReturnTypeLLVMName

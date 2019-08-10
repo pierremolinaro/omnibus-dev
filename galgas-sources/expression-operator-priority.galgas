@@ -433,9 +433,9 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @expressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inTargetType
+  ?optionalTargetType:let @omnibusType inTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries

@@ -24,7 +24,7 @@ void routine_enter_5F_NOP_5F_function (class GALGAS_functionDeclarationListAST &
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeGuardCall (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeGuardCall (const class GALGAS_omnibusType constinArgument0,
                                const class GALGAS_routineAttributes constinArgument1,
                                const class GALGAS_objectIR constinArgument2,
                                const class GALGAS_lstring constinArgument3,
@@ -56,8 +56,8 @@ class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * 
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handleArrayAccess (const class GALGAS_PLMType constinArgument0,
-                                class GALGAS_PLMType & ioArgument1,
+void routine_handleArrayAccess (const class GALGAS_omnibusType constinArgument0,
+                                class GALGAS_omnibusType & ioArgument1,
                                 class GALGAS_string & ioArgument2,
                                 const class GALGAS_routineAttributes constinArgument3,
                                 const class GALGAS_semanticContext constinArgument4,
@@ -80,8 +80,8 @@ void routine_handleArrayAccess (const class GALGAS_PLMType constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handlePropertyAccess (const class GALGAS_PLMType constinArgument0,
-                                   class GALGAS_PLMType & ioArgument1,
+void routine_handlePropertyAccess (const class GALGAS_omnibusType constinArgument0,
+                                   class GALGAS_omnibusType & ioArgument1,
                                    class GALGAS_string & ioArgument2,
                                    const class GALGAS_routineAttributes constinArgument3,
                                    const class GALGAS_semanticContext constinArgument4,
@@ -102,8 +102,8 @@ void routine_handlePropertyAccess (const class GALGAS_PLMType constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handleNextOperand (const class GALGAS_PLMType constinArgument0,
-                                class GALGAS_PLMType & ioArgument1,
+void routine_handleNextOperand (const class GALGAS_omnibusType constinArgument0,
+                                class GALGAS_omnibusType & ioArgument1,
                                 class GALGAS_string & ioArgument2,
                                 const class GALGAS_LValueOperandAST constinArgument3,
                                 const class GALGAS_routineAttributes constinArgument4,
@@ -188,8 +188,8 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_intermediateCodeStruct constinArgument3,
                              const class GALGAS_userLLVMTypeDefinitionListIR constinArgument4,
                              const class GALGAS_lstring constinArgument5,
-                             const class GALGAS_PLMType constinArgument6,
-                             const class GALGAS_PLMType constinArgument7,
+                             const class GALGAS_omnibusType constinArgument6,
+                             const class GALGAS_omnibusType constinArgument7,
                              const class GALGAS_availableInterruptMap constinArgument8,
                              const class GALGAS_staticListInitializationMap constinArgument9,
                              const class GALGAS_targetParameters constinArgument10,
@@ -207,8 +207,8 @@ void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
                                 const class GALGAS_intermediateCodeStruct constinArgument2,
                                 const class GALGAS_userLLVMTypeDefinitionListIR constinArgument3,
                                 const class GALGAS_lstring constinArgument4,
-                                const class GALGAS_PLMType constinArgument5,
-                                const class GALGAS_PLMType constinArgument6,
+                                const class GALGAS_omnibusType constinArgument5,
+                                const class GALGAS_omnibusType constinArgument6,
                                 const class GALGAS_availableInterruptMap constinArgument7,
                                 const class GALGAS_staticListInitializationMap constinArgument8,
                                 const class GALGAS_targetParameters constinArgument9,

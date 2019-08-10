@@ -1,7 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc handleArraySubscriptNew
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -13,7 +13,7 @@ proc handleArraySubscriptNew
   ?let @location inErrorLocation
   ?let @bool inCheckIndexExpression
   ?arraySize:let @bigint inArraySize
-  ?elementType:let @PLMType inElementType
+  ?elementType:let @omnibusType inElementType
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outIndexIR
 {

@@ -65,7 +65,7 @@ override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode

@@ -86,7 +86,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -96,7 +96,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @PLMType targetType = if mOptionalTypeName.string == ""
+  @omnibusType targetType = if mOptionalTypeName.string == ""
     then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
   end
@@ -121,24 +121,24 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !staticTypeAllowed:false
   )
 #--- Declare local variable
-  let plmLocalVariableName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let omnibusLocalVariableName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !plmLocalVariableName !.hasUnreadValue !false]
+  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !omnibusLocalVariableName !.hasUnreadValue !false]
 #--- Code generation
-  ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) ![result type] !false
+  ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) ![result type] !false
 #--- Assignment generation
   [!?ioInstructionGenerationList appendCopyFromReferences
     !?ioTemporaries
     !errorLocation:mVarName
     !source:sourcePossibleReference
-    !target:.new {![result type] !llvmNameForLocalVariable (!plmLocalVariableName)}
+    !target:.new {![result type] !llvmNameForLocalVariable (!omnibusLocalVariableName)}
   ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType unused inSelfType
+  ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode unused inMode
@@ -151,14 +151,14 @@ override method @varInstructionAST instructionSemanticAnalysis
   let targetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
 #---
   if not [targetType instanciable] then
-    error mVarName : targetType.plmTypeDescriptionName + " type is not instanciable"
+    error mVarName : targetType.omnibusTypeDescriptionName + " type is not instanciable"
   end
 #--- Declare local variable
-  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let omnibusName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  [!?ioUniversalMap insertLocalVariable !mVarName !targetType !plmName !.noValue !true]
+  [!?ioUniversalMap insertLocalVariable !mVarName !targetType !omnibusName !.noValue !true]
 #--- Code generation
-  ioAllocaList += !llvmNameForLocalVariable (!plmName) !targetType !false
+  ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !targetType !false
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

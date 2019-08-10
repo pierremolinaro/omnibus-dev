@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendStoreIndirectVolatileRegister
-  ?let @PLMType inTargetVarType
+  ?let @omnibusType inTargetVarType
   ?let @string inLLVMName
   ?let @objectIR inSourceValue
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendStoreIndirectVolatileRegister
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeIndirectVolatileIR : @abstractInstructionIR {
-  @PLMType mTargetVarType
+  @omnibusType mTargetVarType
   @string mLLVMName
   @objectIR mSourceValue
 }

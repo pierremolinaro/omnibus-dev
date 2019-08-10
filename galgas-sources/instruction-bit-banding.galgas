@@ -60,7 +60,7 @@ override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @bitbandInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -96,15 +96,15 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !?sourceExpressionOperand
   ]
 #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
-  if ([sourceExpressionOperand type].plmTypeDescriptionName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
+  if ([sourceExpressionOperand type].omnibusTypeDescriptionName == staticIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
     [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
     if (value < 0G) || (value > 1G) then
       error mSourceExpressionLocation : "static value should be 0 or 1"
     else
       sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
     end
-  elsif [sourceExpressionOperand type].plmTypeDescriptionName != requiredSourceExpressionType.plmTypeDescriptionName then
-    error mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.plmTypeDescriptionName
+  elsif [sourceExpressionOperand type].omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
+    error mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName
   end
 #-------------------- Control register LValue
   [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
@@ -150,15 +150,15 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !?bitExpressionOperand
   ]
 #--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
-  if ([bitExpressionOperand type].plmTypeDescriptionName == staticIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
+  if ([bitExpressionOperand type].omnibusTypeDescriptionName == staticIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
     [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
     if (value < 0G) || (value >= registerBitCount) then
       error mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
     else
       bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
     end
-  elsif [bitExpressionOperand type].plmTypeDescriptionName != requiredBitExpressionType.plmTypeDescriptionName then
-    error mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.plmTypeDescriptionName
+  elsif [bitExpressionOperand type].omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
+    error mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
   end
 #-------------------- Generate code
   ioInstructionGenerationList += !@bitbandInstructionIR.new {

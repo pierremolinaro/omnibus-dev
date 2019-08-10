@@ -198,7 +198,7 @@ func typeNameForTypeMapForDriver ?let @lstring inDriverName -> @lstring {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private func plmTypeSpecificNameForDriver ?let @lstring inDriverName -> @lstring {
+private func omnibusTypeSpecificNameForDriver ?let @lstring inDriverName -> @lstring {
   result = .new {!"Driver " + inDriverName !inDriverName.location}
 }
 
@@ -308,7 +308,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
   #---
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
       !typeNameForTypeMapForDriver (!declaration.mDriverName)
-      !plmTypeSpecificNameForDriver (!declaration.mDriverName)
+      !omnibusTypeSpecificNameForDriver (!declaration.mDriverName)
       !llvmDriverNameFromName (!declaration.mDriverName)
       !{}
       !false # Do not generate assignment routine
@@ -431,7 +431,7 @@ override method @decoratedRequiredDriver semanticAnalysis
 
 list @driverListIR {
   @lstring mDriverName
-  @PLMType mType
+  @omnibusType mType
   @operandIRList mInitialValueList
 }
 

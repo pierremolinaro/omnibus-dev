@@ -3,7 +3,7 @@ setter @instructionListIR appendGetComputedPropertyValue
   ?!@semanticTemporariesStruct ioTemporaries
   ?let @objectIR inReceiverIR
   ?let @string inLLVMGetterName
-  ?let @PLMType inResultType
+  ?let @omnibusType inResultType
   !@objectIR outResultValueIR
 {
  [!?ioTemporaries newTempLLVMVar ?let result_llvmName]

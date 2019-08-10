@@ -217,7 +217,7 @@ getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLo
 
 list @routineFormalArgumentListIR {
   @procFormalArgumentPassingMode mFormalArgumentKind
-  @PLMType mFormalArgumentType
+  @omnibusType mFormalArgumentType
   @string mFormalArgumentName
 }
 

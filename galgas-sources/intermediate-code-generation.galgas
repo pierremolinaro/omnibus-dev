@@ -19,24 +19,7 @@ struct @intermediateCodeStruct {
   @globalSyncInstanceMapIR mGlobalSyncInstanceMap
   @controlRegisterGroupArrayList mControlRegisterGroupArrayList
   @routineListIR mRoutineListIR
-#  @typeCppGenerationList mTypeCppGenerationList
 }
-
-#·······················································································································
-
-#abstract class @typeCppGeneration {
-#  @string mPLMTypeName 
-#}
-
-#·······················································································································
-
-#abstract method @typeCppGeneration generateTypeCppCode ?!@string ioCppCode
-
-#·······················································································································
-
-#list @typeCppGenerationList {
-#  @typeCppGeneration mTypeCppGeneration
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

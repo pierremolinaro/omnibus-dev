@@ -69,9 +69,9 @@ override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@sema
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -173,7 +173,7 @@ override method @constructorCallAST analyzeExpression
     outResult = .null {!type: resultType}
   case simple (value) :
     if [mParameterList length] != 0 then
-      error mErrorLocation : resultType.plmTypeDescriptionName + " constructor should have no parameter" : outResult
+      error mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end

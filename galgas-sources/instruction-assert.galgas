@@ -41,7 +41,7 @@ override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @assertInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode

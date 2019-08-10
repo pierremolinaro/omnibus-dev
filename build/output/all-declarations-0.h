@@ -7967,7 +7967,7 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPLMTypeSpecificName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOmnibusTypeSpecificName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
 
@@ -8839,7 +8839,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclar
 class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mReceiverTypeName ;
-  public : GALGAS_lstring mProperty_mPLMTypeSpecificName ;
+  public : GALGAS_lstring mProperty_mOmnibusTypeSpecificName ;
   public : GALGAS_lstring mProperty_mLLVMBaseTypeName ;
   public : GALGAS_lstringlist mProperty_mAttributeListAST ;
   public : GALGAS_bool mProperty_mGenerateAssignmentRoutine ;
@@ -8851,7 +8851,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Constructor
   public : cPtr_structureDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
-                                         const GALGAS_lstring & in_mPLMTypeSpecificName,
+                                         const GALGAS_lstring & in_mOmnibusTypeSpecificName,
                                          const GALGAS_lstring & in_mLLVMBaseTypeName,
                                          const GALGAS_lstringlist & in_mAttributeListAST,
                                          const GALGAS_bool & in_mGenerateAssignmentRoutine,
@@ -8867,7 +8867,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPLMTypeSpecificName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOmnibusTypeSpecificName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mGenerateAssignmentRoutine (LOCATION_ARGS) const ;

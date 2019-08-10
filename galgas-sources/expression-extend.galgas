@@ -69,9 +69,9 @@ override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@sem
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -100,7 +100,7 @@ override method @extendExpressionAST analyzeExpression
     !?expressionResult
   ]  
 #--- Analyze type
-  let @PLMType resultType = if mTypeName.string == ""
+  let @omnibusType resultType = if mTypeName.string == ""
     then inOptionalTargetType
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
   end

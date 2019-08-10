@@ -60,7 +60,7 @@ override method @booleanDeclarationAST enterInContext
     ?routineLLVMName:*
   ]
 #---------- Define boolean type composition
-  let booleanType = @PLMType.new {
+  let booleanType = @omnibusType.new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
     !routineMap: routineMap
@@ -70,7 +70,7 @@ override method @booleanDeclarationAST enterInContext
     !subscript:.noSubscript
     !assignmentSources: {!boolTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
-    !plmTypeDescriptionName:boolTypeName ()
+    !omnibusTypeDescriptionName:boolTypeName ()
     !kind:.boolean
     !llvmBaseTypeName:boolTypeName ()
   }

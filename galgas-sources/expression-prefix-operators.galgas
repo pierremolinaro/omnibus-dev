@@ -41,9 +41,9 @@ override method @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGrap
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -135,7 +135,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
   end
 #--- Check operator
-  [prefixOperatorMap searchKey !.new {![expressionResult plmTypeDescriptionName] !mOperatorLocation}]
+  [prefixOperatorMap searchKey !.new {![expressionResult omnibusTypeDescriptionName] !mOperatorLocation}]
   let resultType = [expressionResult type]
 #---
   if [expressionResult isLiteralInteger] then

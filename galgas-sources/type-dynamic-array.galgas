@@ -79,11 +79,11 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     error mElementTypeName : "an array element should be instanciable"
   end
 #-------------------------------------------- Original type name
-  let plmTypeDescriptionName = @lstring.new {!"[" + elementType.plmTypeDescriptionName + "]" !mDynamicArrayTypeName}
+  let omnibusTypeDescriptionName = @lstring.new {!"[" + elementType.omnibusTypeDescriptionName + "]" !mDynamicArrayTypeName}
   let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !mDynamicArrayTypeName}
 #-------------------------------------------- Original type name
-  if [ioContext.mTypeMap hasKey !plmTypeDescriptionName] then
-    [ioContext.mTypeMap searchKey !lkey:plmTypeDescriptionName ?type:var type]
+  if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
+    [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type:var type]
     [!?ioContext.mTypeMap insertType
       !lkey:mDynamicArrayTypeName
       !type:type
@@ -165,9 +165,9 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["()" nowhere] !{} !.null]
   #-------------------------------------------- Type attributes
-    let @PLMTypeAttributes typeAttributes = .instanciable | .copyable
+    let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
-    let dynamicArrayType = @PLMType.new {
+    let dynamicArrayType = @omnibusType.new {
       !propertyGetterMap:propertyGetterMap
       !propertySetterMap: {}
       !routineMap: routineMap
@@ -177,7 +177,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !subscript:.noSubscript
       !assignmentSources: {!llvmBaseTypeName}
       !attributes:typeAttributes
-      !plmTypeDescriptionName:plmTypeDescriptionName
+      !omnibusTypeDescriptionName:omnibusTypeDescriptionName
       !kind:.dynamicArrayType {!elementType:elementType}
       !llvmBaseTypeName:llvmBaseTypeName
     }

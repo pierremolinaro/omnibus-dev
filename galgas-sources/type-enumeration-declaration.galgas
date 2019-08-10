@@ -142,7 +142,7 @@ override method @enumerationDeclarationAST enterInContext
 #---------------- Infix operators
   enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
 #---------------- Insert enumeration in type map
-  let enumerationType = @PLMType.new {
+  let enumerationType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: {}
     !routineMap: routineMap
@@ -152,7 +152,7 @@ override method @enumerationDeclarationAST enterInContext
     !subscript:.noSubscript
     !assignmentSources: {!mEnumerationName}
     !attributes:.instanciable | .equatable | .copyable
-    !plmTypeDescriptionName: mEnumerationName
+    !omnibusTypeDescriptionName: mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
     !llvmBaseTypeName: mEnumerationName
   }

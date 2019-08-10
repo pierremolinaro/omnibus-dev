@@ -78,7 +78,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -93,7 +93,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #--- Type kind
   let iteratedType = [iteratedObjectPointer type]
 #--- Get iterated element type
-  @PLMType iteratedElementType
+  @omnibusType iteratedElementType
   switch iteratedType.subscript
   case noSubscript :
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
@@ -103,12 +103,12 @@ override method @forInstructionAST instructionSemanticAnalysis
     iteratedElementType = elementType
   end
 #---
-  let plmName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let omnibusName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  ioAllocaList += !llvmNameForLocalVariable (!plmName) !iteratedElementType !false
+  ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !iteratedElementType !false
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
-  [!?ioUniversalMap insertLocalConstant !mVarName !false !iteratedElementType !plmName]
+  [!?ioUniversalMap insertLocalConstant !mVarName !false !iteratedElementType !omnibusName]
 #------------------------------------ Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
   [mWhileExpression analyzeExpression
@@ -152,7 +152,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   case noSubscript :
   case literalString :
     ioInstructionGenerationList += !@forInstructionOnLiteralStringIR.new {
-      !plmName
+      !omnibusName
       !mIteratedObject.location
       !iteratedObjectPointer
       !iteratedType
@@ -167,7 +167,7 @@ override method @forInstructionAST instructionSemanticAnalysis
       [ioTemporaries.mStaticArrayMapForTemporaries searchKey !mIteratedObject ?invokedFunctionSet]
     end
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
-      !plmName
+      !omnibusName
       !mIteratedObject
       !iteratedObjectPointer
       !whileExpression_GenerationList
@@ -191,7 +191,7 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
   @instructionListIR mWhileInstructionList
   @objectIR mWhileExpressionResult
   @instructionListIR mDoInstructionList
-  @PLMType mElementType
+  @omnibusType mElementType
   @uint mArraySize
   @stringset mInvokedFunctionSet
 }
@@ -321,7 +321,7 @@ class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
   @string mVarName
   @location mLocation
   @objectIR mStringElementIteratedObject
-  @PLMType mLiteralStringType
+  @omnibusType mLiteralStringType
   @instructionListIR mWhileInstructionList
   @objectIR mWhileExpressionResult
   @instructionListIR mDoInstructionList

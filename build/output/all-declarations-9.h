@@ -116,13 +116,13 @@ class GALGAS_string function_instantiableAttribute (class C_Compiler * inCompile
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Function 'registerGroupNameFromPLMname'                                       *
+//                                     Function 'registerGroupNameFromOmnibusName'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_registerGroupNameFromPLMname (const class GALGAS_lstring & constinArgument0,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_registerGroupNameFromOmnibusName (const class GALGAS_lstring & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -264,13 +264,13 @@ class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Function 'plmTypeSpecificNameForDriver'                                       *
+//                                     Function 'omnibusTypeSpecificNameForDriver'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_plmTypeSpecificNameForDriver (const class GALGAS_lstring & constinArgument0,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_omnibusTypeSpecificNameForDriver (const class GALGAS_lstring & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -284,13 +284,13 @@ void routine_retainRequiredDrivers (class GALGAS_ast & ioArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         Function 'plmNameForStaticListType'                                         *
+//                                       Function 'omnibusNameForStaticListType'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_plmNameForStaticListType (const class GALGAS_lstring & constinArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_omnibusNameForStaticListType (const class GALGAS_lstring & constinArgument0,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -304,13 +304,13 @@ class GALGAS_lstring function_llvmNameForStaticListType (const class GALGAS_lstr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Function 'plmNameForStaticListElementType'                                      *
+//                                   Function 'omnibusNameForStaticListElementType'                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_plmNameForStaticListElementType (const class GALGAS_lstring & constinArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_omnibusNameForStaticListElementType (const class GALGAS_lstring & constinArgument0,
+                                                                   class C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -332,7 +332,7 @@ class GALGAS_string function_checkModeAndReturnsRoutineLLVMName (const class GAL
 
 class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
                                                     const class GALGAS_string & constinArgument1,
-                                                    const class GALGAS_PLMType & constinArgument2,
+                                                    const class GALGAS_omnibusType & constinArgument2,
                                                     const class GALGAS_routineFormalArgumentListIR & constinArgument3,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
@@ -402,12 +402,12 @@ void routine_routineTypedSignature_32_ (class GALGAS_unifiedTypeMap inArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Function 'acceptVariablePLMName'                                           *
+//                                        Function 'acceptVariableOmnibusName'                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_acceptVariablePLMName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_acceptVariableOmnibusName (class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -415,7 +415,7 @@ class GALGAS_string function_acceptVariablePLMName (class C_Compiler * inCompile
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeEffectiveParameters (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
                                          const class GALGAS_routineAttributes constinArgument1,
                                          const class GALGAS_routineTypedSignature constinArgument2,
                                          const class GALGAS_effectiveArgumentListAST constinArgument3,

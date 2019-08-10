@@ -110,7 +110,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
 
 list @allocaList {
   @string mVarLLVMName
-  @PLMType mLLVMType
+  @omnibusType mLLVMType
   @bool mFormalInputArgument
 }
 
@@ -134,13 +134,13 @@ method @allocaList generateAllocaList ?!@string ioLLVMcode {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @regularRoutineIR : @abstractRoutineIR {
-  @PLMType mReceiverType # .void if standalone function
+  @omnibusType mReceiverType # .void if standalone function
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mExportedFunction # Function is not tagged with internal
   @routineKind mKind
-  @PLMType mReturnType # .void if no return value
+  @omnibusType mReturnType # .void if no return value
   @bool mAppendFileAndLineArgumentForPanicLocation
 }
 

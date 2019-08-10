@@ -10,64 +10,91 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Extension getter '@PLMType descriptionForHTMLFile'                                  *
+//                                   Extension method '@omnibusType generateRelease'                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_string (*enterExtensionGetter_PLMType_descriptionForHTMLFile) (const class cPtr_PLMType * inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_omnibusType_generateRelease) (const class cPtr_omnibusType * inObject,
+                                                                      const class GALGAS_string constinArgument0,
+                                                                      class GALGAS_string & ioArgument1,
+                                                                      class GALGAS_generationAdds & ioArgument2,
+                                                                      class C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateRelease (const int32_t inClassIndex,
+                                           extensionMethodSignature_omnibusType_generateRelease inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateRelease (const class cPtr_omnibusType * inObject,
+                                          const GALGAS_string constin_inOmnibusName,
+                                          GALGAS_string & io_ioLLVMcode,
+                                          GALGAS_generationAdds & io_ioGenerationAdds,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               Extension getter '@omnibusType descriptionForHTMLFile'                                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef class GALGAS_string (*enterExtensionGetter_omnibusType_descriptionForHTMLFile) (const class cPtr_omnibusType * inObject,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_descriptionForHTMLFile (const int32_t inClassIndex,
-                                                  enterExtensionGetter_PLMType_descriptionForHTMLFile inGetter) ;
+                                                  enterExtensionGetter_omnibusType_descriptionForHTMLFile inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string callExtensionGetter_descriptionForHTMLFile (const cPtr_PLMType * inObject,
+class GALGAS_string callExtensionGetter_descriptionForHTMLFile (const cPtr_omnibusType * inObject,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Extension getter '@PLMType defaultAlignment'                                     *
+//                                  Extension getter '@omnibusType defaultAlignment'                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_uint (*enterExtensionGetter_PLMType_defaultAlignment) (const class cPtr_PLMType * inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_uint (*enterExtensionGetter_omnibusType_defaultAlignment) (const class cPtr_omnibusType * inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_defaultAlignment (const int32_t inClassIndex,
-                                            enterExtensionGetter_PLMType_defaultAlignment inGetter) ;
+                                            enterExtensionGetter_omnibusType_defaultAlignment inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_uint callExtensionGetter_defaultAlignment (const cPtr_PLMType * inObject,
+class GALGAS_uint callExtensionGetter_defaultAlignment (const cPtr_omnibusType * inObject,
                                                         class C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      Extension getter '@PLMType deinitNeeded'                                       *
+//                                    Extension getter '@omnibusType deinitNeeded'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_bool (*enterExtensionGetter_PLMType_deinitNeeded) (const class cPtr_PLMType * inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_deinitNeeded) (const class cPtr_omnibusType * inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_deinitNeeded (const int32_t inClassIndex,
-                                        enterExtensionGetter_PLMType_deinitNeeded inGetter) ;
+                                        enterExtensionGetter_omnibusType_deinitNeeded inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_bool callExtensionGetter_deinitNeeded (const cPtr_PLMType * inObject,
+class GALGAS_bool callExtensionGetter_deinitNeeded (const cPtr_omnibusType * inObject,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -598,7 +625,7 @@ class GALGAS_sizeofInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_sizeofInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                    const class GALGAS_PLMType & inOperand1
+                                                                    const class GALGAS_omnibusType & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -610,7 +637,7 @@ class GALGAS_sizeofInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mSourceType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mSourceType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
@@ -634,11 +661,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofInstructionIR
 class cPtr_sizeofInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectIR mProperty_mTarget ;
-  public : GALGAS_PLMType mProperty_mSourceType ;
+  public : GALGAS_omnibusType mProperty_mSourceType ;
 
 //--- Constructor
   public : cPtr_sizeofInstructionIR (const GALGAS_objectIR & in_mTarget,
-                                     const GALGAS_PLMType & in_mSourceType
+                                     const GALGAS_omnibusType & in_mSourceType
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -646,7 +673,7 @@ class cPtr_sizeofInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mSourceType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mSourceType (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -669,7 +696,7 @@ typedef void (*extensionMethodSignature_infixOperatorDescription_generateInfixOp
                                                                                              const class GALGAS_objectIR constinArgument2,
                                                                                              const class GALGAS_location constinArgument3,
                                                                                              const class GALGAS_objectIR constinArgument4,
-                                                                                             const class GALGAS_PLMType constinArgument5,
+                                                                                             const class GALGAS_omnibusType constinArgument5,
                                                                                              class GALGAS_objectIR & outArgument6,
                                                                                              class C_Compiler * inCompiler
                                                                                              COMMA_LOCATION_ARGS) ;
@@ -687,7 +714,7 @@ void callExtensionMethod_generateInfixOperatorCode (const class cPtr_infixOperat
                                                     const GALGAS_objectIR constin_inLeftOperand,
                                                     const GALGAS_location constin_inOperatorLocation,
                                                     const GALGAS_objectIR constin_inRightOperand,
-                                                    const GALGAS_PLMType constin_inResultType,
+                                                    const GALGAS_omnibusType constin_inResultType,
                                                     GALGAS_objectIR & out_outResultValue,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
@@ -724,9 +751,9 @@ class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infix
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionNoSelf) (const class cPtr_primaryInExpressionAST * inObject,
-                                                                                                const class GALGAS_PLMType constinArgument0,
+                                                                                                const class GALGAS_omnibusType constinArgument0,
                                                                                                 const class GALGAS_routineAttributes constinArgument1,
-                                                                                                const class GALGAS_PLMType constinArgument2,
+                                                                                                const class GALGAS_omnibusType constinArgument2,
                                                                                                 const class GALGAS_semanticContext constinArgument3,
                                                                                                 const class GALGAS_mode constinArgument4,
                                                                                                 class GALGAS_semanticTemporariesStruct & ioArgument5,
@@ -746,9 +773,9 @@ void enterExtensionMethod_analyzePrimaryExpressionNoSelf (const int32_t inClassI
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primaryInExpressionAST * inObject,
-                                                         const GALGAS_PLMType constin_inSelfType,
+                                                         const GALGAS_omnibusType constin_inSelfType,
                                                          const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                         const GALGAS_PLMType constin_inOptionalTargetType,
+                                                         const GALGAS_omnibusType constin_inOptionalTargetType,
                                                          const GALGAS_semanticContext constin_inContext,
                                                          const GALGAS_mode constin_inMode,
                                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
@@ -766,9 +793,9 @@ void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primar
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType constinArgument0,
+void routine_procAnalyzeAccesListInExpression (const class GALGAS_omnibusType constinArgument0,
                                                const class GALGAS_routineAttributes constinArgument1,
-                                               const class GALGAS_PLMType constinArgument2,
+                                               const class GALGAS_omnibusType constinArgument2,
                                                const class GALGAS_semanticContext constinArgument3,
                                                const class GALGAS_mode constinArgument4,
                                                class GALGAS_semanticTemporariesStruct & ioArgument5,
@@ -788,9 +815,9 @@ void routine_procAnalyzeAccesListInExpression (const class GALGAS_PLMType consti
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionWithSelf) (const class cPtr_primaryInExpressionAST * inObject,
-                                                                                                  const class GALGAS_PLMType constinArgument0,
+                                                                                                  const class GALGAS_omnibusType constinArgument0,
                                                                                                   const class GALGAS_routineAttributes constinArgument1,
-                                                                                                  const class GALGAS_PLMType constinArgument2,
+                                                                                                  const class GALGAS_omnibusType constinArgument2,
                                                                                                   const class GALGAS_semanticContext constinArgument3,
                                                                                                   const class GALGAS_mode constinArgument4,
                                                                                                   class GALGAS_semanticTemporariesStruct & ioArgument5,
@@ -810,9 +837,9 @@ void enterExtensionMethod_analyzePrimaryExpressionWithSelf (const int32_t inClas
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_primaryInExpressionAST * inObject,
-                                                           const GALGAS_PLMType constin_inSelfType,
+                                                           const GALGAS_omnibusType constin_inSelfType,
                                                            const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                           const GALGAS_PLMType constin_inOptionalTargetType,
+                                                           const GALGAS_omnibusType constin_inOptionalTargetType,
                                                            const GALGAS_semanticContext constin_inContext,
                                                            const GALGAS_mode constin_inMode,
                                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
@@ -834,9 +861,9 @@ void routine_handleArrayAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                             const class GALGAS_expressionAST constinArgument1,
                                             const class GALGAS_location constinArgument2,
                                             const class GALGAS_bool constinArgument3,
-                                            const class GALGAS_PLMType constinArgument4,
+                                            const class GALGAS_omnibusType constinArgument4,
                                             const class GALGAS_routineAttributes constinArgument5,
-                                            const class GALGAS_PLMType constinArgument6,
+                                            const class GALGAS_omnibusType constinArgument6,
                                             const class GALGAS_semanticContext constinArgument7,
                                             const class GALGAS_mode constinArgument8,
                                             class GALGAS_semanticTemporariesStruct & ioArgument9,
@@ -855,7 +882,7 @@ void routine_handleArrayAccessInExpression (class GALGAS_objectIR & ioArgument0,
 
 void routine_handleFunctionCallInExpression (const class GALGAS_lstring constinArgument0,
                                              class GALGAS_objectIR & ioArgument1,
-                                             const class GALGAS_PLMType constinArgument2,
+                                             const class GALGAS_omnibusType constinArgument2,
                                              const class GALGAS_semanticContext constinArgument3,
                                              const class GALGAS_mode constinArgument4,
                                              const class GALGAS_routineAttributes constinArgument5,
@@ -905,7 +932,7 @@ void routine_handleSliceInExpression (const class GALGAS_semanticContext constin
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_analyzeLValueInAssignment (const class GALGAS_LValueAST inObject,
-                                                const class GALGAS_PLMType constin_inSelfType,
+                                                const class GALGAS_omnibusType constin_inSelfType,
                                                 const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                                 const class GALGAS_semanticContext constin_inContext,
                                                 const class GALGAS_mode constin_inMode,
@@ -925,7 +952,7 @@ void extensionMethod_analyzeLValueInAssignment (const class GALGAS_LValueAST inO
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeSelfLValueInAssignment (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeSelfLValueInAssignment (const class GALGAS_omnibusType constinArgument0,
                                             const class GALGAS_routineAttributes constinArgument1,
                                             const class GALGAS_semanticContext constinArgument2,
                                             const class GALGAS_mode constinArgument3,
@@ -946,7 +973,7 @@ void routine_analyzeSelfLValueInAssignment (const class GALGAS_PLMType constinAr
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeVariableInLValueInAssignment (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeVariableInLValueInAssignment (const class GALGAS_omnibusType constinArgument0,
                                                   const class GALGAS_routineAttributes constinArgument1,
                                                   const class GALGAS_semanticContext constinArgument2,
                                                   const class GALGAS_mode constinArgument3,
@@ -958,7 +985,7 @@ void routine_analyzeVariableInLValueInAssignment (const class GALGAS_PLMType con
                                                   class GALGAS_instructionListListIR & ioArgument9,
                                                   const class GALGAS_lstring constinArgument10,
                                                   const class GALGAS_string constinArgument11,
-                                                  const class GALGAS_PLMType constinArgument12,
+                                                  const class GALGAS_omnibusType constinArgument12,
                                                   const class GALGAS_LValueOperandAST constinArgument13,
                                                   class GALGAS_LValueRepresentation & outArgument14,
                                                   class C_Compiler * inCompiler
@@ -997,7 +1024,7 @@ class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
                                                                         const class GALGAS_instructionListIR & inOperand3,
                                                                         const class GALGAS_objectIR & inOperand4,
                                                                         const class GALGAS_instructionListIR & inOperand5,
-                                                                        const class GALGAS_PLMType & inOperand6,
+                                                                        const class GALGAS_omnibusType & inOperand6,
                                                                         const class GALGAS_uint & inOperand7,
                                                                         const class GALGAS_stringset & inOperand8
                                                                         COMMA_LOCATION_ARGS) ;
@@ -1015,7 +1042,7 @@ class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mEnumeratedValueName (LOCATION_ARGS) const ;
 
@@ -1054,7 +1081,7 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
   public : GALGAS_instructionListIR mProperty_mWhileInstructionList ;
   public : GALGAS_objectIR mProperty_mWhileExpressionResult ;
   public : GALGAS_instructionListIR mProperty_mDoInstructionList ;
-  public : GALGAS_PLMType mProperty_mElementType ;
+  public : GALGAS_omnibusType mProperty_mElementType ;
   public : GALGAS_uint mProperty_mArraySize ;
   public : GALGAS_stringset mProperty_mInvokedFunctionSet ;
 
@@ -1065,7 +1092,7 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
                                          const GALGAS_instructionListIR & in_mWhileInstructionList,
                                          const GALGAS_objectIR & in_mWhileExpressionResult,
                                          const GALGAS_instructionListIR & in_mDoInstructionList,
-                                         const GALGAS_PLMType & in_mElementType,
+                                         const GALGAS_omnibusType & in_mElementType,
                                          const GALGAS_uint & in_mArraySize,
                                          const GALGAS_stringset & in_mInvokedFunctionSet
                                          COMMA_LOCATION_ARGS) ;
@@ -1080,7 +1107,7 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mWhileInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mWhileExpressionResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_stringset getter_mInvokedFunctionSet (LOCATION_ARGS) const ;
 //--- Description
@@ -1123,7 +1150,7 @@ class GALGAS_forInstructionOnLiteralStringIR : public GALGAS_abstractInstruction
   public : static class GALGAS_forInstructionOnLiteralStringIR constructor_new (const class GALGAS_string & inOperand0,
                                                                                 const class GALGAS_location & inOperand1,
                                                                                 const class GALGAS_objectIR & inOperand2,
-                                                                                const class GALGAS_PLMType & inOperand3,
+                                                                                const class GALGAS_omnibusType & inOperand3,
                                                                                 const class GALGAS_instructionListIR & inOperand4,
                                                                                 const class GALGAS_objectIR & inOperand5,
                                                                                 const class GALGAS_instructionListIR & inOperand6
@@ -1140,7 +1167,7 @@ class GALGAS_forInstructionOnLiteralStringIR : public GALGAS_abstractInstruction
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mLiteralStringType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mLiteralStringType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
@@ -1174,7 +1201,7 @@ class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mProperty_mVarName ;
   public : GALGAS_location mProperty_mLocation ;
   public : GALGAS_objectIR mProperty_mStringElementIteratedObject ;
-  public : GALGAS_PLMType mProperty_mLiteralStringType ;
+  public : GALGAS_omnibusType mProperty_mLiteralStringType ;
   public : GALGAS_instructionListIR mProperty_mWhileInstructionList ;
   public : GALGAS_objectIR mProperty_mWhileExpressionResult ;
   public : GALGAS_instructionListIR mProperty_mDoInstructionList ;
@@ -1183,7 +1210,7 @@ class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
   public : cPtr_forInstructionOnLiteralStringIR (const GALGAS_string & in_mVarName,
                                                  const GALGAS_location & in_mLocation,
                                                  const GALGAS_objectIR & in_mStringElementIteratedObject,
-                                                 const GALGAS_PLMType & in_mLiteralStringType,
+                                                 const GALGAS_omnibusType & in_mLiteralStringType,
                                                  const GALGAS_instructionListIR & in_mWhileInstructionList,
                                                  const GALGAS_objectIR & in_mWhileExpressionResult,
                                                  const GALGAS_instructionListIR & in_mDoInstructionList
@@ -1196,7 +1223,7 @@ class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mStringElementIteratedObject (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mLiteralStringType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mLiteralStringType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mWhileInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mWhileExpressionResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;
@@ -1238,7 +1265,7 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_forLowerUpperBoundInstructionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                                const class GALGAS_PLMType & inOperand1,
+                                                                                const class GALGAS_omnibusType & inOperand1,
                                                                                 const class GALGAS_bool & inOperand2,
                                                                                 const class GALGAS_location & inOperand3,
                                                                                 const class GALGAS_objectIR & inOperand4,
@@ -1261,7 +1288,7 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mLowerExpressionResult (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mUnsigned (LOCATION_ARGS) const ;
 
@@ -1289,7 +1316,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundI
 class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mProperty_mVarName ;
-  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_omnibusType mProperty_mType ;
   public : GALGAS_bool mProperty_mUnsigned ;
   public : GALGAS_location mProperty_mLocation ;
   public : GALGAS_objectIR mProperty_mLowerExpressionResult ;
@@ -1298,7 +1325,7 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Constructor
   public : cPtr_forLowerUpperBoundInstructionIR (const GALGAS_string & in_mVarName,
-                                                 const GALGAS_PLMType & in_mType,
+                                                 const GALGAS_omnibusType & in_mType,
                                                  const GALGAS_bool & in_mUnsigned,
                                                  const GALGAS_location & in_mLocation,
                                                  const GALGAS_objectIR & in_mLowerExpressionResult,
@@ -1311,7 +1338,7 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mUnsigned (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mLowerExpressionResult (LOCATION_ARGS) const ;
@@ -1356,7 +1383,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
-                                    const class GALGAS_PLMType constin_inSelfType,
+                                    const class GALGAS_omnibusType constin_inSelfType,
                                     const class GALGAS_bool constin_inIsAddressOf,
                                     const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                     const class GALGAS_semanticContext constin_inContext,
@@ -1376,7 +1403,7 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeSelfLValue (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeSelfLValue (const class GALGAS_omnibusType constinArgument0,
                                 const class GALGAS_routineAttributes constinArgument1,
                                 const class GALGAS_semanticContext constinArgument2,
                                 const class GALGAS_mode constinArgument3,
@@ -1396,7 +1423,7 @@ void routine_analyzeSelfLValue (const class GALGAS_PLMType constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument0,
+void routine_analyzeVariableInLValue (const class GALGAS_omnibusType constinArgument0,
                                       const class GALGAS_bool constinArgument1,
                                       const class GALGAS_routineAttributes constinArgument2,
                                       const class GALGAS_semanticContext constinArgument3,
@@ -1408,7 +1435,7 @@ void routine_analyzeVariableInLValue (const class GALGAS_PLMType constinArgument
                                       class GALGAS_instructionListIR & ioArgument9,
                                       const class GALGAS_lstring constinArgument10,
                                       const class GALGAS_string constinArgument11,
-                                      const class GALGAS_PLMType constinArgument12,
+                                      const class GALGAS_omnibusType constinArgument12,
                                       const class GALGAS_LValueOperandAST constinArgument13,
                                       class GALGAS_LValueRepresentation & outArgument14,
                                       class C_Compiler * inCompiler
@@ -1445,7 +1472,7 @@ void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_co
 
 void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_controlRegisterLValueAST inObject,
                                                             const class GALGAS_bool constin_inWriteAccess,
-                                                            const class GALGAS_PLMType constin_inSelfType,
+                                                            const class GALGAS_omnibusType constin_inSelfType,
                                                             const class GALGAS_routineAttributes constin_inRoutineAttributes,
                                                             const class GALGAS_semanticContext constin_inContext,
                                                             const class GALGAS_mode constin_inMode,
@@ -1454,7 +1481,7 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_c
                                                             class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
                                                             class GALGAS_allocaList & io_ioAllocaList,
                                                             class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                            class GALGAS_PLMType & out_outRegisterType,
+                                                            class GALGAS_omnibusType & out_outRegisterType,
                                                             class GALGAS_uint & out_outRegisterTypeBitCount,
                                                             class GALGAS_sliceMap & out_outSliceMap,
                                                             class GALGAS_string & out_outllvmRegisterAddressName,
@@ -1467,7 +1494,7 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_c
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument0,
+void routine_handleArraySubscriptNew (const class GALGAS_omnibusType constinArgument0,
                                       const class GALGAS_routineAttributes constinArgument1,
                                       const class GALGAS_semanticContext constinArgument2,
                                       const class GALGAS_mode constinArgument3,
@@ -1479,7 +1506,7 @@ void routine_handleArraySubscriptNew (const class GALGAS_PLMType constinArgument
                                       const class GALGAS_location constinArgument9,
                                       const class GALGAS_bool constinArgument10,
                                       const class GALGAS_bigint constinArgument11,
-                                      const class GALGAS_PLMType constinArgument12,
+                                      const class GALGAS_omnibusType constinArgument12,
                                       class GALGAS_instructionListIR & ioArgument13,
                                       class GALGAS_objectIR & outArgument14,
                                       class C_Compiler * inCompiler

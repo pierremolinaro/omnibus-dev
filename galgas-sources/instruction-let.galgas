@@ -55,7 +55,7 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -65,7 +65,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  let @PLMType targetType = if mOptionalTypeName.string == ""
+  let @omnibusType targetType = if mOptionalTypeName.string == ""
     then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
   end
@@ -97,20 +97,20 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   drop targetType
 #---
   if not [[result type] instanciable] then
-    error mConstantName : [result plmTypeDescriptionName] + " type is not instanciable" : result
+    error mConstantName : [result omnibusTypeDescriptionName] + " type is not instanciable" : result
   end
 #--- Declare local constant
-  let plmName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
+  let omnibusName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
   ioTemporaries.mTemporaryIndex ++
-  if [result plmTypeDescriptionName] != staticIntegerTypeName () then
-    ioAllocaList += !llvmNameForLocalVariable (!plmName) ![result type] !false
+  if [result omnibusTypeDescriptionName] != staticIntegerTypeName () then
+    ioAllocaList += !llvmNameForLocalVariable (!omnibusName) ![result type] !false
     [!?ioInstructionGenerationList appendStoreTemporaryReference
       ![result type]
-      !llvmNameForLocalVariable (!plmName)
+      !llvmNameForLocalVariable (!omnibusName)
       !result
     ]
   end
-  [!?ioUniversalMap insertLocalConstant !mConstantName !false ![result type] !plmName]
+  [!?ioUniversalMap insertLocalConstant !mConstantName !false ![result type] !omnibusName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

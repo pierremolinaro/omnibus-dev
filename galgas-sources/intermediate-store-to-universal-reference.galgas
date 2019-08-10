@@ -3,7 +3,7 @@
 
 setter @instructionListIR appendStoreToUniversalReference
   ?let @string inLLVMVarName
-  ?let @PLMType inTargetVarType
+  ?let @omnibusType inTargetVarType
   ?let @objectIR inSourceValue
 {
   self += !@storeToUniversalReferenceIR.new {!inLLVMVarName !inTargetVarType !inSourceValue}
@@ -13,7 +13,7 @@ setter @instructionListIR appendStoreToUniversalReference
 
 class @storeToUniversalReferenceIR : @abstractInstructionIR {
   @string mLLVMTargetVarName
-  @PLMType mTargetVarType
+  @omnibusType mTargetVarType
   @objectIR mSourceValue
 }
 

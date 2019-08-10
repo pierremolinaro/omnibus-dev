@@ -651,7 +651,7 @@ class GALGAS_structureTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
   public : static class GALGAS_structureTypeAssignFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
                                                                               const class GALGAS_bool & inOperand1,
                                                                               const class GALGAS_bool & inOperand2,
-                                                                              const class GALGAS_PLMType & inOperand3
+                                                                              const class GALGAS_omnibusType & inOperand3
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -663,7 +663,7 @@ class GALGAS_structureTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mStructureType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mStructureType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -684,20 +684,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureTypeAssign
 
 class cPtr_structureTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mStructureType ;
+  public : GALGAS_omnibusType mProperty_mStructureType ;
 
 //--- Constructor
   public : cPtr_structureTypeAssignFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
                                                const GALGAS_bool & in_isRequired,
                                                const GALGAS_bool & in_warnsIfUnused,
-                                               const GALGAS_PLMType & in_mStructureType
+                                               const GALGAS_omnibusType & in_mStructureType
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mStructureType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mStructureType (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2020,7 +2020,7 @@ class GALGAS_guardUserRoutineIR : public GALGAS_abstractRoutineIR {
                                                                    const class GALGAS_bool & inOperand2,
                                                                    const class GALGAS_string & inOperand3,
                                                                    const class GALGAS_routineFormalArgumentListIR & inOperand4,
-                                                                   const class GALGAS_PLMType & inOperand5,
+                                                                   const class GALGAS_omnibusType & inOperand5,
                                                                    const class GALGAS_guardKindGenerationIR & inOperand6
                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -2039,7 +2039,7 @@ class GALGAS_guardUserRoutineIR : public GALGAS_abstractRoutineIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mMangledImplementationGuardName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mReceiverType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mReceiverType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2062,7 +2062,7 @@ class cPtr_guardUserRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
   public : GALGAS_string mProperty_mMangledImplementationGuardName ;
   public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_PLMType mProperty_mReceiverType ;
+  public : GALGAS_omnibusType mProperty_mReceiverType ;
   public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
 
 //--- Constructor
@@ -2071,7 +2071,7 @@ class cPtr_guardUserRoutineIR : public cPtr_abstractRoutineIR {
                                     const GALGAS_bool & in_warnsIfUnused,
                                     const GALGAS_string & in_mMangledImplementationGuardName,
                                     const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                    const GALGAS_PLMType & in_mReceiverType,
+                                    const GALGAS_omnibusType & in_mReceiverType,
                                     const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR
                                     COMMA_LOCATION_ARGS) ;
 
@@ -2081,7 +2081,7 @@ class cPtr_guardUserRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mMangledImplementationGuardName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mReceiverType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mReceiverType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIR (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2124,7 +2124,7 @@ class GALGAS_guardImplementationRoutineIR : public GALGAS_abstractRoutineIR {
                                                                              const class GALGAS_bool & inOperand1,
                                                                              const class GALGAS_bool & inOperand2,
                                                                              const class GALGAS_routineFormalArgumentListIR & inOperand3,
-                                                                             const class GALGAS_PLMType & inOperand4,
+                                                                             const class GALGAS_omnibusType & inOperand4,
                                                                              const class GALGAS_guardKindGenerationIR & inOperand5,
                                                                              const class GALGAS_allocaList & inOperand6,
                                                                              const class GALGAS_instructionListIR & inOperand7
@@ -2147,7 +2147,7 @@ class GALGAS_guardImplementationRoutineIR : public GALGAS_abstractRoutineIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mReceiverType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mReceiverType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2169,7 +2169,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardImplementation
 class cPtr_guardImplementationRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
   public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_PLMType mProperty_mReceiverType ;
+  public : GALGAS_omnibusType mProperty_mReceiverType ;
   public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
   public : GALGAS_allocaList mProperty_mAllocaList ;
   public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
@@ -2179,7 +2179,7 @@ class cPtr_guardImplementationRoutineIR : public cPtr_abstractRoutineIR {
                                               const GALGAS_bool & in_isRequired,
                                               const GALGAS_bool & in_warnsIfUnused,
                                               const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                              const GALGAS_PLMType & in_mReceiverType,
+                                              const GALGAS_omnibusType & in_mReceiverType,
                                               const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                               const GALGAS_allocaList & in_mAllocaList,
                                               const GALGAS_instructionListIR & in_mInstructionGenerationList
@@ -2190,7 +2190,7 @@ class cPtr_guardImplementationRoutineIR : public cPtr_abstractRoutineIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mReceiverType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mReceiverType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIR (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
@@ -2245,13 +2245,13 @@ class GALGAS_regularRoutineIR : public GALGAS_abstractRoutineIR {
   public : static class GALGAS_regularRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
                                                                  const class GALGAS_bool & inOperand1,
                                                                  const class GALGAS_bool & inOperand2,
-                                                                 const class GALGAS_PLMType & inOperand3,
+                                                                 const class GALGAS_omnibusType & inOperand3,
                                                                  const class GALGAS_routineFormalArgumentListIR & inOperand4,
                                                                  const class GALGAS_allocaList & inOperand5,
                                                                  const class GALGAS_instructionListIR & inOperand6,
                                                                  const class GALGAS_bool & inOperand7,
                                                                  const class GALGAS_routineKind & inOperand8,
-                                                                 const class GALGAS_PLMType & inOperand9,
+                                                                 const class GALGAS_omnibusType & inOperand9,
                                                                  const class GALGAS_bool & inOperand10
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -2276,9 +2276,9 @@ class GALGAS_regularRoutineIR : public GALGAS_abstractRoutineIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mKind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mReceiverType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mReceiverType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mReturnType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mReturnType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2299,26 +2299,26 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_regularRoutineIR ;
 
 class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public : GALGAS_PLMType mProperty_mReceiverType ;
+  public : GALGAS_omnibusType mProperty_mReceiverType ;
   public : GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
   public : GALGAS_allocaList mProperty_mAllocaList ;
   public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
   public : GALGAS_bool mProperty_mExportedFunction ;
   public : GALGAS_routineKind mProperty_mKind ;
-  public : GALGAS_PLMType mProperty_mReturnType ;
+  public : GALGAS_omnibusType mProperty_mReturnType ;
   public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
   public : cPtr_regularRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
                                   const GALGAS_bool & in_isRequired,
                                   const GALGAS_bool & in_warnsIfUnused,
-                                  const GALGAS_PLMType & in_mReceiverType,
+                                  const GALGAS_omnibusType & in_mReceiverType,
                                   const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                   const GALGAS_allocaList & in_mAllocaList,
                                   const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                   const GALGAS_bool & in_mExportedFunction,
                                   const GALGAS_routineKind & in_mKind,
-                                  const GALGAS_PLMType & in_mReturnType,
+                                  const GALGAS_omnibusType & in_mReturnType,
                                   const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                   COMMA_LOCATION_ARGS) ;
 
@@ -2326,13 +2326,13 @@ class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mReceiverType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mReceiverType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mExportedFunction (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineKind getter_mKind (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_PLMType getter_mReturnType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mReturnType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2353,7 +2353,7 @@ class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
 void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObject,
                                    const class GALGAS_lstring constin_inDriverName,
                                    const class GALGAS_bool constin_inIsInstancied,
-                                   const class GALGAS_PLMType constin_inDriverType,
+                                   const class GALGAS_omnibusType constin_inDriverType,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -2377,7 +2377,7 @@ void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap
 
 void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjectMap & ioObject,
                                                const class GALGAS_lstring constin_inSyncInstanceName,
-                                               const class GALGAS_PLMType constin_inType,
+                                               const class GALGAS_omnibusType constin_inType,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
@@ -2390,8 +2390,8 @@ void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjec
 void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalConstantName,
                                           const class GALGAS_bool constin_inIsFormalInputArgument,
-                                          const class GALGAS_PLMType constin_inType,
-                                          const class GALGAS_lstring constin_inPLMConstantName,
+                                          const class GALGAS_omnibusType constin_inType,
+                                          const class GALGAS_lstring constin_inOmnibusConstantName,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -2404,8 +2404,8 @@ void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap 
 void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                               const class GALGAS_lstring constin_inLocalConstantName,
                                               const class GALGAS_bool constin_inIsFormalInputArgument,
-                                              const class GALGAS_PLMType constin_inType,
-                                              const class GALGAS_lstring constin_inPLMConstantName,
+                                              const class GALGAS_omnibusType constin_inType,
+                                              const class GALGAS_lstring constin_inOmnibusConstantName,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
@@ -2417,8 +2417,8 @@ void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObject
 
 void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalVariableName,
-                                          const class GALGAS_PLMType constin_inType,
-                                          const class GALGAS_lstring constin_inPLMName,
+                                          const class GALGAS_omnibusType constin_inType,
+                                          const class GALGAS_lstring constin_inOmnibusName,
                                           const class GALGAS_valuedObjectState constin_inVariableInitialState,
                                           const class GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
                                           class C_Compiler * inCompiler
@@ -2514,9 +2514,9 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universa
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
-                                             const class GALGAS_PLMType constin_inSelfType,
+                                             const class GALGAS_omnibusType constin_inSelfType,
                                              const class GALGAS_LValueAST constin_inLValue,
-                                             class GALGAS_PLMType & out_outType,
+                                             class GALGAS_omnibusType & out_outType,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2527,7 +2527,7 @@ void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedO
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_getValuedObjectType (const class GALGAS_LValueOperandAST inObject,
-                                          class GALGAS_PLMType & io_ioType,
+                                          class GALGAS_omnibusType & io_ioType,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -2587,22 +2587,22 @@ void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObj
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Extension getter '@PLMType equatable'                                        *
+//                                      Extension getter '@omnibusType equatable'                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_bool (*enterExtensionGetter_PLMType_equatable) (const class cPtr_PLMType * inObject,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_equatable) (const class cPtr_omnibusType * inObject,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_equatable (const int32_t inClassIndex,
-                                     enterExtensionGetter_PLMType_equatable inGetter) ;
+                                     enterExtensionGetter_omnibusType_equatable inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_bool callExtensionGetter_equatable (const cPtr_PLMType * inObject,
+class GALGAS_bool callExtensionGetter_equatable (const cPtr_omnibusType * inObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -2618,22 +2618,22 @@ class GALGAS_bool extensionGetter_instanciable (const class GALGAS_unifiedTypeMa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      Extension getter '@PLMType instanciable'                                       *
+//                                    Extension getter '@omnibusType instanciable'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_bool (*enterExtensionGetter_PLMType_instanciable) (const class cPtr_PLMType * inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_instanciable) (const class cPtr_omnibusType * inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_instanciable (const int32_t inClassIndex,
-                                        enterExtensionGetter_PLMType_instanciable inGetter) ;
+                                        enterExtensionGetter_omnibusType_instanciable inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_bool callExtensionGetter_instanciable (const cPtr_PLMType * inObject,
+class GALGAS_bool callExtensionGetter_instanciable (const cPtr_omnibusType * inObject,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -2649,47 +2649,47 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Extension getter '@PLMType copyable'                                         *
+//                                      Extension getter '@omnibusType copyable'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_bool (*enterExtensionGetter_PLMType_copyable) (const class cPtr_PLMType * inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_copyable) (const class cPtr_omnibusType * inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_copyable (const int32_t inClassIndex,
-                                    enterExtensionGetter_PLMType_copyable inGetter) ;
+                                    enterExtensionGetter_omnibusType_copyable inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_bool callExtensionGetter_copyable (const cPtr_PLMType * inObject,
+class GALGAS_bool callExtensionGetter_copyable (const cPtr_omnibusType * inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Extension method '@PLMType generateRetain'                                      *
+//                                   Extension method '@omnibusType generateRetain'                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef void (*extensionMethodSignature_PLMType_generateRetain) (const class cPtr_PLMType * inObject,
-                                                                 const class GALGAS_string constinArgument0,
-                                                                 class GALGAS_string & ioArgument1,
-                                                                 class GALGAS_generationAdds & ioArgument2,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_omnibusType_generateRetain) (const class cPtr_omnibusType * inObject,
+                                                                     const class GALGAS_string constinArgument0,
+                                                                     class GALGAS_string & ioArgument1,
+                                                                     class GALGAS_generationAdds & ioArgument2,
+                                                                     class C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionMethod_generateRetain (const int32_t inClassIndex,
-                                          extensionMethodSignature_PLMType_generateRetain inMethod) ;
+                                          extensionMethodSignature_omnibusType_generateRetain inMethod) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void callExtensionMethod_generateRetain (const class cPtr_PLMType * inObject,
-                                         const GALGAS_string constin_inPLMName,
+void callExtensionMethod_generateRetain (const class cPtr_omnibusType * inObject,
+                                         const GALGAS_string constin_inOmnibusName,
                                          GALGAS_string & io_ioLLVMcode,
                                          GALGAS_generationAdds & io_ioGenerationAdds,
                                          C_Compiler * inCompiler
@@ -2697,78 +2697,51 @@ void callExtensionMethod_generateRetain (const class cPtr_PLMType * inObject,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         Extension getter '@PLMType arcList'                                         *
+//                                       Extension getter '@omnibusType arcList'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef class GALGAS_arcAssignmentList (*enterExtensionGetter_PLMType_arcList) (const class cPtr_PLMType * inObject,
-                                                                                const class GALGAS_uintlist constinArgument0,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_arcAssignmentList (*enterExtensionGetter_omnibusType_arcList) (const class cPtr_omnibusType * inObject,
+                                                                                    const class GALGAS_uintlist constinArgument0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionGetter_arcList (const int32_t inClassIndex,
-                                   enterExtensionGetter_PLMType_arcList inGetter) ;
+                                   enterExtensionGetter_omnibusType_arcList inGetter) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_arcAssignmentList callExtensionGetter_arcList (const cPtr_PLMType * inObject,
+class GALGAS_arcAssignmentList callExtensionGetter_arcList (const cPtr_omnibusType * inObject,
                                                             const GALGAS_uintlist constin_inPropertyIndexPath,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Extension method '@PLMType generateInsulate'                                     *
+//                                  Extension method '@omnibusType generateInsulate'                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typedef void (*extensionMethodSignature_PLMType_generateInsulate) (const class cPtr_PLMType * inObject,
-                                                                   const class GALGAS_string constinArgument0,
-                                                                   class GALGAS_string & ioArgument1,
-                                                                   class GALGAS_generationAdds & ioArgument2,
-                                                                   class C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_omnibusType_generateInsulate) (const class cPtr_omnibusType * inObject,
+                                                                       const class GALGAS_string constinArgument0,
+                                                                       class GALGAS_string & ioArgument1,
+                                                                       class GALGAS_generationAdds & ioArgument2,
+                                                                       class C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void enterExtensionMethod_generateInsulate (const int32_t inClassIndex,
-                                            extensionMethodSignature_PLMType_generateInsulate inMethod) ;
+                                            extensionMethodSignature_omnibusType_generateInsulate inMethod) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void callExtensionMethod_generateInsulate (const class cPtr_PLMType * inObject,
-                                           const GALGAS_string constin_inPLMName,
+void callExtensionMethod_generateInsulate (const class cPtr_omnibusType * inObject,
+                                           const GALGAS_string constin_inOmnibusName,
                                            GALGAS_string & io_ioLLVMcode,
                                            GALGAS_generationAdds & io_ioGenerationAdds,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Extension method '@PLMType generateRelease'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typedef void (*extensionMethodSignature_PLMType_generateRelease) (const class cPtr_PLMType * inObject,
-                                                                  const class GALGAS_string constinArgument0,
-                                                                  class GALGAS_string & ioArgument1,
-                                                                  class GALGAS_generationAdds & ioArgument2,
-                                                                  class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void enterExtensionMethod_generateRelease (const int32_t inClassIndex,
-                                           extensionMethodSignature_PLMType_generateRelease inMethod) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void callExtensionMethod_generateRelease (const class cPtr_PLMType * inObject,
-                                          const GALGAS_string constin_inPLMName,
-                                          GALGAS_string & io_ioLLVMcode,
-                                          GALGAS_generationAdds & io_ioGenerationAdds,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
 

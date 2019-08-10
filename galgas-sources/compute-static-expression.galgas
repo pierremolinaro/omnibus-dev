@@ -11,7 +11,7 @@ proc computeStaticExpression
   !result:@objectIR outStaticExpressionIR
 {
 #--- Get destination type
-  @PLMType annotationType
+  @omnibusType annotationType
   if inOptionalTypeName.string == "" then
     annotationType = voidType ()
   else

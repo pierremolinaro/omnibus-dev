@@ -199,7 +199,7 @@ override method @literal_literal_integerInfixOperation generateInfixOperatorCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
-  ?let @PLMType inResultType
+  ?let @omnibusType inResultType
   !@objectIR outResult
 {
   [inLeftOperand  literalInteger ?1* ?value:let @bigint leftValue]

@@ -67,7 +67,7 @@ override getter @syncToolInstanceDeclarationAST locationForErrorSignaling -> @lo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMap %selectors {
-  @PLMType type
+  @omnibusType type
   @objectIR initialValue
 
   insert insertKey error message "the '%K' global variable is already declared in %L"
@@ -88,7 +88,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Get sync type
-  @PLMType optionalSyncType
+  @omnibusType optionalSyncType
   if mSyncTypeName.string == "" then
     optionalSyncType = voidType ()
   else

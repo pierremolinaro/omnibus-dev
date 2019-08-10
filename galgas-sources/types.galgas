@@ -4,7 +4,7 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @PLMType {
+shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
   @propertySetterMap propertySetterMap %selector
   @routineMapCTXT routineMap %selector
@@ -13,8 +13,8 @@ shared class @PLMType {
   @guardMapCTXT guardMap %selector
   @subscript subscript %selector
   @stringset assignmentSources %selector
-  @PLMTypeAttributes attributes %selector # as instanciable, copyable, ...
-  @string plmTypeDescriptionName %selector # used for type checking and type display
+  @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
+  @string omnibusTypeDescriptionName %selector # used for type checking and type display
   @typeKind kind %selector
   @string llvmBaseTypeName %selector # used for type implementation
 }
@@ -23,7 +23,7 @@ shared class @PLMType {
 
 enum @subscript {
   case noSubscript
-  case staticSubscript (@PLMType elementType @bigint size)
+  case staticSubscript (@omnibusType elementType @bigint size)
   case literalString
   
   default noSubscript
@@ -32,7 +32,7 @@ enum @subscript {
 #·······················································································································
 
 enum @propertyGetterKind {
-  case storedProperty (@PLMType type @uint index)
+  case storedProperty (@omnibusType type @uint index)
   case computedProperty (@unifiedTypeMap-proxy typeProxy @routineLLVMNameDict modeDictionary)
   case constantProperty (@objectIR value)
 }
@@ -58,7 +58,7 @@ map @propertySetterMap {
 #·······················································································································
 
 enum @propertySetterKind {
-  case storedProperty (@PLMType type @uint index)
+  case storedProperty (@omnibusType type @uint index)
   case computedProperty (@unifiedTypeMap-proxy typeProxy
                          @routineLLVMNameDict getterModeDictionary
                          @routineLLVMNameDict setterModeDictionary)
@@ -66,7 +66,7 @@ enum @propertySetterKind {
 
 #·······················································································································
 
-boolset @PLMTypeAttributes {
+boolset @omnibusTypeAttributes {
   instanciable, equatable, copyable, comparable
 }
 
@@ -82,8 +82,8 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
-  case staticArrayType (@PLMType elementType @bigint size)
-  case dynamicArrayType (@PLMType elementType)
+  case staticArrayType (@omnibusType elementType @bigint size)
+  case dynamicArrayType (@omnibusType elementType)
   case function (@mode mode
                  @routineTypedSignature signature
                  @unifiedTypeMap-proxy returnTypeProxy)
@@ -92,7 +92,7 @@ enum @typeKind {
 
 #·······················································································································
 
-getter @PLMType llvmTypeName -> @string {
+getter @omnibusType llvmTypeName -> @string {
   switch self.kind
   case void :
     result = "void"
@@ -138,7 +138,7 @@ getter @PLMType llvmTypeName -> @string {
 
 #·······················································································································
 
-func %once literalIntegerType -> @PLMType {
+func %once literalIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
@@ -149,7 +149,7 @@ func %once literalIntegerType -> @PLMType {
     !subscript:.noSubscript
     !assignmentSources: {!staticIntegerTypeName ()}
     !attributes:.equatable | .copyable
-    !plmTypeDescriptionName:staticIntegerTypeName ()
+    !omnibusTypeDescriptionName:staticIntegerTypeName ()
     !kind:.staticInteger
     !llvmBaseTypeName:staticIntegerTypeName ()
   }
@@ -157,7 +157,7 @@ func %once literalIntegerType -> @PLMType {
 
 #·······················································································································
 
-func %once literalStringType -> @PLMType {
+func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
@@ -168,7 +168,7 @@ func %once literalStringType -> @PLMType {
     !subscript:.literalString
     !assignmentSources: {!staticStringTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
-    !plmTypeDescriptionName:staticStringTypeName () 
+    !omnibusTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString
     !llvmBaseTypeName:staticStringTypeName ()
   }
@@ -176,7 +176,7 @@ func %once literalStringType -> @PLMType {
 
 #·······················································································································
 
-func %once voidType -> @PLMType {
+func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
@@ -187,7 +187,7 @@ func %once voidType -> @PLMType {
     !subscript:.noSubscript
     !assignmentSources: {}
     !attributes:.none
-    !plmTypeDescriptionName:""
+    !omnibusTypeDescriptionName:""
     !kind:.void
     !llvmBaseTypeName:""
   }
@@ -195,7 +195,7 @@ func %once voidType -> @PLMType {
 
 #·······················································································································
 
-getter @PLMType equatable -> @bool {
+getter @omnibusType equatable -> @bool {
   result = [attributes equatable]
 }
 
@@ -207,7 +207,7 @@ getter @unifiedTypeMap-proxy instanciable -> @bool {
 
 #·······················································································································
 
-getter @PLMType instanciable -> @bool {
+getter @omnibusType instanciable -> @bool {
   result = [attributes instanciable]
 }
 
@@ -219,21 +219,21 @@ getter @unifiedTypeMap-proxy copyable -> @bool {
 
 #·······················································································································
 
-getter @PLMType copyable -> @bool {
+getter @omnibusType copyable -> @bool {
   result = [attributes copyable]
 }
 
 #·······················································································································
 
-method @PLMType generateRetain
-  ?let @string inPLMName
+method @omnibusType generateRetain
+  ?let @string inOmnibusName
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
 {
   let llvmTypeName = [self llvmTypeName]
-  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
+  let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if [self.kind isDynamicArrayType] then
-    let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
+    let tempLLVMVariable = "%temp." + [inOmnibusName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
@@ -257,16 +257,16 @@ method @PLMType generateRetain
 
 #·······················································································································
 
-method @PLMType generateInsulate
-  ?let @string inPLMName
+method @omnibusType generateInsulate
+  ?let @string inOmnibusName
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
 {
   let llvmTypeName = [self llvmTypeName]
-  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
+  let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if [self.kind isDynamicArrayType] then
-    let loadedVar = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
-    let insulatedVar = "%temp." + [inPLMName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
+    let loadedVar = "%temp." + [inOmnibusName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
+    let insulatedVar = "%temp." + [inOmnibusName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + loadedVar + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @arc.insulate (" + llvmTypeName + " " + loadedVar + ")\n"
@@ -294,15 +294,15 @@ method @PLMType generateInsulate
 
 #·······················································································································
 
-method @PLMType generateRelease
-  ?let @string inPLMName
+method @omnibusType generateRelease
+  ?let @string inOmnibusName
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
 {
   let llvmTypeName = [self llvmTypeName]
-  let LLVMVariable =  llvmNameForLocalVariable (!inPLMName)
+  let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if [self.kind isDynamicArrayType] then
-    let tempLLVMVariable = "%temp." + [inPLMName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
+    let tempLLVMVariable = "%temp." + [inOmnibusName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     ioGenerationAdds.mUniqueIndex ++
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ") ;\n"
@@ -326,7 +326,7 @@ method @PLMType generateRelease
 
 #·······················································································································
 
-getter @PLMType descriptionForHTMLFile -> @string {
+getter @omnibusType descriptionForHTMLFile -> @string {
   switch self.kind
   case void :
     result = "Void"
@@ -358,7 +358,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
 
 #·······················································································································
 
-getter @PLMType defaultAlignment -> @uint{
+getter @omnibusType defaultAlignment -> @uint{
   switch self.kind
   case void :
     result = 0
@@ -409,13 +409,13 @@ getter @PLMType defaultAlignment -> @uint{
 
 list @arcAssignmentList {
   @string mPropertyName
-  @PLMType mPropertyType
+  @omnibusType mPropertyType
   @uintlist mPropertyIndexPath
 }
 
 #·······················································································································
 
-getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
+getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
   result = {}
   if [kind isDynamicArrayType] then
     result += !"" !self !inPropertyIndexPath
@@ -430,7 +430,7 @@ getter @PLMType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList
 
 #·······················································································································
 
-getter @PLMType deinitNeeded -> @bool {
+getter @omnibusType deinitNeeded -> @bool {
   result = [kind isDynamicArrayType]
   if [kind isStructure] then
     [kind structure ?propertyList:let @propertyList propertyList]
@@ -443,7 +443,7 @@ getter @PLMType deinitNeeded -> @bool {
 #·······················································································································
 
 shared map @unifiedTypeMap %selectors {
-  @PLMType type
+  @omnibusType type
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"

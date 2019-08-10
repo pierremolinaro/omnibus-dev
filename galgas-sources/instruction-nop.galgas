@@ -37,7 +37,7 @@ override method @instructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanti
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @instructionNOP instructionSemanticAnalysis
-  ?self:let @PLMType unused inSelfType
+  ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode

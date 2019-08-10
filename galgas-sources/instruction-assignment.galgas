@@ -46,7 +46,7 @@ override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @assignmentInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -106,8 +106,8 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
         !target:lvalueIR
       ]
     else
-      var m = "no valid assignment to " + targetType.plmTypeDescriptionName
-      m += " from " + [sourceOperandPossibleReference type].plmTypeDescriptionName
+      var m = "no valid assignment to " + targetType.omnibusTypeDescriptionName
+      m += " from " + [sourceOperandPossibleReference type].omnibusTypeDescriptionName
       error mTargetAST.mIdentifier : m
     end
   end
@@ -120,7 +120,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
 #·······················································································································
 
 method @LValueAST analyzeLValueInAssignment
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -164,7 +164,7 @@ method @LValueAST analyzeLValueInAssignment
       error mIdentifier : "a local constant cannot be written" : outInternalRepresentation
     case globalSyncInstance (2*) :
       error mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation
-    case localVariable (@PLMType variableType @lstring plmName) :
+    case localVariable (@omnibusType variableType @lstring omnibusName) :
       analyzeVariableInLValueInAssignment (
         !self: inSelfType
         !routineAttributes:inRoutineAttributes
@@ -177,7 +177,7 @@ method @LValueAST analyzeLValueInAssignment
         !?instructionListIR: ioInstructionGenerationList
         !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
         !variableName: mIdentifier
-        !llvmName:llvmNameForLocalVariable (!plmName)
+        !llvmName:llvmNameForLocalVariable (!omnibusName)
         !type: variableType
         !mOperand
         ?outInternalRepresentation
@@ -189,7 +189,7 @@ method @LValueAST analyzeLValueInAssignment
 #·······················································································································
 
 private proc analyzeVariableInLValueInAssignment
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -201,7 +201,7 @@ private proc analyzeVariableInLValueInAssignment
   ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
   ?variableName:let @lstring inVariableName
   ?llvmName:let @string inLLVMName
-  ?type:let @PLMType inVariableType
+  ?type:let @omnibusType inVariableType
   ?let @LValueOperandAST inOperand
   !@LValueRepresentation outInternalRepresentation
 {
@@ -255,8 +255,8 @@ private proc analyzeVariableInLValueInAssignment
 #·······················································································································
 
 private proc handlePropertyAccessInAssignment
-  ?self:let @PLMType inSelfType
-  ?!@PLMType ioCurrentType
+  ?self:let @omnibusType inSelfType
+  ?!@omnibusType ioCurrentType
   ?!@string ioCurrentLLVMName
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -314,7 +314,7 @@ private proc handlePropertyAccessInAssignment
       !?instructionListIR: ioInstructionGenerationList
       !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
     )
-  case storedProperty (@PLMType propertyType @uint index) :
+  case storedProperty (@omnibusType propertyType @uint index) :
     [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
       !ioCurrentType
@@ -346,8 +346,8 @@ private proc handlePropertyAccessInAssignment
 #·······················································································································
 
 private proc handleArrayAccessInAssignment
-  ?self:let @PLMType inSelfType
-  ?!@PLMType ioCurrentType
+  ?self:let @omnibusType inSelfType
+  ?!@omnibusType ioCurrentType
   ?!@string ioCurrentLLVMName
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -366,12 +366,12 @@ private proc handleArrayAccessInAssignment
   switch ioCurrentType.subscript
   case noSubscript :
     error inEndOfIndex
-    : "the receiver type is " + [ioCurrentType plmTypeDescriptionName] + " and does not accept subscripting"
+    : "the receiver type is " + [ioCurrentType omnibusTypeDescriptionName] + " and does not accept subscripting"
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
     : ioCurrentType, ioCurrentLLVMName
-  case staticSubscript (@PLMType elementType @bigint arraySize) :
+  case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -420,7 +420,7 @@ private proc handleArrayAccessInAssignment
 #·······················································································································
 
 private proc analyzeSelfLValueInAssignment
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -480,8 +480,8 @@ private proc analyzeSelfLValueInAssignment
 #·······················································································································
 
 private proc handleNextOperandInAssignment
-  ?self:let @PLMType inSelfType
-  ?!@PLMType ioCurrentType
+  ?self:let @omnibusType inSelfType
+  ?!@omnibusType ioCurrentType
   ?!@string ioCurrentLLVMName
   ?let @LValueOperandAST inOperand
   ?routineAttributes:let @routineAttributes inRoutineAttributes

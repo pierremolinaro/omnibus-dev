@@ -179,7 +179,7 @@ override method @syncDeclarationAST enterInContext
     !?ioDecoratedDeclarationList
   ]
 #---------------------------------------- Enter in type map
-  let structureType = @PLMType.new {
+  let structureType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: propertySetterMap
     !routineMap: routineMapCTXT
@@ -189,7 +189,7 @@ override method @syncDeclarationAST enterInContext
     !subscript:.noSubscript
     !assignmentSources: {}
     !attributes:.instanciable
-    !plmTypeDescriptionName:mSyncToolName # "sync " + mSyncToolName
+    !omnibusTypeDescriptionName:mSyncToolName # "sync " + mSyncToolName
     !kind:.syncTool
     !llvmBaseTypeName:mSyncToolName
   }

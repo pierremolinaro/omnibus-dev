@@ -96,7 +96,7 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -126,7 +126,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   ]  
 #--- Check inferred type
   if [testResult type].kind != .boolean then
-    error mTestExpressionEndLocation : "test expression type is '" + [testResult plmTypeDescriptionName] + "', it should be boolean"
+    error mTestExpressionEndLocation : "test expression type is '" + [testResult omnibusTypeDescriptionName] + "', it should be boolean"
   elsif mStaticIfExpression && not [testResult isStatic] then
     error mTestExpressionEndLocation : "'if' expression is not static"
   elsif [testResult isStatic] && not mStaticIfExpression then

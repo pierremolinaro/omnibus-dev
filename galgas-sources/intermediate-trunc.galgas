@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendTrunc
-  ?let @PLMType inResultType
+  ?let @omnibusType inResultType
   ?!@objectIR ioObject
   ?!@semanticTemporariesStruct ioTemporaries
 {

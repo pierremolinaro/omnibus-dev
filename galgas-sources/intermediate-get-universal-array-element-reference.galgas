@@ -1,8 +1,8 @@
 
 setter @instructionListIR appendGetUniversalArrayElementReference
-  ?let @PLMType inType
+  ?let @omnibusType inType
   ?let @string inLLVMName
-  ?let @PLMType inElementType
+  ?let @omnibusType inElementType
   ?let @string inElementLLVMName
   ?let @objectIR inIndexIR
 {
@@ -12,9 +12,9 @@ setter @instructionListIR appendGetUniversalArrayElementReference
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getUniversalArrayElementReferenceIR : @abstractInstructionIR {
-  @PLMType mType
+  @omnibusType mType
   @string mLLVMName
-  @PLMType mElementType
+  @omnibusType mElementType
   @string mElementLLVMName
   @objectIR mIndexIR
 }

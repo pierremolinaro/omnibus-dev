@@ -1,13 +1,13 @@
 
-setter @instructionListIR generateRelease ?let @PLMType inType ?let @lstring in_plmName {
-  self += !@releaseIR.new {!inType !in_plmName}
+setter @instructionListIR generateRelease ?let @omnibusType inType ?let @lstring in_omnibusName {
+  self += !@releaseIR.new {!inType !in_omnibusName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @releaseIR : @abstractInstructionIR {
-  @PLMType mType
-  @lstring mPLMName
+  @omnibusType mType
+  @lstring mOmnibusName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,7 +17,7 @@ override method @releaseIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [mType generateRelease !mPLMName !?ioLLVMcode !?ioGenerationAdds]
+  [mType generateRelease !mOmnibusName !?ioLLVMcode !?ioGenerationAdds]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

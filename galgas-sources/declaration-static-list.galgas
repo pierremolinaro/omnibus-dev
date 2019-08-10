@@ -224,7 +224,7 @@ override getter @staticListAST keyRepresentationForErrorSignaling -> @string {
 #! Static list
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
+private func omnibusNameForStaticListType ?let @lstring inStaticListName -> @lstring {
   result = .new {!"staticlist " + inStaticListName !inStaticListName}
 }
 
@@ -236,7 +236,7 @@ private func llvmNameForStaticListType ?let @lstring inStaticListName -> @lstrin
 
 #·······················································································································
 
-private func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+private func omnibusNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
   result = .new {!"staticlist element " + inStaticListName !inStaticListName}
 }
 
@@ -279,8 +279,8 @@ override method @staticListAST enterInContext
   @propertyList propertyList = {}
   @propertyGetterMap propertyGetterMap = {}
   @stringset propertyNameSet = {}
-  let plmElementTypeName = plmNameForStaticListElementType (!mStaticListName)
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !plmElementTypeName ?let elementTypeProxy]
+  let omnibusElementTypeName = omnibusNameForStaticListElementType (!mStaticListName)
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !omnibusElementTypeName ?let elementTypeProxy]
 #-------------------------------------------------------------------- Build property list, map
   for (propertyName kind) in mPropertyList do (propertyIndex)
     switch kind
@@ -312,7 +312,7 @@ override method @staticListAST enterInContext
         @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
     #--- Enter routine type in type map
-      let propertyType = @PLMType.new {
+      let propertyType = @omnibusType.new {
         !propertyGetterMap:{}
         !propertySetterMap: {}
         !routineMap: {}
@@ -322,7 +322,7 @@ override method @staticListAST enterInContext
         !subscript:.noSubscript
         !assignmentSources: {}
         !attributes:.none
-        !plmTypeDescriptionName:""
+        !omnibusTypeDescriptionName:""
         !kind:.function {
           !mode:mode
           !signature:signature
@@ -360,7 +360,7 @@ override method @staticListAST enterInContext
   end
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
-  let elementType = @PLMType.new {
+  let elementType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
     !routineMap: routineMap
@@ -370,12 +370,12 @@ override method @staticListAST enterInContext
     !subscript:.noSubscript
     !assignmentSources: {}
     !attributes:.none
-    !plmTypeDescriptionName:plmNameForStaticListElementType (!mStaticListName)
+    !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
     !llvmBaseTypeName:llvmNameForStaticListElementType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:plmElementTypeName
+    !lkey:omnibusElementTypeName
     !type:elementType
   ]
 #-------------------------------------------------------------------- Enter static list values
@@ -461,7 +461,7 @@ override method @staticListAST enterInContext
     !.constantProperty {!value:.literalInteger {!type:literalIntegerType () !value:[mValueList length]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
-  let arrayType = @PLMType.new {
+  let arrayType = @omnibusType.new {
     !propertyGetterMap:listTypePropertyMap
     !propertySetterMap: {}
     !routineMap: {}
@@ -471,16 +471,16 @@ override method @staticListAST enterInContext
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
     !assignmentSources: {}
     !attributes:.instanciable | .equatable | .copyable
-    !plmTypeDescriptionName:plmNameForStaticListType (!mStaticListName)
+    !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)
     !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}
     !llvmBaseTypeName:llvmNameForStaticListType (!mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:plmNameForStaticListType (!mStaticListName)
+    !lkey:omnibusNameForStaticListType (!mStaticListName)
     !type:arrayType
   ]
 #-------------------------------------------------------------------- Enter list in constant map
-  let staticListType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !plmNameForStaticListType (!mStaticListName)}
+  let staticListType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !omnibusNameForStaticListType (!mStaticListName)}
   [!?ioContext.mGlobalConstantMap insertKey
     !mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!mStaticListName)}

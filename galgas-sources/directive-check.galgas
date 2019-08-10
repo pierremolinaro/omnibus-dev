@@ -46,7 +46,7 @@ override method @checkInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @checkInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode

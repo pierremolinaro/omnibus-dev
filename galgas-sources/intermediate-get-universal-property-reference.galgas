@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendGetUniversalPropertyReference
-  ?let @PLMType inType
+  ?let @omnibusType inType
   ?let @string inLLVMName
   ?let @string inElementLLVMName
   ?let @uint inPropertyIndex
@@ -12,7 +12,7 @@ setter @instructionListIR appendGetUniversalPropertyReference
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
-  @PLMType mType
+  @omnibusType mType
   @string mLLVMName
   @string mElementLLVMName
   @uint mPropertyIndex

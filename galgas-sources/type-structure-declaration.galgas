@@ -4,7 +4,7 @@
 
 class @structureDeclarationAST : @abstractDeclarationAST {
   @lstring mReceiverTypeName
-  @lstring mPLMTypeSpecificName
+  @lstring mOmnibusTypeSpecificName
   @lstring mLLVMBaseTypeName
   @lstringlist mAttributeListAST
   @bool mGenerateAssignmentRoutine
@@ -369,7 +369,7 @@ override getter @structureDeclarationAST locationForErrorSignaling -> @location 
 
 list @propertyList {
   @string mPropertyName
-  @PLMType mType
+  @omnibusType mType
 }
 
 #·······················································································································
@@ -427,7 +427,7 @@ override method @structureDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute instanciable, copyable
-  var typeAttributes = @PLMTypeAttributes.instanciable
+  var typeAttributes = @omnibusTypeAttributes.instanciable
 #---------------------------------------- Check structure is copyable
   for (s) in mAttributeListAST do
     if s.string == copyableAttribute () then
@@ -472,7 +472,7 @@ override method @structureDeclarationAST enterInContext
     !?ioDecoratedDeclarationList
   ]
 #---------------------------------------- Enter in type map
-  let structureType = @PLMType.new {
+  let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: propertySetterMap
     !routineMap: routineMapCTXT
@@ -482,7 +482,7 @@ override method @structureDeclarationAST enterInContext
     !subscript:.noSubscript
     !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mLLVMBaseTypeName} else {} end
     !attributes:typeAttributes
-    !plmTypeDescriptionName:mPLMTypeSpecificName
+    !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
     !kind:.structure {!propertyList:propertyList}
     !llvmBaseTypeName:mLLVMBaseTypeName
   }
@@ -498,7 +498,7 @@ override method @structureDeclarationAST enterInContext
 #---------- Enter structure assignment function
   if mGenerateAssignmentRoutine & canBeCopied then
     ioRoutineListIR += !@structureTypeAssignFunctionIR.new {
-      ![assignmentPrefix () + mPLMTypeSpecificName + "." + mPLMTypeSpecificName nowhere]
+      ![assignmentPrefix () + mOmnibusTypeSpecificName + "." + mOmnibusTypeSpecificName nowhere]
       !isRequired:false
       !warnsIfUnused:false
       !structureType
@@ -541,7 +541,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
   end
 #---------- Property type
-  let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
+  let @omnibusType optionalPropertyType = if mPropertyTypeName.string == ""
     then voidType ()
     else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
   end
@@ -556,14 +556,14 @@ method @structurePropertyListAST-element enterPropertyInContext
       !optionalContextualTypeName: mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
-    @PLMType actualPropertyType
+    @omnibusType actualPropertyType
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : actualPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -582,14 +582,14 @@ method @structurePropertyListAST-element enterPropertyInContext
       !optionalContextualTypeName: mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
-    @PLMType actualPropertyType
+    @omnibusType actualPropertyType
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : actualPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
@@ -609,7 +609,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
   case uninitializedStoredProperty :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
@@ -627,7 +627,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     ioConstructorKey += "!" + mPropertyName
   case uninitializedConstantProperty :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
@@ -640,7 +640,7 @@ method @structurePropertyListAST-element enterPropertyInContext
     ioConstructorKey += "!" + mPropertyName
   case readOnlyComputedProperty (instructionList endOfInstructionList) :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
@@ -672,7 +672,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !returnTypeName: mPropertyTypeName
   case writeComputedProperty (writeInstructionList endOfWriteInstructionList) :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.plmTypeDescriptionName + " type is not instanciable"
+      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let llvmGetterRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
@@ -738,7 +738,7 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @structureTypeAssignFunctionIR : @abstractRoutineIR {
-  @PLMType mStructureType
+  @omnibusType mStructureType
 }
 
 #·······················································································································

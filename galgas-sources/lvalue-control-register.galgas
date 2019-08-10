@@ -126,7 +126,7 @@ method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
 
 method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ?writeAccess:let @bool inWriteAccess
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -135,7 +135,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !registerType: @PLMType outRegisterType
+  !registerType: @omnibusType outRegisterType
   !registerBitCount:@uint outRegisterTypeBitCount
   !sliceMap:@sliceMap outSliceMap
   !llvmRegisterAddressName:@string outllvmRegisterAddressName

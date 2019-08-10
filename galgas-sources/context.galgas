@@ -16,7 +16,7 @@ list @declarationDecorationList {
 #·······················································································································
 
 map @infixOperatorMap {
-  @PLMType mResultType
+  @omnibusType mResultType
   @infixOperatorDescription mOperation
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
@@ -41,7 +41,7 @@ struct @staticEntityMap {
 #·······················································································································
 
 list @globalStructuredConstantList {
-  @PLMType mType
+  @omnibusType mType
   @operandIRList mOperandIRList
 }
 
@@ -91,8 +91,8 @@ map @availableInterruptMap {
 struct @semanticContext {
   @targetParameters mTargetParameters
 
-  @PLMType mPanicCodeType
-  @PLMType mPanicLineType
+  @omnibusType mPanicCodeType
+  @omnibusType mPanicLineType
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
 
@@ -145,7 +145,7 @@ struct @semanticContext {
 
 #·······················································································································
 
-getter @semanticContext booleanType -> @PLMType {
+getter @semanticContext booleanType -> @omnibusType {
   [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result]
 }
 

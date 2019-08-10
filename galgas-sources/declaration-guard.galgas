@@ -226,7 +226,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   switch mGuardKind
   case baseGuard :
   #--- Add 'accept" output variable
-    let resultVarName = @lstring.new {!acceptVariablePLMName() !mGuardName.location}
+    let resultVarName = @lstring.new {!acceptVariableOmnibusName() !mGuardName.location}
     [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
@@ -332,7 +332,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @callInstructionAST baseGuardAnalyze
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -344,7 +344,7 @@ abstract method @callInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
-  ?self:let @PLMType unused inSelfType
+  ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode
@@ -359,7 +359,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procedureCallInstructionAST baseGuardAnalyze
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -400,7 +400,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       switch propertyAccess
       case constantProperty (*) :
         error propertyName: "a constant property not available in this context" : currentObject
-      case storedProperty (@PLMType propertyType @uint propertyIndex) :
+      case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
           !currentType
@@ -474,7 +474,7 @@ enum @guardKindGenerationIR {
 class @guardUserRoutineIR : @abstractRoutineIR {
   @string mMangledImplementationGuardName
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @PLMType mReceiverType
+  @omnibusType mReceiverType
   @guardKindGenerationIR mGuardKindGenerationIR
 }
 
@@ -527,7 +527,7 @@ override method @guardUserRoutineIR llvmCodeGeneration
 
 class @guardImplementationRoutineIR : @abstractRoutineIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @PLMType mReceiverType
+  @omnibusType mReceiverType
   @guardKindGenerationIR mGuardKindGenerationIR
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
@@ -591,13 +591,13 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     end
   end
 #--- Declare "accept" variable 
-  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariablePLMName ())
-  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariablePLMName () + ".loaded")
+  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableOmnibusName ())
+  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableOmnibusName () + ".loaded")
 #--- Base guard or convenience guard ?
   switch mGuardKindGenerationIR
   case baseGuard :
-    let accepted_label = acceptVariablePLMName () + ".guard.accepted"
-    let rejected_label = acceptVariablePLMName () + ".guard.rejected"
+    let accepted_label = acceptVariableOmnibusName () + ".guard.accepted"
+    let rejected_label = acceptVariableOmnibusName () + ".guard.rejected"
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  " + accepted_llvmName_loaded + " = load i1, i1* " + accepted_llvmName + "\n"
     ioLLVMcode += "  br i1 " + accepted_llvmName_loaded + ", label %" + accepted_label + ", label %" + rejected_label + "\n\n"

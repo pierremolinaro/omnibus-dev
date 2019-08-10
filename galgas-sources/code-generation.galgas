@@ -95,8 +95,8 @@ proc codeGeneration
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?userDefinedTypes:let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?target:let @lstring inTargetName
-  ?panicCodeType:let @PLMType inPanicCodeType
-  ?panicLineType:let @PLMType inPanicLineType
+  ?panicCodeType:let @omnibusType inPanicCodeType
+  ?panicLineType:let @omnibusType inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
@@ -150,8 +150,8 @@ proc codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationContext {
-  @PLMType mPanicCodeLLVMType
-  @PLMType mPanicLineLLVMType
+  @omnibusType mPanicCodeLLVMType
+  @omnibusType mPanicLineLLVMType
   @string mNopInstructionInLLVM
   @globalTaskVariableList mGlobalTaskVariableList
   @availableInterruptMap mAvailableInterruptMap
@@ -165,8 +165,8 @@ private proc generateCodeFiles
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?userDefinedTypes:let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
   ?target:let @lstring inTargetName
-  ?panicCodeType:let @PLMType inPanicCodeType
-  ?panicLineType:let @PLMType inPanicLineType
+  ?panicCodeType:let @omnibusType inPanicCodeType
+  ?panicLineType:let @omnibusType inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters

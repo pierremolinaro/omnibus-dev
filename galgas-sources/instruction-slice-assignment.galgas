@@ -109,7 +109,7 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -194,15 +194,15 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     case discarded :
     case varDeclaration (varName) :
     #--- Declare local variable
-      let plmLocalVariableName = @lstring.new {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
+      let omnibusLocalVariableName = @lstring.new {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
       ioTemporaries.mTemporaryIndex ++
-      [!?ioUniversalMap insertLocalVariable !varName !sliceType !plmLocalVariableName !.hasUnreadValue !false]
+      [!?ioUniversalMap insertLocalVariable !varName !sliceType !omnibusLocalVariableName !.hasUnreadValue !false]
     #--- Code generation
-      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) !sliceType !false
+      ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
     #--- Target reference
       let targetRef = @LValueRepresentation.new {
         !sliceType
-        !llvmNameForLocalVariable (!plmLocalVariableName)
+        !llvmNameForLocalVariable (!omnibusLocalVariableName)
       }
    #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
@@ -213,15 +213,15 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       ]
     case letDeclaration (letName) :
     #--- Declare local constant
-      let plmLocalVariableName = @lstring.new {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
+      let omnibusLocalVariableName = @lstring.new {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
       ioTemporaries.mTemporaryIndex ++
-      [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !plmLocalVariableName]
+      [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !omnibusLocalVariableName]
     #--- Code generation
-      ioAllocaList += !llvmNameForLocalVariable (!plmLocalVariableName) !sliceType !false
+      ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
     #--- Target reference
       let targetRef = @LValueRepresentation.new {
         !sliceType
-        !llvmNameForLocalVariable (!plmLocalVariableName)
+        !llvmNameForLocalVariable (!omnibusLocalVariableName)
        }
     #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences

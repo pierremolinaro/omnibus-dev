@@ -2,7 +2,7 @@
 setter @instructionListIR appendGetArrayElementReference
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?arrayReference:let @objectIR inArrayIR
-  ?elementType:let @PLMType inElementType
+  ?elementType:let @omnibusType inElementType
   ?index:let @objectIR inIndexIR
   !elementPtr:@objectIR outElementPtr
 {

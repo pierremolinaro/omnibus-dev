@@ -6,14 +6,14 @@ enum @constructorValue {
   case null
   case simple (@bigint value)
   case structure (@sortedOperandIRList sortedOperandList)
-  case arrayValue (@PLMType elementType @uint size)
+  case arrayValue (@omnibusType elementType @uint size)
 }
 
 #·······················································································································
 
 list @constructorSignature {
   @string mSelector
-  @PLMType mType
+  @omnibusType mType
   @uint mFieldIndex
 }
 

@@ -14,7 +14,7 @@ func %once staticAttribute -> @string {
 #!   Type
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func registerGroupNameFromPLMname ?let @lstring inName -> @lstring {
+func registerGroupNameFromOmnibusName ?let @lstring inName -> @lstring {
   result = .new {!"registers " + inName !inName.location}
 }
 
@@ -130,7 +130,7 @@ func llvmNameForSectionImplementation ?let @string inName -> @string {
 #!   Guards
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once acceptVariablePLMName -> @string {
+func %once acceptVariableOmnibusName -> @string {
   result = "accept"
 }
 

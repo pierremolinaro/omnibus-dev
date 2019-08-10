@@ -104,7 +104,7 @@ syntax extension omnibus_syntax {
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc analyzeEffectiveParameters
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?formal:let @routineTypedSignature inFormalSignature
   ?effective:let @effectiveArgumentListAST inEffectiveParameterList
@@ -195,7 +195,7 @@ proc analyzeEffectiveParameters
       switch propertyAccess
       case constantProperty (*) :
         error inErrorLocation : "a constant property cannot be used as output / input parameter"
-      case storedProperty (@PLMType propertyType @uint propertyIndex) :
+      case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
           !inSelfType
@@ -217,8 +217,8 @@ proc analyzeEffectiveParameters
       + [inEffectiveParameterList length] + " argument(s)"
   else
     for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mTypeProxy type].plmTypeDescriptionName != actual_mParameterType.plmTypeDescriptionName then
-        error actual_mSelector : "the actual parameter type is $" + actual_mParameterType.plmTypeDescriptionName +
+      if [formal_mTypeProxy type].omnibusTypeDescriptionName != actual_mParameterType.omnibusTypeDescriptionName then
+        error actual_mSelector : "the actual parameter type is $" + actual_mParameterType.omnibusTypeDescriptionName +
            ", and is incompatible with the formal type $" + [formal_mTypeProxy key]
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]

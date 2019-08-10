@@ -87,7 +87,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  @PLMTypeAttributes opaqueTypeAttributes = .none
+  @omnibusTypeAttributes opaqueTypeAttributes = .none
   var copyable = false
   for (attribute) in mAttributeList do
     if attribute.string == instantiableAttribute () then
@@ -126,7 +126,7 @@ override method @typeOpaqueDeclarationAST enterInContext
       [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
-    let opaqueType = @PLMType.new {
+    let opaqueType = @omnibusType.new {
       !propertyGetterMap:{}
       !propertySetterMap: {}
       !routineMap: {}
@@ -136,7 +136,7 @@ override method @typeOpaqueDeclarationAST enterInContext
       !subscript:.noSubscript
       !assignmentSources: if copyable then {!mOpaqueTypeName} else {} end
       !attributes:opaqueTypeAttributes
-      !plmTypeDescriptionName:mOpaqueTypeName
+      !omnibusTypeDescriptionName:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
       !llvmBaseTypeName:mOpaqueTypeName
     }

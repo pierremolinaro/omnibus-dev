@@ -1526,7 +1526,7 @@ class cCollectionElement_propertyList : public cCollectionElement {
 
 //--- Constructors
   public : cCollectionElement_propertyList (const GALGAS_string & in_mPropertyName,
-                                            const GALGAS_PLMType & in_mType
+                                            const GALGAS_omnibusType & in_mType
                                             COMMA_LOCATION_ARGS) ;
   public : cCollectionElement_propertyList (const GALGAS_propertyList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
@@ -1546,7 +1546,7 @@ class cCollectionElement_propertyList : public cCollectionElement {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_propertyList::cCollectionElement_propertyList (const GALGAS_string & in_mPropertyName,
-                                                                  const GALGAS_PLMType & in_mType
+                                                                  const GALGAS_omnibusType & in_mType
                                                                   COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mPropertyName, in_mType) {
@@ -1615,7 +1615,7 @@ GALGAS_propertyList GALGAS_propertyList::constructor_emptyList (UNUSED_LOCATION_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_propertyList GALGAS_propertyList::constructor_listWithValue (const GALGAS_string & inOperand0,
-                                                                    const GALGAS_PLMType & inOperand1
+                                                                    const GALGAS_omnibusType & inOperand1
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_propertyList result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
@@ -1631,7 +1631,7 @@ GALGAS_propertyList GALGAS_propertyList::constructor_listWithValue (const GALGAS
 
 void GALGAS_propertyList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                      const GALGAS_string & in_mPropertyName,
-                                                     const GALGAS_PLMType & in_mType
+                                                     const GALGAS_omnibusType & in_mType
                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement_propertyList * p = NULL ;
   macroMyNew (p, cCollectionElement_propertyList (in_mPropertyName,
@@ -1643,7 +1643,7 @@ void GALGAS_propertyList::makeAttributesFromObjects (capCollectionElement & outA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::addAssign_operation (const GALGAS_string & inOperand0,
-                                               const GALGAS_PLMType & inOperand1
+                                               const GALGAS_omnibusType & inOperand1
                                                COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -1673,7 +1673,7 @@ void GALGAS_propertyList::setter_append (GALGAS_propertyList_2D_element inElemen
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::setter_insertAtIndex (const GALGAS_string inOperand0,
-                                                const GALGAS_PLMType inOperand1,
+                                                const GALGAS_omnibusType inOperand1,
                                                 const GALGAS_uint inInsertionIndex,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
@@ -1690,7 +1690,7 @@ void GALGAS_propertyList::setter_insertAtIndex (const GALGAS_string inOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::setter_removeAtIndex (GALGAS_string & outOperand0,
-                                                GALGAS_PLMType & outOperand1,
+                                                GALGAS_omnibusType & outOperand1,
                                                 const GALGAS_uint inRemoveIndex,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
@@ -1712,7 +1712,7 @@ void GALGAS_propertyList::setter_removeAtIndex (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::setter_popFirst (GALGAS_string & outOperand0,
-                                           GALGAS_PLMType & outOperand1,
+                                           GALGAS_omnibusType & outOperand1,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -1731,7 +1731,7 @@ void GALGAS_propertyList::setter_popFirst (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::setter_popLast (GALGAS_string & outOperand0,
-                                          GALGAS_PLMType & outOperand1,
+                                          GALGAS_omnibusType & outOperand1,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -1750,7 +1750,7 @@ void GALGAS_propertyList::setter_popLast (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::method_first (GALGAS_string & outOperand0,
-                                        GALGAS_PLMType & outOperand1,
+                                        GALGAS_omnibusType & outOperand1,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -1769,7 +1769,7 @@ void GALGAS_propertyList::method_first (GALGAS_string & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_propertyList::method_last (GALGAS_string & outOperand0,
-                                       GALGAS_PLMType & outOperand1,
+                                       GALGAS_omnibusType & outOperand1,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -1853,12 +1853,12 @@ GALGAS_string GALGAS_propertyList::getter_mPropertyNameAtIndex (const GALGAS_uin
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType GALGAS_propertyList::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusType GALGAS_propertyList::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
-  GALGAS_PLMType result ;
+  GALGAS_omnibusType result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_propertyList) ;
     result = p->mObject.mProperty_mType ;
@@ -1895,7 +1895,7 @@ GALGAS_string cEnumerator_propertyList::current_mPropertyName (LOCATION_ARGS) co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType cEnumerator_propertyList::current_mType (LOCATION_ARGS) const {
+GALGAS_omnibusType cEnumerator_propertyList::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_propertyList * p = (const cCollectionElement_propertyList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_propertyList) ;
   return p->mObject.mProperty_mType ;
@@ -2242,7 +2242,7 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::extractObject (const GALG
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_reference::cEnumAssociatedValues_objectIR_reference (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_reference::cEnumAssociatedValues_objectIR_reference (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                     const GALGAS_string & inAssociatedValue1
                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2277,7 +2277,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_reference::compare (const cE
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_null::cEnumAssociatedValues_objectIR_null (const GALGAS_PLMType & inAssociatedValue0
+cEnumAssociatedValues_objectIR_null::cEnumAssociatedValues_objectIR_null (const GALGAS_omnibusType & inAssociatedValue0
                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -2306,7 +2306,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_null::compare (const cEnumAs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_llvmValue::cEnumAssociatedValues_objectIR_llvmValue (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_llvmValue::cEnumAssociatedValues_objectIR_llvmValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                     const GALGAS_string & inAssociatedValue1
                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2341,7 +2341,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmValue::compare (const cE
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_literalInteger::cEnumAssociatedValues_objectIR_literalInteger (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_literalInteger::cEnumAssociatedValues_objectIR_literalInteger (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                               const GALGAS_bigint & inAssociatedValue1
                                                                                               COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2376,7 +2376,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_literalInteger::compare (con
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_llvmStructureValue::cEnumAssociatedValues_objectIR_llvmStructureValue (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_llvmStructureValue::cEnumAssociatedValues_objectIR_llvmStructureValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                                       const GALGAS_sortedOperandIRList & inAssociatedValue1
                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2446,7 +2446,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_literalString::compare (cons
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_zero::cEnumAssociatedValues_objectIR_zero (const GALGAS_PLMType & inAssociatedValue0
+cEnumAssociatedValues_objectIR_zero::cEnumAssociatedValues_objectIR_zero (const GALGAS_omnibusType & inAssociatedValue0
                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -2475,7 +2475,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_zero::compare (const cEnumAs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_llvmArrayStaticValues::cEnumAssociatedValues_objectIR_llvmArrayStaticValues (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_llvmArrayStaticValues::cEnumAssociatedValues_objectIR_llvmArrayStaticValues (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                                             const GALGAS_operandIRList & inAssociatedValue1,
                                                                                                             const GALGAS_uint & inAssociatedValue2
                                                                                                             COMMA_LOCATION_ARGS) :
@@ -2516,7 +2516,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayStaticValues::compa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_llvmArrayDynamicValues::cEnumAssociatedValues_objectIR_llvmArrayDynamicValues (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_llvmArrayDynamicValues::cEnumAssociatedValues_objectIR_llvmArrayDynamicValues (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                                               const GALGAS_operandIRList & inAssociatedValue1
                                                                                                               COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2551,7 +2551,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayDynamicValues::comp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue::cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue::cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                                                           const GALGAS_uint & inAssociatedValue1,
                                                                                                                           const GALGAS_objectIR & inAssociatedValue2,
                                                                                                                           const GALGAS_uint & inAssociatedValue3
@@ -2598,7 +2598,7 @@ typeComparisonResult cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue::cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue (const GALGAS_PLMType & inAssociatedValue0,
+cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue::cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                                                                             const GALGAS_uint & inAssociatedValue1,
                                                                                                                             const GALGAS_objectIR & inAssociatedValue2
                                                                                                                             COMMA_LOCATION_ARGS) :
@@ -2654,7 +2654,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_void (UNUSED_LOCATION_ARGS) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_reference (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_reference (const GALGAS_omnibusType & inAssociatedValue0,
                                                         const GALGAS_string & inAssociatedValue1
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -2670,7 +2670,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_reference (const GALGAS_PLMType & i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_null (const GALGAS_PLMType & inAssociatedValue0
+GALGAS_objectIR GALGAS_objectIR::constructor_null (const GALGAS_omnibusType & inAssociatedValue0
                                                    COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -2685,7 +2685,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_null (const GALGAS_PLMType & inAsso
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmValue (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                         const GALGAS_string & inAssociatedValue1
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -2701,7 +2701,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmValue (const GALGAS_PLMType & i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_literalInteger (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_literalInteger (const GALGAS_omnibusType & inAssociatedValue0,
                                                              const GALGAS_bigint & inAssociatedValue1
                                                              COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -2717,7 +2717,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_literalInteger (const GALGAS_PLMTyp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmStructureValue (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmStructureValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                  const GALGAS_sortedOperandIRList & inAssociatedValue1
                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -2749,7 +2749,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_literalString (const GALGAS_uint & 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_zero (const GALGAS_PLMType & inAssociatedValue0
+GALGAS_objectIR GALGAS_objectIR::constructor_zero (const GALGAS_omnibusType & inAssociatedValue0
                                                    COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -2764,7 +2764,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_zero (const GALGAS_PLMType & inAsso
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayStaticValues (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayStaticValues (const GALGAS_omnibusType & inAssociatedValue0,
                                                                     const GALGAS_operandIRList & inAssociatedValue1,
                                                                     const GALGAS_uint & inAssociatedValue2
                                                                     COMMA_LOCATION_ARGS) {
@@ -2781,7 +2781,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayStaticValues (const GALGAS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayDynamicValues (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayDynamicValues (const GALGAS_omnibusType & inAssociatedValue0,
                                                                      const GALGAS_operandIRList & inAssociatedValue1
                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -2797,7 +2797,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayDynamicValues (const GALGA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayRepeatedStaticValue (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayRepeatedStaticValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                            const GALGAS_uint & inAssociatedValue1,
                                                                            const GALGAS_objectIR & inAssociatedValue2,
                                                                            const GALGAS_uint & inAssociatedValue3
@@ -2815,7 +2815,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayRepeatedStaticValue (const
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayRepeatedDynamicValue (const GALGAS_PLMType & inAssociatedValue0,
+GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayRepeatedDynamicValue (const GALGAS_omnibusType & inAssociatedValue0,
                                                                             const GALGAS_uint & inAssociatedValue1,
                                                                             const GALGAS_objectIR & inAssociatedValue2
                                                                             COMMA_LOCATION_ARGS) {
@@ -2832,7 +2832,7 @@ GALGAS_objectIR GALGAS_objectIR::constructor_llvmArrayRepeatedDynamicValue (cons
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_reference (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_reference (GALGAS_omnibusType & outAssociatedValue0,
                                         GALGAS_string & outAssociatedValue1,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
@@ -2851,7 +2851,7 @@ void GALGAS_objectIR::method_reference (GALGAS_PLMType & outAssociatedValue0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_null (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_null (GALGAS_omnibusType & outAssociatedValue0,
                                    C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_null) {
@@ -2867,7 +2867,7 @@ void GALGAS_objectIR::method_null (GALGAS_PLMType & outAssociatedValue0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_llvmValue (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_llvmValue (GALGAS_omnibusType & outAssociatedValue0,
                                         GALGAS_string & outAssociatedValue1,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
@@ -2886,7 +2886,7 @@ void GALGAS_objectIR::method_llvmValue (GALGAS_PLMType & outAssociatedValue0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_literalInteger (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_literalInteger (GALGAS_omnibusType & outAssociatedValue0,
                                              GALGAS_bigint & outAssociatedValue1,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) const {
@@ -2905,7 +2905,7 @@ void GALGAS_objectIR::method_literalInteger (GALGAS_PLMType & outAssociatedValue
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_llvmStructureValue (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_llvmStructureValue (GALGAS_omnibusType & outAssociatedValue0,
                                                  GALGAS_sortedOperandIRList & outAssociatedValue1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
@@ -2943,7 +2943,7 @@ void GALGAS_objectIR::method_literalString (GALGAS_uint & outAssociatedValue0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_zero (GALGAS_omnibusType & outAssociatedValue0,
                                    C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_zero) {
@@ -2959,7 +2959,7 @@ void GALGAS_objectIR::method_zero (GALGAS_PLMType & outAssociatedValue0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_llvmArrayStaticValues (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_llvmArrayStaticValues (GALGAS_omnibusType & outAssociatedValue0,
                                                     GALGAS_operandIRList & outAssociatedValue1,
                                                     GALGAS_uint & outAssociatedValue2,
                                                     C_Compiler * inCompiler
@@ -2981,7 +2981,7 @@ void GALGAS_objectIR::method_llvmArrayStaticValues (GALGAS_PLMType & outAssociat
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_llvmArrayDynamicValues (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_llvmArrayDynamicValues (GALGAS_omnibusType & outAssociatedValue0,
                                                      GALGAS_operandIRList & outAssociatedValue1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -3000,7 +3000,7 @@ void GALGAS_objectIR::method_llvmArrayDynamicValues (GALGAS_PLMType & outAssocia
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_llvmArrayRepeatedStaticValue (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_llvmArrayRepeatedStaticValue (GALGAS_omnibusType & outAssociatedValue0,
                                                            GALGAS_uint & outAssociatedValue1,
                                                            GALGAS_objectIR & outAssociatedValue2,
                                                            GALGAS_uint & outAssociatedValue3,
@@ -3025,7 +3025,7 @@ void GALGAS_objectIR::method_llvmArrayRepeatedStaticValue (GALGAS_PLMType & outA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_objectIR::method_llvmArrayRepeatedDynamicValue (GALGAS_PLMType & outAssociatedValue0,
+void GALGAS_objectIR::method_llvmArrayRepeatedDynamicValue (GALGAS_omnibusType & outAssociatedValue0,
                                                             GALGAS_uint & outAssociatedValue1,
                                                             GALGAS_objectIR & outAssociatedValue2,
                                                             C_Compiler * inCompiler
@@ -7435,7 +7435,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (co
 cMapElement_sliceMap::cMapElement_sliceMap (const GALGAS_lstring & inKey,
                                             const GALGAS_llvmBinaryOperation & in_mAccessOperator,
                                             const GALGAS_bigint & in_mAccessRightOperand,
-                                            const GALGAS_PLMType & in_mResultType
+                                            const GALGAS_omnibusType & in_mResultType
                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mAccessOperator (in_mAccessOperator),
@@ -7541,7 +7541,7 @@ GALGAS_sliceMap GALGAS_sliceMap::getter_overriddenMap (C_Compiler * inCompiler
 void GALGAS_sliceMap::addAssign_operation (const GALGAS_lstring & inKey,
                                            const GALGAS_llvmBinaryOperation & inArgument0,
                                            const GALGAS_bigint & inArgument1,
-                                           const GALGAS_PLMType & inArgument2,
+                                           const GALGAS_omnibusType & inArgument2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
   cMapElement_sliceMap * p = NULL ;
@@ -7559,7 +7559,7 @@ void GALGAS_sliceMap::addAssign_operation (const GALGAS_lstring & inKey,
 void GALGAS_sliceMap::setter_insertKey (GALGAS_lstring inKey,
                                         GALGAS_llvmBinaryOperation inArgument0,
                                         GALGAS_bigint inArgument1,
-                                        GALGAS_PLMType inArgument2,
+                                        GALGAS_omnibusType inArgument2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) {
   cMapElement_sliceMap * p = NULL ;
@@ -7581,7 +7581,7 @@ const char * kSearchErrorMessage_sliceMap_searchKey = "the '%K' slice is not dec
 void GALGAS_sliceMap::method_searchKey (GALGAS_lstring inKey,
                                         GALGAS_llvmBinaryOperation & outArgument0,
                                         GALGAS_bigint & outArgument1,
-                                        GALGAS_PLMType & outArgument2,
+                                        GALGAS_omnibusType & outArgument2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) performSearch (inKey,
@@ -7632,12 +7632,12 @@ GALGAS_bigint GALGAS_sliceMap::getter_mAccessRightOperandForKey (const GALGAS_st
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType GALGAS_sliceMap::getter_mResultTypeForKey (const GALGAS_string & inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusType GALGAS_sliceMap::getter_mResultTypeForKey (const GALGAS_string & inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
-  GALGAS_PLMType result ;
+  GALGAS_omnibusType result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     result = p->mProperty_mResultType ;
@@ -7675,7 +7675,7 @@ void GALGAS_sliceMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttri
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_sliceMap::setter_setMResultTypeForKey (GALGAS_PLMType inAttributeValue,
+void GALGAS_sliceMap::setter_setMResultTypeForKey (GALGAS_omnibusType inAttributeValue,
                                                    GALGAS_string inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
@@ -7739,7 +7739,7 @@ GALGAS_bigint cEnumerator_sliceMap::current_mAccessRightOperand (LOCATION_ARGS) 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType cEnumerator_sliceMap::current_mResultType (LOCATION_ARGS) const {
+GALGAS_omnibusType cEnumerator_sliceMap::current_mResultType (LOCATION_ARGS) const {
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_sliceMap) ;
   return p->mProperty_mResultType ;
@@ -8344,12 +8344,12 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
-  cEnumerator_controlRegisterDeclarationList enumerator_11315 (object->mProperty_mRegisters, kENUMERATION_UP) ;
-  while (enumerator_11315.hasCurrentObject ()) {
+  cEnumerator_controlRegisterDeclarationList enumerator_11319 (object->mProperty_mRegisters, kENUMERATION_UP) ;
+  while (enumerator_11319.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_11315.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_11319.current (HERE).getter_mRegisterTypeName (HERE) COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)) ;
     }
-    enumerator_11315.gotoNextObject () ;
+    enumerator_11319.gotoNextObject () ;
   }
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8373,7 +8373,7 @@ C_PrologueEpilogue gMethod_controlRegisterGroupDeclarationAST_noteTypesInPrecede
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cMapElement_controlRegisterMap::cMapElement_controlRegisterMap (const GALGAS_lstring & inKey,
-                                                                const GALGAS_PLMType & in_mType,
+                                                                const GALGAS_omnibusType & in_mType,
                                                                 const GALGAS_bool & in_mIsReadOnly,
                                                                 const GALGAS_bool & in_mUserAccess,
                                                                 const GALGAS_sliceMap & in_mRegisterFieldAccessMap,
@@ -8542,7 +8542,7 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::getter_overriddenMap (C_Com
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                     const GALGAS_PLMType & inArgument0,
+                                                     const GALGAS_omnibusType & inArgument0,
                                                      const GALGAS_bool & inArgument1,
                                                      const GALGAS_bool & inArgument2,
                                                      const GALGAS_sliceMap & inArgument3,
@@ -8567,7 +8567,7 @@ void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKe
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
-                                                  GALGAS_PLMType inArgument0,
+                                                  GALGAS_omnibusType inArgument0,
                                                   GALGAS_bool inArgument1,
                                                   GALGAS_bool inArgument2,
                                                   GALGAS_sliceMap inArgument3,
@@ -8596,7 +8596,7 @@ const char * kSearchErrorMessage_controlRegisterMap_searchKey = "the '%K' contro
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
-                                                  GALGAS_PLMType & outArgument0,
+                                                  GALGAS_omnibusType & outArgument0,
                                                   GALGAS_bool & outArgument1,
                                                   GALGAS_bool & outArgument2,
                                                   GALGAS_sliceMap & outArgument3,
@@ -8640,12 +8640,12 @@ void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType GALGAS_controlRegisterMap::getter_mTypeForKey (const GALGAS_string & inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusType GALGAS_controlRegisterMap::getter_mTypeForKey (const GALGAS_string & inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
-  GALGAS_PLMType result ;
+  GALGAS_omnibusType result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mType ;
@@ -8790,7 +8790,7 @@ GALGAS_uint GALGAS_controlRegisterMap::getter_mElementArraySizeForKey (const GAL
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_controlRegisterMap::setter_setMTypeForKey (GALGAS_PLMType inAttributeValue,
+void GALGAS_controlRegisterMap::setter_setMTypeForKey (GALGAS_omnibusType inAttributeValue,
                                                        GALGAS_string inKey,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
@@ -8964,7 +8964,7 @@ GALGAS_lstring cEnumerator_controlRegisterMap::current_lkey (LOCATION_ARGS) cons
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType cEnumerator_controlRegisterMap::current_mType (LOCATION_ARGS) const {
+GALGAS_omnibusType cEnumerator_controlRegisterMap::current_mType (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
   return p->mProperty_mType ;
@@ -10808,7 +10808,7 @@ void callExtensionMethod_addDependenceEdgeForStaticExpression (const cPtr_expres
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cMapElement_globalSyncInstanceMap::cMapElement_globalSyncInstanceMap (const GALGAS_lstring & inKey,
-                                                                      const GALGAS_PLMType & in_type,
+                                                                      const GALGAS_omnibusType & in_type,
                                                                       const GALGAS_objectIR & in_initialValue
                                                                       COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
@@ -10905,7 +10905,7 @@ GALGAS_globalSyncInstanceMap GALGAS_globalSyncInstanceMap::getter_overriddenMap 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_globalSyncInstanceMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                        const GALGAS_PLMType & inArgument0,
+                                                        const GALGAS_omnibusType & inArgument0,
                                                         const GALGAS_objectIR & inArgument1,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
@@ -10922,7 +10922,7 @@ void GALGAS_globalSyncInstanceMap::addAssign_operation (const GALGAS_lstring & i
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_globalSyncInstanceMap::setter_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_PLMType inArgument0,
+                                                     GALGAS_omnibusType inArgument0,
                                                      GALGAS_objectIR inArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -10943,7 +10943,7 @@ const char * kSearchErrorMessage_globalSyncInstanceMap_searchKey = "there is no 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_globalSyncInstanceMap::method_searchKey (GALGAS_lstring inKey,
-                                                     GALGAS_PLMType & outArgument0,
+                                                     GALGAS_omnibusType & outArgument0,
                                                      GALGAS_objectIR & outArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -10963,12 +10963,12 @@ void GALGAS_globalSyncInstanceMap::method_searchKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType GALGAS_globalSyncInstanceMap::getter_typeForKey (const GALGAS_string & inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusType GALGAS_globalSyncInstanceMap::getter_typeForKey (const GALGAS_string & inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_globalSyncInstanceMap * p = (const cMapElement_globalSyncInstanceMap *) attributes ;
-  GALGAS_PLMType result ;
+  GALGAS_omnibusType result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalSyncInstanceMap) ;
     result = p->mProperty_type ;
@@ -10993,7 +10993,7 @@ GALGAS_objectIR GALGAS_globalSyncInstanceMap::getter_initialValueForKey (const G
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_globalSyncInstanceMap::setter_setTypeForKey (GALGAS_PLMType inAttributeValue,
+void GALGAS_globalSyncInstanceMap::setter_setTypeForKey (GALGAS_omnibusType inAttributeValue,
                                                          GALGAS_string inKey,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -11055,7 +11055,7 @@ GALGAS_lstring cEnumerator_globalSyncInstanceMap::current_lkey (LOCATION_ARGS) c
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType cEnumerator_globalSyncInstanceMap::current_type (LOCATION_ARGS) const {
+GALGAS_omnibusType cEnumerator_globalSyncInstanceMap::current_type (LOCATION_ARGS) const {
   const cMapElement_globalSyncInstanceMap * p = (const cMapElement_globalSyncInstanceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalSyncInstanceMap) ;
   return p->mProperty_type ;
@@ -13507,7 +13507,7 @@ class cCollectionElement_driverListIR : public cCollectionElement {
 
 //--- Constructors
   public : cCollectionElement_driverListIR (const GALGAS_lstring & in_mDriverName,
-                                            const GALGAS_PLMType & in_mType,
+                                            const GALGAS_omnibusType & in_mType,
                                             const GALGAS_operandIRList & in_mInitialValueList
                                             COMMA_LOCATION_ARGS) ;
   public : cCollectionElement_driverListIR (const GALGAS_driverListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -13528,7 +13528,7 @@ class cCollectionElement_driverListIR : public cCollectionElement {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cCollectionElement_driverListIR::cCollectionElement_driverListIR (const GALGAS_lstring & in_mDriverName,
-                                                                  const GALGAS_PLMType & in_mType,
+                                                                  const GALGAS_omnibusType & in_mType,
                                                                   const GALGAS_operandIRList & in_mInitialValueList
                                                                   COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
@@ -13602,7 +13602,7 @@ GALGAS_driverListIR GALGAS_driverListIR::constructor_emptyList (UNUSED_LOCATION_
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_driverListIR GALGAS_driverListIR::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                    const GALGAS_PLMType & inOperand1,
+                                                                    const GALGAS_omnibusType & inOperand1,
                                                                     const GALGAS_operandIRList & inOperand2
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_driverListIR result ;
@@ -13619,7 +13619,7 @@ GALGAS_driverListIR GALGAS_driverListIR::constructor_listWithValue (const GALGAS
 
 void GALGAS_driverListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                      const GALGAS_lstring & in_mDriverName,
-                                                     const GALGAS_PLMType & in_mType,
+                                                     const GALGAS_omnibusType & in_mType,
                                                      const GALGAS_operandIRList & in_mInitialValueList
                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement_driverListIR * p = NULL ;
@@ -13633,7 +13633,7 @@ void GALGAS_driverListIR::makeAttributesFromObjects (capCollectionElement & outA
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                               const GALGAS_PLMType & inOperand1,
+                                               const GALGAS_omnibusType & inOperand1,
                                                const GALGAS_operandIRList & inOperand2
                                                COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -13664,7 +13664,7 @@ void GALGAS_driverListIR::setter_append (GALGAS_driverListIR_2D_element inElemen
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                const GALGAS_PLMType inOperand1,
+                                                const GALGAS_omnibusType inOperand1,
                                                 const GALGAS_operandIRList inOperand2,
                                                 const GALGAS_uint inInsertionIndex,
                                                 C_Compiler * inCompiler
@@ -13682,7 +13682,7 @@ void GALGAS_driverListIR::setter_insertAtIndex (const GALGAS_lstring inOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                GALGAS_PLMType & outOperand1,
+                                                GALGAS_omnibusType & outOperand1,
                                                 GALGAS_operandIRList & outOperand2,
                                                 const GALGAS_uint inRemoveIndex,
                                                 C_Compiler * inCompiler
@@ -13707,7 +13707,7 @@ void GALGAS_driverListIR::setter_removeAtIndex (GALGAS_lstring & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_popFirst (GALGAS_lstring & outOperand0,
-                                           GALGAS_PLMType & outOperand1,
+                                           GALGAS_omnibusType & outOperand1,
                                            GALGAS_operandIRList & outOperand2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
@@ -13729,7 +13729,7 @@ void GALGAS_driverListIR::setter_popFirst (GALGAS_lstring & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::setter_popLast (GALGAS_lstring & outOperand0,
-                                          GALGAS_PLMType & outOperand1,
+                                          GALGAS_omnibusType & outOperand1,
                                           GALGAS_operandIRList & outOperand2,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
@@ -13751,7 +13751,7 @@ void GALGAS_driverListIR::setter_popLast (GALGAS_lstring & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::method_first (GALGAS_lstring & outOperand0,
-                                        GALGAS_PLMType & outOperand1,
+                                        GALGAS_omnibusType & outOperand1,
                                         GALGAS_operandIRList & outOperand2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
@@ -13773,7 +13773,7 @@ void GALGAS_driverListIR::method_first (GALGAS_lstring & outOperand0,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void GALGAS_driverListIR::method_last (GALGAS_lstring & outOperand0,
-                                       GALGAS_PLMType & outOperand1,
+                                       GALGAS_omnibusType & outOperand1,
                                        GALGAS_operandIRList & outOperand2,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
@@ -13860,12 +13860,12 @@ GALGAS_lstring GALGAS_driverListIR::getter_mDriverNameAtIndex (const GALGAS_uint
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType GALGAS_driverListIR::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusType GALGAS_driverListIR::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_driverListIR * p = (cCollectionElement_driverListIR *) attributes.ptr () ;
-  GALGAS_PLMType result ;
+  GALGAS_omnibusType result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_driverListIR) ;
     result = p->mObject.mProperty_mType ;
@@ -13917,7 +13917,7 @@ GALGAS_lstring cEnumerator_driverListIR::current_mDriverName (LOCATION_ARGS) con
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_PLMType cEnumerator_driverListIR::current_mType (LOCATION_ARGS) const {
+GALGAS_omnibusType cEnumerator_driverListIR::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_driverListIR * p = (const cCollectionElement_driverListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_driverListIR) ;
   return p->mObject.mProperty_mType ;
@@ -14373,12 +14373,12 @@ void extensionMethod_generateLLVMDriverCode (const GALGAS_driverListIR inObject,
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 454)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 454)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @boot ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 455)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 455)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 455)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 455)) ;
   const GALGAS_driverListIR temp_0 = inObject ;
-  cEnumerator_driverListIR enumerator_18718 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_18718.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmBootRoutineNameFromDriver (enumerator_18718.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 457)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) enumerator_18718.current (HERE).getter_mType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)).add_operation (function_llvmNameForGlobalVariable (enumerator_18718.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 458)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)) ;
+  cEnumerator_driverListIR enumerator_18730 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_18730.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmBootRoutineNameFromDriver (enumerator_18730.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 457)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 457)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_18730.current (HERE).getter_mType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)).add_operation (function_llvmNameForGlobalVariable (enumerator_18730.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 458)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 458)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 459)) ;
-    enumerator_18718.gotoNextObject () ;
+    enumerator_18730.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 461)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
@@ -14386,12 +14386,12 @@ void extensionMethod_generateLLVMDriverCode (const GALGAS_driverListIR inObject,
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Startup"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 464)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 464)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @startup ()").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 465)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 465)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 465)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 465)) ;
   const GALGAS_driverListIR temp_1 = inObject ;
-  cEnumerator_driverListIR enumerator_19191 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_19191.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmStartupRoutineNameFromDriver (enumerator_19191.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 467)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(callExtensionGetter_llvmTypeName ((const cPtr_PLMType *) enumerator_19191.current (HERE).getter_mType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)).add_operation (function_llvmNameForGlobalVariable (enumerator_19191.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 468)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)) ;
+  cEnumerator_driverListIR enumerator_19203 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_19203.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (function_llvmStartupRoutineNameFromDriver (enumerator_19203.current (HERE).getter_mDriverName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("declaration-driver.galgas", 467)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 467)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_19203.current (HERE).getter_mType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)).add_operation (function_llvmNameForGlobalVariable (enumerator_19203.current (HERE).getter_mDriverName (HERE).getter_string (SOURCE_FILE ("declaration-driver.galgas", 468)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 468)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 469)) ;
-    enumerator_19191.gotoNextObject () ;
+    enumerator_19203.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 471)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"

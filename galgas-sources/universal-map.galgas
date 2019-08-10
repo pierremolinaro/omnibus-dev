@@ -14,7 +14,7 @@ struct @universalValuedObjectMap {
 
 setter @universalValuedObjectMap insertTask
   ?let @lstring inTaskName
-  ?let @PLMType inTaskType
+  ?let @omnibusType inTaskType
 {
   [!?mInternalPropertyAndRoutineMap insertKey
     !inTaskName
@@ -29,7 +29,7 @@ setter @universalValuedObjectMap insertTask
 setter @universalValuedObjectMap insertDriver
   ?let @lstring inDriverName
   ?let @bool inIsInstancied
-  ?let @PLMType inDriverType
+  ?let @omnibusType inDriverType
 {
   [!?mInternalPropertyAndRoutineMap insertKey
     !inDriverName
@@ -57,13 +57,13 @@ setter @universalValuedObjectMap insertGlobalConstant
 
 setter @universalValuedObjectMap insertGlobalSyncInstance
   ?let @lstring inSyncInstanceName
-  ?let @PLMType inType
+  ?let @omnibusType inType
 {
   [!?mInternalPropertyAndRoutineMap insertKey
     !inSyncInstanceName
     !.noValue
     !false
-    !.globalSyncInstance {!type:inType !plmName:inSyncInstanceName}
+    !.globalSyncInstance {!type:inType !omnibusName:inSyncInstanceName}
   ]
 }
 
@@ -72,14 +72,14 @@ setter @universalValuedObjectMap insertGlobalSyncInstance
 setter @universalValuedObjectMap insertLocalConstant
   ?let @lstring inLocalConstantName
   ?let @bool inIsFormalInputArgument
-  ?let @PLMType inType
-  ?let @lstring inPLMConstantName
+  ?let @omnibusType inType
+  ?let @lstring inOmnibusConstantName
 {
   [!?mInternalPropertyAndRoutineMap insertKey
     !inLocalConstantName
     !.hasUnreadValue
     !false
-    !.localConstant {!type:inType !plmName:inPLMConstantName !isFormalInputArgument:inIsFormalInputArgument}
+    !.localConstant {!type:inType !omnibusName:inOmnibusConstantName !isFormalInputArgument:inIsFormalInputArgument}
   ]
   mLocalObjectList += !inLocalConstantName
 }
@@ -89,14 +89,14 @@ setter @universalValuedObjectMap insertLocalConstant
 setter @universalValuedObjectMap insertUsedLocalConstant
   ?let @lstring inLocalConstantName
   ?let @bool inIsFormalInputArgument
-  ?let @PLMType inType
-  ?let @lstring inPLMConstantName
+  ?let @omnibusType inType
+  ?let @lstring inOmnibusConstantName
 {
   [!?mInternalPropertyAndRoutineMap insertKey
     !inLocalConstantName
     !.hasReadValue
     !false
-    !.localConstant {!type:inType !plmName:inPLMConstantName !isFormalInputArgument:inIsFormalInputArgument}
+    !.localConstant {!type:inType !omnibusName:inOmnibusConstantName !isFormalInputArgument:inIsFormalInputArgument}
   ]
   mLocalObjectList += !inLocalConstantName
 }
@@ -105,8 +105,8 @@ setter @universalValuedObjectMap insertUsedLocalConstant
 
 setter @universalValuedObjectMap insertLocalVariable
   ?let @lstring inLocalVariableName
-  ?let @PLMType inType
-  ?let @lstring inPLMName
+  ?let @omnibusType inType
+  ?let @lstring inOmnibusName
   ?let @valuedObjectState inVariableInitialState
   ?let @bool inObjectShouldBeValuedAtEndOfScope
 {
@@ -114,7 +114,7 @@ setter @universalValuedObjectMap insertLocalVariable
     !inLocalVariableName
     !inVariableInitialState
     !inObjectShouldBeValuedAtEndOfScope
-    !.localVariable {!type:inType !plmName:inPLMName}
+    !.localVariable {!type:inType !omnibusName:inOmnibusName}
   ]
   mLocalObjectList += !inLocalVariableName
 }
@@ -140,13 +140,13 @@ method @universalValuedObjectMap searchValuedObject
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?let entity]
   switch entity
-  case task (@PLMType type) :
+  case task (@omnibusType type) :
     if inMode == .bootMode then
       error inValuedObjectName : "cannot call a task entry in a boot routine" : outObjectIR
     else
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     end
-  case driver (@PLMType type instancied) :
+  case driver (@omnibusType type instancied) :
     if inMode == .bootMode then
       error inValuedObjectName : "cannot call a driver in a boot routine" : outObjectIR
     elsif not instancied then
@@ -158,12 +158,12 @@ method @universalValuedObjectMap searchValuedObject
     end
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
-  case localConstant (@PLMType type @lstring plmName *) :
-    outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
-  case localVariable (@PLMType type @lstring plmName) :
-    outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
-  case globalSyncInstance (@PLMType type @lstring plmName) :
-    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!plmName)}
+  case localConstant (@omnibusType type @lstring omnibusName *) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
+  case localVariable (@omnibusType type @lstring omnibusName) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
+  case globalSyncInstance (@omnibusType type @lstring omnibusName) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!omnibusName)}
   end
 }
 
@@ -201,9 +201,9 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
 {
   [mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
-  case task (@PLMType type) :
+  case task (@omnibusType type) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
-  case driver (@PLMType type instancied) :
+  case driver (@omnibusType type instancied) :
     if instancied then
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     else
@@ -211,22 +211,22 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
     end
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
-  case localConstant (@PLMType type @lstring plmName *) :
-    outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+  case localConstant (@omnibusType type @lstring omnibusName *) :
+    outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     if valueState == .hasUnreadValue then
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
-  case globalSyncInstance (@PLMType type @lstring plmName) :
-    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!plmName)}
-  case localVariable (@PLMType type @lstring plmName) :
+  case globalSyncInstance (@omnibusType type @lstring omnibusName) :
+    outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!omnibusName)}
+  case localVariable (@omnibusType type @lstring omnibusName) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outObjectIR
     case hasUnreadValue :
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
-      outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+      outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     case hasReadValue :
-      outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+      outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     end
   end
 }
@@ -249,8 +249,8 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
     error inValuedObjectName : "a global sync instance cannot be written" : outObjectIR
   case localConstant (3*) :
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case localVariable (@PLMType type @lstring plmName) :
-    outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+  case localVariable (@omnibusType type @lstring omnibusName) :
+    outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     switch valueState 
     case noValue, hasReadValue :
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
@@ -278,15 +278,15 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
     error inValuedObjectName : "a constant cannot be written" : outObjectIR
   case globalSyncInstance (2*) :
     error inValuedObjectName : "a global sync instance cannot be written" : outObjectIR
-  case localVariable (@PLMType type @lstring plmName) :
+  case localVariable (@omnibusType type @lstring omnibusName) :
     switch valueState 
     case noValue :
       error inValuedObjectName : "object has no value" : outObjectIR
     case hasUnreadValue :
-      outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+      outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     case hasReadValue :
       [!?mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-      outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+      outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     end
   end
 }
@@ -294,9 +294,9 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
 #·······················································································································
 
 method @universalValuedObjectMap searchValuedObjectType
-  ?selfType: let @PLMType inSelfType
+  ?selfType: let @omnibusType inSelfType
   ?let @LValueAST inLValue
-  !@PLMType outType
+  !@omnibusType outType
 {
   if inLValue.mIdentifier.string == "" then # Receiver is self
     outType = inSelfType
@@ -311,9 +311,9 @@ method @universalValuedObjectMap searchValuedObjectType
       error inLValue.mIdentifier : "undefined in this context" : outType
     case localConstant (3*) :
       error inLValue.mIdentifier : "undefined in this context" : outType
-    case localVariable (@PLMType type *) :
+    case localVariable (@omnibusType type *) :
       outType = type
-    case globalSyncInstance (@PLMType type *) :
+    case globalSyncInstance (@omnibusType type *) :
       outType = type
     end
   end
@@ -322,7 +322,7 @@ method @universalValuedObjectMap searchValuedObjectType
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueOperandAST getValuedObjectType ?!@PLMType ioType {
+method @LValueOperandAST getValuedObjectType ?!@omnibusType ioType {
   switch self
   case noOperand :
   case property (@lstring propertyName @LValueOperandAST next) :
@@ -341,7 +341,7 @@ method @LValueOperandAST getValuedObjectType ?!@PLMType ioType {
     switch ioType.subscript
     case noSubscript :
     case literalString :
-    case staticSubscript (@PLMType elementType *) :
+    case staticSubscript (@omnibusType elementType *) :
       ioType = elementType
     end
     [next getValuedObjectType !?ioType]
@@ -360,18 +360,18 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
     case driver (* *) :
     case globalSyncInstance (2*) :
     case globalConstant (*) :
-    case localConstant (@PLMType type @lstring plmName @bool isFormalInputArg) :
+    case localConstant (@omnibusType type @lstring omnibusName @bool isFormalInputArg) :
 #      if entry.mObjectState == .hasUnreadValue then
 #        warning entry.lkey : "'" + entry.lkey + "' is never read"
 #      end
       if not isFormalInputArg then
-        [!?ioInstructionGenerationList generateRelease !type !plmName]
+        [!?ioInstructionGenerationList generateRelease !type !omnibusName]
       end
-    case localVariable (@PLMType type @lstring plmName) :
+    case localVariable (@omnibusType type @lstring omnibusName) :
       if (entry.mObjectState == .noValue) && entry.mObjectShouldBeValuedAtEndOfScope then
         error entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine"
       end
-      [!?ioInstructionGenerationList generateRelease !type !plmName]
+      [!?ioInstructionGenerationList generateRelease !type !omnibusName]
     end
   end
 }
@@ -555,12 +555,12 @@ map @referenceStateMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valuedObject {
-  case driver (@PLMType type @bool instancied)
-  case task (@PLMType type)
+  case driver (@omnibusType type @bool instancied)
+  case task (@omnibusType type)
   case globalConstant (@objectIR objectIR)
-  case localConstant (@PLMType type @lstring plmName @bool isFormalInputArgument)
-  case localVariable (@PLMType type @lstring plmName)
-  case globalSyncInstance (@PLMType type @lstring plmName)
+  case localConstant (@omnibusType type @lstring omnibusName @bool isFormalInputArgument)
+  case localVariable (@omnibusType type @lstring omnibusName)
+  case globalSyncInstance (@omnibusType type @lstring omnibusName)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

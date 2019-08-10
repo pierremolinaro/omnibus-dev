@@ -104,9 +104,9 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -117,7 +117,7 @@ override method @typedConstantCallAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze constructor source type
-  @PLMType inferredResultType
+  @omnibusType inferredResultType
   if mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
   else

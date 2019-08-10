@@ -164,9 +164,9 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @primaryInExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -217,9 +217,9 @@ override method @primaryInExpressionAST analyzeExpression
 #·······················································································································
 
 method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -282,9 +282,9 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case localConstant (@PLMType type @lstring plmName *) :
+  case localConstant (@omnibusType type @lstring omnibusName *) :
     [!?ioUniversalMap readAccess !mReceiverName]
-    outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!plmName)}
+    outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -299,8 +299,8 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case localVariable (@PLMType type @lstring plmName) :
-    outResult = .reference {!type: type !llvmName:llvmNameForLocalVariable (!plmName)}
+  case localVariable (@omnibusType type @lstring omnibusName) :
+    outResult = .reference {!type: type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     [!?ioUniversalMap readAccess !mReceiverName]
     procAnalyzeAccesListInExpression (
       !self: inSelfType
@@ -316,8 +316,8 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !mAccessList
       !?result: outResult
     )
-  case globalSyncInstance (@PLMType type @lstring plmName) :
-    outResult = .reference {!type: type !llvmName:llvmNameForGlobalSyncInstance (!plmName)}
+  case globalSyncInstance (@omnibusType type @lstring omnibusName) :
+    outResult = .reference {!type: type !llvmName:llvmNameForGlobalSyncInstance (!omnibusName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -338,9 +338,9 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
 #·······················································································································
 
 proc procAnalyzeAccesListInExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -415,9 +415,9 @@ proc procAnalyzeAccesListInExpression
 #·······················································································································
 
 method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?optionalTargetType:let @omnibusType inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -530,7 +530,7 @@ proc handlePropertyAccessInExpression
   switch accessKind
   case constantProperty (@objectIR value) :
     ioResult = value
-  case storedProperty (@PLMType propertyType @uint propertyIndex) :
+  case storedProperty (@omnibusType propertyType @uint propertyIndex) :
    [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
       ![ioResult type]
@@ -561,9 +561,9 @@ private proc handleArrayAccessInExpression
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
   ?let @bool inCheckIndexExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -575,11 +575,11 @@ private proc handleArrayAccessInExpression
 #--- Check current object is an array
   switch [ioResult type].subscript
   case noSubscript :
-    error inEndOfIndex : "the receiver type is " + [[ioResult type] plmTypeDescriptionName] + " and does not accept subscripting"
+    error inEndOfIndex : "the receiver type is " + [[ioResult type] omnibusTypeDescriptionName] + " and does not accept subscripting"
   case literalString  :
     error inEndOfIndex
     : "the receiver type is literal string (dynamic array) and does not accept subscripting"
-  case staticSubscript (@PLMType elementType @bigint arraySize) :
+  case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -613,7 +613,7 @@ private proc handleArrayAccessInExpression
 private proc handleFunctionCallInExpression
   ?let @lstring inMethodName
   ?!@objectIR ioObjectIR
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?routineAttributes:let @routineAttributes inRoutineAttributes

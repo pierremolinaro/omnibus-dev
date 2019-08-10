@@ -87,9 +87,9 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerSliceExpressionAST analyzeExpression
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -171,10 +171,10 @@ override method @integerSliceExpressionAST analyzeExpression
         case syncTool :
           error expressionLocation: "an unsigned integer expression is required here"
         case boolean :
-          if [[expressionResult type] plmTypeDescriptionName] != [expressionTargetType plmTypeDescriptionName] then
+          if [[expressionResult type] omnibusTypeDescriptionName] != [expressionTargetType omnibusTypeDescriptionName] then
             error expressionLocation :
-            "an $" + [expressionTargetType plmTypeDescriptionName] + " expression is required, found an $" +
-            [[expressionResult type] plmTypeDescriptionName] + " expression"
+            "an $" + [expressionTargetType omnibusTypeDescriptionName] + " expression is required, found an $" +
+            [[expressionResult type] omnibusTypeDescriptionName] + " expression"
           end
           if [expressionResult isLiteralInteger] then
             [expressionResult literalInteger ?1* ?value:let @bigint value]

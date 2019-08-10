@@ -66,7 +66,7 @@ end
 </h2>
 <p>
 Kind: %![type descriptionForHTMLFile]%<br>
-Description: %![type plmTypeDescriptionName]%<br>
+Description: %![type omnibusTypeDescriptionName]%<br>
 LLVM Base Name: %![type llvmBaseTypeName]%<br>
 LLVM Name: %![type llvmTypeName]%
 </p>

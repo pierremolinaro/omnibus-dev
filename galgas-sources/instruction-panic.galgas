@@ -38,7 +38,7 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionAST instructionSemanticAnalysis
-  ?self:let @PLMType inSelfType
+  ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -71,14 +71,14 @@ override method @panicInstructionAST instructionSemanticAnalysis
 #--- Expression is static ?
   if ([unusedInstructionListIR length] > 0)
      || not [result isLiteralInteger]
-     || ([result plmTypeDescriptionName] != staticIntegerTypeName ()) then
+     || ([result omnibusTypeDescriptionName] != staticIntegerTypeName ()) then
     error mInstructionLocation : "throw expression should be a literal integer"
   else
     [inContext.mPanicCodeType.kind integer ?min:let min ?max:let max ?2*]
     [result literalInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
       error mInstructionLocation
-      : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.plmTypeDescriptionName
+      : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName
     elsif not [option omnibus_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@panicInstructionIR.new {
         !mInstructionLocation
