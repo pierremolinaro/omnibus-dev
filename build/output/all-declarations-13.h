@@ -99,16 +99,6 @@ void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               Routine 'typeInventory'                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_typeInventory (const class GALGAS_declarationListAST constinArgument0,
-                            class C_Compiler * inCompiler
-                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -140,46 +130,46 @@ void routine_recursiveImportFileSystemTargetFiles (class GALGAS_ast & ioArgument
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 extern const char * gWrapperFileContent_0_embeddedSampleCode ;
-extern const char * gWrapperFileContent_13_embeddedSampleCode ;
-extern const char * gWrapperFileContent_10_embeddedSampleCode ;
-extern const char * gWrapperFileContent_1_embeddedSampleCode ;
-extern const char * gWrapperFileContent_8_embeddedSampleCode ;
-extern const char * gWrapperFileContent_7_embeddedSampleCode ;
+extern const char * gWrapperFileContent_4_embeddedSampleCode ;
+extern const char * gWrapperFileContent_12_embeddedSampleCode ;
+extern const char * gWrapperFileContent_11_embeddedSampleCode ;
 extern const char * gWrapperFileContent_2_embeddedSampleCode ;
+extern const char * gWrapperFileContent_13_embeddedSampleCode ;
+extern const char * gWrapperFileContent_3_embeddedSampleCode ;
+extern const char * gWrapperFileContent_8_embeddedSampleCode ;
 extern const char * gWrapperFileContent_15_embeddedSampleCode ;
 extern const char * gWrapperFileContent_9_embeddedSampleCode ;
-extern const char * gWrapperFileContent_11_embeddedSampleCode ;
 extern const char * gWrapperFileContent_14_embeddedSampleCode ;
-extern const char * gWrapperFileContent_3_embeddedSampleCode ;
+extern const char * gWrapperFileContent_10_embeddedSampleCode ;
 extern const char * gWrapperFileContent_6_embeddedSampleCode ;
+extern const char * gWrapperFileContent_7_embeddedSampleCode ;
 extern const char * gWrapperFileContent_5_embeddedSampleCode ;
-extern const char * gWrapperFileContent_12_embeddedSampleCode ;
-extern const char * gWrapperFileContent_4_embeddedSampleCode ;
-extern const char * gWrapperFileContent_31_embeddedSampleCode ;
-extern const char * gWrapperFileContent_18_embeddedSampleCode ;
-extern const char * gWrapperFileContent_35_embeddedSampleCode ;
-extern const char * gWrapperFileContent_33_embeddedSampleCode ;
-extern const char * gWrapperFileContent_20_embeddedSampleCode ;
-extern const char * gWrapperFileContent_30_embeddedSampleCode ;
-extern const char * gWrapperFileContent_27_embeddedSampleCode ;
-extern const char * gWrapperFileContent_32_embeddedSampleCode ;
-extern const char * gWrapperFileContent_24_embeddedSampleCode ;
-extern const char * gWrapperFileContent_28_embeddedSampleCode ;
-extern const char * gWrapperFileContent_37_embeddedSampleCode ;
-extern const char * gWrapperFileContent_22_embeddedSampleCode ;
-extern const char * gWrapperFileContent_38_embeddedSampleCode ;
-extern const char * gWrapperFileContent_29_embeddedSampleCode ;
-extern const char * gWrapperFileContent_40_embeddedSampleCode ;
-extern const char * gWrapperFileContent_36_embeddedSampleCode ;
-extern const char * gWrapperFileContent_25_embeddedSampleCode ;
-extern const char * gWrapperFileContent_17_embeddedSampleCode ;
-extern const char * gWrapperFileContent_19_embeddedSampleCode ;
+extern const char * gWrapperFileContent_1_embeddedSampleCode ;
 extern const char * gWrapperFileContent_26_embeddedSampleCode ;
-extern const char * gWrapperFileContent_16_embeddedSampleCode ;
-extern const char * gWrapperFileContent_34_embeddedSampleCode ;
-extern const char * gWrapperFileContent_39_embeddedSampleCode ;
-extern const char * gWrapperFileContent_23_embeddedSampleCode ;
+extern const char * gWrapperFileContent_25_embeddedSampleCode ;
+extern const char * gWrapperFileContent_32_embeddedSampleCode ;
 extern const char * gWrapperFileContent_21_embeddedSampleCode ;
+extern const char * gWrapperFileContent_29_embeddedSampleCode ;
+extern const char * gWrapperFileContent_19_embeddedSampleCode ;
+extern const char * gWrapperFileContent_37_embeddedSampleCode ;
+extern const char * gWrapperFileContent_35_embeddedSampleCode ;
+extern const char * gWrapperFileContent_36_embeddedSampleCode ;
+extern const char * gWrapperFileContent_28_embeddedSampleCode ;
+extern const char * gWrapperFileContent_39_embeddedSampleCode ;
+extern const char * gWrapperFileContent_20_embeddedSampleCode ;
+extern const char * gWrapperFileContent_22_embeddedSampleCode ;
+extern const char * gWrapperFileContent_16_embeddedSampleCode ;
+extern const char * gWrapperFileContent_27_embeddedSampleCode ;
+extern const char * gWrapperFileContent_30_embeddedSampleCode ;
+extern const char * gWrapperFileContent_33_embeddedSampleCode ;
+extern const char * gWrapperFileContent_40_embeddedSampleCode ;
+extern const char * gWrapperFileContent_31_embeddedSampleCode ;
+extern const char * gWrapperFileContent_24_embeddedSampleCode ;
+extern const char * gWrapperFileContent_18_embeddedSampleCode ;
+extern const char * gWrapperFileContent_23_embeddedSampleCode ;
+extern const char * gWrapperFileContent_34_embeddedSampleCode ;
+extern const char * gWrapperFileContent_38_embeddedSampleCode ;
+extern const char * gWrapperFileContent_17_embeddedSampleCode ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

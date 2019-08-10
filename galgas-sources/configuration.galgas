@@ -74,7 +74,7 @@ class @configurationDeclarationAST : @abstractDeclarationAST {
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_target_specific_syntax {
+syntax extension omnibus_target_specific_syntax {
 
   #·····················································································································
 
@@ -204,7 +204,7 @@ syntax extension plm_target_specific_syntax {
       LL_definitionFiles += !fileRelativePath
     end
     outImportedFileList = {}
-    <configuration_key> !"PLM_FILES"
+    <configuration_key> !"OMNIBUS_FILES"
     repeat
     while
       $"string"$ ?let relativeFilePath

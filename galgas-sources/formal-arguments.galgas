@@ -44,7 +44,7 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let 
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 

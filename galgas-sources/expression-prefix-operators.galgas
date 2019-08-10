@@ -126,7 +126,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation
         : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
-    if [option plm_options.noPanicGeneration value] then
+    if [option omnibus_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
       leftOperand = .literalInteger {!type:literalIntegerType () !value:0G}
     else

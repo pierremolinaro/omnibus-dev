@@ -68,7 +68,7 @@ override method @binaryOperationIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  if not [option plm_options.noPanicGeneration value] then
+  if not [option omnibus_options.noPanicGeneration value] then
     ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mLocation)
   end
 }

@@ -8,14 +8,13 @@ import sys, os
 #----------------------------------------------------------------------------------------------------------------------*
 
 sys.path.append (os.path.dirname (os.path.abspath (sys.argv [0])) + "/sources")
-import plm
+import omnibus
 import toolpath
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def archiveBaseURL ():
-  # return "http://crossgcc.rts-software.org/downloads/plm-tools/"
-  return "http://www.pcmolinaro.name/plm-tools/"
+  return "http://www.pcmolinaro.name/omnibus-tools/"
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -216,7 +215,7 @@ def check_stack_utility ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 currentFile = os.path.abspath (sys.argv [0])
-plm.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \
+omnibus.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \
                  LLCcompiler (), llvmOptimizerCompiler (), \
                  asAssembler (), productDir (), \
                  linker (), linkerScripts (), linkerLibraries (), \

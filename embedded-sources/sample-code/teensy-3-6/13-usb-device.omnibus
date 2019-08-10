@@ -1,0 +1,504 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 180
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   Display clock settings
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//let myBUS_MHZ @display = BUS_MHZ
+//let myFLEXBUS_MHZ @display = FLEXBUS_MHZ
+//let myFLASH_KHZ @display = FLASH_KHZ
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// USB DEVICE DRIVER
+// Kevin Cuzner wrote a simpler version, and a great blog article:
+//   http://kevincuzner.com/2014/12/12/teensy-3-1-bare-metal-writing-a-usb-driver/
+//   https://github.com/kcuzner/teensy-oscilloscope/blob/master/scope-teensy/src/usb.c
+//---
+//   https://github.com/prof7bit/frdm-kl25z-minimal-usb-hid
+//   http://www.beyondlogic.org/usbnutshell/usb1.shtml
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// 1. La routine init du pilote est exécutée. Elle se termine par l'activation du pull-up sur D+. Ceci a pour
+//    conséquence que le host lance une commande d'initialisation qui déclenche une interruption
+// 2. L'interruption est du type 'RESET', et la routine configureEndPoint0OnReset effectue la configuration.
+// 3. Nouvelle interruption, du type 'TOKEN COMPLETED' -> on lance tokenCompleted (). Cette routine lit l'endPoint
+//    concerné, il s'agit du n°0. On exécute alors endpoint_0_handler ().
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let DEVICE_DESCRIPTOR = [18 : $uint8] (
+  !18 // Descriptor size in bytes
+  !1  // DEVICE constant
+  !0x00 !0x02 // USB specification release (BCD): 0x0200
+  !0x02 // Class code (2 -> communication)
+  !0    // Subclass code
+  !0    // Protocol code
+  !8    // Maximum packet size for endpoint0 (low-speed: 8, full-speed: 8, 16, 32, 64)
+  !0xAD !0xDE // Vendor ID:   0xDEAD
+  !0xAF !0xBE // Product ID : 0xBEAF
+  !0 !0 // Device release number (BCD)
+  !0 // Index of string descriptor for the manufacturer (0 -> no string)
+  !0 // Index of string descriptor for the product (0 -> no string)
+  !0 // Index of string descriptor for the serial umber (0 -> no string)
+  !1 // Number of possible configurations
+)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let CONFIG_DESCRIPTOR = [32 : $uint8] (
+//--- Configuration descriptor
+  !9  // Configuration descriptor size in bytes
+  !2  // CONFIGURATION constant
+  !32 !0 // The number of bytes in the configuration descriptor and all its subordinate descriptors
+  !1 // Number of interfaces in the configuration (should be ≥ 1)
+  !1 // Identifier for Set_Configuration and Get_Configuration (should be ≥ 1)
+  !0 // Index of string descriptor for the configuration (0 -> no string)
+  !0 // Device is bus-powered (bit 6=1 --> self powered)
+  !100 / 2 // Half of bus current required, in milli-amperes (50 --> 100 mA)
+//--- Subordinate descriptor: INTERFACE association
+  !9  // $interface descriptor size in bytes
+  !4  // INTERFACE constant
+  !0  // Number identifying this interface
+  !0  // Value used to select an alternate setting (0: no alternate setting)
+  !2  // Number of endpoints supported (not counting endpoint 0)
+  !0x0A // Class code (0x0A --> Data $interface of Communication Device Class)
+  !0x00 // Subclass code
+  !0  // $interface Protocol
+  !0  // Index of string descriptor for the interface (0 --> no string)
+//--- Subordinate descriptor: ENDPOINT association
+  !7  // Endpoint descriptor size in bytes
+  !5  // ENDPOINT constant
+  !1  // ENDPOINT number and direction (bit 7=0 --> OUT)
+  !0x02 // Transfer type (0x02 --> BULK)
+  !64 !0 // Maximum packet size (0 à 1024); here: 64
+  !0  // Maximum latency / polling interval / NAK rate [ignored for bulk and control transfers]
+//--- Subordinate descriptor: ENDPOINT association
+  !7  // Endpoint descriptor size in bytes
+  !5  // ENDPOINT constant
+  !1 | 0x80  // ENDPOINT number and direction (bit 7=1 --> IN)
+  !0x02 // Transfer type (0x02 --> BULK)
+  !64 !0 // Maximum packet size (0 à 1024); here: 64
+  !0  // Maximulm latency / polling interval / NAK rate [ignored for bulk and control transfers]
+)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+let NUM_ENDPOINTS = 4
+
+//······················································································································
+
+struct $BDT @copyable {
+ var desc $uint32 = 0
+ var addr $uint32 = 0
+}
+
+
+let BDT_OWN   = 0x80
+let BDT_DATA1 = 0x40
+let BDT_DATA0 = 0x00
+let BDT_DTS   = 0x08
+let BDT_STALL = 0x04
+//let BDT_PID(n) (((n) >> 2) & 15)
+
+let EP0_RX_SIZE = 8
+
+func BDT_DESC safe section (?count $uint32 ?data $uint1) -> $uint32 {
+  result = BDT_OWN | BDT_DTS | (count << 16) | if data ≠ 0 {BDT_DATA1} else {BDT_DATA0}
+}
+
+let TX   = 1
+let RX   = 0
+let ODD  = 1
+let EVEN = 0
+let DATA0 = 0
+let DATA1 = 1
+
+func index safe section (? endpoint $uint32 ?tx $uint32 ?odd $uint32) -> $uint32 {
+  result = (endpoint << 2) | (tx << 1) | odd
+}
+
+let TRACE_SIZE = 10
+
+//······················································································································
+
+driver usb_device > digital {
+// Descriptor table should be aligned on a 512 byte-boudary
+  var descriptorTable @align 512 = [(NUM_ENDPOINTS+1)*4 : $BDT] (!repeated: $BDT ())
+
+  var ep0_rx0_buf @align 4 = [EP0_RX_SIZE : $uint8] (!repeated:0)
+  var ep0_rx1_buf @align 4 = [EP0_RX_SIZE : $uint8] (!repeated:0)
+  var ep0_tx_bdt_bank $uint32 = 0
+
+  var état = [TRACE_SIZE : $uint4] (!repeated:0)
+  var indexÉtat $uint32 = 0
+
+  public section lireÉtat (?index $uint32) -> $uint32 {
+    result = extend (self.état [index])
+  }
+
+  var trace $uint32 = 0
+
+  public section lireTrace () -> $uint32 {
+    result = self.trace
+  }
+
+  public section lireAddresseUSB () -> $uint32 {
+    result = extend (©USB0.ADDR)
+  }
+
+  //····················································································································
+
+  startup {
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+  // This basically follows the flowchart in the Kinetis Quick Reference User Guide, Rev. 3, 05/2014, page 134
+  //-- Assume 48 MHz clock already running
+    ©SIM.SCGC4 |= {©SIM.SCGC4 !USBOTG:1} // SIM - enable clock
+    ©MPU.RGDAAC [0] |= {©MPU.RGDAAC !M4RE:1 !M4WE:1}
+  //--- If using IRC48M, turn on the USB clock recovery hardware
+    if @static (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) {
+      ©USB0.CLK_RECOVER_IRC_EN = {©USB0.CLK_RECOVER_IRC_EN !IRC_EN:1 !REG_EN:1}
+      ©USB0.CLK_RECOVER_CTRL = {©USB0.CLK_RECOVER_CTRL !CLOCK_RECOVER_EN:1 !RESTART_IFRTRIM_EN:1}
+    }
+  //--- Reset USB module (SB0:USBTRC0:USBRESET is always read as 0. Wait 2 USB clock cycles after setting this bit)
+    ©USB0.USBTRC0 |= {©USB0.USBTRC0 !USBRESET:1} // Page 1516
+    while ©USB0.USBTRC0.USBRESET ≠ 0 {} // wait for reset to end
+  //-- Set descriptor table base address
+    let descriptorTableBaseAddress = addressof (self.descriptorTable)
+    ©USB0.BDTPAGE1 = descriptorTableBaseAddress [08...15]
+    ©USB0.BDTPAGE2 = descriptorTableBaseAddress [16...23]
+    ©USB0.BDTPAGE3 = descriptorTableBaseAddress [24...31]
+  //--- Clear all ISR flags
+    ©USB0.ISTAT = 0xFF
+    ©USB0.ERRSTAT = 0xFF
+    ©USB0.OTGISTAT = 0xFF
+    ©USB0.INTEN = {©USB0.INTEN !USBRSTEN:1} // | 0x40
+  //-- Enable USB
+    ©USB0.CTL = {©USB0.CTL !USBENOFEN:1}
+    ©USB0.USBCTRL = 0
+  //-- Enable reset interrupt
+    ©USB0.INTEN = {©USB0.INTEN !USBRSTEN:1}
+  //-- Enable interrupt in NVIC
+    enable (!interrupt: .USBFS_OTG)
+  //--- Enable d+ pullup
+    ©USB0.CONTROL = {©USB0.CONTROL !DPPULLNONOTG:1} // Page 1515
+  }
+
+  //····················································································································
+
+  interrupt section USBFS_OTG {
+    let status = ©USB0.ISTAT
+
+  //-------------------- RESET: configure Endpoint 0
+    if (status & {©USB0.ISTAT !USBRST:1}) ≠ 0 {
+      self.trace |= 1
+//      self.état [self.indexÉtat] = 1
+//      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+      self.configureEndPoint0OnReset ()
+  //    ©USB0.ISTAT = ©USB0.ISTAT !USBRST:1) // Ack
+    }else{
+    //-------------------- START OF FRAME
+      if (status & {©USB0.ISTAT !SOFTOK:1}) ≠ 0 {
+  //        self.état [self.indexÉtat] = 2
+  //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        ©USB0.ISTAT = {©USB0.ISTAT !SOFTOK:1} // Ack
+      }
+
+    //-------------------- TOKEN COMPLETED
+      if (status & {©USB0.ISTAT !TOKDNE:1}) ≠ 0 { // Page 1502
+        self.trace |= 2
+  //        digital.write (!yes !toPort:LED_L2)
+  //        self.état [self.indexÉtat] = 3
+  //        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        self.tokenCompleted ()
+        ©USB0.ISTAT = {©USB0.ISTAT !TOKDNE:1} // Ack
+      }
+
+    //-------------------- STALL
+      if (status & {©USB0.ISTAT !STALL:1}) ≠ 0 {
+        self.état [self.indexÉtat] = 4
+        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        ©USB0.ISTAT = {©USB0.ISTAT !STALL:1} // Ack
+      }
+
+    //-------------------- ERROR
+      if (status & {©USB0.ISTAT !ERROR:1}) ≠ 0 {
+        self.état [self.indexÉtat] = 5
+        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        let err = ©USB0.ERRSTAT
+        ©USB0.ERRSTAT = err
+        ©USB0.ISTAT = {©USB0.ISTAT !ERROR:1} // Ack
+      }
+
+    //-------------------- SLEEP
+      if (status & {©USB0.ISTAT !SLEEP:1}) ≠ 0 {
+        self.état [self.indexÉtat] = 6
+        self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+        ©USB0.ISTAT = {©USB0.ISTAT !SLEEP:1} // Ack
+      }
+    }
+  }
+
+  //····················································································································
+
+  func configureEndPoint0OnReset section @mutating () {
+//      self.état [self.indexÉtat] = 1
+//      self.indexÉtat = (self.indexÉtat + 1) % TRACE_SIZE
+      ©USB0.CTL |= {©USB0.CTL !ODDRST:1}
+      self.ep0_tx_bdt_bank = 0
+   //--- Set up buffers to receive Setup and OUT packets
+      self.descriptorTable [index(!0 !RX !EVEN)].desc = BDT_DESC (!EP0_RX_SIZE  !0)
+      self.descriptorTable [index(!0 !RX !EVEN)].addr = addressof (self.ep0_rx0_buf)
+      self.descriptorTable [index(!0 !RX !ODD) ].desc = BDT_DESC (!EP0_RX_SIZE !0)
+      self.descriptorTable [index(!0 !RX !ODD) ].addr = addressof (self.ep0_rx1_buf)
+      self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
+      self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
+    //--- Activate endpoint 0
+      ©USB0.ENDPT [0] = {©USB0.ENDPT !EPRXEN:1 !EPTXEN:1 !EPHSHK:1}
+    //--- Clear all ending interrupts
+      ©USB0.ERRSTAT = 0xFF
+      ©USB0.ISTAT = 0xFF
+    //--- Set the address to zero during enumeration
+      ©USB0.ADDR = 0
+    //--- Enable other interrupts
+      ©USB0.ERREN = 0xFF
+      ©USB0.INTEN = {©USB0.INTEN !STALLEN:1 !SLEEPEN:1 !TOKDNEEN:1 !SOFTOKEN:1 !ERROREN:1 !USBRSTEN:1}
+    //--- is this necessary?
+   //   ©USB0.CTL = ©USB0.CTL !USBENOFEN:1) // Page 1507
+  }
+
+  //····················································································································
+  // This means a transaction has completed, we receive this interrupt
+  // after data was transferred and the handshake has been completed:
+  //
+  //   host:TOK_IN    -> device:DATA ->   host:ACK/NAK -> $interrupt
+  //   host:TOK_OUT   ->   host:DATA -> device:ACK/NAK -> $interrupt
+  //   host:TOK_SETUP ->   host:DATA -> device:ACK/NAK -> $interrupt
+  //
+  // The handler can then process the received data or queue more
+  // data to be sent during the next transaction. When there is a
+  // TOK_IN transaction and no data has been placed in the TX buffer
+  // then the hardware will automatically send a NAK:
+  //
+  //   host:TOK_IN -> device:NAK -> NO $interrupt!
+  //
+  // There will be no interrupt in this case! This means as long
+  // as there is no data to be sent there will also be no TOK_IN
+  // calls to the handler anymore. Something else has to prepare
+  // a new TX buffer for that endpoint when data becomes available
+  // again, the handler will only be called AFTER the transmission!
+
+  func tokenCompleted section @mutating () {
+    let transactionStatus = ©USB0.STAT
+    let endPoint $uint4 = transactionStatus [4...7]
+    let TX_transitionStatus = transactionStatus [3...3]
+    let ODD_transitionStatus = transactionStatus [2...2]
+    let index = index (!extend (endPoint) !extend (TX_transitionStatus) !extend (ODD_transitionStatus))
+   //--- Get TOK_PID
+     let TOK_PID = self.descriptorTable [index].desc [2...5]
+//     let TOK_PID = self.ep0_rx0_buf [0] [2...5]
+     self.trace |= (extend $uint32 (TOK_PID)) << 8
+   //---
+     if TOK_PID == 0x09 { // IN_TOKEN: transfer device --> host
+     }else if TOK_PID == 0x01 { // OUT_TOKEN: transfer host --> device
+     }else if TOK_PID == 0x0D { // SETUP_TOKEN: transfer host --> device
+       let bmRequestType = self.ep0_rx0_buf [0]
+       self.trace |= (extend $uint32 (bmRequestType)) << 12
+       if bmRequestType == 0 { // setup device
+         self.setupDevice ()
+       }else if bmRequestType == 1 { // setup interface
+
+       }else if bmRequestType == 2 { // setup end point
+
+       }
+       ©USB0.CTL = {©USB0.CTL !USBENOFEN:1}
+     }
+   //---
+    if endPoint == 0 {
+      self.endpoint_0_handler (!transactionStatus: transactionStatus)
+    }else{
+
+    }
+//    let index = transactionStatus >> 2
+//    let pid = (self.descriptorTable [index].desc >> 2) & 15
+//    if pid == 0x0D { // Setup received from host
+//      self.usb_setup ()
+//    //--- Unfreeze the USB, now that we're ready
+//      ©USB0.CTL) = ©USB0.CTL !USBENOFEN:1) // clear TXSUSPENDTOKENBUSY bit
+//    }else if pid == 0x09 { // IN transaction completed to host
+//    }else if (pid == 0x01) or (pid == 0x02) { // OUT transaction received from host
+//
+//    }
+
+//    if endPoint == 0 {
+//      self.configure
+//    }else{
+//
+//    }
+  }
+
+  //····················································································································
+
+  func setupDevice section @mutating () {
+    self.trace |= 8
+    let bRequest = self.ep0_rx0_buf [1]
+    if bRequest == 6 { // mGET_DESC
+
+    }else if bRequest == 5 { // mSET_ADDRESS
+
+    }else if bRequest == 9 { // mSET_CONFIG
+
+    }
+  }
+
+  //····················································································································
+
+  func endpoint_0_handler section @mutating (?transactionStatus: _ $uint8) {
+    self.trace |= 4
+  }
+
+  //····················································································································
+
+//  func section usb_setup @mutating () {
+//  //---
+//    let index $uint32 = 0
+//    self.descriptorTable [index].desc = BDT_DESC (!EP0_SIZE !DATA1)
+//    self.descriptorTable [index(!0 !TX !EVEN)].desc = 0
+//    self.descriptorTable [index(!0 !TX !ODD) ].desc = 0
+//  //--- Grab the 8 byte setup info
+//    let bmRequestType = self.ep0_rx0_buf [0] & 0x1F
+//    let bRequest = self.ep0_rx0_buf [1]
+//    if bmRequestType == 0 { // Setup device
+//      digital.write (!yes !toPort:LED_L2)
+//      self.usb_setup_device (!bRequest)
+//    }else if bmRequestType == 1 { // Setup interface
+//      digital.write (!yes !toPort:LED_L3)
+//
+//    }else if bmRequestType == 2 { // Setup endpoint
+//      digital.write (!yes !toPort:LED_L4)
+//
+//    }
+//////    let wValue  = {UInt16 !8:self.ep0_rx0_buf [3] !8:self.ep0_rx0_buf [2]}
+//////    let wIndex  = {UInt16 !8:self.ep0_rx0_buf [5] !8:self.ep0_rx0_buf [4]}
+//////    let wLength = {UInt16 !8:self.ep0_rx0_buf [7] !8:self.ep0_rx0_buf [6]}
+////  //--- Build uint16 requestAndType
+////    let requestAndType = {UInt16 !8:bRequest !8:bmRequestType}
+////  //---
+////    if requestAndType == 0x0500 { // Set address, nothing to do
+////        digital.write (!yes !toPort:LED_L2)
+////    }else if requestAndType == 0x0900 { // Set configuration
+////        digital.write (!yes !toPort:LED_L1)
+////
+////
+////    }else if requestAndType == 0x0880 { // Get configuration
+////    }else if requestAndType == 0x0080 { // Get status (device)
+////    }else if requestAndType == 0x0082 { // Get status (endpoint)
+////    }else if requestAndType == 0x0102 { // Clear feature (device)
+////    }else if requestAndType == 0x0302 { // Clear feature (endpoint)
+////    }else if (requestAndType == 0x0680) or (requestAndType == 0x0681) { // Get descriptor
+////        digital.write (!yes !toPort:LED_L3)
+////    }
+//  }
+//
+////#define mGET_STATUS           0
+////#define mCLR_FEATURE          1
+////#define mSET_FEATURE          3
+////#define mSET_ADDRESS          5
+////#define mGET_DESC             6
+////#define mSET_DESC             7
+////#define mGET_CONFIG           8
+////#define mSET_CONFIG           9
+////#define mGET_INTF             10
+////#define mSET_INTF             11
+////#define mSYNC_FRAME           12
+//
+//  func section usb_setup_device @mutating (?bRequest $uint8) {
+//    self.trace = extend (bRequest)
+////    const usb_descriptor_list_t *p;
+////    int len;
+////
+////    switch (setup->bRequest) {
+////        case mGET_DESC:
+////            p = usb_descriptor_list;                    // Find entry in table
+////            while(p->wValue) {
+////                if(p->wValue == setup->wValue) {
+////                    if(p->length == 0)
+////                        len = p->addr[0];               // Use structure length
+////                    else
+////                        len = p->length;
+////
+////                    iprintf("sending 0x%04x %d\r\n",setup->wValue, len);
+////                    usb_queue_tx(ep, p->addr, min(len, setup->wLength));
+////                    return;
+////                }
+////                p++;
+////            }
+////            iprintf("NOT IMPLEMENTED! 0x%04x\r\n", setup->wValue);
+////            break;
+////
+////        case mSET_ADDRESS:
+////            device_state = ADDRESS;
+////            device_address = setup->wValue & 0x7f;
+////            usb_tx(ep,0,0);                         // Send handshake
+////            break;
+////
+////        case mSET_CONFIG:
+////            iprintf("setconfig: %d\r\n", setup->wValue);
+////            device_state = ENUMERATED;
+////            usb_set_config(setup->wValue);
+////            usb_tx(ep,0,0);                         // Send handshake
+////            break;
+////
+////        default:
+////            iprintf("NOT IMPLEMENTED! %d\r\n", setup->bRequest);
+////            break;
+////      }
+//  }
+
+  //····················································································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver usb_device ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// TASK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T @stacksize 512 @autostart {
+  var tick $uint32 = 0
+  var état $uint32 = 0
+
+  //····················································································································
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  }
+
+  //····················································································································
+
+  event time.wait (!until:self.tick) {
+    digital.toggle (!port:LED_L0)
+    self.tick +%= 500
+    lcd.goto (!line:0 !column:0)
+    for i $uint32 in 0 ..< TRACE_SIZE {
+      let e = usb_device.lireÉtat (!i)
+      lcd.print (!hex2:e)
+    }
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!hex8:usb_device.lireAddresseUSB ())
+    lcd.goto (!line:2 !column:0)
+    lcd.print (!hex8:usb_device.lireTrace ())
+  }
+
+  //····················································································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

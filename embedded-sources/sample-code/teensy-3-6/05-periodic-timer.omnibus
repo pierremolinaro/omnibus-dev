@@ -1,0 +1,59 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 180
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sync $PeriodicTimer {
+  var deadline $uint32 = 0
+  let period $uint32
+  var guardList = $GuardList ()
+
+  //············································································
+
+  public primitive wait @noUnusedWarning @mutating () {
+    if self.deadline ≤ time.now () {
+      block (!onDeadline:self.deadline)
+    }
+    self.deadline += self.period
+  }
+
+  //············································································
+
+  public guard wait @noUnusedWarning () {
+    accept = self.deadline ≤ time.now ()
+    if accept {
+      self.deadline += self.period
+    }else{
+      handle (!?guard:self.guardList)
+    }
+  }
+
+  public section deadline @noUnusedWarning () -> $uint32 {
+    result = self.deadline
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche @stacksize 512 @autostart {
+  var compteur $uint32 = 0
+  var deadline = PeriodicTimer (!period:500)
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+  }
+
+  event time.wait (!until:self.compteur) {
+    digital.toggle (!port:LED_L0)
+    self.compteur +%= 500
+  }
+
+  event self.deadline.wait () {
+    digital.toggle (!port:LED_L1)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

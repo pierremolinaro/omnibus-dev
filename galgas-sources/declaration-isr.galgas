@@ -14,7 +14,7 @@ list @isrDeclarationListAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -166,7 +166,7 @@ method @interruptMapIR interruptCodeGeneration
         let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!lkey.string)]
         ioAScode += s
       case code (@lbigint value) :
-        if [option plm_options.noPanicGeneration value] then
+        if [option omnibus_options.noPanicGeneration value] then
           let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!lkey.string)]
           ioAScode += s
         else

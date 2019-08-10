@@ -2,7 +2,7 @@
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax plm_syntax (plm_lexique) {
+syntax omnibus_syntax (omnibus_lexique) {
 
   #·····················································································································
 
@@ -10,8 +10,8 @@ syntax plm_syntax (plm_lexique) {
     $import$
     $"string"$ ?let importedFile
     ioImportedFileList += !importedFile
-    if [importedFile.string pathExtension] != "plm-import" then
-      error importedFile : "the pah extension should be .plm-import"
+    if [importedFile.string pathExtension] != "omnibus-import" then
+      error importedFile : "the path extension should be .omnibus-import"
     end
   }
 
@@ -50,7 +50,7 @@ syntax plm_syntax (plm_lexique) {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax plm_target_specific_syntax (plm_lexique) {
+syntax omnibus_target_specific_syntax (omnibus_lexique) {
 
 }
 
@@ -58,8 +58,8 @@ syntax plm_target_specific_syntax (plm_lexique) {
 #  GRAMMARS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-grammar plm_grammar "SLR" {
-  syntax plm_syntax
+grammar omnibus_grammar "SLR" {
+  syntax omnibus_syntax
   <start_symbol>
     ?!@ast outAst
     !importClauseList:@lstringlist outImportedFileList
@@ -68,8 +68,8 @@ grammar plm_grammar "SLR" {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-grammar plm_target_grammar "SLR" {
-  syntax plm_target_specific_syntax
+grammar omnibus_target_grammar "SLR" {
+  syntax omnibus_target_specific_syntax
   <configuration_start_symbol>
     ?!@ast outAst
     !importClauseList:@lstringlist outImportedFileList

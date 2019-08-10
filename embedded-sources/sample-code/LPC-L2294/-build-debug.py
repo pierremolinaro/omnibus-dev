@@ -81,11 +81,11 @@ def runCommand (command) :
 
 def compileSource (source) :
   print MAGENTA() + BOLD () + "********** Compile " + os.path.basename (os.getcwd ()) + "/"  + source + ENDC ()
-  command = ["../../../makefile-macosx/plm-debug", "--no-panic-generation", "-v", "--Oz", source]
+  command = ["../../../makefile-macosx/omnibus-debug", "--no-panic-generation", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
-  command = ["../../../makefile-macosx/plm-debug", "-v", "--Oz", source]
+  command = ["../../../makefile-macosx/omnibus-debug", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
@@ -95,14 +95,14 @@ def compileSource (source) :
 #--- Get script absolute path
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
-#--- Compile PLM
-print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
+#--- Compile omnibus
+print MAGENTA() + BOLD () + "********** Compile OMNIBUS" + ENDC ()
 runCommand (["python", "../../../makefile-macosx/build+debug.py"])
-#--- Compile PLM sources
+#--- Compile omnibus sources
 for dirname, dirnames, filenames in os.walk (scriptDir):
   for file in filenames :
     extension = os.path.splitext (file)[1]
-    if extension == ".plm" :
+    if extension == ".omnibus" :
       #print "  Dependence file : '" + file + "'"
       compileSource (file)
 

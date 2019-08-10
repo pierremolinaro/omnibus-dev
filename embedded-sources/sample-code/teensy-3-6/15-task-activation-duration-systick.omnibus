@@ -1,0 +1,49 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 240
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+driver myDriver ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//
+driver myDriver > time {
+  var tick $uint32 = 0
+
+  public section noteTick () {
+    self.tick = ©SYST.CVR
+  }
+
+  public section getDuration () -> $uint32 {
+    result = self.tick - ©SYST.CVR
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sync s = $Semaphore (!value:0)
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task TâcheA > TâcheB @stacksize 512 @autostart {
+
+  event @onSetup first {
+    s.wait ()
+    let duration = myDriver.getDuration ()
+    lcd.print (!u32:duration)
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!hex8: currentStackPointer ())
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task TâcheB @stacksize 512 @autostart {
+
+  event @onSetup first {
+    myDriver.noteTick ()
+    s.signal ()
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

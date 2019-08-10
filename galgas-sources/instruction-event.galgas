@@ -35,7 +35,7 @@ class @syncInstructionAST : @instructionAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -524,7 +524,7 @@ override method @syncInstructionIR llvmInstructionCode
   ioLLVMcode += "  %" + selectLabelName + " = call i1 @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
   ioLLVMcode += "  br i1 %" + selectLabelName + ", label %" + startLabelName + ", label %" + errorLabelName + "\n\n"
   ioLLVMcode += errorLabelName + ":\n" # Error, all guards are closed
-  if [option plm_options.noPanicGeneration value] then
+  if [option omnibus_options.noPanicGeneration value] then
     ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
   else
     ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mSelectInstructionLocation) assemblerRepresentation] + " ("
@@ -559,7 +559,7 @@ override method @syncInstructionIR enterAccessibleEntities
       ioInvokedRoutineSet += !guardMangledName
     end
   end
-  if not [option plm_options.noPanicGeneration value] then
+  if not [option omnibus_options.noPanicGeneration value] then
     ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mSelectInstructionLocation)
   end
 }

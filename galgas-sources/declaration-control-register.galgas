@@ -74,7 +74,7 @@ map @controlRegisterUserAccesMapAST {
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
   #   register group declaration
@@ -719,7 +719,7 @@ proc buildControlRegisterMapHTMLFile
 #------------------------------- Build an HTML file that contains all declared control registers, ordered by address
   let byAddressFilePath = inSourceFile.string + ".control-registers-sorted-by-address.html"
   let byNameFilePath = inSourceFile.string + ".control-registers-sorted-by-name.html"
-  if [option plm_options.emitControlRegisterHTMLDumpFile value] then
+  if [option omnibus_options.emitControlRegisterHTMLDumpFile value] then
     @controlRegisterByAddress controlRegisterByAddress = {}
     @controlRegisterByName controlRegisterByName = {}
     @uint controlRegisterCount = 0

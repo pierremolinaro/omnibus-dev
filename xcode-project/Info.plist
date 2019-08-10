@@ -9,7 +9,7 @@
  <key>CFBundleIconFile</key>
  <string>application_icns</string>
  <key>CFBundleIdentifier</key>
- <string>pierre.molinaro.name.plm</string>
+ <string>pierre.molinaro.name.omnibus</string>
  <key>CFBundleInfoDictionaryVersion</key>
  <string>6.0</string>
  <key>CFBundleName</key>
@@ -30,13 +30,13 @@
  <array>
   <dict>
    <key>CFBundleTypeIconFile</key>
-   <string>plm_icns</string>
+   <string>omnibus_icns</string>
    <key>CFBundleTypeExtensions</key>
    <array>
-    <string>plm</string>
+    <string>omnibus</string>
    </array>
    <key>CFBundleTypeName</key>
-   <string>plm Source</string>
+   <string>omnibus Source</string>
    <key>CFBundleTypeOSTypes</key>
    <array>
     <string>TEXT</string>
@@ -50,13 +50,13 @@
   </dict>
   <dict>
    <key>CFBundleTypeIconFile</key>
-   <string>plm-import_icns</string>
+   <string>omnibus-import_icns</string>
    <key>CFBundleTypeExtensions</key>
    <array>
-    <string>plm-import</string>
+    <string>omnibus-import</string>
    </array>
    <key>CFBundleTypeName</key>
-   <string>plm Source</string>
+   <string>omnibus Source</string>
    <key>CFBundleTypeOSTypes</key>
    <array>
     <string>TEXT</string>
@@ -70,13 +70,13 @@
   </dict>
   <dict>
    <key>CFBundleTypeIconFile</key>
-   <string>plm-target_icns</string>
+   <string>omnibus-target_icns</string>
    <key>CFBundleTypeExtensions</key>
    <array>
-    <string>plm-target</string>
+    <string>omnibus-target</string>
    </array>
    <key>CFBundleTypeName</key>
-   <string>plm Source</string>
+   <string>omnibus Source</string>
    <key>CFBundleTypeOSTypes</key>
    <array>
     <string>TEXT</string>

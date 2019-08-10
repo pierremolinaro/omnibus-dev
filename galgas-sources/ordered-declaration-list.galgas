@@ -59,11 +59,11 @@ proc buildOrderedDeclarationList
     end
   end
 #------------------------------------------  Display ?
-  if (@uint.errorCount == 0) &&[option plm_options.printPasses value] then
+  if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
     message "    Added " + addintegerTypeCount + " integer types\n" 
   end
 #------------------------------------------  Write precedence graph file ?
-  if (@uint.errorCount == 0) && [option plm_options.emitDeclarationDependencyGraphFile value] then
+  if (@uint.errorCount == 0) && [option omnibus_options.emitDeclarationDependencyGraphFile value] then
     let s = [precedenceGraph graphviz]
     let filePath = inSourceFile + ".declarationDependency.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]

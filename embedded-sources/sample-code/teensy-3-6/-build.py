@@ -81,11 +81,11 @@ def runCommand (command) :
 
 def compileSource (source) :
   print MAGENTA() + BOLD () + "********** Compile " + os.path.basename (os.getcwd ()) + "/" + source + ENDC ()
-  command = ["time", "../../../makefile-macosx/plm", "--no-panic-generation", "-v", "--Oz", source] # , "--no-deadcode-elimination"
+  command = ["time", "../../../makefile-macosx/omnibus", "--no-panic-generation", "-v", "--Oz", source] # , "--no-deadcode-elimination"
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
-  command = ["time", "../../../makefile-macosx/plm", "-v", "--Oz", source]
+  command = ["time", "../../../makefile-macosx/omnibus", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
@@ -95,15 +95,15 @@ def compileSource (source) :
 #--- Get script absolute path
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
-#--- Compile PLM
-print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
-#runCommand (["galgas", "../../../+plm.galgasProject"])
+#--- Compile omnibus
+print MAGENTA() + BOLD () + "********** Compile OMNIBUS" + ENDC ()
+#runCommand (["galgas", "../../../+omnibus.galgasProject"])
 runCommand (["python", "../../../makefile-macosx/build+release.py"])
-#--- Compile PLM sources
+#--- Compile omnibus sources
 for dirname, dirnames, filenames in os.walk (scriptDir):
   for file in filenames :
     extension = os.path.splitext (file)[1]
-    if extension == ".plm" :
+    if extension == ".omnibus" :
       #print "  Dependence file : '" + file + "'"
       compileSource (file)
 

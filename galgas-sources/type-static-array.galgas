@@ -13,7 +13,7 @@ class @staticArrayTypeDeclarationAST : @abstractDeclarationAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 

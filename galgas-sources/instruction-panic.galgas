@@ -10,7 +10,7 @@ class @panicInstructionAST : @instructionAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -79,7 +79,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
     if (throwValue < min) || (throwValue > max) then
       error mInstructionLocation
       : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.plmTypeDescriptionName
-    elsif not [option plm_options.noPanicGeneration value] then
+    elsif not [option omnibus_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@panicInstructionIR.new {
         !mInstructionLocation
         !throwValue

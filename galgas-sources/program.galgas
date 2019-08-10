@@ -1,24 +1,24 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-case . "plm-target"
-message "a target definition text file with the .plm-target extension"
-grammar plm_target_grammar
+case . "omnibus-target"
+message "a target definition text file with the .omnibus-target extension"
+grammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-case . "plm-import"
-message "an imported text file with the .plm-import extension"
-grammar plm_target_grammar
+case . "omnibus-import"
+message "an imported text file with the .omnibus-import extension"
+grammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-case . "plm"
-message "a source text file with the .plm extension"
-grammar plm_grammar
+case . "omnibus"
+message "a source text file with the .omnibus extension"
+grammar omnibus_grammar
 ?sourceFilePath:@lstring inSourceFile
 {
   if ([option .mode value] == "") & not [option .outputConcreteSyntaxTree value] then
@@ -31,7 +31,7 @@ grammar plm_grammar
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
   @ast ast = .default
-  grammar plm_grammar in inSourceFile
+  grammar omnibus_grammar in inSourceFile
     !?ast
     ?importClauseList:let importedFileList
     ?endOfSourceFile:let endOfSourceFile
@@ -86,7 +86,7 @@ private proc compileProject
   ?importedFilePathSet:let @stringset inImportedFileAbsolutePathSet
 {
   let @timer parsingTime = .start 
-  if [option plm_options.printPasses value] then
+  if [option omnibus_options.printPasses value] then
     message "** Parsing\n" 
   end
   @ast ast = inAST
@@ -128,7 +128,7 @@ private proc compileProject
     retainRequiredDrivers (!?ast)
   end
 #------------------------------------------------------------ printPasses option
-  if [option plm_options.printPasses value] & (@uint.errorCount == 0) then
+  if [option omnibus_options.printPasses value] & (@uint.errorCount == 0) then
     message "    " + [ast.mDeclarationListAST length] + " declarations\n" 
     message "    Duration: " + [parsingTime string] + "\n" 
   end
@@ -136,7 +136,7 @@ private proc compileProject
   @declarationListAST orderedDeclarationListAST = .default
   if @uint.errorCount == 0 then
     let @timer t = .start 
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       message "** Declaration sorting\n" 
     end
     buildOrderedDeclarationList (
@@ -145,12 +145,10 @@ private proc compileProject
       !endOfSourceFile:inEndOfSourceFile
       ?orderedDeclarationList:orderedDeclarationListAST
     )
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       message "    Duration: " + [t string] + "\n" 
     end
   end
-#------------------------------------------------------------ Type inventory
-  typeInventory (!orderedDeclarationListAST)
 #------------------------------------------------------------ Check "check target" declarations
   if @uint.errorCount == 0 then
     for (targetLocation acceptedTargetList) in ast.mCheckTargetListAST do
@@ -185,7 +183,7 @@ private proc compileProject
       ?routineListIR
       ?userLLVMTypeDefinitionListIR
     )
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       message "** Context: " + [t string] + "\n" 
     end
   end
@@ -205,7 +203,7 @@ private proc compileProject
       !staticEntityMap:globalLiteralStringMap
       ?intermediateCode:intermediateCodeStruct
     )
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       message "** Semantic: " + [t string] + "\n" 
     end
   end
@@ -213,7 +211,7 @@ private proc compileProject
   if @uint.errorCount == 0 then
     let @timer tOpt = .start 
     codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       message "    Duration: " + [tOpt string] + "\n" 
     end
   end
@@ -243,12 +241,13 @@ private proc addTargetSpecificFiles
   ?currentDirectory:let @string inCurrentDirectory
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
-  if [option plm_options.useDirAsTargetDir value] != "" then # Target is defined in files
-    let targetDirectory = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+  if [option omnibus_options.useDirAsTargetDir value] != "" then # Target is defined in files
+    let targetDirectory = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     if [targetDirectory directoryExists] then
-      let targetDefinitionFullPath = targetDirectory + "/" + inTargetName.string + "/+config.plm-target"
+      let targetDefinitionFullPath = targetDirectory + "/" + inTargetName.string + "/+config.omnibus-target"
       if [targetDefinitionFullPath fileExists] then
-        grammar plm_target_grammar in [targetDefinitionFullPath nowhere]
+        grammar omnibus_target_grammar
+         in [targetDefinitionFullPath nowhere]
           !?ioAST
           ?importClauseList:let importedFileList
           ?endOfSourceFile:*
@@ -260,17 +259,17 @@ private proc addTargetSpecificFiles
         )
       else
         error inTargetName
-          : "This target is not defined in '" + [option plm_options.useDirAsTargetDir value] + "' directory"
+          : "This target is not defined in '" + [option omnibus_options.useDirAsTargetDir value] + "' directory"
       end
     else
-      error ["" nowhere]: "the '" + [option plm_options.useDirAsTargetDir value] + "' directory does not exist"
+      error ["" nowhere]: "the '" + [option omnibus_options.useDirAsTargetDir value] + "' directory does not exist"
     end
   else # Target is defined in embedded files
   #--- Parse target definition file
     let @filewrapper fw = [filewrapper targetTemplates]
-    if [fw fileExistsAtPath !inTargetName.string + "/+config.plm-target"] then
-      let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.plm-target"]
-      grammar plm_target_grammar on (source, inTargetName.string)
+    if [fw fileExistsAtPath !inTargetName.string + "/+config.omnibus-target"] then
+      let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.omnibus-target"]
+      grammar omnibus_target_grammar on (source, inTargetName.string)
         !?ioAST
         ?importClauseList:let importedFileList
         ?endOfSourceFile:*
@@ -300,8 +299,8 @@ private proc recursiveImportFileSystemTargetFiles
     if [absolutePath fileExists] then
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
-        if [absolutePath pathExtension] == "plm-import" then
-          grammar plm_grammar in @lstring.new {!absolutePath !path.location}
+        if [absolutePath pathExtension] == "omnibus-import" then
+          grammar omnibus_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -311,8 +310,8 @@ private proc recursiveImportFileSystemTargetFiles
             !importClauseList:importedFileList
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
-        elsif [absolutePath pathExtension] == "plm-target" then
-          grammar plm_target_grammar in @lstring.new {!absolutePath !path.location}
+        elsif [absolutePath pathExtension] == "omnibus-target" then
+          grammar omnibus_target_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -323,7 +322,7 @@ private proc recursiveImportFileSystemTargetFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .plm-import or .plm-target)"
+          error path : "invalid extension (should be .omnibus-import or .omnibus-target)"
         end
       end
     else
@@ -347,7 +346,7 @@ private proc recursiveImportEmbeddedTargetFiles
       let embeddedPath = ":" + fullPath
       if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
         ioImportedFileAbsolutePathSet += !embeddedPath
-        grammar plm_grammar on ([fw textFileContentsAtPath !fullPath], path.string)
+        grammar omnibus_grammar on ([fw textFileContentsAtPath !fullPath], path.string)
           !?ioAST
           ?importClauseList:let importedFileList
           ?endOfSourceFile:*
@@ -359,7 +358,7 @@ private proc recursiveImportEmbeddedTargetFiles
         )
       end
     else
-      error path : "cannot find this file in embedded files"
+      error .nowhere : "cannot find '" + path + "' file in embedded files"
     end
   end
 }
@@ -377,8 +376,8 @@ private proc recursiveImportFiles
     if [absolutePath fileExists] then # Exists in file system ?
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
-        if [absolutePath pathExtension] == "plm-import" then
-          grammar plm_grammar in @lstring.new {!absolutePath !path.location}
+        if [absolutePath pathExtension] == "omnibus-import" then
+          grammar omnibus_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -388,8 +387,8 @@ private proc recursiveImportFiles
             !importClauseList:importedFileList
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
-        elsif [absolutePath pathExtension] == "plm-target" then
-          grammar plm_target_grammar in @lstring.new {!absolutePath !path.location}
+        elsif [absolutePath pathExtension] == "omnibus-target" then
+          grammar omnibus_target_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -400,7 +399,7 @@ private proc recursiveImportFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .plm-import or .plm-target)"
+          error path : "invalid extension (should be .omnibus-import or .omnibus-target)"
         end
       end
     else
@@ -409,8 +408,8 @@ private proc recursiveImportFiles
         let embeddedPath = ":" + path
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
           ioImportedFileAbsolutePathSet += !embeddedPath
-          if [path pathExtension] == "plm-import" then
-            grammar plm_grammar on ([fw textFileContentsAtPath !path.string], path.string)
+          if [path pathExtension] == "omnibus-import" then
+            grammar omnibus_grammar on ([fw textFileContentsAtPath !path.string], path.string)
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
@@ -420,8 +419,8 @@ private proc recursiveImportFiles
               !importClauseList:importedFileList
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
-          elsif [path pathExtension] == "plm-target" then
-            grammar plm_target_grammar on ([fw textFileContentsAtPath !path.string], path.string)
+          elsif [path pathExtension] == "omnibus-target" then
+            grammar omnibus_target_grammar on ([fw textFileContentsAtPath !path.string], path.string)
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
@@ -432,7 +431,7 @@ private proc recursiveImportFiles
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
           else
-            error path : "invalid extension (should be .plm-import or .plm-target)"
+            error path : "invalid extension (should be .omnibus-import or .omnibus-target)"
           end
         end
       else

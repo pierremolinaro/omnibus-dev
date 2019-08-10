@@ -1,0 +1,30 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 240
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche0 @stacksize 512 @autostart {
+  var tick $uint32 = 0
+
+  event time.wait (!until: self.tick) {
+    self.tick += 500
+    Tâche1.activate ()
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche1 @stacksize 512 { // Do not activate
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  }
+
+  event @onStart first {
+    digital.toggle (!port:LED_L0)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

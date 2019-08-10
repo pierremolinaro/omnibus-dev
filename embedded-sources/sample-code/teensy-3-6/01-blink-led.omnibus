@@ -1,0 +1,52 @@
+target "teensy-3-6/xtr64"
+let F_CPU_MHZ = 240
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver RegisterRead > root {
+
+  public section SIM_CLKDIV1 () -> $uint32 {
+    result = ©SIM.CLKDIV1
+  }
+
+  public section MCG_C5 () -> $uint8 {
+    result = ©MCG.C5
+  }
+
+  public section MCG_C6 () -> $uint8 {
+    result = ©MCG.C6
+  }
+}
+
+driver RegisterRead ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche @stacksize 512 @autostart {
+  var compteur $uint32 = 0
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!string:"OUTDIV: ")
+    lcd.print (!hex4: RegisterRead.SIM_CLKDIV1 ()>> 16)
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!string:"PRDIV: ")
+    lcd.print (!u32:extend (RegisterRead.MCG_C5 () & 7))
+    lcd.goto (!line:2 !column:0)
+    lcd.print (!string:"VDIV: ")
+    lcd.print (!u32:extend (RegisterRead.MCG_C6 () & 0x1F))
+  }
+
+  event time.wait (!until:self.compteur) {
+    digital.write (!yes !toPort:LED_L0)
+    self.compteur +%= 500
+    time.wait (!until: self.compteur)
+    digital.write (!no !toPort:LED_L0)
+    self.compteur +%= 500
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

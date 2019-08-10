@@ -182,7 +182,7 @@ private func getInfixOperatorMap
     if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
-    if [option plm_options.noPanicGeneration value] then
+    if [option omnibus_options.noPanicGeneration value] then
       outOperatorMap = inContext.mAddNoOvfOperatorMap
     else
       outOperatorMap = inContext.mAddOperatorMap
@@ -193,7 +193,7 @@ private func getInfixOperatorMap
     if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
-    if [option plm_options.noPanicGeneration value] then
+    if [option omnibus_options.noPanicGeneration value] then
       outOperatorMap = inContext.mSubNoOvfOperatorMap
     else
       outOperatorMap = inContext.mSubOperatorMap
@@ -204,7 +204,7 @@ private func getInfixOperatorMap
     if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
-    if [option plm_options.noPanicGeneration value] then
+    if [option omnibus_options.noPanicGeneration value] then
       outOperatorMap = inContext.mMulNoOvfOperatorMap
     else
       outOperatorMap = inContext.mMulOperatorMap
@@ -215,7 +215,7 @@ private func getInfixOperatorMap
     if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
-    if [option plm_options.noPanicGeneration value] then
+    if [option omnibus_options.noPanicGeneration value] then
       outOperatorMap = inContext.mDivNoOvfOperatorMap
     else
       outOperatorMap = inContext.mDivOperatorMap
@@ -226,7 +226,7 @@ private func getInfixOperatorMap
     if inMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
     end
-    if [option plm_options.noPanicGeneration value] then
+    if [option omnibus_options.noPanicGeneration value] then
       outOperatorMap = inContext.mModNoOvfOperatorMap
     else
       outOperatorMap = inContext.mModOperatorMap

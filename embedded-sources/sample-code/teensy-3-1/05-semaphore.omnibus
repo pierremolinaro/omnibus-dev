@@ -1,0 +1,45 @@
+target "teensy-3-1/unprivileged"
+
+import "carte-tp-teensy-3-1.omnibus-import"
+
+typealias $Sémaphore = $Semaphore
+
+//——————————————————————————————————————————————————————————————————————————————
+
+sync sémaphore = $Sémaphore (!value:0)
+
+//——————————————————————————————————————————————————————————————————————————————
+
+task T1 @stacksize 512 @autostart {
+  var top $uint32 = 0
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+  }
+
+  event time.wait (!until:self.top) {
+    sémaphore.signal ()
+    self.top += 250
+    digital.write (!yes !toPort:LED_L1)
+    let constanteAccentuée = self.top
+    time.wait (!until:constanteAccentuée)
+    sémaphore.signal ()
+    self.top += 250
+    digital.write (!no !toPort:LED_L1)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
+task T2 @stacksize 512 @autostart {
+
+  event sémaphore.wait () {
+    digital.write (!yes !toPort:LED_L2)
+    sémaphore.wait ()
+    digital.write (!no !toPort:LED_L2)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————

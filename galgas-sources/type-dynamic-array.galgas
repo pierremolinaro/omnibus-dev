@@ -11,7 +11,7 @@ class @typeDynamicArrayDeclarationAST : @abstractDeclarationAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 

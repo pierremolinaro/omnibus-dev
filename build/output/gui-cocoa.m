@@ -6,7 +6,7 @@
 #import "OC_Token.h"
 #import "F_CocoaWrapperForGalgas.h"
 #import "OC_GGS_CommandLineOption.h"
-#import "lexique-plm-5F-lexique-cocoa.h"
+#import "lexique-omnibus-5F-lexique-cocoa.h"
 
 #ifdef USER_DEFAULT_COLORS_DEFINED
   #import "user_default_colors.h"
@@ -37,7 +37,7 @@ NSArray * nibsAndClasses (void) {
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-#import "option-plm-5F-options-cocoa.h"
+#import "option-omnibus-5F-options-cocoa.h"
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -45,7 +45,7 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
                    NSMutableArray * ioUIntOptionArray,
                    NSMutableArray * ioStringOptionArray,
                    NSMutableArray * ioStringListOptionArray) {
-  enterOptionsFor_plm_5F_options (ioBoolOptionArray, ioUIntOptionArray, ioStringOptionArray, ioStringListOptionArray) ;
+  enterOptionsFor_omnibus_5F_options (ioBoolOptionArray, ioUIntOptionArray, ioStringOptionArray, ioStringListOptionArray) ;
   OC_GGS_CommandLineOption * option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"galgas_cli_options"
     identifier:@"verbose_output"
@@ -59,7 +59,7 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-#pragma mark Lexique plm_lexique
+#pragma mark Lexique omnibus_lexique
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -67,14 +67,14 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const UInt16 gPopUpData_plm_5F_lexique_232 [4] = {
+static const UInt16 gPopUpData_omnibus_5F_lexique_252 [4] = {
   1, // Leading character count to strip
-  plm_lexique_1_commentMark, 48,
+  omnibus_lexique_1_commentMark, 48,
   0
 } ;
 
-static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
-  gPopUpData_plm_5F_lexique_232,
+static const UInt16 * gPopUpData_omnibus_5F_lexique [2] = {
+  gPopUpData_omnibus_5F_lexique_252,
   NULL
 } ;
 
@@ -84,7 +84,7 @@ static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-@interface OC_Tokenizer_plm_lexique : OC_Lexique_plm_lexique {
+@interface OC_Tokenizer_omnibus_lexique : OC_Lexique_omnibus_lexique {
 
 }
 
@@ -104,7 +104,7 @@ static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-@implementation OC_Tokenizer_plm_lexique
+@implementation OC_Tokenizer_omnibus_lexique
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -115,7 +115,7 @@ static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 - (const UInt16 * *) popupListData {
-  return gPopUpData_plm_5F_lexique ;
+  return gPopUpData_omnibus_5F_lexique ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -158,12 +158,12 @@ static const UInt16 * gPopUpData_plm_5F_lexique [2] = {
 
 OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
   OC_Lexique * result = nil ;
-  if ([inExtension isEqualToString:@"plm"]) {
-    result = [OC_Tokenizer_plm_lexique new] ;
-  }else if ([inExtension isEqualToString:@"plm-import"]) {
-    result = [OC_Tokenizer_plm_lexique new] ;
-  }else if ([inExtension isEqualToString:@"plm-target"]) {
-    result = [OC_Tokenizer_plm_lexique new] ;
+  if ([inExtension isEqualToString:@"omnibus"]) {
+    result = [OC_Tokenizer_omnibus_lexique new] ;
+  }else if ([inExtension isEqualToString:@"omnibus-import"]) {
+    result = [OC_Tokenizer_omnibus_lexique new] ;
+  }else if ([inExtension isEqualToString:@"omnibus-target"]) {
+    result = [OC_Tokenizer_omnibus_lexique new] ;
   }
   return result ;
 }
@@ -172,7 +172,7 @@ OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
 
 NSArray * tokenizers (void) {
   return [NSArray arrayWithObjects:
-    [OC_Tokenizer_plm_lexique new],
+    [OC_Tokenizer_omnibus_lexique new],
     nil
   ] ;
 }

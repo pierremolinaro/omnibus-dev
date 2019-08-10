@@ -19,7 +19,7 @@ override getter @globalConstantDeclarationAST locationForErrorSignaling -> @loca
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -132,7 +132,7 @@ proc buildGlobalConstantMapHTMLFile
 {
 #------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
-  if [option plm_options.emitGlobalConstantHTMLDumpFile value] then
+  if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
     @stringset firstLetterSet = {}
     for () in inGlobalConstantMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]

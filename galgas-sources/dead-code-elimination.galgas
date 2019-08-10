@@ -39,7 +39,7 @@ proc codeOptimization
       exploreRoutineSet += !routine.mRoutine.mRoutineMangledName
     end
   end
-  if [option plm_options.printPasses value] then
+  if [option omnibus_options.printPasses value] then
     var m = "** Dead code elimination\n"
     m += "    " + [[ioIntermediateCodeStruct.mRoutineListIR length] string] + " routines, "
     m += [[exploreRoutineSet count] string] + " root routines.\n"
@@ -55,8 +55,8 @@ proc codeOptimization
     error .nowhere : m
   end
 #----------------------------------------------- Compute useful routines
-  if [option plm_options.noDeadCodeElimination value] then
-    message "    No dead code elimination (option --" + [option plm_options.noDeadCodeElimination string] + ")\n"
+  if [option omnibus_options.noDeadCodeElimination value] then
+    message "    No dead code elimination (option --" + [option omnibus_options.noDeadCodeElimination string] + ")\n"
   else
     @stringset usefulRoutineSet = {}
     loop ([ioIntermediateCodeStruct.mRoutineListIR length] + 1) while [exploreRoutineSet count] > 0 do
@@ -78,7 +78,7 @@ proc codeOptimization
       end
     end
   #-----------------------------------------------
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       var m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
   #    for (r) in usefulRoutineSet do
   #      m += "    - " + r + "\n"
@@ -95,7 +95,7 @@ proc codeOptimization
   end
 #--- Display invocation graph
   let filePath = inSourceFile + ".routineInvocation.dot"
-  if [option plm_options.emitRoutineInvocationGraphFile value] then
+  if [option omnibus_options.emitRoutineInvocationGraphFile value] then
     displayInvocationGraph (!ioIntermediateCodeStruct.mRoutineListIR !filePath)
   else
     [@string deleteFileIfExists !filePath]

@@ -195,7 +195,7 @@ override method @regularRoutineIR llvmCodeGeneration
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
-  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
+  if not [option omnibus_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
     if not first then
       ioLLVMcode += ", "
     end

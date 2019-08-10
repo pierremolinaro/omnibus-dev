@@ -29,7 +29,7 @@ list @taskSetupListAST {
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -231,7 +231,7 @@ method @taskListAST enterInContext
         idx = idx + 1
       end
     end
-    if [option plm_options.taskStrictPriorityOrder value] && ([candidateTaskList length] > 1) then
+    if [option omnibus_options.taskStrictPriorityOrder value] && ([candidateTaskList length] > 1) then
       for task in candidateTaskList do
         error task.mTaskName : "this task does not respect a strict priority order"
       end

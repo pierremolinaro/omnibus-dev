@@ -17,7 +17,7 @@ override getter @typeAliasDeclarationAST locationForErrorSignaling -> @location 
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 

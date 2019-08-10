@@ -1,0 +1,167 @@
+project (1:0:0) -> "omnibus" {
+#--- Targets
+  %makefile-macosx
+  %LatestMacOS
+  %applicationBundleBase : "pierre.molinaro.name"
+  %quietOutputByDefault
+
+#--- Source files
+  "galgas-sources/lexique.galgas"
+  "galgas-sources/options.galgas"
+  "galgas-sources/syntax-grammar.galgas"
+  "galgas-sources/cocoa.galgas"
+
+#--- Configuration
+  "galgas-sources/configuration.galgas"
+
+#--- Type declarations
+  "galgas-sources/type-alias.galgas"
+  "galgas-sources/type-static-array.galgas"
+  "galgas-sources/type-dynamic-array.galgas"
+  "galgas-sources/type-bool.galgas"
+  "galgas-sources/type-enumeration-declaration.galgas"
+  "galgas-sources/type-structure-declaration.galgas"
+  "galgas-sources/type-sync-declaration.galgas"
+  "galgas-sources/type-integer.galgas"
+  "galgas-sources/type-literal-integer.galgas"
+  "galgas-sources/type-static-string.galgas"
+  "galgas-sources/type-opaque-declaration.galgas"
+
+#--- Global declarations
+  "galgas-sources/declaration-control-register.galgas"
+  "galgas-sources/declaration-global-constant.galgas"
+  "galgas-sources/declaration-global-sync-instance.galgas"
+  "galgas-sources/declaration-driver.galgas"
+  "galgas-sources/declaration-standalone-function.galgas"
+  "galgas-sources/declaration-static-list.galgas"
+  "galgas-sources/declaration-option.galgas"
+  "galgas-sources/task-declaration.galgas"
+
+#--- Routines
+  "galgas-sources/declaration-func.galgas"
+  "galgas-sources/declaration-svc.galgas"
+  "galgas-sources/declaration-required-proc.galgas"
+  "galgas-sources/declaration-extern-proc.galgas"
+  "galgas-sources/declaration-isr.galgas"
+  "galgas-sources/declaration-guard.galgas"
+  "galgas-sources/formal-arguments.galgas"
+  "galgas-sources/regular-routine-analysis.galgas"
+
+#--- Modes
+  "galgas-sources/logical-modes.galgas"
+
+#--- Compilation phases
+  "galgas-sources/ast.galgas"
+  "galgas-sources/context-routines.galgas"
+  "galgas-sources/universal-map.galgas"
+  "galgas-sources/ordered-declaration-list.galgas"
+  "galgas-sources/context.galgas"
+  "galgas-sources/types.galgas"
+  "galgas-sources/constructor-map.galgas"
+  "galgas-sources/semantic-analysis.galgas"
+
+#--- Panic
+  "galgas-sources/panic.galgas"
+  "galgas-sources/panic-codes.galgas"
+
+#--- Expression
+  "galgas-sources/compute-static-expression.galgas"
+  "galgas-sources/expression-operator-priority.galgas"
+  "galgas-sources/expression-convert.galgas"
+  "galgas-sources/expression-extend.galgas"
+  "galgas-sources/expression-truncate.galgas"
+  "galgas-sources/expression-addressof-control-register.galgas"
+  "galgas-sources/expression-addressof-regular-var.galgas"
+  "galgas-sources/expression-sizeof.galgas"
+  "galgas-sources/expression-typed-constant.galgas"
+  "galgas-sources/expression-if.galgas"
+  "galgas-sources/expression-infix-operators.galgas"
+  "galgas-sources/expression-boolean-short-circuit-and-operator.galgas"
+  "galgas-sources/expression-integer-slice.galgas"
+  "galgas-sources/expression-prefix-operators.galgas"
+  "galgas-sources/expression-literal-integer.galgas"
+  "galgas-sources/expression-literal-string.galgas"
+  "galgas-sources/expression-true-false.galgas"
+  "galgas-sources/expression-control-register.galgas"
+  "galgas-sources/expression-register-value-from-slices.galgas"
+  "galgas-sources/expression-primary.galgas"
+  "galgas-sources/expression-standalone-function-call.galgas"
+  "galgas-sources/expression-constructor-call.galgas"
+
+#--- Instructions
+  "galgas-sources/instructionList.galgas"
+  "galgas-sources/directive-check.galgas"
+  "galgas-sources/instruction-assert.galgas"
+  "galgas-sources/instruction-assignment.galgas"
+  "galgas-sources/instruction-assignment-control-register.galgas"
+  "galgas-sources/instruction-slice-assignment.galgas"
+  "galgas-sources/instruction-bit-banding.galgas"
+  "galgas-sources/instruction-assignment-operator.galgas"
+  "galgas-sources/instruction-var.galgas"
+  "galgas-sources/instruction-let.galgas"
+  "galgas-sources/instruction-nop.galgas"
+  "galgas-sources/instruction-panic.galgas"
+  "galgas-sources/instruction-if.galgas"
+  "galgas-sources/instruction-event.galgas"
+  "galgas-sources/instruction-while.galgas"
+  "galgas-sources/instruction-for-in-do.galgas"
+  "galgas-sources/instruction-for-in-lower-upper-bounds.galgas"
+  "galgas-sources/instruction-procedure-call.galgas"
+  "galgas-sources/instruction-switch.galgas"
+
+#--- Instruction and expression helpers
+  "galgas-sources/subscript-in-assignment-and-expression.galgas"
+  "galgas-sources/lvalue.galgas"
+  "galgas-sources/lvalue-control-register.galgas"
+  "galgas-sources/effective-parameters.galgas"
+
+#--- Intermediate code
+  "galgas-sources/generated-code-prefixes.galgas"
+  "galgas-sources/object-intermediate-representation.galgas"
+  "galgas-sources/intermediate-code-generation.galgas"
+  "galgas-sources/intermediate-nop.galgas"
+  "galgas-sources/intermediate-extend.galgas"
+  "galgas-sources/intermediate-trunc.galgas"
+  "galgas-sources/intermediate-bool-to-uint.galgas"
+  "galgas-sources/intermediate-shift-left.galgas"
+  "galgas-sources/intermediate-logical-shift-right.galgas"
+  "galgas-sources/intermediate-binary-operation.galgas"
+  "galgas-sources/intermediate-short-circuit-and.galgas"
+  "galgas-sources/intermediate-load-from-reference.galgas"
+  "galgas-sources/intermediate-store-to-universal-reference.galgas"
+  "galgas-sources/intermediate-store-to-temporary-reference.galgas"
+  "galgas-sources/intermediate-static-routine-call.galgas"
+  "galgas-sources/intermediate-release.galgas"
+
+  "galgas-sources/intermediate-compute-subscripted-volatile-register-address.galgas"
+  "galgas-sources/intermediate-enter-register-address.galgas"
+  "galgas-sources/intermediate-register-group-address.galgas"
+  "galgas-sources/intermediate-load-indirect-volatile-register.galgas"
+  "galgas-sources/intermediate-store-indirect-volatile-register.galgas"
+
+  "galgas-sources/intermediate-load-when-reference.galgas"
+  "galgas-sources/intermediate-copy-from-references.galgas"
+  "galgas-sources/intermediate-reference-from-possible-value.galgas"
+
+  "galgas-sources/intermediate-get-universal-property-reference.galgas"
+  "galgas-sources/intermediate-get-universal-array-element-reference.galgas"
+  "galgas-sources/intermediate-get-computed-property-value.galgas"
+  "galgas-sources/intermediate-store-computed-property-value.galgas"
+  "galgas-sources/intermediate-get-array-element-reference.galgas"
+  "galgas-sources/intermediate-select-instruction.galgas"
+
+  "galgas-sources/intermediate-test-array-index.galgas"
+  "galgas-sources/intermediate-comment-source-line.galgas"
+  "galgas-sources/intermediate-free-comment.galgas"
+  "galgas-sources/dead-code-elimination.galgas"
+  "galgas-sources/code-generation.galgas"
+
+#--- Target
+  "galgas-sources/target-generation.galgas"
+  "galgas-sources/declaration-check-target.galgas"
+
+#--- Program
+  "galgas-sources/program.galgas"
+  "galgas-sources/embedded-sample-code.galgas"
+}
+

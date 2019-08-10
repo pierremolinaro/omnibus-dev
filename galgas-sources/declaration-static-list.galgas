@@ -53,7 +53,7 @@ dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 

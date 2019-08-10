@@ -1,0 +1,27 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 180
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche0 @stacksize 512 @autostart {
+  var tick = $uint32 ()
+
+  var readComputedProperty $uint32 { result = self.tick }
+
+  var readWriteComputedProperty $uint32 {
+    @set { self.tick = newValue }
+    @get { result = self.tick }
+  }
+
+  event time.wait (!until: self.tick) {
+    self.readWriteComputedProperty += 500
+//    self.tick += 500
+    digital.toggle (!port:LED_L0)
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!u32:self.readComputedProperty)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

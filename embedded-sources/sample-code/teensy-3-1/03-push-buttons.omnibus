@@ -1,0 +1,40 @@
+target "teensy-3-1/unprivileged"
+
+import "carte-tp-teensy-3-1.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————
+
+task T @stacksize 512 @autostart {
+  var compteur $uint32 = 0
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.OUTPUT !toPort:.D13)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P0)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P1)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P2)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P3)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P4)
+  }
+
+  //············································································
+
+  event time.wait (!until:self.compteur) {
+    self.compteur +%= 50
+    digital.write (!not digital.read (!port:BUTTON_P0) !toPort:LED_L0)
+    digital.write (!not digital.read (!port:BUTTON_P1) !toPort:LED_L1)
+    digital.write (!not digital.read (!port:BUTTON_P2) !toPort:LED_L2)
+    digital.write (!not digital.read (!port:BUTTON_P3) !toPort:LED_L3)
+    digital.write (!not digital.read (!port:BUTTON_P4) !toPort:LED_L4)
+  }
+
+
+  //············································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————

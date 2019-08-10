@@ -1,0 +1,28 @@
+target "teensy-3-1/unprivileged"
+
+import "carte-tp-teensy-3-1.omnibus-import"
+
+//——————————————————————————————————————————————————————————————————————————————
+
+task Tâche @stacksize 512 @autostart {
+  var compteur $uint32 = 0
+  var continue = yes
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  }
+
+  event (self.continue) time.wait (!until:self.compteur) {
+    digital.write (!yes !toPort:LED_L0)
+    self.compteur +%= 500
+    time.wait (!until: self.compteur)
+    digital.write (!no !toPort:LED_L0)
+    self.compteur +%= 500
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!u32:time.now ())
+    self.continue = time.now () < 10_000
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————

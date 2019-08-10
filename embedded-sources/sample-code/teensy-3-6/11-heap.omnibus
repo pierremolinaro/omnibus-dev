@@ -1,0 +1,175 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 240
+
+import "carte-tp-teensy-3-6.omnibus-import"
+
+option "task-strict-priority-order"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver project > digital {
+  startup {
+    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
+    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P0)
+  }
+}
+
+driver project ()
+
+typealias $Array8 = [$uint8]
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct $StructWithARC {
+  public var unEntierQuelconque $uint32 = 0
+  public var donnée = $Array8 ()
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct $AutreStructWithARC {
+  public var autreEntierQuelconque $uint32 = 0
+  public var structure = StructWithARC ()
+  public var autreDonnée = $Array8 ()
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T1 > T2 @stacksize 512 @autostart {
+  var échéance $uint32 = 0
+  var freeRam $uint32 = 0
+  var start $uint32 = 0
+  var maxAllocationParSeconde $uint32 = 0
+  var alloc $uint32 = 0
+  var current $uint32 = 0
+
+  event @onSetup first {
+    lcd.print (!string:"Free:")
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!string:"Start:")
+    lcd.goto (!line:2 !column:0)
+    lcd.print (!string:"Max:")
+  }
+
+  event time.wait (!until:self.échéance) {
+    self.échéance +%= 1_000
+    digital.toggle (!port:LED_L3)
+    let freeRam = freeByteCount ()
+    if self.freeRam ≠ freeRam {
+      self.freeRam = freeRam
+      lcd.goto (!line:0 !column:6)
+      lcd.print (!u32:freeRam !width:6)
+    }
+    let start = heapStartAddress ()
+    if self.start ≠ start {
+      self.start = start
+      lcd.goto (!line:1 !column:6)
+      lcd.print (!hex8:start)
+    }
+    let alloc = totalAllocationObjectCount ()
+    let allocationParSecondes = alloc - self.alloc
+    if allocationParSecondes > self.maxAllocationParSeconde {
+      self.maxAllocationParSeconde = allocationParSecondes
+      lcd.goto (!line:2 !column:6)
+      lcd.print (!u32:allocationParSecondes !width:7)
+    }
+    if self.alloc ≠ alloc {
+      self.alloc = alloc
+      lcd.goto (!line:3 !column:0)
+      lcd.print (!u32:alloc !width:10)
+    }
+    let current = currentlyAllocatedObjectCount ()
+    if self.current ≠ current {
+      self.current = current
+      lcd.goto (!line:3 !column:17)
+      lcd.print (!u32:current !width:3)
+    }
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task T2 > backgroundTask @stacksize 512 @autostart {
+  var échéance1 $uint32 = 2001
+  var échéance2 $uint32 = 2001
+  var échéance3 $uint32 = 2001
+  var data1 = $Array8 ()
+  var data2 = $Array8 ()
+  var structure = AutreStructWithARC ()
+  var b $uint8 = 0
+
+  event time.wait (!until:self.échéance1) {
+    self.échéance1 +%= 71
+    digital.toggle (!port:LED_L4)
+    if digital.read (!port:BUTTON_P0) {
+      if self.data1.length () < 500 {
+        self.data1.append (!self.b)
+        self.b +%= 1
+        // assert (self.b < 25) // For checking assert instruction
+      }else{
+        self.data1.removeAll ()
+      }
+    }else{
+      self.data1.removeAll ()
+    }
+  }
+
+  event time.wait (!until:self.échéance2) {
+    self.échéance2 +%= 97
+    self.data2 = self.data1
+  }
+
+  event time.wait (!until:self.échéance3) {
+    self.échéance3 +%= 511
+    self.structure.structure.donnée = self.data2
+    self.testReleaseLocalVar (!in:self.structure.structure.donnée)
+  }
+
+  func testReleaseLocalVar (?in: inData $Array8) {
+    var d = StructWithARC ()
+    d.donnée = inData
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task backgroundTask @stacksize 512 @autostart {
+  var data = $Array8 ()
+
+  event time.wait (!until:0) {
+    digital.toggle (!port:LED_L0)
+    if digital.read (!port:BUTTON_P0) {
+      if self.data.length () == 0 {
+        self.data.append (!0)
+        self.testReleaseLocalVar (!in:self.data)
+      }else{
+        self.data.removeAll ()
+      }
+    }else{
+      self.data.removeAll ()
+    }
+  }
+
+  func testReleaseLocalVar (?in: inData $Array8) {
+    externalSection (!in:inData)
+    var d $uint32 = 143
+    var x $uint3 = d [3 ... 5]
+  }
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+section externalSection (?in: inData $Array8) {
+  var d = inData
+  d.append (!0)
+  var xxxx = [$bool] ()
+  xxxx.append (!yes)
+  var lg = xxxx.length ()
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

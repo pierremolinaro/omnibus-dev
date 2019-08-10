@@ -102,10 +102,10 @@ proc codeGeneration
   ?targetParameters:let @targetParameters inTargetParameters
 {
   let @timer generationTime = .start 
-  let homeDir = @string.homeDirectory + "/plm-products/"
+  let homeDir = @string.homeDirectory + "/omnibus-products/"
 #--- Create source directory (if does not exist)
   let productDirectory = homeDir
-    + if [option plm_options.noPanicGeneration value] then "no-panic" else "" end
+    + if [option omnibus_options.noPanicGeneration value] then "no-panic" else "" end
     + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
   let sourceDirectory = productDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
@@ -129,19 +129,19 @@ proc codeGeneration
     !staticlistValues:inStaticListValueMap
     !targetParameters:inTargetParameters
   )
-  if [option plm_options.printPasses value] then
+  if [option omnibus_options.printPasses value] then
     message "** Code generation: " + [generationTime string] + "\n" 
   end
 #----------------------------------------- Run compilation script
   if (@uint.errorCount == 0) then
     let @timer scriptTime = .start 
-    let script = if [option plm_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
+    let script = if [option omnibus_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
     let fullScript = "python " + productDirectory + "/" + script + ".py"
     @sint result = [fullScript system]
     if result != 0S then
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
-    if [option plm_options.printPasses value] then
+    if [option omnibus_options.printPasses value] then
       message "** Compilation script: " + [scriptTime string] + "\n" 
     end
   end
@@ -295,7 +295,7 @@ private proc generateCodeFiles
     !targetParameters:inTargetParameters
   )
 #----------------------------------------- Panic
-  if not [option plm_options.noPanicGeneration value] then
+  if not [option omnibus_options.noPanicGeneration value] then
     generatePanicCode (
       !?llvmCode
       !generationContext: generationContext
@@ -427,7 +427,7 @@ private proc generateCodeFiles
     end
     json += "\n    \"" + interruptImplementationName + "\""
   end
-  if not [option plm_options.noPanicGeneration value] then
+  if not [option omnibus_options.noPanicGeneration value] then
     for (lkey panicCode) in inAvailableInterruptMap do
       if not [inIntermediateCodeStruct.mInterruptMapIR hasKey !lkey.string] then
         switch panicCode

@@ -460,7 +460,7 @@ proc buildTypeMapHTMLFile
 {
 #------------------------------------ Build an HTML file that contains all types
   let @string typeDumpFilePath = inSourceFile.string + ".types.html"
-  if [option plm_options.emitTypeMap value] then
+  if [option omnibus_options.emitTypeMap value] then
     @stringset firstLetterSet = {}
     for () in inTypeMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]

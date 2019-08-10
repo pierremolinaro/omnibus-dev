@@ -10,7 +10,7 @@ class @assertInstructionAST : @instructionAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -78,7 +78,7 @@ override method @assertInstructionAST instructionSemanticAnalysis
     error mInstructionLocation : "expression is static: use check directive"
   end
 #--- Code generation
-  if not [option plm_options.noPanicGeneration value] then
+  if not [option omnibus_options.noPanicGeneration value] then
     ioInstructionGenerationList += !@assertInstructionIR.new {
       !mInstructionLocation
       !instructionGenerationList

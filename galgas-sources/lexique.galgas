@@ -1,4 +1,4 @@
-lexique plm_lexique {
+lexique omnibus_lexique {
 
   @string tokenString
   

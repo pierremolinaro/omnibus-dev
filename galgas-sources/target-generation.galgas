@@ -2,7 +2,7 @@
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension plm_syntax {
+syntax extension omnibus_syntax {
 
   #·····················································································································
 
@@ -23,13 +23,13 @@ syntax extension plm_syntax {
 before {
 #--- List targets
   let @filewrapper fw = [filewrapper targetTemplates]
-  if [option plm_options.listTargets value] then
-    let targetDirectoryOption = [option plm_options.useDirAsTargetDir value]
+  if [option omnibus_options.listTargets value] then
+    let targetDirectoryOption = [option omnibus_options.useDirAsTargetDir value]
     if targetDirectoryOption == "" then
       let embeddedFiles = [fw allTextFilePathes]
       message "Embedded targets:\n"
       for (f) in embeddedFiles do
-        if [f lastPathComponent] == "+config.plm-target" then
+        if [f lastPathComponent] == "+config.omnibus-target" then
           let targetName = [[f stringByDeletingLastPathComponent] subStringFromIndex !1]
           message "  " + targetName + '\n'
         end
@@ -37,16 +37,16 @@ before {
     else
       let targetDirectory = [targetDirectoryOption absolutePathFromPath !.stringWithCurrentDirectory]
       message "Targets in '" + targetDirectory + "' directory\n"
-      let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !{!"plm-target"}]
+      let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !{!"omnibus-target"}]
       for (f) in allConfigFiles do
-        if [f lastPathComponent] == "+config.plm-target" then
+        if [f lastPathComponent] == "+config.omnibus-target" then
           message "  " + [f stringByDeletingLastPathComponent] + '\n'
         end
       end
     end
   end
 #--- Extract embedded targets
-  let path = [option plm_options.extractEmbeddedTargets value]
+  let path = [option omnibus_options.extractEmbeddedTargets value]
   if path != "" then
     let embeddedFiles = [fw allTextFilePathes]
     for (f) in embeddedFiles do
@@ -65,7 +65,7 @@ before {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
-  "py", "ld", "cpp", "s", "plm", "plm-target", "plm-import", "ll", "txt"
+  "py", "ld", "cpp", "s", "omnibus", "omnibus-target", "omnibus-import", "ll", "txt"
 }{
 }{
 }
@@ -97,27 +97,27 @@ proc generateTarget
   var opt_optimizationOption = "disable-opt"
   var llc_optimizationOption = "O0"
   var optimizationOptionCount = 0
-  if [option plm_options.optimization1 value] then
+  if [option omnibus_options.optimization1 value] then
     opt_optimizationOption = "O1"
     llc_optimizationOption = "O1"
     optimizationOptionCount ++
   end
-  if [option plm_options.optimization2 value] then
+  if [option omnibus_options.optimization2 value] then
     opt_optimizationOption = "O2"
     llc_optimizationOption = "O2"
     optimizationOptionCount ++
   end
-  if [option plm_options.optimizationS value] then
+  if [option omnibus_options.optimizationS value] then
     opt_optimizationOption = "Os"
     llc_optimizationOption = "O2"
     optimizationOptionCount ++
   end
-  if [option plm_options.optimizationZ value] then
+  if [option omnibus_options.optimizationZ value] then
     opt_optimizationOption = "Oz"
     llc_optimizationOption = "O2"
     optimizationOptionCount ++
   end
-  if [option plm_options.optimizationZ3 value] then
+  if [option omnibus_options.optimizationZ3 value] then
     opt_optimizationOption = "O3"
     llc_optimizationOption = "O3"
     optimizationOptionCount ++
@@ -140,12 +140,12 @@ private proc copyExecutableFile
   ?from:let @string inSourceFileNamePath
   ?to:let @string inDestinationAbsoluteFilePath
 {
-  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
     let s = [fw textFileContentsAtPath !inSourceFileNamePath]
     [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   else
-    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
     [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   end
@@ -160,11 +160,11 @@ private proc copyExecutableFileWithSubstitutions
   ?let @2stringlist inSubstitutions
 {
   @string s
-  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
-    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
   end
   for (templateString replacementString) in inSubstitutions do
@@ -182,11 +182,11 @@ private proc copyFileWithSubstitutions
   ?let @2stringlist inSubstitutions
 {
   @string s
-  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
-    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
   end
   for (templateString replacementString) in inSubstitutions do
@@ -202,11 +202,11 @@ func getTargetTextFile
   ?from:let @string inTargetFile
   -> @string outContents
 {
-  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
     outContents = [fw textFileContentsAtPath !inTargetFile]
   else
-    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     outContents = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inTargetFile}
   end
 }

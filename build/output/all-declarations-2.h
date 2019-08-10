@@ -3210,39 +3210,39 @@ void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropert
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_doNotDetectRecursiveCalls ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_emitControlRegisterHTMLDumpFile ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitControlRegisterHTMLDumpFile ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_emitDeclarationDependencyGraphFile ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitDeclarationDependencyGraphFile ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_emitGlobalConstantHTMLDumpFile ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitGlobalConstantHTMLDumpFile ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_emitRoutineInvocationGraphFile ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitRoutineInvocationGraphFile ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_emitTypeMap ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitTypeMap ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_listEmbeddedSampleFiles ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_listTargets ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_listTargets ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_noDeadCodeElimination ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_noDeadCodeElimination ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_31_ ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_32_ ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_32_ ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationS ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ_33_ ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_printPasses ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_printPasses ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_taskStrictPriorityOrder ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -3256,11 +3256,11 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_taskStrictPriorityOrder ;
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedSampleFile ;
+extern C_StringCommandLineOption gOption_omnibus_5F_options_extractEmbeddedSampleFile ;
 
-extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedTargets ;
+extern C_StringCommandLineOption gOption_omnibus_5F_options_extractEmbeddedTargets ;
 
-extern C_StringCommandLineOption gOption_plm_5F_options_useDirAsTargetDir ;
+extern C_StringCommandLineOption gOption_omnibus_5F_options_useDirAsTargetDir ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -3268,7 +3268,7 @@ extern C_StringCommandLineOption gOption_plm_5F_options_useDirAsTargetDir ;
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern C_StringListCommandLineOption gOption_plm_5F_options_pathList ;
+extern C_StringListCommandLineOption gOption_omnibus_5F_options_pathList ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

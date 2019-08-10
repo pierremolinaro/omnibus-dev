@@ -1,10 +1,10 @@
 gui cocoa {
-  with option plm_options
+  with option omnibus_options
 
-  with lexique plm_lexique {
-    fileExtension: "plm"
-    fileExtension: "plm-target"
-    fileExtension: "plm-import"
+  with lexique omnibus_lexique {
+    fileExtension: "omnibus"
+    fileExtension: "omnibus-target"
+    fileExtension: "omnibus-import"
     title: "Source"
     blockComment : "//"
     label * $commentMark$ (3, 0)

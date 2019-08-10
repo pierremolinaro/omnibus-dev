@@ -1,0 +1,88 @@
+target "teensy-3-6/xtr32"
+let F_CPU_MHZ = 192
+
+import "carte-tp-teensy-3-6.omnibus-import"
+driver chronomètre ()
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+driver chronomètre > root {
+
+  startup {
+  //--- Power on DMA_MUX, #PIT, DMA
+    ©SIM.SCGC6 |= {©SIM.SCGC6 !PIT:1}
+   //--- Enable #PIT module
+    ©PIT.MCR = 0
+  //--- Disable #PIT0 and #PIT1
+    ©PIT.TCTRL [0] = 0
+    ©PIT.TCTRL [1] = 0
+  //--- #PIT0 clock frequency is F_BUS (in Hertz)
+    ©PIT.LDVAL [0] = $uint32.max
+    ©PIT.LDVAL [1] = $uint32.max
+  //--- Enable #PIT0 and #PIT1 : start counting, no interrupt
+    ©PIT.TCTRL [1] = {©PIT.TCTRL !CHN:1 !TEN:1}
+    ©PIT.TCTRL [0] = {©PIT.TCTRL !TEN:1}
+  }
+
+  public section now @noUnusedWarning () -> $Uptime {
+    var r $uint64 = extend (©PIT.LTMR64H)
+    r <<= 32
+    r |= extend (©PIT.LTMR64L)
+    r = ~ r
+    r +%= 1
+    result = $Uptime (!rawValue: r)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct $Uptime @copyable {
+  let rawValue $uint64
+
+  public func raw @noUnusedWarning () -> $uint64 {
+    result = self.rawValue
+  }
+
+  public func µs @noUnusedWarning () -> $uint32 {
+    let r = (self.rawValue / BUS_MHZ) % 1_000
+    result = truncate (r)
+  }
+
+  public func ms @noUnusedWarning () -> $uint32 {
+    let r = (self.rawValue / (BUS_MHZ * 1_000)) % 1_000
+    result = truncate (r)
+  }
+
+  public func s @noUnusedWarning () -> $uint32 {
+    let r = self.rawValue / (BUS_MHZ * 1_000_000)
+    result = truncate (r)
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche @stacksize 512 @autostart {
+  var compteur $uint32 = 0
+
+  event @onSetup first {
+    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+  }
+
+  event time.wait (!until:self.compteur) {
+    let tick = chronomètre.now ()
+    digital.toggle (!port:LED_L0)
+    lcd.goto (!line:0 !column:0)
+    lcd.print (!u32:self.compteur)
+    lcd.goto (!line:1 !column:0)
+    lcd.print (!u64:tick.raw () / BUS_MHZ)
+    lcd.goto (!line:2 !column:0)
+    lcd.print (!u32:tick.s ())
+    lcd.print (!string:" ")
+    lcd.print (!u32:tick.ms ())
+    lcd.print (!string:" ")
+    lcd.print (!u32:tick.µs ())
+    self.compteur +%= 1_001
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

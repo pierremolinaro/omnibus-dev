@@ -9,27 +9,27 @@
 #include "all-declarations-5.h"
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//  GRAMMAR plm_target_grammar
+//  GRAMMAR omnibus_target_grammar
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specific_5F_syntax {
+class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5F_specific_5F_syntax {
 //------------------------------------- 'configuration_key' non terminal
 //--- 'parse' label
-  public : virtual void nt_configuration_5F_key_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_configuration_5F_key_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
   public : virtual void nt_configuration_5F_key_ (const GALGAS_string inArgument0,
-                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+                                                  C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'configuration_start_symbol' non terminal
 //--- 'parse' label
-  public : virtual void nt_configuration_5F_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_configuration_5F_start_5F_symbol_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
   public : virtual void nt_configuration_5F_start_5F_symbol_ (GALGAS_ast & ioArgument0,
                                                               GALGAS_lstringlist & outArgument1,
                                                               GALGAS_location & outArgument2,
-                                                              C_Lexique_plm_5F_lexique * inCompiler) ;
+                                                              C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- Start symbol
   public : static void _performSourceFileParsing_ (C_Compiler * inCompiler,
@@ -61,38 +61,38 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
 
 //------------------------------------- 'interruptConfigList' non terminal
 //--- 'parse' label
-  public : virtual void nt_interruptConfigList_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_interruptConfigList_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
   public : virtual void nt_interruptConfigList_ (GALGAS_interruptionConfigurationList & outArgument0,
                                                  GALGAS_enumerationConstantList & outArgument1,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+                                                 C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'python_utility_tool_list' non terminal
 //--- 'parse' label
-  public : virtual void nt_python_5F_utility_5F_tool_5F_list_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_python_5F_utility_5F_tool_5F_list_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
   public : virtual void nt_python_5F_utility_5F_tool_5F_list_ (GALGAS__32_lstringlist & outArgument0,
-                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
+                                                               C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_0 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_1 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_2 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_2 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_3 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_3 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_4 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_4 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_5 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_5 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_6 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_6 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_7 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_7 (C_Lexique_omnibus_5F_lexique *) ;
 
-  public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_8 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_8 (C_Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
