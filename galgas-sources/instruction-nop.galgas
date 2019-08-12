@@ -9,20 +9,22 @@ class @instructionNOP : @instructionAST {
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc enter_NOP_function ?!@functionDeclarationListAST ioProcListAST {
+proc enter_NOP_function ?!@declarationListAST ioDeclarationListAST {
 #--- NOP function parameters
   let @lstringlist attributeList = {![noUnusedWarningAttribute () nowhere]}
   let instructionList = @instructionListAST {!@instructionNOP.new {!.nowhere}}
 #--- Enter in AST
-    ioProcListAST +=
-      !.anySafeMode
-      !true # is public
-      !["nop" nowhere]
-      !attributeList
-      !{}
-      !["" nowhere] # returnTypeName
-      !instructionList
-      !.nowhere
+  ioDeclarationListAST += !@functionDeclarationAST.new {
+    !.anySafeMode
+    !true # is public
+    !["" nowhere]
+    !["nop" nowhere]
+    !attributeList
+    !{}
+    !["" nowhere] # returnTypeName
+    !instructionList
+    !.nowhere
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

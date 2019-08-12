@@ -335,7 +335,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @implementedDriverAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList

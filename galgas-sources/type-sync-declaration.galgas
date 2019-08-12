@@ -109,7 +109,6 @@ override getter @syncDeclarationAST locationForErrorSignaling -> @location outLo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList

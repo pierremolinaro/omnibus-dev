@@ -26,17 +26,18 @@ abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @s
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildOrderedDeclarationList
-  ?ast:let @ast inAST
-  ?sourceFile:let @string inSourceFile
-  ?endOfSourceFile:let @location inEndOfSourceFile
-  !orderedDeclarationList:@declarationListAST outDeclarationListAST
+  ?ast: let @ast inAST
+  ?sourceFile: let @string inSourceFile
+  ?endOfSourceFile: let @location inEndOfSourceFile
+  !orderedDeclarationList: @declarationListAST outSortedDeclarationListAST
 {
 #-------------------------------------- Build precedence graph
   @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
   for () in inAST.mDeclarationListAST do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
+#    message "Declaration : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"
   end
-  [inAST.mStandaloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+#  [inAST.mStandaloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
@@ -69,14 +70,14 @@ proc buildOrderedDeclarationList
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
 #------------------------------------------  Get ordered declaration list
-  outDeclarationListAST = {}
+  outSortedDeclarationListAST = {}
   if [precedenceGraph undefinedNodeCount] > 0 then
     for () in  [precedenceGraph undefinedNodeReferenceList] do
       error mValue : mValue.string + " is not defined in declaration dependency graph"
     end
   else
     [precedenceGraph topologicalSort
-      ?outDeclarationListAST
+      ?outSortedDeclarationListAST
       ?*
       ?let @declarationListAST unsortedSemanticDeclarationListAST
       ?*
@@ -85,7 +86,7 @@ proc buildOrderedDeclarationList
       var s = "semantic analysis not performed, "
             + [unsortedSemanticDeclarationListAST length]
             + " declarations are involved in circular definition:"
-      for () in  unsortedSemanticDeclarationListAST do
+      for () in unsortedSemanticDeclarationListAST do
         s += "\n-  " + [mDeclaration keyRepresentationForErrorSignaling]
       end
       error inEndOfSourceFile : s
@@ -94,6 +95,9 @@ proc buildOrderedDeclarationList
       end
     end
   end
+#  for () in outSortedDeclarationListAST do
+#    message "Sorted : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

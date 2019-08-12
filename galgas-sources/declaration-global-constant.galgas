@@ -84,7 +84,6 @@ override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @globalConstantDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

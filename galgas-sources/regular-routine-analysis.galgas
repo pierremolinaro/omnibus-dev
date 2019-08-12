@@ -25,7 +25,8 @@ method @decoratedRegularRoutineList routineSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for function in self do 
+  for function in self do
+#    log "name: " : function.routineMangledLLVMName
     [function semanticAnalysis 
       !context: inContext
       !?temporary: ioTemporaries

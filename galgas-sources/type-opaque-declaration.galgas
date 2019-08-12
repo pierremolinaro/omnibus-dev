@@ -77,7 +77,6 @@ override getter @typeOpaqueDeclarationAST locationForErrorSignaling -> @location
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeOpaqueDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

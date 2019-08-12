@@ -5259,7 +5259,7 @@ void extensionMethod_routineSemanticAnalysis (const GALGAS_decoratedRegularRouti
   const GALGAS_decoratedRegularRoutineList temp_0 = inObject ;
   cEnumerator_decoratedRegularRoutineList enumerator_1345 (temp_0, kENUMERATION_UP) ;
   while (enumerator_1345.hasCurrentObject ()) {
-    extensionMethod_semanticAnalysis (enumerator_1345.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 29)) ;
+    extensionMethod_semanticAnalysis (enumerator_1345.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 30)) ;
     enumerator_1345.gotoNextObject () ;
   }
 }
@@ -5276,27 +5276,27 @@ void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_allocaList temp_0 = inObject ;
-  cEnumerator_allocaList enumerator_4471 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_4471.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_4471.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4471.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)) ;
-    enumerator_4471.gotoNextObject () ;
+  cEnumerator_allocaList enumerator_4522 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_4522.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_4522.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 122)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 122)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4522.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 122)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 122)) ;
+    enumerator_4522.gotoNextObject () ;
   }
   const GALGAS_allocaList temp_1 = inObject ;
-  cEnumerator_allocaList enumerator_4632 (temp_1, kENUMERATION_UP) ;
-  while (enumerator_4632.hasCurrentObject ()) {
+  cEnumerator_allocaList enumerator_4683 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_4683.hasCurrentObject ()) {
     enumGalgasBool test_2 = kBoolTrue ;
     if (kBoolTrue == test_2) {
-      GALGAS_bool test_3 = enumerator_4632.current_mLLVMType (HERE).getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("regular-routine-analysis.galgas", 125)) ;
+      GALGAS_bool test_3 = enumerator_4683.current_mLLVMType (HERE).getter_kind (HERE).getter_isDynamicArrayType (SOURCE_FILE ("regular-routine-analysis.galgas", 126)) ;
       if (kBoolTrue == test_3.boolEnum ()) {
-        test_3 = enumerator_4632.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("regular-routine-analysis.galgas", 125)) ;
+        test_3 = enumerator_4683.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("regular-routine-analysis.galgas", 126)) ;
       }
       test_2 = test_3.boolEnum () ;
       if (kBoolTrue == test_2) {
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- init dynamic array type '").add_operation (enumerator_4632.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 126)).add_operation (GALGAS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 126)) ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4632.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GALGAS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4632.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (enumerator_4632.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- init dynamic array type '").add_operation (enumerator_4683.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GALGAS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store ").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4683.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)).add_operation (GALGAS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4683.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)).add_operation (enumerator_4683.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)).add_operation (GALGAS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 128)) ;
       }
     }
-    enumerator_4632.gotoNextObject () ;
+    enumerator_4683.gotoNextObject () ;
   }
 }
 
@@ -6671,7 +6671,6 @@ GALGAS_checkTargetListAST GALGAS_checkTargetListAST::extractObject (const GALGAS
 GALGAS_ast::GALGAS_ast (void) :
 mProperty_mDeclarationListAST (),
 mProperty_mExtendStaticArrayDeclarationAST (),
-mProperty_mStandaloneFunctionDeclarationListAST (),
 mProperty_mRequiredFunctionListAST (),
 mProperty_mExternFunctionListAST (),
 mProperty_mISRDeclarationListAST (),
@@ -6694,32 +6693,30 @@ GALGAS_ast::~ GALGAS_ast (void) {
 
 GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
                         const GALGAS_extendStaticArrayDeclarationDictAST & inOperand1,
-                        const GALGAS_functionDeclarationListAST & inOperand2,
-                        const GALGAS_requiredFunctionDeclarationListAST & inOperand3,
-                        const GALGAS_externFunctionDeclarationListAST & inOperand4,
-                        const GALGAS_isrDeclarationListAST & inOperand5,
-                        const GALGAS_systemRoutineDeclarationListAST & inOperand6,
-                        const GALGAS_lstringlist & inOperand7,
-                        const GALGAS_taskListAST & inOperand8,
-                        const GALGAS_checkTargetListAST & inOperand9,
-                        const GALGAS_driverDeclarationListAST & inOperand10,
-                        const GALGAS_driverInstanciationListAST & inOperand11,
-                        const GALGAS_uint & inOperand12,
-                        const GALGAS_controlRegisterUserAccesMapAST & inOperand13) :
+                        const GALGAS_requiredFunctionDeclarationListAST & inOperand2,
+                        const GALGAS_externFunctionDeclarationListAST & inOperand3,
+                        const GALGAS_isrDeclarationListAST & inOperand4,
+                        const GALGAS_systemRoutineDeclarationListAST & inOperand5,
+                        const GALGAS_lstringlist & inOperand6,
+                        const GALGAS_taskListAST & inOperand7,
+                        const GALGAS_checkTargetListAST & inOperand8,
+                        const GALGAS_driverDeclarationListAST & inOperand9,
+                        const GALGAS_driverInstanciationListAST & inOperand10,
+                        const GALGAS_uint & inOperand11,
+                        const GALGAS_controlRegisterUserAccesMapAST & inOperand12) :
 mProperty_mDeclarationListAST (inOperand0),
 mProperty_mExtendStaticArrayDeclarationAST (inOperand1),
-mProperty_mStandaloneFunctionDeclarationListAST (inOperand2),
-mProperty_mRequiredFunctionListAST (inOperand3),
-mProperty_mExternFunctionListAST (inOperand4),
-mProperty_mISRDeclarationListAST (inOperand5),
-mProperty_mStandAloneSystemRoutineListAST (inOperand6),
-mProperty_mTargetListAST (inOperand7),
-mProperty_mTaskListAST (inOperand8),
-mProperty_mCheckTargetListAST (inOperand9),
-mProperty_mDriverDeclarationListAST (inOperand10),
-mProperty_mRequiredDriverListAST (inOperand11),
-mProperty_mTypeDeclarationIndex (inOperand12),
-mProperty_mControlRegisterUserAccesMapAST (inOperand13) {
+mProperty_mRequiredFunctionListAST (inOperand2),
+mProperty_mExternFunctionListAST (inOperand3),
+mProperty_mISRDeclarationListAST (inOperand4),
+mProperty_mStandAloneSystemRoutineListAST (inOperand5),
+mProperty_mTargetListAST (inOperand6),
+mProperty_mTaskListAST (inOperand7),
+mProperty_mCheckTargetListAST (inOperand8),
+mProperty_mDriverDeclarationListAST (inOperand9),
+mProperty_mRequiredDriverListAST (inOperand10),
+mProperty_mTypeDeclarationIndex (inOperand11),
+mProperty_mControlRegisterUserAccesMapAST (inOperand12) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6727,7 +6724,6 @@ mProperty_mControlRegisterUserAccesMapAST (inOperand13) {
 GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_ast (GALGAS_declarationListAST::constructor_emptyList (HERE),
                      GALGAS_extendStaticArrayDeclarationDictAST::constructor_emptyDict (HERE),
-                     GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_externFunctionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_isrDeclarationListAST::constructor_emptyList (HERE),
@@ -6745,22 +6741,21 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
 
 GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_declarationListAST & inOperand0,
                                         const GALGAS_extendStaticArrayDeclarationDictAST & inOperand1,
-                                        const GALGAS_functionDeclarationListAST & inOperand2,
-                                        const GALGAS_requiredFunctionDeclarationListAST & inOperand3,
-                                        const GALGAS_externFunctionDeclarationListAST & inOperand4,
-                                        const GALGAS_isrDeclarationListAST & inOperand5,
-                                        const GALGAS_systemRoutineDeclarationListAST & inOperand6,
-                                        const GALGAS_lstringlist & inOperand7,
-                                        const GALGAS_taskListAST & inOperand8,
-                                        const GALGAS_checkTargetListAST & inOperand9,
-                                        const GALGAS_driverDeclarationListAST & inOperand10,
-                                        const GALGAS_driverInstanciationListAST & inOperand11,
-                                        const GALGAS_uint & inOperand12,
-                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand13 
+                                        const GALGAS_requiredFunctionDeclarationListAST & inOperand2,
+                                        const GALGAS_externFunctionDeclarationListAST & inOperand3,
+                                        const GALGAS_isrDeclarationListAST & inOperand4,
+                                        const GALGAS_systemRoutineDeclarationListAST & inOperand5,
+                                        const GALGAS_lstringlist & inOperand6,
+                                        const GALGAS_taskListAST & inOperand7,
+                                        const GALGAS_checkTargetListAST & inOperand8,
+                                        const GALGAS_driverDeclarationListAST & inOperand9,
+                                        const GALGAS_driverInstanciationListAST & inOperand10,
+                                        const GALGAS_uint & inOperand11,
+                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand12 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
   }
   return result ;
 }
@@ -6774,9 +6769,6 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
   }
   if (result == kOperandEqual) {
     result = mProperty_mExtendStaticArrayDeclarationAST.objectCompare (inOperand.mProperty_mExtendStaticArrayDeclarationAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mStandaloneFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mStandaloneFunctionDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mRequiredFunctionListAST.objectCompare (inOperand.mProperty_mRequiredFunctionListAST) ;
@@ -6817,7 +6809,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mStandaloneFunctionDeclarationListAST.isValid () && mProperty_mRequiredFunctionListAST.isValid () && mProperty_mExternFunctionListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
+  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mRequiredFunctionListAST.isValid () && mProperty_mExternFunctionListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6825,7 +6817,6 @@ bool GALGAS_ast::isValid (void) const {
 void GALGAS_ast::drop (void) {
   mProperty_mDeclarationListAST.drop () ;
   mProperty_mExtendStaticArrayDeclarationAST.drop () ;
-  mProperty_mStandaloneFunctionDeclarationListAST.drop () ;
   mProperty_mRequiredFunctionListAST.drop () ;
   mProperty_mExternFunctionListAST.drop () ;
   mProperty_mISRDeclarationListAST.drop () ;
@@ -6850,8 +6841,6 @@ void GALGAS_ast::description (C_String & ioString,
     mProperty_mDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mExtendStaticArrayDeclarationAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mStandaloneFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mRequiredFunctionListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -6888,12 +6877,6 @@ GALGAS_declarationListAST GALGAS_ast::getter_mDeclarationListAST (UNUSED_LOCATIO
 
 GALGAS_extendStaticArrayDeclarationDictAST GALGAS_ast::getter_mExtendStaticArrayDeclarationAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mExtendStaticArrayDeclarationAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_functionDeclarationListAST GALGAS_ast::getter_mStandaloneFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStandaloneFunctionDeclarationListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -12232,7 +12215,6 @@ C_PrologueEpilogue gMethod_abstractDeclarationAST_enterInContext (NULL,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inObject,
-                                         const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
                                          GALGAS_semanticContext & io_ioContext,
                                          GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                          GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
@@ -12266,7 +12248,7 @@ void callExtensionMethod_enterInContext (const cPtr_abstractDeclarationAST * inO
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
     }else{
-      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioDecoratedDeclarationList, io_ioDecoratedRoutineList, io_ioRoutineListIR, io_ioStaticListValueMap, io_ioStaticEntityMap, io_ioControlRegisterUserAccesMapAST, io_ioUserLLVMTypeDefinitionListIR, inCompiler COMMA_THERE) ;
+      f (inObject, io_ioContext, io_ioDecoratedDeclarationList, io_ioDecoratedRoutineList, io_ioRoutineListIR, io_ioStaticListValueMap, io_ioStaticEntityMap, io_ioControlRegisterUserAccesMapAST, io_ioUserLLVMTypeDefinitionListIR, inCompiler COMMA_THERE) ;
     }
   }
 }

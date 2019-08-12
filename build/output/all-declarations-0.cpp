@@ -4832,22 +4832,6 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i22_parse (C_
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i23_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
-  GALGAS_functionDeclarationListAST var_standAloneFunctionDeclarationListAST_624 = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-standalone-function.galgas", 10)) ;
-  nt_function_ (ioArgument_ioAST, var_standAloneFunctionDeclarationListAST_624, inCompiler) ;
-  ioArgument_ioAST.mProperty_mStandaloneFunctionDeclarationListAST.plusAssign_operation(var_standAloneFunctionDeclarationListAST_624, inCompiler  COMMA_SOURCE_FILE ("declaration-standalone-function.galgas", 12)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i23_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  nt_function_parse (inCompiler) ;
-  inCompiler->resetTemplateString () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i24_ (GALGAS_ast & ioArgument_ioAST,
-                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_staticArray COMMA_SOURCE_FILE ("declaration-static-list.galgas", 61)) ;
   GALGAS_lstring var_staticListName_2622 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 62)) ;
@@ -4870,7 +4854,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i24_ (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i24_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i23_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_staticArray COMMA_SOURCE_FILE ("declaration-static-list.galgas", 61)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 62)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 63)) ;
@@ -4891,7 +4875,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i24_parse (C_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i25_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i24_ (GALGAS_ast & ioArgument_ioAST,
                                                                                  GALGAS_staticListPropertyListAST & ioArgument_ioPropertyList,
                                                                                  C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_let COMMA_SOURCE_FILE ("declaration-static-list.galgas", 76)) ;
@@ -4944,7 +4928,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i25_ 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i25_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i24_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_let COMMA_SOURCE_FILE ("declaration-static-list.galgas", 76)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 77)) ;
   switch (select_omnibus_5F_syntax_38 (inCompiler)) {
@@ -4985,7 +4969,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i25_p
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i26_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i25_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_extend COMMA_SOURCE_FILE ("declaration-static-list.galgas", 107)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_staticArray COMMA_SOURCE_FILE ("declaration-static-list.galgas", 108)) ;
@@ -5040,7 +5024,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i26_ (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i26_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i25_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_extend COMMA_SOURCE_FILE ("declaration-static-list.galgas", 107)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_staticArray COMMA_SOURCE_FILE ("declaration-static-list.galgas", 108)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 109)) ;
@@ -5074,7 +5058,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i26_parse (C_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i27_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i26_ (GALGAS_ast & ioArgument_ioAST,
                                                                                 GALGAS_extendStaticListElementAST & ioArgument_ioExpressions,
                                                                                 C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_43 (inCompiler)) {
@@ -5098,7 +5082,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i27_ (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i27_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i26_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_43 (inCompiler)) {
   case 1: {
     nt_expression_parse (inCompiler) ;
@@ -5116,7 +5100,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i27_pa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i28_ (GALGAS_ast & /* ioArgument_ioAST */,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i27_ (GALGAS_ast & /* ioArgument_ioAST */,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_option COMMA_SOURCE_FILE ("declaration-option.galgas", 10)) ;
   GALGAS_lstring var_constantName_609 = inCompiler->synthetizedAttribute_tokenString () ;
@@ -5158,7 +5142,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i28_ (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i28_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i27_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_option COMMA_SOURCE_FILE ("declaration-option.galgas", 10)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("declaration-option.galgas", 11)) ;
   inCompiler->resetTemplateString () ;
@@ -5166,7 +5150,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i28_parse (C_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i29_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i28_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_task COMMA_SOURCE_FILE ("task-declaration.galgas", 37)) ;
   GALGAS_lstring var_taskName_1664 = inCompiler->synthetizedAttribute_tokenString () ;
@@ -5352,7 +5336,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i29_ (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i29_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i28_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_task COMMA_SOURCE_FILE ("task-declaration.galgas", 37)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("task-declaration.galgas", 38)) ;
   switch (select_omnibus_5F_syntax_44 (inCompiler)) {
@@ -5459,7 +5443,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i29_parse (C_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_i30_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_i29_ (GALGAS_ast & ioArgument_ioAST,
                                                                       GALGAS_functionDeclarationListAST & ioArgument_ioProcListAST,
                                                                       C_Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_bool var_public_1346 ;
@@ -5500,7 +5484,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_i30_ (GALGAS_ast
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_i30_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_i29_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_51 (inCompiler)) {
   case 1: {
   } break ;
@@ -5529,7 +5513,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_i30_parse (C_Lex
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_mode_i31_ (GALGAS_mode & outArgument_outMode,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_mode_i30_ (GALGAS_mode & outArgument_outMode,
                                                                   C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outMode.drop () ; // Release 'out' argument
   switch (select_omnibus_5F_syntax_53 (inCompiler)) {
@@ -5605,7 +5589,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_mode_i31_ (GALGAS_mode & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_mode_i31_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_mode_i30_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_53 (inCompiler)) {
   case 1: {
   } break ;
@@ -5665,7 +5649,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_mode_i31_parse (C_Lexique
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_header_i32_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_header_i31_ (GALGAS_ast & ioArgument_ioAST,
                                                                                 GALGAS_mode & outArgument_outMode,
                                                                                 GALGAS_lstring & outArgument_outProcName,
                                                                                 GALGAS_lstringlist & outArgument_outAttributeList,
@@ -5698,7 +5682,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_header_i32_ (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_header_i32_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_header_i31_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 121)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 122)) ;
   nt_mode_parse (inCompiler) ;
@@ -5719,8 +5703,8 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_header_i32_pa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_declaration_i33_ (GALGAS_ast & ioArgument_ioAST,
-                                                                                     const GALGAS_lstring constinArgument_inReceiverTypeMane,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_declaration_i32_ (GALGAS_ast & ioArgument_ioAST,
+                                                                                     const GALGAS_lstring constinArgument_inReceiverTypeName,
                                                                                      C_Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_bool var_public_1446 ;
   switch (select_omnibus_5F_syntax_56 (inCompiler)) {
@@ -5755,12 +5739,12 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_declaration_i
   GALGAS_instructionListAST var_instructionList_1907 ;
   nt_instructionList_ (ioArgument_ioAST, var_instructionList_1907, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("declaration-function.galgas", 49)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_functionDeclarationAST::constructor_new (var_mode_1591, var_public_1446, constinArgument_inReceiverTypeMane, var_procName_1616, var_attributeList_1652, var_procFormalArgumentList_1702, var_returnTypeName_1730, var_instructionList_1907, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas", 59))  COMMA_SOURCE_FILE ("declaration-function.galgas", 50))  COMMA_SOURCE_FILE ("declaration-function.galgas", 50)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_functionDeclarationAST::constructor_new (var_mode_1591, var_public_1446, constinArgument_inReceiverTypeName, var_procName_1616, var_attributeList_1652, var_procFormalArgumentList_1702, var_returnTypeName_1730, var_instructionList_1907, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas", 59))  COMMA_SOURCE_FILE ("declaration-function.galgas", 50))  COMMA_SOURCE_FILE ("declaration-function.galgas", 50)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_declaration_i33_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_declaration_i32_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_56 (inCompiler)) {
   case 1: {
   } break ;
@@ -5789,7 +5773,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_function_5F_declaration_i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i34_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i33_ (GALGAS_ast & ioArgument_ioAST,
                                                                                GALGAS_systemRoutineDeclarationListAST & ioArgument_ioSVCListAST,
                                                                                C_Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_bool var_public_1266 ;
@@ -5856,7 +5840,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i34_ (G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i34_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i33_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_58 (inCompiler)) {
   case 1: {
   } break ;
@@ -5907,7 +5891,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i34_par
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i35_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i34_ (GALGAS_ast & ioArgument_ioAST,
                                                                                GALGAS_systemRoutineDeclarationListAST & ioArgument_ioSVCListAST,
                                                                                C_Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_bool var_public_2392 ;
@@ -5962,7 +5946,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i35_ (G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i35_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i34_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_62 (inCompiler)) {
   case 1: {
   } break ;
@@ -6003,7 +5987,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i35_par
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i36_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i35_ (GALGAS_ast & ioArgument_ioAST,
                                                                                GALGAS_systemRoutineDeclarationListAST & ioArgument_ioSVCListAST,
                                                                                C_Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_bool var_public_3290 ;
@@ -6058,7 +6042,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i36_ (G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i36_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i35_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_65 (inCompiler)) {
   case 1: {
   } break ;
@@ -6099,7 +6083,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_system_5F_routine_i36_par
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i37_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i36_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_required COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 22)) ;
   GALGAS_mode var_mode_1186 ;
@@ -6141,7 +6125,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i37_ (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i37_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i36_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_required COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 22)) ;
   nt_function_5F_header_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
@@ -6149,7 +6133,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i37_parse (C_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i38_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i37_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_extern COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 24)) ;
   GALGAS_mode var_mode_1266 ;
@@ -6177,7 +6161,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i38_ (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i38_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i37_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_extern COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 24)) ;
   nt_function_5F_header_parse (inCompiler) ;
   switch (select_omnibus_5F_syntax_68 (inCompiler)) {
@@ -6197,7 +6181,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i38_parse (C_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_isr_i39_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_isr_i38_ (GALGAS_ast & ioArgument_ioAST,
                                                                  const GALGAS_lstring constinArgument_inDriverName,
                                                                  C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_interrupt COMMA_SOURCE_FILE ("declaration-isr.galgas", 22)) ;
@@ -6225,7 +6209,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_isr_i39_ (GALGAS_ast & io
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_isr_i39_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_isr_i38_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_interrupt COMMA_SOURCE_FILE ("declaration-isr.galgas", 22)) ;
   switch (select_omnibus_5F_syntax_69 (inCompiler)) {
   case 1: {
@@ -6246,7 +6230,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_isr_i39_parse (C_Lexique_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_guard_i40_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_guard_i39_ (GALGAS_ast & ioArgument_ioAST,
                                                                    GALGAS_guardDeclarationListAST & ioArgument_ioGuardList,
                                                                    C_Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_bool var_public_1452 ;
@@ -6303,7 +6287,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_guard_i40_ (GALGAS_ast & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_guard_i40_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_guard_i39_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_70 (inCompiler)) {
   case 1: {
   } break ;
@@ -6340,6 +6324,20 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_guard_i40_parse (C_Lexiqu
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("declaration-guard.galgas", 55)) ;
   nt_instructionList_parse (inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("declaration-guard.galgas", 57)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i40_ (GALGAS_ast & ioArgument_ioAST,
+                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_function_5F_declaration_ (ioArgument_ioAST, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-standalone-function.galgas", 18)), inCompiler) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i40_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_function_5F_declaration_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
 

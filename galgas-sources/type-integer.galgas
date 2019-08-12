@@ -64,7 +64,6 @@ func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

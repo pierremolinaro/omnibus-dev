@@ -37,7 +37,6 @@ func %once boolTypeName -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

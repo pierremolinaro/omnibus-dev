@@ -6,10 +6,16 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
+#  rule <declaration> ?!@ast ioAST {
+#    @functionDeclarationListAST standAloneFunctionDeclarationListAST = {}
+#    <function> !?ioAST !?standAloneFunctionDeclarationListAST
+#    ioAST.mStandaloneFunctionDeclarationListAST += standAloneFunctionDeclarationListAST
+#  }
+
+  #·····················································································································
+
   rule <declaration> ?!@ast ioAST {
-    @functionDeclarationListAST standAloneFunctionDeclarationListAST = {}
-    <function> !?ioAST !?standAloneFunctionDeclarationListAST
-    ioAST.mStandaloneFunctionDeclarationListAST += standAloneFunctionDeclarationListAST
+    <function_declaration> !?ioAST !receiverTypeName: ["" nowhere]
   }
 
   #·····················································································································

@@ -333,7 +333,6 @@ override getter @configurationDeclarationAST keyRepresentationForErrorSignaling 
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
 override method @configurationDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

@@ -576,7 +576,6 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
 #·······················································································································
 
 override method @controlRegisterGroupDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

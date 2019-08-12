@@ -22,7 +22,7 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeMane {
+  rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeName {
   #--- Public ?
     @bool public
     select
@@ -50,7 +50,7 @@ syntax extension omnibus_syntax {
     ioAST.mDeclarationListAST += !@functionDeclarationAST.new {
       !mode
       !public
-      !inReceiverTypeMane
+      !inReceiverTypeName
       !procName
       !attributeList
       !procFormalArgumentList
@@ -69,6 +69,17 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  var s = ""
+  if mReceiverTypeName.string != "" then
+    s += mReceiverTypeName.string + "."
+  end
+  s += mFunctionName.string + "("
+  for (formalArgumentPassingMode selector * *) in mFunctionFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  [!?ioGraph addNode !.new {!s !mFunctionName.location} !self]
+#---
   for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]
   end
@@ -98,7 +109,6 @@ override getter @functionDeclarationAST locationForErrorSignaling -> @location {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList

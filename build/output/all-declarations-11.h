@@ -14,7 +14,7 @@
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_enter_5F_NOP_5F_function (class GALGAS_functionDeclarationListAST & ioArgument0,
+void routine_enter_5F_NOP_5F_function (class GALGAS_declarationListAST & ioArgument0,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 

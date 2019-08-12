@@ -651,63 +651,64 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_declaration_i23_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i24_ (GALGAS_ast & ioArgument0,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i24_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_staticArrayProperty_i25_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_staticArrayProperty_i24_ (GALGAS_ast & ioArgument0,
                                                                     GALGAS_staticListPropertyListAST & ioArgument1,
                                                                     C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_staticArrayProperty_i25_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_staticArrayProperty_i24_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i26_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_declaration_i25_ (GALGAS_ast & ioArgument0,
                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i26_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_declaration_i25_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_staticArray_5F_exp_i27_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_staticArray_5F_exp_i26_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_extendStaticListElementAST & ioArgument1,
                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_staticArray_5F_exp_i27_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_staticArray_5F_exp_i26_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i27_ (GALGAS_ast & ioArgument0,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i27_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i28_ (GALGAS_ast & ioArgument0,
                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i28_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i29_ (GALGAS_ast & ioArgument0,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i29_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_function_i30_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_function_i29_ (GALGAS_ast & ioArgument0,
                                                          GALGAS_functionDeclarationListAST & ioArgument1,
                                                          C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_function_i30_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_function_i29_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_mode_i31_ (GALGAS_mode & outArgument0,
+  protected : void rule_omnibus_5F_syntax_mode_i30_ (GALGAS_mode & outArgument0,
                                                      C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_mode_i31_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_mode_i30_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_function_5F_header_i32_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_function_5F_header_i31_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_mode & outArgument1,
                                                                    GALGAS_lstring & outArgument2,
                                                                    GALGAS_lstringlist & outArgument3,
                                                                    GALGAS_routineFormalArgumentListAST & outArgument4,
                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_function_5F_header_i32_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_function_5F_header_i31_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_function_5F_declaration_i33_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_function_5F_declaration_i32_ (GALGAS_ast & ioArgument0,
                                                                         const GALGAS_lstring constinArgument1,
                                                                         C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_function_5F_declaration_i33_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_function_5F_declaration_i32_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_i33_ (GALGAS_ast & ioArgument0,
+                                                                  GALGAS_systemRoutineDeclarationListAST & ioArgument1,
+                                                                  C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_i33_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_system_5F_routine_i34_ (GALGAS_ast & ioArgument0,
                                                                   GALGAS_systemRoutineDeclarationListAST & ioArgument1,
@@ -721,33 +722,32 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_system_5F_routine_i35_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i36_ (GALGAS_ast & ioArgument0,
-                                                                  GALGAS_systemRoutineDeclarationListAST & ioArgument1,
-                                                                  C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_declaration_i36_ (GALGAS_ast & ioArgument0,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i36_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_declaration_i36_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i37_ (GALGAS_ast & ioArgument0,
                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i37_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i38_ (GALGAS_ast & ioArgument0,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i38_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_isr_i39_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_isr_i38_ (GALGAS_ast & ioArgument0,
                                                     const GALGAS_lstring constinArgument1,
                                                     C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_isr_i39_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_isr_i38_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_guard_i40_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_guard_i39_ (GALGAS_ast & ioArgument0,
                                                       GALGAS_guardDeclarationListAST & ioArgument1,
                                                       C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_guard_i40_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_guard_i39_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i40_ (GALGAS_ast & ioArgument0,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i40_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i41_ (GALGAS_ast & ioArgument0,
                                                                                  GALGAS_routineFormalArgumentListAST & outArgument1,
@@ -15103,8 +15103,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 
   public : GALGAS_extendStaticArrayDeclarationDictAST mProperty_mExtendStaticArrayDeclarationAST ;
 
-  public : GALGAS_functionDeclarationListAST mProperty_mStandaloneFunctionDeclarationListAST ;
-
   public : GALGAS_requiredFunctionDeclarationListAST mProperty_mRequiredFunctionListAST ;
 
   public : GALGAS_externFunctionDeclarationListAST mProperty_mExternFunctionListAST ;
@@ -15143,7 +15141,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_ast (const GALGAS_declarationListAST & in_mDeclarationListAST,
                        const GALGAS_extendStaticArrayDeclarationDictAST & in_mExtendStaticArrayDeclarationAST,
-                       const GALGAS_functionDeclarationListAST & in_mStandaloneFunctionDeclarationListAST,
                        const GALGAS_requiredFunctionDeclarationListAST & in_mRequiredFunctionListAST,
                        const GALGAS_externFunctionDeclarationListAST & in_mExternFunctionListAST,
                        const GALGAS_isrDeclarationListAST & in_mISRDeclarationListAST,
@@ -15169,18 +15166,17 @@ class GALGAS_ast : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_ast constructor_new (const class GALGAS_declarationListAST & inOperand0,
                                                     const class GALGAS_extendStaticArrayDeclarationDictAST & inOperand1,
-                                                    const class GALGAS_functionDeclarationListAST & inOperand2,
-                                                    const class GALGAS_requiredFunctionDeclarationListAST & inOperand3,
-                                                    const class GALGAS_externFunctionDeclarationListAST & inOperand4,
-                                                    const class GALGAS_isrDeclarationListAST & inOperand5,
-                                                    const class GALGAS_systemRoutineDeclarationListAST & inOperand6,
-                                                    const class GALGAS_lstringlist & inOperand7,
-                                                    const class GALGAS_taskListAST & inOperand8,
-                                                    const class GALGAS_checkTargetListAST & inOperand9,
-                                                    const class GALGAS_driverDeclarationListAST & inOperand10,
-                                                    const class GALGAS_driverInstanciationListAST & inOperand11,
-                                                    const class GALGAS_uint & inOperand12,
-                                                    const class GALGAS_controlRegisterUserAccesMapAST & inOperand13
+                                                    const class GALGAS_requiredFunctionDeclarationListAST & inOperand2,
+                                                    const class GALGAS_externFunctionDeclarationListAST & inOperand3,
+                                                    const class GALGAS_isrDeclarationListAST & inOperand4,
+                                                    const class GALGAS_systemRoutineDeclarationListAST & inOperand5,
+                                                    const class GALGAS_lstringlist & inOperand6,
+                                                    const class GALGAS_taskListAST & inOperand7,
+                                                    const class GALGAS_checkTargetListAST & inOperand8,
+                                                    const class GALGAS_driverDeclarationListAST & inOperand9,
+                                                    const class GALGAS_driverInstanciationListAST & inOperand10,
+                                                    const class GALGAS_uint & inOperand11,
+                                                    const class GALGAS_controlRegisterUserAccesMapAST & inOperand12
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -15214,8 +15210,6 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_requiredFunctionDeclarationListAST getter_mRequiredFunctionListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mStandAloneSystemRoutineListAST (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mStandaloneFunctionDeclarationListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mTargetListAST (LOCATION_ARGS) const ;
 

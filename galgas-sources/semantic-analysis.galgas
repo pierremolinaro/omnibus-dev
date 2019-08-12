@@ -119,6 +119,7 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
+#  log inDecoratedRoutineList
   [inDecoratedRoutineList routineSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries

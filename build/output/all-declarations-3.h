@@ -3558,15 +3558,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorit
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 typedef void (*extensionMethodSignature_abstractDeclarationAST_enterInContext) (const class cPtr_abstractDeclarationAST * inObject,
-                                                                                const class GALGAS_functionDeclarationListAST constinArgument0,
-                                                                                class GALGAS_semanticContext & ioArgument1,
-                                                                                class GALGAS_declarationDecorationList & ioArgument2,
-                                                                                class GALGAS_decoratedRegularRoutineList & ioArgument3,
-                                                                                class GALGAS_routineListIR & ioArgument4,
-                                                                                class GALGAS_staticListInitializationMap & ioArgument5,
-                                                                                class GALGAS_staticEntityMap & ioArgument6,
-                                                                                class GALGAS_controlRegisterUserAccesMapAST & ioArgument7,
-                                                                                class GALGAS_userLLVMTypeDefinitionListIR & ioArgument8,
+                                                                                class GALGAS_semanticContext & ioArgument0,
+                                                                                class GALGAS_declarationDecorationList & ioArgument1,
+                                                                                class GALGAS_decoratedRegularRoutineList & ioArgument2,
+                                                                                class GALGAS_routineListIR & ioArgument3,
+                                                                                class GALGAS_staticListInitializationMap & ioArgument4,
+                                                                                class GALGAS_staticEntityMap & ioArgument5,
+                                                                                class GALGAS_controlRegisterUserAccesMapAST & ioArgument6,
+                                                                                class GALGAS_userLLVMTypeDefinitionListIR & ioArgument7,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -3578,7 +3577,6 @@ void enterExtensionMethod_enterInContext (const int32_t inClassIndex,
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST * inObject,
-                                         const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
                                          GALGAS_semanticContext & io_ioContext,
                                          GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                          GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,

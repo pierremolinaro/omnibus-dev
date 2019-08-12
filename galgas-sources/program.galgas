@@ -106,13 +106,13 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Add NOP function
-  enter_NOP_function (!?ast.mStandaloneFunctionDeclarationListAST)
+  enter_NOP_function (!?ast.mDeclarationListAST)
 #------------------------------------------------------------ Add target specific files
   addTargetSpecificFiles (
-    !forTarget:inTargetName
-    !?toAST:ast
-    !currentDirectory:inCurrentDirectory
-    !?importedFilePathSet:sourceFileAbsolutePathSet
+    !forTarget: inTargetName
+    !?toAST: ast
+    !currentDirectory: inCurrentDirectory
+    !?importedFilePathSet: sourceFileAbsolutePathSet
   )
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
@@ -140,10 +140,10 @@ private proc compileProject
       message "** Declaration sorting\n" 
     end
     buildOrderedDeclarationList (
-      !ast:ast
+      !ast: ast
       !sourceFile:inSourceFile.string
       !endOfSourceFile:inEndOfSourceFile
-      ?orderedDeclarationList:orderedDeclarationListAST
+      ?orderedDeclarationList: orderedDeclarationListAST
     )
     if [option omnibus_options.printPasses value] then
       message "    Duration: " + [t string] + "\n" 

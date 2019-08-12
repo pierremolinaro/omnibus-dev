@@ -56,7 +56,6 @@ override getter @typeDynamicArrayDeclarationAST locationForErrorSignaling -> @lo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeDynamicArrayDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -139,8 +138,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     ]
     ioRoutineListIR += !@dynArrayInsertFunctionIR.new {
       !insertFunctionMangledName
-      !isRequired:false
-      !warnsIfUnused:false
+      !isRequired: false
+      !warnsIfUnused: false
       !elementTypeProxy
     }
   #--- Method 'append(?:)'
@@ -148,18 +147,18 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:.new {!"append" !mDynamicArrayTypeName}
-      !mode:.anySafeMode
-      !inputArgumentSelector:""
-      !inputArgumentTypeProxy:elementTypeProxy
-      !inputArgumentName:"inValue"
-      !resultTypeProxy:.null
+      !methodName: .new {!"append" !mDynamicArrayTypeName}
+      !mode: .anySafeMode
+      !inputArgumentSelector: ""
+      !inputArgumentTypeProxy: elementTypeProxy
+      !inputArgumentName: "inValue"
+      !resultTypeProxy: .null
       ?routineLLVMName: routineLLVMName
     ]
     ioRoutineListIR += !@dynArrayAppendFunctionIR.new {
       !routineLLVMName
-      !isRequired:false
-      !warnsIfUnused:false
+      !isRequired: false
+      !warnsIfUnused: false
       !arrayTypeProxy
       !elementTypeProxy
       !insertFunctionMangledName
