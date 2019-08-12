@@ -9606,9 +9606,8 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_syncDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                    const class GALGAS_structurePropertyListAST & inOperand1,
-                                                                   const class GALGAS_functionDeclarationListAST & inOperand2,
-                                                                   const class GALGAS_systemRoutineDeclarationListAST & inOperand3,
-                                                                   const class GALGAS_guardDeclarationListAST & inOperand4
+                                                                   const class GALGAS_systemRoutineDeclarationListAST & inOperand2,
+                                                                   const class GALGAS_guardDeclarationListAST & inOperand3
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -9620,8 +9619,6 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
@@ -9651,14 +9648,12 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mSyncToolName ;
   public : GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
-  public : GALGAS_functionDeclarationListAST mProperty_mFunctionDeclarationListAST ;
   public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
 
 //--- Constructor
   public : cPtr_syncDeclarationAST (const GALGAS_lstring & in_mSyncToolName,
                                     const GALGAS_structurePropertyListAST & in_mStructurePropertyListAST,
-                                    const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                     const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
                                     const GALGAS_guardDeclarationListAST & in_mGuardListAST
                                     COMMA_LOCATION_ARGS) ;
@@ -9669,7 +9664,6 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncToolName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
 //--- Description

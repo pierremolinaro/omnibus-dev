@@ -3905,35 +3905,34 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i13_parse (C_
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i14_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_sync COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 22)) ;
-  GALGAS_lstring var_structureName_1256 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_structureName_1257 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 23)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 24)) ;
-  GALGAS_functionDeclarationListAST var_procedureDeclarationListAST_1324 = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 25)) ;
-  GALGAS_structurePropertyListAST var_fieldList_1369 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 26)) ;
-  GALGAS_systemRoutineDeclarationListAST var_systemRoutineListAST_1432 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 27)) ;
-  GALGAS_guardDeclarationListAST var_guardListAST_1479 = GALGAS_guardDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 28)) ;
+  GALGAS_structurePropertyListAST var_fieldList_1305 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 25)) ;
+  GALGAS_systemRoutineDeclarationListAST var_systemRoutineListAST_1368 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 26)) ;
+  GALGAS_guardDeclarationListAST var_guardListAST_1415 = GALGAS_guardDeclarationListAST::constructor_emptyList (SOURCE_FILE ("type-sync-declaration.galgas", 27)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_15 (inCompiler)) {
     case 2: {
-      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_1369, inCompiler) ;
+      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_1305, inCompiler) ;
     } break ;
     case 3: {
-      nt_function_ (ioArgument_ioAST, var_procedureDeclarationListAST_1324, inCompiler) ;
+      nt_function_5F_declaration_ (ioArgument_ioAST, var_structureName_1257, inCompiler) ;
     } break ;
     case 4: {
-      nt_system_5F_routine_ (ioArgument_ioAST, var_systemRoutineListAST_1432, inCompiler) ;
+      nt_system_5F_routine_ (ioArgument_ioAST, var_systemRoutineListAST_1368, inCompiler) ;
     } break ;
     case 5: {
-      nt_guard_ (ioArgument_ioAST, var_guardListAST_1479, inCompiler) ;
+      nt_guard_ (ioArgument_ioAST, var_guardListAST_1415, inCompiler) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 39)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_syncDeclarationAST::constructor_new (var_structureName_1256, var_fieldList_1369, var_procedureDeclarationListAST_1324, var_systemRoutineListAST_1432, var_guardListAST_1479  COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 40))  COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 40)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 38)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_syncDeclarationAST::constructor_new (var_structureName_1257, var_fieldList_1305, var_systemRoutineListAST_1368, var_guardListAST_1415  COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 39))  COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 39)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3949,7 +3948,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i14_parse (C_
       nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (inCompiler) ;
     } break ;
     case 3: {
-      nt_function_parse (inCompiler) ;
+      nt_function_5F_declaration_parse (inCompiler) ;
     } break ;
     case 4: {
       nt_system_5F_routine_parse (inCompiler) ;
@@ -3962,7 +3961,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i14_parse (C_
       break ;
     }
   }
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 39)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-sync-declaration.galgas", 38)) ;
   inCompiler->resetTemplateString () ;
 }
 

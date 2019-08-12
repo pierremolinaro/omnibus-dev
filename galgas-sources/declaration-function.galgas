@@ -167,7 +167,7 @@ override method @functionDeclarationAST enterInContext
   ]
 #---------------- Add decorated declaration (for function semantic analysis)
   ioDecoratedRoutineList +=
-    !receiverTypeName: ["" nowhere]
+    !receiverTypeName: mReceiverTypeName
     !mode:mMode
     !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
     !routineKind: .function

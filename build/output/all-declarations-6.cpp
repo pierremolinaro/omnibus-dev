@@ -4435,9 +4435,6 @@ typeComparisonResult cPtr_syncDeclarationAST::dynamicObjectCompare (const acPtr_
     result = mProperty_mStructurePropertyListAST.objectCompare (p->mProperty_mStructurePropertyListAST) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mFunctionDeclarationListAST.objectCompare (p->mProperty_mFunctionDeclarationListAST) ;
-  }
-  if (kOperandEqual == result) {
     result = mProperty_mSystemRoutineListAST.objectCompare (p->mProperty_mSystemRoutineListAST) ;
   }
   if (kOperandEqual == result) {
@@ -4476,7 +4473,6 @@ GALGAS_abstractDeclarationAST () {
 GALGAS_syncDeclarationAST GALGAS_syncDeclarationAST::constructor_default (LOCATION_ARGS) {
   return GALGAS_syncDeclarationAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
                                                      GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
-                                                     GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                                                      GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
                                                      GALGAS_guardDeclarationListAST::constructor_emptyList (HERE)
                                                      COMMA_THERE) ;
@@ -4493,13 +4489,12 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 
 GALGAS_syncDeclarationAST GALGAS_syncDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mSyncToolName,
                                                                       const GALGAS_structurePropertyListAST & inAttribute_mStructurePropertyListAST,
-                                                                      const GALGAS_functionDeclarationListAST & inAttribute_mFunctionDeclarationListAST,
                                                                       const GALGAS_systemRoutineDeclarationListAST & inAttribute_mSystemRoutineListAST,
                                                                       const GALGAS_guardDeclarationListAST & inAttribute_mGuardListAST
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_syncDeclarationAST result ;
-  if (inAttribute_mSyncToolName.isValid () && inAttribute_mStructurePropertyListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mSystemRoutineListAST.isValid () && inAttribute_mGuardListAST.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_syncDeclarationAST (inAttribute_mSyncToolName, inAttribute_mStructurePropertyListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mSystemRoutineListAST, inAttribute_mGuardListAST COMMA_THERE)) ;
+  if (inAttribute_mSyncToolName.isValid () && inAttribute_mStructurePropertyListAST.isValid () && inAttribute_mSystemRoutineListAST.isValid () && inAttribute_mGuardListAST.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_syncDeclarationAST (inAttribute_mSyncToolName, inAttribute_mStructurePropertyListAST, inAttribute_mSystemRoutineListAST, inAttribute_mGuardListAST COMMA_THERE)) ;
   }
   return result ;
 }
@@ -4538,24 +4533,6 @@ GALGAS_structurePropertyListAST GALGAS_syncDeclarationAST::getter_mStructureProp
 
 GALGAS_structurePropertyListAST cPtr_syncDeclarationAST::getter_mStructurePropertyListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mStructurePropertyListAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_functionDeclarationListAST GALGAS_syncDeclarationAST::getter_mFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  GALGAS_functionDeclarationListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_syncDeclarationAST * p = (const cPtr_syncDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_syncDeclarationAST) ;
-    result = p->mProperty_mFunctionDeclarationListAST ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_functionDeclarationListAST cPtr_syncDeclarationAST::getter_mFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mFunctionDeclarationListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4600,14 +4577,12 @@ GALGAS_guardDeclarationListAST cPtr_syncDeclarationAST::getter_mGuardListAST (UN
 
 cPtr_syncDeclarationAST::cPtr_syncDeclarationAST (const GALGAS_lstring & in_mSyncToolName,
                                                   const GALGAS_structurePropertyListAST & in_mStructurePropertyListAST,
-                                                  const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                                   const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
                                                   const GALGAS_guardDeclarationListAST & in_mGuardListAST
                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclarationAST (THERE),
 mProperty_mSyncToolName (in_mSyncToolName),
 mProperty_mStructurePropertyListAST (in_mStructurePropertyListAST),
-mProperty_mFunctionDeclarationListAST (in_mFunctionDeclarationListAST),
 mProperty_mSystemRoutineListAST (in_mSystemRoutineListAST),
 mProperty_mGuardListAST (in_mGuardListAST) {
 }
@@ -4625,8 +4600,6 @@ void cPtr_syncDeclarationAST::description (C_String & ioString,
   ioString << ", " ;
   mProperty_mStructurePropertyListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_mFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mProperty_mSystemRoutineListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
@@ -4637,7 +4610,7 @@ void cPtr_syncDeclarationAST::description (C_String & ioString,
 
 acPtr_class * cPtr_syncDeclarationAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_syncDeclarationAST (mProperty_mSyncToolName, mProperty_mStructurePropertyListAST, mProperty_mFunctionDeclarationListAST, mProperty_mSystemRoutineListAST, mProperty_mGuardListAST COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_syncDeclarationAST (mProperty_mSyncToolName, mProperty_mStructurePropertyListAST, mProperty_mSystemRoutineListAST, mProperty_mGuardListAST COMMA_THERE)) ;
   return ptr ;
 }
 

@@ -5,7 +5,7 @@
 class @syncDeclarationAST : @abstractDeclarationAST {
   @lstring mSyncToolName
   @structurePropertyListAST mStructurePropertyListAST
-  @functionDeclarationListAST mFunctionDeclarationListAST
+#  @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
 }
@@ -22,7 +22,6 @@ syntax extension omnibus_syntax {
     $sync$
     $\$type$ ?let structureName
     ${$
-    @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
     @systemRoutineDeclarationListAST systemRoutineListAST = {}
     @guardDeclarationListAST guardListAST = {}
@@ -30,7 +29,7 @@ syntax extension omnibus_syntax {
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
-      <function> !?ioAST !?procedureDeclarationListAST
+      <function_declaration> !?ioAST !receiverTypeName: structureName
     while
       <system_routine> !?ioAST !?systemRoutineListAST
     while
@@ -40,7 +39,6 @@ syntax extension omnibus_syntax {
     ioAST.mDeclarationListAST += !@syncDeclarationAST.new {
       !structureName
       !fieldList
-      !procedureDeclarationListAST
       !systemRoutineListAST
       !guardListAST
     }
@@ -78,15 +76,15 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
     end
   end
 #--- Add structure functions
-  for () in mFunctionDeclarationListAST do
-    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      [!?ioGraph noteNode !formalArgumentTypeName]
-    end
-    if mFunctionReturnTypeName.string != "" then
-      [!?ioGraph noteNode !mFunctionReturnTypeName]
-    end
-    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
+#  for () in mFunctionDeclarationListAST do
+#    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
+#      [!?ioGraph noteNode !formalArgumentTypeName]
+#    end
+#    if mFunctionReturnTypeName.string != "" then
+#      [!?ioGraph noteNode !mFunctionReturnTypeName]
+#    end
+#    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+#  end
 #--- Add structure services, section, primitives and guards
   [mSystemRoutineListAST noteTypesInPrecedenceGraph !?ioGraph]
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
@@ -149,20 +147,10 @@ override method @syncDeclarationAST enterInContext
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
-#---------------------------------------- Enter functions in property map
-  [mFunctionDeclarationListAST enterFunctionsInPropertyMap
-    !receiverTypeName: mSyncToolName
-    !receiverLLVMBaseTypeName: mSyncToolName
-#    !?routineMap: routineMapCTXT
-    !?context: ioContext
-    !?ioDecoratedRoutineList
-    !?ioRoutineListIR
-  ]
 #---------------------------------------- Enter system routines in property map
   [mSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName: mSyncToolName
     !receiverLLVMBaseTypeName: mSyncToolName
-#    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
