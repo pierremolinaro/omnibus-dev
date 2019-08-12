@@ -261,7 +261,7 @@ method @taskListAST enterInContext
       [property enterPropertyInContext
         !?context:ioContext
         !?staticEntityMap:ioStaticEntityMap
-        !receiverTypeName:task.mTaskName
+        !receiverTypeName: task.mTaskName
         !receiverLLVMBaseTypeName: task.mTaskName
         !?ioDecoratedRoutineList
         !?propertyList
@@ -275,12 +275,14 @@ method @taskListAST enterInContext
     end
   #---- Add activate function
     [!?routineMap addFunctionWithoutArgument
-      !llvmBaseTypeName:task.mTaskName
-      !methodName:.new {!"activate" !task.mTaskName}
+      !omnibusTypeDescriptionName: task.mTaskName
+      !llvmBaseTypeName: task.mTaskName
+      !methodName:.new {!"activate" !task.mTaskName.location}
       !mode:.safeUserMode
       !resultTypeProxy:.null
       ?routineLLVMName:*
     ]
+#    log routineMap
     let assemblerTaskName = [task.mTaskName assemblerRepresentation]
     let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
     ioRoutineListIR += !@taskActivateFunctionIR.new {

@@ -9383,9 +9383,9 @@ void extensionSetter_addPropertyGetter (GALGAS_propertyGetterMap & ioObject,
                                         COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 335)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 335)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func-EX.galgas", 335))  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 335)) ;
-  GALGAS_routineLLVMNameDict var_modeDictionary_12118 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 336)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 336)) ;
+  GALGAS_routineLLVMNameDict var_modeDictionary_12206 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 336)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 336)) ;
   {
-  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_12118  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 337)) ;
+  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_12206  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 337)) ;
   }
 }
 
@@ -10259,10 +10259,10 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
                                                       GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineFormalArgumentListIR var_formalArguments_5251 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 130)) ;
-  GALGAS_universalValuedObjectMap joker_5340 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 134)) ;
+  GALGAS_routineFormalArgumentListIR var_formalArguments_5287 = GALGAS_routineFormalArgumentListIR::constructor_emptyList (SOURCE_FILE ("declaration-extern-proc.galgas", 130)) ;
+  GALGAS_universalValuedObjectMap joker_5376 = GALGAS_universalValuedObjectMap::constructor_default (SOURCE_FILE ("declaration-extern-proc.galgas", 134)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5340, var_formalArguments_5251, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 131)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mProperty_mProcFormalArgumentList, joker_5376, var_formalArguments_5287, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 131)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, inObject.mProperty_mReturnTypeName.getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
@@ -10271,11 +10271,11 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
   }else if (kBoolFalse == test_1) {
     temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), inObject.mProperty_mReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5447 = temp_0 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5483 = temp_0 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5251, var_returnType_5447, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (inObject.mProperty_mRoutineNameForGeneration, var_formalArguments_5287, var_returnType_5483, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5251, var_returnType_5447  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GALGAS_externRoutineIR::constructor_new (inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (false), GALGAS_bool (false), var_formalArguments_5287, var_returnType_5483  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150))  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
 }
 
 
@@ -11636,15 +11636,15 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_8336 = GALGAS_string ("(") ;
+  GALGAS_string var_key_8498 = GALGAS_string ("(") ;
   const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_8379 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_8379.hasCurrentObject ()) {
-    var_key_8336.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8379.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 210)).add_operation (enumerator_8379.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 210)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 210)) ;
-    enumerator_8379.gotoNextObject () ;
+  cEnumerator_effectiveArgumentListAST enumerator_8541 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_8541.hasCurrentObject ()) {
+    var_key_8498.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8541.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (enumerator_8541.current_mSelector (HERE).getter_string (SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)) ;
+    enumerator_8541.gotoNextObject () ;
   }
-  var_key_8336.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 212)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_8336, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 213)) ;
+  var_key_8498.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 219)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_8498, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("formal-arguments.galgas", 220)) ;
 //---
   return result_result ;
 }

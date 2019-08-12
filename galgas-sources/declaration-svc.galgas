@@ -308,7 +308,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !userRoutineMangledName
       !implementationRoutineMangledName
     ]
-    let routineMangledName = [signature mangledName !system.mName]
+    let routineMangledName = [signature mangledName !receiverTypeName: inReceiverTypeName !functionName: system.mName]
     [!?ioRoutineMapCTXT insertKey
       !routineMangledName
       !system.mPublic

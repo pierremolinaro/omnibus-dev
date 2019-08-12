@@ -145,7 +145,7 @@ override method @functionDeclarationAST enterInContext
   )
 #---------------- Enter in routine map (for function availability)
   let routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !functionLLVMName]
-  let routineMangledName = [signature mangledName !mFunctionName]
+  let routineMangledName = [signature mangledName !receiverTypeName: mReceiverTypeName.string !functionName: mFunctionName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName
     !mPublicFunction

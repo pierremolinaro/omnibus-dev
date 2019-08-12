@@ -53,6 +53,7 @@ override method @booleanDeclarationAST enterInContext
    @routineMapCTXT routineMap = {}
 #--- Add uint1 accessor
   [!?routineMap addFunctionWithoutArgument
+    !omnibusTypeDescriptionName: boolTypeName ()
     !llvmBaseTypeName:boolTypeName ()
     !methodName:["uint1" nowhere]
     !mode:.anySafeMode

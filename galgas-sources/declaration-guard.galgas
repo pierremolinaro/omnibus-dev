@@ -146,7 +146,7 @@ method @guardDeclarationListAST enterGuardsInContext
   #--- Signature
     routineTypedSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
   #--- Guard mangled name
-    let guardMangledName = [signature mangledName !guard.mGuardName]
+    let guardMangledName = [signature mangledName !receiverTypeName: inReceiverTypeName !functionName: guard.mGuardName]
   #--- Guard user routine LLVM name
     let guardUserLLVMName = guardUserLLVMName (
       !inReceiverLLVMBaseTypeName
@@ -421,8 +421,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-#    let key = guardUserMangledNameFromCall (!currentType.llvmBaseTypeName !methodName !mArguments)
-    let guardMangledName = [mArguments mangledName !methodName]
+    let guardMangledName = [mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
     [currentType.guardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
   #--- Add receiver as first parameter
     @procCallEffectiveParameterListIR effectiveParameterListIR = {

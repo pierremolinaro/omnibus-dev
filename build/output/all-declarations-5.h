@@ -25,7 +25,8 @@ class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_e
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_lstring extensionGetter_mangledName (const class GALGAS_effectiveArgumentListAST & inObject,
-                                                  const class GALGAS_lstring & constinArgument0,
+                                                  const class GALGAS_string & constinArgument0,
+                                                  const class GALGAS_lstring & constinArgument1,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 

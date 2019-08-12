@@ -334,7 +334,7 @@ override method @staticListAST enterInContext
       propertyList += !propertyName !propertyType
     #--- Enter in routine map
       let routineMangledName = @lstring.new {
-        !propertyName.string + [formalArgs routineSignature !propertyName]
+        !omnibusNameForStaticListElementType (!mStaticListName).string + "." + propertyName.string + [formalArgs routineSignature !propertyName]
         !propertyName
       }
       [!?routineMap insertKey

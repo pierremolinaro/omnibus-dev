@@ -264,16 +264,6 @@ class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Function 'omnibusTypeSpecificNameForDriver'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_omnibusTypeSpecificNameForDriver (const class GALGAS_lstring & constinArgument0,
-                                                                class C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                           Routine 'retainRequiredDrivers'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

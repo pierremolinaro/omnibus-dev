@@ -321,13 +321,13 @@ class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Function 'typeNameForTypeMapForDriver'                                        *
+//                                     Function 'omnibusTypeSpecificNameForDriver'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_lstring function_typeNameForTypeMapForDriver (const class GALGAS_lstring & constinArgument0,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_omnibusTypeSpecificNameForDriver (const class GALGAS_lstring & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

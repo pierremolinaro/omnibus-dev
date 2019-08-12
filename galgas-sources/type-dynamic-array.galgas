@@ -96,6 +96,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @propertyGetterMap propertyGetterMap = {}
   #--- Method 'removeAll()'
     [!?routineMap addFunctionWithoutArgument
+      !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:.new {!"removeAll" !mDynamicArrayTypeName}
       !mode:.anySafeMode
@@ -109,6 +110,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     }
   #--- Method 'length()'
     [!?routineMap addFunctionWithoutArgument
+      !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:. new {!"length" !mDynamicArrayTypeName}
       !mode:.anySafeMode
@@ -143,6 +145,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     }
   #--- Method 'append(?:)'
     [!?routineMap addFunctionWithInputArgument
+      !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
       !methodName:.new {!"append" !mDynamicArrayTypeName}

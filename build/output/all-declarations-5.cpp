@@ -244,19 +244,28 @@ GALGAS_string extensionGetter_matchingFormalArgument (const GALGAS_effectiveArgu
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_lstring extensionGetter_mangledName (const GALGAS_effectiveArgumentListAST & inObject,
-                                            const GALGAS_lstring & constinArgument_inRoutineName,
+                                            const GALGAS_string & constinArgument_inReceiverTypeName,
+                                            const GALGAS_lstring & constinArgument_inFunctionName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_s_1518 = constinArgument_inRoutineName.getter_string (HERE).add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 35)) ;
-  const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_1601 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_1601.hasCurrentObject ()) {
-    var_s_1518.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_1601.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 37)).add_operation (enumerator_1601.current_mSelector (HERE).getter_string (SOURCE_FILE ("effective-parameters.galgas", 37)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 37)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 37)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 37)) ;
-    enumerator_1601.gotoNextObject () ;
+  GALGAS_string var_s_1591 = GALGAS_string::makeEmptyString () ;
+  enumGalgasBool test_0 = kBoolTrue ;
+  if (kBoolTrue == test_0) {
+    test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverTypeName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      var_s_1591.plusAssign_operation(constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 40)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 40)) ;
+    }
   }
-  var_s_1518.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 39)) ;
-  result_result = GALGAS_lstring::constructor_new (var_s_1518, constinArgument_inRoutineName.getter_location (HERE)  COMMA_SOURCE_FILE ("effective-parameters.galgas", 40)) ;
+  var_s_1591.plusAssign_operation(constinArgument_inFunctionName.getter_string (HERE).add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 42)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 42)) ;
+  const GALGAS_effectiveArgumentListAST temp_1 = inObject ;
+  cEnumerator_effectiveArgumentListAST enumerator_1760 (temp_1, kENUMERATION_UP) ;
+  while (enumerator_1760.hasCurrentObject ()) {
+    var_s_1591.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_1760.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 44)).add_operation (enumerator_1760.current_mSelector (HERE).getter_string (SOURCE_FILE ("effective-parameters.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 44)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 44)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 44)) ;
+    enumerator_1760.gotoNextObject () ;
+  }
+  var_s_1591.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 46)) ;
+  result_result = GALGAS_lstring::constructor_new (var_s_1591, constinArgument_inFunctionName.getter_location (HERE)  COMMA_SOURCE_FILE ("effective-parameters.galgas", 47)) ;
 //---
   return result_result ;
 }

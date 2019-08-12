@@ -329,7 +329,9 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
     error endOfIndex : "a property is required here"
   case property (@lstring methodName) :
     let @routineMapCTXT routineMap = [currentType routineMap]
-    let methodMangledName = [mArguments mangledName !methodName]
+    let methodMangledName = [mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
+#    log routineMap
+#    log methodMangledName
     [routineMap searchKey
       !methodMangledName
       ?let unused implementedPublic

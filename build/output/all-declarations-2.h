@@ -3279,6 +3279,7 @@ extern C_StringListCommandLineOption gOption_omnibus_5F_options_pathList ;
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_addFunctionWithoutArgument (class GALGAS_routineMapCTXT & ioObject,
+                                                 const class GALGAS_string constin_inOmnibusTypeDescriptionName,
                                                  const class GALGAS_string constin_inLLVMBaseTypeName,
                                                  const class GALGAS_lstring constin_inMethodName,
                                                  const class GALGAS_mode constin_inMode,
@@ -6339,7 +6340,8 @@ class GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForFunctio
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_lstring extensionGetter_mangledName (const class GALGAS_routineTypedSignature & inObject,
-                                                  const class GALGAS_lstring & constinArgument0,
+                                                  const class GALGAS_string & constinArgument0,
+                                                  const class GALGAS_lstring & constinArgument1,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -6613,6 +6615,7 @@ class GALGAS_lstring extensionGetter_routineSignature (const class GALGAS_routin
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapCTXT & ioObject,
+                                                   const class GALGAS_string constin_inOmnibusTypeDescriptionName,
                                                    class GALGAS_semanticContext & io_ioContext,
                                                    const class GALGAS_string constin_inLLVMBaseTypeName,
                                                    const class GALGAS_lstring constin_inMethodName,

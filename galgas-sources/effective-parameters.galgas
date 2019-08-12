@@ -31,13 +31,20 @@ list @effectiveArgumentListAST {
 
 #·······················································································································
 
-getter @effectiveArgumentListAST mangledName ?let @lstring inRoutineName -> @lstring {
-  var s = inRoutineName.string + "("
+getter @effectiveArgumentListAST mangledName
+    ?receiverTypeName: let @string inReceiverTypeName
+    ?functionName: let @lstring inFunctionName
+-> @lstring {
+  var s = ""
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inFunctionName.string + "("
   for (effectiveArgumentPassingMode selector) in self do
     s += [effectiveArgumentPassingMode matchingFormalArgument] + selector + ":"
   end
   s += ")"
-  result = .new {!s !inRoutineName.location}
+  result = .new {!s !inFunctionName.location}
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -89,7 +89,7 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
 #--- Enter in context
   let @routineLLVMNameDict routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !mRoutineNameForGeneration]
-  let routineMangledName = [signature mangledName !mExternProcedureName]
+  let routineMangledName = [signature mangledName !receiverTypeName: "" !functionName: mExternProcedureName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName
     !true

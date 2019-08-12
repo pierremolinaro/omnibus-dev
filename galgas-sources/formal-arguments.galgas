@@ -142,13 +142,20 @@ getter @routineTypedSignature typedString -> @string {
 
 #·······················································································································
 
-getter @routineTypedSignature mangledName ?let @lstring inRoutineName -> @lstring {
-  var s = inRoutineName.string + "("
+getter @routineTypedSignature mangledName
+     ?receiverTypeName: let @string inReceiverTypeName
+     ?functionName: let @lstring inFunctionName
+-> @lstring {
+  var s = ""
+  if inReceiverTypeName != "" then
+    s += inReceiverTypeName + "."
+  end
+  s += inFunctionName.string + "("
   for (formalArgumentPassingMode selector typeProxy *) in self do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  result = .new {!s !inRoutineName.location}
+  result = .new {!s !inFunctionName.location}
 }
 
 #·······················································································································

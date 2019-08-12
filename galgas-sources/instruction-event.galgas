@@ -360,8 +360,7 @@ proc analyzeGuardCall
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
 {
-#  let guardMangledName = guardUserMangledNameFromCall (![inReceiver type].llvmBaseTypeName !inGuardName !inEffectiveParameterList)
-  let guardMangledName = [inEffectiveParameterList mangledName !inGuardName]
+  let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: [[inReceiver type] omnibusTypeDescriptionName] !functionName: inGuardName]
   let guardMap = [[inReceiver type] guardMap]
   [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
 #--- Check accessibility

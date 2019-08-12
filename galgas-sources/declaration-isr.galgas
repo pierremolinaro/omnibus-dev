@@ -60,7 +60,7 @@ method @isrDeclarationListAST enterInContext
     let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
     let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
     ioDecoratedRoutineList +=
-      !receiverTypeName: typeNameForTypeMapForDriver (!isr.mDriverName)
+      !receiverTypeName: omnibusTypeSpecificNameForDriver (!isr.mDriverName)
       !mode:isr.mMode
       !isRequired:true
       !routineKind: .function
@@ -93,7 +93,7 @@ override method @decoratedISRDeclarations semanticAnalysis
 {
   for isr in mISRDeclarationList do
   #--- Self type
-    [inContext.mTypeMap searchKey !lkey:typeNameForTypeMapForDriver (!isr.mDriverName) ?type:let selfType]
+    [inContext.mTypeMap searchKey !lkey: omnibusTypeSpecificNameForDriver (!isr.mDriverName) ?type:let selfType]
   #--- Code generation
     [inContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
