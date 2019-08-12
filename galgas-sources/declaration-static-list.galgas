@@ -275,7 +275,6 @@ override method @staticListAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
-  @routineMapCTXT routineMap = {}
   @propertyList propertyList = {}
   @propertyGetterMap propertyGetterMap = {}
   @stringset propertyNameSet = {}
@@ -315,7 +314,7 @@ override method @staticListAST enterInContext
       let propertyType = @omnibusType.new {
         !propertyGetterMap:{}
         !propertySetterMap: {}
-        !routineMap: {}
+#        !routineMap: {}
         !classConstantMap:{}
         !constructorMap:{}
         !guardMap:{}
@@ -337,7 +336,7 @@ override method @staticListAST enterInContext
         !omnibusNameForStaticListElementType (!mStaticListName).string + "." + propertyName.string + [formalArgs routineSignature !propertyName]
         !propertyName
       }
-      [!?routineMap insertKey
+      [!?ioContext.mRoutineMap insertKey
         !routineMangledName
         !true
         !signature
@@ -363,7 +362,7 @@ override method @staticListAST enterInContext
   let elementType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
-    !routineMap: routineMap
+#    !routineMap: routineMap
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -464,7 +463,7 @@ override method @staticListAST enterInContext
   let arrayType = @omnibusType.new {
     !propertyGetterMap:listTypePropertyMap
     !propertySetterMap: {}
-    !routineMap: {}
+#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

@@ -119,7 +119,6 @@ override method @enumerationDeclarationAST enterInContext
     maxValue = maxValue / 2G
   end
 #---------------- Property map: add uintN() accessor
-  @routineMapCTXT routineMap = {}
   @propertyGetterMap propertyGetterMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
@@ -145,7 +144,7 @@ override method @enumerationDeclarationAST enterInContext
   let enumerationType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: {}
-    !routineMap: routineMap
+#    !routineMap: routineMap
     !classConstantMap:enumConstantMap
     !constructorMap:{}
     !guardMap:{}

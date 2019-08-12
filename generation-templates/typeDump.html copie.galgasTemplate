@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Global constants of %!PROJECT_NAME%</title>
+<style type="text/css">body {
+  font-family: Georgia, sans-serif ;
+  font-size: small ;
+}
+
+h1 {
+  text-align: center ;
+}
+
+.selecteur {
+  color:green ;
+}
+
+a.header_link {
+  background-color: #FFFFCC ;
+}
+
+a:visited, a:link, a:active{
+  color: blue ;
+  text-decoration: underline ;
+}
+
+a:hover {
+  color:green ;
+  background-color: #FFFF00 ;
+  text-decoration: none ;
+}
+
+table.result {
+  border: 1px solid #666666 ;
+}
+
+td.result_title {
+  font-weight: bold ;
+  text-align: center ;
+  background-color: yellow ;
+}
+
+tr.result_line {
+  background-color: #EEEEEE ;
+}
+
+</style>
+</head>
+<body>
+<div>
+<h1>Types defined by %!PROJECT_NAME%</h1>
+<p>This document lists all %![[GLOBAL_TYPE_MAP count] string]% defined types, sorted by name.</p>
+<p>%
+for () in FIRST_LETTER_SET
+do %<a class="header_link" href="#%![[[key characterAtIndex!0] uint] string]%">%!key%</a>%
+between % - %
+end
+%</p>
+<p>%
+!TABLE_OF_TYPES_STRING%
+</p>
+%for () in GLOBAL_TYPE_MAP do%
+<h2>
+  <a name="%!lkey.string%">%!lkey.string%</a>
+</h2>
+<p>
+Kind: %![type descriptionForHTMLFile]%<br>
+Description: %![type omnibusTypeDescriptionName]%<br>
+LLVM Base Name: %![type llvmBaseTypeName]%<br>
+LLVM Name: %![type llvmTypeName]%
+</p>
+  %if [[type routineMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Routine Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Typed signature</td>
+        <td class="result_title">Routine LLVM Name, by mode</td>
+      </tr>
+    %for () in [type routineMap] : routine_ do%
+      <tr class="result_line">
+        <td>%!routine_lkey.string%</td>
+        <td>%if routine_mIsPublic then !"public" else !"private" end%</td>
+        <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy isNull] then else % -> %![routine_mReturnTypeProxy key] end%</td>
+        <td>%for () in routine_mModeDictionary : mode_ do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
+      </tr>
+    %end%
+    </table>
+    <br>
+  %end%
+  %if [[type propertyGetterMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    %for () in [type propertyGetterMap] : getter_ do%
+      <tr class="result_line">
+        <td>%!getter_lkey.string%</td>
+        <td>%if getter_mIsPublic then !"public" else !"private" end%</td>
+        <td>%
+        switch getter_mAccess
+        case storedProperty (propertyType propertyIndex) :
+          %Stored property, index %![propertyIndex string]%, type %![propertyType llvmTypeName]
+        case computedProperty (propertyTypeProxy modeDictionary) :
+          %Computed property, type %![propertyTypeProxy key]%, routine LLVM name:%
+          for () in modeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
+        case constantProperty (propertyValue) :
+          %Constant property, type %![[propertyValue type] llvmTypeName]%, value %![propertyValue llvmName]
+        end
+        %</td>
+      </tr>
+    %end%
+    </table>
+    <br>
+  %end%
+  %if [[type propertySetterMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Setter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    %for () in [type propertySetterMap] : setter_ do%
+      <tr class="result_line">
+        <td>%!setter_lkey.string%</td>
+        <td>%if setter_mIsPublic then !"public" else !"private" end%</td>
+        <td>%
+        switch setter_mAccess
+        case storedProperty (propertyType propertyIndex) :
+          %Stored property, index %![propertyIndex string]%, type %![propertyType llvmTypeName]
+        case computedProperty (propertyTypeProxy getterModeDictionary setterModeDictionary) :
+          %Computed property, type %![propertyTypeProxy key]%, routine LLVM name:%
+          for () in setterModeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
+        end
+        %</td>
+      </tr>
+    %end%
+    </table>
+    <br>
+  %end%
+  %if [[type guardMap] count] > 0 then%
+    <table class="result">
+      <tr>
+        <td class="result_title">Guard Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Typed signature</td>
+        <td class="result_title">User routine LLVM Name</td>
+        <td class="result_title">Implementation routine LLVM Name</td>
+      </tr>
+    %for () in [type guardMap] : guard_ do%
+      <tr class="result_line">
+        <td>%!guard_lkey.string%</td>
+        <td>%if guard_mIsPublic then !"public" else !"private" end%</td>
+        <td>%![guard_mSignature typedString]%</td>
+        <td>%![guard_mUserRoutineLLVMName string]%</td>
+        <td>%![guard_mImplementationRoutineLLVMName string]%</td>
+      </tr>
+    %end%
+    </table>
+    <br>
+  %end%
+%end%
+<p>
+<h2>
+  Standalone routines
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Standalone routine Name</td>
+      <td class="result_title">Visibility</td>
+      <td class="result_title">Typed signature</td>
+      <td class="result_title">Routine LLVM Name, by mode</td>
+    </tr>
+  %for () in STANDALONE_ROUTINE_MAP: routine_ do%
+    <tr class="result_line">
+      <td>%!routine_lkey.string%</td>
+      <td>%if routine_mIsPublic then !"public" else !"private" end%</td>
+      <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy isNull] then else % -> %![routine_mReturnTypeProxy key] end%</td>
+      <td>%for () in routine_mModeDictionary : mode_ do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
+    </tr>
+  %end%
+  </table>
+</p>
+</div>
+</body>
+</html>

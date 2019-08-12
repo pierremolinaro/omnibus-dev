@@ -3187,9 +3187,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_start_5F_symbol_i1_ (GALG
       nt_declaration_ (ioArgument_ioAST, inCompiler) ;
     } break ;
     case 3: {
-      GALGAS_systemRoutineDeclarationListAST var_standAloneSystemRoutineListAST_1492 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 38)) ;
-      nt_system_5F_routine_ (ioArgument_ioAST, var_standAloneSystemRoutineListAST_1492, inCompiler) ;
-      ioArgument_ioAST.mProperty_mStandAloneSystemRoutineListAST.plusAssign_operation(var_standAloneSystemRoutineListAST_1492, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 40)) ;
+      GALGAS_systemRoutineDeclarationListAST var_standAloneSystemRoutineListAST_1253 = GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 30)) ;
+      nt_system_5F_routine_ (ioArgument_ioAST, var_standAloneSystemRoutineListAST_1253, inCompiler) ;
+      ioArgument_ioAST.mProperty_mStandAloneSystemRoutineListAST.plusAssign_operation(var_standAloneSystemRoutineListAST_1253, inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 32)) ;
     } break ;
     case 4: {
       nt_import_5F_file_ (outArgument_outImportedFileList, inCompiler) ;
@@ -3199,7 +3199,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_start_5F_symbol_i1_ (GALG
       break ;
     }
   }
-  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 44)) ;
+  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 36)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

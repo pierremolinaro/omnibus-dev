@@ -238,7 +238,6 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
 method @systemRoutineDeclarationListAST enterSystemRoutineInContext
   ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
-  ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR ioRoutineListIR
@@ -270,7 +269,6 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !routineKind
       !system.mName
       !system.mFormalArgumentList
-#      !ioContext.mTypeMap
     )
     let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
       !inReceiverLLVMBaseTypeName
@@ -309,7 +307,7 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !implementationRoutineMangledName
     ]
     let routineMangledName = [signature mangledName !receiverTypeName: inReceiverTypeName !functionName: system.mName]
-    [!?ioRoutineMapCTXT insertKey
+    [!?ioContext.mRoutineMap insertKey
       !routineMangledName
       !system.mPublic
       !signature

@@ -49,10 +49,8 @@ override method @booleanDeclarationAST enterInContext
 {
 #---------- Self type proxy
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!"uint1" ![boolTypeName () nowhere]} ?let uint1TypeProxy]
-#---------- routine map
-   @routineMapCTXT routineMap = {}
 #--- Add uint1 accessor
-  [!?routineMap addFunctionWithoutArgument
+  [!?ioContext.mRoutineMap addFunctionWithoutArgument
     !omnibusTypeDescriptionName: boolTypeName ()
     !llvmBaseTypeName:boolTypeName ()
     !methodName:["uint1" nowhere]
@@ -64,7 +62,7 @@ override method @booleanDeclarationAST enterInContext
   let booleanType = @omnibusType.new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !routineMap: routineMap
+#    !routineMap: routineMap
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

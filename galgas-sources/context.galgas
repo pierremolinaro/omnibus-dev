@@ -195,16 +195,13 @@ proc buildSemanticContext
     !?outDecoratedDeclarationList
     !?outDecoratedRoutineList
   ]
-  @routineMapCTXT routineMapCTXT = {}
   [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName:["" nowhere] # Empty string if standalone
     !receiverLLVMBaseTypeName:""  # Empty string if standalone
-    !?routineMap: routineMapCTXT
     !?context: outSemanticContext
     !?outDecoratedRoutineList
     !?outRoutineListIR
   ]
-  outSemanticContext.mRoutineMap = routineMapCTXT
   [inAST.mExternFunctionListAST enterExternProcInContext
     !?context: outSemanticContext
   ]

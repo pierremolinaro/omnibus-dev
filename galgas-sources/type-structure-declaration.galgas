@@ -443,11 +443,9 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter functions in property map
-  @routineMapCTXT routineMapCTXT = {}
   [mFunctionDeclarationListAST enterFunctionsInPropertyMap
     !receiverTypeName: mReceiverTypeName
     !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
@@ -456,7 +454,6 @@ override method @structureDeclarationAST enterInContext
   [mSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName: mReceiverTypeName
     !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-    !?routineMap: routineMapCTXT
     !?context: ioContext
     !?ioDecoratedRoutineList
     !?ioRoutineListIR
@@ -474,7 +471,7 @@ override method @structureDeclarationAST enterInContext
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: propertySetterMap
-    !routineMap: routineMapCTXT
+#    !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap

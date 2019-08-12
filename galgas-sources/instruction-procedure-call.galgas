@@ -167,6 +167,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
 #--- Search routine in map
   let requiredFunctionMangledName = mSandAloneRoutineName.string + calledRoutineSignature
+#   log "keys " : [inContext.mRoutineMap keyList]
   [inContext.mRoutineMap searchKey
     !.new {!requiredFunctionMangledName !mSandAloneRoutineName}
     ?let unused implementedPublic
@@ -182,14 +183,6 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   end
 #--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !mSandAloneRoutineName)
-#    @string functionLLVMName
-#    if [implementedModeDictionary hasKey !inMode] then
-#      [implementedModeDictionary searchKey !inMode ?functionLLVMName]
-#    elsif [implementedModeDictionary hasKey !.anyMode] then
-#      [implementedModeDictionary searchKey !.anyMode ?functionLLVMName]
-#    else
-#      error mSandAloneRoutineName : "this function cannot be invoked in " + inMode + " mode" : functionLLVMName
-#    end
 #--- Analyze effective parameters
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   analyzeEffectiveParameters (
@@ -328,11 +321,8 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   case arrayAccess (* @location endOfIndex *) :
     error endOfIndex : "a property is required here"
   case property (@lstring methodName) :
-    let @routineMapCTXT routineMap = [currentType routineMap]
     let methodMangledName = [mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
-#    log routineMap
-#    log methodMangledName
-    [routineMap searchKey
+    [inContext.mRoutineMap searchKey
       !methodMangledName
       ?let unused implementedPublic
       ?let formalSignature

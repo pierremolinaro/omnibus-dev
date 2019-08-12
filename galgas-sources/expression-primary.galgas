@@ -626,11 +626,10 @@ private proc handleFunctionCallInExpression
 {
   let receiverType = [ioObjectIR type]
 #--- Search routine in receiver type routine map
-  let @routineMapCTXT routineMap = [receiverType routineMap]
   let methodMangledName = [inArguments mangledName !receiverTypeName: [receiverType omnibusTypeDescriptionName] !functionName: inMethodName]
 #  log routineMap
 #  log methodMangledName
-  [routineMap searchKey
+  [inContext.mRoutineMap searchKey
     !methodMangledName
     ?let unused implementedPublic
     ?let formalSignature

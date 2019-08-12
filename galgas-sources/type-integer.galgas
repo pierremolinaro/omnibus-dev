@@ -82,7 +82,6 @@ override method @integerDeclarationAST enterInContext
   let max = maxValueForInteger (!not mIsSigned !mSize)
 #--------------------------------------- Property map
   let llvmTypeName = "i" + mSize
-  @routineMapCTXT routineMap = {}
   @propertyGetterMap propertyGetterMap = {}
 #--------------------------------------- byteSwapped
   if (mSize mod 16) == 0 then
@@ -194,7 +193,7 @@ override method @integerDeclarationAST enterInContext
   let integerType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
-    !routineMap: routineMap
+#    !routineMap: routineMap
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !guardMap:{}

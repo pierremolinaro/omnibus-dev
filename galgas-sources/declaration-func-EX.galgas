@@ -229,7 +229,6 @@ method @functionDeclarationListAST enterStandaloneFunctionsInContext
 method @functionDeclarationListAST enterFunctionsInPropertyMap
   ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
-  ?!routineMap: @routineMapCTXT ioRoutineMapCTXT
   ?!context:@semanticContext ioContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
@@ -274,7 +273,7 @@ method @functionDeclarationListAST enterFunctionsInPropertyMap
   #--- Enter in routine map
     let routineLLVMNameDict = [function.mMode routineLLVMDictionaryForFunction !functionLLVMName]
     let routineMangledName = [signature mangledName !receiverTypeName: inReceiverTypeName !functionName: function.mFunctionName]
-    [!?ioRoutineMapCTXT insertKey
+    [!?ioContext.mRoutineMap insertKey
       !routineMangledName
       !function.mPublicFunction
       !signature
@@ -410,6 +409,7 @@ setter @routineMapCTXT addFunctionWithInputArgument
 #·······················································································································
 
 setter @routineMapCTXT addFunctionWithTwoInputArguments
+  ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
   ?!context:@semanticContext ioContext
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
@@ -441,7 +441,7 @@ setter @routineMapCTXT addFunctionWithTwoInputArguments
   )
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let routineMangledName = @lstring.new {
-    !inMethodName.string + [argumentList routineSignature !inMethodName]
+    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName]
     !inMethodName
   }
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]

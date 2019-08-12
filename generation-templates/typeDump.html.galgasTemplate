@@ -70,25 +70,6 @@ Description: %![type omnibusTypeDescriptionName]%<br>
 LLVM Base Name: %![type llvmBaseTypeName]%<br>
 LLVM Name: %![type llvmTypeName]%
 </p>
-  %if [[type routineMap] count] > 0 then%
-    <table class="result">
-      <tr>
-        <td class="result_title">Routine Name</td>
-        <td class="result_title">Visibility</td>
-        <td class="result_title">Typed signature</td>
-        <td class="result_title">Routine LLVM Name, by mode</td>
-      </tr>
-    %for () in [type routineMap] : routine_ do%
-      <tr class="result_line">
-        <td>%!routine_lkey.string%</td>
-        <td>%if routine_mIsPublic then !"public" else !"private" end%</td>
-        <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy isNull] then else % -> %![routine_mReturnTypeProxy key] end%</td>
-        <td>%for () in routine_mModeDictionary : mode_ do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
-      </tr>
-    %end%
-    </table>
-    <br>
-  %end%
   %if [[type propertyGetterMap] count] > 0 then%
     <table class="result">
       <tr>

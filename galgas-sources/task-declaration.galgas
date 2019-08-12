@@ -252,7 +252,6 @@ method @taskListAST enterInContext
   @decoratedTaskList decoratedTaskList = {}
   for task in sortedTaskList do (taskIndex)
   #--- task variables
-    @routineMapCTXT routineMap = {}
     @propertyList propertyList = {}
     @propertyGetterMap propertyGetterMap = {}
     @propertySetterMap propertySetterMap = {}
@@ -274,7 +273,7 @@ method @taskListAST enterInContext
       ]
     end
   #---- Add activate function
-    [!?routineMap addFunctionWithoutArgument
+    [!?ioContext.mRoutineMap addFunctionWithoutArgument
       !omnibusTypeDescriptionName: task.mTaskName
       !llvmBaseTypeName: task.mTaskName
       !methodName:.new {!"activate" !task.mTaskName.location}
@@ -371,7 +370,7 @@ method @taskListAST enterInContext
     [task.mTaskFunctionList enterFunctionsInPropertyMap
       !receiverTypeName: task.mTaskName
       !receiverLLVMBaseTypeName: task.mTaskName
-      !?routineMap: routineMap
+#      !?routineMap: routineMap
       !?context: ioContext
       !?ioDecoratedRoutineList
       !?ioRoutineListIR
@@ -380,7 +379,7 @@ method @taskListAST enterInContext
     let taskType = @omnibusType.new {
       !propertyGetterMap:propertyGetterMap
       !propertySetterMap: propertySetterMap
-      !routineMap: routineMap
+#      !routineMap: routineMap
       !classConstantMap:{}
       !constructorMap:{}
       !guardMap:{}

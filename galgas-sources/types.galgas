@@ -7,7 +7,6 @@
 shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
   @propertySetterMap propertySetterMap %selector
-  @routineMapCTXT routineMap %selector # §
   @classConstantMap classConstantMap %selector # type.cst, as enumeration values
   @constructorMap constructorMap %selector # type (!... !...)
   @guardMapCTXT guardMap %selector # §
@@ -142,7 +141,7 @@ func %once literalIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !routineMap: {}
+#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -161,7 +160,7 @@ func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !routineMap: {}
+#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}
@@ -180,7 +179,7 @@ func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !routineMap: {}
+#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !guardMap:{}

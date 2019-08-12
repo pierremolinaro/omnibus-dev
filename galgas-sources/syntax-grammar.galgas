@@ -26,14 +26,6 @@ syntax omnibus_syntax (omnibus_lexique) {
     repeat
     while
       <declaration> !?ioAST
-#      select
-#        $;$
-#      or
-#        let s = @string.separatorString 
-#        if not [s containsCharacter !'\n'] then
-#          error .here : "declaration should be terminated by an end of line or a ';'"
-#        end
-#      end
     while
       @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
       <system_routine> !?ioAST !?standAloneSystemRoutineListAST
