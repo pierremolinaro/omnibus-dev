@@ -87,9 +87,6 @@ override method @integerDeclarationAST typeInventory ?!@typeMap ioTypeMap {
 
 override method @structureDeclarationAST typeInventory ?!@typeMap ioTypeMap {
   message "Type structure " + mReceiverTypeName + "\n"
-#  for property in mStructurePropertyListAST do
-#    [ioTypeMap searchKey !property.mPropertyTypeName]
-#  end
   [!?ioTypeMap insertKey !mReceiverTypeName]
 }
 

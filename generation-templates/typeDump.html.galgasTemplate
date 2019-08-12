@@ -146,7 +146,7 @@ LLVM Name: %![type llvmTypeName]%
 %end%
 <p>
 <h2>
-  Standalone routines
+  Routines
 </h2>
   <table class="result">
     <tr>
@@ -155,7 +155,7 @@ LLVM Name: %![type llvmTypeName]%
       <td class="result_title">Typed signature</td>
       <td class="result_title">Routine LLVM Name, by mode</td>
     </tr>
-  %for () in STANDALONE_ROUTINE_MAP: routine_ do%
+  %for () in ALL_ROUTINE_MAP: routine_ do%
     <tr class="result_line">
       <td>%!routine_lkey.string%</td>
       <td>%if routine_mIsPublic then !"public" else !"private" end%</td>

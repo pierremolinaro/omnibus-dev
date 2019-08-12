@@ -96,7 +96,7 @@ struct @semanticContext {
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
 
-  @routineMapCTXT mRoutineMap
+  @routineMapForContext mRoutineMap
   
   @controlRegisterGroupMap mControlRegisterGroupMap
   @globalConstantMap mGlobalConstantMap

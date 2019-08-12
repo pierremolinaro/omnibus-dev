@@ -454,7 +454,7 @@ shared map @unifiedTypeMap %selectors {
 
 proc buildTypeMapHTMLFile
   ?let @unifiedTypeMap inTypeMap
-  ?let @routineMapCTXT inRoutineMap
+  ?let @routineMapForContext inRoutineMap
   ?sourceFile:let @lstring inSourceFile
 {
 #------------------------------------ Build an HTML file that contains all types
@@ -496,7 +496,7 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
     ?@unifiedTypeMap GLOBAL_TYPE_MAP
     ?@stringset FIRST_LETTER_SET
     ?@string TABLE_OF_TYPES_STRING
-    ?@routineMapCTXT STANDALONE_ROUTINE_MAP
+    ?@routineMapForContext ALL_ROUTINE_MAP
 }
 
 #·······················································································································

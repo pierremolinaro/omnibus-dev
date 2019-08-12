@@ -9,7 +9,6 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   @lstringlist mAttributeListAST
   @bool mGenerateAssignmentRoutine
   @structurePropertyListAST mStructurePropertyListAST
-  @functionDeclarationListAST mFunctionDeclarationListAST %selector
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
@@ -234,46 +233,6 @@ syntax extension omnibus_syntax {
   
   #·····················································································································
 
-  rule <structure_function> ?!@ast ioAST ?!@functionDeclarationListAST ioProcListAST {
-    @bool public
-    select
-      public = false
-    or
-      $public$
-      public = true
-    end
-    $func$
-    $identifier$ ?let procName
-    @lstringlist attributeList = {}
-    repeat
-    while
-      $@attribute$ ?let attribute
-      attributeList += !attribute
-    end
-    <procedure_formal_arguments>  !?ioAST ?let procFormalArgumentList
-    @lstring returnTypeName
-    select
-      returnTypeName = ["" here]
-    or
-      $->$
-      <type_definition>!?ioAST  ?returnTypeName
-    end
-    ${$
-    <instructionList> !?ioAST ?let instructionList
-    ioProcListAST +=
-      !.anyMode
-      !public
-      !procName
-      !attributeList
-      !procFormalArgumentList
-      !returnTypeName
-      !instructionList
-      !.here
-    $}$
-  }
-
-  #·····················································································································
-
   rule <declaration> ?!@ast ioAST {
     $struct$
     $\$type$ ?let structureName
@@ -284,14 +243,12 @@ syntax extension omnibus_syntax {
       attributeList += !attribute
     end 
     ${$
-    @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
-#      <function_declaration> !?ioAST !receiverTypeName: structureName
-      <structure_function> !?ioAST !?functionDeclarationListAST
+      <function_declaration> !?ioAST !receiverTypeName: structureName
     end
     $}$
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
@@ -301,7 +258,6 @@ syntax extension omnibus_syntax {
       !attributeList
       !true # Generate assignment routine
       !fieldList
-      !mFunctionDeclarationListAST: functionDeclarationListAST
       !{}
       !{}
       !true
@@ -335,16 +291,6 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
     case writeComputedProperty (writeInstructionList *) :
       [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
-  end
-#--- Add structure functions
-  for () in mFunctionDeclarationListAST do
-    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      [!?ioGraph noteNode !formalArgumentTypeName]
-    end
-    if mFunctionReturnTypeName.string != "" then
-      [!?ioGraph noteNode !mFunctionReturnTypeName]
-    end
-    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure services, section, primitives and guards
   [mSystemRoutineListAST noteTypesInPrecedenceGraph !?ioGraph]
@@ -443,13 +389,13 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter functions in property map
-  [mFunctionDeclarationListAST enterFunctionsInPropertyMap
-    !receiverTypeName: mReceiverTypeName
-    !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-    !?context: ioContext
-    !?ioDecoratedRoutineList
-    !?ioRoutineListIR
-  ]
+#  [mFunctionDeclarationListAST enterFunctionsInPropertyMap
+#    !receiverTypeName: mReceiverTypeName
+#    !receiverLLVMBaseTypeName: mLLVMBaseTypeName
+#    !?context: ioContext
+#    !?ioDecoratedRoutineList
+#    !?ioRoutineListIR
+#  ]
 #---------------------------------------- Enter system routines in property map
   [mSystemRoutineListAST enterSystemRoutineInContext
     !receiverTypeName: mReceiverTypeName
