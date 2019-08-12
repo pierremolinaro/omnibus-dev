@@ -79,7 +79,6 @@ syntax extension omnibus_syntax {
     end
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
-#    @driverPropertyListAST driverPropertyListAST = {}
     @structurePropertyListAST propertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
@@ -364,13 +363,13 @@ override method @implementedDriverAST enterInContext
     !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
     !mode:.bootMode
     !isRequired:true
-    !.function
+    !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
-    !.none
-    !llvmBootRoutineNameFromDriver (!mDriverName)
-    !{}
-    !true # warningOnUnusedArgs
+    !routineAttributes: .none
+    !routineMangledLLVMName: llvmBootRoutineNameFromDriver (!mDriverName)
+    !formalArgumentList: {}
+    !warningOnUnusedArgs: true
     !mBootInstructionList
     !mBootEndLocation
     !returnTypeName:.new {!"" !mBootLocation}  # Empty string if no returned value
@@ -379,13 +378,13 @@ override method @implementedDriverAST enterInContext
     !receiverTypeName: typeNameForTypeMapForDriver (!mDriverName)
     !mode:.startupMode
     !isRequired:true
-    !.function
+    !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
-    !.none
-    !llvmStartupRoutineNameFromDriver (!mDriverName)
-    !{}
-    !true
+    !routineAttributes: .none
+    !routineMangledLLVMName: llvmStartupRoutineNameFromDriver (!mDriverName)
+    !formalArgumentList: {}
+    !warningOnUnusedArgs: true
     !mStartupInstructionList
     !mStartupEndLocation
     !returnTypeName: .new {!"" !mStartupLocation}  # Empty string if no returned value

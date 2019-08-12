@@ -323,13 +323,13 @@ method @systemRoutineDeclarationListAST enterSystemRoutineInContext
       !receiverTypeName: inReceiverTypeName
       !mode:system.mMode
       !isRequired:false
-      !routineKind
+      !routineKind: routineKind
       !warnIfUnused: not noUnusedWarning
       !exportedRoutine: true
-      !attributes
-      !implementationRoutineMangledName
-      !system.mFormalArgumentList
-      !noUnusedWarning
+      !routineAttributes: attributes
+      !routineMangledLLVMName: implementationRoutineMangledName
+      !formalArgumentList: system.mFormalArgumentList
+      !warningOnUnusedArgs: noUnusedWarning
       !system.mInstructionList
       !system.mEndOfInstructionListLocation
       !returnTypeName: system.mReturnTypeName  # Empty string if no returned value

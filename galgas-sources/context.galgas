@@ -174,7 +174,6 @@ proc buildSemanticContext
   !@decoratedRegularRoutineList outDecoratedRoutineList
   !@routineListIR outRoutineListIR
   !@userLLVMTypeDefinitionListIR outUserLLVMTypeDefinitionListIR
-
 {
   outSemanticContext = .default
   outDecoratedDeclarationList = {}

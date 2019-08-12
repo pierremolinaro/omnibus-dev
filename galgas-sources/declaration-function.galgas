@@ -1,0 +1,175 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @functionDeclarationAST : @abstractDeclarationAST {
+  @mode mMode
+  @bool mPublicFunction
+  @lstring mReceiverTypeName # Empty string if standalone
+  @lstring mFunctionName
+  @lstringlist mFunctionAttributeList
+  @routineFormalArgumentListAST mFunctionFormalArgumentList
+  @lstring mFunctionReturnTypeName # Empty string if no return value
+  @instructionListAST mFunctionInstructionList
+  @location mEndOfFunctionDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeMane {
+  #--- Public ?
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
+    <function_header>
+      !?ioAST
+      ?mode:let @mode mode
+      ?name:let procName
+      ?attributes:let attributeList
+      ?formalArguments:let procFormalArgumentList
+    @lstring returnTypeName
+    select
+      returnTypeName = ["" here]
+    or
+      $->$
+      <type_definition>!?ioAST  ?returnTypeName
+    end
+    ${$
+    <instructionList> !?ioAST ?let instructionList
+    $}$
+    ioAST.mDeclarationListAST += !@functionDeclarationAST.new {
+      !mode
+      !public
+      !inReceiverTypeMane
+      !procName
+      !attributeList
+      !procFormalArgumentList
+      !returnTypeName
+      !instructionList
+      !.here
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
+    [!?ioGraph noteNode !formalArgumentTypeName]
+  end
+  [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  if mReceiverTypeName.string != "" then
+    [!?ioGraph noteNode !mReceiverTypeName]
+  end
+  if mFunctionReturnTypeName.string != "" then
+    [!?ioGraph noteNode !mFunctionReturnTypeName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @functionDeclarationAST keyRepresentationForErrorSignaling -> @string {
+  result = "function " + mReceiverTypeName + "." + mFunctionName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @functionDeclarationAST locationForErrorSignaling -> @location {
+  result = mFunctionName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @functionDeclarationAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+#--- Signature
+  routineTypedSignature (!?ioContext.mTypeMap !mFunctionFormalArgumentList ?let signature)
+#--- Return type
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mFunctionReturnTypeName ?let returnTypeProxy]
+#--- Attributes
+  var warnIfUnused = true
+  var exportedFunction = false
+  var canMutateProperties = false
+  for (attribute) in mFunctionAttributeList do
+    if attribute.string == noUnusedWarningAttribute () then
+      if not warnIfUnused then
+        error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+      end
+      warnIfUnused = false    
+    elsif attribute.string == exportedAttribute () then
+      if exportedFunction then
+        error attribute : "duplicated @" + exportedAttribute () + " attribute"
+      end
+      exportedFunction = true
+    elsif attribute.string == mutatingAttribute () then
+      if canMutateProperties then
+        error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+      end
+      canMutateProperties = true
+    else
+      error attribute : "unknown attribute; available attributes are @"
+        + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + " and @" + exportedAttribute ()
+    end
+  end
+#--- Routine mangled name
+  let functionLLVMName = routineMangledNameFromAST (
+    !mReceiverTypeName.string
+    !mFunctionName
+    !mFunctionFormalArgumentList
+  )
+#---------------- Enter in routine map (for function availability)
+  let routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !functionLLVMName]
+  let routineMangledName = [signature mangledName !mFunctionName]
+  [!?ioContext.mRoutineMap insertKey
+    !routineMangledName
+    !mPublicFunction
+    !signature
+    !returnTypeProxy
+    !routineLLVMNameDict
+    !exportedFunction
+    !mMode
+  ]
+#---------------- Add decorated declaration (for function semantic analysis)
+  ioDecoratedRoutineList +=
+    !receiverTypeName: ["" nowhere]
+    !mode:mMode
+    !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
+    !routineKind: .function
+    !warnIfUnused: warnIfUnused
+    !exportedRoutine: exportedFunction
+    !routineAttributes: .none
+    !routineMangledLLVMName: functionLLVMName
+    !formalArgumentList: mFunctionFormalArgumentList
+    !warningOnUnusedArgs: true
+    !mFunctionInstructionList
+    !mEndOfFunctionDeclaration
+    !returnTypeName: mFunctionReturnTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

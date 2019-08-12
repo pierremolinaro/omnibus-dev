@@ -298,13 +298,13 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.userMode
         !isRequired:true
-        !.function # {!executionMode:.userMode}
+        !routineKind: .function
         !warnIfUnused: true
         !exportedRoutine: false
-        !.mutating
-        !.new {!mangledName !setup.mName.location}
-        !@routineFormalArgumentListAST {}
-        !true # warningOnUnusedArgs
+        !routineAttributes: .mutating
+        !routineMangledLLVMName: .new {!mangledName !setup.mName.location}
+        !formalArgumentList: {}
+        !warningOnUnusedArgs:true
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
         !returnTypeName: ["" nowhere] # Empty string if no returned value
@@ -315,13 +315,13 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.safeUserMode
         !isRequired:true
-        !.function # {!executionMode:.userMode}
+        !routineKind: .function
         !warnIfUnused:true
         !exportedRoutine: false
-        !.mutating
-        !.new {!mangledName !setup.mName.location}
-        !@routineFormalArgumentListAST {}
-        !true # warningOnUnusedArgs
+        !routineAttributes: .mutating
+        !routineMangledLLVMName: .new {!mangledName !setup.mName.location}
+        !formalArgumentList: {}
+        !warningOnUnusedArgs: true
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
         !returnTypeName: ["" nowhere] # Empty string if no returned value
@@ -332,13 +332,13 @@ method @taskListAST enterInContext
         !receiverTypeName: task.mTaskName
         !mode:.safeUserMode
         !isRequired:true
-        !.function
+        !routineKind: .function
         !warnIfUnused: true
         !exportedRoutine: false
-        !.mutating
-        !.new {!mangledName !setup.mName.location}
-        !@routineFormalArgumentListAST {}
-        !true # warningOnUnusedArgs
+        !routineAttributes: .mutating
+        !routineMangledLLVMName: .new {!mangledName !setup.mName.location}
+        !formalArgumentList: {}
+        !warningOnUnusedArgs: true
         !setup.mTaskSetupInstructionList
         !setup.mEndOfTaskSetupDeclaration
         !returnTypeName: ["" nowhere] # Empty string if no returned value
@@ -355,13 +355,13 @@ method @taskListAST enterInContext
       !receiverTypeName: task.mTaskName
       !mode:.userMode
       !isRequired:true
-      !.function
+      !routineKind: .function
       !warnIfUnused: true
       !exportedRoutine: false
-      !.mutating
-      !routineMangledName
-      !{}
-      !true
+      !routineAttributes: .mutating
+      !routineMangledLLVMName: routineMangledName
+      !formalArgumentList: {}
+      !warningOnUnusedArgs: true
       !taskListInstructionList
       !task.mTaskName.location
       !returnTypeName: ["" nowhere]

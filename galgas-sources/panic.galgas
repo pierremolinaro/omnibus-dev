@@ -158,14 +158,14 @@ override method @panicAST enterInContext
     !receiverTypeName: ["" nowhere] # Empty string if standalone function
     !mode:.panicMode
     !isRequired:false
-    !.function
+    !routineKind: .function
     !warnIfUnused: false
     !exportedRoutine: false
-    !.none
-    !routineMangledName
-    !arguments
-    !false # warningOnUnusedArgs
-    !mPanicInstructionList
+    !routineAttributes: .none
+    !routineMangledLLVMName: routineMangledName
+    !formalArgumentList: arguments
+    !warningOnUnusedArgs: false
+    ! mPanicInstructionList
     !mEndOfPanicInstructions
     !returnTypeName: ["" nowhere]  # Empty string if no returned value
 }

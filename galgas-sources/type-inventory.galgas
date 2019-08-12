@@ -1,0 +1,96 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#                                                                                                                       
+#   T Y P E    I N V E N T O R Y                                                               
+#                                                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @typeMap {
+#  @aType mAnAttribute
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc typeInventory ?let @declarationListAST inOrderedDeclarationListAST {
+  @typeMap typeMap = {}
+#  for (declaration) in inOrderedDeclarationListAST do
+#    [declaration typeInventory !?typeMap] 
+#  end
+}
+
+#·······················································································································
+
+method @abstractDeclarationAST typeInventory ?!@typeMap unused ioTypeMap {
+}
+
+#·······················································································································
+
+override method @booleanDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey ![boolTypeName () nowhere]]
+  message "Type " + boolTypeName () + "\n"
+}
+
+#·······················································································································
+
+override method @literalStringDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey ![staticStringTypeName () nowhere]]
+  message "Type " + staticStringTypeName () + "\n"
+}
+
+#·······················································································································
+
+override method @typeOpaqueDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey !mOpaqueTypeName]
+  message "Type opaque " + mOpaqueTypeName + "\n"
+}
+
+#·······················································································································
+
+override method @literalIntegerDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey ![staticIntegerTypeName () nowhere]]
+  message "Type " + staticIntegerTypeName () + "\n"
+}
+
+#·······················································································································
+
+override method @typeDynamicArrayDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  message "Type dynamic array " + mDynamicArrayTypeName + ", " + mElementTypeName + "\n"
+}
+
+#·······················································································································
+
+override method @typeAliasDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  message "Type alias " + mAliasTypeName + " = " + mOriginalTypeName + "\n"
+}
+
+#·······················································································································
+
+override method @enumerationDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey !mEnumerationName]
+  message "Type enum " + mEnumerationName + "\n"
+}
+
+#·······················································································································
+
+override method @staticArrayTypeDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  message "Type static array " + mArrayTypeName + " of " + mElementTypeName + "\n"
+}
+
+#·······················································································································
+
+override method @integerDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey ![[self typeName] nowhere]]
+  message "Type integer " + [self typeName] + "\n"
+}
+#·······················································································································
+
+override method @structureDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  message "Type structure " + mReceiverTypeName + "\n"
+#  for property in mStructurePropertyListAST do
+#    [ioTypeMap searchKey !property.mPropertyTypeName]
+#  end
+  [!?ioTypeMap insertKey !mReceiverTypeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

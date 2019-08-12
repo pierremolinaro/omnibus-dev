@@ -6,14 +6,14 @@ list @decoratedRegularRoutineList {
   @lstring receiverTypeName %selector # Empty string if standalone function
   @mode mode %selector
   @bool isRequired %selector
-  @routineKind mRoutineKind
+  @routineKind routineKind %selector
   @bool warnIfUnused %selector
   @bool exportedRoutine %selector
-  @routineAttributes mRoutineAttributes
-  @lstring mRoutineMangledName
-  @routineFormalArgumentListAST mRoutineFormalArgumentList
-  @bool warningOnUnusedArgs
-  @instructionListAST mRoutineInstructionList
+  @routineAttributes routineAttributes %selector
+  @lstring routineMangledLLVMName %selector
+  @routineFormalArgumentListAST formalArgumentList %selector
+  @bool warningOnUnusedArgs %selector
+  @instructionListAST mInstructionList
   @location mEndOfRoutineDeclaration
   @lstring returnTypeName %selector # Empty string if no returned value
 }
@@ -62,7 +62,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
-    !mRoutineFormalArgumentList
+    !formalArgumentList
     !?universalMap
     !?formalArguments
     !warningOnUnusedArgs: warningOnUnusedArgs
@@ -70,9 +70,9 @@ method @decoratedRegularRoutineList-element semanticAnalysis
 #--- Analyze instruction list
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
-  [mRoutineInstructionList analyzeRoutineInstructionList
+  [mInstructionList analyzeRoutineInstructionList
     !self:receiverType
-    !routineAttributes:mRoutineAttributes
+    !routineAttributes: routineAttributes
     !context:inContext
     !mode:mode
     !?temporary:ioTemporaries
@@ -92,7 +92,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
     [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !returnTypeName} type]
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
-    !mRoutineMangledName
+    !routineMangledLLVMName
     !isRequired:isRequired
     !warnsIfUnused:warnIfUnused
     !receiverType
@@ -100,7 +100,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
     !allocaList
     !instructionGenerationList
     !exportedRoutine
-    !mRoutineKind
+    !routineKind
     !returnType
     !false
   }

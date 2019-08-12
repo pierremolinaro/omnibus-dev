@@ -168,7 +168,6 @@ syntax extension omnibus_syntax {
     ?let @lstring inTypeName
     ?!@structurePropertyListAST ioPropertyListAST
   {
-#    <mode> ?let mode
     ${$  
     select
       var getterDefined = false
@@ -285,13 +284,13 @@ syntax extension omnibus_syntax {
       attributeList += !attribute
     end 
     ${$
-    @functionDeclarationListAST procedureDeclarationListAST = {}
+    @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
-      <structure_function> !?ioAST !?procedureDeclarationListAST
+      <structure_function> !?ioAST !?functionDeclarationListAST
     end
     $}$
     ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
@@ -301,7 +300,7 @@ syntax extension omnibus_syntax {
       !attributeList
       !true # Generate assignment routine
       !fieldList
-      !procedureDeclarationListAST
+      !functionDeclarationListAST
       !{}
       !{}
       !true
@@ -660,13 +659,13 @@ method @structurePropertyListAST-element enterPropertyInContext
       !receiverTypeName: inReceiverTypeName
       !mode:.anyMode
       !isRequired: false
-      !.function
+      !routineKind: .function
       !warnIfUnused: false
       !exportedRoutine: false
-      !.none
-      !functionLLVMName
-      !{}
-      !false 
+      !routineAttributes: .none
+      !routineMangledLLVMName: functionLLVMName
+      !formalArgumentList: {}
+      !warningOnUnusedArgs: false 
       !instructionList
       !endOfInstructionList
       !returnTypeName: mPropertyTypeName
@@ -701,13 +700,13 @@ method @structurePropertyListAST-element enterPropertyInContext
       !receiverTypeName: inReceiverTypeName
       !mode:.anyMode
       !isRequired: false
-      !.function
+      !routineKind: .function
       !warnIfUnused: false
       !exportedRoutine: false
-      !.mutating
-      !functionLLVMName
-      !formalArgumentList
-      !false 
+      !routineAttributes: .mutating
+      !routineMangledLLVMName: functionLLVMName
+      !formalArgumentList: formalArgumentList
+      !warningOnUnusedArgs: false 
       !writeInstructionList
       !endOfWriteInstructionList
       !returnTypeName: ["" nowhere]

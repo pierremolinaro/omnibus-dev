@@ -63,13 +63,13 @@ method @isrDeclarationListAST enterInContext
       !receiverTypeName: typeNameForTypeMapForDriver (!isr.mDriverName)
       !mode:isr.mMode
       !isRequired:true
-      !.function # {!executionMode: isr.mMode}
+      !routineKind: .function
       !warnIfUnused: true
       !exportedRoutine: false
-      !.mutating
-      !isrRoutineMangledName
-      !{}
-      !true # warningOnUnusedArgs
+      !routineAttributes:.mutating
+      !routineMangledLLVMName: isrRoutineMangledName
+      !formalArgumentList: {}
+      !warningOnUnusedArgs: true
       !isr.mISRInstructionList
       !isr.mEndOfISRDeclaration
       !returnTypeName: ["" nowhere]  # Empty string if no returned value

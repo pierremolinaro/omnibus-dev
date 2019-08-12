@@ -38,7 +38,8 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/task-declaration.galgas"
 
 #--- Routines
-  "galgas-sources/declaration-func.galgas"
+  "galgas-sources/declaration-func-EX.galgas"
+  "galgas-sources/declaration-function.galgas"
   "galgas-sources/declaration-svc.galgas"
   "galgas-sources/declaration-required-proc.galgas"
   "galgas-sources/declaration-extern-proc.galgas"
