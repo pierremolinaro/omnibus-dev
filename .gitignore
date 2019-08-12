@@ -25,14 +25,14 @@ xcode-project/build/*
 xcode-project/plm.xcodeproj/xcuserdata/*
 xcode-project/plm.xcodeproj/project.xcworkspace/*
 
-makefile-macosx/plm
-makefile-macosx/plm-debug
-makefile-x86linux32-on-macosx/plm
-makefile-x86linux32-on-macosx/plm-debug
-makefile-x86linux64-on-macosx/plm
-makefile-x86linux64-on-macosx/plm-debug
-makefile-win32-on-macosx/plm.exe
-makefile-win32-on-macosx/plm-debug.exe
+makefile-macosx/omnibus
+makefile-macosx/omnibus-debug
+makefile-x86linux32-on-macosx/omnibus
+makefile-x86linux32-on-macosx/omnibus-debug
+makefile-x86linux64-on-macosx/omnibus
+makefile-x86linux64-on-macosx/omnibus-debug
+makefile-win32-on-macosx/omnibus.exe
+makefile-win32-on-macosx/omnibus-debug.exe
 
 doc-plm/galgas-book.pdf
 doc-plm/temp.galgas

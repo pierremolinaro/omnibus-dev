@@ -9,7 +9,7 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   @lstringlist mAttributeListAST
   @bool mGenerateAssignmentRoutine
   @structurePropertyListAST mStructurePropertyListAST
-  @functionDeclarationListAST mFunctionDeclarationListAST
+  @functionDeclarationListAST mFunctionDeclarationListAST %selector
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
@@ -290,6 +290,7 @@ syntax extension omnibus_syntax {
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
+#      <function_declaration> !?ioAST !receiverTypeName: structureName
       <structure_function> !?ioAST !?functionDeclarationListAST
     end
     $}$
@@ -300,7 +301,7 @@ syntax extension omnibus_syntax {
       !attributeList
       !true # Generate assignment routine
       !fieldList
-      !functionDeclarationListAST
+      !mFunctionDeclarationListAST: functionDeclarationListAST
       !{}
       !{}
       !true

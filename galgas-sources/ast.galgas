@@ -35,7 +35,6 @@ list @checkTargetListAST {
 struct @ast {
   @declarationListAST mDeclarationListAST
   @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST
-#  @functionDeclarationListAST mStandaloneFunctionDeclarationListAST
   @requiredFunctionDeclarationListAST mRequiredFunctionListAST
   @externFunctionDeclarationListAST mExternFunctionListAST
   @isrDeclarationListAST mISRDeclarationListAST

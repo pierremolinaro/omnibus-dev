@@ -62,6 +62,79 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
+  rule <mode> !@mode outMode {
+    select
+      outMode = .anyMode
+    or
+      $user$
+      outMode = .userMode
+    or
+      $panic$
+      outMode = .panicMode
+    or
+      $boot$
+      outMode = .bootMode
+    or
+      $startup$
+      outMode = .startupMode
+    or
+      $section$
+      outMode = .sectionMode
+    or
+      $service$
+      outMode = .serviceMode
+    or
+      $primitive$
+      outMode = .primitiveMode
+    or
+      $guard$
+      outMode = .guardMode
+    or
+      $safe$
+      select
+        outMode = .anySafeMode
+      or
+        $user$
+        outMode = .safeUserMode
+      or
+        $section$
+        outMode = .safeSectionMode
+      or
+        $service$
+        outMode = .safeServiceMode
+      or
+        $primitive$
+        outMode = .safePrimitiveMode
+      or
+        $guard$
+        outMode = .safeGuardMode
+      end
+    end
+  }
+
+  #·····················································································································
+
+  rule <function_header>
+    ?!@ast ioAST
+    !mode:@mode outMode
+    !name:@lstring outProcName
+    !attributes:@lstringlist outAttributeList
+    !formalArguments:@routineFormalArgumentListAST outProcFormalArgumentList
+  {
+    $func$
+    $identifier$ ?outProcName
+    <mode> ?outMode
+    outAttributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      outAttributeList += !attribute
+    end
+    <procedure_formal_arguments> !?ioAST ?outProcFormalArgumentList
+  }
+
+  #·····················································································································
+
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

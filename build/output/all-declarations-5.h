@@ -3832,15 +3832,6 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
                                                  GALGAS_expressionAST & outArgument1,
                                                  C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'function' non terminal
-//--- 'parse' label
-  public : virtual void nt_function_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_function_ (GALGAS_ast & ioArgument0,
-                                      GALGAS_functionDeclarationListAST & ioArgument1,
-                                      C_Lexique_omnibus_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'function_declaration' non terminal
 //--- 'parse' label
   public : virtual void nt_function_5F_declaration_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -4374,10 +4365,6 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual int32_t select_omnibus_5F_syntax_126 (C_Lexique_omnibus_5F_lexique *) ;
 
   public : virtual int32_t select_omnibus_5F_syntax_127 (C_Lexique_omnibus_5F_lexique *) ;
-
-  public : virtual int32_t select_omnibus_5F_syntax_128 (C_Lexique_omnibus_5F_lexique *) ;
-
-  public : virtual int32_t select_omnibus_5F_syntax_129 (C_Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -7179,7 +7179,6 @@ GALGAS_driverDeclarationAST::GALGAS_driverDeclarationAST (void) :
 mProperty_mDriverName (),
 mProperty_mDriverDependanceList (),
 mProperty_mPropertyListAST (),
-mProperty_mDriverFunctionDeclarationListAST (),
 mProperty_mDriverSystemRoutineListAST (),
 mProperty_mDriverGuardListAST (),
 mProperty_mBootLocation (),
@@ -7200,27 +7199,25 @@ GALGAS_driverDeclarationAST::~ GALGAS_driverDeclarationAST (void) {
 GALGAS_driverDeclarationAST::GALGAS_driverDeclarationAST (const GALGAS_lstring & inOperand0,
                                                           const GALGAS_lstringlist & inOperand1,
                                                           const GALGAS_structurePropertyListAST & inOperand2,
-                                                          const GALGAS_functionDeclarationListAST & inOperand3,
-                                                          const GALGAS_systemRoutineDeclarationListAST & inOperand4,
-                                                          const GALGAS_guardDeclarationListAST & inOperand5,
-                                                          const GALGAS_location & inOperand6,
-                                                          const GALGAS_instructionListAST & inOperand7,
+                                                          const GALGAS_systemRoutineDeclarationListAST & inOperand3,
+                                                          const GALGAS_guardDeclarationListAST & inOperand4,
+                                                          const GALGAS_location & inOperand5,
+                                                          const GALGAS_instructionListAST & inOperand6,
+                                                          const GALGAS_location & inOperand7,
                                                           const GALGAS_location & inOperand8,
-                                                          const GALGAS_location & inOperand9,
-                                                          const GALGAS_instructionListAST & inOperand10,
-                                                          const GALGAS_location & inOperand11) :
+                                                          const GALGAS_instructionListAST & inOperand9,
+                                                          const GALGAS_location & inOperand10) :
 mProperty_mDriverName (inOperand0),
 mProperty_mDriverDependanceList (inOperand1),
 mProperty_mPropertyListAST (inOperand2),
-mProperty_mDriverFunctionDeclarationListAST (inOperand3),
-mProperty_mDriverSystemRoutineListAST (inOperand4),
-mProperty_mDriverGuardListAST (inOperand5),
-mProperty_mBootLocation (inOperand6),
-mProperty_mBootInstructionList (inOperand7),
-mProperty_mBootEndLocation (inOperand8),
-mProperty_mStartupLocation (inOperand9),
-mProperty_mStartupInstructionList (inOperand10),
-mProperty_mStartupEndLocation (inOperand11) {
+mProperty_mDriverSystemRoutineListAST (inOperand3),
+mProperty_mDriverGuardListAST (inOperand4),
+mProperty_mBootLocation (inOperand5),
+mProperty_mBootInstructionList (inOperand6),
+mProperty_mBootEndLocation (inOperand7),
+mProperty_mStartupLocation (inOperand8),
+mProperty_mStartupInstructionList (inOperand9),
+mProperty_mStartupEndLocation (inOperand10) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7229,7 +7226,6 @@ GALGAS_driverDeclarationAST GALGAS_driverDeclarationAST::constructor_default (UN
   return GALGAS_driverDeclarationAST (GALGAS_lstring::constructor_default (HERE),
                                       GALGAS_lstringlist::constructor_emptyList (HERE),
                                       GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
-                                      GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                                       GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
                                       GALGAS_guardDeclarationListAST::constructor_emptyList (HERE),
                                       GALGAS_location::constructor_nowhere (HERE),
@@ -7245,19 +7241,18 @@ GALGAS_driverDeclarationAST GALGAS_driverDeclarationAST::constructor_default (UN
 GALGAS_driverDeclarationAST GALGAS_driverDeclarationAST::constructor_new (const GALGAS_lstring & inOperand0,
                                                                           const GALGAS_lstringlist & inOperand1,
                                                                           const GALGAS_structurePropertyListAST & inOperand2,
-                                                                          const GALGAS_functionDeclarationListAST & inOperand3,
-                                                                          const GALGAS_systemRoutineDeclarationListAST & inOperand4,
-                                                                          const GALGAS_guardDeclarationListAST & inOperand5,
-                                                                          const GALGAS_location & inOperand6,
-                                                                          const GALGAS_instructionListAST & inOperand7,
+                                                                          const GALGAS_systemRoutineDeclarationListAST & inOperand3,
+                                                                          const GALGAS_guardDeclarationListAST & inOperand4,
+                                                                          const GALGAS_location & inOperand5,
+                                                                          const GALGAS_instructionListAST & inOperand6,
+                                                                          const GALGAS_location & inOperand7,
                                                                           const GALGAS_location & inOperand8,
-                                                                          const GALGAS_location & inOperand9,
-                                                                          const GALGAS_instructionListAST & inOperand10,
-                                                                          const GALGAS_location & inOperand11 
+                                                                          const GALGAS_instructionListAST & inOperand9,
+                                                                          const GALGAS_location & inOperand10 
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_driverDeclarationAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
-    result = GALGAS_driverDeclarationAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid ()) {
+    result = GALGAS_driverDeclarationAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10) ;
   }
   return result ;
 }
@@ -7274,9 +7269,6 @@ typeComparisonResult GALGAS_driverDeclarationAST::objectCompare (const GALGAS_dr
   }
   if (result == kOperandEqual) {
     result = mProperty_mPropertyListAST.objectCompare (inOperand.mProperty_mPropertyListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mDriverFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mDriverFunctionDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mDriverSystemRoutineListAST.objectCompare (inOperand.mProperty_mDriverSystemRoutineListAST) ;
@@ -7308,7 +7300,7 @@ typeComparisonResult GALGAS_driverDeclarationAST::objectCompare (const GALGAS_dr
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_driverDeclarationAST::isValid (void) const {
-  return mProperty_mDriverName.isValid () && mProperty_mDriverDependanceList.isValid () && mProperty_mPropertyListAST.isValid () && mProperty_mDriverFunctionDeclarationListAST.isValid () && mProperty_mDriverSystemRoutineListAST.isValid () && mProperty_mDriverGuardListAST.isValid () && mProperty_mBootLocation.isValid () && mProperty_mBootInstructionList.isValid () && mProperty_mBootEndLocation.isValid () && mProperty_mStartupLocation.isValid () && mProperty_mStartupInstructionList.isValid () && mProperty_mStartupEndLocation.isValid () ;
+  return mProperty_mDriverName.isValid () && mProperty_mDriverDependanceList.isValid () && mProperty_mPropertyListAST.isValid () && mProperty_mDriverSystemRoutineListAST.isValid () && mProperty_mDriverGuardListAST.isValid () && mProperty_mBootLocation.isValid () && mProperty_mBootInstructionList.isValid () && mProperty_mBootEndLocation.isValid () && mProperty_mStartupLocation.isValid () && mProperty_mStartupInstructionList.isValid () && mProperty_mStartupEndLocation.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7317,7 +7309,6 @@ void GALGAS_driverDeclarationAST::drop (void) {
   mProperty_mDriverName.drop () ;
   mProperty_mDriverDependanceList.drop () ;
   mProperty_mPropertyListAST.drop () ;
-  mProperty_mDriverFunctionDeclarationListAST.drop () ;
   mProperty_mDriverSystemRoutineListAST.drop () ;
   mProperty_mDriverGuardListAST.drop () ;
   mProperty_mBootLocation.drop () ;
@@ -7341,8 +7332,6 @@ void GALGAS_driverDeclarationAST::description (C_String & ioString,
     mProperty_mDriverDependanceList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mPropertyListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mDriverFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mDriverSystemRoutineListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -7379,12 +7368,6 @@ GALGAS_lstringlist GALGAS_driverDeclarationAST::getter_mDriverDependanceList (UN
 
 GALGAS_structurePropertyListAST GALGAS_driverDeclarationAST::getter_mPropertyListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mPropertyListAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_functionDeclarationListAST GALGAS_driverDeclarationAST::getter_mDriverFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mDriverFunctionDeclarationListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9328,10 +9311,10 @@ void extensionSetter_addPropertyGetter (GALGAS_propertyGetterMap & ioObject,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
-  outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 334)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 334)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func-EX.galgas", 334))  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 334)) ;
-  GALGAS_routineLLVMNameDict var_modeDictionary_12162 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 335)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 335)) ;
+  outArgument_outRoutineLLVMName = GALGAS_lstring::constructor_new (function_getterLLVMName (constinArgument_inLLVMBaseTypeName, constinArgument_inPropertyName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 213)), constinArgument_inPropertyName.getter_location (SOURCE_FILE ("declaration-func-EX.galgas", 213))  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 213)) ;
+  GALGAS_routineLLVMNameDict var_modeDictionary_9174 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.getter_string (SOURCE_FILE ("declaration-func-EX.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 214)) ;
   {
-  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_12162  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 339)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 336)) ;
+  ioObject.setter_insertKey (constinArgument_inPropertyName, constinArgument_inPublic, GALGAS_propertyGetterKind::constructor_computedProperty (constinArgument_inResultTypeProxy, var_modeDictionary_9174  COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("declaration-func-EX.galgas", 215)) ;
   }
 }
 

@@ -5,7 +5,6 @@
 class @syncDeclarationAST : @abstractDeclarationAST {
   @lstring mSyncToolName
   @structurePropertyListAST mStructurePropertyListAST
-#  @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
 }
@@ -75,16 +74,6 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
       [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
   end
-#--- Add structure functions
-#  for () in mFunctionDeclarationListAST do
-#    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-#      [!?ioGraph noteNode !formalArgumentTypeName]
-#    end
-#    if mFunctionReturnTypeName.string != "" then
-#      [!?ioGraph noteNode !mFunctionReturnTypeName]
-#    end
-#    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-#  end
 #--- Add structure services, section, primitives and guards
   [mSystemRoutineListAST noteTypesInPrecedenceGraph !?ioGraph]
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]

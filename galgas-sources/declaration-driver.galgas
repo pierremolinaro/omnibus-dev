@@ -6,7 +6,6 @@ struct @driverDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
   @structurePropertyListAST mPropertyListAST
-  @functionDeclarationListAST mDriverFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
 #--- Boot
@@ -78,7 +77,6 @@ syntax extension omnibus_syntax {
       end       
     end
     ${$
-    @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST propertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
@@ -118,7 +116,7 @@ syntax extension omnibus_syntax {
     while
       <struct_property_declaration> !?ioAST !false !?propertyListAST
     while
-      <function> !?ioAST !?functionDeclarationListAST
+      <function_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
     while
      <system_routine>!?ioAST !?svcListAST
     while
@@ -130,7 +128,6 @@ syntax extension omnibus_syntax {
       !driverName
       !driverDependenceList
       !propertyListAST
-      !functionDeclarationListAST
       !svcListAST
       !guardListAST
       !bootLocation
@@ -306,7 +303,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !{}
       !false # Do not generate assignment routine
       !driverPropertyListAST
-      !declaration.mDriverFunctionDeclarationListAST
+      !mFunctionDeclarationListAST: {}
       !declaration.mDriverSystemRoutineListAST
       !declaration.mDriverGuardListAST
       !false # Do not implement deinit
