@@ -46,10 +46,10 @@ enum $DigitalPort {
 //··············································································
 
 enum $DigitalMode {
-  case OUTPUT
-  case OUTPUT_OPEN_COLLECTOR
-  case INPUT
-  case INPUT_PULLUP
+  case output
+  case outputOpenCollector
+  case input
+  case inputPullUp
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -92,16 +92,16 @@ driver digital > root {
    var config $uint32
     var dir $uint1
     switch mode {
-    case OUTPUT :
+    case output :
       config = {©PORTC.PCR !MUX:1}
       dir = 1
-    case OUTPUT_OPEN_COLLECTOR :
+    case outputOpenCollector :
       config = {©PORTC.PCR !MUX:1 !ODE:1}
       dir = 1
-    case INPUT :
+    case input :
       config = {©PORTC.PCR !MUX:1}
       dir = 0
-    case INPUT_PULLUP :
+    case inputPullUp :
       config = {©PORTC.PCR !MUX:1 !PE:1 !PS:1}
       dir = 0
     }

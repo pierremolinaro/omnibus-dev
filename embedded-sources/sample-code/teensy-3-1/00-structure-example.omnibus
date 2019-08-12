@@ -26,8 +26,8 @@ task T @stacksize 512 @autostart {
   var acc = C ()
 
   event @onSetup first {
-    digital.set (!mode: $DigitalMode.OUTPUT !toPort:.D13)
-    digital.set (!mode: $DigitalMode.OUTPUT !toPort: LED_L1)
+    digital.set (!mode: $DigitalMode.output !toPort:.D13)
+    digital.set (!mode: $DigitalMode.output !toPort: LED_L1)
   }
 
   event time.wait (!until:self.deadline) {

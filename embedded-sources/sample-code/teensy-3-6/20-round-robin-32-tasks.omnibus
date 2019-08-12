@@ -17,7 +17,7 @@ driver myDriver > digital {
   //····················································································································
 
   startup {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L0)
   }
 
   var tick = $uint32 ()

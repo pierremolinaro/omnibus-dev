@@ -28,7 +28,7 @@ task Tâche @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L0)
     lcd.goto (!line:0 !column:0)
     lcd.print (!string:"OUTDIV: ")
     lcd.print (!hex4: RegisterRead.SIM_CLKDIV1 ()>> 16)

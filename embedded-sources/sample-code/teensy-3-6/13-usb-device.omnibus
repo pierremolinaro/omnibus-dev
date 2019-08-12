@@ -151,10 +151,10 @@ driver usb_device > digital {
   //····················································································································
 
   startup {
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
-    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.output !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L2)
+    digital.set (!mode:.output !toPort:LED_L3)
+    digital.set (!mode:.output !toPort:LED_L4)
   // This basically follows the flowchart in the Kinetis Quick Reference User Guide, Rev. 3, 05/2014, page 134
   //-- Assume 48 MHz clock already running
     ©SIM.SCGC4 |= {©SIM.SCGC4 !USBOTG:1} // SIM - enable clock
@@ -478,7 +478,7 @@ task T @stacksize 512 @autostart {
   //····················································································································
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L0)
   }
 
   //····················································································································

@@ -64,9 +64,9 @@ task Tâche1 @stacksize 512 {
   var index $uint32 = 0
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L2)
   }
 
   event time.wait (!until:self.compteur) {

@@ -13,12 +13,12 @@ task T0 @stacksize 512 @autostart {
   var top $uint32 = 0
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13)
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
-    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.output !toPort:.D13)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L2)
+    digital.set (!mode:.output !toPort:LED_L3)
+    digital.set (!mode:.output !toPort:LED_L4)
   }
 
   event time.wait (!until:self.top) {

@@ -17,8 +17,8 @@ driver pit > digital {
   var gPITValue $uint32 = 0
 
   startup {
-    digital.set (!mode:.OUTPUT !toPort:.D13)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:.D13)
+    digital.set (!mode:.output !toPort:LED_L1)
     ©SIM.SCGC6 |= SIM_SCGC6_PIT
   }
 

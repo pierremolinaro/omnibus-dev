@@ -24,14 +24,14 @@ static void installInterruptServiceRoutine (const unsigned irq_routine, const un
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-extern unsigned __plm_interrupt_vectors [30] ;
+extern unsigned __omnibus_interrupt_vectors [30] ;
 
 void installInterrupts (void) ;
 
 void installInterrupts (void) {
   for (unsigned i=0 ; i<30 ; i++) {
-    if (__plm_interrupt_vectors [i] != 0) {
-      installInterruptServiceRoutine (__plm_interrupt_vectors [i], i) ;
+    if (__omnibus_interrupt_vectors [i] != 0) {
+      installInterruptServiceRoutine (__omnibus_interrupt_vectors [i], i) ;
     }
   }
 }

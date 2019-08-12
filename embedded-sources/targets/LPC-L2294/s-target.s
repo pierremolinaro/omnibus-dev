@@ -129,11 +129,11 @@ as_reset_handler:
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-   .section .text.__plm_interrupt_vectors, "ax"
+   .section .text.__omnibus_interrupt_vectors, "ax"
 
-  .global __plm_interrupt_vectors
+  .global __omnibus_interrupt_vectors
 
-__plm_interrupt_vectors :
+__omnibus_interrupt_vectors :
   .word !ISR!WDT      @ 0
   .word 0             @ 1
   .word !ISR!ARMCore0 @ 2

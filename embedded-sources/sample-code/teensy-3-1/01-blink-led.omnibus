@@ -9,8 +9,8 @@ task Tâche @stacksize 512 @autostart {
   var continue = yes
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:.D13) // Led Teensy
+    digital.set (!mode:.output !toPort:LED_L0)
   }
 
   event (self.continue) time.wait (!until:self.compteur) {

@@ -22,9 +22,9 @@ driver myDriver > digital {
   //····················································································································
 
   startup {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
-    digital.set (!mode:.OUTPUT !toPort:.D3) // Led L0
-    digital.set (!mode:.OUTPUT !toPort:.D8) // Led L0
+    digital.set (!mode:.output !toPort:.D13) // Led Teensy
+    digital.set (!mode:.output !toPort:.D3) // Led L0
+    digital.set (!mode:.output !toPort:.D8) // Led L0
   //--- Enable clock
     ©SIM.SCGC6 |= {©SIM.SCGC6 !FTM0:1}
   //--- Set counter min value

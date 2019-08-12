@@ -71,7 +71,7 @@ driver pit > root {
       current = b
     }
   //--- Set up LED_BUILTIN digital output at LOW level
-    digital.set (!mode:.OUTPUT !toPort:LED_L4)
+    digital.set (!mode:.output !toPort:LED_L4)
     digital.write (!no !toPort:LED_L4)
   
   //--- Power on DMA:MUX, PIT, DMA
@@ -184,9 +184,9 @@ task Tâche @stacksize 512 @autostart {
 
   event @onSetup first {
     pit.initializeDMA (!?self.pattern)
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L3)
+    digital.set (!mode:.output !toPort:LED_L2)
   }
 
   event time.wait (!until:self.compteur) {

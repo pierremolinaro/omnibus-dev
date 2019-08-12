@@ -9,24 +9,24 @@ task T1 @stacksize 512 @autostart {
   var compteur $uint32 = 0
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
-    digital.set (!mode:.OUTPUT !toPort:LED_L4)
-    lcd.print (!string:"Hello")
+    digital.set (!mode: .output !toPort: LED_L0)
+    digital.set (!mode: .output !toPort: LED_L1)
+    digital.set (!mode: .output !toPort: LED_L2)
+    digital.set (!mode: .output !toPort: LED_L3)
+    digital.set (!mode: .output !toPort: LED_L4)
+    lcd.print (!string: "Hello")
   }
 
   event time.wait (!until:self.compteur) {
-    digital.write (!yes !toPort:LED_L0)
+    digital.write (!yes !toPort: LED_L0)
     self.compteur +%= 500
-    time.wait (!until:self.compteur)
-    digital.write (!no !toPort:LED_L0)
+    time.wait (!until: self.compteur)
+    digital.write (!no !toPort: LED_L0)
     self.compteur +%= 500
-    lcd.goto (!line:1 !column:0)
-    lcd.print (!u32:time.now ())
-    lcd.goto (!line:2 !column:0)
-    lcd.print (!u32:freeStackSize ())
+    lcd.goto (!line: 1 !column: 0)
+    lcd.print (!u32: time.now ())
+    lcd.goto (!line:2 !column: 0)
+    lcd.print (!u32: freeStackSize ())
   }
 }
 

@@ -9,12 +9,12 @@ option "task-strict-priority-order"
 
 driver project > digital {
   startup {
-    digital.set (!mode:.OUTPUT !toPort:.D13) // Led Teensy
-    digital.set (!mode:.OUTPUT !toPort:LED_L4)
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P0)
+    digital.set (!mode:.output !toPort:.D13) // Led Teensy
+    digital.set (!mode:.output !toPort:LED_L4)
+    digital.set (!mode:.output !toPort:LED_L3)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.inputPullUp !toPort:BUTTON_P0)
   }
 }
 

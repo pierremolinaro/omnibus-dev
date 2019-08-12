@@ -42,8 +42,8 @@ task Tâche @stacksize 512 @autostart {
   var deadline = PeriodicTimer (!period:500)
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L1)
   }
 
   event time.wait (!until:self.compteur) {

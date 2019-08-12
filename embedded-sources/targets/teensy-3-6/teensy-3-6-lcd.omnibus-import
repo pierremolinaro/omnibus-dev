@@ -25,12 +25,12 @@ driver lcd > digital {
   //····················································································································
 
   func configurePorts startup @noUnusedWarning () {
-    digital.set (!mode:.OUTPUT !toPort:self.DB4)
-    digital.set (!mode:.OUTPUT !toPort:self.DB5)
-    digital.set (!mode:.OUTPUT !toPort:self.DB6)
-    digital.set (!mode:.OUTPUT !toPort:self.DB7)
-    digital.set (!mode:.OUTPUT !toPort:self.RS)
-    digital.set (!mode:.OUTPUT !toPort:self.ENABLE)
+    digital.set (!mode:.output !toPort:self.DB4)
+    digital.set (!mode:.output !toPort:self.DB5)
+    digital.set (!mode:.output !toPort:self.DB6)
+    digital.set (!mode:.output !toPort:self.DB7)
+    digital.set (!mode:.output !toPort:self.RS)
+    digital.set (!mode:.output !toPort:self.ENABLE)
   }
 
   //····················································································································

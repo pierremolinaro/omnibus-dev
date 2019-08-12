@@ -40,10 +40,10 @@ task T @stacksize 512 @autostart {
   var deadline $uint32 = 0
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:.D13)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L2)
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.output !toPort:.D13)
+    digital.set (!mode:.output !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L2)
+    digital.set (!mode:.output !toPort:LED_L3)
   }
 
   event time.wait (!until:self.deadline) {

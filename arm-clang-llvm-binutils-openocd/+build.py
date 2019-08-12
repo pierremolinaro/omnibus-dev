@@ -8,7 +8,7 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "7.0.1"
+LLVM_VERSION = "8.0.1"
 LLVM_SUFFIX = ""
 
 BINUTILS_VERSION = "2.32"
@@ -160,7 +160,7 @@ myChDir (scriptDir)
 (SYSTEM_NAME, MODE_NAME, SYSTEM_RELEASE, SYSTEM_VERSION, MACHINE) = os.uname ()
 if SYSTEM_NAME == "Darwin":
   MACHINE = "i386"
-PRODUCT_NAME = "plm-" + SYSTEM_NAME + "-" + MACHINE
+PRODUCT_NAME = "omnibus-" + SYSTEM_NAME + "-" + MACHINE
 PRODUCT_NAME += "-llvm-" + LLVM_VERSION + LLVM_SUFFIX
 PRODUCT_NAME += "-binutils-" + BINUTILS_VERSION
 PRODUCT_NAME += "-openocd-" + OPENOCD_VERSION

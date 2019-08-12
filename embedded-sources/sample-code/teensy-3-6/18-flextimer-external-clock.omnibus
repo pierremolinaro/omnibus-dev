@@ -24,8 +24,8 @@ driver myDriver > digital {
   //····················································································································
 
   startup {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L1)
   //--- Enable clock
     ©SIM.SCGC6 |= {©SIM.SCGC6 !FTM0:1 !FTM1:1}
     ©SIM.SOPT4 = 0 // |= ©SIM.SOPT4 !FTM1CLKSEL:1)
@@ -112,7 +112,7 @@ task T1 @stacksize 512 @autostart {
   var counter1 $uint32 = 0
 
   event @onSetup first {
-    digital.set (!mode:.OUTPUT !toPort:LED_L3)
+    digital.set (!mode:.output !toPort:LED_L3)
     lcd.print (!string:"FTM0:")
     lcd.goto (!line:1 !column:0)
     lcd.print (!string:"FTM1:")

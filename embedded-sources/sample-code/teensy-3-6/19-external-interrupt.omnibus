@@ -17,10 +17,10 @@ driver myDriver > digital {
   //····················································································································
 
   startup {
-    digital.set (!mode:.OUTPUT !toPort:LED_L0)
-    digital.set (!mode:.OUTPUT !toPort:LED_L1)
-    digital.set (!mode:.OUTPUT !toPort:LED_L4)
-    digital.set (!mode:.INPUT_PULLUP !toPort:BUTTON_P4)
+    digital.set (!mode:.output !toPort:LED_L0)
+    digital.set (!mode:.output !toPort:LED_L1)
+    digital.set (!mode:.output !toPort:LED_L4)
+    digital.set (!mode:.inputPullUp !toPort:BUTTON_P4)
   //--- Generate an interrupt on falling edge of port #3 (PTA12)
     ©PORTA.PCR[12] |= {©PORTA.PCR !IRQC:0xA}
   //--- Enable NVIC interrupt
