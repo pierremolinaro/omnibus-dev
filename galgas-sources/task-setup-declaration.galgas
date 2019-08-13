@@ -1,0 +1,141 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @taskSetupDeclarationAST : @abstractDeclarationAST {
+  @lstring mTaskName
+  @string mQualifier
+  @lstring mSetupName
+  @lstringlist mDependanceList
+  @instructionListAST mTaskSetupInstructionList
+  @location mEndOfTaskSetupDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <task_event> ?!@ast ioAST
+                    ?taskName: let @lstring inTaskName
+                    ?!setup: @taskSetupListAST ioTaskSetupListAST
+                    ?!activate: @taskSetupListAST ioTaskActivateListAST
+                    ?!deactivate: @taskSetupListAST ioTaskDeactivateListAST
+  {
+    $event$
+    $@attribute$ ?let attribute
+    $identifier$ ?let name
+    @lstringlist dependenceList = {}
+    select
+    or
+      $>$
+      repeat
+        $identifier$ ?let dependenceName
+        dependenceList += !dependenceName
+      while
+        $,$
+      end
+    end
+    ${$
+    <instructionList> !?ioAST ?let instructionList
+    let endOfInit = @location.here
+    $}$
+    if attribute.string == "onSetup" then
+      ioTaskSetupListAST += !name !dependenceList # !instructionList !endOfInit
+      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
+        !inTaskName
+        !"task.setup."
+        !name
+        !dependenceList
+        !instructionList
+        !endOfInit
+      }
+    elsif attribute.string == "onStart" then
+      ioTaskActivateListAST += !name !dependenceList # !instructionList !endOfInit
+      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
+        !inTaskName
+        !"task.activate."
+        !name
+        !dependenceList
+        !instructionList
+        !endOfInit
+      }
+    elsif attribute.string == "onTermination" then
+      ioTaskDeactivateListAST += !name !dependenceList # !instructionList !endOfInit
+      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
+        !inTaskName
+        !"task.deactivate."
+        !name
+        !dependenceList
+        !instructionList
+        !endOfInit
+      }
+    else
+      error attribute : "attribute should be @onSetup, @onStart or @onTermination"
+    end
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @taskSetupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let s = mQualifier + mTaskName.string + "." + mSetupName.string + "()"
+  [!?ioGraph addNode !.new {!s !mSetupName.location} !self]
+#---
+  [!?ioGraph noteNode !mTaskName]
+  [mTaskSetupInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @taskSetupDeclarationAST keyRepresentationForErrorSignaling -> @string {
+  result = "task function " + mTaskName + "." + mSetupName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @taskSetupDeclarationAST locationForErrorSignaling -> @location {
+  result = mSetupName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @taskSetupDeclarationAST enterInContext
+  ?!context:@semanticContext unused ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+#  let mangledName = "task.setup." + task.mTaskName + "." + setup.mName
+  let mangledName = mQualifier + mTaskName + "." + mSetupName
+  ioDecoratedRoutineList +=
+    !receiverTypeName: mTaskName
+    !mode:.userMode
+    !isRequired:true
+    !routineKind: .function
+    !warnIfUnused: true
+    !exportedRoutine: false
+    !routineAttributes: .mutating
+    !routineMangledLLVMName: .new {!mangledName !mSetupName.location}
+    !formalArgumentList: {}
+    !warningOnUnusedArgs:true
+    !mTaskSetupInstructionList
+    !mEndOfTaskSetupDeclaration
+    !returnTypeName: ["" nowhere] # Empty string if no returned value
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

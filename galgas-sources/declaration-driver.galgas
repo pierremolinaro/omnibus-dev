@@ -110,15 +110,13 @@ syntax extension omnibus_syntax {
       end
       startupHandled = true
     while
-      <isr> !?ioAST !driverName
+      <isr_in_driver> !?ioAST !driverName
     while
       <struct_property_declaration> !?ioAST !false !?propertyListAST
     while
       <function_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
     while
       <system_routine_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
-#    while
-#     <system_routine>!?ioAST !?svcListAST
     while
       <guard> !?ioAST !?guardListAST
     end
@@ -128,7 +126,6 @@ syntax extension omnibus_syntax {
       !driverName
       !driverDependenceList
       !propertyListAST
-#      !svcListAST
       !guardListAST
       !bootLocation
       !bootInstructionList

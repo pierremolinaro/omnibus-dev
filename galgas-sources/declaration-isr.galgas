@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @isrDeclarationListAST {
+class @isrDeclarationAST : @abstractDeclarationAST {
   @lstring mISRName
   @mode mMode
   @lstring mDriverName
@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <isr> ?!@ast ioAST ?let @lstring inDriverName {
+  rule <isr_in_driver> ?!@ast ioAST ?let @lstring inDriverName {
     $interrupt$
     @mode mode
     select
@@ -32,12 +32,13 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-    ioAST.mISRDeclarationListAST +=
+    ioAST.mDeclarationListAST += !@isrDeclarationAST.new {
       !isrName
       !mode
       !inDriverName
       !instructionList
       !.here
+    }
   }
 
   #·····················································································································
@@ -45,64 +46,63 @@ syntax extension omnibus_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let receiverTypeName = omnibusTypeSpecificNameForDriver (!mDriverName)
+  let s = receiverTypeName.string + "." + mISRName.string + "()"
+  [!?ioGraph addNode !.new {!s !mISRName.location} !self]
+#---
+  [mISRInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  if receiverTypeName.string != "" then
+    [!?ioGraph noteNode !receiverTypeName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @isrDeclarationAST keyRepresentationForErrorSignaling -> @string {
+  let receiverTypeName = omnibusTypeSpecificNameForDriver (!mDriverName)
+  result = "function " + receiverTypeName + "." + mISRName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @isrDeclarationAST locationForErrorSignaling -> @location {
+  result = mISRName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @isrDeclarationListAST enterInContext
-  ?!@semanticContext unused ioSemanticContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+override method @isrDeclarationAST enterInContext
+  ?!context:@semanticContext unused ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
-  ioDecoratedDeclarationList += !@decoratedISRDeclarations.new {!self}
-#---
-  for isr in self do
-    let driverLLVMBaseTypeName = llvmDriverNameFromName (!isr.mDriverName)
-    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !isr.mISRName !{})
-    ioDecoratedRoutineList +=
-      !receiverTypeName: omnibusTypeSpecificNameForDriver (!isr.mDriverName)
-      !mode:isr.mMode
-      !isRequired:true
-      !routineKind: .function
-      !warnIfUnused: true
-      !exportedRoutine: false
-      !routineAttributes:.mutating
-      !routineMangledLLVMName: isrRoutineMangledName
-      !formalArgumentList: {}
-      !warningOnUnusedArgs: true
-      !isr.mISRInstructionList
-      !isr.mEndOfISRDeclaration
-      !returnTypeName: ["" nowhere]  # Empty string if no returned value
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @decoratedISRDeclarations : @abstractDecoratedDeclaration {
-  @isrDeclarationListAST mISRDeclarationList
-}
-
-#·······················································································································
-
-override method @decoratedISRDeclarations semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  for isr in mISRDeclarationList do
-  #--- Self type
-    [inContext.mTypeMap searchKey !lkey: omnibusTypeSpecificNameForDriver (!isr.mDriverName) ?type:let selfType]
-  #--- Code generation
-    [inContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
-    [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
-      !isr.mISRName
-      !selfType
-      !isr.mDriverName
-      !isr.mMode
-    ]  
-  end
+  let driverLLVMBaseTypeName = llvmDriverNameFromName (!mDriverName)
+  let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !mISRName !{})
+  ioDecoratedRoutineList +=
+    !receiverTypeName: omnibusTypeSpecificNameForDriver (!mDriverName)
+    !mode: mMode
+    !isRequired:true
+    !routineKind: .function
+    !warnIfUnused: true
+    !exportedRoutine: false
+    !routineAttributes:.mutating
+    !routineMangledLLVMName: isrRoutineMangledName
+    !formalArgumentList: {}
+    !warningOnUnusedArgs: true
+    ! mISRInstructionList
+    ! mEndOfISRDeclaration
+    !returnTypeName: ["" nowhere]  # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

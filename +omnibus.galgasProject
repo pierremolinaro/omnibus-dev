@@ -35,9 +35,9 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/declaration-static-list.galgas"
   "galgas-sources/declaration-option.galgas"
   "galgas-sources/task-declaration.galgas"
+  "galgas-sources/task-setup-declaration.galgas"
 
 #--- Routines
-  "galgas-sources/declaration-func-EX.galgas"
   "galgas-sources/declaration-function.galgas"
   "galgas-sources/declaration-svc.galgas"
   "galgas-sources/declaration-required-proc.galgas"

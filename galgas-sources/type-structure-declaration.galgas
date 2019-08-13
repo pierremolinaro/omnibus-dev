@@ -9,7 +9,6 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   @lstringlist mAttributeListAST
   @bool mGenerateAssignmentRoutine
   @structurePropertyListAST mStructurePropertyListAST
-#  @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
 }
@@ -258,7 +257,6 @@ syntax extension omnibus_syntax {
       !attributeList
       !true # Generate assignment routine
       !fieldList
-#      !{}
       !{}
       !true
     }
@@ -293,7 +291,6 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
     end
   end
 #--- Add structure services, section, primitives and guards
-#  [mSystemRoutineListAST noteTypesInPrecedenceGraph !?ioGraph]
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -388,22 +385,6 @@ override method @structureDeclarationAST enterInContext
   if mGenerateAssignmentRoutine & canBeCopied then
     typeAttributes = typeAttributes | .copyable
   end
-#---------------------------------------- Enter functions in property map
-#  [mFunctionDeclarationListAST enterFunctionsInPropertyMap
-#    !receiverTypeName: mReceiverTypeName
-#    !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-#    !?context: ioContext
-#    !?ioDecoratedRoutineList
-#    !?ioRoutineListIR
-#  ]
-#---------------------------------------- Enter system routines in property map
-#  [mSystemRoutineListAST enterSystemRoutineInContext
-#    !receiverTypeName: mReceiverTypeName
-#    !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-#    !?context: ioContext
-#    !?ioDecoratedRoutineList
-#    !?ioRoutineListIR
-#  ]
 #---------------------------------------- Enter guards in guard map
   @guardMapCTXT guardMap = {}
   [mGuardListAST enterGuardsInContext
@@ -417,7 +398,6 @@ override method @structureDeclarationAST enterInContext
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: propertySetterMap
-#    !routineMap: routineMapCTXT
     !classConstantMap:{}
     !constructorMap:constructorMap
     !guardMap:guardMap

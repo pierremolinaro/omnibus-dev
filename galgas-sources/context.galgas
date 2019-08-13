@@ -188,26 +188,9 @@ proc buildSemanticContext
     )
     outSemanticContext.mRequiredRoutineSet += !procedureMangledName.string
   end 
-#--- Enter standalone isr in context
-  [inAST.mISRDeclarationListAST enterInContext
-    !?outSemanticContext
-    !?outDecoratedDeclarationList
-    !?outDecoratedRoutineList
-  ]
-#  [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
-#    !receiverTypeName:["" nowhere] # Empty string if standalone
-#    !receiverLLVMBaseTypeName:""  # Empty string if standalone
-#    !?context: outSemanticContext
-#    !?outDecoratedRoutineList
-#    !?outRoutineListIR
-#  ]
   [inAST.mExternFunctionListAST enterExternProcInContext
     !?context: outSemanticContext
   ]
-#  [inAST.mStandaloneFunctionDeclarationListAST enterStandaloneFunctionsInContext
-#    !?context:outSemanticContext
-#    !?outDecoratedRoutineList
-#  ]
 #---
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do

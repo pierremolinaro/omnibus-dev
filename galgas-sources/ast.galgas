@@ -2,6 +2,22 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+struct @ast {
+  @declarationListAST mDeclarationListAST
+  @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST
+  @requiredFunctionDeclarationListAST mRequiredFunctionListAST
+  @externFunctionDeclarationListAST mExternFunctionListAST
+  @lstringlist mTargetListAST
+  @taskListAST mTaskListAST
+  @checkTargetListAST mCheckTargetListAST
+  @driverDeclarationListAST mDriverDeclarationListAST
+  @driverInstanciationListAST mRequiredDriverListAST
+  @uint mTypeDeclarationIndex
+  @controlRegisterUserAccesMapAST mControlRegisterUserAccesMapAST
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 abstract class @abstractDeclarationAST {
 }
 
@@ -28,23 +44,6 @@ list @declarationListAST {
 list @checkTargetListAST {
   @location mTargetConstructLocation
   @lstringlist mAcceptedTargetList
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-struct @ast {
-  @declarationListAST mDeclarationListAST
-  @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST
-  @requiredFunctionDeclarationListAST mRequiredFunctionListAST
-  @externFunctionDeclarationListAST mExternFunctionListAST
-  @isrDeclarationListAST mISRDeclarationListAST
-  @lstringlist mTargetListAST
-  @taskListAST mTaskListAST
-  @checkTargetListAST mCheckTargetListAST
-  @driverDeclarationListAST mDriverDeclarationListAST
-  @driverInstanciationListAST mRequiredDriverListAST
-  @uint mTypeDeclarationIndex
-  @controlRegisterUserAccesMapAST mControlRegisterUserAccesMapAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

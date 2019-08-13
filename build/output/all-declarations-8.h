@@ -294,6 +294,28 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                     Extension method '@structurePropertyListAST-element enterPropertyInContext'                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropertyListAST_2D_element inObject,
+                                             class GALGAS_semanticContext & io_ioContext,
+                                             class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                             const class GALGAS_lstring constin_inReceiverTypeName,
+                                             const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
+                                             class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
+                                             class GALGAS_propertyList & io_ioPropertyList,
+                                             class GALGAS_propertyGetterMap & io_ioPropertyGetterMap,
+                                             class GALGAS_propertySetterMap & io_ioPropertySetterMap,
+                                             class GALGAS_sortedOperandIRList & io_sortedOperandIRList,
+                                             class GALGAS_constructorSignature & io_constructorSignature,
+                                             class GALGAS_string & io_ioConstructorKey,
+                                             class GALGAS_bool & io_canBeCopied,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                              Function 'setterLLVMName'                                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
