@@ -282,7 +282,7 @@ class GALGAS_omnibusType : public AC_GALGAS_class {
                                                             const class GALGAS_propertySetterMap & inOperand1,
                                                             const class GALGAS_classConstantMap & inOperand2,
                                                             const class GALGAS_constructorMap & inOperand3,
-                                                            const class GALGAS_guardMapCTXT & inOperand4,
+                                                            const class GALGAS_guardMapForContext & inOperand4,
                                                             const class GALGAS_subscript & inOperand5,
                                                             const class GALGAS_stringset & inOperand6,
                                                             const class GALGAS_omnibusTypeAttributes & inOperand7,
@@ -308,7 +308,7 @@ class GALGAS_omnibusType : public AC_GALGAS_class {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap getter_constructorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapCTXT getter_guardMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_guardMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kind (LOCATION_ARGS) const ;
 
@@ -1372,25 +1372,25 @@ class cMapElement_constructorMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                  @guardMapCTXT map                                                  *
+//                                               @guardMapForContext map                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_guardMapCTXT ;
+class cMapElement_guardMapForContext ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const char * kSearchErrorMessage_guardMapCTXT_searchKey ;
+extern const char * kSearchErrorMessage_guardMapForContext_searchKey ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_guardMapCTXT : public AC_GALGAS_map {
+class GALGAS_guardMapForContext : public AC_GALGAS_map {
 //--------------------------------- Default constructor
-  public : GALGAS_guardMapCTXT (void) ;
+  public : GALGAS_guardMapForContext (void) ;
 
 //--------------------------------- Handle copy
-  public : GALGAS_guardMapCTXT (const GALGAS_guardMapCTXT & inSource) ;
-  public : GALGAS_guardMapCTXT & operator = (const GALGAS_guardMapCTXT & inSource) ;
+  public : GALGAS_guardMapForContext (const GALGAS_guardMapForContext & inSource) ;
+  public : GALGAS_guardMapForContext & operator = (const GALGAS_guardMapForContext & inSource) ;
 
 //-- Start of generic part --*
 
@@ -1398,15 +1398,15 @@ class GALGAS_guardMapCTXT : public AC_GALGAS_map {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_guardMapCTXT extractObject (const GALGAS_object & inObject,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_guardMapForContext extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_guardMapCTXT constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_guardMapForContext constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static class GALGAS_guardMapCTXT constructor_mapWithMapToOverride (const class GALGAS_guardMapCTXT & inOperand0
-                                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_guardMapForContext constructor_mapWithMapToOverride (const class GALGAS_guardMapForContext & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -1475,29 +1475,29 @@ class GALGAS_guardMapCTXT : public AC_GALGAS_map {
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapCTXT getter_overriddenMap (C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_overriddenMap (C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_guardMapCTXT * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                          const GALGAS_string & inKey
-                                                                                          COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG cMapElement_guardMapForContext * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                const GALGAS_string & inKey
+                                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
 
-  friend class cEnumerator_guardMapCTXT ;
+  friend class cEnumerator_guardMapForContext ;
  
-} ; // End of GALGAS_guardMapCTXT class
+} ; // End of GALGAS_guardMapForContext class
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Enumerator declaration                                                                                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumerator_guardMapCTXT : public cGenericAbstractEnumerator {
-  public : cEnumerator_guardMapCTXT (const GALGAS_guardMapCTXT & inEnumeratedObject,
-                                     const typeEnumerationOrder inOrder) ;
+class cEnumerator_guardMapForContext : public cGenericAbstractEnumerator {
+  public : cEnumerator_guardMapForContext (const GALGAS_guardMapForContext & inEnumeratedObject,
+                                           const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -1506,20 +1506,20 @@ class cEnumerator_guardMapCTXT : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_mUserRoutineLLVMName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mImplementationRoutineLLVMName (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_guardMapCTXT_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_guardMapForContext_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapCTXT ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      Class for element of '@guardMapCTXT' map                                       *
+//                                   Class for element of '@guardMapForContext' map                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_guardMapCTXT : public cMapElement {
+class cMapElement_guardMapForContext : public cMapElement {
 //--- Map attributes
   public : GALGAS_bool mProperty_mIsPublic ;
   public : GALGAS_routineTypedSignature mProperty_mSignature ;
@@ -1527,12 +1527,12 @@ class cMapElement_guardMapCTXT : public cMapElement {
   public : GALGAS_lstring mProperty_mImplementationRoutineLLVMName ;
 
 //--- Constructor
-  public : cMapElement_guardMapCTXT (const GALGAS_lstring & inKey,
-                                     const GALGAS_bool & in_mIsPublic,
-                                     const GALGAS_routineTypedSignature & in_mSignature,
-                                     const GALGAS_lstring & in_mUserRoutineLLVMName,
-                                     const GALGAS_lstring & in_mImplementationRoutineLLVMName
-                                     COMMA_LOCATION_ARGS) ;
+  public : cMapElement_guardMapForContext (const GALGAS_lstring & inKey,
+                                           const GALGAS_bool & in_mIsPublic,
+                                           const GALGAS_routineTypedSignature & in_mSignature,
+                                           const GALGAS_lstring & in_mUserRoutineLLVMName,
+                                           const GALGAS_lstring & in_mImplementationRoutineLLVMName
+                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -2037,7 +2037,7 @@ class cPtr_omnibusType : public acPtr_class {
   public : GALGAS_propertySetterMap mProperty_propertySetterMap ;
   public : GALGAS_classConstantMap mProperty_classConstantMap ;
   public : GALGAS_constructorMap mProperty_constructorMap ;
-  public : GALGAS_guardMapCTXT mProperty_guardMap ;
+  public : GALGAS_guardMapForContext mProperty_guardMap ;
   public : GALGAS_subscript mProperty_subscript ;
   public : GALGAS_stringset mProperty_assignmentSources ;
   public : GALGAS_omnibusTypeAttributes mProperty_attributes ;
@@ -2050,7 +2050,7 @@ class cPtr_omnibusType : public acPtr_class {
                              const GALGAS_propertySetterMap & in_propertySetterMap,
                              const GALGAS_classConstantMap & in_classConstantMap,
                              const GALGAS_constructorMap & in_constructorMap,
-                             const GALGAS_guardMapCTXT & in_guardMap,
+                             const GALGAS_guardMapForContext & in_guardMap,
                              const GALGAS_subscript & in_subscript,
                              const GALGAS_stringset & in_assignmentSources,
                              const GALGAS_omnibusTypeAttributes & in_attributes,
@@ -2067,7 +2067,7 @@ class cPtr_omnibusType : public acPtr_class {
   public : VIRTUAL_IN_DEBUG GALGAS_propertySetterMap getter_propertySetterMap (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_classConstantMap getter_classConstantMap (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_constructorMap getter_constructorMap (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_guardMapCTXT getter_guardMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_guardMapForContext getter_guardMap (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_subscript getter_subscript (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_stringset getter_assignmentSources (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_omnibusTypeAttributes getter_attributes (LOCATION_ARGS) const ;

@@ -12205,29 +12205,29 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GALGAS_guardDeclarationLi
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_guardDeclarationListAST temp_0 = inObject ;
-  cEnumerator_guardDeclarationListAST enumerator_2809 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_2809.hasCurrentObject ()) {
-    cEnumerator_routineFormalArgumentListAST enumerator_2879 (enumerator_2809.current_mGuardFormalArgumentList (HERE), kENUMERATION_UP) ;
-    while (enumerator_2879.hasCurrentObject ()) {
+  cEnumerator_guardDeclarationListAST enumerator_4792 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_4792.hasCurrentObject ()) {
+    cEnumerator_routineFormalArgumentListAST enumerator_4862 (enumerator_4792.current_mGuardFormalArgumentList (HERE), kENUMERATION_UP) ;
+    while (enumerator_4862.hasCurrentObject ()) {
       {
-      ioArgument_ioGraph.setter_noteNode (enumerator_2879.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-guard.galgas", 79)) ;
+      ioArgument_ioGraph.setter_noteNode (enumerator_4862.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-guard.galgas", 127)) ;
       }
-      enumerator_2879.gotoNextObject () ;
+      enumerator_4862.gotoNextObject () ;
     }
-    extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_2809.current_mGuardInstructionList (HERE), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 81)) ;
-    enumerator_2809.gotoNextObject () ;
+    extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_4792.current_mGuardInstructionList (HERE), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 129)) ;
+    enumerator_4792.gotoNextObject () ;
   }
 }
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cMapElement_guardMapCTXT::cMapElement_guardMapCTXT (const GALGAS_lstring & inKey,
-                                                    const GALGAS_bool & in_mIsPublic,
-                                                    const GALGAS_routineTypedSignature & in_mSignature,
-                                                    const GALGAS_lstring & in_mUserRoutineLLVMName,
-                                                    const GALGAS_lstring & in_mImplementationRoutineLLVMName
-                                                    COMMA_LOCATION_ARGS) :
+cMapElement_guardMapForContext::cMapElement_guardMapForContext (const GALGAS_lstring & inKey,
+                                                                const GALGAS_bool & in_mIsPublic,
+                                                                const GALGAS_routineTypedSignature & in_mSignature,
+                                                                const GALGAS_lstring & in_mUserRoutineLLVMName,
+                                                                const GALGAS_lstring & in_mImplementationRoutineLLVMName
+                                                                COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mIsPublic (in_mIsPublic),
 mProperty_mSignature (in_mSignature),
@@ -12237,21 +12237,21 @@ mProperty_mImplementationRoutineLLVMName (in_mImplementationRoutineLLVMName) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-bool cMapElement_guardMapCTXT::isValid (void) const {
+bool cMapElement_guardMapForContext::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mIsPublic.isValid () && mProperty_mSignature.isValid () && mProperty_mUserRoutineLLVMName.isValid () && mProperty_mImplementationRoutineLLVMName.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cMapElement * cMapElement_guardMapCTXT::copy (void) {
+cMapElement * cMapElement_guardMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_guardMapCTXT (mProperty_lkey, mProperty_mIsPublic, mProperty_mSignature, mProperty_mUserRoutineLLVMName, mProperty_mImplementationRoutineLLVMName COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_guardMapForContext (mProperty_lkey, mProperty_mIsPublic, mProperty_mSignature, mProperty_mUserRoutineLLVMName, mProperty_mImplementationRoutineLLVMName COMMA_HERE)) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void cMapElement_guardMapCTXT::description (C_String & ioString, const int32_t inIndentation) const {
+void cMapElement_guardMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mIsPublic" ":" ;
@@ -12272,8 +12272,8 @@ void cMapElement_guardMapCTXT::description (C_String & ioString, const int32_t i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cMapElement_guardMapCTXT::compare (const cCollectionElement * inOperand) const {
-  cMapElement_guardMapCTXT * operand = (cMapElement_guardMapCTXT *) inOperand ;
+typeComparisonResult cMapElement_guardMapForContext::compare (const cCollectionElement * inOperand) const {
+  cMapElement_guardMapForContext * operand = (cMapElement_guardMapForContext *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
   if (kOperandEqual == result) {
     result = mProperty_mIsPublic.objectCompare (operand->mProperty_mIsPublic) ;
@@ -12292,79 +12292,79 @@ typeComparisonResult cMapElement_guardMapCTXT::compare (const cCollectionElement
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT::GALGAS_guardMapCTXT (void) :
+GALGAS_guardMapForContext::GALGAS_guardMapForContext (void) :
 AC_GALGAS_map () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT::GALGAS_guardMapCTXT (const GALGAS_guardMapCTXT & inSource) :
+GALGAS_guardMapForContext::GALGAS_guardMapForContext (const GALGAS_guardMapForContext & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT & GALGAS_guardMapCTXT::operator = (const GALGAS_guardMapCTXT & inSource) {
+GALGAS_guardMapForContext & GALGAS_guardMapForContext::operator = (const GALGAS_guardMapForContext & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT GALGAS_guardMapCTXT::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_guardMapCTXT result ;
+GALGAS_guardMapForContext GALGAS_guardMapForContext::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_guardMapForContext result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT GALGAS_guardMapCTXT::constructor_mapWithMapToOverride (const GALGAS_guardMapCTXT & inMapToOverride
-                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_guardMapCTXT result ;
+GALGAS_guardMapForContext GALGAS_guardMapForContext::constructor_mapWithMapToOverride (const GALGAS_guardMapForContext & inMapToOverride
+                                                                                       COMMA_LOCATION_ARGS) {
+  GALGAS_guardMapForContext result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT GALGAS_guardMapCTXT::getter_overriddenMap (C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_guardMapCTXT result ;
+GALGAS_guardMapForContext GALGAS_guardMapForContext::getter_overriddenMap (C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
+  GALGAS_guardMapForContext result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::addAssign_operation (const GALGAS_lstring & inKey,
-                                               const GALGAS_bool & inArgument0,
-                                               const GALGAS_routineTypedSignature & inArgument1,
-                                               const GALGAS_lstring & inArgument2,
-                                               const GALGAS_lstring & inArgument3,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
-  cMapElement_guardMapCTXT * p = NULL ;
-  macroMyNew (p, cMapElement_guardMapCTXT (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+void GALGAS_guardMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
+                                                     const GALGAS_bool & inArgument0,
+                                                     const GALGAS_routineTypedSignature & inArgument1,
+                                                     const GALGAS_lstring & inArgument2,
+                                                     const GALGAS_lstring & inArgument3,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cMapElement_guardMapForContext * p = NULL ;
+  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@guardMapCTXT insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@guardMapForContext insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::setter_insertKey (GALGAS_lstring inKey,
-                                            GALGAS_bool inArgument0,
-                                            GALGAS_routineTypedSignature inArgument1,
-                                            GALGAS_lstring inArgument2,
-                                            GALGAS_lstring inArgument3,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  cMapElement_guardMapCTXT * p = NULL ;
-  macroMyNew (p, cMapElement_guardMapCTXT (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+void GALGAS_guardMapForContext::setter_insertKey (GALGAS_lstring inKey,
+                                                  GALGAS_bool inArgument0,
+                                                  GALGAS_routineTypedSignature inArgument1,
+                                                  GALGAS_lstring inArgument2,
+                                                  GALGAS_lstring inArgument3,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  cMapElement_guardMapForContext * p = NULL ;
+  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -12375,28 +12375,28 @@ void GALGAS_guardMapCTXT::setter_insertKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const char * kSearchErrorMessage_guardMapCTXT_searchKey = "there is no '%K' guard" ;
+const char * kSearchErrorMessage_guardMapForContext_searchKey = "there is no '%K' guard" ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::method_searchKey (GALGAS_lstring inKey,
-                                            GALGAS_bool & outArgument0,
-                                            GALGAS_routineTypedSignature & outArgument1,
-                                            GALGAS_lstring & outArgument2,
-                                            GALGAS_lstring & outArgument3,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) performSearch (inKey,
-                                                                                         inCompiler,
-                                                                                         kSearchErrorMessage_guardMapCTXT_searchKey
-                                                                                         COMMA_THERE) ;
+void GALGAS_guardMapForContext::method_searchKey (GALGAS_lstring inKey,
+                                                  GALGAS_bool & outArgument0,
+                                                  GALGAS_routineTypedSignature & outArgument1,
+                                                  GALGAS_lstring & outArgument2,
+                                                  GALGAS_lstring & outArgument3,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) performSearch (inKey,
+                                                                                                     inCompiler,
+                                                                                                     kSearchErrorMessage_guardMapForContext_searchKey
+                                                                                                     COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     outArgument0 = p->mProperty_mIsPublic ;
     outArgument1 = p->mProperty_mSignature ;
     outArgument2 = p->mProperty_mUserRoutineLLVMName ;
@@ -12406,14 +12406,14 @@ void GALGAS_guardMapCTXT::method_searchKey (GALGAS_lstring inKey,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool GALGAS_guardMapCTXT::getter_mIsPublicForKey (const GALGAS_string & inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_guardMapForContext::getter_mIsPublicForKey (const GALGAS_string & inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) attributes ;
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) attributes ;
   GALGAS_bool result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     result = p->mProperty_mIsPublic ;
   }
   return result ;
@@ -12421,14 +12421,14 @@ GALGAS_bool GALGAS_guardMapCTXT::getter_mIsPublicForKey (const GALGAS_string & i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_routineTypedSignature GALGAS_guardMapCTXT::getter_mSignatureForKey (const GALGAS_string & inKey,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
+GALGAS_routineTypedSignature GALGAS_guardMapForContext::getter_mSignatureForKey (const GALGAS_string & inKey,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) attributes ;
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) attributes ;
   GALGAS_routineTypedSignature result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     result = p->mProperty_mSignature ;
   }
   return result ;
@@ -12436,14 +12436,14 @@ GALGAS_routineTypedSignature GALGAS_guardMapCTXT::getter_mSignatureForKey (const
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_guardMapCTXT::getter_mUserRoutineLLVMNameForKey (const GALGAS_string & inKey,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_guardMapForContext::getter_mUserRoutineLLVMNameForKey (const GALGAS_string & inKey,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) attributes ;
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) attributes ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     result = p->mProperty_mUserRoutineLLVMName ;
   }
   return result ;
@@ -12451,14 +12451,14 @@ GALGAS_lstring GALGAS_guardMapCTXT::getter_mUserRoutineLLVMNameForKey (const GAL
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring GALGAS_guardMapCTXT::getter_mImplementationRoutineLLVMNameForKey (const GALGAS_string & inKey,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_guardMapForContext::getter_mImplementationRoutineLLVMNameForKey (const GALGAS_string & inKey,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) attributes ;
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) attributes ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     result = p->mProperty_mImplementationRoutineLLVMName ;
   }
   return result ;
@@ -12466,89 +12466,89 @@ GALGAS_lstring GALGAS_guardMapCTXT::getter_mImplementationRoutineLLVMNameForKey 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_guardMapForContext::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_guardMapCTXT * p = (cMapElement_guardMapCTXT *) attributes ;
+  cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     p->mProperty_mIsPublic = inAttributeValue ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::setter_setMSignatureForKey (GALGAS_routineTypedSignature inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_guardMapForContext::setter_setMSignatureForKey (GALGAS_routineTypedSignature inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_guardMapCTXT * p = (cMapElement_guardMapCTXT *) attributes ;
+  cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     p->mProperty_mSignature = inAttributeValue ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::setter_setMUserRoutineLLVMNameForKey (GALGAS_lstring inAttributeValue,
-                                                                GALGAS_string inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_guardMapForContext::setter_setMUserRoutineLLVMNameForKey (GALGAS_lstring inAttributeValue,
+                                                                      GALGAS_string inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_guardMapCTXT * p = (cMapElement_guardMapCTXT *) attributes ;
+  cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     p->mProperty_mUserRoutineLLVMName = inAttributeValue ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_guardMapCTXT::setter_setMImplementationRoutineLLVMNameForKey (GALGAS_lstring inAttributeValue,
-                                                                          GALGAS_string inKey,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_guardMapForContext::setter_setMImplementationRoutineLLVMNameForKey (GALGAS_lstring inAttributeValue,
+                                                                                GALGAS_string inKey,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_guardMapCTXT * p = (cMapElement_guardMapCTXT *) attributes ;
+  cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     p->mProperty_mImplementationRoutineLLVMName = inAttributeValue ;
   }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cMapElement_guardMapCTXT * GALGAS_guardMapCTXT::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                   const GALGAS_string & inKey
-                                                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_guardMapCTXT * result = (cMapElement_guardMapCTXT *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_guardMapCTXT) ;
+cMapElement_guardMapForContext * GALGAS_guardMapForContext::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                               const GALGAS_string & inKey
+                                                                                               COMMA_LOCATION_ARGS) {
+  cMapElement_guardMapForContext * result = (cMapElement_guardMapForContext *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_guardMapForContext) ;
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cEnumerator_guardMapCTXT::cEnumerator_guardMapCTXT (const GALGAS_guardMapCTXT & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) :
+cEnumerator_guardMapForContext::cEnumerator_guardMapForContext (const GALGAS_guardMapForContext & inEnumeratedObject,
+                                                                const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT_2D_element cEnumerator_guardMapCTXT::current (LOCATION_ARGS) const {
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
-  return GALGAS_guardMapCTXT_2D_element (p->mProperty_lkey, p->mProperty_mIsPublic, p->mProperty_mSignature, p->mProperty_mUserRoutineLLVMName, p->mProperty_mImplementationRoutineLLVMName) ;
+GALGAS_guardMapForContext_2D_element cEnumerator_guardMapForContext::current (LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapForContext) ;
+  return GALGAS_guardMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mIsPublic, p->mProperty_mSignature, p->mProperty_mUserRoutineLLVMName, p->mProperty_mImplementationRoutineLLVMName) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cEnumerator_guardMapCTXT::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_guardMapForContext::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
@@ -12556,33 +12556,33 @@ GALGAS_lstring cEnumerator_guardMapCTXT::current_lkey (LOCATION_ARGS) const {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_bool cEnumerator_guardMapCTXT::current_mIsPublic (LOCATION_ARGS) const {
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+GALGAS_bool cEnumerator_guardMapForContext::current_mIsPublic (LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapForContext) ;
   return p->mProperty_mIsPublic ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_routineTypedSignature cEnumerator_guardMapCTXT::current_mSignature (LOCATION_ARGS) const {
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+GALGAS_routineTypedSignature cEnumerator_guardMapForContext::current_mSignature (LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapForContext) ;
   return p->mProperty_mSignature ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cEnumerator_guardMapCTXT::current_mUserRoutineLLVMName (LOCATION_ARGS) const {
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+GALGAS_lstring cEnumerator_guardMapForContext::current_mUserRoutineLLVMName (LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapForContext) ;
   return p->mProperty_mUserRoutineLLVMName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_lstring cEnumerator_guardMapCTXT::current_mImplementationRoutineLLVMName (LOCATION_ARGS) const {
-  const cMapElement_guardMapCTXT * p = (const cMapElement_guardMapCTXT *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_guardMapCTXT) ;
+GALGAS_lstring cEnumerator_guardMapForContext::current_mImplementationRoutineLLVMName (LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapForContext) ;
   return p->mProperty_mImplementationRoutineLLVMName ;
 }
 
@@ -12590,42 +12590,42 @@ GALGAS_lstring cEnumerator_guardMapCTXT::current_mImplementationRoutineLLVMName 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @guardMapCTXT type                                                  *
+//                                              @guardMapForContext type                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardMapCTXT ("guardMapCTXT",
-                                     NULL) ;
+kTypeDescriptor_GALGAS_guardMapForContext ("guardMapForContext",
+                                           NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_guardMapCTXT::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_guardMapCTXT ;
+const C_galgas_type_descriptor * GALGAS_guardMapForContext::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardMapForContext ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_guardMapCTXT::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_guardMapForContext::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_guardMapCTXT (*this)) ;
+    macroMyNew (result, GALGAS_guardMapForContext (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_guardMapCTXT GALGAS_guardMapCTXT::extractObject (const GALGAS_object & inObject,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_guardMapCTXT result ;
-  const GALGAS_guardMapCTXT * p = (const GALGAS_guardMapCTXT *) inObject.embeddedObject () ;
+GALGAS_guardMapForContext GALGAS_guardMapForContext::extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_guardMapForContext result ;
+  const GALGAS_guardMapForContext * p = (const GALGAS_guardMapForContext *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_guardMapCTXT *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_guardMapForContext *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("guardMapCTXT", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("guardMapForContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -12641,25 +12641,25 @@ void extensionMethod_enterGuardsInContext (const GALGAS_guardDeclarationListAST 
                                            const GALGAS_lstring constinArgument_inReceiverTypeName,
                                            const GALGAS_string constinArgument_inReceiverLLVMBaseTypeName,
                                            GALGAS_semanticContext & ioArgument_ioContext,
-                                           GALGAS_guardMapCTXT & ioArgument_ioGuardMap,
+                                           GALGAS_guardMapForContext & /* ioArgument_ioGuardMap */,
                                            GALGAS_declarationDecorationList & ioArgument_ioDecoratedDeclarationList,
                                            C_Compiler * inCompiler
                                            COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_guardDeclarationListAST temp_0 = inObject ;
-  cEnumerator_guardDeclarationListAST enumerator_5859 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_5859.hasCurrentObject ()) {
-    GALGAS_routineTypedSignature var_signature_5974 ;
+  cEnumerator_guardDeclarationListAST enumerator_8801 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_8801.hasCurrentObject ()) {
+    GALGAS_routineTypedSignature var_signature_8916 ;
     {
-    routine_routineTypedSignature (ioArgument_ioContext.mProperty_mTypeMap, enumerator_5859.current (HERE).getter_mGuardFormalArgumentList (HERE), var_signature_5974, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 147)) ;
+    routine_routineTypedSignature (ioArgument_ioContext.mProperty_mTypeMap, enumerator_8801.current (HERE).getter_mGuardFormalArgumentList (HERE), var_signature_8916, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 211)) ;
     }
-    GALGAS_lstring var_guardMangledName_6026 = extensionGetter_mangledName (var_signature_5974, constinArgument_inReceiverTypeName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 149)), enumerator_5859.current (HERE).getter_mGuardName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 149)) ;
-    GALGAS_lstring var_guardUserLLVMName_6184 = function_guardUserLLVMName (constinArgument_inReceiverLLVMBaseTypeName, enumerator_5859.current (HERE).getter_mGuardName (HERE), enumerator_5859.current (HERE).getter_mGuardFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 151)) ;
-    GALGAS_lstring var_guardImplementationLLVMName_6390 = function_guardImplementationLLVMName (constinArgument_inReceiverLLVMBaseTypeName, enumerator_5859.current (HERE).getter_mGuardName (HERE), enumerator_5859.current (HERE).getter_mGuardFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 157)) ;
+    GALGAS_lstring var_guardMangledName_8968 = extensionGetter_mangledName (var_signature_8916, constinArgument_inReceiverTypeName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 213)), enumerator_8801.current (HERE).getter_mGuardName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 213)) ;
+    GALGAS_lstring var_guardUserLLVMName_9126 = function_guardUserLLVMName (constinArgument_inReceiverLLVMBaseTypeName, enumerator_8801.current (HERE).getter_mGuardName (HERE), enumerator_8801.current (HERE).getter_mGuardFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 215)) ;
+    GALGAS_lstring var_guardImplementationLLVMName_9332 = function_guardImplementationLLVMName (constinArgument_inReceiverLLVMBaseTypeName, enumerator_8801.current (HERE).getter_mGuardName (HERE), enumerator_8801.current (HERE).getter_mGuardFormalArgumentList (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 221)) ;
     {
-    ioArgument_ioGuardMap.setter_insertKey (var_guardMangledName_6026, enumerator_5859.current (HERE).getter_mIsPublic (HERE), var_signature_5974, var_guardUserLLVMName_6184, var_guardImplementationLLVMName_6390, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 163)) ;
+    ioArgument_ioContext.mProperty_mGuardMap.setter_insertKey (var_guardMangledName_8968, enumerator_8801.current (HERE).getter_mIsPublic (HERE), var_signature_8916, var_guardUserLLVMName_9126, var_guardImplementationLLVMName_9332, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 234)) ;
     }
-    ioArgument_ioDecoratedDeclarationList.addAssign_operation (GALGAS_decoratedGuardDeclaration::constructor_new (constinArgument_inReceiverTypeName, enumerator_5859.current (HERE).getter_mGuardName (HERE), enumerator_5859.current (HERE).getter_mIsPublic (HERE), enumerator_5859.current (HERE).getter_mGuardAttributeList (HERE), enumerator_5859.current (HERE).getter_mGuardFormalArgumentList (HERE), enumerator_5859.current (HERE).getter_mGuardKind (HERE), enumerator_5859.current (HERE).getter_mGuardInstructionList (HERE), enumerator_5859.current (HERE).getter_mEndOfGuardDeclaration (HERE)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 170))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 170)) ;
-    enumerator_5859.gotoNextObject () ;
+    ioArgument_ioDecoratedDeclarationList.addAssign_operation (GALGAS_decoratedGuardDeclaration::constructor_new (constinArgument_inReceiverTypeName, enumerator_8801.current (HERE).getter_mGuardName (HERE), enumerator_8801.current (HERE).getter_mIsPublic (HERE), enumerator_8801.current (HERE).getter_mGuardAttributeList (HERE), enumerator_8801.current (HERE).getter_mGuardFormalArgumentList (HERE), enumerator_8801.current (HERE).getter_mGuardKind (HERE), enumerator_8801.current (HERE).getter_mGuardInstructionList (HERE), enumerator_8801.current (HERE).getter_mEndOfGuardDeclaration (HERE)  COMMA_SOURCE_FILE ("declaration-guard.galgas", 241))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 241)) ;
+    enumerator_8801.gotoNextObject () ;
   }
 }
 

@@ -19,6 +19,17 @@ list @guardDeclarationListAST {
   @location mEndOfGuardDeclaration
 }
 
+class @guardDeclarationAST : @abstractDeclarationAST {
+  @lstring mReceiverTypeName # Empty string if standalone
+  @lstring mGuardName
+  @bool mIsPublic
+  @lstringlist mGuardAttributeList
+  @routineFormalArgumentListAST mGuardFormalArgumentList
+  @guardKind mGuardKind
+  @instructionListAST mGuardInstructionList
+  @location mEndOfGuardDeclaration
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -70,6 +81,43 @@ syntax extension omnibus_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  var s = ""
+  if mReceiverTypeName.string != "" then
+    s += mReceiverTypeName.string + "."
+  end
+  s += mGuardName.string + "("
+  for (formalArgumentPassingMode selector * *) in mGuardFormalArgumentList do
+    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  s += ")"
+  [!?ioGraph addNode !.new {!s !mGuardName.location} !self]
+#---
+  for (* * formalArgumentTypeName *) in mGuardFormalArgumentList do
+    [!?ioGraph noteNode !formalArgumentTypeName]
+  end
+  [mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  if mReceiverTypeName.string != "" then
+    [!?ioGraph noteNode !mReceiverTypeName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @guardDeclarationAST keyRepresentationForErrorSignaling -> @string {
+  result = "guard " + mReceiverTypeName + "." + mGuardName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @guardDeclarationAST locationForErrorSignaling -> @location {
+  result = mGuardName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -80,6 +128,22 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
     end
     [mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @guardDeclarationAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -122,7 +186,7 @@ private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
 #!  ENTER IN CONTEXT                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @guardMapCTXT {
+map @guardMapForContext {
   @bool mIsPublic
   @routineTypedSignature mSignature
   @lstring mUserRoutineLLVMName
@@ -138,7 +202,7 @@ method @guardDeclarationListAST enterGuardsInContext
   ?receiverTypeName:let @lstring inReceiverTypeName
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
   ?!context:@semanticContext ioContext
-  ?!guardMap:@guardMapCTXT ioGuardMap
+  ?!guardMap:@guardMapForContext ioGuardMap
   ?!@declarationDecorationList ioDecoratedDeclarationList
 {
 #---------------------------------------- Enter guards in guard map
@@ -160,7 +224,14 @@ method @guardDeclarationListAST enterGuardsInContext
       !guard.mGuardFormalArgumentList
     )
   #--- Enter in context
-    [!?ioGuardMap insertKey
+#    [!?ioGuardMap insertKey
+#      !guardMangledName
+#      !guard.mIsPublic
+#      !signature
+#      !guardUserLLVMName
+#      !guardImplementationLLVMName
+#    ]
+    [!?ioContext.mGuardMap insertKey
       !guardMangledName
       !guard.mIsPublic
       !signature
@@ -422,7 +493,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   case property (@lstring methodName) :
     let currentType = [currentObject type]
     let guardMangledName = [mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
-    [currentType.guardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
+    [inContext.mGuardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
   #--- Add receiver as first parameter
     @procCallEffectiveParameterListIR effectiveParameterListIR = {
       !.outputInput

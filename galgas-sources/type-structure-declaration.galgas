@@ -386,7 +386,7 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter guards in guard map
-  @guardMapCTXT guardMap = {}
+  @guardMapForContext guardMap = {}
   [mGuardListAST enterGuardsInContext
     !receiverTypeName:mReceiverTypeName
     !receiverLLVMBaseTypeName:mLLVMBaseTypeName

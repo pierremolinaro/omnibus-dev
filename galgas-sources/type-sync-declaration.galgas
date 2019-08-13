@@ -27,8 +27,6 @@ syntax extension omnibus_syntax {
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
     while
       <function_declaration> !?ioAST !receiverTypeName: structureName
-#    while
-#      <system_routine> !?ioAST !?systemRoutineListAST
     while
       <system_routine_declaration> !?ioAST !receiverTypeName: structureName
     while
@@ -144,7 +142,7 @@ override method @syncDeclarationAST enterInContext
 #    !?ioRoutineListIR
 #  ]
 #---------------------------------------- Enter guards in guard map
-  @guardMapCTXT guardMap = {}
+  @guardMapForContext guardMap = {}
   [mGuardListAST enterGuardsInContext
     !receiverTypeName:mSyncToolName
     !receiverLLVMBaseTypeName:mSyncToolName

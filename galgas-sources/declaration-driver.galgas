@@ -300,7 +300,6 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !{}
       !false # Do not generate assignment routine
       !driverPropertyListAST
-#      !{} # declaration.mDriverSystemRoutineListAST
       !declaration.mDriverGuardListAST
       !false # Do not implement deinit
     }

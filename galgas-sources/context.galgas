@@ -4,6 +4,64 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+struct @semanticContext {
+  @targetParameters mTargetParameters
+
+  @omnibusType mPanicCodeType
+  @omnibusType mPanicLineType
+  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
+  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
+
+  @routineMapForContext mRoutineMap
+  @guardMapForContext mGuardMap
+  
+  @controlRegisterGroupMap mControlRegisterGroupMap
+  @globalConstantMap mGlobalConstantMap
+  @globalSyncInstanceMap mGlobalSyncInstanceMap
+  @staticlistMap mStaticListMap
+
+  @stringset mRequiredRoutineSet
+
+#--- Types
+  @unifiedTypeMap mTypeMap
+
+#--- Interrupts
+  @availableInterruptMap mAvailableInterruptMap
+
+#--- Operators
+  @infixOperatorMap mEqualOperatorMap           # ==
+  @infixOperatorMap mStrictInfOperatorMap       # <
+  @infixOperatorMap mInfEqualOperatorMap        # <=
+  @infixOperatorMap mAndOperatorMap             # &
+  @infixOperatorMap mOrOperatorMap              # |
+  @infixOperatorMap mXorOperatorMap             # ^
+  @infixOperatorMap mBooleanXorOperatorMap      # xor
+  @infixOperatorMap mAddOperatorMap             # +
+  @infixOperatorMap mAddNoOvfOperatorMap        # &+
+  @infixOperatorMap mSubOperatorMap             # -
+  @infixOperatorMap mSubNoOvfOperatorMap        # &-
+  @infixOperatorMap mMulOperatorMap             # *
+  @infixOperatorMap mMulNoOvfOperatorMap        # &*
+  @infixOperatorMap mDivOperatorMap             # /
+  @infixOperatorMap mDivNoOvfOperatorMap        # &/
+  @infixOperatorMap mModOperatorMap             # %
+  @infixOperatorMap mModNoOvfOperatorMap        # &%
+  @infixOperatorMap mLeftShiftOperatorMap       # <<
+  @infixOperatorMap mRightShiftOperatorMap      # >>
+  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
+  @prefixOperatorMap mNotOperatorMap            # not
+  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+
+#--- Tasks
+  @taskMap mTaskMap
+  @globalTaskVariableList mGlobalTaskVariableList
+
+#--- Entity map
+  @universalValuedObjectMap mValuedObjectMap
+}
+
+#·······················································································································
+
 abstract class @abstractDecoratedDeclaration {
 }
 
@@ -84,63 +142,6 @@ map @availableInterruptMap {
   @interruptionPanicCode mInterruptionPanicCode
   insert insertKey error message "interrupt '%K' is already defined"
   search searchKey error message "interrupt '%K' is not defined"
-}
-
-#·······················································································································
-
-struct @semanticContext {
-  @targetParameters mTargetParameters
-
-  @omnibusType mPanicCodeType
-  @omnibusType mPanicLineType
-  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
-  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-
-  @routineMapForContext mRoutineMap
-  
-  @controlRegisterGroupMap mControlRegisterGroupMap
-  @globalConstantMap mGlobalConstantMap
-  @globalSyncInstanceMap mGlobalSyncInstanceMap
-  @staticlistMap mStaticListMap
-
-  @stringset mRequiredRoutineSet
-
-#--- Types
-  @unifiedTypeMap mTypeMap
-
-#--- Interrupts
-  @availableInterruptMap mAvailableInterruptMap
-
-#--- Operators
-  @infixOperatorMap mEqualOperatorMap           # ==
-  @infixOperatorMap mStrictInfOperatorMap       # <
-  @infixOperatorMap mInfEqualOperatorMap        # <=
-  @infixOperatorMap mAndOperatorMap             # &
-  @infixOperatorMap mOrOperatorMap              # |
-  @infixOperatorMap mXorOperatorMap             # ^
-  @infixOperatorMap mBooleanXorOperatorMap      # xor
-  @infixOperatorMap mAddOperatorMap             # +
-  @infixOperatorMap mAddNoOvfOperatorMap        # &+
-  @infixOperatorMap mSubOperatorMap             # -
-  @infixOperatorMap mSubNoOvfOperatorMap        # &-
-  @infixOperatorMap mMulOperatorMap             # *
-  @infixOperatorMap mMulNoOvfOperatorMap        # &*
-  @infixOperatorMap mDivOperatorMap             # /
-  @infixOperatorMap mDivNoOvfOperatorMap        # &/
-  @infixOperatorMap mModOperatorMap             # %
-  @infixOperatorMap mModNoOvfOperatorMap        # &%
-  @infixOperatorMap mLeftShiftOperatorMap       # <<
-  @infixOperatorMap mRightShiftOperatorMap      # >>
-  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
-  @prefixOperatorMap mNotOperatorMap            # not
-  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
-
-#--- Tasks
-  @taskMap mTaskMap
-  @globalTaskVariableList mGlobalTaskVariableList
-
-#--- Entity map
-  @universalValuedObjectMap mValuedObjectMap
 }
 
 #·······················································································································
@@ -234,6 +235,7 @@ proc buildSemanticContext
      !?staticEntityMap:ioStaticEntityMap
      !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
    ]
+#   log "GUARDs : " : [outSemanticContext.mGuardMap keyList]
 }
 
 #·······················································································································

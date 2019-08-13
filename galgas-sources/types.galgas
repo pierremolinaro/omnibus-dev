@@ -9,7 +9,7 @@ shared class @omnibusType {
   @propertySetterMap propertySetterMap %selector
   @classConstantMap classConstantMap %selector # type.cst, as enumeration values
   @constructorMap constructorMap %selector # type (!... !...)
-  @guardMapCTXT guardMap %selector # §
+  @guardMapForContext guardMap %selector # §
   @subscript subscript %selector # §
   @stringset assignmentSources %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...

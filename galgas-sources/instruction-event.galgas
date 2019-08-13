@@ -361,8 +361,8 @@ proc analyzeGuardCall
   !guardMangledName:@lstring outGuardMangledName
 {
   let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: [[inReceiver type] omnibusTypeDescriptionName] !functionName: inGuardName]
-  let guardMap = [[inReceiver type] guardMap]
-  [guardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
+#  let guardMap = [[inReceiver type] guardMap]
+  [inContext.mGuardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
 #--- Check accessibility
   if not isPublic then
     error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR

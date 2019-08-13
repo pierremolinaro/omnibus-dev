@@ -4095,6 +4095,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_routineMapForContext mProperty_mRoutineMap ;
 
+  public : GALGAS_guardMapForContext mProperty_mGuardMap ;
+
   public : GALGAS_controlRegisterGroupMap mProperty_mControlRegisterGroupMap ;
 
   public : GALGAS_globalConstantMap mProperty_mGlobalConstantMap ;
@@ -4179,6 +4181,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMap,
+                                   const GALGAS_guardMapForContext & in_mGuardMap,
                                    const GALGAS_controlRegisterGroupMap & in_mControlRegisterGroupMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalSyncInstanceMap & in_mGlobalSyncInstanceMap,
@@ -4229,14 +4232,14 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand3,
                                                                 const class GALGAS_panicRoutinePriorityMap & inOperand4,
                                                                 const class GALGAS_routineMapForContext & inOperand5,
-                                                                const class GALGAS_controlRegisterGroupMap & inOperand6,
-                                                                const class GALGAS_globalConstantMap & inOperand7,
-                                                                const class GALGAS_globalSyncInstanceMap & inOperand8,
-                                                                const class GALGAS_staticlistMap & inOperand9,
-                                                                const class GALGAS_stringset & inOperand10,
-                                                                const class GALGAS_unifiedTypeMap & inOperand11,
-                                                                const class GALGAS_availableInterruptMap & inOperand12,
-                                                                const class GALGAS_infixOperatorMap & inOperand13,
+                                                                const class GALGAS_guardMapForContext & inOperand6,
+                                                                const class GALGAS_controlRegisterGroupMap & inOperand7,
+                                                                const class GALGAS_globalConstantMap & inOperand8,
+                                                                const class GALGAS_globalSyncInstanceMap & inOperand9,
+                                                                const class GALGAS_staticlistMap & inOperand10,
+                                                                const class GALGAS_stringset & inOperand11,
+                                                                const class GALGAS_unifiedTypeMap & inOperand12,
+                                                                const class GALGAS_availableInterruptMap & inOperand13,
                                                                 const class GALGAS_infixOperatorMap & inOperand14,
                                                                 const class GALGAS_infixOperatorMap & inOperand15,
                                                                 const class GALGAS_infixOperatorMap & inOperand16,
@@ -4255,12 +4258,13 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_infixOperatorMap & inOperand29,
                                                                 const class GALGAS_infixOperatorMap & inOperand30,
                                                                 const class GALGAS_infixOperatorMap & inOperand31,
-                                                                const class GALGAS_prefixOperatorMap & inOperand32,
+                                                                const class GALGAS_infixOperatorMap & inOperand32,
                                                                 const class GALGAS_prefixOperatorMap & inOperand33,
                                                                 const class GALGAS_prefixOperatorMap & inOperand34,
-                                                                const class GALGAS_taskMap & inOperand35,
-                                                                const class GALGAS_globalTaskVariableList & inOperand36,
-                                                                const class GALGAS_universalValuedObjectMap & inOperand37
+                                                                const class GALGAS_prefixOperatorMap & inOperand35,
+                                                                const class GALGAS_taskMap & inOperand36,
+                                                                const class GALGAS_globalTaskVariableList & inOperand37,
+                                                                const class GALGAS_universalValuedObjectMap & inOperand38
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4298,6 +4302,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalSyncInstanceMap getter_mGlobalSyncInstanceMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_mGuardMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 
@@ -8112,11 +8118,11 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_guardDeclara
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @guardMapCTXT_2D_element struct                                           *
+//                                        @guardMapForContext_2D_element struct                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_guardMapCTXT_2D_element : public AC_GALGAS_root {
+class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
 
@@ -8133,20 +8139,20 @@ class GALGAS_guardMapCTXT_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_guardMapCTXT_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_guardMapForContext_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_guardMapCTXT_2D_element (void) ;
+  public : GALGAS_guardMapForContext_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_guardMapCTXT_2D_element (void) ;
+  public : virtual ~ GALGAS_guardMapForContext_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_guardMapCTXT_2D_element (const GALGAS_lstring & in_lkey,
-                                           const GALGAS_bool & in_mIsPublic,
-                                           const GALGAS_routineTypedSignature & in_mSignature,
-                                           const GALGAS_lstring & in_mUserRoutineLLVMName,
-                                           const GALGAS_lstring & in_mImplementationRoutineLLVMName) ;
+  public : GALGAS_guardMapForContext_2D_element (const GALGAS_lstring & in_lkey,
+                                                 const GALGAS_bool & in_mIsPublic,
+                                                 const GALGAS_routineTypedSignature & in_mSignature,
+                                                 const GALGAS_lstring & in_mUserRoutineLLVMName,
+                                                 const GALGAS_lstring & in_mImplementationRoutineLLVMName) ;
 
 //-- Start of generic part --*
 
@@ -8154,23 +8160,23 @@ class GALGAS_guardMapCTXT_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_guardMapCTXT_2D_element extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_guardMapForContext_2D_element extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_guardMapCTXT_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_bool & inOperand1,
-                                                                        const class GALGAS_routineTypedSignature & inOperand2,
-                                                                        const class GALGAS_lstring & inOperand3,
-                                                                        const class GALGAS_lstring & inOperand4
-                                                                        COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_guardMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                              const class GALGAS_bool & inOperand1,
+                                                                              const class GALGAS_routineTypedSignature & inOperand2,
+                                                                              const class GALGAS_lstring & inOperand3,
+                                                                              const class GALGAS_lstring & inOperand4
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_guardMapCTXT_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_guardMapForContext_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8192,12 +8198,12 @@ class GALGAS_guardMapCTXT_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_guardMapCTXT_2D_element class
+} ; // End of GALGAS_guardMapForContext_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapCTXT_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -8209,7 +8215,7 @@ void extensionMethod_enterGuardsInContext (const class GALGAS_guardDeclarationLi
                                            const class GALGAS_lstring constin_inReceiverTypeName,
                                            const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
                                            class GALGAS_semanticContext & io_ioContext,
-                                           class GALGAS_guardMapCTXT & io_ioGuardMap,
+                                           class GALGAS_guardMapForContext & io_ioGuardMap,
                                            class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
