@@ -1255,20 +1255,20 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "  var top $uint32 = 0\n"
   "\n"
   "  event @onSetup first {\n"
-  "    digital.set (!mode:.output !toPort:.D13)\n"
-  "    digital.set (!mode:.output !toPort:LED_L1)\n"
-  "    digital.set (!mode:.output !toPort:LED_L2)\n"
+  "    digital.set (!mode: .output !toPort: .D13)\n"
+  "    digital.set (!mode: .output !toPort: LED_L1)\n"
+  "    digital.set (!mode: .output !toPort: LED_L2)\n"
   "  }\n"
   "\n"
-  "  event time.wait (!until:self.top) {\n"
+  "  event time.wait (!until: self.top) {\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
-  "    digital.write (!yes !toPort:LED_L1)\n"
+  "    digital.write (!yes !toPort: LED_L1)\n"
   "    let constanteAccentu\xC3""\xA9""e = self.top\n"
-  "    time.wait (!until:constanteAccentu\xC3""\xA9""e)\n"
+  "    time.wait (!until: constanteAccentu\xC3""\xA9""e)\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
-  "    digital.write (!no !toPort:LED_L1)\n"
+  "    digital.write (!no !toPort: LED_L1)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1277,9 +1277,9 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1/unp
   "task T2 @stacksize 512 @autostart {\n"
   "\n"
   "  event s\xC3""\xA9""maphore.wait () {\n"
-  "    digital.write (!yes !toPort:LED_L2)\n"
+  "    digital.write (!yes !toPort: LED_L2)\n"
   "    s\xC3""\xA9""maphore.wait ()\n"
-  "    digital.write (!no !toPort:LED_L2)\n"
+  "    digital.write (!no !toPort: LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1289,7 +1289,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "05-semaphore.omnibus",
   "omnibus",
   true, // Text file
-  1174, // Text length
+  1186, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 

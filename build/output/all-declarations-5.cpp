@@ -11534,7 +11534,7 @@ static const char * gNonTerminalNames_omnibus_grammar [169] = {
   "<function_declaration>",// Index 11
   "<mode>",// Index 12
   "<function_header>",// Index 13
-  "<system_routine>",// Index 14
+  "<system_routine_declaration>",// Index 14
   "<isr>",// Index 15
   "<guard>",// Index 16
   "<procedure_formal_arguments>",// Index 17
@@ -31385,20 +31385,20 @@ void cGrammar_omnibus_5F_grammar::nt_function_5F_header_ (GALGAS_ast &  paramete
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
-//                                    'system_routine' non terminal implementation                                      
+//                              'system_routine_declaration' non terminal implementation                                
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
+void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 31 :
-      rule_omnibus_5F_syntax_system_5F_routine_i31_parse(inLexique) ;
+      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i31_parse(inLexique) ;
     break ;
   case 32 :
-      rule_omnibus_5F_syntax_system_5F_routine_i32_parse(inLexique) ;
+      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i32_parse(inLexique) ;
     break ;
   case 33 :
-      rule_omnibus_5F_syntax_system_5F_routine_i33_parse(inLexique) ;
+      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i33_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -31406,18 +31406,18 @@ void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_parse (C_Lexique_omnibus_
   }
 }
 
-void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_ (GALGAS_ast &  parameter_1,
-                                GALGAS_systemRoutineDeclarationListAST &  parameter_2,
+void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_ (GALGAS_ast &  parameter_1,
+                                const GALGAS_lstring  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 31 :
-      rule_omnibus_5F_syntax_system_5F_routine_i31_(parameter_1, parameter_2, inLexique) ;
+      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i31_(parameter_1, parameter_2, inLexique) ;
     break ;
   case 32 :
-      rule_omnibus_5F_syntax_system_5F_routine_i32_(parameter_1, parameter_2, inLexique) ;
+      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i32_(parameter_1, parameter_2, inLexique) ;
     break ;
   case 33 :
-      rule_omnibus_5F_syntax_system_5F_routine_i33_(parameter_1, parameter_2, inLexique) ;
+      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i33_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

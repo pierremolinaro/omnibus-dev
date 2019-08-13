@@ -4193,14 +4193,14 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
                                                                GALGAS_structurePropertyListAST & ioArgument2,
                                                                C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'system_routine' non terminal
+//------------------------------------- 'system_routine_declaration' non terminal
 //--- 'parse' label
-  public : virtual void nt_system_5F_routine_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
+  public : virtual void nt_system_5F_routine_5F_declaration_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_system_5F_routine_ (GALGAS_ast & ioArgument0,
-                                               GALGAS_systemRoutineDeclarationListAST & ioArgument1,
-                                               C_Lexique_omnibus_5F_lexique * inCompiler) ;
+  public : virtual void nt_system_5F_routine_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                              const GALGAS_lstring inArgument1,
+                                                              C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'type_definition' non terminal
 //--- 'parse' label

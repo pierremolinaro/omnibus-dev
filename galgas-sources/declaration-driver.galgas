@@ -118,7 +118,9 @@ syntax extension omnibus_syntax {
     while
       <function_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
     while
-     <system_routine>!?ioAST !?svcListAST
+      <system_routine_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
+#    while
+#     <system_routine>!?ioAST !?svcListAST
     while
       <guard> !?ioAST !?guardListAST
     end

@@ -38,7 +38,7 @@ struct @ast {
   @requiredFunctionDeclarationListAST mRequiredFunctionListAST
   @externFunctionDeclarationListAST mExternFunctionListAST
   @isrDeclarationListAST mISRDeclarationListAST
-  @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
+#  @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
   @lstringlist mTargetListAST
   @taskListAST mTaskListAST
   @checkTargetListAST mCheckTargetListAST

@@ -194,13 +194,13 @@ proc buildSemanticContext
     !?outDecoratedDeclarationList
     !?outDecoratedRoutineList
   ]
-  [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
-    !receiverTypeName:["" nowhere] # Empty string if standalone
-    !receiverLLVMBaseTypeName:""  # Empty string if standalone
-    !?context: outSemanticContext
-    !?outDecoratedRoutineList
-    !?outRoutineListIR
-  ]
+#  [inAST.mStandAloneSystemRoutineListAST enterSystemRoutineInContext
+#    !receiverTypeName:["" nowhere] # Empty string if standalone
+#    !receiverLLVMBaseTypeName:""  # Empty string if standalone
+#    !?context: outSemanticContext
+#    !?outDecoratedRoutineList
+#    !?outRoutineListIR
+#  ]
   [inAST.mExternFunctionListAST enterExternProcInContext
     !?context: outSemanticContext
   ]

@@ -7229,7 +7229,6 @@ mProperty_mExtendStaticArrayDeclarationAST (),
 mProperty_mRequiredFunctionListAST (),
 mProperty_mExternFunctionListAST (),
 mProperty_mISRDeclarationListAST (),
-mProperty_mStandAloneSystemRoutineListAST (),
 mProperty_mTargetListAST (),
 mProperty_mTaskListAST (),
 mProperty_mCheckTargetListAST (),
@@ -7251,27 +7250,25 @@ GALGAS_ast::GALGAS_ast (const GALGAS_declarationListAST & inOperand0,
                         const GALGAS_requiredFunctionDeclarationListAST & inOperand2,
                         const GALGAS_externFunctionDeclarationListAST & inOperand3,
                         const GALGAS_isrDeclarationListAST & inOperand4,
-                        const GALGAS_systemRoutineDeclarationListAST & inOperand5,
-                        const GALGAS_lstringlist & inOperand6,
-                        const GALGAS_taskListAST & inOperand7,
-                        const GALGAS_checkTargetListAST & inOperand8,
-                        const GALGAS_driverDeclarationListAST & inOperand9,
-                        const GALGAS_driverInstanciationListAST & inOperand10,
-                        const GALGAS_uint & inOperand11,
-                        const GALGAS_controlRegisterUserAccesMapAST & inOperand12) :
+                        const GALGAS_lstringlist & inOperand5,
+                        const GALGAS_taskListAST & inOperand6,
+                        const GALGAS_checkTargetListAST & inOperand7,
+                        const GALGAS_driverDeclarationListAST & inOperand8,
+                        const GALGAS_driverInstanciationListAST & inOperand9,
+                        const GALGAS_uint & inOperand10,
+                        const GALGAS_controlRegisterUserAccesMapAST & inOperand11) :
 mProperty_mDeclarationListAST (inOperand0),
 mProperty_mExtendStaticArrayDeclarationAST (inOperand1),
 mProperty_mRequiredFunctionListAST (inOperand2),
 mProperty_mExternFunctionListAST (inOperand3),
 mProperty_mISRDeclarationListAST (inOperand4),
-mProperty_mStandAloneSystemRoutineListAST (inOperand5),
-mProperty_mTargetListAST (inOperand6),
-mProperty_mTaskListAST (inOperand7),
-mProperty_mCheckTargetListAST (inOperand8),
-mProperty_mDriverDeclarationListAST (inOperand9),
-mProperty_mRequiredDriverListAST (inOperand10),
-mProperty_mTypeDeclarationIndex (inOperand11),
-mProperty_mControlRegisterUserAccesMapAST (inOperand12) {
+mProperty_mTargetListAST (inOperand5),
+mProperty_mTaskListAST (inOperand6),
+mProperty_mCheckTargetListAST (inOperand7),
+mProperty_mDriverDeclarationListAST (inOperand8),
+mProperty_mRequiredDriverListAST (inOperand9),
+mProperty_mTypeDeclarationIndex (inOperand10),
+mProperty_mControlRegisterUserAccesMapAST (inOperand11) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7282,7 +7279,6 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
                      GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_externFunctionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_isrDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_lstringlist::constructor_emptyList (HERE),
                      GALGAS_taskListAST::constructor_emptyList (HERE),
                      GALGAS_checkTargetListAST::constructor_emptyList (HERE),
@@ -7299,18 +7295,17 @@ GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_declarationListAST & inOper
                                         const GALGAS_requiredFunctionDeclarationListAST & inOperand2,
                                         const GALGAS_externFunctionDeclarationListAST & inOperand3,
                                         const GALGAS_isrDeclarationListAST & inOperand4,
-                                        const GALGAS_systemRoutineDeclarationListAST & inOperand5,
-                                        const GALGAS_lstringlist & inOperand6,
-                                        const GALGAS_taskListAST & inOperand7,
-                                        const GALGAS_checkTargetListAST & inOperand8,
-                                        const GALGAS_driverDeclarationListAST & inOperand9,
-                                        const GALGAS_driverInstanciationListAST & inOperand10,
-                                        const GALGAS_uint & inOperand11,
-                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand12 
+                                        const GALGAS_lstringlist & inOperand5,
+                                        const GALGAS_taskListAST & inOperand6,
+                                        const GALGAS_checkTargetListAST & inOperand7,
+                                        const GALGAS_driverDeclarationListAST & inOperand8,
+                                        const GALGAS_driverInstanciationListAST & inOperand9,
+                                        const GALGAS_uint & inOperand10,
+                                        const GALGAS_controlRegisterUserAccesMapAST & inOperand11 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
   }
   return result ;
 }
@@ -7333,9 +7328,6 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
   }
   if (result == kOperandEqual) {
     result = mProperty_mISRDeclarationListAST.objectCompare (inOperand.mProperty_mISRDeclarationListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mStandAloneSystemRoutineListAST.objectCompare (inOperand.mProperty_mStandAloneSystemRoutineListAST) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mTargetListAST.objectCompare (inOperand.mProperty_mTargetListAST) ;
@@ -7364,7 +7356,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool GALGAS_ast::isValid (void) const {
-  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mRequiredFunctionListAST.isValid () && mProperty_mExternFunctionListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mStandAloneSystemRoutineListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
+  return mProperty_mDeclarationListAST.isValid () && mProperty_mExtendStaticArrayDeclarationAST.isValid () && mProperty_mRequiredFunctionListAST.isValid () && mProperty_mExternFunctionListAST.isValid () && mProperty_mISRDeclarationListAST.isValid () && mProperty_mTargetListAST.isValid () && mProperty_mTaskListAST.isValid () && mProperty_mCheckTargetListAST.isValid () && mProperty_mDriverDeclarationListAST.isValid () && mProperty_mRequiredDriverListAST.isValid () && mProperty_mTypeDeclarationIndex.isValid () && mProperty_mControlRegisterUserAccesMapAST.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7375,7 +7367,6 @@ void GALGAS_ast::drop (void) {
   mProperty_mRequiredFunctionListAST.drop () ;
   mProperty_mExternFunctionListAST.drop () ;
   mProperty_mISRDeclarationListAST.drop () ;
-  mProperty_mStandAloneSystemRoutineListAST.drop () ;
   mProperty_mTargetListAST.drop () ;
   mProperty_mTaskListAST.drop () ;
   mProperty_mCheckTargetListAST.drop () ;
@@ -7402,8 +7393,6 @@ void GALGAS_ast::description (C_String & ioString,
     mProperty_mExternFunctionListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mISRDeclarationListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mStandAloneSystemRoutineListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mTargetListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -7450,12 +7439,6 @@ GALGAS_externFunctionDeclarationListAST GALGAS_ast::getter_mExternFunctionListAS
 
 GALGAS_isrDeclarationListAST GALGAS_ast::getter_mISRDeclarationListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mISRDeclarationListAST ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_systemRoutineDeclarationListAST GALGAS_ast::getter_mStandAloneSystemRoutineListAST (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mStandAloneSystemRoutineListAST ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

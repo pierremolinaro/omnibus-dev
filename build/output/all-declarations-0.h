@@ -487,11 +487,11 @@ class cParser_omnibus_5F_syntax {
 
   protected : virtual void nt_struct_5F_property_5F_declaration_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected : virtual void nt_system_5F_routine_ (class GALGAS_ast & ioArgument0,
-                                                  class GALGAS_systemRoutineDeclarationListAST & ioArgument1,
-                                                  class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+  protected : virtual void nt_system_5F_routine_5F_declaration_ (class GALGAS_ast & ioArgument0,
+                                                                 const class GALGAS_lstring constinArgument1,
+                                                                 class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected : virtual void nt_system_5F_routine_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+  protected : virtual void nt_system_5F_routine_5F_declaration_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_type_5F_definition_ (class GALGAS_ast & ioArgument0,
                                                    class GALGAS_lstring & outArgument1,
@@ -680,23 +680,23 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_function_5F_header_i30_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i31_ (GALGAS_ast & ioArgument0,
-                                                                  GALGAS_systemRoutineDeclarationListAST & ioArgument1,
-                                                                  C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i31_ (GALGAS_ast & ioArgument0,
+                                                                                 const GALGAS_lstring constinArgument1,
+                                                                                 C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i31_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i31_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i32_ (GALGAS_ast & ioArgument0,
-                                                                  GALGAS_systemRoutineDeclarationListAST & ioArgument1,
-                                                                  C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i32_ (GALGAS_ast & ioArgument0,
+                                                                                 const GALGAS_lstring constinArgument1,
+                                                                                 C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i32_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i32_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i33_ (GALGAS_ast & ioArgument0,
-                                                                  GALGAS_systemRoutineDeclarationListAST & ioArgument1,
-                                                                  C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i33_ (GALGAS_ast & ioArgument0,
+                                                                                 const GALGAS_lstring constinArgument1,
+                                                                                 C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_system_5F_routine_i33_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i33_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i34_ (GALGAS_ast & ioArgument0,
                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
@@ -8804,7 +8804,7 @@ class GALGAS_systemRoutineDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_lstring & in_mName,
+                                                  const class GALGAS_lstring & in_mSystemRoutineName,
                                                   const class GALGAS_mode & in_mMode,
                                                   const class GALGAS_bool & in_mPublic,
                                                   const class GALGAS_lstringlist & in_mAttributeList,
@@ -8956,10 +8956,6 @@ class GALGAS_systemRoutineDeclarationListAST : public AC_GALGAS_list {
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublicAtIndex (const class GALGAS_uint & constinOperand0,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
@@ -8967,6 +8963,10 @@ class GALGAS_systemRoutineDeclarationListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSystemRoutineNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                                   C_Compiler * inCompiler
@@ -8998,7 +8998,7 @@ class cEnumerator_systemRoutineDeclarationListAST : public cGenericAbstractEnume
                                                         const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_lstring current_mName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mSystemRoutineName (LOCATION_ARGS) const ;
   public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mPublic (LOCATION_ARGS) const ;
   public : class GALGAS_lstringlist current_mAttributeList (LOCATION_ARGS) const ;
@@ -9341,8 +9341,7 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_syncDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                    const class GALGAS_structurePropertyListAST & inOperand1,
-                                                                   const class GALGAS_systemRoutineDeclarationListAST & inOperand2,
-                                                                   const class GALGAS_guardDeclarationListAST & inOperand3
+                                                                   const class GALGAS_guardDeclarationListAST & inOperand2
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -9359,8 +9358,6 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSyncToolName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -9383,13 +9380,11 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mSyncToolName ;
   public : GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
-  public : GALGAS_systemRoutineDeclarationListAST mProperty_mSystemRoutineListAST ;
   public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
 
 //--- Constructor
   public : cPtr_syncDeclarationAST (const GALGAS_lstring & in_mSyncToolName,
                                     const GALGAS_structurePropertyListAST & in_mStructurePropertyListAST,
-                                    const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
                                     const GALGAS_guardDeclarationListAST & in_mGuardListAST
                                     COMMA_LOCATION_ARGS) ;
 
@@ -9399,7 +9394,6 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncToolName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_systemRoutineDeclarationListAST getter_mSystemRoutineListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -9741,6 +9735,135 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncInstanceName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         @systemRoutineDeclarationAST class                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST {
+//--- Constructor
+  public : GALGAS_systemRoutineDeclarationAST (void) ;
+
+//---
+  public : inline const class cPtr_systemRoutineDeclarationAST * ptr (void) const { return (const cPtr_systemRoutineDeclarationAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_systemRoutineDeclarationAST (const cPtr_systemRoutineDeclarationAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_systemRoutineDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_systemRoutineDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                            const class GALGAS_lstring & inOperand1,
+                                                                            const class GALGAS_mode & inOperand2,
+                                                                            const class GALGAS_bool & inOperand3,
+                                                                            const class GALGAS_lstringlist & inOperand4,
+                                                                            const class GALGAS_routineFormalArgumentListAST & inOperand5,
+                                                                            const class GALGAS_lstring & inOperand6,
+                                                                            const class GALGAS_instructionListAST & inOperand7,
+                                                                            const class GALGAS_location & inOperand8
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_systemRoutineDeclarationAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfInstructionListLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mFormalArgumentList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublic (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSystemRoutineName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_systemRoutineDeclarationAST class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclarationAST ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                Pointer class for @systemRoutineDeclarationAST class                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
+//--- Attributes
+  public : GALGAS_lstring mProperty_mReceiverTypeName ;
+  public : GALGAS_lstring mProperty_mSystemRoutineName ;
+  public : GALGAS_mode mProperty_mMode ;
+  public : GALGAS_bool mProperty_mPublic ;
+  public : GALGAS_lstringlist mProperty_mAttributeList ;
+  public : GALGAS_routineFormalArgumentListAST mProperty_mFormalArgumentList ;
+  public : GALGAS_lstring mProperty_mReturnTypeName ;
+  public : GALGAS_instructionListAST mProperty_mInstructionList ;
+  public : GALGAS_location mProperty_mEndOfInstructionListLocation ;
+
+//--- Constructor
+  public : cPtr_systemRoutineDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
+                                             const GALGAS_lstring & in_mSystemRoutineName,
+                                             const GALGAS_mode & in_mMode,
+                                             const GALGAS_bool & in_mPublic,
+                                             const GALGAS_lstringlist & in_mAttributeList,
+                                             const GALGAS_routineFormalArgumentListAST & in_mFormalArgumentList,
+                                             const GALGAS_lstring & in_mReturnTypeName,
+                                             const GALGAS_instructionListAST & in_mInstructionList,
+                                             const GALGAS_location & in_mEndOfInstructionListLocation
+                                             COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSystemRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mPublic (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfInstructionListLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -15073,8 +15196,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 
   public : GALGAS_isrDeclarationListAST mProperty_mISRDeclarationListAST ;
 
-  public : GALGAS_systemRoutineDeclarationListAST mProperty_mStandAloneSystemRoutineListAST ;
-
   public : GALGAS_lstringlist mProperty_mTargetListAST ;
 
   public : GALGAS_taskListAST mProperty_mTaskListAST ;
@@ -15108,7 +15229,6 @@ class GALGAS_ast : public AC_GALGAS_root {
                        const GALGAS_requiredFunctionDeclarationListAST & in_mRequiredFunctionListAST,
                        const GALGAS_externFunctionDeclarationListAST & in_mExternFunctionListAST,
                        const GALGAS_isrDeclarationListAST & in_mISRDeclarationListAST,
-                       const GALGAS_systemRoutineDeclarationListAST & in_mStandAloneSystemRoutineListAST,
                        const GALGAS_lstringlist & in_mTargetListAST,
                        const GALGAS_taskListAST & in_mTaskListAST,
                        const GALGAS_checkTargetListAST & in_mCheckTargetListAST,
@@ -15133,14 +15253,13 @@ class GALGAS_ast : public AC_GALGAS_root {
                                                     const class GALGAS_requiredFunctionDeclarationListAST & inOperand2,
                                                     const class GALGAS_externFunctionDeclarationListAST & inOperand3,
                                                     const class GALGAS_isrDeclarationListAST & inOperand4,
-                                                    const class GALGAS_systemRoutineDeclarationListAST & inOperand5,
-                                                    const class GALGAS_lstringlist & inOperand6,
-                                                    const class GALGAS_taskListAST & inOperand7,
-                                                    const class GALGAS_checkTargetListAST & inOperand8,
-                                                    const class GALGAS_driverDeclarationListAST & inOperand9,
-                                                    const class GALGAS_driverInstanciationListAST & inOperand10,
-                                                    const class GALGAS_uint & inOperand11,
-                                                    const class GALGAS_controlRegisterUserAccesMapAST & inOperand12
+                                                    const class GALGAS_lstringlist & inOperand5,
+                                                    const class GALGAS_taskListAST & inOperand6,
+                                                    const class GALGAS_checkTargetListAST & inOperand7,
+                                                    const class GALGAS_driverDeclarationListAST & inOperand8,
+                                                    const class GALGAS_driverInstanciationListAST & inOperand9,
+                                                    const class GALGAS_uint & inOperand10,
+                                                    const class GALGAS_controlRegisterUserAccesMapAST & inOperand11
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -15172,8 +15291,6 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_driverInstanciationListAST getter_mRequiredDriverListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_requiredFunctionDeclarationListAST getter_mRequiredFunctionListAST (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_systemRoutineDeclarationListAST getter_mStandAloneSystemRoutineListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mTargetListAST (LOCATION_ARGS) const ;
 
@@ -16529,7 +16646,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structurePropertyLi
 
 class GALGAS_systemRoutineDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public : GALGAS_lstring mProperty_mName ;
+  public : GALGAS_lstring mProperty_mSystemRoutineName ;
 
   public : GALGAS_mode mProperty_mMode ;
 
@@ -16556,7 +16673,7 @@ class GALGAS_systemRoutineDeclarationListAST_2D_element : public AC_GALGAS_root 
   public : virtual ~ GALGAS_systemRoutineDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_systemRoutineDeclarationListAST_2D_element (const GALGAS_lstring & in_mName,
+  public : GALGAS_systemRoutineDeclarationListAST_2D_element (const GALGAS_lstring & in_mSystemRoutineName,
                                                               const GALGAS_mode & in_mMode,
                                                               const GALGAS_bool & in_mPublic,
                                                               const GALGAS_lstringlist & in_mAttributeList,
@@ -16608,11 +16725,11 @@ class GALGAS_systemRoutineDeclarationListAST_2D_element : public AC_GALGAS_root 
 
   public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mName (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublic (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSystemRoutineName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
