@@ -76,7 +76,6 @@ syntax extension omnibus_syntax {
     end
     ${$
     @structurePropertyListAST propertyListAST = {}
-#    @guardDeclarationListAST guardListAST = {}
     var bootHandled = false
     var bootLocation = @location.here
     @instructionListAST bootInstructionList = {}
@@ -117,8 +116,10 @@ syntax extension omnibus_syntax {
     while
       <system_routine_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
     while
-#      <guard> !?ioAST !?guardListAST
-      <guard> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName) !receiverLLVMBaseTypeName: llvmDriverNameFromName (!driverName).string
+      <guard>
+        !?ioAST
+        !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
+        !receiverLLVMBaseTypeName: llvmDriverNameFromName (!driverName).string
     end
     $}$
   #--- Declare driver

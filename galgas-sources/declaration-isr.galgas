@@ -79,7 +79,7 @@ override getter @isrDeclarationAST locationForErrorSignaling -> @location {
 
 override method @isrDeclarationAST enterInContext
   ?!context:@semanticContext unused ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
@@ -87,6 +87,9 @@ override method @isrDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
+#---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
+  ioDecoratedDeclarationList += !@decoratedISRDeclaration.new {!mISRName !mMode !mDriverName}
+#----------------
   let driverLLVMBaseTypeName = llvmDriverNameFromName (!mDriverName)
   let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !mISRName !{})
   ioDecoratedRoutineList +=
@@ -103,6 +106,35 @@ override method @isrDeclarationAST enterInContext
     ! mISRInstructionList
     ! mEndOfISRDeclaration
     !returnTypeName: ["" nowhere]  # Empty string if no returned value
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
+  @lstring mISRName
+  @mode mMode
+  @lstring mDriverName
+}
+
+#·······················································································································
+
+override method @decoratedISRDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Self type
+  [inContext.mTypeMap searchKey !lkey:omnibusTypeSpecificNameForDriver (!mDriverName) ?type:let selfType]
+#--- Code generation
+  [inContext.mAvailableInterruptMap searchKey !mISRName ?*]
+  [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
+    !mISRName
+    !selfType
+    !mDriverName
+    !mMode
+  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
