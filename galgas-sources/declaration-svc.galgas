@@ -2,17 +2,6 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @systemRoutineDeclarationListAST {
-  @lstring mSystemRoutineName
-  @mode mMode
-  @bool mPublic
-  @lstringlist mAttributeList
-  @routineFormalArgumentListAST mFormalArgumentList
-  @lstring mReturnTypeName
-  @instructionListAST mInstructionList
-  @location mEndOfInstructionListLocation
-}
-
 class @systemRoutineDeclarationAST : @abstractDeclarationAST {
   @lstring mReceiverTypeName
   @lstring mSystemRoutineName
@@ -85,7 +74,6 @@ syntax extension omnibus_syntax {
   # A primitive or a service accepts only input arguments and does not return any value
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-#  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
     @bool public
     select
       public = false
@@ -123,21 +111,11 @@ syntax extension omnibus_syntax {
       !instructionList
       !.here
     }
-#    ioSVCListAST +=
-#      !name
-#      !mode
-#      !public
-#      !attributeList
-#      !formalArgumentList
-#      !["" here]
-#      !instructionList
-#      !.here
   }
 
   #·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-#  rule <system_routine>?!@ast ioAST ?!@systemRoutineDeclarationListAST ioSVCListAST {
     @bool public
     select
       public = false
@@ -175,15 +153,6 @@ syntax extension omnibus_syntax {
       !instructionList
       !.here
     }
-#    ioSVCListAST +=
-#      !name
-#      !mode
-#      !public
-#      !attributeList
-#      !formalArgumentList
-#      !["" here]
-#      !instructionList
-#      !.here
   }
 
   #·····················································································································
@@ -219,18 +188,6 @@ override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticT
     [!?ioGraph noteNode !mReturnTypeName]
     [!?ioGraph addEdge !nodeKey !mReturnTypeName]
   end
-
-##---
-#  for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-#    [!?ioGraph noteNode !formalArgumentTypeName]
-#  end
-#  [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-#  if mReceiverTypeName.string != "" then
-#    [!?ioGraph noteNode !mReceiverTypeName]
-#  end
-#  if mFunctionReturnTypeName.string != "" then
-#    [!?ioGraph noteNode !mFunctionReturnTypeName]
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -243,19 +200,6 @@ override getter @systemRoutineDeclarationAST keyRepresentationForErrorSignaling 
 
 override getter @systemRoutineDeclarationAST locationForErrorSignaling -> @location {
   result = mSystemRoutineName.location
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mFormalArgumentList do
-      [!?ioGraph noteNode !formalArgumentTypeName]
-    end
-    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -437,120 +381,6 @@ override method @systemRoutineDeclarationAST enterInContext
     !returnTypeProxy
   }
 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @systemRoutineDeclarationListAST enterSystemRoutineInContext
-  ?receiverTypeName:let @lstring inReceiverTypeName # Empty string if standalone
-  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName  # Empty string if standalone
-  ?!context:@semanticContext ioContext
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR ioRoutineListIR
-{
-#---------------------------------------- Self type proxy
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !inReceiverTypeName ?let selfTypeProxy]
-#---------------------------------------- Self type proxy
-  for system in self do
-  #--- Attributes
-    @stringset attributeSet = {}
-    for attribute in system.mAttributeList do
-      attributeSet += !attribute.mValue.string
-    end
-  #---
-    @routineKind routineKind
-    switch system.mMode
-    case sectionMode, safeSectionMode :
-      routineKind = .section
-    case serviceMode, safeServiceMode :
-      routineKind = .service
-    case primitiveMode, safePrimitiveMode :
-      routineKind = .primitive
-    case userMode, safeUserMode, anyMode, anySafeMode, bootMode, guardMode, panicMode, safeGuardMode, startupMode :
-      error system.mSystemRoutineName : "internal error" : routineKind
-    end
-  #--- Routine mangled names
-    let userRoutineMangledName = systemUserMangledNameFromAST (
-      !inReceiverLLVMBaseTypeName
-      !routineKind
-      !system.mSystemRoutineName
-      !system.mFormalArgumentList
-    )
-    let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
-      !inReceiverLLVMBaseTypeName
-      !routineKind
-      !system.mSystemRoutineName
-      !system.mFormalArgumentList
-    )
-  #--- Signature
-    routineTypedSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
-  #--- Attributes
-    var mutating = false
-    var noUnusedWarning = false
-    for (attribute) in system.mAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if noUnusedWarning then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
-        end
-        noUnusedWarning = true    
-      elsif attribute.string == mutatingAttribute () then
-        if mutating then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
-        end
-        mutating = true    
-      else
-        error attribute 
-        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + noUnusedWarningAttribute ()
-        fixit { remove }
-      end
-    end
-    let @routineAttributes attributes = .mutating
-  #--- Enter in routine map
-    let @routineLLVMNameDict routineLLVMNameDict = [system.mMode routineLLVMDictionaryForSystemRoutine
-      !userRoutineMangledName
-      !implementationRoutineMangledName
-    ]
-    let routineMangledName = [signature mangledName !receiverTypeName: inReceiverTypeName !functionName: system.mSystemRoutineName]
-    [!?ioContext.mRoutineMap insertKey
-      !routineMangledName
-      !system.mPublic
-      !signature
-      !returnTypeProxy
-      !routineLLVMNameDict
-      !true
-      !system.mMode
-    ]
-  #--- Prepare semantic analysis
-    ioDecoratedRoutineList +=
-      !receiverTypeName: inReceiverTypeName
-      !mode:system.mMode
-      !isRequired:false
-      !routineKind: routineKind
-      !warnIfUnused: not noUnusedWarning
-      !exportedRoutine: true
-      !routineAttributes: attributes
-      !routineMangledLLVMName: implementationRoutineMangledName
-      !formalArgumentList: system.mFormalArgumentList
-      !warningOnUnusedArgs: noUnusedWarning
-      !system.mInstructionList
-      !system.mEndOfInstructionListLocation
-      !returnTypeName: system.mReturnTypeName  # Empty string if no returned value
-  #--- 
-    ioRoutineListIR += !@systemUserRoutineIR.new {
-      !userRoutineMangledName
-      !isRequired:false
-      !warnsIfUnused:false
-      !implementationRoutineMangledName
-      !signature
-      !selfTypeProxy
-      !routineKind == .section # If false, service or primitive
-      !returnTypeProxy
-    }
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

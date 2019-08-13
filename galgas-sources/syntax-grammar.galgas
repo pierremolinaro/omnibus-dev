@@ -28,10 +28,6 @@ syntax omnibus_syntax (omnibus_lexique) {
       <declaration> !?ioAST
     while
       <system_routine_declaration> !?ioAST !receiverTypeName: ["" nowhere]
-#    while
-#      @systemRoutineDeclarationListAST standAloneSystemRoutineListAST = {}
-#      <system_routine> !?ioAST !?standAloneSystemRoutineListAST
-#      ioAST.mStandAloneSystemRoutineListAST += standAloneSystemRoutineListAST
     while
       <import_file> !?outImportedFileList
     end

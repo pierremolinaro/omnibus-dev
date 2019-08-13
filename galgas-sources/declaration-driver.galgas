@@ -6,7 +6,6 @@ struct @driverDeclarationAST {
   @lstring mDriverName
   @lstringlist mDriverDependanceList
   @structurePropertyListAST mPropertyListAST
-  @systemRoutineDeclarationListAST mDriverSystemRoutineListAST
   @guardDeclarationListAST mDriverGuardListAST
 #--- Boot
   @location mBootLocation
@@ -79,7 +78,6 @@ syntax extension omnibus_syntax {
     ${$
     @structurePropertyListAST propertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
-    @systemRoutineDeclarationListAST svcListAST = {}
     var bootHandled = false
     var bootLocation = @location.here
     @instructionListAST bootInstructionList = {}
@@ -130,7 +128,7 @@ syntax extension omnibus_syntax {
       !driverName
       !driverDependenceList
       !propertyListAST
-      !svcListAST
+#      !svcListAST
       !guardListAST
       !bootLocation
       !bootInstructionList
@@ -305,7 +303,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !{}
       !false # Do not generate assignment routine
       !driverPropertyListAST
-      !declaration.mDriverSystemRoutineListAST
+#      !{} # declaration.mDriverSystemRoutineListAST
       !declaration.mDriverGuardListAST
       !false # Do not implement deinit
     }

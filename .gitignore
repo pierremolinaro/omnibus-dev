@@ -22,8 +22,8 @@
 build/*
 
 xcode-project/build/*
-xcode-project/plm.xcodeproj/xcuserdata/*
-xcode-project/plm.xcodeproj/project.xcworkspace/*
+xcode-project/*.xcodeproj/xcuserdata/*
+xcode-project/*.xcodeproj/project.xcworkspace/*
 
 makefile-macosx/omnibus
 makefile-macosx/omnibus-debug
