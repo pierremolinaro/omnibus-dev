@@ -264,16 +264,6 @@ class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Function 'llvmDriverNameFromName'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_llvmDriverNameFromName (const class GALGAS_lstring & constinArgument0,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                           Routine 'retainRequiredDrivers'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -434,6 +424,30 @@ void routine_routineTypedSignature_32_ (class GALGAS_unifiedTypeMap inArgument0,
                                         class GALGAS_routineTypedSignature & outArgument2,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'guardImplementationLLVMName'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardImplementationLLVMName (const class GALGAS_string & constinArgument0,
+                                                           const class GALGAS_lstring & constinArgument1,
+                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'guardUserLLVMName'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardUserLLVMName (const class GALGAS_string & constinArgument0,
+                                                 const class GALGAS_lstring & constinArgument1,
+                                                 const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

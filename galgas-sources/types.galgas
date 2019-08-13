@@ -9,8 +9,7 @@ shared class @omnibusType {
   @propertySetterMap propertySetterMap %selector
   @classConstantMap classConstantMap %selector # type.cst, as enumeration values
   @constructorMap constructorMap %selector # type (!... !...)
-  @guardMapForContext guardMap %selector # §
-  @subscript subscript %selector # §
+  @subscript subscript %selector
   @stringset assignmentSources %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
@@ -141,10 +140,8 @@ func %once literalIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
-    !guardMap:{}
     !subscript:.noSubscript
     !assignmentSources: {!staticIntegerTypeName ()}
     !attributes:.equatable | .copyable
@@ -160,10 +157,8 @@ func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
-    !guardMap:{}
     !subscript:.literalString
     !assignmentSources: {!staticStringTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
@@ -179,10 +174,8 @@ func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-#    !routineMap: {}
     !classConstantMap:{}
     !constructorMap:{}
-    !guardMap:{}
     !subscript:.noSubscript
     !assignmentSources: {}
     !attributes:.none

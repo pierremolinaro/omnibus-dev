@@ -9,18 +9,9 @@ enum @guardKind {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @guardDeclarationListAST {
-  @lstring mGuardName
-  @bool mIsPublic
-  @lstringlist mGuardAttributeList
-  @routineFormalArgumentListAST mGuardFormalArgumentList
-  @guardKind mGuardKind
-  @instructionListAST mGuardInstructionList
-  @location mEndOfGuardDeclaration
-}
-
 class @guardDeclarationAST : @abstractDeclarationAST {
   @lstring mReceiverTypeName # Empty string if standalone
+  @string mReceiverLLVMBaseTypeName
   @lstring mGuardName
   @bool mIsPublic
   @lstringlist mGuardAttributeList
@@ -38,7 +29,9 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <guard> ?!@ast ioAST ?!@guardDeclarationListAST ioGuardList {
+  rule <guard> ?!@ast ioAST
+               ?receiverTypeName: let @lstring inReceiverTypeName
+               ?receiverLLVMBaseTypeName: let @string inReceiverLLVMBaseTypeName {
     @bool public
     select
       public = false
@@ -66,7 +59,10 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-    ioGuardList +=
+#     ioGuardList +=
+   ioAST.mDeclarationListAST += !@guardDeclarationAST.new {
+      !inReceiverTypeName
+      !inReceiverLLVMBaseTypeName
       !guardName
       !public
       !attributeList
@@ -74,6 +70,7 @@ syntax extension omnibus_syntax {
       !guardKind
       !instructionList
       !.here
+    }
   }
 
   #·····················································································································
@@ -85,7 +82,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  var s = ""
+  var s = "guard."
   if mReceiverTypeName.string != "" then
     s += mReceiverTypeName.string + "."
   end
@@ -118,32 +115,52 @@ override getter @guardDeclarationAST locationForErrorSignaling -> @location {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mGuardFormalArgumentList do
-      [!?ioGraph noteNode !formalArgumentTypeName]
-    end
-    [mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @guardDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
+#--- Signature
+  routineTypedSignature (!?ioContext.mTypeMap !mGuardFormalArgumentList ?let signature)
+#--- Guard mangled name
+  let guardMangledName = [signature mangledName !receiverTypeName: mReceiverTypeName !functionName: mGuardName]
+#--- Guard user routine LLVM name
+  let guardUserLLVMName = guardUserLLVMName (
+    !mReceiverLLVMBaseTypeName
+    !mGuardName
+    !mGuardFormalArgumentList
+  )
+#--- Guard implementation routine LLVM name
+  let guardImplementationLLVMName = guardImplementationLLVMName (
+    !mReceiverLLVMBaseTypeName
+    !mGuardName
+    !mGuardFormalArgumentList
+  )
+  [!?ioContext.mGuardMap insertKey
+    !guardMangledName
+    !mIsPublic
+    !signature
+    !guardUserLLVMName
+    !guardImplementationLLVMName
+  ]
+  ioDecoratedDeclarationList += !@decoratedGuardDeclaration.new {
+    !mReceiverTypeName
+    !mGuardName
+    !mIsPublic
+    !mGuardAttributeList
+    !mGuardFormalArgumentList
+    !mGuardKind
+    !mGuardInstructionList
+    !mEndOfGuardDeclaration
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -194,61 +211,6 @@ map @guardMapForContext {
 
   insert insertKey error message "the '%K' guard is already declared in %L"
   search searchKey error message "there is no '%K' guard"
-}
-
-#·······················································································································
-
-method @guardDeclarationListAST enterGuardsInContext
-  ?receiverTypeName:let @lstring inReceiverTypeName
-  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
-  ?!context:@semanticContext ioContext
-  ?!guardMap:@guardMapForContext ioGuardMap
-  ?!@declarationDecorationList ioDecoratedDeclarationList
-{
-#---------------------------------------- Enter guards in guard map
-  for guard in self do
-  #--- Signature
-    routineTypedSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
-  #--- Guard mangled name
-    let guardMangledName = [signature mangledName !receiverTypeName: inReceiverTypeName !functionName: guard.mGuardName]
-  #--- Guard user routine LLVM name
-    let guardUserLLVMName = guardUserLLVMName (
-      !inReceiverLLVMBaseTypeName
-      !guard.mGuardName
-      !guard.mGuardFormalArgumentList
-    )
-  #--- Guard implementation routine LLVM name
-    let guardImplementationLLVMName = guardImplementationLLVMName (
-      !inReceiverLLVMBaseTypeName
-      !guard.mGuardName
-      !guard.mGuardFormalArgumentList
-    )
-  #--- Enter in context
-#    [!?ioGuardMap insertKey
-#      !guardMangledName
-#      !guard.mIsPublic
-#      !signature
-#      !guardUserLLVMName
-#      !guardImplementationLLVMName
-#    ]
-    [!?ioContext.mGuardMap insertKey
-      !guardMangledName
-      !guard.mIsPublic
-      !signature
-      !guardUserLLVMName
-      !guardImplementationLLVMName
-    ]
-    ioDecoratedDeclarationList += !@decoratedGuardDeclaration.new {
-      !inReceiverTypeName
-      !guard.mGuardName
-      !guard.mIsPublic
-      !guard.mGuardAttributeList
-      !guard.mGuardFormalArgumentList
-      !guard.mGuardKind
-      !guard.mGuardInstructionList
-      !guard.mEndOfGuardDeclaration
-    }
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

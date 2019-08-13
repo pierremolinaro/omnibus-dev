@@ -172,10 +172,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     let dynamicArrayType = @omnibusType.new {
       !propertyGetterMap:propertyGetterMap
       !propertySetterMap: {}
-#      !routineMap: routineMap
       !classConstantMap:{}
       !constructorMap:constructorMap
-      !guardMap:{}
       !subscript:.noSubscript
       !assignmentSources: {!llvmBaseTypeName}
       !attributes:typeAttributes

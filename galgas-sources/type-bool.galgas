@@ -61,10 +61,8 @@ override method @booleanDeclarationAST enterInContext
   let booleanType = @omnibusType.new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-#    !routineMap: routineMap
     !classConstantMap:{}
     !constructorMap:{}
-    !guardMap:{}
     !subscript:.noSubscript
     !assignmentSources: {!boolTypeName ()}
     !attributes:.instanciable | .equatable | .copyable

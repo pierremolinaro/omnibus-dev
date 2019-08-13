@@ -2190,19 +2190,19 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @guardDeclarationAST class                                              *
+//                                          @decoratedGuardDeclaration class                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
+class GALGAS_decoratedGuardDeclaration : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
-  public : GALGAS_guardDeclarationAST (void) ;
+  public : GALGAS_decoratedGuardDeclaration (void) ;
 
 //---
-  public : inline const class cPtr_guardDeclarationAST * ptr (void) const { return (const cPtr_guardDeclarationAST *) mObjectPtr ; }
+  public : inline const class cPtr_decoratedGuardDeclaration * ptr (void) const { return (const cPtr_decoratedGuardDeclaration *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_guardDeclarationAST (const cPtr_guardDeclarationAST * inSourcePtr) ;
+  public : GALGAS_decoratedGuardDeclaration (const cPtr_decoratedGuardDeclaration * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -2210,23 +2210,23 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_guardDeclarationAST extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_decoratedGuardDeclaration extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_guardDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_lstring & inOperand1,
-                                                                    const class GALGAS_bool & inOperand2,
-                                                                    const class GALGAS_lstringlist & inOperand3,
-                                                                    const class GALGAS_routineFormalArgumentListAST & inOperand4,
-                                                                    const class GALGAS_guardKind & inOperand5,
-                                                                    const class GALGAS_instructionListAST & inOperand6,
-                                                                    const class GALGAS_location & inOperand7
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_decoratedGuardDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                          const class GALGAS_lstring & inOperand1,
+                                                                          const class GALGAS_bool & inOperand2,
+                                                                          const class GALGAS_lstringlist & inOperand3,
+                                                                          const class GALGAS_routineFormalArgumentListAST & inOperand4,
+                                                                          const class GALGAS_guardKind & inOperand5,
+                                                                          const class GALGAS_instructionListAST & inOperand6,
+                                                                          const class GALGAS_location & inOperand7
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_guardDeclarationAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_decoratedGuardDeclaration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2254,20 +2254,20 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_guardDeclarationAST class
+} ; // End of GALGAS_decoratedGuardDeclaration class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardDeclarationAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedGuardDeclaration ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @guardDeclarationAST class                                     *
+//                                 Pointer class for @decoratedGuardDeclaration class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
+class cPtr_decoratedGuardDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
   public : GALGAS_lstring mProperty_mReceiverTypeName ;
   public : GALGAS_lstring mProperty_mGuardName ;
@@ -2279,15 +2279,15 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_location mProperty_mEndOfGuardDeclaration ;
 
 //--- Constructor
-  public : cPtr_guardDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
-                                     const GALGAS_lstring & in_mGuardName,
-                                     const GALGAS_bool & in_mIsPublic,
-                                     const GALGAS_lstringlist & in_mGuardAttributeList,
-                                     const GALGAS_routineFormalArgumentListAST & in_mGuardFormalArgumentList,
-                                     const GALGAS_guardKind & in_mGuardKind,
-                                     const GALGAS_instructionListAST & in_mGuardInstructionList,
-                                     const GALGAS_location & in_mEndOfGuardDeclaration
-                                     COMMA_LOCATION_ARGS) ;
+  public : cPtr_decoratedGuardDeclaration (const GALGAS_lstring & in_mReceiverTypeName,
+                                           const GALGAS_lstring & in_mGuardName,
+                                           const GALGAS_bool & in_mIsPublic,
+                                           const GALGAS_lstringlist & in_mGuardAttributeList,
+                                           const GALGAS_routineFormalArgumentListAST & in_mGuardFormalArgumentList,
+                                           const GALGAS_guardKind & in_mGuardKind,
+                                           const GALGAS_instructionListAST & in_mGuardInstructionList,
+                                           const GALGAS_location & in_mEndOfGuardDeclaration
+                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -2864,4 +2864,14 @@ void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalV
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_openOverrideForSelectBlock (class GALGAS_universalValuedObjectMap & ioObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 

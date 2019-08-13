@@ -128,10 +128,8 @@ override method @typeOpaqueDeclarationAST enterInContext
     let opaqueType = @omnibusType.new {
       !propertyGetterMap:{}
       !propertySetterMap: {}
-#      !routineMap: {}
       !classConstantMap:{}
       !constructorMap:constructorMap
-      !guardMap:{}
       !subscript:.noSubscript
       !assignmentSources: if copyable then {!mOpaqueTypeName} else {} end
       !attributes:opaqueTypeAttributes

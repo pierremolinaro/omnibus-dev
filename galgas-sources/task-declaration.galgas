@@ -173,7 +173,6 @@ syntax extension omnibus_syntax {
       !{}
       !false # Generate assignment routine
       !taskVarList
-      !{}
       !false
     }
   }

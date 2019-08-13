@@ -9,7 +9,6 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   @lstringlist mAttributeListAST
   @bool mGenerateAssignmentRoutine
   @structurePropertyListAST mStructurePropertyListAST
-  @guardDeclarationListAST mGuardListAST
   @bool mMayImplementDeinit
 }
 
@@ -257,7 +256,6 @@ syntax extension omnibus_syntax {
       !attributeList
       !true # Generate assignment routine
       !fieldList
-      !{}
       !true
     }
   }
@@ -290,8 +288,6 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
       [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
   end
-#--- Add structure services, section, primitives and guards
-  [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
 #·······················································································································
@@ -328,7 +324,7 @@ sortedlist @sortedOperandIRList {
 
 override method @structureDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
@@ -385,22 +381,12 @@ override method @structureDeclarationAST enterInContext
   if mGenerateAssignmentRoutine & canBeCopied then
     typeAttributes = typeAttributes | .copyable
   end
-#---------------------------------------- Enter guards in guard map
-  @guardMapForContext guardMap = {}
-  [mGuardListAST enterGuardsInContext
-    !receiverTypeName:mReceiverTypeName
-    !receiverLLVMBaseTypeName:mLLVMBaseTypeName
-    !?context: ioContext
-    !?guardMap: guardMap
-    !?ioDecoratedDeclarationList
-  ]
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: propertySetterMap
     !classConstantMap:{}
     !constructorMap:constructorMap
-    !guardMap:guardMap
     !subscript:.noSubscript
     !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mLLVMBaseTypeName} else {} end
     !attributes:typeAttributes

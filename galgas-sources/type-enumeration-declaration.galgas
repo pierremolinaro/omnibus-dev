@@ -143,10 +143,8 @@ override method @enumerationDeclarationAST enterInContext
   let enumerationType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: {}
-#    !routineMap: routineMap
     !classConstantMap:enumConstantMap
     !constructorMap:{}
-    !guardMap:{}
     !subscript:.noSubscript
     !assignmentSources: {!mEnumerationName}
     !attributes:.instanciable | .equatable | .copyable

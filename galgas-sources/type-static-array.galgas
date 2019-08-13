@@ -134,10 +134,8 @@ override method @staticArrayTypeDeclarationAST enterInContext
       let arrayType = @omnibusType.new {
         !propertyGetterMap:arrayTypePropertyMap
         !propertySetterMap: {}
-#        !routineMap: {}
         !classConstantMap:classConstantMap
         !constructorMap:constructorMap
-        !guardMap:{}
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !assignmentSources: {!llvmBaseTypeName}
         !attributes:typeAttributes
