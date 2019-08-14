@@ -71,11 +71,6 @@ private proc enterLiteralIntegerOperators
     !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_eq}
   ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intIntOp
-#    !booleanType
-#    !@literal_literal_integerInfixOperation.new {!.icmp_ne}
-#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !booleanType
@@ -86,16 +81,6 @@ private proc enterLiteralIntegerOperators
     !booleanType
     !@literal_literal_integerInfixOperation.new {!.icmp_sle}
   ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intIntOp
-#    !booleanType
-#    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intIntOp
-#    !booleanType
-#    !@literal_literal_integerInfixOperation.new {!.icmp_sge}
-#  ]
 #--- Bit Wise operators (for unsigned integers)
   [!?ioContext.mAndOperatorMap insertKey
     !intIntOp
@@ -205,7 +190,6 @@ override method @literal_literal_integerInfixOperation generateInfixOperatorCode
   [inRightOperand literalInteger ?1* ?value:let @bigint rightValue]
   let result = [self performStaticOperation !leftValue !rightValue]
   outResult = .literalInteger {!type: inResultType !value:result}
-#  message "LITERAL LITERAL " + leftValue + " " + rightValue + " -> " + result + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -160,16 +160,10 @@ private func getInfixOperatorMap
   switch inOp 
   case equal :
     outOperatorMap = inContext.mEqualOperatorMap
-#  case nonEqual :
-#    outOperatorMap = inContext.mNonEqualOperatorMap
   case strictInf :
     outOperatorMap = inContext.mStrictInfOperatorMap
   case infEqual :
     outOperatorMap = inContext.mInfEqualOperatorMap
-#  case strictSup :
-#    outOperatorMap = inContext.mStrictSupOperatorMap
-#  case supEqual :
-#    outOperatorMap = inContext.mSupEqualOperatorMap
   case andOp :
     outOperatorMap = inContext.mAndOperatorMap
   case orOp :
@@ -292,15 +286,10 @@ getter @infixOperatorDescription performStaticOperation
   case lshr : result = inLeft >> [inRight uint]
   
   case icmp_eq : result = [inLeft == inRight bigint]
-#  case icmp_ne : result = [inLeft != inRight bigint]
   case icmp_ult : result = [inLeft < inRight bigint]
   case icmp_ule : result = [inLeft <= inRight bigint]
-#  case icmp_ugt : result = [inLeft > inRight bigint]
-#  case icmp_uge : result = [inLeft >= inRight bigint]
   case icmp_slt : result = [inLeft < inRight bigint]
   case icmp_sle : result = [inLeft <= inRight bigint]
-#  case icmp_sgt : result = [inLeft > inRight bigint]
-#  case icmp_sge : result = [inLeft >= inRight bigint]
   end
 }
 

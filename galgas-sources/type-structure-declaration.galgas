@@ -715,7 +715,7 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "copyWords:\n"
   ioLLVMcode += "  %target32 = bitcast " + structureTypeLLVMTypeName + "* %inTarget to i32*\n"
   ioLLVMcode += "  %source32 = bitcast " + structureTypeLLVMTypeName + "* %inSource to i32*\n"
-  ioLLVMcode += "  %temp = add nsw nuw i32 %byteCount, 3\n"
+  ioLLVMcode += "  %temp = add i32 %byteCount, 3\n"
   ioLLVMcode += "  %wordCount = udiv i32 %temp, 4\n"
   ioLLVMcode += "  br label %copyWords.loop\n"
   ioLLVMcode += "copyWords.loop:\n"

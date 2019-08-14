@@ -223,7 +223,7 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
 #loopLabel:                                      ; preds = %1
 #  %...accès.à.une.propriété... = getelementptr inbounds %TYPE_ELEMENT, %TYPE_ELEMENT* %ptrVar, i32 0, i32 0
 #  %ptrVarNext = getelementptr inbounds %TYPE_ELEMENT, %TYPE_ELEMENT* %ptrVar, i32 1
-#  %indexVarNext = add nsw i32 %indexVar, -1
+#  %indexVarNext = add i32 %indexVar, -1
 #  br label %1
 #
 #endLabel:

@@ -241,7 +241,7 @@ proc buildSemanticContext
 #·······················································································································
 
 func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
-  result = ["{" + inLeftTypeName + ", " + inRightTypeName + "}" nowhere]
+  result = [inLeftTypeName + "," + inRightTypeName nowhere]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

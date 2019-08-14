@@ -768,7 +768,7 @@ override method @integerTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "copyWords:\n"
   ioLLVMcode += "  %target32 = bitcast " + mLLVMTypeName + "* %outTarget to i32*\n"
   ioLLVMcode += "  %source32 = bitcast " + mLLVMTypeName + "* %inSource to i32*\n"
-  ioLLVMcode += "  %temp = add nsw nuw i32 %byteCount, 3\n"
+  ioLLVMcode += "  %temp = add i32 %byteCount, 3\n"
   ioLLVMcode += "  %wordCount = udiv i32 %temp, 4\n"
   ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
   ioLLVMcode += "  ret void\n"
