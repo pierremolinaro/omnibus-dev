@@ -4438,7 +4438,7 @@ const char * gWrapperFileContent_26_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/omnibus-tools/omnibus-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-8.0.1-binutils-2.32-openocd-0.10.0-libusb-1.0.22\")\n"
+  "  return os.path.expanduser (\"~/omnibus-tools/omnibus-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-9.0.0-binutils-2.32-openocd-0.10.0-libusb-1.0.23\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -5161,15 +5161,20 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
 
 //--- File 'LPC-L2294/ll-arm7tdmi.ll'
 
-const char * gWrapperFileContent_55_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
-  "target triple = \"armv4-none--eabi\"\n"
-  "\n" ;
+const char * gWrapperFileContent_55_targetTemplates = ";--- For LLVM < 9.0.0\n"
+  ";target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "\n"
+  ";--- For LLVM >= 9.0.0\n"
+  "target datalayout = \"e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "\n"
+  ";---\n"
+  "target triple = \"armv4-none-unknown-eabi\"\n" ;
 
 const cRegularFileWrapper gWrapperFile_55_targetTemplates (
   "ll-arm7tdmi.ll",
   "ll",
   true, // Text file
-  106, // Text length
+  239, // Text length
   gWrapperFileContent_55_targetTemplates
 ) ;
 
@@ -7575,15 +7580,20 @@ const cRegularFileWrapper gWrapperFile_63_targetTemplates (
 
 //--- File 'teensy-3-1/ll-cortex-m4.ll'
 
-const char * gWrapperFileContent_67_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
-  "target triple = \"thumbv7em-none--eabi\"\n"
-  "\n" ;
+const char * gWrapperFileContent_67_targetTemplates = ";--- For LLVM < 9.0.0\n"
+  ";target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "\n"
+  ";--- For LLVM >= 9.0.0\n"
+  "target datalayout = \"e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "\n"
+  ";---\n"
+  "target triple = \"thumbv7em-none--eabi\"\n" ;
 
 const cRegularFileWrapper gWrapperFile_67_targetTemplates (
   "ll-cortex-m4.ll",
   "ll",
   true, // Text file
-  110, // Text length
+  236, // Text length
   gWrapperFileContent_67_targetTemplates
 ) ;
 
@@ -12567,15 +12577,20 @@ const cRegularFileWrapper gWrapperFile_104_targetTemplates (
 
 //--- File 'teensy-3-6/ll-cortex-m4.ll'
 
-const char * gWrapperFileContent_109_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
-  "target triple = \"thumbv7em-none--eabi\"\n"
-  "\n" ;
+const char * gWrapperFileContent_109_targetTemplates = ";--- For LLVM < 9.0.0\n"
+  ";target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "\n"
+  ";--- For LLVM >= 9.0.0\n"
+  "target datalayout = \"e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "\n"
+  ";---\n"
+  "target triple = \"thumbv7em-none--eabi\"\n" ;
 
 const cRegularFileWrapper gWrapperFile_109_targetTemplates (
   "ll-cortex-m4.ll",
   "ll",
   true, // Text file
-  110, // Text length
+  236, // Text length
   gWrapperFileContent_109_targetTemplates
 ) ;
 

@@ -8,18 +8,18 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "8.0.1"
+LLVM_VERSION = "9.0.0"
 LLVM_SUFFIX = ""
 
 BINUTILS_VERSION = "2.32"
 
-LIBUSB_VERSION   = "1.0.22"
+LIBUSB_VERSION   = "1.0.23"
 
 OPENOCD_VERSION = "0.10.0"
 
 XZ_VERSION = "5.2.4"
 
-CMAKE_VERSION = "3.11.4" # "3.9.0"
+CMAKE_VERSION = "3.15.3" # "3.11.4" # "3.9.0"
 
 #--------------------------------------- Target
 TARGET = "arm-eabi"
@@ -175,7 +175,16 @@ downloadArchive ("ftp://ftp.gnu.org/gnu/binutils/" + BINUTILS + ".tar.bz2", BINU
 #--------------------------------------------------------------------------- LIBUSB archives
 LIBUSB = "libusb-" + LIBUSB_VERSION
 LIBUSB_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LIBUSB + ".tar.bz2"
-downloadArchive ("http://sourceforge.net/projects/libusb/files/libusb-1.0/" + LIBUSB + "/" + LIBUSB + ".tar.bz2", LIBUSB_ARCHIVE_PATH, startTime)
+if LIBUSB_VERSION == "1.0.22" :
+  LIBUSB_URL = "http://sourceforge.net/projects/libusb/files/libusb-1.0/" + LIBUSB
+  LIBUSB_URL += "/" + LIBUSB + ".tar.bz2"
+elif LIBUSB_VERSION == "1.0.23" :
+  LIBUSB_URL = "https://github.com/libusb/libusb/releases/download/v" + LIBUSB_VERSION
+  LIBUSB_URL += "/libusb-" + LIBUSB_VERSION + ".tar.bz2"
+else :
+  print (bcolors.BOLD_RED + "LIBUSB version " + LLVM_VERSION + " non prise en charge par le script" + bcolors.ENDC)
+  sys.exit (1)
+downloadArchive (LIBUSB_URL, LIBUSB_ARCHIVE_PATH, startTime)
 #--------------------------------------------------------------------------- XZ archives
 XZ = "xz-" + XZ_VERSION
 XZ_ARCHIVE_PATH = ARCHIVE_DIR + "/" + XZ + ".tar.bz2"
@@ -192,10 +201,10 @@ CLANG_ARCHIVE_PATH = ARCHIVE_DIR + "/" + CLANG + ".tar.xz"
 #--- Téléchargement : la base des URL des archives LLVM change régulièrement !
 if (LLVM_VERSION == "8.0.1") or (LLVM_VERSION == "7.1.0") :
   BASE_URL = "https://github.com/llvm/llvm-project/releases/download/llvmorg-"
-elif (LLVM_VERSION == "8.0.0") or (LLVM_VERSION == "7.0.1") or (LLVM_VERSION == "7.0.0") :
+elif (LLVM_VERSION == "9.0.0") or (LLVM_VERSION == "8.0.0") or (LLVM_VERSION == "7.0.1") or (LLVM_VERSION == "7.0.0") :
   BASE_URL = "http://releases.llvm.org/"
 else:
-  print (bcolors.BOLD_RED + "Verion " + LLVM_VERSION + " non prise en charge" + bcolors.ENDC)
+  print (bcolors.BOLD_RED + "LLVM Version " + LLVM_VERSION + " non prise en charge par le script" + bcolors.ENDC)
   sys.exit (1)
 LLVM_URL = BASE_URL + LLVM_VERSION + "/" + LLVM + ".tar.xz"
 CLANG_URL = BASE_URL + LLVM_VERSION + "/" + CLANG + ".tar.xz"

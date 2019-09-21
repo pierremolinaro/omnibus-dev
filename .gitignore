@@ -21,6 +21,8 @@
 
 build/*
 
+arm-clang-llvm-binutils-openocd/+archives-for-cross-compilation/**
+
 xcode-project/build/**
 xcode-project/*.xcodeproj/xcuserdata/**
 xcode-project/*.xcodeproj/project.xcworkspace/**
