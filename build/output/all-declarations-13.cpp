@@ -4195,7 +4195,7 @@ const cRegularFileWrapper gWrapperFile_16_embeddedSampleCode (
 //--- File 'teensy-3-6/15-task-activation-duration-systick.omnibus'
 
 const char * gWrapperFileContent_27_embeddedSampleCode = "target \"teensy-3-6/xtr32\"\n"
-  "let F_CPU_MHZ = 240\n"
+  "let F_CPU_MHZ = 180\n"
   "\n"
   "import \"carte-tp-teensy-3-6.omnibus-import\"\n"
   "\n"

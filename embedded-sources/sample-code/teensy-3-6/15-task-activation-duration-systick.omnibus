@@ -1,5 +1,5 @@
 target "teensy-3-6/xtr32"
-let F_CPU_MHZ = 240
+let F_CPU_MHZ = 180
 
 import "carte-tp-teensy-3-6.omnibus-import"
 
