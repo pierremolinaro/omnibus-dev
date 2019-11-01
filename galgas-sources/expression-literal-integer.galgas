@@ -31,7 +31,7 @@ override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpress
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName ![staticIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !inConstantName ![ctIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -39,7 +39,7 @@ override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpress
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode ![staticIntegerTypeName () nowhere]]
+  [!?ioGraph noteNode ![ctIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -59,7 +59,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type: literalIntegerType () !value:mLiteralInteger.bigint}
+  outResult = .literalInteger {!type: compileTimeIntegerType () !value:mLiteralInteger.bigint}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

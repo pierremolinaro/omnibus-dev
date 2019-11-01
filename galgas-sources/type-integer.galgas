@@ -28,7 +28,7 @@ override method @integerDeclarationAST enterInPrecedenceGraph
 {
   let integerTypeName = [[self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName ![staticIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !integerTypeName ![ctIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -399,7 +399,7 @@ private proc enter_integer_literal_operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
   let booleanType = [ioContext booleanType]
 #--- Comparison infix operator
-  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
+  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !ctIntegerTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
     !booleanType
@@ -549,7 +549,7 @@ private proc enter_literal_integer_operators
 #--- Infix operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
 #--- Comparison infix operator
-  let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
+  let intLiteralOp = combineTypeNamesForInfixOperator (!ctIntegerTypeName () !inIntegerTypeName.string)
   let booleanType = [ioContext booleanType]
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp

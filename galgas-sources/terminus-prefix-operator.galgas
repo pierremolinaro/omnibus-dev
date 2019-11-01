@@ -1,0 +1,168 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @terminusPrefixOperatorEnumeration {
+ case notOp   # not
+ case minusOp # -
+}
+
+#·······················································································································
+
+getter @terminusPrefixOperatorEnumeration string -> @string {
+ switch self
+ case notOp   : result = "not"
+ case minusOp : result = "-"
+ end
+}
+
+#·······················································································································
+
+class @nativePrefixOperatorAST : @abstractDeclarationAST {
+  @terminusPrefixOperatorEnumeration mPrefixOperator
+  @location mInfixOperatorLocation
+  @lstring mReceiverName
+  @lstring mReceiverTypeName
+  @ctExpressionAST mExpression
+  @lstring mResultTypeName
+}
+
+#·······················································································································
+
+override getter @nativePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
+  outLocation = mInfixOperatorLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <prefixOperator> !@terminusPrefixOperatorEnumeration outOperator {
+    select
+      $not$
+      outOperator = .notOp
+    or
+      $-$
+      outOperator = .minusOp
+    end
+  }
+  
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $compiletime$
+    $func$
+    let operationLocation = @location.here
+    <prefixOperator> ?let prefixOperator
+    $($
+    $?selector:$ ?let leftSelector
+    if leftSelector.string != "" then
+      error leftSelector : "only '?' is allowed here"
+    end
+    $identifier$ ?let receiverName
+    $\$type$ ?let receiverType
+    $)$
+    $->$
+    $\$type$ ?let resultType
+    ${$
+    <native_expression> ?let @ctExpressionAST expression
+    $}$
+    ioAST.mDeclarationListAST += !@nativePrefixOperatorAST.new {
+      !prefixOperator
+      !operationLocation
+      !receiverName
+      !receiverType
+      !expression
+      !resultType
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @nativePrefixOperatorAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let nodeName = @lstring.new {![mPrefixOperator string] + "." + mReceiverTypeName !mInfixOperatorLocation}
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
+  [!?ioGraph addEdge !nodeName !mResultTypeName]
+}
+
+#·······················································································································
+
+override getter @nativePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = [mPrefixOperator string] + " " + mReceiverTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @nativePrefixOperatorAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+#--- Check types
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverType]
+  [[receiverType type] checkIsCompileTimeType !mReceiverTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
+  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
+#--- Check native operator expression
+  @ctCheckMap ctCheckMap = {}
+  [!?ctCheckMap insertKey !mReceiverName]
+  [mExpression checkCompileTimeExpression !ctCheckMap]
+#--- Enter in infix operator map  
+  let key = @lstring.new {
+    ![mPrefixOperator string] + " " + [[receiverType type] omnibusTypeDescriptionName]
+    !mInfixOperatorLocation
+  }
+  let definition = @terminusNativePrefixOperator.new {
+    !mInfixOperatorLocation
+    !mReceiverName
+    !mExpression
+  }
+  [!?ioContext.mTerminusPrefixOperatorMap insertKey !key ![receiverType type] ![resultType type] !definition]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   INFIX OPERATOR MAP
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @terminusPrefixOperatorMap {
+  @omnibusType mReceiverType
+  @omnibusType mResultType
+  @terminusPrefixOperator mOperator
+  insert insertKey error message "the '%K' infix operator is already declared in %L"
+  search searchKey error message "there is no '%K' infix operator"
+}
+
+#·······················································································································
+
+abstract class @terminusPrefixOperator {}
+
+#·······················································································································
+
+class @terminusNativePrefixOperator : @terminusPrefixOperator {
+  @location mInfixOperatorLocation
+  @lstring mReceiverOperandName
+  @ctExpressionAST mExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

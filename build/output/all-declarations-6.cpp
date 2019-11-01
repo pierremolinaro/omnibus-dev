@@ -6241,35 +6241,35 @@ void extensionMethod_generateLLVMcode (const GALGAS_controlRegisterGroupArrayLis
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     const GALGAS_controlRegisterGroupArrayList temp_1 = inObject ;
-    test_0 = GALGAS_bool (kIsStrictSup, temp_1.getter_length (SOURCE_FILE ("declaration-control-register.galgas", 666)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_0 = GALGAS_bool (kIsStrictSup, temp_1.getter_length (SOURCE_FILE ("declaration-control-register.galgas", 668)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_0) {
-      ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Control Register Group Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 667)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 667)) ;
-      GALGAS_string var_int_27166 = GALGAS_string ("i").add_operation (constinArgument_inPointerSize.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 668)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 668)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Control Register Group Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 669)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 669)) ;
+      GALGAS_string var_int_27296 = GALGAS_string ("i").add_operation (constinArgument_inPointerSize.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 670)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 670)) ;
       const GALGAS_controlRegisterGroupArrayList temp_2 = inObject ;
-      cEnumerator_controlRegisterGroupArrayList enumerator_27230 (temp_2, kENUMERATION_UP) ;
-      while (enumerator_27230.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(function_registerGroupAddressArrayLLVMname (enumerator_27230.current_mGroupName (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 670)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 670)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 670)).add_operation (enumerator_27230.current_mBaseAddresses (HERE).getter_length (SOURCE_FILE ("declaration-control-register.galgas", 671)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 671)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 671)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 671)).add_operation (var_int_27166, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 671)).add_operation (GALGAS_string ("] ["), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 671)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 670)) ;
-        cEnumerator_lbigintlist enumerator_27437 (enumerator_27230.current_mBaseAddresses (HERE), kENUMERATION_UP) ;
-        while (enumerator_27437.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(var_int_27166.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 674)).add_operation (enumerator_27437.current_mValue (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 674)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 674)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 674)) ;
-          if (enumerator_27437.hasNextObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 676)) ;
+      cEnumerator_controlRegisterGroupArrayList enumerator_27360 (temp_2, kENUMERATION_UP) ;
+      while (enumerator_27360.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(function_registerGroupAddressArrayLLVMname (enumerator_27360.current_mGroupName (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 672)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 672)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 672)).add_operation (enumerator_27360.current_mBaseAddresses (HERE).getter_length (SOURCE_FILE ("declaration-control-register.galgas", 673)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 673)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 673)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 673)).add_operation (var_int_27296, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 673)).add_operation (GALGAS_string ("] ["), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 673)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 672)) ;
+        cEnumerator_lbigintlist enumerator_27567 (enumerator_27360.current_mBaseAddresses (HERE), kENUMERATION_UP) ;
+        while (enumerator_27567.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(var_int_27296.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 676)).add_operation (enumerator_27567.current_mValue (HERE).getter_bigint (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 676)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 676)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 676)) ;
+          if (enumerator_27567.hasNextObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 678)) ;
           }
-          enumerator_27437.gotoNextObject () ;
+          enumerator_27567.gotoNextObject () ;
         }
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("] ; "), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 678)) ;
-        cEnumerator_lbigintlist enumerator_27613 (enumerator_27230.current_mBaseAddresses (HERE), kENUMERATION_UP) ;
-        while (enumerator_27613.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(enumerator_27613.current_mValue (HERE).getter_bigint (HERE).getter_hexString (SOURCE_FILE ("declaration-control-register.galgas", 681)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 681)) ;
-          if (enumerator_27613.hasNextObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 683)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("] ; "), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 680)) ;
+        cEnumerator_lbigintlist enumerator_27743 (enumerator_27360.current_mBaseAddresses (HERE), kENUMERATION_UP) ;
+        while (enumerator_27743.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(enumerator_27743.current_mValue (HERE).getter_bigint (HERE).getter_hexString (SOURCE_FILE ("declaration-control-register.galgas", 683)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 683)) ;
+          if (enumerator_27743.hasNextObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 685)) ;
           }
-          enumerator_27613.gotoNextObject () ;
+          enumerator_27743.gotoNextObject () ;
         }
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 685)) ;
-        enumerator_27230.gotoNextObject () ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 687)) ;
+        enumerator_27360.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 687)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 689)) ;
     }
   }
 }

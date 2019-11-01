@@ -23,9 +23,10 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/type-structure-declaration.galgas"
   "galgas-sources/type-sync-declaration.galgas"
   "galgas-sources/type-integer.galgas"
-  "galgas-sources/type-literal-integer.galgas"
+  "galgas-sources/type-static-integer.galgas"
   "galgas-sources/type-static-string.galgas"
   "galgas-sources/type-opaque-declaration.galgas"
+
 
 #--- Global declarations
   "galgas-sources/declaration-control-register.galgas"
@@ -164,5 +165,11 @@ project (1:0:0) -> "omnibus" {
 #--- Program
   "galgas-sources/program.galgas"
   "galgas-sources/embedded-sample-code.galgas"
+
+#---- Nouvelle définition des types
+  "galgas-sources/compile-time-type-bool.galgas"
+  "galgas-sources/terminus-infix-operator.galgas"
+  "galgas-sources/terminus-prefix-operator.galgas"
+  "galgas-sources/compile-time-expression.galgas"
 }
 

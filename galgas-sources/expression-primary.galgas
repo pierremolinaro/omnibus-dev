@@ -502,7 +502,7 @@ proc handleSliceInExpression
 {
   if inLow.bigint > inHigh.bigint then
     error inLow : "low bound should be lower or equal to high bound" : ioResult
-  elsif not ([[ioResult type].kind isInteger] || [[ioResult type].kind isStaticInteger]) then
+  elsif not ([[ioResult type].kind isInteger] || [[ioResult type].kind isCompileTimeInteger]) then
     error inLow : "Invalid, receiver is not an integer" : ioResult
   else
   #--- Shift source value

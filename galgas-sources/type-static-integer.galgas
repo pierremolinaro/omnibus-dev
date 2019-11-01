@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literalIntegerDeclarationAST : @abstractDeclarationAST {
+class @staticIntegerDeclarationAST : @abstractDeclarationAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalIntegerDeclarationAST locationForErrorSignaling -> @location outLocation {
+override getter @staticIntegerDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
@@ -15,25 +15,25 @@ override getter @literalIntegerDeclarationAST locationForErrorSignaling -> @loca
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclarationAST enterInPrecedenceGraph
+override method @staticIntegerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let staticIntegerTypeName = [staticIntegerTypeName () nowhere]
-  [!?ioGraph addNode !staticIntegerTypeName !self]
-  [!?ioGraph addEdge !staticIntegerTypeName ![boolTypeName () nowhere]]
+  let ctIntegerTypeName = [ctIntegerTypeName () nowhere]
+  [!?ioGraph addNode !ctIntegerTypeName !self]
+  [!?ioGraph addEdge !ctIntegerTypeName ![boolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalIntegerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = staticIntegerTypeName () 
+override getter @staticIntegerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = ctIntegerTypeName () 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclarationAST enterInContext
+override method @staticIntegerDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -43,11 +43,11 @@ override method @literalIntegerDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  let integerTypeName = [staticIntegerTypeName () nowhere]
+  let integerTypeName = [ctIntegerTypeName () nowhere]
  #---
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-    !type:literalIntegerType ()
+    !type: compileTimeIntegerType ()
   ]
 #--- Enter integer operators
   enterLiteralIntegerOperators (
@@ -60,7 +60,7 @@ override method @literalIntegerDeclarationAST enterInContext
 private proc enterLiteralIntegerOperators
   ?!context:@semanticContext ioContext
 {
-  let literalIntegerTypeName = [staticIntegerTypeName () nowhere]
+  let literalIntegerTypeName = [ctIntegerTypeName () nowhere]
 #--- Infix operators
   let intIntOp = combineTypeNamesForInfixOperator (!literalIntegerTypeName.string !literalIntegerTypeName.string)
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !literalIntegerTypeName} type]

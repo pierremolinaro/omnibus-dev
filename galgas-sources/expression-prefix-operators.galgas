@@ -98,28 +98,30 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case function (3*) :
       error mOperatorLocation : "internal error" : leftOperand
-    case staticInteger :
+    case compileTimeBool :
+      error mOperatorLocation : "internal error" : leftOperand
+    case compileTimeInteger :
       if [inOptionalTargetType.kind isInteger] then
         [inOptionalTargetType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
         if minTarget < 0G then
           error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : leftOperand
         else
-          leftOperand = .literalInteger {!type:literalIntegerType () !value:maxTarget}
+          leftOperand = .literalInteger {!type:compileTimeIntegerType () !value:maxTarget}
         end
       else
         error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : leftOperand
       end
     case integer (* * * @uint bitCount) :
-      leftOperand = .literalInteger {!type:literalIntegerType () !value:(1G << bitCount) - 1G}
+      leftOperand = .literalInteger {!type:compileTimeIntegerType () !value:(1G << bitCount) - 1G}
     end
   case notOperator :
     prefixOperatorMap = inContext.mNotOperatorMap
     binaryOperator = .xor
-    leftOperand = .literalInteger {!type:literalIntegerType () !value:1G}
+    leftOperand = .literalInteger {!type:compileTimeIntegerType () !value:1G}
   case minusNoOvf :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     binaryOperator = .subNoOVF
-    leftOperand = .literalInteger {!type:literalIntegerType () !value:0G}
+    leftOperand = .literalInteger {!type:compileTimeIntegerType () !value:0G}
   case minus :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     if inMode == .panicMode then
@@ -128,10 +130,10 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
     if [option omnibus_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
-      leftOperand = .literalInteger {!type:literalIntegerType () !value:0G}
+      leftOperand = .literalInteger {!type:compileTimeIntegerType () !value:0G}
     else
       binaryOperator = .ssubOVF
-      leftOperand = .literalInteger {!type:literalIntegerType () !value:0G}
+      leftOperand = .literalInteger {!type:compileTimeIntegerType () !value:0G}
     end
   end
 #--- Check operator

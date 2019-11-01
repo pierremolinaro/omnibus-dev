@@ -78,7 +78,8 @@ enum @typeKind {
   case structure (@propertyList propertyList)
   case syncTool
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
-  case staticInteger
+  case compileTimeInteger
+  case compileTimeBool
   case opaque (@bigint bitCount)
   case staticArrayType (@omnibusType elementType @bigint size)
   case dynamicArrayType (@omnibusType elementType)
@@ -106,8 +107,10 @@ getter @omnibusType llvmTypeName -> @string {
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
-  case staticInteger :
-    result = "i32"
+  case compileTimeBool :
+    result = "i1??"
+  case compileTimeInteger :
+    result = "i??"
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case staticArrayType (* *) :
@@ -136,18 +139,43 @@ getter @omnibusType llvmTypeName -> @string {
 
 #·······················································································································
 
-func %once literalIntegerType -> @omnibusType {
+method @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
+  if not ([kind isCompileTimeBool] | [kind isCompileTimeInteger]) then
+    error inErrorLocation : "this type should be a compile time type"
+  end
+}
+
+#·······················································································································
+
+func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-    !assignmentSources: {!staticIntegerTypeName ()}
+    !assignmentSources: {! ctIntegerTypeName ()}
     !attributes:.equatable | .copyable
-    !omnibusTypeDescriptionName:staticIntegerTypeName ()
-    !kind:.staticInteger
-    !llvmBaseTypeName:staticIntegerTypeName ()
+    !omnibusTypeDescriptionName: ctIntegerTypeName ()
+    !kind:.compileTimeInteger
+    !llvmBaseTypeName:ctIntegerTypeName ()
+  }
+}
+
+#·······················································································································
+
+func %once compileTimeBoolType -> @omnibusType {
+  result = .new {
+    !propertyGetterMap:{}
+    !propertySetterMap: {}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !subscript:.noSubscript
+    !assignmentSources: {! ctBoolTypeName ()}
+    !attributes:.equatable | .copyable
+    !omnibusTypeDescriptionName: ctBoolTypeName ()
+    !kind:.compileTimeBool
+    !llvmBaseTypeName:ctBoolTypeName ()
   }
 }
 
@@ -335,8 +363,10 @@ getter @omnibusType descriptionForHTMLFile -> @string {
   case integer (* * @bool unsigned @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
            + ", " + if unsigned then "unsigned" else "signed" end + ")"
-  case staticInteger :
-    result = "Static Integer"
+  case compileTimeBool :
+    result = "Compile Time Bool"
+  case compileTimeInteger :
+    result = "Compile Time Integer"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
   case staticArrayType (* *) :
@@ -378,7 +408,9 @@ getter @omnibusType defaultAlignment -> @uint{
     else
       result = 4
     end
-  case staticInteger :
+  case compileTimeInteger :
+    result = 0
+  case compileTimeBool :
     result = 0
   case opaque (@bigint bitCount) :
     if bitCount <= 8 then
@@ -448,6 +480,8 @@ shared map @unifiedTypeMap %selectors {
 proc buildTypeMapHTMLFile
   ?let @unifiedTypeMap inTypeMap
   ?let @routineMapForContext inRoutineMap
+  ?let @terminusInfixOperatorMap inTerminusInfixOperatorMap
+  ?let @terminusPrefixOperatorMap inTerminusPrefixOperatorMap
   ?sourceFile:let @lstring inSourceFile
 {
 #------------------------------------ Build an HTML file that contains all types
@@ -472,6 +506,8 @@ proc buildTypeMapHTMLFile
       !firstLetterSet
       !tableOfTypeString
       !inRoutineMap
+      !inTerminusInfixOperatorMap
+      !inTerminusPrefixOperatorMap
     ]
     [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
   else
@@ -490,6 +526,9 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
     ?@stringset FIRST_LETTER_SET
     ?@string TABLE_OF_TYPES_STRING
     ?@routineMapForContext ALL_ROUTINE_MAP
+    ?@terminusInfixOperatorMap INFIX_OPERATOR_MAP
+    ?@terminusPrefixOperatorMap PREFIX_OPERATOR_MAP
+
 }
 
 #·······················································································································

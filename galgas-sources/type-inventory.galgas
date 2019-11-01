@@ -47,9 +47,9 @@ override method @typeOpaqueDeclarationAST typeInventory ?!@typeMap ioTypeMap {
 
 #·······················································································································
 
-override method @literalIntegerDeclarationAST typeInventory ?!@typeMap ioTypeMap {
-  [!?ioTypeMap insertKey ![staticIntegerTypeName () nowhere]]
-  message "Type " + staticIntegerTypeName () + "\n"
+override method @staticIntegerDeclarationAST typeInventory ?!@typeMap ioTypeMap {
+  [!?ioTypeMap insertKey ![ctIntegerTypeName () nowhere]]
+  message "Type " + ctIntegerTypeName () + "\n"
 }
 
 #·······················································································································

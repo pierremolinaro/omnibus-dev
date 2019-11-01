@@ -64,6 +64,29 @@ void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObj
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                               Extension method '@omnibusType checkIsCompileTimeType'                                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_omnibusType_checkIsCompileTimeType) (const class cPtr_omnibusType * inObject,
+                                                                             const class GALGAS_location constinArgument0,
+                                                                             class C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_checkIsCompileTimeType (const int32_t inClassIndex,
+                                                  extensionMethodSignature_omnibusType_checkIsCompileTimeType inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_checkIsCompileTimeType (const class cPtr_omnibusType * inObject,
+                                                 const GALGAS_location constin_inErrorLocation,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                      Extension getter '@omnibusType equatable'                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

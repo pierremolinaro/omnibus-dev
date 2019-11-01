@@ -144,6 +144,40 @@ LLVM Name: %![type llvmTypeName]%
   %end%
   </table>
 </p>
+<p>
+<h2>
+  Infix Operators
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Infix operator</td>
+      <td class="result_title">Result Type</td>
+    </tr>
+  %for () in INFIX_OPERATOR_MAP: op_ do%
+    <tr class="result_line">
+      <td>%!op_lkey.string%</td>
+      <td>%![op_mResultType omnibusTypeDescriptionName]%</td>
+    </tr>
+  %end%
+  </table>
+</p>
+<p>
+<h2>
+  Prefix Operators
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Prefix operator</td>
+      <td class="result_title">Result Type</td>
+    </tr>
+  %for () in PREFIX_OPERATOR_MAP: op_ do%
+    <tr class="result_line">
+      <td>%!op_lkey.string%</td>
+      <td>%![op_mResultType omnibusTypeDescriptionName]%</td>
+    </tr>
+  %end%
+  </table>
+</p>
 </div>
 </body>
 </html>

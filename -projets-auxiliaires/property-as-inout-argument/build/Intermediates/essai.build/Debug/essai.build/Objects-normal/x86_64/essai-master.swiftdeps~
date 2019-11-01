@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.1.1 (swiftlang-1100.0.275.2 clang-1100.0.33.9)"
+options: "917907cb860322a0d65e225c867dd6e1"
+build_time: [1572454516, 404691000]
+inputs:
+  "/Users/pierremolinaro/Desktop/essai/essai/main.swift": [1572454516, 366764865]

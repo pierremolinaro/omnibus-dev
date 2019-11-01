@@ -100,7 +100,9 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     error mTypeName : "an integer type is required here"
   case opaque (*) :
     error mTypeName : "an integer type is required here"
-  case staticInteger :
+  case compileTimeBool :
+    error mTypeName : "an integer type is required here"
+  case compileTimeInteger :
     error mTypeName : "an integer type is required here"
   case structure (*) :
     error mTypeName : "an integer type is required here"

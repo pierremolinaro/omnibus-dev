@@ -195,7 +195,9 @@ override method @integerSliceExpressionAST analyzeExpression
           error expressionLocation: "an unsigned integer expression is required here"
         case function (3*) :
           error expressionLocation: "an unsigned integer expression is required here"
-        case staticInteger :
+        case compileTimeBool :
+          error expressionLocation: "an unsigned integer expression is required here"
+        case compileTimeInteger :
           [expressionResult literalInteger ?1* ?value:let @bigint value]
           if value < 0G then
             error expressionLocation: "this integer expression should be positive"

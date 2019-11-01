@@ -134,7 +134,7 @@ override method @registerConstantExpressionAST analyzeExpression
         !?expressionResult
       ]  
     #--- Check expression type
-      if [[expressionResult type].kind isStaticInteger] then 
+      if [[expressionResult type].kind isCompileTimeInteger] then 
         [expressionResult literalInteger ?1* ?value:let @bigint value]
         if value < 0G then
           error expressionLocation: "this integer expression should be positive"

@@ -10,6 +10,85 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                          Routine 'checkRequiredProcedures'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
+                                      const class GALGAS_semanticContext constinArgument1,
+                                      const class GALGAS_location constinArgument2,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'routineTypedSignature2'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_routineTypedSignature_32_ (class GALGAS_unifiedTypeMap inArgument0,
+                                        const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                        class GALGAS_routineTypedSignature & outArgument2,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'guardImplementationLLVMName'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardImplementationLLVMName (const class GALGAS_string & constinArgument0,
+                                                           const class GALGAS_lstring & constinArgument1,
+                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'guardUserLLVMName'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_guardUserLLVMName (const class GALGAS_string & constinArgument0,
+                                                 const class GALGAS_lstring & constinArgument1,
+                                                 const class GALGAS_routineFormalArgumentListAST & constinArgument2,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                        Function 'acceptVariableOmnibusName'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_acceptVariableOmnibusName (class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                        Routine 'analyzeEffectiveParameters'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
+                                         const class GALGAS_routineAttributes constinArgument1,
+                                         const class GALGAS_routineTypedSignature constinArgument2,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
+                                         const class GALGAS_location constinArgument4,
+                                         const class GALGAS_semanticContext constinArgument5,
+                                         const class GALGAS_mode constinArgument6,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                         class GALGAS_staticEntityMap & ioArgument8,
+                                         class GALGAS_universalValuedObjectMap & ioArgument9,
+                                         class GALGAS_allocaList & ioArgument10,
+                                         class GALGAS_instructionListIR & ioArgument11,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -59,9 +138,29 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
 
 void routine_buildTypeMapHTMLFile (const class GALGAS_unifiedTypeMap constinArgument0,
                                    const class GALGAS_routineMapForContext constinArgument1,
-                                   const class GALGAS_lstring constinArgument2,
+                                   const class GALGAS_terminusInfixOperatorMap constinArgument2,
+                                   const class GALGAS_terminusPrefixOperatorMap constinArgument3,
+                                   const class GALGAS_lstring constinArgument4,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           Function 'compileTimeBoolType'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusType function_compileTimeBoolType (class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              Function 'ctBoolTypeName'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_ctBoolTypeName (class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -91,7 +190,9 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
                                                                    const class GALGAS_unifiedTypeMap & in_GLOBAL_5F_TYPE_5F_MAP,
                                                                    const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
                                                                    const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
-                                                                   const class GALGAS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP
+                                                                   const class GALGAS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
+                                                                   const class GALGAS_terminusInfixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
+                                                                   const class GALGAS_terminusPrefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP
                                                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -407,74 +508,4 @@ void routine_analyzeRegularFunctionCall (const class GALGAS_omnibusType constinA
                                          class GALGAS_objectIR & outArgument12,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Routine 'handleArrayAccessInAssignment'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_handleArrayAccessInAssignment (const class GALGAS_omnibusType constinArgument0,
-                                            class GALGAS_omnibusType & ioArgument1,
-                                            class GALGAS_string & ioArgument2,
-                                            const class GALGAS_routineAttributes constinArgument3,
-                                            const class GALGAS_semanticContext constinArgument4,
-                                            const class GALGAS_mode constinArgument5,
-                                            class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                            class GALGAS_staticEntityMap & ioArgument7,
-                                            class GALGAS_universalValuedObjectMap & ioArgument8,
-                                            class GALGAS_allocaList & ioArgument9,
-                                            class GALGAS_instructionListIR & ioArgument10,
-                                            class GALGAS_instructionListListIR & ioArgument11,
-                                            const class GALGAS_expressionAST constinArgument12,
-                                            const class GALGAS_location constinArgument13,
-                                            const class GALGAS_bool constinArgument14,
-                                            const class GALGAS_LValueOperandAST constinArgument15,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Routine 'handlePropertyAccessInAssignment'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_handlePropertyAccessInAssignment (const class GALGAS_omnibusType constinArgument0,
-                                               class GALGAS_omnibusType & ioArgument1,
-                                               class GALGAS_string & ioArgument2,
-                                               const class GALGAS_routineAttributes constinArgument3,
-                                               const class GALGAS_semanticContext constinArgument4,
-                                               const class GALGAS_mode constinArgument5,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                               class GALGAS_staticEntityMap & ioArgument7,
-                                               class GALGAS_universalValuedObjectMap & ioArgument8,
-                                               class GALGAS_allocaList & ioArgument9,
-                                               class GALGAS_instructionListIR & ioArgument10,
-                                               class GALGAS_instructionListListIR & ioArgument11,
-                                               const class GALGAS_lstring constinArgument12,
-                                               const class GALGAS_LValueOperandAST constinArgument13,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Routine 'handleNextOperandInAssignment'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_handleNextOperandInAssignment (const class GALGAS_omnibusType constinArgument0,
-                                            class GALGAS_omnibusType & ioArgument1,
-                                            class GALGAS_string & ioArgument2,
-                                            const class GALGAS_LValueOperandAST constinArgument3,
-                                            const class GALGAS_routineAttributes constinArgument4,
-                                            const class GALGAS_semanticContext constinArgument5,
-                                            const class GALGAS_mode constinArgument6,
-                                            class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                            class GALGAS_staticEntityMap & ioArgument8,
-                                            class GALGAS_universalValuedObjectMap & ioArgument9,
-                                            class GALGAS_allocaList & ioArgument10,
-                                            class GALGAS_instructionListIR & ioArgument11,
-                                            class GALGAS_instructionListListIR & ioArgument12,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
 

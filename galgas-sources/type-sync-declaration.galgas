@@ -137,7 +137,7 @@ override method @syncDeclarationAST enterInContext
     !assignmentSources: {}
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName
-    !kind:.syncTool
+    !kind: .syncTool
     !llvmBaseTypeName:mSyncToolName
   }
   [!?ioContext.mTypeMap insertType

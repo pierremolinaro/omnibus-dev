@@ -109,13 +109,13 @@ override method @staticArrayTypeDeclarationAST enterInContext
     else
     #-------------------------------------------- Class method map : add "count" constructor
       @classConstantMap classConstantMap = {}
-     [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![staticIntegerTypeName () nowhere]]
+     [!?classConstantMap insertKey !.new {!"count" !mArrayTypeName} !arraySize ![ctIntegerTypeName () nowhere]]
     #-------------------------------------------- Property map
       @propertyGetterMap arrayTypePropertyMap = {}
       [!?arrayTypePropertyMap insertKey # "count" property
         !.new {!"count" !omnibusTypeDescriptionName.location}
         !true # public
-        !.constantProperty {!value:.literalInteger {!type:literalIntegerType () !value:arraySize}}
+        !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
       ]
     #-------------------------------------------- Constructor map
       @constructorMap constructorMap = {}

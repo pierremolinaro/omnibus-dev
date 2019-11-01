@@ -1,0 +1,574 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract class @ctExpressionAST {
+}
+
+#·······················································································································
+
+class @ctInfixExpressionAST : @ctExpressionAST {
+  @ctExpressionAST mLeftExpression
+  @location mOperatorLocation
+  @terminusInfixOperatorEnumeration mInfixOperator
+  @ctExpressionAST mRightExpression
+}
+
+#·······················································································································
+
+class @ctPrefixExpressionAST : @ctExpressionAST {
+  @location mOperatorLocation
+  @prefixOperator mPrefixOperator
+  @ctExpressionAST mExpression
+}
+
+#·······················································································································
+
+class @ctTrueExpressionAST : @ctExpressionAST {
+}
+
+#·······················································································································
+
+class @ctFalseExpressionAST : @ctExpressionAST {
+}
+
+#·······················································································································
+
+class @ctIntExpressionAST : @ctExpressionAST {
+  @lbigint mValue
+}
+
+#·······················································································································
+
+class @ctIdentifierExpressionAST : @ctExpressionAST {
+  @lstring mIdentifier
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <native_expression> !@ctExpressionAST outExpression {
+    <native_expression_bitwise_xor> ?outExpression
+    repeat
+    while
+      $|$
+      let operatorLocation = @location.here
+      <native_expression_bitwise_xor> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.bitWiseOr
+        !rightExpression
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_expression_bitwise_xor> !@ctExpressionAST outExpression {
+    <native_expression_bitwise_and> ?outExpression
+    repeat
+    while
+      $^$
+      let operatorLocation = @location.here
+      <native_expression_bitwise_and> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.xor
+        !rightExpression
+      }
+    end
+   }
+
+  #·····················································································································
+
+  rule <native_expression_bitwise_and> !@ctExpressionAST outExpression {
+    <native_expression_equality> ?outExpression
+    repeat
+    while
+      $&$
+      let operatorLocation = @location.here
+      <native_expression_equality> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.bitWiseAnd
+        !rightExpression
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_expression_equality> !@ctExpressionAST outExpression {
+    <native_expression_comparison> ?outExpression
+    select
+    or
+      $==$
+      let operatorLocation = @location.here
+      <native_expression_comparison> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.equal
+        !rightExpression
+      }
+    or
+      $≠$ # (a ≠ b) equivalent to not (a == b)
+      let operatorLocation = @location.here
+      <native_expression_comparison> ?let rightExpression
+      let expression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.equal
+        !rightExpression
+      }
+      outExpression = @ctPrefixExpressionAST.new {
+        !operatorLocation
+        !.notOperator
+        !expression
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_expression_comparison> !@ctExpressionAST outExpression {
+    <native_expression_shift> ?outExpression
+    select
+    or
+      $≤$ # (a ≤ b) equivalent to (a == b) | (a < b)
+      let operatorLocation = @location.here
+      <native_expression_shift> ?let rightExpression
+      let lessThanExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.strictInf
+        !rightExpression
+      }
+      let equalExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.equal
+        !rightExpression
+      }
+      outExpression = @ctInfixExpressionAST.new {
+        !lessThanExpression
+        !operatorLocation
+        !.booleanOr
+        !equalExpression
+      }
+    or
+      $≥$ # (a ≥ b) equivalent to not (a < b)
+      let operatorLocation = @location.here
+      <native_expression_shift> ?let rightExpression
+      let expression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.strictInf
+        !rightExpression
+      }
+      outExpression = @ctPrefixExpressionAST.new {
+        !operatorLocation
+        !.notOperator
+        !expression
+      }
+    or
+      $<$
+      let operatorLocation = @location.here
+      <native_expression_shift> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.strictInf
+        !rightExpression
+      }
+    or
+      $>$ # (a > b) equivalent to not ((a == b) | (a < b))
+      let operatorLocation = @location.here
+      <native_expression_shift> ?let rightExpression
+     let lessThanExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.strictInf
+        !rightExpression
+      }
+      let equalExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.equal
+        !rightExpression
+      }
+      let lessThanOrEqualExpression = @ctInfixExpressionAST.new {
+        !lessThanExpression
+        !operatorLocation
+        !.booleanOr
+        !equalExpression
+      }
+      outExpression = @ctPrefixExpressionAST.new {
+        !operatorLocation
+        !.notOperator
+        !lessThanOrEqualExpression
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_expression_shift> !@ctExpressionAST outExpression {
+    <native_expression_addition> ?outExpression
+    repeat
+    while
+      $<<$
+      let operatorLocation = @location.here
+      <native_expression_addition> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.leftShift
+        !rightExpression
+      }
+    while
+      $>>$
+      let operatorLocation = @location.here
+      <native_expression_addition> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.rightShift
+        !rightExpression
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_expression_addition> !@ctExpressionAST outExpression {
+    <native_expression_product> ?outExpression
+    repeat
+    while
+      $+$
+      let operatorLocation = @location.here
+      <native_expression_product> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.add
+        !rightExpression
+      }
+    while
+      $-$
+      let operatorLocation = @location.here
+      <native_expression_product> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.add
+        !@ctPrefixExpressionAST.new {!operatorLocation !.minus !rightExpression}
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_expression_product> !@ctExpressionAST outExpression {
+    <native_primary> ?outExpression
+    repeat
+    while
+      $*$
+      let operatorLocation = @location.here
+      <native_primary> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.mul
+        !rightExpression
+      }
+   while
+      $%$
+      let operatorLocation = @location.here
+      <native_primary> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.modulo
+        !rightExpression
+      }
+    while
+      $!%$
+      let operatorLocation = @location.here
+      <native_primary> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.moduloNoOvf
+        !rightExpression
+      }
+    while
+      $/$
+      let operatorLocation = @location.here
+      <native_primary> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.div
+        !rightExpression
+      }
+    while
+      $!/$
+      let operatorLocation = @location.here
+      <native_primary> ?let rightExpression
+      outExpression = @ctInfixExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.divNoOvf
+        !rightExpression
+      }
+    end
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $~$
+    let operatorLocation = @location.here
+    <native_primary> ?let expression
+    outExpression = @ctPrefixExpressionAST.new {
+      !operatorLocation
+      !.unsignedComplement
+      !expression
+    }
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $not$
+    let operatorLocation = @location.here
+    <native_primary> ?let expression
+    outExpression = @ctPrefixExpressionAST.new {
+      !operatorLocation
+      !.notOperator
+      !expression
+    }
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $-$
+    let operatorLocation = @location.here
+    <native_primary> ?let expression
+    outExpression = @ctPrefixExpressionAST.new {
+      !operatorLocation
+      !.minus
+      !expression
+    }
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $-%$
+    let operatorLocation = @location.here
+    <native_primary> ?let expression
+    outExpression = @ctPrefixExpressionAST.new {
+      !operatorLocation
+      !.minusNoOvf
+      !expression
+    }
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $($
+    <native_expression> ?outExpression
+    $)$
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $yes$
+    outExpression = @ctTrueExpressionAST.new
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $no$
+    outExpression = @ctFalseExpressionAST.new
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $integer$ ?let value
+    outExpression = @ctIntExpressionAST.new {!value}
+  }
+
+  #·····················································································································
+
+  rule <native_primary> !@ctExpressionAST outExpression {
+    $identifier$ ?let name
+    outExpression = @ctIdentifierExpressionAST.new {!name}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CHECK COMPILE TIME EXPRESSION                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @ctCheckMap {
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
+}
+
+#·······················································································································
+
+abstract method @ctExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap
+
+#·······················································································································
+
+override method @ctInfixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
+  [mLeftExpression checkCompileTimeExpression  !inMap]
+  [mRightExpression checkCompileTimeExpression !inMap]
+}
+
+#·······················································································································
+
+override method @ctPrefixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
+  [mExpression checkCompileTimeExpression !inMap]
+}
+
+#·······················································································································
+
+override method @ctTrueExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+}
+
+#·······················································································································
+
+override method @ctFalseExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+}
+
+#·······················································································································
+
+override method @ctIntExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+}
+
+#·······················································································································
+
+override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
+  [inMap searchKey !mIdentifier]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPUTE COMPILE TIME EXPRESSION                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @ctMap {
+  @bigint mValue
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
+}
+
+#·······················································································································
+
+abstract method @ctExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+
+#·······················································································································
+
+override method @ctInfixExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+{
+  [mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
+  [mRightExpression computeCompileTimeExpression !inMap ?result: let right]
+  switch mInfixOperator
+   case equal     : outValue = if left == right then 1G else 0G end
+   case strictInf : outValue = if left <  right then 1G else 0G end
+   case booleanOr : outValue = left | right
+   case bitWiseAnd: outValue = left & right
+   case bitWiseOr : outValue = left | right
+   case xor       : outValue = left ^ right
+   case booleanXor: outValue = left ^ right
+   case add       : outValue = left + right
+   case mul       : outValue = left * right
+   case div       : outValue = left / right
+   case divNoOvf  : outValue = left / right
+   case modulo    : outValue = left mod right
+   case moduloNoOvf: outValue = left mod right
+   case leftShift : outValue = left << right
+   case rightShift: outValue = left >> right
+  end
+}
+
+#·······················································································································
+
+override method @ctPrefixExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+{
+  [mExpression computeCompileTimeExpression !inMap ?result: let exp]
+  switch mPrefixOperator
+   case minus     : outValue = - exp
+   case minusNoOvf : outValue = - exp
+   case notOperator  : outValue = if exp == 0G then 1G else 0G end
+   case unsignedComplement: outValue = exp
+  end
+}
+
+#·······················································································································
+
+override method @ctTrueExpressionAST computeCompileTimeExpression
+  ?let @ctMap unused inMap
+  !result: @bigint outValue
+{
+  outValue = 1G
+}
+
+#·······················································································································
+
+override method @ctFalseExpressionAST computeCompileTimeExpression
+  ?let @ctMap unused inMap
+  !result: @bigint outValue
+{
+  outValue = 0G
+}
+
+#·······················································································································
+
+override method @ctIntExpressionAST computeCompileTimeExpression
+  ?let @ctMap unused inMap
+  !result: @bigint outValue
+{
+  outValue = [mValue bigint]
+}
+
+#·······················································································································
+
+override method @ctIdentifierExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+{
+  [inMap searchKey !mIdentifier ?outValue]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

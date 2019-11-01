@@ -48,6 +48,10 @@ struct @semanticContext {
   @infixOperatorMap mModNoOvfOperatorMap        # &%
   @infixOperatorMap mLeftShiftOperatorMap       # <<
   @infixOperatorMap mRightShiftOperatorMap      # >>
+  
+  @terminusInfixOperatorMap mTerminusInfixOperatorMap
+  @terminusPrefixOperatorMap mTerminusPrefixOperatorMap
+  
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
@@ -219,6 +223,8 @@ proc buildSemanticContext
   buildTypeMapHTMLFile (
     !outSemanticContext.mTypeMap
     !outSemanticContext.mRoutineMap
+    !outSemanticContext.mTerminusInfixOperatorMap
+    !outSemanticContext.mTerminusPrefixOperatorMap
     !sourceFile:inSourceFile
   )
 #--- Enter control registers in context

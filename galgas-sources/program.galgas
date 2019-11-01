@@ -116,10 +116,12 @@ private proc compileProject
   )
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
+  #--- Add compile time boolean type
+   ast.mDeclarationListAST += !@ctBoolDeclarationAST.new
   #--- Add boolean type
     ast.mDeclarationListAST += !@booleanDeclarationAST.new
   #--- Literal integer type
-    ast.mDeclarationListAST += !@literalIntegerDeclarationAST.new
+    ast.mDeclarationListAST += !@staticIntegerDeclarationAST.new
   #--- Add String type
     ast.mDeclarationListAST += !@literalStringDeclarationAST.new
   end

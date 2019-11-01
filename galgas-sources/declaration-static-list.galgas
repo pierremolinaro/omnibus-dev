@@ -452,7 +452,7 @@ override method @staticListAST enterInContext
   [!?listTypePropertyMap insertKey # "count" property
     !.new {!"count" !mStaticListName.location}
     !true # public
-    !.constantProperty {!value:.literalInteger {!type:literalIntegerType () !value:[mValueList length]}}
+    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @omnibusType.new {

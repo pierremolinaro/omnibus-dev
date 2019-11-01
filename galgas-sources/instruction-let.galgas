@@ -102,7 +102,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
 #--- Declare local constant
   let omnibusName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
   ioTemporaries.mTemporaryIndex ++
-  if [result omnibusTypeDescriptionName] != staticIntegerTypeName () then
+  if [result omnibusTypeDescriptionName] != ctIntegerTypeName () then
     ioAllocaList += !llvmNameForLocalVariable (!omnibusName) ![result type] !false
     [!?ioInstructionGenerationList appendStoreTemporaryReference
       ![result type]

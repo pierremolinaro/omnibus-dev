@@ -630,7 +630,7 @@ class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
   @propertyList mPropertyList
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += mLLVMDefinedTypeName + " = type {"
@@ -642,7 +642,7 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: INTEGER ASSIGNMENT
+#! CODE GENERATION: ASSIGNMENT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @structureTypeAssignFunctionIR : @abstractRoutineIR {

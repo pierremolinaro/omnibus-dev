@@ -8,6 +8,71 @@
 
 #include "all-declarations-8.h"
 
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               Bool options                                                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern C_BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               UInt options                                                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              String options                                                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              String List options                                                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Function 'configurationNodeNameForPrecedenceGraph'                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Function 'assignmentPrefix'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_assignmentPrefix (class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'compileTimeIntegerType'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusType function_compileTimeIntegerType (class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'ctIntegerTypeName'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_ctIntegerTypeName (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                    Routine 'enterEnumerationComparisonOperators'                                    *
@@ -400,83 +465,4 @@ void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string co
                                                     const class GALGAS_targetParameters constinArgument4,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Routine 'checkRequiredProcedures'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
-                                      const class GALGAS_semanticContext constinArgument1,
-                                      const class GALGAS_location constinArgument2,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Routine 'routineTypedSignature2'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_routineTypedSignature_32_ (class GALGAS_unifiedTypeMap inArgument0,
-                                        const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                        class GALGAS_routineTypedSignature & outArgument2,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'guardImplementationLLVMName'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardImplementationLLVMName (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_lstring & constinArgument1,
-                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'guardUserLLVMName'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardUserLLVMName (const class GALGAS_string & constinArgument0,
-                                                 const class GALGAS_lstring & constinArgument1,
-                                                 const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'acceptVariableOmnibusName'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_acceptVariableOmnibusName (class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Routine 'analyzeEffectiveParameters'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
-                                         const class GALGAS_routineAttributes constinArgument1,
-                                         const class GALGAS_routineTypedSignature constinArgument2,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
-                                         const class GALGAS_location constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticEntityMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 

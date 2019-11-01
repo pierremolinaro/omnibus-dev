@@ -74,6 +74,8 @@ OMNIBUS_FILES:
   "registers-lpc2294.omnibus-import"
   "lpc2294-xtr.omnibus-import"
   "../semaphore.omnibus-import"
+  "../ctBool.omnibus-import"
+  "../ctInt.omnibus-import"
 
 INTERRUPTS:
   WDT

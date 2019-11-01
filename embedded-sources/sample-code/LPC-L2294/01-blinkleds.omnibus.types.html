@@ -1,0 +1,936 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Global constants of 01-blinkleds.omnibus</title>
+<style type="text/css">body {
+  font-family: Georgia, sans-serif ;
+  font-size: small ;
+}
+
+h1 {
+  text-align: center ;
+}
+
+.selecteur {
+  color:green ;
+}
+
+a.header_link {
+  background-color: #FFFFCC ;
+}
+
+a:visited, a:link, a:active{
+  color: blue ;
+  text-decoration: underline ;
+}
+
+a:hover {
+  color:green ;
+  background-color: #FFFF00 ;
+  text-decoration: none ;
+}
+
+table.result {
+  border: 1px solid #666666 ;
+}
+
+td.result_title {
+  font-weight: bold ;
+  text-align: center ;
+  background-color: yellow ;
+}
+
+tr.result_line {
+  background-color: #EEEEEE ;
+}
+
+</style>
+</head>
+<body>
+<div>
+<h1>Types defined by 01-blinkleds.omnibus</h1>
+<p>This document lists all 18 defined types, sorted by name.</p>
+<p><a class="header_link" href="#71">G</a> - <a class="header_link" href="#73">I</a> - <a class="header_link" href="#83">S</a> - <a class="header_link" href="#84">T</a> - <a class="header_link" href="#98">b</a> - <a class="header_link" href="#99">c</a> - <a class="header_link" href="#100">d</a> - <a class="header_link" href="#108">l</a> - <a class="header_link" href="#117">u</a></p>
+<p><br><a name="71"><b>G</b></a><br><a class="header_link" href="#GuardList">GuardList</a><br><br><a name="73"><b>I</b></a><br><a class="header_link" href="#ISRSlot">ISRSlot</a><br><br><a name="83"><b>S</b></a><br><a class="header_link" href="#Semaphore">Semaphore</a><br><br><a name="84"><b>T</b></a><br><a class="header_link" href="#T1">T1</a><br><a class="header_link" href="#TaskList">TaskList</a><br><br><a name="98"><b>b</b></a><br><a class="header_link" href="#bool">bool</a><br><br><a name="99"><b>c</b></a><br><a class="header_link" href="#ctBool">ctBool</a><br><a class="header_link" href="#ctInt">ctInt</a><br><br><a name="100"><b>d</b></a><br><a class="header_link" href="#driver.time">driver.time</a><br><br><a name="108"><b>l</b></a><br><a class="header_link" href="#literalString">literalString</a><br><br><a name="117"><b>u</b></a><br><a class="header_link" href="#uint1">uint1</a><br><a class="header_link" href="#uint16">uint16</a><br><a class="header_link" href="#uint3">uint3</a><br><a class="header_link" href="#uint32">uint32</a><br><a class="header_link" href="#uint4">uint4</a><br><a class="header_link" href="#uint5">uint5</a><br><a class="header_link" href="#uint6">uint6</a><br><a class="header_link" href="#uint8">uint8</a><br>
+</p>
+
+<h2>
+  <a name="GuardList">GuardList</a>
+</h2>
+<p>
+Kind: Opaque (32 bits)<br>
+Description: GuardList<br>
+LLVM Base Name: GuardList<br>
+LLVM Name: i32
+</p>
+  
+  
+
+<h2>
+  <a name="ISRSlot">ISRSlot</a>
+</h2>
+<p>
+Kind: Enumeration<br>
+Description: ISRSlot<br>
+LLVM Base Name: ISRSlot<br>
+LLVM Name: i6
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>uint6</td>
+        <td>public</td>
+        <td>Computed property, type uint6, routine LLVM name:<br>user : get.ISRSlot.uint6<br>section : get.ISRSlot.uint6<br>service : get.ISRSlot.uint6<br>primitive : get.ISRSlot.uint6<br>guard : get.ISRSlot.uint6<br>any : get.ISRSlot.uint6<br>any safe : get.ISRSlot.uint6<br>safe user : get.ISRSlot.uint6<br>safe section : get.ISRSlot.uint6<br>safe service : get.ISRSlot.uint6<br>safe primitive : get.ISRSlot.uint6<br>safe guard : get.ISRSlot.uint6<br>panic : get.ISRSlot.uint6<br>boot : get.ISRSlot.uint6<br>startup : get.ISRSlot.uint6</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="Semaphore">Semaphore</a>
+</h2>
+<p>
+Kind: Synchronization tool<br>
+Description: Semaphore<br>
+LLVM Base Name: Semaphore<br>
+LLVM Name: %Semaphore
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>guardList</td>
+        <td>private</td>
+        <td>Stored property, index 2, type i32</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>list</td>
+        <td>private</td>
+        <td>Stored property, index 1, type i32</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>value</td>
+        <td>private</td>
+        <td>Stored property, index 0, type i32</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Setter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>guardList</td>
+        <td>private</td>
+        <td>Stored property, index 2, type i32</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>list</td>
+        <td>private</td>
+        <td>Stored property, index 1, type i32</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>value</td>
+        <td>private</td>
+        <td>Stored property, index 0, type i32</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+
+<h2>
+  <a name="T1">T1</a>
+</h2>
+<p>
+Kind: Structure<br>
+Description: T1<br>
+LLVM Base Name: T1<br>
+LLVM Name: %T1
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>compteur</td>
+        <td>private</td>
+        <td>Stored property, index 0, type i32</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Setter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>compteur</td>
+        <td>private</td>
+        <td>Stored property, index 0, type i32</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+
+<h2>
+  <a name="TaskList">TaskList</a>
+</h2>
+<p>
+Kind: Opaque (32 bits)<br>
+Description: TaskList<br>
+LLVM Base Name: TaskList<br>
+LLVM Name: i32
+</p>
+  
+  
+
+<h2>
+  <a name="bool">bool</a>
+</h2>
+<p>
+Kind: Boolean<br>
+Description: bool<br>
+LLVM Base Name: bool<br>
+LLVM Name: i1
+</p>
+  
+  
+
+<h2>
+  <a name="ctBool">ctBool</a>
+</h2>
+<p>
+Kind: Compile Time Bool<br>
+Description: ctBool<br>
+LLVM Base Name: ctBool<br>
+LLVM Name: i1??
+</p>
+  
+  
+
+<h2>
+  <a name="ctInt">ctInt</a>
+</h2>
+<p>
+Kind: Compile Time Integer<br>
+Description: ctInt<br>
+LLVM Base Name: ctInt<br>
+LLVM Name: i??
+</p>
+  
+  
+
+<h2>
+  <a name="driver.time">driver.time</a>
+</h2>
+<p>
+Kind: Structure<br>
+Description: driver.time<br>
+LLVM Base Name: driver$time<br>
+LLVM Name: %driver$time
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>mUptime</td>
+        <td>private</td>
+        <td>Stored property, index 0, type i32</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Setter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>mUptime</td>
+        <td>private</td>
+        <td>Stored property, index 0, type i32</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+
+<h2>
+  <a name="literalString">literalString</a>
+</h2>
+<p>
+Kind: Literal String<br>
+Description: literalString<br>
+LLVM Base Name: literalString<br>
+LLVM Name: i8*
+</p>
+  
+  
+
+<h2>
+  <a name="uint1">uint1</a>
+</h2>
+<p>
+Kind: Integer (1 bit, unsigned)<br>
+Description: uint1<br>
+LLVM Base Name: uint1<br>
+LLVM Name: i1
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint1, routine LLVM name:<br>user : get.uint1.bitReversed<br>section : get.uint1.bitReversed<br>service : get.uint1.bitReversed<br>primitive : get.uint1.bitReversed<br>guard : get.uint1.bitReversed<br>any : get.uint1.bitReversed<br>any safe : get.uint1.bitReversed<br>safe user : get.uint1.bitReversed<br>safe section : get.uint1.bitReversed<br>safe service : get.uint1.bitReversed<br>safe primitive : get.uint1.bitReversed<br>safe guard : get.uint1.bitReversed<br>panic : get.uint1.bitReversed<br>boot : get.uint1.bitReversed<br>startup : get.uint1.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bool</td>
+        <td>public</td>
+        <td>Computed property, type bool, routine LLVM name:<br>user : get.uint1.bool<br>section : get.uint1.bool<br>service : get.uint1.bool<br>primitive : get.uint1.bool<br>guard : get.uint1.bool<br>any : get.uint1.bool<br>any safe : get.uint1.bool<br>safe user : get.uint1.bool<br>safe section : get.uint1.bool<br>safe service : get.uint1.bool<br>safe primitive : get.uint1.bool<br>safe guard : get.uint1.bool<br>panic : get.uint1.bool<br>boot : get.uint1.bool<br>startup : get.uint1.bool</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint1, routine LLVM name:<br>user : get.uint1.leadingZeroCount<br>section : get.uint1.leadingZeroCount<br>service : get.uint1.leadingZeroCount<br>primitive : get.uint1.leadingZeroCount<br>guard : get.uint1.leadingZeroCount<br>any : get.uint1.leadingZeroCount<br>any safe : get.uint1.leadingZeroCount<br>safe user : get.uint1.leadingZeroCount<br>safe section : get.uint1.leadingZeroCount<br>safe service : get.uint1.leadingZeroCount<br>safe primitive : get.uint1.leadingZeroCount<br>safe guard : get.uint1.leadingZeroCount<br>panic : get.uint1.leadingZeroCount<br>boot : get.uint1.leadingZeroCount<br>startup : get.uint1.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint1, routine LLVM name:<br>user : get.uint1.setBitCount<br>section : get.uint1.setBitCount<br>service : get.uint1.setBitCount<br>primitive : get.uint1.setBitCount<br>guard : get.uint1.setBitCount<br>any : get.uint1.setBitCount<br>any safe : get.uint1.setBitCount<br>safe user : get.uint1.setBitCount<br>safe section : get.uint1.setBitCount<br>safe service : get.uint1.setBitCount<br>safe primitive : get.uint1.setBitCount<br>safe guard : get.uint1.setBitCount<br>panic : get.uint1.setBitCount<br>boot : get.uint1.setBitCount<br>startup : get.uint1.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint1, routine LLVM name:<br>user : get.uint1.trainingZeroCount<br>section : get.uint1.trainingZeroCount<br>service : get.uint1.trainingZeroCount<br>primitive : get.uint1.trainingZeroCount<br>guard : get.uint1.trainingZeroCount<br>any : get.uint1.trainingZeroCount<br>any safe : get.uint1.trainingZeroCount<br>safe user : get.uint1.trainingZeroCount<br>safe section : get.uint1.trainingZeroCount<br>safe service : get.uint1.trainingZeroCount<br>safe primitive : get.uint1.trainingZeroCount<br>safe guard : get.uint1.trainingZeroCount<br>panic : get.uint1.trainingZeroCount<br>boot : get.uint1.trainingZeroCount<br>startup : get.uint1.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint16">uint16</a>
+</h2>
+<p>
+Kind: Integer (16 bits, unsigned)<br>
+Description: uint16<br>
+LLVM Base Name: uint16<br>
+LLVM Name: i16
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint16, routine LLVM name:<br>user : get.uint16.bitReversed<br>section : get.uint16.bitReversed<br>service : get.uint16.bitReversed<br>primitive : get.uint16.bitReversed<br>guard : get.uint16.bitReversed<br>any : get.uint16.bitReversed<br>any safe : get.uint16.bitReversed<br>safe user : get.uint16.bitReversed<br>safe section : get.uint16.bitReversed<br>safe service : get.uint16.bitReversed<br>safe primitive : get.uint16.bitReversed<br>safe guard : get.uint16.bitReversed<br>panic : get.uint16.bitReversed<br>boot : get.uint16.bitReversed<br>startup : get.uint16.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>byteSwapped</td>
+        <td>public</td>
+        <td>Computed property, type uint16, routine LLVM name:<br>user : get.uint16.byteSwapped<br>section : get.uint16.byteSwapped<br>service : get.uint16.byteSwapped<br>primitive : get.uint16.byteSwapped<br>guard : get.uint16.byteSwapped<br>any : get.uint16.byteSwapped<br>any safe : get.uint16.byteSwapped<br>safe user : get.uint16.byteSwapped<br>safe section : get.uint16.byteSwapped<br>safe service : get.uint16.byteSwapped<br>safe primitive : get.uint16.byteSwapped<br>safe guard : get.uint16.byteSwapped<br>panic : get.uint16.byteSwapped<br>boot : get.uint16.byteSwapped<br>startup : get.uint16.byteSwapped</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint16, routine LLVM name:<br>user : get.uint16.leadingZeroCount<br>section : get.uint16.leadingZeroCount<br>service : get.uint16.leadingZeroCount<br>primitive : get.uint16.leadingZeroCount<br>guard : get.uint16.leadingZeroCount<br>any : get.uint16.leadingZeroCount<br>any safe : get.uint16.leadingZeroCount<br>safe user : get.uint16.leadingZeroCount<br>safe section : get.uint16.leadingZeroCount<br>safe service : get.uint16.leadingZeroCount<br>safe primitive : get.uint16.leadingZeroCount<br>safe guard : get.uint16.leadingZeroCount<br>panic : get.uint16.leadingZeroCount<br>boot : get.uint16.leadingZeroCount<br>startup : get.uint16.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint16, routine LLVM name:<br>user : get.uint16.setBitCount<br>section : get.uint16.setBitCount<br>service : get.uint16.setBitCount<br>primitive : get.uint16.setBitCount<br>guard : get.uint16.setBitCount<br>any : get.uint16.setBitCount<br>any safe : get.uint16.setBitCount<br>safe user : get.uint16.setBitCount<br>safe section : get.uint16.setBitCount<br>safe service : get.uint16.setBitCount<br>safe primitive : get.uint16.setBitCount<br>safe guard : get.uint16.setBitCount<br>panic : get.uint16.setBitCount<br>boot : get.uint16.setBitCount<br>startup : get.uint16.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint16, routine LLVM name:<br>user : get.uint16.trainingZeroCount<br>section : get.uint16.trainingZeroCount<br>service : get.uint16.trainingZeroCount<br>primitive : get.uint16.trainingZeroCount<br>guard : get.uint16.trainingZeroCount<br>any : get.uint16.trainingZeroCount<br>any safe : get.uint16.trainingZeroCount<br>safe user : get.uint16.trainingZeroCount<br>safe section : get.uint16.trainingZeroCount<br>safe service : get.uint16.trainingZeroCount<br>safe primitive : get.uint16.trainingZeroCount<br>safe guard : get.uint16.trainingZeroCount<br>panic : get.uint16.trainingZeroCount<br>boot : get.uint16.trainingZeroCount<br>startup : get.uint16.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint3">uint3</a>
+</h2>
+<p>
+Kind: Integer (3 bits, unsigned)<br>
+Description: uint3<br>
+LLVM Base Name: uint3<br>
+LLVM Name: i3
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint3, routine LLVM name:<br>user : get.uint3.bitReversed<br>section : get.uint3.bitReversed<br>service : get.uint3.bitReversed<br>primitive : get.uint3.bitReversed<br>guard : get.uint3.bitReversed<br>any : get.uint3.bitReversed<br>any safe : get.uint3.bitReversed<br>safe user : get.uint3.bitReversed<br>safe section : get.uint3.bitReversed<br>safe service : get.uint3.bitReversed<br>safe primitive : get.uint3.bitReversed<br>safe guard : get.uint3.bitReversed<br>panic : get.uint3.bitReversed<br>boot : get.uint3.bitReversed<br>startup : get.uint3.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint3, routine LLVM name:<br>user : get.uint3.leadingZeroCount<br>section : get.uint3.leadingZeroCount<br>service : get.uint3.leadingZeroCount<br>primitive : get.uint3.leadingZeroCount<br>guard : get.uint3.leadingZeroCount<br>any : get.uint3.leadingZeroCount<br>any safe : get.uint3.leadingZeroCount<br>safe user : get.uint3.leadingZeroCount<br>safe section : get.uint3.leadingZeroCount<br>safe service : get.uint3.leadingZeroCount<br>safe primitive : get.uint3.leadingZeroCount<br>safe guard : get.uint3.leadingZeroCount<br>panic : get.uint3.leadingZeroCount<br>boot : get.uint3.leadingZeroCount<br>startup : get.uint3.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint3, routine LLVM name:<br>user : get.uint3.setBitCount<br>section : get.uint3.setBitCount<br>service : get.uint3.setBitCount<br>primitive : get.uint3.setBitCount<br>guard : get.uint3.setBitCount<br>any : get.uint3.setBitCount<br>any safe : get.uint3.setBitCount<br>safe user : get.uint3.setBitCount<br>safe section : get.uint3.setBitCount<br>safe service : get.uint3.setBitCount<br>safe primitive : get.uint3.setBitCount<br>safe guard : get.uint3.setBitCount<br>panic : get.uint3.setBitCount<br>boot : get.uint3.setBitCount<br>startup : get.uint3.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint3, routine LLVM name:<br>user : get.uint3.trainingZeroCount<br>section : get.uint3.trainingZeroCount<br>service : get.uint3.trainingZeroCount<br>primitive : get.uint3.trainingZeroCount<br>guard : get.uint3.trainingZeroCount<br>any : get.uint3.trainingZeroCount<br>any safe : get.uint3.trainingZeroCount<br>safe user : get.uint3.trainingZeroCount<br>safe section : get.uint3.trainingZeroCount<br>safe service : get.uint3.trainingZeroCount<br>safe primitive : get.uint3.trainingZeroCount<br>safe guard : get.uint3.trainingZeroCount<br>panic : get.uint3.trainingZeroCount<br>boot : get.uint3.trainingZeroCount<br>startup : get.uint3.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint32">uint32</a>
+</h2>
+<p>
+Kind: Integer (32 bits, unsigned)<br>
+Description: uint32<br>
+LLVM Base Name: uint32<br>
+LLVM Name: i32
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint32, routine LLVM name:<br>user : get.uint32.bitReversed<br>section : get.uint32.bitReversed<br>service : get.uint32.bitReversed<br>primitive : get.uint32.bitReversed<br>guard : get.uint32.bitReversed<br>any : get.uint32.bitReversed<br>any safe : get.uint32.bitReversed<br>safe user : get.uint32.bitReversed<br>safe section : get.uint32.bitReversed<br>safe service : get.uint32.bitReversed<br>safe primitive : get.uint32.bitReversed<br>safe guard : get.uint32.bitReversed<br>panic : get.uint32.bitReversed<br>boot : get.uint32.bitReversed<br>startup : get.uint32.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>byteSwapped</td>
+        <td>public</td>
+        <td>Computed property, type uint32, routine LLVM name:<br>user : get.uint32.byteSwapped<br>section : get.uint32.byteSwapped<br>service : get.uint32.byteSwapped<br>primitive : get.uint32.byteSwapped<br>guard : get.uint32.byteSwapped<br>any : get.uint32.byteSwapped<br>any safe : get.uint32.byteSwapped<br>safe user : get.uint32.byteSwapped<br>safe section : get.uint32.byteSwapped<br>safe service : get.uint32.byteSwapped<br>safe primitive : get.uint32.byteSwapped<br>safe guard : get.uint32.byteSwapped<br>panic : get.uint32.byteSwapped<br>boot : get.uint32.byteSwapped<br>startup : get.uint32.byteSwapped</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint32, routine LLVM name:<br>user : get.uint32.leadingZeroCount<br>section : get.uint32.leadingZeroCount<br>service : get.uint32.leadingZeroCount<br>primitive : get.uint32.leadingZeroCount<br>guard : get.uint32.leadingZeroCount<br>any : get.uint32.leadingZeroCount<br>any safe : get.uint32.leadingZeroCount<br>safe user : get.uint32.leadingZeroCount<br>safe section : get.uint32.leadingZeroCount<br>safe service : get.uint32.leadingZeroCount<br>safe primitive : get.uint32.leadingZeroCount<br>safe guard : get.uint32.leadingZeroCount<br>panic : get.uint32.leadingZeroCount<br>boot : get.uint32.leadingZeroCount<br>startup : get.uint32.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint32, routine LLVM name:<br>user : get.uint32.setBitCount<br>section : get.uint32.setBitCount<br>service : get.uint32.setBitCount<br>primitive : get.uint32.setBitCount<br>guard : get.uint32.setBitCount<br>any : get.uint32.setBitCount<br>any safe : get.uint32.setBitCount<br>safe user : get.uint32.setBitCount<br>safe section : get.uint32.setBitCount<br>safe service : get.uint32.setBitCount<br>safe primitive : get.uint32.setBitCount<br>safe guard : get.uint32.setBitCount<br>panic : get.uint32.setBitCount<br>boot : get.uint32.setBitCount<br>startup : get.uint32.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint32, routine LLVM name:<br>user : get.uint32.trainingZeroCount<br>section : get.uint32.trainingZeroCount<br>service : get.uint32.trainingZeroCount<br>primitive : get.uint32.trainingZeroCount<br>guard : get.uint32.trainingZeroCount<br>any : get.uint32.trainingZeroCount<br>any safe : get.uint32.trainingZeroCount<br>safe user : get.uint32.trainingZeroCount<br>safe section : get.uint32.trainingZeroCount<br>safe service : get.uint32.trainingZeroCount<br>safe primitive : get.uint32.trainingZeroCount<br>safe guard : get.uint32.trainingZeroCount<br>panic : get.uint32.trainingZeroCount<br>boot : get.uint32.trainingZeroCount<br>startup : get.uint32.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint4">uint4</a>
+</h2>
+<p>
+Kind: Integer (4 bits, unsigned)<br>
+Description: uint4<br>
+LLVM Base Name: uint4<br>
+LLVM Name: i4
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint4, routine LLVM name:<br>user : get.uint4.bitReversed<br>section : get.uint4.bitReversed<br>service : get.uint4.bitReversed<br>primitive : get.uint4.bitReversed<br>guard : get.uint4.bitReversed<br>any : get.uint4.bitReversed<br>any safe : get.uint4.bitReversed<br>safe user : get.uint4.bitReversed<br>safe section : get.uint4.bitReversed<br>safe service : get.uint4.bitReversed<br>safe primitive : get.uint4.bitReversed<br>safe guard : get.uint4.bitReversed<br>panic : get.uint4.bitReversed<br>boot : get.uint4.bitReversed<br>startup : get.uint4.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint4, routine LLVM name:<br>user : get.uint4.leadingZeroCount<br>section : get.uint4.leadingZeroCount<br>service : get.uint4.leadingZeroCount<br>primitive : get.uint4.leadingZeroCount<br>guard : get.uint4.leadingZeroCount<br>any : get.uint4.leadingZeroCount<br>any safe : get.uint4.leadingZeroCount<br>safe user : get.uint4.leadingZeroCount<br>safe section : get.uint4.leadingZeroCount<br>safe service : get.uint4.leadingZeroCount<br>safe primitive : get.uint4.leadingZeroCount<br>safe guard : get.uint4.leadingZeroCount<br>panic : get.uint4.leadingZeroCount<br>boot : get.uint4.leadingZeroCount<br>startup : get.uint4.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint4, routine LLVM name:<br>user : get.uint4.setBitCount<br>section : get.uint4.setBitCount<br>service : get.uint4.setBitCount<br>primitive : get.uint4.setBitCount<br>guard : get.uint4.setBitCount<br>any : get.uint4.setBitCount<br>any safe : get.uint4.setBitCount<br>safe user : get.uint4.setBitCount<br>safe section : get.uint4.setBitCount<br>safe service : get.uint4.setBitCount<br>safe primitive : get.uint4.setBitCount<br>safe guard : get.uint4.setBitCount<br>panic : get.uint4.setBitCount<br>boot : get.uint4.setBitCount<br>startup : get.uint4.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint4, routine LLVM name:<br>user : get.uint4.trainingZeroCount<br>section : get.uint4.trainingZeroCount<br>service : get.uint4.trainingZeroCount<br>primitive : get.uint4.trainingZeroCount<br>guard : get.uint4.trainingZeroCount<br>any : get.uint4.trainingZeroCount<br>any safe : get.uint4.trainingZeroCount<br>safe user : get.uint4.trainingZeroCount<br>safe section : get.uint4.trainingZeroCount<br>safe service : get.uint4.trainingZeroCount<br>safe primitive : get.uint4.trainingZeroCount<br>safe guard : get.uint4.trainingZeroCount<br>panic : get.uint4.trainingZeroCount<br>boot : get.uint4.trainingZeroCount<br>startup : get.uint4.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint5">uint5</a>
+</h2>
+<p>
+Kind: Integer (5 bits, unsigned)<br>
+Description: uint5<br>
+LLVM Base Name: uint5<br>
+LLVM Name: i5
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint5, routine LLVM name:<br>user : get.uint5.bitReversed<br>section : get.uint5.bitReversed<br>service : get.uint5.bitReversed<br>primitive : get.uint5.bitReversed<br>guard : get.uint5.bitReversed<br>any : get.uint5.bitReversed<br>any safe : get.uint5.bitReversed<br>safe user : get.uint5.bitReversed<br>safe section : get.uint5.bitReversed<br>safe service : get.uint5.bitReversed<br>safe primitive : get.uint5.bitReversed<br>safe guard : get.uint5.bitReversed<br>panic : get.uint5.bitReversed<br>boot : get.uint5.bitReversed<br>startup : get.uint5.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint5, routine LLVM name:<br>user : get.uint5.leadingZeroCount<br>section : get.uint5.leadingZeroCount<br>service : get.uint5.leadingZeroCount<br>primitive : get.uint5.leadingZeroCount<br>guard : get.uint5.leadingZeroCount<br>any : get.uint5.leadingZeroCount<br>any safe : get.uint5.leadingZeroCount<br>safe user : get.uint5.leadingZeroCount<br>safe section : get.uint5.leadingZeroCount<br>safe service : get.uint5.leadingZeroCount<br>safe primitive : get.uint5.leadingZeroCount<br>safe guard : get.uint5.leadingZeroCount<br>panic : get.uint5.leadingZeroCount<br>boot : get.uint5.leadingZeroCount<br>startup : get.uint5.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint5, routine LLVM name:<br>user : get.uint5.setBitCount<br>section : get.uint5.setBitCount<br>service : get.uint5.setBitCount<br>primitive : get.uint5.setBitCount<br>guard : get.uint5.setBitCount<br>any : get.uint5.setBitCount<br>any safe : get.uint5.setBitCount<br>safe user : get.uint5.setBitCount<br>safe section : get.uint5.setBitCount<br>safe service : get.uint5.setBitCount<br>safe primitive : get.uint5.setBitCount<br>safe guard : get.uint5.setBitCount<br>panic : get.uint5.setBitCount<br>boot : get.uint5.setBitCount<br>startup : get.uint5.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint5, routine LLVM name:<br>user : get.uint5.trainingZeroCount<br>section : get.uint5.trainingZeroCount<br>service : get.uint5.trainingZeroCount<br>primitive : get.uint5.trainingZeroCount<br>guard : get.uint5.trainingZeroCount<br>any : get.uint5.trainingZeroCount<br>any safe : get.uint5.trainingZeroCount<br>safe user : get.uint5.trainingZeroCount<br>safe section : get.uint5.trainingZeroCount<br>safe service : get.uint5.trainingZeroCount<br>safe primitive : get.uint5.trainingZeroCount<br>safe guard : get.uint5.trainingZeroCount<br>panic : get.uint5.trainingZeroCount<br>boot : get.uint5.trainingZeroCount<br>startup : get.uint5.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint6">uint6</a>
+</h2>
+<p>
+Kind: Integer (6 bits, unsigned)<br>
+Description: uint6<br>
+LLVM Base Name: uint6<br>
+LLVM Name: i6
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint6, routine LLVM name:<br>user : get.uint6.bitReversed<br>section : get.uint6.bitReversed<br>service : get.uint6.bitReversed<br>primitive : get.uint6.bitReversed<br>guard : get.uint6.bitReversed<br>any : get.uint6.bitReversed<br>any safe : get.uint6.bitReversed<br>safe user : get.uint6.bitReversed<br>safe section : get.uint6.bitReversed<br>safe service : get.uint6.bitReversed<br>safe primitive : get.uint6.bitReversed<br>safe guard : get.uint6.bitReversed<br>panic : get.uint6.bitReversed<br>boot : get.uint6.bitReversed<br>startup : get.uint6.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint6, routine LLVM name:<br>user : get.uint6.leadingZeroCount<br>section : get.uint6.leadingZeroCount<br>service : get.uint6.leadingZeroCount<br>primitive : get.uint6.leadingZeroCount<br>guard : get.uint6.leadingZeroCount<br>any : get.uint6.leadingZeroCount<br>any safe : get.uint6.leadingZeroCount<br>safe user : get.uint6.leadingZeroCount<br>safe section : get.uint6.leadingZeroCount<br>safe service : get.uint6.leadingZeroCount<br>safe primitive : get.uint6.leadingZeroCount<br>safe guard : get.uint6.leadingZeroCount<br>panic : get.uint6.leadingZeroCount<br>boot : get.uint6.leadingZeroCount<br>startup : get.uint6.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint6, routine LLVM name:<br>user : get.uint6.setBitCount<br>section : get.uint6.setBitCount<br>service : get.uint6.setBitCount<br>primitive : get.uint6.setBitCount<br>guard : get.uint6.setBitCount<br>any : get.uint6.setBitCount<br>any safe : get.uint6.setBitCount<br>safe user : get.uint6.setBitCount<br>safe section : get.uint6.setBitCount<br>safe service : get.uint6.setBitCount<br>safe primitive : get.uint6.setBitCount<br>safe guard : get.uint6.setBitCount<br>panic : get.uint6.setBitCount<br>boot : get.uint6.setBitCount<br>startup : get.uint6.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint6, routine LLVM name:<br>user : get.uint6.trainingZeroCount<br>section : get.uint6.trainingZeroCount<br>service : get.uint6.trainingZeroCount<br>primitive : get.uint6.trainingZeroCount<br>guard : get.uint6.trainingZeroCount<br>any : get.uint6.trainingZeroCount<br>any safe : get.uint6.trainingZeroCount<br>safe user : get.uint6.trainingZeroCount<br>safe section : get.uint6.trainingZeroCount<br>safe service : get.uint6.trainingZeroCount<br>safe primitive : get.uint6.trainingZeroCount<br>safe guard : get.uint6.trainingZeroCount<br>panic : get.uint6.trainingZeroCount<br>boot : get.uint6.trainingZeroCount<br>startup : get.uint6.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<h2>
+  <a name="uint8">uint8</a>
+</h2>
+<p>
+Kind: Integer (8 bits, unsigned)<br>
+Description: uint8<br>
+LLVM Base Name: uint8<br>
+LLVM Name: i8
+</p>
+  
+    <table class="result">
+      <tr>
+        <td class="result_title">Getter Name</td>
+        <td class="result_title">Visibility</td>
+        <td class="result_title">Kind</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>bitReversed</td>
+        <td>public</td>
+        <td>Computed property, type uint8, routine LLVM name:<br>user : get.uint8.bitReversed<br>section : get.uint8.bitReversed<br>service : get.uint8.bitReversed<br>primitive : get.uint8.bitReversed<br>guard : get.uint8.bitReversed<br>any : get.uint8.bitReversed<br>any safe : get.uint8.bitReversed<br>safe user : get.uint8.bitReversed<br>safe section : get.uint8.bitReversed<br>safe service : get.uint8.bitReversed<br>safe primitive : get.uint8.bitReversed<br>safe guard : get.uint8.bitReversed<br>panic : get.uint8.bitReversed<br>boot : get.uint8.bitReversed<br>startup : get.uint8.bitReversed</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>leadingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint8, routine LLVM name:<br>user : get.uint8.leadingZeroCount<br>section : get.uint8.leadingZeroCount<br>service : get.uint8.leadingZeroCount<br>primitive : get.uint8.leadingZeroCount<br>guard : get.uint8.leadingZeroCount<br>any : get.uint8.leadingZeroCount<br>any safe : get.uint8.leadingZeroCount<br>safe user : get.uint8.leadingZeroCount<br>safe section : get.uint8.leadingZeroCount<br>safe service : get.uint8.leadingZeroCount<br>safe primitive : get.uint8.leadingZeroCount<br>safe guard : get.uint8.leadingZeroCount<br>panic : get.uint8.leadingZeroCount<br>boot : get.uint8.leadingZeroCount<br>startup : get.uint8.leadingZeroCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>setBitCount</td>
+        <td>public</td>
+        <td>Computed property, type uint8, routine LLVM name:<br>user : get.uint8.setBitCount<br>section : get.uint8.setBitCount<br>service : get.uint8.setBitCount<br>primitive : get.uint8.setBitCount<br>guard : get.uint8.setBitCount<br>any : get.uint8.setBitCount<br>any safe : get.uint8.setBitCount<br>safe user : get.uint8.setBitCount<br>safe section : get.uint8.setBitCount<br>safe service : get.uint8.setBitCount<br>safe primitive : get.uint8.setBitCount<br>safe guard : get.uint8.setBitCount<br>panic : get.uint8.setBitCount<br>boot : get.uint8.setBitCount<br>startup : get.uint8.setBitCount</td>
+      </tr>
+    
+      <tr class="result_line">
+        <td>trainingZeroCount</td>
+        <td>public</td>
+        <td>Computed property, type uint8, routine LLVM name:<br>user : get.uint8.trainingZeroCount<br>section : get.uint8.trainingZeroCount<br>service : get.uint8.trainingZeroCount<br>primitive : get.uint8.trainingZeroCount<br>guard : get.uint8.trainingZeroCount<br>any : get.uint8.trainingZeroCount<br>any safe : get.uint8.trainingZeroCount<br>safe user : get.uint8.trainingZeroCount<br>safe section : get.uint8.trainingZeroCount<br>safe service : get.uint8.trainingZeroCount<br>safe primitive : get.uint8.trainingZeroCount<br>safe guard : get.uint8.trainingZeroCount<br>panic : get.uint8.trainingZeroCount<br>boot : get.uint8.trainingZeroCount<br>startup : get.uint8.trainingZeroCount</td>
+      </tr>
+    
+    </table>
+    <br>
+  
+  
+
+<p>
+<h2>
+  Routines
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Standalone routine Name</td>
+      <td class="result_title">Visibility</td>
+      <td class="result_title">Typed signature</td>
+      <td class="result_title">Routine LLVM Name, by mode</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>Semaphore.signal()</td>
+      <td>public</td>
+      <td>()</td>
+      <td>user : service.user.Semaphore.signal()<br>service : service.implementation.Semaphore.signal()<br>primitive : service.implementation.Semaphore.signal()<br>guard : service.implementation.Semaphore.signal()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>Semaphore.wait()</td>
+      <td>public</td>
+      <td>()</td>
+      <td>user : primitive.user.Semaphore.wait()<br>primitive : primitive.implementation.Semaphore.wait()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>Semaphore.wait(?until:)</td>
+      <td>public</td>
+      <td>(?until:uint32) -> bool</td>
+      <td>user : func.Semaphore.wait(?until:)<br>section : func.Semaphore.wait(?until:)<br>service : func.Semaphore.wait(?until:)<br>primitive : func.Semaphore.wait(?until:)<br>guard : func.Semaphore.wait(?until:)<br>any : func.Semaphore.wait(?until:)</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>block(?!inList:)</td>
+      <td>public</td>
+      <td>(?!inList:TaskList)</td>
+      <td>primitive : blockInList</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>block(?onDeadline:)</td>
+      <td>public</td>
+      <td>(?onDeadline:uint32)</td>
+      <td>primitive : blockOnDeadline</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>bool.uint1()</td>
+      <td>public</td>
+      <td>() -> uint1</td>
+      <td>user : func.bool.uint1()<br>section : func.bool.uint1()<br>service : func.bool.uint1()<br>primitive : func.bool.uint1()<br>guard : func.bool.uint1()<br>any : func.bool.uint1()<br>any safe : func.bool.uint1()<br>safe user : func.bool.uint1()<br>safe section : func.bool.uint1()<br>safe service : func.bool.uint1()<br>safe primitive : func.bool.uint1()<br>safe guard : func.bool.uint1()<br>panic : func.bool.uint1()<br>boot : func.bool.uint1()<br>startup : func.bool.uint1()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>driver.time.now()</td>
+      <td>public</td>
+      <td>() -> uint32</td>
+      <td>user : section.user.driver$time.now()<br>section : section.implementation.driver$time.now()<br>service : section.implementation.driver$time.now()<br>primitive : section.implementation.driver$time.now()<br>guard : section.implementation.driver$time.now()<br>safe section : section.implementation.driver$time.now()<br>safe service : section.implementation.driver$time.now()<br>safe primitive : section.implementation.driver$time.now()<br>safe guard : section.implementation.driver$time.now()<br>startup : section.implementation.driver$time.now()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>driver.time.wait(?during:)</td>
+      <td>public</td>
+      <td>(?during:uint32)</td>
+      <td>user : func.driver.time.wait(?during:)<br>any : func.driver.time.wait(?during:)</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>driver.time.wait(?until:)</td>
+      <td>public</td>
+      <td>(?until:uint32)</td>
+      <td>user : primitive.user.driver$time.wait(?until:)<br>primitive : primitive.implementation.driver$time.wait(?until:)</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>handle(?!guard:)</td>
+      <td>public</td>
+      <td>(?!guard:GuardList)</td>
+      <td>service : handleGuardedCommand<br>guard : handleGuardedCommand</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>handle(?guardedDeadline:)</td>
+      <td>public</td>
+      <td>(?guardedDeadline:uint32)</td>
+      <td>service : guard.handle.wait.until<br>guard : guard.handle.wait.until</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ledOff()</td>
+      <td>private</td>
+      <td>()</td>
+      <td>user : section.user.ledOff()<br>section : section.implementation.ledOff()<br>service : section.implementation.ledOff()<br>primitive : section.implementation.ledOff()<br>guard : section.implementation.ledOff()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ledOn()</td>
+      <td>private</td>
+      <td>()</td>
+      <td>user : section.user.ledOn()<br>section : section.implementation.ledOn()<br>service : section.implementation.ledOn()<br>primitive : section.implementation.ledOn()<br>guard : section.implementation.ledOn()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>makeTaskReady(?!fromList:!found:)</td>
+      <td>public</td>
+      <td>(?!fromList:TaskList!found:bool)</td>
+      <td>service : makeTaskReady<br>primitive : makeTaskReady<br>guard : makeTaskReady</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>makeTasksReady(?fromCurrentDate:)</td>
+      <td>public</td>
+      <td>(?fromCurrentDate:uint32)</td>
+      <td>service : makeTasksReadyFromCurrentDate<br>primitive : makeTasksReadyFromCurrentDate<br>guard : makeTasksReadyFromCurrentDate</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>nop()</td>
+      <td>public</td>
+      <td>()</td>
+      <td>user : func.nop()<br>section : func.nop()<br>service : func.nop()<br>primitive : func.nop()<br>guard : func.nop()<br>any : func.nop()<br>any safe : func.nop()<br>safe user : func.nop()<br>safe section : func.nop()<br>safe service : func.nop()<br>safe primitive : func.nop()<br>safe guard : func.nop()<br>panic : func.nop()<br>boot : func.nop()<br>startup : func.nop()</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>notifyChange(?!forGuard:)</td>
+      <td>public</td>
+      <td>(?!forGuard:GuardList)</td>
+      <td>service : notify.change.from.guard.list<br>primitive : notify.change.from.guard.list<br>guard : notify.change.from.guard.list</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>notifyChangeForGuardedWaitUntil(?withCurrentDate:)</td>
+      <td>public</td>
+      <td>(?withCurrentDate:uint32)</td>
+      <td>service : notify.change.for.guarded.wait.until<br>primitive : notify.change.for.guarded.wait.until<br>guard : notify.change.for.guarded.wait.until</td>
+    </tr>
+  
+  </table>
+</p>
+<p>
+<h2>
+  Infix Operators
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Infix operator</td>
+      <td class="result_title">Result Type</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctBool == ctBool</td>
+      <td>ctBool</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctBool or ctBool</td>
+      <td>ctBool</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctBool xor ctBool</td>
+      <td>ctBool</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt % ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt & ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt * ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt + ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt / ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt < ctInt</td>
+      <td>ctBool</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt == ctInt</td>
+      <td>ctBool</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt ^ ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>ctInt | ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+  </table>
+</p>
+<p>
+<h2>
+  Prefix Operators
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Prefix operator</td>
+      <td class="result_title">Result Type</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>- ctInt</td>
+      <td>ctInt</td>
+    </tr>
+  
+    <tr class="result_line">
+      <td>not ctBool</td>
+      <td>ctBool</td>
+    </tr>
+  
+  </table>
+</p>
+</div>
+</body>
+</html>

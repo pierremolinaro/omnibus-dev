@@ -71,7 +71,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
 #--- Expression is static ?
   if ([unusedInstructionListIR length] > 0)
      || not [result isLiteralInteger]
-     || ([result omnibusTypeDescriptionName] != staticIntegerTypeName ()) then
+     || ([result omnibusTypeDescriptionName] != ctIntegerTypeName ()) then
     error mInstructionLocation : "throw expression should be a literal integer"
   else
     [inContext.mPanicCodeType.kind integer ?min:let min ?max:let max ?2*]

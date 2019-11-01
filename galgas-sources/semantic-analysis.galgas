@@ -16,7 +16,7 @@ func checkAssignmentCompatibility
     result = inSourceValue
   elsif [inOptionalTargetAnnotationType.kind isVoid] then
     result = inSourceValue
-  elsif [sourceType.kind isStaticInteger] && [inOptionalTargetAnnotationType.kind isInteger] then
+  elsif [sourceType.kind isCompileTimeInteger] && [inOptionalTargetAnnotationType.kind isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
     [inOptionalTargetAnnotationType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
     if (value < minTarget) || (maxTarget < value) then
@@ -31,8 +31,8 @@ func checkAssignmentCompatibility
     : result
   end
   if not inStaticTypeAllowed then
-    if [result omnibusTypeDescriptionName] == staticIntegerTypeName () then
-      error inErrorLocation : "the " + staticIntegerTypeName () + " static type is not allowed here"
+    if [result omnibusTypeDescriptionName] == ctIntegerTypeName () then
+      error inErrorLocation : "the " + ctIntegerTypeName () + " static type is not allowed here"
     end
   end
 }

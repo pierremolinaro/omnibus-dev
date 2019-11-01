@@ -1,0 +1,54 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @ctBoolDeclarationAST : @abstractDeclarationAST {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @ctBoolDeclarationAST locationForErrorSignaling -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @ctBoolDeclarationAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let ctBoolTypeName = [ctBoolTypeName () nowhere]
+  [!?ioGraph addNode !ctBoolTypeName !self]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @ctBoolDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = ctBoolTypeName () 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @ctBoolDeclarationAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+  let ctBoolTypeName = [ctBoolTypeName () nowhere]
+ #---
+  [!?ioContext.mTypeMap insertType
+    !lkey: ctBoolTypeName
+    !type: compileTimeBoolType ()
+  ]
+ #---
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

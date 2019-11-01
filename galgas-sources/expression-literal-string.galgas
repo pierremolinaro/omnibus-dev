@@ -39,7 +39,7 @@ override method @literalStringInExpressionAST addDependenceEdgeForStaticExpressi
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode ![staticIntegerTypeName () nowhere]]
+  [!?ioGraph noteNode ![ctIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

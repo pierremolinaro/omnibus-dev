@@ -1,0 +1,23 @@
+//——————————————————————————————————————————————————————————————————————————————
+//   COMPILE TIME BOOLEAN
+//  (a and b) is implicitly defined as not (not a or not b)
+//  (a ≠ b) is implicitly defined as not (a == b)
+//——————————————————————————————————————————————————————————————————————————————
+
+compiletime func not (?operand $ctBool) -> $ctBool {
+  not operand
+}
+
+compiletime func or (?left $ctBool ?right $ctBool) -> $ctBool {
+  left | right
+}
+
+compiletime func xor (?left $ctBool ?right $ctBool) -> $ctBool {
+  left ^ right
+}
+
+compiletime func == (?left $ctBool ?right $ctBool) -> $ctBool {
+  left == right
+}
+
+//——————————————————————————————————————————————————————————————————————————————

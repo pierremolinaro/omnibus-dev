@@ -407,7 +407,9 @@ private proc controlRegisterType
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case staticInteger :
+  case compileTimeBool :
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+  case compileTimeInteger :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case structure (*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

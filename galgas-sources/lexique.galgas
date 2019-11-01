@@ -18,6 +18,7 @@ lexique omnibus_lexique {
     "case",
     "check",
     "convert",
+    "compiletime",
     "driver",
     "else",
     "enum",
