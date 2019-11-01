@@ -4,19 +4,19 @@
 //  (a ≠ b) is implicitly defined as not (a == b)
 //——————————————————————————————————————————————————————————————————————————————
 
-compiletime func not (?operand $ctBool) -> $ctBool {
+compiletime func not (operand $ctBool) -> $ctBool {
   not operand
 }
 
-compiletime func or (?left $ctBool ?right $ctBool) -> $ctBool {
+compiletime func (left $ctBool) or (right $ctBool) -> $ctBool {
   left | right
 }
 
-compiletime func xor (?left $ctBool ?right $ctBool) -> $ctBool {
+compiletime func (left $ctBool) xor (right $ctBool) -> $ctBool {
   left ^ right
 }
 
-compiletime func == (?left $ctBool ?right $ctBool) -> $ctBool {
+compiletime func (left $ctBool) == (right $ctBool) -> $ctBool {
   left == right
 }
 

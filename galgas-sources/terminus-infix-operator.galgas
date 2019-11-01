@@ -128,19 +128,13 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $compiletime$
     $func$
+    $($
+    $identifier$ ?let leftArgument
+    $\$type$ ?let leftType
+    $)$
     let operationLocation = @location.here
     <infixOperator> ?let infixOperator
     $($
-    $?selector:$ ?let leftSelector
-    if leftSelector.string != "" then
-      error leftSelector : "only '?' is allowed here"
-    end
-    $identifier$ ?let leftArgument
-    $\$type$ ?let leftType
-    $?selector:$ ?let rightSelector
-    if rightSelector.string != "" then
-      error rightSelector : "only '?' is allowed here"
-    end
     $identifier$ ?let rightArgument
     $\$type$ ?let rightType
     $)$

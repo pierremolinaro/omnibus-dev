@@ -8,43 +8,43 @@
 //  (a - b) is implicitly defined as (a + - b)
 //——————————————————————————————————————————————————————————————————————————————
 
-compiletime func == (?left $ctInt ?right $ctInt) -> $ctBool {
+compiletime func (left $ctInt) == (right $ctInt) -> $ctBool {
   left == right
 }
 
-compiletime func < (?left $ctInt ?right $ctInt) -> $ctBool {
+compiletime func (left $ctInt) < (right $ctInt) -> $ctBool {
   left < right
 }
 
-compiletime func - (?operand $ctInt) -> $ctInt {
+compiletime func - (operand $ctInt) -> $ctInt {
   - operand
 }
 
-compiletime func + (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) + (right $ctInt) -> $ctInt {
   left + right
 }
 
-compiletime func * (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) * (right $ctInt) -> $ctInt {
   left * right
 }
 
-compiletime func / (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) / (right $ctInt) -> $ctInt {
   left / right
 }
 
-compiletime func % (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) % (right $ctInt) -> $ctInt {
   left % right
 }
 
-compiletime func & (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) & (right $ctInt) -> $ctInt {
   left & right
 }
 
-compiletime func | (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) | (right $ctInt) -> $ctInt {
   left | right
 }
 
-compiletime func ^ (?left $ctInt ?right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) ^(right $ctInt) -> $ctInt {
   left ^ right
 }
 
