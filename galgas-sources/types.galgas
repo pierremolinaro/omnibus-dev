@@ -14,7 +14,7 @@ shared class @omnibusType {
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
   @typeKind kind %selector
-  @string llvmBaseTypeName %selector # used for type implementation
+  @string llvmBaseTypeName %selector # used for type implementation, empty string if compile time type
 }
 
 #·······················································································································
@@ -108,9 +108,9 @@ getter @omnibusType llvmTypeName -> @string {
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case compileTimeBool :
-    result = "i1??"
+    result = "" # No LLVM type, Compile Time Type
   case compileTimeInteger :
-    result = "i??"
+    result = ""
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case staticArrayType (* *) :
@@ -158,7 +158,7 @@ func %once compileTimeIntegerType -> @omnibusType {
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
     !kind:.compileTimeInteger
-    !llvmBaseTypeName:ctIntegerTypeName ()
+    !llvmBaseTypeName: "" # Compile Time Type
   }
 }
 
@@ -175,7 +175,7 @@ func %once compileTimeBoolType -> @omnibusType {
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
     !kind:.compileTimeBool
-    !llvmBaseTypeName:ctBoolTypeName ()
+    !llvmBaseTypeName: "" # Compile Time Type
   }
 }
 

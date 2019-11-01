@@ -1,0 +1,222 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @llvmGenerationInstructionElement {
+  case string (@string string)
+  case constant (@lstring name)
+  case type (@lstring name)
+}
+
+#·······················································································································
+
+list @llvmGenerationInstructionElementList {
+  @llvmGenerationInstructionElement mElement
+}
+
+#·······················································································································
+
+abstract class @abstractLLVMInstruction {
+}
+#·······················································································································
+
+class @llvmGenerationInstruction : @abstractLLVMInstruction {
+  @llvmGenerationInstructionElementList mGenerationList
+}
+
+#·······················································································································
+
+list @llvmGenerationInstructionList {
+  @llvmGenerationInstruction mInstruction
+}
+
+#·······················································································································
+
+class @llvmAssignmentOperatorDeclaractionAST : @abstractDeclarationAST {
+  @location mOperatorLocation
+  @lstring mTargetVariableName
+  @lstring mTargetTypeName
+  @genericFormalParameterList mTargetGenericFormalParameterList
+  @lstring mSourceVariableName
+  @lstring mSourceTypeName
+  @genericFormalParameterList mSourceGenericFormalParameterList
+  @ctExpressionAST mWhereClause
+  @llvmGenerationInstructionList mInstructionList
+}
+
+#·······················································································································
+
+override getter @llvmAssignmentOperatorDeclaractionAST locationForErrorSignaling -> @location outLocation {
+  outLocation = mOperatorLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <llvm_instruction_list> !@llvmGenerationInstructionList outInstructionList {
+    outInstructionList = {}
+    repeat
+    while
+      <llvm_instruction> ?let instruction
+      outInstructionList += !instruction
+    end
+  }
+  #·····················································································································
+
+  rule <llvm_instruction> !@llvmGenerationInstruction outInstruction {
+    $llvm$
+    @llvmGenerationInstructionElementList elementList = {}
+    repeat
+      select
+        $"string"$ ?let string
+        elementList += !.string {!string: string}
+      or
+        $identifier$ ?let name
+        elementList += !.constant {!name: name}
+      or
+        $\$type$ ?let typeName
+        elementList += !.type {!name: typeName}
+      end
+   while
+     $+$
+   end
+   outInstruction = @llvmGenerationInstruction.new {!elementList}
+  }
+  
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $llvm$
+    $func$
+    $($
+    $identifier$ ?let targetVariableName
+    $\$type$ ?let targetTypeName
+    <generic_formal_arguments> ?let targetGenericFormalParameterList
+    $)$
+    let operatorLocation = @location.here
+    $=$
+    $($
+    $identifier$ ?let sourceVariableName
+    $\$type$ ?let sourceTypeName
+    <generic_formal_arguments> ?let sourceGenericFormalParameterList
+    $)$
+    <generic_where_clause> ?let whereClause
+    ${$
+    <llvm_instruction_list> ?let instructionList
+    $}$
+    ioAST.mDeclarationListAST += !@llvmAssignmentOperatorDeclaractionAST.new {
+      !operatorLocation
+      !targetVariableName
+      !targetTypeName
+      !targetGenericFormalParameterList
+      !sourceVariableName
+      !sourceTypeName
+      !sourceGenericFormalParameterList
+      !whereClause
+      !instructionList
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @llvmAssignmentOperatorDeclaractionAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let nodeName = @lstring.new {!mTargetTypeName.string + " = " + mSourceTypeName !mOperatorLocation}
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName !mTargetTypeName]
+  [!?ioGraph addEdge !nodeName !mSourceTypeName]
+}
+
+#·······················································································································
+
+override getter @llvmAssignmentOperatorDeclaractionAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "Assignment " + mTargetTypeName + " = " + mSourceTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
+  for (instruction) in self do
+    [instruction checkInstructionList !inMap]
+  end
+}
+
+#·······················································································································
+
+abstract method @abstractLLVMInstruction checkInstructionList  ?let @ctCheckMap inMap
+
+#·······················································································································
+
+override method @llvmGenerationInstruction checkInstructionList  ?let @ctCheckMap inMap {
+  for (element) in mGenerationList do
+    switch element
+    case string (*) :
+    case constant (name) :
+      [inMap searchKey !name]
+    case type (name) :
+      [inMap searchKey !name]
+    end
+  end
+}
+
+#·······················································································································
+
+override method @llvmAssignmentOperatorDeclaractionAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+#--- Build formal generic constant parameter map
+  @ctCheckMap formalGenericConstantParameterMap = {}
+  [mTargetGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
+  [mSourceGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
+#--- Check Where clause
+  [mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
+#--- Check instruction list
+  [!?formalGenericConstantParameterMap insertKey !mTargetVariableName]
+  [!?formalGenericConstantParameterMap insertKey !mSourceVariableName]
+  [mInstructionList checkInstructionList !formalGenericConstantParameterMap]
+
+
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverType]
+#  [[receiverType type] checkIsCompileTimeType !mReceiverTypeName.location]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
+#  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
+##--- Check native operator expression
+#  @ctCheckMap ctCheckMap = {}
+#  [!?ctCheckMap insertKey !mReceiverName]
+#  [mExpression checkCompileTimeExpression !ctCheckMap]
+##--- Enter in infix operator map  
+#  let key = @lstring.new {
+#    ![mPrefixOperator string] + " " + [[receiverType type] omnibusTypeDescriptionName]
+#    !mInfixOperatorLocation
+#  }
+#  let definition = @terminusNativePrefixOperator.new {
+#    !mInfixOperatorLocation
+#    !mReceiverName
+#    !mExpression
+#  }
+#  [!?ioContext.mTerminusPrefixOperatorMap insertKey !key ![receiverType type] ![resultType type] !definition]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

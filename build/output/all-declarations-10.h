@@ -10,6 +10,58 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                          Function 'llvmFunctionPrototype'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
+                                                    const class GALGAS_string & constinArgument1,
+                                                    const class GALGAS_omnibusType & constinArgument2,
+                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         Routine 'generateSectionDispatcher'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generateSectionDispatcher (const class GALGAS_string constinArgument0,
+                                        const class GALGAS_string constinArgument1,
+                                        const class GALGAS_targetParameters constinArgument2,
+                                        class GALGAS_string & ioArgument3,
+                                        const class GALGAS_sectionIRlist constinArgument4,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'getTargetTextFile'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
+                                                const class GALGAS_string & constinArgument1,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Routine 'generatePrimitiveAndServiceDispatcher'                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string constinArgument0,
+                                                    const class GALGAS_string constinArgument1,
+                                                    class GALGAS_string & ioArgument2,
+                                                    const class GALGAS_primitiveAndServiceIRlist constinArgument3,
+                                                    const class GALGAS_targetParameters constinArgument4,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                          Routine 'checkRequiredProcedures'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -465,47 +517,4 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
                                                             const class GALGAS_location & constinArgument3,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Routine 'analyzeConstructorCall'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_analyzeConstructorCall (const class GALGAS_omnibusType constinArgument0,
-                                     const class GALGAS_lstring constinArgument1,
-                                     const class GALGAS_effectiveArgumentListAST constinArgument2,
-                                     const class GALGAS_routineAttributes constinArgument3,
-                                     const class GALGAS_semanticContext constinArgument4,
-                                     const class GALGAS_mode constinArgument5,
-                                     class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                     class GALGAS_staticEntityMap & ioArgument7,
-                                     class GALGAS_universalValuedObjectMap & ioArgument8,
-                                     class GALGAS_allocaList & ioArgument9,
-                                     class GALGAS_instructionListIR & ioArgument10,
-                                     class GALGAS_objectIR & outArgument11,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Routine 'analyzeRegularFunctionCall'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_analyzeRegularFunctionCall (const class GALGAS_omnibusType constinArgument0,
-                                         const class GALGAS_lstring constinArgument1,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument2,
-                                         const class GALGAS_lstring constinArgument3,
-                                         const class GALGAS_routineAttributes constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticEntityMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_objectIR & outArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 

@@ -171,5 +171,7 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/terminus-infix-operator.galgas"
   "galgas-sources/terminus-prefix-operator.galgas"
   "galgas-sources/compile-time-expression.galgas"
+  "galgas-sources/llvm-generic-type.galgas"
+  "galgas-sources/assignment-operator-definition.galgas"
 }
 

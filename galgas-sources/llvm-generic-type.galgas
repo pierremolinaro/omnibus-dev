@@ -2,35 +2,43 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @terminusPrefixOperatorEnumeration {
- case notOp   # not
- case minusOp # -
+enum @genericFormalParameter {
+  case constant (@lstring name)
+  case type (@lstring name)
 }
 
 #·······················································································································
 
-getter @terminusPrefixOperatorEnumeration string -> @string {
- switch self
- case notOp   : result = "not"
- case minusOp : result = "-"
- end
+list @genericFormalParameterList {
+  @genericFormalParameter mParameter
 }
 
 #·······················································································································
 
-class @nativePrefixOperatorAST : @abstractDeclarationAST {
-  @terminusPrefixOperatorEnumeration mPrefixOperator
-  @location mInfixOperatorLocation
-  @lstring mReceiverName
-  @lstring mReceiverTypeName
-  @ctExpressionAST mExpression
-  @lstring mResultTypeName
+enum @llvmStringDefinitionElement {
+  case variable (@lstring name)
+  case string (@lstring value)
 }
 
 #·······················································································································
 
-override getter @nativePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mInfixOperatorLocation
+list @llvmStringDefinition {
+  @llvmStringDefinitionElement mElement
+}
+
+#·······················································································································
+
+class @llvmGenericType : @abstractDeclarationAST {
+  @lstring mTypeName
+  @genericFormalParameterList mGenericFormalParameterList
+  @ctExpressionAST mWhereClause
+  @llvmStringDefinition mLLVMNativeTypeNameExpression
+}
+
+#·······················································································································
+
+override getter @llvmGenericType locationForErrorSignaling -> @location outLocation {
+  outLocation = mTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -41,39 +49,69 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <prefixOperator> !@terminusPrefixOperatorEnumeration outOperator {
+  rule <llvm_string_definition> !@llvmStringDefinition outStringDefinition {
+    outStringDefinition = {}
+    repeat
+      select
+        $"string"$ ?let string
+        outStringDefinition += !.string {!value: string}
+      or
+        $identifier$ ?let name
+        outStringDefinition += !.variable {!name: name}
+      end
+    while
+      $+$
+    end
+  }
+  
+  #·····················································································································
+
+  rule <generic_formal_arguments> !@genericFormalParameterList outGenericFormalParameterList {
+    outGenericFormalParameterList = {}
     select
-      $not$
-      outOperator = .notOp
     or
-      $-$
-      outOperator = .minusOp
+      $<$
+      repeat
+        select
+          $identifier$ ?let constantName
+          outGenericFormalParameterList += !.constant {!name: constantName}
+        or
+          $\$type$ ?let typeName
+          outGenericFormalParameterList += !.type {!name: typeName}
+        end
+      while
+        $,$
+      end
+      $>$
+    end
+  }
+
+  #·····················································································································
+
+  rule <generic_where_clause> !@ctExpressionAST outWhereClause {
+    select
+      outWhereClause = @ctTrueExpressionAST.new
+    or
+      $where$
+      <compile_time_expression> ?outWhereClause
     end
   }
   
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $compiletime$
-    $func$
-    let operationLocation = @location.here
-    <prefixOperator> ?let prefixOperator
-    $($
-    $identifier$ ?let receiverName
-    $\$type$ ?let receiverType
-    $)$
-    $->$
-    $\$type$ ?let resultType
+    $llvm$
+    $\$type$ ?let typeName
+    <generic_formal_arguments> ?let genericFormalParameterList
+    <generic_where_clause> ?let whereClause
     ${$
-    <compile_time_expression> ?let @ctExpressionAST expression
+    <llvm_string_definition> ?let llvmNativeTypeNameExpression
     $}$
-    ioAST.mDeclarationListAST += !@nativePrefixOperatorAST.new {
-      !prefixOperator
-      !operationLocation
-      !receiverName
-      !receiverType
-      !expression
-      !resultType
+    ioAST.mDeclarationListAST += !@llvmGenericType.new {
+      !typeName
+      !genericFormalParameterList
+      !whereClause
+      !llvmNativeTypeNameExpression
     }
   }
 
@@ -85,26 +123,49 @@ syntax extension omnibus_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @nativePrefixOperatorAST enterInPrecedenceGraph
+override method @llvmGenericType enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![mPrefixOperator string] + "." + mReceiverTypeName !mInfixOperatorLocation}
+  let nodeName = mTypeName
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
-  [!?ioGraph addEdge !nodeName !mResultTypeName]
+#  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
 }
 
 #·······················································································································
 
-override getter @nativePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = [mPrefixOperator string] + " " + mReceiverTypeName
+override getter @llvmGenericType keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "Generic type " + mTypeName.string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @nativePrefixOperatorAST enterInContext
+method @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap ioMap {
+  for (element) in self do
+    switch element 
+    case type (*) :
+    case constant (constantName) :
+      [!?ioMap insertKey !constantName]
+    end
+  end
+}
+
+#·······················································································································
+
+method @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
+  for (element) in self do
+    switch element 
+    case string (*) :
+    case variable (name) :
+      [inMap searchKey !name]
+    end
+  end
+}
+
+#·······················································································································
+
+override method @llvmGenericType enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -114,50 +175,34 @@ override method @nativePrefixOperatorAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverType]
-  [[receiverType type] checkIsCompileTimeType !mReceiverTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
-  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
-#--- Check native operator expression
-  @ctCheckMap ctCheckMap = {}
-  [!?ctCheckMap insertKey !mReceiverName]
-  [mExpression checkCompileTimeExpression !ctCheckMap]
-#--- Enter in infix operator map  
-  let key = @lstring.new {
-    ![mPrefixOperator string] + " " + [[receiverType type] omnibusTypeDescriptionName]
-    !mInfixOperatorLocation
-  }
-  let definition = @terminusNativePrefixOperator.new {
-    !mInfixOperatorLocation
-    !mReceiverName
-    !mExpression
-  }
-  [!?ioContext.mTerminusPrefixOperatorMap insertKey !key ![receiverType type] ![resultType type] !definition]
-}
+#--- Build formal generic constant parameter map
+  @ctCheckMap formalGenericConstantParameterMap = {}
+  [mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
+#--- Check Where clause
+  [mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
+#--- Check native LLVM type expression
+  [mLLVMNativeTypeNameExpression checkCompileTimeExpression !formalGenericConstantParameterMap]
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   INFIX OPERATOR MAP
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @terminusPrefixOperatorMap {
-  @omnibusType mReceiverType
-  @omnibusType mResultType
-  @terminusPrefixOperator mOperator
-  insert insertKey error message "the '%K' infix operator is already declared in %L"
-  search searchKey error message "there is no '%K' infix operator"
-}
-
-#·······················································································································
-
-abstract class @terminusPrefixOperator {}
-
-#·······················································································································
-
-class @terminusNativePrefixOperator : @terminusPrefixOperator {
-  @location mInfixOperatorLocation
-  @lstring mReceiverOperandName
-  @ctExpressionAST mExpression
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverType]
+#  [[receiverType type] checkIsCompileTimeType !mReceiverTypeName.location]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
+#  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
+##--- Check native operator expression
+#  @ctCheckMap ctCheckMap = {}
+#  [!?ctCheckMap insertKey !mReceiverName]
+#  [mExpression checkCompileTimeExpression !ctCheckMap]
+##--- Enter in infix operator map  
+#  let key = @lstring.new {
+#    ![mPrefixOperator string] + " " + [[receiverType type] omnibusTypeDescriptionName]
+#    !mInfixOperatorLocation
+#  }
+#  let definition = @terminusNativePrefixOperator.new {
+#    !mInfixOperatorLocation
+#    !mReceiverName
+#    !mExpression
+#  }
+#  [!?ioContext.mTerminusPrefixOperatorMap insertKey !key ![receiverType type] ![resultType type] !definition]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

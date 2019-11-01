@@ -1,0 +1,23 @@
+//——————————————————————————————————————————————————————————————————————————————
+//   OPAQUE GENERIC TYPE
+//——————————————————————————————————————————————————————————————————————————————
+
+llvm $opaque <N> where (N > 0) & ((N % 8) == 0) {
+  "i" + N
+}
+
+llvm func (tgt $opaque <N>) = (src $opaque <P>) where N == P {
+  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
+}
+
+//llvm func (tgt $uint <N>) = (src $uint <P>) where N >= P {
+//  if N > P {
+//    var temp
+//    llvm temp + " = zext " + $src + " " + src + " to " + $tgt
+//    llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
+//  }else{
+//    llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
+//  }
+//}
+
+//——————————————————————————————————————————————————————————————————————————————

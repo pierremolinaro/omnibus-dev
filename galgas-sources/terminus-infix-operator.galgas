@@ -141,7 +141,7 @@ syntax extension omnibus_syntax {
     $->$
     $\$type$ ?let resultType
     ${$
-    <native_expression> ?let @ctExpressionAST expression
+    <compile_time_expression> ?let @ctExpressionAST expression
     $}$
     ioAST.mDeclarationListAST += !@nativeInfixOperatorAST.new {
       !infixOperator

@@ -52,13 +52,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression> !@ctExpressionAST outExpression {
-    <native_expression_bitwise_xor> ?outExpression
+  rule <compile_time_expression> !@ctExpressionAST outExpression {
+    <compile_time_expression_bitwise_xor> ?outExpression
     repeat
     while
       $|$
       let operatorLocation = @location.here
-      <native_expression_bitwise_xor> ?let rightExpression
+      <compile_time_expression_bitwise_xor> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -70,13 +70,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_bitwise_xor> !@ctExpressionAST outExpression {
-    <native_expression_bitwise_and> ?outExpression
+  rule <compile_time_expression_bitwise_xor> !@ctExpressionAST outExpression {
+    <compile_time_expression_bitwise_and> ?outExpression
     repeat
     while
       $^$
       let operatorLocation = @location.here
-      <native_expression_bitwise_and> ?let rightExpression
+      <compile_time_expression_bitwise_and> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -88,13 +88,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_bitwise_and> !@ctExpressionAST outExpression {
-    <native_expression_equality> ?outExpression
+  rule <compile_time_expression_bitwise_and> !@ctExpressionAST outExpression {
+    <compile_time_expression_equality> ?outExpression
     repeat
     while
       $&$
       let operatorLocation = @location.here
-      <native_expression_equality> ?let rightExpression
+      <compile_time_expression_equality> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -106,13 +106,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_equality> !@ctExpressionAST outExpression {
-    <native_expression_comparison> ?outExpression
+  rule <compile_time_expression_equality> !@ctExpressionAST outExpression {
+    <compile_time_expression_comparison> ?outExpression
     select
     or
       $==$
       let operatorLocation = @location.here
-      <native_expression_comparison> ?let rightExpression
+      <compile_time_expression_comparison> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -122,7 +122,7 @@ syntax extension omnibus_syntax {
     or
       $≠$ # (a ≠ b) equivalent to not (a == b)
       let operatorLocation = @location.here
-      <native_expression_comparison> ?let rightExpression
+      <compile_time_expression_comparison> ?let rightExpression
       let expression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -139,13 +139,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_comparison> !@ctExpressionAST outExpression {
-    <native_expression_shift> ?outExpression
+  rule <compile_time_expression_comparison> !@ctExpressionAST outExpression {
+    <compile_time_expression_shift> ?outExpression
     select
     or
       $≤$ # (a ≤ b) equivalent to (a == b) | (a < b)
       let operatorLocation = @location.here
-      <native_expression_shift> ?let rightExpression
+      <compile_time_expression_shift> ?let rightExpression
       let lessThanExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -167,7 +167,7 @@ syntax extension omnibus_syntax {
     or
       $≥$ # (a ≥ b) equivalent to not (a < b)
       let operatorLocation = @location.here
-      <native_expression_shift> ?let rightExpression
+      <compile_time_expression_shift> ?let rightExpression
       let expression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -182,7 +182,7 @@ syntax extension omnibus_syntax {
     or
       $<$
       let operatorLocation = @location.here
-      <native_expression_shift> ?let rightExpression
+      <compile_time_expression_shift> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -192,7 +192,7 @@ syntax extension omnibus_syntax {
     or
       $>$ # (a > b) equivalent to not ((a == b) | (a < b))
       let operatorLocation = @location.here
-      <native_expression_shift> ?let rightExpression
+      <compile_time_expression_shift> ?let rightExpression
      let lessThanExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -221,13 +221,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_shift> !@ctExpressionAST outExpression {
-    <native_expression_addition> ?outExpression
+  rule <compile_time_expression_shift> !@ctExpressionAST outExpression {
+    <compile_time_expression_addition> ?outExpression
     repeat
     while
       $<<$
       let operatorLocation = @location.here
-      <native_expression_addition> ?let rightExpression
+      <compile_time_expression_addition> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -237,7 +237,7 @@ syntax extension omnibus_syntax {
     while
       $>>$
       let operatorLocation = @location.here
-      <native_expression_addition> ?let rightExpression
+      <compile_time_expression_addition> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -249,13 +249,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_addition> !@ctExpressionAST outExpression {
-    <native_expression_product> ?outExpression
+  rule <compile_time_expression_addition> !@ctExpressionAST outExpression {
+    <compile_time_expression_product> ?outExpression
     repeat
     while
       $+$
       let operatorLocation = @location.here
-      <native_expression_product> ?let rightExpression
+      <compile_time_expression_product> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -265,7 +265,7 @@ syntax extension omnibus_syntax {
     while
       $-$
       let operatorLocation = @location.here
-      <native_expression_product> ?let rightExpression
+      <compile_time_expression_product> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -277,13 +277,13 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_expression_product> !@ctExpressionAST outExpression {
-    <native_primary> ?outExpression
+  rule <compile_time_expression_product> !@ctExpressionAST outExpression {
+    <compile_time_primary> ?outExpression
     repeat
     while
       $*$
       let operatorLocation = @location.here
-      <native_primary> ?let rightExpression
+      <compile_time_primary> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -293,7 +293,7 @@ syntax extension omnibus_syntax {
    while
       $%$
       let operatorLocation = @location.here
-      <native_primary> ?let rightExpression
+      <compile_time_primary> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -303,7 +303,7 @@ syntax extension omnibus_syntax {
     while
       $!%$
       let operatorLocation = @location.here
-      <native_primary> ?let rightExpression
+      <compile_time_primary> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -313,7 +313,7 @@ syntax extension omnibus_syntax {
     while
       $/$
       let operatorLocation = @location.here
-      <native_primary> ?let rightExpression
+      <compile_time_primary> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -323,7 +323,7 @@ syntax extension omnibus_syntax {
     while
       $!/$
       let operatorLocation = @location.here
-      <native_primary> ?let rightExpression
+      <compile_time_primary> ?let rightExpression
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -335,10 +335,10 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $~$
     let operatorLocation = @location.here
-    <native_primary> ?let expression
+    <compile_time_primary> ?let expression
     outExpression = @ctPrefixExpressionAST.new {
       !operatorLocation
       !.unsignedComplement
@@ -348,10 +348,10 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $not$
     let operatorLocation = @location.here
-    <native_primary> ?let expression
+    <compile_time_primary> ?let expression
     outExpression = @ctPrefixExpressionAST.new {
       !operatorLocation
       !.notOperator
@@ -361,10 +361,10 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $-$
     let operatorLocation = @location.here
-    <native_primary> ?let expression
+    <compile_time_primary> ?let expression
     outExpression = @ctPrefixExpressionAST.new {
       !operatorLocation
       !.minus
@@ -374,10 +374,10 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $-%$
     let operatorLocation = @location.here
-    <native_primary> ?let expression
+    <compile_time_primary> ?let expression
     outExpression = @ctPrefixExpressionAST.new {
       !operatorLocation
       !.minusNoOvf
@@ -387,36 +387,36 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $($
-    <native_expression> ?outExpression
+    <compile_time_expression> ?outExpression
     $)$
   }
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $yes$
     outExpression = @ctTrueExpressionAST.new
   }
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $no$
     outExpression = @ctFalseExpressionAST.new
   }
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $integer$ ?let value
     outExpression = @ctIntExpressionAST.new {!value}
   }
 
   #·····················································································································
 
-  rule <native_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> !@ctExpressionAST outExpression {
     $identifier$ ?let name
     outExpression = @ctIdentifierExpressionAST.new {!name}
   }
