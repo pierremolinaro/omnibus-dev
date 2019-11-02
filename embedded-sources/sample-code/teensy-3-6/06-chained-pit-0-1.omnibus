@@ -59,6 +59,12 @@ struct $Uptime @copyable {
   }
 }
 
+llvm func (tgt $Uptime) = (src $Uptime) {
+  var r
+  llvm r + " = load " + $src + ", " + $src + "* " + src 
+  llvm "store " + $tgt + " " + r + ", " + $tgt + "* " + tgt
+}
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @autostart {

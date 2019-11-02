@@ -122,6 +122,7 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/object-intermediate-representation.galgas"
   "galgas-sources/intermediate-code-generation.galgas"
   "galgas-sources/intermediate-nop.galgas"
+  "galgas-sources/instruction-free-string.galgas"
   "galgas-sources/intermediate-extend.galgas"
   "galgas-sources/intermediate-trunc.galgas"
   "galgas-sources/intermediate-bool-to-uint.galgas"

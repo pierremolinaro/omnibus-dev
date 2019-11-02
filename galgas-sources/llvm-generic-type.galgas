@@ -182,27 +182,23 @@ override method @llvmGenericType enterInContext
   [mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
 #--- Check native LLVM type expression
   [mLLVMNativeTypeNameExpression checkCompileTimeExpression !formalGenericConstantParameterMap]
-
-
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverType]
-#  [[receiverType type] checkIsCompileTimeType !mReceiverTypeName.location]
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
-#  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
-##--- Check native operator expression
-#  @ctCheckMap ctCheckMap = {}
-#  [!?ctCheckMap insertKey !mReceiverName]
-#  [mExpression checkCompileTimeExpression !ctCheckMap]
-##--- Enter in infix operator map  
-#  let key = @lstring.new {
-#    ![mPrefixOperator string] + " " + [[receiverType type] omnibusTypeDescriptionName]
-#    !mInfixOperatorLocation
-#  }
-#  let definition = @terminusNativePrefixOperator.new {
-#    !mInfixOperatorLocation
-#    !mReceiverName
-#    !mExpression
-#  }
-#  [!?ioContext.mTerminusPrefixOperatorMap insertKey !key ![receiverType type] ![resultType type] !definition]
+#---
+  let genericType = @omnibusType.new {
+    !propertyGetterMap: {}
+    !propertySetterMap: {}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !subscript:.noSubscript
+    !assignmentSources: {}
+    !attributes: .none
+    !omnibusTypeDescriptionName: mTypeName
+    !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: mLLVMNativeTypeNameExpression}
+    !llvmBaseTypeName: "" # Empty String, compile time type
+  }
+  [!?ioContext.mTypeMap insertType
+    !lkey: mTypeName
+    !type: genericType
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

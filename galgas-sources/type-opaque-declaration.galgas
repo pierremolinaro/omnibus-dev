@@ -108,7 +108,7 @@ override method @typeOpaqueDeclarationAST enterInContext
         + " attributes are allowed here"
     end
   end
-#--- Compute array size
+#--- Compute opaque type size
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
@@ -141,6 +141,10 @@ override method @typeOpaqueDeclarationAST enterInContext
       !lkey:mOpaqueTypeName
       !type:opaqueType
     ]
+  end
+#--- Add Assignment ?
+  if copyable then
+    message "OPAQUE " + mOpaqueTypeName + " is copyable\n"
   end
 }
 

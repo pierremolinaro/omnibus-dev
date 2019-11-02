@@ -80,6 +80,9 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case compileTimeInteger
   case compileTimeBool
+  case generic (@genericFormalParameterList parameters
+                @ctExpressionAST whereClause
+                @llvmStringDefinition llvmNativeTypeNameExpression)
   case opaque (@bigint bitCount)
   case staticArrayType (@omnibusType elementType @bigint size)
   case dynamicArrayType (@omnibusType elementType)
@@ -107,10 +110,10 @@ getter @omnibusType llvmTypeName -> @string {
     result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
-  case compileTimeBool :
+  case compileTimeBool, compileTimeInteger :
     result = "" # No LLVM type, Compile Time Type
-  case compileTimeInteger :
-    result = ""
+  case generic (3*) :
+    result = "" # No LLVM type, Compile Time Type
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case staticArrayType (* *) :
@@ -367,6 +370,8 @@ getter @omnibusType descriptionForHTMLFile -> @string {
     result = "Compile Time Bool"
   case compileTimeInteger :
     result = "Compile Time Integer"
+  case generic (3*) :
+    result = "Generic Type"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
   case staticArrayType (* *) :
@@ -411,6 +416,8 @@ getter @omnibusType defaultAlignment -> @uint{
   case compileTimeInteger :
     result = 0
   case compileTimeBool :
+    result = 0
+  case generic (3*) :
     result = 0
   case opaque (@bigint bitCount) :
     if bitCount <= 8 then
@@ -482,6 +489,7 @@ proc buildTypeMapHTMLFile
   ?let @routineMapForContext inRoutineMap
   ?let @terminusInfixOperatorMap inTerminusInfixOperatorMap
   ?let @terminusPrefixOperatorMap inTerminusPrefixOperatorMap
+  ?let @assignmentOperatorMap inAssignmentOperatorMap
   ?sourceFile:let @lstring inSourceFile
 {
 #------------------------------------ Build an HTML file that contains all types
@@ -508,6 +516,7 @@ proc buildTypeMapHTMLFile
       !inRoutineMap
       !inTerminusInfixOperatorMap
       !inTerminusPrefixOperatorMap
+      !inAssignmentOperatorMap
     ]
     [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
   else
@@ -528,6 +537,7 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
     ?@routineMapForContext ALL_ROUTINE_MAP
     ?@terminusInfixOperatorMap INFIX_OPERATOR_MAP
     ?@terminusPrefixOperatorMap PREFIX_OPERATOR_MAP
+    ?@assignmentOperatorMap ASSIGNMENT_OPERATOR_MAP
 
 }
 

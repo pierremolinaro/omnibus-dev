@@ -529,6 +529,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_integer,
     kEnum_compileTimeInteger,
     kEnum_compileTimeBool,
+    kEnum_generic,
     kEnum_opaque,
     kEnum_staticArrayType,
     kEnum_dynamicArrayType,
@@ -576,6 +577,11 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                               COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_typeKind constructor_generic (const class GALGAS_genericFormalParameterList & inOperand0,
+                                                             const class GALGAS_ctExpressionAST & inOperand1,
+                                                             const class GALGAS_llvmStringDefinition & inOperand2
+                                                             COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
                                                              const class GALGAS_bigint & inOperand1,
                                                              const class GALGAS_bool & inOperand2,
@@ -621,6 +627,12 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_generic (class GALGAS_genericFormalParameterList & outArgument0,
+                                                 class GALGAS_ctExpressionAST & outArgument1,
+                                                 class GALGAS_llvmStringDefinition & outArgument2,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_integer (class GALGAS_bigint & outArgument0,
                                                  class GALGAS_bigint & outArgument1,
                                                  class GALGAS_bool & outArgument2,
@@ -655,6 +667,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEnumeration (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGeneric (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInteger (LOCATION_ARGS) const ;
 
@@ -970,6 +984,26 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_typeKind_integer (void) {}
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumAssociatedValues_typeKind_generic : public cEnumAssociatedValues {
+  public : const GALGAS_genericFormalParameterList mAssociatedValue0 ;
+  public : const GALGAS_ctExpressionAST mAssociatedValue1 ;
+  public : const GALGAS_llvmStringDefinition mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_generic (const GALGAS_genericFormalParameterList & inAssociatedValue0,
+                                                   const GALGAS_ctExpressionAST & inAssociatedValue1,
+                                                   const GALGAS_llvmStringDefinition & inAssociatedValue2
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_generic (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -18,6 +18,7 @@ list @llvmGenerationInstructionElementList {
 
 abstract class @abstractLLVMInstruction {
 }
+
 #·······················································································································
 
 class @llvmGenerationInstruction : @abstractLLVMInstruction {
@@ -26,8 +27,14 @@ class @llvmGenerationInstruction : @abstractLLVMInstruction {
 
 #·······················································································································
 
+class @llvmVarInstruction : @abstractLLVMInstruction {
+  @lstring mVariableName
+}
+
+#·······················································································································
+
 list @llvmGenerationInstructionList {
-  @llvmGenerationInstruction mInstruction
+  @abstractLLVMInstruction mInstruction
 }
 
 #·······················································································································
@@ -66,9 +73,18 @@ syntax extension omnibus_syntax {
       outInstructionList += !instruction
     end
   }
+
   #·····················································································································
 
-  rule <llvm_instruction> !@llvmGenerationInstruction outInstruction {
+  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
+    $var$
+    $identifier$ ?let name
+    outInstruction = @llvmVarInstruction.new {!name}
+  }
+  
+  #·····················································································································
+
+  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
     $llvm$
     @llvmGenerationInstructionElementList elementList = {}
     repeat
@@ -82,10 +98,10 @@ syntax extension omnibus_syntax {
         $\$type$ ?let typeName
         elementList += !.type {!name: typeName}
       end
-   while
+    while
      $+$
-   end
-   outInstruction = @llvmGenerationInstruction.new {!elementList}
+    end
+    outInstruction = @llvmGenerationInstruction.new {!elementList}
   }
   
   #·····················································································································
@@ -150,27 +166,49 @@ override getter @llvmAssignmentOperatorDeclaractionAST keyRepresentationForError
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
+  var currentMap = inMap
   for (instruction) in self do
-    [instruction checkInstructionList !inMap]
+    [instruction checkInstructionList !?currentMap]
   end
 }
 
 #·······················································································································
 
-abstract method @abstractLLVMInstruction checkInstructionList  ?let @ctCheckMap inMap
+abstract method @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMap
 
 #·······················································································································
 
-override method @llvmGenerationInstruction checkInstructionList  ?let @ctCheckMap inMap {
+override method @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
+  [!?ioMap insertKey !mVariableName]
+}
+
+#·······················································································································
+
+override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
   for (element) in mGenerationList do
     switch element
     case string (*) :
     case constant (name) :
-      [inMap searchKey !name]
+      [ioMap searchKey !name]
     case type (name) :
-      [inMap searchKey !name]
+      [ioMap searchKey !name]
     end
   end
+}
+
+#·······················································································································
+
+map @assignmentOperatorMap {
+  @omnibusType mTargetType
+  @lstring mTargetVarName
+  @genericFormalParameterList mTargetGenericFormalParameterList
+  @omnibusType mSourceTpe
+  @lstring mSourceVarName
+  @genericFormalParameterList mSourceGenericFormalParameterList
+  @ctExpressionAST mWhereClause
+  @llvmGenerationInstructionList mInstructionList
+  insert insertKey error message "the '%K' assignment is already declared in %L"
+  search searchKey error message "there is no '%K' assignment"
 }
 
 #·······················································································································
@@ -195,27 +233,128 @@ override method @llvmAssignmentOperatorDeclaractionAST enterInContext
   [!?formalGenericConstantParameterMap insertKey !mTargetVariableName]
   [!?formalGenericConstantParameterMap insertKey !mSourceVariableName]
   [mInstructionList checkInstructionList !formalGenericConstantParameterMap]
+#--- Types
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTargetTypeName ?let targetType]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mSourceTypeName ?let sourceType]
+#---
+  let key = @lstring.new {
+    ![[targetType type] omnibusTypeDescriptionName] + " = " + [[sourceType type] omnibusTypeDescriptionName]
+    !mOperatorLocation
+  }
+  [!?ioContext.mAssignmentOperatorMap insertKey
+    !key 
+    ![targetType type]
+    !mTargetVariableName
+    !mTargetGenericFormalParameterList
+    ![sourceType type]
+    !mSourceVariableName
+    !mSourceGenericFormalParameterList
+    !mWhereClause
+    !mInstructionList
+  ]
+}
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   CODE GENERATION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverType]
-#  [[receiverType type] checkIsCompileTimeType !mReceiverTypeName.location]
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
-#  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
-##--- Check native operator expression
-#  @ctCheckMap ctCheckMap = {}
-#  [!?ctCheckMap insertKey !mReceiverName]
-#  [mExpression checkCompileTimeExpression !ctCheckMap]
-##--- Enter in infix operator map  
-#  let key = @lstring.new {
-#    ![mPrefixOperator string] + " " + [[receiverType type] omnibusTypeDescriptionName]
-#    !mInfixOperatorLocation
-#  }
-#  let definition = @terminusNativePrefixOperator.new {
-#    !mInfixOperatorLocation
-#    !mReceiverName
-#    !mExpression
-#  }
-#  [!?ioContext.mTerminusPrefixOperatorMap insertKey !key ![receiverType type] ![resultType type] !definition]
+map @assignmentGenerationVarMap {
+  @string mValue
+  insert insertKey error message "internal error"
+  search searchKey error message "internal error"
+}
+
+#·······················································································································
+
+method @llvmGenerationInstructionList generateIRCode
+    ?let @assignmentGenerationVarMap inVarMap
+    ?let @assignmentGenerationVarMap inTypeMap
+    ?!@instructionListIR ioInstructionListIR
+    ?!@semanticTemporariesStruct ioTemporaries
+{
+  var varMap = inVarMap
+  var typeMap = inTypeMap
+  for (instruction) in self do
+    [instruction generateIRCode !?varMap !?typeMap !?ioInstructionListIR !?ioTemporaries]
+  end
+}
+
+#·······················································································································
+
+abstract method @abstractLLVMInstruction generateIRCode
+    ?!@assignmentGenerationVarMap ioVarMap
+    ?!@assignmentGenerationVarMap ioTypeMap
+    ?!@instructionListIR ioInstructionListIR
+    ?!@semanticTemporariesStruct ioTemporaries
+
+#·······················································································································
+
+override method @llvmGenerationInstruction generateIRCode
+    ?!@assignmentGenerationVarMap ioVarMap
+    ?!@assignmentGenerationVarMap ioTypeMap
+    ?!@instructionListIR ioInstructionListIR
+    ?!@semanticTemporariesStruct unused ioTemporaries
+{
+   var s = ";§ "
+   for (element) in mGenerationList do
+     switch element 
+     case string (value) :
+       s += value
+     case constant (name) :
+       [ioVarMap searchKey !name ?let value]
+       s += value
+     case type (name) :
+       [ioTypeMap searchKey !name ?let value]
+       s += value
+     end
+   end
+   s += " ; Assignment"
+   [!?ioInstructionListIR appendInstructionAsFreeString! s]
+}
+
+#·······················································································································
+
+override method @llvmVarInstruction generateIRCode
+    ?!@assignmentGenerationVarMap ioVarMap
+    ?!@assignmentGenerationVarMap unused ioTypeMap
+    ?!@instructionListIR unused ioInstructionListIR
+    ?!@semanticTemporariesStruct ioTemporaries
+{
+  let newTemporaryVariable = "%temp" + ioTemporaries.mTemporaryIndex
+  ioTemporaries.mTemporaryIndex ++
+  [!?ioVarMap insertKey !mVariableName !newTemporaryVariable]
+}
+
+#·······················································································································
+
+method @assignmentOperatorMap appendAssignment
+    ?!@semanticTemporariesStruct ioTemporaries
+    ?!@instructionListIR ioInstructionListIR
+    ?let @LValueRepresentation inTarget
+    ?let @objectIR inSourcePossibleReference
+    ?let @location inErrorLocation
+{
+  let key = @lstring.new {
+   !inTarget.type.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
+   !inErrorLocation
+  }
+  [self searchKey !key ?* ?let targetVarName ?2* ?let sourceVarName ?2* ?let instructionList]
+  let srcTypeLLVMName = [[inSourcePossibleReference type] llvmTypeName]
+  var srcLLVMName = [inSourcePossibleReference llvmName]
+  if not [inSourcePossibleReference isReference] then # Assignment from value
+    let temp = "%tempref" + ioTemporaries.mTemporaryIndex
+    ioTemporaries.mTemporaryIndex ++
+    let s = ";! store " + srcTypeLLVMName + " " + srcLLVMName + ", " + srcTypeLLVMName + "* " + temp + " ; Load from ref"
+    [!?ioInstructionListIR appendInstructionAsFreeString! s]
+    srcLLVMName = temp
+  end
+  @assignmentGenerationVarMap varMap = {}
+  [!?varMap insertKey !targetVarName !inTarget.llvmName]
+  [!?varMap insertKey !sourceVarName !srcLLVMName]
+  @assignmentGenerationVarMap typeMap = {}
+  [!?typeMap insertKey !targetVarName ![[inTarget type] llvmTypeName]]
+  [!?typeMap insertKey !sourceVarName !srcTypeLLVMName]
+  [instructionList generateIRCode !varMap !typeMap !?ioInstructionListIR !?ioTemporaries]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

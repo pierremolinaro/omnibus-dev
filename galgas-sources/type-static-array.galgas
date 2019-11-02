@@ -158,12 +158,32 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !arraySize
       }
     #---------- Enter static array assignment function
+      let assignmentFunctionLLVMName = assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName
       ioRoutineListIR += !@staticArrayTypeAssignFunctionIR.new {
-        ![assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
+        ![assignmentFunctionLLVMName nowhere]
         !isRequired:false
         !warnsIfUnused:false
         !arrayType
       }
+      let key = @lstring.new {
+        ![arrayType omnibusTypeDescriptionName] + " = " + [arrayType omnibusTypeDescriptionName]
+        !mArrayTypeName.location
+      }
+      let llvmAssignmentInstruction = @llvmGenerationInstruction.new {
+        !{!.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + "(" + llvmBaseTypeName + "* TGT, " + llvmBaseTypeName + "* SRC)"}
+        }
+      }
+      [!?ioContext.mAssignmentOperatorMap insertKey
+        !key 
+        !arrayType
+        !["TGT" nowhere]
+        !{}
+        !arrayType
+        !["SRC" nowhere]
+        !{}
+        !@ctTrueExpressionAST.new
+        !{!llvmAssignmentInstruction}
+      ]
     end
   end
 }

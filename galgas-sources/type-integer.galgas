@@ -224,12 +224,30 @@ override method @integerDeclarationAST enterInContext
     !?context:ioContext
   )
 #---------- Enter integer assignment function
+  let assignmentFunctionLLVMName = assignmentPrefix () + integerTypeName + "." + integerTypeName
   ioRoutineListIR += !@integerTypeAssignFunctionIR.new {
-    ![assignmentPrefix () + integerTypeName + "." + integerTypeName nowhere]
+    ![assignmentFunctionLLVMName nowhere]
     !isRequired:false
     !warnsIfUnused:false
     !llvmTypeName
   }
+#  let key = @lstring.new {
+#    ![integerType omnibusTypeDescriptionName] + " = " + [integerType omnibusTypeDescriptionName]
+#    !["" nowhere]
+#  }
+#  let llvmAssignmentInstruction = @llvmGenerationInstruction.new {
+#    !{!.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + "(i" + mSize + "* TGT, i" + mSize + "* SRC)"}
+#    }
+#  }
+#  [!?ioContext.mAssignmentOperatorMap insertKey
+#    !key 
+#    !integerType
+#    !{}
+#    !integerType
+#    !{}
+#    !@ctTrueExpressionAST.new
+#    !{!llvmAssignmentInstruction}
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

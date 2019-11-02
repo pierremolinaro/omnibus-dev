@@ -1,36 +1,23 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendTrunc
-  ?let @omnibusType inResultType
-  ?!@objectIR ioObject
-  ?!@semanticTemporariesStruct ioTemporaries
-{
-  if [ioObject isLiteralInteger] then
-    [ioObject literalInteger ?type:* ?value:let @bigint value]
-    ioObject = .literalInteger {!type:inResultType !value:value}
-  else
-    getNewTempValue (!inResultType !?ioTemporaries ?let result)
-    self += !@truncIR.new {!result !ioObject}
-    ioObject = result
-  end
+setter @instructionListIR appendInstructionAsFreeString ?let @string inString {
+  self += !@freeStringIR.new {!inString}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @truncIR : @abstractInstructionIR {
-  @objectIR mResult
-  @objectIR mSource
+class @freeStringIR : @abstractInstructionIR {
+  @string mString
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncIR llvmInstructionCode
+override method @freeStringIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult llvmName] + " = trunc "
-  ioLLVMcode += [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
+  ioLLVMcode += "  " + mString + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

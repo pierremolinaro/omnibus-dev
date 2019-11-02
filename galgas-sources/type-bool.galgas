@@ -83,11 +83,6 @@ override method @booleanDeclarationAST enterInContext
     !selfType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !boolBoolOp
-#    !selfType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !boolBoolOp
     !selfType
@@ -98,16 +93,6 @@ override method @booleanDeclarationAST enterInContext
     !selfType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !boolBoolOp
-#    !selfType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !boolBoolOp
-#    !selfType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
-#  ]
   [!?ioContext.mBooleanXorOperatorMap insertKey
     !boolBoolOp
     !selfType
@@ -127,12 +112,30 @@ override method @booleanDeclarationAST enterInContext
     ![boolTypeName () nowhere]
   ]
 #---------- Enter boolean assignment function
+  let assignmentFunctionLLVMName = assignmentPrefix () + boolTypeName () + "." + boolTypeName ()
   ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-    ![assignmentPrefix () + boolTypeName () + "." + boolTypeName () nowhere]
+    ![assignmentFunctionLLVMName nowhere]
     !isRequired:false
     !warnsIfUnused:false
     !"i1"
   }
+#  let key = @lstring.new {
+#    ![selfType omnibusTypeDescriptionName] + " = " + [selfType omnibusTypeDescriptionName]
+#    !["" nowhere]
+#  }
+#  let llvmAssignmentInstruction = @llvmGenerationInstruction.new {
+#    !{!.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + "(i1* TGT, i1* SRC)"}
+#    }
+#  }
+#  [!?ioContext.mAssignmentOperatorMap insertKey
+#    !key 
+#    !selfType
+#    !{}
+#    !selfType
+#    !{}
+#    !@ctTrueExpressionAST.new
+#    !{!llvmAssignmentInstruction}
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

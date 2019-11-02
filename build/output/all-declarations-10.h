@@ -10,511 +10,487 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Function 'llvmFunctionPrototype'                                           *
+//                            Extension getter '@semanticContext booleanType' (as function)                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
-                                                    const class GALGAS_string & constinArgument1,
-                                                    const class GALGAS_omnibusType & constinArgument2,
-                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
-                                                    class C_Compiler * inCompiler
+class GALGAS_omnibusType extensionGetter_booleanType (const class GALGAS_semanticContext & inObject,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                               Function 'boolTypeName'                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            @addressofInstructionIR class                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_addressofInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_addressofInstructionIR (void) ;
+
+//---
+  public : inline const class cPtr_addressofInstructionIR * ptr (void) const { return (const cPtr_addressofInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_addressofInstructionIR (const cPtr_addressofInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_addressofInstructionIR extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_addressofInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                       const class GALGAS_LValueRepresentation & inOperand1
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_addressofInstructionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_addressofInstructionIR class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofInstructionIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Pointer class for @addressofInstructionIR class                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_addressofInstructionIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_LValueRepresentation mProperty_mLValue ;
+
+//--- Constructor
+  public : cPtr_addressofInstructionIR (const GALGAS_objectIR & in_mTarget,
+                                        const GALGAS_LValueRepresentation & in_mLValue
+                                        COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               Bool options                                                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern C_BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               UInt options                                                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              String options                                                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              String List options                                                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Function 'configurationNodeNameForPrecedenceGraph'                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Function 'assignmentPrefix'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_assignmentPrefix (class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'compileTimeIntegerType'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusType function_compileTimeIntegerType (class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'ctIntegerTypeName'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_ctIntegerTypeName (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Routine 'enterEnumerationComparisonOperators'                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
+                                                  class GALGAS_semanticContext & ioArgument1,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'copyableAttribute'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'minValueForInteger'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
+                                                 const class GALGAS_uint & constinArgument1,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'maxValueForInteger'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & constinArgument0,
+                                                 const class GALGAS_uint & constinArgument1,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                      Routine 'enter_integer_integer_operators'                                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enter_5F_integer_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                      Routine 'enter_integer_literal_operators'                                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enter_5F_integer_5F_literal_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                      Routine 'enter_literal_integer_operators'                                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Routine 'enterLiteralIntegerOperators'                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_enterLiteralIntegerOperators (class GALGAS_semanticContext & ioArgument0,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           Function 'staticStringTypeName'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'instantiableAttribute'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_instantiableAttribute (class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         Routine 'generateSectionDispatcher'                                         *
+//                                     Function 'registerGroupNameFromOmnibusName'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_generateSectionDispatcher (const class GALGAS_string constinArgument0,
-                                        const class GALGAS_string constinArgument1,
-                                        const class GALGAS_targetParameters constinArgument2,
-                                        class GALGAS_string & ioArgument3,
-                                        const class GALGAS_sectionIRlist constinArgument4,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_registerGroupNameFromOmnibusName (const class GALGAS_lstring & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            Function 'getTargetTextFile'                                             *
+//                                      Routine 'buildControlRegisterMapHTMLFile'                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
-                                                const class GALGAS_string & constinArgument1,
+void routine_buildControlRegisterMapHTMLFile (const class GALGAS_controlRegisterGroupMap constinArgument0,
+                                              const class GALGAS_lstring constinArgument1,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                 Filewrapper 'controlRegisterDumpGenerationTemplate'                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGenerationTemplate ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByName'                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByName (class C_Compiler * inCompiler,
+                                                                                    const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                                    const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
+                                                                                    const class GALGAS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                     Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByAddress'                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAddress (class C_Compiler * inCompiler,
+                                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                                       const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
+                                                                                       const class GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         Routine 'buildControlRegisterMaps'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_buildControlRegisterMaps (const class GALGAS_controlRegisterMap constinArgument0,
+                                       const class GALGAS_bigint constinArgument1,
+                                       const class GALGAS_string constinArgument2,
+                                       class GALGAS_controlRegisterByAddress & ioArgument3,
+                                       class GALGAS_controlRegisterByName & ioArgument4,
+                                       class GALGAS_uint & ioArgument5,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'arrayIndexListFor'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & constinArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'fieldIndexColumns'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Routine 'generatePrimitiveAndServiceDispatcher'                                   *
+//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string constinArgument0,
-                                                    const class GALGAS_string constinArgument1,
-                                                    class GALGAS_string & ioArgument2,
-                                                    const class GALGAS_primitiveAndServiceIRlist constinArgument3,
-                                                    const class GALGAS_targetParameters constinArgument4,
+void routine_buildGlobalConstantMapHTMLFile (class GALGAS_globalConstantMap inArgument0,
+                                             const class GALGAS_lstring constinArgument1,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
+                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                       const class GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
+                                                                       const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                       const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'linkForGlobalConstant'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Routine 'checkRequiredProcedures'                                          *
+//                                           Routine 'retainRequiredDrivers'                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
-                                      const class GALGAS_semanticContext constinArgument1,
-                                      const class GALGAS_location constinArgument2,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
+void routine_retainRequiredDrivers (class GALGAS_ast & ioArgument0,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          Routine 'routineTypedSignature2'                                           *
+//                                       Function 'omnibusNameForStaticListType'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_routineTypedSignature_32_ (class GALGAS_unifiedTypeMap inArgument0,
-                                        const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                        class GALGAS_routineTypedSignature & outArgument2,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'guardImplementationLLVMName'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardImplementationLLVMName (const class GALGAS_string & constinArgument0,
-                                                           const class GALGAS_lstring & constinArgument1,
-                                                           const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'guardUserLLVMName'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_guardUserLLVMName (const class GALGAS_string & constinArgument0,
-                                                 const class GALGAS_lstring & constinArgument1,
-                                                 const class GALGAS_routineFormalArgumentListAST & constinArgument2,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'acceptVariableOmnibusName'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_acceptVariableOmnibusName (class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Routine 'analyzeEffectiveParameters'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
-                                         const class GALGAS_routineAttributes constinArgument1,
-                                         const class GALGAS_routineTypedSignature constinArgument2,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
-                                         const class GALGAS_location constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticEntityMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'routineMangledNameFromCall'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_string & constinArgument0,
-                                                          const class GALGAS_lstring & constinArgument1,
-                                                          const class GALGAS_effectiveArgumentListAST & constinArgument2,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Routine 'buildOrderedDeclarationList'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument0,
-                                          const class GALGAS_string constinArgument1,
-                                          const class GALGAS_location constinArgument2,
-                                          class GALGAS_declarationListAST & outArgument3,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Routine 'buildSemanticContext'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
-                                   const class GALGAS_ast constinArgument1,
-                                   class GALGAS_staticEntityMap & ioArgument2,
-                                   class GALGAS_staticListInitializationMap & ioArgument3,
-                                   class GALGAS_semanticContext & outArgument4,
-                                   class GALGAS_declarationDecorationList & outArgument5,
-                                   class GALGAS_decoratedRegularRoutineList & outArgument6,
-                                   class GALGAS_routineListIR & outArgument7,
-                                   class GALGAS_userLLVMTypeDefinitionListIR & outArgument8,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Routine 'buildTypeMapHTMLFile'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildTypeMapHTMLFile (const class GALGAS_unifiedTypeMap constinArgument0,
-                                   const class GALGAS_routineMapForContext constinArgument1,
-                                   const class GALGAS_terminusInfixOperatorMap constinArgument2,
-                                   const class GALGAS_terminusPrefixOperatorMap constinArgument3,
-                                   const class GALGAS_lstring constinArgument4,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Function 'compileTimeBoolType'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_omnibusType function_compileTimeBoolType (class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                              Function 'ctBoolTypeName'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_ctBoolTypeName (class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Filewrapper 'typeDumpGenerationTemplate'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_typeDumpGenerationTemplate ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Filewrapper template 'typeDumpGenerationTemplate dump'                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
-                                                                   const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                   const class GALGAS_unifiedTypeMap & in_GLOBAL_5F_TYPE_5F_MAP,
-                                                                   const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                   const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
-                                                                   const class GALGAS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
-                                                                   const class GALGAS_terminusInfixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
-                                                                   const class GALGAS_terminusPrefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'linkForHTMLTypeMap'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & constinArgument0,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             Routine 'declareLLVMTypes'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_declareLLVMTypes (const class GALGAS_userLLVMTypeDefinitionListIR constinArgument0,
-                               class GALGAS_string & ioArgument1,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Routine 'getNewTempReference'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_getNewTempReference (const class GALGAS_omnibusType constinArgument0,
-                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                  class GALGAS_objectIR & outArgument2,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             Routine 'semanticAnalysis'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
-                               const class GALGAS_ast constinArgument1,
-                               const class GALGAS_stringset constinArgument2,
-                               const class GALGAS_declarationDecorationList constinArgument3,
-                               const class GALGAS_decoratedRegularRoutineList constinArgument4,
-                               const class GALGAS_routineListIR constinArgument5,
-                               const class GALGAS_semanticContext constinArgument6,
-                               const class GALGAS_location constinArgument7,
-                               const class GALGAS_staticEntityMap constinArgument8,
-                               class GALGAS_intermediateCodeStruct & outArgument9,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Routine 'appendPanicRoutines'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_appendPanicRoutines (const class GALGAS_stringset constinArgument0,
-                                  class GALGAS_intermediateCodeStruct & ioArgument1,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'panicRoutineNameForFilePath'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_panicRoutineNameForFilePath (const class GALGAS_string & constinArgument0,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                              Function 'panicModeName'                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             Routine 'generatePanicCode'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_generatePanicCode (class GALGAS_string & ioArgument0,
-                                const class GALGAS_generationContext constinArgument1,
-                                class GALGAS_generationAdds & ioArgument2,
-                                class C_Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Function 'llvmNameForSectionImplementation'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForSectionImplementation (const class GALGAS_string & constinArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             Function 'panicRoutineName'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_panicRoutineName (class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'llvmNameForSectionCall'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'panicCodeForAssertViolation'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForAssertViolation (class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Function 'panicCodeForUnsignedAdditionOverflow'                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Function 'panicCodeForSignedAdditionOverflow'                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForSignedAdditionOverflow (class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Function 'panicCodeForUnsignedSubtractOverflow'                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForUnsignedSubtractOverflow (class C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Function 'panicCodeForSignedSubtractOverflow'                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForSignedSubtractOverflow (class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                Function 'panicCodeForUnsignedMultiplicationOverflow'                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForUnsignedMultiplicationOverflow (class C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Function 'panicCodeForSignedMultiplicationOverflow'                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForSignedMultiplicationOverflow (class C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Function 'panicCodeForUnsignedDivisionByZero'                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForUnsignedDivisionByZero (class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Function 'panicCodeForSignedDivisionByZero'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForSignedDivisionByZero (class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Function 'panicCodeForUnsignedRemainderByZero'                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForUnsignedRemainderByZero (class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Function 'panicCodeForSignedRemainderByZero'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForSignedRemainderByZero (class C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Function 'panicCodeForConvertOverflow'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Function 'panicCodeForNegativeArrayIndex'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Function 'panicCodeForTooLargeArrayIndex'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'panicCodeForClosedSync'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           Function 'getInfixOperatorMap'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
-                                                            const class GALGAS_semanticContext & constinArgument1,
-                                                            const class GALGAS_mode & constinArgument2,
-                                                            const class GALGAS_location & constinArgument3,
+class GALGAS_lstring function_omnibusNameForStaticListType (const class GALGAS_lstring & constinArgument0,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                        Function 'llvmNameForStaticListType'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_llvmNameForStaticListType (const class GALGAS_lstring & constinArgument0,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Function 'omnibusNameForStaticListElementType'                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_omnibusNameForStaticListElementType (const class GALGAS_lstring & constinArgument0,
+                                                                   class C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    Function 'checkModeAndReturnsRoutineLLVMName'                                    *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_checkModeAndReturnsRoutineLLVMName (const class GALGAS_routineLLVMNameDict & constinArgument0,
+                                                                 const class GALGAS_mode & constinArgument1,
+                                                                 const class GALGAS_lstring & constinArgument2,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         Function 'noUnusedWarningAttribute'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_noUnusedWarningAttribute (class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 

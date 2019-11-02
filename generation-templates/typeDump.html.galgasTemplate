@@ -178,6 +178,20 @@ LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" 
   %end%
   </table>
 </p>
+<h2>
+  Assignment Operators
+</h2>
+  <table class="result">
+    <tr>
+      <td class="result_title">Operator</td>
+    </tr>
+  %for () in ASSIGNMENT_OPERATOR_MAP: op_ do%
+    <tr class="result_line">
+      <td>%!op_lkey.string%</td>
+    </tr>
+  %end%
+  </table>
+</p>
 </div>
 </body>
 </html>

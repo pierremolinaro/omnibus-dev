@@ -49,12 +49,13 @@ struct @semanticContext {
   @infixOperatorMap mLeftShiftOperatorMap       # <<
   @infixOperatorMap mRightShiftOperatorMap      # >>
   
-  @terminusInfixOperatorMap mTerminusInfixOperatorMap
-  @terminusPrefixOperatorMap mTerminusPrefixOperatorMap
-  
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+  
+  @terminusInfixOperatorMap mTerminusInfixOperatorMap
+  @terminusPrefixOperatorMap mTerminusPrefixOperatorMap
+  @assignmentOperatorMap mAssignmentOperatorMap
 
 #--- Tasks
   @taskMap mTaskMap
@@ -225,6 +226,7 @@ proc buildSemanticContext
     !outSemanticContext.mRoutineMap
     !outSemanticContext.mTerminusInfixOperatorMap
     !outSemanticContext.mTerminusPrefixOperatorMap
+    !outSemanticContext.mAssignmentOperatorMap
     !sourceFile:inSourceFile
   )
 #--- Enter control registers in context
@@ -241,7 +243,6 @@ proc buildSemanticContext
      !?staticEntityMap:ioStaticEntityMap
      !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
    ]
-#   log "GUARDs : " : [outSemanticContext.mGuardMap keyList]
 }
 
 #·······················································································································

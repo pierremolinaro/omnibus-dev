@@ -88,6 +88,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ]
 #--- If source is a value, transform it to a reference
   if not [sourceOperandPossibleReference isReference] then # Assignment from value
+#    message "VALUE " + lvalueIR.type.omnibusTypeDescriptionName + " = " + [sourceOperandPossibleReference type].omnibusTypeDescriptionName + "\n"
     let result = checkAssignmentCompatibility (
       !source:sourceOperandPossibleReference # loadedResultValue
       !targetAnnotationType:targetType
@@ -96,6 +97,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     )
     [!?ioInstructionGenerationList appendStoreToUniversalReference !lvalueIR.llvmName !targetType !result]
   else # Assignment from reference
+#    warning mTargetAST.mIdentifier : "REFERENCE " + lvalueIR.type.omnibusTypeDescriptionName + " = " + [sourceOperandPossibleReference type].omnibusTypeDescriptionName + "\n"
   #--- Check assignment is defined
     let sourceOperand_llvmBaseTypeName = [sourceOperandPossibleReference type].llvmBaseTypeName
     if [targetType.assignmentSources hasKey !sourceOperand_llvmBaseTypeName] then
@@ -107,10 +109,18 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
       ]
     else
       var m = "no valid assignment to " + targetType.omnibusTypeDescriptionName
-      m += " from " + [sourceOperandPossibleReference type].omnibusTypeDescriptionName
+      m += " from " + sourceOperand_llvmBaseTypeName
       error mTargetAST.mIdentifier : m
     end
   end
+#--- New assignment test (§temp)
+  [inContext.mAssignmentOperatorMap appendAssignment
+    !?ioTemporaries
+    !?ioInstructionGenerationList
+    !lvalueIR
+    !sourceOperandPossibleReference
+    !mInstructionLocation
+  ]
 #--- Append pending computed property store (in reverse order)
   for > (instructionList) in pendingStoreComputedPropertyInstructionGenerationList do
     ioInstructionGenerationList += instructionList

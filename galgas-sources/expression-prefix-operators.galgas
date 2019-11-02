@@ -96,6 +96,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case syncTool :
       error mOperatorLocation : "internal error" : leftOperand
+    case generic (3*) :
+      error mOperatorLocation : "internal error" : leftOperand
     case function (3*) :
       error mOperatorLocation : "internal error" : leftOperand
     case compileTimeBool :

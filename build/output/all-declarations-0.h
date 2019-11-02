@@ -456,7 +456,7 @@ class cParser_omnibus_5F_syntax {
 
   protected : virtual void nt_isr_5F_in_5F_driver_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected : virtual void nt_llvm_5F_instruction_ (class GALGAS_llvmGenerationInstruction & outArgument0,
+  protected : virtual void nt_llvm_5F_instruction_ (class GALGAS_abstractLLVMInstruction & outArgument0,
                                                     class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_llvm_5F_instruction_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
@@ -1394,15 +1394,20 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i138_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i139_ (GALGAS_llvmGenerationInstruction & outArgument0,
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i139_ (GALGAS_abstractLLVMInstruction & outArgument0,
                                                                      C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i139_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i140_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i140_ (GALGAS_abstractLLVMInstruction & outArgument0,
+                                                                     C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i140_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i141_ (GALGAS_ast & ioArgument0,
                                                              C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i140_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_declaration_i141_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
 
 
@@ -1695,6 +1700,75 @@ class cParser_omnibus_5F_syntax {
 
   protected : virtual int32_t select_omnibus_5F_syntax_143 (C_Lexique_omnibus_5F_lexique *) = 0 ;
 
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           @abstractLLVMInstruction class                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_abstractLLVMInstruction : public AC_GALGAS_class {
+//--- Constructor
+  public : GALGAS_abstractLLVMInstruction (void) ;
+
+//---
+  public : inline const class cPtr_abstractLLVMInstruction * ptr (void) const { return (const cPtr_abstractLLVMInstruction *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_abstractLLVMInstruction (const cPtr_abstractLLVMInstruction * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_abstractLLVMInstruction extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_abstractLLVMInstruction & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_abstractLLVMInstruction class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractLLVMInstruction ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                  Pointer class for @abstractLLVMInstruction class                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_abstractLLVMInstruction : public acPtr_class {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_abstractLLVMInstruction (LOCATION_ARGS) ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const = 0 ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
 
 } ;
 
@@ -7737,7 +7811,7 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_llvmGenerationInstruction & in_mInstruction
+                                                  const class GALGAS_abstractLLVMInstruction & in_mInstruction
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -7753,7 +7827,7 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_llvmGenerationInstructionList constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static class GALGAS_llvmGenerationInstructionList constructor_listWithValue (const class GALGAS_llvmGenerationInstruction & inOperand0
+  public : static class GALGAS_llvmGenerationInstructionList constructor_listWithValue (const class GALGAS_abstractLLVMInstruction & inOperand0
                                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -7762,7 +7836,7 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_llvmGenerationInstruction & inOperand0
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_abstractLLVMInstruction & inOperand0
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList add_operation (const GALGAS_llvmGenerationInstructionList & inOperand,
@@ -7775,40 +7849,40 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_llvmGenerationInstruction constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_abstractLLVMInstruction constinArgument0,
                                                        class GALGAS_uint constinArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_llvmGenerationInstruction & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_abstractLLVMInstruction & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_llvmGenerationInstruction & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_abstractLLVMInstruction & outArgument0,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_llvmGenerationInstruction & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_abstractLLVMInstruction & outArgument0,
                                                        class GALGAS_uint constinArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_llvmGenerationInstruction & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_abstractLLVMInstruction & outArgument0,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_llvmGenerationInstruction & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_abstractLLVMInstruction & outArgument0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstruction getter_mInstructionAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                               C_Compiler * inCompiler
-                                                                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_abstractLLVMInstruction getter_mInstructionAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                                 C_Compiler * inCompiler
@@ -7840,7 +7914,7 @@ class cEnumerator_llvmGenerationInstructionList : public cGenericAbstractEnumera
                                                       const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_llvmGenerationInstruction current_mInstruction (LOCATION_ARGS) const ;
+  public : class GALGAS_abstractLLVMInstruction current_mInstruction (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_llvmGenerationInstructionList_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -7899,75 +7973,6 @@ class cPtr_llvmAssignmentOperatorDeclaractionAST : public cPtr_abstractDeclarati
   public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
 
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                           @abstractLLVMInstruction class                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_abstractLLVMInstruction : public AC_GALGAS_class {
-//--- Constructor
-  public : GALGAS_abstractLLVMInstruction (void) ;
-
-//---
-  public : inline const class cPtr_abstractLLVMInstruction * ptr (void) const { return (const cPtr_abstractLLVMInstruction *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_abstractLLVMInstruction (const cPtr_abstractLLVMInstruction * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_abstractLLVMInstruction extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_abstractLLVMInstruction & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_abstractLLVMInstruction class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractLLVMInstruction ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Pointer class for @abstractLLVMInstruction class                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_abstractLLVMInstruction : public acPtr_class {
-//--- Attributes
-
-//--- Constructor
-  public : cPtr_abstractLLVMInstruction (LOCATION_ARGS) ;
-
-//--- Attribute accessors
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const = 0 ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
 
 } ;
 
@@ -8398,6 +8403,90 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mGenericFormalParameterList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmStringDefinition getter_mLLVMNativeTypeNameExpression (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              @llvmVarInstruction class                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
+//--- Constructor
+  public : GALGAS_llvmVarInstruction (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_llvmVarInstruction constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_llvmVarInstruction * ptr (void) const { return (const cPtr_llvmVarInstruction *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_llvmVarInstruction (const cPtr_llvmVarInstruction * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_llvmVarInstruction extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_llvmVarInstruction constructor_new (const class GALGAS_lstring & inOperand0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_llvmVarInstruction & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVariableName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_llvmVarInstruction class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmVarInstruction ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                     Pointer class for @llvmVarInstruction class                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
+//--- Attributes
+  public : GALGAS_lstring mProperty_mVariableName ;
+
+//--- Constructor
+  public : cPtr_llvmVarInstruction (const GALGAS_lstring & in_mVariableName
+                                    COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVariableName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
