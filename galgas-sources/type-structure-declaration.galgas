@@ -388,7 +388,7 @@ override method @structureDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:constructorMap
     !subscript:.noSubscript
-    !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mLLVMBaseTypeName} else {} end
+#    !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mLLVMBaseTypeName} else {} end
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
     !kind:.structure {!propertyList:propertyList}

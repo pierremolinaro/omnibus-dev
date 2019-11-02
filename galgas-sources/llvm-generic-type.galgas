@@ -189,7 +189,7 @@ override method @llvmGenericType enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-    !assignmentSources: {}
+#    !assignmentSources: {}
     !attributes: .none
     !omnibusTypeDescriptionName: mTypeName
     !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: mLLVMNativeTypeNameExpression}

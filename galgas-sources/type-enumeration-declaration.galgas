@@ -146,7 +146,7 @@ override method @enumerationDeclarationAST enterInContext
     !classConstantMap:enumConstantMap
     !constructorMap:{}
     !subscript:.noSubscript
-    !assignmentSources: {!mEnumerationName}
+#    !assignmentSources: {!mEnumerationName}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName: mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
@@ -178,11 +178,6 @@ proc enterEnumerationComparisonOperators
     !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !key
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-#  ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !key
     !booleanType
@@ -193,16 +188,6 @@ proc enterEnumerationComparisonOperators
     !booleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !key
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !key
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
-#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

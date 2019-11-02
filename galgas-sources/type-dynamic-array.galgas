@@ -175,7 +175,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !subscript:.noSubscript
-      !assignmentSources: {!llvmBaseTypeName}
+#      !assignmentSources: {!llvmBaseTypeName}
       !attributes:typeAttributes
       !omnibusTypeDescriptionName:omnibusTypeDescriptionName
       !kind:.dynamicArrayType {!elementType:elementType}

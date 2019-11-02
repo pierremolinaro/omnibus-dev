@@ -195,7 +195,7 @@ override method @integerDeclarationAST enterInContext
     !classConstantMap:classConstantMap
     !constructorMap:constructorMap
     !subscript:.noSubscript
-    !assignmentSources: {!integerTypeName}
+#    !assignmentSources: {!integerTypeName}
     !attributes:.instanciable | .equatable | .copyable | .comparable
     !omnibusTypeDescriptionName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}

@@ -354,11 +354,10 @@ class GALGAS_omnibusType : public AC_GALGAS_class {
                                                             const class GALGAS_classConstantMap & inOperand2,
                                                             const class GALGAS_constructorMap & inOperand3,
                                                             const class GALGAS_subscript & inOperand4,
-                                                            const class GALGAS_stringset & inOperand5,
-                                                            const class GALGAS_omnibusTypeAttributes & inOperand6,
-                                                            const class GALGAS_string & inOperand7,
-                                                            const class GALGAS_typeKind & inOperand8,
-                                                            const class GALGAS_string & inOperand9
+                                                            const class GALGAS_omnibusTypeAttributes & inOperand5,
+                                                            const class GALGAS_string & inOperand6,
+                                                            const class GALGAS_typeKind & inOperand7,
+                                                            const class GALGAS_string & inOperand8
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -370,8 +369,6 @@ class GALGAS_omnibusType : public AC_GALGAS_class {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_assignmentSources (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusTypeAttributes getter_attributes (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_classConstantMap getter_classConstantMap (LOCATION_ARGS) const ;
@@ -1968,7 +1965,6 @@ class cPtr_omnibusType : public acPtr_class {
   public : GALGAS_classConstantMap mProperty_classConstantMap ;
   public : GALGAS_constructorMap mProperty_constructorMap ;
   public : GALGAS_subscript mProperty_subscript ;
-  public : GALGAS_stringset mProperty_assignmentSources ;
   public : GALGAS_omnibusTypeAttributes mProperty_attributes ;
   public : GALGAS_string mProperty_omnibusTypeDescriptionName ;
   public : GALGAS_typeKind mProperty_kind ;
@@ -1980,7 +1976,6 @@ class cPtr_omnibusType : public acPtr_class {
                              const GALGAS_classConstantMap & in_classConstantMap,
                              const GALGAS_constructorMap & in_constructorMap,
                              const GALGAS_subscript & in_subscript,
-                             const GALGAS_stringset & in_assignmentSources,
                              const GALGAS_omnibusTypeAttributes & in_attributes,
                              const GALGAS_string & in_omnibusTypeDescriptionName,
                              const GALGAS_typeKind & in_kind,
@@ -1996,7 +1991,6 @@ class cPtr_omnibusType : public acPtr_class {
   public : VIRTUAL_IN_DEBUG GALGAS_classConstantMap getter_classConstantMap (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_constructorMap getter_constructorMap (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_subscript getter_subscript (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_stringset getter_assignmentSources (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_omnibusTypeAttributes getter_attributes (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_omnibusTypeDescriptionName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_typeKind getter_kind (LOCATION_ARGS) const ;

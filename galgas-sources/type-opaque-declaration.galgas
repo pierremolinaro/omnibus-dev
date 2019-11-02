@@ -131,7 +131,7 @@ override method @typeOpaqueDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !subscript:.noSubscript
-      !assignmentSources: if copyable then {!mOpaqueTypeName} else {} end
+#      !assignmentSources: if copyable then {!mOpaqueTypeName} else {} end
       !attributes:opaqueTypeAttributes
       !omnibusTypeDescriptionName:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}

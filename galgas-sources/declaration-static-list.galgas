@@ -316,7 +316,7 @@ override method @staticListAST enterInContext
         !classConstantMap:{}
         !constructorMap:{}
         !subscript:.noSubscript
-        !assignmentSources: {}
+#        !assignmentSources: {}
         !attributes:.none
         !omnibusTypeDescriptionName:""
         !kind:.function {
@@ -362,7 +362,7 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-    !assignmentSources: {}
+#    !assignmentSources: {}
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}
@@ -461,7 +461,7 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
-    !assignmentSources: {}
+#    !assignmentSources: {}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)
     !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}

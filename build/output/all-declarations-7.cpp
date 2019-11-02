@@ -1464,9 +1464,6 @@ typeComparisonResult cPtr_omnibusType::dynamicObjectCompare (const acPtr_class *
     result = mProperty_subscript.objectCompare (p->mProperty_subscript) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_assignmentSources.objectCompare (p->mProperty_assignmentSources) ;
-  }
-  if (kOperandEqual == result) {
     result = mProperty_attributes.objectCompare (p->mProperty_attributes) ;
   }
   if (kOperandEqual == result) {
@@ -1514,7 +1511,6 @@ GALGAS_omnibusType GALGAS_omnibusType::constructor_default (LOCATION_ARGS) {
                                               GALGAS_classConstantMap::constructor_emptyMap (HERE),
                                               GALGAS_constructorMap::constructor_emptyMap (HERE),
                                               GALGAS_subscript::constructor_noSubscript (HERE),
-                                              GALGAS_stringset::constructor_emptySet (HERE),
                                               GALGAS_omnibusTypeAttributes::constructor_none (HERE),
                                               GALGAS_string::constructor_default (HERE),
                                               GALGAS_typeKind::constructor_void (HERE),
@@ -1536,15 +1532,14 @@ GALGAS_omnibusType GALGAS_omnibusType::constructor_new (const GALGAS_propertyGet
                                                         const GALGAS_classConstantMap & inAttribute_classConstantMap,
                                                         const GALGAS_constructorMap & inAttribute_constructorMap,
                                                         const GALGAS_subscript & inAttribute_subscript,
-                                                        const GALGAS_stringset & inAttribute_assignmentSources,
                                                         const GALGAS_omnibusTypeAttributes & inAttribute_attributes,
                                                         const GALGAS_string & inAttribute_omnibusTypeDescriptionName,
                                                         const GALGAS_typeKind & inAttribute_kind,
                                                         const GALGAS_string & inAttribute_llvmBaseTypeName
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_omnibusType result ;
-  if (inAttribute_propertyGetterMap.isValid () && inAttribute_propertySetterMap.isValid () && inAttribute_classConstantMap.isValid () && inAttribute_constructorMap.isValid () && inAttribute_subscript.isValid () && inAttribute_assignmentSources.isValid () && inAttribute_attributes.isValid () && inAttribute_omnibusTypeDescriptionName.isValid () && inAttribute_kind.isValid () && inAttribute_llvmBaseTypeName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_omnibusType (inAttribute_propertyGetterMap, inAttribute_propertySetterMap, inAttribute_classConstantMap, inAttribute_constructorMap, inAttribute_subscript, inAttribute_assignmentSources, inAttribute_attributes, inAttribute_omnibusTypeDescriptionName, inAttribute_kind, inAttribute_llvmBaseTypeName COMMA_THERE)) ;
+  if (inAttribute_propertyGetterMap.isValid () && inAttribute_propertySetterMap.isValid () && inAttribute_classConstantMap.isValid () && inAttribute_constructorMap.isValid () && inAttribute_subscript.isValid () && inAttribute_attributes.isValid () && inAttribute_omnibusTypeDescriptionName.isValid () && inAttribute_kind.isValid () && inAttribute_llvmBaseTypeName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_omnibusType (inAttribute_propertyGetterMap, inAttribute_propertySetterMap, inAttribute_classConstantMap, inAttribute_constructorMap, inAttribute_subscript, inAttribute_attributes, inAttribute_omnibusTypeDescriptionName, inAttribute_kind, inAttribute_llvmBaseTypeName COMMA_THERE)) ;
   }
   return result ;
 }
@@ -1641,24 +1636,6 @@ GALGAS_subscript cPtr_omnibusType::getter_subscript (UNUSED_LOCATION_ARGS) const
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_stringset GALGAS_omnibusType::getter_assignmentSources (UNUSED_LOCATION_ARGS) const {
-  GALGAS_stringset result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_omnibusType * p = (const cPtr_omnibusType *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_omnibusType) ;
-    result = p->mProperty_assignmentSources ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_stringset cPtr_omnibusType::getter_assignmentSources (UNUSED_LOCATION_ARGS) const {
-  return mProperty_assignmentSources ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_omnibusTypeAttributes GALGAS_omnibusType::getter_attributes (UNUSED_LOCATION_ARGS) const {
   GALGAS_omnibusTypeAttributes result ;
   if (NULL != mObjectPtr) {
@@ -1738,7 +1715,6 @@ cPtr_omnibusType::cPtr_omnibusType (const GALGAS_propertyGetterMap & in_property
                                     const GALGAS_classConstantMap & in_classConstantMap,
                                     const GALGAS_constructorMap & in_constructorMap,
                                     const GALGAS_subscript & in_subscript,
-                                    const GALGAS_stringset & in_assignmentSources,
                                     const GALGAS_omnibusTypeAttributes & in_attributes,
                                     const GALGAS_string & in_omnibusTypeDescriptionName,
                                     const GALGAS_typeKind & in_kind,
@@ -1750,7 +1726,6 @@ mProperty_propertySetterMap (in_propertySetterMap),
 mProperty_classConstantMap (in_classConstantMap),
 mProperty_constructorMap (in_constructorMap),
 mProperty_subscript (in_subscript),
-mProperty_assignmentSources (in_assignmentSources),
 mProperty_attributes (in_attributes),
 mProperty_omnibusTypeDescriptionName (in_omnibusTypeDescriptionName),
 mProperty_kind (in_kind),
@@ -1776,8 +1751,6 @@ void cPtr_omnibusType::description (C_String & ioString,
   ioString << ", " ;
   mProperty_subscript.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_assignmentSources.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mProperty_attributes.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_omnibusTypeDescriptionName.description (ioString, inIndentation+1) ;
@@ -1792,7 +1765,7 @@ void cPtr_omnibusType::description (C_String & ioString,
 
 acPtr_class * cPtr_omnibusType::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_omnibusType (mProperty_propertyGetterMap, mProperty_propertySetterMap, mProperty_classConstantMap, mProperty_constructorMap, mProperty_subscript, mProperty_assignmentSources, mProperty_attributes, mProperty_omnibusTypeDescriptionName, mProperty_kind, mProperty_llvmBaseTypeName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_omnibusType (mProperty_propertyGetterMap, mProperty_propertySetterMap, mProperty_classConstantMap, mProperty_constructorMap, mProperty_subscript, mProperty_attributes, mProperty_omnibusTypeDescriptionName, mProperty_kind, mProperty_llvmBaseTypeName COMMA_THERE)) ;
   return ptr ;
 }
 

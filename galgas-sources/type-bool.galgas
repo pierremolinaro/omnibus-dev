@@ -64,7 +64,7 @@ override method @booleanDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-    !assignmentSources: {!boolTypeName ()}
+#    !assignmentSources: {!boolTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:boolTypeName ()
     !kind:.boolean

@@ -134,7 +134,7 @@ override method @syncDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:constructorMap
     !subscript:.noSubscript
-    !assignmentSources: {}
+#    !assignmentSources: {}
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName
     !kind: .syncTool
