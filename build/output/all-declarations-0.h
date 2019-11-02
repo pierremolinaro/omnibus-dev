@@ -14029,7 +14029,7 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_string,
-    kEnum_constant,
+    kEnum_symbol,
     kEnum_type
   } enumeration ;
   
@@ -14057,10 +14057,10 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_llvmGenerationInstructionElement constructor_constant (const class GALGAS_lstring & inOperand0
-                                                                                      COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_llvmGenerationInstructionElement constructor_string (const class GALGAS_string & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_llvmGenerationInstructionElement constructor_symbol (const class GALGAS_lstring & inOperand0
                                                                                     COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_llvmGenerationInstructionElement constructor_type (const class GALGAS_lstring & inOperand0
@@ -14075,11 +14075,11 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_constant (class GALGAS_lstring & outArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_string (class GALGAS_string & outArgument0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_symbol (class GALGAS_lstring & outArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
@@ -14090,9 +14090,9 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstant (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isString (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSymbol (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isType (LOCATION_ARGS) const ;
 
@@ -14129,18 +14129,18 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_string : public cEn
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cEnumAssociatedValues_llvmGenerationInstructionElement_constant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_llvmGenerationInstructionElement_symbol : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_llvmGenerationInstructionElement_constant (const GALGAS_lstring & inAssociatedValue0
-                                                                            COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (const GALGAS_lstring & inAssociatedValue0
+                                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_constant (void) {}
+  public : virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (void) {}
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

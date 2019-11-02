@@ -4,7 +4,7 @@
 
 enum @llvmGenerationInstructionElement {
   case string (@string string)
-  case constant (@lstring name)
+  case symbol (@lstring name)
   case type (@lstring name)
 }
 
@@ -93,7 +93,7 @@ syntax extension omnibus_syntax {
         elementList += !.string {!string: string}
       or
         $identifier$ ?let name
-        elementList += !.constant {!name: name}
+        elementList += !.symbol {!name: name}
       or
         $\$type$ ?let typeName
         elementList += !.type {!name: typeName}
@@ -188,7 +188,7 @@ override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap io
   for (element) in mGenerationList do
     switch element
     case string (*) :
-    case constant (name) :
+    case symbol (name) :
       [ioMap searchKey !name]
     case type (name) :
       [ioMap searchKey !name]
@@ -303,7 +303,7 @@ override method @llvmGenerationInstruction generateIRCode
      switch element 
      case string (value) :
        s += value
-     case constant (name) :
+     case symbol (name) :
        [ioVarMap searchKey !name ?let value]
        s += value
      case type (name) :

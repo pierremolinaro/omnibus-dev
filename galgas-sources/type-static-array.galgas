@@ -173,11 +173,11 @@ override method @staticArrayTypeDeclarationAST enterInContext
       instructionElements += !.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + " ("}
       instructionElements += !.type {!name: ["TGT" nowhere]}
       instructionElements += !.string {!string: "* "}
-      instructionElements += !.constant {!name: ["TGT" nowhere]}
+      instructionElements += !.symbol {!name: ["TGT" nowhere]}
       instructionElements += !.string {!string: ", "}
       instructionElements += !.type {!name: ["SRC" nowhere]}
       instructionElements += !.string {!string: "* "}
-      instructionElements += !.constant {!name: ["SRC" nowhere]}
+      instructionElements += !.symbol {!name: ["SRC" nowhere]}
       instructionElements += !.string {!string: ")"}
       let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
       [!?ioContext.mAssignmentOperatorMap insertKey

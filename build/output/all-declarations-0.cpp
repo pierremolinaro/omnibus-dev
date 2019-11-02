@@ -10725,9 +10725,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_li
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_141 (inCompiler)) {
     case 2: {
-      GALGAS_abstractLLVMInstruction var_instruction_3048 ;
-      nt_llvm_5F_instruction_ (var_instruction_3048, inCompiler) ;
-      outArgument_outInstructionList.addAssign_operation (var_instruction_3048  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 73)) ;
+      GALGAS_abstractLLVMInstruction var_instruction_3046 ;
+      nt_llvm_5F_instruction_ (var_instruction_3046, inCompiler) ;
+      outArgument_outInstructionList.addAssign_operation (var_instruction_3046  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 73)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10759,9 +10759,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i139_
                                                                                   C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_var COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 80)) ;
-  GALGAS_lstring var_name_3330 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_name_3328 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 81)) ;
-  outArgument_outInstruction = GALGAS_llvmVarInstruction::constructor_new (var_name_3330  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 82)) ;
+  outArgument_outInstruction = GALGAS_llvmVarInstruction::constructor_new (var_name_3328  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 82)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10778,24 +10778,24 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i140_
                                                                                   C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 88)) ;
-  GALGAS_llvmGenerationInstructionElementList var_elementList_3646 = GALGAS_llvmGenerationInstructionElementList::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 89)) ;
+  GALGAS_llvmGenerationInstructionElementList var_elementList_3644 = GALGAS_llvmGenerationInstructionElementList::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 89)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_143 (inCompiler)) {
     case 1: {
-      GALGAS_lstring var_string_3706 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_string_3704 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 92)) ;
-      var_elementList_3646.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_string (var_string_3706.getter_string (SOURCE_FILE ("assignment-operator-definition.galgas", 93))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 93))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 93)) ;
+      var_elementList_3644.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_string (var_string_3704.getter_string (SOURCE_FILE ("assignment-operator-definition.galgas", 93))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 93))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 93)) ;
     } break ;
     case 2: {
-      GALGAS_lstring var_name_3796 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_name_3794 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 95)) ;
-      var_elementList_3646.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_constant (var_name_3796  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 96))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 96)) ;
+      var_elementList_3644.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_symbol (var_name_3794  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 96))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 96)) ;
     } break ;
     case 3: {
-      GALGAS_lstring var_typeName_3884 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_typeName_3880 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 98)) ;
-      var_elementList_3646.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_type (var_typeName_3884  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 99))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 99)) ;
+      var_elementList_3644.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_type (var_typeName_3880  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 99))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 99)) ;
     } break ;
     default:
       break ;
@@ -10809,7 +10809,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i140_
       break ;
     }
   }
-  outArgument_outInstruction = GALGAS_llvmGenerationInstruction::constructor_new (var_elementList_3646  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 104)) ;
+  outArgument_outInstruction = GALGAS_llvmGenerationInstruction::constructor_new (var_elementList_3644  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 104)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10850,30 +10850,30 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i141_ (GALGAS
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 110)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 111)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 112)) ;
-  GALGAS_lstring var_targetVariableName_4272 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_targetVariableName_4268 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 113)) ;
-  GALGAS_lstring var_targetTypeName_4305 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_targetTypeName_4301 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 114)) ;
-  GALGAS_genericFormalParameterList var_targetGenericFormalParameterList_4374 ;
-  nt_generic_5F_formal_5F_arguments_ (var_targetGenericFormalParameterList_4374, inCompiler) ;
+  GALGAS_genericFormalParameterList var_targetGenericFormalParameterList_4370 ;
+  nt_generic_5F_formal_5F_arguments_ (var_targetGenericFormalParameterList_4370, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 116)) ;
-  GALGAS_location var_operatorLocation_4407 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 117)) ;
+  GALGAS_location var_operatorLocation_4403 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 117)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 118)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 119)) ;
-  GALGAS_lstring var_sourceVariableName_4481 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sourceVariableName_4477 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 120)) ;
-  GALGAS_lstring var_sourceTypeName_4514 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sourceTypeName_4510 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 121)) ;
-  GALGAS_genericFormalParameterList var_sourceGenericFormalParameterList_4583 ;
-  nt_generic_5F_formal_5F_arguments_ (var_sourceGenericFormalParameterList_4583, inCompiler) ;
+  GALGAS_genericFormalParameterList var_sourceGenericFormalParameterList_4579 ;
+  nt_generic_5F_formal_5F_arguments_ (var_sourceGenericFormalParameterList_4579, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 123)) ;
-  GALGAS_ctExpressionAST var_whereClause_4635 ;
-  nt_generic_5F_where_5F_clause_ (var_whereClause_4635, inCompiler) ;
+  GALGAS_ctExpressionAST var_whereClause_4631 ;
+  nt_generic_5F_where_5F_clause_ (var_whereClause_4631, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 125)) ;
-  GALGAS_llvmGenerationInstructionList var_instructionList_4692 ;
-  nt_llvm_5F_instruction_5F_list_ (var_instructionList_4692, inCompiler) ;
+  GALGAS_llvmGenerationInstructionList var_instructionList_4688 ;
+  nt_llvm_5F_instruction_5F_list_ (var_instructionList_4688, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 127)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmAssignmentOperatorDeclaractionAST::constructor_new (var_operatorLocation_4407, var_targetVariableName_4272, var_targetTypeName_4305, var_targetGenericFormalParameterList_4374, var_sourceVariableName_4481, var_sourceTypeName_4514, var_sourceGenericFormalParameterList_4583, var_whereClause_4635, var_instructionList_4692  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 128))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 128)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmAssignmentOperatorDeclaractionAST::constructor_new (var_operatorLocation_4403, var_targetVariableName_4268, var_targetTypeName_4301, var_targetGenericFormalParameterList_4370, var_sourceVariableName_4477, var_sourceTypeName_4510, var_sourceGenericFormalParameterList_4579, var_whereClause_4631, var_instructionList_4688  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 128))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 128)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

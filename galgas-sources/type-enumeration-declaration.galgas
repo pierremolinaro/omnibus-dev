@@ -163,6 +163,44 @@ override method @enumerationDeclarationAST enterInContext
     !warnsIfUnused:false
     ![enumerationType llvmTypeName]
   }
+
+
+  let key = @lstring.new {
+    ![enumerationType omnibusTypeDescriptionName] + " = " + [enumerationType omnibusTypeDescriptionName]
+    !mEnumerationName.location
+  }
+  let llvmVarInstruction = @llvmVarInstruction.new {!["LOADED" nowhere]}
+  @llvmGenerationInstructionElementList instructionElements = {}
+  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+  instructionElements += !.string {!string: " = load "}
+  instructionElements += !.type {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: "* "}
+  instructionElements += !.symbol {!name: ["SRC" nowhere]}
+  let llvmLoadInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+  instructionElements = {}
+  instructionElements += !.string {!string: "store "}
+  instructionElements += !.type {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: " "}
+  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+  instructionElements += !.string {!string: ", "}
+  instructionElements += !.type {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: "* "}
+  instructionElements += !.symbol {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: ")"}
+  let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+  [!?ioContext.mAssignmentOperatorMap insertKey
+    !key 
+    !enumerationType
+    !["TGT" nowhere]
+    !{}
+    !enumerationType
+    !["SRC" nowhere]
+    !{}
+    !@ctTrueExpressionAST.new
+    !{!llvmVarInstruction, !llvmLoadInstruction, !llvmAssignmentInstruction}
+  ]
+
+
 }
 
 #·······················································································································
