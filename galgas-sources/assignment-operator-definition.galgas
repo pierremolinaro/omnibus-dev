@@ -271,11 +271,12 @@ method @llvmGenerationInstructionList generateIRCode
     ?let @assignmentGenerationVarMap inTypeMap
     ?!@instructionListIR ioInstructionListIR
     ?!@semanticTemporariesStruct ioTemporaries
+    ?!@allocaList ioAllocaList
 {
   var varMap = inVarMap
   var typeMap = inTypeMap
   for (instruction) in self do
-    [instruction generateIRCode !?varMap !?typeMap !?ioInstructionListIR !?ioTemporaries]
+    [instruction generateIRCode !?varMap !?typeMap !?ioInstructionListIR !?ioTemporaries !?ioAllocaList]
   end
 }
 
@@ -286,6 +287,7 @@ abstract method @abstractLLVMInstruction generateIRCode
     ?!@assignmentGenerationVarMap ioTypeMap
     ?!@instructionListIR ioInstructionListIR
     ?!@semanticTemporariesStruct ioTemporaries
+    ?!@allocaList unused ioAllocaList
 
 #·······················································································································
 
@@ -294,8 +296,9 @@ override method @llvmGenerationInstruction generateIRCode
     ?!@assignmentGenerationVarMap ioTypeMap
     ?!@instructionListIR ioInstructionListIR
     ?!@semanticTemporariesStruct unused ioTemporaries
+    ?!@allocaList unused ioAllocaList
 {
-   var s = ";§ "
+   var s = ""
    for (element) in mGenerationList do
      switch element 
      case string (value) :
@@ -319,6 +322,7 @@ override method @llvmVarInstruction generateIRCode
     ?!@assignmentGenerationVarMap unused ioTypeMap
     ?!@instructionListIR unused ioInstructionListIR
     ?!@semanticTemporariesStruct ioTemporaries
+    ?!@allocaList unused ioAllocaList
 {
   let newTemporaryVariable = "%temp" + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
@@ -330,6 +334,7 @@ override method @llvmVarInstruction generateIRCode
 method @assignmentOperatorMap appendAssignment
     ?!@semanticTemporariesStruct ioTemporaries
     ?!@instructionListIR ioInstructionListIR
+    ?!@allocaList ioAllocaList
     ?let @LValueRepresentation inTarget
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
@@ -341,20 +346,23 @@ method @assignmentOperatorMap appendAssignment
   [self searchKey !key ?* ?let targetVarName ?2* ?let sourceVarName ?2* ?let instructionList]
   let srcTypeLLVMName = [[inSourcePossibleReference type] llvmTypeName]
   var srcLLVMName = [inSourcePossibleReference llvmName]
-  if not [inSourcePossibleReference isReference] then # Assignment from value
-    let temp = "%tempref" + ioTemporaries.mTemporaryIndex
-    ioTemporaries.mTemporaryIndex ++
-    let s = ";! store " + srcTypeLLVMName + " " + srcLLVMName + ", " + srcTypeLLVMName + "* " + temp + " ; Load from ref"
-    [!?ioInstructionListIR appendInstructionAsFreeString! s]
-    srcLLVMName = temp
+  if not [inSourcePossibleReference isReference] then
+    let result = checkAssignmentCompatibility (
+      !source:inSourcePossibleReference # loadedResultValue
+      !targetAnnotationType:[inTarget type]
+      !errorLocation:inErrorLocation
+      !staticTypeAllowed:false
+    )
+   [!?ioInstructionListIR appendStoreToUniversalReference !inTarget.llvmName ![inTarget type] !result]
+  else
+    @assignmentGenerationVarMap varMap = {}
+    [!?varMap insertKey !targetVarName !inTarget.llvmName]
+    [!?varMap insertKey !sourceVarName !srcLLVMName]
+    @assignmentGenerationVarMap typeMap = {}
+    [!?typeMap insertKey !targetVarName ![[inTarget type] llvmTypeName]]
+    [!?typeMap insertKey !sourceVarName !srcTypeLLVMName]
+    [instructionList generateIRCode !varMap !typeMap !?ioInstructionListIR !?ioTemporaries !?ioAllocaList]
   end
-  @assignmentGenerationVarMap varMap = {}
-  [!?varMap insertKey !targetVarName !inTarget.llvmName]
-  [!?varMap insertKey !sourceVarName !srcLLVMName]
-  @assignmentGenerationVarMap typeMap = {}
-  [!?typeMap insertKey !targetVarName ![[inTarget type] llvmTypeName]]
-  [!?typeMap insertKey !sourceVarName !srcTypeLLVMName]
-  [instructionList generateIRCode !varMap !typeMap !?ioInstructionListIR !?ioTemporaries]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

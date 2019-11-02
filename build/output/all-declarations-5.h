@@ -4752,6 +4752,7 @@ void extensionMethod_generateIRCode (const class GALGAS_llvmGenerationInstructio
                                      const class GALGAS_assignmentGenerationVarMap constin_inTypeMap,
                                      class GALGAS_instructionListIR & io_ioInstructionListIR,
                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                     class GALGAS_allocaList & io_ioAllocaList,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
@@ -4766,6 +4767,7 @@ typedef void (*extensionMethodSignature_abstractLLVMInstruction_generateIRCode) 
                                                                                  class GALGAS_assignmentGenerationVarMap & ioArgument1,
                                                                                  class GALGAS_instructionListIR & ioArgument2,
                                                                                  class GALGAS_semanticTemporariesStruct & ioArgument3,
+                                                                                 class GALGAS_allocaList & ioArgument4,
                                                                                  class C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -4781,6 +4783,7 @@ void callExtensionMethod_generateIRCode (const class cPtr_abstractLLVMInstructio
                                          GALGAS_assignmentGenerationVarMap & io_ioTypeMap,
                                          GALGAS_instructionListIR & io_ioInstructionListIR,
                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                         GALGAS_allocaList & io_ioAllocaList,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -4793,6 +4796,7 @@ void callExtensionMethod_generateIRCode (const class cPtr_abstractLLVMInstructio
 void extensionMethod_appendAssignment (const class GALGAS_assignmentOperatorMap inObject,
                                        class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                        class GALGAS_instructionListIR & io_ioInstructionListIR,
+                                       class GALGAS_allocaList & io_ioAllocaList,
                                        const class GALGAS_LValueRepresentation constin_inTarget,
                                        const class GALGAS_objectIR constin_inSourcePossibleReference,
                                        const class GALGAS_location constin_inErrorLocation,

@@ -199,7 +199,7 @@ override method @integerDeclarationAST enterInContext
     !attributes:.instanciable | .equatable | .copyable | .comparable
     !omnibusTypeDescriptionName:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-    !llvmBaseTypeName:integerTypeName
+    !llvmBaseTypeName: integerTypeName
   }
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName

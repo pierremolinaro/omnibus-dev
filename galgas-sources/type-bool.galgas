@@ -68,7 +68,7 @@ override method @booleanDeclarationAST enterInContext
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:boolTypeName ()
     !kind:.boolean
-    !llvmBaseTypeName:boolTypeName ()
+    !llvmBaseTypeName: boolTypeName ()
   }
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType

@@ -161,7 +161,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
       let assignmentFunctionLLVMName = assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName
       ioRoutineListIR += !@staticArrayTypeAssignFunctionIR.new {
         ![assignmentFunctionLLVMName nowhere]
-        !isRequired:false
+        !isRequired:true
         !warnsIfUnused:false
         !arrayType
       }
@@ -169,16 +169,23 @@ override method @staticArrayTypeDeclarationAST enterInContext
         ![arrayType omnibusTypeDescriptionName] + " = " + [arrayType omnibusTypeDescriptionName]
         !mArrayTypeName.location
       }
-      let llvmAssignmentInstruction = @llvmGenerationInstruction.new {
-        !{!.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + "(" + llvmBaseTypeName + "* TGT, " + llvmBaseTypeName + "* SRC)"}
-        }
-      }
+      @llvmGenerationInstructionElementList instructionElements = {}
+      instructionElements += !.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + " ("}
+      instructionElements += !.type {!name: ["TGT" nowhere]}
+      instructionElements += !.string {!string: "* "}
+      instructionElements += !.constant {!name: ["TGT" nowhere]}
+      instructionElements += !.string {!string: ", "}
+      instructionElements += !.type {!name: ["SRC" nowhere]}
+      instructionElements += !.string {!string: "* "}
+      instructionElements += !.constant {!name: ["SRC" nowhere]}
+      instructionElements += !.string {!string: ")"}
+      let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
       [!?ioContext.mAssignmentOperatorMap insertKey
         !key 
-        !arrayType
+        !elementType
         !["TGT" nowhere]
         !{}
-        !arrayType
+        !elementType
         !["SRC" nowhere]
         !{}
         !@ctTrueExpressionAST.new
