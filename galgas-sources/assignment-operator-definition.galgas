@@ -198,7 +198,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
     [mLLVMInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @assignmentRoutineIR.new {
       !.new {!assignmentFuncName (!targetType !sourceType) !mOperatorLocation}
-      !isRequired: false # §
+      !isRequired: false
       !warnsIfUnused: false
       !targetType
       !mTargetVariableName.string

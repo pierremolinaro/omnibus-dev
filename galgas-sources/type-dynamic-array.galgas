@@ -184,6 +184,106 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !lkey:mDynamicArrayTypeName
       !type:dynamicArrayType
     ]
+  #-------------------------------------------- Assignment
+    @llvmGenerationInstructionList llvmInstructionList = {}
+    llvmInstructionList += !@llvmVarInstruction.new {!["SOURCE" nowhere]}
+    llvmInstructionList += !@llvmVarInstruction.new {!["TARGET" nowhere]}
+    llvmInstructionList += !@llvmVarInstruction.new {!["SOURCE.LOADED" nowhere]}
+    llvmInstructionList += !@llvmVarInstruction.new {!["TARGET.LOADED" nowhere]}
+
+#  ioLLVMcode += "  %source = bitcast " + arrayTypeLLVMName + "* %inSourcePtr to %ptrtype*\n" 
+    @llvmGenerationInstructionElementList instructionElements = {}
+    instructionElements += !.symbol {!name: ["SOURCE" nowhere]}
+    instructionElements += !.string {!string: " = bitcast "}
+    instructionElements += !.type {!name: ["SRC" nowhere]}
+    instructionElements += !.string {!string: "* "}
+    instructionElements += !.symbol {!name: ["SRC" nowhere]}
+    instructionElements += !.string {!string: " to %ptrtype*"}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+
+#  ioLLVMcode += "  %target = bitcast " + arrayTypeLLVMName + "* %inTargetPtr to %ptrtype*\n" 
+    instructionElements = {}
+    instructionElements += !.symbol {!name: ["TARGET" nowhere]}
+    instructionElements += !.string {!string: " = bitcast "}
+    instructionElements += !.type {!name: ["TGT" nowhere]}
+    instructionElements += !.string {!string: "* "}
+    instructionElements += !.symbol {!name: ["TGT" nowhere]}
+    instructionElements += !.string {!string: " to %ptrtype*"}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+   
+#  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
+    instructionElements = {}
+    instructionElements += !.symbol {!name: ["SOURCE.LOADED" nowhere]}
+    instructionElements += !.string {!string: " = load %ptrtype, %ptrtype*  "}
+    instructionElements += !.symbol {!name: ["SRC" nowhere]}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+   
+#  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
+    instructionElements = {}
+    instructionElements += !.string {!string: "call void @arc.retain (%ptrtype "}
+    instructionElements += !.symbol {!name: ["SOURCE.LOADED" nowhere]}
+    instructionElements += !.string {!string: ")"}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+
+#  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
+    instructionElements = {}
+    instructionElements += !.symbol {!name: ["TARGET.LOADED" nowhere]}
+    instructionElements += !.string {!string: " = load %ptrtype, %ptrtype*  "}
+    instructionElements += !.symbol {!name: ["TGT" nowhere]}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+
+#  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
+    instructionElements = {}
+    instructionElements += !.string {!string: "call void @arc.release (%ptrtype "}
+    instructionElements += !.symbol {!name: ["TARGET.LOADED" nowhere]}
+    instructionElements += !.string {!string: ")"}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+
+#  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
+    instructionElements = {}
+    instructionElements += !.string {!string: "store %ptrtype "}
+    instructionElements += !.symbol {!name: ["SOURCE.LOADED" nowhere]}
+    instructionElements += !.string {!string: ", %ptrtype* "}
+    instructionElements += !.symbol {!name: ["TGT" nowhere]}
+    llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+
+    let key = @lstring.new {
+      ![dynamicArrayType omnibusTypeDescriptionName] + " = " + [dynamicArrayType omnibusTypeDescriptionName]
+      !mDynamicArrayTypeName.location
+    }
+    [!?ioContext.mAssignmentOperatorMap insertKey
+      !key 
+      !dynamicArrayType
+      !["TGT" nowhere]
+      !{}
+      !dynamicArrayType
+      !["SRC" nowhere]
+      !{}
+      !@ctTrueExpressionAST.new
+      !llvmInstructionList
+    ]
+    @assignmentGenerationVarMap varMap = {}
+    [!?varMap insertKey !["SRC" nowhere] !"%SRC"]
+    [!?varMap insertKey !["TGT" nowhere] !"%TGT"]
+    @assignmentGenerationVarMap typeMap = {}
+    [!?typeMap insertKey !["SRC" nowhere] ![dynamicArrayType llvmTypeName]]
+    [!?typeMap insertKey !["TGT" nowhere] ![dynamicArrayType llvmTypeName]]
+    @stringlist generatedInstructions = {}
+    @allocaList allocaList = {}
+    @uint temporaryIndex = 0
+    [llvmInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
+    let routine = @assignmentRoutineIR.new {
+      !.new {!assignmentFuncName (!dynamicArrayType !dynamicArrayType) !mDynamicArrayTypeName.location}
+      !isRequired: false
+      !warnsIfUnused: false
+      !dynamicArrayType
+      !"TGT"
+      !dynamicArrayType
+      !"SRC"
+      !generatedInstructions
+      !allocaList
+    }
+    ioRoutineListIR += !routine
   end
 }
 
@@ -199,8 +299,9 @@ class @dynArrayRemoveAllFunctionIR : @abstractRoutineIR {
 override method @dynArrayRemoveAllFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
+  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
@@ -222,8 +323,9 @@ class @dynArrayLengthFunctionIR : @abstractRoutineIR {
 override method @dynArrayLengthFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
+  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   ioLLVMcode += "define internal i32 @" + [mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
@@ -256,8 +358,9 @@ override method @dynArrayAppendFunctionIR enterAccessibleEntities
 override method @dynArrayAppendFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
+  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   let elementType = [mElementTypeProxy type]
   let @routineFormalArgumentListAST argumentList = {
     !.input
@@ -312,8 +415,9 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
 override method @dynArrayInsertFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
+  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue, i32 %inIndex)" + llvmAttributeFunction () + "{\n"
@@ -346,11 +450,47 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 #class @dynamicArrayTypeAssignFunctionIR : @abstractRoutineIR {
+#  @omnibusType mArrayType
+#}
+#
+##·······················································································································
+#
+#override method @dynamicArrayTypeAssignFunctionIR llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
+##--- Assignment
+#  let arrayTypeLLVMName = [mArrayType llvmTypeName]
+#  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+#  ioLLVMcode += " (" + arrayTypeLLVMName + " * %inTargetPtr, " + arrayTypeLLVMName + "* %inSourcePtr) nounwind optsize {\n"
+#  ioLLVMcode += "  %source = bitcast " + arrayTypeLLVMName + "* %inSourcePtr to %ptrtype*\n" 
+#  ioLLVMcode += "  %target = bitcast " + arrayTypeLLVMName + "* %inTargetPtr to %ptrtype*\n" 
+#  ioLLVMcode += "  call void @" + assignDynamicArrayFunctionName () + " (%ptrtype* %target, %ptrtype* %source)\n" 
+#  ioLLVMcode += "  ret void\n"
+#  ioLLVMcode += "}\n\n"
+#}
+#
+##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#
+#override method @dynamicArrayTypeAssignFunctionIR enterAccessibleEntities
+#  ?!@stringset ioInvokedRoutineSet
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+# {
+#  ioInvokedRoutineSet += !assignDynamicArrayFunctionName ()
 #}
 
-#·······················································································································
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! CODE GENERATION: DYNAMIC ARRAY ASSIGNMENT GENERIC FUNCTION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @dynamicArrayTypeAssignFunctionIR llvmCodeGeneration 
+#class @dynamicArrayTypeAssignGenericFunctionIR : @abstractRoutineIR {
+#}
+#
+##·······················································································································
+#
+#override method @dynamicArrayTypeAssignGenericFunctionIR llvmCodeGeneration 
 #  ?!@string ioLLVMcode
 #  ?let @generationContext unused inGenerationContext
 #  ?!@generationAdds ioGenerationAdds

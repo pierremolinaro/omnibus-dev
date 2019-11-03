@@ -211,6 +211,12 @@ proc buildSemanticContext
       !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
     ]
   end
+#--- Add Dynamic array assignment function
+#  outRoutineListIR += !@dynamicArrayTypeAssignGenericFunctionIR.new {
+#    ![assignDynamicArrayFunctionName () nowhere]
+#    !isRequired: false
+#    !warnsIfUnused: false
+#  }
 #--- Check all registers declared as @user are actually defined
   for (lkey) in controlRegisterUserAccesMapAST do
     error lkey : "this control register is not defined"
