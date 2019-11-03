@@ -76,16 +76,4 @@ task T @stacksize 512 @autostart {
   }
 }
 
-llvm func (tgt $B) = (src $B) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
-llvm func (tgt $C) = (src $C) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
 //------------------------------------------------*

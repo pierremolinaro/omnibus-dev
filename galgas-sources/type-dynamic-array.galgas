@@ -313,7 +313,7 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
-  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
+#  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue, i32 %inIndex)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Inserted element pointer\n"
@@ -330,7 +330,7 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ioLLVMcode += "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
-  let assignRoutineLLVMName = assignmentPrefix () + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
+  let assignRoutineLLVMName = assignmentFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
   ioLLVMcode += "  call void @" + [assignRoutineLLVMName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"

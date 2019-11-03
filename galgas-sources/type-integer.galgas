@@ -230,25 +230,6 @@ override method @integerDeclarationAST enterInContext
     !warnsIfUnused:false
     !llvmTypeName
   }
-
-
-#  let key = @lstring.new {
-#    ![integerType omnibusTypeDescriptionName] + " = " + [integerType omnibusTypeDescriptionName]
-#    !["" nowhere]
-#  }
-#  let llvmAssignmentInstruction = @llvmGenerationInstruction.new {
-#    !{!.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + "(i" + mSize + "* TGT, i" + mSize + "* SRC)"}
-#    }
-#  }
-#  [!?ioContext.mAssignmentOperatorMap insertKey
-#    !key 
-#    !integerType
-#    !{}
-#    !integerType
-#    !{}
-#    !@ctTrueExpressionAST.new
-#    !{!llvmAssignmentInstruction}
-#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

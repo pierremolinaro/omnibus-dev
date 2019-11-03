@@ -16,36 +16,6 @@ llvm func (tgt $bool) = (src $bool) {
   llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
 }
 
-llvm func (tgt $int32) = (src $int32) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
-llvm func (tgt $uint32) = (src $uint32) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
-llvm func (tgt $uint64) = (src $uint64) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
-llvm func (tgt $uint7) = (src $uint7) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
-llvm func (tgt $uint8) = (src $uint8) {
-  var temp
-  llvm temp + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $tgt + " " + temp + ", " + $tgt + "* " + tgt
-}
-
 llvm func (tgt $int32) = (src $ctInt) { // Ajouter test
   llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
 }
