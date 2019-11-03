@@ -9,6 +9,126 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_instructionListListIR_2D_element::GALGAS_instructionListListIR_2D_element (void) :
+mProperty_mInstructionList () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListListIR_2D_element::~ GALGAS_instructionListListIR_2D_element (void) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListListIR_2D_element::GALGAS_instructionListListIR_2D_element (const GALGAS_instructionListIR & inOperand0) :
+mProperty_mInstructionList (inOperand0) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListListIR_2D_element GALGAS_instructionListListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_instructionListListIR_2D_element (GALGAS_instructionListIR::constructor_emptyList (HERE)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListListIR_2D_element GALGAS_instructionListListIR_2D_element::constructor_new (const GALGAS_instructionListIR & inOperand0 
+                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_instructionListListIR_2D_element result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_instructionListListIR_2D_element (inOperand0) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult GALGAS_instructionListListIR_2D_element::objectCompare (const GALGAS_instructionListListIR_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mInstructionList.objectCompare (inOperand.mProperty_mInstructionList) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+bool GALGAS_instructionListListIR_2D_element::isValid (void) const {
+  return mProperty_mInstructionList.isValid () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_instructionListListIR_2D_element::drop (void) {
+  mProperty_mInstructionList.drop () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_instructionListListIR_2D_element::description (C_String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString << "<struct @instructionListListIR-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mInstructionList.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListIR GALGAS_instructionListListIR_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mInstructionList ;
+}
+
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         @instructionListListIR-element type                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_instructionListListIR_2D_element ("instructionListListIR-element",
+                                                         NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_instructionListListIR_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_instructionListListIR_2D_element ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_instructionListListIR_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_instructionListListIR_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_instructionListListIR_2D_element GALGAS_instructionListListIR_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_instructionListListIR_2D_element result ;
+  const GALGAS_instructionListListIR_2D_element * p = (const GALGAS_instructionListListIR_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_instructionListListIR_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("instructionListListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_genericFormalParameterList_2D_element::GALGAS_genericFormalParameterList_2D_element (void) :
 mProperty_mParameter () {
 }
@@ -17902,7 +18022,7 @@ static const int16_t gActionTable_omnibus_grammar [] = {
 , C_Lexique_omnibus_5F_lexique::kToken_llvm, SHIFT (1040)
 , END
 // State S1043 (index = 31265)
-, C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (139)
 , END
 // State S1044 (index = 31268)
 , C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (163)
@@ -17913,9 +18033,9 @@ static const int16_t gActionTable_omnibus_grammar [] = {
 , C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (426)
 , END
 // State S1046 (index = 31278)
-, C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (139)
-, C_Lexique_omnibus_5F_lexique::kToken_var, REDUCE (139)
-, C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (139)
+, C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (140)
+, C_Lexique_omnibus_5F_lexique::kToken_var, REDUCE (140)
+, C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (140)
 , END
 // State S1047 (index = 31285)
 , C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (513)
@@ -17942,32 +18062,32 @@ static const int16_t gActionTable_omnibus_grammar [] = {
 , C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (511)
 , END
 // State S1051 (index = 31321)
-, C_Lexique_omnibus_5F_lexique::kToken_import, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_typealias, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_enum, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_public, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_let, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_struct, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_sync, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_opaque, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_registers, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_driver, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_staticArray, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_func, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_extend, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_option, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_task, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_panic, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_section, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_service, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_primitive, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_required, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_extern, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_ctAssert, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_target, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_compiletime, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (141)
-, C_Lexique_omnibus_5F_lexique::kToken_, REDUCE (141)
+, C_Lexique_omnibus_5F_lexique::kToken_import, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_typealias, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_enum, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_public, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_let, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_struct, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_sync, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_opaque, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_registers, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_driver, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_staticArray, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_func, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_extend, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_option, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_task, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_panic, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_section, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_service, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_primitive, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_required, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_extern, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_ctAssert, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_target, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_compiletime, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (138)
+, C_Lexique_omnibus_5F_lexique::kToken_, REDUCE (138)
 , END
 // State S1052 (index = 31374)
 , C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (510)
@@ -17984,9 +18104,9 @@ static const int16_t gActionTable_omnibus_grammar [] = {
 , C_Lexique_omnibus_5F_lexique::kToken_identifier, SHIFT (1049)
 , END
 // State S1056 (index = 31390)
-, C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (140)
-, C_Lexique_omnibus_5F_lexique::kToken_var, REDUCE (140)
-, C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (140)
+, C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (141)
+, C_Lexique_omnibus_5F_lexique::kToken_var, REDUCE (141)
+, C_Lexique_omnibus_5F_lexique::kToken_llvm, REDUCE (141)
 , END
 // State S1057 (index = 31397)
 , C_Lexique_omnibus_5F_lexique::kToken__7D_, REDUCE (511)
@@ -21788,10 +21908,10 @@ static const int16_t gProductionsTable_omnibus_grammar [517 * 2] = {
   56, 1,
   57, 1,
   2, 7,
+  2, 17,
   58, 1,
   59, 2,
   59, 3,
-  2, 17,
   60, 0,
   60, 2,
   60, 2,
@@ -22405,8 +22525,8 @@ void cGrammar_omnibus_5F_grammar::nt_declaration_parse (C_Lexique_omnibus_5F_lex
   case 137 :
       rule_omnibus_5F_syntax_declaration_i137_parse(inLexique) ;
     break ;
-  case 141 :
-      rule_omnibus_5F_syntax_declaration_i141_parse(inLexique) ;
+  case 138 :
+      rule_omnibus_5F_syntax_declaration_i138_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -22489,8 +22609,8 @@ void cGrammar_omnibus_5F_grammar::nt_declaration_ (GALGAS_ast &  parameter_1,
   case 137 :
       rule_omnibus_5F_syntax_declaration_i137_(parameter_1, inLexique) ;
     break ;
-  case 141 :
-      rule_omnibus_5F_syntax_declaration_i141_(parameter_1, inLexique) ;
+  case 138 :
+      rule_omnibus_5F_syntax_declaration_i138_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -24440,8 +24560,8 @@ void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_ (GALGAS_ctExpre
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 138 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i138_parse(inLexique) ;
+  case 139 :
+      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i139_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -24452,8 +24572,8 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_parse (C_Lexiqu
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_ (GALGAS_llvmGenerationInstructionList &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 138 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i138_(parameter_1, inLexique) ;
+  case 139 :
+      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i139_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -24468,11 +24588,11 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_ (GALGAS_llvmGe
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 139 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_i139_parse(inLexique) ;
-    break ;
   case 140 :
       rule_omnibus_5F_syntax_llvm_5F_instruction_i140_parse(inLexique) ;
+    break ;
+  case 141 :
+      rule_omnibus_5F_syntax_llvm_5F_instruction_i141_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -24483,11 +24603,11 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_parse (C_Lexique_omnibu
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_ (GALGAS_abstractLLVMInstruction &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 139 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_i139_(parameter_1, inLexique) ;
-    break ;
   case 140 :
       rule_omnibus_5F_syntax_llvm_5F_instruction_i140_(parameter_1, inLexique) ;
+    break ;
+  case 141 :
+      rule_omnibus_5F_syntax_llvm_5F_instruction_i141_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

@@ -184,12 +184,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !lkey:mDynamicArrayTypeName
       !type:dynamicArrayType
     ]
-  #---------- Enter static array assignment function
-#    ioRoutineListIR += !@dynamicArrayTypeAssignFunctionIR.new {
-#      ![assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
-#      !isRequired:false
-#      !warnsIfUnused:false
-#    }
   end
 }
 
@@ -309,9 +303,6 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
    ?!@stringset unused ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-#  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
-#  let assignRoutineLLVMName = assignmentPrefix () + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
-#  ioInvokedRoutineSet += !assignRoutineLLVMName
 }
 
 #·······················································································································
@@ -324,9 +315,7 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
   let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
-  ioLLVMcode += ", " + elementLLVMTypeName + " %inValue"
-  ioLLVMcode += ", i32 %inIndex"
-  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += ", " + elementLLVMTypeName + " %inValue, i32 %inIndex)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Inserted element pointer\n"
   ioLLVMcode += "  %insert.address = alloca %ptrtype\n"
   ioLLVMcode += ";--- value pointer\n"

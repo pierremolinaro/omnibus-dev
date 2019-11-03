@@ -1389,25 +1389,25 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_declaration_i137_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i138_ (GALGAS_llvmGenerationInstructionList & outArgument0,
+  protected : void rule_omnibus_5F_syntax_declaration_i138_ (GALGAS_ast & ioArgument0,
+                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i138_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i139_ (GALGAS_llvmGenerationInstructionList & outArgument0,
                                                                              C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i138_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i139_ (GALGAS_abstractLLVMInstruction & outArgument0,
-                                                                     C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i139_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i139_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i140_ (GALGAS_abstractLLVMInstruction & outArgument0,
                                                                      C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i140_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i141_ (GALGAS_ast & ioArgument0,
-                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i141_ (GALGAS_abstractLLVMInstruction & outArgument0,
+                                                                     C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_declaration_i141_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_llvm_5F_instruction_i141_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
 
 
@@ -7595,19 +7595,19 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @llvmAssignmentOperatorDeclaractionAST class                                     *
+//                                     @llvmAssignmentOperatorDeclarationAST class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_llvmAssignmentOperatorDeclaractionAST : public GALGAS_abstractDeclarationAST {
+class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
-  public : GALGAS_llvmAssignmentOperatorDeclaractionAST (void) ;
+  public : GALGAS_llvmAssignmentOperatorDeclarationAST (void) ;
 
 //---
-  public : inline const class cPtr_llvmAssignmentOperatorDeclaractionAST * ptr (void) const { return (const cPtr_llvmAssignmentOperatorDeclaractionAST *) mObjectPtr ; }
+  public : inline const class cPtr_llvmAssignmentOperatorDeclarationAST * ptr (void) const { return (const cPtr_llvmAssignmentOperatorDeclarationAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_llvmAssignmentOperatorDeclaractionAST (const cPtr_llvmAssignmentOperatorDeclaractionAST * inSourcePtr) ;
+  public : GALGAS_llvmAssignmentOperatorDeclarationAST (const cPtr_llvmAssignmentOperatorDeclarationAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -7615,24 +7615,24 @@ class GALGAS_llvmAssignmentOperatorDeclaractionAST : public GALGAS_abstractDecla
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_llvmAssignmentOperatorDeclaractionAST extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_llvmAssignmentOperatorDeclarationAST extractObject (const GALGAS_object & inObject,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_llvmAssignmentOperatorDeclaractionAST constructor_new (const class GALGAS_location & inOperand0,
-                                                                                      const class GALGAS_lstring & inOperand1,
-                                                                                      const class GALGAS_lstring & inOperand2,
-                                                                                      const class GALGAS_genericFormalParameterList & inOperand3,
-                                                                                      const class GALGAS_lstring & inOperand4,
-                                                                                      const class GALGAS_lstring & inOperand5,
-                                                                                      const class GALGAS_genericFormalParameterList & inOperand6,
-                                                                                      const class GALGAS_ctExpressionAST & inOperand7,
-                                                                                      const class GALGAS_llvmGenerationInstructionList & inOperand8
-                                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_llvmAssignmentOperatorDeclarationAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                                     const class GALGAS_lstring & inOperand1,
+                                                                                     const class GALGAS_lstring & inOperand2,
+                                                                                     const class GALGAS_genericFormalParameterList & inOperand3,
+                                                                                     const class GALGAS_lstring & inOperand4,
+                                                                                     const class GALGAS_lstring & inOperand5,
+                                                                                     const class GALGAS_genericFormalParameterList & inOperand6,
+                                                                                     const class GALGAS_ctExpressionAST & inOperand7,
+                                                                                     const class GALGAS_llvmGenerationInstructionList & inOperand8
+                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclaractionAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -7640,7 +7640,7 @@ class GALGAS_llvmAssignmentOperatorDeclaractionAST : public GALGAS_abstractDecla
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mLLVMInstructionList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
 
@@ -7662,12 +7662,12 @@ class GALGAS_llvmAssignmentOperatorDeclaractionAST : public GALGAS_abstractDecla
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_llvmAssignmentOperatorDeclaractionAST class
+} ; // End of GALGAS_llvmAssignmentOperatorDeclarationAST class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOperatorDeclaractionAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOperatorDeclarationAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -7925,11 +7925,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                           Pointer class for @llvmAssignmentOperatorDeclaractionAST class                            *
+//                            Pointer class for @llvmAssignmentOperatorDeclarationAST class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_llvmAssignmentOperatorDeclaractionAST : public cPtr_abstractDeclarationAST {
+class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
   public : GALGAS_location mProperty_mOperatorLocation ;
   public : GALGAS_lstring mProperty_mTargetVariableName ;
@@ -7939,19 +7939,19 @@ class cPtr_llvmAssignmentOperatorDeclaractionAST : public cPtr_abstractDeclarati
   public : GALGAS_lstring mProperty_mSourceTypeName ;
   public : GALGAS_genericFormalParameterList mProperty_mSourceGenericFormalParameterList ;
   public : GALGAS_ctExpressionAST mProperty_mWhereClause ;
-  public : GALGAS_llvmGenerationInstructionList mProperty_mInstructionList ;
+  public : GALGAS_llvmGenerationInstructionList mProperty_mLLVMInstructionList ;
 
 //--- Constructor
-  public : cPtr_llvmAssignmentOperatorDeclaractionAST (const GALGAS_location & in_mOperatorLocation,
-                                                       const GALGAS_lstring & in_mTargetVariableName,
-                                                       const GALGAS_lstring & in_mTargetTypeName,
-                                                       const GALGAS_genericFormalParameterList & in_mTargetGenericFormalParameterList,
-                                                       const GALGAS_lstring & in_mSourceVariableName,
-                                                       const GALGAS_lstring & in_mSourceTypeName,
-                                                       const GALGAS_genericFormalParameterList & in_mSourceGenericFormalParameterList,
-                                                       const GALGAS_ctExpressionAST & in_mWhereClause,
-                                                       const GALGAS_llvmGenerationInstructionList & in_mInstructionList
-                                                       COMMA_LOCATION_ARGS) ;
+  public : cPtr_llvmAssignmentOperatorDeclarationAST (const GALGAS_location & in_mOperatorLocation,
+                                                      const GALGAS_lstring & in_mTargetVariableName,
+                                                      const GALGAS_lstring & in_mTargetTypeName,
+                                                      const GALGAS_genericFormalParameterList & in_mTargetGenericFormalParameterList,
+                                                      const GALGAS_lstring & in_mSourceVariableName,
+                                                      const GALGAS_lstring & in_mSourceTypeName,
+                                                      const GALGAS_genericFormalParameterList & in_mSourceGenericFormalParameterList,
+                                                      const GALGAS_ctExpressionAST & in_mWhereClause,
+                                                      const GALGAS_llvmGenerationInstructionList & in_mLLVMInstructionList
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -7965,7 +7965,7 @@ class cPtr_llvmAssignmentOperatorDeclaractionAST : public cPtr_abstractDeclarati
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSourceTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mSourceGenericFormalParameterList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mLLVMInstructionList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

@@ -110,57 +110,11 @@ override method @booleanDeclarationAST enterInContext
   [!?ioContext.mNotOperatorMap insertKey
     ![boolTypeName () nowhere]
   ]
-#---------- Enter boolean assignment function
-#  let assignmentFunctionLLVMName = assignmentPrefix () + boolTypeName () + "." + boolTypeName ()
-#  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-#    ![assignmentFunctionLLVMName nowhere]
-#    !isRequired:false
-#    !warnsIfUnused:false
-#    !"i1"
-#  }
-
-
-#  let key = @lstring.new {
-#    ![selfType omnibusTypeDescriptionName] + " = " + [selfType omnibusTypeDescriptionName]
-#    !["" nowhere]
-#  }
-#  let llvmAssignmentInstruction = @llvmGenerationInstruction.new {
-#    !{!.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + "(i1* TGT, i1* SRC)"}
-#    }
-#  }
-#  [!?ioContext.mAssignmentOperatorMap insertKey
-#    !key 
-#    !selfType
-#    !{}
-#    !selfType
-#    !{}
-#    !@ctTrueExpressionAST.new
-#    !{!llvmAssignmentInstruction}
-#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: INTEGER ASSIGN FROM SAME TYPE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#class @basicIntegerAssignFunctionIR : @abstractRoutineIR {
-#  @string mLLVMTypeName
-#}
-
-#·······················································································································
-
-#override method @basicIntegerAssignFunctionIR llvmCodeGeneration 
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  ioLLVMcode += "define internal void @" +[mRoutineMangledName assemblerRepresentation]
-#  ioLLVMcode += " (" + mLLVMTypeName + "* %target, " + mLLVMTypeName + "* %source) alwaysinline {\n"
-#  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %source\n"
-#  ioLLVMcode += "  store " + mLLVMTypeName + " %value, " + mLLVMTypeName + "* %target\n"
-#  ioLLVMcode += "  ret void\n"
-#  ioLLVMcode += "}\n\n"
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

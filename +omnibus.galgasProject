@@ -174,5 +174,6 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/compile-time-expression.galgas"
   "galgas-sources/llvm-generic-type.galgas"
   "galgas-sources/assignment-operator-definition.galgas"
+  "galgas-sources/llvm-instructions.galgas"
 }
 

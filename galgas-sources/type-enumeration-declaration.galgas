@@ -24,7 +24,7 @@ syntax extension omnibus_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $enum$
-    $\$type$ ?let enumName
+    $\$type$ ?let enumerationName
     ${$
     @enumerationConstantList enumCaseList = {}
     var idx = 0G
@@ -36,7 +36,39 @@ syntax extension omnibus_syntax {
     while
     end
     $}$
-    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {!enumName !enumCaseList}
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {!enumerationName !enumCaseList}
+  #--- Add assignment operator declaration
+    let llvmVarInstruction = @llvmVarInstruction.new {!["LOADED" nowhere]}
+    @llvmGenerationInstructionElementList instructionElements = {}
+    instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+    instructionElements += !.string {!string: " = load "}
+    instructionElements += !.type {!name: ["SRC" nowhere]}
+    instructionElements += !.string {!string: ", "}
+    instructionElements += !.type {!name: ["SRC" nowhere]}
+    instructionElements += !.string {!string: "* "}
+    instructionElements += !.symbol {!name: ["SRC" nowhere]}
+    let llvmLoadInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+    instructionElements = {}
+    instructionElements += !.string {!string: "store "}
+    instructionElements += !.type {!name: ["SRC" nowhere]}
+    instructionElements += !.string {!string: " "}
+    instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+    instructionElements += !.string {!string: ", "}
+    instructionElements += !.type {!name: ["TGT" nowhere]}
+    instructionElements += !.string {!string: "* "}
+    instructionElements += !.symbol {!name: ["TGT" nowhere]}
+    let llvmStoreInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+    ioAST.mDeclarationListAST += !@llvmAssignmentOperatorDeclarationAST.new {
+      !enumerationName.location
+      !["TGT" nowhere]
+      !enumerationName
+      !{}
+      !["SRC" nowhere]
+      !enumerationName
+      !{}
+      !@ctTrueExpressionAST.new
+      !{!llvmVarInstruction, !llvmLoadInstruction, !llvmStoreInstruction}
+    }
   }
 
   #·····················································································································
@@ -146,7 +178,6 @@ override method @enumerationDeclarationAST enterInContext
     !classConstantMap:enumConstantMap
     !constructorMap:{}
     !subscript:.noSubscript
-#    !assignmentSources: {!mEnumerationName}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName: mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
@@ -156,52 +187,6 @@ override method @enumerationDeclarationAST enterInContext
     !lkey:mEnumerationName
     !type:enumerationType
   ]
-#---------- Enter boolean assignment function
-#  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-#    ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
-#    !isRequired:false
-#    !warnsIfUnused:false
-#    ![enumerationType llvmTypeName]
-#  }
-
-
-  let key = @lstring.new {
-    ![enumerationType omnibusTypeDescriptionName] + " = " + [enumerationType omnibusTypeDescriptionName]
-    !mEnumerationName.location
-  }
-  let llvmVarInstruction = @llvmVarInstruction.new {!["LOADED" nowhere]}
-  @llvmGenerationInstructionElementList instructionElements = {}
-  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
-  instructionElements += !.string {!string: " = load "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["SRC" nowhere]}
-  let llvmLoadInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
-  instructionElements = {}
-  instructionElements += !.string {!string: "store "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["SRC" nowhere]}
-  let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
-  [!?ioContext.mAssignmentOperatorMap insertKey
-    !key 
-    !enumerationType
-    !["TGT" nowhere]
-    !{}
-    !enumerationType
-    !["SRC" nowhere]
-    !{}
-    !@ctTrueExpressionAST.new
-    !{!llvmVarInstruction, !llvmLoadInstruction, !llvmAssignmentInstruction}
-  ]
-
-
 }
 
 #·······················································································································

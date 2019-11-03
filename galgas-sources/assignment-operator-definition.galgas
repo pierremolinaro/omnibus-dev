@@ -2,44 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @llvmGenerationInstructionElement {
-  case string (@string string)
-  case symbol (@lstring name)
-  case type (@lstring name)
-}
-
-#·······················································································································
-
-list @llvmGenerationInstructionElementList {
-  @llvmGenerationInstructionElement mElement
-}
-
-#·······················································································································
-
-abstract class @abstractLLVMInstruction {
-}
-
-#·······················································································································
-
-class @llvmGenerationInstruction : @abstractLLVMInstruction {
-  @llvmGenerationInstructionElementList mGenerationList
-}
-
-#·······················································································································
-
-class @llvmVarInstruction : @abstractLLVMInstruction {
-  @lstring mVariableName
-}
-
-#·······················································································································
-
-list @llvmGenerationInstructionList {
-  @abstractLLVMInstruction mInstruction
-}
-
-#·······················································································································
-
-class @llvmAssignmentOperatorDeclaractionAST : @abstractDeclarationAST {
+class @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
   @location mOperatorLocation
   @lstring mTargetVariableName
   @lstring mTargetTypeName
@@ -48,12 +11,12 @@ class @llvmAssignmentOperatorDeclaractionAST : @abstractDeclarationAST {
   @lstring mSourceTypeName
   @genericFormalParameterList mSourceGenericFormalParameterList
   @ctExpressionAST mWhereClause
-  @llvmGenerationInstructionList mInstructionList
+  @llvmGenerationInstructionList mLLVMInstructionList
 }
 
 #·······················································································································
 
-override getter @llvmAssignmentOperatorDeclaractionAST locationForErrorSignaling -> @location outLocation {
+override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = mOperatorLocation
 }
 
@@ -63,47 +26,6 @@ override getter @llvmAssignmentOperatorDeclaractionAST locationForErrorSignaling
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
-
-  rule <llvm_instruction_list> !@llvmGenerationInstructionList outInstructionList {
-    outInstructionList = {}
-    repeat
-    while
-      <llvm_instruction> ?let instruction
-      outInstructionList += !instruction
-    end
-  }
-
-  #·····················································································································
-
-  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
-    $var$
-    $identifier$ ?let name
-    outInstruction = @llvmVarInstruction.new {!name}
-  }
-  
-  #·····················································································································
-
-  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
-    $llvm$
-    @llvmGenerationInstructionElementList elementList = {}
-    repeat
-      select
-        $"string"$ ?let string
-        elementList += !.string {!string: string}
-      or
-        $identifier$ ?let name
-        elementList += !.symbol {!name: name}
-      or
-        $\$type$ ?let typeName
-        elementList += !.type {!name: typeName}
-      end
-    while
-     $+$
-    end
-    outInstruction = @llvmGenerationInstruction.new {!elementList}
-  }
-  
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -125,7 +47,7 @@ syntax extension omnibus_syntax {
     ${$
     <llvm_instruction_list> ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@llvmAssignmentOperatorDeclaractionAST.new {
+    ioAST.mDeclarationListAST += !@llvmAssignmentOperatorDeclarationAST.new {
       !operatorLocation
       !targetVariableName
       !targetTypeName
@@ -146,7 +68,7 @@ syntax extension omnibus_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmAssignmentOperatorDeclaractionAST enterInPrecedenceGraph
+override method @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = @lstring.new {!mTargetTypeName.string + " = " + mSourceTypeName !mOperatorLocation}
@@ -157,46 +79,13 @@ override method @llvmAssignmentOperatorDeclaractionAST enterInPrecedenceGraph
 
 #·······················································································································
 
-override getter @llvmAssignmentOperatorDeclaractionAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "Assignment " + mTargetTypeName + " = " + mSourceTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
-  var currentMap = inMap
-  for (instruction) in self do
-    [instruction checkInstructionList !?currentMap]
-  end
-}
-
-#·······················································································································
-
-abstract method @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMap
-
-#·······················································································································
-
-override method @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
-  [!?ioMap insertKey !mVariableName]
-}
-
-#·······················································································································
-
-override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
-  for (element) in mGenerationList do
-    switch element
-    case string (*) :
-    case symbol (name) :
-      [ioMap searchKey !name]
-    case type (name) :
-      [ioMap searchKey !name]
-    end
-  end
-}
-
-#·······················································································································
 
 map @assignmentOperatorMap {
   @omnibusType mTargetType
@@ -213,11 +102,11 @@ map @assignmentOperatorMap {
 
 #·······················································································································
 
-override method @llvmAssignmentOperatorDeclaractionAST enterInContext
+override method @llvmAssignmentOperatorDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
@@ -232,104 +121,63 @@ override method @llvmAssignmentOperatorDeclaractionAST enterInContext
 #--- Check instruction list
   [!?formalGenericConstantParameterMap insertKey !mTargetVariableName]
   [!?formalGenericConstantParameterMap insertKey !mSourceVariableName]
-  [mInstructionList checkInstructionList !formalGenericConstantParameterMap]
+  [mLLVMInstructionList checkInstructionList !formalGenericConstantParameterMap]
 #--- Types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTargetTypeName ?let targetType]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mSourceTypeName ?let sourceType]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTargetTypeName ?let targetTypeProxy]
+  let targetType = [targetTypeProxy type]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mSourceTypeName ?let sourceTypeProxy]
+  let sourceType = [sourceTypeProxy type]
 #---
   let key = @lstring.new {
-    ![[targetType type] omnibusTypeDescriptionName] + " = " + [[sourceType type] omnibusTypeDescriptionName]
+    ![targetType omnibusTypeDescriptionName] + " = " + [sourceType omnibusTypeDescriptionName]
     !mOperatorLocation
   }
   [!?ioContext.mAssignmentOperatorMap insertKey
     !key 
-    ![targetType type]
+    !targetType
     !mTargetVariableName
     !mTargetGenericFormalParameterList
-    ![sourceType type]
+    !sourceType
     !mSourceVariableName
     !mSourceGenericFormalParameterList
     !mWhereClause
-    !mInstructionList
+    !mLLVMInstructionList
   ]
+#--- Generate function if
+#       - none type is generic
+#       - source type is not a compile time type
+  if ([mTargetGenericFormalParameterList length] == 0)
+   && ([mSourceGenericFormalParameterList length] == 0)
+   && not [sourceType.kind isCompileTimeInteger]
+   && not [sourceType.kind isCompileTimeBool] then
+    @assignmentGenerationVarMap varMap = {}
+    [!?varMap insertKey !mTargetVariableName !"%" + mTargetVariableName]
+    [!?varMap insertKey !mSourceVariableName !"%" + mSourceVariableName]
+    @assignmentGenerationVarMap typeMap = {}
+    [!?typeMap insertKey !mTargetVariableName ![targetType llvmTypeName]]
+    [!?typeMap insertKey !mSourceVariableName ![sourceType llvmTypeName]]
+    @stringlist generatedInstructions = {}
+    @allocaList allocaList = {}
+    @uint temporaryIndex = 0
+    [mLLVMInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
+    let routine = @assignmentRoutineIR.new {
+      !.new {!assignmentFuncName (!targetType !sourceType) !mOperatorLocation}
+      !isRequired:true # §
+      !warnsIfUnused:false
+      !targetType
+      !mTargetVariableName.string
+      !sourceType
+      !mSourceVariableName.string
+      !generatedInstructions
+      !allocaList
+    }
+    ioRoutineListIR += !routine
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @assignmentGenerationVarMap {
-  @string mValue
-  insert insertKey error message "internal error"
-  search searchKey error message "internal error"
-}
-
-#·······················································································································
-
-method @llvmGenerationInstructionList generateIRCode
-    ?let @assignmentGenerationVarMap inVarMap
-    ?let @assignmentGenerationVarMap inTypeMap
-    ?!@instructionListIR ioInstructionListIR
-    ?!@semanticTemporariesStruct ioTemporaries
-    ?!@allocaList ioAllocaList
-{
-  var varMap = inVarMap
-  var typeMap = inTypeMap
-  for (instruction) in self do
-    [instruction generateIRCode !?varMap !?typeMap !?ioInstructionListIR !?ioTemporaries !?ioAllocaList]
-  end
-}
-
-#·······················································································································
-
-abstract method @abstractLLVMInstruction generateIRCode
-    ?!@assignmentGenerationVarMap ioVarMap
-    ?!@assignmentGenerationVarMap ioTypeMap
-    ?!@instructionListIR ioInstructionListIR
-    ?!@semanticTemporariesStruct ioTemporaries
-    ?!@allocaList unused ioAllocaList
-
-#·······················································································································
-
-override method @llvmGenerationInstruction generateIRCode
-    ?!@assignmentGenerationVarMap ioVarMap
-    ?!@assignmentGenerationVarMap ioTypeMap
-    ?!@instructionListIR ioInstructionListIR
-    ?!@semanticTemporariesStruct unused ioTemporaries
-    ?!@allocaList unused ioAllocaList
-{
-   var s = ""
-   for (element) in mGenerationList do
-     switch element 
-     case string (value) :
-       s += value
-     case symbol (name) :
-       [ioVarMap searchKey !name ?let value]
-       s += value
-     case type (name) :
-       [ioTypeMap searchKey !name ?let value]
-       s += value
-     end
-   end
-   s += " ; Assignment"
-   [!?ioInstructionListIR appendInstructionAsFreeString! s]
-}
-
-#·······················································································································
-
-override method @llvmVarInstruction generateIRCode
-    ?!@assignmentGenerationVarMap ioVarMap
-    ?!@assignmentGenerationVarMap unused ioTypeMap
-    ?!@instructionListIR unused ioInstructionListIR
-    ?!@semanticTemporariesStruct ioTemporaries
-    ?!@allocaList unused ioAllocaList
-{
-  let newTemporaryVariable = "%temp" + ioTemporaries.mTemporaryIndex
-  ioTemporaries.mTemporaryIndex ++
-  [!?ioVarMap insertKey !mVariableName !newTemporaryVariable]
-}
-
-#·······················································································································
 
 setter @instructionListIR appendAssignmentIR
     ?!@semanticTemporariesStruct ioTemporaries
@@ -352,7 +200,27 @@ setter @instructionListIR appendAssignmentIR
      !inTarget.type.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
      !inErrorLocation
     }
-    [inAssignmentOperatorMap searchKey !key ?* ?let targetVarName ?2* ?let sourceVarName ?2* ?let instructionList]
+    [inAssignmentOperatorMap searchKey
+      !key
+      ?*
+      ?let targetVarName
+      ?let targetGenericFormalParameterList
+      ?*
+      ?let sourceVarName
+      ?let sourceGenericFormalParameterList
+      ?*
+      ?let llvmInstructionList
+    ]
+    if ([targetGenericFormalParameterList length] == 0)
+    && ([sourceGenericFormalParameterList length] == 0)
+    && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
+    && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
+      let llvmRoutineName = assignmentFuncName (!inTarget.type ![inSourcePossibleReference type])
+      var s = "call void @" + [llvmRoutineName assemblerRepresentation]
+            + " (" + [inTarget.type llvmTypeName] + "* " + inTarget.llvmName
+            + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
+      [!?self appendInstructionAsFreeString !s]
+    else
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
     @assignmentGenerationVarMap varMap = {}
     [!?varMap insertKey !targetVarName !inTarget.llvmName]
@@ -360,10 +228,42 @@ setter @instructionListIR appendAssignmentIR
     @assignmentGenerationVarMap typeMap = {}
     [!?typeMap insertKey !targetVarName ![[inTarget type] llvmTypeName]]
     [!?typeMap insertKey !sourceVarName ! [sourceType llvmTypeName]]
-    @instructionListIR generatedInstructions = {}
-    [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries !?ioAllocaList]
-    self += generatedInstructions
+    @stringlist generatedInstructions = {}
+    [llvmInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
+    for (str) in generatedInstructions do
+     [!?self appendInstructionAsFreeString !str]
+    end
+    end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @assignmentRoutineIR : @abstractRoutineIR {
+  @omnibusType mTargetType
+  @string mTargetVarName
+  @omnibusType mSourceType
+  @string mSourceVarName
+  @stringlist mGeneratedInstructions
+  @allocaList mAllocaList
+}
+
+#·······················································································································
+
+override method @assignmentRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + [mTargetType llvmTypeName] + "* %" + mTargetVarName
+             + ", " + [mSourceType llvmTypeName] + "* %" + mSourceVarName + ") nounwind {\n"
+  [mAllocaList generateAllocaList !?ioLLVMcode]
+  for (instruction) in mGeneratedInstructions do
+    ioLLVMcode += "  " + instruction + "\n"
+  end
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

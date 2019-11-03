@@ -158,7 +158,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !arraySize
       }
     #---------- Enter static array assignment function
-      let assignmentFunctionLLVMName = assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName
+      let assignmentFunctionLLVMName =  assignmentFuncName (!arrayType !arrayType)
       ioRoutineListIR += !@staticArrayTypeAssignFunctionIR.new {
         ![assignmentFunctionLLVMName nowhere]
         !isRequired:true

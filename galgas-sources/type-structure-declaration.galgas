@@ -403,15 +403,6 @@ override method @structureDeclarationAST enterInContext
     ![structureType llvmTypeName]
     !propertyList
   }
-#---------- Enter structure assignment function
-#  if mGenerateAssignmentRoutine & canBeCopied then
-#    ioRoutineListIR += !@structureTypeAssignFunctionIR.new {
-#      ![assignmentPrefix () + mOmnibusTypeSpecificName + "." + mOmnibusTypeSpecificName nowhere]
-#      !isRequired:false
-#      !warnsIfUnused:false
-#      !structureType
-#    }
-#  end
 }
 
 #·······················································································································

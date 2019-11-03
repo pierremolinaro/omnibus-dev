@@ -1,0 +1,202 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @llvmGenerationInstructionElement {
+  case string (@string string)
+  case symbol (@lstring name)
+  case type (@lstring name)
+}
+
+#·······················································································································
+
+list @llvmGenerationInstructionElementList {
+  @llvmGenerationInstructionElement mElement
+}
+
+#·······················································································································
+
+abstract class @abstractLLVMInstruction {
+}
+
+#·······················································································································
+
+class @llvmGenerationInstruction : @abstractLLVMInstruction {
+  @llvmGenerationInstructionElementList mGenerationList
+}
+
+#·······················································································································
+
+class @llvmVarInstruction : @abstractLLVMInstruction {
+  @lstring mVariableName
+}
+
+#·······················································································································
+
+list @llvmGenerationInstructionList {
+  @abstractLLVMInstruction mInstruction
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <llvm_instruction_list> !@llvmGenerationInstructionList outInstructionList {
+    outInstructionList = {}
+    repeat
+    while
+      <llvm_instruction> ?let instruction
+      outInstructionList += !instruction
+    end
+  }
+
+  #·····················································································································
+
+  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
+    $var$
+    $identifier$ ?let name
+    outInstruction = @llvmVarInstruction.new {!name}
+  }
+  
+  #·····················································································································
+
+  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
+    $llvm$
+    @llvmGenerationInstructionElementList elementList = {}
+    repeat
+      select
+        $"string"$ ?let string
+        elementList += !.string {!string: string}
+      or
+        $identifier$ ?let name
+        elementList += !.symbol {!name: name}
+      or
+        $\$type$ ?let typeName
+        elementList += !.type {!name: typeName}
+      end
+    while
+     $+$
+    end
+    outInstruction = @llvmGenerationInstruction.new {!elementList}
+  }
+  
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
+  var currentMap = inMap
+  for (instruction) in self do
+    [instruction checkInstructionList !?currentMap]
+  end
+}
+
+#·······················································································································
+
+abstract method @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMap
+
+#·······················································································································
+
+override method @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
+  [!?ioMap insertKey !mVariableName]
+}
+
+#·······················································································································
+
+override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
+  for (element) in mGenerationList do
+    switch element
+    case string (*) :
+    case symbol (name) :
+      [ioMap searchKey !name]
+    case type (name) :
+      [ioMap searchKey !name]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   CODE GENERATION
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @assignmentGenerationVarMap {
+  @string mValue
+  insert insertKey error message "internal error"
+  search searchKey error message "internal error"
+}
+
+#·······················································································································
+
+method @llvmGenerationInstructionList generateIRCode
+    ?let @assignmentGenerationVarMap inVarMap
+    ?let @assignmentGenerationVarMap inTypeMap
+    ?!@stringlist ioInstructionAsStringListIR
+    ?!@uint ioTemporaryIndex
+    ?!@allocaList ioAllocaList
+{
+  var varMap = inVarMap
+  var typeMap = inTypeMap
+  for (instruction) in self do
+    [instruction generateIRCode !?varMap !?typeMap !?ioInstructionAsStringListIR !?ioTemporaryIndex !?ioAllocaList]
+  end
+}
+
+#·······················································································································
+
+abstract method @abstractLLVMInstruction generateIRCode
+    ?!@assignmentGenerationVarMap ioVarMap
+    ?!@assignmentGenerationVarMap ioTypeMap
+    ?!@stringlist ioInstructionAsStringListIR
+    ?!@uint ioTemporaryIndex
+    ?!@allocaList unused ioAllocaList
+
+#·······················································································································
+
+override method @llvmGenerationInstruction generateIRCode
+    ?!@assignmentGenerationVarMap ioVarMap
+    ?!@assignmentGenerationVarMap ioTypeMap
+    ?!@stringlist ioInstructionAsStringListIR
+    ?!@uint unused ioTemporaryIndex
+    ?!@allocaList unused ioAllocaList
+{
+   var s = ""
+   for (element) in mGenerationList do
+     switch element 
+     case string (value) :
+       s += value
+     case symbol (name) :
+       [ioVarMap searchKey !name ?let value]
+       s += value
+     case type (name) :
+       [ioTypeMap searchKey !name ?let value]
+       s += value
+     end
+   end
+   s += " ; Assignment"
+   ioInstructionAsStringListIR += !s
+}
+
+#·······················································································································
+
+override method @llvmVarInstruction generateIRCode
+    ?!@assignmentGenerationVarMap ioVarMap
+    ?!@assignmentGenerationVarMap unused ioTypeMap
+    ?!@stringlist unused ioInstructionAsStringListIR
+    ?!@uint ioTemporaryIndex
+    ?!@allocaList unused ioAllocaList
+{
+  let newTemporaryVariable = "%temp" + ioTemporaryIndex
+  ioTemporaryIndex ++
+  [!?ioVarMap insertKey !mVariableName !newTemporaryVariable]
+}
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
