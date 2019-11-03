@@ -206,6 +206,7 @@ class cPtr_nopIR : public cPtr_abstractInstructionIR {
 
 void extensionSetter_appendInstructionAsFreeString (class GALGAS_instructionListIR & ioObject,
                                                     const class GALGAS_string constin_inString,
+                                                    const class GALGAS_stringset constin_inInvokedFunctionSet,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -239,7 +240,8 @@ class GALGAS_freeStringIR : public GALGAS_abstractInstructionIR {
                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_freeStringIR constructor_new (const class GALGAS_string & inOperand0
+  public : static class GALGAS_freeStringIR constructor_new (const class GALGAS_string & inOperand0,
+                                                             const class GALGAS_stringset & inOperand1
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -251,6 +253,8 @@ class GALGAS_freeStringIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mInvokedFunctionSet (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mString (LOCATION_ARGS) const ;
 
 
@@ -273,9 +277,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_freeStringIR ;
 class cPtr_freeStringIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mProperty_mString ;
+  public : GALGAS_stringset mProperty_mInvokedFunctionSet ;
 
 //--- Constructor
-  public : cPtr_freeStringIR (const GALGAS_string & in_mString
+  public : cPtr_freeStringIR (const GALGAS_string & in_mString,
+                              const GALGAS_stringset & in_mInvokedFunctionSet
                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -283,6 +289,7 @@ class cPtr_freeStringIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mString (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_stringset getter_mInvokedFunctionSet (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

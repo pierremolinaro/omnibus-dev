@@ -1,13 +1,14 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendInstructionAsFreeString ?let @string inString {
-  self += !@freeStringIR.new {!inString}
+setter @instructionListIR appendInstructionAsFreeString ?let @string inString ?let @stringset inInvokedFunctionSet {
+  self += !@freeStringIR.new {!inString !inInvokedFunctionSet}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @freeStringIR : @abstractInstructionIR {
   @string mString
+  @stringset mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,6 +19,15 @@ override method @freeStringIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  " + mString + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @freeStringIR enterAccessibleEntities
+  ?!@stringset ioInvokedRoutineSet
+  ?!@uint unused ioMaxBranchOfOnInstructions
+ {
+  ioInvokedRoutineSet += mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

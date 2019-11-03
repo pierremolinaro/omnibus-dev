@@ -198,8 +198,8 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
     [mLLVMInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @assignmentRoutineIR.new {
       !.new {!assignmentFuncName (!targetType !sourceType) !mOperatorLocation}
-      !isRequired:true # §
-      !warnsIfUnused:false
+      !isRequired: false # §
+      !warnsIfUnused: false
       !targetType
       !mTargetVariableName.string
       !sourceType
@@ -255,7 +255,7 @@ setter @instructionListIR appendAssignmentIR
       var s = "call void @" + [llvmRoutineName assemblerRepresentation]
             + " (" + [inTarget.type llvmTypeName] + "* " + inTarget.llvmName
             + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
-      [!?self appendInstructionAsFreeString !s]
+      [!?self appendInstructionAsFreeString !s !{!llvmRoutineName}]
     else
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
     @assignmentGenerationVarMap varMap = {}
@@ -267,7 +267,7 @@ setter @instructionListIR appendAssignmentIR
     @stringlist generatedInstructions = {}
     [llvmInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
     for (str) in generatedInstructions do
-     [!?self appendInstructionAsFreeString !str]
+     [!?self appendInstructionAsFreeString !str !{}]
     end
     end
   end

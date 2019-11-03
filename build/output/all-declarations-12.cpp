@@ -7731,7 +7731,7 @@ static void extensionMethod_freeStringIR_llvmInstructionCode (const cPtr_abstrac
                                                               COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_freeStringIR * object = (const cPtr_freeStringIR *) inObject ;
   macroValidSharedObject (object, cPtr_freeStringIR) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (object->mProperty_mString, inCompiler COMMA_SOURCE_FILE ("instruction-free-string.galgas", 20)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-free-string.galgas", 20)), inCompiler  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 20)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (object->mProperty_mString, inCompiler COMMA_SOURCE_FILE ("instruction-free-string.galgas", 21)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-free-string.galgas", 21)), inCompiler  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 21)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7744,6 +7744,33 @@ static void defineExtensionMethod_freeStringIR_llvmInstructionCode (void) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_PrologueEpilogue gMethod_freeStringIR_llvmInstructionCode (defineExtensionMethod_freeStringIR_llvmInstructionCode, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                         Overriding extension method '@freeStringIR enterAccessibleEntities'                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_freeStringIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                  GALGAS_stringset & ioArgument_ioInvokedRoutineSet,
+                                                                  GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_freeStringIR * object = (const cPtr_freeStringIR *) inObject ;
+  macroValidSharedObject (object, cPtr_freeStringIR) ;
+  ioArgument_ioInvokedRoutineSet.plusAssign_operation(object->mProperty_mInvokedFunctionSet, inCompiler  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 30)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_freeStringIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_freeStringIR.mSlotID,
+                                                extensionMethod_freeStringIR_enterAccessibleEntities) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_freeStringIR_enterAccessibleEntities (defineExtensionMethod_freeStringIR_enterAccessibleEntities, NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

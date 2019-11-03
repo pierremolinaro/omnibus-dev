@@ -300,9 +300,11 @@ class @dynArrayInsertFunctionIR : @abstractRoutineIR {
 #·······················································································································
 
 override method @dynArrayInsertFunctionIR enterAccessibleEntities
-   ?!@stringset unused ioInvokedRoutineSet
+   ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
+  let assignRoutineLLVMName = assignmentFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
+  ioInvokedRoutineSet += !assignRoutineLLVMName
 }
 
 #·······················································································································
@@ -313,7 +315,6 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
-#  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
   ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue, i32 %inIndex)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Inserted element pointer\n"
