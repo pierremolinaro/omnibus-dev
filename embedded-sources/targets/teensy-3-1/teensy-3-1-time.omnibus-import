@@ -1,4 +1,4 @@
-check target "teensy-3-1/unprivileged"
+ctAssert target "teensy-3-1/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————
 

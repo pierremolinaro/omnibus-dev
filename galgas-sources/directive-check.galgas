@@ -16,7 +16,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    $check$
+    $ctAssert$
     @lstring checkMessage
     select
       checkMessage = ["" here]

@@ -10,25 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Extension getter '@semanticContext booleanType' (as function)                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_omnibusType extensionGetter_booleanType (const class GALGAS_semanticContext & inObject,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               Function 'boolTypeName'                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            @addressofInstructionIR class                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -493,4 +474,68 @@ class GALGAS_string function_checkModeAndReturnsRoutineLLVMName (const class GAL
 
 class GALGAS_string function_noUnusedWarningAttribute (class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       Function 'systemUserMangledNameFromAST'                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_systemUserMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                            const class GALGAS_routineKind & constinArgument1,
+                                                            const class GALGAS_lstring & constinArgument2,
+                                                            const class GALGAS_routineFormalArgumentListAST & constinArgument3,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                  Function 'systemImplementationMangledNameFromAST'                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_systemImplementationMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                                      const class GALGAS_routineKind & constinArgument1,
+                                                                      const class GALGAS_lstring & constinArgument2,
+                                                                      const class GALGAS_routineFormalArgumentListAST & constinArgument3,
+                                                                      class C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Function 'llvmFunctionPrototype'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
+                                                    const class GALGAS_string & constinArgument1,
+                                                    const class GALGAS_omnibusType & constinArgument2,
+                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         Routine 'generateSectionDispatcher'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generateSectionDispatcher (const class GALGAS_string constinArgument0,
+                                        const class GALGAS_string constinArgument1,
+                                        const class GALGAS_targetParameters constinArgument2,
+                                        class GALGAS_string & ioArgument3,
+                                        const class GALGAS_sectionIRlist constinArgument4,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'getTargetTextFile'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
+                                                const class GALGAS_string & constinArgument1,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 

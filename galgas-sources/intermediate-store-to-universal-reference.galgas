@@ -33,7 +33,7 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
   case llvmArrayRepeatedDynamicValue (* * value) :
     let llvmAssignRoutineName = assignmentPrefix () + [value type].llvmBaseTypeName + "." + [value type].llvmBaseTypeName
     ioInvokedRoutineSet += !llvmAssignRoutineName
-   case llvmArrayRepeatedStaticValue (4*) :
+  case llvmArrayRepeatedStaticValue (4*) :
   case llvmArrayStaticValues (3*) :
   case llvmArrayDynamicValues (* @operandIRList operands) :
     for (value) in operands do

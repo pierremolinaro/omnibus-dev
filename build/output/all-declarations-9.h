@@ -765,3 +765,22 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
 class GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                            Extension getter '@semanticContext booleanType' (as function)                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusType extensionGetter_booleanType (const class GALGAS_semanticContext & inObject,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                               Function 'boolTypeName'                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+

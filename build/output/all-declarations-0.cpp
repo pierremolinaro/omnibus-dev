@@ -122,11 +122,11 @@ static const char * gSyntaxErrorMessage_omnibus_5F_lexique_boot = "the 'boot' ke
 //--- Syntax error message for terminal '$case$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_case = "the 'case' keyword" ;
 
-//--- Syntax error message for terminal '$check$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique_check = "the 'check' keyword" ;
-
 //--- Syntax error message for terminal '$convert$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_convert = "the 'convert' keyword" ;
+
+//--- Syntax error message for terminal '$ctAssert$' :
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique_ctAssert = "the 'ctAssert' keyword" ;
 
 //--- Syntax error message for terminal '$compiletime$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_compiletime = "the 'compiletime' keyword" ;
@@ -450,8 +450,8 @@ C_String C_Lexique_omnibus_5F_lexique::getMessageForTerminal (const int16_t inTe
         gSyntaxErrorMessage_omnibus_5F_lexique_assert,
         gSyntaxErrorMessage_omnibus_5F_lexique_boot,
         gSyntaxErrorMessage_omnibus_5F_lexique_case,
-        gSyntaxErrorMessage_omnibus_5F_lexique_check,
         gSyntaxErrorMessage_omnibus_5F_lexique_convert,
+        gSyntaxErrorMessage_omnibus_5F_lexique_ctAssert,
         gSyntaxErrorMessage_omnibus_5F_lexique_compiletime,
         gSyntaxErrorMessage_omnibus_5F_lexique_driver,
         gSyntaxErrorMessage_omnibus_5F_lexique_else,
@@ -947,16 +947,6 @@ static const utf32 kUnicodeString_omnibus_5F_lexique_case [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$check$'
-static const utf32 kUnicodeString_omnibus_5F_lexique_check [] = {
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('k'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$compiletime$'
 static const utf32 kUnicodeString_omnibus_5F_lexique_compiletime [] = {
   TO_UNICODE ('c'),
@@ -979,6 +969,19 @@ static const utf32 kUnicodeString_omnibus_5F_lexique_convert [] = {
   TO_UNICODE ('o'),
   TO_UNICODE ('n'),
   TO_UNICODE ('v'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('t'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$ctAssert$'
+static const utf32 kUnicodeString_omnibus_5F_lexique_ctAssert [] = {
+  TO_UNICODE ('c'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('A'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('s'),
   TO_UNICODE ('e'),
   TO_UNICODE ('r'),
   TO_UNICODE ('t'),
@@ -1600,7 +1603,6 @@ static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_keyWord
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_sync, 4, C_Lexique_omnibus_5F_lexique::kToken_sync),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_task, 4, C_Lexique_omnibus_5F_lexique::kToken_task),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_user, 4, C_Lexique_omnibus_5F_lexique::kToken_user),
-  C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_check, 5, C_Lexique_omnibus_5F_lexique::kToken_check),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_event, 5, C_Lexique_omnibus_5F_lexique::kToken_event),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_guard, 5, C_Lexique_omnibus_5F_lexique::kToken_guard),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_panic, 5, C_Lexique_omnibus_5F_lexique::kToken_panic),
@@ -1622,6 +1624,7 @@ static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_keyWord
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_section, 7, C_Lexique_omnibus_5F_lexique::kToken_section),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_service, 7, C_Lexique_omnibus_5F_lexique::kToken_service),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_startup, 7, C_Lexique_omnibus_5F_lexique::kToken_startup),
+  C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_ctAssert, 8, C_Lexique_omnibus_5F_lexique::kToken_ctAssert),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_required, 8, C_Lexique_omnibus_5F_lexique::kToken_required),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_truncate, 8, C_Lexique_omnibus_5F_lexique::kToken_truncate),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_addressof, 9, C_Lexique_omnibus_5F_lexique::kToken_addressof),
@@ -1757,14 +1760,14 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       s.appendCString ("case") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_check:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("check") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
     case kToken_convert:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("convert") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_ctAssert:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("ctAssert") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_compiletime:
@@ -2827,8 +2830,8 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("assert") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("boot") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("case") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("check") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("convert") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("ctAssert") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("compiletime") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("driver") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("else") COMMA_THERE) ;
@@ -3024,7 +3027,6 @@ static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIden
     ioList.appendObject ("sync") ;
     ioList.appendObject ("task") ;
     ioList.appendObject ("user") ;
-    ioList.appendObject ("check") ;
     ioList.appendObject ("event") ;
     ioList.appendObject ("guard") ;
     ioList.appendObject ("panic") ;
@@ -3046,6 +3048,7 @@ static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIden
     ioList.appendObject ("section") ;
     ioList.appendObject ("service") ;
     ioList.appendObject ("startup") ;
+    ioList.appendObject ("ctAssert") ;
     ioList.appendObject ("required") ;
     ioList.appendObject ("truncate") ;
     ioList.appendObject ("addressof") ;
@@ -3088,8 +3091,8 @@ uint32_t C_Lexique_omnibus_5F_lexique::styleIndexForTerminal (const int32_t inTe
     1 /* omnibus_lexique_1_assert */,
     1 /* omnibus_lexique_1_boot */,
     1 /* omnibus_lexique_1_case */,
-    1 /* omnibus_lexique_1_check */,
     1 /* omnibus_lexique_1_convert */,
+    1 /* omnibus_lexique_1_ctAssert */,
     1 /* omnibus_lexique_1_compiletime */,
     1 /* omnibus_lexique_1_driver */,
     1 /* omnibus_lexique_1_else */,
@@ -8024,30 +8027,30 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_instructionList_i81_parse
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_instruction_i82_ (GALGAS_ast & ioArgument_ioAST,
                                                                          GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_check COMMA_SOURCE_FILE ("directive-check.galgas", 19)) ;
-  GALGAS_lstring var_checkMessage_1101 ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_ctAssert COMMA_SOURCE_FILE ("directive-check.galgas", 19)) ;
+  GALGAS_lstring var_checkMessage_1104 ;
   switch (select_omnibus_5F_syntax_95 (inCompiler)) {
   case 1: {
-    var_checkMessage_1101 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 22)) ;
+    var_checkMessage_1104 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 22)) ;
   } break ;
   case 2: {
-    var_checkMessage_1101 = inCompiler->synthetizedAttribute_tokenString () ;
+    var_checkMessage_1104 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("directive-check.galgas", 24)) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("directive-check.galgas", 26)) ;
-  GALGAS_expressionAST var_expression_1253 ;
-  nt_expression_ (ioArgument_ioAST, var_expression_1253, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_checkInstructionAST::constructor_new (var_checkMessage_1101.getter_location (HERE), var_checkMessage_1101, var_expression_1253  COMMA_SOURCE_FILE ("directive-check.galgas", 28))  COMMA_SOURCE_FILE ("directive-check.galgas", 28)) ;
+  GALGAS_expressionAST var_expression_1256 ;
+  nt_expression_ (ioArgument_ioAST, var_expression_1256, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_checkInstructionAST::constructor_new (var_checkMessage_1104.getter_location (HERE), var_checkMessage_1104, var_expression_1256  COMMA_SOURCE_FILE ("directive-check.galgas", 28))  COMMA_SOURCE_FILE ("directive-check.galgas", 28)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("directive-check.galgas", 29)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_instruction_i82_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_check COMMA_SOURCE_FILE ("directive-check.galgas", 19)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_ctAssert COMMA_SOURCE_FILE ("directive-check.galgas", 19)) ;
   switch (select_omnibus_5F_syntax_95 (inCompiler)) {
   case 1: {
   } break ;
@@ -9603,15 +9606,15 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i111_parse (C
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i112_ (GALGAS_ast & ioArgument_ioAST,
                                                                           C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_check COMMA_SOURCE_FILE ("declaration-check-target.galgas", 10)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_ctAssert COMMA_SOURCE_FILE ("declaration-check-target.galgas", 10)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_target COMMA_SOURCE_FILE ("declaration-check-target.galgas", 11)) ;
-  GALGAS_location var_targetConstructLocation_612 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-check-target.galgas", 12)) ;
-  GALGAS_lstringlist var_acceptedTargetList_665 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-check-target.galgas", 13)) ;
+  GALGAS_location var_targetConstructLocation_615 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-check-target.galgas", 12)) ;
+  GALGAS_lstringlist var_acceptedTargetList_668 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-check-target.galgas", 13)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    GALGAS_lstring var_targetName_714 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_lstring var_targetName_717 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("declaration-check-target.galgas", 15)) ;
-    var_acceptedTargetList_665.addAssign_operation (var_targetName_714  COMMA_SOURCE_FILE ("declaration-check-target.galgas", 16)) ;
+    var_acceptedTargetList_668.addAssign_operation (var_targetName_717  COMMA_SOURCE_FILE ("declaration-check-target.galgas", 16)) ;
     switch (select_omnibus_5F_syntax_124 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2C_ COMMA_SOURCE_FILE ("declaration-check-target.galgas", 18)) ;
@@ -9621,13 +9624,13 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i112_ (GALGAS
       break ;
     }
   }
-  ioArgument_ioAST.mProperty_mCheckTargetListAST.addAssign_operation (var_targetConstructLocation_612, var_acceptedTargetList_665  COMMA_SOURCE_FILE ("declaration-check-target.galgas", 20)) ;
+  ioArgument_ioAST.mProperty_mCheckTargetListAST.addAssign_operation (var_targetConstructLocation_615, var_acceptedTargetList_668  COMMA_SOURCE_FILE ("declaration-check-target.galgas", 20)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i112_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_check COMMA_SOURCE_FILE ("declaration-check-target.galgas", 10)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_ctAssert COMMA_SOURCE_FILE ("declaration-check-target.galgas", 10)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_target COMMA_SOURCE_FILE ("declaration-check-target.galgas", 11)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {

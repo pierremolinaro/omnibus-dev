@@ -175,7 +175,6 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !classConstantMap:{}
       !constructorMap:constructorMap
       !subscript:.noSubscript
-#      !assignmentSources: {!llvmBaseTypeName}
       !attributes:typeAttributes
       !omnibusTypeDescriptionName:omnibusTypeDescriptionName
       !kind:.dynamicArrayType {!elementType:elementType}
@@ -186,11 +185,11 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !type:dynamicArrayType
     ]
   #---------- Enter static array assignment function
-    ioRoutineListIR += !@dynamicArrayTypeAssignFunctionIR.new {
-      ![assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
-      !isRequired:false
-      !warnsIfUnused:false
-    }
+#    ioRoutineListIR += !@dynamicArrayTypeAssignFunctionIR.new {
+#      ![assignmentPrefix () + llvmBaseTypeName + "." + llvmBaseTypeName nowhere]
+#      !isRequired:false
+#      !warnsIfUnused:false
+#    }
   end
 }
 
@@ -307,12 +306,12 @@ class @dynArrayInsertFunctionIR : @abstractRoutineIR {
 #·······················································································································
 
 override method @dynArrayInsertFunctionIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
+   ?!@stringset unused ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
-  let assignRoutineLLVMName = assignmentPrefix () + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
-  ioInvokedRoutineSet += !assignRoutineLLVMName
+#  let elementLLVMBaseTypeName = [mElementTypeProxy type].llvmBaseTypeName
+#  let assignRoutineLLVMName = assignmentPrefix () + elementLLVMBaseTypeName + "." + elementLLVMBaseTypeName
+#  ioInvokedRoutineSet += !assignRoutineLLVMName
 }
 
 #·······················································································································
@@ -356,27 +355,27 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
 #! CODE GENERATION: DYNAMIC ARRAY ASSIGNMENT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @dynamicArrayTypeAssignFunctionIR : @abstractRoutineIR {
-}
+#class @dynamicArrayTypeAssignFunctionIR : @abstractRoutineIR {
+#}
 
 #·······················································································································
 
-override method @dynamicArrayTypeAssignFunctionIR llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-#--- Assignment
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
-  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
-  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
-  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
-  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
+#override method @dynamicArrayTypeAssignFunctionIR llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
+##--- Assignment
+#  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+#  ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
+#  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
+#  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
+#  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
+#  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
+#  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
+#  ioLLVMcode += "  ret void\n"
+#  ioLLVMcode += "}\n\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -151,9 +151,9 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 #--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) ![result type] !false
 #--- Assignment generation
-  [inContext.mAssignmentOperatorMap appendAssignment
+  [!?ioInstructionGenerationList appendAssignmentIR
     !?ioTemporaries
-    !?ioInstructionGenerationList
+    !inContext.mAssignmentOperatorMap
     !?ioAllocaList
     !.new {![result type] !llvmNameForLocalVariable (!omnibusLocalVariableName)}
     !sourcePossibleReference

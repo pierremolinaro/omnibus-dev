@@ -1,5 +1,5 @@
 
-check target "teensy-3-6/xtr32", "teensy-3-6/xtr64"
+ctAssert target "teensy-3-6/xtr32", "teensy-3-6/xtr64"
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // CLOCK SETTINGS
@@ -330,44 +330,44 @@ let SIM_CLKDIV2_USBDIV =
 driver root {
   boot {
   //--------------------------------------------------- Static checks
-    check "F_CPU_MHZ valid values: 240, 216, 192, 180, 168, 144, 120, 96, 72, 48 or 24"
+    ctAssert "F_CPU_MHZ valid values: 240, 216, 192, 180, 168, 144, 120, 96, 72, 48 or 24"
      (   (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
       or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ ==  96) or (F_CPU_MHZ ==  72) or (F_CPU_MHZ ==  48)
       or (F_CPU_MHZ == 24))
   //--- Check CPU clock setting is correct
-    check "CPU clock setting" (F_CPU_MHZ * (MCG_C5_PRDIV + 1) * (SIM_CLKDIV1_OUTDIV1 + 1) == (16 / 2) * (MCG_C6_VDIV + 16))
+    ctAssert "CPU clock setting" (F_CPU_MHZ * (MCG_C5_PRDIV + 1) * (SIM_CLKDIV1_OUTDIV1 + 1) == (16 / 2) * (MCG_C6_VDIV + 16))
   //--- (2) The bus clock frequency must be programmed to 60 MHz or less in HSRUN or RUN ...
-    check "BUS_MHZ ≤ 60" (BUS_MHZ ≤ 60)
+    ctAssert "BUS_MHZ ≤ 60" (BUS_MHZ ≤ 60)
   //---  ... an integer divide of the core clock. ...
-    check "bus clock frequency must be an integer divide of the core clock" (F_CPU_MHZ == (F_CPU_MHZ / BUS_MHZ) * BUS_MHZ)
+    ctAssert "bus clock frequency must be an integer divide of the core clock" (F_CPU_MHZ == (F_CPU_MHZ / BUS_MHZ) * BUS_MHZ)
   //--- ... The core clock to bus clock ratio is limited to a max value of 8.
-    check "core clock to bus clock ratio is limited to a max value of 8" (F_CPU_MHZ / BUS_MHZ ≤ 8)
+    ctAssert "core clock to bus clock ratio is limited to a max value of 8" (F_CPU_MHZ / BUS_MHZ ≤ 8)
   //--- (3) The flash clock frequency must be programmed to 28 MHz or less [No! overclocking --> 30 MHz] ...
-    check "flash clock frequency must be programmed to 30 MHz or less" (FLASH_KHZ ≤ 30_000)
+    ctAssert "flash clock frequency must be programmed to 30 MHz or less" (FLASH_KHZ ≤ 30_000)
   //--- ... less than or equal to the bus clock, ...
-    check "flash clock frequency must be less than or equal to the bus clock" (FLASH_KHZ ≤ (BUS_MHZ * 1000))
+    ctAssert "flash clock frequency must be less than or equal to the bus clock" (FLASH_KHZ ≤ (BUS_MHZ * 1000))
   //    ... and an integer divide of the core clock. ...
-    check "flash clock frequency must be an integer divide of the core clock" (
+    ctAssert "flash clock frequency must be an integer divide of the core clock" (
       (SIM_CLKDIV1_OUTDIV4 + 1) == ((SIM_CLKDIV1_OUTDIV4 + 1) / (SIM_CLKDIV1_OUTDIV1 + 1)) * (SIM_CLKDIV1_OUTDIV1 + 1)
     )
   //    ... The core clock to flash clock ratio is limited to a max value of 8.
-    check "core clock to flash clock ratio is limited to a max value of 8" (F_CPU_MHZ * 1000 / FLASH_KHZ ≤ 8)
+    ctAssert "core clock to flash clock ratio is limited to a max value of 8" (F_CPU_MHZ * 1000 / FLASH_KHZ ≤ 8)
   //--- (4) The FlexBus clock frequency must be programmed to be less than or equal to the bus clock frequency. ...
 //    check "flexBus clock frequency must be less than or equal to the bus clock" (FLEXBUS_MHZ ≤ BUS_MHZ)
   //--- ... For this device the FlexBus maximum frequency is 60 MHz. ...
 //    check "flexBus maximum frequency is 60 MHz" (FLEXBUS_MHZ ≤ 60)
   //--- ... The core clock to FlexBus clock ratio is limited to a max value of 8
-    check "core clock to FlexBus clock ratio is limited to a max value of 8" (F_CPU_MHZ / FLEXBUS_MHZ ≤ 8)
+    ctAssert "core clock to FlexBus clock ratio is limited to a max value of 8" (F_CPU_MHZ / FLEXBUS_MHZ ≤ 8)
   //--- USB Clock
-    check "USB Clock is 48 MHz" (
+    ctAssert "USB Clock is 48 MHz" (
      (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) or // 180 MHz and 216 MHz use directly IRC48MHZ clock
      (6 * (MCG_C5_PRDIV + 1) * (SIM_CLKDIV2_USBDIV + 1) == (MCG_C6_VDIV + 16) * (SIM_CLKDIV2_USBFRAC + 1))
     )
-    check "USB Clock is 48 MHz (for 180 MHz CPU clock)" (
+    ctAssert "USB Clock is 48 MHz (for 180 MHz CPU clock)" (
      (F_CPU_MHZ ≠ 180) or // 180 MHz uses directly IRC48 clock
      ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))
     )
-    check "USB Clock is 48 MHz (for 216 MHz CPU clock)" (
+    ctAssert "USB Clock is 48 MHz (for 216 MHz CPU clock)" (
      (F_CPU_MHZ ≠ 216) or // 216 MHz uses directly IRC48 clock
      ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))
     )

@@ -7,7 +7,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $check$
+    $ctAssert$
     $target$
     let targetConstructLocation = @location.here
     @lstringlist acceptedTargetList = {}

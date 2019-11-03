@@ -87,9 +87,9 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     ?let @LValueRepresentation lvalueIR
   ]
 #--- New assignment test
-  [inContext.mAssignmentOperatorMap appendAssignment
+  [!?ioInstructionGenerationList appendAssignmentIR
     !?ioTemporaries
-    !?ioInstructionGenerationList
+    !inContext.mAssignmentOperatorMap
     !?ioAllocaList
     !lvalueIR
     !sourceOperandPossibleReference

@@ -4789,17 +4789,17 @@ void callExtensionMethod_generateIRCode (const class cPtr_abstractLLVMInstructio
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Extension method '@assignmentOperatorMap appendAssignment'                              *
+//                              Extension setter '@instructionListIR appendAssignmentIR'                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_appendAssignment (const class GALGAS_assignmentOperatorMap inObject,
-                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                       class GALGAS_instructionListIR & io_ioInstructionListIR,
-                                       class GALGAS_allocaList & io_ioAllocaList,
-                                       const class GALGAS_LValueRepresentation constin_inTarget,
-                                       const class GALGAS_objectIR constin_inSourcePossibleReference,
-                                       const class GALGAS_location constin_inErrorLocation,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendAssignmentIR (class GALGAS_instructionListIR & ioObject,
+                                         class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                         const class GALGAS_assignmentOperatorMap constin_inAssignmentOperatorMap,
+                                         class GALGAS_allocaList & io_ioAllocaList,
+                                         const class GALGAS_LValueRepresentation constin_inTarget,
+                                         const class GALGAS_objectIR constin_inSourcePossibleReference,
+                                         const class GALGAS_location constin_inErrorLocation,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 

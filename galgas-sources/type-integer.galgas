@@ -231,6 +231,8 @@ override method @integerDeclarationAST enterInContext
     !warnsIfUnused:false
     !llvmTypeName
   }
+
+
 #  let key = @lstring.new {
 #    ![integerType omnibusTypeDescriptionName] + " = " + [integerType omnibusTypeDescriptionName]
 #    !["" nowhere]

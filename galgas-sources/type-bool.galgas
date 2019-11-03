@@ -40,7 +40,7 @@ override method @booleanDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR ioRoutineListIR
+  ?!@routineListIR unused ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
@@ -64,7 +64,6 @@ override method @booleanDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-#    !assignmentSources: {!boolTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:boolTypeName ()
     !kind:.boolean
@@ -112,13 +111,15 @@ override method @booleanDeclarationAST enterInContext
     ![boolTypeName () nowhere]
   ]
 #---------- Enter boolean assignment function
-  let assignmentFunctionLLVMName = assignmentPrefix () + boolTypeName () + "." + boolTypeName ()
-  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-    ![assignmentFunctionLLVMName nowhere]
-    !isRequired:false
-    !warnsIfUnused:false
-    !"i1"
-  }
+#  let assignmentFunctionLLVMName = assignmentPrefix () + boolTypeName () + "." + boolTypeName ()
+#  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
+#    ![assignmentFunctionLLVMName nowhere]
+#    !isRequired:false
+#    !warnsIfUnused:false
+#    !"i1"
+#  }
+
+
 #  let key = @lstring.new {
 #    ![selfType omnibusTypeDescriptionName] + " = " + [selfType omnibusTypeDescriptionName]
 #    !["" nowhere]
@@ -142,24 +143,24 @@ override method @booleanDeclarationAST enterInContext
 #! CODE GENERATION: INTEGER ASSIGN FROM SAME TYPE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @basicIntegerAssignFunctionIR : @abstractRoutineIR {
-  @string mLLVMTypeName
-}
+#class @basicIntegerAssignFunctionIR : @abstractRoutineIR {
+#  @string mLLVMTypeName
+#}
 
 #·······················································································································
 
-override method @basicIntegerAssignFunctionIR llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  ioLLVMcode += "define internal void @" +[mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + mLLVMTypeName + "* %target, " + mLLVMTypeName + "* %source) alwaysinline {\n"
-  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %source\n"
-  ioLLVMcode += "  store " + mLLVMTypeName + " %value, " + mLLVMTypeName + "* %target\n"
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
+#override method @basicIntegerAssignFunctionIR llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  ioLLVMcode += "define internal void @" +[mRoutineMangledName assemblerRepresentation]
+#  ioLLVMcode += " (" + mLLVMTypeName + "* %target, " + mLLVMTypeName + "* %source) alwaysinline {\n"
+#  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %source\n"
+#  ioLLVMcode += "  store " + mLLVMTypeName + " %value, " + mLLVMTypeName + "* %target\n"
+#  ioLLVMcode += "  ret void\n"
+#  ioLLVMcode += "}\n\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

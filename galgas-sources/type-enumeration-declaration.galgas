@@ -157,12 +157,12 @@ override method @enumerationDeclarationAST enterInContext
     !type:enumerationType
   ]
 #---------- Enter boolean assignment function
-  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
-    ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
-    !isRequired:false
-    !warnsIfUnused:false
-    ![enumerationType llvmTypeName]
-  }
+#  ioRoutineListIR += !@basicIntegerAssignFunctionIR.new {
+#    ![assignmentPrefix () + mEnumerationName + "." + mEnumerationName nowhere]
+#    !isRequired:false
+#    !warnsIfUnused:false
+#    ![enumerationType llvmTypeName]
+#  }
 
 
   let key = @lstring.new {
