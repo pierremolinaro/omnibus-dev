@@ -25,42 +25,6 @@ abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @s
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func integerAssignmentOperator ?let @string inIntegerTypeName -> @abstractDeclarationAST {
-  let llvmVarInstruction = @llvmVarInstruction.new {!["LOADED" nowhere]}
-  @llvmGenerationInstructionElementList instructionElements = {}
-  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
-  instructionElements += !.string {!string: " = load "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["SRC" nowhere]}
-  let llvmLoadInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
-  instructionElements = {}
-  instructionElements += !.string {!string: "store "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["TGT" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["TGT" nowhere]}
-  let llvmStoreInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
-  result = @llvmAssignmentOperatorDeclarationAST.new {
-    !["" nowhere]
-    !["TGT" nowhere]
-    ![inIntegerTypeName nowhere]
-    !{}
-    !["SRC" nowhere]
-    ![inIntegerTypeName nowhere]
-    !{}
-    !@ctTrueExpressionAST.new
-    !{!llvmVarInstruction, !llvmLoadInstruction, !llvmStoreInstruction}
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc buildOrderedDeclarationList
   ?ast: let @ast inAST
   ?sourceFile: let @string inSourceFile
@@ -87,7 +51,7 @@ proc buildOrderedDeclarationList
         let declaration = @integerDeclarationAST.new {!false !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
-        let assignmentOperatorDeclaration = integerAssignmentOperator (!mValue)
+        let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
         [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
       #---
         addintegerTypeCount ++
@@ -96,7 +60,7 @@ proc buildOrderedDeclarationList
         let declaration = @integerDeclarationAST.new {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
-        let assignmentOperatorDeclaration = integerAssignmentOperator (!mValue)
+        let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
         [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
       #---
         addintegerTypeCount ++

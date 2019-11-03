@@ -36,11 +36,6 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 #!   Assignment
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once assignmentPrefix -> @string {
-  result = "assign.from.ref."
-}
-
-
 func assignmentFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
   result = "assign." + [inTargetType omnibusTypeDescriptionName] + ".ref.from." + [inSourceType omnibusTypeDescriptionName] + ".ref"
 }

@@ -21,6 +21,42 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDeclarationAST {
+  let llvmVarInstruction = @llvmVarInstruction.new {!["LOADED" nowhere]}
+  @llvmGenerationInstructionElementList instructionElements = {}
+  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+  instructionElements += !.string {!string: " = load "}
+  instructionElements += !.type {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: ", "}
+  instructionElements += !.type {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: "* "}
+  instructionElements += !.symbol {!name: ["SRC" nowhere]}
+  let llvmLoadInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+  instructionElements = {}
+  instructionElements += !.string {!string: "store "}
+  instructionElements += !.type {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: " "}
+  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+  instructionElements += !.string {!string: ", "}
+  instructionElements += !.type {!name: ["TGT" nowhere]}
+  instructionElements += !.string {!string: "* "}
+  instructionElements += !.symbol {!name: ["TGT" nowhere]}
+  let llvmStoreInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+  result = @llvmAssignmentOperatorDeclarationAST.new {
+    !["" nowhere]
+    !["TGT" nowhere]
+    ![inTypeName nowhere]
+    !{}
+    !["SRC" nowhere]
+    ![inTypeName nowhere]
+    !{}
+    !@ctTrueExpressionAST.new
+    !{!llvmVarInstruction, !llvmLoadInstruction, !llvmStoreInstruction}
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
