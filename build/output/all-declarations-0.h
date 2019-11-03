@@ -12612,22 +12612,22 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @varInstructionAST class                                               *
+//                                         @varDeclarationInstructionAST class                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_varInstructionAST : public GALGAS_instructionAST {
+class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
 //--- Constructor
-  public : GALGAS_varInstructionAST (void) ;
+  public : GALGAS_varDeclarationInstructionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_varInstructionAST constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_varDeclarationInstructionAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_varInstructionAST * ptr (void) const { return (const cPtr_varInstructionAST *) mObjectPtr ; }
+  public : inline const class cPtr_varDeclarationInstructionAST * ptr (void) const { return (const cPtr_varDeclarationInstructionAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_varInstructionAST (const cPtr_varInstructionAST * inSourcePtr) ;
+  public : GALGAS_varDeclarationInstructionAST (const cPtr_varDeclarationInstructionAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -12635,18 +12635,18 @@ class GALGAS_varInstructionAST : public GALGAS_instructionAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_varInstructionAST extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_varDeclarationInstructionAST extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_varInstructionAST constructor_new (const class GALGAS_location & inOperand0,
-                                                                  const class GALGAS_lstring & inOperand1,
-                                                                  const class GALGAS_lstring & inOperand2
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_varDeclarationInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                             const class GALGAS_lstring & inOperand1,
+                                                                             const class GALGAS_lstring & inOperand2
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_varInstructionAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_varDeclarationInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -12662,29 +12662,29 @@ class GALGAS_varInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_varInstructionAST class
+} ; // End of GALGAS_varDeclarationInstructionAST class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varDeclarationInstructionAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Pointer class for @varInstructionAST class                                      *
+//                                Pointer class for @varDeclarationInstructionAST class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_varInstructionAST : public cPtr_instructionAST {
+class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
 //--- Attributes
   public : GALGAS_lstring mProperty_mVarName ;
   public : GALGAS_lstring mProperty_mTypeName ;
 
 //--- Constructor
-  public : cPtr_varInstructionAST (const GALGAS_location & in_mInstructionLocation,
-                                   const GALGAS_lstring & in_mVarName,
-                                   const GALGAS_lstring & in_mTypeName
-                                   COMMA_LOCATION_ARGS) ;
+  public : cPtr_varDeclarationInstructionAST (const GALGAS_location & in_mInstructionLocation,
+                                              const GALGAS_lstring & in_mVarName,
+                                              const GALGAS_lstring & in_mTypeName
+                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;

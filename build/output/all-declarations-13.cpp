@@ -4137,6 +4137,10 @@ const char * gWrapperFileContent_33_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  llvm \"store \" + $tgt + \" \" + src + \", \" + $tgt + \"* \" + tgt\n"
   "}\n"
   "\n"
+  "llvm func (tgt $uint64) = (src $ctInt) { // Ajouter test\n"
+  "  llvm \"store \" + $tgt + \" \" + src + \", \" + $tgt + \"* \" + tgt\n"
+  "}\n"
+  "\n"
   "llvm func (tgt $uint32) = (src $ctInt) { // Ajouter test\n"
   "  llvm \"store \" + $tgt + \" \" + src + \", \" + $tgt + \"* \" + tgt\n"
   "}\n"
@@ -4165,7 +4169,7 @@ const cRegularFileWrapper gWrapperFile_33_targetTemplates (
   "opaque-generic-type.omnibus-import",
   "omnibus-import",
   true, // Text file
-  2327, // Text length
+  2449, // Text length
   gWrapperFileContent_33_targetTemplates
 ) ;
 

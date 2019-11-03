@@ -339,13 +339,7 @@ method @assignmentOperatorMap appendAssignment
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
 {
-  let key = @lstring.new {
-   !inTarget.type.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
-   !inErrorLocation
-  }
-  [self searchKey !key ?* ?let targetVarName ?2* ?let sourceVarName ?2* ?let instructionList]
-  let srcTypeLLVMName = [[inSourcePossibleReference type] llvmTypeName]
-  var srcLLVMName = [inSourcePossibleReference llvmName]
+#  let srcTypeLLVMName = [[inSourcePossibleReference type] llvmTypeName]
   if not [inSourcePossibleReference isReference] then
     let result = checkAssignmentCompatibility (
       !source:inSourcePossibleReference # loadedResultValue
@@ -353,17 +347,45 @@ method @assignmentOperatorMap appendAssignment
       !errorLocation:inErrorLocation
       !staticTypeAllowed:false
     )
-   [!?ioInstructionListIR appendStoreToUniversalReference !inTarget.llvmName ![inTarget type] !result]
+   [!?ioInstructionListIR appendStoreToUniversalReference !inTarget.llvmName !inTarget.type !result]
   else
+    let key = @lstring.new {
+     !inTarget.type.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
+     !inErrorLocation
+    }
+    [self searchKey !key ?* ?let targetVarName ?2* ?let sourceVarName ?2* ?let instructionList]
+    [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
     @assignmentGenerationVarMap varMap = {}
     [!?varMap insertKey !targetVarName !inTarget.llvmName]
     [!?varMap insertKey !sourceVarName !srcLLVMName]
     @assignmentGenerationVarMap typeMap = {}
     [!?typeMap insertKey !targetVarName ![[inTarget type] llvmTypeName]]
-    [!?typeMap insertKey !sourceVarName !srcTypeLLVMName]
+    [!?typeMap insertKey !sourceVarName ! [sourceType llvmTypeName]]
     [instructionList generateIRCode !varMap !typeMap !?ioInstructionListIR !?ioTemporaries !?ioAllocaList]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+#  if not [inSourcePossibleReference isReference] then
+#    var loadedResultValue = inSourcePossibleReference
+#    [!?self appendLoadWhenReference
+#      !?ioTemporaries
+#      !?loadedResultValue
+#    ]
+#    let result = checkAssignmentCompatibility (
+#      !source:loadedResultValue
+#      !targetAnnotationType:[inTargetReference type]
+#      !errorLocation:inErrorLocation
+#      !staticTypeAllowed:false
+#    )
+#    [!?self appendStoreToUniversalReference !inTargetReference.llvmName !inTargetReference.type !result]
+#  else # Call a copy routine
+#    [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
+#    if sourceType.omnibusTypeDescriptionName != inTargetReference.type.omnibusTypeDescriptionName then
+#      error inErrorLocation
+#      : "object of type " + inTargetReference.type.omnibusTypeDescriptionName
+#        + " cannot be assigned from expression of type " + sourceType.omnibusTypeDescriptionName
+#    end
+#    self += !@copyFromReferencesIR.new {!inTargetReference !sourceLLVMName}
+#  end

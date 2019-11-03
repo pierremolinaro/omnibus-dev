@@ -50,6 +50,10 @@ llvm func (tgt $int32) = (src $ctInt) { // Ajouter test
   llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
 }
 
+llvm func (tgt $uint64) = (src $ctInt) { // Ajouter test
+  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
+}
+
 llvm func (tgt $uint32) = (src $ctInt) { // Ajouter test
   llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
 }

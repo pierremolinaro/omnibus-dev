@@ -67,13 +67,21 @@ task T @stacksize 512 @autostart {
       x += a [i]
     }
 
-    var s = B ()
+    var s = $B ()
     var aa = s.a
     var bb = s.b
     s.a = aa
-    var s2 = C ()
+    var s2 = $C ()
     s2.c.a = aa
   }
+}
+
+llvm func (tgt $B) = (src $B) {
+  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
+}
+
+llvm func (tgt $C) = (src $C) {
+  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
 }
 
 //------------------------------------------------*

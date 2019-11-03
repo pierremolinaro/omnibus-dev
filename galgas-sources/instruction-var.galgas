@@ -10,7 +10,7 @@ class @varInstructionWithAssignmentAST : @instructionAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varInstructionAST : @instructionAST {
+class @varDeclarationInstructionAST : @instructionAST {
   @lstring mVarName
   @lstring mTypeName
 }
@@ -38,26 +38,50 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
+#  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+#    $var$
+#    $identifier$ ?let varName
+#    <type_definition> !?ioAST ?let typeName
+#    select
+#      ioInstructionList += !@varDeclarationInstructionAST.new {
+#        !varName.location
+#        !varName
+#        !typeName
+#      }
+#    or
+#      $=$
+#      <expression> !?ioAST ?let @expressionAST expression
+#      ioInstructionList += !@varInstructionWithAssignmentAST.new {
+#        !varName.location
+#        !varName
+#        !typeName
+#        !expression
+#      }
+#   end
+#  }
+
+  #·····················································································································
+
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
     <type_definition> !?ioAST ?let typeName
+    ioInstructionList += !@varDeclarationInstructionAST.new {
+      !varName.location
+      !varName
+      !typeName
+    }
     select
-      ioInstructionList += !@varInstructionAST.new {
-        !varName.location
-        !varName
-        !typeName
-      }
     or
       $=$
-      <expression> !?ioAST ?let @expressionAST expression
-      ioInstructionList += !@varInstructionWithAssignmentAST.new {
-        !varName.location
-        !varName
-        !typeName
-        !expression
-      }
-   end
+      <expression> !?ioAST ?let @expressionAST sourceExpression
+      let assignmentTargetAST = @LValueAST.new {!varName !.noOperand}
+      ioInstructionList += !@assignmentInstructionAST.new {
+       !assignmentTargetAST.mIdentifier.location
+       !assignmentTargetAST
+       !sourceExpression
+     }
+    end
   }
 
   #·····················································································································
@@ -77,7 +101,7 @@ override method @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @varDeclarationInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !mTypeName]
 }
 
@@ -127,17 +151,19 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 #--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) ![result type] !false
 #--- Assignment generation
-  [!?ioInstructionGenerationList appendCopyFromReferences
+  [inContext.mAssignmentOperatorMap appendAssignment
     !?ioTemporaries
-    !errorLocation:mVarName
-    !source:sourcePossibleReference
-    !target:.new {![result type] !llvmNameForLocalVariable (!omnibusLocalVariableName)}
-  ]  
+    !?ioInstructionGenerationList
+    !?ioAllocaList
+    !.new {![result type] !llvmNameForLocalVariable (!omnibusLocalVariableName)}
+    !sourcePossibleReference
+    !mVarName
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInstructionAST instructionSemanticAnalysis
+override method @varDeclarationInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext inContext
