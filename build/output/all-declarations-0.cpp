@@ -9650,69 +9650,69 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i112_parse (C
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_infixOperator_i113_ (GALGAS_terminusInfixOperatorEnumeration & outArgument_outOperator,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_infixOperator_i113_ (GALGAS_infixOperatorEnumeration & outArgument_outOperator,
                                                                             C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outOperator.drop () ; // Release 'out' argument
   switch (select_omnibus_5F_syntax_125 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D__3D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 79)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_equal (SOURCE_FILE ("terminus-infix-operator.galgas", 80)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D__3D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 102)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_equal (SOURCE_FILE ("terminus-infix-operator.galgas", 103)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 82)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("terminus-infix-operator.galgas", 83)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 105)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("terminus-infix-operator.galgas", 106)) ;
   } break ;
   case 3: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_or COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 85)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_booleanOr (SOURCE_FILE ("terminus-infix-operator.galgas", 86)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_or COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 108)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_booleanOr (SOURCE_FILE ("terminus-infix-operator.galgas", 109)) ;
   } break ;
   case 4: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__26_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 88)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_bitWiseAnd (SOURCE_FILE ("terminus-infix-operator.galgas", 89)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__26_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 111)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_bitWiseAnd (SOURCE_FILE ("terminus-infix-operator.galgas", 112)) ;
   } break ;
   case 5: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 91)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_bitWiseOr (SOURCE_FILE ("terminus-infix-operator.galgas", 92)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 114)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_bitWiseOr (SOURCE_FILE ("terminus-infix-operator.galgas", 115)) ;
   } break ;
   case 6: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 94)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_xor (SOURCE_FILE ("terminus-infix-operator.galgas", 95)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 117)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_xor (SOURCE_FILE ("terminus-infix-operator.galgas", 118)) ;
   } break ;
   case 7: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_xor COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 97)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_booleanXor (SOURCE_FILE ("terminus-infix-operator.galgas", 98)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_xor COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 120)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_booleanXor (SOURCE_FILE ("terminus-infix-operator.galgas", 121)) ;
   } break ;
   case 8: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 100)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_add (SOURCE_FILE ("terminus-infix-operator.galgas", 101)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 123)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_add (SOURCE_FILE ("terminus-infix-operator.galgas", 124)) ;
   } break ;
   case 9: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 103)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_mul (SOURCE_FILE ("terminus-infix-operator.galgas", 104)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 126)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_mul (SOURCE_FILE ("terminus-infix-operator.galgas", 127)) ;
   } break ;
   case 10: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 106)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_div (SOURCE_FILE ("terminus-infix-operator.galgas", 107)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 129)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_div (SOURCE_FILE ("terminus-infix-operator.galgas", 130)) ;
   } break ;
   case 11: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 109)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_divNoOvf (SOURCE_FILE ("terminus-infix-operator.galgas", 110)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 132)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_divNoOvf (SOURCE_FILE ("terminus-infix-operator.galgas", 133)) ;
   } break ;
   case 12: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 112)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_modulo (SOURCE_FILE ("terminus-infix-operator.galgas", 113)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 135)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_modulo (SOURCE_FILE ("terminus-infix-operator.galgas", 136)) ;
   } break ;
   case 13: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 115)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_moduloNoOvf (SOURCE_FILE ("terminus-infix-operator.galgas", 116)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 138)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_moduloNoOvf (SOURCE_FILE ("terminus-infix-operator.galgas", 139)) ;
   } break ;
   case 14: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 118)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_leftShift (SOURCE_FILE ("terminus-infix-operator.galgas", 119)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 141)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_leftShift (SOURCE_FILE ("terminus-infix-operator.galgas", 142)) ;
   } break ;
   case 15: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 121)) ;
-    outArgument_outOperator = GALGAS_terminusInfixOperatorEnumeration::constructor_rightShift (SOURCE_FILE ("terminus-infix-operator.galgas", 122)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 144)) ;
+    outArgument_outOperator = GALGAS_infixOperatorEnumeration::constructor_rightShift (SOURCE_FILE ("terminus-infix-operator.galgas", 145)) ;
   } break ;
   default:
     break ;
@@ -9724,49 +9724,49 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_infixOperator_i113_ (GALG
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_infixOperator_i113_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_125 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D__3D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 79)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D__3D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 102)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 82)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 105)) ;
   } break ;
   case 3: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_or COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 85)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_or COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 108)) ;
   } break ;
   case 4: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__26_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 88)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__26_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 111)) ;
   } break ;
   case 5: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 91)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 114)) ;
   } break ;
   case 6: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 94)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 117)) ;
   } break ;
   case 7: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_xor COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 97)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_xor COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 120)) ;
   } break ;
   case 8: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 100)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 123)) ;
   } break ;
   case 9: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 103)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 126)) ;
   } break ;
   case 10: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 106)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 129)) ;
   } break ;
   case 11: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 109)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 132)) ;
   } break ;
   case 12: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 112)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 135)) ;
   } break ;
   case 13: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 115)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 138)) ;
   } break ;
   case 14: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 118)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 141)) ;
   } break ;
   case 15: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 121)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 144)) ;
   } break ;
   default:
     break ;
@@ -9778,58 +9778,108 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_infixOperator_i113_parse 
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i114_ (GALGAS_ast & ioArgument_ioAST,
                                                                           C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_compiletime COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 129)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 130)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 131)) ;
-  GALGAS_lstring var_leftArgument_3755 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 132)) ;
-  GALGAS_lstring var_leftType_3782 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 133)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 134)) ;
-  GALGAS_location var_operationLocation_3816 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 135)) ;
-  GALGAS_terminusInfixOperatorEnumeration var_infixOperator_3872 ;
-  nt_infixOperator_ (var_infixOperator_3872, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 137)) ;
-  GALGAS_lstring var_rightArgument_3916 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 138)) ;
-  GALGAS_lstring var_rightType_3944 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 139)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 140)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 141)) ;
-  GALGAS_lstring var_resultType_3990 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 142)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 143)) ;
-  GALGAS_ctExpressionAST var_expression_4061 ;
-  nt_compile_5F_time_5F_expression_ (var_expression_4061, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 145)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_nativeInfixOperatorAST::constructor_new (var_infixOperator_3872, var_operationLocation_3816, var_leftArgument_3755, var_leftType_3782, var_rightArgument_3916, var_rightType_3944, var_expression_4061, var_resultType_3990  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 146))  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 146)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_compiletime COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 152)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 153)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 154)) ;
+  GALGAS_lstring var_leftArgument_4671 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 155)) ;
+  GALGAS_lstring var_leftType_4698 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 156)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 157)) ;
+  GALGAS_location var_operationLocation_4732 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 158)) ;
+  GALGAS_infixOperatorEnumeration var_infixOperator_4788 ;
+  nt_infixOperator_ (var_infixOperator_4788, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 160)) ;
+  GALGAS_lstring var_rightArgument_4832 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 161)) ;
+  GALGAS_lstring var_rightType_4860 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 162)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 163)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 164)) ;
+  GALGAS_lstring var_resultType_4906 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 165)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 166)) ;
+  GALGAS_ctExpressionAST var_expression_4977 ;
+  nt_compile_5F_time_5F_expression_ (var_expression_4977, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 168)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_compileTimeInfixOperatorAST::constructor_new (var_infixOperator_4788, var_operationLocation_4732, var_leftArgument_4671, var_leftType_4698, var_rightArgument_4832, var_rightType_4860, var_expression_4977, var_resultType_4906  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 169))  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 169)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i114_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_compiletime COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 129)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 130)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 131)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 132)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 133)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 134)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_compiletime COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 152)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 153)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 154)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 155)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 156)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 157)) ;
   nt_infixOperator_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 137)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 138)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 139)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 140)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 141)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 142)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 143)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 160)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 161)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 162)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 163)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 164)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 165)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 166)) ;
   nt_compile_5F_time_5F_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 145)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 168)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_prefixOperator_i115_ (GALGAS_terminusPrefixOperatorEnumeration & outArgument_outOperator,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i115_ (GALGAS_ast & ioArgument_ioAST,
+                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
+  GALGAS_lstring var_leftVariableName_5427 ;
+  GALGAS_lstring var_leftTypeName_5445 ;
+  GALGAS_genericFormalParameterList var_leftGenericFormalParameterList_5481 ;
+  nt_llvm_5F_function_5F_header_ (var_leftVariableName_5427, var_leftTypeName_5445, var_leftGenericFormalParameterList_5481, inCompiler) ;
+  GALGAS_location var_operationLocation_5507 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 185)) ;
+  GALGAS_infixOperatorEnumeration var_infixOperator_5563 ;
+  nt_infixOperator_ (var_infixOperator_5563, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 187)) ;
+  GALGAS_lstring var_rightVariableName_5611 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 188)) ;
+  GALGAS_lstring var_rightType_5639 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 189)) ;
+  GALGAS_genericFormalParameterList var_rightGenericFormalParameterList_5707 ;
+  nt_generic_5F_formal_5F_arguments_ (var_rightGenericFormalParameterList_5707, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 191)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 192)) ;
+  GALGAS_lstring var_resultType_5753 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 193)) ;
+  GALGAS_genericFormalParameterList var_resultGenericFormalParameterList_5822 ;
+  nt_generic_5F_formal_5F_arguments_ (var_resultGenericFormalParameterList_5822, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 195)) ;
+  GALGAS_llvmGenerationInstructionList var_instructionList_5879 ;
+  nt_llvm_5F_instruction_5F_list_ (var_instructionList_5879, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 197)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmInfixOperatorAST::constructor_new (var_infixOperator_5563, var_operationLocation_5507, var_leftVariableName_5427, var_leftTypeName_5445, var_leftGenericFormalParameterList_5481, var_rightVariableName_5611, var_rightType_5639, var_rightGenericFormalParameterList_5707, var_resultType_5753, var_resultGenericFormalParameterList_5822, var_instructionList_5879  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 198))  COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 198)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i115_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_llvm_5F_function_5F_header_parse (inCompiler) ;
+  nt_infixOperator_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 187)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 188)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 189)) ;
+  nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 191)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 192)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 193)) ;
+  nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 195)) ;
+  nt_llvm_5F_instruction_5F_list_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("terminus-infix-operator.galgas", 197)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_prefixOperator_i116_ (GALGAS_terminusPrefixOperatorEnumeration & outArgument_outOperator,
                                                                              C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outOperator.drop () ; // Release 'out' argument
   switch (select_omnibus_5F_syntax_126 (inCompiler)) {
@@ -9848,7 +9898,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_prefixOperator_i115_ (GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_prefixOperator_i115_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_prefixOperator_i116_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_126 (inCompiler)) {
   case 1: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_not COMMA_SOURCE_FILE ("terminus-prefix-operator.galgas", 46)) ;
@@ -9864,7 +9914,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_prefixOperator_i115_parse
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i116_ (GALGAS_ast & ioArgument_ioAST,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i117_ (GALGAS_ast & ioArgument_ioAST,
                                                                           C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_compiletime COMMA_SOURCE_FILE ("terminus-prefix-operator.galgas", 57)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("terminus-prefix-operator.galgas", 58)) ;
@@ -9889,7 +9939,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i116_ (GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i116_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i117_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_compiletime COMMA_SOURCE_FILE ("terminus-prefix-operator.galgas", 57)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("terminus-prefix-operator.galgas", 58)) ;
   nt_prefixOperator_parse (inCompiler) ;
@@ -9907,7 +9957,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i116_parse (C
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i117_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i118_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                             C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (outArgument_outExpression, inCompiler) ;
@@ -9916,10 +9966,10 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
     switch (select_omnibus_5F_syntax_127 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 59)) ;
-      GALGAS_location var_operatorLocation_2437 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 60)) ;
-      GALGAS_ctExpressionAST var_rightExpression_2519 ;
-      nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (var_rightExpression_2519, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_2437, GALGAS_terminusInfixOperatorEnumeration::constructor_bitWiseOr (SOURCE_FILE ("compile-time-expression.galgas", 65)), var_rightExpression_2519  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 62)) ;
+      GALGAS_location var_operatorLocation_2429 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 60)) ;
+      GALGAS_ctExpressionAST var_rightExpression_2511 ;
+      nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (var_rightExpression_2511, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_2429, GALGAS_infixOperatorEnumeration::constructor_bitWiseOr (SOURCE_FILE ("compile-time-expression.galgas", 65)), var_rightExpression_2511  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 62)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -9930,7 +9980,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i117_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i118_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -9949,7 +9999,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i118_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i119_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                               C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (outArgument_outExpression, inCompiler) ;
@@ -9958,10 +10008,10 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
     switch (select_omnibus_5F_syntax_128 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 77)) ;
-      GALGAS_location var_operatorLocation_3000 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 78)) ;
-      GALGAS_ctExpressionAST var_rightExpression_3082 ;
-      nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (var_rightExpression_3082, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_3000, GALGAS_terminusInfixOperatorEnumeration::constructor_xor (SOURCE_FILE ("compile-time-expression.galgas", 83)), var_rightExpression_3082  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 80)) ;
+      GALGAS_location var_operatorLocation_2992 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 78)) ;
+      GALGAS_ctExpressionAST var_rightExpression_3074 ;
+      nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (var_rightExpression_3074, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_2992, GALGAS_infixOperatorEnumeration::constructor_xor (SOURCE_FILE ("compile-time-expression.galgas", 83)), var_rightExpression_3074  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 80)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -9972,7 +10022,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i118_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i119_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -9991,7 +10041,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i119_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i120_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                               C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_equality_ (outArgument_outExpression, inCompiler) ;
@@ -10000,10 +10050,10 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
     switch (select_omnibus_5F_syntax_129 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__26_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 95)) ;
-      GALGAS_location var_operatorLocation_3555 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 96)) ;
-      GALGAS_ctExpressionAST var_rightExpression_3634 ;
-      nt_compile_5F_time_5F_expression_5F_equality_ (var_rightExpression_3634, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_3555, GALGAS_terminusInfixOperatorEnumeration::constructor_bitWiseAnd (SOURCE_FILE ("compile-time-expression.galgas", 101)), var_rightExpression_3634  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 98)) ;
+      GALGAS_location var_operatorLocation_3547 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 96)) ;
+      GALGAS_ctExpressionAST var_rightExpression_3626 ;
+      nt_compile_5F_time_5F_expression_5F_equality_ (var_rightExpression_3626, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_3547, GALGAS_infixOperatorEnumeration::constructor_bitWiseAnd (SOURCE_FILE ("compile-time-expression.galgas", 101)), var_rightExpression_3626  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 98)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10014,7 +10064,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i119_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i120_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_equality_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -10033,7 +10083,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i120_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i121_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_comparison_ (outArgument_outExpression, inCompiler) ;
@@ -10042,18 +10092,18 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D__3D_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 113)) ;
-    GALGAS_location var_operatorLocation_4110 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 114)) ;
-    GALGAS_ctExpressionAST var_rightExpression_4191 ;
-    nt_compile_5F_time_5F_expression_5F_comparison_ (var_rightExpression_4191, inCompiler) ;
-    outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_4110, GALGAS_terminusInfixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 119)), var_rightExpression_4191  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 116)) ;
+    GALGAS_location var_operatorLocation_4102 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 114)) ;
+    GALGAS_ctExpressionAST var_rightExpression_4183 ;
+    nt_compile_5F_time_5F_expression_5F_comparison_ (var_rightExpression_4183, inCompiler) ;
+    outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_4102, GALGAS_infixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 119)), var_rightExpression_4183  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 116)) ;
   } break ;
   case 3: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2260_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 123)) ;
-    GALGAS_location var_operatorLocation_4420 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 124)) ;
-    GALGAS_ctExpressionAST var_rightExpression_4501 ;
-    nt_compile_5F_time_5F_expression_5F_comparison_ (var_rightExpression_4501, inCompiler) ;
-    GALGAS_ctInfixExpressionAST var_expression_4522 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_4420, GALGAS_terminusInfixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 129)), var_rightExpression_4501  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 126)) ;
-    outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_4420, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 134)), var_expression_4522  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 132)) ;
+    GALGAS_location var_operatorLocation_4412 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 124)) ;
+    GALGAS_ctExpressionAST var_rightExpression_4493 ;
+    nt_compile_5F_time_5F_expression_5F_comparison_ (var_rightExpression_4493, inCompiler) ;
+    GALGAS_ctInfixExpressionAST var_expression_4514 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_4412, GALGAS_infixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 129)), var_rightExpression_4493  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 126)) ;
+    outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_4412, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 134)), var_expression_4514  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 132)) ;
   } break ;
   default:
     break ;
@@ -10062,7 +10112,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i120_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i121_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_comparison_parse (inCompiler) ;
   switch (select_omnibus_5F_syntax_130 (inCompiler)) {
   case 1: {
@@ -10083,7 +10133,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i121_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i122_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                           C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_shift_ (outArgument_outExpression, inCompiler) ;
@@ -10092,37 +10142,37 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2264_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 146)) ;
-    GALGAS_location var_operatorLocation_5139 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 147)) ;
-    GALGAS_ctExpressionAST var_rightExpression_5215 ;
-    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_5215, inCompiler) ;
-    GALGAS_ctInfixExpressionAST var_lessThanExpression_5244 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5139, GALGAS_terminusInfixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 152)), var_rightExpression_5215  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 149)) ;
-    GALGAS_ctInfixExpressionAST var_equalExpression_5402 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5139, GALGAS_terminusInfixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 158)), var_rightExpression_5215  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 155)) ;
-    outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (var_lessThanExpression_5244, var_operatorLocation_5139, GALGAS_terminusInfixOperatorEnumeration::constructor_booleanOr (SOURCE_FILE ("compile-time-expression.galgas", 164)), var_equalExpression_5402  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 161)) ;
+    GALGAS_location var_operatorLocation_5131 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 147)) ;
+    GALGAS_ctExpressionAST var_rightExpression_5207 ;
+    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_5207, inCompiler) ;
+    GALGAS_ctInfixExpressionAST var_lessThanExpression_5236 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5131, GALGAS_infixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 152)), var_rightExpression_5207  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 149)) ;
+    GALGAS_ctInfixExpressionAST var_equalExpression_5394 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5131, GALGAS_infixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 158)), var_rightExpression_5207  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 155)) ;
+    outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (var_lessThanExpression_5236, var_operatorLocation_5131, GALGAS_infixOperatorEnumeration::constructor_booleanOr (SOURCE_FILE ("compile-time-expression.galgas", 164)), var_equalExpression_5394  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 161)) ;
   } break ;
   case 3: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2265_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 168)) ;
-    GALGAS_location var_operatorLocation_5767 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 169)) ;
-    GALGAS_ctExpressionAST var_rightExpression_5843 ;
-    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_5843, inCompiler) ;
-    GALGAS_ctInfixExpressionAST var_expression_5864 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5767, GALGAS_terminusInfixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 174)), var_rightExpression_5843  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 171)) ;
-    outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_5767, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 179)), var_expression_5864  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 177)) ;
+    GALGAS_location var_operatorLocation_5759 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 169)) ;
+    GALGAS_ctExpressionAST var_rightExpression_5835 ;
+    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_5835, inCompiler) ;
+    GALGAS_ctInfixExpressionAST var_expression_5856 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_5759, GALGAS_infixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 174)), var_rightExpression_5835  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 171)) ;
+    outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_5759, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 179)), var_expression_5856  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 177)) ;
   } break ;
   case 4: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 183)) ;
-    GALGAS_location var_operatorLocation_6167 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 184)) ;
-    GALGAS_ctExpressionAST var_rightExpression_6243 ;
-    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_6243, inCompiler) ;
-    outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6167, GALGAS_terminusInfixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 189)), var_rightExpression_6243  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 186)) ;
+    GALGAS_location var_operatorLocation_6159 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 184)) ;
+    GALGAS_ctExpressionAST var_rightExpression_6235 ;
+    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_6235, inCompiler) ;
+    outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6159, GALGAS_infixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 189)), var_rightExpression_6235  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 186)) ;
   } break ;
   case 5: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 193)) ;
-    GALGAS_location var_operatorLocation_6488 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 194)) ;
-    GALGAS_ctExpressionAST var_rightExpression_6564 ;
-    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_6564, inCompiler) ;
-    GALGAS_ctInfixExpressionAST var_lessThanExpression_6592 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6488, GALGAS_terminusInfixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 199)), var_rightExpression_6564  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 196)) ;
-    GALGAS_ctInfixExpressionAST var_equalExpression_6750 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6488, GALGAS_terminusInfixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 205)), var_rightExpression_6564  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 202)) ;
-    GALGAS_ctInfixExpressionAST var_lessThanOrEqualExpression_6914 = GALGAS_ctInfixExpressionAST::constructor_new (var_lessThanExpression_6592, var_operatorLocation_6488, GALGAS_terminusInfixOperatorEnumeration::constructor_booleanOr (SOURCE_FILE ("compile-time-expression.galgas", 211)), var_equalExpression_6750  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 208)) ;
-    outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_6488, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 216)), var_lessThanOrEqualExpression_6914  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 214)) ;
+    GALGAS_location var_operatorLocation_6480 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 194)) ;
+    GALGAS_ctExpressionAST var_rightExpression_6556 ;
+    nt_compile_5F_time_5F_expression_5F_shift_ (var_rightExpression_6556, inCompiler) ;
+    GALGAS_ctInfixExpressionAST var_lessThanExpression_6584 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6480, GALGAS_infixOperatorEnumeration::constructor_strictInf (SOURCE_FILE ("compile-time-expression.galgas", 199)), var_rightExpression_6556  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 196)) ;
+    GALGAS_ctInfixExpressionAST var_equalExpression_6742 = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_6480, GALGAS_infixOperatorEnumeration::constructor_equal (SOURCE_FILE ("compile-time-expression.galgas", 205)), var_rightExpression_6556  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 202)) ;
+    GALGAS_ctInfixExpressionAST var_lessThanOrEqualExpression_6906 = GALGAS_ctInfixExpressionAST::constructor_new (var_lessThanExpression_6584, var_operatorLocation_6480, GALGAS_infixOperatorEnumeration::constructor_booleanOr (SOURCE_FILE ("compile-time-expression.galgas", 211)), var_equalExpression_6742  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 208)) ;
+    outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_6480, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 216)), var_lessThanOrEqualExpression_6906  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 214)) ;
   } break ;
   default:
     break ;
@@ -10131,7 +10181,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i121_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i122_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_shift_parse (inCompiler) ;
   switch (select_omnibus_5F_syntax_131 (inCompiler)) {
   case 1: {
@@ -10160,7 +10210,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i122_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i123_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                      C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_addition_ (outArgument_outExpression, inCompiler) ;
@@ -10169,17 +10219,17 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
     switch (select_omnibus_5F_syntax_132 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C__3C_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 228)) ;
-      GALGAS_location var_operatorLocation_7514 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 229)) ;
-      GALGAS_ctExpressionAST var_rightExpression_7593 ;
-      nt_compile_5F_time_5F_expression_5F_addition_ (var_rightExpression_7593, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7514, GALGAS_terminusInfixOperatorEnumeration::constructor_leftShift (SOURCE_FILE ("compile-time-expression.galgas", 234)), var_rightExpression_7593  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 231)) ;
+      GALGAS_location var_operatorLocation_7506 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 229)) ;
+      GALGAS_ctExpressionAST var_rightExpression_7585 ;
+      nt_compile_5F_time_5F_expression_5F_addition_ (var_rightExpression_7585, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7506, GALGAS_infixOperatorEnumeration::constructor_leftShift (SOURCE_FILE ("compile-time-expression.galgas", 234)), var_rightExpression_7585  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 231)) ;
     } break ;
     case 3: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E__3E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 238)) ;
-      GALGAS_location var_operatorLocation_7793 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 239)) ;
-      GALGAS_ctExpressionAST var_rightExpression_7872 ;
-      nt_compile_5F_time_5F_expression_5F_addition_ (var_rightExpression_7872, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7793, GALGAS_terminusInfixOperatorEnumeration::constructor_rightShift (SOURCE_FILE ("compile-time-expression.galgas", 244)), var_rightExpression_7872  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 241)) ;
+      GALGAS_location var_operatorLocation_7785 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 239)) ;
+      GALGAS_ctExpressionAST var_rightExpression_7864 ;
+      nt_compile_5F_time_5F_expression_5F_addition_ (var_rightExpression_7864, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_7785, GALGAS_infixOperatorEnumeration::constructor_rightShift (SOURCE_FILE ("compile-time-expression.galgas", 244)), var_rightExpression_7864  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 241)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10190,7 +10240,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i122_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i123_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_addition_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -10213,7 +10263,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i123_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i124_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_expression_5F_product_ (outArgument_outExpression, inCompiler) ;
@@ -10222,17 +10272,17 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
     switch (select_omnibus_5F_syntax_133 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 256)) ;
-      GALGAS_location var_operatorLocation_8347 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 257)) ;
-      GALGAS_ctExpressionAST var_rightExpression_8425 ;
-      nt_compile_5F_time_5F_expression_5F_product_ (var_rightExpression_8425, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8347, GALGAS_terminusInfixOperatorEnumeration::constructor_add (SOURCE_FILE ("compile-time-expression.galgas", 262)), var_rightExpression_8425  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 259)) ;
+      GALGAS_location var_operatorLocation_8339 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 257)) ;
+      GALGAS_ctExpressionAST var_rightExpression_8417 ;
+      nt_compile_5F_time_5F_expression_5F_product_ (var_rightExpression_8417, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8339, GALGAS_infixOperatorEnumeration::constructor_add (SOURCE_FILE ("compile-time-expression.galgas", 262)), var_rightExpression_8417  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 259)) ;
     } break ;
     case 3: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 266)) ;
-      GALGAS_location var_operatorLocation_8618 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 267)) ;
-      GALGAS_ctExpressionAST var_rightExpression_8696 ;
-      nt_compile_5F_time_5F_expression_5F_product_ (var_rightExpression_8696, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8618, GALGAS_terminusInfixOperatorEnumeration::constructor_add (SOURCE_FILE ("compile-time-expression.galgas", 272)), GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_8618, GALGAS_prefixOperator::constructor_minus (SOURCE_FILE ("compile-time-expression.galgas", 273)), var_rightExpression_8696  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 273))  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 269)) ;
+      GALGAS_location var_operatorLocation_8610 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 267)) ;
+      GALGAS_ctExpressionAST var_rightExpression_8688 ;
+      nt_compile_5F_time_5F_expression_5F_product_ (var_rightExpression_8688, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_8610, GALGAS_infixOperatorEnumeration::constructor_add (SOURCE_FILE ("compile-time-expression.galgas", 272)), GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_8610, GALGAS_prefixOperator::constructor_minus (SOURCE_FILE ("compile-time-expression.galgas", 273)), var_rightExpression_8688  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 273))  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 269)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10243,7 +10293,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i123_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i124_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_expression_5F_product_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -10266,7 +10316,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i124_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i125_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                                        C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_compile_5F_time_5F_primary_ (outArgument_outExpression, inCompiler) ;
@@ -10275,38 +10325,38 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
     switch (select_omnibus_5F_syntax_134 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2A_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 284)) ;
-      GALGAS_location var_operatorLocation_9208 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 285)) ;
-      GALGAS_ctExpressionAST var_rightExpression_9275 ;
-      nt_compile_5F_time_5F_primary_ (var_rightExpression_9275, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9208, GALGAS_terminusInfixOperatorEnumeration::constructor_mul (SOURCE_FILE ("compile-time-expression.galgas", 290)), var_rightExpression_9275  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 287)) ;
+      GALGAS_location var_operatorLocation_9200 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 285)) ;
+      GALGAS_ctExpressionAST var_rightExpression_9267 ;
+      nt_compile_5F_time_5F_primary_ (var_rightExpression_9267, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9200, GALGAS_infixOperatorEnumeration::constructor_mul (SOURCE_FILE ("compile-time-expression.galgas", 290)), var_rightExpression_9267  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 287)) ;
     } break ;
     case 3: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__25_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 294)) ;
-      GALGAS_location var_operatorLocation_9467 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 295)) ;
-      GALGAS_ctExpressionAST var_rightExpression_9534 ;
-      nt_compile_5F_time_5F_primary_ (var_rightExpression_9534, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9467, GALGAS_terminusInfixOperatorEnumeration::constructor_modulo (SOURCE_FILE ("compile-time-expression.galgas", 300)), var_rightExpression_9534  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 297)) ;
+      GALGAS_location var_operatorLocation_9459 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 295)) ;
+      GALGAS_ctExpressionAST var_rightExpression_9526 ;
+      nt_compile_5F_time_5F_primary_ (var_rightExpression_9526, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9459, GALGAS_infixOperatorEnumeration::constructor_modulo (SOURCE_FILE ("compile-time-expression.galgas", 300)), var_rightExpression_9526  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 297)) ;
     } break ;
     case 4: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__25_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 304)) ;
-      GALGAS_location var_operatorLocation_9731 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 305)) ;
-      GALGAS_ctExpressionAST var_rightExpression_9798 ;
-      nt_compile_5F_time_5F_primary_ (var_rightExpression_9798, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9731, GALGAS_terminusInfixOperatorEnumeration::constructor_moduloNoOvf (SOURCE_FILE ("compile-time-expression.galgas", 310)), var_rightExpression_9798  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 307)) ;
+      GALGAS_location var_operatorLocation_9723 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 305)) ;
+      GALGAS_ctExpressionAST var_rightExpression_9790 ;
+      nt_compile_5F_time_5F_primary_ (var_rightExpression_9790, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9723, GALGAS_infixOperatorEnumeration::constructor_moduloNoOvf (SOURCE_FILE ("compile-time-expression.galgas", 310)), var_rightExpression_9790  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 307)) ;
     } break ;
     case 5: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2F_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 314)) ;
-      GALGAS_location var_operatorLocation_9999 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 315)) ;
-      GALGAS_ctExpressionAST var_rightExpression_10066 ;
-      nt_compile_5F_time_5F_primary_ (var_rightExpression_10066, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9999, GALGAS_terminusInfixOperatorEnumeration::constructor_div (SOURCE_FILE ("compile-time-expression.galgas", 320)), var_rightExpression_10066  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 317)) ;
+      GALGAS_location var_operatorLocation_9991 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 315)) ;
+      GALGAS_ctExpressionAST var_rightExpression_10058 ;
+      nt_compile_5F_time_5F_primary_ (var_rightExpression_10058, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_9991, GALGAS_infixOperatorEnumeration::constructor_div (SOURCE_FILE ("compile-time-expression.galgas", 320)), var_rightExpression_10058  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 317)) ;
     } break ;
     case 6: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21__2F_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 324)) ;
-      GALGAS_location var_operatorLocation_10260 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 325)) ;
-      GALGAS_ctExpressionAST var_rightExpression_10327 ;
-      nt_compile_5F_time_5F_primary_ (var_rightExpression_10327, inCompiler) ;
-      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10260, GALGAS_terminusInfixOperatorEnumeration::constructor_divNoOvf (SOURCE_FILE ("compile-time-expression.galgas", 330)), var_rightExpression_10327  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 327)) ;
+      GALGAS_location var_operatorLocation_10252 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 325)) ;
+      GALGAS_ctExpressionAST var_rightExpression_10319 ;
+      nt_compile_5F_time_5F_primary_ (var_rightExpression_10319, inCompiler) ;
+      outArgument_outExpression = GALGAS_ctInfixExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation_10252, GALGAS_infixOperatorEnumeration::constructor_divNoOvf (SOURCE_FILE ("compile-time-expression.galgas", 330)), var_rightExpression_10319  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 327)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10317,7 +10367,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i124_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i125_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   nt_compile_5F_time_5F_primary_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -10352,40 +10402,20 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i125_ (GALGAS_ctExpressionAST & outArgument_outExpression,
-                                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
-  outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 339)) ;
-  GALGAS_location var_operatorLocation_10710 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 340)) ;
-  GALGAS_ctExpressionAST var_expression_10770 ;
-  nt_compile_5F_time_5F_primary_ (var_expression_10770, inCompiler) ;
-  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_10710, GALGAS_prefixOperator::constructor_unsignedComplement (SOURCE_FILE ("compile-time-expression.galgas", 344)), var_expression_10770  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 342)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i125_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 339)) ;
-  nt_compile_5F_time_5F_primary_parse (inCompiler) ;
-  inCompiler->resetTemplateString () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i126_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_not COMMA_SOURCE_FILE ("compile-time-expression.galgas", 352)) ;
-  GALGAS_location var_operatorLocation_11120 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 353)) ;
-  GALGAS_ctExpressionAST var_expression_11180 ;
-  nt_compile_5F_time_5F_primary_ (var_expression_11180, inCompiler) ;
-  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_11120, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 357)), var_expression_11180  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 355)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 339)) ;
+  GALGAS_location var_operatorLocation_10702 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 340)) ;
+  GALGAS_ctExpressionAST var_expression_10762 ;
+  nt_compile_5F_time_5F_primary_ (var_expression_10762, inCompiler) ;
+  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_10702, GALGAS_prefixOperator::constructor_unsignedComplement (SOURCE_FILE ("compile-time-expression.galgas", 344)), var_expression_10762  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 342)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i126_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_not COMMA_SOURCE_FILE ("compile-time-expression.galgas", 352)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7E_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 339)) ;
   nt_compile_5F_time_5F_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -10395,17 +10425,17 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i127_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 365)) ;
-  GALGAS_location var_operatorLocation_11521 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 366)) ;
-  GALGAS_ctExpressionAST var_expression_11581 ;
-  nt_compile_5F_time_5F_primary_ (var_expression_11581, inCompiler) ;
-  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_11521, GALGAS_prefixOperator::constructor_minus (SOURCE_FILE ("compile-time-expression.galgas", 370)), var_expression_11581  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 368)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_not COMMA_SOURCE_FILE ("compile-time-expression.galgas", 352)) ;
+  GALGAS_location var_operatorLocation_11112 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 353)) ;
+  GALGAS_ctExpressionAST var_expression_11172 ;
+  nt_compile_5F_time_5F_primary_ (var_expression_11172, inCompiler) ;
+  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_11112, GALGAS_prefixOperator::constructor_notOperator (SOURCE_FILE ("compile-time-expression.galgas", 357)), var_expression_11172  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 355)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i127_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 365)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_not COMMA_SOURCE_FILE ("compile-time-expression.galgas", 352)) ;
   nt_compile_5F_time_5F_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -10415,17 +10445,17 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i128_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 378)) ;
-  GALGAS_location var_operatorLocation_11917 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 379)) ;
-  GALGAS_ctExpressionAST var_expression_11977 ;
-  nt_compile_5F_time_5F_primary_ (var_expression_11977, inCompiler) ;
-  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_11917, GALGAS_prefixOperator::constructor_minusNoOvf (SOURCE_FILE ("compile-time-expression.galgas", 383)), var_expression_11977  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 381)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 365)) ;
+  GALGAS_location var_operatorLocation_11513 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 366)) ;
+  GALGAS_ctExpressionAST var_expression_11573 ;
+  nt_compile_5F_time_5F_primary_ (var_expression_11573, inCompiler) ;
+  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_11513, GALGAS_prefixOperator::constructor_minus (SOURCE_FILE ("compile-time-expression.galgas", 370)), var_expression_11573  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 368)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i128_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 378)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 365)) ;
   nt_compile_5F_time_5F_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -10435,17 +10465,18 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i129_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 391)) ;
-  nt_compile_5F_time_5F_expression_ (outArgument_outExpression, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 393)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 378)) ;
+  GALGAS_location var_operatorLocation_11909 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 379)) ;
+  GALGAS_ctExpressionAST var_expression_11969 ;
+  nt_compile_5F_time_5F_primary_ (var_expression_11969, inCompiler) ;
+  outArgument_outExpression = GALGAS_ctPrefixExpressionAST::constructor_new (var_operatorLocation_11909, GALGAS_prefixOperator::constructor_minusNoOvf (SOURCE_FILE ("compile-time-expression.galgas", 383)), var_expression_11969  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 381)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i129_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 391)) ;
-  nt_compile_5F_time_5F_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 393)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__25_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 378)) ;
+  nt_compile_5F_time_5F_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -10454,14 +10485,17 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i130_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("compile-time-expression.galgas", 399)) ;
-  outArgument_outExpression = GALGAS_ctTrueExpressionAST::constructor_new (SOURCE_FILE ("compile-time-expression.galgas", 400)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 391)) ;
+  nt_compile_5F_time_5F_expression_ (outArgument_outExpression, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 393)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i130_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("compile-time-expression.galgas", 399)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 391)) ;
+  nt_compile_5F_time_5F_expression_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("compile-time-expression.galgas", 393)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -10470,14 +10504,14 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i131_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("compile-time-expression.galgas", 406)) ;
-  outArgument_outExpression = GALGAS_ctFalseExpressionAST::constructor_new (SOURCE_FILE ("compile-time-expression.galgas", 407)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("compile-time-expression.galgas", 399)) ;
+  outArgument_outExpression = GALGAS_ctTrueExpressionAST::constructor_new (SOURCE_FILE ("compile-time-expression.galgas", 400)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i131_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("compile-time-expression.galgas", 406)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("compile-time-expression.galgas", 399)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -10486,15 +10520,14 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i132_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lbigint var_value_13053 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("compile-time-expression.galgas", 413)) ;
-  outArgument_outExpression = GALGAS_ctIntExpressionAST::constructor_new (var_value_13053  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 414)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("compile-time-expression.galgas", 406)) ;
+  outArgument_outExpression = GALGAS_ctFalseExpressionAST::constructor_new (SOURCE_FILE ("compile-time-expression.galgas", 407)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i132_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("compile-time-expression.galgas", 413)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("compile-time-expression.galgas", 406)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -10503,43 +10536,60 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primar
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i133_ (GALGAS_ctExpressionAST & outArgument_outExpression,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lstring var_name_13324 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("compile-time-expression.galgas", 420)) ;
-  outArgument_outExpression = GALGAS_ctIdentifierExpressionAST::constructor_new (var_name_13324  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 421)) ;
+  GALGAS_lbigint var_value_13045 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("compile-time-expression.galgas", 413)) ;
+  outArgument_outExpression = GALGAS_ctIntExpressionAST::constructor_new (var_value_13045  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 414)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i133_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("compile-time-expression.galgas", 413)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i134_ (GALGAS_ctExpressionAST & outArgument_outExpression,
+                                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
+  outArgument_outExpression.drop () ; // Release 'out' argument
+  GALGAS_lstring var_name_13316 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("compile-time-expression.galgas", 420)) ;
+  outArgument_outExpression = GALGAS_ctIdentifierExpressionAST::constructor_new (var_name_13316  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 421)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i134_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("compile-time-expression.galgas", 420)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_string_5F_definition_i134_ (GALGAS_llvmStringDefinition & outArgument_outStringDefinition,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_string_5F_definition_i135_ (GALGAS_llvmStringDefinition & outArgument_outStringDefinition,
                                                                                            C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outStringDefinition.drop () ; // Release 'out' argument
-  outArgument_outStringDefinition = GALGAS_llvmStringDefinition::constructor_emptyList (SOURCE_FILE ("llvm-generic-type.galgas", 53)) ;
+  outArgument_outStringDefinition = GALGAS_llvmStringDefinition::constructor_emptyList (SOURCE_FILE ("llvm-generic-type.galgas", 76)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_136 (inCompiler)) {
     case 1: {
-      GALGAS_lstring var_string_2341 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 56)) ;
-      outArgument_outStringDefinition.addAssign_operation (GALGAS_llvmStringDefinitionElement::constructor_string (var_string_2341  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 57))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 57)) ;
+      GALGAS_lstring var_string_3098 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 79)) ;
+      outArgument_outStringDefinition.addAssign_operation (GALGAS_llvmStringDefinitionElement::constructor_string (var_string_3098  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 80))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 80)) ;
     } break ;
     case 2: {
-      GALGAS_lstring var_name_2438 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 59)) ;
-      outArgument_outStringDefinition.addAssign_operation (GALGAS_llvmStringDefinitionElement::constructor_variable (var_name_2438  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 60))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 60)) ;
+      GALGAS_lstring var_name_3195 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 82)) ;
+      outArgument_outStringDefinition.addAssign_operation (GALGAS_llvmStringDefinitionElement::constructor_variable (var_name_3195  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 83))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 83)) ;
     } break ;
     default:
       break ;
     }
     switch (select_omnibus_5F_syntax_135 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 63)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 86)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10550,22 +10600,22 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_string_5F_definit
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_string_5F_definition_i134_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_string_5F_definition_i135_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_136 (inCompiler)) {
     case 1: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 56)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 79)) ;
     } break ;
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 59)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 82)) ;
     } break ;
     default:
       break ;
     }
     switch (select_omnibus_5F_syntax_135 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 63)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 86)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10577,41 +10627,41 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_string_5F_definit
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i135_ (GALGAS_genericFormalParameterList & outArgument_outGenericFormalParameterList,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_ (GALGAS_genericFormalParameterList & outArgument_outGenericFormalParameterList,
                                                                                              C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outGenericFormalParameterList.drop () ; // Release 'out' argument
-  outArgument_outGenericFormalParameterList = GALGAS_genericFormalParameterList::constructor_emptyList (SOURCE_FILE ("llvm-generic-type.galgas", 70)) ;
+  outArgument_outGenericFormalParameterList = GALGAS_genericFormalParameterList::constructor_emptyList (SOURCE_FILE ("llvm-generic-type.galgas", 93)) ;
   switch (select_omnibus_5F_syntax_137 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 73)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 96)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
       switch (select_omnibus_5F_syntax_139 (inCompiler)) {
       case 1: {
-        GALGAS_lstring var_constantName_2892 = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 76)) ;
-        outArgument_outGenericFormalParameterList.addAssign_operation (GALGAS_genericFormalParameter::constructor_constant (var_constantName_2892  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 77))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 77)) ;
+        GALGAS_lstring var_constantName_3649 = inCompiler->synthetizedAttribute_tokenString () ;
+        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 99)) ;
+        outArgument_outGenericFormalParameterList.addAssign_operation (GALGAS_genericFormalParameter::constructor_constant (var_constantName_3649  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 100))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 100)) ;
       } break ;
       case 2: {
-        GALGAS_lstring var_typeName_3012 = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 79)) ;
-        outArgument_outGenericFormalParameterList.addAssign_operation (GALGAS_genericFormalParameter::constructor_type (var_typeName_3012  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 80))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 80)) ;
+        GALGAS_lstring var_typeName_3769 = inCompiler->synthetizedAttribute_tokenString () ;
+        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 102)) ;
+        outArgument_outGenericFormalParameterList.addAssign_operation (GALGAS_genericFormalParameter::constructor_type (var_typeName_3769  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 103))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 103)) ;
       } break ;
       default:
         break ;
       }
       switch (select_omnibus_5F_syntax_138 (inCompiler)) {
       case 2: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 83)) ;
+        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 106)) ;
       } break ;
       default:
         repeatFlag_0 = false ;
         break ;
       }
     }
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 85)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 108)) ;
   } break ;
   default:
     break ;
@@ -10620,34 +10670,34 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_formal_5F_argu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i135_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_137 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 73)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 96)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
       switch (select_omnibus_5F_syntax_139 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 76)) ;
+        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 99)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 79)) ;
+        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 102)) ;
       } break ;
       default:
         break ;
       }
       switch (select_omnibus_5F_syntax_138 (inCompiler)) {
       case 2: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 83)) ;
+        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2C_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 106)) ;
       } break ;
       default:
         repeatFlag_0 = false ;
         break ;
       }
     }
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 85)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3E_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 108)) ;
   } break ;
   default:
     break ;
@@ -10657,15 +10707,15 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_formal_5F_argu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i136_ (GALGAS_ctExpressionAST & outArgument_outWhereClause,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_ (GALGAS_ctExpressionAST & outArgument_outWhereClause,
                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outWhereClause.drop () ; // Release 'out' argument
   switch (select_omnibus_5F_syntax_140 (inCompiler)) {
   case 1: {
-    outArgument_outWhereClause = GALGAS_ctTrueExpressionAST::constructor_new (SOURCE_FILE ("llvm-generic-type.galgas", 93)) ;
+    outArgument_outWhereClause = GALGAS_ctTrueExpressionAST::constructor_new (SOURCE_FILE ("llvm-generic-type.galgas", 116)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_where COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 95)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_where COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 118)) ;
     nt_compile_5F_time_5F_expression_ (outArgument_outWhereClause, inCompiler) ;
   } break ;
   default:
@@ -10675,12 +10725,12 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_where_5F_claus
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i136_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_140 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_where COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 95)) ;
+    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_where COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 118)) ;
     nt_compile_5F_time_5F_expression_parse (inCompiler) ;
   } break ;
   default:
@@ -10691,104 +10741,125 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_generic_5F_where_5F_claus
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i137_ (GALGAS_ast & ioArgument_ioAST,
-                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 103)) ;
-  GALGAS_lstring var_typeName_3675 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 104)) ;
-  GALGAS_genericFormalParameterList var_genericFormalParameterList_3738 ;
-  nt_generic_5F_formal_5F_arguments_ (var_genericFormalParameterList_3738, inCompiler) ;
-  GALGAS_ctExpressionAST var_whereClause_3782 ;
-  nt_generic_5F_where_5F_clause_ (var_whereClause_3782, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 107)) ;
-  GALGAS_llvmStringDefinition var_llvmNativeTypeNameExpression_3853 ;
-  nt_llvm_5F_string_5F_definition_ (var_llvmNativeTypeNameExpression_3853, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 109)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmGenericType::constructor_new (var_typeName_3675, var_genericFormalParameterList_3738, var_whereClause_3782, var_llvmNativeTypeNameExpression_3853  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 110))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 110)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i137_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 103)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 104)) ;
-  nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
-  nt_generic_5F_where_5F_clause_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 107)) ;
-  nt_llvm_5F_string_5F_definition_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 109)) ;
-  inCompiler->resetTemplateString () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i138_ (GALGAS_ast & ioArgument_ioAST,
                                                                           C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 68)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 69)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 70)) ;
-  GALGAS_lstring var_targetVariableName_3362 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 71)) ;
-  GALGAS_lstring var_targetTypeName_3395 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 72)) ;
-  GALGAS_genericFormalParameterList var_targetGenericFormalParameterList_3464 ;
-  nt_generic_5F_formal_5F_arguments_ (var_targetGenericFormalParameterList_3464, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 74)) ;
-  GALGAS_location var_operatorLocation_3497 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 75)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 76)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 77)) ;
-  GALGAS_lstring var_sourceVariableName_3571 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 78)) ;
-  GALGAS_lstring var_sourceTypeName_3604 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 79)) ;
-  GALGAS_genericFormalParameterList var_sourceGenericFormalParameterList_3673 ;
-  nt_generic_5F_formal_5F_arguments_ (var_sourceGenericFormalParameterList_3673, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 81)) ;
-  GALGAS_ctExpressionAST var_whereClause_3725 ;
-  nt_generic_5F_where_5F_clause_ (var_whereClause_3725, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 83)) ;
-  GALGAS_llvmGenerationInstructionList var_instructionList_3782 ;
-  nt_llvm_5F_instruction_5F_list_ (var_instructionList_3782, inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 85)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmAssignmentOperatorDeclarationAST::constructor_new (var_operatorLocation_3497, var_targetVariableName_3362, var_targetTypeName_3395, var_targetGenericFormalParameterList_3464, var_sourceVariableName_3571, var_sourceTypeName_3604, var_sourceGenericFormalParameterList_3673, var_whereClause_3725, var_instructionList_3782  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 86))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 86)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 126)) ;
+  GALGAS_lstring var_typeName_4432 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 127)) ;
+  GALGAS_genericFormalParameterList var_genericFormalParameterList_4495 ;
+  nt_generic_5F_formal_5F_arguments_ (var_genericFormalParameterList_4495, inCompiler) ;
+  GALGAS_ctExpressionAST var_whereClause_4539 ;
+  nt_generic_5F_where_5F_clause_ (var_whereClause_4539, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 130)) ;
+  GALGAS_llvmStringDefinition var_llvmNativeTypeNameExpression_4610 ;
+  nt_llvm_5F_string_5F_definition_ (var_llvmNativeTypeNameExpression_4610, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 132)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmGenericType::constructor_new (var_typeName_4432, var_genericFormalParameterList_4495, var_whereClause_4539, var_llvmNativeTypeNameExpression_4610  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 133))  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 133)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i138_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 68)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 69)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 70)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 71)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 72)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 126)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 127)) ;
   nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 74)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 76)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 77)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 78)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 79)) ;
-  nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 81)) ;
   nt_generic_5F_where_5F_clause_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 83)) ;
-  nt_llvm_5F_instruction_5F_list_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 85)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 130)) ;
+  nt_llvm_5F_string_5F_definition_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 132)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i139_ (GALGAS_llvmGenerationInstructionList & outArgument_outInstructionList,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_ (GALGAS_lstring & outArgument_outTargetVariableName,
+                                                                                         GALGAS_lstring & outArgument_outTargetTypeName,
+                                                                                         GALGAS_genericFormalParameterList & outArgument_outTargetGenericFormalParameterList,
+                                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
+  outArgument_outTargetVariableName.drop () ; // Release 'out' argument
+  outArgument_outTargetTypeName.drop () ; // Release 'out' argument
+  outArgument_outTargetGenericFormalParameterList.drop () ; // Release 'out' argument
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 100)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 101)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 102)) ;
+  outArgument_outTargetVariableName = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 103)) ;
+  outArgument_outTargetTypeName = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 104)) ;
+  nt_generic_5F_formal_5F_arguments_ (outArgument_outTargetGenericFormalParameterList, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 106)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 100)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 101)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 102)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 103)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 104)) ;
+  nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 106)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i140_ (GALGAS_ast & ioArgument_ioAST,
+                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
+  GALGAS_lstring var_targetVariableName_4934 ;
+  GALGAS_lstring var_targetTypeName_4954 ;
+  GALGAS_genericFormalParameterList var_targetGenericFormalParameterList_4992 ;
+  nt_llvm_5F_function_5F_header_ (var_targetVariableName_4934, var_targetTypeName_4954, var_targetGenericFormalParameterList_4992, inCompiler) ;
+  GALGAS_location var_operatorLocation_5017 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 113)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 114)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 115)) ;
+  GALGAS_lstring var_sourceVariableName_5091 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 116)) ;
+  GALGAS_lstring var_sourceTypeName_5124 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 117)) ;
+  GALGAS_genericFormalParameterList var_sourceGenericFormalParameterList_5193 ;
+  nt_generic_5F_formal_5F_arguments_ (var_sourceGenericFormalParameterList_5193, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 119)) ;
+  GALGAS_ctExpressionAST var_whereClause_5245 ;
+  nt_generic_5F_where_5F_clause_ (var_whereClause_5245, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 121)) ;
+  GALGAS_llvmGenerationInstructionList var_instructionList_5302 ;
+  nt_llvm_5F_instruction_5F_list_ (var_instructionList_5302, inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 123)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_llvmAssignmentOperatorDeclarationAST::constructor_new (var_operatorLocation_5017, var_targetVariableName_4934, var_targetTypeName_4954, var_targetGenericFormalParameterList_4992, var_sourceVariableName_5091, var_sourceTypeName_5124, var_sourceGenericFormalParameterList_5193, var_whereClause_5245, var_instructionList_5302  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 124))  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 124)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i140_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_llvm_5F_function_5F_header_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 114)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 115)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 116)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 117)) ;
+  nt_generic_5F_formal_5F_arguments_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 119)) ;
+  nt_generic_5F_where_5F_clause_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 121)) ;
+  nt_llvm_5F_instruction_5F_list_parse (inCompiler) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 123)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_ (GALGAS_llvmGenerationInstructionList & outArgument_outInstructionList,
                                                                                           C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outInstructionList.drop () ; // Release 'out' argument
-  outArgument_outInstructionList = GALGAS_llvmGenerationInstructionList::constructor_emptyList (SOURCE_FILE ("llvm-instructions.galgas", 49)) ;
+  outArgument_outInstructionList = GALGAS_llvmGenerationInstructionList::constructor_emptyList (SOURCE_FILE ("llvm-instructions.galgas", 60)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_141 (inCompiler)) {
     case 2: {
-      GALGAS_abstractLLVMInstruction var_instruction_2225 ;
-      nt_llvm_5F_instruction_ (var_instruction_2225, inCompiler) ;
-      outArgument_outInstructionList.addAssign_operation (var_instruction_2225  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 53)) ;
+      GALGAS_abstractLLVMInstruction var_instruction_2734 ;
+      nt_llvm_5F_instruction_ (var_instruction_2734, inCompiler) ;
+      outArgument_outInstructionList.addAssign_operation (var_instruction_2734  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 64)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -10799,7 +10870,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_li
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i139_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_141 (inCompiler)) {
@@ -10816,85 +10887,85 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_5F_li
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i140_ (GALGAS_abstractLLVMInstruction & outArgument_outInstruction,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i142_ (GALGAS_abstractLLVMInstruction & outArgument_outInstruction,
                                                                                   C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_var COMMA_SOURCE_FILE ("llvm-instructions.galgas", 60)) ;
-  GALGAS_lstring var_name_2507 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 61)) ;
-  outArgument_outInstruction = GALGAS_llvmVarInstruction::constructor_new (var_name_2507  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 62)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_var COMMA_SOURCE_FILE ("llvm-instructions.galgas", 71)) ;
+  GALGAS_lstring var_name_3016 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 72)) ;
+  outArgument_outInstruction = GALGAS_llvmVarInstruction::constructor_new (var_name_3016  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 73)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i140_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_var COMMA_SOURCE_FILE ("llvm-instructions.galgas", 60)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 61)) ;
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i142_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_var COMMA_SOURCE_FILE ("llvm-instructions.galgas", 71)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 72)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i141_ (GALGAS_abstractLLVMInstruction & outArgument_outInstruction,
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i143_ (GALGAS_abstractLLVMInstruction & outArgument_outInstruction,
                                                                                   C_Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-instructions.galgas", 68)) ;
-  GALGAS_llvmGenerationInstructionElementList var_elementList_2823 = GALGAS_llvmGenerationInstructionElementList::constructor_emptyList (SOURCE_FILE ("llvm-instructions.galgas", 69)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-instructions.galgas", 79)) ;
+  GALGAS_llvmGenerationInstructionElementList var_elementList_3332 = GALGAS_llvmGenerationInstructionElementList::constructor_emptyList (SOURCE_FILE ("llvm-instructions.galgas", 80)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_143 (inCompiler)) {
     case 1: {
-      GALGAS_lstring var_string_2883 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 72)) ;
-      var_elementList_2823.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_string (var_string_2883.getter_string (SOURCE_FILE ("llvm-instructions.galgas", 73))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 73))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 73)) ;
+      GALGAS_lstring var_string_3392 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 83)) ;
+      var_elementList_3332.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_string (var_string_3392.getter_string (SOURCE_FILE ("llvm-instructions.galgas", 84))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 84))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 84)) ;
     } break ;
     case 2: {
-      GALGAS_lstring var_name_2973 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 75)) ;
-      var_elementList_2823.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_symbol (var_name_2973  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 76))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 76)) ;
+      GALGAS_lstring var_name_3482 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 86)) ;
+      var_elementList_3332.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_symbol (var_name_3482  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 87))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 87)) ;
     } break ;
     case 3: {
-      GALGAS_lstring var_typeName_3059 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-instructions.galgas", 78)) ;
-      var_elementList_2823.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_type (var_typeName_3059  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 79))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 79)) ;
+      GALGAS_lstring var_typeName_3568 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-instructions.galgas", 89)) ;
+      var_elementList_3332.addAssign_operation (GALGAS_llvmGenerationInstructionElement::constructor_type (var_typeName_3568  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 90))  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 90)) ;
     } break ;
     default:
       break ;
     }
     switch (select_omnibus_5F_syntax_142 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 82)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 93)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  outArgument_outInstruction = GALGAS_llvmGenerationInstruction::constructor_new (var_elementList_2823  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 84)) ;
+  outArgument_outInstruction = GALGAS_llvmGenerationInstruction::constructor_new (var_elementList_3332  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 95)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i141_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-instructions.galgas", 68)) ;
+void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i143_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_llvm COMMA_SOURCE_FILE ("llvm-instructions.galgas", 79)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_143 (inCompiler)) {
     case 1: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 72)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 83)) ;
     } break ;
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 75)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("llvm-instructions.galgas", 86)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-instructions.galgas", 78)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("llvm-instructions.galgas", 89)) ;
     } break ;
     default:
       break ;
     }
     switch (select_omnibus_5F_syntax_142 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 82)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 93)) ;
     } break ;
     default:
       repeatFlag_0 = false ;

@@ -2189,11 +2189,11 @@ GALGAS_infixOperatorExpressionAST GALGAS_infixOperatorExpressionAST::extractObje
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Extension method '@infixOperatorMap checkBinaryOperationWith'                            *
+//                          Extension method '@infixOperatorMap_EX checkBinaryOperationWith'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_checkBinaryOperationWith (const GALGAS_infixOperatorMap inObject,
+void extensionMethod_checkBinaryOperationWith (const GALGAS_infixOperatorMap_5F_EX inObject,
                                                const GALGAS_omnibusType constinArgument_inLeftType,
                                                const GALGAS_omnibusType constinArgument_inRightType,
                                                const GALGAS_location constinArgument_inOperatorLocation,
@@ -2203,14 +2203,14 @@ void extensionMethod_checkBinaryOperationWith (const GALGAS_infixOperatorMap inO
                                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultType.drop () ; // Release 'out' argument
   outArgument_outOperation.drop () ; // Release 'out' argument
-  GALGAS_lstring var_lkey_2943 = function_combineTypeNamesForInfixOperator (constinArgument_inLeftType.getter_omnibusTypeDescriptionName (HERE), constinArgument_inRightType.getter_omnibusTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)) ;
+  GALGAS_lstring var_lkey_2946 = function_combineTypeNamesForInfixOperator (constinArgument_inLeftType.getter_omnibusTypeDescriptionName (HERE), constinArgument_inRightType.getter_omnibusTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    const GALGAS_infixOperatorMap temp_1 = inObject ;
-    test_0 = temp_1.getter_hasKey (var_lkey_2943.getter_string (HERE) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 69)).boolEnum () ;
+    const GALGAS_infixOperatorMap_5F_EX temp_1 = inObject ;
+    test_0 = temp_1.getter_hasKey (var_lkey_2946.getter_string (HERE) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 69)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const GALGAS_infixOperatorMap temp_2 = inObject ;
-      temp_2.method_searchKey (var_lkey_2943, outArgument_outResultType, outArgument_outOperation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 70)) ;
+      const GALGAS_infixOperatorMap_5F_EX temp_2 = inObject ;
+      temp_2.method_searchKey (var_lkey_2946, outArgument_outResultType, outArgument_outOperation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 70)) ;
     }
   }
   if (kBoolFalse == test_0) {

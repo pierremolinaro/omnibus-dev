@@ -80,6 +80,7 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case compileTimeInteger
   case compileTimeBool
+  case llvmType
   case generic (@genericFormalParameterList parameters
                 @ctExpressionAST whereClause
                 @llvmStringDefinition llvmNativeTypeNameExpression)
@@ -114,6 +115,8 @@ getter @omnibusType llvmTypeName -> @string {
     result = "" # No LLVM type, Compile Time Type
   case generic (3*) :
     result = "" # No LLVM type, Compile Time Type
+  case llvmType :
+    result = [self llvmBaseTypeName]
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case staticArrayType (* *) :
@@ -146,6 +149,20 @@ method @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
   if not ([kind isCompileTimeBool] | [kind isCompileTimeInteger]) then
     error inErrorLocation : "this type should be a compile time type"
   end
+}
+
+#·······················································································································
+
+method @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
+  if [kind isCompileTimeBool] | [kind isCompileTimeInteger] then
+    error inErrorLocation : "this type should not be a compile time type"
+  end
+}
+
+#·······················································································································
+
+getter @omnibusType isCompileTimeType -> @bool {
+  result = [kind isCompileTimeBool] | [kind isCompileTimeInteger]
 }
 
 #·······················································································································
@@ -372,6 +389,8 @@ getter @omnibusType descriptionForHTMLFile -> @string {
     result = "Compile Time Integer"
   case generic (3*) :
     result = "Generic Type"
+  case llvmType :
+    result = "LLVM Type"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
   case staticArrayType (* *) :
@@ -380,59 +399,6 @@ getter @omnibusType descriptionForHTMLFile -> @string {
     result = "Dynamic array"
   case function (3*) :
     result = "Function"
-  end
-}
-
-#·······················································································································
-
-getter @omnibusType defaultAlignment -> @uint{
-  switch self.kind
-  case void :
-    result = 0
-  case boolean :
-    result = 1
-  case literalString :
-    result = 4
-  case enumeration (bitCount) :
-    if bitCount <= 8 then
-      result = 1
-    elsif bitCount <= 16 then
-      result = 2
-    else
-      result = 4
-    end
-  case structure (*) :
-    result = 4
-  case syncTool :
-    result = 4
-  case integer (3* @uint bitCount) :
-    if bitCount <= 8 then
-      result = 1
-    elsif bitCount <= 16 then
-      result = 2
-    else
-      result = 4
-    end
-  case compileTimeInteger :
-    result = 0
-  case compileTimeBool :
-    result = 0
-  case generic (3*) :
-    result = 0
-  case opaque (@bigint bitCount) :
-    if bitCount <= 8 then
-      result = 1
-    elsif bitCount <= 16 then
-      result = 2
-    else
-      result = 4
-    end
-  case staticArrayType (elementType *) :
-    result = [elementType defaultAlignment]
-  case dynamicArrayType (*) :
-    result = 4
-  case function (3*) :
-    result = 4
   end
 }
 
@@ -487,7 +453,7 @@ shared map @unifiedTypeMap %selectors {
 proc buildTypeMapHTMLFile
   ?let @unifiedTypeMap inTypeMap
   ?let @routineMapForContext inRoutineMap
-  ?let @terminusInfixOperatorMap inTerminusInfixOperatorMap
+  ?let @infixOperatorMap inTerminusInfixOperatorMap
   ?let @terminusPrefixOperatorMap inTerminusPrefixOperatorMap
   ?let @assignmentOperatorMap inAssignmentOperatorMap
   ?sourceFile:let @lstring inSourceFile
@@ -535,7 +501,7 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
     ?@stringset FIRST_LETTER_SET
     ?@string TABLE_OF_TYPES_STRING
     ?@routineMapForContext ALL_ROUTINE_MAP
-    ?@terminusInfixOperatorMap INFIX_OPERATOR_MAP
+    ?@infixOperatorMap INFIX_OPERATOR_MAP
     ?@terminusPrefixOperatorMap PREFIX_OPERATOR_MAP
     ?@assignmentOperatorMap ASSIGNMENT_OPERATOR_MAP
 

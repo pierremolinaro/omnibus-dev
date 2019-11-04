@@ -328,11 +328,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpression
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Extension method '@infixOperatorMap checkBinaryOperationWith'                            *
+//                          Extension method '@infixOperatorMap_EX checkBinaryOperationWith'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorMap inObject,
+void extensionMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorMap_5F_EX inObject,
                                                const class GALGAS_omnibusType constin_inLeftType,
                                                const class GALGAS_omnibusType constin_inRightType,
                                                const class GALGAS_location constin_inOperatorLocation,

@@ -425,6 +425,8 @@ private proc controlRegisterType
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case generic (3*) :
     error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+  case llvmType :
+    error inRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   end
 }
 

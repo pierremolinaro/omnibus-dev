@@ -29,31 +29,31 @@ struct @semanticContext {
   @availableInterruptMap mAvailableInterruptMap
 
 #--- Operators
-  @infixOperatorMap mEqualOperatorMap           # ==
-  @infixOperatorMap mStrictInfOperatorMap       # <
-  @infixOperatorMap mInfEqualOperatorMap        # <=
-  @infixOperatorMap mAndOperatorMap             # &
-  @infixOperatorMap mOrOperatorMap              # |
-  @infixOperatorMap mXorOperatorMap             # ^
-  @infixOperatorMap mBooleanXorOperatorMap      # xor
-  @infixOperatorMap mAddOperatorMap             # +
-  @infixOperatorMap mAddNoOvfOperatorMap        # &+
-  @infixOperatorMap mSubOperatorMap             # -
-  @infixOperatorMap mSubNoOvfOperatorMap        # &-
-  @infixOperatorMap mMulOperatorMap             # *
-  @infixOperatorMap mMulNoOvfOperatorMap        # &*
-  @infixOperatorMap mDivOperatorMap             # /
-  @infixOperatorMap mDivNoOvfOperatorMap        # &/
-  @infixOperatorMap mModOperatorMap             # %
-  @infixOperatorMap mModNoOvfOperatorMap        # &%
-  @infixOperatorMap mLeftShiftOperatorMap       # <<
-  @infixOperatorMap mRightShiftOperatorMap      # >>
+  @infixOperatorMap_EX mEqualOperatorMap           # ==
+  @infixOperatorMap_EX mStrictInfOperatorMap       # <
+  @infixOperatorMap_EX mInfEqualOperatorMap        # <=
+  @infixOperatorMap_EX mAndOperatorMap             # &
+  @infixOperatorMap_EX mOrOperatorMap              # |
+  @infixOperatorMap_EX mXorOperatorMap             # ^
+  @infixOperatorMap_EX mBooleanXorOperatorMap      # xor
+  @infixOperatorMap_EX mAddOperatorMap             # +
+  @infixOperatorMap_EX mAddNoOvfOperatorMap        # &+
+  @infixOperatorMap_EX mSubOperatorMap             # -
+  @infixOperatorMap_EX mSubNoOvfOperatorMap        # &-
+  @infixOperatorMap_EX mMulOperatorMap             # *
+  @infixOperatorMap_EX mMulNoOvfOperatorMap        # &*
+  @infixOperatorMap_EX mDivOperatorMap             # /
+  @infixOperatorMap_EX mDivNoOvfOperatorMap        # &/
+  @infixOperatorMap_EX mModOperatorMap             # %
+  @infixOperatorMap_EX mModNoOvfOperatorMap        # &%
+  @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
+  @infixOperatorMap_EX mRightShiftOperatorMap      # >>
   
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
   
-  @terminusInfixOperatorMap mTerminusInfixOperatorMap
+  @infixOperatorMap mTerminusInfixOperatorMap
   @terminusPrefixOperatorMap mTerminusPrefixOperatorMap
   @assignmentOperatorMap mAssignmentOperatorMap
 
@@ -78,7 +78,7 @@ list @declarationDecorationList {
 
 #·······················································································································
 
-map @infixOperatorMap {
+map @infixOperatorMap_EX {
   @omnibusType mResultType
   @infixOperatorDescription mOperation
   insert insertKey error message "** internal error **"

@@ -37,6 +37,17 @@ list @llvmGenerationInstructionList {
   @abstractLLVMInstruction mInstruction
 }
 
+#·······················································································································
+
+setter @llvmGenerationInstructionList appendReturn ?let @lstring inReturnType ?let @lstring inReturnValue {
+  @llvmGenerationInstructionElementList elements = {}
+  elements += !.string {!string: "ret "}
+  elements += !.type {!name: inReturnType}
+  elements += !.string {!string: " "}
+  elements += !.symbol {!name: inReturnValue}
+  self += !@llvmGenerationInstruction.new {!elements}
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -180,7 +191,6 @@ override method @llvmGenerationInstruction generateIRCode
        s += value
      end
    end
-   s += " ; Assignment"
    ioInstructionAsStringListIR += !s
 }
 

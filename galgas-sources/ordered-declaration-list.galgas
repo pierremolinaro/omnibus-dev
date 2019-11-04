@@ -53,6 +53,9 @@ proc buildOrderedDeclarationList
       #--- Add assignment operator declaration
         let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
         [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
+      #--- Add assignment operator declaration from ctInt
+        let assignmentOperatorFrom_ctInt = buildAssignmentOperatorFrom_ctInt (!mValue)
+        [assignmentOperatorFrom_ctInt enterInPrecedenceGraph !?precedenceGraph]
       #---
         addintegerTypeCount ++
       elsif [split mValueAtIndex !0] == "" then 
@@ -62,11 +65,17 @@ proc buildOrderedDeclarationList
       #--- Add assignment operator declaration
         let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
         [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
+      #--- Add assignment operator declaration from ctInt
+        let assignmentOperatorFrom_ctInt = buildAssignmentOperatorFrom_ctInt (!mValue)
+        [assignmentOperatorFrom_ctInt enterInPrecedenceGraph !?precedenceGraph]
       #---
         addintegerTypeCount ++
       end
     end
   end
+#------------------------------------------  Added bool assignment
+  let boolAssignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!boolTypeName ())
+  [boolAssignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Display ?
   if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
     message "    Added " + addintegerTypeCount + " integer types\n" 

@@ -107,13 +107,14 @@ void routine_generateTarget (const class GALGAS_string constinArgument0,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+extern const char * gWrapperFileContent_30_targetTemplates ;
 extern const char * gWrapperFileContent_4_targetTemplates ;
 extern const char * gWrapperFileContent_5_targetTemplates ;
 extern const char * gWrapperFileContent_3_targetTemplates ;
 extern const char * gWrapperFileContent_10_targetTemplates ;
 extern const char * gWrapperFileContent_11_targetTemplates ;
 extern const char * gWrapperFileContent_24_targetTemplates ;
-extern const char * gWrapperFileContent_31_targetTemplates ;
+extern const char * gWrapperFileContent_32_targetTemplates ;
 extern const char * gWrapperFileContent_9_targetTemplates ;
 extern const char * gWrapperFileContent_20_targetTemplates ;
 extern const char * gWrapperFileContent_21_targetTemplates ;
@@ -132,13 +133,12 @@ extern const char * gWrapperFileContent_23_targetTemplates ;
 extern const char * gWrapperFileContent_0_targetTemplates ;
 extern const char * gWrapperFileContent_1_targetTemplates ;
 extern const char * gWrapperFileContent_13_targetTemplates ;
-extern const char * gWrapperFileContent_32_targetTemplates ;
 extern const char * gWrapperFileContent_33_targetTemplates ;
 extern const char * gWrapperFileContent_34_targetTemplates ;
 extern const char * gWrapperFileContent_17_targetTemplates ;
 extern const char * gWrapperFileContent_28_targetTemplates ;
 extern const char * gWrapperFileContent_22_targetTemplates ;
-extern const char * gWrapperFileContent_30_targetTemplates ;
+extern const char * gWrapperFileContent_31_targetTemplates ;
 extern const char * gWrapperFileContent_29_targetTemplates ;
 extern const char * gWrapperFileContent_18_targetTemplates ;
 extern const char * gWrapperFileContent_27_targetTemplates ;

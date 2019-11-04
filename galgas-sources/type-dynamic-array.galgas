@@ -273,7 +273,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     @uint temporaryIndex = 0
     [llvmInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @assignmentRoutineIR.new {
-      !.new {!assignmentFuncName (!dynamicArrayType !dynamicArrayType) !mDynamicArrayTypeName.location}
+      !.new {!assignmentOperatorFuncName (!dynamicArrayType !dynamicArrayType) !mDynamicArrayTypeName.location}
       !isRequired: false
       !warnsIfUnused: false
       !dynamicArrayType
@@ -406,7 +406,7 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  let assignRoutineLLVMName = assignmentFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
+  let assignRoutineLLVMName = assignmentOperatorFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
   ioInvokedRoutineSet += !assignRoutineLLVMName
 }
 
@@ -435,7 +435,7 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ioLLVMcode += "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
-  let assignRoutineLLVMName = assignmentFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
+  let assignRoutineLLVMName = assignmentOperatorFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
   ioLLVMcode += "  call void @" + [assignRoutineLLVMName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"

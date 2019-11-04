@@ -23,7 +23,8 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDeclarationAST {
-  let llvmVarInstruction = @llvmVarInstruction.new {!["LOADED" nowhere]}
+  @llvmGenerationInstructionList llvmInstructionList = {}
+  llvmInstructionList += !@llvmVarInstruction.new {!["LOADED" nowhere]}
   @llvmGenerationInstructionElementList instructionElements = {}
   instructionElements += !.symbol {!name: ["LOADED" nowhere]}
   instructionElements += !.string {!string: " = load "}
@@ -32,7 +33,7 @@ func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDecl
   instructionElements += !.type {!name: ["SRC" nowhere]}
   instructionElements += !.string {!string: "* "}
   instructionElements += !.symbol {!name: ["SRC" nowhere]}
-  let llvmLoadInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
   instructionElements = {}
   instructionElements += !.string {!string: "store "}
   instructionElements += !.type {!name: ["SRC" nowhere]}
@@ -42,7 +43,7 @@ func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDecl
   instructionElements += !.type {!name: ["TGT" nowhere]}
   instructionElements += !.string {!string: "* "}
   instructionElements += !.symbol {!name: ["TGT" nowhere]}
-  let llvmStoreInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
   result = @llvmAssignmentOperatorDeclarationAST.new {
     !["" nowhere]
     !["TGT" nowhere]
@@ -52,7 +53,34 @@ func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDecl
     ![inTypeName nowhere]
     !{}
     !@ctTrueExpressionAST.new
-    !{!llvmVarInstruction, !llvmLoadInstruction, !llvmStoreInstruction}
+    !llvmInstructionList
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func buildAssignmentOperatorFrom_ctInt ?let @string inTypeName -> @abstractDeclarationAST {
+  @llvmGenerationInstructionList llvmInstructionList = {}
+  @llvmGenerationInstructionElementList instructionElements = {}
+  instructionElements += !.string {!string: "store "}
+  instructionElements += !.type {!name: ["TGT" nowhere]}
+  instructionElements += !.string {!string: " "}
+  instructionElements += !.symbol {!name: ["SRC" nowhere]}
+  instructionElements += !.string {!string: ", "}
+  instructionElements += !.type {!name: ["TGT" nowhere]}
+  instructionElements += !.string {!string: "* "}
+  instructionElements += !.symbol {!name: ["TGT" nowhere]}
+  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+  result = @llvmAssignmentOperatorDeclarationAST.new {
+    !["" nowhere]
+    !["TGT" nowhere]
+    ![inTypeName nowhere]
+    !{}
+    !["SRC" nowhere]
+    ![ctIntegerTypeName () nowhere]
+    !{}
+    !@ctTrueExpressionAST.new
+    !llvmInstructionList
   }
 }
 
@@ -64,14 +92,24 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <llvm_function_header>
+    !@lstring outTargetVariableName
+    !@lstring outTargetTypeName
+    !@genericFormalParameterList outTargetGenericFormalParameterList
+  {
     $llvm$
     $func$
     $($
-    $identifier$ ?let targetVariableName
-    $\$type$ ?let targetTypeName
-    <generic_formal_arguments> ?let targetGenericFormalParameterList
+    $identifier$ ?outTargetVariableName
+    $\$type$ ?outTargetTypeName
+    <generic_formal_arguments> ?outTargetGenericFormalParameterList
     $)$
+  }
+  
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    <llvm_function_header> ?let targetVariableName ?let targetTypeName ?let targetGenericFormalParameterList
     let operatorLocation = @location.here
     $=$
     $($
@@ -197,7 +235,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
     @uint temporaryIndex = 0
     [mLLVMInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @assignmentRoutineIR.new {
-      !.new {!assignmentFuncName (!targetType !sourceType) !mOperatorLocation}
+      !.new {!assignmentOperatorFuncName (!targetType !sourceType) !mOperatorLocation}
       !isRequired: false
       !warnsIfUnused: false
       !targetType
@@ -251,7 +289,7 @@ setter @instructionListIR appendAssignmentIR
     && ([sourceGenericFormalParameterList length] == 0)
     && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
     && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
-      let llvmRoutineName = assignmentFuncName (!inTarget.type ![inSourcePossibleReference type])
+      let llvmRoutineName = assignmentOperatorFuncName (!inTarget.type ![inSourcePossibleReference type])
       var s = "call void @" + [llvmRoutineName assemblerRepresentation]
             + " (" + [inTarget.type llvmTypeName] + "* " + inTarget.llvmName
             + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"

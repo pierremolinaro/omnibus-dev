@@ -58,7 +58,7 @@ override method @infixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @infixOperatorMap checkBinaryOperationWith
+method @infixOperatorMap_EX checkBinaryOperationWith
   ?leftType:let @omnibusType inLeftType
   ?rightType:let @omnibusType inRightType
   ?operatorLocation:let @location inOperatorLocation
@@ -155,7 +155,7 @@ private func getInfixOperatorMap
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?let @location inOperatorLocation
-  -> @infixOperatorMap outOperatorMap
+  -> @infixOperatorMap_EX outOperatorMap
 {
   switch inOp 
   case equal :

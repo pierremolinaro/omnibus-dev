@@ -526,6 +526,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_integer,
     kEnum_compileTimeInteger,
     kEnum_compileTimeBool,
+    kEnum_llvmType,
     kEnum_generic,
     kEnum_opaque,
     kEnum_staticArrayType,
@@ -586,6 +587,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                              COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
+
+  public : static class GALGAS_typeKind constructor_llvmType (LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_opaque (const class GALGAS_bigint & inOperand0
                                                             COMMA_LOCATION_ARGS) ;
@@ -670,6 +673,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInteger (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOpaque (LOCATION_ARGS) const ;
 

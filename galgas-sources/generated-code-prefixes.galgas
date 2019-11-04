@@ -33,11 +33,35 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Assignment
+#!   Operators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func assignmentFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
+func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
   result = "assign." + [inTargetType omnibusTypeDescriptionName] + ".ref.from." + [inSourceType omnibusTypeDescriptionName] + ".ref"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func infixOperatorFunctionName ?let @omnibusType inLeftType ?let @infixOperatorEnumeration inOperator ?let @omnibusType inRightType -> @string {
+  result = "operator." + [inLeftType omnibusTypeDescriptionName] + "."
+  switch inOperator
+   case equal     : result += "equal"
+   case strictInf : result += "lessThan"
+   case booleanOr  : result += "booleanOr"
+   case bitWiseAnd : result += "bitWiseAnd"
+   case bitWiseOr : result += "bitWiseOr"
+   case xor       : result += "xor"
+   case booleanXor: result += "booleanXor"
+   case add       : result += "add"
+   case mul       : result += "mul"
+   case div       : result += "div"
+   case divNoOvf  : result += "divNoOvf"
+   case modulo    : result += "modulo"
+   case moduloNoOvf: result += "moduloNoOvf"
+   case leftShift  : result += "leftShift"
+   case rightShift : result += "rightShift"
+  end
+  result += "." + [inRightType omnibusTypeDescriptionName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

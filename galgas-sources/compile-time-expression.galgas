@@ -10,7 +10,7 @@ abstract class @ctExpressionAST {
 class @ctInfixExpressionAST : @ctExpressionAST {
   @ctExpressionAST mLeftExpression
   @location mOperatorLocation
-  @terminusInfixOperatorEnumeration mInfixOperator
+  @infixOperatorEnumeration mInfixOperator
   @ctExpressionAST mRightExpression
 }
 

@@ -2391,20 +2391,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorDescri
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Class for element of '@infixOperatorMap' map                                     *
+//                                   Class for element of '@infixOperatorMap_EX' map                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_infixOperatorMap : public cMapElement {
+class cMapElement_infixOperatorMap_5F_EX : public cMapElement {
 //--- Map attributes
   public : GALGAS_omnibusType mProperty_mResultType ;
   public : GALGAS_infixOperatorDescription mProperty_mOperation ;
 
 //--- Constructor
-  public : cMapElement_infixOperatorMap (const GALGAS_lstring & inKey,
-                                         const GALGAS_omnibusType & in_mResultType,
-                                         const GALGAS_infixOperatorDescription & in_mOperation
-                                         COMMA_LOCATION_ARGS) ;
+  public : cMapElement_infixOperatorMap_5F_EX (const GALGAS_lstring & inKey,
+                                               const GALGAS_omnibusType & in_mResultType,
+                                               const GALGAS_infixOperatorDescription & in_mOperation
+                                               COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -2421,11 +2421,11 @@ class cMapElement_infixOperatorMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @infixOperatorMap_2D_element struct                                         *
+//                                      @infixOperatorMap_5F_EX_2D_element struct                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
+class GALGAS_infixOperatorMap_5F_EX_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
 
@@ -2438,15 +2438,15 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_infixOperatorMap_2D_element (void) ;
+  public : GALGAS_infixOperatorMap_5F_EX_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_infixOperatorMap_2D_element (void) ;
+  public : virtual ~ GALGAS_infixOperatorMap_5F_EX_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_infixOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
-                                               const GALGAS_omnibusType & in_mResultType,
-                                               const GALGAS_infixOperatorDescription & in_mOperation) ;
+  public : GALGAS_infixOperatorMap_5F_EX_2D_element (const GALGAS_lstring & in_lkey,
+                                                     const GALGAS_omnibusType & in_mResultType,
+                                                     const GALGAS_infixOperatorDescription & in_mOperation) ;
 
 //-- Start of generic part --*
 
@@ -2454,21 +2454,21 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_infixOperatorMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_infixOperatorMap_5F_EX_2D_element extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_infixOperatorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                            const class GALGAS_omnibusType & inOperand1,
-                                                                            const class GALGAS_infixOperatorDescription & inOperand2
-                                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_infixOperatorMap_5F_EX_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                  const class GALGAS_omnibusType & inOperand1,
+                                                                                  const class GALGAS_infixOperatorDescription & inOperand2
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixOperatorMap_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_infixOperatorMap_5F_EX_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2486,12 +2486,12 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_infixOperatorMap_2D_element class
+} ; // End of GALGAS_infixOperatorMap_5F_EX_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap_5F_EX_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -2632,11 +2632,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_terminusInfixOperat
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Class for element of '@terminusInfixOperatorMap' map                                 *
+//                                    Class for element of '@infixOperatorMap' map                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cMapElement_terminusInfixOperatorMap : public cMapElement {
+class cMapElement_infixOperatorMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_omnibusType mProperty_mLeftType ;
   public : GALGAS_omnibusType mProperty_mRightType ;
@@ -2644,12 +2644,12 @@ class cMapElement_terminusInfixOperatorMap : public cMapElement {
   public : GALGAS_terminusInfixOperator mProperty_mOperator ;
 
 //--- Constructor
-  public : cMapElement_terminusInfixOperatorMap (const GALGAS_lstring & inKey,
-                                                 const GALGAS_omnibusType & in_mLeftType,
-                                                 const GALGAS_omnibusType & in_mRightType,
-                                                 const GALGAS_omnibusType & in_mResultType,
-                                                 const GALGAS_terminusInfixOperator & in_mOperator
-                                                 COMMA_LOCATION_ARGS) ;
+  public : cMapElement_infixOperatorMap (const GALGAS_lstring & inKey,
+                                         const GALGAS_omnibusType & in_mLeftType,
+                                         const GALGAS_omnibusType & in_mRightType,
+                                         const GALGAS_omnibusType & in_mResultType,
+                                         const GALGAS_terminusInfixOperator & in_mOperator
+                                         COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -2666,11 +2666,11 @@ class cMapElement_terminusInfixOperatorMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @terminusInfixOperatorMap_2D_element struct                                     *
+//                                         @infixOperatorMap_2D_element struct                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_terminusInfixOperatorMap_2D_element : public AC_GALGAS_root {
+class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
 
@@ -2687,17 +2687,17 @@ class GALGAS_terminusInfixOperatorMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_terminusInfixOperatorMap_2D_element (void) ;
+  public : GALGAS_infixOperatorMap_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_terminusInfixOperatorMap_2D_element (void) ;
+  public : virtual ~ GALGAS_infixOperatorMap_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_terminusInfixOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
-                                                       const GALGAS_omnibusType & in_mLeftType,
-                                                       const GALGAS_omnibusType & in_mRightType,
-                                                       const GALGAS_omnibusType & in_mResultType,
-                                                       const GALGAS_terminusInfixOperator & in_mOperator) ;
+  public : GALGAS_infixOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
+                                               const GALGAS_omnibusType & in_mLeftType,
+                                               const GALGAS_omnibusType & in_mRightType,
+                                               const GALGAS_omnibusType & in_mResultType,
+                                               const GALGAS_terminusInfixOperator & in_mOperator) ;
 
 //-- Start of generic part --*
 
@@ -2705,23 +2705,23 @@ class GALGAS_terminusInfixOperatorMap_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_terminusInfixOperatorMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_infixOperatorMap_2D_element extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_terminusInfixOperatorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                    const class GALGAS_omnibusType & inOperand1,
-                                                                                    const class GALGAS_omnibusType & inOperand2,
-                                                                                    const class GALGAS_omnibusType & inOperand3,
-                                                                                    const class GALGAS_terminusInfixOperator & inOperand4
-                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_infixOperatorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                            const class GALGAS_omnibusType & inOperand1,
+                                                                            const class GALGAS_omnibusType & inOperand2,
+                                                                            const class GALGAS_omnibusType & inOperand3,
+                                                                            const class GALGAS_terminusInfixOperator & inOperand4
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_terminusInfixOperatorMap_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_infixOperatorMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2743,12 +2743,12 @@ class GALGAS_terminusInfixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_terminusInfixOperatorMap_2D_element class
+} ; // End of GALGAS_infixOperatorMap_2D_element class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_terminusInfixOperatorMap_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap_2D_element ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

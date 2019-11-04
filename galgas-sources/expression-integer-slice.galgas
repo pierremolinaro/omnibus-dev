@@ -197,6 +197,8 @@ override method @integerSliceExpressionAST analyzeExpression
           error expressionLocation: "an unsigned integer expression is required here"
         case generic (3*) :
           error expressionLocation: "an unsigned integer expression is required here"
+        case llvmType :
+          error expressionLocation: "an unsigned integer expression is required here"
         case compileTimeBool :
           error expressionLocation: "an unsigned integer expression is required here"
         case compileTimeInteger :

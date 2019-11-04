@@ -10,6 +10,44 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                          Function 'llvmFunctionPrototype'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & constinArgument0,
+                                                    const class GALGAS_string & constinArgument1,
+                                                    const class GALGAS_omnibusType & constinArgument2,
+                                                    const class GALGAS_routineFormalArgumentListIR & constinArgument3,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                         Routine 'generateSectionDispatcher'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_generateSectionDispatcher (const class GALGAS_string constinArgument0,
+                                        const class GALGAS_string constinArgument1,
+                                        const class GALGAS_targetParameters constinArgument2,
+                                        class GALGAS_string & ioArgument3,
+                                        const class GALGAS_sectionIRlist constinArgument4,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'getTargetTextFile'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
+                                                const class GALGAS_string & constinArgument1,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                   Routine 'generatePrimitiveAndServiceDispatcher'                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -128,6 +166,16 @@ void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                    Function 'buildAssignmentOperatorFrom_ctInt'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_abstractDeclarationAST function_buildAssignmentOperatorFrom_5F_ctInt (const class GALGAS_string & constinArgument0,
+                                                                                   class C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                           Routine 'buildSemanticContext'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -152,7 +200,7 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
 
 void routine_buildTypeMapHTMLFile (const class GALGAS_unifiedTypeMap constinArgument0,
                                    const class GALGAS_routineMapForContext constinArgument1,
-                                   const class GALGAS_terminusInfixOperatorMap constinArgument2,
+                                   const class GALGAS_infixOperatorMap constinArgument2,
                                    const class GALGAS_terminusPrefixOperatorMap constinArgument3,
                                    const class GALGAS_assignmentOperatorMap constinArgument4,
                                    const class GALGAS_lstring constinArgument5,
@@ -206,7 +254,7 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
                                                                    const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
                                                                    const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
                                                                    const class GALGAS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
-                                                                   const class GALGAS_terminusInfixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
+                                                                   const class GALGAS_infixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
                                                                    const class GALGAS_terminusPrefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP,
                                                                    const class GALGAS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
                                                                    COMMA_LOCATION_ARGS) ;
@@ -475,10 +523,10 @@ class GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompil
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
-                                                            const class GALGAS_semanticContext & constinArgument1,
-                                                            const class GALGAS_mode & constinArgument2,
-                                                            const class GALGAS_location & constinArgument3,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_infixOperatorMap_5F_EX function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
+                                                                  const class GALGAS_semanticContext & constinArgument1,
+                                                                  const class GALGAS_mode & constinArgument2,
+                                                                  const class GALGAS_location & constinArgument3,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 

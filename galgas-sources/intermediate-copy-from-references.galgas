@@ -45,7 +45,7 @@ override method @copyFromReferencesIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let assignmentFunctionLLVMName = assignmentFuncName (![mTarget type] ![mTarget type])
+  let assignmentFunctionLLVMName = assignmentOperatorFuncName (![mTarget type] ![mTarget type])
   let llvmTypeName = [[mTarget type] llvmTypeName]
   ioLLVMcode += "  call void @" + [assignmentFunctionLLVMName assemblerRepresentation]
   ioLLVMcode += " (" + llvmTypeName + "* " + mTarget.llvmName + ", " + llvmTypeName + "* " + mSourceLLVMName + ")\n"
@@ -57,7 +57,7 @@ override method @copyFromReferencesIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  let assignmentFunctionLLVMName = assignmentFuncName (![mTarget type] ![mTarget type])
+  let assignmentFunctionLLVMName = assignmentOperatorFuncName (![mTarget type] ![mTarget type])
   ioInvokedRoutineSet += !assignmentFunctionLLVMName
 }
 

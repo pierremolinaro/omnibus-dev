@@ -15,10 +15,6 @@ func getLargeAddition (? inA $LargeInt ?inB $LargeInt) -> $LargeInt {
   result = inA + inB
 }
 
-llvm func (tgt $uint97) = (src $ctInt) { // Ajouter test
-  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
-}
-
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @autostart {

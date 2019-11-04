@@ -76,7 +76,7 @@ OMNIBUS_FILES:
   "../semaphore.omnibus-import"
   "../ctBool.omnibus-import"
   "../ctInt.omnibus-import"
-  "../opaque-generic-type.omnibus-import"
+  "../bool-type.omnibus-import"
 
 INTERRUPTS:
   WDT

@@ -28,11 +28,34 @@ list @llvmStringDefinition {
 
 #·······················································································································
 
+map @llvmStringVariableMap {
+  @string mValue
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
+}
+
+#·······················································································································
+
+getter @llvmStringDefinition eval ?let @llvmStringVariableMap inVariableMap -> @string {
+  result = ""
+  for (element) in self do
+    switch element
+    case variable (@lstring name) :
+      [inVariableMap searchKey !name ?let value]
+      result += value
+    case string (@lstring value) :
+      result += value.string
+    end 
+  end
+}
+
+#·······················································································································
+
 class @llvmGenericType : @abstractDeclarationAST {
   @lstring mTypeName
   @genericFormalParameterList mGenericFormalParameterList
   @ctExpressionAST mWhereClause
-  @llvmStringDefinition mLLVMNativeTypeNameExpression
+  @llvmStringDefinition mTypeNameExpressionString
 }
 
 #·······················································································································
@@ -128,7 +151,6 @@ override method @llvmGenericType enterInPrecedenceGraph
 {
   let nodeName = mTypeName
   [!?ioGraph addNode !nodeName !self]
-#  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
 }
 
 #·······················································································································
@@ -181,24 +203,41 @@ override method @llvmGenericType enterInContext
 #--- Check Where clause
   [mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
 #--- Check native LLVM type expression
-  [mLLVMNativeTypeNameExpression checkCompileTimeExpression !formalGenericConstantParameterMap]
+  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
 #---
-  let genericType = @omnibusType.new {
-    !propertyGetterMap: {}
-    !propertySetterMap: {}
-    !classConstantMap:{}
-    !constructorMap:{}
-    !subscript:.noSubscript
-#    !assignmentSources: {}
-    !attributes: .none
-    !omnibusTypeDescriptionName: mTypeName
-    !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: mLLVMNativeTypeNameExpression}
-    !llvmBaseTypeName: "" # Empty String, compile time type
-  }
-  [!?ioContext.mTypeMap insertType
-    !lkey: mTypeName
-    !type: genericType
-  ]
+  if [mGenericFormalParameterList length] == 0 then
+    let llvmType = @omnibusType.new {
+      !propertyGetterMap: {}
+      !propertySetterMap: {}
+      !classConstantMap:{}
+      !constructorMap:{}
+      !subscript:.noSubscript
+      !attributes: .none
+      !omnibusTypeDescriptionName: mTypeName
+      !kind: .llvmType
+      !llvmBaseTypeName: [mTypeNameExpressionString eval !{}]
+    }
+    [!?ioContext.mTypeMap insertType
+      !lkey: mTypeName
+      !type: llvmType
+    ]
+  else
+    let genericType = @omnibusType.new {
+      !propertyGetterMap: {}
+      !propertySetterMap: {}
+      !classConstantMap:{}
+      !constructorMap:{}
+      !subscript:.noSubscript
+      !attributes: .none
+      !omnibusTypeDescriptionName: mTypeName
+      !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: mTypeNameExpressionString}
+      !llvmBaseTypeName: "" # A generic type cannot be instancied
+    }
+    [!?ioContext.mTypeMap insertType
+      !lkey: mTypeName
+      !type: genericType
+    ]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -232,6 +232,18 @@ void routine_handleNextOperand (const class GALGAS_omnibusType constinArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                        Function 'infixOperatorFunctionName'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_infixOperatorFunctionName (const class GALGAS_omnibusType & constinArgument0,
+                                                        const class GALGAS_infixOperatorEnumeration & constinArgument1,
+                                                        const class GALGAS_omnibusType & constinArgument2,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                          Function 'memoryAllocSectionName'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
