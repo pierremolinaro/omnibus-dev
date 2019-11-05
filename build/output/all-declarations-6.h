@@ -22,6 +22,14 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
                                                                         GALGAS_location & outArgument1,
                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'compileTimePrefixOperator' non terminal
+//--- 'parse' label
+  public : virtual void nt_compileTimePrefixOperator_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_compileTimePrefixOperator_ (GALGAS_compileTimePrefixOperatorEnumeration & outArgument0,
+                                                       C_Lexique_omnibus_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'compile_time_expression' non terminal
 //--- 'parse' label
   public : virtual void nt_compile_5F_time_5F_expression_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -346,6 +354,14 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
                                                  const GALGAS_lstring inArgument1,
                                                  C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'llvmPrefixOperator' non terminal
+//--- 'parse' label
+  public : virtual void nt_llvmPrefixOperator_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_llvmPrefixOperator_ (GALGAS_llvmPrefixOperatorEnumeration & outArgument0,
+                                                C_Lexique_omnibus_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'llvm_function_header' non terminal
 //--- 'parse' label
   public : virtual void nt_llvm_5F_function_5F_header_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -405,14 +421,6 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 //----------- '' label
   public : virtual void nt_mode_ (GALGAS_mode & outArgument0,
                                   C_Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'prefixOperator' non terminal
-//--- 'parse' label
-  public : virtual void nt_prefixOperator_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_prefixOperator_ (GALGAS_terminusPrefixOperatorEnumeration & outArgument0,
-                                            C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
 //--- 'parse' label
@@ -873,6 +881,8 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual int32_t select_omnibus_5F_syntax_142 (C_Lexique_omnibus_5F_lexique *) ;
 
   public : virtual int32_t select_omnibus_5F_syntax_143 (C_Lexique_omnibus_5F_lexique *) ;
+
+  public : virtual int32_t select_omnibus_5F_syntax_144 (C_Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

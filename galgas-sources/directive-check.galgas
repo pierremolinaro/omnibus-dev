@@ -71,23 +71,44 @@ override method @checkInstructionAST instructionSemanticAnalysis
     !?instructionListIR:instructionGenerationList
     ?result:@objectIR expressionResult
   ]
-#--- Check inferred type
-  if not [[expressionResult type].kind isBoolean] then
-    error mInstructionLocation : "expression is not boolean"
-  end
-#--- Check expression is static, and true
-  if not [expressionResult isStatic] then
-    error mInstructionLocation : "expression is not static: use assert instruction"
-  else
-    [expressionResult literalInteger ?1* ?value:@bigint value]
-    if value != 1G then
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !expressionResult
+    !mCheckMessage.location
+    !?ioTemporaries
+    !?instructionGenerationList
+    !?alloca: ioAllocaList
+    ?let booleanOperand
+  ]
+#--- 
+  switch booleanOperand 
+  case compileTime (boolValue) :
+    if not boolValue then
       if mCheckMessage.string != "" then
         error mCheckMessage : "check failure: " + mCheckMessage
       else
         error mCheckMessage : "check failure"
       end
     end
+  case llvmVariable (*) :
+    error mInstructionLocation : "expression is not static: use assert instruction"
   end
+#--- Check inferred type
+#  if not [[expressionResult type].kind isBoolean] then
+#    error mInstructionLocation : "expression is not boolean"
+#  end
+##--- Check expression is static, and true
+#  if not [expressionResult isStatic] then
+#    error mInstructionLocation : "expression is not static: use assert instruction"
+#  else
+#    [expressionResult literalInteger ?1* ?value:@bigint value]
+#    if value != 1G then
+#      if mCheckMessage.string != "" then
+#        error mCheckMessage : "check failure: " + mCheckMessage
+#      else
+#        error mCheckMessage : "check failure"
+#      end
+#    end
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

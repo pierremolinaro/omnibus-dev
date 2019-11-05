@@ -104,10 +104,6 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR leftOperand
   ]
-#  [!?ioInstructionGenerationList appendLoadWhenReference
-#    !?ioTemporaries
-#    !?leftOperand
-#  ]  
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !self:inSelfType
@@ -122,14 +118,10 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR rightOperand
   ]
-#  [!?ioInstructionGenerationList appendLoadWhenReference
-#    !?ioTemporaries
-#    !?rightOperand
-#  ]
 #------------------- Get operator map
   let key = infixOperatorMapKey (![leftOperand type] !mInfixOperator !mOperatorLocation ![rightOperand type])
   if [inContext.mInfixOperatorMap hasKey !key.string] then
-#    message "NEW INFIX OP (" + key + ")\n"
+    message "NEW INFIX OP (" + key + ")\n"
     [inContext.mInfixOperatorMap generateInfixOperatorCode
       !leftOperand
       !mInfixOperator
@@ -137,18 +129,19 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
       !rightOperand
       !?ioTemporaries
       !?ioInstructionGenerationList
-      ?* #!@objectIR outResultValue
+      ?outResult
     ]
-  end
-#  else 
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
-    !?leftOperand
-  ]  
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
-    !?rightOperand
-  ]
+#  end
+  else 
+    message "OLD INFIX OP (" + [[leftOperand type] omnibusTypeDescriptionName] + " " +  [[rightOperand type] omnibusTypeDescriptionName] + ")\n"
+    [!?ioInstructionGenerationList appendLoadWhenReference
+      !?ioTemporaries
+      !?leftOperand
+    ]  
+    [!?ioInstructionGenerationList appendLoadWhenReference
+      !?ioTemporaries
+      !?rightOperand
+    ]
   #------------------- Get operator map
     let operatorMap = getInfixOperatorMap (!mInfixOperator !context:inContext !mode:inMode !mOperatorLocation)
   #------------------- Check operand types
@@ -169,7 +162,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
       !resultType
       ?outResult
     ]
-#  end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

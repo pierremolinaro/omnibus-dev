@@ -49,12 +49,12 @@ struct @semanticContext {
   @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
   @infixOperatorMap_EX mRightShiftOperatorMap      # >>
   
-  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
-  @prefixOperatorMap mNotOperatorMap            # not
-  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+  @prefixOperatorMap_EX mUnaryMinusOperatorMap     # - and &-
+  @prefixOperatorMap_EX mNotOperatorMap            # not
+  @prefixOperatorMap_EX mUnsignedComplementOperatorMap # ~
   
   @infixOperatorMap mInfixOperatorMap
-  @terminusPrefixOperatorMap mTerminusPrefixOperatorMap
+  @prefixOperatorMap mPrefixOperatorMap
   @assignmentOperatorMap mAssignmentOperatorMap
   
   @implicitConversionToBooleanMap mImplicitConversionToBooleanMap
@@ -89,7 +89,7 @@ map @infixOperatorMap_EX {
 
 #·······················································································································
 
-map @prefixOperatorMap {
+map @prefixOperatorMap_EX {
   insert insertKey error message "** internal error **"
   search searchKey error message "prefix operation is not defined for %K type"
 }
@@ -233,7 +233,7 @@ proc buildSemanticContext
     !outSemanticContext.mTypeMap
     !outSemanticContext.mRoutineMap
     !outSemanticContext.mInfixOperatorMap
-    !outSemanticContext.mTerminusPrefixOperatorMap
+    !outSemanticContext.mPrefixOperatorMap
     !outSemanticContext.mAssignmentOperatorMap
     !sourceFile:inSourceFile
   )

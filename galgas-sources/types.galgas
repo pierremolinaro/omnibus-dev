@@ -174,7 +174,6 @@ func %once compileTimeIntegerType -> @omnibusType {
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-#    !assignmentSources: {! ctIntegerTypeName ()}
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
     !kind:.compileTimeInteger
@@ -454,7 +453,7 @@ proc buildTypeMapHTMLFile
   ?let @unifiedTypeMap inTypeMap
   ?let @routineMapForContext inRoutineMap
   ?let @infixOperatorMap inTerminusInfixOperatorMap
-  ?let @terminusPrefixOperatorMap inTerminusPrefixOperatorMap
+  ?let @prefixOperatorMap inTerminusPrefixOperatorMap
   ?let @assignmentOperatorMap inAssignmentOperatorMap
   ?sourceFile:let @lstring inSourceFile
 {
@@ -502,9 +501,8 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
     ?@string TABLE_OF_TYPES_STRING
     ?@routineMapForContext ALL_ROUTINE_MAP
     ?@infixOperatorMap INFIX_OPERATOR_MAP
-    ?@terminusPrefixOperatorMap PREFIX_OPERATOR_MAP
+    ?@prefixOperatorMap PREFIX_OPERATOR_MAP
     ?@assignmentOperatorMap ASSIGNMENT_OPERATOR_MAP
-
 }
 
 #·······················································································································

@@ -59,7 +59,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type: compileTimeIntegerType () !value:mLiteralInteger.bigint}
+  outResult = .literalInteger {!type: compileTimeIntegerType () !value: mLiteralInteger.bigint}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

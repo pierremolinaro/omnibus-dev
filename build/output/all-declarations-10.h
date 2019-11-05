@@ -10,6 +10,165 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                           @dynArrayAppendFunctionIR class                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
+//--- Constructor
+  public : GALGAS_dynArrayAppendFunctionIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_dynArrayAppendFunctionIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_dynArrayAppendFunctionIR * ptr (void) const { return (const cPtr_dynArrayAppendFunctionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_dynArrayAppendFunctionIR (const cPtr_dynArrayAppendFunctionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_dynArrayAppendFunctionIR extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_dynArrayAppendFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_bool & inOperand1,
+                                                                         const class GALGAS_bool & inOperand2,
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                                         const class GALGAS_string & inOperand5
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_dynArrayAppendFunctionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_dynArrayAppendFunctionIR class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                  Pointer class for @dynArrayAppendFunctionIR class                                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
+//--- Attributes
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mArrayTypeProxy ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mElementTypeProxy ;
+  public : GALGAS_string mProperty_mInsertFunctionMangledName ;
+
+//--- Constructor
+  public : cPtr_dynArrayAppendFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                          const GALGAS_bool & in_isRequired,
+                                          const GALGAS_bool & in_warnsIfUnused,
+                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mArrayTypeProxy,
+                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy,
+                                          const GALGAS_string & in_mInsertFunctionMangledName
+                                          COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                     Extension method '@structurePropertyListAST-element enterPropertyInContext'                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropertyListAST_2D_element inObject,
+                                             class GALGAS_semanticContext & io_ioContext,
+                                             class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                             const class GALGAS_lstring constin_inReceiverTypeName,
+                                             const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
+                                             class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
+                                             class GALGAS_propertyList & io_ioPropertyList,
+                                             class GALGAS_propertyGetterMap & io_ioPropertyGetterMap,
+                                             class GALGAS_propertySetterMap & io_ioPropertySetterMap,
+                                             class GALGAS_sortedOperandIRList & io_sortedOperandIRList,
+                                             class GALGAS_constructorSignature & io_constructorSignature,
+                                             class GALGAS_string & io_ioConstructorKey,
+                                             class GALGAS_bool & io_canBeCopied,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              Function 'setterLLVMName'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_setterLLVMName (class GALGAS_string inArgument0,
+                                             const class GALGAS_string & constinArgument1,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                                 Function 'voidType'                                                 *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusType function_voidType (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'computeStaticExpression'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_computeStaticExpression (class GALGAS_semanticContext & ioArgument0,
+                                      class GALGAS_staticEntityMap & ioArgument1,
+                                      const class GALGAS_expressionAST constinArgument2,
+                                      const class GALGAS_location constinArgument3,
+                                      const class GALGAS_lstring constinArgument4,
+                                      class GALGAS_objectIR & outArgument5,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                     @infixObjectObjectOperatorDescription class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

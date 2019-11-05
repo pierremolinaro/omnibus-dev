@@ -22,13 +22,13 @@ syntax extension omnibus_syntax {
       <expression_logical_xor> !?ioAST ?let rightExpression
     #--- x or y equivalent to not (not x and not y)
       let andExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
-        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOperator !outExpression}
+        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOp !outExpression}
         !operatorLocation
-        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOperator !rightExpression}
+        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOp !rightExpression}
       }
       outExpression = @prefixOperatorExpressionAST.new {
         !operatorLocation
-        !.notOperator
+        !.notOp
         !andExpression
       }
     end
@@ -150,7 +150,7 @@ syntax extension omnibus_syntax {
       }
       outExpression = @prefixOperatorExpressionAST.new {
         !operatorLocation
-        !.notOperator
+        !.notOp
         !expression
       }
     end
@@ -183,7 +183,7 @@ syntax extension omnibus_syntax {
       }
       outExpression = @prefixOperatorExpressionAST.new {
         !operatorLocation
-        !.notOperator
+        !.notOp
         !expression
       }
     or
@@ -208,7 +208,7 @@ syntax extension omnibus_syntax {
       }
       outExpression = @prefixOperatorExpressionAST.new {
         !operatorLocation
-        !.notOperator
+        !.notOp
         !expression
       }
     end
@@ -366,7 +366,7 @@ syntax extension omnibus_syntax {
     <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
-      !.unsignedComplement
+      !.bitWiseComplement
       !expression
     }
   }
@@ -379,7 +379,7 @@ syntax extension omnibus_syntax {
     <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
-      !.notOperator
+      !.notOp
       !expression
     }
   }
@@ -392,7 +392,7 @@ syntax extension omnibus_syntax {
     <primary> !?ioAST ?let expression
     outExpression = @prefixOperatorExpressionAST.new {
       !operatorLocation
-      !.minus
+      !.minusOp
       !expression
     }
   }

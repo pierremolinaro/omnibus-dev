@@ -33,12 +33,20 @@ llvm func (left $ctBool) == (right $boolean) -> $boolean {
 }
 
 llvm func (receiver $boolean) convertToBoolean {
-  llvm result + " = ior " + $receiver + " " + receiver + ", 0"
+  llvm result + " = or " + $receiver + " " + receiver + ", 0"
+}
+
+llvm func not (receiver $boolean) -> $boolean {
+  llvm result + " = xor " + $receiver + " " + receiver + ", 1"
 }
 
 //--- Temp
 llvm func (receiver $bool) convertToBoolean {
-  llvm result + " = ior " + $receiver + " " + receiver + ", 0"
+  llvm result + " = or " + $receiver + " " + receiver + ", 0"
+}
+
+llvm func not (receiver $bool) -> $bool {
+  llvm result + " = xor " + $receiver + " " + receiver + ", 1"
 }
 
 //——————————————————————————————————————————————————————————————————————————————

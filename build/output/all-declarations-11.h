@@ -236,7 +236,7 @@ void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
 void routine_buildTypeMapHTMLFile (const class GALGAS_unifiedTypeMap constinArgument0,
                                    const class GALGAS_routineMapForContext constinArgument1,
                                    const class GALGAS_infixOperatorMap constinArgument2,
-                                   const class GALGAS_terminusPrefixOperatorMap constinArgument3,
+                                   const class GALGAS_prefixOperatorMap constinArgument3,
                                    const class GALGAS_assignmentOperatorMap constinArgument4,
                                    const class GALGAS_lstring constinArgument5,
                                    class C_Compiler * inCompiler
@@ -290,7 +290,7 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
                                                                    const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
                                                                    const class GALGAS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
                                                                    const class GALGAS_infixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
-                                                                   const class GALGAS_terminusPrefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP,
+                                                                   const class GALGAS_prefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP,
                                                                    const class GALGAS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
                                                                    COMMA_LOCATION_ARGS) ;
 

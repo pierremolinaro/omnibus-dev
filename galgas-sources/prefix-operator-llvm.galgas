@@ -2,25 +2,44 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmInfixOperatorAST : @abstractDeclarationAST {
-  @compileTimeInfixOperatorEnumeration mInfixOperator
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mLeftTypeName
-  @genericFormalParameterList mLeftGenericFormalParameterList
-  @lstring mRightOperandName
-  @lstring mRightTypeName
-  @genericFormalParameterList mRightGenericFormalParameterList
- # @ctExpressionAST mWhereExpression
-  @lstring mResultTypeName
-  @genericFormalParameterList mResultGenericFormalParameterList # À modifier
-  @llvmGenerationInstructionList mInstructionList
+enum @llvmPrefixOperatorEnumeration {
+ case notOp   # not
+ case minusOp # -
 }
 
 #·······················································································································
 
-override getter @llvmInfixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mInfixOperatorLocation
+getter @llvmPrefixOperatorEnumeration string -> @string {
+  switch self
+  case notOp   : result = "not"
+  case minusOp : result = "-"
+  end
+}
+
+#·······················································································································
+
+getter @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
+  switch self
+  case notOp   : result = .notOp
+  case minusOp : result = .minusOp
+  end
+}
+
+#·······················································································································
+
+class @llvmPrefixOperatorAST : @abstractDeclarationAST {
+  @llvmPrefixOperatorEnumeration mPrefixOperator
+  @location mPrefixOperatorLocation
+  @lstring mReceiverName
+  @lstring mReceiverTypeName
+  @llvmGenerationInstructionList mInstructionList
+  @lstring mResultTypeName
+}
+
+#·······················································································································
+
+override getter @llvmPrefixOperatorAST locationForErrorSignaling -> @location outLocation {
+  outLocation = mPrefixOperatorLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -29,35 +48,41 @@ override getter @llvmInfixOperatorAST locationForErrorSignaling -> @location out
 
 syntax extension omnibus_syntax {
 
- #·····················································································································
+  #·····················································································································
+
+  rule <llvmPrefixOperator> !@llvmPrefixOperatorEnumeration outOperator {
+    select
+      $not$
+      outOperator = .notOp
+    or
+      $-$
+      outOperator = .minusOp
+    end
+  }
+  
+  #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    <llvm_function_header> ?let leftVariableName ?let leftTypeName ?let leftGenericFormalParameterList
+    $llvm$
+    $func$
     let operationLocation = @location.here
-    <infixOperator> ?let infixOperator
+    <llvmPrefixOperator> ?let prefixOperator
     $($
-    $identifier$ ?let rightVariableName
-    $\$type$ ?let rightType
-    <generic_formal_arguments> ?let rightGenericFormalParameterList
+    $identifier$ ?let receiverName
+    $\$type$ ?let receiverType
     $)$
     $->$
     $\$type$ ?let resultType
-    <generic_formal_arguments> ?let resultGenericFormalParameterList
     ${$
     <llvm_instruction_list> ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@llvmInfixOperatorAST.new {
-      !infixOperator
+    ioAST.mDeclarationListAST += !@llvmPrefixOperatorAST.new {
+      !prefixOperator
       !operationLocation
-      !leftVariableName
-      !leftTypeName
-      !leftGenericFormalParameterList
-      !rightVariableName
-      !rightType
-      !rightGenericFormalParameterList
-      !resultType
-      !resultGenericFormalParameterList
+      !receiverName
+      !receiverType
       !instructionList
+      !resultType
     }
   }
 
@@ -69,27 +94,26 @@ syntax extension omnibus_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmInfixOperatorAST enterInPrecedenceGraph
+override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![mInfixOperator string] + "." + mLeftTypeName + "." + mRightTypeName !mInfixOperatorLocation}
+  let nodeName = @lstring.new {![mPrefixOperator string] + "." + mReceiverTypeName !mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mLeftTypeName]
-  [!?ioGraph addEdge !nodeName !mRightTypeName]
+  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
   [!?ioGraph addEdge !nodeName !mResultTypeName]
 }
 
 #·······················································································································
 
-override getter @llvmInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = mLeftTypeName.string + " " + mInfixOperator + " " + mRightTypeName
+override getter @llvmPrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = [mPrefixOperator string] + " " + mReceiverTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmInfixOperatorAST enterInContext
+override method @llvmPrefixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -100,98 +124,98 @@ override method @llvmInfixOperatorAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftTypeProxy]
-  let leftType = [leftTypeProxy type]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightTypeProxy]
-  let rightType = [rightTypeProxy type]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverTypeProxy]
+  let receiverType = [receiverTypeProxy type]
+  [receiverType checkIsNotCompileTimeType !mReceiverTypeName.location]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
-  if [leftType isCompileTimeType] & [rightType isCompileTimeType] then
-    error mInfixOperatorLocation : "one of the two argument types should not be a compile time type"
-  end
   [resultType checkIsNotCompileTimeType !mResultTypeName.location]
-#--- Enter in infix operator map  
-  let key = infixOperatorMapKey (!leftType !mInfixOperator !mInfixOperatorLocation !rightType)
-  let definition = @llvmInfixOperatorUsage.new {
-    !mInfixOperatorLocation
-    !mLeftOperandName
-    !mRightOperandName
+#--- Check native operator expression
+#  @ctCheckMap ctCheckMap = {}
+#  [!?ctCheckMap insertKey !mReceiverName]
+#  [mExpression checkCompileTimeExpression !ctCheckMap]
+#--- Enter in infix operator map
+  let prefixMangledFunctionName = prefixOperatorFunctionName (!receiverType !mPrefixOperator)
+  let key = prefixOperatorMapKey (!receiverType !mPrefixOperator !mPrefixOperatorLocation)
+  let definition = @llvmPrefixOperatorUsage.new {
+    !prefixMangledFunctionName
+    !mReceiverName
     !mInstructionList
   }
-  [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
-#--- Generate function
-  if not [leftType isCompileTimeType] & not [rightType isCompileTimeType] then
-    @assignmentGenerationVarMap varMap = {}
-    [!?varMap insertKey !mLeftOperandName !"%" + mLeftOperandName]
-    [!?varMap insertKey !mRightOperandName !"%" + mRightOperandName]
-    @assignmentGenerationVarMap typeMap = {}
-    if not [leftType isCompileTimeType] then
-      [!?typeMap insertKey !mLeftOperandName ![leftType llvmTypeName]]
-    end
-    if not [rightType isCompileTimeType] then
-      [!?typeMap insertKey !mRightOperandName ![rightType llvmTypeName]]
-    end
-    [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
-    @llvmGenerationInstructionList instructionList = {}
-    instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
-    instructionList += mInstructionList
-    [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
-    @stringlist generatedInstructions = {}
-    @allocaList allocaList = {}
-    @uint temporaryIndex = 0
-    [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
-    let routine = @infixOperatorRoutineIR.new {
-      !.new {!infixOperatorFunctionName (!leftType !mInfixOperator !rightType) !mInfixOperatorLocation}
-      !isRequired: true
-      !warnsIfUnused: false
-      !leftType
-      !mLeftOperandName.string
-      !rightType
-      !mRightOperandName.string
-      !resultType
-      !generatedInstructions
-      !allocaList
-    }
-    ioRoutineListIR += !routine
-  else # One argument is a compile time type
-  
-  end
+  [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
+#--- Generation routine
+  @assignmentGenerationVarMap varMap = {}
+  [!?varMap insertKey !mReceiverName !"%" + mReceiverName]
+  @assignmentGenerationVarMap typeMap = {}
+  [!?typeMap insertKey !mReceiverName ![receiverType llvmTypeName]]
+  [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
+  @llvmGenerationInstructionList instructionList = {}
+  instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
+  instructionList += mInstructionList
+  [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
+  @stringlist generatedInstructions = {}
+  @allocaList allocaList = {}
+  @uint temporaryIndex = 0
+  [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
+  let routine = @prefixOperatorRoutineIR.new {
+    !.new {!prefixMangledFunctionName !mPrefixOperatorLocation}
+    !isRequired: true
+    !warnsIfUnused: false
+    !receiverType
+    !mReceiverName.string
+    !resultType
+    !generatedInstructions
+    !allocaList
+  }
+  ioRoutineListIR += !routine
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   INFIX OPERATOR MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mRightOperandName
+class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
+  @string mPrefixMangledFunctionName
+  @lstring mReceiverOperandName
   @llvmGenerationInstructionList mInstructionList
 }
 
 #·······················································································································
 
-override method @llvmInfixOperatorUsage generateCode
-  ?let @objectIR inLeftOperand
+override method @llvmPrefixOperatorUsage generateCode
+  ?let @objectIR inReceiverOperand
   ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
+  ?noPanicCode: let @bool inDoNotGeneratePanicCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  error inOperatorLocation : "INFIX OPERATOR NOT HANDLED YET" : outResultValue
+#--- If reference, load it
+  var receiverOperand = inReceiverOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference
+    !?ioTemporaries
+    !?receiverOperand
+  ]  
+#--- New LLVM variable for result
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  @procCallEffectiveParameterListIR argumentList = {}
+  argumentList += !.output !receiverOperand
+  ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
+    !outResultValue
+    !.new {!mPrefixMangledFunctionName !inOperatorLocation}
+    !mPrefixMangledFunctionName
+    !argumentList
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @infixOperatorRoutineIR : @abstractRoutineIR {
-  @omnibusType mTargetType
-  @string mTargetVarName
-  @omnibusType mSourceType
-  @string mSourceVarName
+class @prefixOperatorRoutineIR : @abstractRoutineIR {
+  @omnibusType mReceiverType
+  @string mReceiverVarName
   @omnibusType mResultType
   @stringlist mGeneratedInstructions
   @allocaList mAllocaList
@@ -199,14 +223,13 @@ class @infixOperatorRoutineIR : @abstractRoutineIR {
 
 #·······················································································································
 
-override method @infixOperatorRoutineIR llvmCodeGeneration 
+override method @prefixOperatorRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "define internal " + [mResultType llvmTypeName] + " @" + [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + [mTargetType llvmTypeName] + " %" + mTargetVarName
-             + ", " + [mSourceType llvmTypeName] + " %" + mSourceVarName + ") nounwind {\n"
+  ioLLVMcode += " (" + [mReceiverType llvmTypeName] + " %" + mReceiverVarName + ") nounwind {\n"
   [mAllocaList generateAllocaList !?ioLLVMcode]
   for (instruction) in mGeneratedInstructions do
     ioLLVMcode += "  " + instruction + "\n"

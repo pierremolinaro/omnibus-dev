@@ -65,6 +65,14 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?ioTemporaries
     !?leftOperand
   ]  
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !leftOperand
+    !mOperatorLocation
+    !?ioTemporaries
+    !?leftInstructionGenerationList
+    !?alloca: ioAllocaList
+    ?let leftBooleanOperand
+  ]
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
@@ -74,38 +82,38 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
+    !?staticEntityMap: ioStaticEntityMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:rightInstructionGenerationList
-    ?result:@objectIR rightOperand
+    !?alloca: ioAllocaList
+    !?instructionListIR: rightInstructionGenerationList
+    ?result: @objectIR rightOperand
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?rightOperand
   ]  
-#--- Check left type is boolean
-  if [leftOperand type].kind != .boolean then
-    error mOperatorLocation : "left operand should be boolean"
-  end
-#--- Check right type is boolean
-  if [rightOperand type].kind != .boolean then
-    error mOperatorLocation : "left operand should be boolean"
-  end
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !rightOperand
+    !mOperatorLocation
+    !?ioTemporaries
+    !?rightInstructionGenerationList
+    !?alloca: ioAllocaList
+    ?let rightBooleanOperand
+  ]
 #--- Static operation, or dynamic operation
-  if [leftOperand isLiteralInteger] && [rightOperand isLiteralInteger] then
-    [leftOperand literalInteger ?type:* ?value:let @bigint leftStaticValue]
-    [rightOperand literalInteger ?type:* ?value:let @bigint rightStaticValue]
-    outResult = .literalInteger {!type:[leftOperand type] !value:leftStaticValue & rightStaticValue}
+  if [leftBooleanOperand isCompileTime] && [rightBooleanOperand isCompileTime] then
+    [leftBooleanOperand compileTime ?value:let @bool leftStaticValue]
+    [rightBooleanOperand compileTime ?value:let @bool rightStaticValue]
+    outResult = .literalInteger {!type: [leftOperand type] !value: leftStaticValue & rightStaticValue}
   else
   #--- Result type : bool 
     getNewTempValue (![inContext booleanType] !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation
       !outResult
-      !leftOperand
+      ![leftBooleanOperand llvmName]
       !leftInstructionGenerationList
-      !rightOperand
+      ![rightBooleanOperand llvmName]
       !rightInstructionGenerationList
       !mOperatorLocation
     ]

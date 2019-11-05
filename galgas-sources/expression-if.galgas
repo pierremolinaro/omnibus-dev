@@ -115,9 +115,18 @@ override method @ifExpressionAST analyzeExpression
     !?ifExpressionResult
   ]  
 #--- Check "if" expression type is boolean
-  if not [[ifExpressionResult type].kind isBoolean] then
-    error mIfExpressionEndLocation : "'if' expression should be boolean"
-  end
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !ifExpressionResult
+    !mIfExpressionEndLocation
+    !?ioTemporaries
+    !?ioInstructionGenerationList
+    !?alloca: ioAllocaList
+    ?let ifExpressionConvertedToBoolean
+  ]
+
+#  if not [[ifExpressionResult type].kind isBoolean] then
+#    error mIfExpressionEndLocation : "'if' expression should be boolean"
+#  end
 #--- Analyze 'then' expression
   [mThenExpression analyzeExpression
     !self:inSelfType
@@ -167,18 +176,30 @@ override method @ifExpressionAST analyzeExpression
     !staticTypeAllowed:true
   )
 #--- 'if' expression is static ?
-  if [ifExpressionResult isStatic] then # yes, perform 'if' statically
-    [ifExpressionResult literalInteger ?1* ?value:let value]
-    outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
-  else # No, generate 'select' LLVM instruction
+  switch ifExpressionConvertedToBoolean
+  case compileTime (boolValue) :
+    outResult = if boolValue then thenExpressionResult else elseExpressionResult end
+  case llvmVariable (testResultVariableName) :
     getNewTempValue (![elseExpressionResult type] !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendSelectOperation
       !outResult
-      !ifExpressionResult
+      !testResultVariableName
       !thenExpressionResult
       !elseExpressionResult
     ]      
   end
+#  if [ifExpressionResult isStatic] then # yes, perform 'if' statically
+#    [ifExpressionResult literalInteger ?1* ?value:let value]
+#    outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
+#  else # No, generate 'select' LLVM instruction
+#    getNewTempValue (![elseExpressionResult type] !?ioTemporaries ?outResult)
+#    [!?ioInstructionGenerationList appendSelectOperation
+#      !outResult
+#      !ifExpressionResult
+#      !thenExpressionResult
+#      !elseExpressionResult
+#    ]      
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

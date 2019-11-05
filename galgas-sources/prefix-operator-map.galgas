@@ -1,50 +1,58 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   INFIX OPERATOR MAP
+#   PREFIX OPERATOR MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @infixOperatorMap {
-#  @omnibusType mLeftType
-#  @omnibusType mRightType
+map @prefixOperatorMap {
+  @omnibusType mReceiverType
   @omnibusType mResultType
-  @omnibusInfixOperatorUsage mOperatorUsage
+  @prefixOperatorUsage mOperator
   insert insertKey error message "the '%K' infix operator is already declared in %L"
   search searchKey error message "there is no '%K' infix operator"
 }
 
 #·······················································································································
 
-abstract class @omnibusInfixOperatorUsage {
-}
+abstract class @prefixOperatorUsage {}
 
 #·······················································································································
 
-abstract method @omnibusInfixOperatorUsage generateCode
-  ?let @objectIR inLeftOperand
+abstract method @prefixOperatorUsage generateCode
+  ?let @objectIR inReceiverOperand
   ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
+  ?noPanicCode: let @bool inDoNotGeneratePanicCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @infixOperatorMap generateInfixOperatorCode
-  ?let @objectIR inLeftOperand
-  ?let @omnibusInfixOperator inInfixOperator
+method @prefixOperatorMap generateInfixOperatorCode
+  ?let @objectIR inReceiverOperand
+  ?let @prefixOperator inPrefixOperator
   ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
+  ?safeMode: let @bool inSafeMode
+  ?noPanicCode: let @bool inDoNotGeneratePanicCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  let key = infixOperatorMapKey (![inLeftOperand type] !inInfixOperator !inOperatorLocation ![inRightOperand type])
-  [self searchKey !key ?let resultType ?let operatorUsage]
+#--- Is operator allowed in safe mode ?
+  if inSafeMode then
+    switch inPrefixOperator 
+    case minusNoOvf, notOp, bitWiseComplement :
+    case minusOp :
+      error inOperatorLocation : "this operator is not allowed in safe mode"
+    end
+  end
+#---
+  let key = prefixOperatorMapKey (![inReceiverOperand type] !inPrefixOperator !inOperatorLocation)
+  [self searchKey !key ?1* ?let resultType ?let operatorUsage]
   [operatorUsage generateCode
-    !inLeftOperand
+    !inReceiverOperand
     !inOperatorLocation
-    !inRightOperand
     !resultType
+    !noPanicCode: inDoNotGeneratePanicCode
     !?ioTemporaries
     !?ioInstructionGenerationList
     ?outResultValue
@@ -52,3 +60,4 @@ method @infixOperatorMap generateInfixOperatorCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

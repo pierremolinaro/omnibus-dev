@@ -224,7 +224,20 @@ override method @compileTimeInfixOperatorAST enterInContext
     !mRightOperandName
     !mExpression
   }
-  [!?ioContext.mInfixOperatorMap insertKey !key !leftType !rightType !resultType !definition]
+  [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
+#--- Define '≤' operator ?
+#  let equal_key = infixOperatorMapKey (!leftType !.equal !mInfixOperatorLocation !rightType)
+#  let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !mInfixOperatorLocation !rightType)
+#  if [ioContext.mInfixOperatorMap hasKey !equal_key] & [ioContext.mInfixOperatorMap hasKey !lessThan_key] then
+#    let infEqual_definition = @compileTimeInfixOperatorUsage.new {
+#      !mLeftOperandName
+#      !mRightOperandName
+#      !mExpression
+#    }
+#    let infEqual_key = infixOperatorMapKey (!leftType !.equal !mInfixOperatorLocation !rightType)
+#    [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !definition]   
+#    end
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -255,7 +268,6 @@ override method @compileTimeInfixOperatorUsage generateCode
   [!?varMap insertKey !mRightOperandName !rightValue]
   [mExpression computeCompileTimeExpression !varMap ?result: let result]
   outResultValue = .literalInteger {!type: inResultType !value: result}
-#  error inOperatorLocation : "NOT HANDLED YET" : outResultValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

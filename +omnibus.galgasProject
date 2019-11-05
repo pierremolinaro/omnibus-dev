@@ -80,7 +80,6 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/expression-if.galgas"
   "galgas-sources/expression-boolean-short-circuit-and-operator.galgas"
   "galgas-sources/expression-integer-slice.galgas"
-  "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
   "galgas-sources/expression-literal-string.galgas"
   "galgas-sources/expression-true-false.galgas"
@@ -95,6 +94,12 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/infix-operator-llvm.galgas"
   "galgas-sources/infix-operator-map.galgas"
   "galgas-sources/expression-infix-operators.galgas"
+
+#--- Prefix operator
+  "galgas-sources/prefix-operator-compile-time.galgas"
+  "galgas-sources/prefix-operator-llvm.galgas"
+  "galgas-sources/prefix-operator-map.galgas"
+  "galgas-sources/expression-prefix-operators.galgas"
 
 #--- Instructions
   "galgas-sources/instructionList.galgas"
@@ -175,7 +180,6 @@ project (1:0:0) -> "omnibus" {
 
 #---- Nouvelle définition des types
   "galgas-sources/compile-time-type-bool.galgas"
-  "galgas-sources/terminus-prefix-operator.galgas"
   "galgas-sources/compile-time-expression.galgas"
   "galgas-sources/llvm-generic-type.galgas"
   "galgas-sources/assignment-operator-definition.galgas"

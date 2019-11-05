@@ -108,6 +108,41 @@ func infixOperatorFunctionName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Prefix operators
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func prefixOperatorMapKey ?let @omnibusType inReceiverType
+                          ?let @prefixOperator inOperator
+                          ?let @location inOperatorLocation -> @lstring 
+{
+  @string s
+  switch inOperator
+   case minusNoOvf : s = "-%"
+   case minusOp    : s = "-"
+   case notOp      : s = "not"
+   case bitWiseComplement : s = "~"
+  end
+  s += " " + [inReceiverType omnibusTypeDescriptionName]
+  result = .new {!s !inOperatorLocation}
+}
+
+#·······················································································································
+ 
+func prefixOperatorFunctionName
+      ?let @omnibusType inReceiverType
+      ?let @prefixOperator inOperator -> @string
+{
+  result = "operator."
+  switch inOperator
+   case minusNoOvf : result += "minusNoOvf"
+   case minusOp    : result += "minus"
+   case notOp      : result += "not"
+   case bitWiseComplement : result += "complement"
+  end
+  result += "." + [inReceiverType omnibusTypeDescriptionName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Predefined types
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

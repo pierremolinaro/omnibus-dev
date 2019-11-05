@@ -183,6 +183,22 @@ map @implicitConversionToBooleanMap { # Key is a type omnibus name
 
 #·······················································································································
 
+enum @implicitBooleanConversionResult {
+  case compileTime (@bool value)
+  case llvmVariable (@string name) 
+}
+
+#·······················································································································
+
+getter @implicitBooleanConversionResult llvmName -> @string {
+  switch self
+  case compileTime (@bool value) : result = if value then 1 else 0 end
+  case llvmVariable (@string name) : result = name
+  end
+}
+
+#·······················································································································
+
 abstract class @abstractImplicitConverterToBoolean {
 }
 
@@ -193,7 +209,8 @@ abstract method @abstractImplicitConverterToBoolean generateConvertToBooleanCode
   ?let @location inErrorLocation
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  !@string outResultLLVMName
+  ?!alloca:@allocaList ioAllocaList
+  !@implicitBooleanConversionResult outResult
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -209,14 +226,14 @@ override method @compileTimeImplicitConverterToBoolean generateConvertToBooleanC
   ?let @location unused inErrorLocation
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
-  !@string outResultLLVMName
+  ?!alloca: @allocaList unused ioAllocaList
+  !@implicitBooleanConversionResult outResult
 {
   [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
   @ctMap varMap = {}
   [!?varMap insertKey !mReceiverName !receiverValue]
   [mExpression computeCompileTimeExpression !varMap ?result: let result]
-#  outResultValue = .literalInteger {!type: voidType () !value: result}
-  outResultLLVMName = [result string]
+  outResult = .compileTime {!value: result != 0}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -233,29 +250,25 @@ override method @llvmImplicitConverterToBoolean generateConvertToBooleanCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inErrorLocation
   ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR unused ioInstructionGenerationList
-  !@string outResultLLVMName
+  ?!@instructionListIR ioInstructionGenerationList
+  ?!alloca: @allocaList ioAllocaList
+  !@implicitBooleanConversionResult outResult
 {
   @assignmentGenerationVarMap varMap = {}
   [!?varMap insertKey !mReceiverName ![inReceiverOperand llvmName]]
+  let resultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
+  ioTemporaries.mTemporaryIndex ++
+  [!?varMap insertKey !["result" nowhere] !resultLLVMName]
+
   @assignmentGenerationVarMap typeMap = {}
   [!?typeMap insertKey !mReceiverName ![mReceiverType llvmTypeName]]
 
-  @llvmGenerationInstructionList instructionList = {}
-  instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
-  instructionList += mInstructionList
-  outResultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
-  ioTemporaries.mTemporaryIndex ++
-  [!?instructionList appendReturn !["result" nowhere] ![outResultLLVMName nowhere]]
   @stringlist generatedInstructions = {}
-  @allocaList allocaList = {}
-  @uint temporaryIndex = 0
-  [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
-
-#  @ctMap varMap = {}
-#  [!?varMap insertKey !mReceiverName !receiverValue]
-#  [mExpression computeCompileTimeExpression !varMap ?result: let result]
-#  outResultValue = .literalInteger {!type: boolType () !value: result}
+  [mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
+  for (str) in generatedInstructions do
+    [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
+  end
+  outResult = .llvmVariable {!name: resultLLVMName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -265,7 +278,8 @@ method @implicitConversionToBooleanMap generateConvertToBooleanCode
   ?let @location inErrorLocation
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  !@string outResultLLVMName
+  ?!alloca:@allocaList ioAllocaList
+  !@implicitBooleanConversionResult outResult
 {
   let key = @lstring.new {![inReceiverOperand omnibusTypeDescriptionName] !inErrorLocation}
   [self searchKey !key ?let converter]
@@ -274,9 +288,9 @@ method @implicitConversionToBooleanMap generateConvertToBooleanCode
     !inErrorLocation
     !?ioTemporaries
     !?ioInstructionGenerationList
-    ?outResultLLVMName
+    !?alloca: ioAllocaList
+    ?outResult
   ]
 }
-
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

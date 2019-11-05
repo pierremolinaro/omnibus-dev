@@ -125,13 +125,33 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?testResult
   ]  
 #--- Check inferred type
-  if [testResult type].kind != .boolean then
-    error mTestExpressionEndLocation : "test expression type is '" + [testResult omnibusTypeDescriptionName] + "', it should be boolean"
-  elsif mStaticIfExpression && not [testResult isStatic] then
-    error mTestExpressionEndLocation : "'if' expression is not static"
-  elsif [testResult isStatic] && not mStaticIfExpression then
-    warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !testResult
+    !mTestExpressionEndLocation
+    !?ioTemporaries
+    !?ioInstructionGenerationList
+    !?alloca: ioAllocaList
+    ?let booleanResult
+  ]
+#----  
+  switch booleanResult 
+  case compileTime (*) :
+    if not mStaticIfExpression then
+      warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
+    end
+  case llvmVariable (*) :
+    if mStaticIfExpression then
+      error mTestExpressionEndLocation : "'if' expression is not static"
+    end 
   end
+  
+#  if [testResult type].kind != .boolean then
+#    error mTestExpressionEndLocation : "test expression type is '" + [testResult omnibusTypeDescriptionName] + "', it should be boolean"
+#  elsif mStaticIfExpression && not [testResult isStatic] then
+#    error mTestExpressionEndLocation : "'if' expression is not static"
+#  elsif [testResult isStatic] && not mStaticIfExpression then
+#    warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
+#  end
   [!?ioUniversalMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}
@@ -164,7 +184,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   [!?ioUniversalMap closeOverride !mEndOf_if_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {
-    !testResult
+    ![booleanResult llvmName]
     !mTestExpressionEndLocation
     !thenInstructionGenerationList
     !elseInstructionGenerationList
@@ -176,7 +196,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifInstructionIR : @abstractInstructionIR {
-  @objectIR mTestVariable
+  @string mLLVMTestName
   @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList
@@ -194,7 +214,7 @@ override method @ifInstructionIR llvmInstructionCode
   let labelFalse = "if." + ioGenerationAdds.mUniqueIndex + ".false"
   let labelEnd = "if." + ioGenerationAdds.mUniqueIndex + ".end"
   ioGenerationAdds.mUniqueIndex ++
-  ioLLVMcode += "  br i1 " + [mTestVariable llvmName] + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
+  ioLLVMcode += "  br i1 " + mLLVMTestName + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioLLVMcode += labelTrue + ":\n"
   [mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]

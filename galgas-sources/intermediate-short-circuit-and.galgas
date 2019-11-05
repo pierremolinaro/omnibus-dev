@@ -2,17 +2,17 @@
 
 setter @instructionListIR appendShortCircuitAndOperation
   ?let @objectIR inTargetOperand
-  ?let @objectIR inLeftOperand
+  ?let @string inLeftOperandLLVMName
   ?let @instructionListIR inLeftInstructionList
-  ?let @objectIR inRightOperand
+  ?let @string inRightOperandLLVMName
   ?let @instructionListIR inRightInstructionList
   ?let @location inLocation
 {
   self += !@shortCircuitAndOperationIR.new {
     !inTargetOperand
-    !inLeftOperand
+    !inLeftOperandLLVMName
     !inLeftInstructionList
-    !inRightOperand
+    !inRightOperandLLVMName
     !inRightInstructionList
     !inLocation
   }
@@ -22,9 +22,9 @@ setter @instructionListIR appendShortCircuitAndOperation
 
 class @shortCircuitAndOperationIR : @abstractInstructionIR {
   @objectIR mTargetOperand
-  @objectIR mLeftOperand
+  @string mLeftOperandLLVMName
   @instructionListIR mLeftInstructionList
-  @objectIR mRightOperand
+  @string mRightOperandLLVMName
   @instructionListIR mRightInstructionList
   @location mLocation
 }
@@ -52,12 +52,13 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
   [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mLeftOperand llvmName] + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioLLVMcode += "  br i1 " + mLeftOperandLLVMName + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioLLVMcode += trueLabel + ":\n"
   [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + falseLabel + "\n\n"
   ioLLVMcode += falseLabel + ":\n"
-  ioLLVMcode += "  " + [mTargetOperand llvmName] + " = phi i1 [" + [mRightOperand llvmName] + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+  ioLLVMcode += "  " + [mTargetOperand llvmName]
+             + " = phi i1 [" + mRightOperandLLVMName + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
