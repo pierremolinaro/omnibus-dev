@@ -777,12 +777,3 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'functionResultVariableName'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-

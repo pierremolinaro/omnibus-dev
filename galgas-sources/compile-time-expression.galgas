@@ -481,94 +481,92 @@ override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCh
 #  COMPUTE COMPILE TIME EXPRESSION                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @ctMap {
-#  @bigint mValue
-#  insert insertKey error message "the '%K' key is already declared in %L"
-#  search searchKey error message "there is no '%K' key"
-#}
+map @ctMap {
+  @bigint mValue
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
+}
 
 #·······················································································································
 
-#abstract method @ctExpressionAST computeCompileTimeExpression
-#  ?let @ctMap inMap
-#  !result: @bigint outValue
-#
-##·······················································································································
-#
-#override method @ctInfixExpressionAST computeCompileTimeExpression
-#  ?let @ctMap inMap
-#  !result: @bigint outValue
-#{
-#  [mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
-#  [mRightExpression computeCompileTimeExpression !inMap ?result: let right]
-#  switch mInfixOperator
-#   case equal     : outValue = if left == right then 1G else 0G end
-#   case strictInf : outValue = if left <  right then 1G else 0G end
-#   case booleanOr : outValue = left | right
-#   case bitWiseAnd: outValue = left & right
-#   case bitWiseOr : outValue = left | right
-#   case xor       : outValue = left ^ right
-#   case booleanXor: outValue = left ^ right
-#   case add       : outValue = left + right
-#   case mul       : outValue = left * right
-#   case div       : outValue = left / right
-#   case divNoOvf  : outValue = left / right
-#   case modulo    : outValue = left mod right
-#   case moduloNoOvf: outValue = left mod right
-#   case leftShift : outValue = left << right
-#   case rightShift: outValue = left >> right
-#  end
-#}
-#
-##·······················································································································
-#
-#override method @ctPrefixExpressionAST computeCompileTimeExpression
-#  ?let @ctMap inMap
-#  !result: @bigint outValue
-#{
-#  [mExpression computeCompileTimeExpression !inMap ?result: let exp]
-#  switch mPrefixOperator
-#   case minus     : outValue = - exp
-#   case minusNoOvf : outValue = - exp
-#   case notOperator  : outValue = if exp == 0G then 1G else 0G end
-#   case unsignedComplement: outValue = exp
-#  end
-#}
-#
-##·······················································································································
-#
-#override method @ctTrueExpressionAST computeCompileTimeExpression
-#  ?let @ctMap unused inMap
-#  !result: @bigint outValue
-#{
-#  outValue = 1G
-#}
-#
-##·······················································································································
-#
-#override method @ctFalseExpressionAST computeCompileTimeExpression
-#  ?let @ctMap unused inMap
-#  !result: @bigint outValue
-#{
-#  outValue = 0G
-#}
-#
-##·······················································································································
-#
-#override method @ctIntExpressionAST computeCompileTimeExpression
-#  ?let @ctMap unused inMap
-#  !result: @bigint outValue
-#{
-#  outValue = [mValue bigint]
-#}
-#
-##·······················································································································
-#
-#override method @ctIdentifierExpressionAST computeCompileTimeExpression
-#  ?let @ctMap inMap
-#  !result: @bigint outValue
-#{
-#  [inMap searchKey !mIdentifier ?outValue]
-#}
+abstract method @ctExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+
+#·······················································································································
+
+override method @ctInfixExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+{
+  [mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
+  [mRightExpression computeCompileTimeExpression !inMap ?result: let right]
+  switch mInfixOperator
+   case equal     : outValue = if left == right then 1G else 0G end
+   case lessThan  : outValue = if left <  right then 1G else 0G end
+   case bitWiseAndOp: outValue = left & right
+   case bitWiseOrOp : outValue = left | right
+   case bitWiseXorOp : outValue = left ^ right
+   case addOp     : outValue = left + right
+   case mulOp     : outValue = left * right
+   case divOp     : outValue = left / right
+   case divNoOvf  : outValue = left / right
+   case modOp     : outValue = left mod right
+   case moduloNoOvf: outValue = left mod right
+   case leftShift : outValue = left << right
+   case rightShift: outValue = left >> right
+  end
+}
+
+#·······················································································································
+
+override method @ctPrefixExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+{
+  [mExpression computeCompileTimeExpression !inMap ?result: let exp]
+  switch mPrefixOperator
+   case minus     : outValue = - exp
+   case minusNoOvf : outValue = - exp
+   case notOperator  : outValue = if exp == 0G then 1G else 0G end
+   case unsignedComplement: outValue = exp
+  end
+}
+
+#·······················································································································
+
+override method @ctTrueExpressionAST computeCompileTimeExpression
+  ?let @ctMap unused inMap
+  !result: @bigint outValue
+{
+  outValue = 1G
+}
+
+#·······················································································································
+
+override method @ctFalseExpressionAST computeCompileTimeExpression
+  ?let @ctMap unused inMap
+  !result: @bigint outValue
+{
+  outValue = 0G
+}
+
+#·······················································································································
+
+override method @ctIntExpressionAST computeCompileTimeExpression
+  ?let @ctMap unused inMap
+  !result: @bigint outValue
+{
+  outValue = [mValue bigint]
+}
+
+#·······················································································································
+
+override method @ctIdentifierExpressionAST computeCompileTimeExpression
+  ?let @ctMap inMap
+  !result: @bigint outValue
+{
+  [inMap searchKey !mIdentifier ?outValue]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

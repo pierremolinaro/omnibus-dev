@@ -111,17 +111,14 @@ override method @llvmInfixOperatorAST enterInContext
   end
   [resultType checkIsNotCompileTimeType !mResultTypeName.location]
 #--- Enter in infix operator map  
-  let key = @lstring.new {
-    ![leftType omnibusTypeDescriptionName] + " " + mInfixOperator + " " + [rightType omnibusTypeDescriptionName]
-    !mInfixOperatorLocation
-  }
+  let key = infixOperatorMapKey (!leftType !mInfixOperator !mInfixOperatorLocation !rightType)
   let definition = @llvmInfixOperatorUsage.new {
     !mInfixOperatorLocation
     !mLeftOperandName
     !mRightOperandName
     !mInstructionList
   }
-  [!?ioContext.mTerminusInfixOperatorMap insertKey !key !leftType !rightType !resultType !definition]
+  [!?ioContext.mInfixOperatorMap insertKey !key !leftType !rightType !resultType !definition]
 #--- Generate function
   if not [leftType isCompileTimeType] & not [rightType isCompileTimeType] then
     @assignmentGenerationVarMap varMap = {}
@@ -170,6 +167,20 @@ class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
   @lstring mLeftOperandName
   @lstring mRightOperandName
   @llvmGenerationInstructionList mInstructionList
+}
+
+#·······················································································································
+
+override method @llvmInfixOperatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  error inOperatorLocation : "NOT HANDLED YET" : outResultValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

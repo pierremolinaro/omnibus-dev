@@ -711,6 +711,81 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                         Abstract extension method '@omnibusInfixOperatorUsage generateCode'                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_omnibusInfixOperatorUsage_generateCode) (const class cPtr_omnibusInfixOperatorUsage * inObject,
+                                                                                 const class GALGAS_objectIR constinArgument0,
+                                                                                 const class GALGAS_location constinArgument1,
+                                                                                 const class GALGAS_objectIR constinArgument2,
+                                                                                 const class GALGAS_omnibusType constinArgument3,
+                                                                                 class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                                                                 class GALGAS_instructionListIR & ioArgument5,
+                                                                                 class GALGAS_objectIR & outArgument6,
+                                                                                 class C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateCode (const int32_t inClassIndex,
+                                        extensionMethodSignature_omnibusInfixOperatorUsage_generateCode inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateCode (const class cPtr_omnibusInfixOperatorUsage * inObject,
+                                       const GALGAS_objectIR constin_inLeftOperand,
+                                       const GALGAS_location constin_inOperatorLocation,
+                                       const GALGAS_objectIR constin_inRightOperand,
+                                       const GALGAS_omnibusType constin_inResultType,
+                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                       GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                       GALGAS_objectIR & out_outResultValue,
+                                       C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                           Extension method '@infixOperatorMap generateInfixOperatorCode'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_generateInfixOperatorCode (const class GALGAS_infixOperatorMap inObject,
+                                                const class GALGAS_objectIR constin_inLeftOperand,
+                                                const class GALGAS_omnibusInfixOperator constin_inInfixOperator,
+                                                const class GALGAS_location constin_inOperatorLocation,
+                                                const class GALGAS_objectIR constin_inRightOperand,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                class GALGAS_objectIR & out_outResultValue,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           Function 'infixOperatorMapKey'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_lstring function_infixOperatorMapKey (const class GALGAS_omnibusType & constinArgument0,
+                                                   const class GALGAS_omnibusInfixOperator & constinArgument1,
+                                                   const class GALGAS_location & constinArgument2,
+                                                   const class GALGAS_omnibusType & constinArgument3,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Extension getter '@objectIR type' (as function)                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusType extensionGetter_type (const class GALGAS_objectIR & inObject,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                          Extension method '@infixOperatorMap_EX checkBinaryOperationWith'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

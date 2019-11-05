@@ -8674,26 +8674,26 @@ cMapElement_infixOperatorMap::cMapElement_infixOperatorMap (const GALGAS_lstring
                                                             const GALGAS_omnibusType & in_mLeftType,
                                                             const GALGAS_omnibusType & in_mRightType,
                                                             const GALGAS_omnibusType & in_mResultType,
-                                                            const GALGAS_omnibusInfixOperatorUsage & in_mOperator
+                                                            const GALGAS_omnibusInfixOperatorUsage & in_mOperatorUsage
                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mLeftType (in_mLeftType),
 mProperty_mRightType (in_mRightType),
 mProperty_mResultType (in_mResultType),
-mProperty_mOperator (in_mOperator) {
+mProperty_mOperatorUsage (in_mOperatorUsage) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 bool cMapElement_infixOperatorMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mLeftType.isValid () && mProperty_mRightType.isValid () && mProperty_mResultType.isValid () && mProperty_mOperator.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mLeftType.isValid () && mProperty_mRightType.isValid () && mProperty_mResultType.isValid () && mProperty_mOperatorUsage.isValid () ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 cMapElement * cMapElement_infixOperatorMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_infixOperatorMap (mProperty_lkey, mProperty_mLeftType, mProperty_mRightType, mProperty_mResultType, mProperty_mOperator COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_infixOperatorMap (mProperty_lkey, mProperty_mLeftType, mProperty_mRightType, mProperty_mResultType, mProperty_mOperatorUsage COMMA_HERE)) ;
   return result ;
 }
 
@@ -8714,8 +8714,8 @@ void cMapElement_infixOperatorMap::description (C_String & ioString, const int32
   mProperty_mResultType.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mOperator" ":" ;
-  mProperty_mOperator.description (ioString, inIndentation) ;
+  ioString << "mOperatorUsage" ":" ;
+  mProperty_mOperatorUsage.description (ioString, inIndentation) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8733,7 +8733,7 @@ typeComparisonResult cMapElement_infixOperatorMap::compare (const cCollectionEle
     result = mProperty_mResultType.objectCompare (operand->mProperty_mResultType) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_mOperator.objectCompare (operand->mProperty_mOperator) ;
+    result = mProperty_mOperatorUsage.objectCompare (operand->mProperty_mOperatorUsage) ;
   }
   return result ;
 }
@@ -8848,7 +8848,7 @@ void GALGAS_infixOperatorMap::method_searchKey (GALGAS_lstring inKey,
     outArgument0 = p->mProperty_mLeftType ;
     outArgument1 = p->mProperty_mRightType ;
     outArgument2 = p->mProperty_mResultType ;
-    outArgument3 = p->mProperty_mOperator ;
+    outArgument3 = p->mProperty_mOperatorUsage ;
   }
 }
 
@@ -8899,15 +8899,15 @@ GALGAS_omnibusType GALGAS_infixOperatorMap::getter_mResultTypeForKey (const GALG
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_omnibusInfixOperatorUsage GALGAS_infixOperatorMap::getter_mOperatorForKey (const GALGAS_string & inKey,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusInfixOperatorUsage GALGAS_infixOperatorMap::getter_mOperatorUsageForKey (const GALGAS_string & inKey,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) attributes ;
   GALGAS_omnibusInfixOperatorUsage result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
-    result = p->mProperty_mOperator ;
+    result = p->mProperty_mOperatorUsage ;
   }
   return result ;
 }
@@ -8956,15 +8956,15 @@ void GALGAS_infixOperatorMap::setter_setMResultTypeForKey (GALGAS_omnibusType in
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_infixOperatorMap::setter_setMOperatorForKey (GALGAS_omnibusInfixOperatorUsage inAttributeValue,
-                                                         GALGAS_string inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_infixOperatorMap::setter_setMOperatorUsageForKey (GALGAS_omnibusInfixOperatorUsage inAttributeValue,
+                                                              GALGAS_string inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_infixOperatorMap * p = (cMapElement_infixOperatorMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
-    p->mProperty_mOperator = inAttributeValue ;
+    p->mProperty_mOperatorUsage = inAttributeValue ;
   }
 }
 
@@ -8991,7 +8991,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_infixOperatorMap_2D_element cEnumerator_infixOperatorMap::current (LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
-  return GALGAS_infixOperatorMap_2D_element (p->mProperty_lkey, p->mProperty_mLeftType, p->mProperty_mRightType, p->mProperty_mResultType, p->mProperty_mOperator) ;
+  return GALGAS_infixOperatorMap_2D_element (p->mProperty_lkey, p->mProperty_mLeftType, p->mProperty_mRightType, p->mProperty_mResultType, p->mProperty_mOperatorUsage) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9028,10 +9028,10 @@ GALGAS_omnibusType cEnumerator_infixOperatorMap::current_mResultType (LOCATION_A
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_omnibusInfixOperatorUsage cEnumerator_infixOperatorMap::current_mOperator (LOCATION_ARGS) const {
+GALGAS_omnibusInfixOperatorUsage cEnumerator_infixOperatorMap::current_mOperatorUsage (LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
-  return p->mProperty_mOperator ;
+  return p->mProperty_mOperatorUsage ;
 }
 
 

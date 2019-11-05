@@ -6,7 +6,7 @@ map @infixOperatorMap {
   @omnibusType mLeftType
   @omnibusType mRightType
   @omnibusType mResultType
-  @omnibusInfixOperatorUsage mOperator
+  @omnibusInfixOperatorUsage mOperatorUsage
   insert insertKey error message "the '%K' infix operator is already declared in %L"
   search searchKey error message "there is no '%K' infix operator"
 }
@@ -14,5 +14,40 @@ map @infixOperatorMap {
 #·······················································································································
 
 abstract class @omnibusInfixOperatorUsage {}
+
+#·······················································································································
+
+abstract method @omnibusInfixOperatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @infixOperatorMap generateInfixOperatorCode
+  ?let @objectIR inLeftOperand
+  ?let @omnibusInfixOperator inInfixOperator
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  let key = infixOperatorMapKey (![inLeftOperand type] !inInfixOperator !inOperatorLocation ![inRightOperand type])
+  [self searchKey !key ?2* ?let resultType ?let operatorUsage]
+  [operatorUsage generateCode
+    !inLeftOperand
+    !inOperatorLocation
+    !inRightOperand
+    !resultType
+    !?ioTemporaries
+    !?ioInstructionGenerationList
+    ?outResultValue
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

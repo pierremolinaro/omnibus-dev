@@ -125,27 +125,43 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?rightOperand
-  ]  
+  ]
 #------------------- Get operator map
-  let operatorMap = getInfixOperatorMap (!mInfixOperator !context:inContext !mode:inMode !mOperatorLocation)
-#------------------- Check operand types
-  [operatorMap checkBinaryOperationWith
-    !leftType:[leftOperand type]
-    !rightType:[rightOperand type]
-    !operatorLocation:mOperatorLocation
-    ?resultType:let resultType
-    ?op:let @omnibusInfixOperatorDescription binaryOperator
-  ]
-#------------------- Generate code
-  [binaryOperator generateInfixOperatorCode
-    !?ioTemporaries
-    !?ioInstructionGenerationList
-    !leftOperand
-    !mOperatorLocation
-    !rightOperand
-    !resultType
-    ?outResult
-  ]
+  let key = infixOperatorMapKey (![leftOperand type] !mInfixOperator !mOperatorLocation ![rightOperand type])
+  if [inContext.mInfixOperatorMap hasKey !key.string] then
+    message "NEW INFIX OP (" + key + ")\n"
+    [inContext.mInfixOperatorMap generateInfixOperatorCode
+      !leftOperand
+      !mInfixOperator
+      !mOperatorLocation
+      !rightOperand
+      !?ioTemporaries
+      !?ioInstructionGenerationList
+      ?* #!@objectIR outResultValue
+    ]
+  end
+#  else 
+  #------------------- Get operator map
+    let operatorMap = getInfixOperatorMap (!mInfixOperator !context:inContext !mode:inMode !mOperatorLocation)
+  #------------------- Check operand types
+    [operatorMap checkBinaryOperationWith
+      !leftType:[leftOperand type]
+      !rightType:[rightOperand type]
+      !operatorLocation:mOperatorLocation
+      ?resultType:let resultType
+      ?op:let @omnibusInfixOperatorDescription binaryOperator
+    ]
+  #------------------- Generate code
+    [binaryOperator generateInfixOperatorCode
+      !?ioTemporaries
+      !?ioInstructionGenerationList
+      !leftOperand
+      !mOperatorLocation
+      !rightOperand
+      !resultType
+      ?outResult
+    ]
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -33,7 +33,7 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Operators
+#!   Assignment operator
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
@@ -41,8 +41,47 @@ func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Infix operators
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func infixOperatorFunctionName ?let @omnibusType inLeftType ?let @omnibusInfixOperator inOperator ?let @omnibusType inRightType -> @string {
+func infixOperatorMapKey ?let @omnibusType inLeftType
+                         ?let @omnibusInfixOperator inOperator
+                         ?let @location inOperatorLocation
+                         ?let @omnibusType inRightType -> @lstring 
+{
+  var s = [inLeftType omnibusTypeDescriptionName] + " "
+  switch inOperator
+   case equal     : s += "=="
+   case lessThan : s += "<"
+   case infEqual  : s += "≤"
+   case bitWiseAndOp : s += "&"
+   case bitWiseOrOp : s += "|"
+   case bitWiseXorOp : s += "^"
+   case booleanXorOp: s += "xor"
+   case addOp       : s += "+"
+   case addOpNoOvf  : s += "+%"
+   case subOp       : s += "-"
+   case subOpNoOvf  : s += "-%"
+   case mulOp       : s += "*"
+   case mulOpNoOvf  : s += "*%"
+   case divOp       : s += "/"
+   case divOpNoOvf  : s += "!/"
+   case modOp    : s += "%"
+   case modOpNoOvf: s += "!%"
+   case leftShiftOp  : s += "<<"
+   case rightShiftOp : s += ">>"
+  end
+  s += " " + [inRightType omnibusTypeDescriptionName]
+  result = .new {!s !inOperatorLocation}
+}
+
+#·······················································································································
+ 
+func infixOperatorFunctionName
+      ?let @omnibusType inLeftType
+      ?let @omnibusInfixOperator inOperator
+      ?let @omnibusType inRightType -> @string
+{
   result = "operator." + [inLeftType omnibusTypeDescriptionName] + "."
   switch inOperator
    case equal     : result += "equal"

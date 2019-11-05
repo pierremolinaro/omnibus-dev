@@ -2641,14 +2641,14 @@ class cMapElement_infixOperatorMap : public cMapElement {
   public : GALGAS_omnibusType mProperty_mLeftType ;
   public : GALGAS_omnibusType mProperty_mRightType ;
   public : GALGAS_omnibusType mProperty_mResultType ;
-  public : GALGAS_omnibusInfixOperatorUsage mProperty_mOperator ;
+  public : GALGAS_omnibusInfixOperatorUsage mProperty_mOperatorUsage ;
 
 //--- Constructor
   public : cMapElement_infixOperatorMap (const GALGAS_lstring & inKey,
                                          const GALGAS_omnibusType & in_mLeftType,
                                          const GALGAS_omnibusType & in_mRightType,
                                          const GALGAS_omnibusType & in_mResultType,
-                                         const GALGAS_omnibusInfixOperatorUsage & in_mOperator
+                                         const GALGAS_omnibusInfixOperatorUsage & in_mOperatorUsage
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2680,7 +2680,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_omnibusType mProperty_mResultType ;
 
-  public : GALGAS_omnibusInfixOperatorUsage mProperty_mOperator ;
+  public : GALGAS_omnibusInfixOperatorUsage mProperty_mOperatorUsage ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2697,7 +2697,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
                                                const GALGAS_omnibusType & in_mLeftType,
                                                const GALGAS_omnibusType & in_mRightType,
                                                const GALGAS_omnibusType & in_mResultType,
-                                               const GALGAS_omnibusInfixOperatorUsage & in_mOperator) ;
+                                               const GALGAS_omnibusInfixOperatorUsage & in_mOperatorUsage) ;
 
 //-- Start of generic part --*
 
@@ -2733,7 +2733,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mLeftType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperatorUsage getter_mOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperatorUsage getter_mOperatorUsage (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mResultType (LOCATION_ARGS) const ;
 

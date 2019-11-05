@@ -53,7 +53,7 @@ struct @semanticContext {
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
   
-  @infixOperatorMap mTerminusInfixOperatorMap
+  @infixOperatorMap mInfixOperatorMap
   @terminusPrefixOperatorMap mTerminusPrefixOperatorMap
   @assignmentOperatorMap mAssignmentOperatorMap
 
@@ -230,7 +230,7 @@ proc buildSemanticContext
   buildTypeMapHTMLFile (
     !outSemanticContext.mTypeMap
     !outSemanticContext.mRoutineMap
-    !outSemanticContext.mTerminusInfixOperatorMap
+    !outSemanticContext.mInfixOperatorMap
     !outSemanticContext.mTerminusPrefixOperatorMap
     !outSemanticContext.mAssignmentOperatorMap
     !sourceFile:inSourceFile

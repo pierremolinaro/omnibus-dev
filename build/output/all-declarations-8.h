@@ -1098,10 +1098,9 @@ class GALGAS_compileTimeInfixOperatorUsage : public GALGAS_omnibusInfixOperatorU
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_compileTimeInfixOperatorUsage constructor_new (const class GALGAS_location & inOperand0,
+  public : static class GALGAS_compileTimeInfixOperatorUsage constructor_new (const class GALGAS_lstring & inOperand0,
                                                                               const class GALGAS_lstring & inOperand1,
-                                                                              const class GALGAS_lstring & inOperand2,
-                                                                              const class GALGAS_ctExpressionAST & inOperand3
+                                                                              const class GALGAS_ctExpressionAST & inOperand2
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1114,8 +1113,6 @@ class GALGAS_compileTimeInfixOperatorUsage : public GALGAS_omnibusInfixOperatorU
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
 
@@ -1140,14 +1137,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOpe
 
 class cPtr_compileTimeInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
 //--- Attributes
-  public : GALGAS_location mProperty_mInfixOperatorLocation ;
   public : GALGAS_lstring mProperty_mLeftOperandName ;
   public : GALGAS_lstring mProperty_mRightOperandName ;
   public : GALGAS_ctExpressionAST mProperty_mExpression ;
 
 //--- Constructor
-  public : cPtr_compileTimeInfixOperatorUsage (const GALGAS_location & in_mInfixOperatorLocation,
-                                               const GALGAS_lstring & in_mLeftOperandName,
+  public : cPtr_compileTimeInfixOperatorUsage (const GALGAS_lstring & in_mLeftOperandName,
                                                const GALGAS_lstring & in_mRightOperandName,
                                                const GALGAS_ctExpressionAST & in_mExpression
                                                COMMA_LOCATION_ARGS) ;
@@ -1156,7 +1151,6 @@ class cPtr_compileTimeInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;

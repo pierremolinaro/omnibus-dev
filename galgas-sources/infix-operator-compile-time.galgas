@@ -192,15 +192,6 @@ override getter @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling 
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mRightOperandName
-  @ctExpressionAST mExpression
-}
-
-#·······················································································································
-
 override method @compileTimeInfixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
@@ -212,29 +203,59 @@ override method @compileTimeInfixOperatorAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftType]
-  [[leftType type] checkIsCompileTimeType !mLeftTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightType]
-  [[rightType type] checkIsCompileTimeType !mRightTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
-  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftTypeProxy]
+  let leftType = [leftTypeProxy type]
+  [leftType checkIsCompileTimeType !mLeftTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightTypeProxy]
+  let rightType = [rightTypeProxy type]
+  [rightType checkIsCompileTimeType !mRightTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultTypeProxy]
+  let resultType = [resultTypeProxy type]
+  [resultType checkIsCompileTimeType !mResultTypeName.location]
 #--- Check native operator expression
   @ctCheckMap ctCheckMap = {}
   [!?ctCheckMap insertKey !mLeftOperandName]
   [!?ctCheckMap insertKey !mRightOperandName]
   [mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
-  let key = @lstring.new {
-    ![[leftType type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " + [[rightType type] omnibusTypeDescriptionName]
-    !mInfixOperatorLocation
-  }
+  let key = infixOperatorMapKey (!leftType !mInfixOperator !mInfixOperatorLocation !rightType)
   let definition = @compileTimeInfixOperatorUsage.new {
-    !mInfixOperatorLocation
     !mLeftOperandName
     !mRightOperandName
     !mExpression
   }
-  [!?ioContext.mTerminusInfixOperatorMap insertKey !key ![leftType type] ![rightType type] ![resultType type] !definition]
+  [!?ioContext.mInfixOperatorMap insertKey !key !leftType !rightType !resultType !definition]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  GENERATE CODE                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
+  @lstring mLeftOperandName
+  @lstring mRightOperandName
+  @ctExpressionAST mExpression
+}
+
+#·······················································································································
+
+override method @compileTimeInfixOperatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  @ctMap varMap = {}
+  [!?varMap insertKey !mLeftOperandName !leftValue]
+  [!?varMap insertKey !mRightOperandName !rightValue]
+  [mExpression computeCompileTimeExpression !varMap ?result: let result]
+  outResultValue = .literalInteger {!type: inResultType !value: result}
+#  error inOperatorLocation : "NOT HANDLED YET" : outResultValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
