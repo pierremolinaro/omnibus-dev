@@ -32,4 +32,13 @@ llvm func (left $ctBool) == (right $boolean) -> $boolean {
   llvm result + " = icmp eq " + $right + " " + left + ", " + right
 }
 
+llvm func (receiver $boolean) convertToBoolean {
+  llvm result + " = ior " + $receiver + " " + receiver + ", 0"
+}
+
+//--- Temp
+llvm func (receiver $bool) convertToBoolean {
+  llvm result + " = ior " + $receiver + " " + receiver + ", 0"
+}
+
 //——————————————————————————————————————————————————————————————————————————————

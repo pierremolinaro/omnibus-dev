@@ -3677,6 +3677,110 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                         @implicitConversionToBooleanMap map                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cMapElement_implicitConversionToBooleanMap ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const char * kSearchErrorMessage_implicitConversionToBooleanMap_searchKey ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_implicitConversionToBooleanMap : public AC_GALGAS_map {
+//--------------------------------- Default constructor
+  public : GALGAS_implicitConversionToBooleanMap (void) ;
+
+//--------------------------------- Handle copy
+  public : GALGAS_implicitConversionToBooleanMap (const GALGAS_implicitConversionToBooleanMap & inSource) ;
+  public : GALGAS_implicitConversionToBooleanMap & operator = (const GALGAS_implicitConversionToBooleanMap & inSource) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_implicitConversionToBooleanMap extractObject (const GALGAS_object & inObject,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_implicitConversionToBooleanMap constructor_emptyMap (LOCATION_ARGS) ;
+
+  public : static class GALGAS_implicitConversionToBooleanMap constructor_mapWithMapToOverride (const class GALGAS_implicitConversionToBooleanMap & inOperand0
+                                                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_abstractImplicitConverterToBoolean & inOperand1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_abstractImplicitConverterToBoolean constinArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMConverterForKey (class GALGAS_abstractImplicitConverterToBoolean constinArgument0,
+                                                             class GALGAS_string constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_abstractImplicitConverterToBoolean & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_abstractImplicitConverterToBoolean getter_mConverterForKey (const class GALGAS_string & constinOperand0,
+                                                                                                     C_Compiler * inCompiler
+                                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_implicitConversionToBooleanMap getter_overriddenMap (C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+  public : VIRTUAL_IN_DEBUG cMapElement_implicitConversionToBooleanMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                            const GALGAS_string & inKey
+                                                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
+
+  friend class cEnumerator_implicitConversionToBooleanMap ;
+ 
+} ; // End of GALGAS_implicitConversionToBooleanMap class
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Enumerator declaration                                                                                            *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cEnumerator_implicitConversionToBooleanMap : public cGenericAbstractEnumerator {
+  public : cEnumerator_implicitConversionToBooleanMap (const GALGAS_implicitConversionToBooleanMap & inEnumeratedObject,
+                                                       const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_abstractImplicitConverterToBoolean current_mConverter (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_implicitConversionToBooleanMap_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implicitConversionToBooleanMap ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                                @infixOperatorMap map                                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4911,6 +5015,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_assignmentOperatorMap mProperty_mAssignmentOperatorMap ;
 
+  public : GALGAS_implicitConversionToBooleanMap mProperty_mImplicitConversionToBooleanMap ;
+
   public : GALGAS_taskMap mProperty_mTaskMap ;
 
   public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
@@ -4970,6 +5076,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_infixOperatorMap & in_mInfixOperatorMap,
                                    const GALGAS_terminusPrefixOperatorMap & in_mTerminusPrefixOperatorMap,
                                    const GALGAS_assignmentOperatorMap & in_mAssignmentOperatorMap,
+                                   const GALGAS_implicitConversionToBooleanMap & in_mImplicitConversionToBooleanMap,
                                    const GALGAS_taskMap & in_mTaskMap,
                                    const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
                                    const GALGAS_universalValuedObjectMap & in_mValuedObjectMap) ;
@@ -5024,9 +5131,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_infixOperatorMap & inOperand36,
                                                                 const class GALGAS_terminusPrefixOperatorMap & inOperand37,
                                                                 const class GALGAS_assignmentOperatorMap & inOperand38,
-                                                                const class GALGAS_taskMap & inOperand39,
-                                                                const class GALGAS_globalTaskVariableList & inOperand40,
-                                                                const class GALGAS_universalValuedObjectMap & inOperand41
+                                                                const class GALGAS_implicitConversionToBooleanMap & inOperand39,
+                                                                const class GALGAS_taskMap & inOperand40,
+                                                                const class GALGAS_globalTaskVariableList & inOperand41,
+                                                                const class GALGAS_universalValuedObjectMap & inOperand42
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5068,6 +5176,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_mGuardMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_implicitConversionToBooleanMap getter_mImplicitConversionToBooleanMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap_5F_EX getter_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 

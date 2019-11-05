@@ -20,4 +20,8 @@ compiletime func (left $ctBool) == (right $ctBool) -> $ctBool {
   left == right
 }
 
+compiletime func (receiver $ctBool) convertToBoolean {
+  receiver
+}
+
 //——————————————————————————————————————————————————————————————————————————————

@@ -67,6 +67,7 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/panic-codes.galgas"
 
 #--- Expression
+  "galgas-sources/convert-to-boolean.galgas"
   "galgas-sources/compute-static-expression.galgas"
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-convert.galgas"
