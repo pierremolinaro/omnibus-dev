@@ -3959,7 +3959,7 @@ GALGAS_syncDeclarationAST GALGAS_syncDeclarationAST::extractObject (const GALGAS
 
 
 
-typeComparisonResult GALGAS_infixOperatorDescription::objectCompare (const GALGAS_infixOperatorDescription & inOperand) const {
+typeComparisonResult GALGAS_omnibusInfixOperatorDescription::objectCompare (const GALGAS_omnibusInfixOperatorDescription & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -3977,24 +3977,24 @@ typeComparisonResult GALGAS_infixOperatorDescription::objectCompare (const GALGA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_infixOperatorDescription::GALGAS_infixOperatorDescription (void) :
+GALGAS_omnibusInfixOperatorDescription::GALGAS_omnibusInfixOperatorDescription (void) :
 AC_GALGAS_class (false) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_infixOperatorDescription::GALGAS_infixOperatorDescription (const cPtr_infixOperatorDescription * inSourcePtr) :
+GALGAS_omnibusInfixOperatorDescription::GALGAS_omnibusInfixOperatorDescription (const cPtr_omnibusInfixOperatorDescription * inSourcePtr) :
 AC_GALGAS_class (inSourcePtr, false) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_infixOperatorDescription) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_omnibusInfixOperatorDescription) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_llvmBinaryOperation GALGAS_infixOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_omnibusInfixOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
-    const cPtr_infixOperatorDescription * p = (const cPtr_infixOperatorDescription *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_infixOperatorDescription) ;
+    const cPtr_omnibusInfixOperatorDescription * p = (const cPtr_omnibusInfixOperatorDescription *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_omnibusInfixOperatorDescription) ;
     result = p->mProperty_mOperator ;
   }
   return result ;
@@ -4002,16 +4002,16 @@ GALGAS_llvmBinaryOperation GALGAS_infixOperatorDescription::getter_mOperator (UN
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_llvmBinaryOperation cPtr_infixOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_omnibusInfixOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mProperty_mOperator ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                  Pointer class for @infixOperatorDescription class                                  *
+//                              Pointer class for @omnibusInfixOperatorDescription class                               *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-cPtr_infixOperatorDescription::cPtr_infixOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
-                                                              COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorDescription::cPtr_omnibusInfixOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                                            COMMA_LOCATION_ARGS) :
 acPtr_class (THERE),
 mProperty_mOperator (in_mOperator) {
 }
@@ -4019,42 +4019,42 @@ mProperty_mOperator (in_mOperator) {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @infixOperatorDescription type                                            *
+//                                        @omnibusInfixOperatorDescription type                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_infixOperatorDescription ("infixOperatorDescription",
-                                                 NULL) ;
+kTypeDescriptor_GALGAS_omnibusInfixOperatorDescription ("omnibusInfixOperatorDescription",
+                                                        NULL) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-const C_galgas_type_descriptor * GALGAS_infixOperatorDescription::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_infixOperatorDescription ;
+const C_galgas_type_descriptor * GALGAS_omnibusInfixOperatorDescription::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_omnibusInfixOperatorDescription ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-AC_GALGAS_root * GALGAS_infixOperatorDescription::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_omnibusInfixOperatorDescription::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_infixOperatorDescription (*this)) ;
+    macroMyNew (result, GALGAS_omnibusInfixOperatorDescription (*this)) ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_infixOperatorDescription GALGAS_infixOperatorDescription::extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorDescription result ;
-  const GALGAS_infixOperatorDescription * p = (const GALGAS_infixOperatorDescription *) inObject.embeddedObject () ;
+GALGAS_omnibusInfixOperatorDescription GALGAS_omnibusInfixOperatorDescription::extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_omnibusInfixOperatorDescription result ;
+  const GALGAS_omnibusInfixOperatorDescription * p = (const GALGAS_omnibusInfixOperatorDescription *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_infixOperatorDescription *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_omnibusInfixOperatorDescription *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("infixOperatorDescription", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("omnibusInfixOperatorDescription", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4096,13 +4096,13 @@ typeComparisonResult GALGAS_integerObject_5F_literal_5F_infixOperator::objectCom
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_integerObject_5F_literal_5F_infixOperator::GALGAS_integerObject_5F_literal_5F_infixOperator (void) :
-GALGAS_infixOperatorDescription () {
+GALGAS_omnibusInfixOperatorDescription () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_integerObject_5F_literal_5F_infixOperator::GALGAS_integerObject_5F_literal_5F_infixOperator (const cPtr_integerObject_5F_literal_5F_infixOperator * inSourcePtr) :
-GALGAS_infixOperatorDescription (inSourcePtr) {
+GALGAS_omnibusInfixOperatorDescription (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_integerObject_5F_literal_5F_infixOperator) ;
 }
 
@@ -4123,7 +4123,7 @@ GALGAS_integerObject_5F_literal_5F_infixOperator GALGAS_integerObject_5F_literal
 
 cPtr_integerObject_5F_literal_5F_infixOperator::cPtr_integerObject_5F_literal_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
                                                                                                 COMMA_LOCATION_ARGS) :
-cPtr_infixOperatorDescription (in_mOperator COMMA_THERE) {
+cPtr_omnibusInfixOperatorDescription (in_mOperator COMMA_THERE) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4156,7 +4156,7 @@ acPtr_class * cPtr_integerObject_5F_literal_5F_infixOperator::duplicate (LOCATIO
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator ("integerObject_literal_infixOperator",
-                                                                  & kTypeDescriptor_GALGAS_infixOperatorDescription) ;
+                                                                  & kTypeDescriptor_GALGAS_omnibusInfixOperatorDescription) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4227,13 +4227,13 @@ typeComparisonResult GALGAS_literal_5F_integerObject_5F_infixOperator::objectCom
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_literal_5F_integerObject_5F_infixOperator::GALGAS_literal_5F_integerObject_5F_infixOperator (void) :
-GALGAS_infixOperatorDescription () {
+GALGAS_omnibusInfixOperatorDescription () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_literal_5F_integerObject_5F_infixOperator::GALGAS_literal_5F_integerObject_5F_infixOperator (const cPtr_literal_5F_integerObject_5F_infixOperator * inSourcePtr) :
-GALGAS_infixOperatorDescription (inSourcePtr) {
+GALGAS_omnibusInfixOperatorDescription (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_literal_5F_integerObject_5F_infixOperator) ;
 }
 
@@ -4254,7 +4254,7 @@ GALGAS_literal_5F_integerObject_5F_infixOperator GALGAS_literal_5F_integerObject
 
 cPtr_literal_5F_integerObject_5F_infixOperator::cPtr_literal_5F_integerObject_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
                                                                                                 COMMA_LOCATION_ARGS) :
-cPtr_infixOperatorDescription (in_mOperator COMMA_THERE) {
+cPtr_omnibusInfixOperatorDescription (in_mOperator COMMA_THERE) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4287,7 +4287,7 @@ acPtr_class * cPtr_literal_5F_integerObject_5F_infixOperator::duplicate (LOCATIO
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ("literal_integerObject_infixOperator",
-                                                                  & kTypeDescriptor_GALGAS_infixOperatorDescription) ;
+                                                                  & kTypeDescriptor_GALGAS_omnibusInfixOperatorDescription) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4747,13 +4747,13 @@ typeComparisonResult GALGAS_literal_5F_literal_5F_integerInfixOperation::objectC
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_literal_5F_literal_5F_integerInfixOperation::GALGAS_literal_5F_literal_5F_integerInfixOperation (void) :
-GALGAS_infixOperatorDescription () {
+GALGAS_omnibusInfixOperatorDescription () {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_literal_5F_literal_5F_integerInfixOperation::GALGAS_literal_5F_literal_5F_integerInfixOperation (const cPtr_literal_5F_literal_5F_integerInfixOperation * inSourcePtr) :
-GALGAS_infixOperatorDescription (inSourcePtr) {
+GALGAS_omnibusInfixOperatorDescription (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_literal_5F_literal_5F_integerInfixOperation) ;
 }
 
@@ -4774,7 +4774,7 @@ GALGAS_literal_5F_literal_5F_integerInfixOperation GALGAS_literal_5F_literal_5F_
 
 cPtr_literal_5F_literal_5F_integerInfixOperation::cPtr_literal_5F_literal_5F_integerInfixOperation (const GALGAS_llvmBinaryOperation & in_mOperator
                                                                                                     COMMA_LOCATION_ARGS) :
-cPtr_infixOperatorDescription (in_mOperator COMMA_THERE) {
+cPtr_omnibusInfixOperatorDescription (in_mOperator COMMA_THERE) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4807,7 +4807,7 @@ acPtr_class * cPtr_literal_5F_literal_5F_integerInfixOperation::duplicate (LOCAT
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_literal_5F_literal_5F_integerInfixOperation ("literal_literal_integerInfixOperation",
-                                                                    & kTypeDescriptor_GALGAS_infixOperatorDescription) ;
+                                                                    & kTypeDescriptor_GALGAS_omnibusInfixOperatorDescription) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

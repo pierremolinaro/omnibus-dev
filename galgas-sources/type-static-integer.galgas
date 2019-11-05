@@ -172,7 +172,7 @@ private proc enterLiteralIntegerOperators
 #  INFIX OPERATIONS                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literal_literal_integerInfixOperation : @infixOperatorDescription {
+class @literal_literal_integerInfixOperation : @omnibusInfixOperatorDescription {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

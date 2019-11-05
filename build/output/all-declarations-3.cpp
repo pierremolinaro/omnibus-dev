@@ -8156,7 +8156,7 @@ GALGAS_availableInterruptMap GALGAS_availableInterruptMap::extractObject (const 
 
 cMapElement_infixOperatorMap_5F_EX::cMapElement_infixOperatorMap_5F_EX (const GALGAS_lstring & inKey,
                                                                         const GALGAS_omnibusType & in_mResultType,
-                                                                        const GALGAS_infixOperatorDescription & in_mOperation
+                                                                        const GALGAS_omnibusInfixOperatorDescription & in_mOperation
                                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mResultType (in_mResultType),
@@ -8253,7 +8253,7 @@ GALGAS_infixOperatorMap_5F_EX GALGAS_infixOperatorMap_5F_EX::getter_overriddenMa
 
 void GALGAS_infixOperatorMap_5F_EX::addAssign_operation (const GALGAS_lstring & inKey,
                                                          const GALGAS_omnibusType & inArgument0,
-                                                         const GALGAS_infixOperatorDescription & inArgument1,
+                                                         const GALGAS_omnibusInfixOperatorDescription & inArgument1,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap_5F_EX * p = NULL ;
@@ -8270,7 +8270,7 @@ void GALGAS_infixOperatorMap_5F_EX::addAssign_operation (const GALGAS_lstring & 
 
 void GALGAS_infixOperatorMap_5F_EX::setter_insertKey (GALGAS_lstring inKey,
                                                       GALGAS_omnibusType inArgument0,
-                                                      GALGAS_infixOperatorDescription inArgument1,
+                                                      GALGAS_omnibusInfixOperatorDescription inArgument1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap_5F_EX * p = NULL ;
@@ -8291,7 +8291,7 @@ const char * kSearchErrorMessage_infixOperatorMap_5F_EX_searchKey = "** internal
 
 void GALGAS_infixOperatorMap_5F_EX::method_searchKey (GALGAS_lstring inKey,
                                                       GALGAS_omnibusType & outArgument0,
-                                                      GALGAS_infixOperatorDescription & outArgument1,
+                                                      GALGAS_omnibusInfixOperatorDescription & outArgument1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap_5F_EX * p = (const cMapElement_infixOperatorMap_5F_EX *) performSearch (inKey,
@@ -8325,12 +8325,12 @@ GALGAS_omnibusType GALGAS_infixOperatorMap_5F_EX::getter_mResultTypeForKey (cons
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_infixOperatorDescription GALGAS_infixOperatorMap_5F_EX::getter_mOperationForKey (const GALGAS_string & inKey,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusInfixOperatorDescription GALGAS_infixOperatorMap_5F_EX::getter_mOperationForKey (const GALGAS_string & inKey,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_infixOperatorMap_5F_EX * p = (const cMapElement_infixOperatorMap_5F_EX *) attributes ;
-  GALGAS_infixOperatorDescription result ;
+  GALGAS_omnibusInfixOperatorDescription result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_infixOperatorMap_5F_EX) ;
     result = p->mProperty_mOperation ;
@@ -8354,7 +8354,7 @@ void GALGAS_infixOperatorMap_5F_EX::setter_setMResultTypeForKey (GALGAS_omnibusT
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_infixOperatorMap_5F_EX::setter_setMOperationForKey (GALGAS_infixOperatorDescription inAttributeValue,
+void GALGAS_infixOperatorMap_5F_EX::setter_setMOperationForKey (GALGAS_omnibusInfixOperatorDescription inAttributeValue,
                                                                 GALGAS_string inKey,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
@@ -8410,7 +8410,7 @@ GALGAS_omnibusType cEnumerator_infixOperatorMap_5F_EX::current_mResultType (LOCA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_infixOperatorDescription cEnumerator_infixOperatorMap_5F_EX::current_mOperation (LOCATION_ARGS) const {
+GALGAS_omnibusInfixOperatorDescription cEnumerator_infixOperatorMap_5F_EX::current_mOperation (LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap_5F_EX * p = (const cMapElement_infixOperatorMap_5F_EX *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_infixOperatorMap_5F_EX) ;
   return p->mProperty_mOperation ;
@@ -8674,7 +8674,7 @@ cMapElement_infixOperatorMap::cMapElement_infixOperatorMap (const GALGAS_lstring
                                                             const GALGAS_omnibusType & in_mLeftType,
                                                             const GALGAS_omnibusType & in_mRightType,
                                                             const GALGAS_omnibusType & in_mResultType,
-                                                            const GALGAS_terminusInfixOperator & in_mOperator
+                                                            const GALGAS_omnibusInfixOperatorUsage & in_mOperator
                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mLeftType (in_mLeftType),
@@ -8789,7 +8789,7 @@ void GALGAS_infixOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                    const GALGAS_omnibusType & inArgument0,
                                                    const GALGAS_omnibusType & inArgument1,
                                                    const GALGAS_omnibusType & inArgument2,
-                                                   const GALGAS_terminusInfixOperator & inArgument3,
+                                                   const GALGAS_omnibusInfixOperatorUsage & inArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap * p = NULL ;
@@ -8808,7 +8808,7 @@ void GALGAS_infixOperatorMap::setter_insertKey (GALGAS_lstring inKey,
                                                 GALGAS_omnibusType inArgument0,
                                                 GALGAS_omnibusType inArgument1,
                                                 GALGAS_omnibusType inArgument2,
-                                                GALGAS_terminusInfixOperator inArgument3,
+                                                GALGAS_omnibusInfixOperatorUsage inArgument3,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap * p = NULL ;
@@ -8831,7 +8831,7 @@ void GALGAS_infixOperatorMap::method_searchKey (GALGAS_lstring inKey,
                                                 GALGAS_omnibusType & outArgument0,
                                                 GALGAS_omnibusType & outArgument1,
                                                 GALGAS_omnibusType & outArgument2,
-                                                GALGAS_terminusInfixOperator & outArgument3,
+                                                GALGAS_omnibusInfixOperatorUsage & outArgument3,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) performSearch (inKey,
@@ -8899,12 +8899,12 @@ GALGAS_omnibusType GALGAS_infixOperatorMap::getter_mResultTypeForKey (const GALG
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_terminusInfixOperator GALGAS_infixOperatorMap::getter_mOperatorForKey (const GALGAS_string & inKey,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_omnibusInfixOperatorUsage GALGAS_infixOperatorMap::getter_mOperatorForKey (const GALGAS_string & inKey,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) attributes ;
-  GALGAS_terminusInfixOperator result ;
+  GALGAS_omnibusInfixOperatorUsage result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
     result = p->mProperty_mOperator ;
@@ -8956,7 +8956,7 @@ void GALGAS_infixOperatorMap::setter_setMResultTypeForKey (GALGAS_omnibusType in
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void GALGAS_infixOperatorMap::setter_setMOperatorForKey (GALGAS_terminusInfixOperator inAttributeValue,
+void GALGAS_infixOperatorMap::setter_setMOperatorForKey (GALGAS_omnibusInfixOperatorUsage inAttributeValue,
                                                          GALGAS_string inKey,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -9028,7 +9028,7 @@ GALGAS_omnibusType cEnumerator_infixOperatorMap::current_mResultType (LOCATION_A
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_terminusInfixOperator cEnumerator_infixOperatorMap::current_mOperator (LOCATION_ARGS) const {
+GALGAS_omnibusInfixOperatorUsage cEnumerator_infixOperatorMap::current_mOperator (LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
   return p->mProperty_mOperator ;

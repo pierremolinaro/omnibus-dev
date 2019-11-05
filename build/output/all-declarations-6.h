@@ -18,7 +18,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (GALGAS_infixOperator & outArgument0,
+  public : virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (GALGAS_omnibusInfixOperator & outArgument0,
                                                                         GALGAS_location & outArgument1,
                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
@@ -316,7 +316,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual void nt_infixOperator_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_infixOperator_ (GALGAS_infixOperatorEnumeration & outArgument0,
+  public : virtual void nt_infixOperator_ (GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
                                            C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'instruction' non terminal

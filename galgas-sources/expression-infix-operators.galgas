@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @infixOperator {
+enum @omnibusInfixOperator {
   case equal
-  case strictInf
+  case lessThan
   case infEqual
-  case andOp
-  case orOp
-  case xorOp
+  case bitWiseAndOp
+  case bitWiseOrOp
+  case bitWiseXorOp
   case booleanXorOp
   case addOp
   case addOpNoOvf
@@ -26,10 +26,10 @@ enum @infixOperator {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @infixOperatorExpressionAST : @expressionAST {
+class @omnibusInfixOperatorExpressionAST : @expressionAST {
   @expressionAST mLeftExpression
   @location mOperatorLocation
-  @infixOperator mOp
+  @omnibusInfixOperator mInfixOperator
   @expressionAST mRightExpression
 }
 
@@ -37,7 +37,7 @@ class @infixOperatorExpressionAST : @expressionAST {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
+override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -49,7 +49,7 @@ override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @infixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @omnibusInfixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -63,7 +63,7 @@ method @infixOperatorMap_EX checkBinaryOperationWith
   ?rightType:let @omnibusType inRightType
   ?operatorLocation:let @location inOperatorLocation
   !resultType: @omnibusType outResultType
-  !op:@infixOperatorDescription outOperation
+  !op:@omnibusInfixOperatorDescription outOperation
 {
   let lkey = combineTypeNamesForInfixOperator (!inLeftType.omnibusTypeDescriptionName !inRightType.omnibusTypeDescriptionName)
   if [self hasKey !lkey.string] then
@@ -77,7 +77,7 @@ method @infixOperatorMap_EX checkBinaryOperationWith
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @infixOperatorExpressionAST analyzeExpression
+override method @omnibusInfixOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -127,14 +127,14 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?rightOperand
   ]  
 #------------------- Get operator map
-  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inMode !mOperatorLocation)
+  let operatorMap = getInfixOperatorMap (!mInfixOperator !context:inContext !mode:inMode !mOperatorLocation)
 #------------------- Check operand types
   [operatorMap checkBinaryOperationWith
     !leftType:[leftOperand type]
     !rightType:[rightOperand type]
     !operatorLocation:mOperatorLocation
     ?resultType:let resultType
-    ?op:let @infixOperatorDescription binaryOperator
+    ?op:let @omnibusInfixOperatorDescription binaryOperator
   ]
 #------------------- Generate code
   [binaryOperator generateInfixOperatorCode
@@ -151,7 +151,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func getInfixOperatorMap
-  ?let @infixOperator inOp
+  ?let @omnibusInfixOperator inOp
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
   ?let @location inOperatorLocation
@@ -160,15 +160,15 @@ private func getInfixOperatorMap
   switch inOp 
   case equal :
     outOperatorMap = inContext.mEqualOperatorMap
-  case strictInf :
+  case lessThan :
     outOperatorMap = inContext.mStrictInfOperatorMap
   case infEqual :
     outOperatorMap = inContext.mInfEqualOperatorMap
-  case andOp :
+  case bitWiseAndOp :
     outOperatorMap = inContext.mAndOperatorMap
-  case orOp :
+  case bitWiseOrOp :
     outOperatorMap = inContext.mOrOperatorMap
-  case xorOp :
+  case bitWiseXorOp :
     outOperatorMap = inContext.mXorOperatorMap
   case booleanXorOp :
     outOperatorMap = inContext.mBooleanXorOperatorMap
@@ -236,13 +236,13 @@ private func getInfixOperatorMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @infixOperatorDescription {
+abstract class @omnibusInfixOperatorDescription {
   @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @infixOperatorDescription generateInfixOperatorCode
+abstract method @omnibusInfixOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   ?let @objectIR inLeftOperand
@@ -253,7 +253,7 @@ abstract method @infixOperatorDescription generateInfixOperatorCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @infixOperatorDescription performStaticOperation
+getter @omnibusInfixOperatorDescription performStaticOperation
   ?let @bigint inLeft
   ?let @bigint inRight
   -> @bigint

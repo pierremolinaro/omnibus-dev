@@ -1,0 +1,240 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @compileTimeInfixOperatorEnumeration {
+ case equal          # ==
+ case lessThan       # <
+
+ case bitWiseAndOp      # &
+ case bitWiseOrOp       # |
+ case bitWiseXorOp      # ^
+
+ case addOp             # +
+# case sub             # -
+ case mulOp            # *
+ case divOp             # /
+ case modOp          # mod
+
+ case divNoOvf        # &/
+ case moduloNoOvf     # &%
+ case leftShift       # <<
+ case rightShift      # >>
+}
+
+#·······················································································································
+
+getter @compileTimeInfixOperatorEnumeration string -> @string {
+ switch self
+ case equal     : result = "=="
+ case lessThan : result = "<"
+ case bitWiseAndOp : result = "&"
+ case bitWiseOrOp : result = "|"
+ case bitWiseXorOp : result = "^"
+ case addOp     : result = "+"
+ case mulOp      : result = "*"
+ case divOp     : result = "/"
+ case divNoOvf  : result = "!&"
+ case modOp    : result = "%"
+ case moduloNoOvf: result = "!%"
+ case leftShift  : result = "<<"
+ case rightShift : result = ">>"
+ end
+}
+
+#·······················································································································
+
+getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfixOperator {
+ switch self
+ case equal     : result = .equal
+ case lessThan : result = .lessThan
+ case bitWiseAndOp : result = .bitWiseAndOp
+ case bitWiseOrOp : result = .bitWiseOrOp
+ case bitWiseXorOp : result = .bitWiseXorOp
+ case addOp     : result = .addOp
+ case mulOp     : result = .mulOp
+ case divOp     : result = .divOp
+ case divNoOvf  : result = .divOpNoOvf
+ case modOp    : result = .modOp
+ case moduloNoOvf: result = .modOpNoOvf
+ case leftShift  : result = .leftShiftOp
+ case rightShift : result = .rightShiftOp
+ end
+}
+
+#·······················································································································
+
+class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
+  @compileTimeInfixOperatorEnumeration mInfixOperator
+  @location mInfixOperatorLocation
+  @lstring mLeftOperandName
+  @lstring mLeftTypeName
+  @lstring mRightOperandName
+  @lstring mRightTypeName
+  @ctExpressionAST mExpression
+  @lstring mResultTypeName
+}
+
+#·······················································································································
+
+override getter @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
+  outLocation = mInfixOperatorLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension omnibus_syntax {
+
+  #·····················································································································
+
+  rule <infixOperator> !@compileTimeInfixOperatorEnumeration outOperator {
+    select
+      $==$
+      outOperator = .equal
+    or
+      $<$
+      outOperator = .lessThan
+    or
+      $&$
+      outOperator = .bitWiseAndOp
+    or
+      $|$
+      outOperator = .bitWiseOrOp
+    or
+      $^$
+      outOperator = .bitWiseXorOp
+    or
+      $+$
+      outOperator = .addOp
+    or
+      $*$
+      outOperator = .mulOp
+    or
+      $/$
+      outOperator = .divOp
+    or
+      $!/$
+      outOperator = .divNoOvf
+    or
+      $%$
+      outOperator = .modOp
+    or
+      $!%$
+      outOperator = .moduloNoOvf
+    or
+      $<<$
+      outOperator = .leftShift
+    or
+      $>>$
+      outOperator = .rightShift
+    end
+  }
+  
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $compiletime$
+    $func$
+    $($
+    $identifier$ ?let leftArgument
+    $\$type$ ?let leftType
+    $)$
+    let operationLocation = @location.here
+    <infixOperator> ?let infixOperator
+    $($
+    $identifier$ ?let rightArgument
+    $\$type$ ?let rightType
+    $)$
+    $->$
+    $\$type$ ?let resultType
+    ${$
+    <compile_time_expression> ?let @ctExpressionAST expression
+    $}$
+    ioAST.mDeclarationListAST += !@compileTimeInfixOperatorAST.new {
+      !infixOperator
+      !operationLocation
+      !leftArgument
+      !leftType
+      !rightArgument
+      !rightType
+      !expression
+      !resultType
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let nodeName = @lstring.new {![mInfixOperator string] + "." + mLeftTypeName + "." + mRightTypeName !mInfixOperatorLocation}
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName !mLeftTypeName]
+  [!?ioGraph addEdge !nodeName !mRightTypeName]
+  [!?ioGraph addEdge !nodeName !mResultTypeName]
+}
+
+#·······················································································································
+
+override getter @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = mLeftTypeName.string + " " + mInfixOperator + " " + mRightTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
+  @location mInfixOperatorLocation
+  @lstring mLeftOperandName
+  @lstring mRightOperandName
+  @ctExpressionAST mExpression
+}
+
+#·······················································································································
+
+override method @compileTimeInfixOperatorAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+#--- Check types
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftType]
+  [[leftType type] checkIsCompileTimeType !mLeftTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightType]
+  [[rightType type] checkIsCompileTimeType !mRightTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
+  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
+#--- Check native operator expression
+  @ctCheckMap ctCheckMap = {}
+  [!?ctCheckMap insertKey !mLeftOperandName]
+  [!?ctCheckMap insertKey !mRightOperandName]
+  [mExpression checkCompileTimeExpression !ctCheckMap]
+#--- Enter in infix operator map  
+  let key = @lstring.new {
+    ![[leftType type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " + [[rightType type] omnibusTypeDescriptionName]
+    !mInfixOperatorLocation
+  }
+  let definition = @compileTimeInfixOperatorUsage.new {
+    !mInfixOperatorLocation
+    !mLeftOperandName
+    !mRightOperandName
+    !mExpression
+  }
+  [!?ioContext.mTerminusInfixOperatorMap insertKey !key ![leftType type] ![rightType type] ![resultType type] !definition]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

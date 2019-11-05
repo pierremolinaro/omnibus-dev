@@ -10,7 +10,7 @@ abstract class @ctExpressionAST {
 class @ctInfixExpressionAST : @ctExpressionAST {
   @ctExpressionAST mLeftExpression
   @location mOperatorLocation
-  @infixOperatorEnumeration mInfixOperator
+  @compileTimeInfixOperatorEnumeration mInfixOperator
   @ctExpressionAST mRightExpression
 }
 
@@ -62,7 +62,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.bitWiseOr
+        !.bitWiseOrOp
         !rightExpression
       }
     end
@@ -80,7 +80,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.xor
+        !.bitWiseXorOp
         !rightExpression
       }
     end
@@ -98,7 +98,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.bitWiseAnd
+        !.bitWiseAndOp
         !rightExpression
       }
     end
@@ -149,7 +149,7 @@ syntax extension omnibus_syntax {
       let lessThanExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.strictInf
+        !.lessThan
         !rightExpression
       }
       let equalExpression = @ctInfixExpressionAST.new {
@@ -161,7 +161,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !lessThanExpression
         !operatorLocation
-        !.booleanOr
+        !.bitWiseOrOp
         !equalExpression
       }
     or
@@ -171,7 +171,7 @@ syntax extension omnibus_syntax {
       let expression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.strictInf
+        !.lessThan
         !rightExpression
       }
       outExpression = @ctPrefixExpressionAST.new {
@@ -186,7 +186,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.strictInf
+        !.lessThan
         !rightExpression
       }
     or
@@ -196,7 +196,7 @@ syntax extension omnibus_syntax {
      let lessThanExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.strictInf
+        !.lessThan
         !rightExpression
       }
       let equalExpression = @ctInfixExpressionAST.new {
@@ -208,7 +208,7 @@ syntax extension omnibus_syntax {
       let lessThanOrEqualExpression = @ctInfixExpressionAST.new {
         !lessThanExpression
         !operatorLocation
-        !.booleanOr
+        !.bitWiseOrOp
         !equalExpression
       }
       outExpression = @ctPrefixExpressionAST.new {
@@ -259,7 +259,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.add
+        !.addOp
         !rightExpression
       }
     while
@@ -269,7 +269,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.add
+        !.addOp
         !@ctPrefixExpressionAST.new {!operatorLocation !.minus !rightExpression}
       }
     end
@@ -287,7 +287,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.mul
+        !.mulOp
         !rightExpression
       }
    while
@@ -297,7 +297,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.modulo
+        !.modOp
         !rightExpression
       }
     while
@@ -317,7 +317,7 @@ syntax extension omnibus_syntax {
       outExpression = @ctInfixExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.div
+        !.divOp
         !rightExpression
       }
     while

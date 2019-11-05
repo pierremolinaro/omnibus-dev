@@ -2,74 +2,8 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @infixOperatorEnumeration {
- case equal           # ==
- case strictInf       # <
-
- case booleanOr       # or
- case booleanXor      # xor
-
- case bitWiseAnd      # &
- case bitWiseOr       # |
- case xor             # ^
-
- case add             # +
-# case sub             # -
- case mul             # *
- case div             # /
- case modulo          # mod
-
- case divNoOvf        # &/
- case moduloNoOvf     # &%
- case leftShift       # <<
- case rightShift      # >>
-}
-
-#·······················································································································
-
-getter @infixOperatorEnumeration string -> @string {
- switch self
- case equal     : result = "=="
- case strictInf : result = "<"
- case booleanOr  : result = "or"
- case bitWiseAnd : result = "&"
- case bitWiseOr : result = "|"
- case xor       : result = "^"
- case booleanXor: result = "xor"
- case add       : result = "+"
- case mul       : result = "*"
- case div       : result = "/"
- case divNoOvf  : result = "!&"
- case modulo    : result = "%"
- case moduloNoOvf: result = "!%"
- case leftShift  : result = "<<"
- case rightShift : result = ">>"
- end
-}
-
-#·······················································································································
-
-class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
-  @infixOperatorEnumeration mInfixOperator
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mLeftTypeName
-  @lstring mRightOperandName
-  @lstring mRightTypeName
-  @ctExpressionAST mExpression
-  @lstring mResultTypeName
-}
-
-#·······················································································································
-
-override getter @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mInfixOperatorLocation
-}
-
-#·······················································································································
-
 class @llvmInfixOperatorAST : @abstractDeclarationAST {
-  @infixOperatorEnumeration mInfixOperator
+  @compileTimeInfixOperatorEnumeration mInfixOperator
   @location mInfixOperatorLocation
   @lstring mLeftOperandName
   @lstring mLeftTypeName
@@ -94,89 +28,6 @@ override getter @llvmInfixOperatorAST locationForErrorSignaling -> @location out
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
-
-  #·····················································································································
-
-  rule <infixOperator> !@infixOperatorEnumeration outOperator {
-    select
-      $==$
-      outOperator = .equal
-    or
-      $<$
-      outOperator = .strictInf
-    or
-      $or$
-      outOperator = .booleanOr
-    or
-      $&$
-      outOperator = .bitWiseAnd
-    or
-      $|$
-      outOperator = .bitWiseOr
-    or
-      $^$
-      outOperator = .xor
-    or
-      $xor$
-      outOperator = .booleanXor
-    or
-      $+$
-      outOperator = .add
-    or
-      $*$
-      outOperator = .mul
-    or
-      $/$
-      outOperator = .div
-    or
-      $!/$
-      outOperator = .divNoOvf
-    or
-      $%$
-      outOperator = .modulo
-    or
-      $!%$
-      outOperator = .moduloNoOvf
-    or
-      $<<$
-      outOperator = .leftShift
-    or
-      $>>$
-      outOperator = .rightShift
-    end
-  }
-  
-  #·····················································································································
-
-  rule <declaration> ?!@ast ioAST {
-    $compiletime$
-    $func$
-    $($
-    $identifier$ ?let leftArgument
-    $\$type$ ?let leftType
-    $)$
-    let operationLocation = @location.here
-    <infixOperator> ?let infixOperator
-    $($
-    $identifier$ ?let rightArgument
-    $\$type$ ?let rightType
-    $)$
-    $->$
-    $\$type$ ?let resultType
-    ${$
-    <compile_time_expression> ?let @ctExpressionAST expression
-    $}$
-    ioAST.mDeclarationListAST += !@compileTimeInfixOperatorAST.new {
-      !infixOperator
-      !operationLocation
-      !leftArgument
-      !leftType
-      !rightArgument
-      !rightType
-      !expression
-      !resultType
-    }
-  }
 
  #·····················································································································
 
@@ -218,24 +69,6 @@ syntax extension omnibus_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let nodeName = @lstring.new {![mInfixOperator string] + "." + mLeftTypeName + "." + mRightTypeName !mInfixOperatorLocation}
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mLeftTypeName]
-  [!?ioGraph addEdge !nodeName !mRightTypeName]
-  [!?ioGraph addEdge !nodeName !mResultTypeName]
-}
-
-#·······················································································································
-
-override getter @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = mLeftTypeName.string + " " + mInfixOperator + " " + mRightTypeName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @llvmInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -254,44 +87,6 @@ override getter @llvmInfixOperatorAST keyRepresentationForErrorSignaling -> @str
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @compileTimeInfixOperatorAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
-  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
-#--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftType]
-  [[leftType type] checkIsCompileTimeType !mLeftTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightType]
-  [[rightType type] checkIsCompileTimeType !mRightTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
-  [[resultType type] checkIsCompileTimeType !mResultTypeName.location]
-#--- Check native operator expression
-  @ctCheckMap ctCheckMap = {}
-  [!?ctCheckMap insertKey !mLeftOperandName]
-  [!?ctCheckMap insertKey !mRightOperandName]
-  [mExpression checkCompileTimeExpression !ctCheckMap]
-#--- Enter in infix operator map  
-  let key = @lstring.new {
-    ![[leftType type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " + [[rightType type] omnibusTypeDescriptionName]
-    !mInfixOperatorLocation
-  }
-  let definition = @compileTimeInfixOperator.new {
-    !mInfixOperatorLocation
-    !mLeftOperandName
-    !mRightOperandName
-    !mExpression
-  }
-  [!?ioContext.mTerminusInfixOperatorMap insertKey !key ![leftType type] ![rightType type] ![resultType type] !definition]
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmInfixOperatorAST enterInContext
@@ -320,7 +115,7 @@ override method @llvmInfixOperatorAST enterInContext
     ![leftType omnibusTypeDescriptionName] + " " + mInfixOperator + " " + [rightType omnibusTypeDescriptionName]
     !mInfixOperatorLocation
   }
-  let definition = @llvmInfixOperator.new {
+  let definition = @llvmInfixOperatorUsage.new {
     !mInfixOperatorLocation
     !mLeftOperandName
     !mRightOperandName
@@ -370,31 +165,7 @@ override method @llvmInfixOperatorAST enterInContext
 #   INFIX OPERATOR MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @infixOperatorMap {
-  @omnibusType mLeftType
-  @omnibusType mRightType
-  @omnibusType mResultType
-  @terminusInfixOperator mOperator
-  insert insertKey error message "the '%K' infix operator is already declared in %L"
-  search searchKey error message "there is no '%K' infix operator"
-}
-
-#·······················································································································
-
-abstract class @terminusInfixOperator {}
-
-#·······················································································································
-
-class @compileTimeInfixOperator : @terminusInfixOperator {
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mRightOperandName
-  @ctExpressionAST mExpression
-}
-
-#·······················································································································
-
-class @llvmInfixOperator : @terminusInfixOperator {
+class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
   @location mInfixOperatorLocation
   @lstring mLeftOperandName
   @lstring mRightOperandName

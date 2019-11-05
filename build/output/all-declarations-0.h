@@ -237,7 +237,7 @@ class cParser_omnibus_5F_syntax {
   public : virtual ~ cParser_omnibus_5F_syntax (void) {}
 
 //--- Non terminal declarations
-  protected : virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (class GALGAS_infixOperator & outArgument0,
+  protected : virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (class GALGAS_omnibusInfixOperator & outArgument0,
                                                                            class GALGAS_location & outArgument1,
                                                                            class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -433,7 +433,7 @@ class cParser_omnibus_5F_syntax {
 
   protected : virtual void nt_import_5F_file_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected : virtual void nt_infixOperator_ (class GALGAS_infixOperatorEnumeration & outArgument0,
+  protected : virtual void nt_infixOperator_ (class GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
                                               class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_infixOperator_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
@@ -1080,29 +1080,26 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_primary_i80_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_instructionList_i81_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_infixOperator_i81_ (GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
+                                                              C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_infixOperator_i81_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i82_ (GALGAS_ast & ioArgument0,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i82_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i83_ (GALGAS_ast & ioArgument0,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_declaration_i83_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instructionList_i84_ (GALGAS_ast & ioArgument0,
                                                                 GALGAS_instructionListAST & outArgument1,
                                                                 C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_instructionList_i81_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i82_ (GALGAS_ast & ioArgument0,
-                                                            GALGAS_instructionListAST & ioArgument1,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i82_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i83_ (GALGAS_ast & ioArgument0,
-                                                            GALGAS_instructionListAST & ioArgument1,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i83_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i84_ (GALGAS_ast & ioArgument0,
-                                                            GALGAS_instructionListAST & ioArgument1,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i84_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_instructionList_i84_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_instruction_i85_ (GALGAS_ast & ioArgument0,
                                                             GALGAS_instructionListAST & ioArgument1,
@@ -1122,11 +1119,11 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_instruction_i87_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i88_ (GALGAS_infixOperator & outArgument0,
-                                                                                           GALGAS_location & outArgument1,
-                                                                                           C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_instruction_i88_ (GALGAS_ast & ioArgument0,
+                                                            GALGAS_instructionListAST & ioArgument1,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i88_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_instruction_i88_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_instruction_i89_ (GALGAS_ast & ioArgument0,
                                                             GALGAS_instructionListAST & ioArgument1,
@@ -1140,11 +1137,11 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_instruction_i90_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_instruction_i91_ (GALGAS_ast & ioArgument0,
-                                                            GALGAS_instructionListAST & ioArgument1,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i91_ (GALGAS_omnibusInfixOperator & outArgument0,
+                                                                                           GALGAS_location & outArgument1,
+                                                                                           C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_instruction_i91_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i91_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_instruction_i92_ (GALGAS_ast & ioArgument0,
                                                             GALGAS_instructionListAST & ioArgument1,
@@ -1164,41 +1161,41 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_instruction_i94_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_if_5F_instruction_i95_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_instruction_i95_ (GALGAS_ast & ioArgument0,
+                                                            GALGAS_instructionListAST & ioArgument1,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i95_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i96_ (GALGAS_ast & ioArgument0,
+                                                            GALGAS_instructionListAST & ioArgument1,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i96_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i97_ (GALGAS_ast & ioArgument0,
+                                                            GALGAS_instructionListAST & ioArgument1,
+                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i97_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_if_5F_instruction_i98_ (GALGAS_ast & ioArgument0,
                                                                   GALGAS_ifInstructionAST & outArgument1,
                                                                   C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_if_5F_instruction_i95_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_if_5F_instruction_i98_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i96_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i99_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_guardedCommandAST & outArgument1,
                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i96_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i99_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i97_ (GALGAS_ast & ioArgument0,
-                                                                   GALGAS_guardedCommandAST & outArgument1,
-                                                                   C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i100_ (GALGAS_ast & ioArgument0,
+                                                                    GALGAS_guardedCommandAST & outArgument1,
+                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i97_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i98_ (GALGAS_ast & ioArgument0,
-                                                            GALGAS_instructionListAST & ioArgument1,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i98_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i99_ (GALGAS_ast & ioArgument0,
-                                                            GALGAS_instructionListAST & ioArgument1,
-                                                            C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i99_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i100_ (GALGAS_ast & ioArgument0,
-                                                             GALGAS_instructionListAST & ioArgument1,
-                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_instruction_i100_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_guarded_5F_command_i100_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_instruction_i101_ (GALGAS_ast & ioArgument0,
                                                              GALGAS_instructionListAST & ioArgument1,
@@ -1212,11 +1209,11 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_instruction_i102_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_procedure_5F_call_i103_ (GALGAS_ast & ioArgument0,
-                                                                   GALGAS_callInstructionAST & outArgument1,
-                                                                   C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_instruction_i103_ (GALGAS_ast & ioArgument0,
+                                                             GALGAS_instructionListAST & ioArgument1,
+                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_procedure_5F_call_i103_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_instruction_i103_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_instruction_i104_ (GALGAS_ast & ioArgument0,
                                                              GALGAS_instructionListAST & ioArgument1,
@@ -1224,57 +1221,60 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_instruction_i104_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_i105_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_instruction_i105_ (GALGAS_ast & ioArgument0,
+                                                             GALGAS_instructionListAST & ioArgument1,
+                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i105_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_procedure_5F_call_i106_ (GALGAS_ast & ioArgument0,
+                                                                   GALGAS_callInstructionAST & outArgument1,
+                                                                   C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_procedure_5F_call_i106_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i107_ (GALGAS_ast & ioArgument0,
+                                                             GALGAS_instructionListAST & ioArgument1,
+                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_instruction_i107_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected : void rule_omnibus_5F_syntax_lvalue_i108_ (GALGAS_ast & ioArgument0,
                                                         GALGAS_LValueAST & outArgument1,
                                                         C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_i105_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_lvalue_i108_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i106_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i109_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_LValueOperandAST & outArgument1,
                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i106_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i109_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i107_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i110_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_LValueOperandAST & outArgument1,
                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i107_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i110_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i108_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i111_ (GALGAS_ast & ioArgument0,
                                                                    GALGAS_LValueOperandAST & outArgument1,
                                                                    C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i108_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_lvalue_5F_operand_i111_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i109_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i112_ (GALGAS_ast & ioArgument0,
                                                                                GALGAS_controlRegisterLValueAST & outArgument1,
                                                                                C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i109_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i112_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_effective_5F_parameters_i110_ (GALGAS_ast & ioArgument0,
+  protected : void rule_omnibus_5F_syntax_effective_5F_parameters_i113_ (GALGAS_ast & ioArgument0,
                                                                          GALGAS_effectiveArgumentListAST & outArgument1,
                                                                          GALGAS_location & outArgument2,
                                                                          C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_effective_5F_parameters_i110_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i111_ (GALGAS_ast & ioArgument0,
-                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i111_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i112_ (GALGAS_ast & ioArgument0,
-                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_declaration_i112_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_infixOperator_i113_ (GALGAS_infixOperatorEnumeration & outArgument0,
-                                                               C_Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected : void rule_omnibus_5F_syntax_infixOperator_i113_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_effective_5F_parameters_i113_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i114_ (GALGAS_ast & ioArgument0,
                                                              C_Lexique_omnibus_5F_lexique * inLexique) ;
@@ -3279,7 +3279,7 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_compileTimeInfixOperatorAST constructor_new (const class GALGAS_infixOperatorEnumeration & inOperand0,
+  public : static class GALGAS_compileTimeInfixOperatorAST constructor_new (const class GALGAS_compileTimeInfixOperatorEnumeration & inOperand0,
                                                                             const class GALGAS_location & inOperand1,
                                                                             const class GALGAS_lstring & inOperand2,
                                                                             const class GALGAS_lstring & inOperand3,
@@ -3300,7 +3300,7 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
 
@@ -3396,28 +3396,26 @@ class cPtr_ctExpressionAST : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @infixOperatorEnumeration enum                                            *
+//                                      @compileTimeInfixOperatorEnumeration enum                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_infixOperatorEnumeration : public AC_GALGAS_root {
+class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Default constructor
-  public : GALGAS_infixOperatorEnumeration (void) ;
+  public : GALGAS_compileTimeInfixOperatorEnumeration (void) ;
 
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
     kEnum_equal,
-    kEnum_strictInf,
-    kEnum_booleanOr,
-    kEnum_booleanXor,
-    kEnum_bitWiseAnd,
-    kEnum_bitWiseOr,
-    kEnum_xor,
-    kEnum_add,
-    kEnum_mul,
-    kEnum_div,
-    kEnum_modulo,
+    kEnum_lessThan,
+    kEnum_bitWiseAndOp,
+    kEnum_bitWiseOrOp,
+    kEnum_bitWiseXorOp,
+    kEnum_addOp,
+    kEnum_mulOp,
+    kEnum_divOp,
+    kEnum_modOp,
     kEnum_divNoOvf,
     kEnum_moduloNoOvf,
     kEnum_leftShift,
@@ -3438,46 +3436,42 @@ class GALGAS_infixOperatorEnumeration : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_infixOperatorEnumeration extractObject (const GALGAS_object & inObject,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_compileTimeInfixOperatorEnumeration extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_infixOperatorEnumeration constructor_add (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_addOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_bitWiseAnd (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_bitWiseAndOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_bitWiseOr (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_bitWiseOrOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_booleanOr (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_bitWiseXorOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_booleanXor (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_divNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_div (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_divOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_divNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_equal (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_equal (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_leftShift (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_leftShift (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_lessThan (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_modulo (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_modOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_moduloNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_moduloNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_mul (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_mulOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperatorEnumeration constructor_rightShift (LOCATION_ARGS) ;
-
-  public : static class GALGAS_infixOperatorEnumeration constructor_strictInf (LOCATION_ARGS) ;
-
-  public : static class GALGAS_infixOperatorEnumeration constructor_xor (LOCATION_ARGS) ;
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_rightShift (LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixOperatorEnumeration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_compileTimeInfixOperatorEnumeration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3485,46 +3479,42 @@ class GALGAS_infixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAdd (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddOp (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseAnd (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseAndOp (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseOr (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseOrOp (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBooleanOr (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBooleanXor (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDiv (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseXorOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivNoOvf (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEqual (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLeftShift (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModulo (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLessThan (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModuloNoOvf (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMul (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRightShift (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStrictInf (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isXor (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_infixOperatorEnumeration class
+} ; // End of GALGAS_compileTimeInfixOperatorEnumeration class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorEnumeration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOperatorEnumeration ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -3534,7 +3524,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorEnumer
 
 class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_infixOperatorEnumeration mProperty_mInfixOperator ;
+  public : GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
   public : GALGAS_location mProperty_mInfixOperatorLocation ;
   public : GALGAS_lstring mProperty_mLeftOperandName ;
   public : GALGAS_lstring mProperty_mLeftTypeName ;
@@ -3544,7 +3534,7 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_lstring mProperty_mResultTypeName ;
 
 //--- Constructor
-  public : cPtr_compileTimeInfixOperatorAST (const GALGAS_infixOperatorEnumeration & in_mInfixOperator,
+  public : cPtr_compileTimeInfixOperatorAST (const GALGAS_compileTimeInfixOperatorEnumeration & in_mInfixOperator,
                                              const GALGAS_location & in_mInfixOperatorLocation,
                                              const GALGAS_lstring & in_mLeftOperandName,
                                              const GALGAS_lstring & in_mLeftTypeName,
@@ -3558,7 +3548,7 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_infixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
@@ -3915,7 +3905,7 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_controlRegisterAssignmentOperatorKind constructor_assignment (LOCATION_ARGS) ;
 
-  public : static class GALGAS_controlRegisterAssignmentOperatorKind constructor_assignmentWithOperator (const class GALGAS_infixOperator & inOperand0,
+  public : static class GALGAS_controlRegisterAssignmentOperatorKind constructor_assignmentWithOperator (const class GALGAS_omnibusInfixOperator & inOperand0,
                                                                                                          const class GALGAS_location & inOperand1
                                                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -3928,7 +3918,7 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_assignmentWithOperator (class GALGAS_infixOperator & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_assignmentWithOperator (class GALGAS_omnibusInfixOperator & outArgument0,
                                                                 class GALGAS_location & outArgument1,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
@@ -3953,23 +3943,23 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterAssi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @infixOperator enum                                                 *
+//                                             @omnibusInfixOperator enum                                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_infixOperator : public AC_GALGAS_root {
+class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
 //--------------------------------- Default constructor
-  public : GALGAS_infixOperator (void) ;
+  public : GALGAS_omnibusInfixOperator (void) ;
 
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
     kEnum_equal,
-    kEnum_strictInf,
+    kEnum_lessThan,
     kEnum_infEqual,
-    kEnum_andOp,
-    kEnum_orOp,
-    kEnum_xorOp,
+    kEnum_bitWiseAndOp,
+    kEnum_bitWiseOrOp,
+    kEnum_bitWiseXorOp,
     kEnum_booleanXorOp,
     kEnum_addOp,
     kEnum_addOpNoOvf,
@@ -3999,54 +3989,54 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_infixOperator extractObject (const GALGAS_object & inObject,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_omnibusInfixOperator extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_infixOperator constructor_addOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_addOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_addOpNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_addOpNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_andOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_bitWiseAndOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_booleanXorOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_bitWiseOrOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_divOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_bitWiseXorOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_divOpNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_booleanXorOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_equal (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_divOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_infEqual (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_divOpNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_leftShiftOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_equal (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_modOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_infEqual (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_modOpNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_leftShiftOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_mulOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_lessThan (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_mulOpNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_modOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_orOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_modOpNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_rightShiftOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_mulOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_strictInf (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_mulOpNoOvf (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_subOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_rightShiftOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_subOpNoOvf (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_subOp (LOCATION_ARGS) ;
 
-  public : static class GALGAS_infixOperator constructor_xorOp (LOCATION_ARGS) ;
+  public : static class GALGAS_omnibusInfixOperator constructor_subOpNoOvf (LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixOperator & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperator & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4058,7 +4048,11 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddOpNoOvf (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAndOp (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseAndOp (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseOrOp (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseXorOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBooleanXorOp (LOCATION_ARGS) const ;
 
@@ -4072,6 +4066,8 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLeftShiftOp (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLessThan (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModOpNoOvf (LOCATION_ARGS) const ;
@@ -4080,28 +4076,22 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOpNoOvf (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOrOp (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRightShiftOp (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStrictInf (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOpNoOvf (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isXorOp (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_infixOperator class
+} ; // End of GALGAS_omnibusInfixOperator class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperator ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperator ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -4110,11 +4100,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperator ;
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator : public cEnumAssociatedValues {
-  public : const GALGAS_infixOperator mAssociatedValue0 ;
+  public : const GALGAS_omnibusInfixOperator mAssociatedValue0 ;
   public : const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (const GALGAS_infixOperator & inAssociatedValue0,
+  public : cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (const GALGAS_omnibusInfixOperator & inAssociatedValue0,
                                                                                                const GALGAS_location & inAssociatedValue1
                                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -4845,7 +4835,7 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_ctInfixExpressionAST constructor_new (const class GALGAS_ctExpressionAST & inOperand0,
                                                                      const class GALGAS_location & inOperand1,
-                                                                     const class GALGAS_infixOperatorEnumeration & inOperand2,
+                                                                     const class GALGAS_compileTimeInfixOperatorEnumeration & inOperand2,
                                                                      const class GALGAS_ctExpressionAST & inOperand3
                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -4858,7 +4848,7 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
 
@@ -4887,13 +4877,13 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
 //--- Attributes
   public : GALGAS_ctExpressionAST mProperty_mLeftExpression ;
   public : GALGAS_location mProperty_mOperatorLocation ;
-  public : GALGAS_infixOperatorEnumeration mProperty_mInfixOperator ;
+  public : GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
   public : GALGAS_ctExpressionAST mProperty_mRightExpression ;
 
 //--- Constructor
   public : cPtr_ctInfixExpressionAST (const GALGAS_ctExpressionAST & in_mLeftExpression,
                                       const GALGAS_location & in_mOperatorLocation,
-                                      const GALGAS_infixOperatorEnumeration & in_mInfixOperator,
+                                      const GALGAS_compileTimeInfixOperatorEnumeration & in_mInfixOperator,
                                       const GALGAS_ctExpressionAST & in_mRightExpression
                                       COMMA_LOCATION_ARGS) ;
 
@@ -4903,7 +4893,7 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_infixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mRightExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -6935,105 +6925,6 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @infixOperatorExpressionAST class                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_infixOperatorExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
-  public : GALGAS_infixOperatorExpressionAST (void) ;
-
-//---
-  public : inline const class cPtr_infixOperatorExpressionAST * ptr (void) const { return (const cPtr_infixOperatorExpressionAST *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_infixOperatorExpressionAST (const cPtr_infixOperatorExpressionAST * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_infixOperatorExpressionAST extractObject (const GALGAS_object & inObject,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_infixOperatorExpressionAST constructor_new (const class GALGAS_expressionAST & inOperand0,
-                                                                           const class GALGAS_location & inOperand1,
-                                                                           const class GALGAS_infixOperator & inOperand2,
-                                                                           const class GALGAS_expressionAST & inOperand3
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixOperatorExpressionAST & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperator getter_mOp (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_infixOperatorExpressionAST class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorExpressionAST ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Pointer class for @infixOperatorExpressionAST class                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_infixOperatorExpressionAST : public cPtr_expressionAST {
-//--- Attributes
-  public : GALGAS_expressionAST mProperty_mLeftExpression ;
-  public : GALGAS_location mProperty_mOperatorLocation ;
-  public : GALGAS_infixOperator mProperty_mOp ;
-  public : GALGAS_expressionAST mProperty_mRightExpression ;
-
-//--- Constructor
-  public : cPtr_infixOperatorExpressionAST (const GALGAS_expressionAST & in_mLeftExpression,
-                                            const GALGAS_location & in_mOperatorLocation,
-                                            const GALGAS_infixOperator & in_mOp,
-                                            const GALGAS_expressionAST & in_mRightExpression
-                                            COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_infixOperator getter_mOp (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                          @integerSliceExpressionAST class                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8582,7 +8473,7 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_llvmInfixOperatorAST constructor_new (const class GALGAS_infixOperatorEnumeration & inOperand0,
+  public : static class GALGAS_llvmInfixOperatorAST constructor_new (const class GALGAS_compileTimeInfixOperatorEnumeration & inOperand0,
                                                                      const class GALGAS_location & inOperand1,
                                                                      const class GALGAS_lstring & inOperand2,
                                                                      const class GALGAS_lstring & inOperand3,
@@ -8604,7 +8495,7 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
 
@@ -8645,7 +8536,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorAS
 
 class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
-  public : GALGAS_infixOperatorEnumeration mProperty_mInfixOperator ;
+  public : GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
   public : GALGAS_location mProperty_mInfixOperatorLocation ;
   public : GALGAS_lstring mProperty_mLeftOperandName ;
   public : GALGAS_lstring mProperty_mLeftTypeName ;
@@ -8658,7 +8549,7 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public : GALGAS_llvmGenerationInstructionList mProperty_mInstructionList ;
 
 //--- Constructor
-  public : cPtr_llvmInfixOperatorAST (const GALGAS_infixOperatorEnumeration & in_mInfixOperator,
+  public : cPtr_llvmInfixOperatorAST (const GALGAS_compileTimeInfixOperatorEnumeration & in_mInfixOperator,
                                       const GALGAS_location & in_mInfixOperatorLocation,
                                       const GALGAS_lstring & in_mLeftOperandName,
                                       const GALGAS_lstring & in_mLeftTypeName,
@@ -8675,7 +8566,7 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_infixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
@@ -8948,6 +8839,105 @@ class cPtr_nativePrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                      @omnibusInfixOperatorExpressionAST class                                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
+//--- Constructor
+  public : GALGAS_omnibusInfixOperatorExpressionAST (void) ;
+
+//---
+  public : inline const class cPtr_omnibusInfixOperatorExpressionAST * ptr (void) const { return (const cPtr_omnibusInfixOperatorExpressionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_omnibusInfixOperatorExpressionAST (const cPtr_omnibusInfixOperatorExpressionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_omnibusInfixOperatorExpressionAST extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_omnibusInfixOperatorExpressionAST constructor_new (const class GALGAS_expressionAST & inOperand0,
+                                                                                  const class GALGAS_location & inOperand1,
+                                                                                  const class GALGAS_omnibusInfixOperator & inOperand2,
+                                                                                  const class GALGAS_expressionAST & inOperand3
+                                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_omnibusInfixOperatorExpressionAST class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperatorExpressionAST ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                             Pointer class for @omnibusInfixOperatorExpressionAST class                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
+//--- Attributes
+  public : GALGAS_expressionAST mProperty_mLeftExpression ;
+  public : GALGAS_location mProperty_mOperatorLocation ;
+  public : GALGAS_omnibusInfixOperator mProperty_mInfixOperator ;
+  public : GALGAS_expressionAST mProperty_mRightExpression ;
+
+//--- Constructor
+  public : cPtr_omnibusInfixOperatorExpressionAST (const GALGAS_expressionAST & in_mLeftExpression,
+                                                   const GALGAS_location & in_mOperatorLocation,
+                                                   const GALGAS_omnibusInfixOperator & in_mInfixOperator,
+                                                   const GALGAS_expressionAST & in_mRightExpression
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

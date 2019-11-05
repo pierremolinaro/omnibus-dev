@@ -1,0 +1,18 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   INFIX OPERATOR MAP
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @infixOperatorMap {
+  @omnibusType mLeftType
+  @omnibusType mRightType
+  @omnibusType mResultType
+  @omnibusInfixOperatorUsage mOperator
+  insert insertKey error message "the '%K' infix operator is already declared in %L"
+  search searchKey error message "there is no '%K' infix operator"
+}
+
+#·······················································································································
+
+abstract class @omnibusInfixOperatorUsage {}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -536,7 +536,7 @@ class cPtr_userLLVMSructureTypeDefinitionIR : public cPtr_userLLVMTypeDefinition
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_integerObject_5F_literal_5F_infixOperator : public GALGAS_infixOperatorDescription {
+class GALGAS_integerObject_5F_literal_5F_infixOperator : public GALGAS_omnibusInfixOperatorDescription {
 //--- Constructor
   public : GALGAS_integerObject_5F_literal_5F_infixOperator (void) ;
 
@@ -586,7 +586,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerObject_5F_li
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_integerObject_5F_literal_5F_infixOperator : public cPtr_infixOperatorDescription {
+class cPtr_integerObject_5F_literal_5F_infixOperator : public cPtr_omnibusInfixOperatorDescription {
 //--- Attributes
 
 //--- Constructor
@@ -613,7 +613,7 @@ class cPtr_integerObject_5F_literal_5F_infixOperator : public cPtr_infixOperator
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_literal_5F_integerObject_5F_infixOperator : public GALGAS_infixOperatorDescription {
+class GALGAS_literal_5F_integerObject_5F_infixOperator : public GALGAS_omnibusInfixOperatorDescription {
 //--- Constructor
   public : GALGAS_literal_5F_integerObject_5F_infixOperator (void) ;
 
@@ -663,7 +663,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_integerO
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_literal_5F_integerObject_5F_infixOperator : public cPtr_infixOperatorDescription {
+class cPtr_literal_5F_integerObject_5F_infixOperator : public cPtr_omnibusInfixOperatorDescription {
 //--- Attributes
 
 //--- Constructor
@@ -876,7 +876,7 @@ class cPtr_integerBuiltinFunctionIR : public cPtr_abstractRoutineIR {
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_literal_5F_literal_5F_integerInfixOperation : public GALGAS_infixOperatorDescription {
+class GALGAS_literal_5F_literal_5F_integerInfixOperation : public GALGAS_omnibusInfixOperatorDescription {
 //--- Constructor
   public : GALGAS_literal_5F_literal_5F_integerInfixOperation (void) ;
 
@@ -926,7 +926,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_literal_
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_literal_5F_literal_5F_integerInfixOperation : public cPtr_infixOperatorDescription {
+class cPtr_literal_5F_literal_5F_integerInfixOperation : public cPtr_omnibusInfixOperatorDescription {
 //--- Attributes
 
 //--- Constructor

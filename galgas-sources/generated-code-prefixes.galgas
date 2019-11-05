@@ -42,24 +42,28 @@ func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func infixOperatorFunctionName ?let @omnibusType inLeftType ?let @infixOperatorEnumeration inOperator ?let @omnibusType inRightType -> @string {
+func infixOperatorFunctionName ?let @omnibusType inLeftType ?let @omnibusInfixOperator inOperator ?let @omnibusType inRightType -> @string {
   result = "operator." + [inLeftType omnibusTypeDescriptionName] + "."
   switch inOperator
    case equal     : result += "equal"
-   case strictInf : result += "lessThan"
-   case booleanOr  : result += "booleanOr"
-   case bitWiseAnd : result += "bitWiseAnd"
-   case bitWiseOr : result += "bitWiseOr"
-   case xor       : result += "xor"
-   case booleanXor: result += "booleanXor"
-   case add       : result += "add"
-   case mul       : result += "mul"
-   case div       : result += "div"
-   case divNoOvf  : result += "divNoOvf"
-   case modulo    : result += "modulo"
-   case moduloNoOvf: result += "moduloNoOvf"
-   case leftShift  : result += "leftShift"
-   case rightShift : result += "rightShift"
+   case lessThan : result += "lessThan"
+   case infEqual  : result += "infEqual"
+   case bitWiseAndOp : result += "bitWiseAnd"
+   case bitWiseOrOp : result += "bitWiseOr"
+   case bitWiseXorOp : result += "xor"
+   case booleanXorOp: result += "booleanXor"
+   case addOp       : result += "add"
+   case addOpNoOvf  : result += "addOpNoOvf"
+   case subOp       : result += "sub"
+   case subOpNoOvf  : result += "subOpNoOvf"
+   case mulOp       : result += "mul"
+   case mulOpNoOvf  : result += "mulOpNoOvf"
+   case divOp       : result += "div"
+   case divOpNoOvf  : result += "divNoOvf"
+   case modOp    : result += "modulo"
+   case modOpNoOvf: result += "moduloNoOvf"
+   case leftShiftOp  : result += "leftShift"
+   case rightShiftOp : result += "rightShift"
   end
   result += "." + [inRightType omnibusTypeDescriptionName]
 }
@@ -302,12 +306,6 @@ func %once memoryAllocSectionName -> @string {
 func %once memoryFreeSectionName -> @string {
   result = "heap.memory.free"
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func %once assignDynamicArrayFunctionName -> @string {
-#  result = "assign.dynamic.array"
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Register Group Array Name

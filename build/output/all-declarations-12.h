@@ -53,6 +53,31 @@ void routine_analyzeRegularFunctionCall (const class GALGAS_omnibusType constinA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                        Function 'infixOperatorFunctionName'                                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_infixOperatorFunctionName (const class GALGAS_omnibusType & constinArgument0,
+                                                        const class GALGAS_omnibusInfixOperator & constinArgument1,
+                                                        const class GALGAS_omnibusType & constinArgument2,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           Function 'getInfixOperatorMap'                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_infixOperatorMap_5F_EX function_getInfixOperatorMap (const class GALGAS_omnibusInfixOperator & constinArgument0,
+                                                                  const class GALGAS_semanticContext & constinArgument1,
+                                                                  const class GALGAS_mode & constinArgument2,
+                                                                  const class GALGAS_location & constinArgument3,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                       Routine 'handleArrayAccessInAssignment'                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -229,34 +254,4 @@ void routine_handleNextOperand (const class GALGAS_omnibusType constinArgument0,
                                 class GALGAS_instructionListIR & ioArgument11,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'infixOperatorFunctionName'                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_infixOperatorFunctionName (const class GALGAS_omnibusType & constinArgument0,
-                                                        const class GALGAS_infixOperatorEnumeration & constinArgument1,
-                                                        const class GALGAS_omnibusType & constinArgument2,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'memoryAllocSectionName'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_memoryAllocSectionName (class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Function 'memoryFreeSectionName'                                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_memoryFreeSectionName (class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
 

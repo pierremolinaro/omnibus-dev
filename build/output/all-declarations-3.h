@@ -2343,19 +2343,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_availableInterruptM
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @infixOperatorDescription class                                           *
+//                                       @omnibusInfixOperatorDescription class                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_infixOperatorDescription : public AC_GALGAS_class {
+class GALGAS_omnibusInfixOperatorDescription : public AC_GALGAS_class {
 //--- Constructor
-  public : GALGAS_infixOperatorDescription (void) ;
+  public : GALGAS_omnibusInfixOperatorDescription (void) ;
 
 //---
-  public : inline const class cPtr_infixOperatorDescription * ptr (void) const { return (const cPtr_infixOperatorDescription *) mObjectPtr ; }
+  public : inline const class cPtr_omnibusInfixOperatorDescription * ptr (void) const { return (const cPtr_omnibusInfixOperatorDescription *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_infixOperatorDescription (const cPtr_infixOperatorDescription * inSourcePtr) ;
+  public : GALGAS_omnibusInfixOperatorDescription (const cPtr_omnibusInfixOperatorDescription * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -2363,12 +2363,12 @@ class GALGAS_infixOperatorDescription : public AC_GALGAS_class {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_infixOperatorDescription extractObject (const GALGAS_object & inObject,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_omnibusInfixOperatorDescription extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixOperatorDescription & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperatorDescription & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2382,12 +2382,12 @@ class GALGAS_infixOperatorDescription : public AC_GALGAS_class {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_infixOperatorDescription class
+} ; // End of GALGAS_omnibusInfixOperatorDescription class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorDescription ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperatorDescription ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -2398,12 +2398,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorDescri
 class cMapElement_infixOperatorMap_5F_EX : public cMapElement {
 //--- Map attributes
   public : GALGAS_omnibusType mProperty_mResultType ;
-  public : GALGAS_infixOperatorDescription mProperty_mOperation ;
+  public : GALGAS_omnibusInfixOperatorDescription mProperty_mOperation ;
 
 //--- Constructor
   public : cMapElement_infixOperatorMap_5F_EX (const GALGAS_lstring & inKey,
                                                const GALGAS_omnibusType & in_mResultType,
-                                               const GALGAS_infixOperatorDescription & in_mOperation
+                                               const GALGAS_omnibusInfixOperatorDescription & in_mOperation
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2431,7 +2431,7 @@ class GALGAS_infixOperatorMap_5F_EX_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_omnibusType mProperty_mResultType ;
 
-  public : GALGAS_infixOperatorDescription mProperty_mOperation ;
+  public : GALGAS_omnibusInfixOperatorDescription mProperty_mOperation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2446,7 +2446,7 @@ class GALGAS_infixOperatorMap_5F_EX_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_infixOperatorMap_5F_EX_2D_element (const GALGAS_lstring & in_lkey,
                                                      const GALGAS_omnibusType & in_mResultType,
-                                                     const GALGAS_infixOperatorDescription & in_mOperation) ;
+                                                     const GALGAS_omnibusInfixOperatorDescription & in_mOperation) ;
 
 //-- Start of generic part --*
 
@@ -2461,7 +2461,7 @@ class GALGAS_infixOperatorMap_5F_EX_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_infixOperatorMap_5F_EX_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                   const class GALGAS_omnibusType & inOperand1,
-                                                                                  const class GALGAS_infixOperatorDescription & inOperand2
+                                                                                  const class GALGAS_omnibusInfixOperatorDescription & inOperand2
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2478,7 +2478,7 @@ class GALGAS_infixOperatorMap_5F_EX_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorDescription getter_mOperation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperatorDescription getter_mOperation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mResultType (LOCATION_ARGS) const ;
 
@@ -2586,19 +2586,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap_2
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @terminusInfixOperator class                                             *
+//                                          @omnibusInfixOperatorUsage class                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_terminusInfixOperator : public AC_GALGAS_class {
+class GALGAS_omnibusInfixOperatorUsage : public AC_GALGAS_class {
 //--- Constructor
-  public : GALGAS_terminusInfixOperator (void) ;
+  public : GALGAS_omnibusInfixOperatorUsage (void) ;
 
 //---
-  public : inline const class cPtr_terminusInfixOperator * ptr (void) const { return (const cPtr_terminusInfixOperator *) mObjectPtr ; }
+  public : inline const class cPtr_omnibusInfixOperatorUsage * ptr (void) const { return (const cPtr_omnibusInfixOperatorUsage *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_terminusInfixOperator (const cPtr_terminusInfixOperator * inSourcePtr) ;
+  public : GALGAS_omnibusInfixOperatorUsage (const cPtr_omnibusInfixOperatorUsage * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -2606,12 +2606,12 @@ class GALGAS_terminusInfixOperator : public AC_GALGAS_class {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_terminusInfixOperator extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_omnibusInfixOperatorUsage extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_terminusInfixOperator & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperatorUsage & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2623,12 +2623,12 @@ class GALGAS_terminusInfixOperator : public AC_GALGAS_class {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_terminusInfixOperator class
+} ; // End of GALGAS_omnibusInfixOperatorUsage class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_terminusInfixOperator ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
@@ -2641,14 +2641,14 @@ class cMapElement_infixOperatorMap : public cMapElement {
   public : GALGAS_omnibusType mProperty_mLeftType ;
   public : GALGAS_omnibusType mProperty_mRightType ;
   public : GALGAS_omnibusType mProperty_mResultType ;
-  public : GALGAS_terminusInfixOperator mProperty_mOperator ;
+  public : GALGAS_omnibusInfixOperatorUsage mProperty_mOperator ;
 
 //--- Constructor
   public : cMapElement_infixOperatorMap (const GALGAS_lstring & inKey,
                                          const GALGAS_omnibusType & in_mLeftType,
                                          const GALGAS_omnibusType & in_mRightType,
                                          const GALGAS_omnibusType & in_mResultType,
-                                         const GALGAS_terminusInfixOperator & in_mOperator
+                                         const GALGAS_omnibusInfixOperatorUsage & in_mOperator
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2680,7 +2680,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_omnibusType mProperty_mResultType ;
 
-  public : GALGAS_terminusInfixOperator mProperty_mOperator ;
+  public : GALGAS_omnibusInfixOperatorUsage mProperty_mOperator ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2697,7 +2697,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
                                                const GALGAS_omnibusType & in_mLeftType,
                                                const GALGAS_omnibusType & in_mRightType,
                                                const GALGAS_omnibusType & in_mResultType,
-                                               const GALGAS_terminusInfixOperator & in_mOperator) ;
+                                               const GALGAS_omnibusInfixOperatorUsage & in_mOperator) ;
 
 //-- Start of generic part --*
 
@@ -2714,7 +2714,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
                                                                             const class GALGAS_omnibusType & inOperand1,
                                                                             const class GALGAS_omnibusType & inOperand2,
                                                                             const class GALGAS_omnibusType & inOperand3,
-                                                                            const class GALGAS_terminusInfixOperator & inOperand4
+                                                                            const class GALGAS_omnibusInfixOperatorUsage & inOperand4
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2733,7 +2733,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mLeftType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_terminusInfixOperator getter_mOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperatorUsage getter_mOperator (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mResultType (LOCATION_ARGS) const ;
 

@@ -3718,7 +3718,7 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
                                                       const class GALGAS_omnibusType & inOperand1,
                                                       const class GALGAS_omnibusType & inOperand2,
                                                       const class GALGAS_omnibusType & inOperand3,
-                                                      const class GALGAS_terminusInfixOperator & inOperand4,
+                                                      const class GALGAS_omnibusInfixOperatorUsage & inOperand4,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3727,7 +3727,7 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
                                                    class GALGAS_omnibusType constinArgument1,
                                                    class GALGAS_omnibusType constinArgument2,
                                                    class GALGAS_omnibusType constinArgument3,
-                                                   class GALGAS_terminusInfixOperator constinArgument4,
+                                                   class GALGAS_omnibusInfixOperatorUsage constinArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3736,7 +3736,7 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMOperatorForKey (class GALGAS_terminusInfixOperator constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorForKey (class GALGAS_omnibusInfixOperatorUsage constinArgument0,
                                                             class GALGAS_string constinArgument1,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
@@ -3757,7 +3757,7 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
                                                    class GALGAS_omnibusType & outArgument1,
                                                    class GALGAS_omnibusType & outArgument2,
                                                    class GALGAS_omnibusType & outArgument3,
-                                                   class GALGAS_terminusInfixOperator & outArgument4,
+                                                   class GALGAS_omnibusInfixOperatorUsage & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -3768,9 +3768,9 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_terminusInfixOperator getter_mOperatorForKey (const class GALGAS_string & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperatorUsage getter_mOperatorForKey (const class GALGAS_string & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mResultTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                C_Compiler * inCompiler
@@ -3809,7 +3809,7 @@ class cEnumerator_infixOperatorMap : public cGenericAbstractEnumerator {
   public : class GALGAS_omnibusType current_mLeftType (LOCATION_ARGS) const ;
   public : class GALGAS_omnibusType current_mRightType (LOCATION_ARGS) const ;
   public : class GALGAS_omnibusType current_mResultType (LOCATION_ARGS) const ;
-  public : class GALGAS_terminusInfixOperator current_mOperator (LOCATION_ARGS) const ;
+  public : class GALGAS_omnibusInfixOperatorUsage current_mOperator (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_infixOperatorMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -3859,18 +3859,18 @@ class GALGAS_infixOperatorMap_5F_EX : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_omnibusType & inOperand1,
-                                                      const class GALGAS_infixOperatorDescription & inOperand2,
+                                                      const class GALGAS_omnibusInfixOperatorDescription & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_omnibusType constinArgument1,
-                                                   class GALGAS_infixOperatorDescription constinArgument2,
+                                                   class GALGAS_omnibusInfixOperatorDescription constinArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMOperationForKey (class GALGAS_infixOperatorDescription constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_setMOperationForKey (class GALGAS_omnibusInfixOperatorDescription constinArgument0,
                                                              class GALGAS_string constinArgument1,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
@@ -3884,16 +3884,16 @@ class GALGAS_infixOperatorMap_5F_EX : public AC_GALGAS_map {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_omnibusType & outArgument1,
-                                                   class GALGAS_infixOperatorDescription & outArgument2,
+                                                   class GALGAS_omnibusInfixOperatorDescription & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorDescription getter_mOperationForKey (const class GALGAS_string & constinOperand0,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperatorDescription getter_mOperationForKey (const class GALGAS_string & constinOperand0,
+                                                                                                  C_Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mResultTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                C_Compiler * inCompiler
@@ -3926,7 +3926,7 @@ class cEnumerator_infixOperatorMap_5F_EX : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_omnibusType current_mResultType (LOCATION_ARGS) const ;
-  public : class GALGAS_infixOperatorDescription current_mOperation (LOCATION_ARGS) const ;
+  public : class GALGAS_omnibusInfixOperatorDescription current_mOperation (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_infixOperatorMap_5F_EX_2D_element current (LOCATION_ARGS) const ;
 } ;

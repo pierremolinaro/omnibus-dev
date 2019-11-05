@@ -44,7 +44,7 @@ compiletime func (left $ctInt) | (right $ctInt) -> $ctInt {
   left | right
 }
 
-compiletime func (left $ctInt) ^(right $ctInt) -> $ctInt {
+compiletime func (left $ctInt) ^ (right $ctInt) -> $ctInt {
   left ^ right
 }
 

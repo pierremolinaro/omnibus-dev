@@ -80,7 +80,7 @@ list @declarationDecorationList {
 
 map @infixOperatorMap_EX {
   @omnibusType mResultType
-  @infixOperatorDescription mOperation
+  @omnibusInfixOperatorDescription mOperation
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

@@ -4,7 +4,7 @@
 
 enum @controlRegisterAssignmentOperatorKind {
   case assignment
-  case assignmentWithOperator (@infixOperator infixOperator @location operatorLocation)
+  case assignmentWithOperator (@omnibusInfixOperator infixOperator @location operatorLocation)
 }
 
 #·······················································································································
@@ -130,7 +130,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
         !rightType:[sourceIR type]
         !operatorLocation:operatorLocation
         ?resultType:let resultType
-        ?op:let @infixOperatorDescription binaryOperator
+        ?op:let @omnibusInfixOperatorDescription binaryOperator
       ]
       [binaryOperator generateInfixOperatorCode
         !?ioTemporaries

@@ -345,7 +345,7 @@ private proc enter_integer_integer_operators
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
+class @infixObjectObjectOperatorDescription : @omnibusInfixOperatorDescription {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -491,7 +491,7 @@ private proc enter_integer_literal_operators
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @integerObject_literal_infixOperator : @infixOperatorDescription {
+class @integerObject_literal_infixOperator : @omnibusInfixOperatorDescription {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -642,7 +642,7 @@ private proc enter_literal_integer_operators
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literal_integerObject_infixOperator : @infixOperatorDescription {
+class @literal_integerObject_infixOperator : @omnibusInfixOperatorDescription {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

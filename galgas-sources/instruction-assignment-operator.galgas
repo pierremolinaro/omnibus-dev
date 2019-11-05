@@ -6,16 +6,16 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <assignment_combined_with_operator> !@infixOperator outInfixOperator !@location outOperatorLocation {
+  rule <assignment_combined_with_operator> !@omnibusInfixOperator outInfixOperator !@location outOperatorLocation {
     select
       $|=$
-      outInfixOperator = .orOp
+      outInfixOperator = .bitWiseOrOp
     or
       $&=$
-      outInfixOperator = .andOp
+      outInfixOperator = .bitWiseAndOp
     or
       $^=$
-      outInfixOperator = .xorOp
+      outInfixOperator = .bitWiseXorOp
     or
       $+=$
       outInfixOperator = .addOp
@@ -66,7 +66,7 @@ syntax extension omnibus_syntax {
 #      end
 #    end
     let leftExpression = @primaryInExpressionAST.new {!lvalue.mIdentifier !expressionAccessList}
-    let expression = @infixOperatorExpressionAST.new {
+    let expression = @omnibusInfixOperatorExpressionAST.new {
       !leftExpression
       !operatorLocation
       !infixOperator

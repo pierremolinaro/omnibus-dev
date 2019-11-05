@@ -8,11 +8,11 @@ compiletime func not (operand $ctBool) -> $ctBool {
   not operand
 }
 
-compiletime func (left $ctBool) or (right $ctBool) -> $ctBool {
+compiletime func (left $ctBool) | (right $ctBool) -> $ctBool {
   left | right
 }
 
-compiletime func (left $ctBool) xor (right $ctBool) -> $ctBool {
+compiletime func (left $ctBool) ^ (right $ctBool) -> $ctBool {
   left ^ right
 }
 
