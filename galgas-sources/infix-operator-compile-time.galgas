@@ -240,6 +240,11 @@ override method @compileTimeInfixOperatorAST enterInContext
       end  
     end
   end
+#--- Define '+%' operator ?
+  if mInfixOperator == .addOp then
+    let addOpNoOVF_key = infixOperatorMapKey (!leftType !.addOpNoOvf !mInfixOperatorLocation !rightType)
+    [!?ioContext.mInfixOperatorMap insertKey !addOpNoOVF_key !resultType !definition] 
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -275,6 +280,7 @@ override method @compileTimeInfixOperatorUsage generateCode
   ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
   ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
@@ -297,6 +303,7 @@ override method @compileTimeInfixInfEqualOperatorUsage generateCode
   ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
   ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {

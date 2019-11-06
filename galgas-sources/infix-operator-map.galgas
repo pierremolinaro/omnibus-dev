@@ -3,8 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @infixOperatorMap {
-#  @omnibusType mLeftType
-#  @omnibusType mRightType
   @omnibusType mResultType
   @omnibusInfixOperatorUsage mOperatorUsage
   insert insertKey error message "the '%K' infix operator is already declared in %L"
@@ -24,6 +22,7 @@ abstract method @omnibusInfixOperatorUsage generateCode
   ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
   ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList ioAllocaList
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 
@@ -35,6 +34,7 @@ method @infixOperatorMap generateInfixOperatorCode
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
   ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList ioAllocaList
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
@@ -46,6 +46,7 @@ method @infixOperatorMap generateInfixOperatorCode
     !inRightOperand
     !resultType
     !?ioTemporaries
+    !?ioAllocaList
     !?ioInstructionGenerationList
     ?outResultValue
   ]

@@ -20,6 +20,14 @@ compiletime func - (operand $ctInt) -> $ctInt {
   - operand
 }
 
+compiletime func (left $ctInt) << (right $ctInt) -> $ctInt {
+  left << right
+}
+
+compiletime func (left $ctInt) >> (right $ctInt) -> $ctInt {
+  left >> right
+}
+
 compiletime func (left $ctInt) + (right $ctInt) -> $ctInt {
   left + right
 }

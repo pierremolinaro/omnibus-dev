@@ -10,6 +10,102 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//           Extension getter '@effectiveArgumentPassingModeAST passingModeForActualSelector' (as function)            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_effectiveArgumentPassingModeAST & inObject,
+                                                                  const class GALGAS_lstring & constinArgument0,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                         Extension method '@LValueAST noteInstructionTypesInPrecedenceGraph'                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_LValueAST inObject,
+                                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                     Extension method '@LValueAST analyzeLValue'                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
+                                    const class GALGAS_omnibusType constin_inSelfType,
+                                    const class GALGAS_bool constin_inIsAddressOf,
+                                    const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                    const class GALGAS_semanticContext constin_inContext,
+                                    const class GALGAS_mode constin_inMode,
+                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                    class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                    class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                    class GALGAS_allocaList & io_ioAllocaList,
+                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                    class GALGAS_LValueRepresentation & out_outInternalRepresentation,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                            Function 'mutatingAttribute'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Routine 'analyzeSelfLValue'                                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeSelfLValue (const class GALGAS_omnibusType constinArgument0,
+                                const class GALGAS_routineAttributes constinArgument1,
+                                const class GALGAS_semanticContext constinArgument2,
+                                const class GALGAS_mode constinArgument3,
+                                class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                class GALGAS_staticEntityMap & ioArgument5,
+                                class GALGAS_universalValuedObjectMap & ioArgument6,
+                                class GALGAS_allocaList & ioArgument7,
+                                class GALGAS_instructionListIR & ioArgument8,
+                                const class GALGAS_LValueOperandAST constinArgument9,
+                                class GALGAS_LValueRepresentation & outArgument10,
+                                class C_Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'analyzeVariableInLValue'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_analyzeVariableInLValue (const class GALGAS_omnibusType constinArgument0,
+                                      const class GALGAS_bool constinArgument1,
+                                      const class GALGAS_routineAttributes constinArgument2,
+                                      const class GALGAS_semanticContext constinArgument3,
+                                      const class GALGAS_mode constinArgument4,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                      class GALGAS_staticEntityMap & ioArgument6,
+                                      class GALGAS_universalValuedObjectMap & ioArgument7,
+                                      class GALGAS_allocaList & ioArgument8,
+                                      class GALGAS_instructionListIR & ioArgument9,
+                                      const class GALGAS_lstring constinArgument10,
+                                      const class GALGAS_string constinArgument11,
+                                      const class GALGAS_omnibusType constinArgument12,
+                                      const class GALGAS_LValueOperandAST constinArgument13,
+                                      class GALGAS_LValueRepresentation & outArgument14,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                  Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

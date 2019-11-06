@@ -14,6 +14,16 @@ project (1:0:0) -> "omnibus" {
 #--- Configuration
   "galgas-sources/configuration.galgas"
 
+#--- Compilation phases
+  "galgas-sources/ast.galgas"
+  "galgas-sources/context-routines.galgas"
+  "galgas-sources/universal-map.galgas"
+  "galgas-sources/ordered-declaration-list.galgas"
+  "galgas-sources/context.galgas"
+  "galgas-sources/types.galgas"
+  "galgas-sources/constructor-map.galgas"
+  "galgas-sources/semantic-analysis.galgas"
+
 #--- Type declarations
   "galgas-sources/type-alias.galgas"
   "galgas-sources/type-static-array.galgas"
@@ -51,16 +61,6 @@ project (1:0:0) -> "omnibus" {
 
 #--- Modes
   "galgas-sources/logical-modes.galgas"
-
-#--- Compilation phases
-  "galgas-sources/ast.galgas"
-  "galgas-sources/context-routines.galgas"
-  "galgas-sources/universal-map.galgas"
-  "galgas-sources/ordered-declaration-list.galgas"
-  "galgas-sources/context.galgas"
-  "galgas-sources/types.galgas"
-  "galgas-sources/constructor-map.galgas"
-  "galgas-sources/semantic-analysis.galgas"
 
 #--- Panic
   "galgas-sources/panic.galgas"

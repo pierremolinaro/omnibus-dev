@@ -25,6 +25,80 @@ abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @s
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
+#--- Add assignment operator declaration
+  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
+  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+#--- Add assignment operator declaration from ctInt
+  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
+  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+#--- ==
+  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#--- ≤
+  appendInfixOperatorDeclaration (!.infEqual !"icmp ule" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#--- <
+  appendInfixOperatorDeclaration (!.lessThan !"icmp ult" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#--- +
+  appendInfixOperatorDeclaration (!.addOp !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- -
+  appendInfixOperatorDeclaration (!.subOp !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- *
+  appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- /
+  appendInfixOperatorDeclaration (!.divOp !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.divOpNoOvf !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- |
+  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- &
+  appendInfixOperatorDeclaration (!.bitWiseAndOp !"and" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- <<
+  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- >>
+  appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
+#--- Add assignment operator declaration
+  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
+  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+#--- Add assignment operator declaration from ctInt
+  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
+  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+#--- ==
+  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#--- ≤
+  appendInfixOperatorDeclaration (!.infEqual !"icmp sle" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#--- <
+  appendInfixOperatorDeclaration (!.lessThan !"icmp slt" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#--- +
+  appendInfixOperatorDeclaration (!.addOp !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- -
+  appendInfixOperatorDeclaration (!.subOp !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- *
+  appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- /
+  appendInfixOperatorDeclaration (!.divOp !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.divOpNoOvf !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- |
+  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- &
+  appendInfixOperatorDeclaration (!.bitWiseAndOp !"and" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- <<
+  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- >>
+  appendInfixOperatorDeclaration (!.rightShiftOp !"ashr" !inTypeName !inTypeName !?ioPrecedenceGraph)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc buildOrderedDeclarationList
   ?ast: let @ast inAST
   ?sourceFile: let @string inSourceFile
@@ -37,9 +111,7 @@ proc buildOrderedDeclarationList
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
 #    message "Declaration : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"
   end
-#  [inAST.mStandaloneFunctionDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-#  [inAST.mStandAloneSystemRoutineListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed UIntXX and IntXX types
   var addintegerTypeCount = 0
@@ -51,11 +123,7 @@ proc buildOrderedDeclarationList
         let declaration = @integerDeclarationAST.new {!false !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
-        let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
-        [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
-      #--- Add assignment operator declaration from ctInt
-        let assignmentOperatorFrom_ctInt = buildAssignmentOperatorFrom_ctInt (!mValue)
-        [assignmentOperatorFrom_ctInt enterInPrecedenceGraph !?precedenceGraph]
+        appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
       #---
         addintegerTypeCount ++
       elsif [split mValueAtIndex !0] == "" then 
@@ -63,11 +131,12 @@ proc buildOrderedDeclarationList
         let declaration = @integerDeclarationAST.new {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
-        let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
-        [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
-      #--- Add assignment operator declaration from ctInt
-        let assignmentOperatorFrom_ctInt = buildAssignmentOperatorFrom_ctInt (!mValue)
-        [assignmentOperatorFrom_ctInt enterInPrecedenceGraph !?precedenceGraph]
+        appendSignedOperatorsTo (!mValue !?precedenceGraph)
+#        let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
+#        [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
+#      #--- Add assignment operator declaration from ctInt
+#        let assignmentOperatorFrom_ctInt = buildAssignmentOperatorFrom_ctInt (!mValue)
+#        [assignmentOperatorFrom_ctInt enterInPrecedenceGraph !?precedenceGraph]
       #---
         addintegerTypeCount ++
       end
