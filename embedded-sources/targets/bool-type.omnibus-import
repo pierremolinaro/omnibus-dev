@@ -48,4 +48,8 @@ llvm func not (receiver $bool) -> $bool {
   llvm result + " = xor " + $receiver + " " + receiver + ", 1"
 }
 
+llvm func (left $bool) == (right $bool) -> $bool {
+  llvm result + " = icmp eq " + $left + " " + left + ", " + right
+}
+
 //——————————————————————————————————————————————————————————————————————————————

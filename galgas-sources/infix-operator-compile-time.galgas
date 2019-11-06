@@ -11,7 +11,7 @@ enum @compileTimeInfixOperatorEnumeration {
  case bitWiseXorOp      # ^
 
  case addOp             # +
-# case sub             # -
+ case subOp            # -
  case mulOp            # *
  case divOp             # /
  case modOp          # mod
@@ -32,6 +32,7 @@ getter @compileTimeInfixOperatorEnumeration string -> @string {
  case bitWiseOrOp : result = "|"
  case bitWiseXorOp : result = "^"
  case addOp     : result = "+"
+ case subOp     : result = "-"
  case mulOp      : result = "*"
  case divOp     : result = "/"
  case divNoOvf  : result = "!&"
@@ -52,6 +53,7 @@ getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfi
  case bitWiseOrOp : result = .bitWiseOrOp
  case bitWiseXorOp : result = .bitWiseXorOp
  case addOp     : result = .addOp
+ case subOp     : result = .subOp
  case mulOp     : result = .mulOp
  case divOp     : result = .divOp
  case divNoOvf  : result = .divOpNoOvf
@@ -89,7 +91,7 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <infixOperator> !@compileTimeInfixOperatorEnumeration outOperator {
+  rule <compileTimeInfixOperator> !@compileTimeInfixOperatorEnumeration outOperator {
     select
       $==$
       outOperator = .equal
@@ -108,6 +110,9 @@ syntax extension omnibus_syntax {
     or
       $+$
       outOperator = .addOp
+    or
+      $-$
+      outOperator = .subOp
     or
       $*$
       outOperator = .mulOp
@@ -142,7 +147,7 @@ syntax extension omnibus_syntax {
     $\$type$ ?let leftType
     $)$
     let operationLocation = @location.here
-    <infixOperator> ?let infixOperator
+    <compileTimeInfixOperator> ?let infixOperator
     $($
     $identifier$ ?let rightArgument
     $\$type$ ?let rightType
@@ -180,6 +185,7 @@ override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addEdge !nodeName !mLeftTypeName]
   [!?ioGraph addEdge !nodeName !mRightTypeName]
   [!?ioGraph addEdge !nodeName !mResultTypeName]
+  [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName]
 }
 
 #·······················································································································

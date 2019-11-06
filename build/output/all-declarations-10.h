@@ -495,6 +495,17 @@ void routine_appendInfixOperatorDeclaration (const class GALGAS_omnibusInfixOper
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                             Routine 'appendPrefixOperatorDeclaration_bitWiseComplement'                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_appendPrefixOperatorDeclaration_5F_bitWiseComplement (const class GALGAS_string constinArgument0,
+                                                                   class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                                                   class C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                          Routine 'appendSignedOperatorsTo'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -503,6 +514,17 @@ void routine_appendSignedOperatorsTo (const class GALGAS_string constinArgument0
                                       class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                   Routine 'appendPrefixOperatorDeclaration_minus'                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_appendPrefixOperatorDeclaration_5F_minus (const class GALGAS_string constinArgument0,
+                                                       class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

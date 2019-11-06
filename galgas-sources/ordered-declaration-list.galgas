@@ -24,6 +24,47 @@ abstract method @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
 abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @string
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPILE TIME BARRIER FOR PRECEDENCE GRAPH
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
+}
+
+#·······················································································································
+
+override method @compileTimeDeclarationBarrierAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !compileTimeDeclarationBarrier () !self]
+}
+
+#·······················································································································
+
+override getter @compileTimeDeclarationBarrierAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = compileTimeDeclarationBarrier ()
+}
+
+#·······················································································································
+
+override getter @compileTimeDeclarationBarrierAST locationForErrorSignaling -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#·······················································································································
+
+override method @compileTimeDeclarationBarrierAST enterInContext
+  ?!context:@semanticContext unused ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
 #--- Add assignment operator declaration
@@ -50,6 +91,9 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
 #--- /
   appendInfixOperatorDeclaration (!.divOp !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.divOpNoOvf !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- %
+  appendInfixOperatorDeclaration (!.modOp !"urem" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.modOpNoOvf !"urem" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- |
   appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- &
@@ -58,6 +102,8 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
   appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- >>
   appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- ~ 
+  appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -84,6 +130,9 @@ private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrec
 #--- *
   appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- %
+  appendInfixOperatorDeclaration (!.modOp !"srem" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.modOpNoOvf !"srem" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- /
   appendInfixOperatorDeclaration (!.divOp !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.divOpNoOvf !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
@@ -95,6 +144,8 @@ private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrec
   appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- >>
   appendInfixOperatorDeclaration (!.rightShiftOp !"ashr" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#--- - prefixed
+  appendPrefixOperatorDeclaration_minus (!inTypeName !?ioPrecedenceGraph)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -132,16 +183,14 @@ proc buildOrderedDeclarationList
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
         appendSignedOperatorsTo (!mValue !?precedenceGraph)
-#        let assignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!mValue)
-#        [assignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
-#      #--- Add assignment operator declaration from ctInt
-#        let assignmentOperatorFrom_ctInt = buildAssignmentOperatorFrom_ctInt (!mValue)
-#        [assignmentOperatorFrom_ctInt enterInPrecedenceGraph !?precedenceGraph]
       #---
         addintegerTypeCount ++
       end
     end
   end
+#------------------------------------------  Add compile time barrier
+  let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST.new
+  [compileTimeDeclarationBarrierAST enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Added bool assignment
   let boolAssignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!boolTypeName ())
   [boolAssignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]

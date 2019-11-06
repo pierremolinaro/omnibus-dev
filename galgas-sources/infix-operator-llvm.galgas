@@ -120,7 +120,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     <llvm_function_header> ?let leftVariableName ?let leftTypeName ?let leftGenericFormalParameterList
     let operationLocation = @location.here
-    <infixOperator> ?let infixOperator
+    <compileTimeInfixOperator> ?let infixOperator
     $($
     $identifier$ ?let rightVariableName
     $\$type$ ?let rightType

@@ -243,6 +243,11 @@ class cParser_omnibus_5F_syntax {
 
   protected : virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_compileTimeInfixOperator_ (class GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
+                                                         class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_compileTimeInfixOperator_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
   protected : virtual void nt_compileTimePrefixOperator_ (class GALGAS_compileTimePrefixOperatorEnumeration & outArgument0,
                                                           class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -437,11 +442,6 @@ class cParser_omnibus_5F_syntax {
                                                class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_import_5F_file_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_infixOperator_ (class GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
-                                              class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_infixOperator_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_instruction_ (class GALGAS_ast & ioArgument0,
                                             class GALGAS_instructionListAST & ioArgument1,
@@ -1095,10 +1095,10 @@ class cParser_omnibus_5F_syntax {
 
   protected : void rule_omnibus_5F_syntax_primary_i82_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_infixOperator_i83_ (GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
-                                                              C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_compileTimeInfixOperator_i83_ (GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
+                                                                         C_Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected : void rule_omnibus_5F_syntax_infixOperator_i83_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
+  protected : void rule_omnibus_5F_syntax_compileTimeInfixOperator_i83_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_declaration_i84_ (GALGAS_ast & ioArgument0,
                                                             C_Lexique_omnibus_5F_lexique * inLexique) ;
@@ -3529,6 +3529,7 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
     kEnum_bitWiseOrOp,
     kEnum_bitWiseXorOp,
     kEnum_addOp,
+    kEnum_subOp,
     kEnum_mulOp,
     kEnum_divOp,
     kEnum_modOp,
@@ -3583,6 +3584,8 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
 
   public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_rightShift (LOCATION_ARGS) ;
 
+  public : static class GALGAS_compileTimeInfixOperatorEnumeration constructor_subOp (LOCATION_ARGS) ;
+
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -3620,6 +3623,8 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRightShift (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOp (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -8987,7 +8992,9 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_notOp,
-    kEnum_minusOp
+    kEnum_bitWiseComplement,
+    kEnum_minusOp,
+    kEnum_minusOpNoOvf
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -9009,7 +9016,11 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_llvmPrefixOperatorEnumeration constructor_bitWiseComplement (LOCATION_ARGS) ;
+
   public : static class GALGAS_llvmPrefixOperatorEnumeration constructor_minusOp (LOCATION_ARGS) ;
+
+  public : static class GALGAS_llvmPrefixOperatorEnumeration constructor_minusOpNoOvf (LOCATION_ARGS) ;
 
   public : static class GALGAS_llvmPrefixOperatorEnumeration constructor_notOp (LOCATION_ARGS) ;
 
@@ -9025,7 +9036,11 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseComplement (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusOp (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusOpNoOvf (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNotOp (LOCATION_ARGS) const ;
 

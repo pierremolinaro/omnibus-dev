@@ -159,7 +159,8 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
       ?outResult
     ]
   else 
-    message "OLD INFIX OP (" + [[leftOperand type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " +  [[rightOperand type] omnibusTypeDescriptionName] + ")\n"
+    error mOperatorLocation :
+    "OLD INFIX OP (" + [[leftOperand type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " +  [[rightOperand type] omnibusTypeDescriptionName] + ")\n"
     [!?ioInstructionGenerationList appendLoadWhenReference
       !?ioTemporaries
       !?leftOperand

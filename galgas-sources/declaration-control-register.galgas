@@ -295,6 +295,7 @@ map @sliceMap {
 method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for reg in mRegisters do
     [!?ioGraph noteNode !reg.mRegisterTypeName]
+    [!?ioGraph addEdge !compileTimeDeclarationBarrier () !reg.mRegisterTypeName]
   end
 }
 
@@ -320,6 +321,7 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
   for reg in mRegisters do
   #--- Add dependency from type name
     [!?ioGraph addEdge !nodeName !reg.mRegisterTypeName]
+    [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
   #--- Add dependency from the number of integer type name (i.e. $uint32 --> $uint5)
     let split = [reg.mRegisterTypeName componentsSeparatedByString !"uint"]
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then

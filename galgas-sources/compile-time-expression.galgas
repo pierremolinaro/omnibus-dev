@@ -477,6 +477,7 @@ override method @ctInfixExpressionAST computeCompileTimeExpression
    case bitWiseOrOp : outValue = left | right
    case bitWiseXorOp : outValue = left ^ right
    case addOp     : outValue = left + right
+   case subOp     : outValue = left - right
    case mulOp     : outValue = left * right
    case divOp     : outValue = left / right
    case divNoOvf  : outValue = left / right
