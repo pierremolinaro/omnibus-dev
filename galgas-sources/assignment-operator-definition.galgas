@@ -176,6 +176,16 @@ map @assignmentOperatorMap {
 
 #·······················································································································
 
+list @omnibusTypeList {
+  @omnibusType mType
+}
+
+#·······················································································································
+
+listmap @assignableTypesFromCompileTimeType_Map (@omnibusTypeList)
+
+#·······················································································································
+
 override method @llvmAssignmentOperatorDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
@@ -246,6 +256,10 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
       !allocaList
     }
     ioRoutineListIR += !routine
+  end
+#--- 
+  if [sourceType.kind isCompileTimeBool] | [sourceType.kind isCompileTimeInteger] then
+    ioContext.mAssignableTypesFromCompileTimeType_Map += !sourceType.omnibusTypeDescriptionName !targetType
   end
 }
 

@@ -125,13 +125,30 @@ override method @forInstructionAST instructionSemanticAnalysis
     ?result:let @objectIR whileExpressionResult
   ]
 #--- Check "while" expression type is boolean
-  if not [[whileExpressionResult type].kind isBoolean] then
-    error mEndOf_whileExpression : "'while' expression should be boolean"
-  elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
-    error mEndOf_whileExpression : "'while' expression is not static"
-  elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
-    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !whileExpressionResult
+    !mEndOf_whileExpression
+    !?ioTemporaries
+    !?whileExpression_GenerationList
+    !?alloca: ioAllocaList
+    ?let whileExpressionBooleanResult
+  ]
+  switch whileExpressionBooleanResult 
+  case compileTime (boolValue) :
+    if not boolValue then
+      error mEndOf_whileExpression : "test expression is always false"
+    end
+  case llvmVariable (*) :
   end
+
+
+#  if not [[whileExpressionResult type].kind isBoolean] then
+#    error mEndOf_whileExpression : "'while' expression should be boolean"
+#  elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
+#    error mEndOf_whileExpression : "'while' expression is not static"
+#  elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
+#    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
+#  end
 #------------------------------------ "DO" instruction list
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
@@ -171,7 +188,7 @@ override method @forInstructionAST instructionSemanticAnalysis
       !mIteratedObject
       !iteratedObjectPointer
       !whileExpression_GenerationList
-      !whileExpressionResult
+      ![whileExpressionBooleanResult llvmName]
       !doInstructionList_GenerationList
       !elementType
       !size
@@ -189,7 +206,7 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
   @lstring mIteratedObjectName
   @objectIR mIteratedObject
   @instructionListIR mWhileInstructionList
-  @objectIR mWhileExpressionResult
+  @string mWhileExpressionBooleanResult_llvmName
   @instructionListIR mDoInstructionList
   @omnibusType mElementType
   @uint mArraySize
@@ -277,7 +294,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += whileLabel + ":\n"
 #--- While instructions
   [mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mWhileExpressionResult llvmName] + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
+  ioLLVMcode += "  br i1 " + mWhileExpressionBooleanResult_llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 #------------ Loop  
   ioLLVMcode += loopLabel + ":\n"

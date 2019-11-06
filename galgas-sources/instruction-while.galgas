@@ -82,12 +82,27 @@ override method @whileInstructionAST instructionSemanticAnalysis
     !?ioTemporaries
     !?testValue
   ]  
-#--- Check inferred type
-  if [testValue type].kind != .boolean then
-    error mEndOf_test_expression : "test expression type is '" + [testValue omnibusTypeDescriptionName] + "', it should be boolean"
-  elsif [testValue isStatic] then
-    error mEndOf_test_expression : "test expression type should not be static"
+#--- Check result is allowed for condition
+  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+    !testValue
+    !mEndOf_test_expression
+    !?ioTemporaries
+    !?testInstructionGenerationList
+    !?alloca: ioAllocaList
+    ?let booleanResult
+  ]
+  switch booleanResult 
+  case compileTime (*) :
+    error mEndOf_test_expression : "test expression type should not be a compile time expression"
+  case llvmVariable (*) :
   end
+
+#--- Check inferred type
+#  if [testValue type].kind != .boolean then
+#    error mEndOf_test_expression : "test expression type is '" + [testValue omnibusTypeDescriptionName] + "', it should be boolean"
+#  elsif [testValue isStatic] then
+#    error mEndOf_test_expression : "test expression type should not be static"
+#  end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [!?ioUniversalMap openOverrideForRepeatBlock]
@@ -108,7 +123,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ioInstructionGenerationList += !@whileInstructionIR.new {
     ![mEndOf_test_expression locationIndex]
     !testInstructionGenerationList
-    !testValue
+    ![booleanResult llvmName]
     !instructionGenerationList
  }
 }
@@ -120,7 +135,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 class @whileInstructionIR : @abstractInstructionIR {
   @uint mLabelIndex
   @instructionListIR mTestInstructionGenerationList
-  @objectIR m_while_Expression
+  @string m_while_llvmName
   @instructionListIR mInstructionGenerationList
 }
 
@@ -137,7 +152,7 @@ override method @whileInstructionIR llvmInstructionCode
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelTest + ":\n"
   [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [m_while_Expression llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  ioLLVMcode += "  br i1 " + m_while_llvmName + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioLLVMcode += labelLoop + ":\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelTest + "\n\n"

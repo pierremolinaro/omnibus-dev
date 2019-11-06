@@ -14,6 +14,7 @@ task Tâche1 @stacksize 512 @autostart {
   var test = yes
 
   event @onSetup first {
+    var toto = yes
     digital.set (!mode:.output !toPort:.D13) // Led Teensy
     let b = {$uint8 !b:self.test !1:0 !6:12}
     lcd.print (!hex2:extend (b))

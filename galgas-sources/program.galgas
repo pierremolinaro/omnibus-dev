@@ -119,7 +119,7 @@ private proc compileProject
   #--- Add compile time boolean type
    ast.mDeclarationListAST += !@ctBoolDeclarationAST.new
   #--- Add boolean type
-    ast.mDeclarationListAST += !@booleanDeclarationAST.new
+#    ast.mDeclarationListAST += !@booleanDeclarationAST.new
   #--- Literal integer type
     ast.mDeclarationListAST += !@staticIntegerDeclarationAST.new
   #--- Add String type

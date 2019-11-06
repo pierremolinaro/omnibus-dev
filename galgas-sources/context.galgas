@@ -58,6 +58,7 @@ struct @semanticContext {
   @assignmentOperatorMap mAssignmentOperatorMap
   
   @implicitConversionToBooleanMap mImplicitConversionToBooleanMap
+  @assignableTypesFromCompileTimeType_Map mAssignableTypesFromCompileTimeType_Map
 
 #--- Tasks
   @taskMap mTaskMap

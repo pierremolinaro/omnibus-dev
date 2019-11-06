@@ -388,7 +388,6 @@ override method @structureDeclarationAST enterInContext
     !classConstantMap:{}
     !constructorMap:constructorMap
     !subscript:.noSubscript
-#    !assignmentSources: if mGenerateAssignmentRoutine & canBeCopied then {!mLLVMBaseTypeName} else {} end
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
     !kind:.structure {!propertyList:propertyList}
@@ -487,7 +486,10 @@ method @structurePropertyListAST-element enterPropertyInContext
     else
       actualPropertyType = [expressionIR type]
     end
-    if not [actualPropertyType instanciable] then
+    if [actualPropertyType isCompileTimeType] then
+      error mPropertyName
+      : "$" + actualPropertyType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
+    elsif not [actualPropertyType instanciable] then
       error mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then

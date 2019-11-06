@@ -10,7 +10,6 @@ shared class @omnibusType {
   @classConstantMap classConstantMap %selector # type.cst, as enumeration values
   @constructorMap constructorMap %selector # type (!... !...)
   @subscript subscript %selector
-#  @stringset assignmentSources %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
   @typeKind kind %selector
@@ -190,7 +189,6 @@ func %once compileTimeBoolType -> @omnibusType {
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-#    !assignmentSources: {! ctBoolTypeName ()}
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
     !kind:.compileTimeBool
@@ -207,7 +205,6 @@ func %once literalStringType -> @omnibusType {
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.literalString
-#    !assignmentSources: {!staticStringTypeName ()}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString
@@ -224,7 +221,6 @@ func %once voidType -> @omnibusType {
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-#    !assignmentSources: {}
     !attributes:.none
     !omnibusTypeDescriptionName:""
     !kind:.void

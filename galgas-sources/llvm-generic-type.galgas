@@ -212,7 +212,7 @@ override method @llvmGenericType enterInContext
       !classConstantMap:{}
       !constructorMap:{}
       !subscript:.noSubscript
-      !attributes: .none
+      !attributes: .instanciable
       !omnibusTypeDescriptionName: mTypeName
       !kind: .llvmType
       !llvmBaseTypeName: [mTypeNameExpressionString eval !{}]

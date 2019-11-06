@@ -192,8 +192,8 @@ proc buildOrderedDeclarationList
   let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST.new
   [compileTimeDeclarationBarrierAST enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Added bool assignment
-  let boolAssignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!boolTypeName ())
-  [boolAssignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
+#  let boolAssignmentOperatorDeclaration = buildAssignmentOperatorDeclaration (!boolTypeName ())
+#  [boolAssignmentOperatorDeclaration enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Display ?
   if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
     message "    Added " + addintegerTypeCount + " integer types\n" 

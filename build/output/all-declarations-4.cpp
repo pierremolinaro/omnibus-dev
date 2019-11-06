@@ -13918,7 +13918,7 @@ typeComparisonResult cPtr_whileInstructionIR::dynamicObjectCompare (const acPtr_
     result = mProperty_mTestInstructionGenerationList.objectCompare (p->mProperty_mTestInstructionGenerationList) ;
   }
   if (kOperandEqual == result) {
-    result = mProperty_m_5F_while_5F_Expression.objectCompare (p->mProperty_m_5F_while_5F_Expression) ;
+    result = mProperty_m_5F_while_5F_llvmName.objectCompare (p->mProperty_m_5F_while_5F_llvmName) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mInstructionGenerationList.objectCompare (p->mProperty_mInstructionGenerationList) ;
@@ -13953,6 +13953,16 @@ GALGAS_abstractInstructionIR () {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+GALGAS_whileInstructionIR GALGAS_whileInstructionIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_whileInstructionIR::constructor_new (GALGAS_uint::constructor_default (HERE),
+                                                     GALGAS_instructionListIR::constructor_emptyList (HERE),
+                                                     GALGAS_string::constructor_default (HERE),
+                                                     GALGAS_instructionListIR::constructor_emptyList (HERE)
+                                                     COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_whileInstructionIR::GALGAS_whileInstructionIR (const cPtr_whileInstructionIR * inSourcePtr) :
 GALGAS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_whileInstructionIR) ;
@@ -13962,12 +13972,12 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_whileInstructionIR GALGAS_whileInstructionIR::constructor_new (const GALGAS_uint & inAttribute_mLabelIndex,
                                                                       const GALGAS_instructionListIR & inAttribute_mTestInstructionGenerationList,
-                                                                      const GALGAS_objectIR & inAttribute_m_5F_while_5F_Expression,
+                                                                      const GALGAS_string & inAttribute_m_5F_while_5F_llvmName,
                                                                       const GALGAS_instructionListIR & inAttribute_mInstructionGenerationList
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_whileInstructionIR result ;
-  if (inAttribute_mLabelIndex.isValid () && inAttribute_mTestInstructionGenerationList.isValid () && inAttribute_m_5F_while_5F_Expression.isValid () && inAttribute_mInstructionGenerationList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_whileInstructionIR (inAttribute_mLabelIndex, inAttribute_mTestInstructionGenerationList, inAttribute_m_5F_while_5F_Expression, inAttribute_mInstructionGenerationList COMMA_THERE)) ;
+  if (inAttribute_mLabelIndex.isValid () && inAttribute_mTestInstructionGenerationList.isValid () && inAttribute_m_5F_while_5F_llvmName.isValid () && inAttribute_mInstructionGenerationList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_whileInstructionIR (inAttribute_mLabelIndex, inAttribute_mTestInstructionGenerationList, inAttribute_m_5F_while_5F_llvmName, inAttribute_mInstructionGenerationList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -14010,20 +14020,20 @@ GALGAS_instructionListIR cPtr_whileInstructionIR::getter_mTestInstructionGenerat
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR GALGAS_whileInstructionIR::getter_m_5F_while_5F_Expression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
+GALGAS_string GALGAS_whileInstructionIR::getter_m_5F_while_5F_llvmName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionIR * p = (const cPtr_whileInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_whileInstructionIR) ;
-    result = p->mProperty_m_5F_while_5F_Expression ;
+    result = p->mProperty_m_5F_while_5F_llvmName ;
   }
   return result ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_objectIR cPtr_whileInstructionIR::getter_m_5F_while_5F_Expression (UNUSED_LOCATION_ARGS) const {
-  return mProperty_m_5F_while_5F_Expression ;
+GALGAS_string cPtr_whileInstructionIR::getter_m_5F_while_5F_llvmName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_m_5F_while_5F_llvmName ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -14050,13 +14060,13 @@ GALGAS_instructionListIR cPtr_whileInstructionIR::getter_mInstructionGenerationL
 
 cPtr_whileInstructionIR::cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
                                                   const GALGAS_instructionListIR & in_mTestInstructionGenerationList,
-                                                  const GALGAS_objectIR & in_m_5F_while_5F_Expression,
+                                                  const GALGAS_string & in_m_5F_while_5F_llvmName,
                                                   const GALGAS_instructionListIR & in_mInstructionGenerationList
                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mLabelIndex (in_mLabelIndex),
 mProperty_mTestInstructionGenerationList (in_mTestInstructionGenerationList),
-mProperty_m_5F_while_5F_Expression (in_m_5F_while_5F_Expression),
+mProperty_m_5F_while_5F_llvmName (in_m_5F_while_5F_llvmName),
 mProperty_mInstructionGenerationList (in_mInstructionGenerationList) {
 }
 
@@ -14073,7 +14083,7 @@ void cPtr_whileInstructionIR::description (C_String & ioString,
   ioString << ", " ;
   mProperty_mTestInstructionGenerationList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mProperty_m_5F_while_5F_Expression.description (ioString, inIndentation+1) ;
+  mProperty_m_5F_while_5F_llvmName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mInstructionGenerationList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -14083,7 +14093,7 @@ void cPtr_whileInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_whileInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_whileInstructionIR (mProperty_mLabelIndex, mProperty_mTestInstructionGenerationList, mProperty_m_5F_while_5F_Expression, mProperty_mInstructionGenerationList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_whileInstructionIR (mProperty_mLabelIndex, mProperty_mTestInstructionGenerationList, mProperty_m_5F_while_5F_llvmName, mProperty_mInstructionGenerationList COMMA_THERE)) ;
   return ptr ;
 }
 

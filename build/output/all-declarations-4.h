@@ -2747,6 +2747,9 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
   public : GALGAS_whileInstructionIR (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_whileInstructionIR constructor_default (LOCATION_ARGS) ;
+
 //---
   public : inline const class cPtr_whileInstructionIR * ptr (void) const { return (const cPtr_whileInstructionIR *) mObjectPtr ; }
 
@@ -2766,7 +2769,7 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_whileInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
                                                                    const class GALGAS_instructionListIR & inOperand1,
-                                                                   const class GALGAS_objectIR & inOperand2,
+                                                                   const class GALGAS_string & inOperand2,
                                                                    const class GALGAS_instructionListIR & inOperand3
                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -2785,7 +2788,7 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mTestInstructionGenerationList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_m_5F_while_5F_Expression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_m_5F_while_5F_llvmName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2808,13 +2811,13 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_uint mProperty_mLabelIndex ;
   public : GALGAS_instructionListIR mProperty_mTestInstructionGenerationList ;
-  public : GALGAS_objectIR mProperty_m_5F_while_5F_Expression ;
+  public : GALGAS_string mProperty_m_5F_while_5F_llvmName ;
   public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
 
 //--- Constructor
   public : cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
                                     const GALGAS_instructionListIR & in_mTestInstructionGenerationList,
-                                    const GALGAS_objectIR & in_m_5F_while_5F_Expression,
+                                    const GALGAS_string & in_m_5F_while_5F_llvmName,
                                     const GALGAS_instructionListIR & in_mInstructionGenerationList
                                     COMMA_LOCATION_ARGS) ;
 
@@ -2824,7 +2827,7 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mTestInstructionGenerationList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_m_5F_while_5F_Expression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_m_5F_while_5F_llvmName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

@@ -124,7 +124,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?ioTemporaries
     !?testResult
   ]  
-#--- Check inferred type
+#--- Check result is allowed for condition
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !testResult
     !mTestExpressionEndLocation
@@ -144,14 +144,6 @@ override method @ifInstructionAST instructionSemanticAnalysis
       error mTestExpressionEndLocation : "'if' expression is not static"
     end 
   end
-  
-#  if [testResult type].kind != .boolean then
-#    error mTestExpressionEndLocation : "test expression type is '" + [testResult omnibusTypeDescriptionName] + "', it should be boolean"
-#  elsif mStaticIfExpression && not [testResult isStatic] then
-#    error mTestExpressionEndLocation : "'if' expression is not static"
-#  elsif [testResult isStatic] && not mStaticIfExpression then
-#    warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
-#  end
   [!?ioUniversalMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}

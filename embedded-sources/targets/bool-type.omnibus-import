@@ -2,11 +2,11 @@
 //   BOOL TYPE 
 //——————————————————————————————————————————————————————————————————————————————
 
-llvm $boolean { "i1" }
+llvm $bool { "i1" }
 
 //··············································································
 
-llvm func (tgt $boolean) = (src $boolean) {
+llvm func (tgt $bool) = (src $bool) {
   var loaded
   llvm loaded + " = load " + $src + ", " + $src + "* " + src
   llvm "store " + $src + " " + src + ", " + $tgt + "* " + tgt
@@ -14,42 +14,30 @@ llvm func (tgt $boolean) = (src $boolean) {
 
 //··············································································
 
-llvm func (tgt $boolean) = (src $ctBool) {
+llvm func (tgt $bool) = (src $ctBool) {
   llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
 }
 
 //··············································································
 
-llvm func (left $boolean) == (right $boolean) -> $boolean {
+llvm func (left $bool) == (right $bool) -> $bool {
   llvm result + " = icmp eq " + $left + " " + left + ", " + right
 }
 
-llvm func (left $boolean) == (right $ctBool) -> $boolean {
+llvm func (left $bool) == (right $ctBool) -> $bool {
   llvm result + " = icmp eq " + $left + " " + left + ", " + right
 }
 
-llvm func (left $ctBool) == (right $boolean) -> $boolean {
+llvm func (left $ctBool) == (right $bool) -> $bool {
   llvm result + " = icmp eq " + $right + " " + left + ", " + right
 }
 
-llvm func (receiver $boolean) convertToBoolean {
-  llvm result + " = or " + $receiver + " " + receiver + ", 0"
-}
-
-llvm func not (receiver $boolean) -> $boolean {
-  llvm result + " = xor " + $receiver + " " + receiver + ", 1"
-}
-
-//--- Temp
 llvm func (receiver $bool) convertToBoolean {
+  llvm result + " = or " + $receiver + " " + receiver + ", 0"
 }
 
 llvm func not (receiver $bool) -> $bool {
   llvm result + " = xor " + $receiver + " " + receiver + ", 1"
-}
-
-llvm func (left $bool) == (right $bool) -> $bool {
-  llvm result + " = icmp eq " + $left + " " + left + ", " + right
 }
 
 //——————————————————————————————————————————————————————————————————————————————
