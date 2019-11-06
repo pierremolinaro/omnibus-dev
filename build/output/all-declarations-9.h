@@ -10,6 +10,77 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                  Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_controlRegisterLValueAST inObject,
+                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                  Extension method '@controlRegisterLValueAST addDependenceEdgeForStaticExpression'                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_controlRegisterLValueAST inObject,
+                                                           const class GALGAS_lstring constin_inConstantName,
+                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                 Extension method '@controlRegisterLValueAST controlRegisterLValueSemanticAnalysis'                  *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_controlRegisterLValueAST inObject,
+                                                            const class GALGAS_bool constin_inWriteAccess,
+                                                            const class GALGAS_omnibusType constin_inSelfType,
+                                                            const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                            const class GALGAS_semanticContext constin_inContext,
+                                                            const class GALGAS_mode constin_inMode,
+                                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                            class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                            class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                            class GALGAS_allocaList & io_ioAllocaList,
+                                                            class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                            class GALGAS_omnibusType & out_outRegisterType,
+                                                            class GALGAS_uint & out_outRegisterTypeBitCount,
+                                                            class GALGAS_sliceMap & out_outSliceMap,
+                                                            class GALGAS_string & out_outllvmRegisterAddressName,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'handleArraySubscriptNew'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_handleArraySubscriptNew (const class GALGAS_omnibusType constinArgument0,
+                                      const class GALGAS_routineAttributes constinArgument1,
+                                      const class GALGAS_semanticContext constinArgument2,
+                                      const class GALGAS_mode constinArgument3,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                      class GALGAS_staticEntityMap & ioArgument5,
+                                      class GALGAS_universalValuedObjectMap & ioArgument6,
+                                      class GALGAS_allocaList & ioArgument7,
+                                      const class GALGAS_expressionAST constinArgument8,
+                                      const class GALGAS_location constinArgument9,
+                                      const class GALGAS_bool constinArgument10,
+                                      const class GALGAS_bigint constinArgument11,
+                                      const class GALGAS_omnibusType constinArgument12,
+                                      class GALGAS_instructionListIR & ioArgument13,
+                                      class GALGAS_objectIR & outArgument14,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                           Extension method '@abstractRoutineIR svcDeclarationGeneration'                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -341,188 +412,6 @@ class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mSourceVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_stringlist getter_mGeneratedInstructions (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     @userLLVMStaticArrayTypeDefinitionIR class                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_userLLVMStaticArrayTypeDefinitionIR : public GALGAS_userLLVMTypeDefinitionIR {
-//--- Constructor
-  public : GALGAS_userLLVMStaticArrayTypeDefinitionIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_userLLVMStaticArrayTypeDefinitionIR constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_userLLVMStaticArrayTypeDefinitionIR * ptr (void) const { return (const cPtr_userLLVMStaticArrayTypeDefinitionIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_userLLVMStaticArrayTypeDefinitionIR (const cPtr_userLLVMStaticArrayTypeDefinitionIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_userLLVMStaticArrayTypeDefinitionIR extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_userLLVMStaticArrayTypeDefinitionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                                    const class GALGAS_omnibusType & inOperand1,
-                                                                                    const class GALGAS_bigint & inOperand2
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_userLLVMStaticArrayTypeDefinitionIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mSize (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_userLLVMStaticArrayTypeDefinitionIR class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMStaticArrayTypeDefinitionIR ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Pointer class for @userLLVMStaticArrayTypeDefinitionIR class                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_userLLVMStaticArrayTypeDefinitionIR : public cPtr_userLLVMTypeDefinitionIR {
-//--- Attributes
-  public : GALGAS_omnibusType mProperty_mElementType ;
-  public : GALGAS_bigint mProperty_mSize ;
-
-//--- Constructor
-  public : cPtr_userLLVMStaticArrayTypeDefinitionIR (const GALGAS_string & in_mLLVMDefinedTypeName,
-                                                     const GALGAS_omnibusType & in_mElementType,
-                                                     const GALGAS_bigint & in_mSize
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mSize (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       @staticArrayTypeAssignFunctionIR class                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_staticArrayTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
-//--- Constructor
-  public : GALGAS_staticArrayTypeAssignFunctionIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_staticArrayTypeAssignFunctionIR constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_staticArrayTypeAssignFunctionIR * ptr (void) const { return (const cPtr_staticArrayTypeAssignFunctionIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_staticArrayTypeAssignFunctionIR (const cPtr_staticArrayTypeAssignFunctionIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_staticArrayTypeAssignFunctionIR extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_staticArrayTypeAssignFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                const class GALGAS_bool & inOperand1,
-                                                                                const class GALGAS_bool & inOperand2,
-                                                                                const class GALGAS_omnibusType & inOperand3
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_staticArrayTypeAssignFunctionIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mStaticArrayType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_staticArrayTypeAssignFunctionIR class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayTypeAssignFunctionIR ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Pointer class for @staticArrayTypeAssignFunctionIR class                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_staticArrayTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
-//--- Attributes
-  public : GALGAS_omnibusType mProperty_mStaticArrayType ;
-
-//--- Constructor
-  public : cPtr_staticArrayTypeAssignFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                 const GALGAS_bool & in_isRequired,
-                                                 const GALGAS_bool & in_warnsIfUnused,
-                                                 const GALGAS_omnibusType & in_mStaticArrayType
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mStaticArrayType (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

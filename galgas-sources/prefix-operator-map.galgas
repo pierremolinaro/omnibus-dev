@@ -45,8 +45,17 @@ method @prefixOperatorMap generateInfixOperatorCode
       error inOperatorLocation : "this operator is not allowed in safe mode"
     end
   end
+#--- Do not generate panic code ?
+  var prefixOperator = inPrefixOperator
+  if inDoNotGeneratePanicCode then
+    switch inPrefixOperator 
+    case minusNoOvf, notOp, bitWiseComplement :
+    case minusOp :
+      prefixOperator = .minusNoOvf
+    end
+  end
 #---
-  let key = prefixOperatorMapKey (![inReceiverOperand type] !inPrefixOperator !inOperatorLocation)
+  let key = prefixOperatorMapKey (![inReceiverOperand type] !prefixOperator !inOperatorLocation)
   [self searchKey !key ?1* ?let resultType ?let operatorUsage]
   [operatorUsage generateCode
     !inReceiverOperand

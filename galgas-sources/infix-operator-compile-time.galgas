@@ -226,18 +226,20 @@ override method @compileTimeInfixOperatorAST enterInContext
   }
   [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
 #--- Define '≤' operator ?
-#  let equal_key = infixOperatorMapKey (!leftType !.equal !mInfixOperatorLocation !rightType)
-#  let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !mInfixOperatorLocation !rightType)
-#  if [ioContext.mInfixOperatorMap hasKey !equal_key] & [ioContext.mInfixOperatorMap hasKey !lessThan_key] then
-#    let infEqual_definition = @compileTimeInfixOperatorUsage.new {
-#      !mLeftOperandName
-#      !mRightOperandName
-#      !mExpression
-#    }
-#    let infEqual_key = infixOperatorMapKey (!leftType !.equal !mInfixOperatorLocation !rightType)
-#    [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !definition]   
-#    end
-#  end
+  if (mInfixOperator == .equal) || (mInfixOperator == .lessThan) then
+    let equal_key = infixOperatorMapKey (!leftType !.equal !mInfixOperatorLocation !rightType)
+    let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !mInfixOperatorLocation !rightType)
+  if [ioContext.mInfixOperatorMap hasKey !equal_key] & [ioContext.mInfixOperatorMap hasKey !lessThan_key] then
+    [ioContext.mInfixOperatorMap searchKey !equal_key ?* ?let equalOperatorUsage]
+    [ioContext.mInfixOperatorMap searchKey !lessThan_key ?* ?let lessThanOperatorUsage]
+    if let eou = equalOperatorUsage as @compileTimeInfixOperatorUsage,
+       let ltou = lessThanOperatorUsage as @compileTimeInfixOperatorUsage then
+      let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage.new {!eou !ltou}
+      let infEqual_key = infixOperatorMapKey (!leftType !.infEqual !mInfixOperatorLocation !rightType)
+      [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !infEqual_definition] 
+      end  
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -252,6 +254,21 @@ class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
 
 #·······················································································································
 
+method @compileTimeInfixOperatorUsage eval
+  ?let @objectIR inLeftOperand
+  ?let @objectIR inRightOperand
+  !@bigint outResult
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  @ctMap varMap = {}
+  [!?varMap insertKey !mLeftOperandName !leftValue]
+  [!?varMap insertKey !mRightOperandName !rightValue]
+  [mExpression computeCompileTimeExpression !varMap ?result: outResult]
+}
+
+#·······················································································································
+
 override method @compileTimeInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
@@ -261,12 +278,32 @@ override method @compileTimeInfixOperatorUsage generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
-  @ctMap varMap = {}
-  [!?varMap insertKey !mLeftOperandName !leftValue]
-  [!?varMap insertKey !mRightOperandName !rightValue]
-  [mExpression computeCompileTimeExpression !varMap ?result: let result]
+  [self eval !inLeftOperand !inRightOperand ?let result]
+  outResultValue = .literalInteger {!type: inResultType !value: result}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
+  @compileTimeInfixOperatorUsage mEqualOperatorUsage
+  @compileTimeInfixOperatorUsage mLessThanOperatorUsage
+}
+
+#·······················································································································
+
+override method @compileTimeInfixInfEqualOperatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [mEqualOperatorUsage eval !inLeftOperand !inRightOperand ?var result]
+  if result == 0G then
+    [mLessThanOperatorUsage eval !inLeftOperand !inRightOperand ?result]
+  end
   outResultValue = .literalInteger {!type: inResultType !value: result}
 }
 

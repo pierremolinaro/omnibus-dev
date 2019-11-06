@@ -114,14 +114,14 @@ override getter @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compiletimePrefixOperatorAST enterInContext
-  ?!context:@semanticContext ioContext
+  ?!context: @semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
   ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
-  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+  ?!staticlistValues: @staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap: @staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess: @controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes: @userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverTypeProxy]
@@ -142,10 +142,15 @@ override method @compiletimePrefixOperatorAST enterInContext
     !mExpression
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
+#--- Enter derived operators ?
+  if mPrefixOperator == .minusOp then
+    let minusNoOvf_key = prefixOperatorMapKey (!receiverType !.minusNoOvf !mPrefixOperatorLocation)
+    [!?ioContext.mPrefixOperatorMap insertKey !minusNoOvf_key !receiverType !resultType !definition]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   INFIX OPERATOR MAP
+#   PREFIX OPERATOR USAGE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {

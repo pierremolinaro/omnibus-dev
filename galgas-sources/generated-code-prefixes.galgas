@@ -45,32 +45,11 @@ func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func infixOperatorMapKey ?let @omnibusType inLeftType
-                         ?let @omnibusInfixOperator inOperator
+                         ?let @omnibusInfixOperator inInfixOperator
                          ?let @location inOperatorLocation
                          ?let @omnibusType inRightType -> @lstring 
 {
-  var s = [inLeftType omnibusTypeDescriptionName] + " "
-  switch inOperator
-   case equal     : s += "=="
-   case lessThan : s += "<"
-   case infEqual  : s += "≤"
-   case bitWiseAndOp : s += "&"
-   case bitWiseOrOp : s += "|"
-   case bitWiseXorOp : s += "^"
-   case booleanXorOp: s += "xor"
-   case addOp       : s += "+"
-   case addOpNoOvf  : s += "+%"
-   case subOp       : s += "-"
-   case subOpNoOvf  : s += "-%"
-   case mulOp       : s += "*"
-   case mulOpNoOvf  : s += "*%"
-   case divOp       : s += "/"
-   case divOpNoOvf  : s += "!/"
-   case modOp    : s += "%"
-   case modOpNoOvf: s += "!%"
-   case leftShiftOp  : s += "<<"
-   case rightShiftOp : s += ">>"
-  end
+  var s = [inLeftType omnibusTypeDescriptionName] + " " + inInfixOperator
   s += " " + [inRightType omnibusTypeDescriptionName]
   result = .new {!s !inOperatorLocation}
 }

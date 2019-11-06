@@ -42,7 +42,6 @@ llvm func not (receiver $boolean) -> $boolean {
 
 //--- Temp
 llvm func (receiver $bool) convertToBoolean {
-  llvm result + " = or " + $receiver + " " + receiver + ", 0"
 }
 
 llvm func not (receiver $bool) -> $bool {

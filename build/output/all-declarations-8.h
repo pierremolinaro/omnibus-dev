@@ -1349,6 +1349,120 @@ class cPtr_compileTimeInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                               Extension method '@compileTimeInfixOperatorUsage eval'                                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typedef void (*extensionMethodSignature_compileTimeInfixOperatorUsage_eval) (const class cPtr_compileTimeInfixOperatorUsage * inObject,
+                                                                             const class GALGAS_objectIR constinArgument0,
+                                                                             const class GALGAS_objectIR constinArgument1,
+                                                                             class GALGAS_bigint & outArgument2,
+                                                                             class C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_eval (const int32_t inClassIndex,
+                                extensionMethodSignature_compileTimeInfixOperatorUsage_eval inMethod) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_eval (const class cPtr_compileTimeInfixOperatorUsage * inObject,
+                               const GALGAS_objectIR constin_inLeftOperand,
+                               const GALGAS_objectIR constin_inRightOperand,
+                               GALGAS_bigint & out_outResult,
+                               C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                    @compileTimeInfixInfEqualOperatorUsage class                                     *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_compileTimeInfixInfEqualOperatorUsage : public GALGAS_omnibusInfixOperatorUsage {
+//--- Constructor
+  public : GALGAS_compileTimeInfixInfEqualOperatorUsage (void) ;
+
+//---
+  public : inline const class cPtr_compileTimeInfixInfEqualOperatorUsage * ptr (void) const { return (const cPtr_compileTimeInfixInfEqualOperatorUsage *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_compileTimeInfixInfEqualOperatorUsage (const cPtr_compileTimeInfixInfEqualOperatorUsage * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_compileTimeInfixInfEqualOperatorUsage extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_compileTimeInfixInfEqualOperatorUsage constructor_new (const class GALGAS_compileTimeInfixOperatorUsage & inOperand0,
+                                                                                      const class GALGAS_compileTimeInfixOperatorUsage & inOperand1
+                                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_compileTimeInfixInfEqualOperatorUsage & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorUsage getter_mEqualOperatorUsage (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorUsage getter_mLessThanOperatorUsage (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_compileTimeInfixInfEqualOperatorUsage class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixInfEqualOperatorUsage ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                           Pointer class for @compileTimeInfixInfEqualOperatorUsage class                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class cPtr_compileTimeInfixInfEqualOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
+//--- Attributes
+  public : GALGAS_compileTimeInfixOperatorUsage mProperty_mEqualOperatorUsage ;
+  public : GALGAS_compileTimeInfixOperatorUsage mProperty_mLessThanOperatorUsage ;
+
+//--- Constructor
+  public : cPtr_compileTimeInfixInfEqualOperatorUsage (const GALGAS_compileTimeInfixOperatorUsage & in_mEqualOperatorUsage,
+                                                       const GALGAS_compileTimeInfixOperatorUsage & in_mLessThanOperatorUsage
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorUsage getter_mEqualOperatorUsage (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorUsage getter_mLessThanOperatorUsage (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                            @llvmInfixOperatorUsage class                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1377,7 +1491,7 @@ class GALGAS_llvmInfixOperatorUsage : public GALGAS_omnibusInfixOperatorUsage {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_llvmInfixOperatorUsage constructor_new (const class GALGAS_location & inOperand0,
+  public : static class GALGAS_llvmInfixOperatorUsage constructor_new (const class GALGAS_string & inOperand0,
                                                                        const class GALGAS_lstring & inOperand1,
                                                                        const class GALGAS_lstring & inOperand2,
                                                                        const class GALGAS_llvmGenerationInstructionList & inOperand3
@@ -1392,7 +1506,7 @@ class GALGAS_llvmInfixOperatorUsage : public GALGAS_omnibusInfixOperatorUsage {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mInfixMangledFunctionName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
 
@@ -1419,13 +1533,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorUs
 
 class cPtr_llvmInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
 //--- Attributes
-  public : GALGAS_location mProperty_mInfixOperatorLocation ;
+  public : GALGAS_string mProperty_mInfixMangledFunctionName ;
   public : GALGAS_lstring mProperty_mLeftOperandName ;
   public : GALGAS_lstring mProperty_mRightOperandName ;
   public : GALGAS_llvmGenerationInstructionList mProperty_mInstructionList ;
 
 //--- Constructor
-  public : cPtr_llvmInfixOperatorUsage (const GALGAS_location & in_mInfixOperatorLocation,
+  public : cPtr_llvmInfixOperatorUsage (const GALGAS_string & in_mInfixMangledFunctionName,
                                         const GALGAS_lstring & in_mLeftOperandName,
                                         const GALGAS_lstring & in_mRightOperandName,
                                         const GALGAS_llvmGenerationInstructionList & in_mInstructionList
@@ -1435,7 +1549,7 @@ class cPtr_llvmInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mInfixMangledFunctionName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
@@ -2460,77 +2574,6 @@ void routine_analyzeVariableInLValue (const class GALGAS_omnibusType constinArgu
                                       const class GALGAS_omnibusType constinArgument12,
                                       const class GALGAS_LValueOperandAST constinArgument13,
                                       class GALGAS_LValueRepresentation & outArgument14,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                  Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_controlRegisterLValueAST inObject,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                  Extension method '@controlRegisterLValueAST addDependenceEdgeForStaticExpression'                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_controlRegisterLValueAST inObject,
-                                                           const class GALGAS_lstring constin_inConstantName,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                 Extension method '@controlRegisterLValueAST controlRegisterLValueSemanticAnalysis'                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_controlRegisterLValueAST inObject,
-                                                            const class GALGAS_bool constin_inWriteAccess,
-                                                            const class GALGAS_omnibusType constin_inSelfType,
-                                                            const class GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                            const class GALGAS_semanticContext constin_inContext,
-                                                            const class GALGAS_mode constin_inMode,
-                                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                            class GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                            class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                                            class GALGAS_allocaList & io_ioAllocaList,
-                                                            class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                            class GALGAS_omnibusType & out_outRegisterType,
-                                                            class GALGAS_uint & out_outRegisterTypeBitCount,
-                                                            class GALGAS_sliceMap & out_outSliceMap,
-                                                            class GALGAS_string & out_outllvmRegisterAddressName,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Routine 'handleArraySubscriptNew'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_handleArraySubscriptNew (const class GALGAS_omnibusType constinArgument0,
-                                      const class GALGAS_routineAttributes constinArgument1,
-                                      const class GALGAS_semanticContext constinArgument2,
-                                      const class GALGAS_mode constinArgument3,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                      class GALGAS_staticEntityMap & ioArgument5,
-                                      class GALGAS_universalValuedObjectMap & ioArgument6,
-                                      class GALGAS_allocaList & ioArgument7,
-                                      const class GALGAS_expressionAST constinArgument8,
-                                      const class GALGAS_location constinArgument9,
-                                      const class GALGAS_bool constinArgument10,
-                                      const class GALGAS_bigint constinArgument11,
-                                      const class GALGAS_omnibusType constinArgument12,
-                                      class GALGAS_instructionListIR & ioArgument13,
-                                      class GALGAS_objectIR & outArgument14,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 

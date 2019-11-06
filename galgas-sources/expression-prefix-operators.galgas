@@ -76,7 +76,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   let @bool noPanicGeneration = [option omnibus_options.noPanicGeneration value]
   let key = prefixOperatorMapKey (![expressionResult type] !mOp !mOperatorLocation)
   if [inContext.mPrefixOperatorMap hasKey !key] then
-    message "NEW INFIX OP " + key + "\n"
+#    message "NEW PREFIX OP " + key + "\n"
     [inContext.mPrefixOperatorMap generateInfixOperatorCode
       !expressionResult
       !mOp
@@ -88,6 +88,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       ?outResult
     ]
   else
+#    message "OLD PREFIX OP " + key + "\n"
     @prefixOperatorMap_EX prefixOperatorMap
     @llvmBinaryOperation binaryOperator
     @objectIR leftOperand

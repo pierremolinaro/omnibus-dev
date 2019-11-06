@@ -1209,6 +1209,16 @@ class GALGAS_omnibusType extensionGetter_type (const class GALGAS_objectIR & inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                            Extension getter '@omnibusInfixOperator string' (as function)                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string extensionGetter_string (const class GALGAS_omnibusInfixOperator & inObject,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                          Extension method '@infixOperatorMap_EX checkBinaryOperationWith'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

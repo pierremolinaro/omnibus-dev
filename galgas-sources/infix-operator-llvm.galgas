@@ -113,7 +113,7 @@ override method @llvmInfixOperatorAST enterInContext
 #--- Enter in infix operator map  
   let key = infixOperatorMapKey (!leftType !mInfixOperator !mInfixOperatorLocation !rightType)
   let definition = @llvmInfixOperatorUsage.new {
-    !mInfixOperatorLocation
+    !infixOperatorFunctionName (!leftType !mInfixOperator !rightType)
     !mLeftOperandName
     !mRightOperandName
     !mInstructionList
@@ -163,7 +163,7 @@ override method @llvmInfixOperatorAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
-  @location mInfixOperatorLocation
+  @string mInfixMangledFunctionName
   @lstring mLeftOperandName
   @lstring mRightOperandName
   @llvmGenerationInstructionList mInstructionList
@@ -180,7 +180,28 @@ override method @llvmInfixOperatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  error inOperatorLocation : "INFIX OPERATOR NOT HANDLED YET" : outResultValue
+#--- If reference, load it
+  var leftOperand = inLeftOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference
+    !?ioTemporaries
+    !?leftOperand
+  ]  
+  var rightOperand = inRightOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference
+    !?ioTemporaries
+    !?rightOperand
+  ]  
+#--- New LLVM variable for result
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  @procCallEffectiveParameterListIR argumentList = {}
+  argumentList += !.output !leftOperand
+  argumentList += !.output !rightOperand
+  ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
+    !outResultValue
+    !.new {!mInfixMangledFunctionName !inOperatorLocation}
+    !mInfixMangledFunctionName
+    !argumentList
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

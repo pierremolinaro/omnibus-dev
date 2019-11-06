@@ -161,10 +161,6 @@ override method @llvmConvertToBooleanAST enterInContext
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsNotCompileTimeType !mReceiverTypeName.location]
-#--- Check native operator expression
-#  @ctCheckMap ctCheckMap = {}
-#  [!?ctCheckMap insertKey !mReceiverName]
-#  [mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
   let key = @lstring.new {![receiverType omnibusTypeDescriptionName] !mReceiverTypeName.location}
   let converter = @llvmImplicitConverterToBoolean.new {!mReceiverName !receiverType !mInstructionList}
@@ -254,21 +250,25 @@ override method @llvmImplicitConverterToBoolean generateConvertToBooleanCode
   ?!alloca: @allocaList ioAllocaList
   !@implicitBooleanConversionResult outResult
 {
-  @assignmentGenerationVarMap varMap = {}
-  [!?varMap insertKey !mReceiverName ![inReceiverOperand llvmName]]
-  let resultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
-  ioTemporaries.mTemporaryIndex ++
-  [!?varMap insertKey !["result" nowhere] !resultLLVMName]
-
-  @assignmentGenerationVarMap typeMap = {}
-  [!?typeMap insertKey !mReceiverName ![mReceiverType llvmTypeName]]
-
-  @stringlist generatedInstructions = {}
-  [mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
-  for (str) in generatedInstructions do
-    [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
+  if [mInstructionList length] == 0 then
+    outResult = .llvmVariable {!name: [inReceiverOperand llvmName]}
+  else
+    @assignmentGenerationVarMap varMap = {}
+    [!?varMap insertKey !mReceiverName ![inReceiverOperand llvmName]]
+    let resultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
+    ioTemporaries.mTemporaryIndex ++
+    [!?varMap insertKey !["result" nowhere] !resultLLVMName]
+  
+    @assignmentGenerationVarMap typeMap = {}
+    [!?typeMap insertKey !mReceiverName ![mReceiverType llvmTypeName]]
+  
+    @stringlist generatedInstructions = {}
+    [mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
+    for (str) in generatedInstructions do
+      [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
+    end
+    outResult = .llvmVariable {!name: resultLLVMName}
   end
-  outResult = .llvmVariable {!name: resultLLVMName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

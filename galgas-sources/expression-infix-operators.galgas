@@ -24,6 +24,32 @@ enum @omnibusInfixOperator {
   case rightShiftOp
 }
 
+#·······················································································································
+
+getter @omnibusInfixOperator string -> @string {
+  switch self
+   case equal     : result = "=="
+   case lessThan : result = "<"
+   case infEqual  : result = "≤"
+   case bitWiseAndOp : result = "&"
+   case bitWiseOrOp : result = "|"
+   case bitWiseXorOp : result = "^"
+   case booleanXorOp: result = "xor"
+   case addOp       : result = "+"
+   case addOpNoOvf  : result = "+%"
+   case subOp       : result = "-"
+   case subOpNoOvf  : result = "-%"
+   case mulOp       : result = "*"
+   case mulOpNoOvf  : result = "*%"
+   case divOp       : result = "/"
+   case divOpNoOvf  : result = "!/"
+   case modOp    : result = "%"
+   case modOpNoOvf: result = "!%"
+   case leftShiftOp  : result = "<<"
+   case rightShiftOp : result = ">>"
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @omnibusInfixOperatorExpressionAST : @expressionAST {
@@ -121,7 +147,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 #------------------- Get operator map
   let key = infixOperatorMapKey (![leftOperand type] !mInfixOperator !mOperatorLocation ![rightOperand type])
   if [inContext.mInfixOperatorMap hasKey !key.string] then
-    message "NEW INFIX OP (" + key + ")\n"
+#    message "NEW INFIX OP (" + key + ")\n"
     [inContext.mInfixOperatorMap generateInfixOperatorCode
       !leftOperand
       !mInfixOperator
@@ -131,9 +157,8 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
       !?ioInstructionGenerationList
       ?outResult
     ]
-#  end
   else 
-    message "OLD INFIX OP (" + [[leftOperand type] omnibusTypeDescriptionName] + " " +  [[rightOperand type] omnibusTypeDescriptionName] + ")\n"
+#    message "OLD INFIX OP (" + [[leftOperand type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " +  [[rightOperand type] omnibusTypeDescriptionName] + ")\n"
     [!?ioInstructionGenerationList appendLoadWhenReference
       !?ioTemporaries
       !?leftOperand
