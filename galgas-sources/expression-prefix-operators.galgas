@@ -114,7 +114,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
         error mOperatorLocation : "internal error" : leftOperand
       case generic (3*) :
         error mOperatorLocation : "internal error" : leftOperand
-      case llvmType :
+      case llvmType (*) :
         error mOperatorLocation : "internal error" : leftOperand
       case function (3*) :
         error mOperatorLocation : "internal error" : leftOperand

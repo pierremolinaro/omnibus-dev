@@ -44,6 +44,12 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
     !importClauseList:importedFileList
     !?importedFilePathSet:importedFileAbsolutePathSet
   )
+  var s = "SLICES"
+  for (str) in ast.mSliceSelectorSet do
+    s += " " + str
+  end
+  s += "\n"
+  message s
 #--- Check target names are not duplicated
   if @uint.errorCount == 0 then
     @stringset targetNameSet = {}

@@ -66,7 +66,7 @@ override method @compileTimeDeclarationBarrierAST enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
+private proc appendUnsignedOperatorsTo ?@uint inSize ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
 #--- Add assignment operator declaration
   @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
@@ -104,6 +104,9 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
   appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- ~ 
   appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
+#--- Append slice
+  declaration = @sliceDeclarationAST.new {![[inSize string] nowhere] ![inTypeName nowhere]}
+  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -174,7 +177,7 @@ proc buildOrderedDeclarationList
         let declaration = @integerDeclarationAST.new {!false !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
-        appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
+        appendUnsignedOperatorsTo (!n !mValue !?precedenceGraph)
       #---
         addintegerTypeCount ++
       elsif [split mValueAtIndex !0] == "" then 

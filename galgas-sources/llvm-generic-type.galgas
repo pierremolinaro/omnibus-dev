@@ -55,7 +55,7 @@ class @llvmGenericType : @abstractDeclarationAST {
   @lstring mTypeName
   @genericFormalParameterList mGenericFormalParameterList
   @ctExpressionAST mWhereClause
-  @llvmStringDefinition mTypeNameExpressionString
+  @bigint mBitSize
 }
 
 #·······················································································································
@@ -128,13 +128,29 @@ syntax extension omnibus_syntax {
     <generic_formal_arguments> ?let genericFormalParameterList
     <generic_where_clause> ?let whereClause
     ${$
-    <llvm_string_definition> ?let llvmNativeTypeNameExpression
+    $identifier$ ?let sizeKey
+    if sizeKey.string != "size" then
+      error sizeKey : "this identifier should be 'size'"
+    end
+    $:$
+    $integer$ ?let bitSize
+    $identifier$ ?let sliceKey
+    if sliceKey.string != "slice" then
+      error sliceKey : "this identifier should be 'slice'"
+    end
+    $:$
+    select
+      $no$
+    or
+      $"string"$ ?let sliceString
+      ioAST.mDeclarationListAST += !@sliceDeclarationAST.new {!sliceString ! typeName}
+    end
     $}$
     ioAST.mDeclarationListAST += !@llvmGenericType.new {
       !typeName
       !genericFormalParameterList
       !whereClause
-      !llvmNativeTypeNameExpression
+      !bitSize
     }
   }
 
@@ -203,7 +219,7 @@ override method @llvmGenericType enterInContext
 #--- Check Where clause
   [mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
 #--- Check native LLVM type expression
-  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
+#  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
 #---
   if [mGenericFormalParameterList length] == 0 then
     let llvmType = @omnibusType.new {
@@ -212,31 +228,31 @@ override method @llvmGenericType enterInContext
       !classConstantMap:{}
       !constructorMap:{}
       !subscript:.noSubscript
-      !attributes: .instanciable
+      !attributes: .instanciable | .copyable
       !omnibusTypeDescriptionName: mTypeName
-      !kind: .llvmType
-      !llvmBaseTypeName: [mTypeNameExpressionString eval !{}]
+      !kind: .llvmType {!bitSize: mBitSize}
+      !llvmBaseTypeName: "i" + mBitSize
     }
     [!?ioContext.mTypeMap insertType
       !lkey: mTypeName
       !type: llvmType
     ]
   else
-    let genericType = @omnibusType.new {
-      !propertyGetterMap: {}
-      !propertySetterMap: {}
-      !classConstantMap:{}
-      !constructorMap:{}
-      !subscript:.noSubscript
-      !attributes: .none
-      !omnibusTypeDescriptionName: mTypeName
-      !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: mTypeNameExpressionString}
-      !llvmBaseTypeName: "" # A generic type cannot be instancied
-    }
-    [!?ioContext.mTypeMap insertType
-      !lkey: mTypeName
-      !type: genericType
-    ]
+#    let genericType = @omnibusType.new {
+#      !propertyGetterMap: {}
+#      !propertySetterMap: {}
+#      !classConstantMap:{}
+#      !constructorMap:{}
+#      !subscript:.noSubscript
+#      !attributes: .none
+#      !omnibusTypeDescriptionName: mTypeName
+#      !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: ""}
+#      !llvmBaseTypeName: "" # A generic type cannot be instancied
+#    }
+#    [!?ioContext.mTypeMap insertType
+#      !lkey: mTypeName
+#      !type: genericType
+#    ]
   end
 }
 

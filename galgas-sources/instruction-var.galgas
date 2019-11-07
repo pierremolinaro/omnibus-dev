@@ -155,7 +155,8 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !?ioTemporaries
     !inContext.mAssignmentOperatorMap
     !?ioAllocaList
-    !.new {![result type] !llvmNameForLocalVariable (!omnibusLocalVariableName)}
+    ![result type]
+    !llvmNameForLocalVariable (!omnibusLocalVariableName)
     !sourcePossibleReference
     !mVarName
   ]

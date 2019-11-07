@@ -21,8 +21,13 @@ override method @extendIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  " + [mResult llvmName] + " = "
-  [[mSource type].kind integer ?2* ?unsigned:let sourceIsUnsigned ?1*]
-  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
+  let kind = [mSource type].kind
+  if [kind isLlvmType] then
+    ioLLVMcode += "zext"
+  else
+    [kind integer ?2* ?unsigned:let sourceIsUnsigned ?1*]
+    ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
+  end
   ioLLVMcode += " " + [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
 }
 

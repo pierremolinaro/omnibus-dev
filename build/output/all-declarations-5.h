@@ -5540,7 +5540,8 @@ void extensionSetter_appendAssignmentIR (class GALGAS_instructionListIR & ioObje
                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                          const class GALGAS_assignmentOperatorMap constin_inAssignmentOperatorMap,
                                          class GALGAS_allocaList & io_ioAllocaList,
-                                         const class GALGAS_LValueRepresentation constin_inTarget,
+                                         const class GALGAS_omnibusType constin_inTargetType,
+                                         const class GALGAS_string constin_inTargetLLVMName,
                                          const class GALGAS_objectIR constin_inSourcePossibleReference,
                                          const class GALGAS_location constin_inErrorLocation,
                                          class C_Compiler * inCompiler

@@ -59,6 +59,7 @@ struct @semanticContext {
   
   @implicitConversionToBooleanMap mImplicitConversionToBooleanMap
   @assignableTypesFromCompileTimeType_Map mAssignableTypesFromCompileTimeType_Map
+  @sliceTypeMap mSliceTypeMap
 
 #--- Tasks
   @taskMap mTaskMap

@@ -271,21 +271,22 @@ setter @instructionListIR appendAssignmentIR
     ?!@semanticTemporariesStruct ioTemporaries
     ?let @assignmentOperatorMap inAssignmentOperatorMap
     ?!@allocaList ioAllocaList
-    ?let @LValueRepresentation inTarget
+    ?let @omnibusType inTargetType
+    ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
 {
   if not [inSourcePossibleReference isReference] then
     let result = checkAssignmentCompatibility (
       !source:inSourcePossibleReference # loadedResultValue
-      !targetAnnotationType:[inTarget type]
+      !targetAnnotationType:inTargetType
       !errorLocation:inErrorLocation
       !staticTypeAllowed:false
     )
-   [!?self appendStoreToUniversalReference !inTarget.llvmName !inTarget.type !result]
+   [!?self appendStoreToUniversalReference !inTargetLLVMName !inTargetType !result]
   else
     let key = @lstring.new {
-     !inTarget.type.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
+     !inTargetType.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
      !inErrorLocation
     }
     [inAssignmentOperatorMap searchKey
@@ -303,18 +304,18 @@ setter @instructionListIR appendAssignmentIR
     && ([sourceGenericFormalParameterList length] == 0)
     && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
     && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
-      let llvmRoutineName = assignmentOperatorFuncName (!inTarget.type ![inSourcePossibleReference type])
+      let llvmRoutineName = assignmentOperatorFuncName (!inTargetType ![inSourcePossibleReference type])
       var s = "call void @" + [llvmRoutineName assemblerRepresentation]
-            + " (" + [inTarget.type llvmTypeName] + "* " + inTarget.llvmName
+            + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
             + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
       [!?self appendInstructionAsFreeString !s !{!llvmRoutineName}]
     else
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
     @assignmentGenerationVarMap varMap = {}
-    [!?varMap insertKey !targetVarName !inTarget.llvmName]
+    [!?varMap insertKey !targetVarName !inTargetLLVMName]
     [!?varMap insertKey !sourceVarName !srcLLVMName]
     @assignmentGenerationVarMap typeMap = {}
-    [!?typeMap insertKey !targetVarName ![[inTarget type] llvmTypeName]]
+    [!?typeMap insertKey !targetVarName ![inTargetType llvmTypeName]]
     [!?typeMap insertKey !sourceVarName ! [sourceType llvmTypeName]]
     @stringlist generatedInstructions = {}
     [llvmInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]

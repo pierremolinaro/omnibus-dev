@@ -1,0 +1,75 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+#·······················································································································
+
+class @sliceDeclarationAST : @abstractDeclarationAST {
+  @lstring mSliceString
+  @lstring mSliceTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @sliceDeclarationAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let nodeName = @lstring.new {!"slice " + mSliceString !mSliceString.location}
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName !mSliceTypeName]
+  [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName]
+}
+
+#·······················································································································
+
+override getter @sliceDeclarationAST locationForErrorSignaling -> @location outLocation {
+  outLocation = mSliceString.location
+}
+
+#·······················································································································
+
+override getter @sliceDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "slice " + mSliceString 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @sliceTypeMap {
+  @omnibusType mType
+  @bigint mBitSize
+  insert insertKey error message "the '%K' slice is already declared in %L"
+  search searchKey error message "there is no '%K' slice"
+}
+
+#·······················································································································
+
+override method @sliceDeclarationAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mSliceTypeName ?let sliceTypeProxy]
+  let sliceType = [sliceTypeProxy type]
+  let kind = sliceType.kind
+  if [kind isLlvmType] then
+    [kind llvmType ?bitSize: let bitSize]
+    [!?ioContext.mSliceTypeMap insertKey !mSliceString !sliceType !bitSize]
+  elsif [kind isInteger] then
+    [kind integer ?3* ?bitCount: let bitCount]
+    [!?ioContext.mSliceTypeMap insertKey !mSliceString !sliceType !bitCount]
+  else
+    error mSliceTypeName : "the $" + mSliceTypeName + " type is not slicable"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

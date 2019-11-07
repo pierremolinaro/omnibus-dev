@@ -464,8 +464,9 @@ class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_str
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_appendUnsignedOperatorsTo (const class GALGAS_string constinArgument0,
-                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+void routine_appendUnsignedOperatorsTo (class GALGAS_uint inArgument0,
+                                        const class GALGAS_string constinArgument1,
+                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument2,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
@@ -854,80 +855,4 @@ class GALGAS_string function_instantiableAttribute (class C_Compiler * inCompile
 class GALGAS_lstring function_registerGroupNameFromOmnibusName (const class GALGAS_lstring & constinArgument0,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Filewrapper 'controlRegisterDumpGenerationTemplate'                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGenerationTemplate ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                       Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByName'                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByName (class C_Compiler * inCompiler,
-                                                                                    const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                                    const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                                    const class GALGAS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                     Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByAddress'                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAddress (class C_Compiler * inCompiler,
-                                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                                       const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                                       const class GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         Routine 'buildControlRegisterMaps'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_buildControlRegisterMaps (const class GALGAS_controlRegisterMap constinArgument0,
-                                       const class GALGAS_bigint constinArgument1,
-                                       const class GALGAS_string constinArgument2,
-                                       class GALGAS_controlRegisterByAddress & ioArgument3,
-                                       class GALGAS_controlRegisterByName & ioArgument4,
-                                       class GALGAS_uint & ioArgument5,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'arrayIndexListFor'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & constinArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'fieldIndexColumns'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
 

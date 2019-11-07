@@ -79,7 +79,7 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case compileTimeInteger
   case compileTimeBool
-  case llvmType
+  case llvmType (@bigint bitSize)
   case generic (@genericFormalParameterList parameters
                 @ctExpressionAST whereClause
                 @llvmStringDefinition llvmNativeTypeNameExpression)
@@ -114,7 +114,7 @@ getter @omnibusType llvmTypeName -> @string {
     result = "" # No LLVM type, Compile Time Type
   case generic (3*) :
     result = "" # No LLVM type, Compile Time Type
-  case llvmType :
+  case llvmType (*) :
     result = [self llvmBaseTypeName]
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
@@ -384,7 +384,7 @@ getter @omnibusType descriptionForHTMLFile -> @string {
     result = "Compile Time Integer"
   case generic (3*) :
     result = "Generic Type"
-  case llvmType :
+  case llvmType (*) :
     result = "LLVM Type"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"

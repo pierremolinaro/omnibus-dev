@@ -1866,6 +1866,35 @@ typeComparisonResult cEnumAssociatedValues_typeKind_integer::compare (const cEnu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+cEnumAssociatedValues_typeKind_llvmType::cEnumAssociatedValues_typeKind_llvmType (const GALGAS_bigint & inAssociatedValue0
+                                                                                  COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void cEnumAssociatedValues_typeKind_llvmType::description (C_String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cEnumAssociatedValues_typeKind_llvmType::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_typeKind_llvmType * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_llvmType *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 cEnumAssociatedValues_typeKind_generic::cEnumAssociatedValues_typeKind_generic (const GALGAS_genericFormalParameterList & inAssociatedValue0,
                                                                                 const GALGAS_ctExpressionAST & inAssociatedValue1,
                                                                                 const GALGAS_llvmStringDefinition & inAssociatedValue2
@@ -2144,9 +2173,16 @@ GALGAS_typeKind GALGAS_typeKind::constructor_compileTimeBool (UNUSED_LOCATION_AR
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_typeKind GALGAS_typeKind::constructor_llvmType (UNUSED_LOCATION_ARGS) {
+GALGAS_typeKind GALGAS_typeKind::constructor_llvmType (const GALGAS_bigint & inAssociatedValue0
+                                                       COMMA_LOCATION_ARGS) {
   GALGAS_typeKind result ;
-  result.mEnum = kEnum_llvmType ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_llvmType ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_typeKind_llvmType (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
   return result ;
 }
 
@@ -2284,6 +2320,22 @@ void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue0,
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
     outAssociatedValue2 = ptr->mAssociatedValue2 ;
     outAssociatedValue3 = ptr->mAssociatedValue3 ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_typeKind::method_llvmType (GALGAS_bigint & outAssociatedValue0,
+                                       C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmType) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @typeKind llvmType invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_typeKind_llvmType * ptr = (const cEnumAssociatedValues_typeKind_llvmType *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -14938,327 +14990,6 @@ GALGAS_controlRegisterByAddress GALGAS_controlRegisterByAddress::extractObject (
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterByAddress", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Class for element of '@controlRegisterByName' sorted list                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cSortedListElement_controlRegisterByName : public cSortedListElement {
-  public : GALGAS_controlRegisterByName_2D_element mObject ;
-
-//--- Constructor
-  public : cSortedListElement_controlRegisterByName (const GALGAS_bigint & in_mAddress,
-                                                     const GALGAS_string & in_mHTML,
-                                                     const GALGAS_string & in_mName
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cSortedListElement * copy (void) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-
-//--- Virtual method that comparing element for sorting
-  public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cSortedListElement_controlRegisterByName::cSortedListElement_controlRegisterByName (const GALGAS_bigint & in_mAddress,
-                                                                                    const GALGAS_string & in_mHTML,
-                                                                                    const GALGAS_string & in_mName
-                                                                                    COMMA_LOCATION_ARGS) :
-cSortedListElement (THERE),
-mObject (in_mAddress, in_mHTML, in_mName) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool cSortedListElement_controlRegisterByName::isValid (void) const {
-  return mObject.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cSortedListElement * cSortedListElement_controlRegisterByName::copy (void) {
-  cSortedListElement * result = NULL ;
-  macroMyNew (result, cSortedListElement_controlRegisterByName (mObject.mProperty_mAddress, mObject.mProperty_mHTML, mObject.mProperty_mName COMMA_HERE)) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cSortedListElement_controlRegisterByName::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAddress" ":" ;
-  mObject.mProperty_mAddress.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mHTML" ":" ;
-  mObject.mProperty_mHTML.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mName" ":" ;
-  mObject.mProperty_mName.description (ioString, inIndentation) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cSortedListElement_controlRegisterByName::compare (const cCollectionElement * inOperand) const {
-  cSortedListElement_controlRegisterByName * operand = (cSortedListElement_controlRegisterByName *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_controlRegisterByName) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_controlRegisterByName::GALGAS_controlRegisterByName (void) :
-AC_GALGAS_sortedlist () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cSortedListElement_controlRegisterByName::compareForSorting (const cSortedListElement * inOperand) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cSortedListElement_controlRegisterByName * operand = (const cSortedListElement_controlRegisterByName *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_controlRegisterByName) ;
-  if (result == kOperandEqual) {
-    result = mObject.mProperty_mName.objectCompare (operand->mObject.mProperty_mName) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_controlRegisterByName GALGAS_controlRegisterByName::constructor_emptySortedList (LOCATION_ARGS) {
-  GALGAS_controlRegisterByName result ;
-  result.createNewEmptySortedList (THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_controlRegisterByName GALGAS_controlRegisterByName::constructor_sortedListWithValue (const GALGAS_bigint & inOperand0,
-                                                                                            const GALGAS_string & inOperand1,
-                                                                                            const GALGAS_string & inOperand2
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterByName result = constructor_emptySortedList (THERE) ;
-  cSortedListElement * p = NULL ;
-  macroMyNew (p, cSortedListElement_controlRegisterByName (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
-  capSortedListElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  result.appendObject (attributes) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_controlRegisterByName::addAssign_operation (const GALGAS_bigint & inOperand0,
-                                                        const GALGAS_string & inOperand1,
-                                                        const GALGAS_string & inOperand2
-                                                        COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    cSortedListElement * p = NULL ;
-    macroMyNew (p, cSortedListElement_controlRegisterByName (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
-    capSortedListElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    appendObject (attributes) ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_controlRegisterByName::plusAssign_operation (const GALGAS_controlRegisterByName inOperand,
-                                                         C_Compiler * /* inCompiler */
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid ()) {
-    appendSortedList (inOperand) ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_controlRegisterByName::setter_popSmallest (GALGAS_bigint & outOperand0,
-                                                       GALGAS_string & outOperand1,
-                                                       GALGAS_string & outOperand2,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  capSortedListElement attributes ;
-  removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-    outOperand0 = p->mObject.mProperty_mAddress ;
-    outOperand1 = p->mObject.mProperty_mHTML ;
-    outOperand2 = p->mObject.mProperty_mName ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_controlRegisterByName::setter_popGreatest (GALGAS_bigint & outOperand0,
-                                                       GALGAS_string & outOperand1,
-                                                       GALGAS_string & outOperand2,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  capSortedListElement attributes ;
-  removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-    outOperand0 = p->mObject.mProperty_mAddress ;
-    outOperand1 = p->mObject.mProperty_mHTML ;
-    outOperand2 = p->mObject.mProperty_mName ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_controlRegisterByName::method_smallest (GALGAS_bigint & outOperand0,
-                                                    GALGAS_string & outOperand1,
-                                                    GALGAS_string & outOperand2,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
-  capSortedListElement attributes ;
-  smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-    outOperand0 = p->mObject.mProperty_mAddress ;
-    outOperand1 = p->mObject.mProperty_mHTML ;
-    outOperand2 = p->mObject.mProperty_mName ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_controlRegisterByName::method_greatest (GALGAS_bigint & outOperand0,
-                                                    GALGAS_string & outOperand1,
-                                                    GALGAS_string & outOperand2,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
-  capSortedListElement attributes ;
-  greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-    outOperand0 = p->mObject.mProperty_mAddress ;
-    outOperand1 = p->mObject.mProperty_mHTML ;
-    outOperand2 = p->mObject.mProperty_mName ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumerator_controlRegisterByName::cEnumerator_controlRegisterByName (const GALGAS_controlRegisterByName & inEnumeratedObject,
-                                                                      const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_controlRegisterByName_2D_element cEnumerator_controlRegisterByName::current (LOCATION_ARGS) const {
-  const cSortedListElement_controlRegisterByName * p = (const cSortedListElement_controlRegisterByName *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-  return p->mObject ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bigint cEnumerator_controlRegisterByName::current_mAddress (LOCATION_ARGS) const {
-  const cSortedListElement_controlRegisterByName * p = (const cSortedListElement_controlRegisterByName *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-  return p->mObject.mProperty_mAddress ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string cEnumerator_controlRegisterByName::current_mHTML (LOCATION_ARGS) const {
-  const cSortedListElement_controlRegisterByName * p = (const cSortedListElement_controlRegisterByName *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-  return p->mObject.mProperty_mHTML ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_string cEnumerator_controlRegisterByName::current_mName (LOCATION_ARGS) const {
-  const cSortedListElement_controlRegisterByName * p = (const cSortedListElement_controlRegisterByName *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_controlRegisterByName) ;
-  return p->mObject.mProperty_mName ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             @controlRegisterByName type                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterByName ("controlRegisterByName",
-                                              NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_controlRegisterByName::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterByName ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_controlRegisterByName::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_controlRegisterByName (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_controlRegisterByName GALGAS_controlRegisterByName::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterByName result ;
-  const GALGAS_controlRegisterByName * p = (const GALGAS_controlRegisterByName *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterByName *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterByName", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
