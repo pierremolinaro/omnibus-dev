@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @staticIntegerDeclarationAST : @abstractDeclarationAST {
+class @compileTimeIntegerDeclarationAST : @abstractDeclarationAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @staticIntegerDeclarationAST locationForErrorSignaling -> @location outLocation {
+override getter @compileTimeIntegerDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
@@ -15,17 +15,17 @@ override getter @staticIntegerDeclarationAST locationForErrorSignaling -> @locat
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticIntegerDeclarationAST enterInPrecedenceGraph
+override method @compileTimeIntegerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let ctIntegerTypeName = [ctIntegerTypeName () nowhere]
   [!?ioGraph addNode !ctIntegerTypeName !self]
-  [!?ioGraph addEdge !ctIntegerTypeName ![boolTypeName () nowhere]]
+  [!?ioGraph addEdge !compileTimeDeclarationBarrier () !ctIntegerTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @staticIntegerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @compileTimeIntegerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = ctIntegerTypeName () 
 }
 
@@ -33,7 +33,7 @@ override getter @staticIntegerDeclarationAST keyRepresentationForErrorSignaling 
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticIntegerDeclarationAST enterInContext
+override method @compileTimeIntegerDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -97,13 +97,13 @@ private proc enterLiteralIntegerOperators
     !selfType
     !@literal_literal_integerInfixOperation.new {!.xor}
   ]
-  [!?ioContext.mUnsignedComplementOperatorMap insertKey
-    !literalIntegerTypeName
-  ]
+#  [!?ioContext.mUnsignedComplementOperatorMap insertKey
+#    !literalIntegerTypeName
+#  ]
 #--- Negate operator
-  [!?ioContext.mUnaryMinusOperatorMap insertKey
-    !literalIntegerTypeName
-  ]
+#  [!?ioContext.mUnaryMinusOperatorMap insertKey
+#    !literalIntegerTypeName
+#  ]
 #--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp

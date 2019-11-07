@@ -112,6 +112,19 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !?sourceIR
   ]
 #-------------------- Perform assignment
+#  [inContext.mInfixOperatorMap generateInfixOperatorCode
+#    !leftOperand
+#    !mInfixOperator
+#    !mOperatorLocation
+#    !rightOperand
+#    !?ioTemporaries
+#    !?ioAllocaList
+#    !?ioInstructionGenerationList
+#    ?outResult
+#  ]
+
+
+
   let t = [sourceIR type]
   if not [t copyable] then
     error mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"

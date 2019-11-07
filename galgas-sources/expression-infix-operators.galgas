@@ -144,57 +144,22 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR rightOperand
   ]
-#------------------- Get operator map
-  let key = infixOperatorMapKey (![leftOperand type] !mInfixOperator !mOperatorLocation ![rightOperand type])
-  if [inContext.mInfixOperatorMap hasKey !key.string] then
-#    message "NEW INFIX OP (" + key + ")\n"
-    [inContext.mInfixOperatorMap generateInfixOperatorCode
-      !leftOperand
-      !mInfixOperator
-      !mOperatorLocation
-      !rightOperand
-      !?ioTemporaries
-      !?ioAllocaList
-      !?ioInstructionGenerationList
-      ?outResult
-    ]
-  else 
-    error mOperatorLocation :
-    "OLD INFIX OP (" + [[leftOperand type] omnibusTypeDescriptionName] + " " + mInfixOperator + " " +  [[rightOperand type] omnibusTypeDescriptionName] + ")\n"
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
-      !?leftOperand
-    ]  
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
-      !?rightOperand
-    ]
-  #------------------- Get operator map
-    let operatorMap = getInfixOperatorMap (!mInfixOperator !context:inContext !mode:inMode !mOperatorLocation)
-  #------------------- Check operand types
-    [operatorMap checkBinaryOperationWith
-      !leftType:[leftOperand type]
-      !rightType:[rightOperand type]
-      !operatorLocation:mOperatorLocation
-      ?resultType:let resultType
-      ?op:let @omnibusInfixOperatorDescription binaryOperator
-    ]
-  #------------------- Generate code
-    [binaryOperator generateInfixOperatorCode
-      !?ioTemporaries
-      !?ioInstructionGenerationList
-      !leftOperand
-      !mOperatorLocation
-      !rightOperand
-      !resultType
-      ?outResult
-    ]
-  end
+#------------------- Generate code
+  [inContext.mInfixOperatorMap generateInfixOperatorCode
+    !leftOperand
+    !mInfixOperator
+    !mOperatorLocation
+    !rightOperand
+    !?ioTemporaries
+    !?ioAllocaList
+    !?ioInstructionGenerationList
+    ?outResult
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private func getInfixOperatorMap
+func getInfixOperatorMap
   ?let @omnibusInfixOperator inOp
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode

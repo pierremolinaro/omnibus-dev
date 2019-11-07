@@ -22,6 +22,12 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
+  rule <declaration> ?!@ast ioAST {
+    <function_declaration> !?ioAST !receiverTypeName: ["" nowhere]
+  }
+
+  #·····················································································································
+
   rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeName {
   #--- Public ?
     @bool public
@@ -151,7 +157,9 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  [!?ioGraph addNode !.new {!s !mFunctionName.location} !self]
+  let nodeName = @lstring.new {!s !mFunctionName.location}
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
 #---
   for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]

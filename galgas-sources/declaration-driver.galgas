@@ -162,11 +162,12 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- [!?ioGraph addNode !mDriverName !self]
- [!?ioGraph addEdge !mDriverName !omnibusTypeSpecificNameForDriver (!mDriverName)]
- for (driver) in mDriverDependanceList do
-   [!?ioGraph addEdge !mDriverName !driver]
- end
+  [!?ioGraph addNode !mDriverName !self]
+  [!?ioGraph addEdge !mDriverName !omnibusTypeSpecificNameForDriver (!mDriverName)]
+  for (driver) in mDriverDependanceList do
+    [!?ioGraph addEdge !mDriverName !driver]
+  end
+  [!?ioGraph addEdge !mDriverName !compileTimeDeclarationBarrier ()]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

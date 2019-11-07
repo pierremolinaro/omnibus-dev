@@ -175,6 +175,7 @@ override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !mReceiverTypeName]
   [!?ioGraph addEdge !nodeName !mResultTypeName]
+ # [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName]
 }
 
 #·······················································································································
@@ -256,7 +257,7 @@ override method @llvmPrefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
   ?let @location inOperatorLocation
   ?let @omnibusType inResultType
-  ?noPanicCode: let @bool inDoNotGeneratePanicCode
+  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue

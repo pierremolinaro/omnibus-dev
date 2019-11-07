@@ -75,7 +75,7 @@ override method @integerDeclarationAST enterInContext
 {
   let integerTypeName = [[self typeName] nowhere]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
 #--------------------------------------- Get min and max
   let min = minValueForInteger (!not mIsSigned !mSize)
   let max = maxValueForInteger (!not mIsSigned !mSize)
@@ -101,22 +101,22 @@ override method @integerDeclarationAST enterInContext
     }
   end
 #--------------------------------------- bool for UInt1
-  if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
-    [!?propertyGetterMap addPropertyGetter
-      !llvmBaseTypeName:integerTypeName
-      !propertyName:[boolTypeName () nowhere]
-      !mode:.anySafeMode
-      !public: true
-      !resultTypeProxy:boolTypeProxy
-      ?routineLLVMName: let routineLLVMName
-    ]
-    ioRoutineListIR += !@uint1ToBoolFunctionIR.new {
-      !routineLLVMName
-      !isRequired:false
-      !warnsIfUnused:false
-      !llvmTypeName
-    }
-  end
+#  if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
+#    [!?propertyGetterMap addPropertyGetter
+#      !llvmBaseTypeName:integerTypeName
+#      !propertyName:[boolTypeName () nowhere]
+#      !mode:.anySafeMode
+#      !public: true
+#      !resultTypeProxy:boolTypeProxy
+#      ?routineLLVMName: let routineLLVMName
+#    ]
+#    ioRoutineListIR += !@uint1ToBoolFunctionIR.new {
+#      !routineLLVMName
+#      !isRequired:false
+#      !warnsIfUnused:false
+#      !llvmTypeName
+#    }
+#  end
 #--------------------------------------- bitreverse
   [!?propertyGetterMap addPropertyGetter
     !llvmBaseTypeName:integerTypeName
@@ -269,16 +269,16 @@ private proc enter_integer_integer_operators
       !selfType
       !@infixObjectObjectOperatorDescription.new {!.xor}
     ]
-    [!?ioContext.mUnsignedComplementOperatorMap insertKey
-      !inIntegerTypeName
-    ]
+#    [!?ioContext.mUnsignedComplementOperatorMap insertKey
+#      !inIntegerTypeName
+#    ]
   end
 #--- Negate operator (for signed integers)
-  if inIsSigned then
-    [!?ioContext.mUnaryMinusOperatorMap insertKey
-      !inIntegerTypeName
-    ]
-  end
+#  if inIsSigned then
+#    [!?ioContext.mUnaryMinusOperatorMap insertKey
+#      !inIntegerTypeName
+#    ]
+#  end
 #--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp
@@ -684,23 +684,23 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
 #! CODE GENERATION: UINT1 TO BOOL FUNCTION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @uint1ToBoolFunctionIR : @abstractRoutineIR {
-  @string mLLVMTypeName
-}
+#class @uint1ToBoolFunctionIR : @abstractRoutineIR {
+#  @string mLLVMTypeName
+#}
 
 #·······················································································································
 
-override method @uint1ToBoolFunctionIR llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  ioLLVMcode += "define internal " + mLLVMTypeName + " @" + [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + mLLVMTypeName + "* %inValue) {\n"
-  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %inValue\n"
-  ioLLVMcode += "  ret i1 %value\n"
-  ioLLVMcode += "}\n\n"
-}
+#override method @uint1ToBoolFunctionIR llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  ioLLVMcode += "define internal " + mLLVMTypeName + " @" + [mRoutineMangledName assemblerRepresentation]
+#  ioLLVMcode += " (" + mLLVMTypeName + "* %inValue) {\n"
+#  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %inValue\n"
+#  ioLLVMcode += "  ret i1 %value\n"
+#  ioLLVMcode += "}\n\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: BUILTIN FUNCTIONS

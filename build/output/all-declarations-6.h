@@ -459,14 +459,6 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual void nt_llvm_5F_instruction_5F_list_ (GALGAS_llvmGenerationInstructionList & outArgument0,
                                                          C_Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'llvm_string_definition' non terminal
-//--- 'parse' label
-  public : virtual void nt_llvm_5F_string_5F_definition_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_llvm_5F_string_5F_definition_ (GALGAS_llvmStringDefinition & outArgument0,
-                                                          C_Lexique_omnibus_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'lvalue' non terminal
 //--- 'parse' label
   public : virtual void nt_lvalue_parse (C_Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -952,10 +944,6 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual int32_t select_omnibus_5F_syntax_142 (C_Lexique_omnibus_5F_lexique *) ;
 
   public : virtual int32_t select_omnibus_5F_syntax_143 (C_Lexique_omnibus_5F_lexique *) ;
-
-  public : virtual int32_t select_omnibus_5F_syntax_144 (C_Lexique_omnibus_5F_lexique *) ;
-
-  public : virtual int32_t select_omnibus_5F_syntax_145 (C_Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

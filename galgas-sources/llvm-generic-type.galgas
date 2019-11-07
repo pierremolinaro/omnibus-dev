@@ -28,26 +28,26 @@ list @llvmStringDefinition {
 
 #·······················································································································
 
-map @llvmStringVariableMap {
-  @string mValue
-  insert insertKey error message "the '%K' key is already declared in %L"
-  search searchKey error message "there is no '%K' key"
-}
+#map @llvmStringVariableMap {
+#  @string mValue
+#  insert insertKey error message "the '%K' key is already declared in %L"
+#  search searchKey error message "there is no '%K' key"
+#}
 
 #·······················································································································
 
-getter @llvmStringDefinition eval ?let @llvmStringVariableMap inVariableMap -> @string {
-  result = ""
-  for (element) in self do
-    switch element
-    case variable (@lstring name) :
-      [inVariableMap searchKey !name ?let value]
-      result += value
-    case string (@lstring value) :
-      result += value.string
-    end 
-  end
-}
+#getter @llvmStringDefinition eval ?let @llvmStringVariableMap inVariableMap -> @string {
+#  result = ""
+#  for (element) in self do
+#    switch element
+#    case variable (@lstring name) :
+#      [inVariableMap searchKey !name ?let value]
+#      result += value
+#    case string (@lstring value) :
+#      result += value.string
+#    end 
+#  end
+#}
 
 #·······················································································································
 
@@ -72,20 +72,20 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <llvm_string_definition> !@llvmStringDefinition outStringDefinition {
-    outStringDefinition = {}
-    repeat
-      select
-        $"string"$ ?let string
-        outStringDefinition += !.string {!value: string}
-      or
-        $identifier$ ?let name
-        outStringDefinition += !.variable {!name: name}
-      end
-    while
-      $+$
-    end
-  }
+#  rule <llvm_string_definition> !@llvmStringDefinition outStringDefinition {
+#    outStringDefinition = {}
+#    repeat
+#      select
+#        $"string"$ ?let string
+#        outStringDefinition += !.string {!value: string}
+#      or
+#        $identifier$ ?let name
+#        outStringDefinition += !.variable {!name: name}
+#      end
+#    while
+#      $+$
+#    end
+#  }
   
   #·····················································································································
 

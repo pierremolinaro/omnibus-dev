@@ -127,7 +127,7 @@ private proc compileProject
   #--- Add boolean type
 #    ast.mDeclarationListAST += !@booleanDeclarationAST.new
   #--- Literal integer type
-    ast.mDeclarationListAST += !@staticIntegerDeclarationAST.new
+    ast.mDeclarationListAST += !@compileTimeIntegerDeclarationAST.new
   #--- Add String type
     ast.mDeclarationListAST += !@literalStringDeclarationAST.new
   end

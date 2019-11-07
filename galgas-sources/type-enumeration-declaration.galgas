@@ -53,7 +53,6 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !mEnumerationName !self]
-  [!?ioGraph addEdge !mEnumerationName ![boolTypeName () nowhere]]
 #--- Mark dependance from $uintN used for value property
   @bigint maxValue = 0G
   for (* value) in mCaseNameList do

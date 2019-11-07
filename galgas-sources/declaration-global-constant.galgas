@@ -71,6 +71,7 @@ override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semantic
   end
 #--- Add dependency from source expression
   [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
+  [!?ioGraph addEdge !mConstantName !compileTimeDeclarationBarrier ()]
 }
 
 #·······················································································································

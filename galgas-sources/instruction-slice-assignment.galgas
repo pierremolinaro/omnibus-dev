@@ -85,16 +85,6 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
   [!?ioGraph noteNode !mTypeName]
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   for (sliceWidthStr sliceKind) in mSliceAssignmentList do
-    if [sliceWidthStr.string isDecimalUnsignedNumber] then
-      let sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      if sliceWidth == 0 then
-        error sliceWidthStr : "the bit slice width should be > 0"
-      else
-        [!?ioGraph noteUINTType !sliceWidth !sliceWidthStr.location]
-      end
-    elsif sliceWidthStr.string == "b" then
-      [!?ioGraph noteNode ![boolTypeName () nowhere]]
-    end
     switch sliceKind
     case discarded :
     case varDeclaration (*) :

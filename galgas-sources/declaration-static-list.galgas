@@ -177,6 +177,7 @@ override method @staticListAST enterExtension
 override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add node
   [!?ioGraph addNode !mStaticListName !self]
+  [!?ioGraph addEdge !mStaticListName !compileTimeDeclarationBarrier ()]
 #--- Add dependency edges for type declaration
   for (* type) in mPropertyList do
     switch type
@@ -316,7 +317,6 @@ override method @staticListAST enterInContext
         !classConstantMap:{}
         !constructorMap:{}
         !subscript:.noSubscript
-#        !assignmentSources: {}
         !attributes:.none
         !omnibusTypeDescriptionName:""
         !kind:.function {

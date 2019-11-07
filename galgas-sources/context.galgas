@@ -49,9 +49,9 @@ struct @semanticContext {
   @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
   @infixOperatorMap_EX mRightShiftOperatorMap      # >>
   
-  @prefixOperatorMap_EX mUnaryMinusOperatorMap     # - and &-
-  @prefixOperatorMap_EX mNotOperatorMap            # not
-  @prefixOperatorMap_EX mUnsignedComplementOperatorMap # ~
+#  @prefixOperatorMap_EX mUnaryMinusOperatorMap     # - and &-
+#  @prefixOperatorMap_EX mNotOperatorMap            # not
+#  @prefixOperatorMap_EX mUnsignedComplementOperatorMap # ~
   
   @infixOperatorMap mInfixOperatorMap
   @prefixOperatorMap mPrefixOperatorMap
@@ -87,13 +87,6 @@ map @infixOperatorMap_EX {
   @omnibusInfixOperatorDescription mOperation
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
-}
-
-#·······················································································································
-
-map @prefixOperatorMap_EX {
-  insert insertKey error message "** internal error **"
-  search searchKey error message "prefix operation is not defined for %K type"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
