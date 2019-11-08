@@ -247,12 +247,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     instructionElements += !.symbol {!name: ["TGT" nowhere]}
     llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
 
-    let key = @lstring.new {
-      ![dynamicArrayType omnibusTypeDescriptionName] + " = " + [dynamicArrayType omnibusTypeDescriptionName]
-      !mDynamicArrayTypeName.location
-    }
-    [!?ioContext.mAssignmentOperatorMap insertKey
-      !key 
+    let key = assignmentOperatorKey (!dynamicArrayType !mDynamicArrayTypeName.location !dynamicArrayType)
+    let operatorUsage = @llvmAssignmentOperatorUsage.new{
       !dynamicArrayType
       !["TGT" nowhere]
       !{}
@@ -261,7 +257,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !{}
       !@ctTrueExpressionAST.new
       !llvmInstructionList
-    ]
+    }
+    [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
     @assignmentGenerationVarMap varMap = {}
     [!?varMap insertKey !["SRC" nowhere] !"%SRC"]
     [!?varMap insertKey !["TGT" nowhere] !"%TGT"]

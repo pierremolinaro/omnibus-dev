@@ -258,6 +258,7 @@ private proc analyzeConstructorCall
         ?result:let @objectIR expressionResult
       ]
       let result = checkAssignmentCompatibility (
+        !inContext.mAssignmentOperatorMap
         !source:expressionResult
         !targetAnnotationType:elementType
         !errorLocation:[parameterList mSelectorAtIndex !0].location
@@ -298,6 +299,7 @@ private proc analyzeConstructorCall
             ?result:let @objectIR expressionResult
           ]
           let result = checkAssignmentCompatibility (
+            !inContext.mAssignmentOperatorMap
             !source:expressionResult
             !targetAnnotationType:elementType
             !errorLocation:mSelector.location
@@ -351,6 +353,7 @@ private proc analyzeConstructorCall
           ?result:let @objectIR expressionResult
         ]
         var result = checkAssignmentCompatibility (
+          !inContext.mAssignmentOperatorMap
           !source:expressionResult
           !targetAnnotationType:formal_mType
           !errorLocation:effective_mSelector.location

@@ -139,6 +139,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     ?result:let @objectIR sourcePossibleReference
   ]
   let result = checkAssignmentCompatibility (
+    !inContext.mAssignmentOperatorMap
     !source:sourcePossibleReference
     !targetAnnotationType:targetType
     !errorLocation:mVarName.location

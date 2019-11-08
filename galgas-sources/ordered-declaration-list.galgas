@@ -67,12 +67,12 @@ override method @compileTimeDeclarationBarrierAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc appendUnsignedOperatorsTo ?@uint inSize ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
-#--- Add assignment operator declaration
-  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
-  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-#--- Add assignment operator declaration from ctInt
-  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
-  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+##--- Add assignment operator declaration
+#  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
+#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+##--- Add assignment operator declaration from ctInt
+#  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
+#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 #--- ==
   appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- ≤
@@ -105,7 +105,7 @@ private proc appendUnsignedOperatorsTo ?@uint inSize ?let @string inTypeName ?!@
 #--- ~ 
   appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
 #--- Append slice
-  declaration = @sliceDeclarationAST.new {![[inSize string] nowhere] ![inTypeName nowhere]}
+  @abstractDeclarationAST declaration = @sliceDeclarationAST.new {![[inSize string] nowhere] ![inTypeName nowhere]}
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 }
 
@@ -113,11 +113,11 @@ private proc appendUnsignedOperatorsTo ?@uint inSize ?let @string inTypeName ?!@
 
 private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
 #--- Add assignment operator declaration
-  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
-  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-#--- Add assignment operator declaration from ctInt
-  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
-  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+#  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
+#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
+##--- Add assignment operator declaration from ctInt
+#  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
+#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 #--- ==
   appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- ≤

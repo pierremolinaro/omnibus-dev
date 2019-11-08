@@ -89,6 +89,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ]  
 #--- Declare local constant
   var result = checkAssignmentCompatibility (
+    !inContext.mAssignmentOperatorMap
     !source:expressionResult
     !targetAnnotationType:targetType
     !errorLocation:mConstantName.location

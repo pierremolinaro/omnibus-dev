@@ -152,12 +152,14 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     ]  
   #--- Check expression types
     let lowerBound = checkAssignmentCompatibility (
+      !inContext.mAssignmentOperatorMap
       !source:lowerBoundExpressionResult
       !targetAnnotationType:type
       !errorLocation:mEndOf_lowerBoundExpression_instruction
       !staticTypeAllowed:false
     )
     let upperBound = checkAssignmentCompatibility (
+      !inContext.mAssignmentOperatorMap
       !source:upperBoundExpressionResult
       !targetAnnotationType:type
       !errorLocation:mEndOf_upperBoundExpression_instruction

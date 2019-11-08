@@ -110,6 +110,7 @@ override method @constructorCallAST analyzeExpression
         ?result:let @objectIR expressionResult
       ]
       let result = checkAssignmentCompatibility (
+        !inContext.mAssignmentOperatorMap
         !source:expressionResult
         !targetAnnotationType:elementType
         !errorLocation:[mParameterList mSelectorAtIndex !0].location
@@ -150,6 +151,7 @@ override method @constructorCallAST analyzeExpression
             ?result:let @objectIR expressionResult
           ]
           let result = checkAssignmentCompatibility (
+            !inContext.mAssignmentOperatorMap
             !source:expressionResult
             !targetAnnotationType:elementType
             !errorLocation:mSelector.location
@@ -203,6 +205,7 @@ override method @constructorCallAST analyzeExpression
           ?result:let @objectIR expressionResult
         ]
         var result = checkAssignmentCompatibility (
+          !inContext.mAssignmentOperatorMap
           !source:expressionResult
           !targetAnnotationType:formal_mType
           !errorLocation:effective_mSelector.location

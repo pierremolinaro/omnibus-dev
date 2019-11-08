@@ -164,10 +164,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !warnsIfUnused:false
         !arrayType
       }
-      let key = @lstring.new {
-        ![arrayType omnibusTypeDescriptionName] + " = " + [arrayType omnibusTypeDescriptionName]
-        !mArrayTypeName.location
-      }
+     let key = assignmentOperatorKey (!arrayType !mArrayTypeName.location !arrayType)
       @llvmGenerationInstructionElementList instructionElements = {}
       instructionElements += !.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + " ("}
       instructionElements += !.type {!name: ["TGT" nowhere]}
@@ -179,8 +176,7 @@ override method @staticArrayTypeDeclarationAST enterInContext
       instructionElements += !.symbol {!name: ["SRC" nowhere]}
       instructionElements += !.string {!string: ")"}
       let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
-      [!?ioContext.mAssignmentOperatorMap insertKey
-        !key 
+      let operatorUsage = @llvmAssignmentOperatorUsage.new{
         !elementType
         !["TGT" nowhere]
         !{}
@@ -189,7 +185,8 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !{}
         !@ctTrueExpressionAST.new
         !{!llvmAssignmentInstruction}
-      ]
+      }
+      [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
     end
   end
 }

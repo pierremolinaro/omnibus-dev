@@ -37,8 +37,6 @@ syntax extension omnibus_syntax {
     end
     $}$
     ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {!enumerationName !enumCaseList}
-  #--- Add assignment operator declaration
-    ioAST.mDeclarationListAST += !buildAssignmentOperatorDeclaration (!enumerationName)
   }
 
   #·····················································································································
@@ -152,10 +150,10 @@ override method @enumerationDeclarationAST enterInContext
     !kind:.enumeration {!bitCount:representationBitCount}
     !llvmBaseTypeName: mEnumerationName
   }
-  [!?ioContext.mTypeMap insertType
-    !lkey:mEnumerationName
-    !type:enumerationType
-  ]
+  [!?ioContext.mTypeMap insertType !lkey:mEnumerationName !type:enumerationType]
+#--- Enter assignment operator
+  let key = assignmentOperatorKey (!enumerationType !mEnumerationName.location !enumerationType)
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
 }
 
 #·······················································································································

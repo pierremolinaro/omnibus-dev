@@ -44,10 +44,14 @@ override method @literalStringDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Enter in type map
+  let selfType = literalStringType ()
   [!?ioContext.mTypeMap insertType
     !lkey:[staticStringTypeName () nowhere]
-    !type:literalStringType ()
+    !type: selfType
   ]
+#--- Enter assignment operator
+  let key = assignmentOperatorKey (!selfType !.nowhere !selfType)
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

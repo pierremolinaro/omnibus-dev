@@ -83,9 +83,6 @@ OMNIBUS_FILES:
   "../teensy-3-6-lcd.omnibus-import"
   "../../semaphore.omnibus-import"
   "../../heap.omnibus-import"
-  "../../ctBool.omnibus-import"
-  "../../ctInt.omnibus-import"
-  "../../bool-type.omnibus-import"
 
 INTERRUPTS:
   NMI -> 2

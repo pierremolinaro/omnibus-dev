@@ -5,16 +5,19 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func checkAssignmentCompatibility
+  ?let @assignmentOperatorMap inAssignmentOperatorMap
   ?source:let @objectIR inSourceValue
   ?targetAnnotationType:let @omnibusType inOptionalTargetAnnotationType
   ?errorLocation:let @location inErrorLocation
   ?staticTypeAllowed:let @bool inStaticTypeAllowed
   -> @objectIR
 {
-  let sourceType = [inSourceValue type]
   if [inOptionalTargetAnnotationType.kind isVoid] then
     result = inSourceValue
   else
+    let key = assignmentOperatorKey (!inOptionalTargetAnnotationType !.nowhere ![inSourceValue type])
+    [inAssignmentOperatorMap searchKey !key ?*]
+    result = [inSourceValue withType !inOptionalTargetAnnotationType]
 #    [!?ioInstructionGenerationList appendAssignmentIR
 #      !?ioTemporaries
 #      !inContext.mAssignmentOperatorMap
@@ -24,28 +27,40 @@ func checkAssignmentCompatibility
 #      !expressionResult
 #      !sliceWidthStr.location
 #    ]
+#setter @instructionListIR appendAssignmentIR
+#    ?!@semanticTemporariesStruct ioTemporaries
+#    ?let @assignmentOperatorMap inAssignmentOperatorMap
+#    ?!@allocaList ioAllocaList
+#    ?let @omnibusType inTargetType
+#    ?let @string inTargetLLVMName
+#    ?let @objectIR inSourcePossibleReference
+#    ?let @location inErrorLocation
 
 
-    if inOptionalTargetAnnotationType.omnibusTypeDescriptionName == sourceType.omnibusTypeDescriptionName then
-      result = inSourceValue
-    elsif [sourceType.kind isCompileTimeInteger] && [inOptionalTargetAnnotationType.kind isInteger] then
-      [inSourceValue literalInteger ?1* ?value:let value]
-      [inOptionalTargetAnnotationType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
-      if (value < minTarget) || (maxTarget < value) then
-        error inErrorLocation : "literal integer too large" : result
-      else
-        result = [inSourceValue withType !inOptionalTargetAnnotationType]
-      end
-    else
-      error inErrorLocation
-      : "object of type " + inOptionalTargetAnnotationType.omnibusTypeDescriptionName
-        + " cannot be assigned from expression of type " + [inSourceValue omnibusTypeDescriptionName]
-      : result
-    end
+
+#    if inOptionalTargetAnnotationType.omnibusTypeDescriptionName == sourceType.omnibusTypeDescriptionName then
+#      result = inSourceValue
+#    elsif [sourceType.kind isCompileTimeInteger] && [inOptionalTargetAnnotationType.kind isInteger] then
+#      [inSourceValue literalInteger ?1* ?value:let value]
+#      [inOptionalTargetAnnotationType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
+#      if (value < minTarget) || (maxTarget < value) then
+#        error inErrorLocation : "literal integer too large" : result
+#      else
+#        result = [inSourceValue withType !inOptionalTargetAnnotationType]
+#      end
+#    else
+#      error inErrorLocation
+#      : "object of type " + inOptionalTargetAnnotationType.omnibusTypeDescriptionName
+#        + " cannot be assigned from expression of type " + [inSourceValue omnibusTypeDescriptionName]
+#      : result
+#    end
   end
+
   if not inStaticTypeAllowed then
     if [result omnibusTypeDescriptionName] == ctIntegerTypeName () then
-      error inErrorLocation : "the " + ctIntegerTypeName () + " static type is not allowed here"
+      error inErrorLocation : "the " + ctIntegerTypeName () + " compile time type is not allowed here"
+    elsif [result omnibusTypeDescriptionName] == ctBoolTypeName () then
+      result = [inSourceValue withType !boolType ()]
     end
   end
 }

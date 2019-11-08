@@ -35,10 +35,10 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
-#  [!?ioGraph addEdge !inConstantName ![ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !inConstantName ![ctBoolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -146,6 +146,7 @@ override method @ifExpressionAST analyzeExpression
     !?thenExpressionTempResult
   ]  
   let thenExpressionResult = checkAssignmentCompatibility (
+    !inContext.mAssignmentOperatorMap
     !source:thenExpressionTempResult
     !targetAnnotationType:inOptionalTargetType
     !errorLocation:mThenExpressionEndLocation
@@ -170,6 +171,7 @@ override method @ifExpressionAST analyzeExpression
     !?elseExpressionTempResult
   ]  
   let elseExpressionResult = checkAssignmentCompatibility (
+    !inContext.mAssignmentOperatorMap
     !source:elseExpressionTempResult
     !targetAnnotationType:[thenExpressionResult type]
     !errorLocation:mElseExpressionEndLocation

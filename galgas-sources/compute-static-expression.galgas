@@ -36,6 +36,7 @@ proc computeStaticExpression
   else
   #--- Check assignment compatibility
     outStaticExpressionIR = checkAssignmentCompatibility (
+      !ioContext.mAssignmentOperatorMap
       !source:expressionIR
       !targetAnnotationType:annotationType
       !errorLocation:inErrorLocation

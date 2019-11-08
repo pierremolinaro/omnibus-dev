@@ -26,9 +26,11 @@ getter @integerDeclarationAST typeName -> @string outName {
 override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let integerTypeName = [[self typeName] nowhere]
-  [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName ![ctIntegerTypeName () nowhere]]
+  let nodeName = [[self typeName] nowhere]
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName ![ctIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !nodeName ![boolTypeName () nowhere]]
+  [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -222,6 +224,11 @@ override method @integerDeclarationAST enterInContext
     !signed:mIsSigned
     !?context:ioContext
   )
+#--------------------------------------- Assignment
+  var key = assignmentOperatorKey (!integerType !.nowhere !integerType)
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+  key = assignmentOperatorKey (!integerType !.nowhere !compileTimeIntegerType ())
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

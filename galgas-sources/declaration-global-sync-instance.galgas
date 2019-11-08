@@ -104,6 +104,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
   )
 #--- Check variable type and expression type
   let result = checkAssignmentCompatibility (
+    !ioContext.mAssignmentOperatorMap
     !source:expressionResult
     !targetAnnotationType:optionalSyncType
     !errorLocation:mSyncInstanceName.location

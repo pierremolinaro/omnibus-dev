@@ -397,6 +397,9 @@ override method @structureDeclarationAST enterInContext
     !lkey:mReceiverTypeName
     !type:structureType
   ]
+#--- Enter assignment operator
+  let key = assignmentOperatorKey (!structureType !.nowhere !structureType)
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
 #-------------------------------------------- GenerateLLVM type definition
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
     ![structureType llvmTypeName]
@@ -486,7 +489,9 @@ method @structurePropertyListAST-element enterPropertyInContext
     else
       actualPropertyType = [expressionIR type]
     end
-    if [actualPropertyType isCompileTimeType] then
+    if [actualPropertyType.kind isCompileTimeBool] then
+      actualPropertyType = boolType ()
+    elsif [actualPropertyType.kind isCompileTimeInteger] then
       error mPropertyName
       : "$" + actualPropertyType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
     elsif not [actualPropertyType instanciable] then

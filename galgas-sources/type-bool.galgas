@@ -26,6 +26,7 @@ override method @boolTypeAST enterInPrecedenceGraph
 {
   let nodeName = [boolTypeName () nowhere]
   [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
 }
 
 #·······················································································································
@@ -81,6 +82,10 @@ override method @boolTypeAST enterInContext
   key = @lstring.new {![boolType omnibusTypeDescriptionName] !.nowhere}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean.new]
 #--- Enter assignment operator
+  key = assignmentOperatorKey (!boolType !.nowhere !boolType)
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+  key = assignmentOperatorKey (!boolType !.nowhere !ctBoolType)
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -121,8 +126,10 @@ override method @boolNotOperator generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
+  var receiverOperand = inReceiverOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?receiverOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " xor i1 " + [inReceiverOperand llvmName] + ", 1"
+  let s = [outResultValue llvmName] + " = xor i1 " + [receiverOperand llvmName] + ", 1"
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 
@@ -145,8 +152,12 @@ override method @boolEqualOperator generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
+  var leftOperand = inLeftOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  var rightOperand = inRightOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " icmp eq i1 " + [inLeftOperand llvmName] + ", " + [inRightOperand llvmName]
+  let s = [outResultValue llvmName] + " = icmp eq i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 
@@ -167,8 +178,12 @@ override method @boolXorOperator generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
+  var leftOperand = inLeftOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  var rightOperand = inRightOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " xor i1 " + [inLeftOperand llvmName] + ", " + [inRightOperand llvmName]
+  let s = [outResultValue llvmName] + " = xor i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 
@@ -189,8 +204,12 @@ override method @boolOrOperator generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
+  var leftOperand = inLeftOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  var rightOperand = inRightOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " or i1 " + [inLeftOperand llvmName] + ", " + [inRightOperand llvmName]
+  let s = [outResultValue llvmName] + " = or i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 

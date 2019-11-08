@@ -182,6 +182,7 @@ proc analyzeEffectiveParameters
         !?expressionResult
       ]  
       let result = checkAssignmentCompatibility (
+        !inContext.mAssignmentOperatorMap
         !source:expressionResult
         !targetAnnotationType:[formal_mTypeProxy type]
         !errorLocation:endOfExp

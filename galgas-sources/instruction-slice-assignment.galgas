@@ -197,6 +197,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       }
    #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
+        !inContext.mAssignmentOperatorMap
         !?ioTemporaries
         !errorLocation:varName.location
         !source:sourceOperandForSlicing
@@ -216,6 +217,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
        }
     #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
+        !inContext.mAssignmentOperatorMap
         !?ioTemporaries
         !errorLocation:letName.location
         !source:sourceOperandForSlicing
@@ -237,6 +239,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       ]
     #--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
+        !inContext.mAssignmentOperatorMap
         !?ioTemporaries
         !errorLocation:target.mIdentifier
         !source:sourceOperandForSlicing

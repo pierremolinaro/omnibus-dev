@@ -1,6 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendCopyFromReferences
+  ?let @assignmentOperatorMap inAssignmentOperatorMap
   ?!@semanticTemporariesStruct ioTemporaries
   ?errorLocation:let @location inErrorLocation
   ?source:let @objectIR inSourcePossibleReference
@@ -14,6 +15,7 @@ setter @instructionListIR appendCopyFromReferences
       !?loadedResultValue
     ]
     let result = checkAssignmentCompatibility (
+      !inAssignmentOperatorMap
       !source:loadedResultValue
       !targetAnnotationType:[inTargetReference type]
       !errorLocation:inErrorLocation

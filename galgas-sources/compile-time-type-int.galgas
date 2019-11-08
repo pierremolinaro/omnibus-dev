@@ -78,8 +78,14 @@ override method @compileTimeIntAST enterInContext
  #--- Enter + infix operator
   key = infixOperatorMapKey (!ctBoolInt !.addOp !.nowhere !ctBoolInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntAddOperator.new]
+ #--- Enter +% infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.addOpNoOvf !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntAddOperator.new]
  #--- Enter - infix operator
   key = infixOperatorMapKey (!ctBoolInt !.subOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntSubtractOperator.new]
+ #--- Enter -% infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.subOpNoOvf !.nowhere !ctBoolInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntSubtractOperator.new]
  #--- Enter * infix operator
   key = infixOperatorMapKey (!ctBoolInt !.mulOp !.nowhere !ctBoolInt)

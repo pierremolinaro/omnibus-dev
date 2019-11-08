@@ -22,67 +22,67 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDeclarationAST {
-  @llvmGenerationInstructionList llvmInstructionList = {}
-  llvmInstructionList += !@llvmVarInstruction.new {!["LOADED" nowhere]}
-  @llvmGenerationInstructionElementList instructionElements = {}
-  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
-  instructionElements += !.string {!string: " = load "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["SRC" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  instructionElements = {}
-  instructionElements += !.string {!string: "store "}
-  instructionElements += !.type {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["TGT" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["TGT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  result = @llvmAssignmentOperatorDeclarationAST.new {
-    !["" nowhere]
-    !["TGT" nowhere]
-    ![inTypeName nowhere]
-    !{}
-    !["SRC" nowhere]
-    ![inTypeName nowhere]
-    !{}
-    !@ctTrueExpressionAST.new
-    !llvmInstructionList
-  }
-}
+#func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDeclarationAST {
+#  @llvmGenerationInstructionList llvmInstructionList = {}
+#  llvmInstructionList += !@llvmVarInstruction.new {!["LOADED" nowhere]}
+#  @llvmGenerationInstructionElementList instructionElements = {}
+#  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+#  instructionElements += !.string {!string: " = load "}
+#  instructionElements += !.type {!name: ["SRC" nowhere]}
+#  instructionElements += !.string {!string: ", "}
+#  instructionElements += !.type {!name: ["SRC" nowhere]}
+#  instructionElements += !.string {!string: "* "}
+#  instructionElements += !.symbol {!name: ["SRC" nowhere]}
+#  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+#  instructionElements = {}
+#  instructionElements += !.string {!string: "store "}
+#  instructionElements += !.type {!name: ["SRC" nowhere]}
+#  instructionElements += !.string {!string: " "}
+#  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
+#  instructionElements += !.string {!string: ", "}
+#  instructionElements += !.type {!name: ["TGT" nowhere]}
+#  instructionElements += !.string {!string: "* "}
+#  instructionElements += !.symbol {!name: ["TGT" nowhere]}
+#  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+#  result = @llvmAssignmentOperatorDeclarationAST.new {
+#    !["" nowhere]
+#    !["TGT" nowhere]
+#    ![inTypeName nowhere]
+#    !{}
+#    !["SRC" nowhere]
+#    ![inTypeName nowhere]
+#    !{}
+#    !@ctTrueExpressionAST.new
+#    !llvmInstructionList
+#  }
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func buildAssignmentOperatorFrom_ctInt ?let @string inTypeName -> @abstractDeclarationAST {
-  @llvmGenerationInstructionList llvmInstructionList = {}
-  @llvmGenerationInstructionElementList instructionElements = {}
-  instructionElements += !.string {!string: "store "}
-  instructionElements += !.type {!name: ["TGT" nowhere]}
-  instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["SRC" nowhere]}
-  instructionElements += !.string {!string: ", "}
-  instructionElements += !.type {!name: ["TGT" nowhere]}
-  instructionElements += !.string {!string: "* "}
-  instructionElements += !.symbol {!name: ["TGT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  result = @llvmAssignmentOperatorDeclarationAST.new {
-    !["" nowhere]
-    !["TGT" nowhere]
-    ![inTypeName nowhere]
-    !{}
-    !["SRC" nowhere]
-    ![ctIntegerTypeName () nowhere]
-    !{}
-    !@ctTrueExpressionAST.new
-    !llvmInstructionList
-  }
-}
+#func buildAssignmentOperatorFrom_ctInt ?let @string inTypeName -> @abstractDeclarationAST {
+#  @llvmGenerationInstructionList llvmInstructionList = {}
+#  @llvmGenerationInstructionElementList instructionElements = {}
+#  instructionElements += !.string {!string: "store "}
+#  instructionElements += !.type {!name: ["TGT" nowhere]}
+#  instructionElements += !.string {!string: " "}
+#  instructionElements += !.symbol {!name: ["SRC" nowhere]}
+#  instructionElements += !.string {!string: ", "}
+#  instructionElements += !.type {!name: ["TGT" nowhere]}
+#  instructionElements += !.string {!string: "* "}
+#  instructionElements += !.symbol {!name: ["TGT" nowhere]}
+#  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
+#  result = @llvmAssignmentOperatorDeclarationAST.new {
+#    !["" nowhere]
+#    !["TGT" nowhere]
+#    ![inTypeName nowhere]
+#    !{}
+#    !["SRC" nowhere]
+#    ![ctIntegerTypeName () nowhere]
+#    !{}
+#    !@ctTrueExpressionAST.new
+#    !llvmInstructionList
+#  }
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
@@ -161,17 +161,37 @@ override getter @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorS
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+abstract class @abstractAssignmentOperatorUsage {
+}
+
+#·······················································································································
+
+abstract method @abstractAssignmentOperatorUsage generateCode
+    ?!@semanticTemporariesStruct ioTemporaries
+    ?!@instructionListIR ioInstructionListIR
+    ?!@allocaList ioAllocaList
+    ?let @omnibusType inTargetType
+    ?let @string inTargetLLVMName
+    ?let @objectIR inSourcePossibleReference
+    ?let @location inErrorLocation
+
+#·······················································································································
+
 map @assignmentOperatorMap {
-  @omnibusType mTargetType
-  @lstring mTargetVarName
-  @genericFormalParameterList mTargetGenericFormalParameterList
-  @omnibusType mSourceTpe
-  @lstring mSourceVarName
-  @genericFormalParameterList mSourceGenericFormalParameterList
-  @ctExpressionAST mWhereClause
-  @llvmGenerationInstructionList mInstructionList
+  @abstractAssignmentOperatorUsage mOperatorUsage
   insert insertKey error message "the '%K' assignment is already declared in %L"
   search searchKey error message "there is no '%K' assignment"
+}
+
+#·······················································································································
+
+func assignmentOperatorKey ?let @omnibusType inTargetType
+                           ?let @location inErrorLocation
+                           ?let @omnibusType inSourceType -> @lstring {
+  result = @lstring.new {
+    ![inTargetType omnibusTypeDescriptionName] + " = " + [inSourceType omnibusTypeDescriptionName]
+    !inErrorLocation
+  }
 }
 
 #·······················································································································
@@ -202,12 +222,8 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mSourceTypeName ?let sourceTypeProxy]
   let sourceType = [sourceTypeProxy type]
 #---
-  let key = @lstring.new {
-    ![targetType omnibusTypeDescriptionName] + " = " + [sourceType omnibusTypeDescriptionName]
-    !mOperatorLocation
-  }
-  [!?ioContext.mAssignmentOperatorMap insertKey
-    !key 
+  let key = assignmentOperatorKey (!targetType !mOperatorLocation !sourceType)
+  let operatorUsage = @llvmAssignmentOperatorUsage.new {
     !targetType
     !mTargetVariableName
     !mTargetGenericFormalParameterList
@@ -216,6 +232,10 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
     !mSourceGenericFormalParameterList
     !mWhereClause
     !mLLVMInstructionList
+  }
+  [!?ioContext.mAssignmentOperatorMap insertKey
+    !key 
+    !operatorUsage
   ]
 #--- Generate function if
 #       - none type is generic
@@ -253,6 +273,55 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+class @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+  @omnibusType mTargetType
+  @lstring mTargetVarName
+  @genericFormalParameterList mTargetGenericFormalParameterList
+  @omnibusType mSourceTpe
+  @lstring mSourceVarName
+  @genericFormalParameterList mSourceGenericFormalParameterList
+  @ctExpressionAST mWhereClause
+  @llvmGenerationInstructionList mInstructionList
+}
+
+#·······················································································································
+
+override method @llvmAssignmentOperatorUsage generateCode
+    ?!@semanticTemporariesStruct ioTemporaries
+    ?!@instructionListIR ioInstructionListIR
+    ?!@allocaList ioAllocaList
+    ?let @omnibusType inTargetType
+    ?let @string inTargetLLVMName
+    ?let @objectIR inSourcePossibleReference
+    ?let @location unused inErrorLocation
+{
+  if ([mTargetGenericFormalParameterList length] == 0)
+    && ([mSourceGenericFormalParameterList length] == 0)
+    && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
+    && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
+      let llvmRoutineName = assignmentOperatorFuncName (!inTargetType ![inSourcePossibleReference type])
+      var s = "call void @" + [llvmRoutineName assemblerRepresentation]
+            + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
+            + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{!llvmRoutineName}]
+    else
+    [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
+    @assignmentGenerationVarMap varMap = {}
+    [!?varMap insertKey !mTargetVarName !inTargetLLVMName]
+    [!?varMap insertKey !mSourceVarName !srcLLVMName]
+    @assignmentGenerationVarMap typeMap = {}
+    [!?typeMap insertKey !mTargetVarName ![inTargetType llvmTypeName]]
+    [!?typeMap insertKey !mSourceVarName ! [sourceType llvmTypeName]]
+    @stringlist generatedInstructions = {}
+    [mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
+    for (str) in generatedInstructions do
+     [!?ioInstructionListIR appendInstructionAsFreeString !str !{}]
+    end
+  end
+}
+
+#·······················································································································
+
 setter @instructionListIR appendAssignmentIR
     ?!@semanticTemporariesStruct ioTemporaries
     ?let @assignmentOperatorMap inAssignmentOperatorMap
@@ -262,54 +331,36 @@ setter @instructionListIR appendAssignmentIR
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
 {
-  if not [inSourcePossibleReference isReference] then
-    let result = checkAssignmentCompatibility (
-      !source:inSourcePossibleReference # loadedResultValue
-      !targetAnnotationType:inTargetType
-      !errorLocation:inErrorLocation
-      !staticTypeAllowed:false
-    )
-   [!?self appendStoreToUniversalReference !inTargetLLVMName !inTargetType !result]
-  else
-    let key = @lstring.new {
-     !inTargetType.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
-     !inErrorLocation
-    }
+#  if not [inSourcePossibleReference isReference] then
+#    let result = checkAssignmentCompatibility (
+#      !source:inSourcePossibleReference # loadedResultValue
+#      !targetAnnotationType:inTargetType
+#      !errorLocation:inErrorLocation
+#      !staticTypeAllowed:false
+#    )
+#   [!?self appendStoreToUniversalReference !inTargetLLVMName !inTargetType !result]
+#  else
+    let key = assignmentOperatorKey (!inTargetType !inErrorLocation ![inSourcePossibleReference type])
+#    let key = @lstring.new {
+#     !inTargetType.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
+#     !inErrorLocation
+#    }
     [inAssignmentOperatorMap searchKey
       !key
-      ?*
-      ?let targetVarName
-      ?let targetGenericFormalParameterList
-      ?*
-      ?let sourceVarName
-      ?let sourceGenericFormalParameterList
-      ?*
-      ?let llvmInstructionList
+      ?let operatorUsage
     ]
-    if ([targetGenericFormalParameterList length] == 0)
-    && ([sourceGenericFormalParameterList length] == 0)
-    && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
-    && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
-      let llvmRoutineName = assignmentOperatorFuncName (!inTargetType ![inSourcePossibleReference type])
-      var s = "call void @" + [llvmRoutineName assemblerRepresentation]
-            + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
-            + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
-      [!?self appendInstructionAsFreeString !s !{!llvmRoutineName}]
-    else
-    [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
-    @assignmentGenerationVarMap varMap = {}
-    [!?varMap insertKey !targetVarName !inTargetLLVMName]
-    [!?varMap insertKey !sourceVarName !srcLLVMName]
-    @assignmentGenerationVarMap typeMap = {}
-    [!?typeMap insertKey !targetVarName ![inTargetType llvmTypeName]]
-    [!?typeMap insertKey !sourceVarName ! [sourceType llvmTypeName]]
-    @stringlist generatedInstructions = {}
-    [llvmInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
-    for (str) in generatedInstructions do
-     [!?self appendInstructionAsFreeString !str !{}]
-    end
-    end
-  end
+    @instructionListIR instructions = {}
+    [operatorUsage generateCode
+      !?ioTemporaries
+      !?instructions
+      !?ioAllocaList
+      !inTargetType
+      !inTargetLLVMName
+      !inSourcePossibleReference
+      !inErrorLocation
+    ]
+    self += instructions
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -339,6 +390,36 @@ override method @assignmentRoutineIR llvmCodeGeneration
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+}
+
+#·······················································································································
+
+override method @simpleCopyAssignmentOperatorUsage generateCode
+    ?!@semanticTemporariesStruct ioTemporaries
+    ?!@instructionListIR ioInstructionListIR
+    ?!@allocaList unused ioAllocaList
+    ?let @omnibusType inTargetType
+    ?let @string inTargetLLVMName
+    ?let @objectIR inSourcePossibleReference
+    ?let @location unused inErrorLocation
+{
+#--- If source is a reference, load value
+  @objectIR sourceValue = inSourcePossibleReference
+  if [inSourcePossibleReference isReference] then
+    getNewTempValue (!inTargetType !?ioTemporaries ?sourceValue)
+    let s = [sourceValue llvmName] + " = load " + [inTargetType llvmTypeName] + ", "
+          + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
+  end
+#--- Perfom store
+  let s = "store " + [inTargetType llvmTypeName] + " " + [sourceValue llvmName] 
+        + ", " + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
+  [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
