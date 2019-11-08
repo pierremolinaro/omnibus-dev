@@ -30,22 +30,22 @@ class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @staticArrayTypeAssignFunctionIR class                                        *
+//                            @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class GALGAS_staticArrayTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
+class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
-  public : GALGAS_staticArrayTypeAssignFunctionIR (void) ;
+  public : GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_staticArrayTypeAssignFunctionIR constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_staticArrayTypeAssignFunctionIR * ptr (void) const { return (const cPtr_staticArrayTypeAssignFunctionIR *) mObjectPtr ; }
+  public : inline const class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * ptr (void) const { return (const cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_staticArrayTypeAssignFunctionIR (const cPtr_staticArrayTypeAssignFunctionIR * inSourcePtr) ;
+  public : GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -53,19 +53,21 @@ class GALGAS_staticArrayTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_staticArrayTypeAssignFunctionIR extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_staticArrayTypeAssignFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                const class GALGAS_bool & inOperand1,
-                                                                                const class GALGAS_bool & inOperand2,
-                                                                                const class GALGAS_omnibusType & inOperand3
-                                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                                      const class GALGAS_bool & inOperand1,
+                                                                                                      const class GALGAS_bool & inOperand2,
+                                                                                                      const class GALGAS_omnibusType & inOperand3,
+                                                                                                      const class GALGAS_omnibusType & inOperand4,
+                                                                                                      const class GALGAS_uint & inOperand5
+                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_staticArrayTypeAssignFunctionIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -73,41 +75,51 @@ class GALGAS_staticArrayTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mStaticArrayType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_staticArrayTypeAssignFunctionIR class
+} ; // End of GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR class
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayTypeAssignFunctionIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @staticArrayTypeAssignFunctionIR class                               *
+//                   Pointer class for @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-class cPtr_staticArrayTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
+class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public : GALGAS_omnibusType mProperty_mStaticArrayType ;
+  public : GALGAS_omnibusType mProperty_mFixedSizeArrayType ;
+  public : GALGAS_omnibusType mProperty_mElementType ;
+  public : GALGAS_uint mProperty_mArraySize ;
 
 //--- Constructor
-  public : cPtr_staticArrayTypeAssignFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                 const GALGAS_bool & in_isRequired,
-                                                 const GALGAS_bool & in_warnsIfUnused,
-                                                 const GALGAS_omnibusType & in_mStaticArrayType
-                                                 COMMA_LOCATION_ARGS) ;
+  public : cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                                                       const GALGAS_bool & in_isRequired,
+                                                                       const GALGAS_bool & in_warnsIfUnused,
+                                                                       const GALGAS_omnibusType & in_mFixedSizeArrayType,
+                                                                       const GALGAS_omnibusType & in_mElementType,
+                                                                       const GALGAS_uint & in_mArraySize
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mStaticArrayType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -758,6 +770,16 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
 void routine_enterLiteralIntegerOperators (class GALGAS_semanticContext & ioArgument0,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                             Function 'assignValueToFixedSizeArrayElements_functionName'                             *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GALGAS_omnibusType & constinArgument0,
+                                                                                  class C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

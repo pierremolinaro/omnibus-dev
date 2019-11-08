@@ -461,7 +461,6 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
-#    !assignmentSources: {}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)
     !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}

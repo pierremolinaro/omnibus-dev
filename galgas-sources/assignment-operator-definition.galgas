@@ -345,10 +345,7 @@ setter @instructionListIR appendAssignmentIR
 #     !inTargetType.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
 #     !inErrorLocation
 #    }
-    [inAssignmentOperatorMap searchKey
-      !key
-      ?let operatorUsage
-    ]
+    [inAssignmentOperatorMap searchKey !key ?let operatorUsage]
     @instructionListIR instructions = {}
     [operatorUsage generateCode
       !?ioTemporaries
