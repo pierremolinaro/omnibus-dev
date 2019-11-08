@@ -15,6 +15,7 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 class GALGAS_omnibusType extensionGetter_booleanType (const class GALGAS_semanticContext & inObject,
+                                                      const class GALGAS_location & constinArgument0,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -448,6 +449,15 @@ class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Co
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                              Function 'ctBoolTypeName'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_ctBoolTypeName (class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -621,15 +631,6 @@ class GALGAS_string function_ctIntegerTypeName (class C_Compiler * inCompiler
 
 class GALGAS_omnibusType function_compileTimeBoolType (class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                              Function 'ctBoolTypeName'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_ctBoolTypeName (class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

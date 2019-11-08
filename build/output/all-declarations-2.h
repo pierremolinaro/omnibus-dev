@@ -719,71 +719,6 @@ class cMapElement_staticListInitializationMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  @assignableTypesFromCompileTimeType_Map list map                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_assignableTypesFromCompileTimeType_5F_Map : public AC_GALGAS_listmap {
-//--------------------------------- Default constructor
-  public : GALGAS_assignableTypesFromCompileTimeType_5F_Map (void) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_assignableTypesFromCompileTimeType_5F_Map extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_assignableTypesFromCompileTimeType_5F_Map constructor_emptyMap (LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
-                                                      const class GALGAS_omnibusType & inOperand1
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusTypeList getter_listForKey (const class GALGAS_string & constinOperand0
-                                                                            COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-//--------------------------------- Friend
-
-  friend class cEnumerator_assignableTypesFromCompileTimeType_5F_Map ;
- 
-} ; // End of GALGAS_assignableTypesFromCompileTimeType_5F_Map class
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Enumerator declaration                                                                                            *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cEnumerator_assignableTypesFromCompileTimeType_5F_Map : public cGenericAbstractEnumerator {
-  public : cEnumerator_assignableTypesFromCompileTimeType_5F_Map (const GALGAS_assignableTypesFromCompileTimeType_5F_Map & inEnumeratedObject,
-                                                                  const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_string current_key (LOCATION_ARGS) const ;
-  public : class GALGAS_omnibusTypeList current_mList (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_assignableTypesFromCompileTimeType_5F_Map_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignableTypesFromCompileTimeType_5F_Map ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                          @universalValuedObjectMap struct                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -941,8 +876,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_implicitConversionToBooleanMap mProperty_mImplicitConversionToBooleanMap ;
 
-  public : GALGAS_assignableTypesFromCompileTimeType_5F_Map mProperty_mAssignableTypesFromCompileTimeType_5F_Map ;
-
   public : GALGAS_sliceTypeMap mProperty_mSliceTypeMap ;
 
   public : GALGAS_taskMap mProperty_mTaskMap ;
@@ -1002,7 +935,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mPrefixOperatorMap,
                                    const GALGAS_assignmentOperatorMap & in_mAssignmentOperatorMap,
                                    const GALGAS_implicitConversionToBooleanMap & in_mImplicitConversionToBooleanMap,
-                                   const GALGAS_assignableTypesFromCompileTimeType_5F_Map & in_mAssignableTypesFromCompileTimeType_5F_Map,
                                    const GALGAS_sliceTypeMap & in_mSliceTypeMap,
                                    const GALGAS_taskMap & in_mTaskMap,
                                    const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
@@ -1056,11 +988,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_prefixOperatorMap & inOperand34,
                                                                 const class GALGAS_assignmentOperatorMap & inOperand35,
                                                                 const class GALGAS_implicitConversionToBooleanMap & inOperand36,
-                                                                const class GALGAS_assignableTypesFromCompileTimeType_5F_Map & inOperand37,
-                                                                const class GALGAS_sliceTypeMap & inOperand38,
-                                                                const class GALGAS_taskMap & inOperand39,
-                                                                const class GALGAS_globalTaskVariableList & inOperand40,
-                                                                const class GALGAS_universalValuedObjectMap & inOperand41
+                                                                const class GALGAS_sliceTypeMap & inOperand37,
+                                                                const class GALGAS_taskMap & inOperand38,
+                                                                const class GALGAS_globalTaskVariableList & inOperand39,
+                                                                const class GALGAS_universalValuedObjectMap & inOperand40
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1080,8 +1011,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap_5F_EX getter_mAddOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap_5F_EX getter_mAndOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_assignableTypesFromCompileTimeType_5F_Map getter_mAssignableTypesFromCompileTimeType_5F_Map (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_assignmentOperatorMap getter_mAssignmentOperatorMap (LOCATION_ARGS) const ;
 

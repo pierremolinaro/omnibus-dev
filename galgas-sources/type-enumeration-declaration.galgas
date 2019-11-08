@@ -165,7 +165,7 @@ proc enterEnumerationComparisonOperators
   ?!context:@semanticContext ioContext
 {
   let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
-  let booleanType = [ioContext booleanType]
+  let booleanType = [ioContext booleanType !.nowhere]
   [!?ioContext.mEqualOperatorMap insertKey
     !key
     !booleanType

@@ -312,7 +312,8 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
   let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
   [!?ioGraph addEdge !rootNode !mPanicCodeTypeName]
-  [!?ioGraph addEdge !rootNode !mPanicLineTypeName]
+  [!?ioGraph addEdge !rootNode !mPanicCodeTypeName]
+  [!?ioGraph addEdge !rootNode ![ctBoolTypeName () nowhere]]
 }
 
 #·······················································································································
@@ -342,6 +343,7 @@ override method @configurationDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
+#---
   if ioContext.mTargetParameters.mPointerSize != 0 then
     error mTargetParameters.mConfigurationLocation : "duplicate configuration"
   end

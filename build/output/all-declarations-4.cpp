@@ -12291,7 +12291,7 @@ GALGAS_syncInstructionAST GALGAS_syncInstructionAST::extractObject (const GALGAS
 
 cEnumAssociatedValues_guardedCommandIR_booleanGuard::cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
                                                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                          const GALGAS_objectIR & inAssociatedValue2
+                                                                                                          const GALGAS_string & inAssociatedValue2
                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -12379,7 +12379,7 @@ typeComparisonResult cEnumAssociatedValues_guardedCommandIR_sync::compare (const
 
 cEnumAssociatedValues_guardedCommandIR_boolAndSync::cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                                                         const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                        const GALGAS_objectIR & inAssociatedValue2,
+                                                                                                        const GALGAS_string & inAssociatedValue2,
                                                                                                         const GALGAS_string & inAssociatedValue3,
                                                                                                         const GALGAS_instructionListIR & inAssociatedValue4,
                                                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
@@ -12445,7 +12445,7 @@ mEnum (kNotBuilt) {
 
 GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const GALGAS_bool & inAssociatedValue0,
                                                                            const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                           const GALGAS_objectIR & inAssociatedValue2
+                                                                           const GALGAS_string & inAssociatedValue2
                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
@@ -12480,7 +12480,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_sync (const GALGAS_
 
 GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                          const GALGAS_objectIR & inAssociatedValue2,
+                                                                          const GALGAS_string & inAssociatedValue2,
                                                                           const GALGAS_string & inAssociatedValue3,
                                                                           const GALGAS_instructionListIR & inAssociatedValue4,
                                                                           const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
@@ -12500,7 +12500,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const 
 
 void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedValue0,
                                                    GALGAS_instructionListIR & outAssociatedValue1,
-                                                   GALGAS_objectIR & outAssociatedValue2,
+                                                   GALGAS_string & outAssociatedValue2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_booleanGuard) {
@@ -12547,7 +12547,7 @@ void GALGAS_guardedCommandIR::method_sync (GALGAS_bool & outAssociatedValue0,
 
 void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedValue0,
                                                   GALGAS_instructionListIR & outAssociatedValue1,
-                                                  GALGAS_objectIR & outAssociatedValue2,
+                                                  GALGAS_string & outAssociatedValue2,
                                                   GALGAS_string & outAssociatedValue3,
                                                   GALGAS_instructionListIR & outAssociatedValue4,
                                                   GALGAS_procCallEffectiveParameterListIR & outAssociatedValue5,

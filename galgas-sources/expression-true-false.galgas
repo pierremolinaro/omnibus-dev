@@ -35,10 +35,10 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
 {
-  [!?ioGraph addEdge !inConstantName ![ctBoolTypeName () nowhere]]
+#  [!?ioGraph addEdge !inConstantName ![ctBoolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,7 +58,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
@@ -67,7 +67,8 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type:[inContext booleanType] !value:if mValue then 1G else 0G end}
+#  outResult = .literalInteger {!type:[inContext booleanType !.nowhere] !value:if mValue then 1G else 0G end}
+  outResult = .literalInteger {!type: compileTimeBoolType () !value: if mValue then 1G else 0G end}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

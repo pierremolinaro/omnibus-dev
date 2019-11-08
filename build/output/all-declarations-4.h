@@ -2109,7 +2109,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_guardedCommandIR constructor_boolAndSync (const class GALGAS_bool & inOperand0,
                                                                          const class GALGAS_instructionListIR & inOperand1,
-                                                                         const class GALGAS_objectIR & inOperand2,
+                                                                         const class GALGAS_string & inOperand2,
                                                                          const class GALGAS_string & inOperand3,
                                                                          const class GALGAS_instructionListIR & inOperand4,
                                                                          const class GALGAS_procCallEffectiveParameterListIR & inOperand5
@@ -2117,7 +2117,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 
   public : static class GALGAS_guardedCommandIR constructor_booleanGuard (const class GALGAS_bool & inOperand0,
                                                                           const class GALGAS_instructionListIR & inOperand1,
-                                                                          const class GALGAS_objectIR & inOperand2
+                                                                          const class GALGAS_string & inOperand2
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_guardedCommandIR constructor_sync (const class GALGAS_bool & inOperand0,
@@ -2137,7 +2137,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_bool & outArgument0,
                                                      class GALGAS_instructionListIR & outArgument1,
-                                                     class GALGAS_objectIR & outArgument2,
+                                                     class GALGAS_string & outArgument2,
                                                      class GALGAS_string & outArgument3,
                                                      class GALGAS_instructionListIR & outArgument4,
                                                      class GALGAS_procCallEffectiveParameterListIR & outArgument5,
@@ -2146,7 +2146,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_booleanGuard (class GALGAS_bool & outArgument0,
                                                       class GALGAS_instructionListIR & outArgument1,
-                                                      class GALGAS_objectIR & outArgument2,
+                                                      class GALGAS_string & outArgument2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const ;
 
@@ -2186,12 +2186,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardedCommandIR ;
 class cEnumAssociatedValues_guardedCommandIR_booleanGuard : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_instructionListIR mAssociatedValue1 ;
-  public : const GALGAS_objectIR mAssociatedValue2 ;
+  public : const GALGAS_string mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
                                                                 const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                const GALGAS_objectIR & inAssociatedValue2
+                                                                const GALGAS_string & inAssociatedValue2
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -2228,7 +2228,7 @@ class cEnumAssociatedValues_guardedCommandIR_sync : public cEnumAssociatedValues
 class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_instructionListIR mAssociatedValue1 ;
-  public : const GALGAS_objectIR mAssociatedValue2 ;
+  public : const GALGAS_string mAssociatedValue2 ;
   public : const GALGAS_string mAssociatedValue3 ;
   public : const GALGAS_instructionListIR mAssociatedValue4 ;
   public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue5 ;
@@ -2236,7 +2236,7 @@ class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociate
 //--- Constructor
   public : cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                const GALGAS_instructionListIR & inAssociatedValue1,
-                                                               const GALGAS_objectIR & inAssociatedValue2,
+                                                               const GALGAS_string & inAssociatedValue2,
                                                                const GALGAS_string & inAssociatedValue3,
                                                                const GALGAS_instructionListIR & inAssociatedValue4,
                                                                const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5

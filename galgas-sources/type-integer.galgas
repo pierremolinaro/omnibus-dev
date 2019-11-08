@@ -234,7 +234,7 @@ private proc enter_integer_integer_operators
   ?!context:@semanticContext ioContext
 {
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
-  let booleanType = [ioContext booleanType]
+  let booleanType = [ioContext booleanType !.nowhere]
 #--- Comparison infix operator
   let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName !inIntegerTypeName)
   [!?ioContext.mEqualOperatorMap insertKey
@@ -389,7 +389,7 @@ private proc enter_integer_literal_operators
 {
 #--- Infix operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
-  let booleanType = [ioContext booleanType]
+  let booleanType = [ioContext booleanType !.nowhere]
 #--- Comparison infix operator
   let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !ctIntegerTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
@@ -542,7 +542,7 @@ private proc enter_literal_integer_operators
   let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
 #--- Comparison infix operator
   let intLiteralOp = combineTypeNamesForInfixOperator (!ctIntegerTypeName () !inIntegerTypeName.string)
-  let booleanType = [ioContext booleanType]
+  let booleanType = [ioContext booleanType !.nowhere]
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
     !booleanType

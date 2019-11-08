@@ -174,21 +174,36 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
-        ?result:@objectIR sourceOperand
+        ?result:@objectIR expressionResult
       ]
-      if [sourceOperand omnibusTypeDescriptionName] != boolTypeName () then
-        error endOfExpression : "guarded expression should be boolean"
-      elsif [sourceOperand isStatic] then
-        warning endOfExpression : "guarded expression is static"
-      end
-      [!?guardInstructionGenerationList appendLoadWhenReference
+      [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+        !expressionResult
+        !endOfExpression
         !?ioTemporaries
-        !?sourceOperand
+        !?guardInstructionGenerationList
+        !?alloca: ioAllocaList
+        ?let @implicitBooleanConversionResult booleanResult
       ]
+      switch booleanResult
+      case compileTime (*) :
+         warning endOfExpression : "guarded expression is static"
+      case llvmVariable (*) :
+      end
+
+
+#      if [sourceOperand omnibusTypeDescriptionName] != boolTypeName () then
+#        error endOfExpression : "guarded expression should be boolean"
+#      elsif [sourceOperand isStatic] then
+#        warning endOfExpression : "guarded expression is static"
+#      end
+#      [!?guardInstructionGenerationList appendLoadWhenReference
+#        !?ioTemporaries
+#        !?sourceOperand
+#      ]
       guardedCommandIRList += !.booleanGuard {
         !isExitCommand:isContinue
         !instructionGenerationList:guardInstructionGenerationList
-        !result:sourceOperand
+        !boolGuardBoolLLVMName: [booleanResult llvmName]
       }
     case boolAndSync (isContinue exp warnsOnStaticExpression endOfExp usesSelf nameList parameterList) :
       @instructionListIR boolExpInstructionGenerationList = {}
@@ -204,17 +219,33 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
-        ?result:@objectIR boolExpressionResult
+        ?result:@objectIR expressionResult
       ]
-      if [boolExpressionResult omnibusTypeDescriptionName] != boolTypeName () then
-        error endOfExp : "guarded expression should be boolean"
-      elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
-        warning endOfExp : "guarded expression is static"
-      end
-      [!?boolExpInstructionGenerationList appendLoadWhenReference
+      [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
+        !expressionResult
+        !endOfExp
         !?ioTemporaries
-        !?boolExpressionResult
+        !?boolExpInstructionGenerationList
+        !?alloca: ioAllocaList
+        ?let @implicitBooleanConversionResult booleanResult
       ]
+      switch booleanResult
+      case compileTime (*) :
+        if warnsOnStaticExpression then
+          warning endOfExp : "guarded expression is static"
+        end
+      case llvmVariable (*) :
+      end
+ 
+#      if [boolExpressionResult omnibusTypeDescriptionName] != boolTypeName () then
+#        error endOfExp : "guarded expression should be boolean"
+#      elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
+#        warning endOfExp : "guarded expression is static"
+#      end
+#      [!?boolExpInstructionGenerationList appendLoadWhenReference
+#        !?ioTemporaries
+#        !?boolExpressionResult
+#      ]
     #--- Analyze synchronization
       @instructionListIR guardInstructionGenerationList = {}
       @procCallEffectiveParameterListIR guardEffectiveParameterListIR
@@ -294,9 +325,9 @@ override method @syncInstructionAST instructionSemanticAnalysis
           ?guardMangledName: guardMangledName
         )
       end
-      if [boolExpressionResult isLiteralInteger] then
-        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
-        if value == 1G then
+      switch booleanResult
+      case compileTime (boolValue) :
+        if boolValue then
           guardedCommandIRList += !.sync {
             !isExitCommand:isContinue
             !guardMangledName:guardMangledName.string
@@ -306,16 +337,40 @@ override method @syncInstructionAST instructionSemanticAnalysis
         else
           error guardMangledName : "false guard not handled yet"
         end
-      else
+      case llvmVariable (llvmName) :
         guardedCommandIRList += !.boolAndSync {
           !isExitCommand:isContinue
           !boolExpInstructionGenerationList:boolExpInstructionGenerationList
-          !boolExpResult:boolExpressionResult
+          !boolGuardBoolLLVMName:llvmName
           !guardMangledName:guardMangledName.string
           !guardInstructionGenerationList:guardInstructionGenerationList
           !effectiveParameterListIR:guardEffectiveParameterListIR
         }
       end
+
+
+#      if [boolExpressionResult isLiteralInteger] then
+#        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
+#        if value == 1G then
+#          guardedCommandIRList += !.sync {
+#            !isExitCommand:isContinue
+#            !guardMangledName:guardMangledName.string
+#            !guardInstructionGenerationList:guardInstructionGenerationList
+#            !effectiveParameterListIR:guardEffectiveParameterListIR
+#          }
+#        else
+#          error guardMangledName : "false guard not handled yet"
+#        end
+#      else
+#        guardedCommandIRList += !.boolAndSync {
+#          !isExitCommand:isContinue
+#          !boolExpInstructionGenerationList:boolExpInstructionGenerationList
+#          !boolExpResult:boolExpressionResult
+#          !guardMangledName:guardMangledName.string
+#          !guardInstructionGenerationList:guardInstructionGenerationList
+#          !effectiveParameterListIR:guardEffectiveParameterListIR
+#        }
+#      end
     end
   end
 #-------------------- Instruction lists
@@ -395,7 +450,7 @@ proc analyzeGuardCall
 enum @guardedCommandIR {
   case booleanGuard (@bool isExitCommand # if false, it is an "exit" command
                      @instructionListIR instructionGenerationList
-                     @objectIR result)
+                     @string boolGuardBoolLLVMName)
 
   case sync        (@bool isExitCommand # if false, it is an "exit" command
                     @string guardMangledName
@@ -404,7 +459,7 @@ enum @guardedCommandIR {
 
   case boolAndSync (@bool isExitCommand # if false, it is an "exit" command
                     @instructionListIR boolExpInstructionGenerationList
-                    @objectIR boolExpResult
+                    @string boolGuardBoolLLVMName
                     @string guardMangledName
                     @instructionListIR guardInstructionGenerationList
                     @procCallEffectiveParameterListIR effectiveParameterListIR)
@@ -452,23 +507,23 @@ override method @syncInstructionIR llvmInstructionCode
     let acceptanceVarName = "%" + startLabel + ".accept." + idx
     @bool isWhileGuardedCommand
     switch branch.mGuardedCommand
-    case booleanGuard (isExitCommand instructionGenerationList @objectIR result) :
+    case booleanGuard (isExitCommand instructionGenerationList boolGuardBoolLLVMName) :
       isWhileGuardedCommand = isExitCommand
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let acceptedLabelName = startLabel + "." + idx + ".true"
       let rejectedLabelName = startLabel + "." + idx + ".false"
-      ioLLVMcode += "  br i1 " + [result llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
+      ioLLVMcode += "  br i1 " + boolGuardBoolLLVMName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += acceptedLabelName + ":\n"
       ioLLVMcode += "  call void @accept.guard ()\n"
       ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += rejectedLabelName + ":\n"
-      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result llvmName] + ", 0 ; assignment\n"
-    case boolAndSync (isExitCommand expInstructionList expResult guardMangledName guardInstructionList effectiveParameterList) :
+      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + boolGuardBoolLLVMName + ", 0\n"
+    case boolAndSync (isExitCommand expInstructionList boolGuardLLVMName guardMangledName guardInstructionList effectiveParameterList) :
       isWhileGuardedCommand = isExitCommand
       [expInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
       let testExitLabelName = startLabel + "." + idx + ".test.exit"
-      ioLLVMcode += "  br i1 " + [expResult llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
+      ioLLVMcode += "  br i1 " + boolGuardLLVMName + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
       ioLLVMcode += testOkLabelName + ":\n"
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"

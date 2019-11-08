@@ -149,6 +149,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !mTargetTypeName]
   [!?ioGraph addEdge !nodeName !mSourceTypeName]
+#  [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
 }
 
 #·······················································································································
@@ -173,16 +174,6 @@ map @assignmentOperatorMap {
   insert insertKey error message "the '%K' assignment is already declared in %L"
   search searchKey error message "there is no '%K' assignment"
 }
-
-#·······················································································································
-
-list @omnibusTypeList {
-  @omnibusType mType
-}
-
-#·······················································································································
-
-listmap @assignableTypesFromCompileTimeType_Map (@omnibusTypeList)
 
 #·······················································································································
 
@@ -256,10 +247,6 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
       !allocaList
     }
     ioRoutineListIR += !routine
-  end
-#--- 
-  if [sourceType.kind isCompileTimeBool] | [sourceType.kind isCompileTimeInteger] then
-    ioContext.mAssignableTypesFromCompileTimeType_Map += !sourceType.omnibusTypeDescriptionName !targetType
   end
 }
 

@@ -39,7 +39,7 @@ proc computeStaticExpression
       !source:expressionIR
       !targetAnnotationType:annotationType
       !errorLocation:inErrorLocation
-      !staticTypeAllowed:true
+      !staticTypeAllowed: true
     )
   end
 }

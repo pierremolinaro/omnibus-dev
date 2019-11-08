@@ -49,16 +49,11 @@ struct @semanticContext {
   @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
   @infixOperatorMap_EX mRightShiftOperatorMap      # >>
   
-#  @prefixOperatorMap_EX mUnaryMinusOperatorMap     # - and &-
-#  @prefixOperatorMap_EX mNotOperatorMap            # not
-#  @prefixOperatorMap_EX mUnsignedComplementOperatorMap # ~
-  
   @infixOperatorMap mInfixOperatorMap
   @prefixOperatorMap mPrefixOperatorMap
   @assignmentOperatorMap mAssignmentOperatorMap
   
   @implicitConversionToBooleanMap mImplicitConversionToBooleanMap
-  @assignableTypesFromCompileTimeType_Map mAssignableTypesFromCompileTimeType_Map
   @sliceTypeMap mSliceTypeMap
 
 #--- Tasks
@@ -148,8 +143,16 @@ map @availableInterruptMap {
 
 #·······················································································································
 
-getter @semanticContext booleanType -> @omnibusType {
+getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
   [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result]
+#  let acceptableTypeList = [mAssignableTypesFromCompileTimeType_Map listForKey !ctBoolTypeName ()]
+#  if [acceptableTypeList length] == 0 then
+#    error inErrorLocation : "There is no type assignable from compile time bool type" : result
+#  elsif [acceptableTypeList length] == 1 then
+#    [acceptableTypeList first ?result]
+#  else
+#    error inErrorLocation : "There are several types assignable from compile time bool type" : result
+#  end
 }
 
 #·······················································································································

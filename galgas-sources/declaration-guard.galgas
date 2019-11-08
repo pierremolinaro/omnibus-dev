@@ -260,7 +260,16 @@ override method @decoratedGuardDeclaration semanticAnalysis
   case baseGuard :
   #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariableOmnibusName() !mGuardName.location}
-    [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType]
+#    let acceptableTypeList = [inContext.mAssignableTypesFromCompileTimeType_Map listForKey !ctBoolTypeName ()]
+    let resultType = [inContext booleanType !resultVarName.location]
+#    if [acceptableTypeList length] == 0 then
+#      error resultVarName : "There is no type assignable from compile time bool type" : resultType
+#    elsif [acceptableTypeList length] == 1 then
+#      [acceptableTypeList first ?resultType]
+#    else
+#      error resultVarName : "There are several types assignable from compile time bool type" : resultType
+#    end
+#    [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
       !resultVarName

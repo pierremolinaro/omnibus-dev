@@ -123,7 +123,7 @@ private proc compileProject
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
   #--- Add compile time boolean type
-   ast.mDeclarationListAST += !@ctBoolDeclarationAST.new
+   ast.mDeclarationListAST += !@compiletimeBoolAST.new
   #--- Add boolean type
 #    ast.mDeclarationListAST += !@booleanDeclarationAST.new
   #--- Literal integer type
