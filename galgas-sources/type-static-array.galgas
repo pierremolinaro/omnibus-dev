@@ -164,29 +164,31 @@ override method @staticArrayTypeDeclarationAST enterInContext
         !warnsIfUnused:false
         !arrayType
       }
+#--- Enter assignment operator
      let key = assignmentOperatorKey (!arrayType !mArrayTypeName.location !arrayType)
-      @llvmGenerationInstructionElementList instructionElements = {}
-      instructionElements += !.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + " ("}
-      instructionElements += !.type {!name: ["TGT" nowhere]}
-      instructionElements += !.string {!string: "* "}
-      instructionElements += !.symbol {!name: ["TGT" nowhere]}
-      instructionElements += !.string {!string: ", "}
-      instructionElements += !.type {!name: ["SRC" nowhere]}
-      instructionElements += !.string {!string: "* "}
-      instructionElements += !.symbol {!name: ["SRC" nowhere]}
-      instructionElements += !.string {!string: ")"}
-      let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
-      let operatorUsage = @llvmAssignmentOperatorUsage.new{
-        !elementType
-        !["TGT" nowhere]
-        !{}
-        !elementType
-        !["SRC" nowhere]
-        !{}
-        !@ctTrueExpressionAST.new
-        !{!llvmAssignmentInstruction}
-      }
-      [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
+      [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+#      @llvmGenerationInstructionElementList instructionElements = {}
+#      instructionElements += !.string {!string: "call void @" + [assignmentFunctionLLVMName assemblerRepresentation] + " ("}
+#      instructionElements += !.type {!name: ["TGT" nowhere]}
+#      instructionElements += !.string {!string: "* "}
+#      instructionElements += !.symbol {!name: ["TGT" nowhere]}
+#      instructionElements += !.string {!string: ", "}
+#      instructionElements += !.type {!name: ["SRC" nowhere]}
+#      instructionElements += !.string {!string: "* "}
+#      instructionElements += !.symbol {!name: ["SRC" nowhere]}
+#      instructionElements += !.string {!string: ")"}
+#      let llvmAssignmentInstruction = @llvmGenerationInstruction.new {!{instructionElements}}
+#      let operatorUsage = @llvmAssignmentOperatorUsage.new{
+#        !elementType
+#        !["TGT" nowhere]
+#        !{}
+#        !elementType
+#        !["SRC" nowhere]
+#        !{}
+#        !@ctTrueExpressionAST.new
+#        !{!llvmAssignmentInstruction}
+#      }
+#      [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
     end
   end
 }

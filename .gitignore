@@ -25,6 +25,7 @@ arm-clang-llvm-binutils-openocd/+archives-for-cross-compilation/**
 
 xcode-project/build/**
 xcode-project/*.xcodeproj/xcuserdata/**
+xcode-project/*.xcodeproj/xcshareddata/xcschemes/**
 xcode-project/*.xcodeproj/project.xcworkspace/**
 
 makefile-macosx/omnibus
