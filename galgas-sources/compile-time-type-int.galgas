@@ -1,0 +1,396 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntAST : @abstractDeclarationAST {
+}
+
+#·······················································································································
+
+override getter @compileTimeIntAST locationForErrorSignaling -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @compileTimeIntAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let nodeName = [ctIntegerTypeName () nowhere]
+  [!?ioGraph addNode !nodeName !self]
+  [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
+}
+
+#·······················································································································
+
+override getter @compileTimeIntAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = ctIntegerTypeName ()
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once ctIntegerTypeName ->@string {
+  result = "ctInt"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @compileTimeIntAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+  let ctIntegerTypeName = [ctIntegerTypeName () nowhere]
+  let ctBoolInt = compileTimeIntegerType ()
+  let ctBoolType = compileTimeBoolType ()
+ #--- Enter type
+  [!?ioContext.mTypeMap insertType !lkey: ctIntegerTypeName !type: ctBoolInt]
+ #--- Enter - prefix operator
+  var key = prefixOperatorMapKey (!ctBoolInt !.minusOp !.nowhere)
+  [!?ioContext.mPrefixOperatorMap insertKey !key !ctBoolInt !ctBoolInt !@compileTimeIntMinusOperator.new]
+ #--- Enter | infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.bitWiseOrOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntBitWiseOrOperator.new]
+ #--- Enter ^ infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.bitWiseXorOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntXorOperator.new]
+ #--- Enter == infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.equal !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntEqualOperator.new]
+ #--- Enter < infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.lessThan !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLessThanOperator.new]
+ #--- Enter << infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.leftShiftOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntShiftLeftOperator.new]
+ #--- Enter >> infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.rightShiftOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntShiftRightOperator.new]
+ #--- Enter + infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.addOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntAddOperator.new]
+ #--- Enter - infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.subOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntSubtractOperator.new]
+ #--- Enter * infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.mulOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntMultiplyOperator.new]
+ #--- Enter / infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.divOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntDivideOperator.new]
+ #--- Enter % infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.modOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntModuloOperator.new]
+ #--- Enter & infix operator
+  key = infixOperatorMapKey (!ctBoolInt !.bitWiseAndOp !.nowhere !ctBoolInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolInt !@compileTimeIntBitWiseAndOperator.new]
+#--- Enter OLD integer operators
+  enterLiteralIntegerOperators (!?context: ioContext)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPILE TIME INFIX OPERATORS
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntModuloOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntModuloOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  if rightValue == 0G then
+    error inOperatorLocation : "compile time divide by zero" : outResultValue
+  else
+    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    outResultValue = .literalInteger {!type: inResultType !value: leftValue mod rightValue}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntDivideOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  if rightValue == 0G then
+    error inOperatorLocation : "compile time divide by zero" : outResultValue
+  else
+    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntMultiplyOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntMultiplyOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue * rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntSubtractOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntSubtractOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue - rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntEqualOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntEqualOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntAddOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntAddOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue + rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntBitWiseAndOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntBitWiseAndOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue & rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntShiftLeftOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue << rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntShiftRightOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue >> rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntLessThanOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntLessThanOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue < rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntXorOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntXorOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntBitWiseOrOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntBitWiseOrOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inLeftOperand literalInteger ?1* ?value: let leftValue]
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPILE TIME PREFIX OPERATOR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntMinusOperator : @prefixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntMinusOperator generateCode
+  ?let @objectIR inReceiverOperand
+  ?let @location unused inOperatorLocation
+  ?let @omnibusType inResultType
+  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  outResultValue = .literalInteger {!type: inResultType !value: - receiverValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

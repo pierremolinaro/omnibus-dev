@@ -1,10 +1,197 @@
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
+#  AST                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once boolTypeName -> @string {
   result = "bool"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolTypeAST : @abstractDeclarationAST {
+}
+
+#·······················································································································
+
+override getter @boolTypeAST locationForErrorSignaling -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @boolTypeAST enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let nodeName = [boolTypeName () nowhere]
+  [!?ioGraph addNode !nodeName !self]
+}
+
+#·······················································································································
+
+override getter @boolTypeAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = boolTypeName ()
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @boolTypeAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
+  ?!@routineListIR unused ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
+{
+  let boolTypeName = [boolTypeName () nowhere]
+  let boolType = boolType ()
+  let ctBoolType = compileTimeBoolType ()
+ #--- Enter type
+  [!?ioContext.mTypeMap insertType !lkey: boolTypeName !type: boolType]
+ #--- Enter not prefix operator
+  var key = prefixOperatorMapKey (!boolType !.notOp !.nowhere)
+  [!?ioContext.mPrefixOperatorMap insertKey !key !boolType !boolType !@boolNotOperator.new]
+ #--- Enter | infix operator
+  key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !boolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolOrOperator.new]
+  key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !boolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolOrOperator.new]
+  key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !ctBoolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolOrOperator.new]
+ #--- Enter ^ infix operator
+  key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !boolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolXorOperator.new]
+  key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !boolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolXorOperator.new]
+  key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !ctBoolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolXorOperator.new]
+ #--- Enter == infix operator
+  key = infixOperatorMapKey (!boolType !.equal !.nowhere !boolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolEqualOperator.new]
+  key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !boolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolEqualOperator.new]
+  key = infixOperatorMapKey (!boolType !.equal !.nowhere !ctBoolType)
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolEqualOperator.new]
+#--- Implicit conversion to i1 for test expressions
+  key = @lstring.new {![boolType omnibusTypeDescriptionName] !.nowhere}
+  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean.new]
+#--- Enter assignment operator
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  IMPLICIT CONVERSION TO i1
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
+}
+
+#·······················································································································
+
+override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
+  ?let @objectIR inReceiverOperand
+  ?let @location unused inErrorLocation
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@instructionListIR unused ioInstructionGenerationList
+  ?!alloca:@allocaList unused ioAllocaList
+  !@implicitBooleanConversionResult outResult
+{
+  outResult = .llvmVariable {!name: [inReceiverOperand llvmName]}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPILE TIME PREFIX OPERATOR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolNotOperator : @prefixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @boolNotOperator generateCode
+  ?let @objectIR inReceiverOperand
+  ?let @location unused inOperatorLocation
+  ?let @omnibusType inResultType
+  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " xor i1 " + [inReceiverOperand llvmName] + ", 1"
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  COMPILE TIME INFIX OPERATORS
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolEqualOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @boolEqualOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " icmp eq i1 " + [inLeftOperand llvmName] + ", " + [inRightOperand llvmName]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolXorOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @boolXorOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " xor i1 " + [inLeftOperand llvmName] + ", " + [inRightOperand llvmName]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @boolOrOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @boolOrOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " or i1 " + [inLeftOperand llvmName] + ", " + [inRightOperand llvmName]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -25,15 +25,17 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/semantic-analysis.galgas"
 
 #--- Type declarations
+  "galgas-sources/compile-time-type-bool.galgas"
+  "galgas-sources/compile-time-type-int.galgas"
+  "galgas-sources/type-static-integer.galgas"
+  "galgas-sources/type-bool.galgas"
   "galgas-sources/type-alias.galgas"
   "galgas-sources/type-static-array.galgas"
   "galgas-sources/type-dynamic-array.galgas"
-  "galgas-sources/type-bool.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"
   "galgas-sources/type-structure-declaration.galgas"
   "galgas-sources/type-sync-declaration.galgas"
   "galgas-sources/type-integer.galgas"
-  "galgas-sources/type-static-integer.galgas"
   "galgas-sources/type-static-string.galgas"
   "galgas-sources/type-opaque-declaration.galgas"
 
@@ -178,7 +180,6 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/embedded-sample-code.galgas"
 
 #---- Nouvelle définition des types
-  "galgas-sources/compile-time-type-bool.galgas"
   "galgas-sources/compile-time-expression.galgas"
   "galgas-sources/llvm-generic-type.galgas"
   "galgas-sources/assignment-operator-definition.galgas"

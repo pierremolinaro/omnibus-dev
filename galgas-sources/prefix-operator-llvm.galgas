@@ -175,7 +175,6 @@ override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !mReceiverTypeName]
   [!?ioGraph addEdge !nodeName !mResultTypeName]
- # [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName]
 }
 
 #·······················································································································

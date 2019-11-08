@@ -198,6 +198,22 @@ func %once compileTimeBoolType -> @omnibusType {
 
 #·······················································································································
 
+func %once boolType -> @omnibusType {
+  result = .new {
+    !propertyGetterMap:{}
+    !propertySetterMap: {}
+    !classConstantMap:{}
+    !constructorMap:{}
+    !subscript:.noSubscript
+    !attributes:.equatable | .copyable
+    !omnibusTypeDescriptionName: boolTypeName ()
+    !kind: .boolean
+    !llvmBaseTypeName: "i1"
+  }
+}
+
+#·······················································································································
+
 func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}

@@ -2,45 +2,45 @@
 //   BOOL TYPE 
 //——————————————————————————————————————————————————————————————————————————————
 
-llvm $bool {
-  size: 1
-  slice: "b"
-}
-
-//··············································································
-
-llvm func (tgt $bool) = (src $bool) {
-  var loaded
-  llvm loaded + " = load " + $src + ", " + $src + "* " + src
-  llvm "store " + $src + " " + loaded + ", " + $tgt + "* " + tgt
-}
-
-//··············································································
-
-llvm func (tgt $bool) = (src $ctBool) {
-  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
-}
-
-//··············································································
-
-llvm func (left $bool) == (right $bool) -> $bool {
-  llvm result + " = icmp eq " + $left + " " + left + ", " + right
-}
-
-llvm func (left $bool) == (right $ctBool) -> $bool {
-  llvm result + " = icmp eq " + $left + " " + left + ", " + right
-}
-
-llvm func (left $ctBool) == (right $bool) -> $bool {
-  llvm result + " = icmp eq " + $right + " " + left + ", " + right
-}
-
-llvm func (receiver $bool) convertToBoolean {
-  llvm result + " = or " + $receiver + " " + receiver + ", 0"
-}
-
-llvm func not (receiver $bool) -> $bool {
-  llvm result + " = xor " + $receiver + " " + receiver + ", 1"
-}
+//llvm $bool {
+//  size: 1
+//  slice: "b"
+//}
+//
+////··············································································
+//
+//llvm func (tgt $bool) = (src $bool) {
+//  var loaded
+//  llvm loaded + " = load " + $src + ", " + $src + "* " + src
+//  llvm "store " + $src + " " + loaded + ", " + $tgt + "* " + tgt
+//}
+//
+////··············································································
+//
+//llvm func (tgt $bool) = (src $ctBool) {
+//  llvm "store " + $tgt + " " + src + ", " + $tgt + "* " + tgt
+//}
+//
+////··············································································
+//
+//llvm func (left $bool) == (right $bool) -> $bool {
+//  llvm result + " = icmp eq " + $left + " " + left + ", " + right
+//}
+//
+//llvm func (left $bool) == (right $ctBool) -> $bool {
+//  llvm result + " = icmp eq " + $left + " " + left + ", " + right
+//}
+//
+//llvm func (left $ctBool) == (right $bool) -> $bool {
+//  llvm result + " = icmp eq " + $right + " " + left + ", " + right
+//}
+//
+//llvm func (receiver $bool) convertToBoolean {
+//  llvm result + " = or " + $receiver + " " + receiver + ", 0"
+//}
+//
+//llvm func not (receiver $bool) -> $bool {
+//  llvm result + " = xor " + $receiver + " " + receiver + ", 1"
+//}
 
 //——————————————————————————————————————————————————————————————————————————————

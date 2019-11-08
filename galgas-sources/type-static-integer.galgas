@@ -1,65 +1,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeIntegerDeclarationAST : @abstractDeclarationAST {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @compileTimeIntegerDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = .nowhere
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @compileTimeIntegerDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let ctIntegerTypeName = [ctIntegerTypeName () nowhere]
-  [!?ioGraph addNode !ctIntegerTypeName !self]
-  [!?ioGraph addEdge !compileTimeDeclarationBarrier () !ctIntegerTypeName]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @compileTimeIntegerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = ctIntegerTypeName () 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @compileTimeIntegerDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
-  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
-  let integerTypeName = [ctIntegerTypeName () nowhere]
- #---
-  [!?ioContext.mTypeMap insertType
-    !lkey:integerTypeName
-    !type: compileTimeIntegerType ()
-  ]
-#--- Enter integer operators
-  enterLiteralIntegerOperators (
-    !?context:ioContext
-  )
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-private proc enterLiteralIntegerOperators
-  ?!context:@semanticContext ioContext
-{
+proc enterLiteralIntegerOperators ?!context:@semanticContext ioContext {
   let literalIntegerTypeName = [ctIntegerTypeName () nowhere]
 #--- Infix operators
   let intIntOp = combineTypeNamesForInfixOperator (!literalIntegerTypeName.string !literalIntegerTypeName.string)
@@ -97,13 +38,6 @@ private proc enterLiteralIntegerOperators
     !selfType
     !@literal_literal_integerInfixOperation.new {!.xor}
   ]
-#  [!?ioContext.mUnsignedComplementOperatorMap insertKey
-#    !literalIntegerTypeName
-#  ]
-#--- Negate operator
-#  [!?ioContext.mUnaryMinusOperatorMap insertKey
-#    !literalIntegerTypeName
-#  ]
 #--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp
