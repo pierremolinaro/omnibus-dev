@@ -10510,21 +10510,21 @@ void callExtensionMethod_generateCode (const cPtr_prefixOperatorUsage * inObject
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                           Extension method '@prefixOperatorMap generateInfixOperatorCode'                           *
+//                          Extension method '@prefixOperatorMap generatePrefixOperatorCode'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_generateInfixOperatorCode (const GALGAS_prefixOperatorMap inObject,
-                                                const GALGAS_objectIR constinArgument_inReceiverOperand,
-                                                const GALGAS_prefixOperator constinArgument_inPrefixOperator,
-                                                const GALGAS_location constinArgument_inOperatorLocation,
-                                                const GALGAS_bool constinArgument_inSafeMode,
-                                                const GALGAS_bool constinArgument_inDoNotGeneratePanicCode,
-                                                GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                GALGAS_objectIR & outArgument_outResultValue,
-                                                C_Compiler * inCompiler
-                                                COMMA_UNUSED_LOCATION_ARGS) {
+void extensionMethod_generatePrefixOperatorCode (const GALGAS_prefixOperatorMap inObject,
+                                                 const GALGAS_objectIR constinArgument_inReceiverOperand,
+                                                 const GALGAS_prefixOperator constinArgument_inPrefixOperator,
+                                                 const GALGAS_location constinArgument_inOperatorLocation,
+                                                 const GALGAS_bool constinArgument_inSafeMode,
+                                                 const GALGAS_bool constinArgument_inDoNotGeneratePanicCode,
+                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                 GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                 GALGAS_objectIR & outArgument_outResultValue,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultValue.drop () ; // Release 'out' argument
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
@@ -10548,7 +10548,7 @@ void extensionMethod_generateInfixOperatorCode (const GALGAS_prefixOperatorMap i
       }
     }
   }
-  GALGAS_prefixOperator var_prefixOperator_1947 = constinArgument_inPrefixOperator ;
+  GALGAS_prefixOperator var_prefixOperator_1948 = constinArgument_inPrefixOperator ;
   enumGalgasBool test_2 = kBoolTrue ;
   if (kBoolTrue == test_2) {
     test_2 = constinArgument_inDoNotGeneratePanicCode.boolEnum () ;
@@ -10564,19 +10564,19 @@ void extensionMethod_generateInfixOperatorCode (const GALGAS_prefixOperatorMap i
         break ;
       case GALGAS_prefixOperator::kEnum_minusOp:
         {
-          var_prefixOperator_1947 = GALGAS_prefixOperator::constructor_minusNoOvf (SOURCE_FILE ("prefix-operator-map.galgas", 54)) ;
+          var_prefixOperator_1948 = GALGAS_prefixOperator::constructor_minusNoOvf (SOURCE_FILE ("prefix-operator-map.galgas", 54)) ;
         }
         break ;
       }
     }
   }
-  GALGAS_lstring var_key_2161 = function_prefixOperatorMapKey (extensionGetter_type (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 58)), var_prefixOperator_1947, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 58)) ;
-  GALGAS_omnibusType var_resultType_2291 ;
-  GALGAS_prefixOperatorUsage var_operatorUsage_2310 ;
+  GALGAS_lstring var_key_2162 = function_prefixOperatorMapKey (extensionGetter_type (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 58)), var_prefixOperator_1948, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 58)) ;
+  GALGAS_omnibusType var_resultType_2292 ;
+  GALGAS_prefixOperatorUsage var_operatorUsage_2311 ;
   const GALGAS_prefixOperatorMap temp_3 = inObject ;
-  GALGAS_omnibusType joker_2273_1 ; // Joker input parameter
-  temp_3.method_searchKey (var_key_2161, joker_2273_1, var_resultType_2291, var_operatorUsage_2310, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 59)) ;
-  callExtensionMethod_generateCode ((const cPtr_prefixOperatorUsage *) var_operatorUsage_2310.ptr (), constinArgument_inReceiverOperand, constinArgument_inOperatorLocation, var_resultType_2291, constinArgument_inDoNotGeneratePanicCode, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 60)) ;
+  GALGAS_omnibusType joker_2274_1 ; // Joker input parameter
+  temp_3.method_searchKey (var_key_2162, joker_2274_1, var_resultType_2292, var_operatorUsage_2311, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 59)) ;
+  callExtensionMethod_generateCode ((const cPtr_prefixOperatorUsage *) var_operatorUsage_2311.ptr (), constinArgument_inReceiverOperand, constinArgument_inOperatorLocation, var_resultType_2292, constinArgument_inDoNotGeneratePanicCode, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 60)) ;
 }
 
 

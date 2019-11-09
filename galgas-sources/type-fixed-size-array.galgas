@@ -160,20 +160,19 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       let assignValueToElements_functionName = assignValueToFixedSizeArrayElements_functionName (!arrayType)
       ioRoutineListIR += !@assignRepeatedValueToFixedSizeArrayElementsFunctionIR.new {
         ![assignValueToElements_functionName nowhere]
-        !isRequired: true
+        !isRequired: false
         !warnsIfUnused: false
         !arrayType
         !elementType
         !arraySize
       }
-
-#      let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!arrayType !arrayType)
-#      ioRoutineListIR += !@staticArrayTypeAssignFunctionIR.new {
-#        ![assignmentFunctionLLVMName nowhere]
-#        !isRequired: true
-#        !warnsIfUnused: false
-#        !arrayType
-#      }
+      let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!arrayType !arrayType)
+      ioRoutineListIR += !@staticArrayTypeAssignFunctionIR.new {
+        ![assignmentFunctionLLVMName nowhere]
+        !isRequired: false
+        !warnsIfUnused: false
+        !arrayType
+      }
    #--- Enter assignment operator
       let key = assignmentOperatorKey (!arrayType !mFixedSizeArrayType.location !arrayType)
       [!?ioContext.mAssignmentOperatorMap insertKey !key !@fixedSizeArrayAssignmentOperatorUsage.new {!elementType !arraySize !assignValueToElements_functionName}]
@@ -221,20 +220,33 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     ?let @omnibusType inTargetType
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
-    ?let @location unused inErrorLocation
+    ?let @location inErrorLocation
 {
   let arrayTypeName = [inTargetType llvmTypeName]
   let elementTypeName = [mElementType llvmTypeName]
-  if [inSourcePossibleReference isLlvmArrayRepeatedDynamicValue] then
-    [inSourcePossibleReference llvmArrayRepeatedDynamicValue ?2* ?value: let @objectIR value]
-     var s = "call void @" + [mAssignValueToElements_functionName assemblerRepresentation]
-     s += " (" + arrayTypeName + "* " + [value llvmName]
-     s += ", " + elementTypeName + " " + [value llvmName]
-     [!?ioInstructionListIR appendInstructionAsFreeString !s !{!mAssignValueToElements_functionName}]
-  elsif [inSourcePossibleReference isLlvmArrayDynamicValues] then
+  switch inSourcePossibleReference
+  case llvmArrayRepeatedDynamicValue (2* @objectIR sourceValuePossibleReference) :
+    @objectIR sourceValue = sourceValuePossibleReference
+    [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
+    var s = "call void @" + [mAssignValueToElements_functionName assemblerRepresentation]
+    s += " (" + arrayTypeName + "* " + inTargetLLVMName
+    s += ", " + elementTypeName + " " + [sourceValue llvmName] + ")"
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!mAssignValueToElements_functionName}]
+  case llvmArrayDynamicValues (1* @operandIRList values) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex ++
-    [inSourcePossibleReference llvmArrayDynamicValues ?1* ?values: let @operandIRList values]
+    for (value) in values do (idx)
+      @objectIR sourceValue = value
+      [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
+      let ptr = "%ptr." + uniqueValue + "." + idx
+      var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
+      s = "store " + elementTypeName + " " + [sourceValue llvmName] + ", " + elementTypeName + "* " + ptr
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]    
+    end
+  case llvmArrayStaticValues (1* @operandIRList values 1*) :
+    let uniqueValue = ioTemporaries.mTemporaryIndex
+    ioTemporaries.mTemporaryIndex ++
     for (value) in values do (idx)
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
@@ -242,35 +254,34 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
       s = "store " + elementTypeName + " " + [value llvmName] + ", " + elementTypeName + "* " + ptr
       [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]    
     end
-  else
-#--- If source is a reference, load value
-  @objectIR sourceValue = inSourcePossibleReference
-  if [inSourcePossibleReference isReference] then
-    getNewTempValue (!inTargetType !?ioTemporaries ?sourceValue)
-    let s = [sourceValue llvmName] + " = load " + [inTargetType llvmTypeName] + ", "
-          + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName]
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
-  end
-  #--- Perfom store
-    let s = "store " + [inTargetType llvmTypeName] + " " + [sourceValue llvmName] 
-          + ", " + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
+  case llvmArrayRepeatedStaticValue (3* @uint idx) :
+    let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
+    let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
+        + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
+          + ", " + [inTargetType llvmTypeName] + "* @gconst." + idx + ")"
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!assignmentFunctionLLVMName}]
+  case reference (2*) :
+    let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
+    let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
+        + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
+          + ", " + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!assignmentFunctionLLVMName}]
+  case literalInteger (2*) :
+    error inErrorLocation : "invalid fixed array assignment source (literalInteger)"
+  case literalString (2*) :
+    error inErrorLocation : "invalid fixed array assignment source (literalString)"
+  case llvmStructureValue (2*) :
+    error inErrorLocation : "invalid fixed array assignment source (llvmStructureValue)"
+  case llvmValue (2*) :
+    error inErrorLocation : "invalid fixed array assignment source (llvmValue)"
+  case null (*) :
+    error inErrorLocation : "invalid fixed array assignment source (null)"
+  case void:
+    error inErrorLocation : "invalid fixed array assignment source (void)"
+  case zero (*) :
+    error inErrorLocation : "invalid fixed array assignment source (zero)"
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
-#  @omnibusType mFixedSizeArrayType
-#}
-
-#·······················································································································
-
-#override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration 
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -309,77 +320,88 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#  let llvmTypeName = [mFixedSizeArrayType llvmTypeName]
-#  let arcAssignmentList = [mFixedSizeArrayType arcList !{}]
-#  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
-#  ioLLVMcode += " (" + llvmTypeName + " * %inTarget, " + llvmTypeName + "* %inSource) nounwind optsize {\n"
-#  ioLLVMcode += ";--- Handle ARC properties\n"
-#  for (propertyName propertyType indexPath) in arcAssignmentList do
-#    let propertyTypeLLVMName = [propertyType llvmTypeName]
-#    let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-#    ioGenerationAdds.mUniqueIndex ++
-#    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inSource, i32 0"
-#    for (idx) in indexPath do
-#      ioLLVMcode += ", i32 " + idx
-#    end
-#    ioLLVMcode += " ; " + propertyName + "\n"
-#    let llvmLoadedVarName = llvmVarName + ".loaded"
-#    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-#    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
-#  end
-#  for (propertyName propertyType indexPath) in arcAssignmentList do
-#    let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-#    ioGenerationAdds.mUniqueIndex ++
-#    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inTarget, i32 0"
-#    for (idx) in indexPath do
-#      ioLLVMcode += ", i32 " + idx
-#    end
-#    ioLLVMcode += " ; " + propertyName + "\n"
-#    let propertyTypeLLVMName = [propertyType llvmTypeName]
-#    let llvmLoadedVarName = llvmVarName + ".loaded"
-#    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-#    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
-#  end
-#  ioLLVMcode += ";--- Compute type size\n"
-#  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* null, i32 1\n"
-#  ioLLVMcode += "  %byteCount = ptrtoint " + llvmTypeName + "* %sizeAsPtr to i32\n"
-#  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
-#  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
-#  ioLLVMcode += ";--- Copy\n"
-#  ioLLVMcode += "loadStore:\n"
-#  ioLLVMcode += "  %v = load " + llvmTypeName + ", " + llvmTypeName + "* %inSource\n" 
-#  ioLLVMcode += "  store " + llvmTypeName + " %v, " + llvmTypeName + "* %inTarget\n" 
-#  ioLLVMcode += "  br label %copy.end\n"
-#  ioLLVMcode += "copyBytesOrCopyWords:\n"
-#  ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
-#  ioLLVMcode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
-#  ioLLVMcode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
-#  ioLLVMcode += "testTarget:\n"
-#  ioLLVMcode += "  %targetAsUnsigned = ptrtoint " + llvmTypeName + "* %inTarget to i32\n"
-#  ioLLVMcode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
-#  ioLLVMcode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
-#  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
-#  ioLLVMcode += "testSource:\n"
-#  ioLLVMcode += "  %sourceAsUnsigned = ptrtoint " + llvmTypeName + "* %inSource to i32\n"
-#  ioLLVMcode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
-#  ioLLVMcode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
-#  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
-#  ioLLVMcode += "copyWords:\n"
-#  ioLLVMcode += "  %target32 = bitcast " + llvmTypeName + "* %inTarget to i32*\n"
-#  ioLLVMcode += "  %source32 = bitcast " + llvmTypeName + "* %inSource to i32*\n"
-#  ioLLVMcode += "  %wordCount = udiv i32 %byteCount, 4\n"
-#  ioLLVMcode += "  br label %copyWords.loop\n"
-#  ioLLVMcode += "copyWords.loop:\n"
-#  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
-#  ioLLVMcode += "  br label %copy.end\n"
-#  ioLLVMcode += "copyBytes:\n"
-#  ioLLVMcode += "  %target8 = bitcast " + llvmTypeName + "* %inTarget to i8*\n"
-#  ioLLVMcode += "  %source8 = bitcast " + llvmTypeName + "* %inSource to i8*\n"
-#  ioLLVMcode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
-#  ioLLVMcode += "  br label %copy.end\n"
-#  ioLLVMcode += "copy.end:\n"
-#  ioLLVMcode += "  ret void\n"
-#  ioLLVMcode += "}\n\n"
-#}
+class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
+  @omnibusType mFixedSizeArrayType
+}
+
+#·······················································································································
+
+override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let llvmTypeName = [mFixedSizeArrayType llvmTypeName]
+  let arcAssignmentList = [mFixedSizeArrayType arcList !{}]
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + llvmTypeName + " * %inTarget, " + llvmTypeName + "* %inSource) nounwind optsize {\n"
+  ioLLVMcode += ";--- Handle ARC properties\n"
+  for (propertyName propertyType indexPath) in arcAssignmentList do
+    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inSource, i32 0"
+    for (idx) in indexPath do
+      ioLLVMcode += ", i32 " + idx
+    end
+    ioLLVMcode += " ; " + propertyName + "\n"
+    let llvmLoadedVarName = llvmVarName + ".loaded"
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+  end
+  for (propertyName propertyType indexPath) in arcAssignmentList do
+    let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inTarget, i32 0"
+    for (idx) in indexPath do
+      ioLLVMcode += ", i32 " + idx
+    end
+    ioLLVMcode += " ; " + propertyName + "\n"
+    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let llvmLoadedVarName = llvmVarName + ".loaded"
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+  end
+  ioLLVMcode += ";--- Compute type size\n"
+  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* null, i32 1\n"
+  ioLLVMcode += "  %byteCount = ptrtoint " + llvmTypeName + "* %sizeAsPtr to i32\n"
+  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
+  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
+  ioLLVMcode += ";--- Copy\n"
+  ioLLVMcode += "loadStore:\n"
+  ioLLVMcode += "  %v = load " + llvmTypeName + ", " + llvmTypeName + "* %inSource\n" 
+  ioLLVMcode += "  store " + llvmTypeName + " %v, " + llvmTypeName + "* %inTarget\n" 
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copyBytesOrCopyWords:\n"
+  ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
+  ioLLVMcode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
+  ioLLVMcode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
+  ioLLVMcode += "testTarget:\n"
+  ioLLVMcode += "  %targetAsUnsigned = ptrtoint " + llvmTypeName + "* %inTarget to i32\n"
+  ioLLVMcode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
+  ioLLVMcode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
+  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
+  ioLLVMcode += "testSource:\n"
+  ioLLVMcode += "  %sourceAsUnsigned = ptrtoint " + llvmTypeName + "* %inSource to i32\n"
+  ioLLVMcode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
+  ioLLVMcode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
+  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
+  ioLLVMcode += "copyWords:\n"
+  ioLLVMcode += "  %target32 = bitcast " + llvmTypeName + "* %inTarget to i32*\n"
+  ioLLVMcode += "  %source32 = bitcast " + llvmTypeName + "* %inSource to i32*\n"
+  ioLLVMcode += "  %wordCount = udiv i32 %byteCount, 4\n"
+  ioLLVMcode += "  br label %copyWords.loop\n"
+  ioLLVMcode += "copyWords.loop:\n"
+  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copyBytes:\n"
+  ioLLVMcode += "  %target8 = bitcast " + llvmTypeName + "* %inTarget to i8*\n"
+  ioLLVMcode += "  %source8 = bitcast " + llvmTypeName + "* %inSource to i8*\n"
+  ioLLVMcode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copy.end:\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

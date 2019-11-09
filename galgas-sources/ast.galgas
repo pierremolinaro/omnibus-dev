@@ -14,7 +14,6 @@ struct @ast {
   @driverInstanciationListAST mRequiredDriverListAST
   @uint mTypeDeclarationIndex
   @controlRegisterUserAccesMapAST mControlRegisterUserAccesMapAST
-  @stringset mSliceSelectorSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

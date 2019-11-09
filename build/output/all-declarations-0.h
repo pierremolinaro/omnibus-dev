@@ -1722,8 +1722,6 @@ class cParser_omnibus_5F_syntax {
 
   protected : virtual int32_t select_omnibus_5F_syntax_142 (C_Lexique_omnibus_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_omnibus_5F_syntax_143 (C_Lexique_omnibus_5F_lexique *) = 0 ;
-
 
 } ;
 
@@ -10784,96 +10782,6 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @sliceDeclarationAST class                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_sliceDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
-  public : GALGAS_sliceDeclarationAST (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_sliceDeclarationAST constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_sliceDeclarationAST * ptr (void) const { return (const cPtr_sliceDeclarationAST *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_sliceDeclarationAST (const cPtr_sliceDeclarationAST * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_sliceDeclarationAST extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_sliceDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_lstring & inOperand1
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_sliceDeclarationAST & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSliceString (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSliceTypeName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_sliceDeclarationAST class
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceDeclarationAST ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Pointer class for @sliceDeclarationAST class                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class cPtr_sliceDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
-  public : GALGAS_lstring mProperty_mSliceString ;
-  public : GALGAS_lstring mProperty_mSliceTypeName ;
-
-//--- Constructor
-  public : cPtr_sliceDeclarationAST (const GALGAS_lstring & in_mSliceString,
-                                     const GALGAS_lstring & in_mSliceTypeName
-                                     COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSliceString (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSliceTypeName (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                    @standAloneProcedureCallInstructionAST class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -17709,8 +17617,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 
   public : GALGAS_controlRegisterUserAccesMapAST mProperty_mControlRegisterUserAccesMapAST ;
 
-  public : GALGAS_stringset mProperty_mSliceSelectorSet ;
-
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -17735,8 +17641,7 @@ class GALGAS_ast : public AC_GALGAS_root {
                        const GALGAS_driverDeclarationListAST & in_mDriverDeclarationListAST,
                        const GALGAS_driverInstanciationListAST & in_mRequiredDriverListAST,
                        const GALGAS_uint & in_mTypeDeclarationIndex,
-                       const GALGAS_controlRegisterUserAccesMapAST & in_mControlRegisterUserAccesMapAST,
-                       const GALGAS_stringset & in_mSliceSelectorSet) ;
+                       const GALGAS_controlRegisterUserAccesMapAST & in_mControlRegisterUserAccesMapAST) ;
 
 //-- Start of generic part --*
 
@@ -17759,8 +17664,7 @@ class GALGAS_ast : public AC_GALGAS_root {
                                                     const class GALGAS_driverDeclarationListAST & inOperand7,
                                                     const class GALGAS_driverInstanciationListAST & inOperand8,
                                                     const class GALGAS_uint & inOperand9,
-                                                    const class GALGAS_controlRegisterUserAccesMapAST & inOperand10,
-                                                    const class GALGAS_stringset & inOperand11
+                                                    const class GALGAS_controlRegisterUserAccesMapAST & inOperand10
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -17790,8 +17694,6 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_driverInstanciationListAST getter_mRequiredDriverListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_requiredFunctionDeclarationListAST getter_mRequiredFunctionListAST (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mSliceSelectorSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mTargetListAST (LOCATION_ARGS) const ;
 

@@ -134,17 +134,17 @@ syntax extension omnibus_syntax {
     end
     $:$
     $integer$ ?let bitSize
-    $identifier$ ?let sliceKey
-    if sliceKey.string != "slice" then
-      error sliceKey : "this identifier should be 'slice'"
-    end
-    $:$
-    select
-      $no$
-    or
-      $"string"$ ?let sliceString
-      ioAST.mDeclarationListAST += !@sliceDeclarationAST.new {!sliceString !typeName}
-    end
+#    $identifier$ ?let sliceKey
+#    if sliceKey.string != "slice" then
+#      error sliceKey : "this identifier should be 'slice'"
+#    end
+#    $:$
+#    select
+#      $no$
+#    or
+#      $"string"$ ?let sliceString
+#      ioAST.mDeclarationListAST += !@sliceDeclarationAST.new {!sliceString !typeName}
+#    end
     $}$
     ioAST.mDeclarationListAST += !@llvmGenericType.new {
       !typeName

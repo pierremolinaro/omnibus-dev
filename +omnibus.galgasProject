@@ -183,6 +183,6 @@ project (1:0:0) -> "omnibus" {
   "galgas-sources/llvm-generic-type.galgas"
   "galgas-sources/assignment-operator-definition.galgas"
   "galgas-sources/llvm-instructions.galgas"
-  "galgas-sources/slice-declaration.galgas"
+#  "galgas-sources/slice-declaration.galgas"
 }
 

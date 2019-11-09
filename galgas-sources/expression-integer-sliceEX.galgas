@@ -32,6 +32,7 @@ syntax extension omnibus_syntax {
       $!selector:$ ?let sliceWidth
       <expression> !?ioAST ?let expression
       integerFieldValues += !sliceWidth !expression !.here
+      ioAST.mSliceSelectorSet += !sliceWidth.string
     while
     end
     if [integerFieldValues length] < 2 then
@@ -114,22 +115,7 @@ override method @integerSliceExpressionAST analyzeExpression
       @bigint accumulatedFieldStaticValues = 0G
       @operandIRList operandList = {}
       for (sliceWidthStr expression expressionLocation) in mSliceValues do
-        @uint sliceWidth
-        @lstring expressionTypeName
-        if sliceWidthStr.string == "" then
-          error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
-        elsif sliceWidthStr.string == "b" then
-          sliceWidth = 1
-          expressionTypeName = .new {!boolTypeName () !mTypeName.location}
-        elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
-          error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
-        else
-          sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-          expressionTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
-          if sliceWidth == 0 then
-            error sliceWidthStr : "the bit slice width should be > 0"
-          end
-        end
+        [inContext.mSliceTypeMap searchKey !sliceWidthStr ?let targetType ?let sliceWidth]
         if leftShiftAmount >= sliceWidth then
           leftShiftAmount = leftShiftAmount - sliceWidth
         else
@@ -138,11 +124,10 @@ override method @integerSliceExpressionAST analyzeExpression
           leftShiftAmount = 0
         end
       #--- Analyze expression
-        let expressionTargetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !expressionTypeName} type]
         [expression analyzeExpression
           !self:inSelfType
-          !routineAttributes:inRoutineAttributes
-          !optionalTargetType:expressionTargetType
+          !routineAttributes: inRoutineAttributes
+          !optionalTargetType: targetType
           !context:inContext
           !mode:inMode
           !?temporary:ioTemporaries
@@ -152,86 +137,34 @@ override method @integerSliceExpressionAST analyzeExpression
           !?instructionListIR:ioInstructionGenerationList
           ?result:@objectIR expressionResult
         ]
-        [!?ioInstructionGenerationList appendLoadWhenReference
+        [!?ioTemporaries newTempLLVMVar ?let targetReference_llvmName]
+        ioAllocaList += !targetReference_llvmName !targetType !false
+      #--- Source 
+        [!?ioInstructionGenerationList appendAssignmentIR
           !?ioTemporaries
-          !?expressionResult
-        ]  
-      #--- Check expression type
-        switch [expressionResult type].kind
-        case staticArrayType (* *) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case dynamicArrayType (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case opaque (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case enumeration (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case structure (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case syncTool :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case boolean :
-          if [[expressionResult type] omnibusTypeDescriptionName] != [expressionTargetType omnibusTypeDescriptionName] then
-            error expressionLocation :
-            "an $" + [expressionTargetType omnibusTypeDescriptionName] + " expression is required, found an $" +
-            [[expressionResult type] omnibusTypeDescriptionName] + " expression"
-          end
-          if [expressionResult isLiteralInteger] then
-            [expressionResult literalInteger ?1* ?value:let @bigint value]
-            accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
-          else
-          #--- Perform an bit extend to register type or a trunc
-            getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
-            [!?ioInstructionGenerationList appendBoolToUInt !extendedResult !expressionResult]
-          #--- Perform left shift
-            getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
-            [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
-          #---- Accumulate 
-            operandList += !shiftedResult
-          end
-        case void :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case literalString :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case function (3*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case generic (3*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case llvmType (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case compileTimeBool :
-          error expressionLocation: "an unsigned integer expression is required here"
-        case compileTimeInteger :
-          [expressionResult literalInteger ?1* ?value:let @bigint value]
-          if value < 0G then
-            error expressionLocation: "this integer expression should be positive"
-          elsif value < (1G << sliceWidth) then
-            accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
-          else
-            error expressionLocation: "expression too large (should be < " + (1G << sliceWidth) + ")"
-          end
-        case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
-          if not unsigned then
-            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
-          elsif expressionBitCount != sliceWidth then
-            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
-          else
-          #--- Perform an bit extend to result type
-            getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
-            [!?ioInstructionGenerationList appendExtend !extendedResult !expressionResult]
-          #--- Perform left shift
-            getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
-            [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
-          #---- Accumulate 
-            operandList += !shiftedResult
-          end
-        end
+          !inContext.mAssignmentOperatorMap
+          !?ioAllocaList
+          !targetType
+          !targetReference_llvmName
+          !expressionResult
+          !sliceWidthStr.location
+        ]
+        var resultRef = @objectIR.reference {!type: targetType !llvmName: targetReference_llvmName}
+        [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?resultRef]
+      #--- Perform an bit extend to result type
+        getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
+        [!?ioInstructionGenerationList appendExtend !extendedResult !resultRef]
+      #--- Perform left shift
+        getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
+        [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
+      #---- Accumulate 
+        operandList += !shiftedResult
       end
       if leftShiftAmount != 0 then
         error mLocation : [bitCount string] + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
       end
     #------------------------------------------------------ Result
-      outResult = .literalInteger {!type: resultType!value:accumulatedFieldStaticValues}
+      outResult = .literalInteger {!type: resultType !value: accumulatedFieldStaticValues}
       for (operand) in operandList do
         getNewTempValue (!resultType !?ioTemporaries ?let newResult)
         [!?ioInstructionGenerationList appendBinaryOperation
@@ -244,7 +177,7 @@ override method @integerSliceExpressionAST analyzeExpression
         ] 
         outResult = newResult
       end
-      end
+    end
   end
 }
 

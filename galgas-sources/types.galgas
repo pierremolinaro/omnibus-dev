@@ -205,7 +205,7 @@ func %once boolType -> @omnibusType {
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-    !attributes:.equatable | .copyable
+    !attributes:.equatable | .copyable | .instanciable
     !omnibusTypeDescriptionName: boolTypeName ()
     !kind: .boolean
     !llvmBaseTypeName: "i1"

@@ -27,7 +27,7 @@ abstract method @prefixOperatorUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @prefixOperatorMap generateInfixOperatorCode
+method @prefixOperatorMap generatePrefixOperatorCode
   ?let @objectIR inReceiverOperand
   ?let @prefixOperator inPrefixOperator
   ?let @location inOperatorLocation

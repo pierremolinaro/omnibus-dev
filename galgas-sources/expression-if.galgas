@@ -110,10 +110,7 @@ override method @ifExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR ifExpressionResult 
   ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
-    !?ifExpressionResult
-  ]  
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?ifExpressionResult]  
 #--- Check "if" expression type is boolean
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !ifExpressionResult

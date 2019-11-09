@@ -2255,21 +2255,21 @@ void callExtensionMethod_generateCode (const class cPtr_prefixOperatorUsage * in
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                           Extension method '@prefixOperatorMap generateInfixOperatorCode'                           *
+//                          Extension method '@prefixOperatorMap generatePrefixOperatorCode'                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void extensionMethod_generateInfixOperatorCode (const class GALGAS_prefixOperatorMap inObject,
-                                                const class GALGAS_objectIR constin_inReceiverOperand,
-                                                const class GALGAS_prefixOperator constin_inPrefixOperator,
-                                                const class GALGAS_location constin_inOperatorLocation,
-                                                const class GALGAS_bool constin_inSafeMode,
-                                                const class GALGAS_bool constin_inDoNotGeneratePanicCode,
-                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                class GALGAS_objectIR & out_outResultValue,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_generatePrefixOperatorCode (const class GALGAS_prefixOperatorMap inObject,
+                                                 const class GALGAS_objectIR constin_inReceiverOperand,
+                                                 const class GALGAS_prefixOperator constin_inPrefixOperator,
+                                                 const class GALGAS_location constin_inOperatorLocation,
+                                                 const class GALGAS_bool constin_inSafeMode,
+                                                 const class GALGAS_bool constin_inDoNotGeneratePanicCode,
+                                                 class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                 class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                 class GALGAS_objectIR & out_outResultValue,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

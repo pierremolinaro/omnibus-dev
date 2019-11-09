@@ -1228,8 +1228,6 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public : virtual int32_t select_omnibus_5F_syntax_141 (C_Lexique_omnibus_5F_lexique *) ;
 
   public : virtual int32_t select_omnibus_5F_syntax_142 (C_Lexique_omnibus_5F_lexique *) ;
-
-  public : virtual int32_t select_omnibus_5F_syntax_143 (C_Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

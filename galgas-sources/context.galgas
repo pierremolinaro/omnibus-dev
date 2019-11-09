@@ -54,7 +54,6 @@ struct @semanticContext {
   @assignmentOperatorMap mAssignmentOperatorMap
   
   @implicitConversionToBooleanMap mImplicitConversionToBooleanMap
-  @sliceTypeMap mSliceTypeMap
 
 #--- Tasks
   @taskMap mTaskMap

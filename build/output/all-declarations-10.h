@@ -495,9 +495,8 @@ class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_str
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_appendUnsignedOperatorsTo (class GALGAS_uint inArgument0,
-                                        const class GALGAS_string constinArgument1,
-                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument2,
+void routine_appendUnsignedOperatorsTo (const class GALGAS_string constinArgument0,
+                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
@@ -802,71 +801,4 @@ void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgumen
                                                   class GALGAS_semanticContext & ioArgument1,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'copyableAttribute'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'minValueForInteger'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'maxValueForInteger'                                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Routine 'enter_integer_integer_operators'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_enter_5F_integer_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
-                                                       const class GALGAS_bool constinArgument1,
-                                                       class GALGAS_semanticContext & ioArgument2,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Routine 'enter_integer_literal_operators'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_enter_5F_integer_5F_literal_5F_operators (const class GALGAS_lstring constinArgument0,
-                                                       const class GALGAS_bool constinArgument1,
-                                                       class GALGAS_semanticContext & ioArgument2,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Routine 'enter_literal_integer_operators'                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
-                                                       const class GALGAS_bool constinArgument1,
-                                                       class GALGAS_semanticContext & ioArgument2,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
 

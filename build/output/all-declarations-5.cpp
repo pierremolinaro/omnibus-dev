@@ -14227,9 +14227,9 @@ void extensionMethod_buildFormalGenericConstantMap (const GALGAS_genericFormalPa
                                                     C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_genericFormalParameterList temp_0 = inObject ;
-  cEnumerator_genericFormalParameterList enumerator_6589 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6589.hasCurrentObject ()) {
-    switch (enumerator_6589.current_mParameter (HERE).enumValue ()) {
+  cEnumerator_genericFormalParameterList enumerator_6600 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6600.hasCurrentObject ()) {
+    switch (enumerator_6600.current_mParameter (HERE).enumValue ()) {
     case GALGAS_genericFormalParameter::kNotBuilt:
       break ;
     case GALGAS_genericFormalParameter::kEnum_type:
@@ -14238,15 +14238,15 @@ void extensionMethod_buildFormalGenericConstantMap (const GALGAS_genericFormalPa
       break ;
     case GALGAS_genericFormalParameter::kEnum_constant:
       {
-        const cEnumAssociatedValues_genericFormalParameter_constant * extractPtr_6707 = (const cEnumAssociatedValues_genericFormalParameter_constant *) (enumerator_6589.current_mParameter (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_constantName = extractPtr_6707->mAssociatedValue0 ;
+        const cEnumAssociatedValues_genericFormalParameter_constant * extractPtr_6718 = (const cEnumAssociatedValues_genericFormalParameter_constant *) (enumerator_6600.current_mParameter (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_constantName = extractPtr_6718->mAssociatedValue0 ;
         {
         ioArgument_ioMap.setter_insertKey (extractedValue_constantName, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 187)) ;
         }
       }
       break ;
     }
-    enumerator_6589.gotoNextObject () ;
+    enumerator_6600.gotoNextObject () ;
   }
 }
 
@@ -14262,9 +14262,9 @@ void extensionMethod_checkCompileTimeExpression (const GALGAS_llvmStringDefiniti
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_llvmStringDefinition temp_0 = inObject ;
-  cEnumerator_llvmStringDefinition enumerator_6951 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6951.hasCurrentObject ()) {
-    switch (enumerator_6951.current_mElement (HERE).enumValue ()) {
+  cEnumerator_llvmStringDefinition enumerator_6962 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6962.hasCurrentObject ()) {
+    switch (enumerator_6962.current_mElement (HERE).enumValue ()) {
     case GALGAS_llvmStringDefinitionElement::kNotBuilt:
       break ;
     case GALGAS_llvmStringDefinitionElement::kEnum_string:
@@ -14273,13 +14273,13 @@ void extensionMethod_checkCompileTimeExpression (const GALGAS_llvmStringDefiniti
       break ;
     case GALGAS_llvmStringDefinitionElement::kEnum_variable:
       {
-        const cEnumAssociatedValues_llvmStringDefinitionElement_variable * extractPtr_7053 = (const cEnumAssociatedValues_llvmStringDefinitionElement_variable *) (enumerator_6951.current_mElement (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_7053->mAssociatedValue0 ;
+        const cEnumAssociatedValues_llvmStringDefinitionElement_variable * extractPtr_7064 = (const cEnumAssociatedValues_llvmStringDefinitionElement_variable *) (enumerator_6962.current_mElement (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_7064->mAssociatedValue0 ;
         constinArgument_inMap.method_searchKey (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 199)) ;
       }
       break ;
     }
-    enumerator_6951.gotoNextObject () ;
+    enumerator_6962.gotoNextObject () ;
   }
 }
 

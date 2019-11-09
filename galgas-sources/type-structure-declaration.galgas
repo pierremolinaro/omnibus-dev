@@ -322,93 +322,6 @@ sortedlist @sortedOperandIRList {
 
 #·······················································································································
 
-override method @structureDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
-  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
-{
-#---------------------------------------- Properties
-  @propertyList propertyList = {}
-  @propertyGetterMap propertyGetterMap = {}
-  @propertySetterMap propertySetterMap = {}
-  @sortedOperandIRList sortedOperandIRList = {}
-  @constructorSignature constructorSignature = {}
-  @string constructorKey = "("
-  var canBeCopied = true
-  for property in mStructurePropertyListAST do
-    [property enterPropertyInContext
-      !?context:ioContext
-      !?staticEntityMap:ioStaticEntityMap
-      !receiverTypeName:mReceiverTypeName
-      !receiverLLVMBaseTypeName: mLLVMBaseTypeName
-      !?ioDecoratedRoutineList
-      !?propertyList
-      !?propertyGetterMap
-      !?propertySetterMap
-      !?sortedOperandIRList
-      !?constructorSignature
-      !?constructorKey
-      !?canBeCopied
-    ]
-  end
-  constructorKey += ")"
-#---------------------------------------- Constructor map
-  @constructorMap constructorMap = {}
-  [!?constructorMap insertKey
-    !.new {!constructorKey !mReceiverTypeName.location}
-    !constructorSignature
-    !.structure {!sortedOperandList:sortedOperandIRList}
-  ]
-#---------------------------------------- Attribute instanciable, copyable
-  var typeAttributes = @omnibusTypeAttributes.instanciable
-#---------------------------------------- Check structure is copyable
-  for (s) in mAttributeListAST do
-    if s.string == copyableAttribute () then
-      if [typeAttributes copyable] then
-        error s : "duplicated attribute"
-      elsif not canBeCopied then
-        error mReceiverTypeName : "this structure cannot be copied, one field is not copyable"
-      end
-    else
-      error s : "only @copyable attribute is allowed here"
-    end
-  end
-  if mGenerateAssignmentRoutine & canBeCopied then
-    typeAttributes = typeAttributes | .copyable
-  end
-#---------------------------------------- Enter in type map
-  let structureType = @omnibusType.new {
-    !propertyGetterMap: propertyGetterMap
-    !propertySetterMap: propertySetterMap
-    !classConstantMap:{}
-    !constructorMap:constructorMap
-    !subscript:.noSubscript
-    !attributes:typeAttributes
-    !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
-    !kind:.structure {!propertyList:propertyList}
-    !llvmBaseTypeName:mLLVMBaseTypeName
-  }
-  [!?ioContext.mTypeMap insertType
-    !lkey:mReceiverTypeName
-    !type:structureType
-  ]
-#--- Enter assignment operator
-  let key = assignmentOperatorKey (!structureType !.nowhere !structureType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
-#-------------------------------------------- GenerateLLVM type definition
-  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
-    ![structureType llvmTypeName]
-    !propertyList
-  }
-}
-
-#·······················································································································
-
 method @structurePropertyListAST-element enterPropertyInContext
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -620,6 +533,103 @@ method @structurePropertyListAST-element enterPropertyInContext
   end
 }
 
+#·······················································································································
+
+override method @structureDeclarationAST enterInContext
+  ?!context:@semanticContext ioContext
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
+  ?!@routineListIR ioRoutineListIR
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+  ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
+{
+#---------------------------------------- Properties
+  @propertyList propertyList = {}
+  @propertyGetterMap propertyGetterMap = {}
+  @propertySetterMap propertySetterMap = {}
+  @sortedOperandIRList sortedOperandIRList = {}
+  @constructorSignature constructorSignature = {}
+  @string constructorKey = "("
+  var canBeCopied = true
+  for property in mStructurePropertyListAST do
+    [property enterPropertyInContext
+      !?context:ioContext
+      !?staticEntityMap:ioStaticEntityMap
+      !receiverTypeName:mReceiverTypeName
+      !receiverLLVMBaseTypeName: mLLVMBaseTypeName
+      !?ioDecoratedRoutineList
+      !?propertyList
+      !?propertyGetterMap
+      !?propertySetterMap
+      !?sortedOperandIRList
+      !?constructorSignature
+      !?constructorKey
+      !?canBeCopied
+    ]
+  end
+  constructorKey += ")"
+#---------------------------------------- Constructor map
+  @constructorMap constructorMap = {}
+  [!?constructorMap insertKey
+    !.new {!constructorKey !mReceiverTypeName.location}
+    !constructorSignature
+    !.structure {!sortedOperandList:sortedOperandIRList}
+  ]
+#---------------------------------------- Attribute instanciable, copyable
+  var typeAttributes = @omnibusTypeAttributes.instanciable
+#---------------------------------------- Check structure is copyable
+  for (s) in mAttributeListAST do
+    if s.string == copyableAttribute () then
+      if [typeAttributes copyable] then
+        error s : "duplicated attribute"
+      elsif not canBeCopied then
+        error mReceiverTypeName : "this structure cannot be copied, one field is not copyable"
+      end
+    else
+      error s : "only @copyable attribute is allowed here"
+    end
+  end
+  if mGenerateAssignmentRoutine & canBeCopied then
+    typeAttributes = typeAttributes | .copyable
+  end
+#---------------------------------------- Enter in type map
+  let structureType = @omnibusType.new {
+    !propertyGetterMap: propertyGetterMap
+    !propertySetterMap: propertySetterMap
+    !classConstantMap:{}
+    !constructorMap:constructorMap
+    !subscript:.noSubscript
+    !attributes:typeAttributes
+    !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
+    !kind:.structure {!propertyList:propertyList}
+    !llvmBaseTypeName:mLLVMBaseTypeName
+  }
+  [!?ioContext.mTypeMap insertType
+    !lkey:mReceiverTypeName
+    !type:structureType
+  ]
+#-------------------------------------------- GenerateLLVM type definition
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+    ![structureType llvmTypeName]
+    !propertyList
+  }
+#----------------- Assignment
+#--- Enter assignment function from references
+  let assignmentFunctionLLVMName = assignmentOperatorFuncName (!structureType !structureType)
+  ioRoutineListIR += !@structureTypeAssignFunctionIR.new {
+    ![assignmentFunctionLLVMName nowhere]
+    !isRequired: false
+    !warnsIfUnused: false
+    !structureType
+  }
+#--- Enter assignment operator
+  let key = assignmentOperatorKey (!structureType !.nowhere !structureType)
+  let operatorUsage = @structureAssignmentOperatorUsage.new {!structureType}
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! USER LLVM TYPE DEFINITION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -641,92 +651,154 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: ASSIGNMENT
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @structureTypeAssignFunctionIR : @abstractRoutineIR {
-#  @omnibusType mStructureType
-#}
+class @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+  @omnibusType mStructureType
+#  @string mAssignValueToElements_functionName
+}
 
 #·······················································································································
 
-#override method @structureTypeAssignFunctionIR llvmCodeGeneration 
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  let arcAssignmentList = [mStructureType arcList !{}]
-#  let structureTypeLLVMTypeName = [mStructureType llvmTypeName]
-#  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
-#  ioLLVMcode += " (" + structureTypeLLVMTypeName + " * %inTarget, "
-#  ioLLVMcode += structureTypeLLVMTypeName + "* %inSource) nounwind optsize {\n"
-#  ioLLVMcode += ";--- Handle ARC properties\n"
-#  for (propertyName propertyType indexPath) in arcAssignmentList do
-#    let propertyTypeLLVMName = [propertyType llvmTypeName]
-#    let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-#    ioGenerationAdds.mUniqueIndex ++
-#    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inSource, i32 0"
-#    for (idx) in indexPath do
-#      ioLLVMcode += ", i32 " + idx
-#    end
-#    ioLLVMcode += " ; " + propertyName + "\n"
-#    let llvmLoadedVarName = llvmVarName + ".loaded"
-#    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-#    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
-#  end
-#  for (propertyName propertyType indexPath) in arcAssignmentList do
-#    let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-#    ioGenerationAdds.mUniqueIndex ++
-#    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inTarget, i32 0"
-#    for (idx) in indexPath do
-#      ioLLVMcode += ", i32 " + idx
-#    end
-#    ioLLVMcode += " ; " + propertyName + "\n"
-#    let propertyTypeLLVMName = [propertyType llvmTypeName]
-#    let llvmLoadedVarName = llvmVarName + ".loaded"
-#    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-#    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
-#  end
-#  ioLLVMcode += ";--- Compute type size\n"
-#  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* null, i32 1\n"
-#  ioLLVMcode += "  %byteCount = ptrtoint " + structureTypeLLVMTypeName + "* %sizeAsPtr to i32\n"
-#  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
-#  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
-#  ioLLVMcode += ";--- Copy\n"
-#  ioLLVMcode += "loadStore:\n"
-#  ioLLVMcode += "  %v = load " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inSource\n" 
-#  ioLLVMcode += "  store " + structureTypeLLVMTypeName + " %v, " + structureTypeLLVMTypeName + "* %inTarget\n" 
-#  ioLLVMcode += "  br label %copy.end\n"
-#  ioLLVMcode += "copyBytesOrCopyWords:\n"
-#  ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
-#  ioLLVMcode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
-#  ioLLVMcode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
-#  ioLLVMcode += "testTarget:\n"
-#  ioLLVMcode += "  %targetAsUnsigned = ptrtoint " + structureTypeLLVMTypeName + "* %inTarget to i32\n"
-#  ioLLVMcode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
-#  ioLLVMcode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
-#  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
-#  ioLLVMcode += "testSource:\n"
-#  ioLLVMcode += "  %sourceAsUnsigned = ptrtoint " + structureTypeLLVMTypeName + "* %inSource to i32\n"
-#  ioLLVMcode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
-#  ioLLVMcode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
-#  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
-#  ioLLVMcode += "copyWords:\n"
-#  ioLLVMcode += "  %target32 = bitcast " + structureTypeLLVMTypeName + "* %inTarget to i32*\n"
-#  ioLLVMcode += "  %source32 = bitcast " + structureTypeLLVMTypeName + "* %inSource to i32*\n"
-#  ioLLVMcode += "  %temp = add i32 %byteCount, 3\n"
-#  ioLLVMcode += "  %wordCount = udiv i32 %temp, 4\n"
-#  ioLLVMcode += "  br label %copyWords.loop\n"
-#  ioLLVMcode += "copyWords.loop:\n"
-#  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
-#  ioLLVMcode += "  br label %copy.end\n"
-#  ioLLVMcode += "copyBytes:\n"
-#  ioLLVMcode += "  %target8 = bitcast " + structureTypeLLVMTypeName + "* %inTarget to i8*\n"
-#  ioLLVMcode += "  %source8 = bitcast " + structureTypeLLVMTypeName + "* %inSource to i8*\n"
-#  ioLLVMcode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
-#  ioLLVMcode += "  br label %copy.end\n"
-#  ioLLVMcode += "copy.end:\n"
-#  ioLLVMcode += "  ret void\n"
-#  ioLLVMcode += "}\n\n"
-#}
+override method @structureAssignmentOperatorUsage generateCode
+    ?!@semanticTemporariesStruct ioTemporaries
+    ?!@instructionListIR ioInstructionListIR
+    ?!@allocaList unused ioAllocaList
+    ?let @omnibusType inTargetType
+    ?let @string inTargetLLVMName
+    ?let @objectIR inSourcePossibleReference
+    ?let @location inErrorLocation
+{
+  let structTypeName = [inTargetType llvmTypeName]
+  switch inSourcePossibleReference
+  case llvmArrayRepeatedDynamicValue (3*) :
+    error inErrorLocation : "invalid structure assignment «llvmArrayRepeatedDynamicValue»"
+  case llvmArrayDynamicValues (2*) :
+    error inErrorLocation : "invalid structure assignment «llvmArrayDynamicValues»"
+  case llvmArrayStaticValues (3*) :
+    error inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»"
+  case llvmArrayRepeatedStaticValue (3* @uint idx) :
+    let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
+    let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
+        + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
+          + ", " + [inTargetType llvmTypeName] + "* @gconst." + idx + ")"
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!assignmentFunctionLLVMName}]
+  case reference (2*) :
+    let assignmentFunctionLLVMName = assignmentOperatorFuncName (!inTargetType !inTargetType)
+    let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
+        + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
+          + ", " + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!assignmentFunctionLLVMName}]
+  case llvmStructureValue (* sortedOperandValues) :
+    let uniqueValue = ioTemporaries.mTemporaryIndex
+    ioTemporaries.mTemporaryIndex ++
+    for (operand idx) in sortedOperandValues do
+      let ptr = "%ptr." + uniqueValue + "." + idx
+      var s = ptr + " = getelementptr " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
+      s = "store " + [operand llvmTypeName] + " " + [operand llvmName] + ", " + [operand llvmTypeName] + "* " + ptr
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]    
+    end
+  case literalInteger (2*) :
+    error inErrorLocation : "invalid structure assignment «literalInteger»"
+  case literalString (2*) :
+    error inErrorLocation : "invalid structure assignment «literalString»"
+  case llvmValue (2*) :
+    error inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»"
+  case null (*) :
+    error inErrorLocation : "invalid structure assignment «llvmValue»"
+  case void:
+    error inErrorLocation : "invalid structure assignment «void»"
+  case zero (*) :
+    error inErrorLocation : "invalid structure assignment «zero»"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @structureTypeAssignFunctionIR : @abstractRoutineIR {
+  @omnibusType mStructureType
+}
+
+#·······················································································································
+
+override method @structureTypeAssignFunctionIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let arcAssignmentList = [mStructureType arcList !{}]
+  let structureTypeLLVMTypeName = [mStructureType llvmTypeName]
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + structureTypeLLVMTypeName + " * %inTarget, "
+  ioLLVMcode += structureTypeLLVMTypeName + "* %inSource) nounwind optsize {\n"
+  ioLLVMcode += ";--- Handle ARC properties\n"
+  for (propertyName propertyType indexPath) in arcAssignmentList do
+    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inSource, i32 0"
+    for (idx) in indexPath do
+      ioLLVMcode += ", i32 " + idx
+    end
+    ioLLVMcode += " ; " + propertyName + "\n"
+    let llvmLoadedVarName = llvmVarName + ".loaded"
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+  end
+  for (propertyName propertyType indexPath) in arcAssignmentList do
+    let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inTarget, i32 0"
+    for (idx) in indexPath do
+      ioLLVMcode += ", i32 " + idx
+    end
+    ioLLVMcode += " ; " + propertyName + "\n"
+    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let llvmLoadedVarName = llvmVarName + ".loaded"
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
+    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+  end
+  ioLLVMcode += ";--- Compute type size\n"
+  ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* null, i32 1\n"
+  ioLLVMcode += "  %byteCount = ptrtoint " + structureTypeLLVMTypeName + "* %sizeAsPtr to i32\n"
+  ioLLVMcode += "  %useLoadStore = icmp ule i32 %byteCount, 12\n"
+  ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
+  ioLLVMcode += ";--- Copy\n"
+  ioLLVMcode += "loadStore:\n"
+  ioLLVMcode += "  %v = load " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inSource\n" 
+  ioLLVMcode += "  store " + structureTypeLLVMTypeName + " %v, " + structureTypeLLVMTypeName + "* %inTarget\n" 
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copyBytesOrCopyWords:\n"
+  ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"
+  ioLLVMcode += "  %byteCountIsMutipleOf4 = icmp eq i32 %byteCountAnd3, 0\n"
+  ioLLVMcode += "  br i1 %byteCountIsMutipleOf4, label %testTarget, label %copyBytes\n"
+  ioLLVMcode += "testTarget:\n"
+  ioLLVMcode += "  %targetAsUnsigned = ptrtoint " + structureTypeLLVMTypeName + "* %inTarget to i32\n"
+  ioLLVMcode += "  %targetAsUnsignedAnd3 = and i32 %targetAsUnsigned, 3\n"
+  ioLLVMcode += "  %targetAsUnsignedIsMutipleOf4 = icmp eq i32%targetAsUnsignedAnd3, 0\n"
+  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %testSource, label %copyBytes\n"
+  ioLLVMcode += "testSource:\n"
+  ioLLVMcode += "  %sourceAsUnsigned = ptrtoint " + structureTypeLLVMTypeName + "* %inSource to i32\n"
+  ioLLVMcode += "  %sourceAsUnsignedAnd3 = and i32 %sourceAsUnsigned, 3\n"
+  ioLLVMcode += "  %sourceAsUnsignedIsMutipleOf4 = icmp eq i32 %sourceAsUnsignedAnd3, 0\n"
+  ioLLVMcode += "  br i1 %targetAsUnsignedIsMutipleOf4, label %copyWords, label %copyBytes\n"
+  ioLLVMcode += "copyWords:\n"
+  ioLLVMcode += "  %target32 = bitcast " + structureTypeLLVMTypeName + "* %inTarget to i32*\n"
+  ioLLVMcode += "  %source32 = bitcast " + structureTypeLLVMTypeName + "* %inSource to i32*\n"
+  ioLLVMcode += "  %temp = add i32 %byteCount, 3\n"
+  ioLLVMcode += "  %wordCount = udiv i32 %temp, 4\n"
+  ioLLVMcode += "  br label %copyWords.loop\n"
+  ioLLVMcode += "copyWords.loop:\n"
+  ioLLVMcode += "  call void @copy.word.array (i32* %target32, i32* %source32, i32 %wordCount)\n"
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copyBytes:\n"
+  ioLLVMcode += "  %target8 = bitcast " + structureTypeLLVMTypeName + "* %inTarget to i8*\n"
+  ioLLVMcode += "  %source8 = bitcast " + structureTypeLLVMTypeName + "* %inSource to i8*\n"
+  ioLLVMcode += "  call void @copy.byte.array (i8* %target8, i8* %source8, i32 %byteCount)\n"
+  ioLLVMcode += "  br label %copy.end\n"
+  ioLLVMcode += "copy.end:\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

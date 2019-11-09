@@ -39,7 +39,6 @@ syntax extension omnibus_syntax {
     @sliceAssignmentListAST sliceAssignmentListAST = {}
     repeat
       $?selector:$ ?let sliceWidth
-      ioAST.mSliceSelectorSet += !sliceWidth.string
       @sliceTargetAST sliceKind
       select
         $_$

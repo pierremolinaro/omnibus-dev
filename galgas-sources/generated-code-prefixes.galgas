@@ -43,7 +43,7 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
-  result = "assign." + [inTargetType omnibusTypeDescriptionName] + ".ref.from." + [inSourceType omnibusTypeDescriptionName] + ".ref"
+  result = "assign." + [inTargetType llvmBaseTypeName] + ".ref.from." + [inSourceType llvmBaseTypeName] + ".ref"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

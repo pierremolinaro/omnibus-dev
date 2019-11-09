@@ -155,7 +155,7 @@ override method @boolEqualOperator generateCode
   var leftOperand = inLeftOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   var rightOperand = inRightOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   let s = [outResultValue llvmName] + " = icmp eq i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]

@@ -55,7 +55,7 @@ syntax extension omnibus_syntax {
       $not$
       outOperator = .notOp
     or
-      $-$
+      $-%$
       outOperator = .minusOp
     end
   }
