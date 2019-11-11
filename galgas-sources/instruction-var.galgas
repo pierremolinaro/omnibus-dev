@@ -160,6 +160,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !llvmNameForLocalVariable (!omnibusLocalVariableName)
     !sourcePossibleReference
     !mVarName
+    !initializedTarget: false
   ]
 }
 

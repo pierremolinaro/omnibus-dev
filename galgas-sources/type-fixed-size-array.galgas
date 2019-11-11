@@ -221,6 +221,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
+    ?initializedTarget: let @bool unused inTargetIsInitialized
 {
   let arrayTypeName = [inTargetType llvmTypeName]
   let elementTypeName = [mElementType llvmTypeName]

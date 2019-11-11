@@ -39,14 +39,6 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Assignment operator
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
-  result = "assign." + [inTargetType llvmBaseTypeName] + ".ref.from." + [inSourceType llvmBaseTypeName] + ".ref"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Infix operators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

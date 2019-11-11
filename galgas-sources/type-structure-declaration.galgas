@@ -654,7 +654,6 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
 
 class @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   @omnibusType mStructureType
-#  @string mAssignValueToElements_functionName
 }
 
 #·······················································································································
@@ -667,8 +666,24 @@ override method @structureAssignmentOperatorUsage generateCode
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
+    ?initializedTarget: let @bool inTargetIsInitialized
 {
   let structTypeName = [inTargetType llvmTypeName]
+  let arcAssignmentList = [inTargetType arcList !{}]
+  if not inTargetIsInitialized then
+   for (propertyName propertyType indexPath) in arcAssignmentList do 
+      let llvmPropertyPtrName = "%arc.init." + [inErrorLocation locationIndex]
+      var s = "  " + llvmPropertyPtrName + " = getelementptr inbounds " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0"
+      for (idx) in indexPath do
+        s += ", i32 " + idx
+      end
+      s += " ; " + propertyName + "\n"
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
+      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      s = "store " + propertyTypeLLVMName + " null, " + propertyTypeLLVMName + "* " + llvmPropertyPtrName 
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
+    end
+  end
   switch inSourcePossibleReference
   case llvmArrayRepeatedDynamicValue (3*) :
     error inErrorLocation : "invalid structure assignment «llvmArrayRepeatedDynamicValue»"

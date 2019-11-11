@@ -43,7 +43,7 @@ override method @boolTypeAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
+  ?!@routineListIR ioRoutineListIR
   ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
   ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
@@ -86,6 +86,14 @@ override method @boolTypeAST enterInContext
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
   key = assignmentOperatorKey (!boolType !.nowhere !ctBoolType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+#--- Copy from reference is used by dynamic arraies  
+  let functionName = assignmentOperatorFuncName (!boolType !boolType)
+  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR.new {
+    ![functionName nowhere]
+    !isRequired: false
+    !warnsIfUnused: false
+    !boolType
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -129,7 +137,7 @@ override method @boolNotOperator generateCode
   var receiverOperand = inReceiverOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?receiverOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = xor i1 " + [receiverOperand llvmName] + ", 1"
+  let s = [outResultValue llvmName] + " = xor i1 1, " + [receiverOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 

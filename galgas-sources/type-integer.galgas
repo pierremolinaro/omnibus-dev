@@ -229,6 +229,14 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
   key = assignmentOperatorKey (!integerType !.nowhere !compileTimeIntegerType ())
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+#--- Copy from reference is used by dynamic arraies  
+  let functionName = assignmentOperatorFuncName (!integerType !integerType)
+  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR.new {
+    ![functionName nowhere]
+    !isRequired: false
+    !warnsIfUnused: false
+    !integerType
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

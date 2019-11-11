@@ -5958,6 +5958,7 @@ typedef void (*extensionMethodSignature_abstractAssignmentOperatorUsage_generate
                                                                                        const class GALGAS_string constinArgument4,
                                                                                        const class GALGAS_objectIR constinArgument5,
                                                                                        const class GALGAS_location constinArgument6,
+                                                                                       const class GALGAS_bool constinArgument7,
                                                                                        class C_Compiler * inCompiler
                                                                                        COMMA_LOCATION_ARGS) ;
 
@@ -5976,6 +5977,7 @@ void callExtensionMethod_generateCode (const class cPtr_abstractAssignmentOperat
                                        const GALGAS_string constin_inTargetLLVMName,
                                        const GALGAS_objectIR constin_inSourcePossibleReference,
                                        const GALGAS_location constin_inErrorLocation,
+                                       const GALGAS_bool constin_inTargetIsInitialized,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
@@ -5993,6 +5995,7 @@ void extensionSetter_appendAssignmentIR (class GALGAS_instructionListIR & ioObje
                                          const class GALGAS_string constin_inTargetLLVMName,
                                          const class GALGAS_objectIR constin_inSourcePossibleReference,
                                          const class GALGAS_location constin_inErrorLocation,
+                                         const class GALGAS_bool constin_inTargetIsInitialized,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 

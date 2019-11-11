@@ -11,7 +11,7 @@
 LLVM_VERSION = "9.0.0"
 LLVM_SUFFIX = ""
 
-BINUTILS_VERSION = "2.32"
+BINUTILS_VERSION = "2.33.1"
 
 LIBUSB_VERSION   = "1.0.23"
 
@@ -19,7 +19,7 @@ OPENOCD_VERSION = "0.10.0"
 
 XZ_VERSION = "5.2.4"
 
-CMAKE_VERSION = "3.15.3" # "3.11.4" # "3.9.0"
+CMAKE_VERSION = "3.15.5" # "3.11.4" # "3.9.0"
 
 #--------------------------------------- Target
 TARGET = "arm-eabi"
@@ -41,7 +41,7 @@ import platform
 
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 ARCHIVE_DIR = os.path.abspath (scriptDir + "/+archives-for-cross-compilation")
-UTILITY_DIR = os.path.abspath (scriptDir + "/+utilities")
+UTILITY_DIR = os.path.abspath (scriptDir + "/utilities")
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   processorCount
@@ -115,7 +115,10 @@ def myDeleteDir (dir):
 def runCommand (cmd, environnement=None) :
   str = "+"
   for s in cmd:
-    str += " " + s
+    if " " in s :
+      str += " '" + s + "'"
+    else:
+      str += " " + s
   print bcolors.BOLD_BLUE + str + bcolors.ENDC
   childProcess = subprocess.Popen (cmd, env=environnement)
   childProcess.wait ()

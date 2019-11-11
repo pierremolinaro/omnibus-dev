@@ -7,15 +7,6 @@ import "carte-tp-teensy-3-6.omnibus-import"
 
 driver myDriver > digital {
 
-  //····················································································································
-  //--- LED_L0 is port #3: PTA12
-  //    PORTA_PCR12 is configured to generate an interrupt on falling edge
-  // So: when LED_L0 is swichted off, LED_L1 toggles
-  //--- Port #12 is PTC7
-  //    PORTC_PCR7 is configured to generate an interrupt on falling edge
-  // So: when push button P4 is pressed, LED_L4 toggles
-  //····················································································································
-
   startup {
     digital.set (!mode:.output !toPort:LED_L0)
   }
@@ -185,7 +176,7 @@ task T8 @stacksize 512 @autostart {
 
 task T9 @stacksize 512 @autostart {
   event sémaphore8.wait () {
-    sémaphore10.signal ()
+    sémaphore9.signal ()
   }
 }
 
@@ -271,7 +262,7 @@ task T19 @stacksize 512 @autostart {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T20 @stacksize 512 {
+task T20 @stacksize 512 @autostart {
   event sémaphore19.wait () {
     sémaphore20.signal ()
   }
@@ -295,7 +286,7 @@ task T22 @stacksize 512 @autostart {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-task T23 @stacksize 512 {
+task T23 @stacksize 512 @autostart {
   event sémaphore22.wait () {
     sémaphore23.signal ()
   }
@@ -620,7 +611,7 @@ task T63 @stacksize 512 @autostart {
     let duration = myDriver.getDuration ()
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:duration)
-    digital.toggle (!port:LED_L0)
+    digital.toggle (!port: LED_L0)
   }
 }
 

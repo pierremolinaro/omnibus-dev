@@ -95,6 +95,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !lvalueIR.llvmName
     !sourceOperandPossibleReference
     !mInstructionLocation
+    !initializedTarget: true
   ]
 #--- Append pending computed property store (in reverse order)
   for > (instructionList) in pendingStoreComputedPropertyInstructionGenerationList do

@@ -20,12 +20,12 @@ sync $SynchronizationGate {
 
   public service open @noUnusedWarning @mutating () {
     if not self.isOpen {
+      self.isOpen = yes
       var continue = yes
       while continue {
         makeTaskReady (!?fromList:self.taskList ?found:continue)
       }
-      notifyChange (!?forGuard:self.guardList)
-      self.isOpen = yes
+      notifyChange (!?forGuard: self.guardList)
     }
   }
 
@@ -71,7 +71,7 @@ task Tâche1 @stacksize 512 @autostart {
     gate.open ()
     s1.wait ()
     s1.wait ()
-    gate.open ()
+    gate.close ()
     s2.signal ()
     s2.signal ()
   }

@@ -14320,6 +14320,7 @@ void callExtensionMethod_generateCode (const cPtr_abstractAssignmentOperatorUsag
                                        const GALGAS_string constin_inTargetLLVMName,
                                        const GALGAS_objectIR constin_inSourcePossibleReference,
                                        const GALGAS_location constin_inErrorLocation,
+                                       const GALGAS_bool constin_inTargetIsInitialized,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
@@ -14345,7 +14346,7 @@ void callExtensionMethod_generateCode (const cPtr_abstractAssignmentOperatorUsag
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
     }else{
-      f (inObject, io_ioTemporaries, io_ioInstructionListIR, io_ioAllocaList, constin_inTargetType, constin_inTargetLLVMName, constin_inSourcePossibleReference, constin_inErrorLocation, inCompiler COMMA_THERE) ;
+      f (inObject, io_ioTemporaries, io_ioInstructionListIR, io_ioAllocaList, constin_inTargetType, constin_inTargetLLVMName, constin_inSourcePossibleReference, constin_inErrorLocation, constin_inTargetIsInitialized, inCompiler COMMA_THERE) ;
     }
   }
 }
@@ -14364,14 +14365,15 @@ void extensionSetter_appendAssignmentIR (GALGAS_instructionListIR & ioObject,
                                          const GALGAS_string constinArgument_inTargetLLVMName,
                                          const GALGAS_objectIR constinArgument_inSourcePossibleReference,
                                          const GALGAS_location constinArgument_inErrorLocation,
+                                         const GALGAS_bool constinArgument_inTargetIsInitialized,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring var_key_15364 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 343)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 343)) ;
-  GALGAS_abstractAssignmentOperatorUsage var_operatorUsage_15695 ;
-  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15364, var_operatorUsage_15695, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
-  GALGAS_instructionListIR var_instructions_15732 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 349)) ;
-  callExtensionMethod_generateCode ((const cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15695.ptr (), ioArgument_ioTemporaries, var_instructions_15732, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 350)) ;
-  ioObject.plusAssign_operation(var_instructions_15732, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 359)) ;
+  GALGAS_lstring var_key_15652 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
+  GALGAS_abstractAssignmentOperatorUsage var_operatorUsage_15804 ;
+  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15652, var_operatorUsage_15804, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
+  GALGAS_instructionListIR var_instructions_15839 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 347)) ;
+  callExtensionMethod_generateCode ((const cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15804.ptr (), ioArgument_ioTemporaries, var_instructions_15839, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
+  ioObject.plusAssign_operation(var_instructions_15839, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
 }
 
 

@@ -158,6 +158,25 @@ override getter @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorS
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Assignment operator
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
+  result = "assign." + [inTargetType llvmBaseTypeName] + ".ref.from." + [inSourceType llvmBaseTypeName] + ".ref"
+}
+
+#·······················································································································
+
+func assignmentOperatorKey ?let @omnibusType inTargetType
+                           ?let @location inErrorLocation
+                           ?let @omnibusType inSourceType -> @lstring {
+  result = @lstring.new {
+    ![inTargetType omnibusTypeDescriptionName] + " = " + [inSourceType omnibusTypeDescriptionName]
+    !inErrorLocation
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -174,6 +193,7 @@ abstract method @abstractAssignmentOperatorUsage generateCode
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
+    ?initializedTarget: let @bool inTargetIsInitialized
 
 #·······················································································································
 
@@ -181,17 +201,6 @@ map @assignmentOperatorMap {
   @abstractAssignmentOperatorUsage mOperatorUsage
   insert insertKey error message "the '%K' assignment is already declared in %L"
   search searchKey error message "there is no '%K' assignment"
-}
-
-#·······················································································································
-
-func assignmentOperatorKey ?let @omnibusType inTargetType
-                           ?let @location inErrorLocation
-                           ?let @omnibusType inSourceType -> @lstring {
-  result = @lstring.new {
-    ![inTargetType omnibusTypeDescriptionName] + " = " + [inSourceType omnibusTypeDescriptionName]
-    !inErrorLocation
-  }
 }
 
 #·······················································································································
@@ -294,6 +303,7 @@ override method @llvmAssignmentOperatorUsage generateCode
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location unused inErrorLocation
+    ?initializedTarget: let @bool unused inTargetIsInitialized
 {
   if ([mTargetGenericFormalParameterList length] == 0)
     && ([mSourceGenericFormalParameterList length] == 0)
@@ -330,34 +340,22 @@ setter @instructionListIR appendAssignmentIR
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location inErrorLocation
+    ?initializedTarget: let @bool inTargetIsInitialized
 {
-#  if not [inSourcePossibleReference isReference] then
-#    let result = checkAssignmentCompatibility (
-#      !source:inSourcePossibleReference # loadedResultValue
-#      !targetAnnotationType:inTargetType
-#      !errorLocation:inErrorLocation
-#      !staticTypeAllowed:false
-#    )
-#   [!?self appendStoreToUniversalReference !inTargetLLVMName !inTargetType !result]
-#  else
-    let key = assignmentOperatorKey (!inTargetType !inErrorLocation ![inSourcePossibleReference type])
-#    let key = @lstring.new {
-#     !inTargetType.omnibusTypeDescriptionName + " = " + [inSourcePossibleReference type].omnibusTypeDescriptionName
-#     !inErrorLocation
-#    }
-    [inAssignmentOperatorMap searchKey !key ?let operatorUsage]
-    @instructionListIR instructions = {}
-    [operatorUsage generateCode
-      !?ioTemporaries
-      !?instructions
-      !?ioAllocaList
-      !inTargetType
-      !inTargetLLVMName
-      !inSourcePossibleReference
-      !inErrorLocation
-    ]
-    self += instructions
-#  end
+  let key = assignmentOperatorKey (!inTargetType !inErrorLocation ![inSourcePossibleReference type])
+  [inAssignmentOperatorMap searchKey !key ?let operatorUsage]
+  @instructionListIR instructions = {}
+  [operatorUsage generateCode
+    !?ioTemporaries
+    !?instructions
+    !?ioAllocaList
+    !inTargetType
+    !inTargetLLVMName
+    !inSourcePossibleReference
+    !inErrorLocation
+    !initializedTarget: inTargetIsInitialized
+  ]
+  self += instructions
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -391,6 +389,31 @@ override method @assignmentRoutineIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+class @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
+  @omnibusType mTargetType
+}
+
+#·······················································································································
+
+override method @simpleAssignmentCopyRoutineIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let typeName = [mTargetType llvmTypeName]
+  let targetVarName = "%targetPtr"
+  let sourceVarName = "%sourcePtr"
+  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + typeName + "* " + targetVarName
+             + ", " + typeName + "* " + sourceVarName + ") nounwind {\n"
+  ioLLVMcode += "  %value = load " + typeName + ", " + typeName + "* " + sourceVarName + "\n"
+  ioLLVMcode += "  store " + typeName + " %value, " + typeName + "* " + targetVarName + "\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 class @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 }
 
@@ -404,6 +427,7 @@ override method @simpleCopyAssignmentOperatorUsage generateCode
     ?let @string inTargetLLVMName
     ?let @objectIR inSourcePossibleReference
     ?let @location unused inErrorLocation
+    ?initializedTarget: let @bool unused inTargetIsInitialized
 {
 #--- If source is a reference, load value
   @objectIR sourceValue = inSourcePossibleReference

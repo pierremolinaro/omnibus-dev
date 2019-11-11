@@ -190,17 +190,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
          warning endOfExpression : "guarded expression is a compile time value"
       case llvmVariable (*) :
       end
-
-
-#      if [sourceOperand omnibusTypeDescriptionName] != boolTypeName () then
-#        error endOfExpression : "guarded expression should be boolean"
-#      elsif [sourceOperand isStatic] then
-#        warning endOfExpression : "guarded expression is static"
-#      end
-#      [!?guardInstructionGenerationList appendLoadWhenReference
-#        !?ioTemporaries
-#        !?sourceOperand
-#      ]
       guardedCommandIRList += !.booleanGuard {
         !isExitCommand:isContinue
         !instructionGenerationList:guardInstructionGenerationList
@@ -514,7 +503,7 @@ override method @syncInstructionIR llvmInstructionCode
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let acceptedLabelName = startLabel + "." + idx + ".true"
       let rejectedLabelName = startLabel + "." + idx + ".false"
-      ioLLVMcode += "  br i1 " + boolGuardBoolLLVMName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + " ; C\n\n"
+      ioLLVMcode += "  br i1 " + boolGuardBoolLLVMName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += acceptedLabelName + ":\n"
       ioLLVMcode += "  call void @accept.guard ()\n"
       ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
@@ -525,7 +514,7 @@ override method @syncInstructionIR llvmInstructionCode
       [expInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
       let testExitLabelName = startLabel + "." + idx + ".test.exit"
-      ioLLVMcode += "  br i1 " + boolGuardLLVMName + ", label %" + testOkLabelName + ", label %" + testExitLabelName + " ; B\n\n"
+      ioLLVMcode += "  br i1 " + boolGuardLLVMName + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
       ioLLVMcode += testOkLabelName + ":\n"
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
@@ -570,7 +559,7 @@ override method @syncInstructionIR llvmInstructionCode
     end
     let acceptedLabelName = startLabel + ".accepted." + idx
     let rejectedLabelName = startLabel + ".rejected." + idx
-    ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + " ; A\n\n"
+    ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
     ioLLVMcode += acceptedLabelName + ":\n"
     [branch.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  br label %" + if isWhileGuardedCommand then startLabelName else exitLabelName end + "\n\n"

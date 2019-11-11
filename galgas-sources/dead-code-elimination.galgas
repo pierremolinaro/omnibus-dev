@@ -23,7 +23,6 @@ proc codeOptimization
  ?let @string inSourceFile
  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  @uint maxBranchOfOnInstructions = 0
   @routineAccessibilityIR routineAccessibilityIR = {}
 #----------------------------------------------- Compute accessiblity graph
   @stringset exploreRoutineSet = {}
@@ -31,7 +30,7 @@ proc codeOptimization
   @stringset definedRoutineSet = {}
   for routine in ioIntermediateCodeStruct.mRoutineListIR do
     @stringset accessibleRoutineSet = {}
-    [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?maxBranchOfOnInstructions]
+    [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
     allRoutineSet += accessibleRoutineSet
     definedRoutineSet += !routine.mRoutine.mRoutineMangledName
