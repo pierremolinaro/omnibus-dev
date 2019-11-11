@@ -1,0 +1,211 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapterLabel{Compilation LLVM}{chapitreCompilationLLVM}
+
+Ce chapitre contient différentes notes sur la compilation en LLVM des sources OMNIBUS. Sa lecture n'est pas nécessaire pour comprendre l'utilisation de OMNIBUS.
+
+
+Le point le plus délicat est l'analyse sémantique et la génération de code des constructions implicant \omnibus=self=, l'accès aux propriétés, aux éléments de tableaux, à l'appel de fonction. Ces constructions sont :
+\begin{itemize}
+  \item l'expression primaire (qui peut apparaître par exemple en partie droite de l'instruction d'affectation) ;
+  \item la cible d'affection (partie gauche de l'instruction d'affectation) ;
+  \item l'instruction d'appel de procédure (c'est-à-dire l'appel d'une fonction qui ne retourne aucune valeur).
+\end{itemize}
+
+\section{Diagrammes syntaxiques}
+
+\tikzset{
+  nonterminal/.style={
+    % The shape:
+    rectangle,
+    % The size:
+    minimum size=6mm,
+    % The border:
+    very thick,
+    draw=red!50!black!50,         % 50% red and 50% black,
+                                  % and that mixed with 50% white
+    % The filling:
+    top color=white,              % a shading that is white at the top...
+    bottom color=red!50!black!20, % and something else at the bottom
+    % Font
+    font=\itshape,
+    text height=1.5ex,
+    text depth=.25ex
+  },
+  terminal/.style={
+    % The shape:
+    rounded rectangle,
+    minimum size=6mm,
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily,
+    text height=1.5ex,
+    text depth=.25ex
+  },
+  point/.style={coordinate, >=stealth', thick, draw=black!50},
+  tip/.style={->, shorten >=0.007pt,every join/.style={rounded corners}},
+  hv path/.style={to path={-| (\tikztotarget)}},
+  vh path/.style={to path={|- (\tikztotarget)}},
+%  skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}}
+}
+
+\subsection{Expression primaire}
+
+\begin{tikzpicture}
+  \matrix[column sep=4mm, row sep=1mm] {
+  % rows:
+    & & & & & & & & \node (loopleft) [point] {}; & \node (startloopup2) [point] {}; & & \\
+    & & & & & & & & & & & \node (startloopup) [point] {}; & \\
+    & & & & & & & & \node (parouv) [terminal] {(}; & \node (args) [nonterminal] {arguments}; & \node (parfer) [terminal] {)};  & \\
+    & & & & & & & & \node (croouv) [terminal] {\verb+[+}; & \node (exparray) [nonterminal] {expression}; & \node (crofer) [terminal] {\verb+]+};  & \\
+    & & \node (self) [terminal] {self}; & \node (selfdot) [terminal] {.}; & & & & &  \node (propdot) [terminal] {.}; & \node (prop) [terminal] {idf};  & \\
+    \node (pstart) [point] {}; & \node (selfstart) [point] {}; & & & \node (selfend) [point] {}; & \node (idf) [terminal] {idf}; & \node (optionloop) [point] {};  & \node (optionstart) [point] {}; & & & & & \node (pend) [point] {};\\
+  };
+
+  { [start chain]
+    \chainin (pstart);
+    \chainin (selfstart)     [join];
+    { [start branch=selfstart]
+      \chainin (self)  [join=by {vh path,tip}];
+      \chainin (selfdot)  [join=by tip];
+      \chainin (selfend)  [join=by {hv path,tip}];
+    }
+    \chainin (selfend)     [join];
+    \chainin (idf)         [join=by tip];
+    \chainin (optionloop) [join];
+    \chainin (optionstart)  [join];
+    { [start branch=optionstart]
+      \chainin (propdot)  [join=by {vh path,tip}];
+      \chainin (prop)     [join=by tip];
+      \chainin (startloopup)  [join=by {hv path,tip}];
+    }
+    \chainin (pend)        [join=by tip];
+  }
+  { [start chain]
+    \chainin (startloopup) ;
+    \chainin (startloopup2) [join=by {vh path}];
+    \chainin (loopleft)     [join] ;
+    \chainin (optionloop) [join=by {hv path}];
+  }
+  { [start chain]
+    \chainin (optionstart) ;
+    \chainin (croouv)     [join=by {vh path, tip}];
+    \chainin (exparray)   [join=by tip] ;
+    \chainin (crofer)     [join=by tip];
+      \chainin (startloopup) [join=by {hv path}];
+  }
+  { [start chain]
+    \chainin (optionstart) ;
+    \chainin (parouv)  [join=by {vh path, tip}];
+    \chainin (args)   [join=by tip] ;
+    \chainin (parfer)     [join=by tip];
+    \chainin (startloopup) [join=by {hv path}];
+  }
+\end{tikzpicture}
+
+Le préfixe \omnibus=self.= est obligatoire pour accéder à une propriété ou fonction locale.
+
+\subsection{Cible d'affectation}
+
+\begin{tikzpicture}
+  \matrix[column sep=4mm, row sep=1mm] {
+  % rows:
+    & & & & & & & & \node (loopleft) [point] {}; & \node (startloopup2) [point] {}; & & \\
+    & & & & & & & & & & & \node (startloopup) [point] {}; & \\
+    & & & & & & & & \node (croouv) [terminal] {\verb+[+}; & \node (exparray) [nonterminal] {expression}; & \node (crofer) [terminal] {\verb+]+};  & \\
+    & & \node (self) [terminal] {self}; & \node (selfdot) [terminal] {.}; & & & & &  \node (propdot) [terminal] {.}; & \node (prop) [terminal] {idf};  & \\
+    \node (pstart) [point] {}; & \node (selfstart) [point] {}; & & & \node (selfend) [point] {}; & \node (idf) [terminal] {idf}; & \node (optionloop) [point] {};  & \node (optionstart) [point] {}; & & & & & \node (pend) [point] {};\\
+  };
+
+  { [start chain]
+    \chainin (pstart);
+    \chainin (selfstart)     [join];
+    { [start branch=selfstart]
+      \chainin (self)  [join=by {vh path,tip}];
+      \chainin (selfdot)  [join=by tip];
+      \chainin (selfend)  [join=by {hv path,tip}];
+    }
+    \chainin (selfend)     [join];
+    \chainin (idf)         [join=by tip];
+    \chainin (optionloop) [join];
+    \chainin (optionstart)  [join];
+    { [start branch=optionstart]
+      \chainin (propdot)  [join=by {vh path,tip}];
+      \chainin (prop)     [join=by tip];
+      \chainin (startloopup)  [join=by {hv path,tip}];
+    }
+    \chainin (pend)        [join=by tip];
+  }
+  { [start chain]
+    \chainin (startloopup) ;
+    \chainin (startloopup2) [join=by {vh path}];
+    \chainin (loopleft)     [join] ;
+    \chainin (optionloop) [join=by {hv path}];
+  }
+  { [start chain]
+    \chainin (optionstart) ;
+    \chainin (croouv)     [join=by {vh path, tip}];
+    \chainin (exparray)   [join=by tip] ;
+    \chainin (crofer)     [join=by tip];
+      \chainin (startloopup) [join=by {hv path}];
+  }
+\end{tikzpicture}
+
+
+
+\subsection{Appel de procédure}
+
+\begin{tikzpicture}
+  \matrix[column sep=4mm, row sep=1mm] {
+  % rows:
+    & & & & & & & & \node (loopleft) [point] {}; & \node (startloopup2) [point] {}; & & \\
+    & & & & & & & & & & & \node (startloopup) [point] {}; & \\
+    & & & & & & & & \node (croouv) [terminal] {\verb+[+}; & \node (exparray) [nonterminal] {expression}; & \node (crofer) [terminal] {\verb+]+};  & \\
+    & & \node (self) [terminal] {self}; & \node (selfdot) [terminal] {.}; & & & & &  \node (propdot) [terminal] {.}; & \node (prop) [terminal] {idf};  & \\
+    \node (pstart) [point] {}; & \node (selfstart) [point] {}; & & & \node (selfend) [point] {}; & \node (idf) [terminal] {idf}; & \node (optionloop) [point] {};  & \node (optionstart) [point] {}; & \node (parouv) [terminal] {(}; & \node (args) [nonterminal] {arguments}; & \node (parfer) [terminal] {)}; & \node (pend) [point] {};\\
+  };
+
+  { [start chain]
+    \chainin (pstart);
+    \chainin (selfstart)     [join];
+    { [start branch=selfstart]
+      \chainin (self)  [join=by {vh path,tip}];
+      \chainin (selfdot)  [join=by tip];
+      \chainin (selfend)  [join=by {hv path,tip}];
+    }
+    \chainin (selfend)     [join];
+    \chainin (idf)         [join=by tip];
+    \chainin (optionloop) [join];
+    \chainin (optionstart)  [join];
+    { [start branch=optionstart]
+      \chainin (propdot)  [join=by {vh path,tip}];
+      \chainin (prop)     [join=by tip];
+      \chainin (startloopup)  [join=by {hv path,tip}];
+    }
+    \chainin (parouv)      [join=by tip];
+    \chainin (args)        [join=by tip];
+    \chainin (parfer)      [join=by tip];
+    \chainin (pend)        [join=by tip];
+  }
+  { [start chain]
+    \chainin (startloopup) ;
+    \chainin (startloopup2) [join=by {vh path}];
+    \chainin (loopleft)     [join] ;
+    \chainin (optionloop) [join=by {hv path}];
+  }
+  { [start chain]
+    \chainin (optionstart) ;
+    \chainin (croouv)      [join=by {vh path, tip}];
+    \chainin (exparray)    [join=by tip] ;
+    \chainin (crofer)      [join=by tip];
+    \chainin (startloopup) [join=by {hv path}];
+  }
+\end{tikzpicture}
+
+

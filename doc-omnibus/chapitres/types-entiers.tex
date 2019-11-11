@@ -1,0 +1,362 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapterLabel{Les types entiers}{chapitreTypesEntiers}
+
+Sont définis implicitement les types entiers signés et non signés d'une taille variant entre $1$ bit et $32768$ bits, et sont notés :
+\begin{itemize}
+  \item \omnibus!UInt1! à \omnibus!UInt32768! pour les types entiers non signés de $1$ à $32768$ bits~;
+  \item \omnibus!Int1! à \omnibus!Int32768! pour les types entiers signés de $1$ à $32768$ bits.
+\end{itemize}
+
+OMNIBUS définit aussi le type \omnibus!LiteralInt!, qui est le type de toute constante entière littérale. Mais ce type est aussi applicable à des constantes entières \emph{statiques}, c'est-à-dire dont la valeur est calculée à la compilation. Ce type est décrit au \refChapterPage{chapitreTypeEntierStatique}.
+
+\section{Constante littérale entière}
+
+Le langage accepte des constantes littérales entières d'une taille quelconque. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
+
+\begin{OMNIBUS}
+var v Int8 = 128  // Erreur de compilation : 128 non
+                   // représentable par un entier signé 8 bits
+var v Int8 = -128 // Ok
+\end{OMNIBUS}
+
+Une constante littérale entière a pour type \omnibus!LiteralInt!, or ce type n'est pas acceptable pour une variable. Par exemple, si on écrit :
+\begin{OMNIBUS}
+var v = 28 // Erreur, le type LiteralInt n'est pas valide pour une variable
+\end{OMNIBUS}
+
+Dans ce cas, il faut que la déclaration contienne l'annotation de type :
+\begin{OMNIBUS}
+var v Int32 = 28 // Ok
+\end{OMNIBUS}
+
+
+
+
+\section{Conversion entre objets de type entier}
+
+Il y a trois types de conversion entre objets de type entier :
+\begin{itemize}
+  \item les conversions toujours possibles \omnibus+extend Type (exp)+ (\refSubsectionPage{conversionsToujoursPossibles})~;
+  \item les conversions pouvant échouer \omnibus+convert Type (exp)+ (\refSubsectionPage{conversionsPouvantEchouer})~;
+  \item les troncatures \omnibus+truncate Type (exp)+  (\refSubsectionPage{conversionsTroncature}).
+\end{itemize}
+
+
+\subsectionLabel{Conversions toujours possibles : \texttt{extend}}{conversionsToujoursPossibles}
+
+Les conversions qui sont toujours possibles sont exprimées par le mot réservé \omnibus=extend=. Par exemple :
+\begin{OMNIBUS}
+let v UInt8 = ...
+let x UInt9 = extend UInt9 (v)
+let y Int9 =  extend Int9 (v)
+let z Int10 = extend Int10 (y)
+\end{OMNIBUS}
+
+D'une manière générale :
+\begin{itemize}
+\item un entier non signé peut être étendu en un entier non signé de taille strictement supérieure~;
+\item un entier non signé peut être étendu en un entier signé de taille strictement supérieure~;
+\item un entier signé peut être étendu en un entier signé de taille strictement supérieure.
+\end{itemize}
+
+Par contre, une conversion pouvant provoquer un débordement est rejetée à la compilation :
+\begin{OMNIBUS}
+let s Int8 = ...
+let x UInt16 = x // Erreur de compilation
+\end{OMNIBUS}
+
+L'annotation de type après le mot-clé \omnibus=extend= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
+\begin{OMNIBUS}
+let x Int9 =  ...
+let y Int10 = extend (x) // Le type Int10 est inféré du contexte
+let z = extend (x) // Invalide : aucun type ne peut être inféré.
+\end{OMNIBUS}
+
+
+\subsectionLabel{Conversions pouvant échouer : \texttt{convert}}{conversionsPouvantEchouer}
+
+Les conversions pouvant échouer sont exprimées par le mot réservé \omnibus=convert=. Par exemple :
+
+\begin{OMNIBUS}
+let s Int8 = ...
+let x UInt16 = convert UInt16 (s)
+\end{OMNIBUS}
+
+L'opérateur \omnibus+convert+ engendre un code qui vérifie à l'exécution que l'expression source (ici \omnibus+x+) peut être convertie dans le type cible (ici \omnibus+UInt16+) sans débordement. En cas de débordement détecté à l'exécution, la panique dont le code est donné dans le \refTableauPage{tableauCodePanique} est déclenchée. L'opérateur \omnibus+convert+ est donc interdit dans les constructions où la panique ne peut être déclenchée : il faut alors utiliser l'opérateur \omnibus=truncate=.
+
+L'annotation de type après le mot-clé \omnibus=convert= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
+\begin{OMNIBUS}
+let s Int8 = ...
+let x UInt16 = convert (s) // Le type UInt16 est inféré du contexte
+let y = convert (s) // Invalide : aucun type ne peut être inféré
+\end{OMNIBUS}
+
+L'opérateur \omnibus+convert+ ne peut pas apparaître dans une expression statique.
+
+De plus, une erreur de compilation est déclenchée si l'opérateur \omnibus+convert+ est utilisé alors que la conversion est toujours possible :
+\begin{OMNIBUS}
+let v UInt8 = ...
+let y = convert Int16 (v) // Erreur, conversion toujours possible
+\end{OMNIBUS}
+
+\subsectionLabel{Troncatures : \texttt{truncate}}{conversionsTroncature}
+
+L'opérateur \omnibus+truncate+ permet de spécifier une conversion explicite silencieuse, qui ne déclenche aucune panique. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{truncate} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
+
+\begin{OMNIBUS}
+let s Int8 = -10
+let x UInt16 = truncate UInt16 (x)
+\end{OMNIBUS}
+
+L'annotation de type après le mot-clé \omnibus=truncate= est optionnel~: par défaut, le type est inféré par le contexte. Par exemple, on peut écrire~:
+\begin{OMNIBUS}
+let s Int8 = -10
+let x UInt16 = truncate (s) // Le type UInt16 est inféré du contexte
+let y = truncate (s) // Invalide : aucun type ne peut être inféré
+\end{OMNIBUS}
+
+
+L'opérateur \omnibus+truncate+ ne peut pas apparaître dans une expression statique.
+
+De plus, une erreur de compilation est déclenchée si l'opérateur \omnibus+truncate+ est utilisé alors qu'une conversion implicite est possible :
+\begin{OMNIBUS}
+let v UInt8 = ...
+let y = truncate Int16 (v) // Erreur, conversion toujours possible
+\end{OMNIBUS}
+
+\section{Opérateurs infixes de comparaison}
+
+Les valeurs entières sont comparables, les six opérateurs \omnibus+==+, \omnibus+≠+, \omnibus+≥+, \omnibus+>+, \omnibus+≤+ et \omnibus+<+ sont acceptés.
+
+La comparaison ne peut s'effectuer qu'entre objets du même type entier, ou entre un objet de type entier et une constante littérale entière.
+
+
+
+
+
+
+
+
+
+\sectionLabel{Opérateurs infixes arithmétiques}{operateursInfixArithmétiques}
+
+
+Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateursInfixesArithmetiques} avec leur signification. Ils ne peuvent opérer qu'entre objets du même type entier, ou entre un objet de type entier et une constante littérale entière.
+
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{lllll}
+  \textbf{Opérateur} & \textbf{Signification} \\
+  \omnibus=+= & Addition avec détection de débordement\\
+  \omnibus=-= & Soustraction avec détection de débordement\\
+  \omnibus=*= & Multiplication avec détection de débordement\\
+  \omnibus=/= & Division avec détection de débordement\\
+  \omnibus=%= & Modulo avec détection de division par zéro\\
+  \omnibus=+%= & Addition sans détection de débordement\\
+  \omnibus=-%= & Soustraction sans détection de débordement\\
+  \omnibus=*%= & Multiplication sans détection de débordement\\
+  \omnibus=!/= & Division sans détection de débordement\\
+  \omnibus=!%= & Modulo sans détection de division par zéro\\
+\end{tabular}
+\caption{Opérateurs infixes arithmétiques}
+\labelTableau{operateursInfixesArithmetiques}
+\ligne
+\end{table}
+
+
+
+
+\section{Opérateurs préfixés de négation arithmétique}
+
+\subsectionLabel{Opérateur \texttt{-}}{negationOvf}
+
+L'opérateur préfixé \omnibus=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\omnibus+-128+ pour \omnibus+Int8+, \omnibus+-32768+ pour \omnibus+Int16+, ...) entraîne un débordement arithmétique qui déclenche une panique dont le code est donné dans le \refTableau{tableauCodePanique}.
+
+
+\subsectionLabel{Opérateur \texttt{-\%}}{negationNoOvf}
+
+L'opérateur préfixé \omnibus=-%= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\omnibus+-128+ pour \omnibus+Int8+, \omnibus+-32768+ pour \omnibus+Int16+, ...) retourne cette même valeur. Cet opérateur ne déclenche jamais de panique.
+
+
+
+
+\sectionLabel{Opérateurs infixes bit-à-bit}{operateurBitABitEntier}
+\index{"\&!Entier}
+\index{\textbar!Entier}
+\index{\^!Entier}
+
+Les opérateurs infixes bit-à-bit acceptent les types entiers non signés (\refTableau{operateursInfixesBitABit}).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllll}
+  \textbf{Opérateur} & \textbf{Signification} \\
+  \omnibus=|= & \emph{ou} bit-à-bit\\
+  \omnibus=&= & \emph{et} bit-à-bit\\
+  \omnibus=^= & \emph{ou exclusif} bit-à-bit\\
+\end{tabular}
+\caption{Opérateurs infixes bit-à-bit sur les entiers non signés}
+\labelTableau{operateursInfixesBitABit}
+\ligne
+\end{table}
+
+
+
+
+
+\section{Opérateur préfixé bit-à-bit}
+
+L'opérateur préfixé \omnibus=~= retourne la complémentation bit-à-bit d'une valeur entière non signée.
+
+
+
+
+\section{Opérateurs infixes de décalage}
+
+Les opérateurs infixes \omnibus=<<= et \omnibus=>>= réalisent respectivement le décalage à gauche et à droite de l'opérande de gauche. L'amplitude du décalage est spécifiée par la valeur de l'opérande droite (\refTableau{operateursInfixesDecalage}). \omnibus=a= est une expression entière signée ou non signée, et l'expression renvoie une valeur de même type que \omnibus=a=. L'expression \omnibus=b= est une expression entière non signée.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllll}
+  \textbf{Expression} & \textbf{Signification} \\
+  \omnibus=a << b= & Décalage à gauche de \omnibus=a= d'une amplitude de \omnibus=b= bits\\
+  \omnibus=a >> b= & Décalage à droite de \omnibus=a= d'une amplitude de \omnibus=b= bits\\
+\end{tabular}
+\caption{Opérateurs infixes de décalage sur les entiers}
+\labelTableau{operateursInfixesDecalage}
+\ligne
+\end{table}
+
+
+
+
+
+
+
+
+\sectionLabel{Opérateurs combinées avec une affectation}{operateursCombinesAffectationEntier}
+\index{\&=!Entier}
+\index{\textbar=!Entier}
+\index{\^{}=!Entier}
+
+Les opérateurs suivants sont définis pour les entiers.
+
+\omnibus!a &= b! est équivalent à \omnibus!a = a & b!.
+
+\omnibus!a |= b! est équivalent à \omnibus!a = a | b!.
+
+\omnibus!a ^= b! est équivalent à \omnibus!a = a ^ b!.
+
+\omnibus!a += b! est équivalent à \omnibus!a = a + b!.
+
+\omnibus!a +%= b! est équivalent à \omnibus!a = a +% b!.
+
+\omnibus!a -= b! est équivalent à \omnibus!a = a - b!.
+
+\omnibus!a -%= b! est équivalent à \omnibus!a = a -% b!.
+
+\omnibus!a *= b! est équivalent à \omnibus!a = a * b!.
+
+\omnibus!a *%= b! est équivalent à \omnibus!a = a *% b!.
+
+Les opérateurs infixes \omnibus!&=!, \omnibus!|=! et \omnibus!^=! sont décrits à la \refSectionPage{operateurBitABitEntier}.
+
+Les opérateurs infixes \omnibus!+!, \omnibus!+%!, \omnibus!-!, \omnibus!-%!, \omnibus!*! et \omnibus!*%! sont décrits à la \refSectionPage{operateursInfixArithmétiques}.
+
+
+
+
+
+
+
+
+\sectionLabel{Accesseurs}{accesseursEntiers}
+
+
+\subsection{Accesseur \texttt{bitReversed}}
+
+L'accesseur \omnibus=bitReversed= est implémenté pour tout type entier. Pour un entier sur $n$ bits, il retourne une valeur dont le bit d'indice $i$ (avec $0 \leqslant i < n$) a la valeur du bit $n-i-1$ du récepteur. Par exemple~:
+
+\begin{OMNIBUS}
+let x UInt3 = 0x_3
+let y = x.bitReversed () // 0x_6
+let z UInt16 = 0x_1234
+let t = z.bitReversed () // 0x_2C48
+\end{OMNIBUS}
+
+
+
+\subsection{Accesseur \texttt{byteSwapped}}
+
+L'accesseur \omnibus=byteSwapped= est implémenté pour tout type entier dont la taille est un multiple de 16 bits, qu'il soit signé ou non (\omnibus=Int16=, \omnibus=UInt16=, \omnibus=Int32=, \omnibus=UInt32=, \omnibus=Int48=, \omnibus=UInt48=, \omnibus=Int64=, \omnibus=UInt64=, …). Il réalise la conversion \emph{big endian} $\leftrightarrow$ \emph{little endian}. Par exemple~:
+
+\begin{OMNIBUS}
+let x : UInt32 = 0x_1234_5678
+let y = x.byteSwapped () // 0x_8756_3412
+let z UInt48 = 0x_1234_5678_ABCD
+let t = z.byteSwapped () // 0x_CDAB_8756_3412
+\end{OMNIBUS}
+
+
+
+\subsection{Accesseur \texttt{leadingZeroCount}}
+
+L'accesseur \omnibus=leadingZeroCount= est implémenté pour tout type entier. Il retourne le nombre de bits à zéro à partir du bit le plus significatif. Par exemple~:
+
+\begin{OMNIBUS}
+let x : UInt32 = 0x_1234_5678
+let y = x.leadingZeroCount () // 3
+\end{OMNIBUS}
+
+
+
+\subsection{Accesseur \texttt{setBitCount}}
+
+L'accesseur \omnibus=setBitCount= est implémenté pour tout type entier. Il retourne le nombre de bits à un dans la valeur du récepteur. Par exemple~:
+
+\begin{OMNIBUS}
+let x UInt16 = 0x_1234
+let y = x.setBitCount () // 5
+\end{OMNIBUS}
+
+
+
+\subsection{Accesseur \texttt{trainingZeroCount}}
+
+L'accesseur \omnibus=trainingZeroCount= est implémenté pour tout type entier. Il retourne le nombre de bits à zéro à partir du bit le moins significatif. Par exemple~:
+
+\begin{OMNIBUS}
+let x UInt16 = 0x_1234
+let y = x.trainingZeroCount () // 2
+\end{OMNIBUS}
+
+
+
+
+\section{Construction d'un entier non signé par tranches}
+
+Cette expression permet de construire un entier non signé à partir d'entiers non signés ou de booléens. Par exemple~:
+\begin{OMNIBUS}
+let x = {UInt8 !1:1 !1:0 !6:12} // 0x8C
+\end{OMNIBUS}
+
+Dans l'exemple ci-dessus, le bit n°7 est à 1, le bit n°6 à 0, et les 6 bits de poids faibles à 12.
+
+Les tranches sont désignés par des sélecteurs (\omnibus=!1:=, \omnibus=!6:=) qui indiquent le nombre de bits de la tranche. La description commence à partir du bit de poids fort. L'expression qui suit le sélecteur doit être du type entier non signé correspondant~: par exemple, \omnibus=!1:= $\rightarrow$ \omnibus=UInt1=, \omnibus=!6:= $\rightarrow$ \omnibus=UInt6=.
+
+Attention, une tranche \omnibus=!1:= signifie que l'expression doit être un entier non signé sur un bit, et non pas un booléen. Si l'on veut initialiser une tranche de 1 bit à partir d'un booléen, il faut utiliser le sélecteur particulier \omnibus=!b:=. Par exemple~:
+\begin{OMNIBUS}
+let x = {UInt8 !b:yes !1:0 !6:12} // 0x8C
+\end{OMNIBUS}
+
+Si toutes les expressions associées aux sélecteurs sont statiques, alors l'expression de construction d'un entier non signé par tranches est aussi une expression statique~: on peut donc utiliser cette construction pour définir des constantes globales.
+
+
+

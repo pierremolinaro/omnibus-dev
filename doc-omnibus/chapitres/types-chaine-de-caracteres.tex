@@ -1,0 +1,55 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Les types chaîne de caractères}
+
+La prise en charge des chaînes de caractères est très partielle : uniquement le type \omnibus+LiteralString+ est défini.
+
+\section{Constante littérale chaîne de caractères}
+
+Une constante littérale chaîne de caractères est délimitée par des « " ». Comme les sources OMNIBUS sont des textes UTF-8, la constante chaîne de caractères accepte tout caractère UTF-8. Par Exemple : \omnibus+"Hello !"+. % , \omnibus+"// œuf"+.
+
+Une constante littérale chaîne de caractères a pour type \omnibus+LiteralString+.
+
+
+\section{Le type \texttt{LiteralString}}
+
+\subsection{Déclaration d'un objet de type \texttt{LiteralString}}
+
+Le type \omnibus+LiteralString+ représente une référence vers une chaîne statique. La sémantique du langage garantit que cette référence toujours valide\footnote{On peut faire un parallèle avec le langage C, où un pointeur vers une chaîne littérale est du type «~\texttt{const char *}~» ; cependant, en C, ce pointeur peut recevoir la valeur \texttt{NULL}. En OMNIBUS, la sémantique interdit cette situation : une référence est toujours valide.}. Une utilisation typique est la déclaration d'une constante :
+\begin{OMNIBUS}
+let x LiteralString = "Hello !"
+\end{OMNIBUS}
+
+L'annotation de type peut être omise :
+\begin{OMNIBUS}
+let x = "Hello !"
+\end{OMNIBUS}
+
+La chaîne référencée ne peut pas être modifiée, cepandant une référence déclarée par \omnibus!var! peut figurer comme cible d'une affectation :
+\begin{OMNIBUS}
+var x = "Hello !"
+x = "Bonjour !"
+\end{OMNIBUS}
+
+\subsection{Énumération d'une chaîne}
+
+L'instruction \omnibus!for! permet d'énumérer un objet de type \omnibus+LiteralString+ :
+\begin{OMNIBUS}
+for c in x {
+  ...
+}
+\end{OMNIBUS}
+
+\omnibus!c! est une constante locale à l'instruction \omnibus!for!, de type \omnibus!UInt8!. Pour le moment, la seule opération que l'on peut faire à l'intérieur de la boucle est d'afficher \omnibus!c! sous la forme d'un caractère sur l'afficheur LCD :
+\begin{OMNIBUS}
+for c in x {
+  lcd.writeData_inUserMode (!c)
+}
+\end{OMNIBUS}
+
+

@@ -112,19 +112,6 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !?sourceIR
   ]
 #-------------------- Perform assignment
-#  [inContext.mInfixOperatorMap generateInfixOperatorCode
-#    !leftOperand
-#    !mInfixOperator
-#    !mOperatorLocation
-#    !rightOperand
-#    !?ioTemporaries
-#    !?ioAllocaList
-#    !?ioInstructionGenerationList
-#    ?outResult
-#  ]
-
-
-
   let t = [sourceIR type]
   if not [t copyable] then
     error mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"
@@ -137,23 +124,36 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
       getNewTempValue (!registerType !?ioTemporaries ?let registerValueIR)
       [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !registerValueIR !llvmRegAddressName]
     #--- Perform operation
-      let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
-      [operatorMap checkBinaryOperationWith
-        !leftType:[registerValueIR type]
-        !rightType:[sourceIR type]
-        !operatorLocation:operatorLocation
-        ?resultType:let resultType
-        ?op:let @omnibusInfixOperatorDescription binaryOperator
+      let key = infixOperatorMapKey (!registerType !infixOperator !operatorLocation ![sourceIR type])
+      [inContext.mInfixOperatorMap searchKey !key ?let resultType ?let operatorUsage]
+      [operatorUsage generateCode
+         !registerValueIR
+         !operatorLocation
+         !sourceIR
+         !resultType
+         !?ioTemporaries
+         !?ioAllocaList
+         !?ioInstructionGenerationList
+         ?let operationResult
       ]
-      [binaryOperator generateInfixOperatorCode
-        !?ioTemporaries
-        !?ioInstructionGenerationList
-        !registerValueIR
-        !operatorLocation
-        !sourceIR
-        !resultType
-        ?let operationResult
-      ]
+      
+#      let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
+#      [operatorMap checkBinaryOperationWith
+#        !leftType:[registerValueIR type]
+#        !rightType:[sourceIR type]
+#        !operatorLocation:operatorLocation
+#        ?resultType:let resultType
+#        ?op:let @omnibusInfixOperatorDescription binaryOperator
+#      ]
+#      [binaryOperator generateInfixOperatorCode
+#        !?ioTemporaries
+#        !?ioInstructionGenerationList
+#        !registerValueIR
+#        !operatorLocation
+#        !sourceIR
+#        !resultType
+#        ?let operationResult
+#      ]
     #--- Store register
       [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !operationResult]
     end

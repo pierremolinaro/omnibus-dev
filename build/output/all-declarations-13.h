@@ -135,3 +135,25 @@ class GALGAS_string function_memoryAllocSectionName (class C_Compiler * inCompil
 class GALGAS_string function_memoryFreeSectionName (class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Routine 'codeOptimization'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_codeOptimization (const class GALGAS_string constinArgument0,
+                               class GALGAS_intermediateCodeStruct & ioArgument1,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'displayInvocationGraph'                                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_displayInvocationGraph (const class GALGAS_routineListIR constinArgument0,
+                                     const class GALGAS_string constinArgument1,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+

@@ -207,23 +207,23 @@ override method @integerDeclarationAST enterInContext
     !type:integerType
   ]
 #--------------------------------------- Enter integer <-> integer operators
-  enter_integer_integer_operators (
-    !integerTypeName:integerTypeName
-    !signed:mIsSigned
-    !?context:ioContext
-  )
+#  enter_integer_integer_operators (
+#    !integerTypeName:integerTypeName
+#    !signed:mIsSigned
+#    !?context:ioContext
+#  )
 #--------------------------------------- Enter integer <-> literal operators
-  enter_integer_literal_operators (
-    !integerTypeName:integerTypeName
-    !signed:mIsSigned
-    !?context:ioContext
-  )
+#  enter_integer_literal_operators (
+#    !integerTypeName:integerTypeName
+#    !signed:mIsSigned
+#    !?context:ioContext
+#  )
 #--------------------------------------- Enter literal <-> integer operators
-  enter_literal_integer_operators (
-    !integerTypeName:integerTypeName
-    !signed:mIsSigned
-    !?context:ioContext
-  )
+#  enter_literal_integer_operators (
+#    !integerTypeName:integerTypeName
+#    !signed:mIsSigned
+#    !?context:ioContext
+#  )
 #--------------------------------------- Assignment
   var key = assignmentOperatorKey (!integerType !.nowhere !integerType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
@@ -237,6 +237,148 @@ override method @integerDeclarationAST enterInContext
     !warnsIfUnused: false
     !integerType
   }
+#--------------------------------------- Infix operator between integers
+  let boolType = boolType ()
+#--- Enter == infix operator
+  addIntegerInfixOperator (!.equal !integerType !"icmp eq" !?ioContext.mInfixOperatorMap !boolType)
+#--- Enter ≤ infix operator
+  addIntegerInfixOperator (
+    !.infEqual
+    !integerType
+    !if mIsSigned then "icmp sle" else "icmp ule" end
+    !?ioContext.mInfixOperatorMap
+    !boolType
+  )
+#--- Enter < infix operator
+  addIntegerInfixOperator (
+    !.lessThan
+    !integerType
+    !if mIsSigned then "icmp slt" else "icmp ult" end
+    !?ioContext.mInfixOperatorMap
+    !boolType
+  )
+#--- Enter << infix operator
+  addIntegerInfixOperator (!.leftShiftOp !integerType !"shl" !?ioContext.mInfixOperatorMap !integerType)
+#--- Enter >> infix operator
+  addIntegerInfixOperator (
+    !.rightShiftOp
+    !integerType
+    !if mIsSigned then "ashr" else "lshr" end
+    !?ioContext.mInfixOperatorMap
+    !integerType
+  )
+#--- Enter | infix operator
+  addIntegerInfixOperator (!.bitWiseOrOp !integerType !"or" !?ioContext.mInfixOperatorMap !integerType)
+#--- Enter & infix operator
+  addIntegerInfixOperator (!.bitWiseAndOp !integerType !"and" !?ioContext.mInfixOperatorMap !integerType)
+#--- Enter ^ infix operator
+  addIntegerInfixOperator (!.bitWiseXorOp !integerType !"xor" !?ioContext.mInfixOperatorMap !integerType)
+#--- Enter +% infix operator
+  addIntegerInfixOperator (!.addOpNoOvf !integerType !"add" !?ioContext.mInfixOperatorMap !integerType)
+#--- Enter -% infix operator
+  addIntegerInfixOperator (!.subOpNoOvf !integerType !"sub" !?ioContext.mInfixOperatorMap !integerType)
+#--- Enter *% infix operator
+  addIntegerInfixOperator (!.mulOpNoOvf !integerType !"mul" !?ioContext.mInfixOperatorMap !integerType)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc addIntegerInfixOperator
+  ?let @omnibusInfixOperator inInfixOperator
+  ?let @omnibusType inIntegerType
+  ?let @string inLLVMOp
+  ?!@infixOperatorMap ioInfixOperatorMap
+  ?let @omnibusType inResultType
+{
+  let ctIntType = compileTimeIntegerType ()
+  var key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !inIntegerType)
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfixOperatorUsage.new {!inLLVMOp}]
+  key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !ctIntType)
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_integer_compileTimeInt_operatorUsage.new {!inLLVMOp}]
+  key = infixOperatorMapKey (!ctIntType !inInfixOperator !.nowhere !inIntegerType)
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage.new {!inLLVMOp}] 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
+  @string mLLVMOperation
+}
+
+#·······················································································································
+
+override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+#--- Check right ctInt belong to left integer range
+  [[inLeftOperand type].kind integer ?min: let minValue ?max: let maxValue ?2*]
+  [inRightOperand literalInteger ?1* ?value:let value]
+  if value < minValue then
+    error inOperatorLocation
+    : "right operand is a compile time integer with an invalid value, lower than $"
+      + [[inLeftOperand type] omnibusTypeDescriptionName] + " minimum value"
+  elsif value > maxValue then
+    error inOperatorLocation
+    : "right operand is a compile time integer with an invalid value, greater than $"
+      + [[inLeftOperand type] omnibusTypeDescriptionName] + " maximum value"
+  end
+#---
+  var leftOperand = inLeftOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " = " + mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
+        + " " + [leftOperand llvmName] + ", " + [inRightOperand llvmName]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
+  @string mLLVMOperation
+}
+
+#·······················································································································
+
+override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+#--- Check right ctInt belong to right integer range
+  [[inRightOperand type].kind integer ?min: let minValue ?max: let maxValue ?2*]
+  [inLeftOperand literalInteger ?1* ?value:let value]
+  if value < minValue then
+    error inOperatorLocation
+    : "left operand is a compile time integer with an invalid value, lower than $"
+      + [[inRightOperand type] omnibusTypeDescriptionName] + " minimum value"
+  elsif value > maxValue then
+    error inOperatorLocation
+    : "left operand is a compile time integer with an invalid value, greater than $"
+      + [[inRightOperand type] omnibusTypeDescriptionName] + " maximum value"
+  end
+#---
+  var rightOperand = inRightOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " = " + mLLVMOperation + " " + [[rightOperand type] llvmTypeName]
+        + " " + [inLeftOperand llvmName] + ", " + [rightOperand llvmName]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

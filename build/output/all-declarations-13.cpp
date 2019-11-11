@@ -9,44 +9,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                       Overriding extension method '@bitbandInstructionIR llvmInstructionCode'                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_bitbandInstructionIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                      GALGAS_string & ioArgument_ioLLVMcode,
-                                                                      const GALGAS_generationContext /* constinArgument_inGenerationContext */,
-                                                                      GALGAS_generationAdds & ioArgument_ioGenerationAdds,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_bitbandInstructionIR * object = (const cPtr_bitbandInstructionIR *) inObject ;
-  macroValidSharedObject (object, cPtr_bitbandInstructionIR) ;
-  GALGAS_string var_idx_9441 = ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 206)) ;
-  ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 207)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Bit band\n"), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (" = sub i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (object->mProperty_mRegisterAddressLLVMname, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (object->mProperty_mBitbandRegisterBaseAddress.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (".mul = mul i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (object->mProperty_mBitbandRegisterOffsetMultiplier.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (".mul = mul i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (extensionGetter_llvmName (object->mProperty_mBitExpressionOperand, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (object->mProperty_mBitbandRegisterBitMultiplier.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (" = add i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (".mul, %bit.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (".mul\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.word.addr.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (" = add i32 %offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (object->mProperty_mBitbandRegisterRelocationAddress.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %ptr.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" = inttoptr i32 %bit.word.addr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" to i32*\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %value.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string (" = zext i1 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (extensionGetter_llvmName (object->mProperty_mSourceExpressionOperand, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string (" to i32\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store i32 %value.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)).add_operation (GALGAS_string (", i32* %ptr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_bitbandInstructionIR_llvmInstructionCode (void) {
-  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_bitbandInstructionIR.mSlotID,
-                                            extensionMethod_bitbandInstructionIR_llvmInstructionCode) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_bitbandInstructionIR_llvmInstructionCode (defineExtensionMethod_bitbandInstructionIR_llvmInstructionCode, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //        Overriding extension method '@varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7817,4 +7779,181 @@ static void defineExtensionMethod_sourceLocationIR_llvmInstructionCode (void) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_PrologueEpilogue gMethod_sourceLocationIR_llvmInstructionCode (defineExtensionMethod_sourceLocationIR_llvmInstructionCode, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                          Overriding extension method '@freeCommentIR llvmInstructionCode'                           *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_freeCommentIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                               GALGAS_string & ioArgument_ioLLVMcode,
+                                                               const GALGAS_generationContext /* constinArgument_inGenerationContext */,
+                                                               GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_freeCommentIR * object = (const cPtr_freeCommentIR *) inObject ;
+  macroValidSharedObject (object, cPtr_freeCommentIR) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--------- ").add_operation (object->mProperty_mComment, inCompiler COMMA_SOURCE_FILE ("intermediate-free-comment.galgas", 19)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-free-comment.galgas", 19)), inCompiler  COMMA_SOURCE_FILE ("intermediate-free-comment.galgas", 19)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_freeCommentIR_llvmInstructionCode (void) {
+  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_freeCommentIR.mSlotID,
+                                            extensionMethod_freeCommentIR_llvmInstructionCode) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_freeCommentIR_llvmInstructionCode (defineExtensionMethod_freeCommentIR_llvmInstructionCode, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                             Routine 'codeOptimization'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
+                               GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                               C_Compiler * inCompiler
+                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineAccessibilityIR var_routineAccessibilityIR_1371 = GALGAS_routineAccessibilityIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 26)) ;
+  GALGAS_stringset var_exploreRoutineSet_1483 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 28)) ;
+  GALGAS_stringset var_allRoutineSet_1515 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 29)) ;
+  GALGAS_stringset var_definedRoutineSet_1551 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 30)) ;
+  cEnumerator_routineListIR enumerator_1613 (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), kENUMERATION_UP) ;
+  while (enumerator_1613.hasCurrentObject ()) {
+    GALGAS_stringset var_accessibleRoutineSet_1652 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 32)) ;
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_1613.current (HERE).getter_mRoutine (HERE).ptr (), var_accessibleRoutineSet_1652, ioArgument_ioIntermediateCodeStruct.mProperty_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 33)) ;
+    var_routineAccessibilityIR_1371.addAssign_operation (enumerator_1613.current (HERE).getter_mRoutine (HERE), var_accessibleRoutineSet_1652  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 34)) ;
+    var_allRoutineSet_1515.plusAssign_operation(var_accessibleRoutineSet_1652, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 35)) ;
+    var_definedRoutineSet_1551.addAssign_operation (enumerator_1613.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 36))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 36)) ;
+    enumGalgasBool test_0 = kBoolTrue ;
+    if (kBoolTrue == test_0) {
+      test_0 = enumerator_1613.current (HERE).getter_mRoutine (HERE).getter_isRequired (HERE).boolEnum () ;
+      if (kBoolTrue == test_0) {
+        var_exploreRoutineSet_1483.addAssign_operation (enumerator_1613.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 38))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 38)) ;
+      }
+    }
+    enumerator_1613.gotoNextObject () ;
+  }
+  enumGalgasBool test_1 = kBoolTrue ;
+  if (kBoolTrue == test_1) {
+    test_1 = GALGAS_bool (gOption_omnibus_5F_options_printPasses.getter_value ()).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      GALGAS_string var_m_2138 = GALGAS_string ("** Dead code elimination\n") ;
+      var_m_2138.plusAssign_operation(GALGAS_string ("    ").add_operation (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 43)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 43)).add_operation (GALGAS_string (" routines, "), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 43)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 43)) ;
+      var_m_2138.plusAssign_operation(var_exploreRoutineSet_1483.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 44)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 44)).add_operation (GALGAS_string (" root routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 44)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 44)) ;
+      inCompiler->printMessage (var_m_2138  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 45)) ;
+    }
+  }
+  GALGAS_stringset var_undefinedRoutineSet_2463 = var_allRoutineSet_1515.substract_operation (var_definedRoutineSet_1551, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 48)) ;
+  enumGalgasBool test_2 = kBoolTrue ;
+  if (kBoolTrue == test_2) {
+    test_2 = GALGAS_bool (kIsStrictSup, var_undefinedRoutineSet_2463.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 49)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      GALGAS_string var_m_2551 = GALGAS_string ("undefined routine(s):") ;
+      cEnumerator_stringset enumerator_2618 (var_undefinedRoutineSet_2463, kENUMERATION_UP) ;
+      while (enumerator_2618.hasCurrentObject ()) {
+        var_m_2551.plusAssign_operation(GALGAS_string ("\n"
+          "    - ").add_operation (enumerator_2618.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 52)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 52)) ;
+        enumerator_2618.gotoNextObject () ;
+      }
+      TC_Array <C_FixItDescription> fixItArray3 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 54)), var_m_2551, fixItArray3  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 54)) ;
+    }
+  }
+  enumGalgasBool test_4 = kBoolTrue ;
+  if (kBoolTrue == test_4) {
+    test_4 = GALGAS_bool (gOption_omnibus_5F_options_noDeadCodeElimination.getter_value ()).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      inCompiler->printMessage (GALGAS_string ("    No dead code elimination (option --").add_operation (GALGAS_string (gOption_omnibus_5F_options_noDeadCodeElimination.getter_string ()), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 58)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 58))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 58)) ;
+    }
+  }
+  if (kBoolFalse == test_4) {
+    GALGAS_stringset var_usefulRoutineSet_2990 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 60)) ;
+    if (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 61)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 61)).isValid ()) {
+      uint32_t variant_3004 = ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 61)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 61)).uintValue () ;
+      bool loop_3004 = true ;
+      while (loop_3004) {
+        loop_3004 = GALGAS_bool (kIsStrictSup, var_exploreRoutineSet_1483.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 61)).objectCompare (GALGAS_uint ((uint32_t) 0U))).isValid () ;
+        if (loop_3004) {
+          loop_3004 = GALGAS_bool (kIsStrictSup, var_exploreRoutineSet_1483.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 61)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolValue () ;
+        }
+        if (loop_3004 && (0 == variant_3004)) {
+          loop_3004 = false ;
+          inCompiler->loopRunTimeVariantError (SOURCE_FILE ("dead-code-elimination.galgas", 61)) ;
+        }
+        if (loop_3004) {
+          variant_3004 -- ;
+          GALGAS_stringset var_currentSet_3119 = var_exploreRoutineSet_1483 ;
+          var_exploreRoutineSet_1483 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 63)) ;
+          cEnumerator_routineAccessibilityIR enumerator_3212 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
+          while (enumerator_3212.hasCurrentObject ()) {
+            GALGAS_lstring var_routineMangledName_3246 = enumerator_3212.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE) ;
+            enumGalgasBool test_5 = kBoolTrue ;
+            if (kBoolTrue == test_5) {
+              test_5 = var_currentSet_3119.getter_hasKey (var_routineMangledName_3246.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 66)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 66)).operator_and (var_usefulRoutineSet_2990.getter_hasKey (var_routineMangledName_3246.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 66)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 66)).operator_not (SOURCE_FILE ("dead-code-elimination.galgas", 66)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 66)).boolEnum () ;
+              if (kBoolTrue == test_5) {
+                var_usefulRoutineSet_2990.addAssign_operation (var_routineMangledName_3246.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 67))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 67)) ;
+                var_exploreRoutineSet_1483.plusAssign_operation(enumerator_3212.current (HERE).getter_mAccessibleRoutineSet (HERE), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 68)) ;
+              }
+            }
+            enumerator_3212.gotoNextObject () ;
+          }
+        }
+      }
+    }
+    cEnumerator_routineAccessibilityIR enumerator_3648 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
+    while (enumerator_3648.hasCurrentObject ()) {
+      GALGAS_lstring var_routineMangledName_3680 = enumerator_3648.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE) ;
+      enumGalgasBool test_6 = kBoolTrue ;
+      if (kBoolTrue == test_6) {
+        test_6 = enumerator_3648.current (HERE).getter_mRoutine (HERE).getter_warnsIfUnused (HERE).operator_and (var_usefulRoutineSet_2990.getter_hasKey (var_routineMangledName_3680.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 75)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 75)).operator_not (SOURCE_FILE ("dead-code-elimination.galgas", 75)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 75)).boolEnum () ;
+        if (kBoolTrue == test_6) {
+          TC_Array <C_FixItDescription> fixItArray7 ;
+          inCompiler->emitSemanticWarning (var_routineMangledName_3680.getter_location (SOURCE_FILE ("dead-code-elimination.galgas", 76)), GALGAS_string ("unused routine"), fixItArray7  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 76)) ;
+        }
+      }
+      enumerator_3648.gotoNextObject () ;
+    }
+    enumGalgasBool test_8 = kBoolTrue ;
+    if (kBoolTrue == test_8) {
+      test_8 = GALGAS_bool (gOption_omnibus_5F_options_printPasses.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_8) {
+        GALGAS_string var_m_4006 = GALGAS_string ("    ").add_operation (var_usefulRoutineSet_2990.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 81)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 81)).add_operation (GALGAS_string (" useful routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 81)) ;
+        inCompiler->printMessage (var_m_4006  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 85)) ;
+      }
+    }
+    ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 88)) ;
+    cEnumerator_routineAccessibilityIR enumerator_4356 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
+    while (enumerator_4356.hasCurrentObject ()) {
+      enumGalgasBool test_9 = kBoolTrue ;
+      if (kBoolTrue == test_9) {
+        test_9 = var_usefulRoutineSet_2990.getter_hasKey (enumerator_4356.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 90)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 90)).boolEnum () ;
+        if (kBoolTrue == test_9) {
+          ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (enumerator_4356.current_mRoutine (HERE)  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 91)) ;
+        }
+      }
+      enumerator_4356.gotoNextObject () ;
+    }
+  }
+  GALGAS_string var_filePath_4557 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 96)) ;
+  enumGalgasBool test_10 = kBoolTrue ;
+  if (kBoolTrue == test_10) {
+    test_10 = GALGAS_bool (gOption_omnibus_5F_options_emitRoutineInvocationGraphFile.getter_value ()).boolEnum () ;
+    if (kBoolTrue == test_10) {
+      {
+      routine_displayInvocationGraph (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), var_filePath_4557, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 98)) ;
+      }
+    }
+  }
+  if (kBoolFalse == test_10) {
+    {
+    GALGAS_string::class_method_deleteFileIfExists (var_filePath_4557, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 100)) ;
+    }
+  }
+}
+
 

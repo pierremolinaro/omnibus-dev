@@ -1,0 +1,197 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Variables globales}
+
+Une variable est dite \emph{globale} si elle est déclarée en dehors de toute routine, tâche, module.
+
+
+%Les variables peuvent être déclarées en deux endroits~:
+%\begin{itemize}
+%  \item en dehors de toute routine~: c'est une variable globale (voir ci-après) ;
+%  \item parmi les instructions d'une routine~: c'est une variable locale à la routine (voir \refSectionPage{declarationVariableLocale}).
+%\end{itemize}
+%
+
+
+
+
+\sectionLabel{Déclaration d'une variable globale}{declarationVariableGlobale}\index{Variable!globale}
+
+La déclaration d'une variable globale est la suivante~:
+
+\begin{OMNIBUS}
+var nom : Type = expression_statique
+\end{OMNIBUS}
+
+Où :
+\begin{itemize}
+  \item \omnibus=nom= est le nom de la variable globale ;
+  \item \omnibus=Type= est le nom du type de la variable globale ;
+  \item \omnibus=expression_statique= est l'expression qui fournit la valeur initiale de cette variable ; cette expression est calculée lors de la compilation.
+\end{itemize}
+
+L'\omnibus=expression_statique= est obligatoire ; si la valeur de celle-ci revient à un zéro binaire, la variable est placée dans une section « \texttt{.bss.*} », de façon à être initialisée au début de l'exécution (\refSectionPage{sequenceDemarrage}).
+
+La portée d'une variable globale est le programme dans son intégralité~: peu importe où est déclarée la variable.
+
+% Toutefois, seules les routines explicitement autorisées dans peuvent y accéder.
+%
+%L'\omnibus=expression_statique= peut utiliser la valeur des constantes globales~: le compilateur évalue les constantes globales avant d'évaluer les valeurs initiales des variables globales. Par contre, \omnibus=expression_statique= ne peut pas utiliser les valeurs d'une autre variable globale.
+%
+%Par exemple, voici comment on peut implémenter une variable globale \texttt{gCompteur}, incrémentée par la routine d'interruption \texttt{timerHandler}, et écrire un service d'attente de délai \texttt{wait} avec une boucle d'attente active~:
+%
+%\begin{OMNIBUS}
+%var gCompteur UInt32 = 0 {
+%  @rw func timerHandler // Ne pas faire figurer
+%  func waitMS           // la liste des arguments
+%}
+%
+%func timerHandler isr () {
+%  gCompteur +%= 1
+%}
+%
+%func wait user (?inDuration UInt32) {
+%  let deadline = gCompteur + inDuration
+%  while gCompteur < deadline do
+%  end
+%}
+%\end{OMNIBUS}
+%
+%Note~: si une variable globale est accédée par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \omnibus=isr= et \omnibus=user=.
+%
+%
+%Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\omnibus=init=!Routine} et les routines de panique (\refSubsectionPage{routinesPanique})\index{Routine!panique \omnibus=panic=}
+% doivent de même être déclarées pour pouvoir accéder à une variable globale (et avec l'attribut \omnibus=@rw= si on veut l'accès en écriture). Par exemple~:
+%\begin{OMNIBUS}
+%var gCompteur UInt32 = 0 {
+%  @rw init 112
+%  @rw func panic loop 179
+%}
+%
+%func init 112 {
+%  gCompteur = 10
+%}
+%
+%func panic loop 179 {
+%  gCompteur = 100
+%}
+%\end{OMNIBUS}
+%
+%
+%\sectionLabel{Déclarations des routines autorisées}{DecRoutinesAutoriseesVarGlobale}
+%
+%Dans la déclaration d'une variable globale, \omnibus=en_tetes_routines_autorisees= liste l'ensemble des routines pouvant accédéer à la variable globale. Cette liste doit être non vide. On peut ainsi autoriser l'accès à~:
+%\begin{itemize}
+%  \item une routine d'initialisation (\omnibus!init!) ;
+%  \item une fonction (\omnibus!func!) ;
+%  \item une section (\omnibus!section!) ;
+%  \item une routine de panique (\omnibus!func panic!) ;
+%  \item une fonction de type (\omnibus!func!).
+%\end{itemize}
+%
+%Le \refTableauPage{DecRoutinesAutoriseesAccesVarGlobale} résume les déclarations des routines autorisées. Par défaut, seul l'accès en lecture est permis. L'attribut \omnibus!@rw! permet d'autoriser pour une routine l'accès en écriture, sauf pour les fonctions ou cet attribut est interdit.
+%
+%Le compilateur interdit l'accès des routines \omnibus+boot+ aux variables globales\footnote{En effet, comme les routines \texttt{boot} sont exécutées avant l'initialisation des variables globales, le comportement à l'exécution serait indéfini.}.
+%
+%\begin{table}[t]
+%\centering
+%\begin{tabular}{lp{5cm}l}
+%  \textbf{Déclaration} & \textbf{Routine autorisée} & \textbf{Accés en écriture} \\
+%  \omnibus=init priorite= & Routine d'initialisation de priorité \omnibus=priorite= & Nécessite \omnibus!@rw! \\
+%  \omnibus=func nom= & Fonction \omnibus!nom! & Jamais \\
+%  \omnibus=section nom= & Section \omnibus!nom! & Nécessite \omnibus!@rw! \\
+%  \omnibus=func panic nom prorite= & Routine de panique \omnibus!nom! de priorité \omnibus=priorite= & Nécessite \omnibus!@rw! \\
+%  \omnibus=func Type nom= & Procédure \omnibus!nom! du type \omnibus!Type! & Nécessite \omnibus!@rw! \\
+%  \omnibus=func Type nom= & Fonction \omnibus!nom! du type \omnibus!Type! & Jamais \\
+%\end{tabular}
+%\caption{Déclaration des routines autorisées}
+%\labelTableau{DecRoutinesAutoriseesAccesVarGlobale}
+%\ligne
+%\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Restrictions d'usage des variables globales}{restrictionUsageVariableGlobale}
+
+La concurrence impose des restrictions sur l'usage des variables globales. Pour les illustrer, nous prenons l'exemple d'une variable globale \omnibus+gVariable+, de type \omnibus=T= :
+
+\begin{OMNIBUS}
+var gVariable = T ()
+
+struct T {
+  var mX : UInt32 = 0 ;
+  var mY : UInt32 = 0 ;
+  
+  func increment @mutating @access () {
+    mX += 1
+    mY += 1
+  }
+
+  func section atomicIncrement @mutating @access () {
+    mX += 1
+    mY += 1
+  }
+
+  func indirectIncrement @mutating () {
+    self.atomicIncrement ()
+  }
+}
+\end{OMNIBUS}
+
+Pour mémoire (§), l'attribut \omnibus=@access= signifie que la méthode accède {\bf directement} aux propriétés : c'est le cas de \omnibus=increment= et de \omnibus=atomicIncrement=. L'attribut \omnibus=@mutating= signifie que la méthode modifie la valeur des propriétés, directement (si \omnibus=@access= est présent), ou indrectement (pas d'attribut \omnibus=@access=), comme c'est le cas de la méthode \omnibus=indirectIncrement=.
+
+\subsection{Accès à une variable globale}
+
+
+Afin de préciser ces règles, il convient de rappeler les différents types d'accès à une variable :
+\begin{enumerate}[label=(\arabic*)]
+  \item accès en lecture (par exemple \omnibus+var u = gVariable+) ;
+  \item accès en écriture (par exemple \omnibus+gVariable = u+) ;
+  \item accès en lecture / écriture (par exemple \omnibus!gVariable += u!) ;
+  \item appel d'une méthode, par exemple \omnibus+gVariable.increment ()+.
+\end{enumerate}
+
+L'accès en lecture (1), en écriture (2), en lecture / écriture (3) est interdite à une routine s'exécutant dans le mode \omnibus=user=. Il en est de même pour les fonctions «~universelles~» (\refSubsectionPage{fonctionUniverselle}) : leur mode d'exécution n'étant pas fixé à la compilation, il se peut qu'elles s'exécutent en mode \omnibus+user+.
+
+Le cas (4) est plus difficile à appréhender. Si la méthode est déclarée en mode privilégié, l'appel est possible sans restriction, comme par exemple \omnibus+gVariable.atomicIncrement ()+. Par contre, \omnibus+gVariable.increment ()+ est interdit, et détecté comme une erreur par le compilateur : en effet, appelé en mode \omnibus=user=, l'incrémentation des propriétés ne serait pas atomique. L'appel \omnibus+gVariable.indirectIncrement ()+ est autorisé, puisque l'incrémentation est réalisé par une routine en mode privilégié.
+
+En résumé :
+\begin{itemize}
+  \item l'appel d'une méthode privilégiée d'une variable globale est autorisée ;
+  \item l'appel d'une méthode «~universelle~» ou \omnibus=user= d'une variable globale est autorisée, sous réserve que cette méthode n'ait pas l'attribut \omnibus=@access=.
+\end{itemize}
+
+
+
+
+
+
+
+
+\subsection{Variable globale comme paramètre effectif}
+
+Une variable globale ne peut pas~:\index{Parametre effectif@Paramètre effectif!Variable globale}
+
+\begin{itemize}
+  \item apparaître comme paramètre effectif en entrée d'une fonction ;
+  \item apparaître comme paramètre effectif en sortie/entrée d'une fonction.
+\end{itemize}
+
+Par contre, sous certaines conditions, une variable globale peut apparaître en paramètre effectif de sortie : la routine appelante doit être privilégiée. La transmission d'un paramètre effectif en sortie implique une copie, or en mode \omnibus=user=, celle-ci n'est pas atomique.
+
+

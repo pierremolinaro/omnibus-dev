@@ -9666,6 +9666,163 @@ void extensionMethod_generateInfixOperatorCode (const GALGAS_infixOperatorMap in
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_inlineInfixOperatorUsage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_inlineInfixOperatorUsage * p = (const cPtr_inlineInfixOperatorUsage *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_inlineInfixOperatorUsage) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mLLVMOperation.objectCompare (p->mProperty_mLLVMOperation) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_inlineInfixOperatorUsage::objectCompare (const GALGAS_inlineInfixOperatorUsage & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfixOperatorUsage::GALGAS_inlineInfixOperatorUsage (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfixOperatorUsage GALGAS_inlineInfixOperatorUsage::constructor_default (LOCATION_ARGS) {
+  return GALGAS_inlineInfixOperatorUsage::constructor_new (GALGAS_string::constructor_default (HERE)
+                                                           COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfixOperatorUsage::GALGAS_inlineInfixOperatorUsage (const cPtr_inlineInfixOperatorUsage * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_inlineInfixOperatorUsage) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfixOperatorUsage GALGAS_inlineInfixOperatorUsage::constructor_new (const GALGAS_string & inAttribute_mLLVMOperation
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_inlineInfixOperatorUsage result ;
+  if (inAttribute_mLLVMOperation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_inlineInfixOperatorUsage (inAttribute_mLLVMOperation COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_inlineInfixOperatorUsage::getter_mLLVMOperation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_inlineInfixOperatorUsage * p = (const cPtr_inlineInfixOperatorUsage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_inlineInfixOperatorUsage) ;
+    result = p->mProperty_mLLVMOperation ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string cPtr_inlineInfixOperatorUsage::getter_mLLVMOperation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMOperation ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                  Pointer class for @inlineInfixOperatorUsage class                                  *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_inlineInfixOperatorUsage::cPtr_inlineInfixOperatorUsage (const GALGAS_string & in_mLLVMOperation
+                                                              COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE),
+mProperty_mLLVMOperation (in_mLLVMOperation) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_inlineInfixOperatorUsage::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_inlineInfixOperatorUsage ;
+}
+
+void cPtr_inlineInfixOperatorUsage::description (C_String & ioString,
+                                                 const int32_t inIndentation) const {
+  ioString << "[@inlineInfixOperatorUsage:" ;
+  mProperty_mLLVMOperation.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_inlineInfixOperatorUsage::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_inlineInfixOperatorUsage (mProperty_mLLVMOperation COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                           @inlineInfixOperatorUsage type                                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_inlineInfixOperatorUsage ("inlineInfixOperatorUsage",
+                                                 & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_inlineInfixOperatorUsage::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_inlineInfixOperatorUsage ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_inlineInfixOperatorUsage::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_inlineInfixOperatorUsage (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfixOperatorUsage GALGAS_inlineInfixOperatorUsage::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_inlineInfixOperatorUsage result ;
+  const GALGAS_inlineInfixOperatorUsage * p = (const GALGAS_inlineInfixOperatorUsage *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_inlineInfixOperatorUsage *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("inlineInfixOperatorUsage", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
 //                                   Extension Getter '@omnibusInfixOperator string'                                   *
 //                                                                                                                     *
@@ -14410,388 +14567,6 @@ GALGAS_syncInstructionAST GALGAS_syncInstructionAST::extractObject (const GALGAS
       result = *p ;
     }else{
       inCompiler->castError ("syncInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumAssociatedValues_guardedCommandIR_booleanGuard::cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                          const GALGAS_string & inAssociatedValue2
-                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_guardedCommandIR_booleanGuard::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_booleanGuard::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_booleanGuard *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumAssociatedValues_guardedCommandIR_sync::cEnumAssociatedValues_guardedCommandIR_sync (const GALGAS_bool & inAssociatedValue0,
-                                                                                          const GALGAS_string & inAssociatedValue1,
-                                                                                          const GALGAS_instructionListIR & inAssociatedValue2,
-                                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
-                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_guardedCommandIR_sync::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_sync::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_sync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_sync *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumAssociatedValues_guardedCommandIR_boolAndSync::cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                        const GALGAS_string & inAssociatedValue2,
-                                                                                                        const GALGAS_string & inAssociatedValue3,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue4,
-                                                                                                        const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
-                                                                                                        COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3),
-mAssociatedValue4 (inAssociatedValue4),
-mAssociatedValue5 (inAssociatedValue5) {
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cEnumAssociatedValues_guardedCommandIR_boolAndSync::description (C_String & ioString,
-                                                                      const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  mAssociatedValue4.description (ioString, inIndentation) ;
-  mAssociatedValue5.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_boolAndSync::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_boolAndSync *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue4.objectCompare (ptr->mAssociatedValue4) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue5.objectCompare (ptr->mAssociatedValue5) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR::GALGAS_guardedCommandIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                           const GALGAS_string & inAssociatedValue2
-                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_booleanGuard ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_booleanGuard (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_sync (const GALGAS_bool & inAssociatedValue0,
-                                                                   const GALGAS_string & inAssociatedValue1,
-                                                                   const GALGAS_instructionListIR & inAssociatedValue2,
-                                                                   const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
-                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
-    result.mEnum = kEnum_sync ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_sync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                          const GALGAS_string & inAssociatedValue2,
-                                                                          const GALGAS_string & inAssociatedValue3,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue4,
-                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
-    result.mEnum = kEnum_boolAndSync ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_boolAndSync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedValue0,
-                                                   GALGAS_instructionListIR & outAssociatedValue1,
-                                                   GALGAS_string & outAssociatedValue2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_booleanGuard) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR booleanGuard invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = (const cEnumAssociatedValues_guardedCommandIR_booleanGuard *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::method_sync (GALGAS_bool & outAssociatedValue0,
-                                           GALGAS_string & outAssociatedValue1,
-                                           GALGAS_instructionListIR & outAssociatedValue2,
-                                           GALGAS_procCallEffectiveParameterListIR & outAssociatedValue3,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_sync) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR sync invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_sync * ptr = (const cEnumAssociatedValues_guardedCommandIR_sync *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedValue0,
-                                                  GALGAS_instructionListIR & outAssociatedValue1,
-                                                  GALGAS_string & outAssociatedValue2,
-                                                  GALGAS_string & outAssociatedValue3,
-                                                  GALGAS_instructionListIR & outAssociatedValue4,
-                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue5,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_boolAndSync) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    outAssociatedValue4.drop () ;
-    outAssociatedValue5.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR boolAndSync invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = (const cEnumAssociatedValues_guardedCommandIR_boolAndSync *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-    outAssociatedValue4 = ptr->mAssociatedValue4 ;
-    outAssociatedValue5 = ptr->mAssociatedValue5 ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static const char * gEnumNameArrayFor_guardedCommandIR [4] = {
-  "(not built)",
-  "booleanGuard",
-  "sync",
-  "boolAndSync"
-} ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isBooleanGuard (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanGuard == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isSync (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sync == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolAndSync == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_guardedCommandIR::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "<enum @guardedCommandIR: " << gEnumNameArrayFor_guardedCommandIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult GALGAS_guardedCommandIR::objectCompare (const GALGAS_guardedCommandIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               @guardedCommandIR type                                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardedCommandIR ("guardedCommandIR",
-                                         NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_guardedCommandIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_guardedCommandIR ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_guardedCommandIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_guardedCommandIR (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  const GALGAS_guardedCommandIR * p = (const GALGAS_guardedCommandIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_guardedCommandIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("guardedCommandIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

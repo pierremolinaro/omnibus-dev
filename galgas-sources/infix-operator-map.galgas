@@ -53,3 +53,33 @@ method @infixOperatorMap generateInfixOperatorCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  INLINE INFIX OPERATOR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @inlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
+  @string mLLVMOperation
+}
+
+#·······················································································································
+
+override method @inlineInfixOperatorUsage generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  var leftOperand = inLeftOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  var rightOperand = inRightOperand
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
+  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  let s = [outResultValue llvmName] + " = " + mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
+        + " " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -67,27 +67,21 @@ override method @compileTimeDeclarationBarrierAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
-##--- Add assignment operator declaration
-#  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
-#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-##--- Add assignment operator declaration from ctInt
-#  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
-#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 #--- ==
-  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- ≤
-  appendInfixOperatorDeclaration (!.infEqual !"icmp ule" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.infEqual !"icmp ule" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- <
-  appendInfixOperatorDeclaration (!.lessThan !"icmp ult" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.lessThan !"icmp ult" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- +
   appendInfixOperatorDeclaration (!.addOp !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- -
   appendInfixOperatorDeclaration (!.subOp !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- *
   appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- /
   appendInfixOperatorDeclaration (!.divOp !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.divOpNoOvf !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
@@ -95,13 +89,13 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
   appendInfixOperatorDeclaration (!.modOp !"urem" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.modOpNoOvf !"urem" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- |
-  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- &
-  appendInfixOperatorDeclaration (!.bitWiseAndOp !"and" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.bitWiseAndOp !"and" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- <<
-  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- >>
-  appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- ~ 
   appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
 }
@@ -109,27 +103,21 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
-#--- Add assignment operator declaration
-#  @abstractDeclarationAST declaration = buildAssignmentOperatorDeclaration (!inTypeName)
-#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-##--- Add assignment operator declaration from ctInt
-#  declaration = buildAssignmentOperatorFrom_ctInt (!inTypeName)
-#  [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 #--- ==
-  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- ≤
-  appendInfixOperatorDeclaration (!.infEqual !"icmp sle" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.infEqual !"icmp sle" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- <
-  appendInfixOperatorDeclaration (!.lessThan !"icmp slt" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.lessThan !"icmp slt" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 #--- +
   appendInfixOperatorDeclaration (!.addOp !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- -
   appendInfixOperatorDeclaration (!.subOp !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- *
   appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- %
   appendInfixOperatorDeclaration (!.modOp !"srem" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.modOpNoOvf !"srem" !inTypeName !inTypeName !?ioPrecedenceGraph)
@@ -137,13 +125,13 @@ private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrec
   appendInfixOperatorDeclaration (!.divOp !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
   appendInfixOperatorDeclaration (!.divOpNoOvf !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- |
-  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- &
-  appendInfixOperatorDeclaration (!.bitWiseAndOp !"and" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.bitWiseAndOp !"and" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- <<
-  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- >>
-  appendInfixOperatorDeclaration (!.rightShiftOp !"ashr" !inTypeName !inTypeName !?ioPrecedenceGraph)
+#  appendInfixOperatorDeclaration (!.rightShiftOp !"ashr" !inTypeName !inTypeName !?ioPrecedenceGraph)
 #--- - prefixed
   appendPrefixOperatorDeclaration_minus (!inTypeName !?ioPrecedenceGraph)
 }

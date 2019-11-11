@@ -5,6 +5,8 @@ import "carte-tp-teensy-3-6.omnibus-import"
 
 option "task-strict-priority-order"
 
+let @display ESSAI = 2 | -1
+
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 driver project > digital {

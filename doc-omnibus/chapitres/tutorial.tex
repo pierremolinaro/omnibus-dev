@@ -1,0 +1,410 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+\chapter{Tutorial}
+
+%--- Pour supprimer tout en-tête et pied de page sur la 1re page d'un chapitre
+\thispagestyle{empty}
+
+\colorbox{red}{À revoir}
+
+
+\emph{OMNIBUS} est un langage destiné aux systèmes embarqués. Particularités :
+\begin{itemize}
+  \item détection des débordements arithmétiques ;
+  \item mode d'exécution d'une routine ;
+  \item routines de démarrage, d'initialisation, de panique ;
+  \item arithmétique sur une taille quelconque ;
+  \item tâches ;
+  \item synchronisations définissables par le langage ;
+  \item commandes gardées définissables par le langage ;
+\end{itemize}
+
+
+\sectionLabel{Premier exemple « blinkled »}{exempleBlinkled}
+
+\subsection{Programmes d'exemple embarqués}
+
+Le compilateur OMNIBUS embarque un certain nombre de fichiers d'exemple, prêts à l'emploi. Deux options (voir \refSectionPage{optionsExemplesEmbarques}) permettent de lister les fichiers d'exemple et de les extraire.
+
+Pour afficher la liste des fichiers d'exemple, entrez :
+
+\begin{SHELL}
+{\bfseries omnibus -l}\\
+Embedded sample code:\\
+\hspace*{1.2em}/teensy-3-1-it/01-blink-led.omnibus\\
+\hspace*{1.2em}...
+\end{SHELL}
+
+Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-it}, et le fichier d'exemple \texttt{01-blink-led.omnibus}. Les noms des fichiers d'exemple commencent par des chiffres, simplement pour qu'ils apparaissent dans l'ordre souhaité. Vous pouvez nommer vos fichiers OMNIBUS comme vous le voulez.
+
+Comme son nom le suggère, l'exemple \texttt{01-blink-led.omnibus} fait clignoter une led, celle embarquée sur la carte \emph{Teensy 3.1}.
+
+\subsection{Extraction d'un fichier d'exemple}
+
+Pour extraire le fichier d'exemple \texttt{01-blink-led.omnibus}, exécuter :
+
+\begin{SHELL}
+\bfseries omnibus -x=/teensy-3-1-it/01-blink-led.omnibus
+\end{SHELL}
+
+
+Ceci écrit le fichier \texttt{01-blink-led.omnibus} dans le répertoire courant. Ce fichier est prêt à être compilé.
+
+\subsection{Compilation et flashage}
+
+Pour compiler, entrer\footnote{L'option « \texttt{-{}-Oz} » ordonne une optimisation avec réduction de la taille du code engendré ; pour compiler et flasher, ajouter l'option « \texttt{-f} » (\refSectionPage{optionCodeEngendre}) ; pour compiler avec des messages détaillés, ajouter l'option « \texttt{-v} » (\refSectionPage{optionsGenerales}). Les options peuvent apparaître sur la ligne de commande avant ou après le nom du fichier compilé.} :
+\begin{SHELL}
+{\bfseries omnibus --Oz 01-blink-led.omnibus}\\
+Downloading compiler tool chain\\
+...........................................................\\
+\textcolor{blue}{Making "objects" directory}\\
+\textcolor{blue}{Compiling src.c}\\
+\textcolor{blue}{Assembling src.s}\\
+\textcolor{blue}{LLVM Link sources/src.ll objects/src.c.ll}\\
+\textcolor{blue}{Optimizing all.ll}\\
+\textcolor{blue}{Compiling objects/opt.all.ll}\\
+\textcolor{blue}{Assembling objects/opt.all.ll.s}\\
+\textcolor{blue}{Stack requirements}\\
+\textcolor{blue}{Check stacks}\\
+\textcolor{blue}{Linking product/product-linker.elf}\\
+\textcolor{blue}{Hexing product/product.ihex}\\
+Code:~~~~~~~~4472 bytes\\
+ROM data:~~~~0 bytes\\
+RAM + STACK:~1660 bytes\\
+\end{SHELL}
+
+À la première compilation, le compilateur C va être automatiquement téléchargé\footnote{Les outils de compilation C sont installés en \texttt{$\sim$/omnibus-tools/}.}, cela peut prendre plusieurs minutes.
+
+Ensuite, la compilation s'effectue, et range tous ses fichiers de production dans un sous répertoire de \texttt{$\sim$/omnibus-products/}, dont le nom est le chemin absolu du fichier source (sans son extension), dans lequel tous les « \texttt{/} » ont été remplacés par des « \texttt{+} ».
+
+Si l'option « \texttt{-f} » était présente, la carte \emph{Teensy 3.1} est prête à être flashée : appuyer sur le bouton \emph{reset} de la carte pour démarrer le flashage\footnote{Si vous ne voulez pas flasher le micro-contrôleur, entrez simplement « \texttt{ctrl~C} ».}. L'affichage sur le terminal devient :
+\begin{SHELL}
+Found HalfKay Bootloader\\
+Read "product/product.ihex": 1472 bytes, 1.1\% usage\\
+Programming..\\
+Booting\\
+Success
+\end{SHELL}
+
+Le programme d'exemple a été flashé (« \emph{Programming} »), puis le micro-contrôleur a été redémarré (« \emph{Booting} ») : la led de la carte clignote.
+
+\subsection{Texte source de \texttt{01-blink-led.omnibus}}
+
+Maintenant, nous allons examiner le code source OMNIBUS du fichier \texttt{01-blink-led.omnibus} :
+
+\begin{OMNIBUS}[1]
+target "teensy-3-1-tp"
+
+task T1 priority 1 stackSize 512 {
+  var compteur UInt32 = 0
+
+  while time.waitUntilMS (!deadline:self.compteur) {
+    leds.on (!LED_L0)
+    self.compteur +%= 500
+    time.waitUntilMS (!deadline:self.compteur)
+    leds.off (!LED_L0)
+    self.compteur +%= 500
+    lcd.goto (!line:0 !column:0)
+    lcd.printUnsigned (!time.millis ())
+  }
+}
+
+Examinons le code ligne par ligne.
+
+\begin{OMNIBUS}[1]
+target "teensy-3-1-tp"
+\end{OMNIBUS}
+
+La première ligne \omnibus=target "teensy-3-1-it"= nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blink-led.omnibus}).
+
+\begin{OMNIBUS}[3]
+task T1 priority 1 stackSize 512 {
+\end{OMNIBUS}
+
+Cette ligne déclare une tâche nommée \omnibus+T1+, de priorité \omnibus=1=, avec une pile de \omnibus=512= octets. Ici, le nom de la tâche n'a pas d'importance, ni sa priorité (c'est la seule tâche). Les tâches sont démarrées automatiquement, après la phase d'initialisation.
+
+\begin{OMNIBUS}[4]
+  var compteur UInt32 = 0
+\end{OMNIBUS}
+
+Déclaration d'une variable \omnibus=compteur=, de type \omnibus=UInt32= (entier non signé sur 32 bits), initialisée à 0. Les variables déclarées dans une tâche sont locales à la tâche, aucune autre tâche ne peut y accéder. OMNIBUS prédéfinit les types entiers de taille quelconque (jusqu'à 2048 bits), signés (\omnibus=IntXX=), et non signés (\omnibus=UIntXX=). Il est donc parfaitement légal d'utiliser des types comme par exemple \omnibus=Int8=, \omnibus=Int13=, ou encore \omnibus=UInt2000=.
+
+
+\begin{OMNIBUS}[6]
+  while time.waitUntilMS (!deadline:self.compteur) {
+\end{OMNIBUS}
+
+Appel de la commande gardée \omnibus=waitUntilMS= du pilote \omnibus=time=, avec un argument, la variable de tâche \omnibus=compteur=. L'utilisation de \omnibus=self= est obligatoire pour accéder aux variables de tâche\footnote{Sans \texttt{self}, ce serait un accès à une variable locale à la fonction, ou à une constante globale.}. Cette appel effectue l'attente jusqu'à la date exprimée par l'argument \omnibus=self.compteur=. Cette date est comptée en millisecondes depuis le démarrage du micro-contrôleur.
+
+
+
+\begin{OMNIBUS}[7]
+    leds.on (!LED_L0)
+\end{OMNIBUS}
+
+Appel de la fonction \omnibus=on= du pilote \omnibus=leds=, avec un argument, la constante \omnibus=LED_L0=. L'effet de l'exécution de cet appel est d'allumer la led n°0.
+
+
+
+\begin{OMNIBUS}[8]
+    self.compteur +%= 500
+\end{OMNIBUS}
+
+Incrémente la variable de tâche \omnibus=compteur= de \omnibus=500=. L'opérateur \omnibus!+%=! est l'addition sans test de débordement. Si on voulait le tester, et exécuter un code de panique en cas de débordement, on utiliserait l'opérateur \omnibus!+=!. Comme \omnibus=compteur= est utilisé pour l'attente d'échéance qui s'exprimme en millisecondes, \omnibus=500= représente la date de la prochaine échéance, qui est $500~ms$ plus tard.
+
+
+\begin{OMNIBUS}[9]
+    time.waitUntilMS (!deadline:self.compteur)
+    leds.off (!LED_L0)
+    self.compteur +%= 500
+\end{OMNIBUS}
+
+Attente de la nouvelle échéance, extinction de la led n°0, incrémentation de l'échéance de $500~ms$.
+
+
+\begin{OMNIBUS}[12]
+    lcd.goto (!line:0 !column:0)
+\end{OMNIBUS}
+
+Appel de la fonction \omnibus=goto= du pilote \omnibus=lcd=, avec deux arguments. L'effet de l'exécution de cet appel est de positionner le curseur de l'afficheur LCD au début de la première ligne.
+
+
+
+
+\begin{OMNIBUS}[13]
+    lcd.printUnsigned (!time.millis ())
+\end{OMNIBUS}
+
+Cette ligne affiche sur l'afficheur LCD à la position du curseur le nombre de millisecondes écoulés depuis le démarrage du micro-contrôleur.
+
+
+
+
+
+
+\begin{OMNIBUS}[14]
+  }
+\end{OMNIBUS}
+
+Cette ligne marque la fin de la commande gardée qui commence à la ligne $6$. Comme cette commande gardée commence le mot réservé \omnibus=while=, elle est re-exécutée.
+
+
+%\sectionLabel{Deuxième exemple : clignotement avec routine d'interruption}{deuxiemeExemple}
+%
+%La cible \texttt{teensy-3-1-it} programme le décompteur \texttt{SysTick} de façon que l'interruption correspondante se déclenche toutes les millisecondes, et appelle une routine d'interruption. Par défaut, cette routine ne comporte aucune instruction et n'a donc aucun effet.
+%
+%Le programme d'exemple \texttt{02-blinkled-systick.omnibus} redéfinit cette routine d'interruption et l'utilise pour compter le temps.
+%
+%Pour extraire le programme d'exemple :
+%\begin{SHELL}
+%\bfseries omnibus -x=/teensy-3-1-it/02-blinkled-systick.omnibus
+%\end{SHELL}
+%
+%Ensuite, vous pouvez le compiler et effectuer son flashage sur la carte \emph{Teensy 3.1} :
+%\begin{SHELL}
+%\bfseries omnibus 02-blinkled-systick.omnibus
+%\end{SHELL}
+%
+%La led sur la carte \emph{Teensy 3.1} clignote à la fréquence de `1`~Hz.
+%
+%Voyons maintenant le contenu du fichier d'exemple \texttt{02-blinkled-systick.omnibus} :
+%
+%\begin{OMNIBUS}[1]
+%target "teensy-3-1-it"
+%
+%proc setup `user () {
+%  PORTC_PCR5 = PORTC_PCR5::mux (1)
+%  GPIOC_PDDR |= (1 << 5)
+%}
+%
+%var gUpTimeMS UInt32 = 0 {
+%  @rw proc systickHandler ()
+%  proc wait (?ms: inDuration UInt32)
+%}
+%
+%proc systickHandler `isr () {
+%  gUpTimeMS += 1
+%}
+%
+%proc wait `user (?ms: inDuration UInt32) {
+%  let deadline = gUpTimeMS + inDuration
+%  while deadline > gUpTimeMS do
+%  end
+%}
+%
+%proc loop `user () {
+%  wait (!ms:500)
+%  GPIOC_PSOR = 1 << 5 // Allumer la led
+%  wait (!ms:500)
+%  GPIOC_PCOR = 1 << 5  // Éteindre la led
+%}
+%\end{OMNIBUS}
+%
+%La référence à la cible \omnibus+target "teensy-3-1-it"+ et la définition de la routine \omnibus+setup+ sont identiques à celles écrites dans le premier exemple.
+%
+%La définition de la variable globale \omnibus+gUpTimeMS+ :
+%
+%\begin{OMNIBUS}[8]
+%var gUpTimeMS UInt32 = 0 {
+%  @rw proc systickHandler ()
+%  proc wait (?ms: inDuration UInt32)
+%}
+%\end{OMNIBUS}
+%
+%Cette variable compte le temps exprimé en millisecondes. Deux routines y accèdent, \omnibus+systickHandler+ en lecture / écriture, et \omnibus+wait+, uniquement en lecture. Remarquons que \omnibus+wait+ présente un argument formel en entrée, \omnibus+inDuration+, dont la notation sera présentée plus loin.
+%
+%La routine d'interruption \omnibus+systickHandler+ :
+%
+%\begin{OMNIBUS}[13]
+%proc systickHandler `isr () {
+%  gUpTimeMS += 1
+%}
+%\end{OMNIBUS}
+%
+%Le mode associé à une routine d'interruption est toujours \omnibus+`isr+. L'instruction d'appel de routine (\refSectionPage{instructionAppelProc}) vérifie que les modes de la routine appelée soient un sous-ensemble des modes de la routine appelante : ainsi, par exemple, il n'est pas possible d'appeler \omnibus+systickHandler+ à partir de la routine \omnibus+loop+.
+%
+%La routine d'interruption \omnibus+systickHandler+ est appelée toutes les millisecondes, la variable globale \omnibus+gUpTimeMS+ contient donc le temps absolu depuis le démarrage, exprimé en millisecondes.
+%
+%L'attente durant un certain délai est effectué par la routine \omnibus+wait+ :
+%\begin{OMNIBUS}[17]
+%proc wait `user (?ms: inDuration UInt32) {
+%  let deadline = gUpTimeMS + inDuration
+%  while deadline > gUpTimeMS do
+%  end
+%}
+%\end{OMNIBUS}
+%
+%Cette routine présente un paramètre formel : \omnibus+inDuration+, de type \omnibus+UInt32+. Le \emph{sélecteur} \omnibus+?ms:+ indique que \omnibus+inDuration+ est un paramètre en entrée (son sélecteur commence par « \texttt{?} »), et que le nom de ce sélecteur est « \texttt{ms} »\footnote{La liste de tous les arguments formels et des paramètres effectifs correspondants est présentée à la \refSectionPage{argumentFormel}.}.
+%
+%Le code de cette routine est simple : après avoir calculé la constante \omnibus+deadline+\footnote{Une constante locale à une routine est déclarée par le mot réservé \texttt{\bfseries let} (voir \refSectionPage{declarationConstanteLocale}).}, la boucle \omnibus+while+ attend le délai imparti.
+%
+%Il reste à commenter le code ce la routine \omnibus+loop+ :
+%\begin{OMNIBUS}[23]
+%proc loop `user () {
+%  wait (!ms:500)
+%  GPIOC_PSOR = 1 << 5 // Allumer la led
+%  wait (!ms:500)
+%  GPIOC_PCOR = 1 << 5  // Éteindre la led
+%}
+%\end{OMNIBUS}
+%
+%Intéressons-nous à l'appel de la routine \omnibus+wait+ ; celle-ci présente un argument formel en entrée, dont le sélecteur est \omnibus+?ms:+. L'instruction d'appel devra donc comporter un paramètre effectif en sortie (donc son sélecteur commence par « \texttt{!} »), et de même nom : le sélecteur du paramètre effectif est donc \omnibus+!ms:+. En ce qui concerne les modes, la routine appelée \omnibus+wait+ est déclarée avec le mode \omnibus+`user+, comme la routine appelante \omnibus+loop+ : l'appel est donc valide.
+%
+
+
+\section{Fichiers produits par la compilation}
+
+À titre d'information, on décrit l'organisation des fichiers produits par la compilation d'un fichier \texttt{f{}ichier.omnibus}. Cette organisation est résumée par la \refFigure{}{compilationProgrammeOMNIBUS}.
+
+\begin{figure}[ht]
+  \centering
+  \scriptsize
+  \begin{tikzpicture}[
+      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.5cm, minimum width=1.4cm},
+      block2/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.5cm, minimum width=1.6cm},
+      node distance=0.5cm and 1.4cm
+    ]
+    \node [block] (omnibus) at (0, 0) {\tt f{}ichier.omnibus} ;
+    \node (ws) [right=of omnibus, minimum height=0.6cm, minimum width=1.4cm] {} ;
+    \node [block] (omnibusc) [right=of ws] {\tt src.ll} ;
+    \node [block] (make) [below=of omnibusc] {\tt make.py};
+    \node [block] (makeomnibus) [below=of make] {\tt omnibus.py};
+    \node [block] (omnibuss) [below=of makeomnibus] {\tt src.s} ;
+    \node [block] (omnibusco) [right=of omnibusc] {\tt opt.src.ll} ;
+    \node [block] (omnibuscos) [below=of omnibusco] {\tt opt.src.ll.s} ;
+    \node [block] (omnibusco2) [below=of omnibuscos] {\tt opt.src.ll.s.o} ;
+    \node [block] (omnibusso) [right=of omnibuss] {\tt src.s.o} ;
+    \node [block] (link) [below=of omnibuss] {\tt link.ld} ;
+    \node [block] (elf) [right=of omnibusso] {\tt omnibus.elf} ;
+    \node (elf2) [above=of elf, minimum height=0.6cm] {};
+    \begin{scope}[node distance=0.1cm and 1.6cm]
+      \node [block2] (build) at (3, -0.5) {\tt build.py};
+      \node [block2] (clean) [below=of build] {\tt clean.py};
+      \node [block2] (run) [below=of clean] {\tt run.py};
+      \node [block2] (buildas) [below=of run] {\tt build-as.py};
+      \node [block2] (buildverbose) [below=of buildas] {\tt build-verbose.py};
+      \node [block2] (objsize) [below=of buildverbose] {\tt objsize.py};
+      \node [block2] (objdump) [below=of objsize] {\tt objdump.py};
+    \end{scope}
+
+    \draw [-stealth, thick] (omnibus) to node [above] {\tt omnibus} (omnibusc) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (omnibuss.west) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (link) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (make) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (makeomnibus) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (build.west) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (run.west) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (clean.west) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (buildas.west) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (buildverbose.west) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (objsize.west) ;
+    \draw [-stealth, thick] (omnibus.east) -- +(0.3, 0) |- (objdump.west) ;
+    \draw [-stealth, thick] (omnibuss) to node[above] {\tt as} (omnibusso) ;
+    \draw [-stealth, thick] (omnibusso) to node[above right] {\tt ld} (elf) ;
+    \draw [-stealth, thick] (omnibusc) to node[above] {\tt opt} (omnibusco) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (omnibusco2.east) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (link.east) ;
+    \draw [-stealth, thick] (omnibusco) to node[right] {\tt llc} (omnibuscos) ;
+    \draw [-stealth, thick] (omnibuscos) to node[right] {\tt as} (omnibusco2) ;
+
+    \begin{scope}[node distance=5mm]
+    \node (repws) [above=of ws] {\tt ws/} ;
+    \node (source) [above=of omnibusc] {\tt ws/sources/} ;
+    \node (objects) [above=of omnibusco] {\tt ws/objects/} ;
+    \node (product) [right=of objects] {\tt ws/product/} ;
+    \node (titre) [above=of omnibus] {Répertoires :} ;
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Fichiers produits par la compilation d'un programme OMNIBUS}
+  \labelFigure{compilationProgrammeOMNIBUS}
+  \ligne
+\end{figure}
+
+
+
+Les fichiers produits par la compilation sont regroupés dans un répertoire noté \texttt{ws} dans la \refFigure{}{compilationProgrammeOMNIBUS}, et obtenu de la façon suivante :
+\begin{itemize}
+  \item on considère le chemin absolu du fichier source ; par exemple, pour {\tt f{}ichier.omnibus} situé dans le répertoire courant \texttt{/chemin/absolu} : \colorbox{gray!25}{\tt/chemin/absolu/f{}ichier.omnibus} ;
+  \item on retire l'extension du fichier source ; \colorbox{gray!25}{\tt/chemin/absolu/f{}ichier} ;
+  \item on remplace chaque « \texttt{/} » par un « \texttt{+} » : \colorbox{gray!25}{\tt+chemin+absolu+f{}ichier} ;
+  \item le chemin vers le répertoire \texttt{ws} est obtenu en préfixant par \texttt{$\sim$/omnibus-product/}, où $\sim$ est le répertoire \emph{home} de l'utilisateur : \colorbox{gray!25}{\tt$\sim$/omnibus-product/+chemin+absolu+f{}ichier}.
+\end{itemize}
+
+\begin{table}[t!]
+\centering
+\begin{tabular}{p{2cm}p{11cm}}
+  \textbf{Nom} & \textbf{Commentaire} \\
+  \texttt{build.py} & Effectue la compilation de \texttt{omnibus.c}, l'assemblage de \texttt{omnibus.s}, et l'édition de liens afin d'obtenir l'exécutable \texttt{omnibus.elf}, comme décrit à la \refFigure{}{compilationProgrammeOMNIBUS}. \\
+  \texttt{build-as.py} & Effectue la compilation de \texttt{omnibus.c} jusqu'à la génération d'un fichier assembleur \texttt{omnibus.c.s} qui est placé dans \texttt{ws/objects}. Cette opération permet de connaître la traduction en assembleur du source C.\\
+  \texttt{build-verbose.py} & Effectue les mêmes opérations que \texttt{build.py}, mais affiche les lignes de commande.\\
+  \texttt{run.py} & Construit l'exécutable \texttt{omnibus.elf} (comme le fait \texttt{build.py}), et lance l'exécution sur la cible. Équivalent à l'option \texttt{-f} de la ligne de commande. \\
+  \texttt{clean.py} & Supprime les répertoires \texttt{ws/objects} et \texttt{ws/product}. \\
+  \texttt{objdump.py} & Effectue les mêmes opérations que \texttt{build.py}, puis affiche le code machine obtenu désassemblé. \\
+  \texttt{objsize.py} & Effectue les mêmes opérations que \texttt{build.py}, puis affiche la taille du code engendré. \\
+\end{tabular}
+\caption{Scripts Python engendrés dans le répertoire \texttt{ws}}
+\labelTableau{scriptsPythonEngendres}
+\ligne
+\end{table}
+
+\begin{table}[t!]
+\centering
+\begin{tabular}{p{2cm}p{11cm}}
+  \textbf{Nom} & \textbf{Commentaire} \\
+  \texttt{src.ll} & Contient tout le code LLVM produit par la compilation du fichier source {\tt f{}ichier.omnibus}. \\
+  \texttt{src.s} & Contient tout le code assembleur produit par la compilation du fichier source {\tt f{}ichier.omnibus}. En fonction de la cible, ce fichier peut être vide.\\
+  \texttt{make.py} & Makefile générique écrit en Python.\\
+  \texttt{omnibus.py} & Configuration du makefile générique pour la compilation OMNIBUS.\\
+  \texttt{link.ld} & Script de l'édition de liens.\\
+\end{tabular}
+\caption{Fichiers engendrés dans le répertoire \texttt{ws/sources}}
+\labelTableau{fichiersSourcesEngendres}
+\ligne
+\end{table}
+
+La compilation place dans le répertoire \texttt{ws} les scripts \emph{python} décrits par le \refTableau{scriptsPythonEngendres}. Ces scripts peuvent être appelés directement à partir de la ligne de commande.
+
+
+Le répertoire \texttt{ws/sources} contient les fichiers décrits dans le \refTableau{fichiersSourcesEngendres}, \texttt{ws/objects} contient les fichiers objets issus de la compilation et l'assemblage, et \texttt{ws/product} le fichier exécutable nommé \texttt{omnibus.elf}. Suivant la cible, il peut aussi contenir l'exécutable \texttt{omnibus.ihex} sous le format \emph{hex} d'Intel.

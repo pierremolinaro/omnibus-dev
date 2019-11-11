@@ -1,0 +1,148 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+\newcommand\OPTION[1]{\colorbox{gray!15}{\ttfamily\bfseries #1}}
+
+
+\chapter{Options de la ligne de commande}
+
+Les options de la ligne de commande commencent toutes par un caractère « \texttt{-} ». La forme courte débute par un simple « \texttt{-} », la forme longue par un double « \texttt{-} ». Certaines options acceptent au choix les deux formes (par exemple \texttt{-{}-verbose} ou \texttt{-v}). Une option ne commençant par un « \texttt{-} » est considérée comme un nom de fichier source. Les deux seules extensions autorisées pour les fichiers sources sont « \texttt{.omnibus} » (fichier source OMNIBUS) et  « \texttt{.omnibus-target} » (fichier de description d'une cible). Par exemple, pour compiler un fichier source \texttt{source.omnibus} avec l'option \emph{verbose} :
+
+\begin{SHELL}
+\bfseries omnibus -v source.omnibus
+\end{SHELL}
+
+Les options peuvent apparaître avant ou après le nom du fichier source, elles sont toujours examinées avant que la compilation ne commence.
+
+
+\sectionLabel{Options générales}{optionsGenerales}
+
+\OPTION{-{}-help} Affiche l'aide.
+
+
+\OPTION{-{}-version} Affiche la version du compilateur OMNIBUS.
+
+
+
+\OPTION{-{}-log-file-read} Affiche l'accès en lecture à tout fichier.
+
+\OPTION{-{}-max-errors=$n$} Arrête la compilation si le nombre de $n$ erreurs est atteint. Par défaut, la borne est égale à $100$.
+
+\OPTION{-{}-max-warnings=$n$} Arrête la compilation si le nombre de $n$ alertes est atteint. Par défaut, la borne est égale à $100$.
+
+\OPTION{-{}-Werror} Transforme toute alerte en erreur.
+
+\OPTION{-{}-verbose}, \OPTION{-v} Affiche des messages indiquant la progression de la compilation.
+
+\OPTION{-{}-Werror} Considère tout \emph{warning} comme une erreur.
+
+\OPTION{-{}-no-color} Les textes affichés sur le terminal sont sans l'enrichissement en couleur.
+
+
+
+
+
+
+
+
+\sectionLabel{Options affectant le code engendré}{optionCodeEngendre}
+
+\OPTION{-{}-no-panic-generation} Inhibe la génération du code de la panique organisée.
+
+
+\OPTION{-{}-no-file-generation} Inhibe l'écriture de fichiers par le compilateur.
+
+\OPTION{-{}-O1} Premier niveau d'optimisation (correspond à l'option \texttt{-O1} de LLVM).
+
+\OPTION{-{}-O2} Premier niveau d'optimisation (correspond à l'option \texttt{-O2} de LLVM).
+
+\OPTION{-{}-O3} Premier niveau d'optimisation (correspond à l'option \texttt{-O3} de LLVM).
+
+\OPTION{-{}-Os} Comme l'option \texttt{-{}-O2}, mais avec des optimisations supplémentaires pour réduire la taille (correspond à l'option \texttt{-Os} de LLVM).
+
+\OPTION{-{}-Oz} Comme l'option \texttt{-{}-Os}, mais avec encore d'autres optimisations pour réduire la taille (correspond à l'option \texttt{-Oz} de LLVM).
+
+
+
+\sectionLabel{Options de débogage}{optionsDebogage}
+
+\OPTION{-{}-output-concrete-syntax-tree} Engendre un fichier au format \texttt{dot} contenant l'arbre syntaxique concret du texte source.
+
+\OPTION{-{}-routine-invocation-graph}, \OPTION{-i} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant le graphe d'invocation des routines.
+
+\OPTION{-{}-do-not-detect-recursive-calls}, \OPTION{-r} N'effectue pas la détection des routines récursives. Par défaut le compilateur affiche un message d'erreur si il trouve des routines récursives.\index{Routines!recursives@récursives}
+
+\OPTION{-{}-display-deadcode-elimination}, \OPTION{-z} Affiche sur le terminal les détails d'élimination du code mort.
+
+\OPTION{-{}-control-register-map} Écrit dans un fichier HTML la tables des registres de contrôle.
+
+\OPTION{-{}-global-constant-dependency-graph}, \OPTION{-c} Écrit dans un fichier au format \texttt{dot}  pouvant être ouvert par \texttt{graphviz}\index{graphviz} le graphe de dépendance des constantes statiques.
+
+\OPTION{-{}-routine-invocation-graph}, \OPTION{-i} Écrit dans un fichier au format \texttt{dot}  pouvant être ouvert par \texttt{graphviz}\index{graphviz} le graphe d'invocation des routines.
+
+\OPTION{-{}-type-dependency-graph}, \OPTION{-t} Écrit dans un fichier au format \texttt{dot}  pouvant être ouvert par \texttt{graphviz}\index{graphviz} le graphe de dépendance des types.
+
+\OPTION{-{}-mode=$string$}, où $string$ est l'une des chaînes suivantes : \texttt{lexical-only},\texttt{syntax-only},\texttt{latex}.
+
+\OPTION{-{}-output-keyword-list-file=$string$}, où $string$ est une chaîne décrivant le formatage de la sortie.
+
+
+
+
+
+
+
+
+
+\sectionLabel{Option de flashage du code engendré}{optionFlashageCodeEngendre}
+
+
+\OPTION{-{}-flash-target}, \OPTION{-f} Après une compilation sans erreur, effectue le flashage du micro-contrôleur cible.
+
+
+
+\section{Options de débogage du compilateur}
+
+
+\OPTION{-{}-output-concrete-syntax-tree} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant l'arbre syntaxique concret du texte source.
+
+
+\OPTION{-{}-mode=$nom$}, où \emph{nom} peut prendre pour valeur :
+\begin{itemize}
+  \item « \emph{vide} » : fonctionnement nominal, le compilateur effectue toutes les phases : analyse lexicale, analyse syntaxique, analyse sémantique, et génération de code ;
+  \item \texttt{lexical-only} : le compilateur s'arrête après l'analyse lexicale, et affiche la séquence des symboles terminaux obtenue ;
+  \item \texttt{syntax-only} : le compilateur s'arrête après l'analyse syntaxique, et affiche l'arbre de dérivation.
+  \item \texttt{latex} : le compilateur s'arrête après l'analyse lexicale, et engendre un fichier latex contenant le texte source.
+\end{itemize}
+
+Écrire l'option \texttt{-{}-mode=} est équivalent à l'absence de cette option.
+
+
+
+
+
+
+\sectionLabel{Options d'accès aux fichiers d'exemple embarqués}{optionsExemplesEmbarques}
+
+\OPTION{-{}-list-embedded-samples}, \OPTION{-l} Affiche la liste des fichiers d'exemple embarqués dans le compilateur.
+
+\OPTION{-{}-extract-embedded-sample-code=$nom$}, \OPTION{-x=$nom$} Extrait le fichier d'exemple $nom$ et l'écrit dans le répertoire courant.
+
+L'utilisation de ces deux options est illustrée à la \refSectionPage{exempleBlinkled}.
+
+
+
+
+
+
+\sectionLabel{Options d'accès aux cibles embarquées}{optionsCiblesEmbarquees}
+
+
+\OPTION{-{}-use-target-dir=$repertoire$}, \OPTION{-T=$repertoire$} N'utilise pas les cibles embarquées, au profit des cibles définies dans le répertoire $repertoire$.
+
+\OPTION{-{}-list-targets}, \OPTION{-L} Affiche la liste des cibles disponibles, soit celles embarquées dans le compilateur, soit, si l'option précédente est présente, celles définies dans le répertoire $repertoire$.
+
+\OPTION{-{}-extract-embedded-targets=$repertoire$}, \OPTION{-X=$repertoire$} Extrait les fichiers de définition des cibles embarquées dans le compilateur et les écrit dans le répertoire $repertoire$.
+
+L'utilisation de ces options est illustrée à la \refSectionPage{exempleDefinitionCible}.

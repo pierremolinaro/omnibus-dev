@@ -1,0 +1,386 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Instructions}
+
+
+
+
+
+\sectionLabel{Déclaration d'une variable locale}{declarationVariableLocale}\index{Variable!locale}
+
+La déclaration d'une variable locale peut prendre plusieurs formes, suivant que la variable est initialisée ou non.
+
+\subsection{Déclaration d'une variable locale initialisée}
+
+\begin{OMNIBUS}
+var nom : Type = expression
+\end{OMNIBUS}
+
+Où :
+\begin{itemize}
+  \item \omnibus=nom= est le nom de la variable locale ;
+  \item \omnibus=Type= est le nom du type de la variable globale ;
+  \item \omnibus=expression= est l'expression qui fournit la valeur initiale de cette variable ; cette expression peut être statique ou non.
+\end{itemize}
+
+L'annotation de type peut être omise ; la variable a alors le type de l'expression qui l'initialise~:
+\begin{OMNIBUS}
+var nom = expression
+\end{OMNIBUS}
+
+
+\subsection{Déclaration d'une variable locale non initialisée}
+\begin{OMNIBUS}
+var nom : Type
+\end{OMNIBUS}
+Où~:
+\begin{itemize}
+  \item \omnibus=nom= est le nom de la variable locale ;
+  \item \omnibus=Type= est le nom du type de la variable globale.
+\end{itemize}
+
+Le compilateur garantit qu'aucune lecture n'est faite avant que la variable reçoive une valeur.
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Déclaration d'une constante locale}{declarationConstanteLocale}\index{Constante!locale}
+
+La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante~:
+
+\begin{OMNIBUS}
+let nom : Type = expression
+\end{OMNIBUS}
+
+Où~:
+\begin{itemize}
+  \item \omnibus=nom= est le nom de la constante globale ;
+  \item \omnibus=Type= est le nom du type de la constante globale ;
+  \item \omnibus=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
+\end{itemize}
+
+Il n'y a aucune restriction pour l'\omnibus=expression=~: elle peut nommer constantes locales et globales, variables locales et globales.
+
+
+
+
+
+
+\section {Instruction d'affectation}
+
+L'instruction d'affectation se présente sous plusieurs formes ; la plus simple est la suivante~:
+
+\begin{OMNIBUS}
+nom = expression
+\end{OMNIBUS}
+
+Où~:
+\begin{itemize}
+  \item \omnibus=nom= est le nom d'une variable globale, d'une variable locale, ou d'un registre de contrôle ;
+  \item \omnibus=expression= est l'expression qui fournit la valeur.
+\end{itemize}
+
+On peut aussi accéder à une propriété d'une variable instance de structure~:
+\begin{OMNIBUS}
+nom.propriété = expression
+\end{OMNIBUS}
+
+Ainsi qu'à un élément de tableau~:
+\begin{OMNIBUS}
+nom [expression_indice] = expression
+\end{OMNIBUS}
+
+Ou encore toute combinaison de propriétés et d'éléments de tableau.
+
+
+
+
+
+\sectionLabel {Opérateurs combinés avec l'affectation}{operateursCombinesAffectation}
+\index{\&=!Entier}
+\index{\textbar=!Entier}
+\index{\^{}=!Entier}
+
+Le \refTableau{tableauOperateursCombinesAffectation} liste les opérateurs combinés avec une affectation.
+\begin{table}[ht]
+\centering
+\begin{tabular}{rcl}
+  \textbf{Opérateur combiné} & \textbf{Écriture équivalente} & \textbf{Lien}\\
+  \omnibus!a &= b! & \omnibus!a = a & b! & \refSectionPage{operateursCombinesAffectationEntier}\\
+  \omnibus!a |= b! & \omnibus!a = a | b! & \refSectionPage{operateursCombinesAffectationEntier}\\
+  \omnibus!a ^= b! & \omnibus!a = a ^ b! & \refSectionPage{operateursCombinesAffectationEntier}\\
+  \omnibus!a += b! & \omnibus!a = a + b! \\
+  \omnibus!a +%= b! & \omnibus!a = a +% b! \\
+  \omnibus!a -= b! & \omnibus!a = a - b! \\
+  \omnibus!a -%= b! & \omnibus!a = a -% b! \\
+  \omnibus!a *= b! & \omnibus!a = a * b! \\
+  \omnibus!a *%= b! & \omnibus!a = a *% b! \\
+  \omnibus-a /= b- & \omnibus-a = a / b- \\
+  \omnibus-a !/= b- & \omnibus-a = a !/ b- \\
+  \omnibus-a %= b- & \omnibus-a = a % b- \\
+  \omnibus-a !%= b- & \omnibus-a = a !% b- \\
+  \omnibus-a <<= b- & \omnibus-a = a << b- \\
+  \omnibus-a >>= b- & \omnibus-a = a >> b- \\
+\end{tabular}
+\caption{Opérateurs combinés avec l'affectation}
+\labelTableau{tableauOperateursCombinesAffectation}
+\end{table}
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction d'affectation «~Bit banding~»}{bitbandRegistreControle}
+
+La technique de «~Bit banding~» est implémentée sur certains processeurs pour pouvoir mettre à 0 ou à 1 un bit d'un registre, et ce de manière atomique. C'est par exemple le cas des Cortex-M4.
+
+Considérons l'instruction suivante~:
+\begin{OMNIBUS}
+GPIOB.PDDR |= 1 << 16
+\end{OMNIBUS}
+Son exécution met à 1 le bit n°16 du registre \omnibus+GPIOB.PDDR+. Mais cette opération n'est pas atomique sur un Cortex-M4. Si elle apparaît dans une fonction s'exécutant en mode utilisateur, elle peut être interrompue.
+
+Pour la rendre atomique, on pourrait l'enfermer dans une \omnibus=section=. En OMNIBUS, une autre possibilité est d'utiliser l'instruction de «~Bit banding~»~:
+\begin{OMNIBUS}
+\~{GPIOB.PDDR : 16} = 1
+\end{OMNIBUS}
+
+La forme générale de cette instruction est~:
+\begin{OMNIBUS}
+\~{registre_contrôle : numéro_bit} = expression_source
+\end{OMNIBUS}
+
+OMNIBUS limite le bit-banding à une zone de registres, aussi le premier argument \omnibus=registre_contrôle= doit nommer un registre de contrôle. L'argument \omnibus=numéro_bit= désigne le bit du registre par son numéro, c'est une expression du type \omnibus=UInt5= pour un registre 32-bits, \omnibus=UInt4= pour un registre 16-bits et \omnibus=UInt3= pour un registre 8-bits.
+L'\omnibus=expression_source= est de type \omnibus=UInt1=, et donne la valeur à affecter au bit du registre.
+
+
+
+
+
+
+\section{Instruction de décomposition d'un entier non signé en tranches}
+
+Cette forme particulière d'affectation permet de décomposer une valeur entière non signée en tranches. Par exemple~:
+\begin{OMNIBUS}
+\~{UInt8 ?1:var b1 ?2:let b2 ?5:let b3} = 0xCC // b1 <- 1, b3 <- 2, b3 <- 12
+\end{OMNIBUS}
+
+\sectionLabel{Instruction \texttt{check}}{directiveCheck}\index{check@\omnibus=check=}
+
+La directive \omnibus=check= apparaît dans une liste d'instructions et a la syntaxe suivante :
+\begin{OMNIBUS}
+check expression
+\end{OMNIBUS}
+
+L'\omnibus=expression= est une expression booléenne calculée statiquement.
+
+Contrairement à l'instruction \omnibus=assert= (\refSectionPage{instructionAssert}) qui évalue l'expression booléenne à l'exécution, la directive \omnibus=check= est toujours évaluée à la compilation. Elle permet d'exprimer des assertions qui sont évaluées lors de la compilation.
+
+Aucun code n'est engendré. La directive \omnibus=check= peut donc apparaître dans des listes d'instructions où la panique est interdite.
+
+Exemples :
+\begin{OMNIBUS}
+check yes  // Ok
+check no // Erreur, expression fausse
+\end{OMNIBUS}
+
+
+
+\sectionLabel{L'instruction \texttt{assert}}{instructionAssert}\index{assert@\omnibus=assert=}
+
+L'instruction \omnibus=assert= a la syntaxe suivante :
+\begin{OMNIBUS}
+assert expression
+\end{OMNIBUS}
+
+L'\omnibus=expression= est une expression booléenne non calculable statiquement.
+
+Si le programme est compilé avec la panique activée, alors le compilateur engendre le code de calcul de l'expression booléenne. Celle-ci sera calculée à l'exécution. Si le résultat est faux, une panique (dont le code est donné par le \refTableau{tableauCodePanique}) est déclenchée.
+
+Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alors aucun code n'est engendré.
+
+Noter que \omnibus=expression= ne doit pas être calculable statiquement. Si elle est calculable statiquement, il faut utiliser la directive \omnibus=check=, \refSectionPage{directiveCheck}. Par exemple, le code suivant provoque une erreur de compilation :
+\begin{OMNIBUS}
+assert yes // Erreur de compilation, l'expression est calculable statiquement
+\end{OMNIBUS}
+
+
+
+
+
+
+
+\section{L'instruction \texttt{panic}}\index{panic@\omnibus=panic=}
+
+L'instruction \omnibus=panic= a la syntaxe suivante :
+\begin{OMNIBUS}
+panic expression
+\end{OMNIBUS}
+
+L'\omnibus=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSubsectionPage{configurationPanic}), c'est un type entier non signé.
+
+Si le programme est compilé avec la panique activée, alors l'exécution de l'instruction \omnibus=panic= déclenche la panique avec le code est la valeur de l'\omnibus=expression=. Pour éviter un conflit de code avec les codes prédéfinis dans OMNIBUS, consulter le \refTableauPage{tableauCodePanique}.
+
+Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alors aucun code n'est engendré, l'instruction est ignorée.
+
+
+
+
+\sectionLabel{Instruction d'appel de procédure}{instructionAppelProc}
+
+\colorbox{red}{À définir}
+
+
+\sectionLabel{Instruction \texttt{if}}{instructionIF}
+\index{if@\omnibus=if=}
+
+L'instruction \omnibus=if= a une structure classique, où \omnibus=condition= est une expression booléenne :
+\begin{OMNIBUS}
+if condition {
+  instructions_then
+}else{
+  instructions_else
+}
+\end{OMNIBUS}
+
+Le compilateur vérifie que la \omnibus=condition= n'est pas une expression statique : une erreur de compilation est émise si elle l'est.
+
+La branche \omnibus=else= est optionnelle :
+\begin{OMNIBUS}
+if condition {
+  instructions_then
+}
+\end{OMNIBUS}
+
+
+Une ou plusieurs branches \omnibus=else if= peuvent être ajoutées, avec ou sans branche \omnibus=else= :
+\begin{OMNIBUS}
+if condition {
+  instructions_then
+}else if condition2 {
+  instructions_elsif
+}else if condition3 {
+  instructions_elsif_3
+}else{
+  instructions_else
+}
+\end{OMNIBUS}
+
+
+\section{Instruction \texttt{while}}
+\index{if@\omnibus=while=}
+
+L'instruction \omnibus=while= permet d'exprimer une répétition, où la \omnibus=condition= est testée avant l'exécution des instructions de la boucle :
+\begin{OMNIBUS}
+while condition {
+  instructions_while
+}
+\end{OMNIBUS}
+
+\omnibus=condition= est une expression booléenne, qui ne doit pas être statique : une erreur de compilation est émise si elle l'est.
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction \texttt{for}}{instructionFor}
+
+
+\subsection{Énumération entière}
+\begin{OMNIBUS}
+for nom : Type in lower_bound ..< upper_bound {
+  instructions_for
+}
+\end{OMNIBUS}
+
+Si il n'est pas lu par les \omnibus=instructions_for=, \omnibus=nom= peut être remplacé par le joker « \omnibus=_= ».
+
+
+
+
+\subsection{Énumération d'un tableau ou d'une chaîne de caractères}
+
+\begin{OMNIBUS}
+for nom in objet while expression {
+  instructions_for
+}
+\end{OMNIBUS}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction d'appel de routine}{instructionAppelRoutine}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction \texttt{switch}}{instructionSwitch}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Instruction \texttt{sync}}
+
+L'instruction \omnibus=sync= est décrite à la \refSectionPage{instructionSync}.
+
+
+
+
+
+\sectionLabel{Instruction \texttt{nop}}{instructionNop}
+
+\begin{OMNIBUS}
+nop
+\end{OMNIBUS}
+
+Le mot réservé \omnibus=nop= engendre une instruction assembleur \emph{nop}, telle que défini par le paramètre \texttt{NOP} dans la définition de la cible (\refSubsectionPage{configurationNop}).
+

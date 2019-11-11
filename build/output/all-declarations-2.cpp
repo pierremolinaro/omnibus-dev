@@ -7632,381 +7632,6 @@ GALGAS_boolNotOperator GALGAS_boolNotOperator::extractObject (const GALGAS_objec
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-typeComparisonResult cPtr_boolEqualOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return kOperandEqual ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_boolEqualOperator::objectCompare (const GALGAS_boolEqualOperator & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolEqualOperator::GALGAS_boolEqualOperator (void) :
-GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolEqualOperator GALGAS_boolEqualOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_boolEqualOperator::constructor_new (THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolEqualOperator::GALGAS_boolEqualOperator (const cPtr_boolEqualOperator * inSourcePtr) :
-GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolEqualOperator) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolEqualOperator GALGAS_boolEqualOperator::constructor_new (LOCATION_ARGS) {
-  GALGAS_boolEqualOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolEqualOperator (THERE)) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                     Pointer class for @boolEqualOperator class                                      *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_boolEqualOperator::cPtr_boolEqualOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_boolEqualOperator::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolEqualOperator ;
-}
-
-void cPtr_boolEqualOperator::description (C_String & ioString,
-                                          const int32_t /* inIndentation */) const {
-  ioString << "[@boolEqualOperator]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_boolEqualOperator::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_boolEqualOperator (THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                               @boolEqualOperator type                                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_boolEqualOperator ("boolEqualOperator",
-                                          & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_boolEqualOperator::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolEqualOperator ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_boolEqualOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolEqualOperator (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolEqualOperator GALGAS_boolEqualOperator::extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_boolEqualOperator result ;
-  const GALGAS_boolEqualOperator * p = (const GALGAS_boolEqualOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolEqualOperator *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolEqualOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cPtr_boolXorOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return kOperandEqual ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_boolXorOperator::objectCompare (const GALGAS_boolXorOperator & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolXorOperator::GALGAS_boolXorOperator (void) :
-GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolXorOperator GALGAS_boolXorOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_boolXorOperator::constructor_new (THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolXorOperator::GALGAS_boolXorOperator (const cPtr_boolXorOperator * inSourcePtr) :
-GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolXorOperator) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolXorOperator GALGAS_boolXorOperator::constructor_new (LOCATION_ARGS) {
-  GALGAS_boolXorOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolXorOperator (THERE)) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                      Pointer class for @boolXorOperator class                                       *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_boolXorOperator::cPtr_boolXorOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_boolXorOperator::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolXorOperator ;
-}
-
-void cPtr_boolXorOperator::description (C_String & ioString,
-                                        const int32_t /* inIndentation */) const {
-  ioString << "[@boolXorOperator]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_boolXorOperator::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_boolXorOperator (THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                @boolXorOperator type                                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_boolXorOperator ("boolXorOperator",
-                                        & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_boolXorOperator::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolXorOperator ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_boolXorOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolXorOperator (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolXorOperator GALGAS_boolXorOperator::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_boolXorOperator result ;
-  const GALGAS_boolXorOperator * p = (const GALGAS_boolXorOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolXorOperator *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolXorOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cPtr_boolOrOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return kOperandEqual ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-
-typeComparisonResult GALGAS_boolOrOperator::objectCompare (const GALGAS_boolOrOperator & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolOrOperator::GALGAS_boolOrOperator (void) :
-GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolOrOperator GALGAS_boolOrOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_boolOrOperator::constructor_new (THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolOrOperator::GALGAS_boolOrOperator (const cPtr_boolOrOperator * inSourcePtr) :
-GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolOrOperator) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolOrOperator GALGAS_boolOrOperator::constructor_new (LOCATION_ARGS) {
-  GALGAS_boolOrOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolOrOperator (THERE)) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                       Pointer class for @boolOrOperator class                                       *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cPtr_boolOrOperator::cPtr_boolOrOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * cPtr_boolOrOperator::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolOrOperator ;
-}
-
-void cPtr_boolOrOperator::description (C_String & ioString,
-                                       const int32_t /* inIndentation */) const {
-  ioString << "[@boolOrOperator]" ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-acPtr_class * cPtr_boolOrOperator::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_boolOrOperator (THERE)) ;
-  return ptr ;
-}
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                @boolOrOperator type                                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_boolOrOperator ("boolOrOperator",
-                                       & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_boolOrOperator::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolOrOperator ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_boolOrOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolOrOperator (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_boolOrOperator GALGAS_boolOrOperator::extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_boolOrOperator result ;
-  const GALGAS_boolOrOperator * p = (const GALGAS_boolOrOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolOrOperator *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolOrOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//   Object comparison                                                                                                 *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 
 
 typeComparisonResult GALGAS_expressionAST::objectCompare (const GALGAS_expressionAST & inOperand) const {
@@ -11180,6 +10805,320 @@ static void freeExtensionGetter_integerDeclarationAST_typeName (void) {
 
 C_PrologueEpilogue gGetter_integerDeclarationAST_typeName (defineExtensionGetter_integerDeclarationAST_typeName,
                                                            freeExtensionGetter_integerDeclarationAST_typeName) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * p = (const cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mLLVMOperation.objectCompare (p->mProperty_mLLVMOperation) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::objectCompare (const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::constructor_default (LOCATION_ARGS) {
+  return GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::constructor_new (GALGAS_string::constructor_default (HERE)
+                                                                                            COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (const cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::constructor_new (const GALGAS_string & inAttribute_mLLVMOperation
+                                                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage result ;
+  if (inAttribute_mLLVMOperation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (inAttribute_mLLVMOperation COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::getter_mLLVMOperation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * p = (const cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage) ;
+    result = p->mProperty_mLLVMOperation ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::getter_mLLVMOperation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMOperation ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                      Pointer class for @inlineInfix_integer_compileTimeInt_operatorUsage class                      *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (const GALGAS_string & in_mLLVMOperation
+                                                                                                                                COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE),
+mProperty_mLLVMOperation (in_mLLVMOperation) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage ;
+}
+
+void cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::description (C_String & ioString,
+                                                                                  const int32_t inIndentation) const {
+  ioString << "[@inlineInfix_integer_compileTimeInt_operatorUsage:" ;
+  mProperty_mLLVMOperation.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (mProperty_mLLVMOperation COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               @inlineInfix_integer_compileTimeInt_operatorUsage type                                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage ("inlineInfix_integer_compileTimeInt_operatorUsage",
+                                                                                  & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::extractObject (const GALGAS_object & inObject,
+                                                                                                                                                  C_Compiler * inCompiler
+                                                                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage result ;
+  const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * p = (const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("inlineInfix_integer_compileTimeInt_operatorUsage", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * p = (const cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mLLVMOperation.objectCompare (p->mProperty_mLLVMOperation) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::objectCompare (const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::constructor_default (LOCATION_ARGS) {
+  return GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::constructor_new (GALGAS_string::constructor_default (HERE)
+                                                                                            COMMA_THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (const cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::constructor_new (const GALGAS_string & inAttribute_mLLVMOperation
+                                                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage result ;
+  if (inAttribute_mLLVMOperation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (inAttribute_mLLVMOperation COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::getter_mLLVMOperation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * p = (const cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage) ;
+    result = p->mProperty_mLLVMOperation ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_string cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::getter_mLLVMOperation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mLLVMOperation ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                      Pointer class for @inlineInfix_compileTimeInt_integer_operatorUsage class                      *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (const GALGAS_string & in_mLLVMOperation
+                                                                                                                                COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE),
+mProperty_mLLVMOperation (in_mLLVMOperation) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage ;
+}
+
+void cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::description (C_String & ioString,
+                                                                                  const int32_t inIndentation) const {
+  ioString << "[@inlineInfix_compileTimeInt_integer_operatorUsage:" ;
+  mProperty_mLLVMOperation.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (mProperty_mLLVMOperation COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                               @inlineInfix_compileTimeInt_integer_operatorUsage type                                *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage ("inlineInfix_compileTimeInt_integer_operatorUsage",
+                                                                                  & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::extractObject (const GALGAS_object & inObject,
+                                                                                                                                                  C_Compiler * inCompiler
+                                                                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage result ;
+  const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * p = (const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("inlineInfix_compileTimeInt_integer_operatorUsage", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Object comparison                                                                                                 *

@@ -1,0 +1,204 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Les types tableau}
+
+OMNIBUS implémente les tableaux de taille fixe. La déclaration d'un type tableau utilise obligatoirement la construction \omnibus=type= (\refSectionPage{DecTypeTableau}), il n'est pas possible de déclarer un type tableau anonyme.
+
+
+
+
+
+
+
+
+\sectionLabel{Déclaration d'un type tableau}{DecTypeTableau}
+
+La déclaration d'un type tableau est réalisée par la construction \omnibus=newtype=~:
+
+\begin{OMNIBUS}
+newtype MonTypeTableau : UInt32 [20]
+\end{OMNIBUS}
+
+Cette construction déclare le type \omnibus=MonTypeTableau= comme tableau de $20$ instances de \omnibus=UInt32=.
+
+Tout type est acceptable comme élément de tableau (ici \omnibus=UInt32=), du moment qu'il est instanciable et copiable. Essayer de définir un type tableau avec un type non instanciable et/ou non copiable entraîne une erreur de compilation.
+
+La taille du tableau est une expression statique, de type entier. Il est donc possible de faire référence à des constantes globales, comme par exemple :
+
+\begin{OMNIBUS}
+let SIZE = 20
+typealias MonTypeTableau = [SIZE @x UInt32]
+\end{OMNIBUS}
+
+
+\sectionLabel{Construction d'un tableau}{ConstructionTableau}
+
+Un tableau statique implémente deux constructeurs~:
+\begin{itemize}
+  \item un constructeur qui initialise tous les éléments du tableau à la même valeur (\refSubsectionPage{constructeurTableauRepeated})~;
+  \item un constructeur qui initialise chaque élément du tableau à une valeur particulière (\refSubsectionPage{constructeurTableauValeurParticuliere}).
+\end{itemize}
+
+
+
+
+\subsectionLabel{Constructeur \texttt{(!repeated)}}{constructeurTableauRepeated}
+L'expression \omnibus=MonTypeTableau (!repeated:exp)= est une instance du type \omnibus=MonTypeTableau=, dont tous les éléments sont initialisés avec la valeur de \omnibus=exp=. Par exemple~:
+\begin{OMNIBUS}
+let v : UInt32 = 0
+var t : UInt32 [10] = UInt32 [10] (!repeated:v)
+\end{OMNIBUS}
+
+
+\subsectionLabel{Constructeur \texttt{(!!...)}}{constructeurTableauValeurParticuliere}
+Ce constructeur possède autant d'arguments que d'éléments dans le tableau. Le premier est affecté à l'élément d'indice 0, le deuxième à celui d'indice 1, ... Par exemple~:
+\begin{OMNIBUS}
+var t UInt32 [3] = UInt32 [3] (!0 !1 !2)
+\end{OMNIBUS}
+
+
+
+\sectionLabel{Déclaration d'une instance de tableau}{DecInstanceTableau}
+
+La déclaration d'une instance de tableau s'effectue en nommant le type tableau et l'expression de construction de ce tableau, où \omnibus=v= est une valeur du type de l'élément de tableau (ici, \omnibus=UInt32=)~:
+
+\begin{OMNIBUS}
+let v UInt32 = 0
+var t : MonTypeTableau = MonTypeTableau (!repeated:v)
+\end{OMNIBUS}
+
+Et on peut omettre l'annotation de type~:
+
+\begin{OMNIBUS}
+var t = MonTypeTableau (!repeated:v)
+\end{OMNIBUS}
+
+
+
+
+\sectionLabel{Obtention de la taille d'un tableau}{ObtentionTailleTableau}
+
+L'expression \omnibus=MonTypeTableau.count= renvoie la taille du tableau, sous la forme d'un entier statique (c'est-à-dire de type \omnibus=LiteralInt=, voir \refChapterPage{chapitreTypeEntierStatique}). Ou peut aussi appliquer \omnibus=count= à une instance de tableau.
+
+On peut donc utiliser les expressions \omnibus=$t.count= et \omnibus=$monTypeTableau.count= pour itérer sur tous les élements d'un tableau~:
+\begin{OMNIBUS}
+var t = MonTypeTableau (!repeated:0)
+for i UInt32 in 0 ..< t.count {
+  t [i] = i
+}
+for i UInt32 in 0 ..< MonTypeTableau.count {
+  t [i] = i
+}
+\end{OMNIBUS}
+
+
+Une erreur de compilation est déclenchée si on écrit~:
+\begin{OMNIBUS}
+var s = MonTypeTableau.count // ERREUR
+\end{OMNIBUS}
+
+En effet, \omnibus=MonTypeTableau.count= est un entier statique et le type \emph{entier statique} ne peut pas être attribué à une variable. Il faut préciser obligatoirement un type d'entier~:
+
+\begin{OMNIBUS}
+var s UInt32 = MonTypeTableau.count // Ok
+\end{OMNIBUS}
+
+Ce type peut être signé ou non signé, du moment que sa plage de valeur permet de représenter la valeur statique.
+
+
+
+
+
+
+\sectionLabel{Accès à un élément d'un tableau}{AccesElementTableau}
+
+L'accès à un élément d'un tableau s'effectue par la notation classique \omnibus=[expression_indice]=. Les indices valides commencent à $0$ jusqu'à la taille du tableau moins $1$.
+
+L'accès à un élément de tableau est valide dans les constructions suivantes~:
+\begin{itemize}
+  \item expression~: \omnibus!var x = t [1]! ;
+  \item cible d'une affectation~: \omnibus!t [1] = x! ;
+  \item cible d'un opérateur combiné à une affectation~: \omnibus!t [1] += x! ;
+\end{itemize}
+
+L'\omnibus=expression_indice= doit être une expression entière, signée ou non signée.
+
+\subsection{Expression indice statique}
+
+Si l'\omnibus=expression_indice= est statique, c'est-à-dire dont la valeur est calculée à la compilation, la vérification de sa validité est effectuée à la compilation. Par exemple, pour un tableau \omnibus=t= de $20$ éléments~:
+\begin{OMNIBUS}
+t [0] // Ok
+t [19] // Ok
+t [-1] // Erreur de compilation, indice négatif
+t [20] // Erreur de compilation, indice trop grand
+\end{OMNIBUS}
+
+Comme la validité est effectuée à la compilation, aucune vérification de validité n'est effectuée à l'exécution.
+
+
+\subsectionLabel{Expression indice non signée}{indiceNonSigne}
+
+Si l'\omnibus=expression_indice= est une instance d'un type entier non signé, il y a deux possibilités.
+
+Soit ce type entier non signé présente une valeur maximum supérieure ou égale à la taille du tableau~: alors le code engendré vérifie à l'exécution que l'\omnibus=expression_indice= a une valeur valide. Dans l'exemple ci-dessous, le tableau \omnibus=t= contient $20$ éléments, l'\omnibus=expression_indice= doit donc être inférieure ou égale à $19$ ; or la plage de valeurs de \omnibus=UInt32= dépasse cette borne, aussi la validité est vérifiée à l'exécution. En cas d'échec, la panique est déclenchée (\refTableauPage{tableauCodePanique}).
+\begin{OMNIBUS}
+var i UInt32 = ...
+var x = t [i] // Vérification à l'exécution que i < 20
+\end{OMNIBUS}
+
+
+
+La seconde possibilité est que ce type entier non signé présente une valeur maximum strictement inférieure à la taille du tableau~: la compilation garantit que l'indice sera toujours valide, aucune vérification n'est effectuée à l'exécution. Par exemple~:
+\begin{OMNIBUS}
+var i UInt4 = ... // Donc 0 ≤ i ≤ 15
+var x = t [i] // Aucune vérification à l'exécution car toujours i < 20
+\end{OMNIBUS}
+
+
+
+\subsectionLabel{Expression indice signée}{indiceSigne}
+
+Quand l'\omnibus=expression_indice= est une expression entière signée, il faut vérifier~:
+\begin{itemize}
+  \item qu'elle est positive ou nulle ;
+  \item qu'elle est strictement inférieure à la taille du tableau.
+\end{itemize}
+
+La première vérification est toujours réalisée à l'exécution ; la seconde dépend de la valeur maximum du type entier, de manière analogue à ce qui est fait pour un indice entier non signé. Donc, pour un tableau \omnibus=t= de $20$ éléments~:
+
+\begin{OMNIBUS}
+var i Int32 = ...
+var x = t [i] // Vérification à l'exécution que 0 ≤ i < 20
+\end{OMNIBUS}
+
+
+\begin{OMNIBUS}
+var i Int4 = ... // Donc -16 ≤ i < 15
+var x = t [i] // Vérification à l'exécution que 0 ≤ i
+\end{OMNIBUS}
+
+En cas d'échec de la vérification à l'exécution, la panique est déclenchée (\refTableauPage{tableauCodePanique}).
+
+\subsection{Accès à un élément en mode panique}
+
+Dans une liste d'instructions devant être exécutée en mode panique, les instructions pouvant engendrer une panique sont interdites et leur présence entraîne une erreur de compilation.
+
+Ainsi l'accès à un élément de tableau est donc accepté par le compilateur si l'\omnibus=expression_indice= est~:
+\begin{itemize}
+\item une expression statique ;
+\item ou une expression entière non signée, dont la valeur maximum est strictement inférieure à la taille du tableau.
+\end{itemize}
+
+
+Donc l'accès à un élément de tableau est donc rejeté par le compilateur si l'\omnibus=expression_indice= est~:
+\begin{itemize}
+\item une expression entière signée ;
+\item ou une expression entière non signée, dont la valeur maximum est supérieure ou égale à la taille du tableau.
+\end{itemize}
+
+

@@ -10,15 +10,6 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            Function 'copyableAttribute'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                            Function 'minValueForInteger'                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -38,6 +29,20 @@ class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & const
                                                  const class GALGAS_uint & constinArgument1,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                          Routine 'addIntegerInfixOperator'                                          *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void routine_addIntegerInfixOperator (const class GALGAS_omnibusInfixOperator constinArgument0,
+                                      const class GALGAS_omnibusType constinArgument1,
+                                      const class GALGAS_string constinArgument2,
+                                      class GALGAS_infixOperatorMap & ioArgument3,
+                                      const class GALGAS_omnibusType constinArgument4,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

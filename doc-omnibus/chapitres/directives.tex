@@ -1,0 +1,63 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Directives}
+
+
+\sectionLabel{Directive \texttt{target}}{directiveTarget}\index{target@\omnibus=target=}
+
+La directive \omnibus=target= fixe la cible pour laquelle le code source est compilé. Sa syntaxe est la suivante~:
+\begin{OMNIBUS}
+target "cible"
+\end{OMNIBUS}
+Où \omnibus="cible"= est le nom du descriptif de la cible.
+
+
+
+
+
+\sectionLabel{Directive \texttt{import}}{directiveImport}\index{import@\omnibus=import=}
+
+
+La directive \omnibus=import= permet d'ajouter les définitions contenues dans le fichier texte nommé. Sa syntaxe est la suivante~:
+\begin{OMNIBUS}
+import "chemin.omnibus"
+\end{OMNIBUS}
+Où \omnibus="chemin.omnibus"= est un chemin (absolu, relatif) vers le fichier à importer.
+
+Importer plusieurs fois le même fichier n'est pas une erreur. Le compilateur garde trace des importations déjà effectuées et ignore les importations des fichiers déjà importés.
+
+L'extension \texttt{.omnibus} doit être mentionnée dans le chemin.
+
+
+\sectionLabel{La directive \texttt{check target}}{directiveCheckTarget}\index{check target}
+
+La directive \omnibus=check target= permet de vérifier l'identité de la cible. Elle est utile pour s'assurer qu'un fichier est acceptable par une cible. À la compilation, toute directive \omnibus=check target= incorrecte entraîne une erreur.
+
+Par exemple, compiler pour la cible \omnibus+"teensy-3-1"+ est spécifié par~:
+
+\begin{OMNIBUS}
+target "teensy-3-1"
+\end{OMNIBUS}
+
+Si la définition du projet implique d'importer le fichier \omnibus+"monFichier.omnibus"+~:
+
+\begin{OMNIBUS}
+target "teensy-3-1"
+import "monFichier.omnibus"
+\end{OMNIBUS}
+
+Si le contenu de ce fichier commence par~:
+\begin{OMNIBUS}
+check target "lpc2294"
+\end{OMNIBUS}
+
+Alors une erreur de compilation apparaît. La directive \omnibus=check target= doit être~:
+\begin{OMNIBUS}
+check target "teensy-3-1"
+\end{OMNIBUS}
+

@@ -1,0 +1,71 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapterLabel{Le type \texttt{\$ctInt}}{chapitreTypeEntierStatique}
+
+Ce chapitre est consacré au type \omnibus!$ctInt!, \emph{compile time integer}. Ce type est celui de valeurs entières évaluées lors de la compilation.
+
+C'est le type de toute constante entière littérale. Mais ce type est aussi applicable à des constantes \emph{entières statiques}, c'est-à-dire dont la valeur est calculée à la compilation.
+
+Le type \omnibus!$ctInt! n'est pas applicable à une variable : une variable entière doit être déclarée du type \omnibus!$uintN! (entier non signé de $N$ bits) ou \omnibus!$intN! (entier signé de $N$ bits), décrit au \refChapterPage{chapitreTypesEntiers}.
+
+
+Le langage accepte des constantes littérales entières d'une valeur quelconque.
+
+Il est valide de déclarer des constantes globales (c'est-à-dire définies en dehors de toute construction) de type \omnibus!$ctInt! :
+\begin{OMNIBUS}
+let N $ctInt = 1_000_000 // Ok, N a pour type $ctInt
+\end{OMNIBUS}
+
+L'annotation de type peut être omise :
+\begin{OMNIBUS}
+let N = 1_000_000 // Ok, N a pour type $ctInt
+\end{OMNIBUS}
+
+
+
+Il est possible d'utiliser une constante entière statique pour définir une autre constante :
+\begin{OMNIBUS}
+let P = N + 1 // Ok, P a pour type $ctInt, et vaut 1_000_001
+\end{OMNIBUS}
+
+Le type \omnibus!$ctInt! n'est pas acceptable pour une variable, aussi la déclaration suivante provoque une erreur de compilation :
+\begin{OMNIBUS}
+var N = 1_000_000 // Erreur, $ctInt invalide pour une variable
+\end{OMNIBUS}
+
+Il faut une annotation de type qui nomme un type \omnibus!$uintN! (entier non signé de $N$ bits) ou \omnibus!$intN! (entier signé de $N$ bits) :
+\begin{OMNIBUS}
+var v : $uint32 = 1_000_000 // Ok
+\end{OMNIBUS}
+
+Une constante entière statique de type \omnibus!$ctInt! est silencieusement convertie en un type entier \omnibus!UIntN! ou \omnibus!IntN!, en vérifiant si la conversion est possible ; par exemple, l'écriture suivante déclenche une erreur de compilation :
+\begin{OMNIBUS}
+var w $uint8 = 1_000 // Erreur, 1_000 ne peut pas être représenté
+                     // par un entier non signé de 8 bits
+\end{OMNIBUS}
+
+Comme les constantes entières statiques sont calculées à la compilation, l'écriture suivante est correcte~:
+\begin{OMNIBUS}
+let A = 1_000_000_000_000_000_000_000_000_000_000_000_000_000
+let B = 1_000_000_000_000_000_000_000_000_000_000_000_000_001
+var z $uint1 = B - A
+\end{OMNIBUS}
+
+En effet, la valeur initiale de \omnibus!z! est $1$, représentable par un entier non signé de $1$ bit.
+
+
+\section{Opérateurs préfixés}
+
+Deux opérateurs sont définis : \omnibus!-! et \omnibus!-%! renvoient l'opposé de l'argument. Les deux opérateurs sont équivalents lorsqu'ils s'appliquent à un \omnibus!$ctInt!.
+
+
+
+\section{Opérateurs infixés}
+
+
+

@@ -1,0 +1,170 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Panique organisée}
+
+
+Une panique peut survenir dans deux situations~:
+\begin{itemize}
+  \item exécution d'une opération provoquant la panique~;
+  \item déclenchement d'une interruption pour laquelle aucune routine n'a été définie.
+\end{itemize}
+
+
+Une panique est caractérisée par trois informations~:
+\begin{itemize}
+  \item son code~;
+  \item le nom du fichier source de l'opération qui a levé la panique~;
+  \item le numéro de ligne du fichier source de l'opération qui a levé la panique.
+\end{itemize}
+
+Les types du code et du numéro de ligne sont définies dans la configuration de la cible (\refSubsectionTitlePage{configurationPanic}).
+
+
+
+
+
+
+
+\section{Exécution d'une opération provoquant la panique}
+
+Le code correspondant est défini dans le \refTableau{tableauCodePanique}.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{rp{9cm}p{3.5cm}}
+  \textbf{Code} & \textbf{Signification} & \textbf{Lien} \\
+   1 & Échec de l'instruction \omnibus+assert+ & \refSectionPage{instructionAssert} \\
+   2 & Dépassement de capacité de l'addition non signée (\omnibus-+-) &  \refSectionPage{operateursInfixArithmétiques} \\
+   3 & Dépassement de capacité de l'addition signée (\omnibus-+-) &  \refSectionPage{operateursInfixArithmétiques} \\
+   4 & Dépassement de capacité de la soustraction non signée (\omnibus+-+) & \refSectionPage{operateursInfixArithmétiques} \\
+   5 & Dépassement de capacité de la soustraction signée (\omnibus+-+) & \refSectionPage{operateursInfixArithmétiques} \\
+   6 & Dépassement de capacité de la multiplication non signée (\omnibus+*+) & \refSectionPage{operateursInfixArithmétiques} \\
+   7 & Dépassement de capacité de la multiplication signée (\omnibus+*+) & \refSectionPage{operateursInfixArithmétiques} \\
+   8 & Division non signée par zéro (\omnibus+/+) & \refSectionPage{operateursInfixArithmétiques} \\
+   9 & Division signée par zéro (\omnibus+/+) & \refSectionPage{operateursInfixArithmétiques} \\
+   10 & Modulo non signé par zéro (\omnibus+%+) & \refSectionPage{operateursInfixArithmétiques} \\
+   11 & Modulo signé par zéro (\omnibus+%+) & \refSectionPage{operateursInfixArithmétiques} \\
+   12 & Dépassement de capacité d'une conversion entre entiers (\omnibus+convert+) & \refSubsectionPage{conversionsPouvantEchouer} \\
+   13 & Dépassement de capacité d'un champ de registre de contrôle & \\
+   14 & Indice de tableau négatif & \refSubsectionPage{indiceSigne} \\
+   15 & Indice de tableau supérieur ou égal à la taille du tableau & \refSubsectionPage{indiceNonSigne}, \refSubsectionPage{indiceSigne} \\
+   16 & Instruction \omnibus=sync= invalide &  \\
+\end{tabular}
+\caption{Code des paniques}\index{Panique!Code}
+\labelTableau{tableauCodePanique}
+\ligne
+\end{table}
+
+
+\section{Occurrence d'une interruption sans routine associée}
+
+Le déclenchement d'une interruption pour laquelle aucune routine n'a été définie provoque la panique :
+\begin{itemize}
+  \item son code est le numéro associé à l'interruption, comme définie à la \refSubsectionTitlePage{configurationInterrupts}~;
+  \item son numéro de ligne est $0$~;
+  \item le nom de fichier source associée est la chaîne vide.
+\end{itemize}
+
+
+
+
+%\sectionLabel{Définition des types liés à la panique}{typePanique}\index{panique:@\omnibus=panic=}
+%
+%Une panique est caractérisée par trois informations~:
+%\begin{itemize}
+%  \item son code (\refTableauPage{tableauCodePanique})~;
+%  \item le nom du fichier source de l'instruction qui a levé la panique~;
+%  \item le numéro de ligne du fichier source de l'instruction qui a levé la panique.
+%\enxd{itemize}
+%
+%Le type du code et du numéro de ligne ne sont pas prédéfinis par le langage. La construction suivante définit ces types~:
+%\begin{OMNIBUS}
+%panique : nomDuTypeDuCode nomDuTypeDuNumeroDeLigne
+%\end{OMNIBUS}
+%
+%Par exemple, les numéros de code sont des entiers signés 32 bits, et les numéros de ligne des entiers non signés 32 bits~:
+%\begin{OMNIBUS}
+%panique : Int32 UInt32
+%\end{OMNIBUS}
+%
+%Cette construction doit apparaître exactement une fois. Normalement, c'est le fichier de définition de la cible qui la contient.
+
+
+\sectionLabel{Routines exécutées lors de l'occurrence d'une panique}{routinePanique}
+
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Occurrence d'une panique}};
+    \node [block] (raz) [below=of start] {Masquage des interruptions};
+    \node [block] (setup) [below=of raz] {Routines \texttt{\bf panic setup}};
+    \node [block] (loop) [below=of setup] {Routines \texttt{\bf panic loop}};
+
+    \draw [-stealth, thick] (start) -- (raz);
+    \draw [-stealth, thick] (raz) -- (setup);
+    \draw [-stealth, thick] (setup) -- (loop);
+    \draw [-stealth, thick] (loop.south) -- +(0, -.25) -- +(2.75, -.25) -- +(2.75, 0.75)-- +(0, 0.75);
+  \end{tikzpicture}
+  \caption{Organigramme de la réponse à une panique}
+  \labelFigure{sequencePanique}
+  \ligne
+\end{figure}
+
+Lors de l'occurrence d'une panique, l'exécution séquentielle des instructions est abandonnée, et~:
+\begin{itemize}
+  \item les interruptions sont masquées, si elles ne le sont pas déjà~;
+  \item les routines \omnibus=panic setup= sont exécutées une fois~;
+  \item les routines \omnibus=panic loop= sont exécutées indéfiniment.
+\end{itemize}
+Ce fonctionnement est illustré à \refFigure{}{sequencePanique}.
+
+Si plusieurs routines de panique \omnibus=panic setup= sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Ces routines offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de la panique.
+
+Si plusieurs routines de panique \omnibus=panic loop= sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Ces routines permettent de signaler d'une manière répétitive l'occurrence d'une panique.
+
+\subsectionLabel{Routines de panique \texttt{setup} et \texttt{loop}}{routinesPanique}
+\index{panic loop@\omnibus=panic loop=}
+\index{panic setup@\omnibus=panic setup=}
+\index{Routine!panic\omnibus=panic=}
+
+Leur syntaxe est la suivante~:
+\begin{OMNIBUS}
+panic nom priorite {
+  liste_instructions
+}
+\end{OMNIBUS}
+
+\omnibus=nom= est soit \omnibus=setup=, soit \omnibus=loop=. \omnibus=priorite= est une constante entière, comprise entre $0$ et $2^{64}-1$. Si il y a plusieurs routines de panique de même nom, elles sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines de panique de même nom n'ont pas la même priorité.
+
+\omnibus=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer de panique. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \omnibus=+= est interdite, il faut utiliser \omnibus=&+= à la place.
+
+Trois constantes sont prédéfinies~:
+\begin{itemize}
+  \item \omnibus=CODE=, qui contient le code de panique, et dont le type est défini par la construction \omnibus=panic:= (\refSubsectionPage{configurationPanic})~;
+  \item \omnibus=FILE=, qui contient le nom du fichier source de l'instruction qui a déclenché la panique, et dont le type est \omnibus=LiteralString=~;
+  \item \omnibus=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a déclenché la panique, et dont le type est défini par la construction \omnibus=PANIC:= (\refSubsectionPage{configurationPanic}).
+\end{itemize}
+
+Les trois constantes \omnibus=CODE=, \omnibus=FILE= et \omnibus=LINE= permettent de signaler les caractéristiques de la panique.
+
+
+\section{Exemples}
+
+Pour redémarrer un processeur ARMv7 lors d'une panique, on peut écrire la routine \omnibus=panic setup= suivante~:
+\begin{OMNIBUS}
+panic setup 255 {
+  AIRCR = {AIRCR !VECTKEY:0x5FA !SYSRESETREQ:1}
+}
+\end{OMNIBUS}

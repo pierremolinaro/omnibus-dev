@@ -1,0 +1,118 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Expressions}
+
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+  \textbf{Priorité} & \textbf{Opérateur} & \textbf{Commentaire}\\
+   0 & \omnibus+-+, \omnibus+-%+ & \emph{moins} unaire \\
+   0 & \omnibus+~+, \omnibus+not+ & \emph{complémentation} binaire et \emph{non} logique \\
+   1 & \omnibus=convert= & Conversion \\
+   2 & \omnibus+*+, \omnibus+*%+, \omnibus+/+, \omnibus+!/+, \omnibus-%-, \omnibus-!%- & Multiplication, division, modulo \\
+   3 & \omnibus-+-, \omnibus-+%-, \omnibus+-+, \omnibus+-%+ & Addition, soustraction \\
+   4 & \omnibus+<<+, \omnibus+>>+ & Décalage à gauche et à droite \\
+   5 & \omnibus+≤+, \omnibus+<+, \omnibus+>=+, \omnibus+>+ & Comparaison \\
+   6 & \omnibus+==+, \omnibus+≠+ & Test d'égalité, d'inégalité \\
+   7 & \omnibus+&+ & \emph{et} binaire \\
+   8 & \omnibus+^+ & \emph{ou exclusif} binaire \\
+   9 & \omnibus+|+ & \emph{ou} binaire \\
+   10 & \omnibus+and+ & \emph{et} logique \\
+   11 & \omnibus+xor+ & \emph{ou exclusif} logique \\
+   12 & \omnibus+or+ & \emph{ou} logique \\
+\end{tabular}
+\caption{Priorité des opérateurs}\index{Operateur@Opérateur!Priorite@Priorité}
+\labelTableau{tableauPrioriteOperateurs}
+\end{table}
+
+
+
+\section{Opérateur $\sim$}
+
+L'opérateur $\sim$ renvoie la complémentation bit-à-bit d'un entier non signé. Une erreur de compilation est déclenchée si l'opérateur est appliqué à un entier signé~:
+\begin{OMNIBUS}
+let x Int8 = 3
+let y = ~ x // Erreur, x est signé
+\end{OMNIBUS}
+
+Le nombre de bits complémentés dépend du nombre de bits du type entier non signé~:
+\begin{OMNIBUS}
+let x UInt8 = 1
+let y = ~ x // y est égal à 0xFE
+let z UInt16 = 1
+let t = ~ z // t est égal à 0xFFFE
+\end{OMNIBUS}
+
+L'opérateur $\sim$ ne peut s'appliquer à une constante entière statique uniquement si le type du résultat peut être inféré, et que ce type est un entier non signé~:
+\begin{OMNIBUS}
+let x = ~ 1 // Erreur, le type du résultat ne peut pas être inféré
+let y Int8 = ~ 1 // Erreur, le type inféré est signé
+let z UInt8 = ~ 1 // Ok, z = 0xFE
+let t UInt16 = ~ 1 // Ok, z = 0xFFFE
+\end{OMNIBUS}
+
+
+
+
+
+\section{Expression \texttt{if}}
+
+\begin{OMNIBUS}
+let x = if expression_1 { expression_2 } else { expression_3 }
+\end{OMNIBUS}
+
+L'expression \omnibus=if= fonctionne comme suit~:
+\begin{itemize}
+  \item l'\omnibus=expression_1= est une expression booléenne~;
+  \item si l'\omnibus=expression_1= est vraie, l'\omnibus=expression_2= est calculée et sa valeur est celle renvoyée par l'expression \omnibus=if=~;
+  \item si l'\omnibus=expression_1= est fausse, l'\omnibus=expression_3= est calculée et sa valeur est celle renvoyée par l'expression \omnibus=if=.
+\end{itemize}
+
+Les expressions \omnibus=if= peuvent se succéder, dans tous les cas il faut terminer par une clause \omnibus=else=~:
+
+\begin{OMNIBUS}
+let x =
+  if expression_1 {
+    expression_2
+  }else if expression_3 {
+    expression_4
+  }else{
+    expression_5
+  }
+\end{OMNIBUS}
+
+
+
+\section{Expression \texttt{addressof}}
+
+
+L'expression \omnibus=addressof= permet d'obtenir l'adresse de toute \emph{lvalue}. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \omnibus=UInt32=).
+
+Par exemple~:
+\begin{OMNIBUS}
+var x = yes // x est booléen
+let adresse UInt32 = addressof (x)
+let adresse_registre_controle UInt32 = addressof (PORTA_PCR0)
+\end{OMNIBUS}
+
+
+
+
+\section{Expression \texttt{sizeof}}
+
+
+L'expression \omnibus=sizeof= permet d'obtenir la taille (en nombre d'octets) de toute \emph{lvalue}, ou de tout type. La valeur retournée a pour type l'entier non signé de la taille d'un pointeur (sur Cortex, c'est donc \omnibus=UInt32=).
+
+Par exemple~:
+\begin{OMNIBUS}
+var x = yes // x est booléen
+let s1 UInt32 = sizeof (x) // 1
+let s2 UInt32 = sizeof (Bool) // 1
+\end{OMNIBUS}
+

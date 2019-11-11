@@ -59,25 +59,25 @@ override method @boolTypeAST enterInContext
   [!?ioContext.mPrefixOperatorMap insertKey !key !boolType !boolType !@boolNotOperator.new]
  #--- Enter | infix operator
   key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolOrOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"or"}]
   key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolOrOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"or"}]
   key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolOrOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"or"}]
  #--- Enter ^ infix operator
   key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolXorOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"xor"}]
   key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolXorOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"xor"}]
   key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolXorOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"xor"}]
  #--- Enter == infix operator
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolEqualOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"icmp eq"}]
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolEqualOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"icmp eq"}]
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@boolEqualOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"icmp eq"}]
 #--- Implicit conversion to i1 for test expressions
   key = @lstring.new {![boolType omnibusTypeDescriptionName] !.nowhere}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean.new]
@@ -138,86 +138,6 @@ override method @boolNotOperator generateCode
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?receiverOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   let s = [outResultValue llvmName] + " = xor i1 1, " + [receiverOperand llvmName]
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPILE TIME INFIX OPERATORS
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @boolEqualOperator : @omnibusInfixOperatorUsage {
-}
-
-#·······················································································································
-
-override method @boolEqualOperator generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outResultValue
-{
-  var leftOperand = inLeftOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
-  var rightOperand = inRightOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
-  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = icmp eq i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @boolXorOperator : @omnibusInfixOperatorUsage {
-}
-
-#·······················································································································
-
-override method @boolXorOperator generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outResultValue
-{
-  var leftOperand = inLeftOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
-  var rightOperand = inRightOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
-  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = xor i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @boolOrOperator : @omnibusInfixOperatorUsage {
-}
-
-#·······················································································································
-
-override method @boolOrOperator generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outResultValue
-{
-  var leftOperand = inLeftOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
-  var rightOperand = inRightOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
-  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = or i1 " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
 

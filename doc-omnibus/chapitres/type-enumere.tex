@@ -1,0 +1,112 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+
+
+
+\chapter{Les types énumérés}
+
+
+\section{Déclaration d'un type énuméré}
+
+La déclaration d'un type énuméré est introduite par le mot réservé \omnibus!enum! :
+
+\begin{OMNIBUS}
+enum Feu {
+  case vert
+  case orange
+  case rouge
+}
+\end{OMNIBUS}
+
+\section{Utilisation d'un type énuméré}
+
+\subsection{Constructeurs}
+La déclaration d'un type énuméré définit les constructeurs associés au type énuméré, ici \omnibus!Feu.vert!, \omnibus!Feu.orange! et \omnibus!Feu.rouge!.
+
+
+\subsection{Constante globale et variable globale}
+Les constructeurs d'un type énuméré sont \emph{statiques}, c'est-à-dire qu'ils permettent d'initialiser des variables globales et des constantes globales :
+
+\begin{OMNIBUS}
+let ROUGE : Feu = Feu.rouge
+\end{OMNIBUS}
+
+L'annotation de type peut être omis une fois, c'est-à-dire que l'on peut aussi écrire :
+\begin{OMNIBUS}
+let ROUGE : Feu = .rouge
+\end{OMNIBUS}
+
+Ou encore :
+\begin{OMNIBUS}
+let ROUGE = Feu.rouge
+\end{OMNIBUS}
+
+
+De même, on peut déclarer une variable globale appartenant à un type énuméré :
+\begin{OMNIBUS}
+var unFeu : Feu = Feu.vert
+\end{OMNIBUS}
+
+L'annotation de type peut être omis une fois, c'est-à-dire que l'on peut aussi écrire :
+\begin{OMNIBUS}
+var unFeu : Feu = .vert
+\end{OMNIBUS}
+
+Ou encore :
+\begin{OMNIBUS}
+var unFeu = Feu.vert
+\end{OMNIBUS}
+
+\subsection{Comparaison}
+
+Les opérateurs \omnibus!==!, \omnibus+≠+, \omnibus!<!, \omnibus!≤!, \omnibus!>! et \omnibus!≥! permettent de comparer les valeurs d'un type énuméré ; la relation d'ordre est donnée par l'ordre de déclaration des constantes, c'est-à-dire que \omnibus!Feu.vert < Feu.orange! et \omnibus!Feu.orange < Feu.rouge!.
+
+
+
+
+
+
+
+\section{Accesseur}
+
+\subsection{Accesseur \texttt{uint$N$}}
+
+Tout type énuméré implémente un accesseur qui retourne la valeur entière non signée associée à la valeur du récepteur. Le type de la valeur retournée est \omnibus=UIntN=, où $N$ est le nombre de bits nécessaires pour coder la valeur de ce type.
+
+Par exemple, avec le type énuméré~:
+\begin{OMNIBUS}
+enum Feu {
+  case vert
+  case orange
+  case rouge
+}
+\end{OMNIBUS}
+
+L'accesseur est \omnibus=uint3=, et~:
+\begin{OMNIBUS}
+let x = Feu.orange
+let y UInt3 = x.uint3 () // 1
+\end{OMNIBUS}
+
+
+
+
+
+
+
+
+\sectionLabel{Représentation d'un type énuméré}{representation-type-enumere}
+
+Un type énuméré est représenté dans le code engendré par une valeur codée sur le plus petit nombre de bits nécessaire. Par exemple, le type énuméré suivant code trois valeurs.
+\begin{OMNIBUS}
+enum Feu {
+  case vert
+  case orange
+  case rouge
+}
+\end{OMNIBUS}
+
+Un objet de ce type est donc codé sur deux bits, et \omnibus+vert+ est représenté par $0$, \omnibus+orange+ par $1$ et \omnibus=rouge= par $2$.
+

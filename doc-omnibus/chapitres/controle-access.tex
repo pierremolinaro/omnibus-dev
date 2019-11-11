@@ -1,0 +1,48 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-omnibus.tex
+
+
+\chapter{Contrôle d'accès}
+
+
+
+\section{Routines \texttt{boot}}
+
+Les routines \omnibus=boot= n'ont pas le droit d'appeler des pilotes ou de solliciter les points d'entrée d'une tâche.
+
+En effet, les routines \omnibus=boot= sont exécutées avant l'initialisation des propriétés des pilotes, et les tâches ne sont pas démarrées.
+
+
+
+
+
+\section{Propriétés}
+
+Les propriétés des structures sont par défaut privées~; le qualificatif \omnibus=public= les rend publiques.
+
+Les propriétés des pilotes et des tâches sont toujours privées.
+
+
+
+
+
+
+
+\section{Méthodes}
+
+Le contrôle d'accès suivant s'applique aux~:
+\begin{itemize}
+  \item méthodes de structure ;
+  \item méthodes de pilote~;
+  \item méthode de tâche.
+\end{itemize}
+
+Une méthode déclarée sans mode ou avec le mode \omnibus=user= ne peut accéder qu'aux propriétés constantes.
+
+
+\section{Registres de contrôles}
+
+Si un registre de contrôle est déclaré avec l'attribut \omnibus=@ro=, il ne peut pas être modifié.
+
+Si un registre de contrôle est déclaré avec l'attribut \omnibus=@user=, il peut être accédé en mode \omnibus=user=.
+
