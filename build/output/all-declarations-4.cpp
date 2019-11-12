@@ -8879,14 +8879,6 @@ GALGAS_omnibusInfixOperator GALGAS_omnibusInfixOperator::constructor_bitWiseXorO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-GALGAS_omnibusInfixOperator GALGAS_omnibusInfixOperator::constructor_booleanXorOp (UNUSED_LOCATION_ARGS) {
-  GALGAS_omnibusInfixOperator result ;
-  result.mEnum = kEnum_booleanXorOp ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
 GALGAS_omnibusInfixOperator GALGAS_omnibusInfixOperator::constructor_addOp (UNUSED_LOCATION_ARGS) {
   GALGAS_omnibusInfixOperator result ;
   result.mEnum = kEnum_addOp ;
@@ -8983,7 +8975,7 @@ GALGAS_omnibusInfixOperator GALGAS_omnibusInfixOperator::constructor_rightShiftO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const char * gEnumNameArrayFor_omnibusInfixOperator [20] = {
+static const char * gEnumNameArrayFor_omnibusInfixOperator [19] = {
   "(not built)",
   "equal",
   "lessThan",
@@ -8991,7 +8983,6 @@ static const char * gEnumNameArrayFor_omnibusInfixOperator [20] = {
   "bitWiseAndOp",
   "bitWiseOrOp",
   "bitWiseXorOp",
-  "booleanXorOp",
   "addOp",
   "addOpNoOvf",
   "subOp",
@@ -9040,12 +9031,6 @@ GALGAS_bool GALGAS_omnibusInfixOperator::getter_isBitWiseOrOp (UNUSED_LOCATION_A
 
 GALGAS_bool GALGAS_omnibusInfixOperator::getter_isBitWiseXorOp (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitWiseXorOp == mEnum) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool GALGAS_omnibusInfixOperator::getter_isBooleanXorOp (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanXorOp == mEnum) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9864,11 +9849,6 @@ GALGAS_string extensionGetter_string (const GALGAS_omnibusInfixOperator & inObje
   case GALGAS_omnibusInfixOperator::kEnum_bitWiseXorOp:
     {
       result_result = GALGAS_string ("^") ;
-    }
-    break ;
-  case GALGAS_omnibusInfixOperator::kEnum_booleanXorOp:
-    {
-      result_result = GALGAS_string ("xor") ;
     }
     break ;
   case GALGAS_omnibusInfixOperator::kEnum_addOp:

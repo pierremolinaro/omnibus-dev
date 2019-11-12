@@ -14,12 +14,12 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <expression> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_logical_xor> !?ioAST ?outExpression
+    <expression_logical_and> !?ioAST ?outExpression
     repeat
     while
       $||$
       let operatorLocation = @location.here
-      <expression_logical_xor> !?ioAST ?let rightExpression
+      <expression_logical_and> !?ioAST ?let rightExpression
     #--- x or y equivalent to not (not x and not y)
       let andExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
         !@prefixOperatorExpressionAST.new {!operatorLocation !.notOp !outExpression}
@@ -34,24 +34,24 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
-
-  rule <expression_logical_xor> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_logical_and> !?ioAST ?outExpression
-    repeat
-    while
-      $xor$
-      let operatorLocation = @location.here
-      <expression_logical_and> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
-        !outExpression
-        !operatorLocation
-        !.booleanXorOp
-        !rightExpression
-      }
-    end
-  }
-
+#  #·····················································································································
+#
+#  rule <expression_logical_xor> ?!@ast ioAST !@expressionAST outExpression {
+#    <expression_logical_and> !?ioAST ?outExpression
+#    repeat
+#    while
+#      $xor$
+#      let operatorLocation = @location.here
+#      <expression_logical_and> !?ioAST ?let rightExpression
+#      outExpression = @omnibusInfixOperatorExpressionAST.new {
+#        !outExpression
+#        !operatorLocation
+#        !.booleanXorOp
+#        !rightExpression
+#      }
+#    end
+#  }
+#
   #·····················································································································
 
   rule <expression_logical_and> ?!@ast ioAST !@expressionAST outExpression {

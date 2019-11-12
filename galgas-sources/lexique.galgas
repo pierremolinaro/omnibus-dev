@@ -62,7 +62,6 @@ lexique omnibus_lexique {
     "user",
     "where",
     "while",
-    "xor",
     "yes"
   }
   

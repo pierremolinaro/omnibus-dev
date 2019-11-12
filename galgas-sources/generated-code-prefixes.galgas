@@ -67,7 +67,6 @@ func infixOperatorFunctionName
    case bitWiseAndOp : result += "bitWiseAnd"
    case bitWiseOrOp : result += "bitWiseOr"
    case bitWiseXorOp : result += "xor"
-   case booleanXorOp: result += "booleanXor"
    case addOp       : result += "add"
    case addOpNoOvf  : result += "addOpNoOvf"
    case subOp       : result += "sub"

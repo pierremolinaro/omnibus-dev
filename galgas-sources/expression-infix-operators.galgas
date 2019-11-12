@@ -9,7 +9,6 @@ enum @omnibusInfixOperator {
   case bitWiseAndOp
   case bitWiseOrOp
   case bitWiseXorOp
-  case booleanXorOp
   case addOp
   case addOpNoOvf
   case subOp
@@ -34,7 +33,6 @@ getter @omnibusInfixOperator string -> @string {
    case bitWiseAndOp : result = "&"
    case bitWiseOrOp : result = "|"
    case bitWiseXorOp : result = "^"
-   case booleanXorOp: result = "xor"
    case addOp       : result = "+"
    case addOpNoOvf  : result = "+%"
    case subOp       : result = "-"
