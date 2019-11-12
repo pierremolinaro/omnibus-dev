@@ -83,7 +83,7 @@ driver usb_device > digital {
     ©SIM.SCGC4 |= {©SIM.SCGC4 !USBOTG:1} // SIM - enable clock
 //    MPU:RGDAAC [0] |= {MPU:RGDAAC !M4RE:1 !M4WE:1)
   //--- If using IRC48M, turn on the USB clock recovery hardware
-//    if @static (F_CPU_MHZ == 180) or (F_CPU_MHZ == 216) {
+//    if @static (F_CPU_MHZ == 180) || (F_CPU_MHZ == 216) {
 //      USB0:CLK_RECOVER_IRC_EN = {USB0:CLK_RECOVER_IRC_EN !IRC_EN:1 !REG_EN:1)
 //      USB0:CLK_RECOVER_CTRL = {USB0:CLK_RECOVER_CTRL !CLOCK_RECOVER_EN:1 !RESTART_IFRTRIM_EN:1)
 //    }
@@ -231,7 +231,7 @@ driver usb_device > digital {
 //    //--- Unfreeze the USB, now that we're ready
 //      USB0:CTL = {USB0:CTL !USBENOFEN:1)// clear TXSUSPENDTOKENBUSY bit
 //    }else if pid == 0x09 { // IN transaction completed to host
-//    }else if (pid == 0x01) or (pid == 0x02) { // OUT transaction received from host
+//    }else if (pid == 0x01) || (pid == 0x02) { // OUT transaction received from host
 //
 //    }
 
@@ -285,7 +285,7 @@ driver usb_device > digital {
 ////    }else if requestAndType == 0x0082 { // Get status (endpoint)
 ////    }else if requestAndType == 0x0102 { // Clear feature (device)
 ////    }else if requestAndType == 0x0302 { // Clear feature (endpoint)
-////    }else if (requestAndType == 0x0680) or (requestAndType == 0x0681) { // Get descriptor
+////    }else if (requestAndType == 0x0680) || (requestAndType == 0x0681) { // Get descriptor
 ////        digital.write (!yes !toPort:LED_L3)
 ////    }
 //  }

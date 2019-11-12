@@ -256,7 +256,7 @@ driver lcd > digital {
     var value = inValue
     var isPrinting = no
     while divisor > 0 {
-      if isPrinting or (value ≥ divisor) {
+      if isPrinting || (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!convert (quotient) + 0x30)
@@ -278,7 +278,7 @@ driver lcd > digital {
     var isPrinting = no
     var count $uint32 = 0
     while divisor > 0 {
-      if isPrinting or (value ≥ divisor) {
+      if isPrinting || (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!convert (quotient) + 0x30)
@@ -304,7 +304,7 @@ driver lcd > digital {
     var value = inValue
     var isPrinting = no
     while divisor > 0 {
-      if isPrinting or (value ≥ divisor) {
+      if isPrinting || (value ≥ divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!convert (quotient) + 0x30)
@@ -390,7 +390,7 @@ driver lcd > digital {
     var value = inValue
     var isPrinting = no
     while divisor > 0 {
-      if isPrinting or (value ≥ divisor) {
+      if isPrinting || (value ≥ divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
         self.writeDataInPanicMode (!truncate (quotient) +% 0x30)

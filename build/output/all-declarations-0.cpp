@@ -191,9 +191,6 @@ static const char * gSyntaxErrorMessage_omnibus_5F_lexique_opaque = "the 'opaque
 //--- Syntax error message for terminal '$option$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_option = "the 'option' keyword" ;
 
-//--- Syntax error message for terminal '$or$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique_or = "the 'or' keyword" ;
-
 //--- Syntax error message for terminal '$panic$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_panic = "the 'panic' keyword" ;
 
@@ -331,6 +328,9 @@ static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3E__3E_ = "the '>>' 
 
 //--- Syntax error message for terminal '$~$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__7E_ = "the '~' delimitor" ;
+
+//--- Syntax error message for terminal '$||$' :
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__7C__7C_ = "the '||' delimitor" ;
 
 //--- Syntax error message for terminal '$->$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2D__3E_ = "the '->' delimitor" ;
@@ -473,7 +473,6 @@ C_String C_Lexique_omnibus_5F_lexique::getMessageForTerminal (const int16_t inTe
         gSyntaxErrorMessage_omnibus_5F_lexique_not,
         gSyntaxErrorMessage_omnibus_5F_lexique_opaque,
         gSyntaxErrorMessage_omnibus_5F_lexique_option,
-        gSyntaxErrorMessage_omnibus_5F_lexique_or,
         gSyntaxErrorMessage_omnibus_5F_lexique_panic,
         gSyntaxErrorMessage_omnibus_5F_lexique_primitive,
         gSyntaxErrorMessage_omnibus_5F_lexique_public,
@@ -520,6 +519,7 @@ C_String C_Lexique_omnibus_5F_lexique::getMessageForTerminal (const int16_t inTe
         gSyntaxErrorMessage_omnibus_5F_lexique__3C__3C_,
         gSyntaxErrorMessage_omnibus_5F_lexique__3E__3E_,
         gSyntaxErrorMessage_omnibus_5F_lexique__7E_,
+        gSyntaxErrorMessage_omnibus_5F_lexique__7C__7C_,
         gSyntaxErrorMessage_omnibus_5F_lexique__2D__3E_,
         gSyntaxErrorMessage_omnibus_5F_lexique__2E__2E__3C_,
         gSyntaxErrorMessage_omnibus_5F_lexique__2E__2E__2E_,
@@ -1178,13 +1178,6 @@ static const utf32 kUnicodeString_omnibus_5F_lexique_option [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$or$'
-static const utf32 kUnicodeString_omnibus_5F_lexique_or [] = {
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$panic$'
 static const utf32 kUnicodeString_omnibus_5F_lexique_panic [] = {
   TO_UNICODE ('p'),
@@ -1478,6 +1471,13 @@ static const utf32 kUnicodeString_omnibus_5F_lexique__7C__3D_ [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$_7C__7C_$'
+static const utf32 kUnicodeString_omnibus_5F_lexique__7C__7C_ [] = {
+  TO_UNICODE ('|'),
+  TO_UNICODE ('|'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$_7D_$'
 static const utf32 kUnicodeString_omnibus_5F_lexique__7D_ [] = {
   TO_UNICODE ('}'),
@@ -1512,7 +1512,7 @@ static const utf32 kUnicodeString_omnibus_5F_lexique__2265_ [] = {
 //             Key words table 'delimitorsList'                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const int32_t ktable_size_omnibus_5F_lexique_delimitorsList = 52 ;
+static const int32_t ktable_size_omnibus_5F_lexique_delimitorsList = 53 ;
 
 static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_delimitorsList [ktable_size_omnibus_5F_lexique_delimitorsList] = {
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__25_, 1, C_Lexique_omnibus_5F_lexique::kToken__25_),
@@ -1558,6 +1558,7 @@ static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_delimit
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__5D__21_, 2, C_Lexique_omnibus_5F_lexique::kToken__5D__21_),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__5E__3D_, 2, C_Lexique_omnibus_5F_lexique::kToken__5E__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__7C__3D_, 2, C_Lexique_omnibus_5F_lexique::kToken__7C__3D_),
+  C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__7C__7C_, 2, C_Lexique_omnibus_5F_lexique::kToken__7C__7C_),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__21__25__3D_, 3, C_Lexique_omnibus_5F_lexique::kToken__21__25__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__21__2F__3D_, 3, C_Lexique_omnibus_5F_lexique::kToken__21__2F__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__2A__25__3D_, 3, C_Lexique_omnibus_5F_lexique::kToken__2A__25__3D_),
@@ -1577,13 +1578,12 @@ int16_t C_Lexique_omnibus_5F_lexique::search_into_delimitorsList (const C_String
 //             Key words table 'keyWordList'                            *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const int32_t ktable_size_omnibus_5F_lexique_keyWordList = 54 ;
+static const int32_t ktable_size_omnibus_5F_lexique_keyWordList = 53 ;
 
 static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_keyWordList [ktable_size_omnibus_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_if, 2, C_Lexique_omnibus_5F_lexique::kToken_if),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_in, 2, C_Lexique_omnibus_5F_lexique::kToken_in),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_no, 2, C_Lexique_omnibus_5F_lexique::kToken_no),
-  C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_or, 2, C_Lexique_omnibus_5F_lexique::kToken_or),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_and, 3, C_Lexique_omnibus_5F_lexique::kToken_and),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_for, 3, C_Lexique_omnibus_5F_lexique::kToken_for),
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_let, 3, C_Lexique_omnibus_5F_lexique::kToken_let),
@@ -1875,11 +1875,6 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       s.appendCString ("option") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_or:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("or") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
     case kToken_panic:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("panic") ;
@@ -2108,6 +2103,11 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
     case kToken__7E_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("~") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken__7C__7C_:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("||") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__3E_:
@@ -2457,6 +2457,9 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__21__25__3D_, 3, true)) {
         token.mTokenCode = kToken__21__25__3D_ ;
+        enterToken (token) ;
+      }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__7C__7C_, 2, true)) {
+        token.mTokenCode = kToken__7C__7C_ ;
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__7C__3D_, 2, true)) {
         token.mTokenCode = kToken__7C__3D_ ;
@@ -2853,7 +2856,6 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("not") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("opaque") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("option") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("or") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("panic") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("primitive") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("public") COMMA_THERE) ;
@@ -2900,6 +2902,7 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("<<") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (">>") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("~") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("||") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("->") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("..<") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("...") COMMA_THERE) ;
@@ -2991,6 +2994,7 @@ static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIden
     ioList.appendObject ("]!") ;
     ioList.appendObject ("^=") ;
     ioList.appendObject ("|=") ;
+    ioList.appendObject ("||") ;
     ioList.appendObject ("!%=") ;
     ioList.appendObject ("!/=") ;
     ioList.appendObject ("*%=") ;
@@ -3007,7 +3011,6 @@ static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIden
     ioList.appendObject ("if") ;
     ioList.appendObject ("in") ;
     ioList.appendObject ("no") ;
-    ioList.appendObject ("or") ;
     ioList.appendObject ("and") ;
     ioList.appendObject ("for") ;
     ioList.appendObject ("let") ;
@@ -3114,7 +3117,6 @@ uint32_t C_Lexique_omnibus_5F_lexique::styleIndexForTerminal (const int32_t inTe
     1 /* omnibus_lexique_1_not */,
     1 /* omnibus_lexique_1_opaque */,
     1 /* omnibus_lexique_1_option */,
-    1 /* omnibus_lexique_1_or */,
     1 /* omnibus_lexique_1_panic */,
     1 /* omnibus_lexique_1_primitive */,
     1 /* omnibus_lexique_1_public */,
@@ -3161,6 +3163,7 @@ uint32_t C_Lexique_omnibus_5F_lexique::styleIndexForTerminal (const int32_t inTe
     6 /* omnibus_lexique_1__3C__3C_ */,
     6 /* omnibus_lexique_1__3E__3E_ */,
     6 /* omnibus_lexique_1__7E_ */,
+    6 /* omnibus_lexique_1__7C__7C_ */,
     6 /* omnibus_lexique_1__2D__3E_ */,
     6 /* omnibus_lexique_1__2E__2E__3C_ */,
     6 /* omnibus_lexique_1__2E__2E__2E_ */,
@@ -6557,7 +6560,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_expression_i45_ (GALGAS_a
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_72 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_or COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 20)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C__7C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 20)) ;
       GALGAS_location var_operatorLocation_1094 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 21)) ;
       GALGAS_expressionAST var_rightExpression_1171 ;
       nt_expression_5F_logical_5F_xor_ (ioArgument_ioAST, var_rightExpression_1171, inCompiler) ;
@@ -6579,7 +6582,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_expression_i45_parse (C_L
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_72 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_or COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 20)) ;
+      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7C__7C_ COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 20)) ;
       nt_expression_5F_logical_5F_xor_parse (inCompiler) ;
     } break ;
     default:
