@@ -29,25 +29,25 @@ struct @semanticContext {
   @availableInterruptMap mAvailableInterruptMap
 
 #--- Operators
-  @infixOperatorMap_EX mEqualOperatorMap           # ==
-  @infixOperatorMap_EX mStrictInfOperatorMap       # <
-  @infixOperatorMap_EX mInfEqualOperatorMap        # <=
-  @infixOperatorMap_EX mAndOperatorMap             # &
-  @infixOperatorMap_EX mOrOperatorMap              # |
-  @infixOperatorMap_EX mXorOperatorMap             # ^
-  @infixOperatorMap_EX mBooleanXorOperatorMap      # xor
-  @infixOperatorMap_EX mAddOperatorMap             # +
-  @infixOperatorMap_EX mAddNoOvfOperatorMap        # &+
-  @infixOperatorMap_EX mSubOperatorMap             # -
-  @infixOperatorMap_EX mSubNoOvfOperatorMap        # &-
-  @infixOperatorMap_EX mMulOperatorMap             # *
-  @infixOperatorMap_EX mMulNoOvfOperatorMap        # &*
-  @infixOperatorMap_EX mDivOperatorMap             # /
-  @infixOperatorMap_EX mDivNoOvfOperatorMap        # &/
-  @infixOperatorMap_EX mModOperatorMap             # %
-  @infixOperatorMap_EX mModNoOvfOperatorMap        # &%
-  @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
-  @infixOperatorMap_EX mRightShiftOperatorMap      # >>
+#  @infixOperatorMap_EX mEqualOperatorMap           # ==
+#  @infixOperatorMap_EX mStrictInfOperatorMap       # <
+#  @infixOperatorMap_EX mInfEqualOperatorMap        # <=
+#  @infixOperatorMap_EX mAndOperatorMap             # &
+#  @infixOperatorMap_EX mOrOperatorMap              # |
+#  @infixOperatorMap_EX mXorOperatorMap             # ^
+#  @infixOperatorMap_EX mBooleanXorOperatorMap      # xor
+#  @infixOperatorMap_EX mAddOperatorMap             # +
+#  @infixOperatorMap_EX mAddNoOvfOperatorMap        # &+
+#  @infixOperatorMap_EX mSubOperatorMap             # -
+#  @infixOperatorMap_EX mSubNoOvfOperatorMap        # &-
+#  @infixOperatorMap_EX mMulOperatorMap             # *
+#  @infixOperatorMap_EX mMulNoOvfOperatorMap        # &*
+#  @infixOperatorMap_EX mDivOperatorMap             # /
+#  @infixOperatorMap_EX mDivNoOvfOperatorMap        # &/
+#  @infixOperatorMap_EX mModOperatorMap             # %
+#  @infixOperatorMap_EX mModNoOvfOperatorMap        # &%
+#  @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
+#  @infixOperatorMap_EX mRightShiftOperatorMap      # >>
   
   @infixOperatorMap mInfixOperatorMap
   @prefixOperatorMap mPrefixOperatorMap
@@ -76,12 +76,12 @@ list @declarationDecorationList {
 
 #·······················································································································
 
-map @infixOperatorMap_EX {
-  @omnibusType mResultType
-  @omnibusInfixOperatorDescription mOperation
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-}
+#map @infixOperatorMap_EX {
+#  @omnibusType mResultType
+#  @omnibusInfixOperatorDescription mOperation
+#  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @staticEntityMap
@@ -246,8 +246,8 @@ proc buildSemanticContext
 
 #·······················································································································
 
-func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
-  result = [inLeftTypeName + "," + inRightTypeName nowhere]
-}
+#func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
+#  result = [inLeftTypeName + "," + inRightTypeName nowhere]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

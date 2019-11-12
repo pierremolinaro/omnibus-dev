@@ -136,8 +136,6 @@ override method @enumerationDeclarationAST enterInContext
     !warnsIfUnused:false
     !"i" + representationBitCount # enumerationType llvmTypeName]
   }
-#---------------- Infix operators
-  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
 #---------------- Insert enumeration in type map
   let enumerationType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
@@ -154,32 +152,53 @@ override method @enumerationDeclarationAST enterInContext
 #--- Enter assignment operator
   let key = assignmentOperatorKey (!enumerationType !mEnumerationName.location !enumerationType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+#---------------- Infix operators
+#  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
+  let boolType = boolType ()
+#--- Enter == infix operator
+  addIntegerInfixOperator (!.equal !enumerationType !"icmp eq" !?ioContext.mInfixOperatorMap !boolType)
+#--- Enter ≤ infix operator
+  addIntegerInfixOperator (
+    !.infEqual
+    !enumerationType
+    !"icmp ule"
+    !?ioContext.mInfixOperatorMap
+    !boolType
+  )
+#--- Enter < infix operator
+  addIntegerInfixOperator (
+    !.lessThan
+    !enumerationType
+    !"icmp ult"
+    !?ioContext.mInfixOperatorMap
+    !boolType
+  )
 }
 
 #·······················································································································
 
-proc enterEnumerationComparisonOperators
-  ?typeName:@lstring inTypeName
-  ?!context:@semanticContext ioContext
-{
-  let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
-  let booleanType = [ioContext booleanType !.nowhere]
-  [!?ioContext.mEqualOperatorMap insertKey
-    !key
-    !booleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-  ]
-  [!?ioContext.mStrictInfOperatorMap insertKey
-    !key
-    !booleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
-  ]
-  [!?ioContext.mInfEqualOperatorMap insertKey
-    !key
-    !booleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
-  ]
-}
+#proc enterEnumerationComparisonOperators
+#  ?typeName:@lstring inTypeName
+#  ?!context:@semanticContext ioContext
+#{
+#  let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
+#  let booleanType = [ioContext booleanType !.nowhere]
+#  [!?ioContext.mEqualOperatorMap insertKey
+#    !key
+#    !booleanType
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+#  ]
+#  [!?ioContext.mStrictInfOperatorMap insertKey
+#    !key
+#    !booleanType
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
+#  ]
+#  [!?ioContext.mInfEqualOperatorMap insertKey
+#    !key
+#    !booleanType
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                    

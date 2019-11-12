@@ -762,16 +762,6 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       Routine 'enterLiteralIntegerOperators'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_enterLiteralIntegerOperators (class GALGAS_semanticContext & ioArgument0,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                        Function 'assignmentOperatorFuncName'                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -793,14 +783,17 @@ class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Routine 'enterEnumerationComparisonOperators'                                    *
+//                                          Routine 'addIntegerInfixOperator'                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-void routine_enterEnumerationComparisonOperators (class GALGAS_lstring inArgument0,
-                                                  class GALGAS_semanticContext & ioArgument1,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+void routine_addIntegerInfixOperator (const class GALGAS_omnibusInfixOperator constinArgument0,
+                                      const class GALGAS_omnibusType constinArgument1,
+                                      const class GALGAS_string constinArgument2,
+                                      class GALGAS_infixOperatorMap & ioArgument3,
+                                      const class GALGAS_omnibusType constinArgument4,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

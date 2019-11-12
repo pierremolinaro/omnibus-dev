@@ -27,7 +27,6 @@ project (1:0:0) -> "omnibus" {
 #--- Type declarations
   "galgas-sources/compile-time-type-bool.galgas"
   "galgas-sources/compile-time-type-int.galgas"
-  "galgas-sources/type-static-integer.galgas"
   "galgas-sources/type-bool.galgas"
   "galgas-sources/type-alias.galgas"
   "galgas-sources/type-fixed-size-array.galgas"
