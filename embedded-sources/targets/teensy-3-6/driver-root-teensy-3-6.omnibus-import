@@ -365,11 +365,11 @@ driver root {
     )
     ctAssert "USB Clock is 48 MHz (for 180 MHz CPU clock)" (
      (F_CPU_MHZ ≠ 180) || // 180 MHz uses directly IRC48 clock
-     ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))
+     ((SIM_CLKDIV2_USBDIV == 0) && (SIM_CLKDIV2_USBFRAC == 0))
     )
     ctAssert "USB Clock is 48 MHz (for 216 MHz CPU clock)" (
      (F_CPU_MHZ ≠ 216) || // 216 MHz uses directly IRC48 clock
-     ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))
+     ((SIM_CLKDIV2_USBDIV == 0) && (SIM_CLKDIV2_USBFRAC == 0))
     )
   //--------------------------------------------------- Disable watchdog timer
   //--- These two instructions are required for unlocking watchdog timer

@@ -18560,11 +18560,11 @@ const char * gWrapperFileContent_102_targetTemplates = "\n"
   "    )\n"
   "    ctAssert \"USB Clock is 48 MHz (for 180 MHz CPU clock)\" (\n"
   "     (F_CPU_MHZ \xE2""\x89""\xA0"" 180) || // 180 MHz uses directly IRC48 clock\n"
-  "     ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))\n"
+  "     ((SIM_CLKDIV2_USBDIV == 0) && (SIM_CLKDIV2_USBFRAC == 0))\n"
   "    )\n"
   "    ctAssert \"USB Clock is 48 MHz (for 216 MHz CPU clock)\" (\n"
   "     (F_CPU_MHZ \xE2""\x89""\xA0"" 216) || // 216 MHz uses directly IRC48 clock\n"
-  "     ((SIM_CLKDIV2_USBDIV == 0) and (SIM_CLKDIV2_USBFRAC == 0))\n"
+  "     ((SIM_CLKDIV2_USBDIV == 0) && (SIM_CLKDIV2_USBFRAC == 0))\n"
   "    )\n"
   "  //--------------------------------------------------- Disable watchdog timer\n"
   "  //--- These two instructions are required for unlocking watchdog timer\n"
@@ -18654,7 +18654,7 @@ const cRegularFileWrapper gWrapperFile_102_targetTemplates (
   "driver-root-teensy-3-6.omnibus-import",
   "omnibus-import",
   true, // Text file
-  21283, // Text length
+  21281, // Text length
   gWrapperFileContent_102_targetTemplates
 ) ;
 

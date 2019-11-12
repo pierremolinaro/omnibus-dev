@@ -12,7 +12,6 @@ lexique omnibus_lexique {
   
   list keyWordList style keywordsStyle error message "the '%K' keyword" {
     "addressof",
-    "and",
     "assert",
     "boot",
     "case",
@@ -217,7 +216,7 @@ lexique omnibus_lexique {
     ":", ".",  ",", "{", "}", "=", "(", ")", "_",
     "==", "≠", "<", "≤", ">", "≥",
     "[", "]", "]!", "<<", ">>",
-    "~", "||",
+    "~", "||", "&&",
     "->", "..<", "...",
     "|", "|=",
     "&", "&=",
