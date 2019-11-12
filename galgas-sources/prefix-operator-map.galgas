@@ -21,6 +21,7 @@ abstract method @prefixOperatorUsage generateCode
   ?let @location inOperatorLocation
   ?let @omnibusType inResultType
   ?noPanicCode: let @bool inDoNotGeneratePanicCode
+  ?safeMode: let @bool inSafeMode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
@@ -37,31 +38,32 @@ method @prefixOperatorMap generatePrefixOperatorCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-#--- Is operator allowed in safe mode ?
-  if inSafeMode then
-    switch inPrefixOperator 
-    case minusNoOvf, notOp, bitWiseComplement :
-    case minusOp :
-      error inOperatorLocation : "this operator is not allowed in safe mode"
-    end
-  end
-#--- Do not generate panic code ?
-  var prefixOperator = inPrefixOperator
-  if inDoNotGeneratePanicCode then
-    switch inPrefixOperator 
-    case minusNoOvf, notOp, bitWiseComplement :
-    case minusOp :
-      prefixOperator = .minusNoOvf
-    end
-  end
+##--- Is operator allowed in safe mode ?
+#  if inSafeMode then
+#    switch inPrefixOperator 
+#    case minusNoOvf, notOp, bitWiseComplement :
+#    case minusOp :
+#      error inOperatorLocation : "this operator is not allowed in safe mode"
+#    end
+#  end
+##--- Do not generate panic code ?
+#  var prefixOperator = inPrefixOperator
+#  if inDoNotGeneratePanicCode then
+#    switch inPrefixOperator 
+#    case minusNoOvf, notOp, bitWiseComplement :
+#    case minusOp :
+#      prefixOperator = .minusNoOvf
+#    end
+#  end
 #---
-  let key = prefixOperatorMapKey (![inReceiverOperand type] !prefixOperator !inOperatorLocation)
+  let key = prefixOperatorMapKey (![inReceiverOperand type] !inPrefixOperator !inOperatorLocation)
   [self searchKey !key ?1* ?let resultType ?let operatorUsage]
   [operatorUsage generateCode
     !inReceiverOperand
     !inOperatorLocation
     !resultType
     !noPanicCode: inDoNotGeneratePanicCode
+    !safeMode: inSafeMode
     !?ioTemporaries
     !?ioInstructionGenerationList
     ?outResultValue

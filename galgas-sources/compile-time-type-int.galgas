@@ -53,24 +53,24 @@ override method @compileTimeIntAST enterInContext
   let ctInt = compileTimeIntegerType ()
  #--- Enter type
   [!?ioContext.mTypeMap insertType !lkey: ctIntegerTypeName !type: ctInt]
+ #--- Enter ~ prefix operator
+  var key = prefixOperatorMapKey (!ctInt !.bitWiseComplement !.nowhere)
+  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntComplementOperator.new]
  #--- Enter - prefix operator
-  var key = prefixOperatorMapKey (!ctInt !.minusOp !.nowhere)
+  key = prefixOperatorMapKey (!ctInt !.minusOp !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator.new]
  #--- Enter -% prefix operator
   key = prefixOperatorMapKey (!ctInt !.minusNoOvf !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator.new]
+ #--- Enter & infix operator
+  key = infixOperatorMapKey (!ctInt !.bitWiseAndOp !.nowhere !ctInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseAndOperator.new]
  #--- Enter | infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseOrOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseOrOperator.new]
  #--- Enter ^ infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseXorOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntXorOperator.new]
- #--- Enter << infix operator
-  key = infixOperatorMapKey (!ctInt !.leftShiftOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftLeftOperator.new]
- #--- Enter >> infix operator
-  key = infixOperatorMapKey (!ctInt !.rightShiftOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator.new]
  #--- Enter + infix operator
   key = infixOperatorMapKey (!ctInt !.addOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator.new]
@@ -89,12 +89,15 @@ override method @compileTimeIntAST enterInContext
  #--- Enter / infix operator
   key = infixOperatorMapKey (!ctInt !.divOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideOperator.new]
+ #--- Enter !/ infix operator
+  key = infixOperatorMapKey (!ctInt !.divOpNoOvf !.nowhere !ctInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideZeroOperator.new]
  #--- Enter % infix operator
   key = infixOperatorMapKey (!ctInt !.modOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloOperator.new]
- #--- Enter & infix operator
-  key = infixOperatorMapKey (!ctInt !.bitWiseAndOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseAndOperator.new]
+ #--- Enter !% infix operator
+  key = infixOperatorMapKey (!ctInt !.modOpNoOvf !.nowhere !ctInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloZeroOperator.new]
  #--- Enter == infix operator
   let ctBoolType = compileTimeBoolType ()
   key = infixOperatorMapKey (!ctInt !.equal !.nowhere !ctInt)
@@ -105,8 +108,14 @@ override method @compileTimeIntAST enterInContext
  #--- Enter ≤ infix operator
   key = infixOperatorMapKey (!ctInt !.infEqual !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLowerOrEqualOperator.new]
+ #--- Enter << infix operator
+  key = infixOperatorMapKey (!ctInt !.leftShiftOp !.nowhere !ctInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftLeftOperator.new]
+ #--- Enter >> infix operator
+  key = infixOperatorMapKey (!ctInt !.rightShiftOp !.nowhere !ctInt)
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator.new]
 #--- Enter OLD integer operators
-  enterLiteralIntegerOperators (!?context: ioContext)
+#  enterLiteralIntegerOperators (!?context: ioContext)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -139,6 +148,32 @@ override method @compileTimeIntModuloOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+class @compileTimeIntModuloZeroOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntModuloZeroOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  if rightValue == 0G then
+    outResultValue = .literalInteger {!type: inResultType !value: 0G}
+  else
+    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    outResultValue = .literalInteger {!type: inResultType !value: leftValue mod rightValue}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 class @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
 }
 
@@ -157,6 +192,32 @@ override method @compileTimeIntDivideOperator generateCode
   [inRightOperand literalInteger ?1* ?value: let rightValue]
   if rightValue == 0G then
     error inOperatorLocation : "compile time divide by zero" : outResultValue
+  else
+    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntDivideZeroOperator : @omnibusInfixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntDivideZeroOperator generateCode
+  ?let @objectIR inLeftOperand
+  ?let @location unused inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @omnibusType inResultType
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@allocaList unused ioAllocaList
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  if rightValue == 0G then
+    outResultValue = .literalInteger {!type: inResultType !value: 0G}
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
@@ -282,7 +343,7 @@ class @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
 
 override method @compileTimeIntShiftLeftOperator generateCode
   ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
+  ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
   ?!@semanticTemporariesStruct unused ioTemporaries
@@ -290,9 +351,13 @@ override method @compileTimeIntShiftLeftOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  outResultValue = .literalInteger {!type: inResultType !value: leftValue << rightValue}
+  if rightValue < 0G then
+    error inOperatorLocation : "compile time left shift right operand should be ≥ 0" : outResultValue
+  else
+    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    outResultValue = .literalInteger {!type: inResultType !value: leftValue << rightValue}
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -304,7 +369,7 @@ class @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
 
 override method @compileTimeIntShiftRightOperator generateCode
   ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
+  ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
   ?let @omnibusType inResultType
   ?!@semanticTemporariesStruct unused ioTemporaries
@@ -312,9 +377,13 @@ override method @compileTimeIntShiftRightOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  outResultValue = .literalInteger {!type: inResultType !value: leftValue >> rightValue}
+  if rightValue < 0G then
+    error inOperatorLocation : "compile time right shift right operand should be ≥ 0" : outResultValue
+  else
+    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    outResultValue = .literalInteger {!type: inResultType !value: leftValue >> rightValue}
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -419,12 +488,34 @@ override method @compileTimeIntMinusOperator generateCode
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType
   ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
+  ?safeMode: let @bool unused inSafeMode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
   [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
   outResultValue = .literalInteger {!type: inResultType !value: - receiverValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @compileTimeIntComplementOperator : @prefixOperatorUsage {
+}
+
+#·······················································································································
+
+override method @compileTimeIntComplementOperator generateCode
+  ?let @objectIR inReceiverOperand
+  ?let @location unused inOperatorLocation
+  ?let @omnibusType inResultType
+  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
+  ?safeMode: let @bool unused inSafeMode
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@instructionListIR unused ioInstructionGenerationList
+  !@objectIR outResultValue
+{
+  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  outResultValue = .literalInteger {!type: inResultType !value: ~ receiverValue}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

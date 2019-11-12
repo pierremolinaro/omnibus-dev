@@ -5632,6 +5632,131 @@ GALGAS_compileTimeIntModuloOperator GALGAS_compileTimeIntModuloOperator::extract
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+typeComparisonResult cPtr_compileTimeIntModuloZeroOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return kOperandEqual ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_compileTimeIntModuloZeroOperator::objectCompare (const GALGAS_compileTimeIntModuloZeroOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntModuloZeroOperator::GALGAS_compileTimeIntModuloZeroOperator (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntModuloZeroOperator GALGAS_compileTimeIntModuloZeroOperator::constructor_default (LOCATION_ARGS) {
+  return GALGAS_compileTimeIntModuloZeroOperator::constructor_new (THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntModuloZeroOperator::GALGAS_compileTimeIntModuloZeroOperator (const cPtr_compileTimeIntModuloZeroOperator * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntModuloZeroOperator) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntModuloZeroOperator GALGAS_compileTimeIntModuloZeroOperator::constructor_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntModuloZeroOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntModuloZeroOperator (THERE)) ;
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                              Pointer class for @compileTimeIntModuloZeroOperator class                              *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_compileTimeIntModuloZeroOperator::cPtr_compileTimeIntModuloZeroOperator (LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntModuloZeroOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntModuloZeroOperator ;
+}
+
+void cPtr_compileTimeIntModuloZeroOperator::description (C_String & ioString,
+                                                         const int32_t /* inIndentation */) const {
+  ioString << "[@compileTimeIntModuloZeroOperator]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_compileTimeIntModuloZeroOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_compileTimeIntModuloZeroOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       @compileTimeIntModuloZeroOperator type                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compileTimeIntModuloZeroOperator ("compileTimeIntModuloZeroOperator",
+                                                         & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntModuloZeroOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntModuloZeroOperator ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_compileTimeIntModuloZeroOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntModuloZeroOperator (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntModuloZeroOperator GALGAS_compileTimeIntModuloZeroOperator::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntModuloZeroOperator result ;
+  const GALGAS_compileTimeIntModuloZeroOperator * p = (const GALGAS_compileTimeIntModuloZeroOperator *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_compileTimeIntModuloZeroOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntModuloZeroOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 typeComparisonResult cPtr_compileTimeIntDivideOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
   return kOperandEqual ;
 }
@@ -5748,6 +5873,131 @@ GALGAS_compileTimeIntDivideOperator GALGAS_compileTimeIntDivideOperator::extract
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntDivideOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_compileTimeIntDivideZeroOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return kOperandEqual ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_compileTimeIntDivideZeroOperator::objectCompare (const GALGAS_compileTimeIntDivideZeroOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntDivideZeroOperator::GALGAS_compileTimeIntDivideZeroOperator (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntDivideZeroOperator GALGAS_compileTimeIntDivideZeroOperator::constructor_default (LOCATION_ARGS) {
+  return GALGAS_compileTimeIntDivideZeroOperator::constructor_new (THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntDivideZeroOperator::GALGAS_compileTimeIntDivideZeroOperator (const cPtr_compileTimeIntDivideZeroOperator * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntDivideZeroOperator) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntDivideZeroOperator GALGAS_compileTimeIntDivideZeroOperator::constructor_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntDivideZeroOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntDivideZeroOperator (THERE)) ;
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                              Pointer class for @compileTimeIntDivideZeroOperator class                              *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_compileTimeIntDivideZeroOperator::cPtr_compileTimeIntDivideZeroOperator (LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntDivideZeroOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntDivideZeroOperator ;
+}
+
+void cPtr_compileTimeIntDivideZeroOperator::description (C_String & ioString,
+                                                         const int32_t /* inIndentation */) const {
+  ioString << "[@compileTimeIntDivideZeroOperator]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_compileTimeIntDivideZeroOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_compileTimeIntDivideZeroOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       @compileTimeIntDivideZeroOperator type                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compileTimeIntDivideZeroOperator ("compileTimeIntDivideZeroOperator",
+                                                         & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntDivideZeroOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntDivideZeroOperator ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_compileTimeIntDivideZeroOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntDivideZeroOperator (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntDivideZeroOperator GALGAS_compileTimeIntDivideZeroOperator::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntDivideZeroOperator result ;
+  const GALGAS_compileTimeIntDivideZeroOperator * p = (const GALGAS_compileTimeIntDivideZeroOperator *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_compileTimeIntDivideZeroOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntDivideZeroOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7248,6 +7498,131 @@ GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::extractOb
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntMinusOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//   Object comparison                                                                                                 *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+typeComparisonResult cPtr_compileTimeIntComplementOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return kOperandEqual ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+
+typeComparisonResult GALGAS_compileTimeIntComplementOperator::objectCompare (const GALGAS_compileTimeIntComplementOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntComplementOperator::GALGAS_compileTimeIntComplementOperator (void) :
+GALGAS_prefixOperatorUsage () {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntComplementOperator GALGAS_compileTimeIntComplementOperator::constructor_default (LOCATION_ARGS) {
+  return GALGAS_compileTimeIntComplementOperator::constructor_new (THERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntComplementOperator::GALGAS_compileTimeIntComplementOperator (const cPtr_compileTimeIntComplementOperator * inSourcePtr) :
+GALGAS_prefixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntComplementOperator) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntComplementOperator GALGAS_compileTimeIntComplementOperator::constructor_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntComplementOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntComplementOperator (THERE)) ;
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                              Pointer class for @compileTimeIntComplementOperator class                              *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+cPtr_compileTimeIntComplementOperator::cPtr_compileTimeIntComplementOperator (LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (THERE) {
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntComplementOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntComplementOperator ;
+}
+
+void cPtr_compileTimeIntComplementOperator::description (C_String & ioString,
+                                                         const int32_t /* inIndentation */) const {
+  ioString << "[@compileTimeIntComplementOperator]" ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+acPtr_class * cPtr_compileTimeIntComplementOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_compileTimeIntComplementOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                       @compileTimeIntComplementOperator type                                        *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compileTimeIntComplementOperator ("compileTimeIntComplementOperator",
+                                                         & kTypeDescriptor_GALGAS_prefixOperatorUsage) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntComplementOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntComplementOperator ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+AC_GALGAS_root * GALGAS_compileTimeIntComplementOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntComplementOperator (*this)) ;
+  }
+  return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+GALGAS_compileTimeIntComplementOperator GALGAS_compileTimeIntComplementOperator::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntComplementOperator result ;
+  const GALGAS_compileTimeIntComplementOperator * p = (const GALGAS_compileTimeIntComplementOperator *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_compileTimeIntComplementOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntComplementOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -14742,366 +15117,6 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (co
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterFieldMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cMapElement_sliceMap::cMapElement_sliceMap (const GALGAS_lstring & inKey,
-                                            const GALGAS_llvmBinaryOperation & in_mAccessOperator,
-                                            const GALGAS_bigint & in_mAccessRightOperand,
-                                            const GALGAS_omnibusType & in_mResultType
-                                            COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mProperty_mAccessOperator (in_mAccessOperator),
-mProperty_mAccessRightOperand (in_mAccessRightOperand),
-mProperty_mResultType (in_mResultType) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-bool cMapElement_sliceMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mResultType.isValid () ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cMapElement * cMapElement_sliceMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_sliceMap (mProperty_lkey, mProperty_mAccessOperator, mProperty_mAccessRightOperand, mProperty_mResultType COMMA_HERE)) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void cMapElement_sliceMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAccessOperator" ":" ;
-  mProperty_mAccessOperator.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAccessRightOperand" ":" ;
-  mProperty_mAccessRightOperand.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mResultType" ":" ;
-  mProperty_mResultType.description (ioString, inIndentation) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-typeComparisonResult cMapElement_sliceMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_sliceMap * operand = (cMapElement_sliceMap *) inOperand ;
-  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mAccessOperator.objectCompare (operand->mProperty_mAccessOperator) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mAccessRightOperand.objectCompare (operand->mProperty_mAccessRightOperand) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mResultType.objectCompare (operand->mProperty_mResultType) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap::GALGAS_sliceMap (void) :
-AC_GALGAS_map () {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap::GALGAS_sliceMap (const GALGAS_sliceMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap & GALGAS_sliceMap::operator = (const GALGAS_sliceMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap GALGAS_sliceMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_sliceMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap GALGAS_sliceMap::constructor_mapWithMapToOverride (const GALGAS_sliceMap & inMapToOverride
-                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_sliceMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap GALGAS_sliceMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_sliceMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_sliceMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                           const GALGAS_llvmBinaryOperation & inArgument0,
-                                           const GALGAS_bigint & inArgument1,
-                                           const GALGAS_omnibusType & inArgument2,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
-  cMapElement_sliceMap * p = NULL ;
-  macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@sliceMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_sliceMap::setter_insertKey (GALGAS_lstring inKey,
-                                        GALGAS_llvmBinaryOperation inArgument0,
-                                        GALGAS_bigint inArgument1,
-                                        GALGAS_omnibusType inArgument2,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-  cMapElement_sliceMap * p = NULL ;
-  macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' slice has been already declared" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const char * kSearchErrorMessage_sliceMap_searchKey = "the '%K' slice is not declared" ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_sliceMap::method_searchKey (GALGAS_lstring inKey,
-                                        GALGAS_llvmBinaryOperation & outArgument0,
-                                        GALGAS_bigint & outArgument1,
-                                        GALGAS_omnibusType & outArgument2,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const {
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) performSearch (inKey,
-                                                                                 inCompiler,
-                                                                                 kSearchErrorMessage_sliceMap_searchKey
-                                                                                 COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    outArgument0 = p->mProperty_mAccessOperator ;
-    outArgument1 = p->mProperty_mAccessRightOperand ;
-    outArgument2 = p->mProperty_mResultType ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_llvmBinaryOperation GALGAS_sliceMap::getter_mAccessOperatorForKey (const GALGAS_string & inKey,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
-  GALGAS_llvmBinaryOperation result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    result = p->mProperty_mAccessOperator ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bigint GALGAS_sliceMap::getter_mAccessRightOperandForKey (const GALGAS_string & inKey,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
-  GALGAS_bigint result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    result = p->mProperty_mAccessRightOperand ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_omnibusType GALGAS_sliceMap::getter_mResultTypeForKey (const GALGAS_string & inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
-  GALGAS_omnibusType result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    result = p->mProperty_mResultType ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_sliceMap::setter_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    p->mProperty_mAccessOperator = inAttributeValue ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_sliceMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
-                                                           GALGAS_string inKey,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    p->mProperty_mAccessRightOperand = inAttributeValue ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void GALGAS_sliceMap::setter_setMResultTypeForKey (GALGAS_omnibusType inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_sliceMap) ;
-    p->mProperty_mResultType = inAttributeValue ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cMapElement_sliceMap * GALGAS_sliceMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                           const GALGAS_string & inKey
-                                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_sliceMap * result = (cMapElement_sliceMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_sliceMap) ;
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-cEnumerator_sliceMap::cEnumerator_sliceMap (const GALGAS_sliceMap & inEnumeratedObject,
-                                            const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap_2D_element cEnumerator_sliceMap::current (LOCATION_ARGS) const {
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_sliceMap) ;
-  return GALGAS_sliceMap_2D_element (p->mProperty_lkey, p->mProperty_mAccessOperator, p->mProperty_mAccessRightOperand, p->mProperty_mResultType) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_lstring cEnumerator_sliceMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mProperty_lkey ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_llvmBinaryOperation cEnumerator_sliceMap::current_mAccessOperator (LOCATION_ARGS) const {
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_sliceMap) ;
-  return p->mProperty_mAccessOperator ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bigint cEnumerator_sliceMap::current_mAccessRightOperand (LOCATION_ARGS) const {
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_sliceMap) ;
-  return p->mProperty_mAccessRightOperand ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_omnibusType cEnumerator_sliceMap::current_mResultType (LOCATION_ARGS) const {
-  const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_sliceMap) ;
-  return p->mProperty_mResultType ;
-}
-
-
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                                   @sliceMap type                                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_sliceMap ("sliceMap",
-                                 NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-const C_galgas_type_descriptor * GALGAS_sliceMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sliceMap ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-AC_GALGAS_root * GALGAS_sliceMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_sliceMap (*this)) ;
-  }
-  return result ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_sliceMap GALGAS_sliceMap::extractObject (const GALGAS_object & inObject,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  GALGAS_sliceMap result ;
-  const GALGAS_sliceMap * p = (const GALGAS_sliceMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sliceMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("sliceMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

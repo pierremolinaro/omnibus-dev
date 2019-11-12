@@ -104,6 +104,7 @@ override method @compileTimeBoolNotOperator generateCode
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType
   ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
+  ?safeMode: let @bool unused inSafeMode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue

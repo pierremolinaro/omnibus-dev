@@ -9,6 +9,173 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                  Overriding extension method '@bitbandInstructionAST instructionSemanticAnalysis'                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_bitbandInstructionAST_instructionSemanticAnalysis (const cPtr_instructionAST * inObject,
+                                                                               const GALGAS_omnibusType constinArgument_inSelfType,
+                                                                               const GALGAS_routineAttributes constinArgument_inRoutineAttributes,
+                                                                               const GALGAS_semanticContext constinArgument_inContext,
+                                                                               const GALGAS_mode constinArgument_inMode,
+                                                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                               GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
+                                                                               GALGAS_universalValuedObjectMap & ioArgument_ioUniversalMap,
+                                                                               GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                               GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_bitbandInstructionAST * object = (const cPtr_bitbandInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_bitbandInstructionAST) ;
+  GALGAS_omnibusType var_requiredSourceExpressionType_3743 ;
+  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("uint1"), object->mProperty_mSourceExpressionLocation  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 76)), var_requiredSourceExpressionType_3743, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 75)) ;
+  GALGAS_objectIR var_sourceExpressionOperand_4201 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_requiredSourceExpressionType_3743, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceExpressionOperand_4201, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 80)) ;
+  {
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_sourceExpressionOperand_4201, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 94)) ;
+  }
+  enumGalgasBool test_0 = kBoolTrue ;
+  if (kBoolTrue == test_0) {
+    GALGAS_bool test_1 = GALGAS_bool (kIsEqual, extensionGetter_type (var_sourceExpressionOperand_4201, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 99)).getter_omnibusTypeDescriptionName (HERE).objectCompare (function_ctIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 99)))) ;
+    if (kBoolTrue == test_1.boolEnum ()) {
+      test_1 = var_sourceExpressionOperand_4201.getter_isLiteralInteger (SOURCE_FILE ("instruction-bit-banding.galgas", 99)) ;
+    }
+    test_0 = test_1.boolEnum () ;
+    if (kBoolTrue == test_0) {
+      GALGAS_bigint var_value_4667 ;
+      GALGAS_omnibusType joker_4640_1 ; // Joker input parameter
+      var_sourceExpressionOperand_4201.method_literalInteger (joker_4640_1, var_value_4667, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 100)) ;
+      enumGalgasBool test_2 = kBoolTrue ;
+      if (kBoolTrue == test_2) {
+        GALGAS_bool test_3 = GALGAS_bool (kIsStrictInf, var_value_4667.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 101)))) ;
+        if (kBoolTrue != test_3.boolEnum ()) {
+          test_3 = GALGAS_bool (kIsStrictSup, var_value_4667.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 101)))) ;
+        }
+        test_2 = test_3.boolEnum () ;
+        if (kBoolTrue == test_2) {
+          TC_Array <C_FixItDescription> fixItArray4 ;
+          inCompiler->emitSemanticError (object->mProperty_mSourceExpressionLocation, GALGAS_string ("static value should be 0 or 1"), fixItArray4  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 102)) ;
+        }
+      }
+      if (kBoolFalse == test_2) {
+        var_sourceExpressionOperand_4201 = GALGAS_objectIR::constructor_literalInteger (var_requiredSourceExpressionType_3743, var_value_4667  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 104)) ;
+      }
+    }
+  }
+  if (kBoolFalse == test_0) {
+    enumGalgasBool test_5 = kBoolTrue ;
+    if (kBoolTrue == test_5) {
+      test_5 = GALGAS_bool (kIsNotEqual, extensionGetter_type (var_sourceExpressionOperand_4201, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 106)).getter_omnibusTypeDescriptionName (HERE).objectCompare (var_requiredSourceExpressionType_3743.getter_omnibusTypeDescriptionName (HERE))).boolEnum () ;
+      if (kBoolTrue == test_5) {
+        TC_Array <C_FixItDescription> fixItArray6 ;
+        inCompiler->emitSemanticError (object->mProperty_mSourceExpressionLocation, GALGAS_string ("bit expression type should be $").add_operation (var_requiredSourceExpressionType_3743.getter_omnibusTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 107)), fixItArray6  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 107)) ;
+      }
+    }
+  }
+  GALGAS_uint var_registerBitCount_5652 ;
+  GALGAS_string var_llvmRegisterAddressName_5725 ;
+  GALGAS_omnibusType joker_5608 ; // Joker input parameter
+  GALGAS_sliceMap joker_5667 ; // Joker input parameter
+  extensionMethod_controlRegisterLValueSemanticAnalysis (object->mProperty_mControlRegisterLValue, GALGAS_bool (false), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, joker_5608, var_registerBitCount_5652, joker_5667, var_llvmRegisterAddressName_5725, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 110)) ;
+  GALGAS_omnibusType var_requiredBitExpressionType_5966 ;
+  constinArgument_inContext.getter_mTypeMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (GALGAS_string ("uint").add_operation (var_registerBitCount_5652.substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_uint (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_significantBitCount (SOURCE_FILE ("instruction-bit-banding.galgas", 130)).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), object->mProperty_mBitExpressionLocation  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 130)), var_requiredBitExpressionType_5966, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)) ;
+  GALGAS_objectIR var_bitExpressionOperand_6412 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mProperty_mBitExpression.ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_requiredBitExpressionType_5966, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_bitExpressionOperand_6412, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 134)) ;
+  {
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_bitExpressionOperand_6412, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 148)) ;
+  }
+  enumGalgasBool test_7 = kBoolTrue ;
+  if (kBoolTrue == test_7) {
+    GALGAS_bool test_8 = GALGAS_bool (kIsEqual, extensionGetter_type (var_bitExpressionOperand_6412, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 153)).getter_omnibusTypeDescriptionName (HERE).objectCompare (function_ctIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 153)))) ;
+    if (kBoolTrue == test_8.boolEnum ()) {
+      test_8 = var_bitExpressionOperand_6412.getter_isLiteralInteger (SOURCE_FILE ("instruction-bit-banding.galgas", 153)) ;
+    }
+    test_7 = test_8.boolEnum () ;
+    if (kBoolTrue == test_7) {
+      GALGAS_bigint var_value_6860 ;
+      GALGAS_omnibusType joker_6833_1 ; // Joker input parameter
+      var_bitExpressionOperand_6412.method_literalInteger (joker_6833_1, var_value_6860, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 154)) ;
+      enumGalgasBool test_9 = kBoolTrue ;
+      if (kBoolTrue == test_9) {
+        GALGAS_bool test_10 = GALGAS_bool (kIsStrictInf, var_value_6860.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 155)))) ;
+        if (kBoolTrue != test_10.boolEnum ()) {
+          test_10 = GALGAS_bool (kIsSupOrEqual, var_value_6860.objectCompare (var_registerBitCount_5652.getter_bigint (SOURCE_FILE ("instruction-bit-banding.galgas", 155)))) ;
+        }
+        test_9 = test_10.boolEnum () ;
+        if (kBoolTrue == test_9) {
+          TC_Array <C_FixItDescription> fixItArray11 ;
+          inCompiler->emitSemanticError (object->mProperty_mBitExpressionLocation, GALGAS_string ("static value should be >= 0 and <").add_operation (var_registerBitCount_5652.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 156)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 156)), fixItArray11  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 156)) ;
+        }
+      }
+      if (kBoolFalse == test_9) {
+        var_bitExpressionOperand_6412 = GALGAS_objectIR::constructor_literalInteger (var_requiredBitExpressionType_5966, var_value_6860  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 158)) ;
+      }
+    }
+  }
+  if (kBoolFalse == test_7) {
+    enumGalgasBool test_12 = kBoolTrue ;
+    if (kBoolTrue == test_12) {
+      test_12 = GALGAS_bool (kIsNotEqual, extensionGetter_type (var_bitExpressionOperand_6412, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 160)).getter_omnibusTypeDescriptionName (HERE).objectCompare (var_requiredBitExpressionType_5966.getter_omnibusTypeDescriptionName (HERE))).boolEnum () ;
+      if (kBoolTrue == test_12) {
+        TC_Array <C_FixItDescription> fixItArray13 ;
+        inCompiler->emitSemanticError (object->mProperty_mBitExpressionLocation, GALGAS_string ("bit expression type should be $").add_operation (var_requiredBitExpressionType_5966.getter_omnibusTypeDescriptionName (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 161)), fixItArray13  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 161)) ;
+      }
+    }
+  }
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_bitbandInstructionIR::constructor_new (var_llvmRegisterAddressName_5725, var_bitExpressionOperand_6412, var_sourceExpressionOperand_4201, constinArgument_inContext.getter_mTargetParameters (HERE).getter_mBitbandRegisterBaseAddress (HERE).getter_bigint (HERE), constinArgument_inContext.getter_mTargetParameters (HERE).getter_mBitbandRegisterRelocationAddress (HERE).getter_bigint (HERE), constinArgument_inContext.getter_mTargetParameters (HERE).getter_mBitbandRegisterOffsetMultiplier (HERE).getter_bigint (HERE), constinArgument_inContext.getter_mTargetParameters (HERE).getter_mBitbandRegisterBitMultiplier (HERE).getter_bigint (HERE)  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 164))  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 164)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_bitbandInstructionAST_instructionSemanticAnalysis (void) {
+  enterExtensionMethod_instructionSemanticAnalysis (kTypeDescriptor_GALGAS_bitbandInstructionAST.mSlotID,
+                                                    extensionMethod_bitbandInstructionAST_instructionSemanticAnalysis) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_bitbandInstructionAST_instructionSemanticAnalysis (defineExtensionMethod_bitbandInstructionAST_instructionSemanticAnalysis, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                       Overriding extension method '@bitbandInstructionIR llvmInstructionCode'                       *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void extensionMethod_bitbandInstructionIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                      GALGAS_string & ioArgument_ioLLVMcode,
+                                                                      const GALGAS_generationContext /* constinArgument_inGenerationContext */,
+                                                                      GALGAS_generationAdds & ioArgument_ioGenerationAdds,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_bitbandInstructionIR * object = (const cPtr_bitbandInstructionIR *) inObject ;
+  macroValidSharedObject (object, cPtr_bitbandInstructionIR) ;
+  GALGAS_string var_idx_9441 = ioArgument_ioGenerationAdds.getter_mUniqueIndex (HERE).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 206)) ;
+  ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 207)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Bit band\n"), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (" = sub i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (object->mProperty_mRegisterAddressLLVMname, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (object->mProperty_mBitbandRegisterBaseAddress.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (".mul = mul i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (object->mProperty_mBitbandRegisterOffsetMultiplier.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (".mul = mul i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (extensionGetter_llvmName (object->mProperty_mBitExpressionOperand, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (object->mProperty_mBitbandRegisterBitMultiplier.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %offset.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (" = add i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (".mul, %bit.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (".mul\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.word.addr.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (" = add i32 %offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (object->mProperty_mBitbandRegisterRelocationAddress.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %ptr.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" = inttoptr i32 %bit.word.addr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" to i32*\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %value.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string (" = zext i1 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (extensionGetter_llvmName (object->mProperty_mSourceExpressionOperand, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string (" to i32\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store i32 %value.").add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)).add_operation (GALGAS_string (", i32* %ptr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)).add_operation (var_idx_9441, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 216)) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void defineExtensionMethod_bitbandInstructionIR_llvmInstructionCode (void) {
+  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_bitbandInstructionIR.mSlotID,
+                                            extensionMethod_bitbandInstructionIR_llvmInstructionCode) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_bitbandInstructionIR_llvmInstructionCode (defineExtensionMethod_bitbandInstructionIR_llvmInstructionCode, NULL) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //        Overriding extension method '@varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7709,251 +7876,4 @@ static void defineExtensionMethod_testArrayIndexIR_llvmInstructionCode (void) {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 C_PrologueEpilogue gMethod_testArrayIndexIR_llvmInstructionCode (defineExtensionMethod_testArrayIndexIR_llvmInstructionCode, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                       Overriding extension method '@testArrayIndexIR enterAccessibleEntities'                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_testArrayIndexIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                      GALGAS_stringset & ioArgument_ioInvokedRoutineSet,
-                                                                      GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_testArrayIndexIR * object = (const cPtr_testArrayIndexIR *) inObject ;
-  macroValidSharedObject (object, cPtr_testArrayIndexIR) ;
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
-    test_0 = GALGAS_bool (gOption_omnibus_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("intermediate-test-array-index.galgas", 74)).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      ioArgument_ioInvokedRoutineSet.addAssign_operation (function_panicRoutineNameForLocationFile (object->mProperty_mErrorLocation, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 75))  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 75)) ;
-    }
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_testArrayIndexIR_enterAccessibleEntities (void) {
-  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_testArrayIndexIR.mSlotID,
-                                                extensionMethod_testArrayIndexIR_enterAccessibleEntities) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_testArrayIndexIR_enterAccessibleEntities (defineExtensionMethod_testArrayIndexIR_enterAccessibleEntities, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                         Overriding extension method '@sourceLocationIR llvmInstructionCode'                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_sourceLocationIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                  GALGAS_string & ioArgument_ioLLVMcode,
-                                                                  const GALGAS_generationContext /* constinArgument_inGenerationContext */,
-                                                                  GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_sourceLocationIR * object = (const cPtr_sourceLocationIR *) inObject ;
-  macroValidSharedObject (object, cPtr_sourceLocationIR) ;
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
-    test_0 = object->mProperty_mSourceLocation.getter_isNowhere (SOURCE_FILE ("intermediate-comment-source-line.galgas", 19)).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";---------\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 20)) ;
-    }
-  }
-  if (kBoolFalse == test_0) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--------- ").add_operation (object->mProperty_mSourceLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)).getter_string (SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)).add_operation (object->mProperty_mSourceLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)).getter_lastPathComponent (SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)), inCompiler  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 22)) ;
-  }
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_sourceLocationIR_llvmInstructionCode (void) {
-  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_sourceLocationIR.mSlotID,
-                                            extensionMethod_sourceLocationIR_llvmInstructionCode) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_sourceLocationIR_llvmInstructionCode (defineExtensionMethod_sourceLocationIR_llvmInstructionCode, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Overriding extension method '@freeCommentIR llvmInstructionCode'                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void extensionMethod_freeCommentIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                               GALGAS_string & ioArgument_ioLLVMcode,
-                                                               const GALGAS_generationContext /* constinArgument_inGenerationContext */,
-                                                               GALGAS_generationAdds & /* ioArgument_ioGenerationAdds */,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_freeCommentIR * object = (const cPtr_freeCommentIR *) inObject ;
-  macroValidSharedObject (object, cPtr_freeCommentIR) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--------- ").add_operation (object->mProperty_mComment, inCompiler COMMA_SOURCE_FILE ("intermediate-free-comment.galgas", 19)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-free-comment.galgas", 19)), inCompiler  COMMA_SOURCE_FILE ("intermediate-free-comment.galgas", 19)) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-static void defineExtensionMethod_freeCommentIR_llvmInstructionCode (void) {
-  enterExtensionMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_freeCommentIR.mSlotID,
-                                            extensionMethod_freeCommentIR_llvmInstructionCode) ;
-}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-C_PrologueEpilogue gMethod_freeCommentIR_llvmInstructionCode (defineExtensionMethod_freeCommentIR_llvmInstructionCode, NULL) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                             Routine 'codeOptimization'                                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
-                               GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                               C_Compiler * inCompiler
-                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineAccessibilityIR var_routineAccessibilityIR_1371 = GALGAS_routineAccessibilityIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 26)) ;
-  GALGAS_stringset var_exploreRoutineSet_1483 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 28)) ;
-  GALGAS_stringset var_allRoutineSet_1515 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 29)) ;
-  GALGAS_stringset var_definedRoutineSet_1551 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 30)) ;
-  cEnumerator_routineListIR enumerator_1613 (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), kENUMERATION_UP) ;
-  while (enumerator_1613.hasCurrentObject ()) {
-    GALGAS_stringset var_accessibleRoutineSet_1652 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 32)) ;
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractRoutineIR *) enumerator_1613.current (HERE).getter_mRoutine (HERE).ptr (), var_accessibleRoutineSet_1652, ioArgument_ioIntermediateCodeStruct.mProperty_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 33)) ;
-    var_routineAccessibilityIR_1371.addAssign_operation (enumerator_1613.current (HERE).getter_mRoutine (HERE), var_accessibleRoutineSet_1652  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 34)) ;
-    var_allRoutineSet_1515.plusAssign_operation(var_accessibleRoutineSet_1652, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 35)) ;
-    var_definedRoutineSet_1551.addAssign_operation (enumerator_1613.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 36))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 36)) ;
-    enumGalgasBool test_0 = kBoolTrue ;
-    if (kBoolTrue == test_0) {
-      test_0 = enumerator_1613.current (HERE).getter_mRoutine (HERE).getter_isRequired (HERE).boolEnum () ;
-      if (kBoolTrue == test_0) {
-        var_exploreRoutineSet_1483.addAssign_operation (enumerator_1613.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 38))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 38)) ;
-      }
-    }
-    enumerator_1613.gotoNextObject () ;
-  }
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
-    test_1 = GALGAS_bool (gOption_omnibus_5F_options_printPasses.getter_value ()).boolEnum () ;
-    if (kBoolTrue == test_1) {
-      GALGAS_string var_m_2138 = GALGAS_string ("** Dead code elimination\n") ;
-      var_m_2138.plusAssign_operation(GALGAS_string ("    ").add_operation (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 43)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 43)).add_operation (GALGAS_string (" routines, "), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 43)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 43)) ;
-      var_m_2138.plusAssign_operation(var_exploreRoutineSet_1483.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 44)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 44)).add_operation (GALGAS_string (" root routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 44)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 44)) ;
-      inCompiler->printMessage (var_m_2138  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 45)) ;
-    }
-  }
-  GALGAS_stringset var_undefinedRoutineSet_2463 = var_allRoutineSet_1515.substract_operation (var_definedRoutineSet_1551, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 48)) ;
-  enumGalgasBool test_2 = kBoolTrue ;
-  if (kBoolTrue == test_2) {
-    test_2 = GALGAS_bool (kIsStrictSup, var_undefinedRoutineSet_2463.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 49)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-    if (kBoolTrue == test_2) {
-      GALGAS_string var_m_2551 = GALGAS_string ("undefined routine(s):") ;
-      cEnumerator_stringset enumerator_2618 (var_undefinedRoutineSet_2463, kENUMERATION_UP) ;
-      while (enumerator_2618.hasCurrentObject ()) {
-        var_m_2551.plusAssign_operation(GALGAS_string ("\n"
-          "    - ").add_operation (enumerator_2618.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 52)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 52)) ;
-        enumerator_2618.gotoNextObject () ;
-      }
-      TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 54)), var_m_2551, fixItArray3  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 54)) ;
-    }
-  }
-  enumGalgasBool test_4 = kBoolTrue ;
-  if (kBoolTrue == test_4) {
-    test_4 = GALGAS_bool (gOption_omnibus_5F_options_noDeadCodeElimination.getter_value ()).boolEnum () ;
-    if (kBoolTrue == test_4) {
-      inCompiler->printMessage (GALGAS_string ("    No dead code elimination (option --").add_operation (GALGAS_string (gOption_omnibus_5F_options_noDeadCodeElimination.getter_string ()), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 58)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 58))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 58)) ;
-    }
-  }
-  if (kBoolFalse == test_4) {
-    GALGAS_stringset var_usefulRoutineSet_2990 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 60)) ;
-    if (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 61)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 61)).isValid ()) {
-      uint32_t variant_3004 = ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE).getter_length (SOURCE_FILE ("dead-code-elimination.galgas", 61)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 61)).uintValue () ;
-      bool loop_3004 = true ;
-      while (loop_3004) {
-        loop_3004 = GALGAS_bool (kIsStrictSup, var_exploreRoutineSet_1483.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 61)).objectCompare (GALGAS_uint ((uint32_t) 0U))).isValid () ;
-        if (loop_3004) {
-          loop_3004 = GALGAS_bool (kIsStrictSup, var_exploreRoutineSet_1483.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 61)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolValue () ;
-        }
-        if (loop_3004 && (0 == variant_3004)) {
-          loop_3004 = false ;
-          inCompiler->loopRunTimeVariantError (SOURCE_FILE ("dead-code-elimination.galgas", 61)) ;
-        }
-        if (loop_3004) {
-          variant_3004 -- ;
-          GALGAS_stringset var_currentSet_3119 = var_exploreRoutineSet_1483 ;
-          var_exploreRoutineSet_1483 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 63)) ;
-          cEnumerator_routineAccessibilityIR enumerator_3212 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
-          while (enumerator_3212.hasCurrentObject ()) {
-            GALGAS_lstring var_routineMangledName_3246 = enumerator_3212.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE) ;
-            enumGalgasBool test_5 = kBoolTrue ;
-            if (kBoolTrue == test_5) {
-              test_5 = var_currentSet_3119.getter_hasKey (var_routineMangledName_3246.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 66)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 66)).operator_and (var_usefulRoutineSet_2990.getter_hasKey (var_routineMangledName_3246.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 66)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 66)).operator_not (SOURCE_FILE ("dead-code-elimination.galgas", 66)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 66)).boolEnum () ;
-              if (kBoolTrue == test_5) {
-                var_usefulRoutineSet_2990.addAssign_operation (var_routineMangledName_3246.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 67))  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 67)) ;
-                var_exploreRoutineSet_1483.plusAssign_operation(enumerator_3212.current (HERE).getter_mAccessibleRoutineSet (HERE), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 68)) ;
-              }
-            }
-            enumerator_3212.gotoNextObject () ;
-          }
-        }
-      }
-    }
-    cEnumerator_routineAccessibilityIR enumerator_3648 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
-    while (enumerator_3648.hasCurrentObject ()) {
-      GALGAS_lstring var_routineMangledName_3680 = enumerator_3648.current (HERE).getter_mRoutine (HERE).getter_mRoutineMangledName (HERE) ;
-      enumGalgasBool test_6 = kBoolTrue ;
-      if (kBoolTrue == test_6) {
-        test_6 = enumerator_3648.current (HERE).getter_mRoutine (HERE).getter_warnsIfUnused (HERE).operator_and (var_usefulRoutineSet_2990.getter_hasKey (var_routineMangledName_3680.getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 75)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 75)).operator_not (SOURCE_FILE ("dead-code-elimination.galgas", 75)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 75)).boolEnum () ;
-        if (kBoolTrue == test_6) {
-          TC_Array <C_FixItDescription> fixItArray7 ;
-          inCompiler->emitSemanticWarning (var_routineMangledName_3680.getter_location (SOURCE_FILE ("dead-code-elimination.galgas", 76)), GALGAS_string ("unused routine"), fixItArray7  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 76)) ;
-        }
-      }
-      enumerator_3648.gotoNextObject () ;
-    }
-    enumGalgasBool test_8 = kBoolTrue ;
-    if (kBoolTrue == test_8) {
-      test_8 = GALGAS_bool (gOption_omnibus_5F_options_printPasses.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_8) {
-        GALGAS_string var_m_4006 = GALGAS_string ("    ").add_operation (var_usefulRoutineSet_2990.getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 81)).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 81)).add_operation (GALGAS_string (" useful routines.\n"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 81)) ;
-        inCompiler->printMessage (var_m_4006  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 85)) ;
-      }
-    }
-    ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 88)) ;
-    cEnumerator_routineAccessibilityIR enumerator_4356 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
-    while (enumerator_4356.hasCurrentObject ()) {
-      enumGalgasBool test_9 = kBoolTrue ;
-      if (kBoolTrue == test_9) {
-        test_9 = var_usefulRoutineSet_2990.getter_hasKey (enumerator_4356.current_mRoutine (HERE).getter_mRoutineMangledName (HERE).getter_string (SOURCE_FILE ("dead-code-elimination.galgas", 90)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 90)).boolEnum () ;
-        if (kBoolTrue == test_9) {
-          ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (enumerator_4356.current_mRoutine (HERE)  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 91)) ;
-        }
-      }
-      enumerator_4356.gotoNextObject () ;
-    }
-  }
-  GALGAS_string var_filePath_4557 = constinArgument_inSourceFile.add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 96)) ;
-  enumGalgasBool test_10 = kBoolTrue ;
-  if (kBoolTrue == test_10) {
-    test_10 = GALGAS_bool (gOption_omnibus_5F_options_emitRoutineInvocationGraphFile.getter_value ()).boolEnum () ;
-    if (kBoolTrue == test_10) {
-      {
-      routine_displayInvocationGraph (ioArgument_ioIntermediateCodeStruct.getter_mRoutineListIR (HERE), var_filePath_4557, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 98)) ;
-      }
-    }
-  }
-  if (kBoolFalse == test_10) {
-    {
-    GALGAS_string::class_method_deleteFileIfExists (var_filePath_4557, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 100)) ;
-    }
-  }
-}
-
 

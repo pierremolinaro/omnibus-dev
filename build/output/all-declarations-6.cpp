@@ -8,6 +8,132 @@
 #include "all-declarations-6.h"
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                         Extension method '@llvmStringDefinition checkCompileTimeExpression'                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionMethod_checkCompileTimeExpression (const GALGAS_llvmStringDefinition inObject,
+                                                 const GALGAS_ctCheckMap constinArgument_inMap,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_llvmStringDefinition temp_0 = inObject ;
+  cEnumerator_llvmStringDefinition enumerator_6962 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6962.hasCurrentObject ()) {
+    switch (enumerator_6962.current_mElement (HERE).enumValue ()) {
+    case GALGAS_llvmStringDefinitionElement::kNotBuilt:
+      break ;
+    case GALGAS_llvmStringDefinitionElement::kEnum_string:
+      {
+      }
+      break ;
+    case GALGAS_llvmStringDefinitionElement::kEnum_variable:
+      {
+        const cEnumAssociatedValues_llvmStringDefinitionElement_variable * extractPtr_7064 = (const cEnumAssociatedValues_llvmStringDefinitionElement_variable *) (enumerator_6962.current_mElement (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_7064->mAssociatedValue0 ;
+        constinArgument_inMap.method_searchKey (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 199)) ;
+      }
+      break ;
+    }
+    enumerator_6962.gotoNextObject () ;
+  }
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                      Abstract extension method '@abstractAssignmentOperatorUsage generateCode'                      *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static TC_UniqueArray <extensionMethodSignature_abstractAssignmentOperatorUsage_generateCode> gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void enterExtensionMethod_generateCode (const int32_t inClassIndex,
+                                        extensionMethodSignature_abstractAssignmentOperatorUsage_generateCode inMethod) {
+  gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+static void freeExtensionMethod_abstractAssignmentOperatorUsage_generateCode (void) {
+  gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode.free () ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+C_PrologueEpilogue gMethod_abstractAssignmentOperatorUsage_generateCode (NULL,
+                                                                         freeExtensionMethod_abstractAssignmentOperatorUsage_generateCode) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void callExtensionMethod_generateCode (const cPtr_abstractAssignmentOperatorUsage * inObject,
+                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                       GALGAS_instructionListIR & io_ioInstructionListIR,
+                                       GALGAS_allocaList & io_ioAllocaList,
+                                       const GALGAS_omnibusType constin_inTargetType,
+                                       const GALGAS_string constin_inTargetLLVMName,
+                                       const GALGAS_objectIR constin_inSourcePossibleReference,
+                                       const GALGAS_location constin_inErrorLocation,
+                                       const GALGAS_bool constin_inTargetIsInitialized,
+                                       C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractAssignmentOperatorUsage) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_abstractAssignmentOperatorUsage_generateCode f = NULL ;
+    if (classIndex < gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode.count ()) {
+      f = gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+      while ((NULL == f) && (NULL != p)) {
+        if (p->mSlotID < gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode.count ()) {
+          f = gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode (p->mSlotID COMMA_HERE) ;
+        }
+        p = p->mSuperclassDescriptor ;
+      }
+      gExtensionMethodTable_abstractAssignmentOperatorUsage_generateCode.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioTemporaries, io_ioInstructionListIR, io_ioAllocaList, constin_inTargetType, constin_inTargetLLVMName, constin_inSourcePossibleReference, constin_inErrorLocation, constin_inTargetIsInitialized, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              Extension method '@instructionListIR appendAssignmentIR'                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_appendAssignmentIR (GALGAS_instructionListIR & ioObject,
+                                         GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                         const GALGAS_assignmentOperatorMap constinArgument_inAssignmentOperatorMap,
+                                         GALGAS_allocaList & ioArgument_ioAllocaList,
+                                         const GALGAS_omnibusType constinArgument_inTargetType,
+                                         const GALGAS_string constinArgument_inTargetLLVMName,
+                                         const GALGAS_objectIR constinArgument_inSourcePossibleReference,
+                                         const GALGAS_location constinArgument_inErrorLocation,
+                                         const GALGAS_bool constinArgument_inTargetIsInitialized,
+                                         C_Compiler * inCompiler
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring var_key_15652 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
+  GALGAS_abstractAssignmentOperatorUsage var_operatorUsage_15804 ;
+  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15652, var_operatorUsage_15804, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
+  GALGAS_instructionListIR var_instructions_15839 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 347)) ;
+  callExtensionMethod_generateCode ((const cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15804.ptr (), ioArgument_ioTemporaries, var_instructions_15839, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
+  ioObject.plusAssign_operation(var_instructions_15839, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
+}
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //   Object comparison                                                                                                 *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

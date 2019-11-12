@@ -130,6 +130,7 @@ override method @boolNotOperator generateCode
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType
   ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
+  ?safeMode: let @bool unused inSafeMode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
