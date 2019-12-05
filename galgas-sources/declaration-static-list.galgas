@@ -314,7 +314,6 @@ override method @staticListAST enterInContext
       let propertyType = @omnibusType.new {
         !propertyGetterMap:{}
         !propertySetterMap: {}
-        !constructorMap2:{}
         !subscript:.noSubscript
         !attributes:.none
         !omnibusTypeDescriptionName:""
@@ -358,7 +357,6 @@ override method @staticListAST enterInContext
   let elementType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
-    !constructorMap2:{}
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!mStaticListName)
@@ -455,7 +453,6 @@ override method @staticListAST enterInContext
   let arrayType = @omnibusType.new {
     !propertyGetterMap:listTypePropertyMap
     !propertySetterMap: {}
-    !constructorMap2:{}
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)

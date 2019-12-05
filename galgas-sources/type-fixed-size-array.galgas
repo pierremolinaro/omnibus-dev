@@ -139,7 +139,6 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       let arrayType = @omnibusType.new {
         !propertyGetterMap:arrayTypePropertyMap
         !propertySetterMap: {}
-        !constructorMap2:constructorMap
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
         !omnibusTypeDescriptionName:omnibusTypeDescriptionName

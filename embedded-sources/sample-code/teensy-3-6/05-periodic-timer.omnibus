@@ -39,7 +39,7 @@ sync $PeriodicTimer {
 
 task Tâche @stacksize 512 @autostart {
   var compteur $uint32 = 0
-  var deadline = PeriodicTimer (!period:500)
+  var deadline = $PeriodicTimer (!period:500)
 
   event @onSetup first {
     digital.set (!mode:.output !toPort:LED_L0)

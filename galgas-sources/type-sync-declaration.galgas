@@ -132,7 +132,6 @@ override method @syncDeclarationAST enterInContext
   let structureType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: propertySetterMap
-    !constructorMap2:constructorMap
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName

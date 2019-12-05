@@ -33,7 +33,7 @@ struct $StructWithARC {
 
 struct $AutreStructWithARC {
   public var autreEntierQuelconque $uint32 = 0
-  public var structure = StructWithARC ()
+  public var structure = $StructWithARC ()
   public var autreDonnée = $Array8 ()
 }
 
@@ -99,7 +99,7 @@ task T2 > backgroundTask @stacksize 512 @autostart {
   var échéance3 $uint32 = 2001
   var data1 = $Array8 ()
   var data2 = $Array8 ()
-  var structure = AutreStructWithARC ()
+  var structure = $AutreStructWithARC ()
   var b $uint8 = 0
 
   event time.wait (!until:self.échéance1) {
@@ -130,7 +130,7 @@ task T2 > backgroundTask @stacksize 512 @autostart {
   }
 
   func testReleaseLocalVar (?in: inData $Array8) {
-    var d = StructWithARC ()
+    var d = $StructWithARC ()
     d.donnée = inData
   }
 }

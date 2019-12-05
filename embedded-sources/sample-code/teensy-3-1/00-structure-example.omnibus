@@ -10,7 +10,7 @@ struct $B {
 }
 
 struct $C {
-  var c = B ()
+  var c = $B ()
 }
 
 struct $Toto {
@@ -23,7 +23,7 @@ struct $Toto {
 
 task T @stacksize 512 @autostart {
   var deadline $uint32 = 0
-  var acc = C ()
+  var acc = $C ()
 
   event @onSetup first {
     digital.set (!mode: $DigitalMode.output !toPort:.D13)
