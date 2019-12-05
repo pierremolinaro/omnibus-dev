@@ -1655,8 +1655,6 @@ class GALGAS_omnibusTypeAttributes : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_omnibusTypeAttributes constructor_all (LOCATION_ARGS) ;
 
-  public : static class GALGAS_omnibusTypeAttributes constructor_comparable (LOCATION_ARGS) ;
-
   public : static class GALGAS_omnibusTypeAttributes constructor_copyable (LOCATION_ARGS) ;
 
   public : static class GALGAS_omnibusTypeAttributes constructor_instanciable (LOCATION_ARGS) ;
@@ -1696,8 +1694,6 @@ class GALGAS_omnibusTypeAttributes : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_all (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_comparable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyable (LOCATION_ARGS) const ;
 

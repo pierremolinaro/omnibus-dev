@@ -406,16 +406,6 @@ class GALGAS_bool callExtensionGetter_isCompileTimeType (const cPtr_omnibusType 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                         Extension getter '@unifiedTypeMap-proxy instanciable' (as function)                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_bool extensionGetter_instanciable (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
 //                                    Extension getter '@omnibusType instanciable'                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
