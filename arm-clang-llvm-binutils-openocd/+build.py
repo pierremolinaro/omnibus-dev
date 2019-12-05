@@ -40,7 +40,7 @@ import platform
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
-ARCHIVE_DIR = os.path.abspath (scriptDir + "/+archives-for-cross-compilation")
+ARCHIVE_DIR = os.path.abspath (scriptDir + "/archives-for-cross-compilation")
 UTILITY_DIR = os.path.abspath (scriptDir + "/utilities")
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

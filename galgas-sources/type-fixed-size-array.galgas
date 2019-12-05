@@ -108,8 +108,12 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       ]
     else
     #-------------------------------------------- Class method map : add "count" constructor
-      @classConstantMap classConstantMap = {}
-     [!?classConstantMap insertKey !.new {!"count" !mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
+      @constantMap constantMap = {}
+      [!?constantMap insertKey !.new {!"count" !mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
+      [!?ioContext.mTypeConstantMap insertKey
+        !omnibusTypeDescriptionName
+        !constantMap
+      ]
     #-------------------------------------------- Property map
       @propertyGetterMap arrayTypePropertyMap = {}
       [!?arrayTypePropertyMap insertKey # "count" property
@@ -134,7 +138,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       let arrayType = @omnibusType.new {
         !propertyGetterMap:arrayTypePropertyMap
         !propertySetterMap: {}
-        !classConstantMap:classConstantMap
+        !classConstantMap: constantMap
         !constructorMap:constructorMap
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes

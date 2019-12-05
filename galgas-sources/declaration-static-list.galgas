@@ -362,7 +362,6 @@ override method @staticListAST enterInContext
     !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
-#    !assignmentSources: {}
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyList:propertyList}

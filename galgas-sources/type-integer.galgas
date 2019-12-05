@@ -184,9 +184,13 @@ override method @integerDeclarationAST enterInContext
     !"ctpop"
   }
 #--------------------------------------- Class constant map
-  @classConstantMap classConstantMap = {}
-  [!?classConstantMap insertKey !["min" nowhere] !min !integerTypeName]
-  [!?classConstantMap insertKey !["max" nowhere] !max !integerTypeName]
+  @constantMap constantMap = {}
+  [!?constantMap insertKey !["min" nowhere] !min !integerTypeName]
+  [!?constantMap insertKey !["max" nowhere] !max !integerTypeName]
+  [!?ioContext.mTypeConstantMap insertKey
+    !integerTypeName
+    !constantMap
+  ]
 #--------------------------------------- Constructor map
   @constructorMap constructorMap = {} 
   [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
@@ -194,7 +198,7 @@ override method @integerDeclarationAST enterInContext
   let integerType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
-    !classConstantMap:classConstantMap
+    !classConstantMap:constantMap
     !constructorMap:constructorMap
     !subscript:.noSubscript
     !attributes:.instanciable | .equatable | .copyable | .comparable

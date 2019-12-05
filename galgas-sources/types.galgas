@@ -7,7 +7,7 @@
 shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
   @propertySetterMap propertySetterMap %selector
-  @classConstantMap classConstantMap %selector # type.cst, as enumeration values
+  @constantMap classConstantMap %selector # type.cst, as enumeration values
   @constructorMap constructorMap %selector # type (!... !...)
   @subscript subscript %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...

@@ -82,15 +82,6 @@ override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling ->
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @classConstantMap {
-  @bigint mIndex
-  @lstring mClassTypeName
-  insert insertKey error message "the '%K' constant is already declared"
-  search searchKey error message "there is no '%K' constant"
-}
-
-#·······················································································································
-
 override method @enumerationDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
@@ -102,7 +93,7 @@ override method @enumerationDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------- Build constant map
-  @classConstantMap enumConstantMap = {}
+  @constantMap enumConstantMap = {}
   @bigint maxValue = 0G
   for (name value) in mCaseNameList do
     [!?enumConstantMap insertKey !name !value !mEnumerationName]
@@ -110,6 +101,10 @@ override method @enumerationDeclarationAST enterInContext
       maxValue = value
     end
   end
+  [!?ioContext.mTypeConstantMap insertKey
+    !mEnumerationName
+    !enumConstantMap
+  ]
 #---------------- Compute representation bit count
   @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0G do

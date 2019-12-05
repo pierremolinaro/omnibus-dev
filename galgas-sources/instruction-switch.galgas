@@ -106,13 +106,12 @@ override method @switchInstructionAST instructionSemanticAnalysis
     !?switchValueIR
   ]  
 #--- Check inferred type
-  let enumConstantMap = [switchValueIR type].classConstantMap
+  let switchTypeName = @lstring.new {![switchValueIR type].omnibusTypeDescriptionName !mEndOf_test_expression}
+  [inContext.mTypeConstantMap searchKey !switchTypeName ?let enumConstantMap]
+#  let enumConstantMap = [switchValueIR type].classConstantMap
   if not [[switchValueIR type].kind isEnumeration] then
-#    [[switchValueIR type].kind enumeration ?constantMap:enumConstantMap ?2*]
-#  else
     error mEndOf_test_expression
       : "test expression type is '" + [switchValueIR omnibusTypeDescriptionName] + "', it should be boolean"
-#      : enumConstantMap
   end
   if [switchValueIR isStatic] then
     error mEndOf_test_expression : "test expression type should not be static"

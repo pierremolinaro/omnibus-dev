@@ -24,31 +24,12 @@ struct @semanticContext {
 
 #--- Types
   @unifiedTypeMap mTypeMap
+  @typeConstantMap mTypeConstantMap
 
 #--- Interrupts
   @availableInterruptMap mAvailableInterruptMap
 
-#--- Operators
-#  @infixOperatorMap_EX mEqualOperatorMap           # ==
-#  @infixOperatorMap_EX mStrictInfOperatorMap       # <
-#  @infixOperatorMap_EX mInfEqualOperatorMap        # <=
-#  @infixOperatorMap_EX mAndOperatorMap             # &
-#  @infixOperatorMap_EX mOrOperatorMap              # |
-#  @infixOperatorMap_EX mXorOperatorMap             # ^
-#  @infixOperatorMap_EX mBooleanXorOperatorMap      # xor
-#  @infixOperatorMap_EX mAddOperatorMap             # +
-#  @infixOperatorMap_EX mAddNoOvfOperatorMap        # &+
-#  @infixOperatorMap_EX mSubOperatorMap             # -
-#  @infixOperatorMap_EX mSubNoOvfOperatorMap        # &-
-#  @infixOperatorMap_EX mMulOperatorMap             # *
-#  @infixOperatorMap_EX mMulNoOvfOperatorMap        # &*
-#  @infixOperatorMap_EX mDivOperatorMap             # /
-#  @infixOperatorMap_EX mDivNoOvfOperatorMap        # &/
-#  @infixOperatorMap_EX mModOperatorMap             # %
-#  @infixOperatorMap_EX mModNoOvfOperatorMap        # &%
-#  @infixOperatorMap_EX mLeftShiftOperatorMap       # <<
-#  @infixOperatorMap_EX mRightShiftOperatorMap      # >>
-  
+#--- Operator maps  
   @infixOperatorMap mInfixOperatorMap
   @prefixOperatorMap mPrefixOperatorMap
   @assignmentOperatorMap mAssignmentOperatorMap
@@ -76,12 +57,20 @@ list @declarationDecorationList {
 
 #·······················································································································
 
-#map @infixOperatorMap_EX {
-#  @omnibusType mResultType
-#  @omnibusInfixOperatorDescription mOperation
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "** internal error **"
-#}
+map @typeConstantMap {
+  @constantMap mConstantMap
+  insert insertKey error message "the $%K type is already declared"
+  search searchKey error message "there is no $%K type"
+}
+
+#·······················································································································
+
+map @constantMap {
+  @bigint mIndex
+  @lstring mClassTypeName
+  insert insertKey error message "the '%K' constant is already declared"
+  search searchKey error message "there is no '%K' constant"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @staticEntityMap
@@ -144,14 +133,6 @@ map @availableInterruptMap {
 
 getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
   [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result]
-#  let acceptableTypeList = [mAssignableTypesFromCompileTimeType_Map listForKey !ctBoolTypeName ()]
-#  if [acceptableTypeList length] == 0 then
-#    error inErrorLocation : "There is no type assignable from compile time bool type" : result
-#  elsif [acceptableTypeList length] == 1 then
-#    [acceptableTypeList first ?result]
-#  else
-#    error inErrorLocation : "There are several types assignable from compile time bool type" : result
-#  end
 }
 
 #·······················································································································
