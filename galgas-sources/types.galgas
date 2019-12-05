@@ -6,7 +6,6 @@
 
 shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
-  @propertySetterMap propertySetterMap2 %selector
   @subscript subscript %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
@@ -149,7 +148,6 @@ getter @omnibusType isCompileTimeType -> @bool {
 func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
@@ -163,7 +161,6 @@ func %once compileTimeIntegerType -> @omnibusType {
 func %once compileTimeBoolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
@@ -177,7 +174,6 @@ func %once compileTimeBoolType -> @omnibusType {
 func %once boolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable | .instanciable
     !omnibusTypeDescriptionName: boolTypeName ()
@@ -191,7 +187,6 @@ func %once boolType -> @omnibusType {
 func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap2: {}
     !subscript:.literalString
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:staticStringTypeName () 
@@ -205,7 +200,6 @@ func %once literalStringType -> @omnibusType {
 func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:""

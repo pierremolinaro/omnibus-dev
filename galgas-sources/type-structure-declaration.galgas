@@ -330,7 +330,6 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@propertyList ioPropertyList
   ?!@propertyGetterMap ioPropertyGetterMap
-  ?!@propertySetterMap ioPropertySetterMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
   ?!@string ioConstructorKey
@@ -420,11 +419,6 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mIsPublic
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
-    [!?ioPropertySetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
-    ]
     [!?ioContext.mTypePropertySetterMap insertProperty
       !inReceiverTypeName
       !mPropertyName
@@ -442,11 +436,6 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mPropertyName
       !mIsPublic
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-    ]
-    [!?ioPropertySetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
     ]
     [!?ioContext.mTypePropertySetterMap insertProperty
       !inReceiverTypeName
@@ -509,15 +498,6 @@ method @structurePropertyListAST-element enterPropertyInContext
     let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
     let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let setterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmSetterRoutineName]
-    [!?ioPropertySetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.computedProperty {
-        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
-        !getterModeDictionary: getterModeDictionary
-        !setterModeDictionary: setterModeDictionary
-      }
-    ]
     [!?ioContext.mTypePropertySetterMap insertProperty
       !inReceiverTypeName
       !mPropertyName
@@ -570,7 +550,6 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyGetterMap propertyGetterMap = {}
-  @propertySetterMap propertySetterMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
@@ -584,7 +563,6 @@ override method @structureDeclarationAST enterInContext
       !?ioDecoratedRoutineList
       !?propertyList
       !?propertyGetterMap
-      !?propertySetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -620,7 +598,6 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
-    !propertySetterMap2: propertySetterMap
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
