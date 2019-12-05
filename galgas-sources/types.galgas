@@ -43,7 +43,7 @@ map @propertyGetterMap {
 #·······················································································································
 
 boolset @omnibusTypeAttributes {
-  instanciable, equatable, copyable, comparable
+  instanciable, copyable, comparable
 }
 
 #·······················································································································
@@ -149,7 +149,7 @@ func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !subscript:.noSubscript
-    !attributes:.equatable | .copyable
+    !attributes: .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
     !kind:.compileTimeInteger
     !llvmBaseTypeName: "" # Compile Time Type
@@ -162,7 +162,7 @@ func %once compileTimeBoolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !subscript:.noSubscript
-    !attributes:.equatable | .copyable
+    !attributes: .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
     !kind:.compileTimeBool
     !llvmBaseTypeName: "" # Compile Time Type
@@ -175,7 +175,7 @@ func %once boolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !subscript:.noSubscript
-    !attributes:.equatable | .copyable | .instanciable
+    !attributes: .copyable | .instanciable
     !omnibusTypeDescriptionName: boolTypeName ()
     !kind: .boolean
     !llvmBaseTypeName: boolTypeName ()
@@ -188,7 +188,7 @@ func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !subscript:.literalString
-    !attributes:.instanciable | .equatable | .copyable
+    !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:staticStringTypeName () 
     !kind:.literalString
     !llvmBaseTypeName:staticStringTypeName ()
@@ -210,12 +210,6 @@ func %once voidType -> @omnibusType {
 
 #·······················································································································
 
-getter @omnibusType equatable -> @bool {
-  result = [attributes equatable]
-}
-
-#·······················································································································
-
 getter @unifiedTypeMap-proxy instanciable -> @bool {
   result = [[self type] instanciable]
 }
@@ -224,12 +218,6 @@ getter @unifiedTypeMap-proxy instanciable -> @bool {
 
 getter @omnibusType instanciable -> @bool {
   result = [attributes instanciable]
-}
-
-#·······················································································································
-
-getter @unifiedTypeMap-proxy copyable -> @bool {
-  result = [[self type] copyable]
 }
 
 #·······················································································································

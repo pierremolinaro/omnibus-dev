@@ -135,7 +135,7 @@ override method @enumerationDeclarationAST enterInContext
   let enumerationType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
-    !attributes:.instanciable | .equatable | .copyable
+    !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName: mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
     !llvmBaseTypeName: mEnumerationName

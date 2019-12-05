@@ -2374,7 +2374,7 @@ GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_none (UNU
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_all (UNUSED_LOCATION_ARGS) {
-  return GALGAS_omnibusTypeAttributes ((uint64_t) 0xF) ;
+  return GALGAS_omnibusTypeAttributes ((uint64_t) 0x7) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2385,20 +2385,14 @@ GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_instancia
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_equatable (UNUSED_LOCATION_ARGS) {
+GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_copyable (UNUSED_LOCATION_ARGS) {
   return GALGAS_omnibusTypeAttributes (((uint64_t) 1) << 1) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_copyable (UNUSED_LOCATION_ARGS) {
-  return GALGAS_omnibusTypeAttributes (((uint64_t) 1) << 2) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::constructor_comparable (UNUSED_LOCATION_ARGS) {
-  return GALGAS_omnibusTypeAttributes (((uint64_t) 1) << 3) ;
+  return GALGAS_omnibusTypeAttributes (((uint64_t) 1) << 2) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2478,7 +2472,7 @@ GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::substract_operation (
 GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
   GALGAS_omnibusTypeAttributes result ;
   if (mIsValid) {
-    result = GALGAS_omnibusTypeAttributes (((uint64_t) 0xF) ^ mFlags) ;
+    result = GALGAS_omnibusTypeAttributes (((uint64_t) 0x7) ^ mFlags) ;
   }
   return result ;
 }
@@ -2495,12 +2489,9 @@ void GALGAS_omnibusTypeAttributes::description (C_String & ioString,
       ioString << " instanciable" ;
     }
     if ((mFlags & ((uint64_t) 1) << 1) != 0) {
-      ioString << " equatable" ;
-    }
-    if ((mFlags & ((uint64_t) 1) << 2) != 0) {
       ioString << " copyable" ;
     }
-    if ((mFlags & ((uint64_t) 1) << 3) != 0) {
+    if ((mFlags & ((uint64_t) 1) << 2) != 0) {
       ioString << " comparable" ;
     }
   }
@@ -2522,7 +2513,7 @@ GALGAS_bool GALGAS_omnibusTypeAttributes::getter_none (UNUSED_LOCATION_ARGS) con
 GALGAS_bool GALGAS_omnibusTypeAttributes::getter_all (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool (mFlags == (uint64_t) 0xF) ;
+    result = GALGAS_bool (mFlags == (uint64_t) 0x7) ;
   }
   return result ;
 }
@@ -2539,7 +2530,7 @@ GALGAS_bool GALGAS_omnibusTypeAttributes::getter_instanciable (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_omnibusTypeAttributes::getter_equatable (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_omnibusTypeAttributes::getter_copyable (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
     result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 1) != 0) ;
@@ -2549,20 +2540,10 @@ GALGAS_bool GALGAS_omnibusTypeAttributes::getter_equatable (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_omnibusTypeAttributes::getter_copyable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (mIsValid) {
-    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 2) != 0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_bool GALGAS_omnibusTypeAttributes::getter_comparable (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (mIsValid) {
-    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 3) != 0) ;
+    result = GALGAS_bool ((mFlags & ((uint64_t) 1) << 2) != 0) ;
   }
   return result ;
 }
@@ -3874,25 +3855,6 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (co
   }
   return result ;
 }
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Extension Getter '@unifiedTypeMap-proxy copyable'                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-GALGAS_bool extensionGetter_copyable (const GALGAS_unifiedTypeMap_2D_proxy & inObject,
-                                      C_Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bool result_result ; // Returned variable
-  const GALGAS_unifiedTypeMap_2D_proxy temp_0 = inObject ;
-  result_result = callExtensionGetter_copyable ((const cPtr_omnibusType *) temp_0.getter_type (inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)).ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 232)) ;
-//---
-  return result_result ;
-}
-
-
-
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *

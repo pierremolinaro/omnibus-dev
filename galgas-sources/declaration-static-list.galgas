@@ -451,7 +451,7 @@ override method @staticListAST enterInContext
   let arrayType = @omnibusType.new {
     !propertyGetterMap:listTypePropertyMap
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
-    !attributes:.instanciable | .equatable | .copyable
+    !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)
     !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}
     !llvmBaseTypeName:llvmNameForStaticListType (!mStaticListName)
