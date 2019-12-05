@@ -198,7 +198,6 @@ override method @integerDeclarationAST enterInContext
   let integerType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
-    !classConstantMap:constantMap
     !constructorMap:constructorMap
     !subscript:.noSubscript
     !attributes:.instanciable | .equatable | .copyable | .comparable

@@ -225,7 +225,6 @@ override method @llvmGenericType enterInContext
     let llvmType = @omnibusType.new {
       !propertyGetterMap: {}
       !propertySetterMap: {}
-      !classConstantMap:{}
       !constructorMap:{}
       !subscript:.noSubscript
       !attributes: .instanciable | .copyable

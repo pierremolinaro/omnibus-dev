@@ -7,7 +7,7 @@
 shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
   @propertySetterMap propertySetterMap %selector
-  @constantMap classConstantMap %selector # type.cst, as enumeration values
+#  @constantMap classConstantMap %selector # type.cst, as enumeration values
   @constructorMap constructorMap %selector # type (!... !...)
   @subscript subscript %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
@@ -170,7 +170,6 @@ func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
@@ -186,7 +185,6 @@ func %once compileTimeBoolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
@@ -202,7 +200,6 @@ func %once boolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable | .instanciable
@@ -218,7 +215,6 @@ func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !classConstantMap:{}
     !constructorMap:{}
     !subscript:.literalString
     !attributes:.instanciable | .equatable | .copyable
@@ -234,7 +230,6 @@ func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !classConstantMap:{}
     !constructorMap:{}
     !subscript:.noSubscript
     !attributes:.none

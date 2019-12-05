@@ -598,7 +598,6 @@ override method @structureDeclarationAST enterInContext
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: propertySetterMap
-    !classConstantMap:{}
     !constructorMap:constructorMap
     !subscript:.noSubscript
     !attributes:typeAttributes
