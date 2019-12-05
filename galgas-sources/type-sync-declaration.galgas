@@ -131,7 +131,7 @@ override method @syncDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
-    !propertySetterMap: propertySetterMap
+    !propertySetterMap2: propertySetterMap
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName

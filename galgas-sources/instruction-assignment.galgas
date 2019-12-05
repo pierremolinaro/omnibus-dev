@@ -256,7 +256,9 @@ private proc handlePropertyAccessInAssignment
   ?let @lstring inPropertyName
   ?let @LValueOperandAST inNextOperand
 {
-  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap
+  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
+  [inContext.mTypePropertySetterMap searchKey !typeName ?let propertySetterMap]
+#  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
   case computedProperty (@unifiedTypeMap-proxy computedPropertyType getterModeDictionary setterModeDictionary) :

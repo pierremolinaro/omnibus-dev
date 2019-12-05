@@ -97,14 +97,14 @@ LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" 
     </table>
     <br>
   %end%
-  %if [[type propertySetterMap] count] > 0 then%
+  %if [[type propertySetterMap2] count] > 0 then%
     <table class="result">
       <tr>
         <td class="result_title">Setter Name</td>
         <td class="result_title">Visibility</td>
         <td class="result_title">Kind</td>
       </tr>
-    %for () in [type propertySetterMap] : setter_ do%
+    %for () in [type propertySetterMap2] : setter_ do%
       <tr class="result_line">
         <td>%!setter_lkey.string%</td>
         <td>%if setter_mIsPublic then !"public" else !"private" end%</td>

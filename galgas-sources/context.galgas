@@ -26,6 +26,7 @@ struct @semanticContext {
   @unifiedTypeMap mTypeMap
   @typeConstantMap mTypeConstantMap
   @typeConstructorMap mTypeConstructorMap
+  @typePropertySetterMap mTypePropertySetterMap
 
 #--- Interrupts
   @availableInterruptMap mAvailableInterruptMap
@@ -109,6 +110,52 @@ map @constructorMap { # Key is (!selector!selector)
   @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
   search searchKey error message "constructor is not defined"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# PROPERTY SETTER MAP
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @typePropertySetterMap {
+  @propertySetterMap mSetterMap
+  insert insertKey error message "the $%K type is already declared"
+  search searchKey error message "there is no $%K type"
+  insert or replace
+}
+
+#·······················································································································
+
+setter @typePropertySetterMap insertProperty ?let @lstring inTypeName
+                                             ?let @lstring inSetterName
+                                             ?let @bool inIsPublic
+                                             ?let @propertySetterKind inAccess {
+  if [self hasKey !inTypeName.string] then
+    [self searchKey !inTypeName ?var setterMap]
+    [!?setterMap insertKey !inSetterName !inIsPublic !inAccess]
+    [!?self insertOrReplace !inTypeName !setterMap]
+  else
+    @propertySetterMap setterMap = {}
+    [!?setterMap insertKey !inSetterName !inIsPublic !inAccess]
+    [!?self insertKey !inTypeName !setterMap]
+  end
+}
+
+#·······················································································································
+
+map @propertySetterMap {
+  @bool mIsPublic
+  @propertySetterKind mAccess
+  insert insertKey error message "the '%K' property is already declared"
+  search searchKey error message "there is no '%K' property"
+}
+
+#·······················································································································
+
+enum @propertySetterKind {
+  case storedProperty (@omnibusType type @uint index)
+  case computedProperty (@unifiedTypeMap-proxy typeProxy
+                         @routineLLVMNameDict getterModeDictionary
+                         @routineLLVMNameDict setterModeDictionary)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

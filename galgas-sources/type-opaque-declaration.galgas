@@ -128,7 +128,7 @@ override method @typeOpaqueDeclarationAST enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     let opaqueType = @omnibusType.new {
       !propertyGetterMap:{}
-      !propertySetterMap: {}
+      !propertySetterMap2: {}
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
       !omnibusTypeDescriptionName:mOpaqueTypeName

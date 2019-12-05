@@ -286,7 +286,7 @@ private proc handlePropertyAccess
   ?let @lstring inPropertyName
   ?let @LValueOperandAST inNextOperand
 {
-  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap
+  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
   case computedProperty (3*) :

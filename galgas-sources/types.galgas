@@ -6,7 +6,7 @@
 
 shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
-  @propertySetterMap propertySetterMap %selector
+  @propertySetterMap propertySetterMap2 %selector
   @subscript subscript %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
@@ -39,24 +39,6 @@ map @propertyGetterMap {
   @propertyGetterKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
-}
-
-#·······················································································································
-
-map @propertySetterMap {
-  @bool mIsPublic
-  @propertySetterKind mAccess
-  insert insertKey error message "the '%K' property is already declared"
-  search searchKey error message "there is no '%K' property"
-}
-
-#·······················································································································
-
-enum @propertySetterKind {
-  case storedProperty (@omnibusType type @uint index)
-  case computedProperty (@unifiedTypeMap-proxy typeProxy
-                         @routineLLVMNameDict getterModeDictionary
-                         @routineLLVMNameDict setterModeDictionary)
 }
 
 #·······················································································································
@@ -167,7 +149,7 @@ getter @omnibusType isCompileTimeType -> @bool {
 func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap: {}
+    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
@@ -181,7 +163,7 @@ func %once compileTimeIntegerType -> @omnibusType {
 func %once compileTimeBoolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap: {}
+    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
@@ -195,7 +177,7 @@ func %once compileTimeBoolType -> @omnibusType {
 func %once boolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap: {}
+    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable | .instanciable
     !omnibusTypeDescriptionName: boolTypeName ()
@@ -209,7 +191,7 @@ func %once boolType -> @omnibusType {
 func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap: {}
+    !propertySetterMap2: {}
     !subscript:.literalString
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:staticStringTypeName () 
@@ -223,7 +205,7 @@ func %once literalStringType -> @omnibusType {
 func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
-    !propertySetterMap: {}
+    !propertySetterMap2: {}
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:""

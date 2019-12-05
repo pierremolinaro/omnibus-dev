@@ -425,6 +425,12 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mIsPublic
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
+    [!?ioContext.mTypePropertySetterMap insertProperty
+      !inReceiverTypeName
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
+    ]
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
   case uninitializedStoredProperty :
     if not [optionalPropertyType instanciable] then
@@ -438,6 +444,12 @@ method @structurePropertyListAST-element enterPropertyInContext
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
     [!?ioPropertySetterMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
+    ]
+    [!?ioContext.mTypePropertySetterMap insertProperty
+      !inReceiverTypeName
       !mPropertyName
       !mIsPublic
       !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
@@ -498,6 +510,16 @@ method @structurePropertyListAST-element enterPropertyInContext
     let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let setterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmSetterRoutineName]
     [!?ioPropertySetterMap insertKey
+      !mPropertyName
+      !mIsPublic
+      !.computedProperty {
+        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
+        !getterModeDictionary: getterModeDictionary
+        !setterModeDictionary: setterModeDictionary
+      }
+    ]
+    [!?ioContext.mTypePropertySetterMap insertProperty
+      !inReceiverTypeName
       !mPropertyName
       !mIsPublic
       !.computedProperty {
@@ -598,7 +620,7 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
-    !propertySetterMap: propertySetterMap
+    !propertySetterMap2: propertySetterMap
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
