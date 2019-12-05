@@ -127,11 +127,12 @@ override method @syncDeclarationAST enterInContext
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
+  [!?ioContext.mTypeConstructorMap insertKey !mSyncToolName !constructorMap]
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: propertySetterMap
-    !constructorMap:constructorMap
+    !constructorMap2:constructorMap
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName

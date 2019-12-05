@@ -94,57 +94,6 @@ syntax extension omnibus_syntax {
       $}$
     while
       <task_event> !?ioAST !taskName: taskName !?setup: taskSetupList !?activate: taskActivateList !?deactivate: taskDeactivateList
-#      $event$
-#      $@attribute$ ?let attribute
-#      $identifier$ ?let name
-#      @lstringlist dependenceList = {}
-#      select
-#      or
-#        $>$
-#        repeat
-#          $identifier$ ?let dependenceName
-#          dependenceList += !dependenceName
-#        while
-#          $,$
-#        end
-#      end
-#      ${$
-#      <instructionList> !?ioAST ?let instructionList
-#      let endOfInit = @location.here
-#      $}$
-#      if attribute.string == "onSetup" then
-#        taskSetupListAST += !name !dependenceList # !instructionList !endOfInit
-#        ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
-#          !taskName
-#          !"task.setup."
-#          !name
-#          !dependenceList
-#          !instructionList
-#          !endOfInit
-#        }
-#      elsif attribute.string == "onStart" then
-#        taskActivateListAST += !name !dependenceList # !instructionList !endOfInit
-#        ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
-#          !taskName
-#          !"task.activate."
-#          !name
-#          !dependenceList
-#          !instructionList
-#          !endOfInit
-#        }
-#      elsif attribute.string == "onTermination" then
-#        taskDeactivateListAST += !name !dependenceList # !instructionList !endOfInit
-#        ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
-#          !taskName
-#          !"task.deactivate."
-#          !name
-#          !dependenceList
-#          !instructionList
-#          !endOfInit
-#        }
-#      else
-#        error attribute : "attribute should be @onSetup, @onStart or @onTermination"
-#      end
     while
       $event$
       <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
@@ -232,7 +181,6 @@ method @taskListAST enterInContext
           !task.mTaskName
           !task.mLowerPriorityTaskList
           !task.mStackSize
-#          !task.mVarList
           !task.mTaskSetupListAST
           !task.mTaskActivateListAST
           !task.mTaskDeactivateListAST
@@ -265,27 +213,6 @@ method @taskListAST enterInContext
 #---
   @decoratedTaskList decoratedTaskList = {}
   for task in sortedTaskList do (taskIndex)
-  #--- task variables
-#    @propertyList propertyList = {}
-#    @propertyGetterMap propertyGetterMap = {}
-#    @propertySetterMap propertySetterMap = {}
-#    @sortedOperandIRList initialValueList = {}
-#    for property in task.mVarList do
-#      [property enterPropertyInContext
-#        !?context:ioContext
-#        !?staticEntityMap:ioStaticEntityMap
-#        !receiverTypeName: task.mTaskName
-#        !receiverLLVMBaseTypeName: task.mTaskName
-#        !?ioDecoratedRoutineList
-#        !?propertyList
-#        !?propertyGetterMap
-#        !?propertySetterMap
-#        !?initialValueList
-#        !?*
-#        !?*
-#        !?*
-#      ]
-#    end
   #---- Add activate function
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
       !omnibusTypeDescriptionName: task.mTaskName
@@ -330,7 +257,10 @@ method @taskListAST enterInContext
     [ioContext.mTypeMap searchKey !lkey:task.mTaskName ?type:let taskType]
     [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]
     var initialValueList = @sortedOperandIRList {}
-    for (* * initValue) in [taskType constructorMap] do
+    let typeName = @lstring.new {!taskType.omnibusTypeDescriptionName !task.mTaskName.location}
+    [ioContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
+    for (* * initValue) in constructorMap do
+#    for (* * initValue) in [taskType constructorMap2] do
       [initValue structure ?sortedOperandList: initialValueList]
     end
     ioContext.mGlobalTaskVariableList +=

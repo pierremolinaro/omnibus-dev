@@ -25,6 +25,7 @@ struct @semanticContext {
 #--- Types
   @unifiedTypeMap mTypeMap
   @typeConstantMap mTypeConstantMap
+  @typeConstructorMap mTypeConstructorMap
 
 #--- Interrupts
   @availableInterruptMap mAvailableInterruptMap
@@ -55,7 +56,9 @@ list @declarationDecorationList {
   @abstractDecoratedDeclaration mDeclaration
 }
 
-#·······················································································································
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  TYPE CONSTANT MAP                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typeConstantMap {
   @constantMap mConstantMap
@@ -70,6 +73,42 @@ map @constantMap {
   @lstring mClassTypeName
   insert insertKey error message "the '%K' constant is already declared"
   search searchKey error message "there is no '%K' constant"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  TYPE CONSTRUCTOR MAP                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @typeConstructorMap {
+  @constructorMap mConstructorMap
+  insert insertKey error message "the $%K type is already declared"
+  search searchKey error message "there is no $%K type"
+}
+
+#·······················································································································
+
+enum @constructorValue {
+  case null
+  case simple (@bigint value)
+  case structure (@sortedOperandIRList sortedOperandList)
+  case arrayValue (@omnibusType elementType @uint size)
+}
+
+#·······················································································································
+
+list @constructorSignature {
+  @string mSelector
+  @omnibusType mType
+  @uint mFieldIndex
+}
+
+#·······················································································································
+
+map @constructorMap { # Key is (!selector!selector)
+  @constructorSignature mSignature
+  @constructorValue mInitValue
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "constructor is not defined"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

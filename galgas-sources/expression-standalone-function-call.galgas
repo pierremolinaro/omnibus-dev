@@ -237,7 +237,7 @@ private proc analyzeConstructorCall
   constructorKey += ")"
 #--- Analyze constructor signature and init value
   let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inTypeName} type]
-  let constructorMap = resultType.constructorMap
+  let constructorMap = resultType.constructorMap2
   [constructorMap searchKey !.new {!constructorKey !inTypeName} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue

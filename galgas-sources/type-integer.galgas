@@ -194,11 +194,12 @@ override method @integerDeclarationAST enterInContext
 #--------------------------------------- Constructor map
   @constructorMap constructorMap = {} 
   [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
+  [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 #--------------------------------------- Enter in type map
   let integerType = @omnibusType.new {
     !propertyGetterMap:propertyGetterMap
     !propertySetterMap: {}
-    !constructorMap:constructorMap
+    !constructorMap2:constructorMap
     !subscript:.noSubscript
     !attributes:.instanciable | .equatable | .copyable | .comparable
     !omnibusTypeDescriptionName:integerTypeName

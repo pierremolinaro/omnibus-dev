@@ -166,13 +166,14 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   #-------------------------------------------- Constructor map
     @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["()" nowhere] !{} !.null]
+    [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
   #-------------------------------------------- Type attributes
     let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @omnibusType.new {
       !propertyGetterMap:propertyGetterMap
       !propertySetterMap: {}
-      !constructorMap:constructorMap
+      !constructorMap2:constructorMap
       !subscript:.noSubscript
       !attributes:typeAttributes
       !omnibusTypeDescriptionName:omnibusTypeDescriptionName

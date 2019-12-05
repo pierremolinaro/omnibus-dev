@@ -132,13 +132,14 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       end
       constructorName += ")"
       [!?constructorMap insertKey ![constructorName nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
+      [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
     #-------------------------------------------- Type attributes
       @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
       let arrayType = @omnibusType.new {
         !propertyGetterMap:arrayTypePropertyMap
         !propertySetterMap: {}
-        !constructorMap:constructorMap
+        !constructorMap2:constructorMap
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
         !omnibusTypeDescriptionName:omnibusTypeDescriptionName

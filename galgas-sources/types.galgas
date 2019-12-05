@@ -7,8 +7,7 @@
 shared class @omnibusType {
   @propertyGetterMap propertyGetterMap %selector
   @propertySetterMap propertySetterMap %selector
-#  @constantMap classConstantMap %selector # type.cst, as enumeration values
-  @constructorMap constructorMap %selector # type (!... !...)
+  @constructorMap constructorMap2 %selector # type (!... !...)
   @subscript subscript %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
@@ -170,7 +169,7 @@ func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !constructorMap:{}
+    !constructorMap2:{}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
@@ -185,7 +184,7 @@ func %once compileTimeBoolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !constructorMap:{}
+    !constructorMap2:{}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
@@ -200,7 +199,7 @@ func %once boolType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !constructorMap:{}
+    !constructorMap2:{}
     !subscript:.noSubscript
     !attributes:.equatable | .copyable | .instanciable
     !omnibusTypeDescriptionName: boolTypeName ()
@@ -215,7 +214,7 @@ func %once literalStringType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !constructorMap:{}
+    !constructorMap2:{}
     !subscript:.literalString
     !attributes:.instanciable | .equatable | .copyable
     !omnibusTypeDescriptionName:staticStringTypeName () 
@@ -230,7 +229,7 @@ func %once voidType -> @omnibusType {
   result = .new {
     !propertyGetterMap:{}
     !propertySetterMap: {}
-    !constructorMap:{}
+    !constructorMap2:{}
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:""

@@ -577,6 +577,7 @@ override method @structureDeclarationAST enterInContext
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
+  [!?ioContext.mTypeConstructorMap insertKey !mOmnibusTypeSpecificName !constructorMap]
 #---------------------------------------- Attribute instanciable, copyable
   var typeAttributes = @omnibusTypeAttributes.instanciable
 #---------------------------------------- Check structure is copyable
@@ -598,7 +599,7 @@ override method @structureDeclarationAST enterInContext
   let structureType = @omnibusType.new {
     !propertyGetterMap: propertyGetterMap
     !propertySetterMap: propertySetterMap
-    !constructorMap:constructorMap
+    !constructorMap2:constructorMap
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName

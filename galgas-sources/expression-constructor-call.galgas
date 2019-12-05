@@ -89,7 +89,9 @@ override method @constructorCallAST analyzeExpression
   constructorKey += ")"
 #--- Analyze constructor signature and init value
   let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
-  let constructorMap = resultType.constructorMap
+  let typeName = @lstring.new {!resultType.omnibusTypeDescriptionName !mErrorLocation}
+  [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
+#  let constructorMap = resultType.constructorMap2
   [constructorMap searchKey !.new {!constructorKey !mErrorLocation} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue

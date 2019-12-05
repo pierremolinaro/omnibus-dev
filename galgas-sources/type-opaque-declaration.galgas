@@ -123,12 +123,13 @@ override method @typeOpaqueDeclarationAST enterInContext
     @constructorMap constructorMap = {}
     if [opaqueTypeAttributes instanciable] then
       [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
+      [!?ioContext.mTypeConstructorMap insertKey !mOpaqueTypeName !constructorMap]
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     let opaqueType = @omnibusType.new {
       !propertyGetterMap:{}
       !propertySetterMap: {}
-      !constructorMap:constructorMap
+      !constructorMap2:constructorMap
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
       !omnibusTypeDescriptionName:mOpaqueTypeName
