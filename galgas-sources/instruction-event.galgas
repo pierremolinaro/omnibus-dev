@@ -250,6 +250,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
           @objectIR currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
           for (propertyName) in propertyList do
             handlePropertyAccessInExpression (
+              !context: inContext
               !?currentObject
               !propertyName
               !inMode
@@ -291,6 +292,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         ]
         for (propertyName) in propertyList do
           handlePropertyAccessInExpression (
+            !context: inContext
             !?currentObjectIR
             !propertyName
             !inMode

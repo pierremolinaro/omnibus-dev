@@ -290,6 +290,12 @@ override method @staticListAST enterInContext
       else
         propertyNameSet += !propertyName
         propertyList += !propertyName !propertyType
+        [!?ioContext.mTypePropertyGetterMap insertProperty
+          !omnibusTypeName: omnibusNameForStaticListElementType (!mStaticListName)
+          !propertyName
+          !true # Public
+          !.storedProperty{!type:propertyType !index:propertyIndex}
+        ]
         [!?propertyGetterMap insertKey
           !propertyName
           !true # Public
@@ -312,7 +318,7 @@ override method @staticListAST enterInContext
       end
     #--- Enter routine type in type map
       let propertyType = @omnibusType.new {
-        !propertyGetterMap:{}
+        !propertyGetterMapp:{}
         !subscript:.noSubscript
         !attributes:.none
         !omnibusTypeDescriptionName:""
@@ -354,7 +360,7 @@ override method @staticListAST enterInContext
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
   let elementType = @omnibusType.new {
-    !propertyGetterMap:propertyGetterMap
+    !propertyGetterMapp:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!mStaticListName)
@@ -447,9 +453,15 @@ override method @staticListAST enterInContext
     !true # public
     !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
   ]
+  [!?ioContext.mTypePropertyGetterMap insertProperty
+    !omnibusTypeName: omnibusNameForStaticListType (!mStaticListName)
+    !.new {!"count" !mStaticListName.location}
+    !true # public
+    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
+  ]
 #-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @omnibusType.new {
-    !propertyGetterMap:listTypePropertyMap
+    !propertyGetterMapp:listTypePropertyMap
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)

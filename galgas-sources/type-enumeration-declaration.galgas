@@ -117,13 +117,22 @@ override method @enumerationDeclarationAST enterInContext
     !ioContext.mTypeMap
     !.new {!"uint" + representationBitCount !mEnumerationName}
   }
-  [!?propertyGetterMap addPropertyGetter
+  [!?ioContext.mTypePropertyGetterMap addComputedPropertyGetter
+    !omnibusTypeName: mEnumerationName
     !llvmBaseTypeName:mEnumerationName
     !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
     !mode:.anySafeMode
     !public: true
     !resultTypeProxy:integerTypeProxy
     ?routineLLVMName: let conversionToUIntN
+  ]
+  [!?propertyGetterMap addComputedPropertyGetterEx
+    !llvmBaseTypeName:mEnumerationName
+    !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
+    !mode:.anySafeMode
+    !public: true
+    !resultTypeProxy:integerTypeProxy
+    ?routineLLVMName: *
   ]
   ioRoutineListIR += !@enumToUintRoutineIR.new {
     !conversionToUIntN
@@ -133,7 +142,7 @@ override method @enumerationDeclarationAST enterInContext
   }
 #---------------- Insert enumeration in type map
   let enumerationType = @omnibusType.new {
-    !propertyGetterMap: propertyGetterMap
+    !propertyGetterMapp: propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName: mEnumerationName

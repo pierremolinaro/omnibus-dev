@@ -287,25 +287,6 @@ dict @routineLLVMNameDict : @mode {
 
 #·······················································································································
 
-setter @propertyGetterMap addPropertyGetter
-  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?propertyName:let @lstring inPropertyName
-  ?mode:let @mode inMode
-  ?public:let @bool inPublic
-  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultTypeProxy
-  !routineLLVMName:@lstring outRoutineLLVMName
-{
-  outRoutineLLVMName = .new {!getterLLVMName (!inLLVMBaseTypeName !inPropertyName) !inPropertyName}
-  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
-  [!?self insertKey
-    !inPropertyName
-    !inPublic
-    !.computedProperty {!typeProxy:inResultTypeProxy !modeDictionary:modeDictionary}
-  ]
-}
-
-#·······················································································································
-
 setter @routineMapForContext addFunctionWithoutArgument
   ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName

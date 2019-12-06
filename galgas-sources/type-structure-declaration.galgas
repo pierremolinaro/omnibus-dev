@@ -326,6 +326,7 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?receiverTypeName:let @lstring inReceiverTypeName
+  ?omnibusTypeName: let @lstring inOmnibusTypeSpecificName
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@propertyList ioPropertyList
@@ -381,7 +382,13 @@ method @structurePropertyListAST-element enterPropertyInContext
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
-   [!?ioPropertyGetterMap insertKey
+    [!?ioContext.mTypePropertyGetterMap insertProperty
+      !omnibusTypeName: inOmnibusTypeSpecificName
+      !mPropertyName
+      !mIsPublic
+      !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
+    ]
+    [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
       !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
@@ -414,6 +421,12 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !actualPropertyType
+    [!?ioContext.mTypePropertyGetterMap insertProperty
+      !omnibusTypeName: inOmnibusTypeSpecificName
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
+    ]
     [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
@@ -432,6 +445,12 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
+    [!?ioContext.mTypePropertyGetterMap insertProperty
+      !omnibusTypeName: inOmnibusTypeSpecificName
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
+    ]
     [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
@@ -451,6 +470,12 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
+    [!?ioContext.mTypePropertyGetterMap insertProperty
+      !omnibusTypeName: inOmnibusTypeSpecificName
+      !mPropertyName
+      !mIsPublic
+      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
+    ]
     [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
@@ -464,6 +489,15 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
+    [!?ioContext.mTypePropertyGetterMap insertProperty
+      !omnibusTypeName: inOmnibusTypeSpecificName
+      !mPropertyName
+      !mIsPublic
+      !.computedProperty{
+        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
+        !modeDictionary:modeDictionary
+      }
+    ]
     [!?ioPropertyGetterMap insertKey
       !mPropertyName
       !mIsPublic
@@ -559,6 +593,7 @@ override method @structureDeclarationAST enterInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
       !receiverTypeName:mReceiverTypeName
+      !omnibusTypeName: mOmnibusTypeSpecificName
       !receiverLLVMBaseTypeName: mLLVMBaseTypeName
       !?ioDecoratedRoutineList
       !?propertyList
@@ -597,7 +632,7 @@ override method @structureDeclarationAST enterInContext
   end
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
-    !propertyGetterMap: propertyGetterMap
+    !propertyGetterMapp: propertyGetterMap
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName

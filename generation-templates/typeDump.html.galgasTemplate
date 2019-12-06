@@ -70,33 +70,6 @@ Description: %![type omnibusTypeDescriptionName]%<br>
 LLVM Base Name: %if [type llvmBaseTypeName] == "" then !"<i>none, compile time type</i>" else ![type llvmBaseTypeName] end%<br>
 LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" else ![type llvmTypeName] end%
 </p>
-  %if [[type propertyGetterMap] count] > 0 then%
-    <table class="result">
-      <tr>
-        <td class="result_title">Getter Name</td>
-        <td class="result_title">Visibility</td>
-        <td class="result_title">Kind</td>
-      </tr>
-    %for () in [type propertyGetterMap] : getter_ do%
-      <tr class="result_line">
-        <td>%!getter_lkey.string%</td>
-        <td>%if getter_mIsPublic then !"public" else !"private" end%</td>
-        <td>%
-        switch getter_mAccess
-        case storedProperty (propertyType propertyIndex) :
-          %Stored property, index %![propertyIndex string]%, type %![propertyType llvmTypeName]
-        case computedProperty (propertyTypeProxy modeDictionary) :
-          %Computed property, type %![propertyTypeProxy key]%, routine LLVM name:%
-          for () in modeDictionary : mode_ do %<br>%![mode_key string] % : % !mode_mRoutineLLVMName end
-        case constantProperty (propertyValue) :
-          %Constant property, type %![[propertyValue type] llvmTypeName]%, value %![propertyValue llvmName]
-        end
-        %</td>
-      </tr>
-    %end%
-    </table>
-    <br>
-  %end%
 %end%
 <p>
 <h2>

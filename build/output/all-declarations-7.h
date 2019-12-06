@@ -266,6 +266,7 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universa
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
+                                             const class GALGAS_typePropertyGetterMap constin_inTypePropertyGetterMap,
                                              const class GALGAS_omnibusType constin_inSelfType,
                                              const class GALGAS_LValueAST constin_inLValue,
                                              class GALGAS_omnibusType & out_outType,
@@ -279,6 +280,7 @@ void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedO
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 void extensionMethod_getValuedObjectType (const class GALGAS_LValueOperandAST inObject,
+                                          const class GALGAS_typePropertyGetterMap constin_inTypePropertyGetterMap,
                                           class GALGAS_omnibusType & io_ioType,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;

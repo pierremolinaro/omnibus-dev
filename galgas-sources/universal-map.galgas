@@ -294,6 +294,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
 #·······················································································································
 
 method @universalValuedObjectMap searchValuedObjectType
+  ?let @typePropertyGetterMap inTypePropertyGetterMap
   ?selfType: let @omnibusType inSelfType
   ?let @LValueAST inLValue
   !@omnibusType outType
@@ -317,16 +318,16 @@ method @universalValuedObjectMap searchValuedObjectType
       outType = type
     end
   end
-  [inLValue.mOperand getValuedObjectType !?outType]
+  [inLValue.mOperand getValuedObjectType !inTypePropertyGetterMap !?outType]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueOperandAST getValuedObjectType ?!@omnibusType ioType {
+method @LValueOperandAST getValuedObjectType ?let @typePropertyGetterMap inTypePropertyGetterMap ?!@omnibusType ioType {
   switch self
   case noOperand :
   case property (@lstring propertyName @LValueOperandAST next) :
-    let @propertyGetterMap propertyGetterMap = ioType.propertyGetterMap
+    let @propertyGetterMap propertyGetterMap = ioType.propertyGetterMapp
     [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
     switch accessKind
     case constantProperty (value) :
@@ -336,7 +337,7 @@ method @LValueOperandAST getValuedObjectType ?!@omnibusType ioType {
     case computedProperty (propertyTypeProxy *) :
       ioType = [propertyTypeProxy type]
     end
-    [next getValuedObjectType !?ioType]
+    [next getValuedObjectType !inTypePropertyGetterMap!?ioType]
   case arrayAccess (3* @LValueOperandAST next) :
     switch ioType.subscript
     case noSubscript :
@@ -344,7 +345,7 @@ method @LValueOperandAST getValuedObjectType ?!@omnibusType ioType {
     case staticSubscript (@omnibusType elementType *) :
       ioType = elementType
     end
-    [next getValuedObjectType !?ioType]
+    [next getValuedObjectType !inTypePropertyGetterMap !?ioType]
   end
 }
 

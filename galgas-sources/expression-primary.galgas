@@ -365,6 +365,7 @@ proc procAnalyzeAccesListInExpression
       )
     case property (@lstring propertyName) :
       handlePropertyAccessInExpression (
+        !context: inContext
         !?ioResult
         !propertyName
         !inMode
@@ -443,6 +444,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       )
     case property (@lstring propertyName) :
       handlePropertyAccessInExpression (
+        !context: inContext
         !?outResult
         !propertyName
         !inMode
@@ -517,6 +519,7 @@ proc handleSliceInExpression
 #·······················································································································
 
 proc handlePropertyAccessInExpression
+  ?context:let @semanticContext inContext
   ?!@objectIR ioResult
   ?let @lstring inPropertyName
   ?let @mode inMode
@@ -525,7 +528,9 @@ proc handlePropertyAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
-  let @propertyGetterMap propertyGetterMap = type.propertyGetterMap
+  let typeOmnibusName = @lstring.new {!type.omnibusTypeDescriptionName !inPropertyName.location}
+  [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
+#  let @propertyGetterMap propertyGetterMap = type.propertyGetterMapp
   [propertyGetterMap searchKey !inPropertyName ?* ?let @propertyGetterKind accessKind]
   switch accessKind
   case constantProperty (@objectIR value) :

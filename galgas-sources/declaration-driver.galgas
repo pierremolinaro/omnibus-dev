@@ -396,7 +396,6 @@ override method @decoratedRequiredDriver semanticAnalysis
   ]
   let typeName = @lstring.new {!driverType.omnibusTypeDescriptionName !mDriverName}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
-#  let constructorMap = driverType.constructorMap2
   [constructorMap searchKey !.new {!"()" !mDriverName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}

@@ -199,7 +199,10 @@ proc analyzeEffectiveParameters
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
-      [inSelfType.propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
+      let typeOmnibusName = @lstring.new {!inSelfType.omnibusTypeDescriptionName !name.location}
+      [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
+      [propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
+#      [inSelfType.propertyGetterMapp searchKey !name ?* ?let @propertyGetterKind propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
         error inErrorLocation : "a constant property cannot be used as output / input parameter"

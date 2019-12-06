@@ -106,7 +106,8 @@ override method @syncDeclarationAST enterInContext
     [property enterPropertyInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
-      !receiverTypeName:mSyncToolName
+      !receiverTypeName: mSyncToolName
+      !omnibusTypeName: mSyncToolName
       !receiverLLVMBaseTypeName: mSyncToolName
       !?ioDecoratedRoutineList
       !?propertyList
@@ -128,7 +129,7 @@ override method @syncDeclarationAST enterInContext
   [!?ioContext.mTypeConstructorMap insertKey !mSyncToolName !constructorMap]
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
-    !propertyGetterMap:propertyGetterMap
+    !propertyGetterMapp:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName

@@ -91,7 +91,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["uint32" nowhere] ?let uint32TypeProxy]
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
-    @propertyGetterMap propertyGetterMap = {}
+#    @propertyGetterMap propertyGetterMap = {}
   #--- Method 'removeAll()'
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
       !omnibusTypeDescriptionName: omnibusTypeDescriptionName
@@ -171,7 +171,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @omnibusType.new {
-      !propertyGetterMap:propertyGetterMap
+      !propertyGetterMapp:{}
       !subscript:.noSubscript
       !attributes:typeAttributes
       !omnibusTypeDescriptionName:omnibusTypeDescriptionName
