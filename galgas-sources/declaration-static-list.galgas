@@ -276,7 +276,7 @@ override method @staticListAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
   @propertyList propertyList = {}
-  @propertyGetterMap propertyGetterMap = {}
+#  @propertyGetterMap propertyGetterMap = {}
   @stringset propertyNameSet = {}
   let omnibusElementTypeName = omnibusNameForStaticListElementType (!mStaticListName)
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !omnibusElementTypeName ?let elementTypeProxy]
@@ -296,11 +296,11 @@ override method @staticListAST enterInContext
           !true # Public
           !.storedProperty{!type:propertyType !index:propertyIndex}
         ]
-        [!?propertyGetterMap insertKey
-          !propertyName
-          !true # Public
-          !.storedProperty{!type:propertyType !index:propertyIndex}
-        ]
+#        [!?propertyGetterMap insertKey
+#          !propertyName
+#          !true # Public
+#          !.storedProperty{!type:propertyType !index:propertyIndex}
+#        ]
       end
     case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
     #--- Routine LLVM name
@@ -318,7 +318,7 @@ override method @staticListAST enterInContext
       end
     #--- Enter routine type in type map
       let propertyType = @omnibusType.new {
-        !propertyGetterMapp:{}
+#        !propertyGetterMap:{}
         !subscript:.noSubscript
         !attributes:.none
         !omnibusTypeDescriptionName:""
@@ -360,7 +360,7 @@ override method @staticListAST enterInContext
   [!?ioContext.mStaticListMap insertKey !mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
   let elementType = @omnibusType.new {
-    !propertyGetterMapp:propertyGetterMap
+#    !propertyGetterMap:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!mStaticListName)
@@ -447,12 +447,12 @@ override method @staticListAST enterInContext
   end
   [!?ioStaticListValueMap insertKey !mStaticListName !stringValueList]
 #-------------------------------------------------------------------- List type property map
-  @propertyGetterMap listTypePropertyMap = {}
-  [!?listTypePropertyMap insertKey # "count" property
-    !.new {!"count" !mStaticListName.location}
-    !true # public
-    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
-  ]
+#  @propertyGetterMap listTypePropertyMap = {}
+#  [!?listTypePropertyMap insertKey # "count" property
+#    !.new {!"count" !mStaticListName.location}
+#    !true # public
+#    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
+#  ]
   [!?ioContext.mTypePropertyGetterMap insertProperty
     !omnibusTypeName: omnibusNameForStaticListType (!mStaticListName)
     !.new {!"count" !mStaticListName.location}
@@ -461,7 +461,7 @@ override method @staticListAST enterInContext
   ]
 #-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @omnibusType.new {
-    !propertyGetterMapp:listTypePropertyMap
+#    !propertyGetterMap:listTypePropertyMap
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!mStaticListName)

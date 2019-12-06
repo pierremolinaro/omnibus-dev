@@ -112,7 +112,7 @@ override method @enumerationDeclarationAST enterInContext
     maxValue = maxValue / 2G
   end
 #---------------- Property map: add uintN() accessor
-  @propertyGetterMap propertyGetterMap = {}
+#  @propertyGetterMap propertyGetterMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
     !.new {!"uint" + representationBitCount !mEnumerationName}
@@ -126,14 +126,14 @@ override method @enumerationDeclarationAST enterInContext
     !resultTypeProxy:integerTypeProxy
     ?routineLLVMName: let conversionToUIntN
   ]
-  [!?propertyGetterMap addComputedPropertyGetterEx
-    !llvmBaseTypeName:mEnumerationName
-    !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
-    !mode:.anySafeMode
-    !public: true
-    !resultTypeProxy:integerTypeProxy
-    ?routineLLVMName: *
-  ]
+#  [!?propertyGetterMap addComputedPropertyGetterEx
+#    !llvmBaseTypeName:mEnumerationName
+#    !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
+#    !mode:.anySafeMode
+#    !public: true
+#    !resultTypeProxy:integerTypeProxy
+#    ?routineLLVMName: *
+#  ]
   ioRoutineListIR += !@enumToUintRoutineIR.new {
     !conversionToUIntN
     !isRequired:false
@@ -142,7 +142,7 @@ override method @enumerationDeclarationAST enterInContext
   }
 #---------------- Insert enumeration in type map
   let enumerationType = @omnibusType.new {
-    !propertyGetterMapp: propertyGetterMap
+#    !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName: mEnumerationName

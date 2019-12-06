@@ -171,7 +171,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @omnibusType.new {
-      !propertyGetterMapp:{}
+#      !propertyGetterMap:{}
       !subscript:.noSubscript
       !attributes:typeAttributes
       !omnibusTypeDescriptionName:omnibusTypeDescriptionName

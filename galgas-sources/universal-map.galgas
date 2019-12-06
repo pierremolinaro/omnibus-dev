@@ -294,7 +294,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
 #·······················································································································
 
 method @universalValuedObjectMap searchValuedObjectType
-  ?let @typePropertyGetterMap inTypePropertyGetterMap
+  ?context:let @semanticContext inContext
   ?selfType: let @omnibusType inSelfType
   ?let @LValueAST inLValue
   !@omnibusType outType
@@ -318,16 +318,21 @@ method @universalValuedObjectMap searchValuedObjectType
       outType = type
     end
   end
-  [inLValue.mOperand getValuedObjectType !inTypePropertyGetterMap !?outType]
+  [inLValue.mOperand getValuedObjectType !context: inContext !?outType]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueOperandAST getValuedObjectType ?let @typePropertyGetterMap inTypePropertyGetterMap ?!@omnibusType ioType {
+method @LValueOperandAST getValuedObjectType
+      ?context:let @semanticContext inContext
+      ?!@omnibusType ioType
+{
   switch self
   case noOperand :
   case property (@lstring propertyName @LValueOperandAST next) :
-    let @propertyGetterMap propertyGetterMap = ioType.propertyGetterMapp
+    
+    let @propertyGetterMap propertyGetterMap = [inContext.mTypePropertyGetterMap propertyMap !ioType]
+#    let @propertyGetterMap propertyGetterMap = ioType.propertyGetterMapp
     [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
     switch accessKind
     case constantProperty (value) :
@@ -337,7 +342,7 @@ method @LValueOperandAST getValuedObjectType ?let @typePropertyGetterMap inTypeP
     case computedProperty (propertyTypeProxy *) :
       ioType = [propertyTypeProxy type]
     end
-    [next getValuedObjectType !inTypePropertyGetterMap!?ioType]
+    [next getValuedObjectType !context: inContext !?ioType]
   case arrayAccess (3* @LValueOperandAST next) :
     switch ioType.subscript
     case noSubscript :
@@ -345,7 +350,7 @@ method @LValueOperandAST getValuedObjectType ?let @typePropertyGetterMap inTypeP
     case staticSubscript (@omnibusType elementType *) :
       ioType = elementType
     end
-    [next getValuedObjectType !inTypePropertyGetterMap !?ioType]
+    [next getValuedObjectType !context: inContext !?ioType]
   end
 }
 

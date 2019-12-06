@@ -223,7 +223,7 @@ override method @llvmGenericType enterInContext
 #---
   if [mGenericFormalParameterList length] == 0 then
     let llvmType = @omnibusType.new {
-      !propertyGetterMapp: {}
+#      !propertyGetterMap: {}
       !subscript:.noSubscript
       !attributes: .instanciable | .copyable
       !omnibusTypeDescriptionName: mTypeName

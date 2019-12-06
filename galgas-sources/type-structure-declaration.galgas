@@ -330,7 +330,7 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@propertyList ioPropertyList
-  ?!@propertyGetterMap ioPropertyGetterMap
+#  ?!@propertyGetterMap ioPropertyGetterMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
   ?!@string ioConstructorKey
@@ -388,11 +388,11 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mIsPublic
       !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
     ]
-    [!?ioPropertyGetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
-    ]
+#    [!?ioPropertyGetterMap insertKey
+#      !mPropertyName
+#      !mIsPublic
+#      !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
+#    ]
   case initializedStoredProperty (initExpression) :
     computeStaticExpression (
       !?context: ioContext
@@ -427,11 +427,11 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mIsPublic
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
-    [!?ioPropertyGetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
-    ]
+#    [!?ioPropertyGetterMap insertKey
+#      !mPropertyName
+#      !mIsPublic
+#      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
+#    ]
     [!?ioContext.mTypePropertySetterMap insertProperty
       !inReceiverTypeName
       !mPropertyName
@@ -451,11 +451,11 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mIsPublic
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
-    [!?ioPropertyGetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-    ]
+#    [!?ioPropertyGetterMap insertKey
+#      !mPropertyName
+#      !mIsPublic
+#      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
+#    ]
     [!?ioContext.mTypePropertySetterMap insertProperty
       !inReceiverTypeName
       !mPropertyName
@@ -476,11 +476,11 @@ method @structurePropertyListAST-element enterPropertyInContext
       !mIsPublic
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
-    [!?ioPropertyGetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-    ]
+#    [!?ioPropertyGetterMap insertKey
+#      !mPropertyName
+#      !mIsPublic
+#      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
+#    ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
   case readOnlyComputedProperty (instructionList endOfInstructionList) :
@@ -498,14 +498,14 @@ method @structurePropertyListAST-element enterPropertyInContext
         !modeDictionary:modeDictionary
       }
     ]
-    [!?ioPropertyGetterMap insertKey
-      !mPropertyName
-      !mIsPublic
-      !.computedProperty{
-        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
-        !modeDictionary:modeDictionary
-      }
-    ]
+#    [!?ioPropertyGetterMap insertKey
+#      !mPropertyName
+#      !mIsPublic
+#      !.computedProperty{
+#        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
+#        !modeDictionary:modeDictionary
+#      }
+#    ]
     let functionLLVMName = @lstring.new {
       !llvmRoutineName
       !mPropertyName.location
@@ -583,7 +583,7 @@ override method @structureDeclarationAST enterInContext
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
-  @propertyGetterMap propertyGetterMap = {}
+#  @propertyGetterMap propertyGetterMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
@@ -597,7 +597,7 @@ override method @structureDeclarationAST enterInContext
       !receiverLLVMBaseTypeName: mLLVMBaseTypeName
       !?ioDecoratedRoutineList
       !?propertyList
-      !?propertyGetterMap
+#      !?propertyGetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -632,7 +632,7 @@ override method @structureDeclarationAST enterInContext
   end
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
-    !propertyGetterMapp: propertyGetterMap
+#    !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:mOmnibusTypeSpecificName

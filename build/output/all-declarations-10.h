@@ -144,7 +144,6 @@ void extensionMethod_enterPropertyInContext (const class GALGAS_structurePropert
                                              const class GALGAS_string constin_inReceiverLLVMBaseTypeName,
                                              class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
                                              class GALGAS_propertyList & io_ioPropertyList,
-                                             class GALGAS_propertyGetterMap & io_ioPropertyGetterMap,
                                              class GALGAS_sortedOperandIRList & io_sortedOperandIRList,
                                              class GALGAS_constructorSignature & io_constructorSignature,
                                              class GALGAS_string & io_ioConstructorKey,

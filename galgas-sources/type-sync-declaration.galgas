@@ -98,7 +98,7 @@ override method @syncDeclarationAST enterInContext
 {
 #---------------------------------------- Properties
   @propertyList propertyList = {}
-  @propertyGetterMap propertyGetterMap = {}
+#  @propertyGetterMap propertyGetterMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
@@ -111,7 +111,7 @@ override method @syncDeclarationAST enterInContext
       !receiverLLVMBaseTypeName: mSyncToolName
       !?ioDecoratedRoutineList
       !?propertyList
-      !?propertyGetterMap
+#      !?propertyGetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -129,7 +129,7 @@ override method @syncDeclarationAST enterInContext
   [!?ioContext.mTypeConstructorMap insertKey !mSyncToolName !constructorMap]
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
-    !propertyGetterMapp:propertyGetterMap
+#    !propertyGetterMap:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: mSyncToolName

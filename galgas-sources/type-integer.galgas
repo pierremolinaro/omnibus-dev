@@ -83,7 +83,7 @@ override method @integerDeclarationAST enterInContext
   let max = maxValueForInteger (!not mIsSigned !mSize)
 #--------------------------------------- Property map
   let llvmTypeName = "i" + mSize
-  @propertyGetterMap propertyGetterMap = {}
+#  @propertyGetterMap propertyGetterMap = {}
 #--------------------------------------- byteSwapped
   if (mSize mod 16) == 0 then
     [!?ioContext.mTypePropertyGetterMap addComputedPropertyGetter
@@ -95,14 +95,14 @@ override method @integerDeclarationAST enterInContext
       !resultTypeProxy:selfTypeProxy
       ?routineLLVMName: let routineLLVMName
     ]
-    [!?propertyGetterMap addComputedPropertyGetterEx
-      !llvmBaseTypeName:integerTypeName
-      !propertyName:["byteSwapped" nowhere]
-      !mode:.anySafeMode
-      !public: true
-      !resultTypeProxy:selfTypeProxy
-      ?routineLLVMName: *
-    ]
+#    [!?propertyGetterMap addComputedPropertyGetterEx
+#      !llvmBaseTypeName:integerTypeName
+#      !propertyName:["byteSwapped" nowhere]
+#      !mode:.anySafeMode
+#      !public: true
+#      !resultTypeProxy:selfTypeProxy
+#      ?routineLLVMName: *
+#    ]
     
     ioRoutineListIR += !@integerBuiltinFunctionIR.new {
       !routineLLVMName
@@ -139,14 +139,14 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: var routineLLVMName
   ]
-  [!?propertyGetterMap addComputedPropertyGetterEx
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:["bitReversed" nowhere]
-    !mode:.anySafeMode
-    !public: true
-    !resultTypeProxy:selfTypeProxy
-    ?routineLLVMName: *
-  ]
+#  [!?propertyGetterMap addComputedPropertyGetterEx
+#    !llvmBaseTypeName:integerTypeName
+#    !propertyName:["bitReversed" nowhere]
+#    !mode:.anySafeMode
+#    !public: true
+#    !resultTypeProxy:selfTypeProxy
+#    ?routineLLVMName: *
+#  ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
     !isRequired:false
@@ -164,14 +164,14 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
-  [!?propertyGetterMap addComputedPropertyGetterEx
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:["leadingZeroCount" nowhere]
-    !mode:.anySafeMode
-    !public: true
-    !resultTypeProxy:selfTypeProxy
-    ?routineLLVMName: routineLLVMName
-  ]
+#  [!?propertyGetterMap addComputedPropertyGetterEx
+#    !llvmBaseTypeName:integerTypeName
+#    !propertyName:["leadingZeroCount" nowhere]
+#    !mode:.anySafeMode
+#    !public: true
+#    !resultTypeProxy:selfTypeProxy
+#    ?routineLLVMName: routineLLVMName
+#  ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
     !isRequired:false
@@ -189,14 +189,14 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
-  [!?propertyGetterMap addComputedPropertyGetterEx
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:["trainingZeroCount" nowhere]
-    !mode:.anySafeMode
-    !public: true
-    !resultTypeProxy:selfTypeProxy
-    ?routineLLVMName: routineLLVMName
-  ]
+#  [!?propertyGetterMap addComputedPropertyGetterEx
+#    !llvmBaseTypeName:integerTypeName
+#    !propertyName:["trainingZeroCount" nowhere]
+#    !mode:.anySafeMode
+#    !public: true
+#    !resultTypeProxy:selfTypeProxy
+#    ?routineLLVMName: routineLLVMName
+#  ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
     !isRequired:false
@@ -214,14 +214,14 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
-  [!?propertyGetterMap addComputedPropertyGetterEx
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:["setBitCount" nowhere]
-    !mode:.anySafeMode
-    !public: true
-    !resultTypeProxy:selfTypeProxy
-    ?routineLLVMName: routineLLVMName
-  ]
+#  [!?propertyGetterMap addComputedPropertyGetterEx
+#    !llvmBaseTypeName:integerTypeName
+#    !propertyName:["setBitCount" nowhere]
+#    !mode:.anySafeMode
+#    !public: true
+#    !resultTypeProxy:selfTypeProxy
+#    ?routineLLVMName: routineLLVMName
+#  ]
   ioRoutineListIR += !@integerBuiltinFunctionIR.new {
     !routineLLVMName
     !isRequired:false
@@ -243,7 +243,7 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 #--------------------------------------- Enter in type map
   let integerType = @omnibusType.new {
-    !propertyGetterMapp:propertyGetterMap
+#    !propertyGetterMap:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:integerTypeName

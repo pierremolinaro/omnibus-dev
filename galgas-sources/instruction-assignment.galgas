@@ -56,7 +56,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [ioUniversalMap searchValuedObjectType !inContext.mTypePropertyGetterMap !selfType:inSelfType !mTargetAST ?let targetType]
+  [ioUniversalMap searchValuedObjectType !context: inContext !selfType:inSelfType !mTargetAST ?let targetType]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType

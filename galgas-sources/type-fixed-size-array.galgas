@@ -121,12 +121,12 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !true # public
         !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
       ]
-      @propertyGetterMap arrayTypePropertyMap = {}
-      [!?arrayTypePropertyMap insertKey # "count" property
-        !.new {!"count" !omnibusTypeDescriptionName.location}
-        !true # public
-        !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
-      ]
+#      @propertyGetterMap arrayTypePropertyMap = {}
+#      [!?arrayTypePropertyMap insertKey # "count" property
+#        !.new {!"count" !omnibusTypeDescriptionName.location}
+#        !true # public
+#        !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
+#      ]
     #-------------------------------------------- Constructor map
       @constructorMap constructorMap = {}
     #--- Constructor (!repeated)
@@ -143,7 +143,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
       let arrayType = @omnibusType.new {
-        !propertyGetterMapp:arrayTypePropertyMap
+#        !propertyGetterMap:arrayTypePropertyMap
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
         !omnibusTypeDescriptionName:omnibusTypeDescriptionName
